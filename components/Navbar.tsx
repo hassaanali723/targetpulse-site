@@ -21,7 +21,7 @@ export default function Navbar() {
     { name: 'Services', href: '#services' },
     { name: 'Process', href: '#process' },
     { name: 'Portfolio', href: '#portfolio' },
-    { name: 'Benefits', href: '#benefits' },
+    { name: 'Email Verifier', href: '/email-verifier' },
     { name: 'Contact', href: '#contact' },
   ]
 

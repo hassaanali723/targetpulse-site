@@ -1,6 +1,8 @@
+import React from 'react'
 import Navbar from '@/components/Navbar'
 import Hero from '@/components/Hero'
 import Stats from '@/components/Stats'
+import ProductShowcase from '@/components/ProductShowcase'
 import Services from '@/components/Services'
 import Process from '@/components/Process'
 import Portfolio from '@/components/Portfolio'
@@ -19,6 +21,7 @@ export default function Home() {
       <Process />
       <Portfolio />
       <Benefits />
+      <ProductShowcase />
       <CTA />
       <Contact />
       <Footer />

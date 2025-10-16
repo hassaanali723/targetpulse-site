@@ -102,7 +102,7 @@ export default function Hero() {
   return (
     <section 
       ref={heroRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-12 md:pb-0"
     >
       {/* Animated Background */}
       <canvas

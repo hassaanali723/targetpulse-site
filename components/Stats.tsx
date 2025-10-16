@@ -17,7 +17,7 @@ export default function Stats() {
   ]
 
   return (
-    <section className="relative py-24 bg-gradient-to-r from-primary-700 via-primary-600 to-accent-600 overflow-hidden">
+    <section className="relative py-12 md:py-24 bg-gradient-to-r from-primary-700 via-primary-600 to-accent-600 overflow-hidden">
       {/* Animated Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/20 to-transparent" />
