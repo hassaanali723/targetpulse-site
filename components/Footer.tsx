@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { Linkedin, Twitter, Facebook, Instagram } from 'lucide-react'
+import { Linkedin, Youtube, Facebook, Instagram } from 'lucide-react'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
@@ -34,7 +34,7 @@ export default function Footer() {
           {/* Social Media Links */}
           <div className="flex items-center space-x-4">
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/company/target-pulse/"
               target="_blank"
               rel="noopener noreferrer"
               className="group relative w-11 h-11 bg-white/5 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/10 transition-all duration-300 border border-white/10 hover:border-white/20"
@@ -42,15 +42,15 @@ export default function Footer() {
               <Linkedin className="w-5 h-5 text-gray-300 group-hover:text-white transition-colors" />
             </a>
             <a
-              href="https://twitter.com"
+              href="https://www.youtube.com/@TargetPulseOfficial/shorts"
               target="_blank"
               rel="noopener noreferrer"
               className="group relative w-11 h-11 bg-white/5 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/10 transition-all duration-300 border border-white/10 hover:border-white/20"
             >
-              <Twitter className="w-5 h-5 text-gray-300 group-hover:text-white transition-colors" />
+              <Youtube className="w-5 h-5 text-gray-300 group-hover:text-white transition-colors" />
             </a>
             <a
-              href="https://facebook.com"
+              href="https://www.facebook.com/share/1D31DYxZL5/"
               target="_blank"
               rel="noopener noreferrer"
               className="group relative w-11 h-11 bg-white/5 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/10 transition-all duration-300 border border-white/10 hover:border-white/20"
@@ -58,7 +58,7 @@ export default function Footer() {
               <Facebook className="w-5 h-5 text-gray-300 group-hover:text-white transition-colors" />
             </a>
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/targetpulsee"
               target="_blank"
               rel="noopener noreferrer"
               className="group relative w-11 h-11 bg-white/5 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/10 transition-all duration-300 border border-white/10 hover:border-white/20"
