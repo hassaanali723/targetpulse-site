@@ -100,7 +100,7 @@ export default function Portfolio() {
             Success <span className="gradient-text">Stories</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Real results from real campaigns. See how we've helped companies like yours achieve their goals.
+            Real results from real campaigns. See how we&apos;ve helped companies like yours achieve their goals.
           </p>
         </div>
 
@@ -176,7 +176,7 @@ export default function Portfolio() {
                             <Star key={i} className="w-5 h-5 fill-current" />
                           ))}
                         </div>
-                        <p className="text-lg mb-3 italic">"{item.testimonial}"</p>
+                        <p className="text-lg mb-3 italic">&ldquo;{item.testimonial}&rdquo;</p>
                         <p className="font-semibold">— {item.author}</p>
                       </div>
                     </div>
