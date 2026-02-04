@@ -169,7 +169,7 @@ export default function TermsOfServicePage() {
 
               <h2 className="text-2xl font-bold text-gray-900 mt-8 mb-4">7. Cancellation and Refunds</h2>
               <p className="text-gray-700 mb-4">
-                You may cancel your recurring subscription at any time through your account settings or by contacting our support team at info@targetpulse.com. Upon cancellation:
+                You may cancel your recurring subscription at any time through your account settings or by contacting our support team at info@targetpulse.net. Upon cancellation:
               </p>
               <ul className="list-disc pl-6 mb-4 text-gray-700">
                 <li>Your subscription will not renew for the next billing cycle</li>
@@ -308,8 +308,8 @@ export default function TermsOfServicePage() {
                 If you have any questions about these Terms of Service, please contact us at:
               </p>
               <div className="bg-gray-50 rounded-lg p-6 mb-4">
-                <p className="text-gray-700 mb-2"><strong>Email:</strong> info@targetpulse.com</p>
-                <p className="text-gray-700 mb-2"><strong>Website:</strong> https://targetpulse.com</p>
+                <p className="text-gray-700 mb-2"><strong>Email:</strong> info@targetpulse.net</p>
+                <p className="text-gray-700 mb-2"><strong>Website:</strong> https://targetpulse.net</p>
               </div>
 
               <div className="mt-12 pt-8 border-t border-gray-200">

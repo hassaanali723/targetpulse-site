@@ -94,7 +94,7 @@ export default function RefundPolicyPage() {
                 <li>Any other exceptional circumstances</li>
               </ul>
               <p className="text-gray-700 mb-4">
-                Please contact our support team immediately at <strong>info@targetpulse.com</strong>. We will thoroughly review your case and may issue refunds or credit adjustments on a case-by-case basis at our discretion.
+                Please contact our support team immediately at <strong>info@targetpulse.net</strong>. We will thoroughly review your case and may issue refunds or credit adjustments on a case-by-case basis at our discretion.
               </p>
 
               <h2 className="text-2xl font-bold text-gray-900 mt-8 mb-4">6. Service Quality Issues</h2>
@@ -123,7 +123,7 @@ export default function RefundPolicyPage() {
                 To request a refund or report unusual activity, please contact our support team:
               </p>
               <div className="bg-gray-50 rounded-lg p-6 mb-4">
-                <p className="text-gray-700 mb-2"><strong>Email:</strong> info@targetpulse.com</p>
+                <p className="text-gray-700 mb-2"><strong>Email:</strong> info@targetpulse.net</p>
                 <p className="text-gray-700 mb-2"><strong>Subject:</strong> Refund Request / Issue Report</p>
               </div>
               <p className="text-gray-700 mb-4">
@@ -184,8 +184,8 @@ export default function RefundPolicyPage() {
                 If you have any questions about this Refund Policy or need assistance, please contact us:
               </p>
               <div className="bg-gray-50 rounded-lg p-6 mb-4">
-                <p className="text-gray-700 mb-2"><strong>Email:</strong> info@targetpulse.com</p>
-                <p className="text-gray-700 mb-2"><strong>Website:</strong> https://targetpulse.com</p>
+                <p className="text-gray-700 mb-2"><strong>Email:</strong> info@targetpulse.net</p>
+                <p className="text-gray-700 mb-2"><strong>Website:</strong> https://targetpulse.net</p>
               </div>
               <p className="text-gray-700 mb-4">
                 Our support team is committed to addressing your concerns and finding fair solutions. We typically respond to all inquiries within 24-48 hours.

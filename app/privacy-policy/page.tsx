@@ -162,7 +162,7 @@ export default function PrivacyPolicyPage() {
                 <li><strong>Withdraw Consent:</strong> Withdraw consent where processing is based on consent</li>
               </ul>
               <p className="text-gray-700 mb-4">
-                To exercise these rights, please contact us at privacy@targetpulse.com.
+                To exercise these rights, please contact us at info@targetpulse.net.
               </p>
 
               <h2 className="text-2xl font-bold text-gray-900 mt-8 mb-4">9. Cookies and Tracking Technologies</h2>
@@ -207,9 +207,8 @@ export default function PrivacyPolicyPage() {
                 If you have any questions about this Privacy Policy, please contact us:
               </p>
               <div className="bg-gray-50 rounded-lg p-6 mb-4">
-                <p className="text-gray-700 mb-2"><strong>Email:</strong> hassaan@targetpulse.com</p>
-                <p className="text-gray-700 mb-2"><strong>Support:</strong> info@targetpulse.com</p>
-                <p className="text-gray-700 mb-2"><strong>Website:</strong> https://targetpulse.com</p>
+                <p className="text-gray-700 mb-2"><strong>Email:</strong> info@targetpulse.net</p>
+                <p className="text-gray-700 mb-2"><strong>Website:</strong> https://targetpulse.net</p>
               </div>
 
               <div className="mt-12 pt-8 border-t border-gray-200">
