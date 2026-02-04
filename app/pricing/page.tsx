@@ -45,8 +45,11 @@ export default function PricingPage() {
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
               Simple, <span className="gradient-text">Transparent Pricing</span>
             </h1>
-            <p className="text-xl text-gray-600 mb-4">
+            <p className="text-xl text-gray-600 mb-3">
               Pay only for what you use. No monthly fees, no hidden charges.
+            </p>
+            <p className="text-lg text-primary-600 font-semibold mb-4">
+              Pricing for TargetPulse Email Verifier Tool
             </p>
             <p className="text-lg text-gray-600">
               <strong>Start with 1,000 free trial credits</strong> to test our service

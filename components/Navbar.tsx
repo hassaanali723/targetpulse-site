@@ -22,7 +22,6 @@ export default function Navbar() {
     { name: 'Process', href: '#process' },
     { name: 'Portfolio', href: '#portfolio' },
     { name: 'Email Verifier', href: '/email-verifier' },
-    { name: 'Pricing', href: '/pricing' },
     { name: 'Contact', href: '#contact' },
   ]
 

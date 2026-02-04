@@ -61,10 +61,10 @@ export default function EmailVerifierCTA() {
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </a>
             <a
-              href="#features"
+              href="/pricing"
               className="px-10 py-5 bg-white/10 backdrop-blur-sm text-white rounded-full text-lg font-bold hover:bg-white/20 transition-all duration-300 border-2 border-white/30 flex items-center justify-center"
             >
-              Learn More
+              View Pricing
             </a>
           </div>
 

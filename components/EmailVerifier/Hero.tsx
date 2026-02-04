@@ -66,10 +66,10 @@ export default function EmailVerifierHero() {
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </a>
                 <a
-                  href="#features"
+                  href="/pricing"
                   className="px-8 py-4 bg-white/90 backdrop-blur-sm text-gray-800 rounded-full text-lg font-bold hover:shadow-lg transition-all duration-300 border-2 border-primary-200 hover:border-primary-400 flex items-center justify-center"
                 >
-                  Learn More
+                  View Pricing
                 </a>
               </div>
             </div>
