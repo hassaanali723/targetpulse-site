@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { ChevronLeft, ChevronRight, Star, TrendingUp } from 'lucide-react'
 
 export default function Portfolio() {
@@ -79,9 +79,9 @@ export default function Portfolio() {
     },
   ]
 
-  const nextSlide = () => {
+  const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1) % portfolioItems.length)
-  }
+  }, [portfolioItems.length])
 
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + portfolioItems.length) % portfolioItems.length)
@@ -90,7 +90,7 @@ export default function Portfolio() {
   useEffect(() => {
     const interval = setInterval(nextSlide, 5000)
     return () => clearInterval(interval)
-  }, [])
+  }, [nextSlide])
 
   return (
     <section id="portfolio" className="py-24 bg-white">
