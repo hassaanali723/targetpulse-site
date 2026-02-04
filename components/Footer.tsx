@@ -70,6 +70,30 @@ export default function Footer() {
           {/* Divider */}
           <div className="w-32 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
 
+          {/* Links */}
+          <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6">
+            <a
+              href="/terms-of-service"
+              className="text-gray-400 hover:text-white text-sm transition-colors duration-300"
+            >
+              Terms of Service
+            </a>
+            <span className="text-gray-600">•</span>
+            <a
+              href="/privacy-policy"
+              className="text-gray-400 hover:text-white text-sm transition-colors duration-300"
+            >
+              Privacy Policy
+            </a>
+            <span className="text-gray-600">•</span>
+            <a
+              href="/refund-policy"
+              className="text-gray-400 hover:text-white text-sm transition-colors duration-300"
+            >
+              Refund Policy
+            </a>
+          </div>
+
           {/* Copyright */}
           <p className="text-gray-400 text-sm">
             © {currentYear} TargetPulse. All rights reserved.
