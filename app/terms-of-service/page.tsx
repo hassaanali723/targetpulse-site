@@ -35,10 +35,16 @@ export default function TermsOfServicePage() {
               <p className="text-gray-700 mb-4">
                 By accessing and using TargetPulse's services, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.
               </p>
+              <p className="text-gray-700 mb-4">
+                These Terms of Service govern your use of the TargetPulse Email Verifier service operated by <strong>Hassaan Ali Mehmood</strong>, doing business as <strong>TargetPulse</strong>.
+              </p>
 
               <h2 className="text-2xl font-bold text-gray-900 mt-8 mb-4">2. Description of Service</h2>
               <p className="text-gray-700 mb-4">
-                TargetPulse provides professional email verification and validation services through a credit-based system (collectively, the "Service"). The Service is provided to you subject to these Terms of Service and any additional terms and conditions that may apply.
+                TargetPulse Email Verifier is a cloud-based tool that helps teams clean and validate email lists before sending campaigns. Users upload CSV files or individual emails, and we check deliverability, syntax, and mailbox status to reduce bounces and spam complaints. The product is sold as a pay-as-you-go credit system, so customers only pay for the emails they actually validate.
+              </p>
+              <p className="text-gray-700 mb-4">
+                The Service is provided to you subject to these Terms of Service and any additional terms and conditions that may apply.
               </p>
 
               <h3 className="text-xl font-semibold text-gray-900 mt-6 mb-3">2.1 Email Verification Service</h3>
