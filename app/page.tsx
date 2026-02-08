@@ -5,7 +5,6 @@ import Stats from '@/components/Stats'
 import ProductShowcase from '@/components/ProductShowcase'
 import Services from '@/components/Services'
 import Process from '@/components/Process'
-import Portfolio from '@/components/Portfolio'
 import Benefits from '@/components/Benefits'
 import CTA from '@/components/CTA'
 import Contact from '@/components/Contact'
@@ -19,7 +18,6 @@ export default function Home() {
       <Stats />
       <Services />
       <Process />
-      <Portfolio />
       <Benefits />
       <ProductShowcase />
       <CTA />

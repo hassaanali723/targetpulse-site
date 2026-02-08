@@ -166,8 +166,8 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="font-bold text-lg mb-2">Email Us</h4>
-                  <p className="text-gray-600">hello@targetpulse.com</p>
-                  <p className="text-gray-600">support@targetpulse.com</p>
+                  <p className="text-gray-600">info@targetpulse.net</p>
+                  <p className="text-gray-600">hassaan@targetpulse.net</p>
                 </div>
               </div>
             </div>
@@ -179,8 +179,8 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="font-bold text-lg mb-2">Call Us</h4>
-                  <p className="text-gray-600">+1 (555) 123-4567</p>
-                  <p className="text-sm text-gray-500 mt-1">Mon-Fri, 9AM-6PM EST</p>
+                  <p className="text-gray-600">+447577337716</p>
+                  <p className="text-sm text-gray-500 mt-1">Mon-Fri, 9AM-6PM PKT</p>
                 </div>
               </div>
             </div>
@@ -192,8 +192,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="font-bold text-lg mb-2">Visit Us</h4>
-                  <p className="text-gray-600">123 Marketing Street</p>
-                  <p className="text-gray-600">San Francisco, CA 94105</p>
+                  <p className="text-gray-600">I-10/4 Islamabad, Pakistan</p>
                 </div>
               </div>
             </div>
