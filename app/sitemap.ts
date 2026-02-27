@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://targetpulse.com'
+  const baseUrl = 'https://targetpulse.net'
 
   return [
     {
@@ -11,35 +11,34 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
-      url: `${baseUrl}/#services`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/#process`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/#portfolio`,
+      url: `${baseUrl}/#email-verifier`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/#benefits`,
+      url: `${baseUrl}/#real-time-verification`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/#faq`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/#contact`,
+      url: `${baseUrl}/pricing`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/contact-us`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
   ]
 }
-

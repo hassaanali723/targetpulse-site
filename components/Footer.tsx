@@ -17,19 +17,14 @@ export default function Footer() {
       <div className="container-custom relative z-10">
         <div className="flex flex-col items-center text-center space-y-8">
           {/* Logo */}
-          <div className="h-16 w-auto">
+          <div className="h-20 w-auto">
             <img 
-              src="/logo.webp" 
+              src="/Targetpulse-email verifier- logo.png" 
               alt="TargetPulse" 
               className="h-full w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
               style={{ maxHeight: 'none' }}
             />
           </div>
-
-          {/* Tagline */}
-          <p className="text-gray-300 max-w-md text-sm">
-            Precision Email Marketing
-          </p>
 
           {/* Social Media Links */}
           <div className="flex items-center space-x-4">

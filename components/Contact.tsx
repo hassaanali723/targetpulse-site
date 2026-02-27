@@ -14,20 +14,47 @@ export default function Contact() {
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState('')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setError('')
 
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          company: formData.company,
+          phone: formData.phone,
+          message: formData.message,
+        }),
+      })
+
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to send message')
+      }
+
       setIsSubmitting(false)
       setSubmitted(true)
       setFormData({ name: '', email: '', company: '', phone: '', message: '' })
 
       // Reset success message after 5 seconds
       setTimeout(() => setSubmitted(false), 5000)
-    }, 1500)
+    } catch (err) {
+      setIsSubmitting(false)
+      setError(err instanceof Error ? err.message : 'Failed to send message')
+      
+      // Clear error after 5 seconds
+      setTimeout(() => setError(''), 5000)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -44,25 +71,31 @@ export default function Contact() {
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Get In <span className="gradient-text">Touch</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
             Ready to start your cold email campaign? Contact us today for a free strategy call
           </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
           {/* Contact Form */}
-          <div className="bg-gradient-to-br from-gray-50 to-white rounded-3xl p-8 md:p-10 shadow-xl">
-            <h3 className="text-2xl font-bold mb-6">Send us a message</h3>
+          <div className="bg-gradient-to-br from-slate-50 to-white rounded-3xl p-8 md:p-10 shadow-xl">
+            <h3 className="text-2xl font-bold text-slate-900 mb-6">Send us a message</h3>
 
             {submitted && (
-              <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg text-green-700">
+              <div className="mb-6 p-4 bg-emerald-50 border border-emerald-200 rounded-lg text-emerald-700">
                 ✓ Thank you! We&apos;ll get back to you within 24 hours.
+              </div>
+            )}
+
+            {error && (
+              <div className="mb-6 p-4 bg-rose-50 border border-rose-200 rounded-lg text-rose-700">
+                ✗ {error}
               </div>
             )}
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="name" className="block text-sm font-medium text-slate-700 mb-2">
                   Full Name *
                 </label>
                 <input
@@ -72,13 +105,13 @@ export default function Contact() {
                   required
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none"
+                  className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none"
                   placeholder="John Doe"
                 />
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-2">
                   Email Address *
                 </label>
                 <input
@@ -88,13 +121,13 @@ export default function Contact() {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none"
+                  className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none"
                   placeholder="john@company.com"
                 />
               </div>
 
               <div>
-                <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="company" className="block text-sm font-medium text-slate-700 mb-2">
                   Company Name
                 </label>
                 <input
@@ -103,13 +136,13 @@ export default function Contact() {
                   name="company"
                   value={formData.company}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none"
+                  className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none"
                   placeholder="Your Company Inc."
                 />
               </div>
 
               <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="phone" className="block text-sm font-medium text-slate-700 mb-2">
                   Phone Number
                 </label>
                 <input
@@ -118,13 +151,13 @@ export default function Contact() {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none"
+                  className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none"
                   placeholder="+1 (555) 123-4567"
                 />
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="message" className="block text-sm font-medium text-slate-700 mb-2">
                   Message *
                 </label>
                 <textarea
@@ -134,7 +167,7 @@ export default function Contact() {
                   value={formData.message}
                   onChange={handleChange}
                   rows={4}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none resize-none"
+                  className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none resize-none"
                   placeholder="Tell us about your project..."
                 />
               </div>
@@ -165,9 +198,9 @@ export default function Contact() {
                   <Mail className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-lg mb-2">Email Us</h4>
-                  <p className="text-gray-600">info@targetpulse.net</p>
-                  <p className="text-gray-600">hassaan@targetpulse.net</p>
+                  <h4 className="font-bold text-lg text-slate-900 mb-2">Email Us</h4>
+                  <p className="text-slate-600">info@targetpulse.net</p>
+                  <p className="text-slate-600">hassaan@targetpulse.net</p>
                 </div>
               </div>
             </div>
@@ -178,9 +211,9 @@ export default function Contact() {
                   <Phone className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-lg mb-2">Call Us</h4>
-                  <p className="text-gray-600">+447577337716</p>
-                  <p className="text-sm text-gray-500 mt-1">Mon-Fri, 9AM-6PM PKT</p>
+                  <h4 className="font-bold text-lg text-slate-900 mb-2">Call Us</h4>
+                  <p className="text-slate-600">+447577337716</p>
+                  <p className="text-sm text-slate-500 mt-1">Mon-Fri, 9AM-6PM PKT</p>
                 </div>
               </div>
             </div>
@@ -191,14 +224,14 @@ export default function Contact() {
                   <MapPin className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-lg mb-2">Visit Us</h4>
-                  <p className="text-gray-600">I-10/4 Islamabad, Pakistan</p>
+                  <h4 className="font-bold text-lg text-slate-900 mb-2">Visit Us</h4>
+                  <p className="text-slate-600">I-10/4 Islamabad, Pakistan</p>
                 </div>
               </div>
             </div>
 
             {/* Map or Additional Info */}
-            <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl p-8 text-white shadow-lg">
+            <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-8 text-white shadow-lg">
               <h4 className="font-bold text-xl mb-4">Business Hours</h4>
               <div className="space-y-2">
                 <div className="flex justify-between">
