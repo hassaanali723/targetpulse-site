@@ -9,26 +9,35 @@ const baseUrl = 'https://targetpulse.net'
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: 'TargetPulse - Email Verifier & Email List Cleaner',
+    default: 'TargetPulse - Email Verification Tool & Bulk Email Validator',
     template: '%s | TargetPulse',
   },
-  description: 'Verify emails in real time and clean your email lists with TargetPulse. Improve deliverability, reduce bounces, and protect your sender reputation.',
+  description: 'TargetPulse Email Verifier helps you validate email addresses, clean email lists, reduce bounce rates and improve deliverability. Bulk email verification with real-time results.',
   keywords: [
+    // Primary keywords
     'email verifier',
-    'email verification',
-    'email list cleaner',
-    'bulk email verification',
-    'email validation',
+    'email verification tool',
+    'bulk email verifier',
+    'email validator',
+    'email list cleaning',
     'verify email address',
+    'email deliverability tool',
+    'catch all email check',
+    'free email verification tool',
+    // Secondary keywords
+    'check if email exists',
+    'email verification API',
+    'verify email list',
+    'clean email list',
     'email bounce checker',
-    'email deliverability',
-    'real-time email verification',
-    'email list hygiene',
-    'invalid email checker',
-    'email validator tool',
-    'reduce email bounces',
-    'sender reputation',
-    'email marketing tool',
+    'smtp email verification',
+    'real time email verification',
+    // Long-tail keywords
+    'best email verification tool',
+    'bulk email verification service',
+    'how to verify email addresses',
+    'email list cleaning tool',
+    'reduce email bounce rate',
   ],
   authors: [{ name: 'TargetPulse', url: baseUrl }],
   creator: 'TargetPulse',
@@ -37,13 +46,13 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   openGraph: {
-    title: 'TargetPulse - Email Verifier & Email List Cleaner',
-    description: 'Verify emails in real time and clean your email lists with TargetPulse. Improve deliverability, reduce bounces, and protect your sender reputation.',
+    title: 'TargetPulse - Email Verification Tool & Bulk Email Validator',
+    description: 'TargetPulse Email Verifier helps you validate email addresses, clean email lists, reduce bounce rates and improve deliverability. Bulk email verification with real-time results.',
     url: baseUrl,
     siteName: 'TargetPulse',
     images: [
       {
-        url: '/og-image.jpg',
+        url: '/Targetpulse-email verifier- logo.png',
         width: 1200,
         height: 630,
         alt: 'TargetPulse Email Verifier',
@@ -54,9 +63,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'TargetPulse - Email Verifier & Email List Cleaner',
-    description: 'Verify emails in real time and clean your email lists with TargetPulse. Improve deliverability, reduce bounces, and protect your sender reputation.',
-    images: ['/og-image.jpg'],
+    title: 'TargetPulse - Email Verification Tool & Bulk Email Validator',
+    description: 'TargetPulse Email Verifier helps you validate email addresses, clean email lists, reduce bounce rates and improve deliverability. Bulk email verification with real-time results.',
+    images: ['/Targetpulse-email verifier- logo.png'],
     creator: '@targetpulse',
     site: '@targetpulse',
   },
@@ -71,14 +80,11 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  verification: {
-    google: 'your-google-verification-code',
-  },
   category: 'technology',
   icons: {
-    icon: '/icon.png',
-    apple: '/icon.png',
-    shortcut: '/icon.png',
+    icon: '/Targetpulse-email verifier- logo.png',
+    apple: '/Targetpulse-email verifier- logo.png',
+    shortcut: '/Targetpulse-email verifier- logo.png',
   },
 }
 
@@ -97,7 +103,12 @@ const jsonLd = {
         width: 300,
         height: 80,
       },
-      sameAs: [],
+      sameAs: [
+        'https://www.linkedin.com/company/target-pulse/',
+        'https://www.youtube.com/@TargetPulseOfficial',
+        'https://www.facebook.com/share/1D31DYxZL5/',
+        'https://www.instagram.com/targetpulsee',
+      ],
       contactPoint: {
         '@type': 'ContactPoint',
         email: 'info@targetpulse.net',
@@ -122,14 +133,6 @@ const jsonLd = {
       publisher: {
         '@id': `${baseUrl}/#organization`,
       },
-      potentialAction: {
-        '@type': 'SearchAction',
-        target: {
-          '@type': 'EntryPoint',
-          urlTemplate: `${baseUrl}/?q={search_term_string}`,
-        },
-        'query-input': 'required name=search_term_string',
-      },
     },
     {
       '@type': 'SoftwareApplication',
@@ -145,12 +148,6 @@ const jsonLd = {
         priceCurrency: 'USD',
         description: 'Free trial available. Pay-as-you-go pricing.',
       },
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: '4.8',
-        ratingCount: '200',
-        bestRating: '5',
-      },
       featureList: [
         'Real-time email verification',
         'Bulk email list cleaning',
@@ -161,7 +158,7 @@ const jsonLd = {
         'Catch-all email detection',
         'SMTP verification',
       ],
-      screenshot: `${baseUrl}/og-image.jpg`,
+      screenshot: `${baseUrl}/Targetpulse-email verifier- logo.png`,
       creator: {
         '@id': `${baseUrl}/#organization`,
       },
@@ -177,8 +174,8 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
-        <link rel="icon" href="/icon.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/icon.png" />
+        <link rel="icon" href="/Targetpulse-email verifier- logo.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/Targetpulse-email verifier- logo.png" />
         <meta name="theme-color" content="#295C51" />
         <script
           type="application/ld+json"

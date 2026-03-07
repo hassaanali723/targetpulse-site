@@ -1,7 +1,7 @@
 {
   "name": "targetpulse-site",
   "version": "1.0.0",
-  "description": "TargetPulse - Professional Cold Email Marketing Services",
+  "description": "TargetPulse - Email Verification and List Cleaning Tool",
   "private": true,
   "scripts": {
     "dev": "next dev",

@@ -1,9 +1,13 @@
+import type { Metadata } from 'next'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Terms of Service | TargetPulse',
-  description: 'Terms of Service and conditions for using TargetPulse email marketing services.',
+  description: 'Terms of Service and conditions for using TargetPulse email verification tool.',
+  alternates: {
+    canonical: '/terms-of-service',
+  },
 }
 
 export default function TermsOfServicePage() {

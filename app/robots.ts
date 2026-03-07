@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/', '/privacy-policy', '/refund-policy', '/terms-of-service'],
+        disallow: ['/api/'],
       },
     ],
     sitemap: 'https://targetpulse.net/sitemap.xml',

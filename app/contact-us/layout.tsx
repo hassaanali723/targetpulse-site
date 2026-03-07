@@ -8,6 +8,8 @@ export const metadata: Metadata = {
     'email verifier support',
     'email verification help',
     'TargetPulse support',
+    'email verification tool support',
+    'bulk email verifier help',
   ],
   alternates: {
     canonical: '/contact-us',

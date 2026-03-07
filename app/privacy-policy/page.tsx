@@ -1,9 +1,13 @@
+import type { Metadata } from 'next'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Privacy Policy | TargetPulse',
-  description: 'Privacy Policy for TargetPulse email marketing services.',
+  description: 'Privacy Policy for TargetPulse email verification tool.',
+  alternates: {
+    canonical: '/privacy-policy',
+  },
 }
 
 export default function PrivacyPolicyPage() {

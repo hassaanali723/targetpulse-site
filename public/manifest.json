@@ -1,19 +1,20 @@
 {
-  "name": "TargetPulse - Professional Cold Email Marketing",
+  "name": "TargetPulse - Email Verification Tool",
   "short_name": "TargetPulse",
-  "description": "Transform your outreach with professional cold email marketing services",
+  "description": "Verify and clean email lists in bulk. Improve deliverability, reduce bounce rates, and protect your sender reputation.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#295C51",
   "icons": [
     {
-      "src": "/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png"
+      "src": "/Targetpulse-email verifier- logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "/icon-512.png",
+      "src": "/Targetpulse logo - minimal.png",
       "sizes": "512x512",
       "type": "image/png"
     }

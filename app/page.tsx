@@ -7,14 +7,25 @@ import HomeFAQSection from '@/components/HomeFAQSection'
 import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
-  title: 'TargetPulse - Email Verifier & Email List Cleaner',
-  description: 'Verify emails in real time and clean your email lists with TargetPulse. Improve deliverability, reduce bounces, and protect your sender reputation.',
+  title: 'TargetPulse - Email Verification Tool & Bulk Email Validator',
+  description: 'TargetPulse Email Verifier helps you validate email addresses, clean email lists, reduce bounce rates and improve deliverability. Bulk email verification with real-time results.',
+  keywords: [
+    'email verifier',
+    'email verification tool',
+    'bulk email verifier',
+    'email validator',
+    'verify email address',
+    'email list cleaning',
+    'free email verification tool',
+    'real time email verification',
+    'best email verification tool',
+  ],
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: 'TargetPulse - Email Verifier & Email List Cleaner',
-    description: 'Verify emails in real time and clean your email lists with TargetPulse. Improve deliverability, reduce bounces, and protect your sender reputation.',
+    title: 'TargetPulse - Email Verification Tool & Bulk Email Validator',
+    description: 'TargetPulse Email Verifier helps you validate email addresses, clean email lists, reduce bounce rates and improve deliverability. Bulk email verification with real-time results.',
     url: 'https://targetpulse.net',
     type: 'website',
   },
