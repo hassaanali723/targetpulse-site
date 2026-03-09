@@ -150,7 +150,7 @@ export default function RefundPolicyPage() {
                 <li>We will review your case within 2-3 business days</li>
                 <li>You will receive a response via email regarding the decision</li>
                 <li>Approved refunds will be processed within 5-10 business days</li>
-                <li>Refunds will be issued to the original payment method via Paddle</li>
+                <li>Refunds will be issued to the original payment method via our payment processor</li>
                 <li>It may take an additional 5-7 business days for the refund to appear in your account, depending on your payment provider</li>
               </ul>
 

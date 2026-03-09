@@ -45,7 +45,7 @@ export default function TermsOfServicePage() {
 
               <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">2. Description of Service</h2>
               <p className="text-slate-700 mb-4">
-                TargetPulse Email Verifier is a cloud-based tool that helps teams clean and validate email lists before sending campaigns. Users upload CSV files or individual emails, and we check deliverability, syntax, and mailbox status to reduce bounces and spam complaints. The product is sold as a pay-as-you-go credit system, so customers only pay for the emails they actually validate.
+                TargetPulse Email Verifier is a cloud-based tool that helps teams clean and validate email lists. Users upload CSV files or individual emails, and we check deliverability, syntax, and mailbox status to reduce invalid addresses and improve list quality. The product is sold as a pay-as-you-go credit system, so customers only pay for the emails they actually validate.
               </p>
               <p className="text-slate-700 mb-4">
                 The Service is provided to you subject to these Terms of Service and any additional terms and conditions that may apply.
@@ -89,7 +89,7 @@ export default function TermsOfServicePage() {
                 <li>Export results in CSV, Excel, and JSON formats</li>
                 <li>Duplicate email detection and removal</li>
                 <li>List cleaning and segmentation tools</li>
-                <li>Integration support for popular email marketing platforms</li>
+                <li>Integration support through API and compatible third-party systems</li>
               </ul>
 
               <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">3. User Account</h2>
@@ -106,7 +106,7 @@ export default function TermsOfServicePage() {
 
               <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">4. Payment Terms</h2>
               <p className="text-slate-700 mb-4">
-                Payment processing is handled securely through Paddle, our authorized payment gateway. By purchasing credits or services, you agree to:
+                Payment processing is handled securely through our authorized payment gateway. By purchasing credits or services, you agree to:
               </p>
               <ul className="list-disc pl-6 mb-4 text-slate-700">
                 <li>Provide current, complete, and accurate purchase and account information</li>
@@ -126,7 +126,7 @@ export default function TermsOfServicePage() {
 
               <h3 className="text-xl font-semibold text-slate-900 mt-6 mb-3">4.2 Pricing and Billing</h3>
               <p className="text-slate-700 mb-4">
-                All prices are displayed in your selected currency and include applicable fees. Credits are immediately added to your account upon successful payment confirmation. All credit purchases are non-refundable except as required by law or as explicitly stated in our Refund Policy.
+                All prices are displayed in USD and include applicable fees. Credits are immediately added to your account upon successful payment confirmation. All credit purchases are non-refundable except as required by law or as explicitly stated in our Refund Policy.
               </p>
 
               <h3 className="text-xl font-semibold text-slate-900 mt-6 mb-3">4.3 Free Trial Credits</h3>
@@ -217,12 +217,12 @@ export default function TermsOfServicePage() {
                 <li>Some email servers may provide false-positive or false-negative responses</li>
                 <li>Verification results are based on real-time checks and may change over time</li>
                 <li>We provide verification results "as is" and make no guarantees about deliverability</li>
-                <li>You are responsible for compliance with email marketing laws regardless of verification results</li>
+                <li>You are responsible for lawful use of verified data and any downstream communications</li>
               </ul>
 
-              <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">10. Email Marketing Compliance</h2>
+              <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">10. Lawful Use and Messaging Compliance</h2>
               <p className="text-slate-700 mb-4">
-                If you use verified email addresses for marketing purposes, you are solely responsible for ensuring compliance with all applicable laws and regulations, including but not limited to:
+                If you use verified email addresses for any outreach, transactional, or support messaging, you are solely responsible for ensuring compliance with all applicable laws and regulations, including but not limited to:
               </p>
               <ul className="list-disc pl-6 mb-4 text-slate-700">
                 <li>CAN-SPAM Act (United States)</li>
@@ -231,7 +231,7 @@ export default function TermsOfServicePage() {
                 <li>Other applicable anti-spam and data protection laws</li>
               </ul>
               <p className="text-slate-700 mb-4">
-                You must obtain proper consent before sending marketing emails and include clear unsubscribe mechanisms in all communications. TargetPulse is not responsible for your use of verified email addresses.
+                You must obtain any required consent and include legally required opt-out or preference controls where applicable. TargetPulse is not responsible for your use of verified email addresses.
               </p>
 
               <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">11. Intellectual Property</h2>

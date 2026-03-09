@@ -10,7 +10,7 @@ const faqs = [
   },
   {
     question: 'How do I verify my email list?',
-    answer: 'Upload your CSV or Excel file to TargetPulse Email Verifier. Our tool runs real-time verification: you see results as each email is checked and can download verified leads at any time, even while the rest of your list is still processing. No need to wait for the full run to finish.',
+    answer: 'Upload your CSV or Excel file to TargetPulse Email Verifier. Our tool runs real-time verification: you see results as each email is checked and can download verified results at any time, even while the rest of your list is still processing. No need to wait for the full run to finish.',
   },
   {
     question: 'How accurate is TargetPulse Email Verifier?',
@@ -22,7 +22,7 @@ const faqs = [
   },
   {
     question: 'How frequently should I verify my email lists?',
-    answer: 'We recommend verifying before every major campaign and then every 3 to 6 months to keep your list clean. Because we give you real-time results, you can fix lists quickly and remove invalid or risky addresses before they hurt deliverability.',
+    answer: 'We recommend verifying before every major send and then every 3 to 6 months to keep your list clean. Because we give you real-time results, you can fix lists quickly and remove invalid or risky addresses before they hurt deliverability.',
   },
   {
     question: 'What do different email verification statuses mean?',

@@ -37,7 +37,7 @@ export default function PrivacyPolicyPage() {
               
               <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">1. Introduction</h2>
               <p className="text-slate-700 mb-4">
-                TargetPulse ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our email marketing services and website.
+                TargetPulse ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our email verification services and website.
               </p>
 
               <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">2. Information We Collect</h2>
@@ -48,37 +48,36 @@ export default function PrivacyPolicyPage() {
               </p>
               <ul className="list-disc pl-6 mb-4 text-slate-700">
                 <li>Register for an account</li>
-                <li>Make a purchase or subscription</li>
+                <li>Purchase verification credits or a subscription</li>
                 <li>Contact our customer support</li>
-                <li>Subscribe to our newsletter</li>
-                <li>Fill out forms on our website</li>
+                <li>Submit email lists for verification</li>
+                <li>Use contact or support forms on our website</li>
               </ul>
               <p className="text-slate-700 mb-4">
-                This information may include: name, email address, phone number, billing address, payment information, and company details.
+                This information may include: name, email address, account identifiers, optional company details, and transaction metadata. Payment card details are handled by our payment processor and are not stored by us.
               </p>
 
-              <h3 className="text-xl font-semibold text-slate-900 mt-6 mb-3">2.2 Usage Data</h3>
+              <h3 className="text-xl font-semibold text-slate-900 mt-6 mb-3">2.2 Authentication and Technical Data</h3>
               <p className="text-slate-700 mb-4">
-                We automatically collect certain information when you visit our website, including:
+                We use Clerk for account registration and login (including Google sign-in and email/password sign-up). Through this authentication process, we collect and process:
               </p>
               <ul className="list-disc pl-6 mb-4 text-slate-700">
-                <li>IP address</li>
-                <li>Browser type and version</li>
-                <li>Device information</li>
-                <li>Pages visited and time spent</li>
-                <li>Referring website</li>
-                <li>Operating system</li>
+                <li>Account identifiers (such as user ID, name, and email address)</li>
+                <li>Authentication provider and sign-in method (Google or email/password)</li>
+                <li>Sign-in activity metadata (such as login timestamps)</li>
+                <li>Security-related technical data (such as IP address and user agent) used to protect accounts and prevent abuse</li>
+                <li>Essential session cookies or tokens required to keep you signed in securely</li>
               </ul>
 
-              <h3 className="text-xl font-semibold text-slate-900 mt-6 mb-3">2.3 Email Campaign Data</h3>
+              <h3 className="text-xl font-semibold text-slate-900 mt-6 mb-3">2.3 Email Verification Data</h3>
               <p className="text-slate-700 mb-4">
-                When you use our email marketing services, we collect and process:
+                When you use our email verification services, we collect and process:
               </p>
               <ul className="list-disc pl-6 mb-4 text-slate-700">
-                <li>Email addresses in your contact lists</li>
-                <li>Email content and templates</li>
-                <li>Campaign performance metrics (opens, clicks, bounces)</li>
-                <li>Subscriber engagement data</li>
+                <li>Email addresses submitted for verification</li>
+                <li>Verification results and status (valid, invalid, catch-all, disposable, etc.)</li>
+                <li>Bulk email lists uploaded for processing</li>
+                <li>API usage data and verification history</li>
               </ul>
 
               <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">3. How We Use Your Information</h2>
@@ -93,7 +92,6 @@ export default function PrivacyPolicyPage() {
                 <li>To improve and optimize our services</li>
                 <li>To detect and prevent fraud and abuse</li>
                 <li>To comply with legal obligations</li>
-                <li>To send marketing communications (with your consent)</li>
                 <li>To analyze usage patterns and trends</li>
               </ul>
 
@@ -115,10 +113,10 @@ export default function PrivacyPolicyPage() {
                 We share your information with third-party service providers who perform services on our behalf:
               </p>
               <ul className="list-disc pl-6 mb-4 text-slate-700">
-                <li>Payment processors (Paddle)</li>
+                <li>Payment processors (our authorized payment gateway)</li>
+                <li>Authentication providers (such as Clerk)</li>
                 <li>Cloud hosting providers</li>
-                <li>Email delivery services</li>
-                <li>Analytics providers</li>
+                <li>Security and monitoring providers</li>
                 <li>Customer support tools</li>
               </ul>
 

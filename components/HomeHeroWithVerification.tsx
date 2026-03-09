@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { CheckCircle2, AlertCircle, Loader2, Star, TrendingUp, Shield, ShieldCheck, HelpCircle, AlertTriangle, Mail, AtSign, FileCheck, Database, Zap } from 'lucide-react'
+import { CheckCircle2, AlertCircle, Loader2, TrendingUp, Shield, ShieldCheck, HelpCircle, AlertTriangle, Mail, AtSign, FileCheck, Database, Zap } from 'lucide-react'
 import EmailDetailsModal, { PublicEmailValidationResult } from './EmailDetailsModal'
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5000'
@@ -48,7 +48,7 @@ const checks = [
   },
   {
     title: 'Disposable email screening',
-    description: 'Detects temporary domains that are not suitable for long-term outreach.',
+    description: 'Detects temporary domains that are not suitable for long-term contact lists.',
   },
   {
     title: 'Blacklist check',
@@ -69,7 +69,7 @@ const outcomes = [
     label: 'Deliverable',
     color: 'emerald',
     icon: CheckCircle2,
-    description: 'Email is valid, reachable, and passed checks. Safe to use for outreach.',
+    description: 'Email is valid, reachable, and passed checks. Safe to keep in your contact database.',
   },
   {
     label: 'Risky',
@@ -290,8 +290,8 @@ export default function HomeHeroWithVerification() {
           </h1>
 
           <p className="text-base md:text-lg text-slate-700 max-w-2xl mx-auto mb-10 leading-relaxed">
-            TargetPulse Email Verifier cleans your lists in seconds so campaigns land in the inbox,
-            not the spam folder. Try a single email below to see the experience.
+            TargetPulse Email Verifier cleans your lists in seconds so your messages reach real inboxes,
+            not invalid addresses. Try a single email below to see the experience.
           </p>
 
           <div className="max-w-2xl mx-auto">
@@ -362,10 +362,11 @@ export default function HomeHeroWithVerification() {
 
           {/* Trust Stats Bar */}
           <div className="mt-12 flex flex-wrap items-center justify-center gap-6 md:gap-10">
+            {/* Hidden for now until ratings/user count are verified
             <div className="flex items-center gap-3">
               <div className="flex -space-x-1">
-                {['S','D','A','I','M'].map((letter, i) => {
-                  const colors = ['from-blue-500 to-blue-600','from-emerald-500 to-emerald-600','from-orange-500 to-orange-600','from-purple-500 to-purple-600','from-pink-500 to-pink-600']
+                {['S', 'D', 'A', 'I', 'M'].map((letter, i) => {
+                  const colors = ['from-blue-500 to-blue-600', 'from-emerald-500 to-emerald-600', 'from-orange-500 to-orange-600', 'from-purple-500 to-purple-600', 'from-pink-500 to-pink-600']
                   return (
                     <div key={letter} className={`flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br ${colors[i]} text-white text-xs font-bold shadow-md border-2 border-white`}>
                       {letter}
@@ -385,6 +386,7 @@ export default function HomeHeroWithVerification() {
             </div>
 
             <div className="hidden md:block h-10 w-px bg-slate-200" />
+            */}
 
             <div className="flex items-center gap-2.5">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary-100 to-primary-200 shadow-sm">

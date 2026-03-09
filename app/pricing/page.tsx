@@ -559,7 +559,7 @@ export default function PricingPage() {
                   What payment methods do you accept?
                 </h3>
                 <p className="text-slate-700">
-                  We accept all major credit cards via Stripe and also support crypto payments.
+                  We accept all major credit and debit cards through our secure payment processor.
                 </p>
               </div>
               

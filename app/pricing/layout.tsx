@@ -36,8 +36,8 @@ const pricingSchema = {
     'Catch-all detection',
     'Pay-as-you-go pricing',
     'No credit expiration',
-    'free email verfication tool',
-    'free credits for email verification'
+    'Free email verification trial',
+    'Free credits for email verification'
   ],
 }
 

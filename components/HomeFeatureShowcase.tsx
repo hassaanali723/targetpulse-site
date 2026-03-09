@@ -51,15 +51,15 @@ const howItWorks = [
     number: '03',
     icon: Download,
     title: 'Download Anytime',
-    description: 'Download verified emails while others continue processing. Get clean leads instantly.',
+    description: 'Download verified emails while others continue processing. Get clean results instantly.',
     color: 'accent',
     highlight: true,
   },
   {
     number: '04',
     icon: Target,
-    title: 'Start Your Campaign',
-    description: 'Use verified emails immediately in your campaigns with confidence. Maximum deliverability guaranteed.',
+    title: 'Use Verified Results',
+    description: 'Use verified emails immediately in your systems with confidence and lower bounce risk.',
     color: 'primary',
   },
 ]
@@ -118,7 +118,7 @@ export default function HomeFeatureShowcase() {
             </p>
 
             <p className="text-lg text-slate-700 mb-8 leading-relaxed">
-              Start downloading verified leads immediately while the rest continue processing in the background. No waiting required.
+              Start downloading verified results immediately while the rest continue processing in the background. No waiting required.
             </p>
 
             {/* Feature Checkmarks */}
@@ -171,7 +171,7 @@ export default function HomeFeatureShowcase() {
                     <Upload className="h-5 w-5 text-slate-600" />
                   </div>
                   <div>
-                    <div className="text-sm font-semibold text-slate-900">customer_leads_2024.csv</div>
+                    <div className="text-sm font-semibold text-slate-900">customer_contacts_2024.csv</div>
                     <div className="text-xs text-slate-500">Feb 26, 2026 • 30,247 emails</div>
                   </div>
                 </div>
