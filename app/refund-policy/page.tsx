@@ -39,6 +39,9 @@ export default function RefundPolicyPage() {
               <p className="text-slate-700 mb-4">
                 At TargetPulse, we strive to provide exceptional email verification services. This Refund Policy outlines the circumstances under which refunds may be issued for our credit-based service.
               </p>
+              <p className="text-slate-700 mb-4">
+                We provide digital email verification services only and do not sell or ship physical goods.
+              </p>
 
               <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">2. How Our Credit System Works</h2>
               <p className="text-slate-700 mb-4">

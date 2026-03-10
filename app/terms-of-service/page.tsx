@@ -177,7 +177,7 @@ export default function TermsOfServicePage() {
                 <li><strong>Account-Specific:</strong> Credits are tied to your account and cannot be shared</li>
               </ul>
 
-              <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">7. Cancellation and Refunds</h2>
+              <h2 id="cancellation-policy" className="text-2xl font-bold text-slate-900 mt-8 mb-4">7. Cancellation and Refunds</h2>
               <p className="text-slate-700 mb-4">
                 You may cancel your recurring subscription at any time through your account settings or by contacting our support team at info@targetpulse.net. Upon cancellation:
               </p>
