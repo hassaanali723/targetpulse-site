@@ -72,7 +72,7 @@ export default function TermsOfServicePage() {
               </p>
               <ul className="list-disc pl-6 mb-4 text-slate-700">
                 <li><strong>1 Credit = 1 Email Verification:</strong> Each email address verification consumes exactly 1 credit from your account balance</li>
-                <li><strong>Pay-As-You-Go:</strong> Purchase credits in packages ranging from 2,000 to 1,000,000 credits at any time</li>
+                <li><strong>Pay-As-You-Go:</strong> Purchase credits in packages ranging from 10,000 to 1,000,000 credits at any time</li>
                 <li><strong>Recurring Subscriptions:</strong> Subscribe to monthly recurring credit packages with a 5% discount on the regular price</li>
                 <li><strong>No Expiration:</strong> Credits never expire and remain available in your account until used</li>
                 <li><strong>Free Trial:</strong> New accounts receive 1,000 complimentary credits to test the service</li>

@@ -67,27 +67,20 @@ export default function PricingPage() {
   }
 
   const calculatePrice = (credits: number) => {
-    if (credits >= 1000000) return credits * 0.00125
-    if (credits >= 500000) return credits * 0.0015
-    if (credits >= 250000) return credits * 0.00175
-    if (credits >= 100000) return credits * 0.002
-    if (credits >= 50000) return credits * 0.00225
-    if (credits >= 25000) return credits * 0.0025
-    if (credits >= 10000) return credits * 0.00275
-    if (credits >= 5000) return credits * 0.003
-    if (credits >= 2000) return credits * 0.00375
-    return credits * 0.005
+    if (credits >= 1000000) return credits * (100 / 1000000)
+    if (credits >= 500000) return credits * (60 / 500000)
+    if (credits >= 300000) return credits * (40 / 300000)
+    if (credits >= 100000) return credits * (20 / 100000)
+    if (credits >= 30000) return credits * (10 / 30000)
+    return credits * (5 / 10000)
   }
   const pricingTiers = [
-    { credits: '2,000', price: '$7.50', perCredit: '$0.00375', popular: false },
-    { credits: '5,000', price: '$15.00', perCredit: '$0.0030', popular: false },
-    { credits: '10,000', price: '$27.50', perCredit: '$0.00275', popular: true },
-    { credits: '25,000', price: '$62.50', perCredit: '$0.0025', popular: false },
-    { credits: '50,000', price: '$112.50', perCredit: '$0.00225', popular: false },
-    { credits: '100,000', price: '$200.00', perCredit: '$0.0020', popular: false },
-    { credits: '250,000', price: '$437.50', perCredit: '$0.00175', popular: false },
-    { credits: '500,000', price: '$750.00', perCredit: '$0.0015', popular: false },
-    { credits: '1,000,000', price: '$1,250.00', perCredit: '$0.00125', popular: false },
+    { credits: '10,000', price: '$5.00', perCredit: '$0.00050', popular: false },
+    { credits: '30,000', price: '$10.00', perCredit: '$0.00033', popular: false },
+    { credits: '100,000', price: '$20.00', perCredit: '$0.00020', popular: true },
+    { credits: '300,000', price: '$40.00', perCredit: '$0.00013', popular: false },
+    { credits: '500,000', price: '$60.00', perCredit: '$0.00012', popular: false },
+    { credits: '1,000,000', price: '$100.00', perCredit: '$0.00010', popular: false },
   ]
 
   const features = [
@@ -244,8 +237,8 @@ export default function PricingPage() {
                         value={emailCount}
                         onChange={(e) => setEmailCount(Math.max(1, parseInt(e.target.value) || 1))}
                         className="w-full px-4 py-3 rounded-lg border border-slate-300 bg-white focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none"
-                        min="1"
-                        max="10000000"
+                        min="10000"
+                        max="5000000"
                       />
                     </div>
 
@@ -351,19 +344,14 @@ export default function PricingPage() {
                   </h3>
                   <p className="text-slate-600 mb-4">Credits</p>
                   <div className="text-4xl font-bold gradient-text mb-2">
-                    {isSubscription 
-                      ? `$${(parseFloat(tier.price.replace('$', '').replace(',', '')) * 0.95).toFixed(0)}`
+                    {isSubscription
+                      ? `$${(parseFloat(tier.price.replace('$', '').replace(',', '')) * 0.95).toFixed(2)}`
                       : tier.price
                     }
                   </div>
                   <p className="text-sm text-slate-500">
                     {tier.perCredit} per credit
                   </p>
-                  {parseInt(tier.credits.replace(/,/g, '')) < 1000 && (
-                    <p className="text-xs text-slate-500 mt-1">
-                      For purchases under 1,000 credits: $0.005 per credit
-                    </p>
-                  )}
                   {isSubscription && (
                     <p className="text-xs text-green-600 font-semibold mt-2">
                       💰 Save 5% with subscription
@@ -388,13 +376,13 @@ export default function PricingPage() {
                     <div className="flex items-center justify-between text-sm">
                       <span className="text-slate-600">Monthly payment:</span>
                       <span className="font-semibold text-emerald-600">
-                        ${(parseFloat(tier.price.replace('$', '').replace(',', '')) * 0.95).toFixed(0)}/mo
+                        ${(parseFloat(tier.price.replace('$', '').replace(',', '')) * 0.95).toFixed(2)}/mo
                       </span>
                     </div>
                     <div className="flex items-center justify-between text-xs">
                       <span className="text-slate-500">You save:</span>
                       <span className="font-semibold text-emerald-600">
-                        ${(parseFloat(tier.price.replace('$', '').replace(',', '')) * 0.05).toFixed(0)}/mo
+                        ${(parseFloat(tier.price.replace('$', '').replace(',', '')) * 0.05).toFixed(2)}/mo
                       </span>
                     </div>
                   </div>
@@ -498,7 +486,7 @@ export default function PricingPage() {
                   📊
                 </div>
                 <h3 className="text-xl font-bold text-slate-900 mb-2">Volume Discounts</h3>
-                <p className="text-slate-600 text-sm leading-relaxed">Buy more credits, pay less per credit. From $0.00375 to $0.00125!</p>
+                <p className="text-slate-600 text-sm leading-relaxed">Buy more credits, pay less per credit. From $0.00050 to $0.00010!</p>
               </div>
 
               {/* Step 3 */}
@@ -595,7 +583,7 @@ export default function PricingPage() {
                   Is there a minimum purchase?
                 </h3>
                 <p className="text-slate-700">
-                  No, you can purchase any amount of credits. The price per credit keeps reducing as the number of credits increases. You can also use your 1,000 free trial credits before purchasing.
+                  The minimum purchase is 10,000 credits ($5.00). For purchases over 5,000,000 credits, please contact us to arrange a custom deal. You can also use your 1,000 free trial credits before purchasing.
                 </p>
               </div>
             </div>

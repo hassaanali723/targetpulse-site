@@ -49,7 +49,7 @@ export default function RefundPolicyPage() {
               </p>
               <ul className="list-disc pl-6 mb-4 text-slate-700">
                 <li><strong>1 Credit = 1 Email Validation:</strong> Each email address verification consumes 1 credit from your account</li>
-                <li><strong>Pay-As-You-Go:</strong> Purchase credits in bulk at any time (packages from 2,000 to 1,000,000 credits)</li>
+                <li><strong>Pay-As-You-Go:</strong> Purchase credits in bulk at any time (packages from 10,000 to 1,000,000 credits)</li>
                 <li><strong>Recurring Credits:</strong> Subscribe to monthly recurring credit packages with a 5% discount</li>
                 <li><strong>No Expiration:</strong> Credits never expire and remain in your account until used</li>
               </ul>

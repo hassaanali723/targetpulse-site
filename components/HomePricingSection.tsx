@@ -4,16 +4,12 @@ import { useState } from 'react'
 import { FileText } from 'lucide-react'
 
 const PRICE_TIERS = [
-  { min: 1, max: 1999, perCredit: 0.005 },
-  { min: 2000, max: 4999, perCredit: 0.00375 },
-  { min: 5000, max: 9999, perCredit: 0.003 },
-  { min: 10000, max: 24999, perCredit: 0.00275 },
-  { min: 25000, max: 49999, perCredit: 0.0025 },
-  { min: 50000, max: 99999, perCredit: 0.00225 },
-  { min: 100000, max: 249999, perCredit: 0.002 },
-  { min: 250000, max: 499999, perCredit: 0.00175 },
-  { min: 500000, max: 999999, perCredit: 0.0015 },
-  { min: 1000000, max: Infinity, perCredit: 0.00125 },
+  { min: 10000, max: 29999, perCredit: 5 / 10000 },
+  { min: 30000, max: 99999, perCredit: 10 / 30000 },
+  { min: 100000, max: 299999, perCredit: 20 / 100000 },
+  { min: 300000, max: 499999, perCredit: 40 / 300000 },
+  { min: 500000, max: 999999, perCredit: 60 / 500000 },
+  { min: 1000000, max: Infinity, perCredit: 100 / 1000000 },
 ]
 
 function getPriceForCredits(credits: number) {
@@ -24,21 +20,18 @@ function getPriceForCredits(credits: number) {
 }
 
 const CREDIT_PACKAGES = [
-  { credits: 2000, price: 7.5, perCredit: 0.00375 },
-  { credits: 5000, price: 15, perCredit: 0.003 },
-  { credits: 10000, price: 27.5, perCredit: 0.00275 },
-  { credits: 25000, price: 62.5, perCredit: 0.0025 },
-  { credits: 50000, price: 112.5, perCredit: 0.00225 },
-  { credits: 100000, price: 200, perCredit: 0.002 },
-  { credits: 250000, price: 437.5, perCredit: 0.00175 },
-  { credits: 500000, price: 750, perCredit: 0.0015 },
-  { credits: 1000000, price: 1250, perCredit: 0.00125 },
+  { credits: 10000, price: 5, perCredit: 5 / 10000 },
+  { credits: 30000, price: 10, perCredit: 10 / 30000 },
+  { credits: 100000, price: 20, perCredit: 20 / 100000 },
+  { credits: 300000, price: 40, perCredit: 40 / 300000 },
+  { credits: 500000, price: 60, perCredit: 60 / 500000 },
+  { credits: 1000000, price: 100, perCredit: 100 / 1000000 },
 ]
 
 export default function HomePricingSection() {
-  const [calculatorCredits, setCalculatorCredits] = useState(5000)
+  const [calculatorCredits, setCalculatorCredits] = useState(10000)
   const { total: calculatedPrice, perCredit: calculatedPerCredit } = getPriceForCredits(calculatorCredits)
-  const perCreditDisplay = calculatedPerCredit.toFixed(4)
+  const perCreditDisplay = calculatedPerCredit.toFixed(5)
 
   return (
     <div className="mt-16 rounded-3xl border-2 border-primary-100 bg-gradient-to-br from-primary-50/50 to-accent-50/50 p-6 md:p-8">
@@ -70,7 +63,7 @@ export default function HomePricingSection() {
                 )}
               </div>
               <div className="text-lg font-bold text-primary-700">${pkg.price.toLocaleString(undefined, { minimumFractionDigits: 2 })}</div>
-              <div className="text-xs text-slate-500">${pkg.perCredit.toFixed(4)}/credit</div>
+              <div className="text-xs text-slate-500">${pkg.perCredit.toFixed(5)}/credit</div>
             </button>
           ))}
         </div>
@@ -81,9 +74,9 @@ export default function HomePricingSection() {
           <label className="block text-sm font-medium text-slate-700 mb-2">Credits</label>
           <input
             type="number"
-            min="1"
+            min="10000"
             value={calculatorCredits}
-            onChange={(e) => setCalculatorCredits(Math.max(1, parseInt(e.target.value, 10) || 1))}
+            onChange={(e) => setCalculatorCredits(Math.max(10000, parseInt(e.target.value, 10) || 10000))}
             className="w-full rounded-xl border-2 border-slate-200 px-4 py-3 text-slate-900 font-semibold focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all"
           />
           <p className="mt-3 text-slate-700 font-medium">
