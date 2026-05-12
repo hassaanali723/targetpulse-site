@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, ArrowUpRight } from 'lucide-react'
 import Link from 'next/link'
 
 export default function Navbar() {
@@ -9,67 +9,58 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
-    }
+    const handleScroll = () => setIsScrolled(window.scrollY > 20)
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Prevent body scroll when mobile menu is open
   useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
+    document.body.style.overflow = isMobileMenuOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
   }, [isMobileMenuOpen])
 
   const navLinks = [
     { name: 'Pricing', href: '/pricing' },
-    { name: 'Talk to human', href: '/contact-us' },
+    { name: 'Talk to us', href: '/contact-us' },
+    { name: 'Earn with us', href: '/affiliates' },
   ]
 
   return (
     <>
-      <nav
-        className={`fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300 ${
-          isScrolled
-            ? 'bg-white/95 backdrop-blur-xl shadow-lg border-slate-200'
-            : 'bg-white/90 backdrop-blur-md border-white/20'
-        }`}
-      >
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? 'bg-white/95 backdrop-blur-xl border-b border-slate-100 shadow-[0_1px_12px_rgba(0,0,0,0.04)]'
+          : 'bg-white/90 backdrop-blur-md border-b border-transparent'
+      }`}>
         <div className="container-custom">
-          <div className="flex items-center justify-between h-20">
+          <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <Link href="/" className="group py-3" onClick={() => setIsMobileMenuOpen(false)}>
-              <div className="relative h-14 w-auto transition-transform duration-300 group-hover:scale-105">
-                <img
-                  src="/Targetpulse-email verifier- logo.png"
-                  alt="TargetPulse"
-                  className="h-full w-auto object-contain drop-shadow-md"
-                  style={{ maxHeight: 'none' }}
-                />
-              </div>
+            <Link href="/" className="flex-shrink-0" onClick={() => setIsMobileMenuOpen(false)}>
+              <img
+                src="/Targetpulse-email verifier- logo.png"
+                alt="TargetPulse"
+                className="h-12 w-auto object-contain hover:opacity-80 transition-opacity duration-200"
+              />
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8 text-[15px]">
+            <div className="hidden md:flex items-center gap-1">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="text-slate-800 hover:text-primary-600 transition-colors font-medium"
+                  className="relative px-4 py-2 text-[14px] font-medium text-slate-600 hover:text-slate-900 transition-colors duration-200 group"
                 >
                   {link.name}
+                  <span className="absolute bottom-0.5 left-4 right-4 h-[1.5px] bg-primary-600 rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left" />
                 </Link>
               ))}
               <a
-                href="https://emailverifier.targetpulse.net/sign-up"
-                className="ml-2 px-6 py-2.5 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-full hover:from-primary-700 hover:to-primary-800 hover:shadow-lg transition-all duration-200 font-semibold"
+                href="https://emailverifier.targetpulse.net/sign-in"
+                className="ml-3 inline-flex items-center gap-1.5 px-5 py-2.5 bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white rounded-full text-[14px] font-semibold transition-all duration-200 hover:shadow-lg"
               >
-                Sign up
+                Sign in
+                <ArrowUpRight className="w-3.5 h-3.5" />
               </a>
             </div>
 
@@ -79,62 +70,48 @@ export default function Navbar() {
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle menu"
             >
-              {isMobileMenuOpen ? (
-                <X className="w-6 h-6 text-slate-700" />
-              ) : (
-                <Menu className="w-6 h-6 text-slate-700" />
-              )}
+              {isMobileMenuOpen
+                ? <X className="w-5 h-5 text-slate-700" />
+                : <Menu className="w-5 h-5 text-slate-700" />
+              }
             </button>
           </div>
         </div>
       </nav>
 
-      {/* Mobile Menu — full screen overlay */}
-      <div
-        className={`fixed inset-0 z-40 md:hidden transition-all duration-300 ${
-          isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
-      >
-        {/* Backdrop */}
+      {/* Mobile Menu */}
+      <div className={`fixed inset-0 z-40 md:hidden transition-all duration-300 ${
+        isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+      }`}>
         <div
-          className="absolute inset-0 bg-black/30 backdrop-blur-sm"
+          className="absolute inset-0 bg-black/20 backdrop-blur-sm"
           onClick={() => setIsMobileMenuOpen(false)}
         />
-
-        {/* Slide-in panel */}
-        <div
-          className={`absolute top-20 left-0 right-0 bg-white shadow-2xl transition-transform duration-300 ${
-            isMobileMenuOpen ? 'translate-y-0' : '-translate-y-4'
-          }`}
-        >
-          {/* Divider */}
-          <div className="h-px bg-gradient-to-r from-primary-200 via-accent-200 to-transparent mx-6" />
-
-          <div className="px-6 py-6 space-y-1">
+        <div className={`absolute top-16 left-0 right-0 bg-white border-b border-slate-100 shadow-xl transition-transform duration-300 ${
+          isMobileMenuOpen ? 'translate-y-0' : '-translate-y-2'
+        }`}>
+          <div className="px-6 py-4 space-y-1">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="flex items-center justify-between w-full px-4 py-3.5 rounded-xl text-slate-700 font-medium hover:bg-primary-50 hover:text-primary-700 transition-all duration-200 group"
+                className="flex items-center justify-between w-full px-4 py-3 rounded-xl text-slate-700 font-medium hover:bg-slate-50 hover:text-primary-700 transition-all duration-200"
               >
                 <span>{link.name}</span>
-                <span className="text-slate-300 group-hover:text-primary-400 transition-colors text-lg">›</span>
+                <span className="text-slate-300 text-lg">›</span>
               </Link>
             ))}
           </div>
-
-          {/* CTA */}
-          <div className="px-6 pb-8 pt-2">
-            <div className="h-px bg-slate-100 mb-6" />
+          <div className="px-6 pb-8 pt-3 border-t border-slate-100">
             <a
-              href="https://emailverifier.targetpulse.net/sign-up"
+              href="https://emailverifier.targetpulse.net/sign-in"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="block w-full py-4 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-2xl text-center font-semibold text-[15px] hover:from-primary-700 hover:to-primary-800 hover:shadow-lg transition-all duration-200"
+              className="flex items-center justify-center gap-2 w-full py-3.5 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-2xl font-semibold text-[15px] hover:from-primary-700 hover:to-primary-800 hover:shadow-lg transition-all duration-200"
             >
-              Sign up — It&apos;s Free
+              Sign in
+              <ArrowUpRight className="w-4 h-4" />
             </a>
-            <p className="text-center text-xs text-slate-400 mt-3">No credit card required</p>
           </div>
         </div>
       </div>

@@ -3,446 +3,230 @@
 import { useState } from 'react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import { Check, Loader2, Calculator, DollarSign, Mail, AlertCircle } from 'lucide-react'
-import EmailDetailsModal, { PublicEmailValidationResult } from '@/components/EmailDetailsModal'
+import { Check, Zap, Mail } from 'lucide-react'
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5000'
+const packages = [
+  { credits: 10000,   price: 9.90,   perCredit: 0.00099, tag: 'Starter friendly' },
+  { credits: 30000,   price: 28.00,  perCredit: 0.00093, tag: 'Starter friendly' },
+  { credits: 50000,   price: 39.00,  perCredit: 0.00078, tag: 'Starter friendly' },
+  { credits: 100000,  price: 76.00,  perCredit: 0.00076, tag: 'Best value', bestValue: true },
+  { credits: 300000,  price: 222.00, perCredit: 0.00074, tag: 'Popular with teams' },
+  { credits: 500000,  price: 360.00, perCredit: 0.00072, tag: 'Popular with teams' },
+  { credits: 800000,  price: 559.00, perCredit: 0.00070, tag: 'Popular with teams' },
+  { credits: 1000000, price: 680.00, perCredit: 0.00068, tag: 'Popular with teams' },
+]
 
-async function verifyEmailPublic(email: string): Promise<{
-  rateLimited: boolean
-  result?: PublicEmailValidationResult
-  message?: string
-}> {
-  const res = await fetch(`${BACKEND_URL}/api/public/validate-email`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email }),
-  })
-  const data = await res.json().catch(() => ({}))
-  if (res.status === 429) {
-    return {
-      rateLimited: true,
-      message: data.message || 'You can verify up to 5 emails per hour as a guest. Sign up for unlimited verification.',
-    }
-  }
-  if (!res.ok || !data.success) throw new Error(data.error || 'Validation failed')
-  return { rateLimited: false, result: data.data as PublicEmailValidationResult }
+const DISCOUNT = 0.10
+
+const features = [
+  'Email Syntax Validation',
+  'Domain & MX Record Verification',
+  'SMTP Mailbox Verification',
+  'Disposable Email Detection',
+  'Role-Based Email Detection',
+  'Catch-All Domain Detection',
+  'Bulk Upload & Processing',
+  'CSV, Excel & JSON Export',
+  'Duplicate Email Removal',
+  'Detailed Verification Reports',
+  'No Credit Expiration',
+]
+
+const faqs = [
+  {
+    q: 'What payment methods do you accept?',
+    a: 'We accept all major credit and debit cards through our secure Stripe payment processor.',
+  },
+  {
+    q: 'Can I cancel my subscription anytime?',
+    a: "Yes! Cancel anytime. You'll keep all credits already in your account and won't be charged again.",
+  },
+  {
+    q: 'What happens if I run out of credits?',
+    a: 'Simply purchase more credits anytime. Your account is topped up instantly.',
+  },
+  {
+    q: 'Do you offer refunds?',
+    a: 'Credits are generally non-refundable. We handle exceptional circumstances on a case-by-case basis. See our Refund Policy for details.',
+  },
+  {
+    q: 'Is there a minimum purchase?',
+    a: 'The minimum purchase is 10,000 credits ($9.90). You also get 1,000 free trial credits before purchasing.',
+  },
+  {
+    q: 'Do credits expire?',
+    a: 'Never. Your credits stay in your account until you use them — no rush, no pressure.',
+  },
+]
+
+function formatCredits(n: number) {
+  if (n >= 1000000) return `${n / 1000000}M`
+  return `${(n / 1000).toFixed(0)}K`
 }
 
 export default function PricingPage() {
-  const [isSubscription, setIsSubscription] = useState(false)
-  const [calculatorEmail, setCalculatorEmail] = useState('')
-  const [calculatorStatus, setCalculatorStatus] = useState<'idle' | 'checking' | 'done' | 'error' | 'ratelimit'>('idle')
-  const [errorMsg, setErrorMsg] = useState('')
-  const [rateLimitMsg, setRateLimitMsg] = useState('')
-  const [modalOpen, setModalOpen] = useState(false)
-  const [modalResult, setModalResult] = useState<PublicEmailValidationResult | null>(null)
-  const [emailCount, setEmailCount] = useState(10000)
-
-  const handleCalculatorSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    const trimmed = calculatorEmail.trim()
-    if (!trimmed) return
-
-    setCalculatorStatus('checking')
-    setErrorMsg('')
-    setRateLimitMsg('')
-
-    try {
-      const { rateLimited, result, message } = await verifyEmailPublic(trimmed)
-      if (rateLimited) {
-        setCalculatorStatus('ratelimit')
-        setRateLimitMsg(message || 'Rate limit reached. Sign up for unlimited verification.')
-        return
-      }
-      if (result) {
-        setModalResult(result)
-        setModalOpen(true)
-        setCalculatorStatus('done')
-      }
-    } catch (err: unknown) {
-      setCalculatorStatus('error')
-      setErrorMsg(err instanceof Error ? err.message : 'Verification failed. Please try again.')
-    }
-  }
-
-  const calculatePrice = (credits: number) => {
-    if (credits >= 1000000) return credits * (100 / 1000000)
-    if (credits >= 500000) return credits * (60 / 500000)
-    if (credits >= 300000) return credits * (40 / 300000)
-    if (credits >= 100000) return credits * (20 / 100000)
-    if (credits >= 30000) return credits * (10 / 30000)
-    return credits * (5 / 10000)
-  }
-  const pricingTiers = [
-    { credits: '10,000', price: '$5.00', perCredit: '$0.00050', popular: false },
-    { credits: '30,000', price: '$10.00', perCredit: '$0.00033', popular: false },
-    { credits: '100,000', price: '$20.00', perCredit: '$0.00020', popular: true },
-    { credits: '300,000', price: '$40.00', perCredit: '$0.00013', popular: false },
-    { credits: '500,000', price: '$60.00', perCredit: '$0.00012', popular: false },
-    { credits: '1,000,000', price: '$100.00', perCredit: '$0.00010', popular: false },
-  ]
-
-  const features = [
-    'Email Syntax Validation',
-    'Domain & MX Record Verification',
-    'SMTP Mailbox Verification',
-    'Disposable Email Detection',
-    'Role-Based Email Detection',
-    'Catch-All Domain Detection',
-    'Bulk Upload & Processing',
-    'CSV, Excel & JSON Export',
-    'Duplicate Email Removal',
-    'Detailed Verification Reports',
-    'No Credit Expiration',
-  ]
+  const [isSub, setIsSub] = useState(false)
+  const [openFaq, setOpenFaq] = useState<number | null>(null)
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-primary-100/50 to-accent-100/50">
+    <main className="min-h-screen bg-white">
       <Navbar />
-      
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-16 overflow-hidden">
-        {/* Background Graphics */}
+
+      {/* Hero */}
+      <section className="relative pt-32 pb-20 overflow-hidden">
         <div className="absolute inset-0 -z-10">
-          {/* Large Gradient Shapes */}
-          <div className="absolute -top-20 -right-20 w-[600px] h-[600px] bg-gradient-to-br from-primary-400/20 to-primary-500/20 rounded-full blur-3xl" />
-          <div className="absolute -bottom-20 -left-20 w-[500px] h-[500px] bg-gradient-to-tr from-accent-400/20 to-accent-500/20 rounded-full blur-3xl" />
-          
-          {/* Decorative Circles */}
-          <div className="absolute top-32 left-[15%] w-32 h-32 border-[4px] border-primary-400/30 rounded-full" />
-          <div className="absolute top-48 right-[20%] w-24 h-24 border-[4px] border-accent-400/30 rounded-full" />
-          <div className="absolute bottom-32 right-[15%] w-40 h-40 border-[3px] border-primary-500/25 rounded-full" />
-          
-          {/* Accent Dots */}
-          <div className="absolute top-60 left-[20%] w-2 h-2 bg-primary-500 rounded-full opacity-40" />
-          <div className="absolute top-80 right-[25%] w-3 h-3 bg-accent-500 rounded-full opacity-40" />
-          <div className="absolute bottom-60 left-[30%] w-2 h-2 bg-primary-600 rounded-full opacity-50" />
+          <div className="dot-grid absolute inset-0 opacity-[0.4]" />
+          <div className="absolute top-0 right-0 w-[600px] h-[500px] bg-primary-50 rounded-full blur-[120px] -translate-y-1/3 translate-x-1/4 opacity-70" />
+          <div className="absolute bottom-0 left-0 w-[400px] h-[300px] bg-accent-50 rounded-full blur-[100px] translate-y-1/4 -translate-x-1/4 opacity-60" />
         </div>
 
-        <div className="container-custom relative">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center space-x-2 rounded-full border border-primary-200 bg-gradient-to-r from-primary-50 to-accent-50 px-4 py-2 shadow-sm backdrop-blur-sm mb-6">
-              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-primary-700">
+        <div className="container-custom">
+          <div className="max-w-3xl mx-auto text-center">
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary-200/60 bg-primary-50/80 px-4 py-1.5 mb-8">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-[11px] font-semibold tracking-[0.16em] text-primary-700 uppercase">
                 Transparent pricing
               </span>
             </div>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 mb-5 leading-snug">
-              Simple, <span className="bg-gradient-to-r from-primary-600 via-primary-700 to-accent-600 bg-clip-text text-transparent">Transparent Pricing</span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.02em] text-slate-900 mb-5 leading-[1.05]">
+              Simple, transparent
+              <span className="block bg-gradient-to-r from-primary-600 via-primary-700 to-accent-500 bg-clip-text text-transparent pb-2">
+                pricing
+              </span>
             </h1>
-            <p className="text-xl text-slate-600 mb-3">
-              Pay only for what you use. No monthly fees, no hidden charges.
+
+            <p className="text-lg text-slate-500 mb-4 leading-relaxed">
+              Pay only for what you use. No monthly fees, no hidden charges.<br />
+              Credits never expire.
             </p>
-            <p className="text-lg text-primary-600 font-semibold mb-4">
-              Start with <strong>1,000 free trial credits</strong> to test our service
+            <p className="text-[15px] font-semibold text-primary-700">
+              Start with <strong>1,000 free trial credits</strong> — no card required
             </p>
           </div>
         </div>
       </section>
 
-      {/* Email Verification Calculator */}
-      <section className="relative py-16 overflow-hidden">
+      {/* Pricing section */}
+      <section className="pb-24">
         <div className="container-custom">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              {/* Email Verification Demo */}
-              <div className="lg:order-1">
-                <div className="bg-white/80 rounded-3xl border border-slate-100 p-8 shadow-lg backdrop-blur-sm">
-                  <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-6">
-                    Try <span className="gradient-text">Email Verification</span>
-                  </h2>
-                  <p className="text-slate-600 mb-6">
-                    See how our verification works before you buy. Each email costs exactly 1 credit.
-                  </p>
+          <div className="max-w-5xl mx-auto">
 
-                  <form onSubmit={handleCalculatorSubmit} className="space-y-4">
-                    <div className="flex flex-col sm:flex-row items-stretch gap-3 rounded-2xl border-2 border-slate-200 bg-white p-2.5 shadow-md hover:shadow-lg transition-shadow">
-                      <input
-                        type="email"
-                        value={calculatorEmail}
-                        onChange={(e) => setCalculatorEmail(e.target.value)}
-                        placeholder="test@example.com"
-                        className="flex-1 rounded-xl border-none bg-transparent px-4 py-3 text-sm md:text-base text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-0"
-                      />
-                      <button
-                        type="submit"
-                        className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-primary-600 to-primary-700 px-6 py-3 text-sm md:text-base font-bold text-white shadow-md hover:from-primary-700 hover:to-primary-800 hover:shadow-lg transition-all duration-200 min-w-[120px]"
-                        disabled={calculatorStatus === 'checking'}
-                      >
-                        {calculatorStatus === 'checking' ? (
-                          <>
-                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                            Verifying…
-                          </>
-                        ) : (
-                          <>
-                            <Mail className="mr-2 h-4 w-4" />
-                            Verify
-                          </>
-                        )}
-                      </button>
-                    </div>
-
-                    {/* Error message */}
-                    {calculatorStatus === 'error' && (
-                      <div className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs md:text-sm bg-rose-50 text-rose-700 border border-rose-100">
-                        <AlertCircle className="h-4 w-4 flex-shrink-0" />
-                        <span className="font-medium">{errorMsg}</span>
-                      </div>
-                    )}
-
-                    {/* Rate limit message */}
-                    {calculatorStatus === 'ratelimit' && (
-                      <div className="rounded-2xl border border-amber-200 bg-amber-50 px-5 py-4 text-center">
-                        <p className="text-sm font-semibold text-amber-800 mb-1">Free limit reached</p>
-                        <p className="text-xs text-amber-700 mb-3">{rateLimitMsg}</p>
-                        <a
-                          href="https://emailverifier.targetpulse.net/sign-up"
-                          className="inline-flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-xl text-xs font-semibold hover:from-primary-700 hover:to-primary-800 transition-all"
-                        >
-                          Sign up for free — unlimited verification
-                        </a>
-                      </div>
-                    )}
-                  </form>
-
-                  {/* Results Modal */}
-                  {modalResult && (
-                    <EmailDetailsModal
-                      open={modalOpen}
-                      onClose={() => setModalOpen(false)}
-                      emailDetails={modalResult}
-                    />
-                  )}
-                </div>
-              </div>
-
-              {/* Pricing Calculator */}
-              <div className="lg:order-2">
-                <div className="bg-gradient-to-br from-primary-50 to-accent-50 rounded-3xl border border-primary-100 p-8 shadow-lg">
-                  <h3 className="text-2xl font-bold text-slate-900 mb-6 flex items-center">
-                    <Calculator className="mr-3 h-6 w-6 text-primary-600" />
-                    Pricing Calculator
-                  </h3>
-                  
-                  <div className="space-y-6">
-                    <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-2">
-                        Number of emails to verify
-                      </label>
-                      <input
-                        type="number"
-                        value={emailCount}
-                        onChange={(e) => setEmailCount(Math.max(1, parseInt(e.target.value) || 1))}
-                        className="w-full px-4 py-3 rounded-lg border border-slate-300 bg-white focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none"
-                        min="10000"
-                        max="5000000"
-                      />
-                    </div>
-
-                    <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
-                      <div className="flex items-center justify-between mb-4">
-                        <span className="text-slate-600">Total Cost:</span>
-                        <div className="text-right">
-                          <div className="text-2xl font-bold text-slate-900">
-                            ${calculatePrice(emailCount).toFixed(2)}
-                          </div>
-                          <div className="text-sm text-slate-500">
-                            ${(calculatePrice(emailCount) / emailCount).toFixed(5)} per email
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <div className="flex items-center text-sm text-emerald-600">
-                        <DollarSign className="h-4 w-4 mr-1" />
-                        Volume discounts applied automatically
-                      </div>
-                    </div>
-
-                    <a
-                      href="https://emailverifier.targetpulse.net/pricing"
-                      className="block w-full text-center bg-gradient-to-r from-primary-600 to-accent-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg hover:scale-[1.02] transition-all duration-200"
-                    >
-                      Get Started Now
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Pricing Options Toggle */}
-      <section className="pb-12">
-        <div className="container-custom">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-8">
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-                Choose Your <span className="gradient-text">Payment Method</span>
-              </h2>
-              <p className="text-lg text-slate-600">
-                Pay once or subscribe monthly for 5% savings
-              </p>
-            </div>
-
-            <div className="flex justify-center">
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-2 inline-flex border border-slate-200">
+            {/* Toggle */}
+            <div className="flex justify-center mb-10">
+              <div className="inline-flex items-center gap-1 p-1 bg-slate-100 rounded-xl">
                 <button
-                  onClick={() => setIsSubscription(false)}
-                  className={`px-8 py-3 rounded-xl font-semibold transition-all duration-300 ${
-                    !isSubscription
-                      ? 'bg-gradient-to-r from-primary-500 to-primary-600 text-white shadow-md'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                  onClick={() => setIsSub(false)}
+                  className={`px-6 py-2.5 rounded-lg text-[14px] font-semibold transition-all duration-200 ${
+                    !isSub ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'
                   }`}
                 >
                   Pay-As-You-Go
                 </button>
                 <button
-                  onClick={() => setIsSubscription(true)}
-                  className={`px-8 py-3 rounded-xl font-semibold transition-all duration-300 relative ${
-                    isSubscription
-                      ? 'bg-gradient-to-r from-primary-500 to-primary-600 text-white shadow-md'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                  onClick={() => setIsSub(true)}
+                  className={`flex items-center gap-2 px-6 py-2.5 rounded-lg text-[14px] font-semibold transition-all duration-200 ${
+                    isSub ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'
                   }`}
                 >
                   Subscription
-                  <span className="ml-1 text-xs bg-accent-500 text-white px-1.5 py-0.5 rounded-full">
-                    5% off
+                  <span className="bg-primary-600 text-white text-[11px] font-bold px-2 py-0.5 rounded-full leading-none">
+                    10% off
                   </span>
                 </button>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Pricing Tiers */}
-      <section className="pb-16">
-        <div className="container-custom">
-          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {pricingTiers.map((tier, index) => (
-              <div
-                key={index}
-                className={`relative bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-8 ${
-                  tier.popular ? 'ring-2 ring-primary-500' : ''
-                }`}
-              >
-                {tier.popular && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <span className="bg-gradient-to-r from-primary-500 to-accent-500 text-white px-4 py-1 rounded-full text-sm font-semibold">
-                      Most Popular
-                    </span>
-                  </div>
-                )}
-                
-                <div className="text-center mb-6">
-                  <h3 className="text-3xl font-bold text-slate-900 mb-2">
-                    {tier.credits}
-                  </h3>
-                  <p className="text-slate-600 mb-4">Credits</p>
-                  <div className="text-4xl font-bold gradient-text mb-2">
-                    {isSubscription
-                      ? `$${(parseFloat(tier.price.replace('$', '').replace(',', '')) * 0.95).toFixed(2)}`
-                      : tier.price
-                    }
-                  </div>
-                  <p className="text-sm text-slate-500">
-                    {tier.perCredit} per credit
-                  </p>
-                  {isSubscription && (
-                    <p className="text-xs text-green-600 font-semibold mt-2">
-                      💰 Save 5% with subscription
-                    </p>
-                  )}
-                </div>
+            {/* Package grid */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+              {packages.map((pkg, i) => {
+                const price     = isSub ? pkg.price * (1 - DISCOUNT) : pkg.price
+                const perCredit = isSub ? pkg.perCredit * (1 - DISCOUNT) : pkg.perCredit
 
-                {!isSubscription && (
-                  <div className="space-y-2 mb-6 bg-slate-50 rounded-lg p-4">
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="text-slate-600">One-time payment:</span>
-                      <span className="font-semibold text-slate-900">{tier.price}</span>
+                return (
+                  <div
+                    key={i}
+                    className={`relative rounded-2xl border p-5 transition-all duration-200 ${
+                      pkg.bestValue
+                        ? 'border-primary-300 bg-primary-50/70 shadow-[0_4px_28px_rgba(41,92,81,0.12)]'
+                        : 'border-slate-100 bg-white hover:border-primary-200/60 hover:shadow-[0_2px_20px_rgba(41,92,81,0.08)]'
+                    }`}
+                  >
+                    {pkg.bestValue && (
+                      <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap">
+                        <span className="inline-flex items-center gap-1 bg-primary-600 text-white text-[11px] font-bold px-3 py-0.5 rounded-full">
+                          <Zap className="w-2.5 h-2.5" />
+                          Best Value
+                        </span>
+                      </div>
+                    )}
+
+                    {/* Credits */}
+                    <div className="text-2xl font-black text-slate-900 tracking-tight leading-none mb-0.5">
+                      {formatCredits(pkg.credits)}
                     </div>
-                    <div className="text-xs text-slate-500 text-center mt-2">
-                      Or save 5% with monthly subscription →
+                    <div className="text-[12px] text-slate-400 font-medium mb-4">credits</div>
+
+                    {/* Price */}
+                    <div className="text-3xl font-extrabold text-slate-900 leading-none mb-0.5">
+                      ${price.toFixed(2)}
                     </div>
+                    <div className="text-[12px] text-slate-400 mb-2">
+                      ${perCredit.toFixed(5)}/credit
+                    </div>
+
+                    {/* Tag */}
+                    <div className={`text-[11px] font-semibold ${pkg.bestValue ? 'text-primary-700' : 'text-slate-400'}`}>
+                      {pkg.tag}
+                    </div>
+
+                    {isSub && (
+                      <div className="mt-2 text-[11px] font-semibold text-emerald-600">
+                        Save ${(pkg.price * DISCOUNT).toFixed(2)}
+                      </div>
+                    )}
                   </div>
-                )}
-
-                {isSubscription && (
-                  <div className="space-y-2 mb-6 bg-emerald-50 rounded-lg p-4">
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="text-slate-600">Monthly payment:</span>
-                      <span className="font-semibold text-emerald-600">
-                        ${(parseFloat(tier.price.replace('$', '').replace(',', '')) * 0.95).toFixed(2)}/mo
-                      </span>
-                    </div>
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="text-slate-500">You save:</span>
-                      <span className="font-semibold text-emerald-600">
-                        ${(parseFloat(tier.price.replace('$', '').replace(',', '')) * 0.05).toFixed(2)}/mo
-                      </span>
-                    </div>
-                  </div>
-                )}
-
-                <a
-                  href="https://emailverifier.targetpulse.net/pricing"
-                  className={`block w-full text-center py-3 rounded-xl font-semibold transition-all duration-300 ${
-                    tier.popular
-                      ? 'bg-gradient-to-r from-primary-500 to-accent-500 text-white hover:shadow-lg'
-                      : 'bg-slate-100 text-slate-900 hover:bg-slate-200'
-                  }`}
-                >
-                  Get Started
-                </a>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Custom Amount */}
-      <section className="pb-16">
-        <div className="container-custom">
-          <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg p-8 text-center">
-            <h3 className="text-2xl font-bold text-slate-900 mb-4">
-              Need a Custom Amount?
-            </h3>
-            <p className="text-slate-600 mb-6">
-              Enter any number of credits you need. We'll calculate the best price based on volume discounts.
-            </p>
-            <a
-              href="https://emailverifier.targetpulse.net/pricing"
-              className="inline-block bg-gradient-to-r from-primary-500 to-accent-500 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300"
-            >
-              Calculate Custom Price
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* What's Included - Feature Showcase */}
-      <section className="pb-24">
-        <div className="container-custom">
-          <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-10">
-              <h2 className="text-4xl font-extrabold text-slate-900 mb-2 tracking-tight">
-                Everything Included in <span className="gradient-text">Every Plan</span>
-              </h2>
-              <p className="text-lg text-slate-500 mb-6">
-                All features available with any credit package
-              </p>
+                )
+              })}
             </div>
-            <div className="flex flex-wrap justify-center items-center gap-6">
-              {features.map((feature, index) => (
-                <div key={index} className="flex items-center gap-3 px-6 py-3 bg-white rounded-full shadow-sm border border-slate-200 text-slate-800 font-medium text-base mb-2">
-                  <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-gradient-to-r from-primary-500 to-accent-500 text-white">
-                    <Check className="w-4 h-4" />
+
+            {/* CTA */}
+            <div className="text-center">
+              <a
+                href="https://emailverifier.targetpulse.net/sign-up"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-bold text-[15px] transition-colors duration-200 shadow-[0_4px_24px_rgba(41,92,81,0.25)]"
+              >
+                <Mail className="w-4 h-4" />
+                Get Started — 1,000 Free Credits
+              </a>
+              <p className="mt-3 text-[12px] text-slate-400">No credit card required · Credits never expire</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Everything included */}
+      <section className="py-20 bg-slate-50/60 border-y border-slate-100">
+        <div className="container-custom">
+          <div className="max-w-4xl mx-auto text-center">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-primary-600 mb-3">What you get</p>
+            <h2 className="text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-slate-900 mb-3">
+              Everything included in every package
+            </h2>
+            <p className="text-[15px] text-slate-500 mb-10">All features, all packages. No tiers, no paywalls.</p>
+
+            <div className="flex flex-wrap justify-center gap-3">
+              {features.map((f, i) => (
+                <div
+                  key={i}
+                  className="flex items-center gap-2 px-4 py-2.5 bg-white rounded-full border border-slate-100 shadow-sm text-[14px] font-medium text-slate-700"
+                >
+                  <span className="flex items-center justify-center w-5 h-5 rounded-full bg-primary-600">
+                    <Check className="w-3 h-3 text-white" />
                   </span>
-                  {feature}
+                  {f}
                 </div>
               ))}
             </div>
@@ -450,189 +234,98 @@ export default function PricingPage() {
         </div>
       </section>
 
-      {/* How It Works - Visual Step-by-Step */}
-      <section className="relative py-24 overflow-hidden bg-gradient-to-br from-primary-50 to-accent-50">
-        {/* Background Graphics */}
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute top-20 right-[10%] w-64 h-64 bg-gradient-to-br from-accent-400/15 to-accent-500/15 rounded-full blur-2xl" />
-          <div className="absolute bottom-20 left-[15%] w-48 h-48 bg-gradient-to-br from-primary-400/15 to-primary-500/15 rounded-full blur-2xl" />
-        </div>
-
-        <div className="container-custom relative">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-                How Our <span className="gradient-text">Pricing Works</span>
-              </h2>
-              <p className="text-xl text-slate-600">
-                Simple, transparent, and designed to scale with your needs
-              </p>
-            </div>
-
-            {/* Steps Grid */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-              {/* Step 1 */}
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 text-center shadow-lg border border-white/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary-500 to-primary-600 text-white text-2xl shadow-md mb-4">
-                  💳
-                </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-2">1 Credit = 1 Email</h3>
-                <p className="text-slate-600 text-sm leading-relaxed">Each email verification uses exactly one credit from your balance.</p>
-              </div>
-
-              {/* Step 2 */}
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 text-center shadow-lg border border-white/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-accent-500 to-accent-600 text-white text-2xl shadow-md mb-4">
-                  📊
-                </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-2">Volume Discounts</h3>
-                <p className="text-slate-600 text-sm leading-relaxed">Buy more credits, pay less per credit. From $0.00050 to $0.00010!</p>
-              </div>
-
-              {/* Step 3 */}
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 text-center shadow-lg border border-white/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary-600 to-accent-500 text-white text-2xl shadow-md mb-4">
-                  🔄
-                </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-2">5% Subscription Savings</h3>
-                <p className="text-slate-600 text-sm leading-relaxed">Subscribe monthly for automatic 5% discount on all packages.</p>
-              </div>
-
-              {/* Step 4 */}
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 text-center shadow-lg border border-white/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-600 text-white text-2xl shadow-md mb-4">
-                  ♾️
-                </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-2">Never Expire</h3>
-                <p className="text-slate-600 text-sm leading-relaxed">Use your credits anytime - they never expire or go to waste.</p>
-              </div>
-            </div>
-
-            {/* Free Trial Highlight */}
-            <div className="text-center">
-              <div className="inline-block bg-gradient-to-r from-primary-500 to-accent-500 rounded-3xl p-8 shadow-2xl text-white">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/20 text-3xl mb-4">
-                  🎁
-                </div>
-                <h3 className="text-2xl font-bold mb-2">Start with 1,000 Free Credits!</h3>
-                <p className="text-white/90 mb-4">Test our service risk-free. No credit card required.</p>
-                <a
-                  href="https://emailverifier.targetpulse.net/pricing"
-                  className="inline-block bg-white text-primary-600 px-6 py-3 rounded-xl font-bold hover:shadow-xl hover:scale-105 transition-all duration-200"
-                >
-                  Claim Free Trial
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="py-24 bg-gradient-to-br from-slate-50 to-white">
+      {/* How pricing works */}
+      <section className="py-20">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-                Frequently Asked <span className="gradient-text">Questions</span>
+            <div className="text-center mb-12">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-primary-600 mb-3">How it works</p>
+              <h2 className="text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-slate-900">
+                Pricing made simple
               </h2>
-              <p className="text-lg text-slate-600">
-                Everything you need to know about our pricing and service
-              </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-6 border border-white/20 hover:shadow-xl transition-all duration-300">
-                <h3 className="text-lg font-bold text-slate-900 mb-2">
-                  What payment methods do you accept?
-                </h3>
-                <p className="text-slate-700">
-                  We accept all major credit and debit cards through our secure payment processor.
-                </p>
-              </div>
-              
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-6 border border-white/20 hover:shadow-xl transition-all duration-300">
-                <h3 className="text-lg font-bold text-slate-900 mb-2">
-                  Can I cancel my subscription anytime?
-                </h3>
-                <p className="text-slate-700">
-                  Yes! You can cancel your subscription at any time. You'll keep all credits already added to your account, and you won't be charged again.
-                </p>
-              </div>
-
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-6 border border-white/20 hover:shadow-xl transition-all duration-300">
-                <h3 className="text-lg font-bold text-slate-900 mb-2">
-                  What happens if I run out of credits?
-                </h3>
-                <p className="text-slate-700">
-                  Simply purchase more credits anytime. Your account will be topped up instantly, and you can continue verifying emails immediately.
-                </p>
-              </div>
-
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-6 border border-white/20 hover:shadow-xl transition-all duration-300">
-                <h3 className="text-lg font-bold text-slate-900 mb-2">
-                  Do you offer refunds?
-                </h3>
-                <p className="text-slate-700">
-                  Credits are generally non-refundable. However, we handle exceptional circumstances on a case-by-case basis. Please review our <a href="/refund-policy" className="text-primary-600 hover:underline font-semibold">Refund Policy</a> for details.
-                </p>
-              </div>
-
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-6 border border-white/20 hover:shadow-xl transition-all duration-300 md:col-span-2">
-                <h3 className="text-lg font-bold text-slate-900 mb-2">
-                  Is there a minimum purchase?
-                </h3>
-                <p className="text-slate-700">
-                  The minimum purchase is 10,000 credits ($5.00). For purchases over 5,000,000 credits, please contact us to arrange a custom deal. You can also use your 1,000 free trial credits before purchasing.
-                </p>
-              </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              {[
+                { emoji: '💳', title: '1 Credit = 1 Email', body: 'Each email verification uses exactly one credit from your balance.' },
+                { emoji: '📊', title: 'Volume savings', body: 'Buy more credits, pay less per credit — from $0.00099 down to $0.00068.' },
+                { emoji: '🔄', title: '10% subscription discount', body: 'Subscribe monthly and save 10% automatically on all packages.' },
+                { emoji: '♾️', title: 'Credits never expire', body: 'Use your credits anytime. They stay in your account until you need them.' },
+              ].map((s, i) => (
+                <div key={i} className="rounded-2xl border border-slate-100 bg-white p-6 text-center hover:shadow-[0_4px_24px_rgba(0,0,0,0.06)] hover:-translate-y-0.5 transition-all duration-200">
+                  <div className="text-3xl mb-4">{s.emoji}</div>
+                  <h3 className="text-[15px] font-bold text-slate-900 mb-2">{s.title}</h3>
+                  <p className="text-[13px] text-slate-500 leading-relaxed">{s.body}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="relative py-24 overflow-hidden">
-        {/* Background Graphics */}
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute top-0 left-[20%] w-96 h-96 bg-gradient-to-br from-primary-400/10 to-primary-500/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-[15%] w-80 h-80 bg-gradient-to-br from-accent-400/10 to-accent-500/10 rounded-full blur-3xl" />
-        </div>
+      {/* FAQ */}
+      <section className="py-20 bg-slate-50/60 border-y border-slate-100">
+        <div className="container-custom">
+          <div className="max-w-2xl mx-auto">
+            <div className="text-center mb-12">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-primary-600 mb-3">FAQ</p>
+              <h2 className="text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-slate-900">
+                Common questions
+              </h2>
+            </div>
 
-        <div className="container-custom relative">
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-gradient-to-br from-primary-500 via-primary-600 to-accent-500 rounded-3xl shadow-2xl p-12 text-center text-white relative overflow-hidden">
-              {/* Decorative Elements */}
-              <div className="absolute top-4 right-4 w-24 h-24 bg-white/10 rounded-full blur-xl" />
-              <div className="absolute bottom-4 left-4 w-32 h-32 bg-white/10 rounded-full blur-xl" />
-              
-              <div className="relative">
-                <div className="inline-flex items-center space-x-2 rounded-full bg-white/20 px-4 py-2 mb-6">
-                  <span className="h-2 w-2 rounded-full bg-white animate-pulse" />
-                  <span className="text-xs font-semibold uppercase tracking-[0.18em]">
-                    Get started today
-                  </span>
-                </div>
-
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-                  Ready to Clean Your Email List?
-                </h2>
-                <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-                  Start with 1,000 free credits. No credit card required. Begin verifying emails in seconds.
-                </p>
-                
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                  <a
-                    href="https://emailverifier.targetpulse.net/pricing"
-                    className="inline-flex items-center bg-white text-primary-600 px-8 py-4 rounded-xl font-bold text-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:bg-slate-50"
+            <div className="bg-white rounded-2xl border border-slate-100 divide-y divide-slate-100">
+              {faqs.map((faq, i) => (
+                <div key={i}>
+                  <button
+                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                    className="w-full flex items-center justify-between gap-4 px-6 py-4 text-left"
                   >
-                    <Mail className="mr-2 h-5 w-5" />
-                    Get Started Free
-                  </a>
-                  <p className="text-white/80 text-sm">
-                    Join 2,000+ satisfied customers
-                  </p>
+                    <span className="text-[15px] font-semibold text-slate-900">{faq.q}</span>
+                    <span className="text-slate-400 text-xl flex-shrink-0 font-light">
+                      {openFaq === i ? '−' : '+'}
+                    </span>
+                  </button>
+                  <div
+                    style={{
+                      maxHeight: openFaq === i ? '200px' : '0',
+                      overflow: 'hidden',
+                      transition: 'max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
+                    }}
+                  >
+                    <p className="px-6 pb-5 text-[14px] text-slate-500 leading-relaxed">{faq.a}</p>
+                  </div>
                 </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA banner */}
+      <section className="py-24">
+        <div className="container-custom">
+          <div className="max-w-4xl mx-auto">
+            <div className="relative rounded-3xl bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800 p-12 text-center text-white overflow-hidden">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -translate-y-1/3 translate-x-1/3" />
+              <div className="absolute bottom-0 left-0 w-48 h-48 bg-accent-400/20 rounded-full blur-2xl translate-y-1/3 -translate-x-1/3" />
+
+              <div className="relative">
+                <div className="text-4xl mb-4">🎁</div>
+                <h2 className="text-3xl md:text-4xl font-extrabold mb-3">
+                  Start with 1,000 free credits
+                </h2>
+                <p className="text-white/80 text-[16px] mb-8 max-w-xl mx-auto">
+                  No credit card required. Verify your first emails for free and see results in seconds.
+                </p>
+                <a
+                  href="https://emailverifier.targetpulse.net/sign-up"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary-700 rounded-xl font-bold text-[15px] hover:bg-slate-50 transition-colors duration-200 shadow-xl"
+                >
+                  Claim Free Credits
+                </a>
               </div>
             </div>
           </div>

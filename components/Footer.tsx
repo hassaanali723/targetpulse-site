@@ -2,102 +2,77 @@
 
 import React from 'react'
 import { Linkedin, Youtube, Facebook, Instagram } from 'lucide-react'
+import Link from 'next/link'
+
+const socials = [
+  { icon: Linkedin, href: 'https://www.linkedin.com/company/target-pulse/', label: 'LinkedIn' },
+  { icon: Youtube, href: 'https://www.youtube.com/@TargetPulseOfficial', label: 'YouTube' },
+  { icon: Facebook, href: 'https://www.facebook.com/share/1D31DYxZL5/', label: 'Facebook' },
+  { icon: Instagram, href: 'https://www.instagram.com/targetpulsee', label: 'Instagram' },
+]
+
+const legalLinks = [
+  { name: 'Terms of Service', href: '/terms-of-service' },
+  { name: 'Privacy Policy', href: '/privacy-policy' },
+  { name: 'Refund Policy', href: '/refund-policy' },
+  { name: 'Cancellation', href: '/terms-of-service#cancellation-policy' },
+]
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="relative bg-gradient-to-br from-gray-900 via-primary-900 to-gray-900 text-white py-12 overflow-hidden">
-      {/* Subtle Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary-400 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent-400 rounded-full blur-3xl" />
-      </div>
-
-      <div className="container-custom relative z-10">
-        <div className="flex flex-col items-center text-center space-y-8">
+    <footer className="relative bg-gradient-to-br from-gray-900 via-primary-900 to-gray-900 text-slate-400 overflow-hidden">
+      <div className="container-custom py-16">
+        <div className="flex flex-col items-center gap-8 text-center">
           {/* Logo */}
-          <div className="h-20 w-auto">
-            <img 
-              src="/Targetpulse-email verifier- logo.png" 
-              alt="TargetPulse" 
-              className="h-full w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
-              style={{ maxHeight: 'none' }}
+          <Link href="/">
+            <img
+              src="/Targetpulse-email verifier- logo.png"
+              alt="TargetPulse"
+              className="h-16 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-200"
             />
-          </div>
+          </Link>
 
-          {/* Social Media Links */}
-          <div className="flex items-center space-x-4">
-            <a
-              href="https://www.linkedin.com/company/target-pulse/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative w-11 h-11 bg-white/5 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/10 transition-all duration-300 border border-white/10 hover:border-white/20"
-            >
-              <Linkedin className="w-5 h-5 text-gray-300 group-hover:text-white transition-colors" />
-            </a>
-            <a
-              href="https://www.youtube.com/@TargetPulseOfficial"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative w-11 h-11 bg-white/5 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/10 transition-all duration-300 border border-white/10 hover:border-white/20"
-            >
-              <Youtube className="w-5 h-5 text-gray-300 group-hover:text-white transition-colors" />
-            </a>
-            <a
-              href="https://www.facebook.com/share/1D31DYxZL5/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative w-11 h-11 bg-white/5 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/10 transition-all duration-300 border border-white/10 hover:border-white/20"
-            >
-              <Facebook className="w-5 h-5 text-gray-300 group-hover:text-white transition-colors" />
-            </a>
-            <a
-              href="https://www.instagram.com/targetpulsee"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative w-11 h-11 bg-white/5 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/10 transition-all duration-300 border border-white/10 hover:border-white/20"
-            >
-              <Instagram className="w-5 h-5 text-gray-300 group-hover:text-white transition-colors" />
-            </a>
+          {/* Tagline */}
+          <p className="text-[13px] text-slate-500 max-w-sm leading-relaxed">
+            Email verification that keeps your campaigns landing in real inboxes.
+          </p>
+
+          {/* Social icons */}
+          <div className="flex items-center gap-2">
+            {socials.map(({ icon: Icon, href, label }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center hover:bg-white/10 hover:text-slate-200 transition-all duration-200"
+              >
+                <Icon className="w-4 h-4" />
+              </a>
+            ))}
           </div>
 
           {/* Divider */}
-          <div className="w-32 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+          <div className="w-full max-w-xs h-px bg-white/5" />
 
-          {/* Links */}
-          <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6">
-            <a
-              href="/terms-of-service"
-              className="text-gray-400 hover:text-white text-sm transition-colors duration-300"
-            >
-              Terms of Service
-            </a>
-            <span className="text-gray-600">•</span>
-            <a
-              href="/privacy-policy"
-              className="text-gray-400 hover:text-white text-sm transition-colors duration-300"
-            >
-              Privacy Policy
-            </a>
-            <span className="text-gray-600">•</span>
-            <a
-              href="/refund-policy"
-              className="text-gray-400 hover:text-white text-sm transition-colors duration-300"
-            >
-              Refund Policy
-            </a>
-            <span className="text-gray-600">•</span>
-            <a
-              href="/terms-of-service#cancellation-policy"
-              className="text-gray-400 hover:text-white text-sm transition-colors duration-300"
-            >
-              Cancellation Policy
-            </a>
-          </div>
+          {/* Legal Links */}
+          <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+            {legalLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                className="text-[13px] text-slate-500 hover:text-slate-300 transition-colors duration-200"
+              >
+                {link.name}
+              </Link>
+            ))}
+          </nav>
 
           {/* Copyright */}
-          <p className="text-gray-400 text-sm">
+          <p className="text-[12px] text-slate-600">
             © {currentYear} TargetPulse. All rights reserved.
           </p>
         </div>
@@ -105,4 +80,3 @@ export default function Footer() {
     </footer>
   )
 }
-

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import React from 'react'
 import Navbar from '@/components/Navbar'
 import HomeHeroWithVerification from '@/components/HomeHeroWithVerification'
+import HomeCatchAllSection from '@/components/HomeCatchAllSection'
 import HomeFeatureShowcase from '@/components/HomeFeatureShowcase'
 import HomeFAQSection from '@/components/HomeFAQSection'
 import Footer from '@/components/Footer'
@@ -81,13 +82,14 @@ const faqJsonLd = {
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen overflow-x-hidden">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <Navbar />
       <HomeHeroWithVerification />
+      <HomeCatchAllSection />
       <HomeFeatureShowcase />
       <HomeFAQSection />
       <Footer />
