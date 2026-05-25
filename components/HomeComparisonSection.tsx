@@ -11,9 +11,9 @@ type Row = {
 }
 
 const rows: Row[] = [
-  { credits: 10000,   targetpulse: 9.90,  neverbounce: 80,    zerobounce: 65 },
-  { credits: 100000,  targetpulse: 76,    neverbounce: 400,   zerobounce: 390, highlight: true },
-  { credits: 1000000, targetpulse: 680,   neverbounce: 2000,  zerobounce: 2000 },
+  { credits: 10000,   targetpulse: 9.90,  neverbounce: 50,    zerobounce: 99 },
+  { credits: 100000,  targetpulse: 76,    neverbounce: 400,   zerobounce: 449, highlight: true },
+  { credits: 1000000, targetpulse: 680,   neverbounce: 2500,  zerobounce: 2499 },
 ]
 
 function formatCredits(n: number) {
@@ -35,7 +35,7 @@ export default function HomeComparisonSection() {
           <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-primary-700">Price comparison</span>
         </div>
         <h2 className="text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-slate-900 mb-4 leading-[1.1]">
-          Get up to <span className="bg-gradient-to-r from-primary-600 to-accent-500 bg-clip-text text-transparent">8× more emails</span> per dollar
+          Get up to <span className="bg-gradient-to-r from-primary-600 to-accent-500 bg-clip-text text-transparent">5× more emails</span> per dollar
         </h2>
         <p className="text-[16px] text-slate-500 max-w-2xl mx-auto leading-relaxed">
           Same verification quality. A fraction of the price. Here&apos;s how TargetPulse stacks up
@@ -128,8 +128,8 @@ export default function HomeComparisonSection() {
 
       {/* Disclaimer */}
       <p className="mt-6 text-center text-[11px] text-slate-400 leading-relaxed max-w-xl mx-auto">
-        Competitor prices sourced from neverbounce.com and zerobounce.net.
-        Pricing accurate at time of writing — see competitor websites for current rates.
+        Competitor prices sourced directly from neverbounce.com and zerobounce.net.
+        See competitor websites for current rates.
       </p>
     </div>
   )
