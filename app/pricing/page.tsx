@@ -6,6 +6,7 @@ import Footer from '@/components/Footer'
 import { Check, Zap, Mail } from 'lucide-react'
 
 const packages = [
+  { credits: 3000,    price: 5.00,   perCredit: 0.00167, tag: 'Try it out' },
   { credits: 10000,   price: 9.90,   perCredit: 0.00099, tag: 'Starter friendly' },
   { credits: 30000,   price: 28.00,  perCredit: 0.00093, tag: 'Starter friendly' },
   { credits: 50000,   price: 39.00,  perCredit: 0.00078, tag: 'Starter friendly' },
@@ -138,7 +139,7 @@ export default function PricingPage() {
             </div>
 
             {/* Package grid */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-10">
               {packages.map((pkg, i) => {
                 const price     = isSub ? pkg.price * (1 - DISCOUNT) : pkg.price
                 const perCredit = isSub ? pkg.perCredit * (1 - DISCOUNT) : pkg.perCredit

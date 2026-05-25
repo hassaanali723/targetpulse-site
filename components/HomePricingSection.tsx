@@ -3,7 +3,8 @@
 import { useState } from 'react'
 import { Zap, Sparkles, TrendingUp, ArrowRight, Check } from 'lucide-react'
 
-const packages = [
+const packages: { credits: number; price: number; perCredit: number; tag: string; bestValue?: boolean }[] = [
+  { credits: 3000,    price: 5.00,   perCredit: 0.00167, tag: 'Trial' },
   { credits: 10000,   price: 9.90,   perCredit: 0.00099, tag: 'Starter' },
   { credits: 30000,   price: 28.00,  perCredit: 0.00093, tag: 'Starter' },
   { credits: 50000,   price: 39.00,  perCredit: 0.00078, tag: 'Growth' },
@@ -65,15 +66,15 @@ export default function HomePricingSection() {
       </div>
 
       {/* Package Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-8">
         {packages.map((pkg, i) => {
           const price      = isSub ? pkg.price * (1 - DISCOUNT) : pkg.price
           const perCredit  = isSub ? pkg.perCredit * (1 - DISCOUNT) : pkg.perCredit
           const savings    = Math.round((1 - pkg.perCredit / BASELINE_RATE) * 100)
 
           return (
-            <div key={i} className="relative">
-              {/* Floating BEST VALUE badge — outside the card so overflow-hidden doesn't clip it */}
+            <div key={i} className="relative h-full">
+              {/* Floating BEST VALUE badge */}
               {pkg.bestValue && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap z-20">
                   <span className="inline-flex items-center gap-1 bg-gradient-to-r from-primary-600 to-primary-700 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-md">
@@ -83,10 +84,14 @@ export default function HomePricingSection() {
                 </div>
               )}
 
-              <div
-                className={`group relative rounded-2xl border p-5 transition-all duration-300 overflow-hidden h-full ${
+              <a
+                href="https://emailverifier.targetpulse.net/sign-up"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Get started with ${formatCredits(pkg.credits)} credits for $${pkg.price.toFixed(pkg.price < 100 ? 2 : 0)}`}
+                className={`group block relative rounded-2xl border p-5 transition-all duration-300 overflow-hidden h-full cursor-pointer ${
                   pkg.bestValue
-                    ? 'border-primary-400/80 bg-gradient-to-br from-primary-50 via-white to-primary-50/40 shadow-[0_8px_32px_rgba(41,92,81,0.16)]'
+                    ? 'border-primary-400/80 bg-gradient-to-br from-primary-50 via-white to-primary-50/40 shadow-[0_8px_32px_rgba(41,92,81,0.16)] hover:shadow-[0_12px_40px_rgba(41,92,81,0.22)]'
                     : 'border-slate-100 bg-white hover:border-primary-300/60 hover:shadow-[0_6px_24px_rgba(41,92,81,0.10)] hover:-translate-y-0.5'
                 }`}
               >
@@ -101,11 +106,10 @@ export default function HomePricingSection() {
                 )}
 
                 <div className="relative flex flex-col h-full">
-                  {/* Tier tag + savings row */}
-                  <div className="flex items-center justify-between mb-3">
-                    <span className={`text-[9px] font-bold uppercase tracking-[0.12em] ${
-                      pkg.bestValue ? 'text-primary-700' : 'text-slate-400'
-                    }`}>
+                  {/* Tier tag chip + savings row */}
+                  <div className="flex items-center justify-between mb-3 gap-2">
+                    <span className="inline-flex items-center gap-1.5 text-[9px] font-bold uppercase tracking-[0.12em] px-2 py-0.5 rounded-full bg-primary-50 text-primary-700 border border-primary-100">
+                      <span className="w-1 h-1 rounded-full bg-primary-500" />
                       {pkg.tag}
                     </span>
                     {savings > 0 && (
@@ -124,9 +128,13 @@ export default function HomePricingSection() {
                     <span className="text-[11px] text-slate-400 font-medium">credits</span>
                   </div>
 
-                  {/* Price */}
+                  {/* Price — brand primary on standard, primary→accent gradient on Best Value */}
                   <div className="mb-0.5">
-                    <span className="text-3xl font-extrabold text-slate-900 leading-none tracking-tight">
+                    <span className={`text-3xl font-extrabold leading-none tracking-tight bg-clip-text text-transparent ${
+                      pkg.bestValue
+                        ? 'bg-gradient-to-br from-primary-600 via-primary-700 to-accent-500'
+                        : 'bg-gradient-to-br from-primary-700 to-primary-900'
+                    }`}>
                       ${price.toFixed(price < 100 ? 2 : 0)}
                     </span>
                   </div>
@@ -142,17 +150,13 @@ export default function HomePricingSection() {
                     </div>
                   )}
 
-                  {/* CTA arrow */}
-                  <div className={`mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[12px] font-semibold ${
-                    pkg.bestValue ? 'text-primary-700' : 'text-slate-400 group-hover:text-primary-600'
-                  } transition-colors duration-200`}>
+                  {/* CTA arrow — primary green for visibility */}
+                  <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[12px] font-bold text-primary-700 transition-colors duration-200 group-hover:text-primary-800">
                     <span>Get started</span>
-                    <ArrowRight className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                      pkg.bestValue ? '' : 'group-hover:translate-x-1'
-                    }`} />
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200" />
                   </div>
                 </div>
-              </div>
+              </a>
             </div>
           )
         })}
