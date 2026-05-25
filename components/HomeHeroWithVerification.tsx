@@ -202,7 +202,7 @@ export default function HomeHeroWithVerification() {
           {/* Stats */}
           <div className="mt-14 flex items-center justify-center gap-8 md:gap-12">
             <div className="text-center">
-              <p className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">10M+</p>
+              <p className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">20M+</p>
               <p className="text-xs text-slate-500 font-medium mt-0.5">Emails verified</p>
             </div>
             <div className="h-8 w-px bg-slate-200" />

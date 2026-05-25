@@ -30,6 +30,10 @@ const faqs = [
     question: 'What do different email verification statuses mean?',
     answer: 'We return four outcomes: Deliverable (valid and safe to use), Risky (e.g. catch-all or full mailbox), Undeliverable (invalid format, bad domain, or rejected), and Unknown (timeout or server issues). Each result helps you decide which contacts to keep, pause, or remove.',
   },
+  {
+    question: 'Can I verify catch-all emails?',
+    answer: 'Yes — and we go far deeper than most tools that just mark catch-alls as “Unknown.” Our AI-powered detection scores every catch-all address across three signals: Domain Intelligence (SPF/DKIM/DMARC, SSL, domain reputation), AI Pattern Analysis (name structure, character patterns, human-likeness), and Mailbox Behavior (deep SMTP probing). You get a clear confidence rating — High (90%+ likely deliverable), Medium, Low, or Very Low — so you know exactly which catch-all addresses are safe to keep.',
+  },
 ]
 
 export default function HomeFAQSection() {
@@ -73,7 +77,7 @@ export default function HomeFAQSection() {
 
                   <div
                     style={{
-                      maxHeight: isOpen ? '300px' : '0',
+                      maxHeight: isOpen ? '500px' : '0',
                       overflow: 'hidden',
                       transition: 'max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
                     }}
