@@ -97,10 +97,23 @@ export default function PricingPage() {
               </span>
             </h1>
 
-            <p className="text-lg text-slate-500 mb-4 leading-relaxed">
+            <p className="text-lg text-slate-500 mb-5 leading-relaxed">
               Pay only for what you use. No monthly fees, no hidden charges.<br />
               Credits never expire.
             </p>
+
+            {/* Credit usage pills */}
+            <div className="flex flex-wrap items-center justify-center gap-2 mb-5">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-white border border-slate-200 px-3 py-1 text-[12px] font-semibold text-slate-700 shadow-sm">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary-500" />
+                1 email verification = <span className="text-primary-700">1 credit</span>
+              </span>
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-white border border-slate-200 px-3 py-1 text-[12px] font-semibold text-slate-700 shadow-sm">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent-500" />
+                Catch-all email verification = <span className="text-primary-700">2 credits</span>
+              </span>
+            </div>
+
             <p className="text-[15px] font-semibold text-primary-700">
               Start with <strong>1,000 free trial credits</strong> — no card required
             </p>
