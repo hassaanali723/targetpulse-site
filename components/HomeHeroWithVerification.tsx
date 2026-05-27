@@ -8,7 +8,7 @@ import {
 } from 'lucide-react'
 import EmailDetailsModal, { PublicEmailValidationResult } from './EmailDetailsModal'
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5000'
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5050'
 
 async function verifyEmailPublic(email: string): Promise<{
   rateLimited: boolean

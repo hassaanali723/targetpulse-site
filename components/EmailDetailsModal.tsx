@@ -164,15 +164,22 @@ export default function EmailDetailsModal({ open, onClose, emailDetails }: Props
             </button>
           </div>
 
-          {/* Status + Risk badges */}
+          {/* Status + Risk badges — catch-all emails show "Uncertain" amber, not "High Risk" */}
           <div className="flex items-center gap-2 mt-4 flex-wrap">
             <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold border ${status.bg} ${status.color} ${status.border}`}>
               <StatusIcon className="w-3 h-3" />
               {status.label}
             </span>
-            <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${risk.bg} ${risk.color}`}>
-              {risk.label}
-            </span>
+            {attributes.catch_all ? (
+              <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-700">
+                <AlertTriangle className="w-3 h-3" />
+                Uncertain
+              </span>
+            ) : (
+              <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${risk.bg} ${risk.color}`}>
+                {risk.label}
+              </span>
+            )}
             {general.validation_method && (
               <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600">
                 via {general.validation_method.toUpperCase()}
