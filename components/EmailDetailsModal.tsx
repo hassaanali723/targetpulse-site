@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { X, CheckCircle2, XCircle, AlertTriangle, HelpCircle, Shield, ShieldAlert, Server, Mail, ExternalLink } from 'lucide-react'
+import { X, CheckCircle2, XCircle, AlertTriangle, HelpCircle, Shield, ShieldAlert, Server, Mail, ExternalLink, Circle } from 'lucide-react'
 
 export type PublicEmailValidationResult = {
   email: string
@@ -10,6 +10,8 @@ export type PublicEmailValidationResult = {
   is_valid: boolean
   risk_level: string
   deliverability_score: number
+  catch_all_score?: number
+  catch_all_verdict?: 'valid' | 'invalid'
   details: {
     general: {
       domain: string
@@ -78,30 +80,41 @@ const statusConfig: Record<string, { label: string; color: string; bg: string; b
   },
 }
 
-const riskConfig: Record<string, { label: string; color: string; bg: string }> = {
-  low:    { label: 'Low Risk',    color: 'text-emerald-700', bg: 'bg-emerald-50' },
-  medium: { label: 'Medium Risk', color: 'text-amber-700',   bg: 'bg-amber-50'   },
-  high:   { label: 'High Risk',   color: 'text-rose-700',    bg: 'bg-rose-50'    },
-}
-
 function scoreColor(score: number) {
   if (score >= 80) return 'bg-emerald-500'
   if (score >= 50) return 'bg-amber-400'
   return 'bg-rose-500'
 }
 
-function Attribute({ label, value, goodWhenFalse = false }: { label: string; value: boolean; goodWhenFalse?: boolean }) {
-  const isGood = goodWhenFalse ? !value : value
+// Attribute chip — color reflects the actual state of the attribute, not
+// "good vs bad". Default grey (the attribute is in its neutral / expected
+// state); colored only when the attribute is in its noteworthy state.
+//   green  → positive (mailbox available)
+//   yellow → caution / informational (catch-all, role, free email, plus tag)
+//   red    → negative (disposable, mailbox full)
+//   grey   → neutral / not flagged
+type ChipColor = 'grey' | 'green' | 'yellow' | 'red'
+
+const CHIP_STYLES: Record<ChipColor, { wrap: string; icon: string }> = {
+  grey:   { wrap: 'bg-slate-50 border-slate-200 text-slate-600',     icon: 'text-slate-400' },
+  green:  { wrap: 'bg-emerald-50 border-emerald-200 text-emerald-700', icon: 'text-emerald-600' },
+  yellow: { wrap: 'bg-amber-50 border-amber-200 text-amber-700',     icon: 'text-amber-600' },
+  red:    { wrap: 'bg-rose-50 border-rose-200 text-rose-700',        icon: 'text-rose-600' },
+}
+
+function AttributeChip({
+  label,
+  color,
+  Icon,
+}: {
+  label: string
+  color: ChipColor
+  Icon: typeof CheckCircle2
+}) {
+  const s = CHIP_STYLES[color]
   return (
-    <div className={`flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-medium border ${
-      isGood
-        ? 'bg-emerald-50 border-emerald-100 text-emerald-700'
-        : 'bg-rose-50 border-rose-100 text-rose-700'
-    }`}>
-      {isGood
-        ? <CheckCircle2 className="w-3.5 h-3.5 flex-shrink-0" />
-        : <XCircle className="w-3.5 h-3.5 flex-shrink-0" />
-      }
+    <div className={`flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-medium border ${s.wrap}`}>
+      <Icon className={`w-3.5 h-3.5 flex-shrink-0 ${s.icon}`} />
       {label}
     </div>
   )
@@ -128,7 +141,6 @@ export default function EmailDetailsModal({ open, onClose, emailDetails }: Props
   if (!open || !mounted) return null
 
   const status = statusConfig[emailDetails.status] ?? statusConfig.unknown
-  const risk   = riskConfig[emailDetails.risk_level] ?? riskConfig.medium
   const StatusIcon = status.icon
   const score  = emailDetails.deliverability_score ?? 0
   const { attributes, mail_server, blacklist, general } = emailDetails.details
@@ -164,25 +176,20 @@ export default function EmailDetailsModal({ open, onClose, emailDetails }: Props
             </button>
           </div>
 
-          {/* Status + Risk badges — catch-all emails show "Uncertain" amber, not "High Risk" */}
+          {/* Status + Risk badges */}
           <div className="flex items-center gap-2 mt-4 flex-wrap">
             <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold border ${status.bg} ${status.color} ${status.border}`}>
               <StatusIcon className="w-3 h-3" />
               {status.label}
             </span>
-            {attributes.catch_all ? (
+            {attributes.catch_all && (
+              // Catch-all is informational only — no "Uncertain" wording.
+              // Phase 6 has already produced a definitive verdict that's
+              // surfaced via the main status badge above (deliverable /
+              // undeliverable).
               <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-700">
                 <AlertTriangle className="w-3 h-3" />
-                Uncertain
-              </span>
-            ) : (
-              <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${risk.bg} ${risk.color}`}>
-                {risk.label}
-              </span>
-            )}
-            {general.validation_method && (
-              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600">
-                via {general.validation_method.toUpperCase()}
+                Catch-All
               </span>
             )}
           </div>
@@ -211,12 +218,54 @@ export default function EmailDetailsModal({ open, onClose, emailDetails }: Props
           <div>
             <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">Email Attributes</p>
             <div className="grid grid-cols-2 gap-2">
-              <Attribute label="Not Disposable"   value={attributes.disposable}   goodWhenFalse />
-              <Attribute label="Not Role Account" value={attributes.role_account}  goodWhenFalse />
-              <Attribute label="Not Free Email"   value={attributes.free_email}    goodWhenFalse />
-              <Attribute label="Mailbox Available" value={attributes.mailbox_full} goodWhenFalse />
-              <Attribute label="No Plus Tag"      value={attributes.has_plus_tag}  goodWhenFalse />
-              <Attribute label="Not Catch-All"    value={attributes.catch_all}     goodWhenFalse />
+              {/* Mailbox state is derived from the overall verdict (status),
+                  not the legacy mailbox_full attribute. mailbox_full only fires
+                  for explicit SMTP "mailbox full" replies and stays false for
+                  catch-all not-found cases — leading to "Mailbox Available =
+                  green" on undeliverable catch-all emails (a confusing leak).
+                  The status field already reflects Phase 6's catch-all verdict. */}
+              <AttributeChip
+                label={
+                  emailDetails.status === 'deliverable'   ? 'Mailbox Available' :
+                  emailDetails.status === 'undeliverable' ? 'Mailbox Not Found' :
+                                                            'Mailbox Unknown'
+                }
+                color={
+                  emailDetails.status === 'deliverable'   ? 'green' :
+                  emailDetails.status === 'undeliverable' ? 'red'   :
+                                                            'grey'
+                }
+                Icon={
+                  emailDetails.status === 'deliverable'   ? CheckCircle2 :
+                  emailDetails.status === 'undeliverable' ? XCircle      :
+                                                            Circle
+                }
+              />
+              <AttributeChip
+                label="Catch-All"
+                color={attributes.catch_all ? 'yellow' : 'grey'}
+                Icon={attributes.catch_all ? AlertTriangle : Circle}
+              />
+              <AttributeChip
+                label="Disposable"
+                color={attributes.disposable ? 'red' : 'grey'}
+                Icon={attributes.disposable ? XCircle : Circle}
+              />
+              <AttributeChip
+                label="Role Account"
+                color={attributes.role_account ? 'yellow' : 'grey'}
+                Icon={attributes.role_account ? AlertTriangle : Circle}
+              />
+              <AttributeChip
+                label="Free Email"
+                color={attributes.free_email ? 'yellow' : 'grey'}
+                Icon={attributes.free_email ? AlertTriangle : Circle}
+              />
+              <AttributeChip
+                label="Plus Tag"
+                color={attributes.has_plus_tag ? 'yellow' : 'grey'}
+                Icon={attributes.has_plus_tag ? AlertTriangle : Circle}
+              />
             </div>
           </div>
 
