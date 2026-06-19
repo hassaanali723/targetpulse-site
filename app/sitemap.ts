@@ -2,23 +2,30 @@ import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://targetpulse.net'
+  const recent = new Date('2026-05-27')
 
   return [
     {
       url: baseUrl,
-      lastModified: new Date('2026-03-07'),
+      lastModified: recent,
       changeFrequency: 'weekly',
-      priority: 1,
+      priority: 1.0,
     },
     {
       url: `${baseUrl}/pricing`,
-      lastModified: new Date('2026-03-07'),
+      lastModified: recent,
       changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
+      url: `${baseUrl}/affiliates`,
+      lastModified: recent,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
       url: `${baseUrl}/contact-us`,
-      lastModified: new Date('2026-03-07'),
+      lastModified: recent,
       changeFrequency: 'monthly',
       priority: 0.6,
     },

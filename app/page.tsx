@@ -8,9 +8,19 @@ import HomeFAQSection from '@/components/HomeFAQSection'
 import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
-  title: 'TargetPulse - Email Verification Tool & Bulk Email Validator',
-  description: 'TargetPulse Email Verifier helps you validate email addresses, clean email lists, reduce bounce rates and improve deliverability. Bulk email verification with real-time results.',
+  title: {
+    absolute: 'TargetPulse - Free Email Verification for Catch-all Domains',
+  },
+  description:
+    'Free email verifier built for catch-all and accept-all domains with 99% accuracy. Clean your list, cut bounces, and protect your sender reputation.',
   keywords: [
+    // Catch-all positioning (primary niche)
+    'catch-all email verification',
+    'accept-all email verification',
+    'verify catch-all emails',
+    'catch-all domain checker',
+    'free catch-all email verifier',
+    // Core verification keywords
     'email verifier',
     'email verification tool',
     'bulk email verifier',
@@ -20,15 +30,26 @@ export const metadata: Metadata = {
     'free email verification tool',
     'real time email verification',
     'best email verification tool',
+    // Outcome keywords
+    'reduce email bounce rate',
+    'improve email deliverability',
+    'sender reputation tool',
   ],
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: 'TargetPulse - Email Verification Tool & Bulk Email Validator',
-    description: 'TargetPulse Email Verifier helps you validate email addresses, clean email lists, reduce bounce rates and improve deliverability. Bulk email verification with real-time results.',
+    title: 'TargetPulse - Free Email Verification for Catch-all Domains',
+    description:
+      'Free email verifier built for catch-all and accept-all domains with 99% accuracy. Clean your list, cut bounces, and protect your sender reputation.',
     url: 'https://targetpulse.net',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'TargetPulse - Free Email Verification for Catch-all Domains',
+    description:
+      'Free email verifier built for catch-all and accept-all domains with 99% accuracy. Clean your list, cut bounces, and protect your sender reputation.',
   },
 }
 
