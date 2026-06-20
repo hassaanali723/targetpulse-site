@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import {
   CheckCircle2, AlertCircle, Loader2, ShieldCheck,
-  HelpCircle, AlertTriangle, Mail, AtSign, FileCheck, Zap, Coins,
+  HelpCircle, AlertTriangle, Mail, AtSign, FileCheck, Zap, Coins, Sparkles,
 } from 'lucide-react'
 import EmailDetailsModal, { PublicEmailValidationResult } from './EmailDetailsModal'
 
@@ -34,21 +34,29 @@ const checks = [
   { title: 'Role-based & free-mail detection', description: 'Flags role accounts (support@, info@) and free providers for deliverability scoring.' },
   { title: 'Disposable email screening', description: 'Detects temporary domains that are not suitable for long-term contact lists.' },
   { title: 'Blacklist check', description: 'Checks domain and IPs against reputation lists to flag known bad senders.' },
-  { title: 'SMTP mailbox verification', description: 'Connects to the mail server and verifies whether the mailbox exists and accepts mail.' },
-  { title: 'Catch-all detection', description: 'Identifies domains that accept all addresses, so deliverability is uncertain.' },
+  { title: 'Mailbox check', description: 'Confirms a real mailbox exists at the address, not just the domain.' },
+  { title: 'Catch-all verification', description: 'Verifies catch-all addresses and emails protected by Secure Email Gateways with clear valid or invalid verdicts.' },
 ]
 
-const outcomes: {
+type Outcome = {
   label: string
   color: string
   icon: typeof CheckCircle2
   description: string
   refund?: boolean
-}[] = [
+}
+
+const outcomes: Outcome[] = [
   { label: 'Deliverable', color: 'emerald', icon: CheckCircle2, description: 'Email is valid, reachable, and passed checks. Safe to keep in your contact database.' },
   { label: 'Risky', color: 'amber', icon: AlertTriangle, description: 'May accept mail but has higher risk: catch-all domain, full mailbox, or lower deliverability.' },
   { label: 'Undeliverable', color: 'rose', icon: AlertTriangle, description: 'Not deliverable due to invalid format, domain, rejected mailbox, disposable email, or blacklisted.' },
   { label: 'Unknown', color: 'slate', icon: HelpCircle, description: 'Could not be verified reliably: timeout, server unavailable, or connection issues.', refund: true },
+]
+
+const catchAllOutcomes: Outcome[] = [
+  { label: 'Valid', color: 'emerald', icon: CheckCircle2, description: 'Confirmed deliverable, including catch-all and SEG-protected addresses verified for real existence.' },
+  { label: 'Invalid', color: 'rose', icon: AlertCircle, description: 'Mailbox does not exist or cannot be reached. Safe to remove from your list.' },
+  { label: 'Unknown', color: 'slate', icon: HelpCircle, description: 'Could not be verified reliably. The credit is refunded automatically.', refund: true },
 ]
 
 const colorClasses: Record<string, { chip: string; icon: string; border: string; dot: string }> = {
@@ -220,7 +228,7 @@ export default function HomeHeroWithVerification() {
 
         {/* Verification Explainer */}
         <div className="rounded-2xl border border-slate-100 bg-white p-6 md:p-10 shadow-[0_2px_40px_rgba(0,0,0,0.04)]">
-          <div className="relative grid gap-10 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center">
+          <div className="relative grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_auto_minmax(0,0.95fr)_minmax(0,0.85fr)] items-center">
             {/* Left: Checks */}
             <div style={{ position: 'relative', zIndex: 1 }}>
               <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400 mb-2">
@@ -324,10 +332,10 @@ export default function HomeHeroWithVerification() {
             {/* Right: Outcomes */}
             <div style={{ position: 'relative', zIndex: 1 }}>
               <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400 mb-2">
-                Verification outcomes
+                Standard Verification Outcomes
               </p>
               <p className="text-2xl md:text-3xl font-bold tracking-tight text-slate-900 mb-6">
-                4 possible results, crystal clear
+                4 possible results
               </p>
 
               <div className="space-y-2">
@@ -364,9 +372,55 @@ export default function HomeHeroWithVerification() {
                         </p>
                         {refund && (
                           <p className="mt-1.5 text-[12px] text-emerald-700 font-medium leading-relaxed">
-                            You only pay for emails we can actually verify — Unknown results are refunded automatically.
+                            You only pay for emails we can actually verify. Unknown results are refunded automatically.
                           </p>
                         )}
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+
+            {/* Far Right: Catch-all Verification Enabled outcomes */}
+            <div style={{ position: 'relative', zIndex: 1 }} className="min-w-0">
+              <div className="flex items-center gap-1.5 mb-2">
+                <Sparkles className="w-3 h-3 text-accent-600" />
+                <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-accent-700">
+                  Catch-all Verification Enabled
+                </p>
+              </div>
+              <p className="text-2xl md:text-3xl font-bold tracking-tight text-slate-900 mb-6">
+                Just valid or invalid
+              </p>
+
+              <div className="space-y-2">
+                {catchAllOutcomes.map(({ label, color, icon: Icon, description, refund }) => {
+                  const colors = colorClasses[color]
+                  return (
+                    <div
+                      key={label}
+                      className={`relative flex items-start gap-3 rounded-xl border bg-white px-4 py-3.5 ${colors.border} hover:shadow-[0_2px_16px_rgba(0,0,0,0.06)] hover:-translate-y-0.5 transition-all duration-200 group`}
+                    >
+                      <div className={`mt-0.5 flex h-7 w-7 items-center justify-center rounded-lg flex-shrink-0 ${colors.icon} group-hover:scale-105 transition-transform duration-200`}>
+                        <Icon className="h-3.5 w-3.5" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-1 flex-wrap">
+                          <div className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-[11px] font-semibold ${colors.chip}`}>
+                            <span className={`w-1 h-1 rounded-full ${colors.dot}`} />
+                            {label}
+                          </div>
+                          {refund && (
+                            <div className="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-emerald-50 to-emerald-100/80 border border-emerald-200/70 px-2 py-0.5 text-[10px] font-bold text-emerald-700 tracking-wide uppercase">
+                              <Coins className="w-2.5 h-2.5" />
+                              Refunded
+                            </div>
+                          )}
+                        </div>
+                        <p className="text-[13px] text-slate-500 leading-relaxed">
+                          {description}
+                        </p>
                       </div>
                     </div>
                   )

@@ -18,6 +18,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: `${baseUrl}/catch-all-verification`,
+      lastModified: recent,
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/affiliates`,
       lastModified: recent,
       changeFrequency: 'monthly',

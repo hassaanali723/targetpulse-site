@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { motion } from 'framer-motion'
-import { Upload, Zap, CheckCircle, Download, TrendingUp, Clock, Target, Play, ArrowRight, AlertCircle, Check } from 'lucide-react'
+import { Upload, Zap, CheckCircle, Download, TrendingUp, Clock, ArrowRight, AlertCircle, Check, AtSign, ShieldCheck, Plug } from 'lucide-react'
 import HomePricingSection from '@/components/HomePricingSection'
 import HomeComparisonSection from '@/components/HomeComparisonSection'
 import HomeIntegrationsSection from '@/components/HomeIntegrationsSection'
@@ -15,38 +15,38 @@ const stats = [
   { icon: TrendingUp, value: '95%', label: 'Better Delivery' },
 ]
 
-const howItWorks = [
+const platformTasks = [
   {
-    number: '01',
+    icon: AtSign,
+    iconBg: 'bg-gradient-to-br from-primary-500 to-primary-700',
+    title: 'Single Email Verification',
+    description: 'Validate one email at a time. Free to try, no account needed.',
+  },
+  {
     icon: Upload,
-    title: 'Upload Your File',
-    description: 'Upload CSV or Excel with thousands of emails. Processing starts instantly.',
+    iconBg: 'bg-gradient-to-br from-sky-500 to-sky-700',
+    title: 'Bulk Email Verification',
+    description: 'Upload a CSV or Excel and validate thousands of addresses in seconds.',
   },
   {
-    number: '02',
-    icon: Play,
-    title: 'Real-Time Processing',
-    description: 'Watch emails verify in real-time and see results immediately as they process.',
+    icon: ShieldCheck,
+    iconBg: 'bg-gradient-to-br from-amber-500 to-amber-600',
+    title: 'Catch-All Verification',
+    description: 'Verify catch-all and accept-all domains other tools mark as Unknown.',
   },
   {
-    number: '03',
-    icon: Download,
-    title: 'Download Anytime',
-    description: 'Download verified emails while others continue processing. No waiting.',
-  },
-  {
-    number: '04',
-    icon: Target,
-    title: 'Use Verified Results',
-    description: 'Use verified emails immediately in your systems with lower bounce risk.',
+    icon: Plug,
+    iconBg: 'bg-gradient-to-br from-violet-500 to-violet-700',
+    title: 'API & Integrations',
+    description: 'Connect with Mailchimp, HubSpot, SendGrid, and more, or use the API.',
   },
 ]
 
 const features = [
   { text: 'Real-time results as emails are verified' },
-  { text: 'Download verified emails anytime during processing' },
   { text: 'Process thousands of emails in parallel' },
   { text: 'Resume verification at any time' },
+  { text: 'Export as CSV, Excel, or JSON when complete' },
 ]
 
 export default function HomeFeatureShowcase() {
@@ -83,7 +83,8 @@ export default function HomeFeatureShowcase() {
               Improve deliverability and protect your sender reputation.
             </p>
             <p className="text-[17px] text-slate-500 mb-10 leading-relaxed">
-              Start downloading verified results immediately while the rest continue processing in the background.
+              Watch progress live as your list is processed. Full results delivered in seconds,
+              ready to export.
             </p>
 
             {/* Features */}
@@ -133,14 +134,14 @@ export default function HomeFeatureShowcase() {
                   </div>
                 </div>
                 <div className="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-700 px-3 py-1 rounded-full text-[12px] font-semibold flex-shrink-0">
-                  <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
-                  Processing
+                  <CheckCircle className="h-3 w-3" />
+                  Completed
                 </div>
               </div>
 
               {/* Progress + Stats */}
               <div className="flex flex-col sm:flex-row items-center sm:items-center gap-4 sm:gap-6 mb-5">
-                {/* Circle */}
+                {/* Circle — 100% complete */}
                 <div className="relative w-20 h-20 flex-shrink-0">
                   <svg className="w-20 h-20 -rotate-90">
                     <circle cx="40" cy="40" r="34" stroke="#f1f5f9" strokeWidth="7" fill="none" />
@@ -150,12 +151,12 @@ export default function HomeFeatureShowcase() {
                       strokeWidth="7"
                       fill="none"
                       strokeDasharray="213.6"
-                      strokeDashoffset="53.4"
+                      strokeDashoffset="0"
                       strokeLinecap="round"
                     />
                   </svg>
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-lg font-bold text-slate-900">75%</span>
+                    <span className="text-lg font-bold text-slate-900">100%</span>
                   </div>
                 </div>
 
@@ -201,7 +202,7 @@ export default function HomeFeatureShowcase() {
               </button>
 
               <p className="text-[11px] text-center text-slate-400 mt-3 font-medium px-2">
-                Download now — processing continues in the background
+                Export to CSV, Excel, or JSON
               </p>
             </div>
 
@@ -211,8 +212,8 @@ export default function HomeFeatureShowcase() {
               Real-Time
             </div>
             <div className="absolute top-full mt-2 right-3 md:top-auto md:mt-0 md:-bottom-3 md:-right-3 bg-white border border-slate-200 px-4 py-2 rounded-full shadow-lg flex items-center gap-2 text-[13px]">
-              <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
-              <span className="font-semibold text-slate-700">Still Processing…</span>
+              <CheckCircle className="w-3.5 h-3.5 text-emerald-600" />
+              <span className="font-semibold text-slate-700">Verified in 12s</span>
             </div>
           </div>
         </div>
@@ -253,39 +254,40 @@ export default function HomeFeatureShowcase() {
           })}
         </div>
 
-        {/* How It Works */}
+        {/* One Platform — All verification tasks */}
         <div
           ref={stepsReveal as React.RefObject<HTMLDivElement>}
           className="reveal"
         >
-          <div className="text-center mb-14">
+          <div className="text-center mb-14 max-w-2xl mx-auto">
             <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-primary-600 mb-3">
-              How it works
+              One platform
             </p>
-            <h2 className="text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-slate-900">
-              Simple. Fast. Reliable.
+            <h2 className="text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-slate-900 leading-[1.1] mb-4">
+              Every email verification task, in one place
             </h2>
+            <p className="text-[15px] text-slate-500 leading-relaxed">
+              Stop switching between tools. TargetPulse handles every kind of email verification
+              you need, from single addresses to bulk lists, catch-all domains, and API workflows.
+            </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 mb-10 md:mb-16">
-            {howItWorks.map((step, i) => {
-              const Icon = step.icon
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10 md:mb-16">
+            {platformTasks.map((task) => {
+              const Icon = task.icon
               return (
                 <div
-                  key={i}
-                  className="relative bg-white rounded-xl p-6 border border-slate-100 hover:border-primary-200/80 hover:shadow-[0_4px_24px_rgba(41,92,81,0.08)] hover:-translate-y-1 transition-all duration-300 group"
+                  key={task.title}
+                  className="relative bg-white rounded-2xl p-6 border border-slate-100 hover:border-primary-200/80 hover:shadow-[0_6px_28px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 group"
                 >
-                  <div className="text-6xl font-black text-slate-100 group-hover:text-primary-100/80 transition-colors leading-none mb-5 select-none">
-                    {step.number}
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 shadow-md ${task.iconBg}`}>
+                    <Icon className="h-5 w-5 text-white" strokeWidth={2.25} />
                   </div>
-                  <div className="w-10 h-10 bg-primary-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary-100 transition-colors">
-                    <Icon className="h-5 w-5 text-primary-600" />
-                  </div>
-                  <h3 className="text-[15px] font-bold text-slate-900 mb-2 group-hover:text-primary-700 transition-colors">
-                    {step.title}
+                  <h3 className="text-[16px] font-bold text-slate-900 mb-2 group-hover:text-primary-700 transition-colors">
+                    {task.title}
                   </h3>
                   <p className="text-[13px] text-slate-500 leading-relaxed">
-                    {step.description}
+                    {task.description}
                   </p>
                 </div>
               )

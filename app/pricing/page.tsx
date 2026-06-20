@@ -110,7 +110,7 @@ export default function PricingPage() {
               </span>
               <span className="inline-flex items-center gap-1.5 rounded-full bg-white border border-slate-200 px-3 py-1 text-[12px] font-semibold text-slate-700 shadow-sm">
                 <span className="w-1.5 h-1.5 rounded-full bg-accent-500" />
-                Catch-all email verification = <span className="text-primary-700">2 credits</span>
+                Catch-all email verification = <span className="text-primary-700">1.5 credits</span>
               </span>
             </div>
 

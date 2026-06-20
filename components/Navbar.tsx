@@ -20,6 +20,7 @@ export default function Navbar() {
   }, [isMobileMenuOpen])
 
   const navLinks = [
+    { name: 'Catch-all Verification', href: '/catch-all-verification' },
     { name: 'Pricing', href: '/pricing' },
     { name: 'Talk to us', href: '/contact-us' },
     { name: 'Earn with us', href: '/affiliates' },
