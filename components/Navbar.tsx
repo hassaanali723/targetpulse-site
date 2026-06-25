@@ -22,8 +22,8 @@ export default function Navbar() {
   const navLinks = [
     { name: 'Catch-all Verification', href: '/catch-all-verification' },
     { name: 'Pricing', href: '/pricing' },
-    { name: 'Talk to us', href: '/contact-us' },
     { name: 'Earn with us', href: '/affiliates' },
+    { name: 'Talk to us', href: '/contact-us' },
   ]
 
   return (
@@ -56,13 +56,13 @@ export default function Navbar() {
                   <span className="absolute bottom-0.5 left-4 right-4 h-[1.5px] bg-primary-600 rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left" />
                 </Link>
               ))}
-              <a
-                href="https://emailverifier.targetpulse.net/sign-in"
+              <Link
+                href="/sign-up"
                 className="ml-3 inline-flex items-center gap-1.5 px-5 py-2.5 bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white rounded-full text-[14px] font-semibold transition-all duration-200 hover:shadow-lg"
               >
-                Sign in
+                Sign up free
                 <ArrowUpRight className="w-3.5 h-3.5" />
-              </a>
+              </Link>
             </div>
 
             {/* Mobile Menu Button */}
@@ -105,14 +105,14 @@ export default function Navbar() {
             ))}
           </div>
           <div className="px-6 pb-8 pt-3 border-t border-slate-100">
-            <a
-              href="https://emailverifier.targetpulse.net/sign-in"
+            <Link
+              href="/sign-up"
               onClick={() => setIsMobileMenuOpen(false)}
               className="flex items-center justify-center gap-2 w-full py-3.5 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-2xl font-semibold text-[15px] hover:from-primary-700 hover:to-primary-800 hover:shadow-lg transition-all duration-200"
             >
-              Sign in
+              Sign up free
               <ArrowUpRight className="w-4 h-4" />
-            </a>
+            </Link>
           </div>
         </div>
       </div>

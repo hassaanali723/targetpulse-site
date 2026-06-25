@@ -151,16 +151,18 @@ const jsonLd = {
       '@id': `${baseUrl}/#sitenav`,
       name: [
         'Free Email Verification Tool',
+        'Sign up free',
         'Pricing',
-        'Catch-All Verification',
         'Earn with Us',
+        'Catch-All Verification',
         'Talk to us',
       ],
       url: [
         baseUrl,
+        `${baseUrl}/sign-up`,
         `${baseUrl}/pricing`,
-        `${baseUrl}/catch-all-verification`,
         `${baseUrl}/affiliates`,
+        `${baseUrl}/catch-all-verification`,
         `${baseUrl}/contact-us`,
       ],
     },
@@ -178,14 +180,14 @@ const jsonLd = {
         {
           '@type': 'ListItem',
           position: 2,
-          name: 'Pricing',
-          url: `${baseUrl}/pricing`,
+          name: 'Sign up free',
+          url: `${baseUrl}/sign-up`,
         },
         {
           '@type': 'ListItem',
           position: 3,
-          name: 'Catch-All Verification',
-          url: `${baseUrl}/catch-all-verification`,
+          name: 'Pricing',
+          url: `${baseUrl}/pricing`,
         },
         {
           '@type': 'ListItem',
@@ -196,6 +198,12 @@ const jsonLd = {
         {
           '@type': 'ListItem',
           position: 5,
+          name: 'Catch-All Verification',
+          url: `${baseUrl}/catch-all-verification`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 6,
           name: 'Talk to us',
           url: `${baseUrl}/contact-us`,
         },

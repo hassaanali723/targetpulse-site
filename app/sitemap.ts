@@ -12,22 +12,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0,
     },
     {
+      url: `${baseUrl}/sign-up`,
+      lastModified: recent,
+      changeFrequency: 'monthly',
+      priority: 0.95,
+    },
+    {
       url: `${baseUrl}/pricing`,
       lastModified: recent,
       changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/catch-all-verification`,
+      url: `${baseUrl}/affiliates`,
       lastModified: recent,
       changeFrequency: 'monthly',
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/affiliates`,
+      url: `${baseUrl}/catch-all-verification`,
       lastModified: recent,
       changeFrequency: 'monthly',
-      priority: 0.8,
+      priority: 0.85,
     },
     {
       url: `${baseUrl}/contact-us`,
@@ -35,23 +41,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.6,
     },
+    // Legal pages — kept low priority so Google does NOT pick them for sitelinks
     {
       url: `${baseUrl}/privacy-policy`,
       lastModified: new Date('2026-02-04'),
       changeFrequency: 'yearly',
-      priority: 0.3,
+      priority: 0.1,
     },
     {
       url: `${baseUrl}/terms-of-service`,
       lastModified: new Date('2026-02-04'),
       changeFrequency: 'yearly',
-      priority: 0.3,
+      priority: 0.1,
     },
     {
       url: `${baseUrl}/refund-policy`,
       lastModified: new Date('2026-02-04'),
       changeFrequency: 'yearly',
-      priority: 0.3,
+      priority: 0.1,
     },
   ]
 }
