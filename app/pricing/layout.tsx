@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 const pricingSchema = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
-  name: 'TargetPulse Email Verifier',
+  name: 'Giggal.ai Email Verifier',
   applicationCategory: 'BusinessApplication',
   operatingSystem: 'Web',
   description: 'Start verifying emails for free with 1,000 trial credits. Flexible pay-as-you-go pricing with volume discounts. No monthly commitments required.',
@@ -27,7 +27,7 @@ const pricingSchema = {
     url: 'https://targetpulse.net/pricing',
     seller: {
       '@type': 'Organization',
-      name: 'TargetPulse',
+      name: 'Giggal.ai',
     },
   },
   featureList: [
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     canonical: '/pricing',
   },
   openGraph: {
-    title: 'Pricing - TargetPulse Email Verifier',
+    title: 'Pricing - Giggal.ai Email Verifier',
     description: 'Simple, affordable email verification pricing. Pay only for what you verify. No monthly fees, no subscriptions.',
     url: 'https://targetpulse.net/pricing',
     type: 'website',

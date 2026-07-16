@@ -8,30 +8,38 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['var(--font-jakarta)', 'Plus Jakarta Sans', 'sans-serif'],
+        mono: ['var(--font-jetbrains-mono)', 'JetBrains Mono', 'monospace'],
+      },
       colors: {
+        // Giggal.ai brand — Steel Indigo primary
         primary: {
-          50: '#f0f7f6',
-          100: '#d9ebe8',
-          200: '#b3d7d1',
-          300: '#8cc3ba',
-          400: '#66afa3',
-          500: '#295C51',
-          600: '#244d44',
-          700: '#1e3e37',
-          800: '#192f2a',
-          900: '#13201d',
+          50: '#eef2ff',
+          100: '#e0e7ff',
+          200: '#c7d2fe',
+          300: '#a5b4fc',
+          400: '#818cf8',
+          500: '#6366f1',
+          600: '#4f46e5',
+          700: '#4338ca',
+          800: '#3730a3',
+          900: '#312e81',
+          950: '#1e1b4b',
         },
+        // Giggal.ai brand — Cyber Emerald accent
         accent: {
-          50: '#fef9f0',
-          100: '#fdf3e1',
-          200: '#fae7c3',
-          300: '#f8dba5',
-          400: '#f5cf87',
-          500: '#E9BB71',
-          600: '#e5ae54',
-          700: '#d69634',
-          800: '#b57b23',
-          900: '#8a5d1a',
+          50: '#ecfdf5',
+          100: '#d1fae5',
+          200: '#a7f3d0',
+          300: '#6ee7b7',
+          400: '#34d399',
+          500: '#10b981',
+          600: '#059669',
+          700: '#047857',
+          800: '#065f46',
+          900: '#064e3b',
+          950: '#022c22',
         },
       },
       backgroundImage: {
@@ -46,8 +54,13 @@ const config: Config = {
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'shimmer': 'shimmer 2s infinite',
         'ping': 'ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite',
+        'slide-down': 'slideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards',
       },
       keyframes: {
+        slideDown: {
+          '0%': { opacity: '0', transform: 'translateY(-8px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
         fadeIn: {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },

@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
           <pre style="white-space:pre-wrap">${message}</pre>
           
           <hr>
-          <p><em>This message was sent from the TargetPulse website contact form.</em></p>
+          <p><em>This message was sent from the Giggal.ai website contact form.</em></p>
         `
 
         await transporter.sendMail({

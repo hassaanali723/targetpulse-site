@@ -2,12 +2,12 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Contact Us',
-  description: 'Get in touch with TargetPulse for support, inquiries, or any questions about our email verification tool. We typically respond within 24 hours.',
+  description: 'Get in touch with Giggal.ai for support, inquiries, or any questions about our email verification tool. We typically respond within 24 hours.',
   keywords: [
-    'contact TargetPulse',
+    'contact Giggal.ai',
     'email verifier support',
     'email verification help',
-    'TargetPulse support',
+    'Giggal.ai support',
     'email verification tool support',
     'bulk email verifier help',
   ],
@@ -15,8 +15,8 @@ export const metadata: Metadata = {
     canonical: '/contact-us',
   },
   openGraph: {
-    title: 'Contact Us - TargetPulse Email Verifier',
-    description: 'Get in touch with TargetPulse for support, inquiries, or any questions about our email verification tool.',
+    title: 'Contact Us - Giggal.ai Email Verifier',
+    description: 'Get in touch with Giggal.ai for support, inquiries, or any questions about our email verification tool.',
     url: 'https://targetpulse.net/contact-us',
     type: 'website',
   },

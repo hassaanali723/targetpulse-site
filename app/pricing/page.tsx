@@ -1,23 +1,10 @@
-'use client'
-
-import { useState } from 'react'
+import React from 'react'
+import Link from 'next/link'
+import { Check, CreditCard, TrendingDown, Percent, Infinity as InfinityIcon } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import { Check, Zap, Mail } from 'lucide-react'
-
-const packages = [
-  { credits: 3000,    price: 5.00,   perCredit: 0.00167, tag: 'Try it out' },
-  { credits: 10000,   price: 9.90,   perCredit: 0.00099, tag: 'Starter friendly' },
-  { credits: 30000,   price: 28.00,  perCredit: 0.00093, tag: 'Starter friendly' },
-  { credits: 50000,   price: 39.00,  perCredit: 0.00078, tag: 'Starter friendly' },
-  { credits: 100000,  price: 76.00,  perCredit: 0.00076, tag: 'Best value', bestValue: true },
-  { credits: 300000,  price: 222.00, perCredit: 0.00074, tag: 'Popular with teams' },
-  { credits: 500000,  price: 360.00, perCredit: 0.00072, tag: 'Popular with teams' },
-  { credits: 800000,  price: 559.00, perCredit: 0.00070, tag: 'Popular with teams' },
-  { credits: 1000000, price: 680.00, perCredit: 0.00068, tag: 'Popular with teams' },
-]
-
-const DISCOUNT = 0.10
+import PricingBlock from '@/components/landing/PricingBlock'
+import FaqAccordion, { type FaqItem } from '@/components/landing/FaqAccordion'
 
 const features = [
   'Email Syntax Validation',
@@ -33,315 +20,113 @@ const features = [
   'No Credit Expiration',
 ]
 
-const faqs = [
-  {
-    q: 'What payment methods do you accept?',
-    a: 'We accept all major credit and debit cards through our secure Stripe payment processor.',
-  },
-  {
-    q: 'Can I cancel my subscription anytime?',
-    a: "Yes! Cancel anytime. You'll keep all credits already in your account and won't be charged again.",
-  },
-  {
-    q: 'What happens if I run out of credits?',
-    a: 'Simply purchase more credits anytime. Your account is topped up instantly.',
-  },
-  {
-    q: 'Do you offer refunds?',
-    a: 'Credits are generally non-refundable. We handle exceptional circumstances on a case-by-case basis. See our Refund Policy for details.',
-  },
-  {
-    q: 'Is there a minimum purchase?',
-    a: 'The minimum purchase is 10,000 credits ($9.90). You also get 1,000 free trial credits before purchasing.',
-  },
-  {
-    q: 'Do credits expire?',
-    a: 'Never. Your credits stay in your account until you use them — no rush, no pressure.',
-  },
+const howItWorks = [
+  { Icon: CreditCard, wrap: 'bg-indigo-600 shadow-indigo-600/10', title: '1 Credit = 1 Email', body: 'Each standard email verification uses exactly one credit from your balance.' },
+  { Icon: TrendingDown, wrap: 'bg-emerald-500 shadow-emerald-500/10', title: 'Volume savings', body: 'Buy more credits, pay less per credit — from $0.0017 down to $0.0007.' },
+  { Icon: Percent, wrap: 'bg-violet-600 shadow-violet-600/10', title: '10% subscription discount', body: 'Subscribe monthly and save 10% automatically on every package.' },
+  { Icon: InfinityIcon, wrap: 'bg-amber-500 shadow-amber-500/10', title: 'Credits never expire', body: 'Use your credits anytime. They stay in your account until you need them.' },
 ]
 
-function formatCredits(n: number) {
-  if (n >= 1000000) return `${n / 1000000}M`
-  return `${(n / 1000).toFixed(0)}K`
-}
+const faqs: FaqItem[] = [
+  { q: 'What payment methods do you accept?', a: 'We accept all major credit and debit cards through our secure Stripe payment processor.' },
+  { q: 'Can I cancel my subscription anytime?', a: "Yes! Cancel anytime. You'll keep all credits already in your account and won't be charged again." },
+  { q: 'What happens if I run out of credits?', a: 'Simply purchase more credits anytime. Your account is topped up instantly.' },
+  { q: 'Do you offer refunds?', a: 'Credits are generally non-refundable. We handle exceptional circumstances on a case-by-case basis. See our Refund Policy for details.' },
+  { q: 'Is there a minimum purchase?', a: 'The minimum purchase is 3,000 credits ($5.00). You also get 1,000 free trial credits before purchasing.' },
+  { q: 'Do credits expire?', a: 'Never. Your credits stay in your account until you use them — no rush, no pressure.' },
+]
 
 export default function PricingPage() {
-  const [isSub, setIsSub] = useState(false)
-  const [openFaq, setOpenFaq] = useState<number | null>(null)
-
   return (
-    <main className="min-h-screen bg-white">
+    <main className="relative min-h-screen bg-slate-50 grid-lines overflow-x-hidden text-slate-800 antialiased">
+      <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-indigo-500/10 blur-[120px] -z-10 pointer-events-none" />
+      <div className="absolute top-[600px] right-1/4 w-[500px] h-[500px] rounded-full bg-emerald-500/[0.06] blur-[100px] -z-10 pointer-events-none" />
+
       <Navbar />
 
       {/* Hero */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
-        <div className="absolute inset-0 -z-10">
-          <div className="dot-grid absolute inset-0 opacity-[0.4]" />
-          <div className="absolute top-0 right-0 w-[600px] h-[500px] bg-primary-50 rounded-full blur-[120px] -translate-y-1/3 translate-x-1/4 opacity-70" />
-          <div className="absolute bottom-0 left-0 w-[400px] h-[300px] bg-accent-50 rounded-full blur-[100px] translate-y-1/4 -translate-x-1/4 opacity-60" />
+      <section className="max-w-6xl mx-auto px-6 pt-28 md:pt-32 pb-16 text-center space-y-6">
+        <div className="inline-flex items-center gap-2 rounded-full border border-indigo-100 bg-indigo-50/80 px-4 py-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+          <span className="text-[11px] font-black tracking-[0.16em] text-indigo-700 uppercase">Transparent Pricing</span>
         </div>
-
-        <div className="container-custom">
-          <div className="max-w-3xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-primary-200/60 bg-primary-50/80 px-4 py-1.5 mb-8">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-[11px] font-semibold tracking-[0.16em] text-primary-700 uppercase">
-                Transparent pricing
-              </span>
-            </div>
-
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.02em] text-slate-900 mb-5 leading-[1.05]">
-              Simple, transparent
-              <span className="block bg-gradient-to-r from-primary-600 via-primary-700 to-accent-500 bg-clip-text text-transparent pb-2">
-                pricing
-              </span>
-            </h1>
-
-            <p className="text-lg text-slate-500 mb-5 leading-relaxed">
-              Pay only for what you use. No monthly fees, no hidden charges.<br />
-              Credits never expire.
-            </p>
-
-            {/* Credit usage pills */}
-            <div className="flex flex-wrap items-center justify-center gap-2 mb-5">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-white border border-slate-200 px-3 py-1 text-[12px] font-semibold text-slate-700 shadow-sm">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary-500" />
-                1 email verification = <span className="text-primary-700">1 credit</span>
-              </span>
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-white border border-slate-200 px-3 py-1 text-[12px] font-semibold text-slate-700 shadow-sm">
-                <span className="w-1.5 h-1.5 rounded-full bg-accent-500" />
-                Catch-all email verification = <span className="text-primary-700">1.5 credits</span>
-              </span>
-            </div>
-
-            <p className="text-[15px] font-semibold text-primary-700">
-              Start with <strong>1,000 free trial credits</strong> — no card required
-            </p>
-          </div>
-        </div>
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900">
+          Simple, Transparent{' '}
+          <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">Pricing</span>
+        </h1>
+        <p className="text-base md:text-lg text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed">
+          Pay only for what you use. No monthly fees, no hidden charges, and credits never expire.
+          Start with <strong className="text-indigo-600 font-extrabold">1,000 free trial credits</strong> — no card required.
+        </p>
       </section>
 
-      {/* Pricing section */}
-      <section className="pb-24">
-        <div className="container-custom">
-          <div className="max-w-5xl mx-auto">
-
-            {/* Toggle */}
-            <div className="flex justify-center mb-10">
-              <div className="inline-flex items-center gap-1 p-1 bg-slate-100 rounded-xl">
-                <button
-                  onClick={() => setIsSub(false)}
-                  className={`px-6 py-2.5 rounded-lg text-[14px] font-semibold transition-all duration-200 ${
-                    !isSub ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'
-                  }`}
-                >
-                  Pay-As-You-Go
-                </button>
-                <button
-                  onClick={() => setIsSub(true)}
-                  className={`flex items-center gap-2 px-6 py-2.5 rounded-lg text-[14px] font-semibold transition-all duration-200 ${
-                    isSub ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'
-                  }`}
-                >
-                  Subscription
-                  <span className="bg-primary-600 text-white text-[11px] font-bold px-2 py-0.5 rounded-full leading-none">
-                    10% off
-                  </span>
-                </button>
-              </div>
-            </div>
-
-            {/* Package grid */}
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-10">
-              {packages.map((pkg, i) => {
-                const price     = isSub ? pkg.price * (1 - DISCOUNT) : pkg.price
-                const perCredit = isSub ? pkg.perCredit * (1 - DISCOUNT) : pkg.perCredit
-
-                return (
-                  <div
-                    key={i}
-                    className={`relative rounded-2xl border p-5 transition-all duration-200 ${
-                      pkg.bestValue
-                        ? 'border-primary-300 bg-primary-50/70 shadow-[0_4px_28px_rgba(41,92,81,0.12)]'
-                        : 'border-slate-100 bg-white hover:border-primary-200/60 hover:shadow-[0_2px_20px_rgba(41,92,81,0.08)]'
-                    }`}
-                  >
-                    {pkg.bestValue && (
-                      <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap">
-                        <span className="inline-flex items-center gap-1 bg-primary-600 text-white text-[11px] font-bold px-3 py-0.5 rounded-full">
-                          <Zap className="w-2.5 h-2.5" />
-                          Best Value
-                        </span>
-                      </div>
-                    )}
-
-                    {/* Credits */}
-                    <div className="text-2xl font-black text-slate-900 tracking-tight leading-none mb-0.5">
-                      {formatCredits(pkg.credits)}
-                    </div>
-                    <div className="text-[12px] text-slate-400 font-medium mb-4">credits</div>
-
-                    {/* Price */}
-                    <div className="text-3xl font-extrabold text-slate-900 leading-none mb-0.5">
-                      ${price.toFixed(2)}
-                    </div>
-                    <div className="text-[12px] text-slate-400 mb-2">
-                      ${perCredit.toFixed(5)}/credit
-                    </div>
-
-                    {/* Tag */}
-                    <div className={`text-[11px] font-semibold ${pkg.bestValue ? 'text-primary-700' : 'text-slate-400'}`}>
-                      {pkg.tag}
-                    </div>
-
-                    {isSub && (
-                      <div className="mt-2 text-[11px] font-semibold text-emerald-600">
-                        Save ${(pkg.price * DISCOUNT).toFixed(2)}
-                      </div>
-                    )}
-                  </div>
-                )
-              })}
-            </div>
-
-            {/* CTA */}
-            <div className="text-center">
-              <a
-                href="https://emailverifier.targetpulse.net/sign-up"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-bold text-[15px] transition-colors duration-200 shadow-[0_4px_24px_rgba(41,92,81,0.25)]"
-              >
-                <Mail className="w-4 h-4" />
-                Get Started — 1,000 Free Credits
-              </a>
-              <p className="mt-3 text-[12px] text-slate-400">No credit card required · Credits never expire</p>
-            </div>
-          </div>
-        </div>
+      {/* Pricing widget (same as the landing page) */}
+      <section className="max-w-6xl mx-auto px-6 pb-24 space-y-12">
+        <PricingBlock />
       </section>
 
       {/* Everything included */}
-      <section className="py-20 bg-slate-50/60 border-y border-slate-100">
-        <div className="container-custom">
-          <div className="max-w-4xl mx-auto text-center">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-primary-600 mb-3">What you get</p>
-            <h2 className="text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-slate-900 mb-3">
-              Everything included in every package
-            </h2>
-            <p className="text-[15px] text-slate-500 mb-10">All features, all packages. No tiers, no paywalls.</p>
-
-            <div className="flex flex-wrap justify-center gap-3">
-              {features.map((f, i) => (
-                <div
-                  key={i}
-                  className="flex items-center gap-2 px-4 py-2.5 bg-white rounded-full border border-slate-100 shadow-sm text-[14px] font-medium text-slate-700"
-                >
-                  <span className="flex items-center justify-center w-5 h-5 rounded-full bg-primary-600">
-                    <Check className="w-3 h-3 text-white" />
-                  </span>
-                  {f}
-                </div>
-              ))}
+      <section className="max-w-6xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-12">
+        <div className="text-center max-w-2xl mx-auto space-y-3">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Everything Included in Every Package</h2>
+          <p className="text-slate-600 text-sm md:text-base font-medium">All features, all packages. No tiers, no paywalls.</p>
+        </div>
+        <div className="flex flex-wrap justify-center gap-3">
+          {features.map((f) => (
+            <div key={f} className="flex items-center gap-2.5 px-4 py-2.5 bg-white border-2 border-slate-200 rounded-xl card-vivid-shadow text-[13px] font-bold text-slate-700">
+              <span className="flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500 shrink-0">
+                <Check className="w-3 h-3 text-white" />
+              </span>
+              {f}
             </div>
-          </div>
+          ))}
         </div>
       </section>
 
       {/* How pricing works */}
-      <section className="py-20">
-        <div className="container-custom">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-primary-600 mb-3">How it works</p>
-              <h2 className="text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-slate-900">
-                Pricing made simple
-              </h2>
+      <section className="max-w-6xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-16">
+        <div className="text-center max-w-2xl mx-auto space-y-3">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Pricing Made Simple</h2>
+          <p className="text-slate-600 text-sm md:text-base font-medium">Four principles that keep our pricing honest and predictable.</p>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {howItWorks.map(({ Icon, wrap, title, body }) => (
+            <div key={title} className="bg-white border-2 border-slate-200 rounded-2xl p-6 min-h-[190px] hover:border-indigo-500/30 transition-all duration-300 card-vivid-shadow flex flex-col text-left space-y-4">
+              <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-white shadow-md shrink-0 ${wrap}`}>
+                <Icon className="w-6 h-6" />
+              </div>
+              <div className="space-y-1">
+                <h3 className="text-base font-black text-slate-900 leading-tight">{title}</h3>
+                <p className="text-[13px] text-slate-500 font-semibold leading-normal">{body}</p>
+              </div>
             </div>
-
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-              {[
-                { emoji: '💳', title: '1 Credit = 1 Email', body: 'Each email verification uses exactly one credit from your balance.' },
-                { emoji: '📊', title: 'Volume savings', body: 'Buy more credits, pay less per credit — from $0.00099 down to $0.00068.' },
-                { emoji: '🔄', title: '10% subscription discount', body: 'Subscribe monthly and save 10% automatically on all packages.' },
-                { emoji: '♾️', title: 'Credits never expire', body: 'Use your credits anytime. They stay in your account until you need them.' },
-              ].map((s, i) => (
-                <div key={i} className="rounded-2xl border border-slate-100 bg-white p-6 text-center hover:shadow-[0_4px_24px_rgba(0,0,0,0.06)] hover:-translate-y-0.5 transition-all duration-200">
-                  <div className="text-3xl mb-4">{s.emoji}</div>
-                  <h3 className="text-[15px] font-bold text-slate-900 mb-2">{s.title}</h3>
-                  <p className="text-[13px] text-slate-500 leading-relaxed">{s.body}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+          ))}
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="py-20 bg-slate-50/60 border-y border-slate-100">
-        <div className="container-custom">
-          <div className="max-w-2xl mx-auto">
-            <div className="text-center mb-12">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-primary-600 mb-3">FAQ</p>
-              <h2 className="text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-slate-900">
-                Common questions
-              </h2>
-            </div>
-
-            <div className="bg-white rounded-2xl border border-slate-100 divide-y divide-slate-100">
-              {faqs.map((faq, i) => (
-                <div key={i}>
-                  <button
-                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                    className="w-full flex items-center justify-between gap-4 px-6 py-4 text-left"
-                  >
-                    <span className="text-[15px] font-semibold text-slate-900">{faq.q}</span>
-                    <span className="text-slate-400 text-xl flex-shrink-0 font-light">
-                      {openFaq === i ? '−' : '+'}
-                    </span>
-                  </button>
-                  <div
-                    style={{
-                      maxHeight: openFaq === i ? '200px' : '0',
-                      overflow: 'hidden',
-                      transition: 'max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
-                    }}
-                  >
-                    <p className="px-6 pb-5 text-[14px] text-slate-500 leading-relaxed">{faq.a}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+      <section className="max-w-3xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-16">
+        <div className="text-center space-y-3">
+          <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">Common Questions</h2>
+          <p className="text-sm text-slate-600 font-bold">Everything you need to know about credits, billing, and refunds.</p>
         </div>
+        <FaqAccordion items={faqs} />
       </section>
 
       {/* CTA banner */}
-      <section className="py-24">
-        <div className="container-custom">
-          <div className="max-w-4xl mx-auto">
-            <div className="relative rounded-3xl bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800 p-12 text-center text-white overflow-hidden">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -translate-y-1/3 translate-x-1/3" />
-              <div className="absolute bottom-0 left-0 w-48 h-48 bg-accent-400/20 rounded-full blur-2xl translate-y-1/3 -translate-x-1/3" />
-
-              <div className="relative">
-                <div className="text-4xl mb-4">🎁</div>
-                <h2 className="text-3xl md:text-4xl font-extrabold mb-3">
-                  Start with 1,000 free credits
-                </h2>
-                <p className="text-white/80 text-[16px] mb-8 max-w-xl mx-auto">
-                  No credit card required. Verify your first emails for free and see results in seconds.
-                </p>
-                <a
-                  href="https://emailverifier.targetpulse.net/sign-up"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary-700 rounded-xl font-bold text-[15px] hover:bg-slate-50 transition-colors duration-200 shadow-xl"
-                >
-                  Claim Free Credits
-                </a>
-              </div>
-            </div>
+      <section className="max-w-6xl mx-auto px-6 pb-24">
+        <div className="bg-indigo-600 rounded-3xl p-12 md:p-16 text-center text-white space-y-6 shadow-xl relative overflow-hidden">
+          <h2 className="text-3xl md:text-4xl font-extrabold leading-tight tracking-tight text-white">Start With 1,000 Free Credits</h2>
+          <p className="text-sm text-indigo-100 max-w-lg mx-auto font-medium">
+            No credit card required. Verify your first emails for free and see results in seconds.
+          </p>
+          <div className="pt-4">
+            <Link
+              href="/sign-up"
+              className="px-12 py-5 bg-white hover:bg-indigo-50 text-indigo-600 font-extrabold rounded-2xl text-base transition-all shadow-md inline-block hover:scale-[1.03] active:scale-95 duration-200"
+            >
+              Claim Free Credits
+            </Link>
           </div>
         </div>
       </section>

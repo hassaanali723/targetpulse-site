@@ -1,12 +1,20 @@
 import type { Metadata } from 'next'
 import Script from 'next/script'
-import { Plus_Jakarta_Sans } from 'next/font/google'
+import { Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700', '800'],
+  weight: ['400', '500', '600', '700', '800'],
   display: 'swap',
+  variable: '--font-jakarta',
+})
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
+  variable: '--font-jetbrains-mono',
 })
 
 const baseUrl = 'https://targetpulse.net'
@@ -14,8 +22,8 @@ const baseUrl = 'https://targetpulse.net'
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: 'TargetPulse - Free Email Verification for Catch-all Domains',
-    template: '%s | TargetPulse',
+    default: 'Giggal.ai - Free Email Verification for Catch-all Domains',
+    template: '%s | Giggal.ai',
   },
   description: 'Free email verifier built for catch-all and accept-all domains with 99% accuracy. Clean your list, cut bounces, and protect your sender reputation.',
   keywords: [
@@ -44,23 +52,23 @@ export const metadata: Metadata = {
     'email list cleaning tool',
     'reduce email bounce rate',
   ],
-  authors: [{ name: 'TargetPulse', url: baseUrl }],
-  creator: 'TargetPulse',
-  publisher: 'TargetPulse',
+  authors: [{ name: 'Giggal.ai', url: baseUrl }],
+  creator: 'Giggal.ai',
+  publisher: 'Giggal.ai',
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: 'TargetPulse - Free Email Verification for Catch-all Domains',
+    title: 'Giggal.ai - Free Email Verification for Catch-all Domains',
     description: 'Free email verifier built for catch-all and accept-all domains with 99% accuracy. Clean your list, cut bounces, and protect your sender reputation.',
     url: baseUrl,
-    siteName: 'TargetPulse',
+    siteName: 'Giggal.ai',
     images: [
       {
-        url: '/Targetpulse-email verifier- logo.png',
+        url: '/giggal-logo.png',
         width: 1200,
         height: 630,
-        alt: 'TargetPulse Email Verifier',
+        alt: 'Giggal.ai Email Verifier',
       },
     ],
     locale: 'en_US',
@@ -68,9 +76,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'TargetPulse - Free Email Verification for Catch-all Domains',
+    title: 'Giggal.ai - Free Email Verification for Catch-all Domains',
     description: 'Free email verifier built for catch-all and accept-all domains with 99% accuracy. Clean your list, cut bounces, and protect your sender reputation.',
-    images: ['/Targetpulse-email verifier- logo.png'],
+    images: ['/giggal-logo.png'],
     creator: '@targetpulse',
     site: '@targetpulse',
   },
@@ -97,12 +105,12 @@ const jsonLd = {
     {
       '@type': 'Organization',
       '@id': `${baseUrl}/#organization`,
-      name: 'TargetPulse',
+      name: 'Giggal.ai',
       url: baseUrl,
       logo: {
         '@type': 'ImageObject',
         // Square logo required by Google for knowledge panel / brand recognition
-        url: `${baseUrl}/Targetpulse logo - minimal.png`,
+        url: `${baseUrl}/giggal-logo.png`,
         width: 2000,
         height: 2000,
       },
@@ -131,8 +139,8 @@ const jsonLd = {
       '@type': 'WebSite',
       '@id': `${baseUrl}/#website`,
       url: baseUrl,
-      name: 'TargetPulse',
-      alternateName: ['TargetPulse Email Verifier', 'TargetPulse Email Validator'],
+      name: 'Giggal.ai',
+      alternateName: ['Giggal.ai Email Verifier', 'Giggal.ai Email Validator'],
       description: 'Email Verifier & Email List Cleaner',
       publisher: {
         '@id': `${baseUrl}/#organization`,
@@ -212,7 +220,7 @@ const jsonLd = {
     {
       '@type': 'SoftwareApplication',
       '@id': `${baseUrl}/#software`,
-      name: 'TargetPulse Email Verifier',
+      name: 'Giggal.ai Email Verifier',
       applicationCategory: 'BusinessApplication',
       operatingSystem: 'Web',
       url: baseUrl,
@@ -233,7 +241,7 @@ const jsonLd = {
         'Catch-all email detection',
         'SMTP verification',
       ],
-      screenshot: `${baseUrl}/Targetpulse-email verifier- logo.png`,
+      screenshot: `${baseUrl}/giggal-logo.png`,
       creator: {
         '@id': `${baseUrl}/#organization`,
       },
@@ -247,9 +255,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className={`scroll-smooth ${jakarta.variable} ${jetbrainsMono.variable}`}>
       <head>
-        <meta name="theme-color" content="#295C51" />
+        <meta name="theme-color" content="#4f46e5" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -265,7 +273,7 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <body className={jakarta.className} suppressHydrationWarning>
+      <body className="font-sans" suppressHydrationWarning>
         {children}
       </body>
     </html>

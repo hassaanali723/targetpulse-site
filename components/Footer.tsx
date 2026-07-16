@@ -3,6 +3,7 @@
 import React from 'react'
 import { Linkedin, Youtube, Facebook, Instagram, ArrowUpRight } from 'lucide-react'
 import Link from 'next/link'
+import Wordmark from '@/components/Wordmark'
 
 const socials = [
   { icon: Linkedin, href: 'https://www.linkedin.com/company/target-pulse/', label: 'LinkedIn' },
@@ -34,26 +35,22 @@ export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="relative bg-gradient-to-br from-gray-900 via-primary-900 to-gray-900 text-slate-400 overflow-hidden">
-      <div className="container-custom py-14 md:py-16">
+    <footer className="border-t border-slate-200 bg-white text-slate-500">
+      <div className="max-w-6xl mx-auto px-6 py-16">
         {/* Top grid: Brand + Product + Company */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 mb-12">
           {/* Brand column */}
-          <div className="md:col-span-5">
-            <Link href="/" className="inline-block">
-              <img
-                src="/Targetpulse-email verifier- logo.png"
-                alt="TargetPulse"
-                className="h-14 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-200"
-              />
+          <div className="md:col-span-5 space-y-4">
+            <Link href="/" className="inline-flex items-center" aria-label="Giggal.ai home">
+              <Wordmark className="text-2xl" />
             </Link>
-            <p className="mt-4 text-[13.5px] text-slate-400 max-w-sm leading-relaxed">
-              Email verification that keeps your campaigns landing in real inboxes —
-              including catch-all and accept-all domains other tools skip.
+            <p className="text-[13.5px] text-slate-500 max-w-sm leading-relaxed font-medium">
+              High-performance SMTP verification that keeps your campaigns landing in real
+              inboxes — including catch-all and accept-all domains other tools skip.
             </p>
 
             {/* Social icons */}
-            <div className="flex items-center gap-2 mt-5">
+            <div className="flex items-center gap-2 pt-1">
               {socials.map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
@@ -61,7 +58,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center hover:bg-white/10 hover:text-slate-200 transition-all duration-200"
+                  className="w-9 h-9 rounded-lg bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-indigo-50 hover:border-indigo-200 hover:text-indigo-600 transition-all duration-200"
                 >
                   <Icon className="w-4 h-4" />
                 </a>
@@ -71,13 +68,13 @@ export default function Footer() {
 
           {/* Product column */}
           <div className="md:col-span-4">
-            <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-slate-300 mb-4">Product</p>
+            <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-slate-900 mb-4">Product</p>
             <ul className="space-y-2.5">
               {productLinks.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="inline-flex items-center gap-1 text-[14px] text-slate-400 hover:text-white transition-colors duration-200"
+                    className="inline-flex items-center gap-1 text-[14px] font-medium text-slate-500 hover:text-indigo-600 transition-colors duration-200"
                   >
                     {link.name}
                     {link.external && <ArrowUpRight className="w-3 h-3 opacity-60" />}
@@ -87,43 +84,50 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Company column */}
-          <div className="md:col-span-3">
-            <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-slate-300 mb-4">Company</p>
-            <ul className="space-y-2.5">
-              {companyLinks.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    href={link.href}
-                    className="text-[14px] text-slate-400 hover:text-white transition-colors duration-200"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          {/* Company + Legal column */}
+          <div className="md:col-span-3 grid grid-cols-2 md:grid-cols-1 gap-8 md:gap-6">
+            <div>
+              <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-slate-900 mb-4">Company</p>
+              <ul className="space-y-2.5">
+                {companyLinks.map((link) => (
+                  <li key={link.name}>
+                    <Link
+                      href={link.href}
+                      className="text-[14px] font-medium text-slate-500 hover:text-indigo-600 transition-colors duration-200"
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-slate-900 mb-4">Legal</p>
+              <ul className="space-y-2.5">
+                {legalLinks.map((link) => (
+                  <li key={link.name}>
+                    <Link
+                      href={link.href}
+                      className="text-[14px] font-medium text-slate-500 hover:text-indigo-600 transition-colors duration-200"
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
 
-        {/* Divider */}
-        <div className="w-full h-px bg-white/10" />
-
-        {/* Bottom row: copyright + secondary legal nav */}
-        <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-4 mt-6">
-          <p className="text-[12px] text-slate-500">
-            © {currentYear} TargetPulse. All rights reserved.
+        {/* Divider + copyright */}
+        <div className="pt-8 border-t border-slate-100 text-center">
+          <p className="text-[12px] font-medium text-slate-500">
+            © {currentYear}{' '}
+            <span className="font-bold text-slate-800">
+              Gig<span className="brand-wordmark-accent">gal.ai</span>
+            </span>
+            . All rights reserved.
           </p>
-          <nav className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
-            {legalLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className="text-[12px] text-slate-500 hover:text-slate-300 transition-colors duration-200"
-              >
-                {link.name}
-              </Link>
-            ))}
-          </nav>
         </div>
       </div>
     </footer>

@@ -1,20 +1,20 @@
 {
-  "name": "TargetPulse - Email Verification Tool",
-  "short_name": "TargetPulse",
+  "name": "Giggal.ai - Email Verification Tool",
+  "short_name": "Giggal.ai",
   "description": "Verify and clean email lists in bulk. Improve deliverability, reduce bounce rates, and protect your sender reputation.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#295C51",
+  "theme_color": "#4f46e5",
   "icons": [
     {
-      "src": "/Targetpulse-email verifier- logo.png",
+      "src": "/giggal-logo.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/Targetpulse logo - minimal.png",
+      "src": "/giggal-logo.png",
       "sizes": "512x512",
       "type": "image/png"
     }

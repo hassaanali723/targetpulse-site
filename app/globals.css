@@ -42,12 +42,51 @@
     background-size: 28px 28px;
   }
 
-  /* Gradient text */
+  /* Gradient text — Giggal Steel Indigo → Cyber Emerald */
   .gradient-text {
-    background: linear-gradient(135deg, #295C51 0%, #E9BB71 100%);
+    background: linear-gradient(135deg, #4f46e5 0%, #059669 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+  }
+
+  /* Giggal.ai brand wordmark: "gal.ai" gets the indigo→emerald gradient */
+  .brand-wordmark-accent {
+    background: linear-gradient(to right, #4f46e5, #10b981);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* Ambient 40px grid backdrop for the landing page */
+  .grid-lines {
+    background-size: 40px 40px;
+    background-image:
+      linear-gradient(to right, rgba(79, 70, 229, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(79, 70, 229, 0.03) 1px, transparent 1px);
+  }
+
+  /* Soft indigo glow used on hero widget + console + pricing */
+  .glow-recommendation {
+    box-shadow: 0 25px 60px -15px rgba(79, 70, 229, 0.12), 0 4px 20px -5px rgba(5, 150, 105, 0.04);
+  }
+
+  /* Crisp low-lift card shadow */
+  .card-vivid-shadow {
+    box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(15, 23, 42, 0.04);
+  }
+
+  /* Gradient border wrapper (hero showcase card) */
+  .gradient-border {
+    position: relative;
+    border-radius: 1.5rem;
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.25), rgba(5, 150, 105, 0.15));
+    padding: 1.5px;
+  }
+  .gradient-border-content {
+    background: #ffffff;
+    border-radius: calc(1.5rem - 1.5px);
   }
 
   /* Glassmorphism */
@@ -92,12 +131,12 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #295C51;
+  background: #4f46e5;
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #244d44;
+  background: #4338ca;
 }
 
 /* Keyframes */
