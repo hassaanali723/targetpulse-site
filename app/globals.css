@@ -194,3 +194,14 @@
 @media (prefers-reduced-motion: reduce) {
   .marquee-track { animation: none; }
 }
+
+/* Rebrand announcement bar — a 40px fixed strip above the navbar on the
+   landing page. Offsets are keyed on `.has-ann` (set on <main>), so when
+   AnnouncementBar dismisses itself it removes the class and everything
+   reverts. */
+.has-ann header { top: 2.5rem; }              /* navbar drops below the 40px bar */
+.has-ann > section:first-of-type { padding-top: 9rem; }  /* hero clears bar + navbar */
+.has-ann .top-20 { top: 7.5rem; }             /* mobile menu panel drops too */
+@media (min-width: 768px) {
+  .has-ann > section:first-of-type { padding-top: 10rem; }
+}

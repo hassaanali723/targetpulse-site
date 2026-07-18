@@ -53,7 +53,7 @@ function interleaveByPlatform(reviews: Review[]): Review[] {
     g.push(r)
     groups.set(r.source, g)
   }
-  const entries = [...groups.entries()].map(([, items]) => ({ items, i: 0 }))
+  const entries = Array.from(groups.values(), (items) => ({ items, i: 0 }))
   const out: Review[] = []
   for (let n = 0; n < reviews.length; n++) {
     // Pick the platform whose next item's ideal fractional position is smallest.

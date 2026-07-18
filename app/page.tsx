@@ -5,6 +5,7 @@ import {
   BookOpen, AlertTriangle, CheckCircle2, Plus,
 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
+import AnnouncementBar from '@/components/AnnouncementBar'
 import Footer from '@/components/Footer'
 import Wordmark from '@/components/Wordmark'
 import VerifierConsole from '@/components/landing/VerifierConsole'
@@ -100,11 +101,13 @@ const integrations = [
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen bg-slate-50 grid-lines overflow-x-hidden text-slate-800 antialiased">
+    <main className="has-ann relative min-h-screen bg-slate-50 grid-lines overflow-x-hidden text-slate-800 antialiased">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
+
+      <AnnouncementBar />
 
       {/* Ambient light effects */}
       <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-indigo-500/10 blur-[120px] -z-10 pointer-events-none" />
