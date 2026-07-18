@@ -2,26 +2,40 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import {
-  Mail, Play, Loader2, CircleDashed, CheckCircle2, XCircle, AlertTriangle, Terminal,
+  Mail, Play, Loader2, CircleDashed, CheckCircle2, XCircle, AlertTriangle, HelpCircle, Terminal,
 } from 'lucide-react'
 
-type CheckStatus = 'idle' | 'running' | 'ok' | 'warn' | 'error'
-type ResultType = 'deliverable' | 'catchall' | 'undeliverable'
-interface LogLine { text: string; className: string }
-interface ResultState { type: ResultType; title: string; desc: string }
+type CheckStatus = 'idle' | 'running' | 'ok' | 'warn' | 'error' | 'skip'
+type VerdictType = 'deliverable' | 'catchall' | 'risky' | 'undeliverable' | 'unknown' | 'error'
+type LogLevel = 'info' | 'success' | 'warn' | 'error'
 
-const CHECK_ORDER = ['basic', 'bypass', 'catchall', 'existence'] as const
+interface LogLine { text: string; className: string }
+interface ResultState { type: VerdictType; title: string; desc: string; score?: number }
+
+// Shape returned by the /api/verify route (built from the real validation result)
+interface ApiLog { step: string; text: string; level: LogLevel }
+interface ApiResult {
+  email: string
+  domain: string
+  steps: Record<string, CheckStatus>
+  logs: ApiLog[]
+  verdict: { type: VerdictType; title: string; desc: string; score: number }
+  meta?: { provider: string | null; mxRecord: string | null; disposable: boolean; role: boolean; freeEmail: boolean }
+  error?: string
+}
+
+const CHECK_ORDER = ['basic', 'dns', 'catchall', 'mailbox'] as const
 type CheckKey = (typeof CHECK_ORDER)[number]
 
 const CHECK_LABELS: Record<CheckKey, string> = {
   basic: 'Basic validation checks',
-  bypass: 'Bypassing SEG gateways',
+  dns: 'Locating mail servers',
   catchall: 'Validating catch-all',
-  existence: 'Mailbox Existence Check',
+  mailbox: 'Mailbox existence check',
 }
 
 const INITIAL_CHECKS: Record<CheckKey, CheckStatus> = {
-  basic: 'idle', bypass: 'idle', catchall: 'idle', existence: 'idle',
+  basic: 'idle', dns: 'idle', catchall: 'idle', mailbox: 'idle',
 }
 
 const CHECK_COLOR: Record<CheckStatus, string> = {
@@ -30,6 +44,14 @@ const CHECK_COLOR: Record<CheckStatus, string> = {
   ok: 'text-emerald-400',
   warn: 'text-amber-400',
   error: 'text-rose-400',
+  skip: 'text-slate-600',
+}
+
+const LOG_COLOR: Record<LogLevel, string> = {
+  info: 'text-slate-400',
+  success: 'text-emerald-400 font-bold',
+  warn: 'text-amber-400 font-bold',
+  error: 'text-rose-400 font-bold',
 }
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
@@ -45,37 +67,43 @@ function CheckIcon({ status }: { status: CheckStatus }) {
   }
 }
 
-const RESULT_STYLES: Record<ResultType, {
-  wrap: string; icon: string; heading: string; score: string; scoreBox: string; Icon: typeof CheckCircle2;
+const RESULT_STYLES: Record<VerdictType, {
+  wrap: string; icon: string; heading: string; scoreBox: string; Icon: typeof CheckCircle2;
 }> = {
   deliverable: {
     wrap: 'bg-emerald-950/40 border-emerald-900/60 text-emerald-400 shadow-lg shadow-emerald-950/20',
-    icon: 'text-emerald-400',
-    heading: 'text-emerald-400',
-    score: 'Deliverability Score: 100% (Guaranteed Safe)',
-    scoreBox: 'text-emerald-500 bg-emerald-950/40 border-emerald-900/50',
-    Icon: CheckCircle2,
+    icon: 'text-emerald-400', heading: 'text-emerald-400',
+    scoreBox: 'text-emerald-500 bg-emerald-950/40 border-emerald-900/50', Icon: CheckCircle2,
   },
   catchall: {
     wrap: 'bg-amber-950/40 border-amber-900/60 text-amber-400 shadow-lg shadow-amber-950/20',
-    icon: 'text-amber-400',
-    heading: 'text-amber-400',
-    score: 'Deliverability Score: 85% Heuristic (Safe)',
-    scoreBox: 'text-amber-500 bg-amber-950/40 border-amber-900/50',
-    Icon: AlertTriangle,
+    icon: 'text-amber-400', heading: 'text-amber-400',
+    scoreBox: 'text-amber-500 bg-amber-950/40 border-amber-900/50', Icon: AlertTriangle,
+  },
+  risky: {
+    wrap: 'bg-amber-950/40 border-amber-900/60 text-amber-400 shadow-lg shadow-amber-950/20',
+    icon: 'text-amber-400', heading: 'text-amber-400',
+    scoreBox: 'text-amber-500 bg-amber-950/40 border-amber-900/50', Icon: AlertTriangle,
   },
   undeliverable: {
     wrap: 'bg-rose-950/40 border-rose-900/60 text-rose-400 shadow-lg shadow-rose-950/20',
-    icon: 'text-rose-400',
-    heading: 'text-rose-400',
-    score: 'Deliverability Score: 0% (Will Bounce)',
-    scoreBox: 'text-rose-500 bg-rose-950/40 border-rose-900/50',
-    Icon: XCircle,
+    icon: 'text-rose-400', heading: 'text-rose-400',
+    scoreBox: 'text-rose-500 bg-rose-950/40 border-rose-900/50', Icon: XCircle,
+  },
+  unknown: {
+    wrap: 'bg-slate-800/60 border-slate-700 text-slate-300 shadow-lg shadow-slate-950/20',
+    icon: 'text-slate-300', heading: 'text-slate-200',
+    scoreBox: 'text-slate-400 bg-slate-800/60 border-slate-700', Icon: HelpCircle,
+  },
+  error: {
+    wrap: 'bg-rose-950/40 border-rose-900/60 text-rose-400 shadow-lg shadow-rose-950/20',
+    icon: 'text-rose-400', heading: 'text-rose-300',
+    scoreBox: 'text-rose-500 bg-rose-950/40 border-rose-900/50', Icon: AlertTriangle,
   },
 }
 
 export default function VerifierConsole() {
-  const [email, setEmail] = useState('hr@stripe.com')
+  const [email, setEmail] = useState('info@giggal.ai')
   const [running, setRunning] = useState(false)
   const [started, setStarted] = useState(false)
   const [logs, setLogs] = useState<LogLine[]>([])
@@ -84,16 +112,12 @@ export default function VerifierConsole() {
   const runIdRef = useRef(0)
   const logScrollRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    // Cancel any in-flight run when the component unmounts
-    return () => { runIdRef.current++ }
-  }, [])
-
+  useEffect(() => () => { runIdRef.current++ }, [])
   useEffect(() => {
     if (logScrollRef.current) logScrollRef.current.scrollTop = logScrollRef.current.scrollHeight
   }, [logs])
 
-  async function runSimulation() {
+  async function runProbe() {
     const value = email.trim()
     if (!value || running) return
 
@@ -106,81 +130,69 @@ export default function VerifierConsole() {
     setChecks(INITIAL_CHECKS)
     setLogs([])
 
-    const appendLog = async (text: string, className = 'text-slate-400') => {
-      setLogs((prev) => [...prev, { text, className }])
-      await sleep(850)
-    }
-    const setCheck = (key: CheckKey, status: CheckStatus) =>
-      setChecks((prev) => ({ ...prev, [key]: status }))
+    const appendLog = (text: string, level: LogLevel) =>
+      setLogs((prev) => [...prev, { text, className: LOG_COLOR[level] }])
+    const setCheck = (key: string, status: CheckStatus) =>
+      setChecks((prev) => (key in prev ? { ...prev, [key]: status } : prev))
 
-    const finishResult = async (title: string, desc: string, type: ResultType) => {
-      await sleep(1000)
-      if (!alive()) return
-      setLogs([])
-      setResult({ type, title, desc })
-    }
-
-    const lower = value.toLowerCase()
-    let classification: ResultType = 'deliverable'
-    if (lower.includes('stripe')) classification = 'catchall'
-    else if (lower.includes('nonexistent') || lower.includes('fake-user')) classification = 'undeliverable'
-
-    const domain = (value.split('@')[1] || 'domain.com').toUpperCase()
-    const isNonexistent = lower.includes('nonexistent')
-
-    // Step 1 — Basic validation
+    // Kick off the real probe. Show the first step as active while we wait.
     setCheck('basic', 'running')
-    await appendLog('[BASIC] Starting spelling formats and domain structure checks...'); if (!alive()) return
-    await appendLog('[SUCCESS] Basic validation passed. Format is valid.', 'text-emerald-400 font-bold'); if (!alive()) return
-    setCheck('basic', 'ok')
+    appendLog('[INIT] Opening secure verification socket...', 'info')
 
-    // Step 2 — Bypass SEG gateways
-    setCheck('bypass', 'running')
-    await appendLog(`[DNS] Finding active mail servers for [${domain}]...`); if (!alive()) return
-
-    if (isNonexistent) {
-      await appendLog(`[ERROR] No active mail servers found. Domain [${domain}] does not exist.`, 'text-rose-400 font-bold'); if (!alive()) return
-      setCheck('bypass', 'error'); setCheck('catchall', 'error'); setCheck('existence', 'error')
-      await finishResult('Undeliverable', 'Server DNS resolution failed. Domain does not exist.', 'undeliverable')
-    } else {
-      await appendLog('[GATEWAY] Scanning for active secure email filters (SEG)...'); if (!alive()) return
-      await appendLog('[SUCCESS] Bypassed filters safely. Secure SMTP channel active.', 'text-emerald-400 font-bold'); if (!alive()) return
-      setCheck('bypass', 'ok')
-
-      // Step 3 — Validate catch-all
-      setCheck('catchall', 'running')
-      await appendLog('[CATCH-ALL] Querying target server global inbox configuration...'); if (!alive()) return
-
-      if (classification === 'catchall') {
-        await appendLog('[WARNING] Target server automatically accepts all messages (Catch-All).', 'text-amber-400 font-bold'); if (!alive()) return
-        await appendLog('[HEURISTICS] Deploying multi-ping response timing checks...', 'text-indigo-400 font-bold'); if (!alive()) return
-        await appendLog('[SUCCESS] Heuristics parsed successfully: Recipient exists.', 'text-emerald-400 font-bold'); if (!alive()) return
-        setCheck('catchall', 'warn')
-      } else {
-        await appendLog('[INFO] Standard non-catch-all routing configuration verified.'); if (!alive()) return
-        setCheck('catchall', 'ok')
+    let data: ApiResult | null = null
+    let errorMsg = ''
+    try {
+      const res = await fetch('/api/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: value }),
+      })
+      data = await res.json().catch(() => null)
+      if (!res.ok || !data || data.error) {
+        errorMsg = data?.error || 'Verification failed. Please try again.'
+        data = null
       }
-
-      // Step 4 — Mailbox existence
-      setCheck('existence', 'running')
-      await appendLog('[SMTP] Querying recipient socket deliverability state...'); if (!alive()) return
-
-      if (classification === 'catchall') {
-        await appendLog('[SUCCESS] Recipient confirmed ACTIVE and 100% safe to outreach.', 'text-emerald-400 font-bold'); if (!alive()) return
-        setCheck('existence', 'ok')
-        await finishResult('Risky (Catch-All)', 'Mailbox is active but under a corporate catch-all setting.', 'catchall')
-      } else if (classification === 'undeliverable') {
-        await appendLog('[FAILED] Server explicitly rejected recipient: Recipient unknown.', 'text-rose-400 font-bold'); if (!alive()) return
-        setCheck('existence', 'error')
-        await finishResult('Undeliverable', 'Mailbox does not exist. Sending here will bounce.', 'undeliverable')
-      } else {
-        await appendLog('[SUCCESS] Server accepted recipient: Inbox is active and ready.', 'text-emerald-400 font-bold'); if (!alive()) return
-        setCheck('existence', 'ok')
-        await finishResult('Deliverable', 'SMTP validation passed. The mailbox is fully active.', 'deliverable')
-      }
+    } catch {
+      errorMsg = 'Could not reach the verification service.'
     }
 
-    if (alive()) setRunning(false)
+    if (!alive()) return
+
+    if (!data) {
+      setLogs([])
+      setChecks(INITIAL_CHECKS)
+      setResult({ type: 'error', title: 'Verification Error', desc: errorMsg })
+      setRunning(false)
+      return
+    }
+
+    // Reset the primed "running" state; drive everything from the real payload.
+    setChecks(INITIAL_CHECKS)
+    setLogs([])
+    await sleep(200)
+
+    let current: string | null = null
+    for (const line of data.logs) {
+      if (!alive()) return
+      if (line.step !== current) {
+        if (current) setCheck(current, data.steps[current] ?? 'ok')
+        current = line.step
+        setCheck(current, 'running')
+      }
+      appendLog(line.text, line.level)
+      await sleep(700)
+    }
+    if (!alive()) return
+    // Finalize every step from the authoritative statuses.
+    for (const key of CHECK_ORDER) {
+      if (data.steps[key]) setCheck(key, data.steps[key])
+    }
+
+    await sleep(850)
+    if (!alive()) return
+    setLogs([])
+    setResult({ ...data.verdict })
+    setRunning(false)
   }
 
   const canRun = email.trim().length > 0 && !running
@@ -195,7 +207,7 @@ export default function VerifierConsole() {
           <span className="w-3 h-3 rounded-full bg-emerald-500/80 inline-block" />
         </div>
         <span className="text-[10px] sm:text-xs font-mono font-bold text-slate-500 uppercase tracking-widest">Real Time Tester</span>
-        <div className="text-[10px] bg-slate-800 px-2 py-0.5 rounded font-mono text-emerald-400 font-bold shrink-0">Active Pool</div>
+        <div className="text-[10px] bg-slate-800 px-2 py-0.5 rounded font-mono text-emerald-400 font-bold shrink-0">Live Probe</div>
       </div>
 
       {/* Split layout */}
@@ -214,7 +226,7 @@ export default function VerifierConsole() {
                 type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                onKeyDown={(e) => { if (e.key === 'Enter') runSimulation() }}
+                onKeyDown={(e) => { if (e.key === 'Enter') runProbe() }}
                 placeholder="Email address to verify..."
                 aria-label="Email address to verify"
                 className="w-full h-11 pl-10 pr-4 bg-slate-950 border border-slate-800 rounded-xl focus:border-indigo-500 focus:outline-none text-xs font-mono text-slate-100 font-bold"
@@ -222,7 +234,7 @@ export default function VerifierConsole() {
               <Mail className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
             </div>
             <button
-              onClick={runSimulation}
+              onClick={runProbe}
               disabled={!canRun}
               className={`w-full h-11 bg-indigo-600 text-xs font-black rounded-xl text-white transition-all flex items-center justify-center gap-1.5 shadow-md shadow-indigo-600/10 ${
                 canRun ? 'hover:bg-indigo-500 active:bg-indigo-700' : 'opacity-50 cursor-not-allowed'
@@ -258,7 +270,7 @@ export default function VerifierConsole() {
                 <Terminal className="w-6 h-6 animate-pulse text-indigo-400" />
                 <p className="font-bold text-slate-400">Ready to trace handshakes</p>
                 <p className="text-[10px] max-w-xs leading-normal">
-                  Enter a corporate or consumer address in the console input to dump raw SMTP timing logs here.
+                  Enter a corporate or consumer address in the console input to run a live DNS + SMTP probe.
                 </p>
               </div>
             ) : (
@@ -295,6 +307,11 @@ export default function VerifierConsole() {
 function ResultCard({ result }: { result: ResultState }) {
   const s = RESULT_STYLES[result.type]
   const Icon = s.Icon
+  const showScore = typeof result.score === 'number' && result.type !== 'error'
+  const scoreLabel =
+    result.type === 'deliverable' ? `Deliverability Score: ${result.score}% (Safe)`
+      : result.type === 'undeliverable' ? `Deliverability Score: ${result.score}% (Will Bounce)`
+        : `Deliverability Score: ${result.score}%`
   return (
     <div className="h-full flex flex-col justify-center items-center text-center p-6 space-y-4 animate-slide-down">
       <div className={`w-14 h-14 rounded-2xl flex items-center justify-center border ${s.wrap}`}>
@@ -304,9 +321,11 @@ function ResultCard({ result }: { result: ResultState }) {
         <h4 className={`text-lg font-black tracking-tight leading-tight ${s.heading}`}>{result.title}</h4>
         <p className="text-xs text-slate-400 font-semibold leading-relaxed">{result.desc}</p>
       </div>
-      <div className={`text-[10px] font-mono px-3 py-1 rounded border ${s.scoreBox}`}>
-        {s.score}
-      </div>
+      {showScore && (
+        <div className={`text-[10px] font-mono px-3 py-1 rounded border ${s.scoreBox}`}>
+          {scoreLabel}
+        </div>
+      )}
     </div>
   )
 }

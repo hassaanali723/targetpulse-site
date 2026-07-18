@@ -57,14 +57,14 @@ export default function Navbar() {
             </nav>
 
             {/* Desktop CTA */}
-            <div className="hidden md:flex items-center space-x-3">
+            <div className="hidden md:flex items-center gap-6">
               <a
                 href={SIGNUP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm font-bold text-slate-600 hover:text-indigo-600 transition-colors"
               >
-                Sign in
+                Log in
               </a>
               <Link
                 href="/sign-up"
@@ -128,7 +128,7 @@ export default function Navbar() {
               onClick={() => setIsMobileMenuOpen(false)}
               className="flex items-center justify-center w-full py-3 text-slate-600 font-bold text-sm hover:text-indigo-600 transition-colors"
             >
-              Sign in
+              Log in
             </a>
           </div>
         </div>

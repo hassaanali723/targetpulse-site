@@ -2,12 +2,14 @@ import type { Metadata } from 'next'
 import React from 'react'
 import Link from 'next/link'
 import {
-  BookOpen, AlertTriangle, CheckCircle2, ShieldCheck, Zap, KeyRound, Plus, Star,
+  BookOpen, AlertTriangle, CheckCircle2, Plus,
 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import Wordmark from '@/components/Wordmark'
 import VerifierConsole from '@/components/landing/VerifierConsole'
+import ReviewBadges from '@/components/landing/ReviewBadges'
+import ReviewWall from '@/components/landing/ReviewWall'
 import PricingBlock from '@/components/landing/PricingBlock'
 import FaqAccordion, { type FaqItem } from '@/components/landing/FaqAccordion'
 
@@ -85,33 +87,6 @@ const faqJsonLd = {
     acceptedAnswer: { '@type': 'Answer', text: item.a },
   })),
 }
-
-const reviews = [
-  {
-    stars: 5,
-    title: '"Zero bounce rates"',
-    body: '"Integration was seamless. We reduced our newsletter bounce rates from 8% to under 0.5% in a single campaign run."',
-    name: 'Sarah Jenkins',
-    role: 'VP of Marketing, ClickFlow',
-    img: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&h=150&q=80',
-  },
-  {
-    stars: 4,
-    title: '"Outstanding speed"',
-    body: '"The SMTP verification speed is outstanding. Wish there were more Python examples, but the API itself is rock solid."',
-    name: 'David Chen',
-    role: 'Lead Developer, DevSend',
-    img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150&q=80',
-  },
-  {
-    stars: 5,
-    title: '"Catch-all validation"',
-    body: '"Excellent catch-all validation. Standard checkers kept bouncing corporate domains, but Giggal.ai validates them accurately."',
-    name: 'Elena Rostova',
-    role: 'Operations Director, ScaleOut',
-    img: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&h=150&q=80',
-  },
-]
 
 const integrations = [
   { name: 'Mailchimp', src: '/integrations/mailchimp.png' },
@@ -230,10 +205,10 @@ export default function Home() {
           </p>
         </div>
         <VerifierConsole />
-        <p className="text-xs text-slate-400 font-medium">
-          Try <span className="font-mono text-slate-500">hr@stripe.com</span> (catch-all) or an address with <span className="font-mono text-slate-500">nonexistent</span> in it to see every verdict.
-        </p>
       </section>
+
+      {/* Review-platform badges */}
+      <ReviewBadges />
 
       {/* Catch-all educational */}
       <section className="max-w-5xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-12">
@@ -277,65 +252,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Reviews */}
-      <section id="reviews" className="max-w-6xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-16">
-        <div className="text-center max-w-2xl mx-auto space-y-3">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Proven Impact, Validated by High-Growth Teams</h2>
-          <p className="text-sm md:text-base text-slate-600 font-medium">See how product and marketing teams use Giggal.ai to protect their domain health and keep lists clean.</p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {reviews.map((r) => (
-            <div key={r.name} className="bg-white border-2 border-slate-200 rounded-3xl p-6 shadow-sm hover:border-indigo-500 hover:-translate-y-1 transition-all flex flex-col justify-between space-y-5 card-vivid-shadow">
-              <div className="space-y-3">
-                <div className="flex space-x-1">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star
-                      key={i}
-                      className={`w-3.5 h-3.5 ${i < r.stars ? 'text-amber-500 fill-amber-500' : 'text-slate-300'}`}
-                    />
-                  ))}
-                </div>
-                <h4 className="text-slate-900 font-extrabold text-sm leading-tight">{r.title}</h4>
-                <p className="text-xs text-slate-600 leading-relaxed font-semibold">{r.body}</p>
-              </div>
-              <div className="flex items-center space-x-3.5 pt-4 border-t border-slate-100">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={r.img} className="w-11 h-11 rounded-full object-cover shrink-0" alt={`${r.name} portrait`} />
-                <div className="text-left leading-snug space-y-0.5">
-                  <span className="text-sm font-black text-slate-900 block">{r.name}</span>
-                  <span className="text-[11px] text-slate-500 font-bold block">{r.role}</span>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Value propositions */}
-      <section id="features" className="max-w-6xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200">
-        <div className="text-center max-w-3xl mx-auto mb-20 space-y-4">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Built for Uncompromising Delivery Growth</h2>
-          <p className="text-slate-600 leading-relaxed text-sm md:text-base font-medium">
-            Protect your sender reputation, maximize email outreach conversions, and scale confidently.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {[
-            { Icon: ShieldCheck, wrap: 'bg-emerald-50 border-emerald-100 text-emerald-600', hover: 'hover:border-emerald-500/40', title: '99.8% Accuracy Guarantee' },
-            { Icon: Zap, wrap: 'bg-indigo-50 border-indigo-100 text-indigo-600', hover: 'hover:border-indigo-500/40', title: 'Sub-Second Response Times' },
-            { Icon: KeyRound, wrap: 'bg-violet-50 border-violet-100 text-violet-600', hover: 'hover:border-violet-500/40', title: 'Smart Catch-All Resolution' },
-          ].map(({ Icon, wrap, hover, title }) => (
-            <div key={title} className={`bg-white border-2 border-slate-200 rounded-2xl p-5 ${hover} hover:shadow-md transition-all duration-300 card-vivid-shadow flex items-center space-x-4`}>
-              <div className={`w-12 h-12 rounded-xl border flex items-center justify-center shrink-0 ${wrap}`}>
-                <Icon className="w-6 h-6" />
-              </div>
-              <h3 className="text-base font-extrabold text-slate-900">{title}</h3>
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* Reviews — real Product Hunt testimonial wall */}
+      <ReviewWall />
 
       {/* Feature showcase */}
       <section id="features-showcase" className="max-w-6xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-16">

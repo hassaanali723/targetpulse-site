@@ -170,3 +170,27 @@
 /* Animation delay helpers */
 .animation-delay-2000 { animation-delay: 2s; }
 .animation-delay-4000 { animation-delay: 4s; }
+
+/* Reviews marquee — two rows, opposite directions, seamless infinite loop */
+.marquee-viewport {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 1.5rem;
+  animation: marquee-x 45s linear infinite;
+  will-change: transform;
+}
+.marquee-track.marquee-reverse { animation-direction: reverse; }
+/* Pause both rows when hovering either, so users can read / click */
+.marquee-viewport:hover .marquee-track { animation-play-state: paused; }
+@keyframes marquee-x {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}

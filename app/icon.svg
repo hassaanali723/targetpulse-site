@@ -1,0 +1,14 @@
+<svg width="512" height="512" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="giggal-g" x1="0.18" y1="0.05" x2="0.78" y2="0.96">
+      <stop offset="0" stop-color="#4b66ee"/>
+      <stop offset="0.55" stop-color="#2b8fd2"/>
+      <stop offset="1" stop-color="#15adc6"/>
+    </linearGradient>
+  </defs>
+  <g fill="url(#giggal-g)">
+    <path d="M749 340.5 A343 343 0 1 0 749 683.5 L627.8 613.5 A203 203 0 1 1 627.8 410.5 L749 340.5 Z"/>
+    <rect x="452" y="442" width="343" height="140" rx="12"/>
+  </g>
+  <circle cx="892" cy="762" r="92" fill="#20c58a"/>
+</svg>
