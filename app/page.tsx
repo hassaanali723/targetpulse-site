@@ -10,6 +10,7 @@ import Wordmark from '@/components/Wordmark'
 import VerifierConsole from '@/components/landing/VerifierConsole'
 import ReviewBadges from '@/components/landing/ReviewBadges'
 import ReviewWall from '@/components/landing/ReviewWall'
+import McpSection from '@/components/landing/McpSection'
 import PricingBlock from '@/components/landing/PricingBlock'
 import FaqAccordion, { type FaqItem } from '@/components/landing/FaqAccordion'
 
@@ -57,8 +58,8 @@ export const metadata: Metadata = {
 // Single source of truth for the FAQ — rendered visibly AND emitted as JSON-LD.
 const faqItems: FaqItem[] = [
   {
-    q: 'What is a catch-all email domain?',
-    a: 'A catch-all domain accepts all emails sent to it, regardless of whether the specific mailbox exists (e.g. corporate exchanges). Standard tools mark these as "Unknown". Giggal.ai uses timing algorithms and secondary diagnostics to verify whether the address actually maps to an active user profile.',
+    q: 'Do we verify Catch-all/Accept-all/Risky emails?',
+    a: 'Yes — Giggal.ai verifies catch-all, accept-all, and risky addresses and tells you which ones are actually deliverable, instead of leaving them as a guess.',
   },
   {
     q: 'How accurate is Giggal.ai validation?',
@@ -215,7 +216,7 @@ export default function Home() {
         <div className="text-center max-w-2xl mx-auto space-y-3">
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">What is a Catch-All/Accept-All?</h2>
           <p className="text-slate-600 text-sm font-medium">
-            Catch-all domains are configured by IT departments to accept all incoming emails—even for users that don&apos;t exist. Since standard tools can&apos;t tell if a real mailbox is behind them, they label them as &quot;unknown&quot; and force a blind gamble:
+            Catch-all domains are configured by IT departments to accept all incoming emails—even for users that don&apos;t exist. Since standard tools can&apos;t tell if a real mailbox is behind them, they label them as &quot;risky&quot; and force a blind gamble:
           </p>
         </div>
 
@@ -254,6 +255,9 @@ export default function Home() {
 
       {/* Reviews — real Product Hunt testimonial wall */}
       <ReviewWall />
+
+      {/* MCP — connect your favourite AI */}
+      <McpSection />
 
       {/* Feature showcase */}
       <section id="features-showcase" className="max-w-6xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-16">

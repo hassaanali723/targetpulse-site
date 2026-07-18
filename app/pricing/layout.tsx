@@ -33,7 +33,7 @@ const pricingSchema = {
   featureList: [
     'Bulk email verification',
     'Real-time email validation',
-    'Catch-all detection',
+    'Catch-all validation',
     'Pay-as-you-go pricing',
     'No credit expiration',
     'Free email verification trial',

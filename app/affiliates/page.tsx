@@ -97,11 +97,6 @@ export default function AffiliatesPage() {
       {/* ── HERO ─────────────────────────────────────────────────────── */}
       <section className="max-w-6xl mx-auto px-6 pt-28 md:pt-32 pb-16">
         <div className="max-w-3xl mx-auto text-center space-y-6">
-          <div className="inline-flex items-center gap-2 rounded-full border border-indigo-100 bg-indigo-50/80 px-4 py-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="text-[11px] font-black tracking-[0.16em] text-indigo-700 uppercase">Affiliate Program</span>
-          </div>
-
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 leading-[1.05]">
             Earn 20% recurring
             <span className="block bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent pb-2">
@@ -321,11 +316,6 @@ export default function AffiliatesPage() {
       {/* ── FINAL CTA ────────────────────────────────────────────────── */}
       <section className="max-w-6xl mx-auto px-6 pb-24">
         <div className="bg-indigo-600 rounded-3xl p-12 md:p-16 text-center text-white space-y-6 shadow-xl relative overflow-hidden">
-          <div className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/15 px-3 py-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-300 animate-pulse" />
-            <span className="text-[10px] font-black uppercase tracking-[0.18em] text-white/90">Start earning today</span>
-          </div>
-
           <h2 className="text-3xl md:text-4xl font-extrabold leading-tight tracking-tight text-white">
             Ready to turn referrals into recurring income?
           </h2>

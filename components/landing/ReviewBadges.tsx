@@ -37,7 +37,7 @@ export default function ReviewBadges() {
         {/* Trustpilot */}
         <a href={TRUSTPILOT_URL} target="_blank" rel="noopener noreferrer" className={badgeLink} aria-label="Read Giggal.ai reviews on Trustpilot">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/reviews/trustpilot.jpeg" alt="Giggal.ai reviews on Trustpilot" className="h-[68px] w-auto" />
+          <img src="/reviews/trustpilot.jpeg" alt="Giggal.ai reviews on Trustpilot" className="h-[92px] w-auto" />
         </a>
       </div>
     </section>

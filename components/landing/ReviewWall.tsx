@@ -4,6 +4,7 @@ import { Star } from 'lucide-react'
 const phUrl = (id: number) =>
   `https://www.producthunt.com/products/targetpulse/reviews?review=${id}&utm_source=badge-testimonial-wall&utm_medium=badge`
 const tpUrl = (id: string) => `https://uk.trustpilot.com/reviews/${id}`
+const G2_REVIEWS_URL = 'https://www.g2.com/products/targetpulse-email-verifier/reviews'
 
 type Source = 'producthunt' | 'g2' | 'trustpilot'
 const SOURCE_LABEL: Record<Source, string> = {
@@ -33,6 +34,13 @@ const ALL_REVIEWS: Review[] = [
   { source: 'trustpilot', name: 'Frank Robinson', avatar: 'https://user-images.trustpilot.com/66691191c485c06d5e1ebf8a/73x73.png', url: tpUrl('6a59b8b33b3380c138c4cfa5'), quote: "We just started using Targetpulse. So far, I can say we're very impressed. Seemingly accurate catch all detection and good accuracy when removing bad emails. So far, we've seen less than 2% bounce rate which is better than other Email solutions we've tried. Would recommend to give it a go." },
   { source: 'trustpilot', name: 'Carlos Smith', url: tpUrl('6a591c513798b207609ddcf6'), quote: 'I switched from Reoon to TargetPulse. I was able to drop my bounce rate from 4% to 1.5%. Very satisfied.' },
   { source: 'trustpilot', name: 'Connor Nicholson', url: tpUrl('6a567933d05d47524be965c8'), quote: "It has accurate catch-all email verification and that option is included in the general email verification. That's one of my favorite features." },
+  // ── G2 (verbatim from g2.com/products/targetpulse-email-verifier/reviews) ──
+  { source: 'g2', name: 'Ian G.', url: G2_REVIEWS_URL, quote: `Honestly, it's how it handles catch-all emails. Anyone doing cold outreach knows that catch-alls are the fastest way to ruin your domain reputation because most verifiers just give up and label them "risky" TargetPulse actually gives you a clear score on them so you know if you can safely send or not. Our hard bounces have dropped to basically nothing (well under 2%) since we started running our lists through it. It's just super accurate and doesn't miss the sneaky bad data that other tools skate over.` },
+  { source: 'g2', name: 'Jason F.', url: G2_REVIEWS_URL, quote: `I like the catch-all verification functionality the most. No other tool on the market can do catch-all validation, so this is the only one that can accurately verify catch-all emails, which increases my TAM size. It increased my valid emails percentage and got my bounce rate under 3%. I also like the clean UI. The pricing is lesser than competitor tools. The initial setup was very easy. I switched from NeverBounce mainly because of the catch-all validation, and now I use TargetPulse Email Verifier only for verifying my lists.` },
+  { source: 'g2', name: 'Madison R.', url: G2_REVIEWS_URL, quote: `Honestly, what I like best is how fast and accurate the verification results are. I upload my list, and within minutes I get a clear breakdown valid, invalid, catch-all, disposable so I'm not wasting time guessing which contacts are worth reaching out to.` },
+  { source: 'g2', name: 'Natalie W.', url: G2_REVIEWS_URL, quote: `Honestly it does what it says. that's the best part. I see many tools coming into this industry who make false claims and disappear from the market in a month. But it says it verifiers catch-all emails efficiently and it does!` },
+  { source: 'g2', name: 'Alexander H.', url: G2_REVIEWS_URL, quote: `What I like most is how simple and reliable it is. I can upload a list, get the results quickly, and know which addresses are safe to send to. It saves us time, helps keep our bounce rates low, and gives us more confidence before every campaign.` },
+  { source: 'g2', name: 'Jana S.', url: G2_REVIEWS_URL, quote: `I really value TargetPulse Email Verifier for its very affordable catch-all email validation and high accuracy. The support is 10/10 and the UI is clean, which makes it easier to navigate around, clean, and download the lead lists. The initial setup was very easy, and I appreciate how efficiently it integrates into our workflow.` },
 ]
 
 // Evenly interleave reviews across platforms (stride scheduling) so no single

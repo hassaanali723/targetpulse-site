@@ -90,13 +90,6 @@ export default function CatchAllVerificationPage() {
       <section className="max-w-6xl mx-auto px-6 pt-28 md:pt-32 pb-24 grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-12 lg:gap-16 items-center">
         {/* Left: Headline + copy */}
         <div className="min-w-0 space-y-6">
-          <div className="inline-flex items-center gap-2 rounded-full border border-indigo-100 bg-indigo-50/80 px-4 py-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="text-[11px] font-black tracking-[0.16em] text-indigo-700 uppercase">
-              Catch-All Verification
-            </span>
-          </div>
-
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900">
             Catch-All Email Verification with{' '}
             <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">
@@ -290,21 +283,21 @@ export default function CatchAllVerificationPage() {
             <div className="text-[15px] font-bold text-slate-700">48,028 emails verified</div>
 
             <div className="space-y-2">
-              <div className="flex items-center justify-between rounded-xl bg-emerald-50 border border-emerald-100 px-4 py-3">
+              <div className="flex items-center justify-between rounded-xl bg-slate-50 border border-slate-200 px-4 py-3">
                 <div className="flex items-center gap-2 text-emerald-700">
                   <CheckCircle2 className="w-4 h-4" />
                   <span className="text-[13px] font-bold">Deliverable</span>
                 </div>
                 <span className="text-lg font-black text-emerald-700">31,566</span>
               </div>
-              <div className="flex items-center justify-between rounded-xl bg-rose-50 border border-rose-100 px-4 py-3">
+              <div className="flex items-center justify-between rounded-xl bg-slate-50 border border-slate-200 px-4 py-3">
                 <div className="flex items-center gap-2 text-rose-700">
                   <AlertCircle className="w-4 h-4" />
                   <span className="text-[13px] font-bold">Undeliverable</span>
                 </div>
                 <span className="text-lg font-black text-rose-700">5,982</span>
               </div>
-              <div className="flex items-center justify-between rounded-xl bg-amber-50 border border-amber-100 px-4 py-3">
+              <div className="flex items-center justify-between rounded-xl bg-slate-50 border border-slate-200 px-4 py-3">
                 <div className="flex items-center gap-2 text-amber-700">
                   <AlertTriangle className="w-4 h-4" />
                   <span className="text-[13px] font-bold">Catch-all</span>
@@ -333,14 +326,14 @@ export default function CatchAllVerificationPage() {
             <div className="text-[15px] font-bold text-slate-700">48,028 emails verified</div>
 
             <div className="space-y-2">
-              <div className="flex items-center justify-between rounded-xl bg-emerald-50 border border-emerald-100 px-4 py-3">
+              <div className="flex items-center justify-between rounded-xl bg-slate-50 border border-slate-200 px-4 py-3">
                 <div className="flex items-center gap-2 text-emerald-700">
                   <CheckCircle2 className="w-4 h-4" />
                   <span className="text-[13px] font-bold">Valid</span>
                 </div>
                 <span className="text-lg font-black text-emerald-700">39,950</span>
               </div>
-              <div className="flex items-center justify-between rounded-xl bg-rose-50 border border-rose-100 px-4 py-3">
+              <div className="flex items-center justify-between rounded-xl bg-slate-50 border border-slate-200 px-4 py-3">
                 <div className="flex items-center gap-2 text-rose-700">
                   <AlertCircle className="w-4 h-4" />
                   <span className="text-[13px] font-bold">Invalid</span>
