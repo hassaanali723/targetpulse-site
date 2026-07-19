@@ -66,12 +66,14 @@ export default function Navbar() {
               >
                 Log in
               </a>
-              <Link
-                href="/sign-up"
+              <a
+                href={SIGNUP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-sm font-bold rounded-xl text-white shadow-md shadow-indigo-600/20 hover:-translate-y-0.5 transition-all"
               >
                 Sign up free
-              </Link>
+              </a>
             </div>
 
             {/* Mobile Menu Button */}
@@ -114,13 +116,15 @@ export default function Navbar() {
             ))}
           </div>
           <div className="px-6 pb-8 pt-3 border-t border-slate-100 space-y-3">
-            <Link
-              href="/sign-up"
+            <a
+              href={SIGNUP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setIsMobileMenuOpen(false)}
               className="flex items-center justify-center gap-2 w-full py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-2xl font-bold text-[15px] shadow-md shadow-indigo-600/20 transition-all duration-200"
             >
               Sign up free
-            </Link>
+            </a>
             <a
               href={SIGNUP_URL}
               target="_blank"

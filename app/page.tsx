@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import React from 'react'
-import Link from 'next/link'
 import {
   BookOpen, AlertTriangle, CheckCircle2, Plus,
 } from 'lucide-react'
@@ -14,6 +13,9 @@ import ReviewWall from '@/components/landing/ReviewWall'
 import McpSection from '@/components/landing/McpSection'
 import PricingBlock from '@/components/landing/PricingBlock'
 import FaqAccordion, { type FaqItem } from '@/components/landing/FaqAccordion'
+
+// All sign-up / get-started CTAs go straight to the Giggal email verifier dashboard.
+const SIGNUP_URL = 'https://emailverifier.giggal.ai/sign-up'
 
 export const metadata: Metadata = {
   title: {
@@ -134,12 +136,14 @@ export default function Home() {
           </div>
 
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-            <Link
-              href="/sign-up"
+            <a
+              href={SIGNUP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-8 py-3.5 bg-indigo-600 hover:bg-indigo-700 font-extrabold rounded-xl text-white shadow-md shadow-indigo-600/10 hover:-translate-y-0.5 transition-all text-center text-sm sm:w-auto"
             >
               Start Free
-            </Link>
+            </a>
             <a
               href="#pricing"
               className="px-8 py-3.5 bg-white border border-slate-300 hover:border-slate-800 hover:bg-slate-50 font-bold rounded-xl text-slate-700 hover:text-slate-950 transition-all text-center text-sm flex items-center justify-center gap-2 shadow-sm"
@@ -374,12 +378,14 @@ export default function Home() {
             Prune invalid subscribers, identify risky catch-alls, and secure your email reputation. Set up your account for free.
           </p>
           <div className="pt-4">
-            <Link
-              href="/sign-up"
+            <a
+              href={SIGNUP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-12 py-5 bg-white hover:bg-indigo-50 text-indigo-600 font-extrabold rounded-2xl text-base transition-all shadow-md inline-block hover:scale-[1.03] active:scale-95 duration-200"
             >
               Get Started For Free
-            </Link>
+            </a>
           </div>
         </div>
       </section>
