@@ -56,7 +56,7 @@ export default function EmailVerifierHero() {
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <a
-                  href="https://giggal.ai/"
+                  href="https://emailverifier.giggal.ai/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group px-8 py-4 bg-gradient-to-r from-primary-600 to-accent-600 text-white rounded-full text-lg font-bold hover:shadow-2xl transition-all duration-300 hover:scale-105 flex items-center justify-center space-x-2"

@@ -186,7 +186,7 @@ export default function HomeHeroWithVerification() {
                 <p className="text-sm font-semibold text-amber-800 mb-1">Free limit reached</p>
                 <p className="text-xs text-amber-700 mb-3">{rateLimitMsg}</p>
                 <a
-                  href="https://giggal.ai/sign-up"
+                  href="https://emailverifier.giggal.ai/sign-up"
                   className="inline-flex items-center gap-1.5 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-xl text-xs font-semibold transition-colors"
                 >
                   Sign up free — unlimited verification
