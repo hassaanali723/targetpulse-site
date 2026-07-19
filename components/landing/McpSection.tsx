@@ -1,7 +1,8 @@
 'use client'
 
 import React, { useState } from 'react'
-import { Check, Copy, Bot } from 'lucide-react'
+import Link from 'next/link'
+import { Check, Copy, Bot, ArrowRight } from 'lucide-react'
 
 const MCP_URL = 'https://mcp.giggal.ai/mcp'
 
@@ -37,8 +38,12 @@ const codexToml = `[mcp_servers.giggal]
 url = "${MCP_URL}"
 bearer_token_env_var = "GIGGAL_API_KEY"`
 
+// A connector step. `img` is a screenshot shown only on the dedicated /mcp page
+// (the landing-page section stays compact and links out instead).
+interface Step { text: React.ReactNode; img?: string; alt?: string }
+
 type Setup =
-  | { kind: 'connector'; subtitle: string; steps: React.ReactNode[] }
+  | { kind: 'connector'; subtitle: string; steps: Step[] }
   | { kind: 'command'; boxLabel: string; code: string; note?: React.ReactNode }
   | { kind: 'config'; boxLabel: string; files: string[]; code: string; note?: React.ReactNode }
 
@@ -51,12 +56,62 @@ const TOOLS: Tool[] = [
     id: 'claude', name: 'Claude',
     setup: {
       kind: 'connector',
-      subtitle: 'Add Giggal.ai as a custom connector in Claude — no config files needed.',
+      subtitle: 'Add Giggal.ai as a custom connector in Claude — no config files, no API key to paste.',
       steps: [
-        <>In Claude (web or desktop), open <span className="font-semibold text-slate-700">Settings → Connectors</span>.</>,
-        <>Click <span className="font-semibold text-slate-700">Add custom connector</span>.</>,
-        <>Name it <span className="font-mono text-slate-700">Giggal</span> and paste the MCP URL below.</>,
-        <>Click <span className="font-semibold text-slate-700">Add</span>, then authenticate with your Giggal.ai API key.</>,
+        {
+          text: <>In Claude (web or desktop), open <span className="font-semibold text-slate-700">Settings → Connectors</span>.</>,
+          img: '/mcp/claude/1-connectors.jpeg',
+          alt: 'Claude Settings with the Connectors tab open',
+        },
+        {
+          text: <>Click <span className="font-semibold text-slate-700">Add</span> → <span className="font-semibold text-slate-700">Add custom connector</span>.</>,
+          img: '/mcp/claude/2-add-custom-connector.jpeg',
+          alt: 'The Add menu open showing Add custom connector',
+        },
+        {
+          text: <>Name it <span className="font-mono text-slate-700">Giggal.ai</span>, paste the MCP URL below, then click <span className="font-semibold text-slate-700">Add</span>.</>,
+          img: '/mcp/claude/3-paste-url.jpeg',
+          alt: 'Add custom connector dialog with the Giggal.ai MCP URL filled in',
+        },
+        {
+          text: <>Open the <span className="font-semibold text-slate-700">Giggal.ai</span> connector and click <span className="font-semibold text-slate-700">Connect</span>.</>,
+          img: '/mcp/claude/4-connect.jpeg',
+          alt: 'Giggal.ai connector page with the Connect button',
+        },
+        {
+          text: <>Click <span className="font-semibold text-slate-700">Allow</span> to grant <span className="font-mono text-slate-700">verify:read</span> — verify addresses, check credits, and look up past verifications.</>,
+          img: '/mcp/claude/5-allow.jpeg',
+          alt: 'Giggal.ai authorization screen asking to allow Claude access',
+        },
+      ],
+    },
+  },
+  {
+    id: 'chatgpt', name: 'ChatGPT',
+    setup: {
+      kind: 'connector',
+      subtitle: 'Add Giggal.ai as a custom plugin in ChatGPT — connected over OAuth, no API key to paste.',
+      steps: [
+        {
+          text: <>In ChatGPT, open <span className="font-semibold text-slate-700">Plugins</span> from the sidebar, then click the <span className="font-semibold text-slate-700">+</span> in the top right.</>,
+          img: '/mcp/chatgpt/1-plugins.jpeg',
+          alt: 'ChatGPT Plugins page with the add button in the top right',
+        },
+        {
+          text: <>Name it <span className="font-mono text-slate-700">Giggal.ai</span>, set <span className="font-semibold text-slate-700">Server URL</span> to the MCP URL below, choose <span className="font-semibold text-slate-700">Authentication → OAuth</span>, tick the confirmation, then click <span className="font-semibold text-slate-700">Create</span>.</>,
+          img: '/mcp/chatgpt/2-new-plugin.jpeg',
+          alt: 'ChatGPT New Plugin dialog with the Giggal.ai MCP server URL and OAuth selected',
+        },
+        {
+          text: <>Open the <span className="font-semibold text-slate-700">Giggal.ai</span> plugin, click <span className="font-semibold text-slate-700">Connect</span>, then <span className="font-semibold text-slate-700">Sign in with Giggal.ai</span>.</>,
+          img: '/mcp/chatgpt/3-connect.jpeg',
+          alt: 'Add Giggal.ai to ChatGPT prompt with the Sign in with Giggal.ai button',
+        },
+        {
+          text: <>Click <span className="font-semibold text-slate-700">Allow</span> to grant <span className="font-mono text-slate-700">verify:read</span> — verify addresses, check credits, and look up past verifications.</>,
+          img: '/mcp/chatgpt/4-allow.jpeg',
+          alt: 'Giggal.ai authorization screen asking to allow ChatGPT access',
+        },
       ],
     },
   },
@@ -65,19 +120,6 @@ const TOOLS: Tool[] = [
     setup: {
       kind: 'command', boxLabel: 'Terminal', code: claudeCodeCmd,
       note: <>{REPLACE_KEY} Already have a <span className="font-mono text-slate-700">giggal</span> server? Run <span className="font-mono text-slate-700">claude mcp remove giggal --scope user</span> first, then re-add.</>,
-    },
-  },
-  {
-    id: 'chatgpt', name: 'ChatGPT',
-    setup: {
-      kind: 'connector',
-      subtitle: 'Add Giggal.ai as a connector in ChatGPT (Pro, Business, or Enterprise).',
-      steps: [
-        <>In ChatGPT, open <span className="font-semibold text-slate-700">Settings → Connectors</span>.</>,
-        <>Click <span className="font-semibold text-slate-700">Create</span> to add a new connector.</>,
-        <>Name it <span className="font-mono text-slate-700">Giggal</span> and paste the MCP URL below.</>,
-        <>Save, then enable <span className="font-mono text-slate-700">Giggal</span> from the <span className="font-semibold text-slate-700">+</span> tools menu in the composer.</>,
-      ],
     },
   },
   {
@@ -165,7 +207,14 @@ function CodeBox({ label, code }: { label: string; code: string }) {
   )
 }
 
-export default function McpSection() {
+interface McpSectionProps {
+  /** Show per-step screenshots. Used on the dedicated /mcp page only. */
+  showImages?: boolean
+  /** When set, renders a "full setup guide" link (landing page → /mcp). */
+  detailsHref?: string
+}
+
+export default function McpSection({ showImages = false, detailsHref }: McpSectionProps) {
   const [selected, setSelected] = useState('claude')
   const tool = TOOLS.find((t) => t.id === selected) ?? TOOLS[0]
   const s = tool.setup
@@ -215,11 +264,24 @@ export default function McpSection() {
         {s.kind === 'connector' ? (
           <div className="space-y-4">
             <p className="text-sm text-slate-600 font-medium">{s.subtitle}</p>
-            <ol className="space-y-2.5">
+            <ol className={showImages ? 'space-y-6' : 'space-y-2.5'}>
               {s.steps.map((step, i) => (
-                <li key={i} className="flex gap-3 text-sm text-slate-700 font-medium leading-relaxed">
-                  <span className="shrink-0 w-5 h-5 rounded-full bg-indigo-100 text-indigo-700 text-[11px] font-black flex items-center justify-center mt-0.5">{i + 1}</span>
-                  <span>{step}</span>
+                <li key={i} className="space-y-3">
+                  <div className="flex gap-3 text-sm text-slate-700 font-medium leading-relaxed">
+                    <span className="shrink-0 w-5 h-5 rounded-full bg-indigo-100 text-indigo-700 text-[11px] font-black flex items-center justify-center mt-0.5">{i + 1}</span>
+                    <span>{step.text}</span>
+                  </div>
+                  {showImages && step.img && (
+                    <div className="pl-8">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={step.img}
+                        alt={step.alt || ''}
+                        loading="lazy"
+                        className="w-full rounded-xl border-2 border-slate-200 bg-slate-50 shadow-sm"
+                      />
+                    </div>
+                  )}
                 </li>
               ))}
             </ol>
@@ -247,6 +309,19 @@ export default function McpSection() {
           Restart the client after adding, then just ask: <span className="text-slate-700">&ldquo;Is info@giggal.ai deliverable?&rdquo;</span>
         </div>
       </div>
+
+      {/* Landing page → full guide (with screenshots) on /mcp */}
+      {detailsHref && (
+        <div className="text-center">
+          <Link
+            href={detailsHref}
+            className="group inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-white border-2 border-slate-200 hover:border-indigo-500 font-bold rounded-xl text-slate-700 hover:text-indigo-700 transition-all text-sm card-vivid-shadow"
+          >
+            See the full setup guide
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+          </Link>
+        </div>
+      )}
     </section>
   )
 }

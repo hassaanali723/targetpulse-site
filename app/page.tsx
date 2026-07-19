@@ -263,8 +263,8 @@ export default function Home() {
       {/* Reviews — real Product Hunt testimonial wall */}
       <ReviewWall />
 
-      {/* MCP — connect your favourite AI */}
-      <McpSection />
+      {/* MCP — connect your favourite AI (compact; full guide lives on /mcp) */}
+      <McpSection detailsHref="/mcp" />
 
       {/* Feature showcase */}
       <section id="features-showcase" className="max-w-6xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-16">
