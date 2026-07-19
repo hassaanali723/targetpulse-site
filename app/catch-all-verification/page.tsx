@@ -12,7 +12,7 @@ import {
   Megaphone, MailCheck, Check, Target, ShieldCheck,
 } from 'lucide-react'
 
-const APP_URL = 'https://emailverifier.targetpulse.net/sign-up'
+const APP_URL = 'https://giggal.ai/sign-up'
 
 const signals = [
   {

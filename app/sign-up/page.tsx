@@ -5,7 +5,7 @@ import Footer from '@/components/Footer'
 import Wordmark from '@/components/Wordmark'
 import { ArrowRight, Check, Sparkles, Zap, Shield, Gauge } from 'lucide-react'
 
-const SIGNUP_URL = 'https://emailverifier.targetpulse.net/sign-up'
+const SIGNUP_URL = 'https://giggal.ai/sign-up'
 
 export const metadata: Metadata = {
   title: 'Sign Up Free, 1,000 Free Email Verification Credits',

@@ -322,7 +322,7 @@ export default function EmailDetailsModal({ open, onClose, emailDetails }: Props
             <p className="text-sm font-semibold text-slate-800 mb-1">Need to verify your full list?</p>
             <p className="text-xs text-slate-500 mb-4">Upload CSV files, verify in bulk, and get detailed reports — all in the app.</p>
             <a
-              href="https://emailverifier.targetpulse.net/sign-up"
+              href="https://giggal.ai/sign-up"
               className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-xl text-sm font-semibold hover:from-primary-700 hover:to-primary-800 hover:shadow-lg transition-all duration-200"
             >
               Start verifying for free

@@ -85,7 +85,7 @@ export default function HomePricingSection() {
               )}
 
               <a
-                href="https://emailverifier.targetpulse.net/sign-up"
+                href="https://giggal.ai/sign-up"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`Get started with ${formatCredits(pkg.credits)} credits for $${pkg.price.toFixed(pkg.price < 100 ? 2 : 0)}`}
@@ -165,7 +165,7 @@ export default function HomePricingSection() {
       {/* CTA */}
       <div className="text-center">
         <a
-          href="https://emailverifier.targetpulse.net/sign-up"
+          href="https://giggal.ai/sign-up"
           target="_blank"
           rel="noopener noreferrer"
           className="group inline-flex items-center gap-2 px-8 py-3.5 bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white rounded-xl font-bold text-[15px] transition-all duration-200 shadow-[0_4px_24px_rgba(41,92,81,0.25)] hover:shadow-[0_6px_28px_rgba(41,92,81,0.35)]"

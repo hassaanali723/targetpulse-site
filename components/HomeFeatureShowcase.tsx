@@ -102,7 +102,7 @@ export default function HomeFeatureShowcase() {
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-3">
               <a
-                href="https://emailverifier.targetpulse.net/"
+                href="https://giggal.ai/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-slate-900 hover:bg-primary-700 text-white rounded-xl font-semibold text-[15px] transition-colors duration-200"

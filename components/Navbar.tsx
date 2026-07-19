@@ -5,7 +5,7 @@ import { Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import Wordmark from '@/components/Wordmark'
 
-const SIGNUP_URL = 'https://emailverifier.targetpulse.net/sign-up'
+const SIGNUP_URL = 'https://giggal.ai/sign-up'
 
 const navLinks = [
   { name: 'Catch-all Verification', href: '/catch-all-verification' },
