@@ -9,7 +9,7 @@ import {
   MailCheck, Megaphone, BookOpen, Building2,
 } from 'lucide-react'
 
-const AFFILIATE_SIGNUP_URL = 'https://targetpulse.endorsely.com/'
+const AFFILIATE_SIGNUP_URL = 'https://giggal.endorsely.com/'
 
 const benefits = [
   { Icon: Repeat,         title: '20% recurring',     body: 'Earn on every payment your referrals make — month after month, year after year.' },
@@ -27,7 +27,7 @@ const steps = [
   {
     Icon: Megaphone,
     title: 'Share your link',
-    body: 'Promote TargetPulse on your blog, newsletter, social, YouTube, or directly with clients who need cleaner email lists.',
+    body: 'Promote Giggal.ai on your blog, newsletter, social, YouTube, or directly with clients who need cleaner email lists.',
   },
   {
     Icon: Wallet,
@@ -39,7 +39,7 @@ const steps = [
 const audience = [
   { Icon: MailCheck,  title: 'Email marketers',  body: 'Recommend the tool you already trust to clean lists before campaigns.' },
   { Icon: Building2,  title: 'Agencies',         body: 'Earn a recurring revenue stream from every client you onboard.' },
-  { Icon: BookOpen,   title: 'Course creators',  body: 'Bundle TargetPulse into your cold email or lead-gen course curriculum.' },
+  { Icon: BookOpen,   title: 'Course creators',  body: 'Bundle Giggal.ai into your cold email or lead-gen course curriculum.' },
   { Icon: Users,      title: 'SaaS communities', body: 'Share with your audience of marketers, founders, and growth pros.' },
 ]
 
@@ -69,7 +69,7 @@ const faqs = [
   },
   {
     q: 'Can I promote on YouTube, blogs, and paid ads?',
-    a: 'Yes to YouTube, blogs, newsletters, social media, and Reddit. Paid ads on our brand keywords (e.g. "TargetPulse") are not allowed — anything else is fair game.',
+    a: 'Yes to YouTube, blogs, newsletters, social media, and Reddit. Paid ads on our brand keywords (e.g. "Giggal.ai") are not allowed — anything else is fair game.',
   },
   {
     q: 'Do I need to be a customer to join?',
@@ -113,7 +113,7 @@ export default function AffiliatesPage() {
             </h1>
 
             <p className="text-lg text-slate-500 mb-8 leading-relaxed max-w-2xl mx-auto">
-              Share TargetPulse with your audience and earn a 20% commission on every payment your
+              Share Giggal.ai with your audience and earn a 20% commission on every payment your
               referrals make — for as long as they stay a customer. No caps, no expiry.
             </p>
 
@@ -284,7 +284,7 @@ export default function AffiliatesPage() {
               Built for people who care about deliverability
             </h2>
             <p className="text-[15px] text-slate-500">
-              If your audience sends email, you have an audience for TargetPulse.
+              If your audience sends email, you have an audience for Giggal.ai.
             </p>
           </div>
 

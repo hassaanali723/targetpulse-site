@@ -51,7 +51,7 @@ export default function HomeCatchAllSection() {
 
             <p className="text-[17px] text-slate-500 mb-4 leading-relaxed">
               Most email tools mark catch-all and accept-all domains as Unknown and stop there.
-              TargetPulse goes deeper, confirming the true existence of each mailbox, including
+              Giggal.ai goes deeper, confirming the true existence of each mailbox, including
               addresses protected by Secure Email Gateways.
             </p>
             <p className="text-[17px] text-slate-500 mb-10 leading-relaxed">
@@ -82,7 +82,7 @@ export default function HomeCatchAllSection() {
             </a>
           </div>
 
-          {/* ── Right: 2-card comparison (typical verifier vs TargetPulse) ── */}
+          {/* ── Right: 2-card comparison (typical verifier vs Giggal.ai) ── */}
           <div className="space-y-5">
             {/* Typical verifier card */}
             <div className="rounded-2xl border border-slate-200 bg-white p-5 md:p-6">
@@ -114,12 +114,12 @@ export default function HomeCatchAllSection() {
               </div>
             </div>
 
-            {/* TargetPulse card */}
+            {/* Giggal.ai card */}
             <div className="rounded-2xl border-2 border-primary-300/70 bg-gradient-to-br from-primary-50 via-white to-primary-50/30 p-5 md:p-6 shadow-[0_4px_28px_rgba(41,92,81,0.10)] relative">
               <div className="absolute -top-3 left-6">
                 <span className="inline-flex items-center gap-1 bg-gradient-to-r from-primary-600 to-primary-700 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-md">
                   <Sparkles className="w-2.5 h-2.5" />
-                  TARGETPULSE
+                  GIGGAL.AI
                 </span>
               </div>
 

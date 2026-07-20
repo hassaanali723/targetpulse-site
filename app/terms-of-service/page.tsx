@@ -3,8 +3,8 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
-  title: 'Terms of Service | TargetPulse',
-  description: 'Terms of Service and conditions for using TargetPulse email verification tool.',
+  title: 'Terms of Service | Giggal.ai',
+  description: 'Terms of Service and conditions for using Giggal.ai email verification tool.',
   alternates: {
     canonical: '/terms-of-service',
   },
@@ -37,15 +37,15 @@ export default function TermsOfServicePage() {
               
               <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">1. Acceptance of Terms</h2>
               <p className="text-slate-700 mb-4">
-                By accessing and using TargetPulse's services, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.
+                By accessing and using Giggal.ai's services, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.
               </p>
               <p className="text-slate-700 mb-4">
-                These Terms of Service govern your use of the TargetPulse Email Verifier service operated by <strong>Hassaan Ali Mehmood</strong>, doing business as <strong>TargetPulse</strong>.
+                These Terms of Service govern your use of the Giggal.ai Email Verifier service operated by <strong>Hassaan Ali Mehmood</strong>, doing business as <strong>Giggal.ai</strong>.
               </p>
 
               <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">2. Description of Service</h2>
               <p className="text-slate-700 mb-4">
-                TargetPulse Email Verifier is a cloud-based tool that helps teams clean and validate email lists. Users upload CSV files or individual emails, and we check deliverability, syntax, and mailbox status to reduce invalid addresses and improve list quality. The product is sold as a pay-as-you-go credit system, so customers only pay for the emails they actually validate.
+                Giggal.ai Email Verifier is a cloud-based tool that helps teams clean and validate email lists. Users upload CSV files or individual emails, and we check deliverability, syntax, and mailbox status to reduce invalid addresses and improve list quality. The product is sold as a pay-as-you-go credit system, so customers only pay for the emails they actually validate.
               </p>
               <p className="text-slate-700 mb-4">
                 The Service is provided to you subject to these Terms of Service and any additional terms and conditions that may apply.
@@ -179,7 +179,7 @@ export default function TermsOfServicePage() {
 
               <h2 id="cancellation-policy" className="text-2xl font-bold text-slate-900 mt-8 mb-4">7. Cancellation and Refunds</h2>
               <p className="text-slate-700 mb-4">
-                You may cancel your recurring subscription at any time through your account settings or by contacting our support team at info@targetpulse.net. Upon cancellation:
+                You may cancel your recurring subscription at any time through your account settings or by contacting our support team at info@giggal.ai. Upon cancellation:
               </p>
               <ul className="list-disc pl-6 mb-4 text-slate-700">
                 <li>Your subscription will not renew for the next billing cycle</li>
@@ -231,12 +231,12 @@ export default function TermsOfServicePage() {
                 <li>Other applicable anti-spam and data protection laws</li>
               </ul>
               <p className="text-slate-700 mb-4">
-                You must obtain any required consent and include legally required opt-out or preference controls where applicable. TargetPulse is not responsible for your use of verified email addresses.
+                You must obtain any required consent and include legally required opt-out or preference controls where applicable. Giggal.ai is not responsible for your use of verified email addresses.
               </p>
 
               <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">11. Intellectual Property</h2>
               <p className="text-slate-700 mb-4">
-                The Service and its original content, features, and functionality are owned by TargetPulse and are protected by international copyright, trademark, patent, trade secret, and other intellectual property laws. You may not copy, modify, distribute, sell, or lease any part of our services without prior written permission.
+                The Service and its original content, features, and functionality are owned by Giggal.ai and are protected by international copyright, trademark, patent, trade secret, and other intellectual property laws. You may not copy, modify, distribute, sell, or lease any part of our services without prior written permission.
               </p>
 
               <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">12. Data and Privacy</h2>
@@ -257,7 +257,7 @@ export default function TermsOfServicePage() {
 
               <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">14. Limitation of Liability</h2>
               <p className="text-slate-700 mb-4">
-                TO THE MAXIMUM EXTENT PERMITTED BY LAW, IN NO EVENT SHALL TARGETPULSE, ITS DIRECTORS, EMPLOYEES, PARTNERS, AGENTS, SUPPLIERS, OR AFFILIATES BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING WITHOUT LIMITATION, LOSS OF PROFITS, DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES, RESULTING FROM:
+                TO THE MAXIMUM EXTENT PERMITTED BY LAW, IN NO EVENT SHALL GIGGAL.AI, ITS DIRECTORS, EMPLOYEES, PARTNERS, AGENTS, SUPPLIERS, OR AFFILIATES BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING WITHOUT LIMITATION, LOSS OF PROFITS, DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES, RESULTING FROM:
               </p>
               <ul className="list-disc pl-6 mb-4 text-slate-700">
                 <li>Your access to or use of or inability to access or use the Service</li>
@@ -271,7 +271,7 @@ export default function TermsOfServicePage() {
 
               <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">15. Disclaimer of Warranties</h2>
               <p className="text-slate-700 mb-4">
-                THE SERVICE IS PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS WITHOUT ANY WARRANTIES OF ANY KIND, WHETHER EXPRESS OR IMPLIED. TARGETPULSE DISCLAIMS ALL WARRANTIES, INCLUDING BUT NOT LIMITED TO IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
+                THE SERVICE IS PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS WITHOUT ANY WARRANTIES OF ANY KIND, WHETHER EXPRESS OR IMPLIED. GIGGAL.AI DISCLAIMS ALL WARRANTIES, INCLUDING BUT NOT LIMITED TO IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
               </p>
               <p className="text-slate-700 mb-4">
                 WE DO NOT WARRANT THAT THE SERVICE WILL BE UNINTERRUPTED, TIMELY, SECURE, OR ERROR-FREE, OR THAT EMAIL VERIFICATION RESULTS WILL BE 100% ACCURATE.
@@ -279,7 +279,7 @@ export default function TermsOfServicePage() {
 
               <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">16. Indemnification</h2>
               <p className="text-slate-700 mb-4">
-                You agree to defend, indemnify, and hold harmless TargetPulse and its licensees and licensors from and against any claims, damages, obligations, losses, liabilities, costs, or debt, and expenses arising from your use of the Service or violation of these Terms.
+                You agree to defend, indemnify, and hold harmless Giggal.ai and its licensees and licensors from and against any claims, damages, obligations, losses, liabilities, costs, or debt, and expenses arising from your use of the Service or violation of these Terms.
               </p>
 
               <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">17. Termination</h2>
@@ -295,7 +295,7 @@ export default function TermsOfServicePage() {
 
               <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">18. Governing Law</h2>
               <p className="text-slate-700 mb-4">
-                These Terms shall be governed and construed in accordance with the laws of the jurisdiction in which TargetPulse operates, without regard to its conflict of law provisions.
+                These Terms shall be governed and construed in accordance with the laws of the jurisdiction in which Giggal.ai operates, without regard to its conflict of law provisions.
               </p>
 
               <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">19. Dispute Resolution</h2>
@@ -318,13 +318,13 @@ export default function TermsOfServicePage() {
                 If you have any questions about these Terms of Service, please contact us at:
               </p>
               <div className="bg-slate-50 rounded-lg p-6 mb-4">
-                <p className="text-slate-700 mb-2"><strong>Email:</strong> info@targetpulse.net</p>
-                <p className="text-slate-700 mb-2"><strong>Website:</strong> https://targetpulse.net</p>
+                <p className="text-slate-700 mb-2"><strong>Email:</strong> info@giggal.ai</p>
+                <p className="text-slate-700 mb-2"><strong>Website:</strong> https://giggal.ai</p>
               </div>
 
               <div className="mt-12 pt-8 border-t border-slate-200">
                 <p className="text-sm text-slate-600">
-                  By using TargetPulse's services, you acknowledge that you have read and understood these Terms of Service and agree to be bound by them.
+                  By using Giggal.ai's services, you acknowledge that you have read and understood these Terms of Service and agree to be bound by them.
                 </p>
               </div>
 

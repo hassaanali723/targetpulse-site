@@ -26,6 +26,15 @@
 }
 
 @layer utilities {
+  /* Giggal.ai wordmark accent — "gal.ai" in the indigo → emerald gradient */
+  .brand-wordmark-accent {
+    background: linear-gradient(to right, #4f46e5, #10b981);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
   .container-custom {
     width: 90vw;
     margin-left: auto;

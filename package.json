@@ -1,7 +1,7 @@
 {
-  "name": "targetpulse-site",
+  "name": "giggal-site",
   "version": "1.0.0",
-  "description": "TargetPulse - Email Verification and List Cleaning Tool",
+  "description": "Giggal.ai - Email Verification and List Cleaning Tool",
   "private": true,
   "scripts": {
     "dev": "next dev",

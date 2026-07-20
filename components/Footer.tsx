@@ -3,6 +3,7 @@
 import React from 'react'
 import { Linkedin, Youtube, Facebook, Instagram, ArrowUpRight } from 'lucide-react'
 import Link from 'next/link'
+import Wordmark from '@/components/Wordmark'
 
 const socials = [
   { icon: Linkedin, href: 'https://www.linkedin.com/company/target-pulse/', label: 'LinkedIn' },
@@ -40,12 +41,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 mb-10">
           {/* Brand column */}
           <div className="md:col-span-5">
-            <Link href="/" className="inline-block">
-              <img
-                src="/Targetpulse-email verifier- logo.png"
-                alt="TargetPulse"
-                className="h-14 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-200"
-              />
+            <Link href="/" className="inline-block" aria-label="Giggal.ai home">
+              <Wordmark className="text-3xl opacity-90 hover:opacity-100 transition-opacity duration-200" />
             </Link>
             <p className="mt-4 text-[13.5px] text-slate-400 max-w-sm leading-relaxed">
               Email verification that keeps your campaigns landing in real inboxes —
@@ -111,7 +108,7 @@ export default function Footer() {
         {/* Bottom row: copyright + secondary legal nav */}
         <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-4 mt-6">
           <p className="text-[12px] text-slate-500">
-            © {currentYear} TargetPulse. All rights reserved.
+            © {currentYear} Giggal.ai. All rights reserved.
           </p>
           <nav className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
             {legalLinks.map((link) => (

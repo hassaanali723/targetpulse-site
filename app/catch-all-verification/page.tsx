@@ -9,7 +9,7 @@ import {
   Megaphone, MailCheck, Check, Target, ShieldCheck,
 } from 'lucide-react'
 
-const APP_URL = 'https://emailverifier.targetpulse.net/sign-up'
+const APP_URL = 'https://emailverifier.giggal.ai/sign-up'
 
 const signals = [
   {
@@ -101,7 +101,7 @@ export default function CatchAllVerificationPage() {
               </h1>
 
               <p className="text-lg text-slate-500 mb-8 leading-relaxed">
-                Most verifiers stop at catch-all and accept-all domains. TargetPulse confirms the
+                Most verifiers stop at catch-all and accept-all domains. Giggal.ai confirms the
                 true existence of each mailbox, including addresses sitting behind Secure Email
                 Gateways like Mimecast and Proofpoint, with 99% accuracy.
               </p>
@@ -245,7 +245,7 @@ export default function CatchAllVerificationPage() {
           <div className="max-w-3xl mx-auto text-center mb-12">
             <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-primary-600 mb-3">How It Works</p>
             <h2 className="text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-slate-900 mb-4 leading-[1.1]">
-              How TargetPulse verifies catch-all emails
+              How Giggal.ai verifies catch-all emails
             </h2>
             <p className="text-[16px] text-slate-500 leading-relaxed">
               Every catch-all address goes through multiple layers of verification that combine
@@ -273,7 +273,7 @@ export default function CatchAllVerificationPage() {
         </div>
       </section>
 
-      {/* ── COMPARISON: OLD WAY vs TARGETPULSE ─────────────── */}
+      {/* ── COMPARISON: OLD WAY vs GIGGAL.AI ─────────────── */}
       <section className="py-16 md:py-20 bg-slate-50/60 border-y border-slate-100">
         <div className="container-custom">
           <div className="max-w-3xl mx-auto text-center mb-12">
@@ -282,7 +282,7 @@ export default function CatchAllVerificationPage() {
               From guesswork to clear verdicts
             </h2>
             <p className="text-[16px] text-slate-500 leading-relaxed">
-              See the difference between a typical verifier and TargetPulse on the same list of
+              See the difference between a typical verifier and Giggal.ai on the same list of
               48,000 emails.
             </p>
           </div>
@@ -323,12 +323,12 @@ export default function CatchAllVerificationPage() {
               </p>
             </div>
 
-            {/* TargetPulse card */}
+            {/* Giggal.ai card */}
             <div className="rounded-2xl border-2 border-primary-300/70 bg-gradient-to-br from-primary-50 via-white to-primary-50/30 p-6 shadow-[0_4px_28px_rgba(41,92,81,0.10)] relative">
               <div className="absolute -top-3 left-6">
                 <span className="inline-flex items-center gap-1 bg-gradient-to-r from-primary-600 to-primary-700 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-md">
                   <Sparkles className="w-2.5 h-2.5" />
-                  TARGETPULSE
+                  GIGGAL.AI
                 </span>
               </div>
 

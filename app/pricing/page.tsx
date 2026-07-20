@@ -207,7 +207,7 @@ export default function PricingPage() {
             {/* CTA */}
             <div className="text-center">
               <a
-                href="https://emailverifier.targetpulse.net/sign-up"
+                href="https://emailverifier.giggal.ai/sign-up"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-bold text-[15px] transition-colors duration-200 shadow-[0_4px_24px_rgba(41,92,81,0.25)]"
@@ -333,7 +333,7 @@ export default function PricingPage() {
                   No credit card required. Verify your first emails for free and see results in seconds.
                 </p>
                 <a
-                  href="https://emailverifier.targetpulse.net/sign-up"
+                  href="https://emailverifier.giggal.ai/sign-up"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary-700 rounded-xl font-bold text-[15px] hover:bg-slate-50 transition-colors duration-200 shadow-xl"

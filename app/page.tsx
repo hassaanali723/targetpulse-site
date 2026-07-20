@@ -9,7 +9,7 @@ import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
   title: {
-    absolute: 'TargetPulse - Free Email Verification for Catch-all Domains',
+    absolute: 'Giggal.ai - Free Email Verification for Catch-all Domains',
   },
   description:
     'Free email verifier built for catch-all and accept-all domains with 99% accuracy. Clean your list, cut bounces, and protect your sender reputation.',
@@ -39,15 +39,15 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   openGraph: {
-    title: 'TargetPulse - Free Email Verification for Catch-all Domains',
+    title: 'Giggal.ai - Free Email Verification for Catch-all Domains',
     description:
       'Free email verifier built for catch-all and accept-all domains with 99% accuracy. Clean your list, cut bounces, and protect your sender reputation.',
-    url: 'https://targetpulse.net',
+    url: 'https://giggal.ai',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'TargetPulse - Free Email Verification for Catch-all Domains',
+    title: 'Giggal.ai - Free Email Verification for Catch-all Domains',
     description:
       'Free email verifier built for catch-all and accept-all domains with 99% accuracy. Clean your list, cut bounces, and protect your sender reputation.',
   },
@@ -68,10 +68,10 @@ const faqJsonLd = {
     },
     {
       '@type': 'Question',
-      name: 'How accurate is TargetPulse email verification?',
+      name: 'How accurate is Giggal.ai email verification?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'TargetPulse uses multi-layer verification including syntax checks, DNS/MX record validation, and real-time SMTP verification to deliver industry-leading accuracy.',
+        text: 'Giggal.ai uses multi-layer verification including syntax checks, DNS/MX record validation, and real-time SMTP verification to deliver industry-leading accuracy.',
       },
     },
     {
@@ -79,7 +79,7 @@ const faqJsonLd = {
       name: 'Can I verify emails in bulk?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes! TargetPulse supports bulk email list verification. Simply upload your list and get a clean, verified list back with full results.',
+        text: 'Yes! Giggal.ai supports bulk email list verification. Simply upload your list and get a clean, verified list back with full results.',
       },
     },
     {
@@ -95,7 +95,7 @@ const faqJsonLd = {
       name: 'Is there a free trial?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes, TargetPulse offers a free trial so you can verify emails and experience the accuracy before committing to a paid plan.',
+        text: 'Yes, Giggal.ai offers a free trial so you can verify emails and experience the accuracy before committing to a paid plan.',
       },
     },
   ],

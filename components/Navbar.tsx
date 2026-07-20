@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import { Menu, X, ArrowUpRight } from 'lucide-react'
 import Link from 'next/link'
+import Wordmark from '@/components/Wordmark'
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -36,12 +37,13 @@ export default function Navbar() {
         <div className="container-custom">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <Link href="/" className="flex-shrink-0" onClick={() => setIsMobileMenuOpen(false)}>
-              <img
-                src="/Targetpulse-email verifier- logo.png"
-                alt="TargetPulse"
-                className="h-12 w-auto object-contain hover:opacity-80 transition-opacity duration-200"
-              />
+            <Link
+              href="/"
+              className="flex-shrink-0"
+              onClick={() => setIsMobileMenuOpen(false)}
+              aria-label="Giggal.ai home"
+            >
+              <Wordmark className="text-2xl sm:text-[1.75rem] hover:opacity-80 transition-opacity duration-200" />
             </Link>
 
             {/* Desktop Navigation */}

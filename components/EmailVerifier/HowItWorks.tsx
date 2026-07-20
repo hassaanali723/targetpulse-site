@@ -82,7 +82,7 @@ export default function EmailVerifierHowItWorks() {
         {/* Bottom CTA */}
         <div className="text-center mt-16">
           <a
-            href="https://emailverifier.targetpulse.net/"
+            href="https://emailverifier.giggal.ai/"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center space-x-2 px-10 py-5 bg-gradient-to-r from-primary-600 to-accent-600 text-white rounded-full text-lg font-bold hover:shadow-2xl transition-all duration-300 hover:scale-105"

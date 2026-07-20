@@ -1,14 +1,14 @@
-// Structured data schemas for TargetPulse Email Verification Tool
+// Structured data schemas for Giggal.ai Email Verification Tool
 // Used as supplemental schema; primary JSON-LD is injected in app/layout.tsx
 
-const baseUrl = 'https://targetpulse.net'
+const baseUrl = 'https://giggal.ai'
 
 export const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'TargetPulse',
+  name: 'Giggal.ai',
   url: baseUrl,
-  logo: `${baseUrl}/Targetpulse-email verifier- logo.png`,
+  logo: `${baseUrl}/giggal-logo.png`,
   description: 'Email verification and list cleaning tool. Validate emails in bulk or one-by-one to improve deliverability and protect sender reputation.',
   address: {
     '@type': 'PostalAddress',
@@ -21,7 +21,7 @@ export const organizationSchema = {
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'customer support',
-    email: 'info@targetpulse.net',
+    email: 'info@giggal.ai',
     availableLanguage: 'English',
   },
   sameAs: [

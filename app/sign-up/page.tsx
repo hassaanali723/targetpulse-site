@@ -4,18 +4,18 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import { ArrowRight, Check, Sparkles, Zap, Shield, Gauge } from 'lucide-react'
 
-const SIGNUP_URL = 'https://emailverifier.targetpulse.net/sign-up'
+const SIGNUP_URL = 'https://emailverifier.giggal.ai/sign-up'
 
 export const metadata: Metadata = {
   title: 'Sign Up Free, 1,000 Free Email Verification Credits',
-  description: 'Create your free TargetPulse account in seconds. Get 1,000 free verification credits, no credit card required. Verify catch-all and accept-all email domains with 99% accuracy.',
+  description: 'Create your free Giggal.ai account in seconds. Get 1,000 free verification credits, no credit card required. Verify catch-all and accept-all email domains with 99% accuracy.',
   alternates: {
     canonical: '/sign-up',
   },
   openGraph: {
-    title: 'Sign Up Free, TargetPulse Email Verifier',
+    title: 'Sign Up Free, Giggal.ai Email Verifier',
     description: 'Get 1,000 free verification credits to start. No credit card required. Verify catch-all and accept-all email domains with 99% accuracy.',
-    url: 'https://targetpulse.net/sign-up',
+    url: 'https://giggal.ai/sign-up',
     type: 'website',
   },
 }
@@ -57,7 +57,7 @@ export default function SignUpPage() {
             </h1>
 
             <p className="text-lg text-slate-500 mb-10 leading-relaxed max-w-2xl mx-auto">
-              Create your free TargetPulse account in under 30 seconds. Verify your first 1,000 emails on us —
+              Create your free Giggal.ai account in under 30 seconds. Verify your first 1,000 emails on us —
               including catch-all and accept-all domains other tools mark as "unknown."
             </p>
 

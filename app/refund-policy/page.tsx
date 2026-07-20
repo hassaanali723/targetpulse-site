@@ -3,8 +3,8 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
-  title: 'Refund Policy | TargetPulse',
-  description: 'Refund Policy for TargetPulse email verification tool.',
+  title: 'Refund Policy | Giggal.ai',
+  description: 'Refund Policy for Giggal.ai email verification tool.',
   alternates: {
     canonical: '/refund-policy',
   },
@@ -37,7 +37,7 @@ export default function RefundPolicyPage() {
               
               <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">1. Overview</h2>
               <p className="text-slate-700 mb-4">
-                At TargetPulse, we strive to provide exceptional email verification services. This Refund Policy outlines the circumstances under which refunds may be issued for our credit-based service.
+                At Giggal.ai, we strive to provide exceptional email verification services. This Refund Policy outlines the circumstances under which refunds may be issued for our credit-based service.
               </p>
               <p className="text-slate-700 mb-4">
                 We provide digital email verification services only and do not sell or ship physical goods.
@@ -45,7 +45,7 @@ export default function RefundPolicyPage() {
 
               <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">2. How Our Credit System Works</h2>
               <p className="text-slate-700 mb-4">
-                TargetPulse operates on a credit-based system for email verification:
+                Giggal.ai operates on a credit-based system for email verification:
               </p>
               <ul className="list-disc pl-6 mb-4 text-slate-700">
                 <li><strong>1 Credit = 1 Email Validation:</strong> Each email address verification consumes 1 credit from your account</li>
@@ -101,7 +101,7 @@ export default function RefundPolicyPage() {
                 <li>Any other exceptional circumstances</li>
               </ul>
               <p className="text-slate-700 mb-4">
-                Please contact our support team immediately at <strong>info@targetpulse.net</strong>. We will thoroughly review your case and may issue refunds or credit adjustments on a case-by-case basis at our discretion.
+                Please contact our support team immediately at <strong>info@giggal.ai</strong>. We will thoroughly review your case and may issue refunds or credit adjustments on a case-by-case basis at our discretion.
               </p>
 
               <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">6. Service Quality Issues</h2>
@@ -130,7 +130,7 @@ export default function RefundPolicyPage() {
                 To request a refund or report unusual activity, please contact our support team:
               </p>
               <div className="bg-slate-50 rounded-lg p-6 mb-4">
-                <p className="text-slate-700 mb-2"><strong>Email:</strong> info@targetpulse.net</p>
+                <p className="text-slate-700 mb-2"><strong>Email:</strong> info@giggal.ai</p>
                 <p className="text-slate-700 mb-2"><strong>Subject:</strong> Refund Request / Issue Report</p>
               </div>
               <p className="text-slate-700 mb-4">
@@ -191,8 +191,8 @@ export default function RefundPolicyPage() {
                 If you have any questions about this Refund Policy or need assistance, please contact us:
               </p>
               <div className="bg-slate-50 rounded-lg p-6 mb-4">
-                <p className="text-slate-700 mb-2"><strong>Email:</strong> info@targetpulse.net</p>
-                <p className="text-slate-700 mb-2"><strong>Website:</strong> https://targetpulse.net</p>
+                <p className="text-slate-700 mb-2"><strong>Email:</strong> info@giggal.ai</p>
+                <p className="text-slate-700 mb-2"><strong>Website:</strong> https://giggal.ai</p>
               </div>
               <p className="text-slate-700 mb-4">
                 Our support team is committed to addressing your concerns and finding fair solutions. We typically respond to all inquiries within 24-48 hours.
@@ -200,7 +200,7 @@ export default function RefundPolicyPage() {
 
               <div className="mt-12 pt-8 border-t border-slate-200">
                 <p className="text-sm text-slate-600">
-                  This Refund Policy is part of our Terms of Service. By using TargetPulse's services, you acknowledge that you have read and understood this policy.
+                  This Refund Policy is part of our Terms of Service. By using Giggal.ai's services, you acknowledge that you have read and understood this policy.
                 </p>
               </div>
 

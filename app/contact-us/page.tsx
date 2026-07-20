@@ -203,8 +203,8 @@ export default function TalkToHumanPage() {
                   </div>
                   <div>
                     <h4 className="font-bold text-lg mb-2">Email Us</h4>
-                    <p className="text-gray-600">info@targetpulse.net</p>
-                    <p className="text-gray-600">hassaan@targetpulse.net</p>
+                    <p className="text-gray-600">info@giggal.ai</p>
+                    <p className="text-gray-600">hassaan@giggal.ai</p>
                   </div>
                 </div>
               </div>

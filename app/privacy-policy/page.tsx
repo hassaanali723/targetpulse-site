@@ -3,8 +3,8 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | TargetPulse',
-  description: 'Privacy Policy for TargetPulse email verification tool.',
+  title: 'Privacy Policy | Giggal.ai',
+  description: 'Privacy Policy for Giggal.ai email verification tool.',
   alternates: {
     canonical: '/privacy-policy',
   },
@@ -37,7 +37,7 @@ export default function PrivacyPolicyPage() {
               
               <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">1. Introduction</h2>
               <p className="text-slate-700 mb-4">
-                TargetPulse ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our email verification services and website.
+                Giggal.ai ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our email verification services and website.
               </p>
 
               <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">2. Information We Collect</h2>
@@ -164,7 +164,7 @@ export default function PrivacyPolicyPage() {
                 <li><strong>Withdraw Consent:</strong> Withdraw consent where processing is based on consent</li>
               </ul>
               <p className="text-slate-700 mb-4">
-                To exercise these rights, please contact us at info@targetpulse.net.
+                To exercise these rights, please contact us at info@giggal.ai.
               </p>
 
               <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">9. Cookies and Tracking Technologies</h2>
@@ -209,13 +209,13 @@ export default function PrivacyPolicyPage() {
                 If you have any questions about this Privacy Policy, please contact us:
               </p>
               <div className="bg-slate-50 rounded-lg p-6 mb-4">
-                <p className="text-slate-700 mb-2"><strong>Email:</strong> info@targetpulse.net</p>
-                <p className="text-slate-700 mb-2"><strong>Website:</strong> https://targetpulse.net</p>
+                <p className="text-slate-700 mb-2"><strong>Email:</strong> info@giggal.ai</p>
+                <p className="text-slate-700 mb-2"><strong>Website:</strong> https://giggal.ai</p>
               </div>
 
               <div className="mt-12 pt-8 border-t border-slate-200">
                 <p className="text-sm text-slate-600">
-                  By using TargetPulse's services, you acknowledge that you have read and understood this Privacy Policy and agree to its terms.
+                  By using Giggal.ai's services, you acknowledge that you have read and understood this Privacy Policy and agree to its terms.
                 </p>
               </div>
 

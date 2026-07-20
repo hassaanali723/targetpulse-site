@@ -25,7 +25,7 @@ export default function HomeEmailHero() {
     setTimeout(() => {
       if (isBasicFormatValid) {
         setStatus('valid')
-        setMessage('Format looks good. Run full verification in TargetPulse to check deliverability.')
+        setMessage('Format looks good. Run full verification in Giggal.ai to check deliverability.')
       } else {
         setStatus('invalid')
         setMessage('This doesn\'t look like a valid email format.')
@@ -57,7 +57,7 @@ export default function HomeEmailHero() {
           <div className="inline-flex items-center space-x-2 rounded-full border border-primary-200 bg-gradient-to-r from-primary-50 to-accent-50 px-4 py-2 shadow-sm backdrop-blur-sm mb-6">
             <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
             <span className="text-xs font-semibold uppercase tracking-[0.18em] text-primary-700">
-              Email verifier by TargetPulse
+              Email verifier by Giggal.ai
             </span>
           </div>
 
@@ -69,7 +69,7 @@ export default function HomeEmailHero() {
           </h1>
 
           <p className="text-base md:text-lg text-slate-700 max-w-2xl mx-auto mb-10 leading-relaxed">
-            TargetPulse Email Verifier cleans your lists in seconds so campaigns land in the inbox,
+            Giggal.ai Email Verifier cleans your lists in seconds so campaigns land in the inbox,
             not the spam folder. Try a single email below to see the experience.
           </p>
 

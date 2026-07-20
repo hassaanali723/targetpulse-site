@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
           auth: SMTP_USER || SMTP_PASS ? { user: SMTP_USER, pass: SMTP_PASS } : undefined,
         })
 
-        const to = SUPPORT_TO_EMAIL || 'info@targetpulse.net'
+        const to = SUPPORT_TO_EMAIL || 'info@giggal.ai'
         const html = `
           <h2>New Contact Form Submission</h2>
           <p><strong>Name:</strong> ${name}</p>
@@ -36,11 +36,11 @@ export async function POST(request: NextRequest) {
           <pre style="white-space:pre-wrap">${message}</pre>
           
           <hr>
-          <p><em>This message was sent from the TargetPulse website contact form.</em></p>
+          <p><em>This message was sent from the Giggal.ai website contact form.</em></p>
         `
 
         await transporter.sendMail({
-          from: SMTP_USER || 'no-reply@targetpulse.net',
+          from: SMTP_USER || 'no-reply@giggal.ai',
           to,
           subject: `New Contact Form Submission from ${name}`,
           html,
