@@ -177,7 +177,7 @@ export default function TermsOfServicePage() {
 
           <h2 id="cancellation-policy" className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight mt-10 mb-4 scroll-mt-28">7. Cancellation and Refunds</h2>
           <p className="text-slate-600 leading-relaxed mb-4">
-            You may cancel your recurring subscription at any time through your account settings or by contacting our support team at info@targetpulse.net. Upon cancellation:
+            You may cancel your recurring subscription at any time through your account settings or by contacting our support team at info@giggal.ai. Upon cancellation:
           </p>
           <ul className="list-disc pl-6 mb-4 space-y-1.5 text-slate-600 leading-relaxed marker:text-indigo-400">
             <li>Your subscription will not renew for the next billing cycle</li>
@@ -316,8 +316,8 @@ export default function TermsOfServicePage() {
             If you have any questions about these Terms of Service, please contact us at:
           </p>
           <div className="bg-indigo-50/50 border-2 border-dashed border-indigo-200 rounded-2xl p-6 mb-4 space-y-2">
-            <p className="text-slate-600"><strong>Email:</strong> info@targetpulse.net</p>
-            <p className="text-slate-600"><strong>Website:</strong> https://targetpulse.net</p>
+            <p className="text-slate-600"><strong>Email:</strong> info@giggal.ai</p>
+            <p className="text-slate-600"><strong>Website:</strong> https://giggal.ai</p>
           </div>
 
           <div className="mt-12 pt-8 border-t border-slate-200">

@@ -7,7 +7,7 @@ const pricingSchema = {
   applicationCategory: 'BusinessApplication',
   operatingSystem: 'Web',
   description: 'Start verifying emails for free with 1,000 trial credits. Flexible pay-as-you-go pricing with volume discounts. No monthly commitments required.',
-  url: 'https://targetpulse.net',
+  url: 'https://giggal.ai',
   offers: {
     '@type': 'AggregateOffer',
     lowPrice: '7.50',
@@ -24,7 +24,7 @@ const pricingSchema = {
     },
     offerCount: '9',
     availability: 'https://schema.org/InStock',
-    url: 'https://targetpulse.net/pricing',
+    url: 'https://giggal.ai/pricing',
     seller: {
       '@type': 'Organization',
       name: 'Giggal.ai',
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Pricing - Giggal.ai Email Verifier',
     description: 'Simple, affordable email verification pricing. Pay only for what you verify. No monthly fees, no subscriptions.',
-    url: 'https://targetpulse.net/pricing',
+    url: 'https://giggal.ai/pricing',
     type: 'website',
   },
 }

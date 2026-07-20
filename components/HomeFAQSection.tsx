@@ -7,15 +7,15 @@ import { useReveal } from '@/lib/useReveal'
 
 const faqs = [
   {
-    question: 'Is TargetPulse Email Verifier free to use?',
+    question: 'Is Giggal.ai Email Verifier free to use?',
     answer: 'Yes. You get 1,000 free verification credits to start — no credit card required. After that, pay only for what you use with our pay-as-you-go pricing. No monthly fees; buy credits when you need them and use them at your own pace.',
   },
   {
     question: 'How do I verify my email list?',
-    answer: 'Upload your CSV or Excel file to TargetPulse Email Verifier. Our tool runs real-time verification: you see results as each email is checked and can download verified results at any time, even while the rest of your list is still processing.',
+    answer: 'Upload your CSV or Excel file to Giggal.ai Email Verifier. Our tool runs real-time verification: you see results as each email is checked and can download verified results at any time, even while the rest of your list is still processing.',
   },
   {
-    question: 'How accurate is TargetPulse Email Verifier?',
+    question: 'How accurate is Giggal.ai Email Verifier?',
     answer: 'We aim for high accuracy through multiple checks: syntax, MX/domain, role-based and free-mail detection, disposable screening, blacklist checks, SMTP mailbox verification, and catch-all detection. This helps you maintain strong deliverability and a healthy sender reputation.',
   },
   {

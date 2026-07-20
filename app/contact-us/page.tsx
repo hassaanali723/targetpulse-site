@@ -227,8 +227,7 @@ export default function TalkToHumanPage() {
                 </div>
                 <div className="space-y-1">
                   <h4 className="text-base font-extrabold text-slate-900">Email Us</h4>
-                  <p className="text-sm text-slate-600 font-medium">info@targetpulse.net</p>
-                  <p className="text-sm text-slate-600 font-medium">hassaan@targetpulse.net</p>
+                  <p className="text-sm text-slate-600 font-medium">info@giggal.ai</p>
                 </div>
               </div>
             </div>

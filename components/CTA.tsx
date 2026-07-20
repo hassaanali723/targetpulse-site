@@ -17,7 +17,7 @@ export default function CTA() {
             Ready to Transform Your Outreach?
           </h2>
           <p className="text-xl md:text-2xl mb-8 text-white/90">
-            Join hundreds of companies that trust TargetPulse to drive their growth
+            Join hundreds of companies that trust Giggal.ai to drive their growth
           </p>
 
           {/* Value Props */}

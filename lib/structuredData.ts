@@ -1,7 +1,7 @@
 // Structured data schemas for Giggal.ai Email Verification Tool
 // Used as supplemental schema; primary JSON-LD is injected in app/layout.tsx
 
-const baseUrl = 'https://targetpulse.net'
+const baseUrl = 'https://giggal.ai'
 
 export const organizationSchema = {
   '@context': 'https://schema.org',
@@ -21,7 +21,7 @@ export const organizationSchema = {
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'customer support',
-    email: 'info@targetpulse.net',
+    email: 'info@giggal.ai',
     availableLanguage: 'English',
   },
   sameAs: [

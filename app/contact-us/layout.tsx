@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Contact Us - Giggal.ai Email Verifier',
     description: 'Get in touch with Giggal.ai for support, inquiries, or any questions about our email verification tool.',
-    url: 'https://targetpulse.net/contact-us',
+    url: 'https://giggal.ai/contact-us',
     type: 'website',
   },
 }

@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
           auth: SMTP_USER || SMTP_PASS ? { user: SMTP_USER, pass: SMTP_PASS } : undefined,
         })
 
-        const to = SUPPORT_TO_EMAIL || 'info@targetpulse.net'
+        const to = SUPPORT_TO_EMAIL || 'info@giggal.ai'
         const html = `
           <h2>New Contact Form Submission</h2>
           <p><strong>Name:</strong> ${name}</p>
@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
         `
 
         await transporter.sendMail({
-          from: SMTP_USER || 'no-reply@targetpulse.net',
+          from: SMTP_USER || 'no-reply@giggal.ai',
           to,
           subject: `New Contact Form Submission from ${name}`,
           html,

@@ -133,7 +133,7 @@ export default function HomeHeroWithVerification() {
           <div className="inline-flex items-center gap-2.5 rounded-full border border-primary-200/60 bg-primary-50/80 px-4 py-1.5 mb-6 md:mb-8">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
             <span className="text-[11px] font-semibold tracking-[0.16em] text-primary-700 uppercase">
-              Email Verifier by TargetPulse
+              Email Verifier by Giggal.ai
             </span>
           </div>
 
@@ -145,7 +145,7 @@ export default function HomeHeroWithVerification() {
           </h1>
 
           <p className="text-base md:text-xl text-slate-500 max-w-2xl mx-auto mb-8 md:mb-10 leading-relaxed font-normal">
-            TargetPulse cleans your email lists in seconds — removing invalid addresses so every campaign lands in real inboxes.
+            Giggal.ai cleans your email lists in seconds — removing invalid addresses so every campaign lands in real inboxes.
           </p>
 
           {/* Email Form */}
@@ -322,8 +322,8 @@ export default function HomeHeroWithVerification() {
               {/* Logo */}
               <div className="relative flex h-24 w-24 items-center justify-center rounded-2xl bg-white shadow-[0_8px_40px_rgba(41,92,81,0.18)] border border-primary-100/60 p-3 z-10">
                 <img
-                  src="/Targetpulse logo - minimal.png"
-                  alt="TargetPulse"
+                  src="/giggal-logo.png"
+                  alt="Giggal.ai"
                   className="w-full h-full object-contain"
                 />
               </div>

@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     title: 'Giggal.ai - Free Email Verification for Catch-all Domains',
     description:
       'Free email verifier built for catch-all and accept-all domains with 99% accuracy. Clean your list, cut bounces, and protect your sender reputation.',
-    url: 'https://targetpulse.net',
+    url: 'https://giggal.ai',
     type: 'website',
   },
   twitter: {

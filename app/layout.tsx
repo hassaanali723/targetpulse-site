@@ -17,7 +17,7 @@ const jetbrainsMono = JetBrains_Mono({
   variable: '--font-jetbrains-mono',
 })
 
-const baseUrl = 'https://targetpulse.net'
+const baseUrl = 'https://giggal.ai'
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -122,7 +122,7 @@ const jsonLd = {
       ],
       contactPoint: {
         '@type': 'ContactPoint',
-        email: 'info@targetpulse.net',
+        email: 'info@giggal.ai',
         contactType: 'customer support',
         availableLanguage: 'English',
       },

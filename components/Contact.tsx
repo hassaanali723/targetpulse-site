@@ -199,8 +199,8 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="font-bold text-lg text-slate-900 mb-2">Email Us</h4>
-                  <p className="text-slate-600">info@targetpulse.net</p>
-                  <p className="text-slate-600">hassaan@targetpulse.net</p>
+                  <p className="text-slate-600">info@giggal.ai</p>
+                  <p className="text-slate-600">hassaan@giggal.ai</p>
                 </div>
               </div>
             </div>

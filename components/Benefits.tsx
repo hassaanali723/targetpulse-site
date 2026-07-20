@@ -53,7 +53,7 @@ export default function Benefits() {
       <div className="container-custom">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Why Choose <span className="gradient-text">TargetPulse</span>
+            Why Choose <span className="gradient-text">Giggal.ai</span>
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Partner with us and experience the difference that expertise and dedication can make

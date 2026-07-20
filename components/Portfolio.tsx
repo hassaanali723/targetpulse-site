@@ -18,7 +18,7 @@ export default function Portfolio() {
         revenue: '$450K',
       },
       description: 'Generated 127 qualified meetings for a B2B SaaS platform, resulting in $450K in pipeline revenue.',
-      testimonial: 'TargetPulse transformed our outbound strategy. The quality of leads was exceptional.',
+      testimonial: 'Giggal.ai transformed our outbound strategy. The quality of leads was exceptional.',
       author: 'Sarah Johnson, VP Sales',
     },
     {
@@ -60,7 +60,7 @@ export default function Portfolio() {
         revenue: '$280K',
       },
       description: 'Established strategic partnerships with 20+ retailers and distributors for product expansion.',
-      testimonial: 'TargetPulse helped us build relationships that transformed our distribution network.',
+      testimonial: 'Giggal.ai helped us build relationships that transformed our distribution network.',
       author: 'David Park, Head of Partnerships',
     },
     {

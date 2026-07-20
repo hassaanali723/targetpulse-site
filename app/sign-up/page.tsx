@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Sign Up Free, Giggal.ai Email Verifier',
     description: 'Get 1,000 free verification credits to start. No credit card required. Verify catch-all and accept-all email domains with 99% accuracy.',
-    url: 'https://targetpulse.net/sign-up',
+    url: 'https://giggal.ai/sign-up',
     type: 'website',
   },
 }

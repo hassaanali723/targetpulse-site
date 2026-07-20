@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     title: 'Giggal.ai MCP Server — Verify Emails From Your AI Agent',
     description:
       'Plug Giggal.ai into Claude, ChatGPT, Cursor, VS Code and more over MCP. Catch-all verification, right inside your agent.',
-    url: 'https://targetpulse.net/mcp',
+    url: 'https://giggal.ai/mcp',
     type: 'website',
   },
 }

@@ -162,7 +162,7 @@ export default function PrivacyPolicyPage() {
             <li><strong>Withdraw Consent:</strong> Withdraw consent where processing is based on consent</li>
           </ul>
           <p className="text-slate-600 leading-relaxed mb-4">
-            To exercise these rights, please contact us at info@targetpulse.net.
+            To exercise these rights, please contact us at info@giggal.ai.
           </p>
 
           <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight mt-10 mb-4 scroll-mt-28">9. Cookies and Tracking Technologies</h2>
@@ -207,8 +207,8 @@ export default function PrivacyPolicyPage() {
             If you have any questions about this Privacy Policy, please contact us:
           </p>
           <div className="bg-indigo-50/50 border-2 border-dashed border-indigo-200 rounded-2xl p-6 mb-4 space-y-2">
-            <p className="text-slate-600"><strong>Email:</strong> info@targetpulse.net</p>
-            <p className="text-slate-600"><strong>Website:</strong> https://targetpulse.net</p>
+            <p className="text-slate-600"><strong>Email:</strong> info@giggal.ai</p>
+            <p className="text-slate-600"><strong>Website:</strong> https://giggal.ai</p>
           </div>
 
           <div className="mt-12 pt-8 border-t border-slate-200">

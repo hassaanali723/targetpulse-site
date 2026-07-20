@@ -267,7 +267,7 @@ export default function HomeFeatureShowcase() {
               Every email verification task, in one place
             </h2>
             <p className="text-[15px] text-slate-500 leading-relaxed">
-              Stop switching between tools. TargetPulse handles every kind of email verification
+              Stop switching between tools. Giggal.ai handles every kind of email verification
               you need, from single addresses to bulk lists, catch-all domains, and API workflows.
             </p>
           </div>

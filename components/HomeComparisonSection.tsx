@@ -4,16 +4,16 @@ import { TrendingDown, Sparkles } from 'lucide-react'
 
 type Row = {
   credits: number
-  targetpulse: number
+  giggal: number
   neverbounce: number
   zerobounce: number
   highlight?: boolean
 }
 
 const rows: Row[] = [
-  { credits: 10000,   targetpulse: 9.90,  neverbounce: 50,    zerobounce: 99 },
-  { credits: 100000,  targetpulse: 76,    neverbounce: 400,   zerobounce: 449, highlight: true },
-  { credits: 1000000, targetpulse: 680,   neverbounce: 2500,  zerobounce: 2499 },
+  { credits: 10000,   giggal: 9.90,  neverbounce: 50,    zerobounce: 99 },
+  { credits: 100000,  giggal: 76,    neverbounce: 400,   zerobounce: 449, highlight: true },
+  { credits: 1000000, giggal: 680,   neverbounce: 2500,  zerobounce: 2499 },
 ]
 
 function formatCredits(n: number) {
@@ -38,7 +38,7 @@ export default function HomeComparisonSection() {
           Get up to <span className="bg-gradient-to-r from-primary-600 to-accent-500 bg-clip-text text-transparent">5× more emails</span> per dollar
         </h2>
         <p className="text-[16px] text-slate-500 max-w-2xl mx-auto leading-relaxed">
-          Same verification quality. A fraction of the price. Here&apos;s how TargetPulse stacks up
+          Same verification quality. A fraction of the price. Here&apos;s how Giggal.ai stacks up
           against the top-known email verifiers.
         </p>
       </div>
@@ -56,7 +56,7 @@ export default function HomeComparisonSection() {
                     </th>
                     <th className="px-5 py-4 bg-primary-50 border-l border-r border-primary-100/70 w-[26%]">
                       <div className="flex items-center justify-center gap-2 flex-wrap">
-                        <span className="text-[13px] md:text-[14px] font-extrabold text-primary-700">TargetPulse</span>
+                        <span className="text-[13px] md:text-[14px] font-extrabold text-primary-700">Giggal.ai</span>
                         <span className="inline-flex items-center gap-1 bg-accent-500 text-primary-900 text-[8px] font-extrabold px-1.5 py-0.5 rounded-full uppercase tracking-wider whitespace-nowrap">
                           Best
                         </span>
@@ -73,7 +73,7 @@ export default function HomeComparisonSection() {
                 <tbody>
                   {rows.map((row, i) => {
                     const cheapest = Math.min(row.neverbounce, row.zerobounce)
-                    const savingsX = (cheapest / row.targetpulse).toFixed(1)
+                    const savingsX = (cheapest / row.giggal).toFixed(1)
 
                     return (
                       <tr
@@ -100,12 +100,12 @@ export default function HomeComparisonSection() {
                           </div>
                         </td>
 
-                        {/* TargetPulse cell — green tinted column */}
+                        {/* Giggal.ai cell — green tinted column */}
                         <td className={`px-5 py-6 align-middle text-center border-l border-r border-primary-100/70 ${
                           row.highlight ? 'bg-primary-50/80' : 'bg-primary-50/50'
                         }`}>
                           <div className="text-2xl md:text-3xl font-extrabold text-primary-700 leading-none mb-2">
-                            {formatPrice(row.targetpulse)}
+                            {formatPrice(row.giggal)}
                           </div>
                           <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-white border border-emerald-200/60 px-2 py-0.5 rounded-full">
                             <TrendingDown className="w-2.5 h-2.5" />

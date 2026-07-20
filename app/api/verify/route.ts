@@ -5,7 +5,7 @@ import { NextResponse } from 'next/server'
  *
  * It proxies the SAME endpoint the production landing page uses —
  * the backend's public validator `POST /api/public/validate-email` — so the
- * console's verdicts match targetpulse.net exactly (including the full
+ * console's verdicts match giggal.ai exactly (including the full
  * catch-all deep-verification flow that resolves to valid/invalid). We then
  * map the result into the step-by-step shape the console renders.
  *
@@ -129,7 +129,7 @@ function invalidSyntax(email: string): VerifyResult {
   }
 }
 
-// Map the backend public-validator result (same shape as targetpulse.net) into
+// Map the backend public-validator result (same shape as giggal.ai) into
 // the console's step/verdict structure. `data.status` is already the FINAL
 // verdict — the backend has resolved catch-all to valid/invalid before we see it.
 function mapResult(email: string, data: any): VerifyResult {

@@ -99,7 +99,7 @@ export default function RefundPolicyPage() {
             <li>Any other exceptional circumstances</li>
           </ul>
           <p className="text-slate-600 leading-relaxed mb-4">
-            Please contact our support team immediately at <strong>info@targetpulse.net</strong>. We will thoroughly review your case and may issue refunds or credit adjustments on a case-by-case basis at our discretion.
+            Please contact our support team immediately at <strong>info@giggal.ai</strong>. We will thoroughly review your case and may issue refunds or credit adjustments on a case-by-case basis at our discretion.
           </p>
 
           <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight mt-10 mb-4 scroll-mt-28">6. Service Quality Issues</h2>
@@ -128,7 +128,7 @@ export default function RefundPolicyPage() {
             To request a refund or report unusual activity, please contact our support team:
           </p>
           <div className="bg-indigo-50/50 border-2 border-dashed border-indigo-200 rounded-2xl p-6 mb-4 space-y-2">
-            <p className="text-slate-600"><strong>Email:</strong> info@targetpulse.net</p>
+            <p className="text-slate-600"><strong>Email:</strong> info@giggal.ai</p>
             <p className="text-slate-600"><strong>Subject:</strong> Refund Request / Issue Report</p>
           </div>
           <p className="text-slate-600 leading-relaxed mb-4">
@@ -189,8 +189,8 @@ export default function RefundPolicyPage() {
             If you have any questions about this Refund Policy or need assistance, please contact us:
           </p>
           <div className="bg-indigo-50/50 border-2 border-dashed border-indigo-200 rounded-2xl p-6 mb-4 space-y-2">
-            <p className="text-slate-600"><strong>Email:</strong> info@targetpulse.net</p>
-            <p className="text-slate-600"><strong>Website:</strong> https://targetpulse.net</p>
+            <p className="text-slate-600"><strong>Email:</strong> info@giggal.ai</p>
+            <p className="text-slate-600"><strong>Website:</strong> https://giggal.ai</p>
           </div>
           <p className="text-slate-600 leading-relaxed mb-4">
             Our support team is committed to addressing your concerns and finding fair solutions. We typically respond to all inquiries within 24-48 hours.

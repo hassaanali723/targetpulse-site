@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     title: 'Earn with Us — Giggal.ai Affiliate Program',
     description:
       'Earn 20% recurring commission for every customer you refer to Giggal.ai. Forever. No caps.',
-    url: 'https://targetpulse.net/affiliates',
+    url: 'https://giggal.ai/affiliates',
     type: 'website',
   },
   twitter: {
