@@ -35,14 +35,14 @@ export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="relative bg-gradient-to-br from-gray-900 via-primary-900 to-gray-900 text-slate-400 overflow-hidden">
+    <footer className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-slate-400 overflow-hidden">
       <div className="container-custom py-14 md:py-16">
         {/* Top grid: Brand + Product + Company */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 mb-10">
           {/* Brand column */}
           <div className="md:col-span-5">
             <Link href="/" className="inline-block" aria-label="Giggal.ai home">
-              <Wordmark className="text-3xl opacity-90 hover:opacity-100 transition-opacity duration-200" />
+              <Wordmark tone="light" className="text-3xl opacity-90 hover:opacity-100 transition-opacity duration-200" />
             </Link>
             <p className="mt-4 text-[13.5px] text-slate-400 max-w-sm leading-relaxed">
               Email verification that keeps your campaigns landing in real inboxes —

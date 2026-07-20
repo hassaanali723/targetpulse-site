@@ -162,8 +162,8 @@ export default function PricingPage() {
                     key={i}
                     className={`relative rounded-2xl border p-5 transition-all duration-200 ${
                       pkg.bestValue
-                        ? 'border-primary-300 bg-primary-50/70 shadow-[0_4px_28px_rgba(41,92,81,0.12)]'
-                        : 'border-slate-100 bg-white hover:border-primary-200/60 hover:shadow-[0_2px_20px_rgba(41,92,81,0.08)]'
+                        ? 'border-primary-300 bg-primary-50/70 shadow-[0_4px_28px_rgba(79, 70, 229,0.12)]'
+                        : 'border-slate-100 bg-white hover:border-primary-200/60 hover:shadow-[0_2px_20px_rgba(79, 70, 229,0.08)]'
                     }`}
                   >
                     {pkg.bestValue && (
@@ -210,7 +210,7 @@ export default function PricingPage() {
                 href="https://emailverifier.giggal.ai/sign-up"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-bold text-[15px] transition-colors duration-200 shadow-[0_4px_24px_rgba(41,92,81,0.25)]"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-bold text-[15px] transition-colors duration-200 shadow-[0_4px_24px_rgba(79, 70, 229,0.25)]"
               >
                 <Mail className="w-4 h-4" />
                 Get Started — 1,000 Free Credits

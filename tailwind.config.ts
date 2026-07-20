@@ -9,17 +9,18 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // Giggal.ai brand indigo — primary-600 (#4f46e5) is the main brand colour.
         primary: {
-          50: '#f0f7f6',
-          100: '#d9ebe8',
-          200: '#b3d7d1',
-          300: '#8cc3ba',
-          400: '#66afa3',
-          500: '#295C51',
-          600: '#244d44',
-          700: '#1e3e37',
-          800: '#192f2a',
-          900: '#13201d',
+          50: '#eef2ff',
+          100: '#e0e7ff',
+          200: '#c7d2fe',
+          300: '#a5b4fc',
+          400: '#818cf8',
+          500: '#6366f1',
+          600: '#4f46e5',
+          700: '#4338ca',
+          800: '#3730a3',
+          900: '#312e81',
         },
         accent: {
           50: '#fef9f0',

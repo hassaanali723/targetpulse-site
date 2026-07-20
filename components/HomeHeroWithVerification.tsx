@@ -242,12 +242,12 @@ export default function HomeHeroWithVerification() {
                 {checks.map((item) => (
                   <div
                     key={item.title}
-                    className="relative flex gap-3 rounded-xl border border-slate-100 bg-white px-4 py-3.5 hover:border-primary-200/80 hover:shadow-[0_2px_16px_rgba(41,92,81,0.07)] hover:-translate-y-0.5 transition-all duration-200 group"
+                    className="relative flex gap-3 rounded-xl border border-slate-100 bg-white px-4 py-3.5 hover:border-primary-200/80 hover:shadow-[0_2px_16px_rgba(79, 70, 229,0.07)] hover:-translate-y-0.5 transition-all duration-200 group"
                   >
                     {/* Branch: card right edge → vertical bus */}
                     <div
                       className="hidden lg:block absolute left-full top-1/2 h-px w-5"
-                      style={{ backgroundColor: 'rgba(41,92,81,0.3)' }}
+                      style={{ backgroundColor: 'rgba(79, 70, 229,0.3)' }}
                     />
                     <div className="mt-0.5 flex h-7 w-7 items-center justify-center rounded-lg bg-primary-50 text-primary-600 flex-shrink-0 group-hover:bg-primary-100 transition-colors">
                       <ShieldCheck className="h-3.5 w-3.5" />
@@ -277,13 +277,13 @@ export default function HomeHeroWithVerification() {
               {/* LEFT vertical bus — sits in the middle of the 40px gap */}
               <div
                 className="absolute top-0 bottom-0 right-full mr-5 w-px"
-                style={{ background: 'linear-gradient(to bottom, rgba(41,92,81,0) 0%, rgba(41,92,81,0.3) 15%, rgba(41,92,81,0.3) 85%, rgba(41,92,81,0) 100%)' }}
+                style={{ background: 'linear-gradient(to bottom, rgba(79, 70, 229,0) 0%, rgba(79, 70, 229,0.3) 15%, rgba(79, 70, 229,0.3) 85%, rgba(79, 70, 229,0) 100%)' }}
               />
               {/* LEFT horizontal stub — bus → logo */}
               <div
                 className="absolute top-1/2 right-full h-px w-5"
                 style={{
-                  backgroundImage: 'linear-gradient(to right, rgba(41,92,81,0.45) 50%, transparent 50%)',
+                  backgroundImage: 'linear-gradient(to right, rgba(79, 70, 229,0.45) 50%, transparent 50%)',
                   backgroundSize: '6px 1px',
                   backgroundRepeat: 'repeat-x',
                   animation: 'dashFlow 1.2s linear infinite',
@@ -294,7 +294,7 @@ export default function HomeHeroWithVerification() {
               <div
                 className="absolute top-1/2 left-full h-px w-5"
                 style={{
-                  backgroundImage: 'linear-gradient(to right, rgba(41,92,81,0.45) 50%, transparent 50%)',
+                  backgroundImage: 'linear-gradient(to right, rgba(79, 70, 229,0.45) 50%, transparent 50%)',
                   backgroundSize: '6px 1px',
                   backgroundRepeat: 'repeat-x',
                   animation: 'dashFlow 1.2s linear infinite',
@@ -304,7 +304,7 @@ export default function HomeHeroWithVerification() {
               {/* RIGHT vertical bus — middle of right gap */}
               <div
                 className="absolute top-0 bottom-0 left-full ml-5 w-px"
-                style={{ background: 'linear-gradient(to bottom, rgba(41,92,81,0) 0%, rgba(41,92,81,0.3) 15%, rgba(41,92,81,0.3) 85%, rgba(41,92,81,0) 100%)' }}
+                style={{ background: 'linear-gradient(to bottom, rgba(79, 70, 229,0) 0%, rgba(79, 70, 229,0.3) 15%, rgba(79, 70, 229,0.3) 85%, rgba(79, 70, 229,0) 100%)' }}
               />
 
               {/* Concentric pulse rings */}
@@ -320,7 +320,7 @@ export default function HomeHeroWithVerification() {
               />
 
               {/* Logo */}
-              <div className="relative flex h-24 w-24 items-center justify-center rounded-2xl bg-white shadow-[0_8px_40px_rgba(41,92,81,0.18)] border border-primary-100/60 p-3 z-10">
+              <div className="relative flex h-24 w-24 items-center justify-center rounded-2xl bg-white shadow-[0_8px_40px_rgba(79, 70, 229,0.18)] border border-primary-100/60 p-3 z-10">
                 <img
                   src="/giggal-logo.png"
                   alt="Giggal.ai"
@@ -349,7 +349,7 @@ export default function HomeHeroWithVerification() {
                       {/* Branch: vertical bus → card left edge */}
                       <div
                         className="hidden lg:block absolute right-full top-1/2 h-px w-5"
-                        style={{ backgroundColor: 'rgba(41,92,81,0.3)' }}
+                        style={{ backgroundColor: 'rgba(79, 70, 229,0.3)' }}
                       />
                       <div className={`mt-0.5 flex h-7 w-7 items-center justify-center rounded-lg flex-shrink-0 ${colors.icon} group-hover:scale-105 transition-transform duration-200`}>
                         <Icon className="h-3.5 w-3.5" />

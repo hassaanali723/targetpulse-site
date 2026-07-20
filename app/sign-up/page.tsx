@@ -66,7 +66,7 @@ export default function SignUpPage() {
                 href={SIGNUP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white rounded-xl font-bold text-[15px] transition-all duration-200 shadow-[0_4px_24px_rgba(41,92,81,0.25)] hover:shadow-[0_6px_28px_rgba(41,92,81,0.35)]"
+                className="group inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white rounded-xl font-bold text-[15px] transition-all duration-200 shadow-[0_4px_24px_rgba(79, 70, 229,0.25)] hover:shadow-[0_6px_28px_rgba(79, 70, 229,0.35)]"
               >
                 Create your free account
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
@@ -105,7 +105,7 @@ export default function SignUpPage() {
             {perks.map(({ Icon, title, body }) => (
               <div
                 key={title}
-                className="rounded-2xl border border-slate-100 bg-white p-6 hover:border-primary-300/60 hover:shadow-[0_6px_24px_rgba(41,92,81,0.10)] hover:-translate-y-0.5 transition-all duration-200"
+                className="rounded-2xl border border-slate-100 bg-white p-6 hover:border-primary-300/60 hover:shadow-[0_6px_24px_rgba(79, 70, 229,0.10)] hover:-translate-y-0.5 transition-all duration-200"
               >
                 <div className="w-11 h-11 flex items-center justify-center rounded-xl bg-primary-50 border border-primary-100/60 mb-4">
                   <Icon className="w-5 h-5 text-primary-600" />

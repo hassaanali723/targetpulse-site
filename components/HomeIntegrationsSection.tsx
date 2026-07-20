@@ -52,7 +52,7 @@ export default function HomeIntegrationsSection() {
             className={`group relative flex flex-col items-center justify-center gap-2 rounded-2xl border bg-white p-4 transition-all duration-300 ${
               i.comingSoon
                 ? 'border-slate-100 opacity-70 hover:opacity-100'
-                : 'border-slate-100 hover:border-primary-300/60 hover:shadow-[0_6px_24px_rgba(41,92,81,0.10)] hover:-translate-y-0.5'
+                : 'border-slate-100 hover:border-primary-300/60 hover:shadow-[0_6px_24px_rgba(79, 70, 229,0.10)] hover:-translate-y-0.5'
             }`}
           >
             {/* Coming Soon badge */}

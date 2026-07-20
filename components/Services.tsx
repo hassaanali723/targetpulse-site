@@ -10,7 +10,7 @@ export default function Services() {
       icon: <Mail className="w-10 h-10" />,
       title: 'Cold Email Campaigns',
       description: 'Expertly crafted email sequences designed to capture attention and drive responses from your ideal customers.',
-      color: '#295C51',
+      color: '#4f46e5',
       accent: '#E9BB71',
     },
     {
@@ -18,20 +18,20 @@ export default function Services() {
       title: 'Lead Generation',
       description: 'Strategic prospecting and list building to connect you with decision-makers in your target market.',
       color: '#E9BB71',
-      accent: '#295C51',
+      accent: '#4f46e5',
     },
     {
       icon: <BarChart3 className="w-10 h-10" />,
       title: 'Campaign Analytics',
       description: 'Comprehensive tracking and reporting to optimize your campaigns for maximum ROI and conversion.',
-      color: '#295C51',
+      color: '#4f46e5',
       accent: '#E9BB71',
     },
     {
       icon: <Target className="w-10 h-10" />,
       title: 'Audience Targeting',
       description: 'Precise segmentation and targeting to ensure your message reaches the most relevant prospects.',
-      color: '#1e3e37',
+      color: '#3730a3',
       accent: '#E9BB71',
     },
     {
@@ -39,13 +39,13 @@ export default function Services() {
       title: 'A/B Testing',
       description: 'Continuous optimization through systematic testing of subject lines, content, and timing.',
       color: '#d69634',
-      accent: '#295C51',
+      accent: '#4f46e5',
     },
     {
       icon: <Shield className="w-10 h-10" />,
       title: 'Deliverability Management',
       description: 'Advanced inbox placement strategies to ensure your emails land where they matter most.',
-      color: '#244d44',
+      color: '#4338ca',
       accent: '#f5cf87',
     },
   ]

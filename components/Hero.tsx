@@ -71,7 +71,7 @@ export default function Hero() {
           particle.x, particle.y, 0,
           particle.x, particle.y, particle.size * 2
         )
-        gradient.addColorStop(0, `rgba(41, 92, 81, ${particle.opacity})`)
+        gradient.addColorStop(0, `rgba(79, 70, 229, ${particle.opacity})`)
         gradient.addColorStop(1, `rgba(233, 187, 113, ${particle.opacity * 0.3})`)
         ctx.fillStyle = gradient
         ctx.fill()
@@ -184,7 +184,7 @@ export default function Hero() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto animate-fade-in" style={{ animationDelay: '0.4s' }}>
             {/* Card 1 */}
             <div className="group relative overflow-hidden rounded-2xl transition-all duration-500 hover:scale-105"
-              style={{ background: 'linear-gradient(135deg, #295C51 0%, #1e3e37 100%)' }}>
+              style={{ background: 'linear-gradient(135deg, #4f46e5 0%, #3730a3 100%)' }}>
               <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="relative p-6">
                 <div className="flex items-start space-x-4">
@@ -222,7 +222,7 @@ export default function Hero() {
 
             {/* Card 3 */}
             <div className="group relative overflow-hidden rounded-2xl transition-all duration-500 hover:scale-105"
-              style={{ background: 'linear-gradient(135deg, #244d44 0%, #295C51 100%)' }}>
+              style={{ background: 'linear-gradient(135deg, #4338ca 0%, #4f46e5 100%)' }}>
               <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="relative p-6">
                 <div className="flex items-start space-x-4">

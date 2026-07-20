@@ -111,7 +111,7 @@ export default function CatchAllVerificationPage() {
                   href={APP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 px-7 py-3.5 bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white rounded-xl font-bold text-[15px] transition-all duration-200 shadow-[0_4px_24px_rgba(41,92,81,0.25)]"
+                  className="group inline-flex items-center gap-2 px-7 py-3.5 bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white rounded-xl font-bold text-[15px] transition-all duration-200 shadow-[0_4px_24px_rgba(79, 70, 229,0.25)]"
                 >
                   Start verifying catch-all emails
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
@@ -257,7 +257,7 @@ export default function CatchAllVerificationPage() {
             {signals.map(({ Icon, title, body }, i) => (
               <div
                 key={title}
-                className="relative rounded-2xl border border-slate-100 bg-white p-6 hover:border-primary-300/60 hover:shadow-[0_6px_24px_rgba(41,92,81,0.10)] hover:-translate-y-0.5 transition-all duration-200"
+                className="relative rounded-2xl border border-slate-100 bg-white p-6 hover:border-primary-300/60 hover:shadow-[0_6px_24px_rgba(79, 70, 229,0.10)] hover:-translate-y-0.5 transition-all duration-200"
               >
                 <div className="absolute -top-3 left-6 bg-gradient-to-br from-primary-600 to-primary-700 text-white text-[12px] font-bold w-7 h-7 flex items-center justify-center rounded-lg shadow-md">
                   {i + 1}
@@ -324,7 +324,7 @@ export default function CatchAllVerificationPage() {
             </div>
 
             {/* Giggal.ai card */}
-            <div className="rounded-2xl border-2 border-primary-300/70 bg-gradient-to-br from-primary-50 via-white to-primary-50/30 p-6 shadow-[0_4px_28px_rgba(41,92,81,0.10)] relative">
+            <div className="rounded-2xl border-2 border-primary-300/70 bg-gradient-to-br from-primary-50 via-white to-primary-50/30 p-6 shadow-[0_4px_28px_rgba(79, 70, 229,0.10)] relative">
               <div className="absolute -top-3 left-6">
                 <span className="inline-flex items-center gap-1 bg-gradient-to-r from-primary-600 to-primary-700 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-md">
                   <Sparkles className="w-2.5 h-2.5" />
@@ -415,7 +415,7 @@ export default function CatchAllVerificationPage() {
             {audience.map(({ Icon, title, body }) => (
               <div
                 key={title}
-                className="rounded-2xl border border-slate-100 bg-white p-6 hover:border-primary-300/60 hover:shadow-[0_4px_20px_rgba(41,92,81,0.08)] hover:-translate-y-0.5 transition-all duration-200"
+                className="rounded-2xl border border-slate-100 bg-white p-6 hover:border-primary-300/60 hover:shadow-[0_4px_20px_rgba(79, 70, 229,0.08)] hover:-translate-y-0.5 transition-all duration-200"
               >
                 <Icon className="w-7 h-7 text-primary-600 mb-4" strokeWidth={1.5} />
                 <h3 className="text-[14px] font-bold text-slate-900 mb-1.5">{title}</h3>

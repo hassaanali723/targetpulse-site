@@ -115,7 +115,7 @@ export default function HomeCatchAllSection() {
             </div>
 
             {/* Giggal.ai card */}
-            <div className="rounded-2xl border-2 border-primary-300/70 bg-gradient-to-br from-primary-50 via-white to-primary-50/30 p-5 md:p-6 shadow-[0_4px_28px_rgba(41,92,81,0.10)] relative">
+            <div className="rounded-2xl border-2 border-primary-300/70 bg-gradient-to-br from-primary-50 via-white to-primary-50/30 p-5 md:p-6 shadow-[0_4px_28px_rgba(79, 70, 229,0.10)] relative">
               <div className="absolute -top-3 left-6">
                 <span className="inline-flex items-center gap-1 bg-gradient-to-r from-primary-600 to-primary-700 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-md">
                   <Sparkles className="w-2.5 h-2.5" />

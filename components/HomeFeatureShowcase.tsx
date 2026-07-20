@@ -229,7 +229,7 @@ export default function HomeFeatureShowcase() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: i * 0.09 }}
-                className="group relative rounded-2xl border border-slate-100 bg-white p-7 overflow-hidden hover:border-primary-200/70 hover:shadow-[0_4px_28px_rgba(41,92,81,0.10)] transition-all duration-300"
+                className="group relative rounded-2xl border border-slate-100 bg-white p-7 overflow-hidden hover:border-primary-200/70 hover:shadow-[0_4px_28px_rgba(79, 70, 229,0.10)] transition-all duration-300"
               >
                 {/* Corner gradient on hover */}
                 <div className="absolute top-0 left-0 w-28 h-28 bg-gradient-to-br from-primary-50 via-primary-50/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 rounded-2xl pointer-events-none" />

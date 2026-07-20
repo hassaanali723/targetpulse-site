@@ -51,9 +51,9 @@
     background-size: 28px 28px;
   }
 
-  /* Gradient text */
+  /* Gradient text — Giggal.ai brand gradient (indigo → emerald) */
   .gradient-text {
-    background: linear-gradient(135deg, #295C51 0%, #E9BB71 100%);
+    background: linear-gradient(135deg, #4f46e5 0%, #10b981 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -101,12 +101,12 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #295C51;
+  background: #4f46e5;
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #244d44;
+  background: #4338ca;
 }
 
 /* Keyframes */
