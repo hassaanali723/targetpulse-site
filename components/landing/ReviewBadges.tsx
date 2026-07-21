@@ -6,7 +6,11 @@ const PH_URL =
 const G2_URL = 'https://www.g2.com/products/targetpulse-email-verifier/reviews'
 const TRUSTPILOT_URL = 'https://uk.trustpilot.com/review/targetpulse.net'
 
-const badgeLink = 'hover:opacity-80 hover:-translate-y-0.5 transition-all'
+// NOTE: NO hover effect (opacity, transform, filter, etc.) on the link or img.
+// Any CSS property that creates a new stacking context breaks mix-blend-mode
+// on the image and makes the white badge background reappear. Cursor pointer
+// from the anchor tag is enough affordance.
+const badgeLink = 'inline-block'
 // Makes the white background of the badge images transparent against the
 // light page background. Works because white * anything = anything.
 const badgeImg = 'mix-blend-multiply'
