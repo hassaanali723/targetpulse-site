@@ -79,8 +79,7 @@ export const metadata: Metadata = {
     title: 'Giggal.ai - Free Email Verification for Catch-all Domains',
     description: 'Free email verifier built for catch-all and accept-all domains with 99% accuracy. Clean your list, cut bounces, and protect your sender reputation.',
     images: ['/giggal-logo.png'],
-    creator: '@targetpulse',
-    site: '@targetpulse',
+    // Add `creator` and `site` handles once Giggal.ai has an X/Twitter account.
   },
   robots: {
     index: true,
@@ -115,10 +114,11 @@ const jsonLd = {
         height: 2000,
       },
       sameAs: [
-        'https://www.linkedin.com/company/target-pulse/',
+        'https://www.linkedin.com/company/giggal-ai/',
         'https://www.youtube.com/@TargetPulseOfficial',
         'https://www.facebook.com/share/1D31DYxZL5/',
-        'https://www.instagram.com/targetpulsee',
+        'https://www.instagram.com/giggal.ai',
+        'https://www.producthunt.com/products/giggal-ai',
       ],
       contactPoint: {
         '@type': 'ContactPoint',

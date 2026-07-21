@@ -2,11 +2,14 @@ import React from 'react'
 
 // Review-platform links. Product Hunt embed provided by Product Hunt.
 const PH_URL =
-  'https://www.producthunt.com/products/targetpulse/reviews?utm_source=badge-product_rating&utm_medium=badge&utm_source=badge-targetpulse'
+  'https://www.producthunt.com/products/giggal-ai/reviews?utm_source=badge-product_rating&utm_medium=badge&utm_source=badge-giggal-ai'
 const G2_URL = 'https://www.g2.com/products/targetpulse-email-verifier/reviews'
 const TRUSTPILOT_URL = 'https://uk.trustpilot.com/review/targetpulse.net'
 
 const badgeLink = 'hover:opacity-80 hover:-translate-y-0.5 transition-all'
+// Makes the white background of the badge images transparent against the
+// light page background. Works because white * anything = anything.
+const badgeImg = 'mix-blend-multiply'
 
 export default function ReviewBadges() {
   return (
@@ -24,20 +27,20 @@ export default function ReviewBadges() {
             alt="Giggal.ai on Product Hunt"
             width={242}
             height={108}
-            className="h-[104px] w-auto"
+            className={`h-[104px] w-auto ${badgeImg}`}
           />
         </a>
 
         {/* G2 */}
         <a href={G2_URL} target="_blank" rel="noopener noreferrer" className={badgeLink} aria-label="Read Giggal.ai reviews on G2">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/reviews/g2.jpeg" alt="Giggal.ai reviews on G2" className="h-[96px] w-auto" />
+          <img src="/reviews/g2.jpeg" alt="Giggal.ai reviews on G2" className={`h-[96px] w-auto ${badgeImg}`} />
         </a>
 
         {/* Trustpilot */}
         <a href={TRUSTPILOT_URL} target="_blank" rel="noopener noreferrer" className={badgeLink} aria-label="Read Giggal.ai reviews on Trustpilot">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/reviews/trustpilot.jpeg" alt="Giggal.ai reviews on Trustpilot" className="h-[92px] w-auto" />
+          <img src="/reviews/trustpilot.jpeg" alt="Giggal.ai reviews on Trustpilot" className={`h-[92px] w-auto ${badgeImg}`} />
         </a>
       </div>
     </section>

@@ -25,10 +25,11 @@ export const organizationSchema = {
     availableLanguage: 'English',
   },
   sameAs: [
-    'https://www.linkedin.com/company/target-pulse/',
+    'https://www.linkedin.com/company/giggal-ai/',
     'https://www.youtube.com/@TargetPulseOfficial',
     'https://www.facebook.com/share/1D31DYxZL5/',
-    'https://www.instagram.com/targetpulsee',
+    'https://www.instagram.com/giggal.ai',
+    'https://www.producthunt.com/products/giggal-ai',
   ],
 }
 

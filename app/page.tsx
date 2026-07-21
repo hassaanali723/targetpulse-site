@@ -19,7 +19,7 @@ const SIGNUP_URL = 'https://emailverifier.giggal.ai/sign-up'
 
 export const metadata: Metadata = {
   title: {
-    absolute: 'Giggal.ai - Free Email Verification for Catch-all Domains',
+    absolute: 'Giggal.ai - Verify Catch-All, Risky & SEG-Protected Emails',
   },
   description:
     'Free email verifier built for catch-all and accept-all domains with 99% accuracy. Clean your list, cut bounces, and protect your sender reputation.',
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: '/' },
   openGraph: {
-    title: 'Giggal.ai - Free Email Verification for Catch-all Domains',
+    title: 'Giggal.ai - Verify Catch-All, Risky & SEG-Protected Emails',
     description:
       'Free email verifier built for catch-all and accept-all domains with 99% accuracy. Clean your list, cut bounces, and protect your sender reputation.',
     url: 'https://giggal.ai',
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Giggal.ai - Free Email Verification for Catch-all Domains',
+    title: 'Giggal.ai - Verify Catch-All, Risky & SEG-Protected Emails',
     description:
       'Free email verifier built for catch-all and accept-all domains with 99% accuracy. Clean your list, cut bounces, and protect your sender reputation.',
   },
@@ -61,24 +61,32 @@ export const metadata: Metadata = {
 // Single source of truth for the FAQ — rendered visibly AND emitted as JSON-LD.
 const faqItems: FaqItem[] = [
   {
-    q: 'Do we verify Catch-all/Accept-all/Risky emails?',
-    a: 'Yes — Giggal.ai verifies catch-all, accept-all, and risky addresses and tells you which ones are actually deliverable, instead of leaving them as a guess.',
+    q: 'How do I verify catch-all, accept-all, and SEG-protected emails?',
+    a: 'Giggal.ai is built specifically for catch-all email verification. We check whether each address is a real, active mailbox even on domains that accept every email or sit behind Secure Email Gateways like Mimecast, Proofpoint, and Barracuda. You get a clear valid or invalid verdict instead of the "risky" label other tools give up with. Around 30% of every B2B list is catch-all. Instead of writing off the whole pile, Giggal.ai tells you which addresses are actually valid so you keep the real leads hiding inside.',
   },
   {
-    q: 'How accurate is Giggal.ai validation?',
-    a: 'We maintain a 99.8% SMTP accuracy guarantee on deliverability classifications. By querying mail servers dynamically at the socket layer and cross-checking results with historical bounce patterns, we virtually eliminate false positives.',
+    q: 'How accurate is Giggal.ai email verification?',
+    a: 'Giggal.ai maintains around 99% accuracy on standard business lists. Our deep mailbox existence check goes beyond basic format and domain checks to confirm whether the mailbox is truly reachable. That keeps typical bounce rates under 3% on cleaned lists.',
   },
   {
-    q: 'Can I verify emails in bulk?',
-    a: 'Yes. Upload a CSV or TXT list and Giggal.ai verifies thousands of addresses concurrently in minutes, then returns a clean, deliverability-scored list you can download.',
+    q: 'Can I verify millions of emails at once?',
+    a: 'Yes. Giggal.ai is built for verification at scale. Upload a list of thousands or even millions of email addresses and our cloud infrastructure processes them concurrently, returning fully verified results in minutes. No throttling, no daily caps, no waiting queue.',
+  },
+  {
+    q: 'Does Giggal.ai support MCP (Model Context Protocol) for Claude and AI agents?',
+    a: 'Yes. Giggal.ai has an official MCP server that lets Claude Desktop and other AI agents verify email addresses directly during conversations. Install the Giggal MCP once, then ask Claude to verify any email or list on the fly. No dashboard hopping required.',
+  },
+  {
+    q: 'Can I verify email lists in bulk?',
+    a: 'Yes. Upload a CSV or TXT file with your email list and Giggal.ai verifies thousands of addresses in minutes. You get back a clean, categorized list ready to export as CSV, Excel, or JSON. No manual work required.',
   },
   {
     q: 'How does email verification improve deliverability?',
-    a: 'By removing invalid, fake, and undeliverable addresses before you send, you reduce bounce rates, avoid spam traps, and protect your sender reputation — which leads to better inbox placement.',
+    a: 'By removing invalid, fake, and undeliverable addresses before you send, you cut bounce rates, avoid spam traps, and protect your sender reputation. That leads directly to better inbox placement and higher engagement across your campaigns.',
   },
   {
-    q: 'Is there a free trial?',
-    a: 'Yes. Giggal.ai gives you 1,000 free verification credits to start — no credit card required — so you can experience the accuracy before committing to a paid plan.',
+    q: 'Is Giggal.ai email verification free to try?',
+    a: 'Yes. Giggal.ai gives you 1,000 free verification credits to start, with no credit card required. That is enough to verify a small list end-to-end and see the accuracy before committing to a paid plan. Credits never expire.',
   },
 ]
 
@@ -122,12 +130,13 @@ export default function Home() {
         {/* Copy */}
         <div className="lg:col-span-6 space-y-8 text-left">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900">
-            Reach Every <br />
-            <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">Catch-All Inbox Safely</span>
+            Verify Catch-All, <br />
+            <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">Risky &amp; SEG-Protected Emails</span>
           </h1>
           <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-xl font-medium">
-            Most email validation tools check syntax only. Giggal.ai verifies corporate mailboxes safely at the SMTP socket layer, so you can confidently{' '}
-            <strong className="text-indigo-600 font-extrabold">send to real people</strong>.
+            Giggal.ai runs a deep mailbox existence check on every address. Your bounce rate stays{' '}
+            <strong className="text-indigo-600 font-extrabold">under 3%</strong>, and the{' '}
+            <strong className="text-slate-900 font-extrabold">30% of every B2B list</strong> that other tools flag as &quot;Risky&quot; becomes deliverable again.
           </p>
 
           <div className="pt-12 mt-12 border-t border-slate-200/80 space-y-1">
@@ -248,7 +257,7 @@ export default function Home() {
               <Wordmark className="text-base sm:text-lg" />
               <span className="text-[9px] font-black uppercase text-indigo-600 tracking-wider bg-white px-2 py-0.5 rounded-md shadow-sm ml-2.5">Verified</span>
             </div>
-            <span className="text-6xl sm:text-7xl font-black text-emerald-500 tracking-tight leading-none mt-2">0.4%</span>
+            <span className="text-6xl sm:text-7xl font-black text-emerald-500 tracking-tight leading-none mt-2">&lt;3%</span>
             <span className="text-xs font-extrabold text-emerald-600 uppercase tracking-wider">Guaranteed Outbound Bounces</span>
             <div className="w-full max-w-[200px] h-2 bg-slate-100 rounded-full overflow-hidden mt-2">
               <div className="h-full bg-emerald-500 rounded-full" style={{ width: '5%' }} />

@@ -35,9 +35,9 @@ export default function AnnouncementBar() {
         <p className="flex items-center gap-2 text-[12px] sm:text-[13px] font-bold tracking-tight text-center">
           <Sparkles className="w-3.5 h-3.5 shrink-0 text-emerald-200" />
           <span>
-            <span className="text-indigo-100 font-semibold">TargetPulse is now</span>{' '}
-            <span className="font-black">Giggal.ai</span>
-            <span className="hidden sm:inline text-indigo-100 font-semibold"> — same catch-all verification, fresh new name.</span>
+            <span className="font-black">TargetPulse</span>
+            <span className="text-indigo-100 font-semibold"> is now Giggal.ai</span>
+            <span className="hidden sm:inline text-indigo-100 font-semibold">. We finally got a name that fits.</span>
           </span>
         </p>
         <button

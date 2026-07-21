@@ -6,10 +6,10 @@ import Link from 'next/link'
 import Wordmark from '@/components/Wordmark'
 
 const socials = [
-  { icon: Linkedin, href: 'https://www.linkedin.com/company/target-pulse/', label: 'LinkedIn' },
+  { icon: Linkedin, href: 'https://www.linkedin.com/company/giggal-ai/', label: 'LinkedIn' },
   { icon: Youtube, href: 'https://www.youtube.com/@TargetPulseOfficial', label: 'YouTube' },
   { icon: Facebook, href: 'https://www.facebook.com/share/1D31DYxZL5/', label: 'Facebook' },
-  { icon: Instagram, href: 'https://www.instagram.com/targetpulsee', label: 'Instagram' },
+  { icon: Instagram, href: 'https://www.instagram.com/giggal.ai', label: 'Instagram' },
 ]
 
 const productLinks = [
