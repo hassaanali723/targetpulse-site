@@ -32,6 +32,12 @@ const nextConfig = {
       },
     ]
   },
+  async redirects() {
+    return [
+      // API docs moved from /api-reference → /public/docs
+      { source: '/api-reference', destination: '/public/docs', permanent: true },
+    ]
+  },
 }
 
 module.exports = nextConfig

@@ -15,6 +15,7 @@ const socials = [
 const productLinks = [
   { name: 'Email Verifier', href: '/' },
   { name: 'Catch-All Verification', href: '/catch-all-verification' },
+  { name: 'API Reference', href: '/public/docs' },
   { name: 'Pricing', href: '/pricing' },
   { name: 'Sign up free', href: '/sign-up', external: true },
 ]
