@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Wordmark from '@/components/Wordmark'
 
 const SIGNUP_URL = 'https://emailverifier.giggal.ai/sign-up'
+const SIGNIN_URL = 'https://emailverifier.giggal.ai/sign-in'
 
 const navLinks = [
   { name: 'Catch-all Verification', href: '/catch-all-verification' },
@@ -60,7 +61,7 @@ export default function Navbar() {
             {/* Desktop CTA */}
             <div className="hidden md:flex items-center gap-6">
               <a
-                href={SIGNUP_URL}
+                href={SIGNIN_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm font-bold text-slate-600 hover:text-indigo-600 transition-colors"
@@ -127,7 +128,7 @@ export default function Navbar() {
               Sign up free
             </a>
             <a
-              href={SIGNUP_URL}
+              href={SIGNIN_URL}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setIsMobileMenuOpen(false)}
