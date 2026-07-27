@@ -262,6 +262,21 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        {/* Google Analytics 4 (marketing site only). afterInteractive is
+            Google's + Next.js's recommended strategy for gtag.js: injected once,
+            very early, on every page. */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-QM6FPBZXDL"
+          strategy="afterInteractive"
+        />
+        <Script id="ga4" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-QM6FPBZXDL');
+          `}
+        </Script>
         {/* Microsoft Clarity */}
         <Script id="microsoft-clarity" strategy="afterInteractive">
           {`
