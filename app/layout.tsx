@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
-import Script from 'next/script'
 import { Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
+import DeferredAnalytics from '@/components/DeferredAnalytics'
 
 // Primary UI typeface — used by the hero H1 (the LCP element), so it is the
 // one we preload (next/font default) and keep on the critical path.
@@ -273,33 +273,11 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        {/* Google Analytics 4 (marketing site only). afterInteractive is
-            Google's + Next.js's recommended strategy for gtag.js: injected once,
-            very early, on every page. */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-QM6FPBZXDL"
-          strategy="afterInteractive"
-        />
-        <Script id="ga4" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-QM6FPBZXDL');
-          `}
-        </Script>
-        {/* Microsoft Clarity — non-essential heatmap/analytics; defer to
-            lazyOnload so it loads after the page is idle and doesn't compete
-            with the LCP paint. */}
-        <Script id="microsoft-clarity" strategy="lazyOnload">
-          {`
-            (function(c,l,a,r,i,t,y){
-              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-              t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-              y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-            })(window, document, "clarity", "script", "wx383m5xrf");
-          `}
-        </Script>
+        {/* GA4 + Microsoft Clarity are loaded on first user interaction (see
+            DeferredAnalytics) so their ~800 ms of main-thread work never lands on
+            the LCP critical path. The preconnect hints above keep the eventual
+            load fast. */}
+        <DeferredAnalytics />
       </head>
       <body className="font-sans" suppressHydrationWarning>
         {children}
