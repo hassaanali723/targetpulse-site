@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 import { Star } from 'lucide-react'
 
 const phUrl = (id: number) =>
@@ -110,8 +111,14 @@ function Card({ r }: { r: Review }) {
     >
       <div className="flex items-center gap-3.5 mb-3">
         {r.avatar ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={r.avatar} alt={r.name} className="w-11 h-11 rounded-full object-cover shrink-0 bg-slate-100" />
+          <Image
+            src={r.avatar}
+            alt={r.name}
+            width={44}
+            height={44}
+            loading="lazy"
+            className="w-11 h-11 rounded-full object-cover shrink-0 bg-slate-100"
+          />
         ) : (
           <span className={`w-11 h-11 rounded-full shrink-0 flex items-center justify-center text-sm font-black ${tint(r.name)}`}>
             {initials(r.name)}
@@ -147,7 +154,7 @@ function MarqueeRow({ items, reverse, duration }: { items: Review[]; reverse?: b
 
 export default function ReviewWall() {
   return (
-    <section id="reviews" className="pt-12 pb-24 border-t border-slate-200 space-y-12 overflow-hidden">
+    <section id="reviews" className="cv-section pt-12 pb-24 border-t border-slate-200 space-y-12 overflow-hidden">
       <div className="max-w-2xl mx-auto px-6 text-center space-y-3">
         <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Proven Impact, Validated by High-Growth Teams</h2>
         <p className="text-sm md:text-base text-slate-600 font-medium">See how product and marketing teams use Giggal.ai to protect their domain health and keep lists clean.</p>

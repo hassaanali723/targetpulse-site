@@ -1,0 +1,9 @@
+# Modern evergreen browsers only — stops Next/SWC from shipping legacy
+# transpilation and polyfills (reduces JS bytes; Lighthouse "legacy JavaScript").
+# Covers >99% of real marketing-site traffic.
+chrome >= 111
+edge >= 111
+firefox >= 111
+safari >= 16.4
+ios_saf >= 16.4
+not dead

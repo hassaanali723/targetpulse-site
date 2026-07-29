@@ -17,13 +17,13 @@ const badgeImg = 'mix-blend-multiply'
 
 export default function ReviewBadges() {
   return (
-    <section className="max-w-6xl mx-auto px-6 pt-6 pb-24">
+    <section className="cv-section max-w-6xl mx-auto px-6 pt-6 pb-24">
       <div className="text-center max-w-2xl mx-auto space-y-2.5 mb-10">
         <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">Reviewed by Real Teams</h2>
         <p className="text-sm text-slate-600 font-medium">Rated and trusted across the platforms buyers actually check.</p>
       </div>
       <div className="flex flex-wrap items-center justify-center gap-x-14 gap-y-10">
-        {/* Product Hunt — official rating embed */}
+        {/* Product Hunt — official rating embed (remote SVG; lazy, below the fold) */}
         <a href={PH_URL} target="_blank" rel="noopener noreferrer" className={badgeLink} aria-label="Read Giggal.ai reviews on Product Hunt">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -31,20 +31,22 @@ export default function ReviewBadges() {
             alt="Giggal.ai on Product Hunt"
             width={242}
             height={108}
+            loading="lazy"
+            decoding="async"
             className={`h-[104px] w-auto ${badgeImg}`}
           />
         </a>
 
-        {/* G2 */}
+        {/* G2 — right-sized WebP, lazy */}
         <a href={G2_URL} target="_blank" rel="noopener noreferrer" className={badgeLink} aria-label="Read Giggal.ai reviews on G2">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/reviews/g2.jpeg" alt="Giggal.ai reviews on G2" className={`h-[96px] w-auto ${badgeImg}`} />
+          <img src="/reviews/g2.webp" alt="Giggal.ai reviews on G2" width={192} height={192} loading="lazy" decoding="async" className={`h-[96px] w-auto ${badgeImg}`} />
         </a>
 
-        {/* Trustpilot */}
+        {/* Trustpilot — right-sized WebP, lazy */}
         <a href={TRUSTPILOT_URL} target="_blank" rel="noopener noreferrer" className={badgeLink} aria-label="Read Giggal.ai reviews on Trustpilot">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/reviews/trustpilot.jpeg" alt="Giggal.ai reviews on Trustpilot" className={`h-[92px] w-auto ${badgeImg}`} />
+          <img src="/reviews/trustpilot.webp" alt="Giggal.ai reviews on Trustpilot" width={368} height={184} loading="lazy" decoding="async" className={`h-[92px] w-auto ${badgeImg}`} />
         </a>
       </div>
     </section>

@@ -3,6 +3,8 @@ import Script from 'next/script'
 import { Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 
+// Primary UI typeface — used by the hero H1 (the LCP element), so it is the
+// one we preload (next/font default) and keep on the critical path.
 const jakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700', '800'],
@@ -10,10 +12,14 @@ const jakarta = Plus_Jakarta_Sans({
   variable: '--font-jakarta',
 })
 
+// Mono is only used for small code/email snippets below the fold. Do NOT
+// preload it — its preload otherwise competes with the LCP font on the
+// critical path. It still loads lazily via display: swap when needed.
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
   display: 'swap',
+  preload: false,
   variable: '--font-jetbrains-mono',
 })
 
@@ -258,6 +264,11 @@ export default function RootLayout({
     <html lang="en" className={`scroll-smooth ${jakarta.variable} ${jetbrainsMono.variable}`}>
       <head>
         <meta name="theme-color" content="#4f46e5" />
+        {/* Warm up TCP/TLS to the third-party analytics origins so their
+            scripts don't stall the main thread during the LCP window. */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.clarity.ms" />
+        <link rel="dns-prefetch" href="https://scripts.clarity.ms" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -277,8 +288,10 @@ export default function RootLayout({
             gtag('config', 'G-QM6FPBZXDL');
           `}
         </Script>
-        {/* Microsoft Clarity */}
-        <Script id="microsoft-clarity" strategy="afterInteractive">
+        {/* Microsoft Clarity — non-essential heatmap/analytics; defer to
+            lazyOnload so it loads after the page is idle and doesn't compete
+            with the LCP paint. */}
+        <Script id="microsoft-clarity" strategy="lazyOnload">
           {`
             (function(c,l,a,r,i,t,y){
               c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};

@@ -204,7 +204,7 @@ export default function CatchAllVerificationPage() {
       </section>
 
       {/* ── WHAT IS A CATCH-ALL DOMAIN ─────────────────────── */}
-      <section className="max-w-3xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-8">
+      <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-8">
         <div className="text-center space-y-3">
           <p className="text-[11px] font-black uppercase tracking-[0.2em] text-indigo-600">The Background</p>
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
@@ -233,7 +233,7 @@ export default function CatchAllVerificationPage() {
       </section>
 
       {/* ── HOW IT WORKS: 3 SIGNALS ─────────────────────────── */}
-      <section className="max-w-6xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-12">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-12">
         <div className="text-center max-w-2xl mx-auto space-y-3">
           <p className="text-[11px] font-black uppercase tracking-[0.2em] text-indigo-600">How It Works</p>
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
@@ -264,7 +264,7 @@ export default function CatchAllVerificationPage() {
       </section>
 
       {/* ── COMPARISON: OLD WAY vs GIGGAL.AI ─────────────── */}
-      <section className="max-w-6xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-12">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-12">
         <div className="text-center max-w-2xl mx-auto space-y-3">
           <p className="text-[11px] font-black uppercase tracking-[0.2em] text-indigo-600">Clear Results</p>
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
@@ -351,7 +351,7 @@ export default function CatchAllVerificationPage() {
       </section>
 
       {/* ── TWO WAYS TO RUN IT ─────────────────────────────── */}
-      <section className="max-w-6xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-12">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-12">
         <div className="text-center max-w-2xl mx-auto space-y-3">
           <p className="text-[11px] font-black uppercase tracking-[0.2em] text-indigo-600">In the App</p>
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
@@ -389,7 +389,7 @@ export default function CatchAllVerificationPage() {
       </section>
 
       {/* ── WHO IT IS FOR ──────────────────────────────────── */}
-      <section className="max-w-6xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-12">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-12">
         <div className="text-center max-w-2xl mx-auto space-y-3">
           <p className="text-[11px] font-black uppercase tracking-[0.2em] text-indigo-600">Who Uses It</p>
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
@@ -416,7 +416,7 @@ export default function CatchAllVerificationPage() {
       </section>
 
       {/* ── PRICING ────────────────────────────────────────── */}
-      <section className="max-w-6xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-12">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-12">
         <div className="text-center max-w-2xl mx-auto space-y-3">
           <p className="text-[11px] font-black uppercase tracking-[0.2em] text-indigo-600">Pricing</p>
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
@@ -459,7 +459,7 @@ export default function CatchAllVerificationPage() {
       </section>
 
       {/* ── FAQ ────────────────────────────────────────────── */}
-      <section className="max-w-3xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-16">
+      <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-16">
         <div className="text-center space-y-3">
           <p className="text-[11px] font-black uppercase tracking-[0.2em] text-indigo-600">FAQ</p>
           <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">
@@ -470,7 +470,7 @@ export default function CatchAllVerificationPage() {
       </section>
 
       {/* ── FINAL CTA ─────────────────────────────────────── */}
-      <section className="max-w-6xl mx-auto px-6 pb-24">
+      <section className="cv-section max-w-6xl mx-auto px-6 pb-24">
         <div className="bg-indigo-600 rounded-3xl p-12 md:p-16 text-center text-white space-y-6 shadow-xl relative overflow-hidden">
           <h2 className="text-3xl md:text-4xl font-extrabold leading-tight tracking-tight text-white">
             Get clear verdicts on every catch-all address

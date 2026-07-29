@@ -1,5 +1,4 @@
-'use client'
-
+// Server component — no interactivity, so it ships zero client JS.
 import React from 'react'
 import { Linkedin, Youtube, Facebook, Instagram, ArrowUpRight } from 'lucide-react'
 import Link from 'next/link'

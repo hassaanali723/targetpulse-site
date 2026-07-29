@@ -220,7 +220,7 @@ export default function McpSection({ showImages = false, detailsHref }: McpSecti
   const s = tool.setup
 
   return (
-    <section id="mcp" className="max-w-6xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-10">
+    <section id="mcp" className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-10">
       {/* Header */}
       <div className="text-center max-w-2xl mx-auto space-y-3">
         <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Connect your favourite AI.</h2>

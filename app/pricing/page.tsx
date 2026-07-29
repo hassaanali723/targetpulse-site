@@ -57,12 +57,12 @@ export default function PricingPage() {
       </section>
 
       {/* Pricing widget (same as the landing page) */}
-      <section className="max-w-6xl mx-auto px-6 pb-24 space-y-12">
+      <section className="cv-section max-w-6xl mx-auto px-6 pb-24 space-y-12">
         <PricingBlock />
       </section>
 
       {/* Everything included */}
-      <section className="max-w-6xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-12">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-12">
         <div className="text-center max-w-2xl mx-auto space-y-3">
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Everything Included in Every Package</h2>
           <p className="text-slate-600 text-sm md:text-base font-medium">All features, all packages. No tiers, no paywalls.</p>
@@ -80,7 +80,7 @@ export default function PricingPage() {
       </section>
 
       {/* How pricing works */}
-      <section className="max-w-6xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-16">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-16">
         <div className="text-center max-w-2xl mx-auto space-y-3">
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Pricing Made Simple</h2>
           <p className="text-slate-600 text-sm md:text-base font-medium">Four principles that keep our pricing honest and predictable.</p>
@@ -101,7 +101,7 @@ export default function PricingPage() {
       </section>
 
       {/* FAQ */}
-      <section className="max-w-3xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-16">
+      <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-16">
         <div className="text-center space-y-3">
           <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">Common Questions</h2>
           <p className="text-sm text-slate-600 font-bold">Everything you need to know about credits, billing, and refunds.</p>
@@ -110,7 +110,7 @@ export default function PricingPage() {
       </section>
 
       {/* CTA banner */}
-      <section className="max-w-6xl mx-auto px-6 pb-24">
+      <section className="cv-section max-w-6xl mx-auto px-6 pb-24">
         <div className="bg-indigo-600 rounded-3xl p-12 md:p-16 text-center text-white space-y-6 shadow-xl relative overflow-hidden">
           <h2 className="text-3xl md:text-4xl font-extrabold leading-tight tracking-tight text-white">Start With 1,000 Free Credits</h2>
           <p className="text-sm text-indigo-100 max-w-lg mx-auto font-medium">

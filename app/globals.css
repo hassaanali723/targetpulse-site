@@ -29,6 +29,15 @@
 }
 
 @layer utilities {
+  /* Below-the-fold sections: skip layout/paint until scrolled near, cutting
+     first-paint (FCP/LCP) work on a large DOM. Content stays in the HTML for
+     SEO. `auto` in contain-intrinsic-size remembers each section's real height
+     after first render, so scrolling doesn't shift content (keeps CLS at 0). */
+  .cv-section {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 700px;
+  }
+
   .container-custom {
     width: 90vw;
     margin-left: auto;

@@ -211,7 +211,7 @@ export default function Home() {
       </section>
 
       {/* Real-time verifier console */}
-      <section className="max-w-6xl mx-auto px-6 pb-24 text-center space-y-12">
+      <section className="cv-section max-w-6xl mx-auto px-6 pb-24 text-center space-y-12">
         <div className="max-w-3xl mx-auto space-y-4">
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Verify Any Email in Real-Time</h2>
           <p className="text-slate-600 leading-relaxed text-sm md:text-base font-medium max-w-2xl mx-auto">
@@ -225,7 +225,7 @@ export default function Home() {
       <ReviewBadges />
 
       {/* Catch-all educational */}
-      <section className="max-w-5xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-12">
+      <section className="cv-section max-w-5xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-12">
         <div className="text-center max-w-2xl mx-auto space-y-3">
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">What is a Catch-All/Accept-All?</h2>
           <p className="text-slate-600 text-sm font-medium">
@@ -273,7 +273,7 @@ export default function Home() {
       <McpSection detailsHref="/mcp" />
 
       {/* Feature showcase */}
-      <section id="features-showcase" className="max-w-6xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-16">
+      <section id="features-showcase" className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-16">
         <div className="text-center max-w-2xl mx-auto space-y-3">
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Robust Tools For Uncompromising Scale</h2>
           <p className="text-slate-600 text-sm font-medium">
@@ -330,7 +330,7 @@ export default function Home() {
       </section>
 
       {/* Integrations */}
-      <section id="integrations" className="bg-slate-100 py-24 border-y-2 border-slate-200">
+      <section id="integrations" className="cv-section bg-slate-100 py-24 border-y-2 border-slate-200">
         <div className="max-w-6xl mx-auto px-6 space-y-16">
           <div className="text-center max-w-2xl mx-auto space-y-3">
             <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">Connect Your Marketing Stack</h2>
@@ -341,7 +341,7 @@ export default function Home() {
             {integrations.map((int) => (
               <div key={int.name} className="bg-white border-2 border-slate-200/80 rounded-2xl p-5 w-full flex flex-col items-center hover:border-indigo-500 hover:-translate-y-1 transition-all card-vivid-shadow">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={int.src} className="w-8 h-8 mb-3 object-contain" alt={`${int.name} logo`} />
+                <img src={int.src} width={32} height={32} loading="lazy" decoding="async" className="w-8 h-8 mb-3 object-contain" alt={`${int.name} logo`} />
                 <span className="text-xs font-black text-slate-800">{int.name}</span>
               </div>
             ))}
@@ -356,7 +356,7 @@ export default function Home() {
       </section>
 
       {/* Pricing */}
-      <section id="pricing" className="max-w-6xl mx-auto px-6 py-24 border-t border-slate-200 space-y-12">
+      <section id="pricing" className="cv-section max-w-6xl mx-auto px-6 py-24 border-t border-slate-200 space-y-12">
         <div className="text-center max-w-2xl mx-auto space-y-4">
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Simple, Flexible Pricing</h2>
           <p className="text-sm md:text-base text-slate-600 font-medium">No hidden fees. Choose between one-time credit packages or monthly plans to fit your outbound email volume.</p>
@@ -366,7 +366,7 @@ export default function Home() {
       </section>
 
       {/* FAQ */}
-      <section id="faq" className="max-w-3xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-16">
+      <section id="faq" className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-16">
         <div className="text-center space-y-3">
           <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">Frequently Asked Questions</h2>
           <p className="text-sm text-slate-600 font-bold">Everything you need to know about our SMTP socket logic and server pings.</p>
@@ -375,7 +375,7 @@ export default function Home() {
       </section>
 
       {/* Final CTA */}
-      <section className="max-w-6xl mx-auto px-6 pb-24">
+      <section className="cv-section max-w-6xl mx-auto px-6 pb-24">
         <div className="bg-indigo-600 rounded-3xl p-12 md:p-16 text-center text-white space-y-6 shadow-xl relative overflow-hidden">
           <h2 className="text-3xl md:text-4xl font-extrabold leading-tight tracking-tight text-white">
             Optimize Your Email Marketing Delivery Today
