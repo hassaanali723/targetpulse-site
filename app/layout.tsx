@@ -8,7 +8,7 @@ import './globals.css'
 const jakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700', '800'],
-  display: 'swap',
+  display: 'optional',
   variable: '--font-jakarta',
 })
 
@@ -18,7 +18,7 @@ const jakarta = Plus_Jakarta_Sans({
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
-  display: 'swap',
+  display: 'optional',
   preload: false,
   variable: '--font-jetbrains-mono',
 })
