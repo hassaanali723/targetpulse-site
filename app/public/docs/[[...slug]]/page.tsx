@@ -3,6 +3,8 @@
 import React, { useState, useMemo, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import Navbar from '@/components/Navbar'
+import JsonLd from '@/components/JsonLd'
+import { breadcrumbLd } from '@/lib/schema'
 import Footer from '@/components/Footer'
 import { ChevronDown, Search, ArrowRight } from 'lucide-react'
 
@@ -179,14 +181,14 @@ const jobResultsSample = `{
     },
     "results": [
       {
-        "email": "hassaan@targetpulse.net",
+        "email": "hassaan@giggal.ai",
         "status": "deliverable",
         "is_valid": true,
         "risk_level": "high",
         "deliverability_score": 88,
         "details": {
           "general": {
-            "domain": "targetpulse.net",
+            "domain": "giggal.ai",
             "reason": "All validations passed",
             "validation_method": "smtp"
           },
@@ -214,12 +216,12 @@ const jobResultsSample = `{
         }
       },
       {
-        "email": "zain@targetpulse.net",
+        "email": "zain@giggal.ai",
         "status": "deliverable",
         "is_valid": true,
         "risk_level": "low",
         "deliverability_score": 100,
-        "details": { "general": { "domain": "targetpulse.net", "reason": "2.1.5 OK", "validation_method": "smtp" }, "...": "..." }
+        "details": { "general": { "domain": "giggal.ai", "reason": "2.1.5 OK", "validation_method": "smtp" }, "...": "..." }
       }
     ],
     "pagination": {
@@ -293,7 +295,7 @@ const catchAllResultsSample = `{
     },
     "results": [
       {
-        "email": "hassaan@targetpulse.net",
+        "email": "hassaan@giggal.ai",
         "score": 88,
         "verdict": "valid",
         "is_actually_catchall": true,
@@ -320,7 +322,7 @@ const catchAllResultsSample = `{
         }
       },
       {
-        "email": "zain@targetpulse.net",
+        "email": "zain@giggal.ai",
         "score": 9,
         "verdict": "invalid",
         "is_actually_catchall": true,
@@ -349,14 +351,14 @@ const catchAllResultsSample = `{
 }`
 
 const catchAllCsvSample = `Email,Score,Verdict
-"hassaan@targetpulse.net",88,"valid"
-"zain@targetpulse.net",9,"invalid"
+"hassaan@giggal.ai",88,"valid"
+"zain@giggal.ai",9,"invalid"
 "info@giggal.ai",8,"invalid"
-"hassaan@targetpulse.net",6,"invalid"
-"zain@targetpulse.net",3,"invalid"
+"hassaan@giggal.ai",6,"invalid"
+"zain@giggal.ai",3,"invalid"
 "info@giggal.ai",8,"invalid"
-"hassaan@targetpulse.net",6,"invalid"
-"zain@targetpulse.net",9,"invalid"`
+"hassaan@giggal.ai",6,"invalid"
+"zain@giggal.ai",9,"invalid"`
 
 const creditsResponse = `{
   "success": true,
@@ -837,6 +839,7 @@ export default function ApiReferencePage() {
 
   return (
     <main className="relative min-h-screen bg-slate-50 text-slate-800 antialiased">
+      <JsonLd data={breadcrumbLd('API Documentation', '/public/docs')} />
       <Navbar />
 
       <div className="max-w-[1400px] mx-auto px-6 lg:px-8 pt-24">

@@ -158,6 +158,7 @@ export default function ReviewWall() {
       <div className="max-w-2xl mx-auto px-6 text-center space-y-3">
         <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Proven Impact, Validated by High-Growth Teams</h2>
         <p className="text-sm md:text-base text-slate-600 font-medium">See how product and marketing teams use Giggal.ai to protect their domain health and keep lists clean.</p>
+        <p className="text-xs text-slate-400 font-medium">Some reviews were collected under our previous name, TargetPulse.</p>
       </div>
 
       <div className="space-y-6">
