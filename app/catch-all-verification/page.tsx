@@ -49,7 +49,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'Why does catch-all verification cost more credits?',
-    a: 'A standard verification is a single check. A catch-all verification runs deeper, including direct mailbox checks on addresses protected by Secure Email Gateways. The extra work is the reason a catch-all check costs 1.5 credits instead of 1.',
+    a: 'A standard verification is a single check. A catch-all verification runs deeper, including direct mailbox checks on addresses protected by Secure Email Gateways. That extra work is why it costs 1.5 credits when you enable it during verification, or 2 credits if you run it separately on a list you already verified.',
   },
   {
     q: 'How accurate is catch-all verification?',
@@ -61,13 +61,25 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'Can I verify only the catch-all emails from a list I already cleaned somewhere else?',
-    a: 'Yes. Open Catch-All Detection in your dashboard, paste or upload only the addresses you want to check, and verify just those.',
+    a: 'Yes. Open Catch-All Detection in your dashboard, paste or upload only the addresses you want to check, and verify just those. Standalone checks cost 2 credits per email. If your list is not verified yet, run it in one pass instead and pay 1.5.',
   },
   {
     q: 'What happens if a catch-all check comes back as Unknown?',
     a: 'That is rare, but if we cannot reach a verdict the credit is refunded automatically. You only pay for verifications we can complete.',
   },
 ]
+
+// Built from the same `faqs` array that renders visibly, so the structured
+// data text always matches the on-page copy exactly.
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+}
 
 const EMAIL_COUNT = 49621
 
@@ -80,6 +92,10 @@ export default function CatchAllVerificationPage() {
 
   return (
     <main className="relative min-h-screen bg-slate-50 grid-lines overflow-x-hidden text-slate-800 antialiased">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       {/* Ambient light effects */}
       <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-indigo-500/10 blur-[120px] -z-10 pointer-events-none" />
       <div className="absolute top-[600px] right-1/4 w-[500px] h-[500px] rounded-full bg-emerald-500/[0.06] blur-[100px] -z-10 pointer-events-none" />
@@ -381,7 +397,7 @@ export default function CatchAllVerificationPage() {
             <p className="text-[13px] sm:text-sm text-slate-500 font-semibold leading-relaxed">
               Already ran a list without catch-all verification? Open Catch-All Detection in
               your dashboard, paste or upload only the catch-all addresses, and verify just
-              those. Same 1.5 credits per email.
+              those. 2 credits per email.
             </p>
             <div className="text-[12px] text-slate-400 font-bold">Best for lists you cleaned somewhere else and want to recover.</div>
           </div>
