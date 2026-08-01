@@ -2,24 +2,10 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link'
+import { RAW_OFFERS } from '@/components/landing/pricingOffers'
 
-// Pricing tiers — sourced from the backend (frontend/src/constants/pricing.ts).
 // payRate = pack total ÷ credits; subRate = payRate × (1 − 0.10) monthly discount.
 const SUBSCRIPTION_DISCOUNT_RATE = 0.1
-
-interface Offer { credits: number; price: number; popular?: boolean }
-
-const RAW_OFFERS: Offer[] = [
-  { credits: 3000, price: 5.0 },
-  { credits: 10000, price: 9.9 },
-  { credits: 30000, price: 28.0 },
-  { credits: 50000, price: 39.0 },
-  { credits: 100000, price: 76.0, popular: true },
-  { credits: 300000, price: 222.0 },
-  { credits: 500000, price: 360.0 },
-  { credits: 800000, price: 559.0 },
-  { credits: 1000000, price: 680.0 },
-]
 
 const OFFERS = RAW_OFFERS.map((o) => ({
   ...o,

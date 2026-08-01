@@ -6,6 +6,8 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import Wordmark from '@/components/Wordmark'
 import FaqAccordion, { type FaqItem } from '@/components/landing/FaqAccordion'
+import JsonLd from '@/components/JsonLd'
+import { breadcrumbLd } from '@/lib/schema'
 import {
   Sparkles, Globe, Mail, CheckCircle2, AlertCircle,
   AlertTriangle, ArrowRight, TrendingDown, Users, Building2,
@@ -96,6 +98,7 @@ export default function CatchAllVerificationPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
+      <JsonLd data={breadcrumbLd('Catch-All Verification', '/catch-all-verification')} />
       {/* Ambient light effects */}
       <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-indigo-500/10 blur-[120px] -z-10 pointer-events-none" />
       <div className="absolute top-[600px] right-1/4 w-[500px] h-[500px] rounded-full bg-emerald-500/[0.06] blur-[100px] -z-10 pointer-events-none" />

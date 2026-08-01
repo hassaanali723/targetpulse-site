@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Navbar from '@/components/Navbar'
+import JsonLd from '@/components/JsonLd'
+import { breadcrumbLd } from '@/lib/schema'
 import Footer from '@/components/Footer'
 import Wordmark from '@/components/Wordmark'
 import { Mail, Phone, MapPin, Send, MessageSquare, CheckCircle2, XCircle } from 'lucide-react'
@@ -70,6 +72,7 @@ export default function TalkToHumanPage() {
 
   return (
     <main className="relative min-h-screen bg-slate-50 grid-lines overflow-x-hidden text-slate-800 antialiased">
+      <JsonLd data={breadcrumbLd('Contact Us', '/contact-us')} />
       {/* Ambient light effects */}
       <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-indigo-500/10 blur-[120px] -z-10 pointer-events-none" />
       <div className="absolute top-[600px] right-1/4 w-[500px] h-[500px] rounded-full bg-emerald-500/[0.06] blur-[100px] -z-10 pointer-events-none" />

@@ -4,6 +4,8 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import Wordmark from '@/components/Wordmark'
 import FaqAccordion, { type FaqItem } from '@/components/landing/FaqAccordion'
+import JsonLd from '@/components/JsonLd'
+import { faqPageLd, breadcrumbLd } from '@/lib/schema'
 import {
   Repeat, Calendar, Wallet, Infinity as InfinityIcon,
   Users, ArrowRight, Check, TrendingUp, Share2,
@@ -88,6 +90,8 @@ const faqs: FaqItem[] = [
 export default function AffiliatesPage() {
   return (
     <main className="relative min-h-screen bg-slate-50 grid-lines overflow-x-hidden text-slate-800 antialiased">
+      <JsonLd data={breadcrumbLd('Affiliates', '/affiliates')} />
+      <JsonLd data={faqPageLd(faqs)} />
       {/* Ambient light effects */}
       <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-indigo-500/10 blur-[120px] -z-10 pointer-events-none" />
       <div className="absolute top-[600px] right-1/4 w-[500px] h-[500px] rounded-full bg-emerald-500/[0.06] blur-[100px] -z-10 pointer-events-none" />

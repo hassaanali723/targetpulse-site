@@ -12,6 +12,8 @@ import ReviewWall from '@/components/landing/ReviewWall'
 import McpSection from '@/components/landing/McpSection'
 import PricingBlock from '@/components/landing/PricingBlock'
 import FaqAccordion, { type FaqItem } from '@/components/landing/FaqAccordion'
+import JsonLd from '@/components/JsonLd'
+import { softwareApplicationLd } from '@/lib/schema'
 
 // All sign-up / get-started CTAs go straight to the Giggal email verifier dashboard.
 const SIGNUP_URL = 'https://emailverifier.giggal.ai/sign-up'
@@ -96,6 +98,7 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
+      <JsonLd data={softwareApplicationLd()} />
 
       {/* Ambient light effects */}
       <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-indigo-500/10 blur-[120px] -z-10 pointer-events-none" />

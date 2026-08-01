@@ -88,31 +88,23 @@ const jsonLd = {
       url: baseUrl,
       logo: {
         '@type': 'ImageObject',
-        // Square logo required by Google for knowledge panel / brand recognition
         url: `${baseUrl}/giggal-logo.png`,
-        width: 2000,
-        height: 2000,
       },
+      description:
+        'Email verification tool that verifies catch-all, risky and SEG-protected addresses with clear valid or invalid verdicts.',
+      // Only profiles that already carry the Giggal.ai name. G2, Trustpilot and
+      // YouTube still resolve to TargetPulse-branded profiles and are added in a
+      // later task once migrated.
       sameAs: [
         'https://www.linkedin.com/company/giggal-ai/',
-        'https://www.youtube.com/@TargetPulseOfficial',
+        'https://www.producthunt.com/products/giggal-ai',
         'https://www.facebook.com/share/1D31DYxZL5/',
         'https://www.instagram.com/giggal.ai',
-        'https://www.producthunt.com/products/giggal-ai',
       ],
       contactPoint: {
         '@type': 'ContactPoint',
-        email: 'info@giggal.ai',
         contactType: 'customer support',
-        availableLanguage: 'English',
-      },
-      address: {
-        '@type': 'PostalAddress',
-        streetAddress: 'Office 17366, 182-184 High Street North',
-        addressLocality: 'East Ham',
-        addressRegion: 'London',
-        postalCode: 'E6 2JA',
-        addressCountry: 'GB',
+        url: `${baseUrl}/contact-us`,
       },
     },
     {
@@ -196,35 +188,6 @@ const jsonLd = {
           url: `${baseUrl}/contact-us`,
         },
       ],
-    },
-    {
-      '@type': 'SoftwareApplication',
-      '@id': `${baseUrl}/#software`,
-      name: 'Giggal.ai Email Verifier',
-      applicationCategory: 'BusinessApplication',
-      operatingSystem: 'Web',
-      url: baseUrl,
-      description: 'Real-time email verification and bulk email list cleaning tool. Reduce bounces, improve deliverability, and protect your sender reputation.',
-      offers: {
-        '@type': 'Offer',
-        price: '0',
-        priceCurrency: 'USD',
-        description: 'Free trial available. Pay-as-you-go pricing.',
-      },
-      featureList: [
-        'Real-time email verification',
-        'Bulk email list cleaning',
-        'Syntax validation',
-        'Domain & MX record check',
-        'Disposable email detection',
-        'Role-based email detection',
-        'Catch-all email detection',
-        'SMTP verification',
-      ],
-      screenshot: `${baseUrl}/giggal-logo.png`,
-      creator: {
-        '@id': `${baseUrl}/#organization`,
-      },
     },
   ],
 }
