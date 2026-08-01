@@ -1,70 +1,24 @@
 import { MetadataRoute } from 'next'
 
+// lastModified uses plain 'YYYY-MM-DD' strings so the emitted <lastmod> is
+// date-only (matching the reviewed sitemap). Each date is the page's real last
+// content-change date; trivial meta-only edits do not bump it. Legal pages keep
+// their original date. changefreq/priority are intentionally omitted (Google
+// ignores both).
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://giggal.ai'
-  const recent = new Date('2026-05-27')
 
   return [
-    {
-      url: baseUrl,
-      lastModified: recent,
-      changeFrequency: 'weekly',
-      priority: 1.0,
-    },
-    {
-      url: `${baseUrl}/sign-up`,
-      lastModified: recent,
-      changeFrequency: 'monthly',
-      priority: 0.95,
-    },
-    {
-      url: `${baseUrl}/pricing`,
-      lastModified: recent,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/affiliates`,
-      lastModified: recent,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/catch-all-verification`,
-      lastModified: recent,
-      changeFrequency: 'monthly',
-      priority: 0.85,
-    },
-    {
-      url: `${baseUrl}/public/docs`,
-      lastModified: recent,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/contact-us`,
-      lastModified: recent,
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    },
-    // Legal pages — kept low priority so Google does NOT pick them for sitelinks
-    {
-      url: `${baseUrl}/privacy-policy`,
-      lastModified: new Date('2026-02-04'),
-      changeFrequency: 'yearly',
-      priority: 0.1,
-    },
-    {
-      url: `${baseUrl}/terms-of-service`,
-      lastModified: new Date('2026-02-04'),
-      changeFrequency: 'yearly',
-      priority: 0.1,
-    },
-    {
-      url: `${baseUrl}/refund-policy`,
-      lastModified: new Date('2026-02-04'),
-      changeFrequency: 'yearly',
-      priority: 0.1,
-    },
+    { url: baseUrl, lastModified: '2026-08-01' },
+    { url: `${baseUrl}/catch-all-verification`, lastModified: '2026-08-01' },
+    { url: `${baseUrl}/mcp`, lastModified: '2026-07-21' },
+    { url: `${baseUrl}/pricing`, lastModified: '2026-07-29' },
+    { url: `${baseUrl}/public/docs`, lastModified: '2026-07-24' },
+    { url: `${baseUrl}/sign-up`, lastModified: '2026-07-21' },
+    { url: `${baseUrl}/affiliates`, lastModified: '2026-07-21' },
+    { url: `${baseUrl}/contact-us`, lastModified: '2026-07-21' },
+    { url: `${baseUrl}/privacy-policy`, lastModified: '2026-02-04' },
+    { url: `${baseUrl}/terms-of-service`, lastModified: '2026-02-04' },
+    { url: `${baseUrl}/refund-policy`, lastModified: '2026-02-04' },
   ]
 }
