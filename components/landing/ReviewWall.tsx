@@ -5,7 +5,7 @@ import { Star } from 'lucide-react'
 const phUrl = (id: number) =>
   `https://www.producthunt.com/products/giggal-ai/reviews?review=${id}&utm_source=badge-testimonial-wall&utm_medium=badge`
 const tpUrl = (id: string) => `https://uk.trustpilot.com/reviews/${id}`
-const G2_REVIEWS_URL = 'https://www.g2.com/products/targetpulse-email-verifier/reviews'
+const G2_REVIEWS_URL = 'https://www.g2.com/sellers/giggal-ai#reviews'
 
 type Source = 'producthunt' | 'g2' | 'trustpilot'
 const SOURCE_LABEL: Record<Source, string> = {
