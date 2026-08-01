@@ -44,15 +44,6 @@ const pricingSchema = {
 export const metadata: Metadata = {
   title: 'Pricing',
   description: 'Simple, affordable email verification pricing. Pay only for what you verify. No monthly fees, no subscriptions. Start free and scale as you grow.',
-  keywords: [
-    'email verification pricing',
-    'email verifier cost',
-    'bulk email verification pricing',
-    'free email verification tool',
-    'email verification service',
-    'bulk email verifier',
-    'email validation pricing',
-  ],
   alternates: {
     canonical: '/pricing',
   },

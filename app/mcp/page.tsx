@@ -12,15 +12,6 @@ export const metadata: Metadata = {
   title: 'MCP Server — Verify Emails From Your AI Agent',
   description:
     'Connect Giggal.ai to Claude, ChatGPT, Cursor, VS Code and more over MCP. Verify emails — catch-all included — straight from your AI agent.',
-  keywords: [
-    'Giggal MCP server',
-    'email verification MCP',
-    'MCP email verifier',
-    'Model Context Protocol email',
-    'verify emails in Claude',
-    'verify emails in Cursor',
-    'AI agent email verification',
-  ],
   alternates: { canonical: '/mcp' },
   openGraph: {
     title: 'Giggal.ai MCP Server — Verify Emails From Your AI Agent',

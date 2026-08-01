@@ -4,14 +4,6 @@ export const metadata: Metadata = {
   title: 'Earn with Us — Affiliate Program',
   description:
     'Join the Giggal.ai affiliate program and earn 20% recurring commission on every payment your referrals make. 3-month attribution window, monthly payouts via PayPal or Wise, no earnings cap. Free to join.',
-  keywords: [
-    'Giggal.ai affiliate program',
-    'email verification affiliate',
-    'recurring commission email tool',
-    'earn with Giggal.ai',
-    'refer and earn email verifier',
-    'saas affiliate program',
-  ],
   alternates: {
     canonical: '/affiliates',
   },

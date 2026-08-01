@@ -18,34 +18,15 @@ const SIGNUP_URL = 'https://emailverifier.giggal.ai/sign-up'
 
 export const metadata: Metadata = {
   title: {
-    absolute: 'Giggal.ai - Verify Catch-All, Risky & SEG-Protected Emails',
+    absolute: 'Email Verifier with Catch-All & SEG Verification | Giggal.ai',
   },
   description:
-    'Free email verifier built for catch-all and accept-all domains with 99% accuracy. Clean your list, cut bounces, and protect your sender reputation.',
-  keywords: [
-    'catch-all email verification',
-    'accept-all email verification',
-    'verify catch-all emails',
-    'catch-all domain checker',
-    'free catch-all email verifier',
-    'email verifier',
-    'email verification tool',
-    'bulk email verifier',
-    'email validator',
-    'verify email address',
-    'email list cleaning',
-    'free email verification tool',
-    'real time email verification',
-    'best email verification tool',
-    'reduce email bounce rate',
-    'improve email deliverability',
-    'sender reputation tool',
-  ],
+    'Verify any email including catch-all, risky and SEG-protected addresses. 99% accuracy, bounce rate under 3%. 1,000 free credits, no card required.',
   alternates: { canonical: '/' },
   openGraph: {
     title: 'Giggal.ai - Verify Catch-All, Risky & SEG-Protected Emails',
     description:
-      'Free email verifier built for catch-all and accept-all domains with 99% accuracy. Clean your list, cut bounces, and protect your sender reputation.',
+      'Verify any email including catch-all, risky and SEG-protected addresses. 99% accuracy, bounce rate under 3%. 1,000 free credits, no card required.',
     url: 'https://giggal.ai',
     type: 'website',
   },
@@ -53,7 +34,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Giggal.ai - Verify Catch-All, Risky & SEG-Protected Emails',
     description:
-      'Free email verifier built for catch-all and accept-all domains with 99% accuracy. Clean your list, cut bounces, and protect your sender reputation.',
+      'Verify any email including catch-all, risky and SEG-protected addresses. 99% accuracy, bounce rate under 3%. 1,000 free credits, no card required.',
   },
 }
 

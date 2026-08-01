@@ -4,16 +4,6 @@ export const metadata: Metadata = {
   title: 'Catch-All Email Verification',
   description:
     'Verify catch-all and accept-all email addresses with clear valid or invalid results. Stop guessing on Risky and Unknown labels. 99% accuracy, free to start.',
-  keywords: [
-    'catch-all email verification',
-    'accept-all email verification',
-    'verify catch-all emails',
-    'catch-all email checker',
-    'catch-all domain verifier',
-    'how to verify catch-all emails',
-    'catch-all email validator',
-    'free catch-all verifier',
-  ],
   alternates: {
     canonical: '/catch-all-verification',
   },
