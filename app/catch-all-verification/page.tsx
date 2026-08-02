@@ -483,6 +483,17 @@ export default function CatchAllVerificationPage() {
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
+
+        <p className="text-center text-slate-600 text-sm md:text-base font-medium max-w-2xl mx-auto">
+          Weighing this against another tool? See{' '}
+          <Link
+            href="/alternatives"
+            className="text-indigo-700 hover:text-indigo-800 font-extrabold transition-colors"
+          >
+            how Giggal.ai compares to other verifiers
+          </Link>
+          .
+        </p>
       </section>
 
       {/* ── FAQ ────────────────────────────────────────────── */}

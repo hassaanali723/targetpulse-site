@@ -52,7 +52,7 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 mb-12">
           {/* Brand column */}
-          <div className="md:col-span-4 space-y-4">
+          <div className="md:col-span-3 space-y-4">
             <Link href="/" className="inline-flex items-center" aria-label="Giggal.ai home">
               <Wordmark className="text-2xl" />
             </Link>
@@ -79,7 +79,7 @@ export default function Footer() {
           </div>
 
           {/* Solutions column */}
-          <div className="md:col-span-3">
+          <div className="md:col-span-2">
             <p className={headingClass}>Solutions</p>
             <ul className="space-y-2.5">
               {solutionsLinks.map((link) => (
@@ -89,6 +89,18 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
+            </ul>
+          </div>
+
+          {/* Compare column */}
+          <div className="md:col-span-2">
+            <p className={headingClass}>Compare</p>
+            <ul className="space-y-2.5">
+              <li>
+                <Link href="/alternatives" className={linkClass}>
+                  Compare verifiers
+                </Link>
+              </li>
             </ul>
           </div>
 
