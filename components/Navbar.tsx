@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { Menu, X, ChevronDown } from 'lucide-react'
 import Link from 'next/link'
 import Wordmark from '@/components/Wordmark'
+import { MIMECAST_PAGE_LIVE } from '@/lib/flags'
 
 const SIGNUP_URL = 'https://emailverifier.giggal.ai/sign-up'
 const SIGNIN_URL = 'https://emailverifier.giggal.ai/sign-in'
@@ -14,10 +15,13 @@ const catchAllLink = { name: 'Catch-all Verification', href: '/catch-all-verific
 
 const solutionsLinks = [
   { name: 'SEG Verification', href: '/seg-email-verification' },
-  { name: 'MCP', href: '/mcp' },
+  ...(MIMECAST_PAGE_LIVE
+    ? [{ name: 'Mimecast Verification', href: '/mimecast-email-verification' }]
+    : []),
 ]
 
 const navLinks = [
+  { name: 'MCP', href: '/mcp' },
   { name: 'Pricing', href: '/pricing' },
   { name: 'Earn with us', href: '/affiliates' },
   { name: 'Talk to us', href: '/contact-us' },

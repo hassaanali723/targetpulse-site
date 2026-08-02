@@ -93,7 +93,7 @@ const jsonLd = {
         url: `${baseUrl}/giggal-logo.png`,
       },
       description:
-        'Email verification tool that verifies catch-all, risky and SEG-protected addresses with clear valid or invalid verdicts.',
+        'Email verification tool that verifies catch-all, risky and SEG-protected addresses with a clear valid or invalid result.',
       // Only profiles that already carry the Giggal.ai name. G2, Trustpilot and
       // YouTube still resolve to TargetPulse-branded profiles and are added in a
       // later task once migrated.

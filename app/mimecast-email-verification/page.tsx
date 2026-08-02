@@ -11,7 +11,7 @@ import { CheckCircle2, AlertCircle, AlertTriangle, HelpCircle, ArrowRight, Check
 
 const APP_URL = 'https://emailverifier.giggal.ai/sign-up'
 const DESC =
-  'Mimecast hides whether a mailbox exists, so most verifiers return Unknown. Giggal.ai skips SMTP against Mimecast and returns a real verdict instead.'
+  'Mimecast hides whether a mailbox exists, so most verifiers return Unknown. Giggal.ai skips SMTP against Mimecast and returns a real result instead.'
 
 export const metadata: Metadata = {
   title: { absolute: 'Mimecast Email Verification | Giggal.ai' },
@@ -34,7 +34,7 @@ const VERDICTS = [
   { Icon: CheckCircle2, tint: 'text-emerald-600', label: 'Deliverable', meaning: 'The mailbox exists and will accept mail' },
   { Icon: AlertCircle, tint: 'text-rose-600', label: 'Undeliverable', meaning: 'The mailbox does not exist' },
   { Icon: AlertTriangle, tint: 'text-amber-600', label: 'Risky', meaning: 'The address exists but carries deliverability risk' },
-  { Icon: HelpCircle, tint: 'text-slate-500', label: 'Unknown', meaning: 'We could not reach a verdict' },
+  { Icon: HelpCircle, tint: 'text-slate-500', label: 'Unknown', meaning: 'We could not verify the address' },
 ]
 
 const faqs: FaqItem[] = [
@@ -44,7 +44,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'Why do most verifiers return Unknown on Mimecast domains?',
-    a: 'They ask the mail server over SMTP whether a mailbox exists. Mimecast intercepts that and answers with something deliberately uninformative, so the verifier has nothing to work with.',
+    a: 'They ask the mail server over SMTP whether a mailbox exists. Mimecast intercepts that and answers with something deliberately vague, so the verifier has nothing to work with.',
   },
   {
     q: 'Does Giggal.ai probe Mimecast over SMTP?',
@@ -91,7 +91,7 @@ export default function MimecastEmailVerificationPage() {
         <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium">
           Mimecast is built to stop anyone working out which mailboxes exist on a domain, which is
           why most verifiers hand back Unknown. Giggal.ai takes a different route and returns a real
-          verdict.
+          email verification result.
         </p>
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3">
           <a
@@ -123,14 +123,14 @@ export default function MimecastEmailVerificationPage() {
             exists. The verifier never actually talks to the system that knows the answer.
           </p>
           <p>
-            Anti-enumeration is a deliberate feature, not a side effect. Mimecast is supposed to
-            prevent exactly the kind of probing a verifier does, because the same technique is how an
-            attacker would map out a company&apos;s users. Stopping it is the point.
+            Blocking that kind of mailbox lookup is a deliberate feature, not a side effect. Mimecast
+            is supposed to prevent exactly the kind of probing a verifier does, because the same
+            technique is how an attacker would map out a company&apos;s users. Stopping it is the point.
           </p>
           <p>
-            When probed, Mimecast returns a deliberately uninformative response rather than confirming
+            When probed, Mimecast returns a deliberately vague response rather than confirming
             or denying the mailbox. A verifier that takes that response at face value has two options,
-            and both are bad. It can guess, which puts wrong verdicts into your list, or it can give
+            and both are bad. It can guess, which puts wrong results into your list, or it can give
             up and mark the address Unknown, which leaves a real contact unresolved.
           </p>
         </div>
@@ -150,7 +150,7 @@ export default function MimecastEmailVerificationPage() {
           <p>
             The one behaviour our engine relies on here is specific: it recognises the
             &quot;internal resource temporarily unavailable&quot; anti-enumeration response and does
-            not treat it as a verdict. Everything else in this space is real-world context for what
+            not treat it as a result. Everything else in this space is real-world context for what
             you might see, not a claim that we pattern-match every possible string a gateway can
             return.
           </p>
@@ -182,11 +182,11 @@ export default function MimecastEmailVerificationPage() {
             in the same run.
           </p>
           <p>
-            The verdict comes from a different signal instead, one that does not rely on Mimecast
-            answering a probe. When the anti-enumeration response does show up, it is recognised and
-            never recorded as a verdict.
-            The address comes back as a real deliverable or undeliverable result, or as Unknown with
-            the credit refunded, but not as a guess dressed up as a verdict.
+            The email verification result comes from a different signal instead, one that does not
+            rely on Mimecast answering a probe. When that vague response does show up, it is recognised
+            and never recorded as a real answer. The address comes back as a real deliverable or
+            undeliverable result, or as Unknown with the credit refunded, but not as a guess dressed
+            up as an answer.
           </p>
         </div>
       </section>
@@ -198,7 +198,7 @@ export default function MimecastEmailVerificationPage() {
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="bg-slate-50 border-b-2 border-slate-200">
-                <th className="px-5 py-3 text-[11px] font-black uppercase tracking-wider text-slate-400">Verdict</th>
+                <th className="px-5 py-3 text-[11px] font-black uppercase tracking-wider text-slate-400">Result</th>
                 <th className="px-5 py-3 text-[11px] font-black uppercase tracking-wider text-slate-400">Meaning</th>
               </tr>
             </thead>
@@ -218,7 +218,7 @@ export default function MimecastEmailVerificationPage() {
           </table>
         </div>
         <p className="text-slate-600 text-sm md:text-base font-medium">
-          When we cannot reach a verdict, the credit is refunded automatically. You only pay for
+          When we cannot verify an address, the credit is refunded automatically. You only pay for
           verifications we complete.
         </p>
       </section>

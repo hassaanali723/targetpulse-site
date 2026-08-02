@@ -10,7 +10,7 @@ import { CheckCircle2, AlertCircle, AlertTriangle, HelpCircle, ArrowRight, Check
 
 const APP_URL = 'https://emailverifier.giggal.ai/sign-up'
 const DESC =
-  'Proofpoint, Mimecast, Barracuda and other gateways block the SMTP checks most verifiers rely on. Giggal.ai returns real valid or invalid verdicts behind 15 secure email gateways.'
+  'Proofpoint, Mimecast, Barracuda and other gateways block the SMTP checks most verifiers rely on. Giggal.ai returns real valid or invalid results behind 15 secure email gateways.'
 
 export const metadata: Metadata = {
   title: { absolute: 'Verify Emails Behind Secure Email Gateways | Giggal.ai' },
@@ -39,7 +39,7 @@ const VERDICTS = [
   { Icon: CheckCircle2, tint: 'text-emerald-600', label: 'Deliverable', meaning: 'The mailbox exists and will accept mail' },
   { Icon: AlertCircle, tint: 'text-rose-600', label: 'Undeliverable', meaning: 'The mailbox does not exist' },
   { Icon: AlertTriangle, tint: 'text-amber-600', label: 'Risky', meaning: 'The address exists but carries deliverability risk' },
-  { Icon: HelpCircle, tint: 'text-slate-500', label: 'Unknown', meaning: 'We could not reach a verdict' },
+  { Icon: HelpCircle, tint: 'text-slate-500', label: 'Unknown', meaning: 'We could not verify the address' },
 ]
 
 const faqs: FaqItem[] = [
@@ -64,7 +64,7 @@ const faqs: FaqItem[] = [
     a: 'No. A standard verification is 1 credit regardless of what sits in front of the domain. Catch-all verification is priced separately at 1.5 credits when enabled during the run, or 2 credits standalone.',
   },
   {
-    q: 'What happens if you still cannot reach a verdict?',
+    q: 'What happens if you still cannot verify an address?',
     a: 'The address comes back as Unknown and the credit is refunded automatically.',
   },
 ]
@@ -92,8 +92,8 @@ export default function SegEmailVerificationPage() {
         </h1>
         <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium">
           Secure email gateways sit in front of a company&apos;s real mail server and refuse the
-          checks most verifiers depend on. Giggal.ai routes around them and returns a real valid
-          or invalid verdict instead of a shrug.
+          checks most verifiers depend on. Giggal.ai routes around them and returns a real email
+          verification result, valid or invalid, instead of an Unknown.
         </p>
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3">
           <a
@@ -142,18 +142,18 @@ export default function SegEmailVerificationPage() {
           <p>
             Standard email verification works by opening an SMTP conversation with the mail server
             and asking, in effect, whether a given mailbox exists. On a normal domain the server
-            answers, and the verifier records a verdict.
+            answers, and the verifier records a valid or invalid result.
           </p>
           <p>
             Behind a gateway that conversation never reaches the mail server. The gateway intercepts
             it and answers on the server&apos;s behalf. Gateways are built to prevent exactly this
-            kind of enumeration, since the same technique is used by attackers mapping a
-            company&apos;s users. So the gateway gives a deliberately uninformative answer, accepts
+            kind of probing, since the same technique is used by attackers mapping a
+            company&apos;s users. So the gateway gives a deliberately vague answer, accepts
             every address whether it exists or not, or refuses the connection outright.
           </p>
           <p>
-            The verifier is left with nothing it can turn into a verdict. It reports the address as
-            Unknown or Risky, and the contact stays unresolved. On a business list where a large
+            The verifier is left with nothing it can turn into an email verification result. It
+            reports the address as Unknown or Risky, and the contact stays unresolved. On a business list where a large
             share of domains sit behind a gateway, that is a real part of your list you cannot
             confidently use.
           </p>
@@ -180,16 +180,16 @@ export default function SegEmailVerificationPage() {
           </p>
           <p>
             Domains behind a gateway are routed down a different verification path than domains that
-            answer directly. Where a gateway refuses SMTP probing, the verdict does not depend on that
-            SMTP answer at all. We resolve the address through a different signal, so it still comes
-            back valid or invalid when a plain SMTP check would return nothing.
+            answer directly. Where a gateway refuses SMTP probing, the email verification result does
+            not depend on that SMTP answer at all. We verify the address through a different signal, so
+            it still comes back valid or invalid when a plain SMTP check would return nothing.
           </p>
           <p>
-            Gateways also return anti-enumeration responses, the deliberately vague answers designed
-            to hide whether a mailbox exists. Giggal.ai recognises these responses and does not
-            mistake one for a verdict. If the only thing coming back is noise meant to throw off a
-            verifier, we treat it as no answer rather than guessing. The result is a real valid or
-            invalid verdict on addresses most verifiers hand back as Unknown.
+            Gateways also return responses designed to hide whether a mailbox exists, deliberately
+            vague answers meant to throw off a verifier. Giggal.ai recognises these and does not
+            mistake one for a real result. When the only thing coming back is noise, we treat it as
+            no answer rather than guessing. So the address comes back valid or invalid, where most
+            verifiers hand back an Unknown.
           </p>
         </div>
       </section>
@@ -223,7 +223,7 @@ export default function SegEmailVerificationPage() {
           SMTP check against a Proofpoint domain tends to come back without a usable answer.
           Giggal.ai identifies Proofpoint from the domain&apos;s MX records and routes the address
           down the gateway path, so instead of an Unknown you get a real deliverable or undeliverable
-          verdict on the mailbox behind it.
+          result on the mailbox behind it.
         </p>
       </section>
 
@@ -232,10 +232,10 @@ export default function SegEmailVerificationPage() {
         <h2 className={sectionTitle}>Mimecast</h2>
         <p className="text-slate-600 leading-relaxed text-sm md:text-base font-medium">
           Mimecast is built to stop anyone working out which mailboxes exist on a domain, and it
-          answers probes with a deliberately uninformative response rather than confirming or denying
+          answers probes with a deliberately vague response rather than confirming or denying
           the address. Giggal.ai recognises that behaviour and skips SMTP against Mimecast entirely,
           rather than triggering the response and taking a reputation hit. It verifies the address
-          another way, so it comes back with a real verdict instead of Unknown.
+          another way, so it comes back with a real email verification result instead of an Unknown.
         </p>
         {MIMECAST_PAGE_LIVE && (
           <p className="text-sm font-medium">
@@ -256,7 +256,7 @@ export default function SegEmailVerificationPage() {
           over SMTP usually cannot get a clear answer about the mailbox, because the gateway is the
           thing responding. Giggal.ai detects Barracuda from the domain&apos;s MX records and sends
           the address down the gateway verification path. You get a deliverable or undeliverable
-          verdict on the mailbox itself, not a Risky or Unknown label that leaves you guessing about
+          result on the mailbox itself, not a Risky or Unknown label that leaves you guessing about
           whether the contact is real.
         </p>
       </section>
@@ -268,7 +268,7 @@ export default function SegEmailVerificationPage() {
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="bg-slate-50 border-b-2 border-slate-200">
-                <th className="px-5 py-3 text-[11px] font-black uppercase tracking-wider text-slate-400">Verdict</th>
+                <th className="px-5 py-3 text-[11px] font-black uppercase tracking-wider text-slate-400">Result</th>
                 <th className="px-5 py-3 text-[11px] font-black uppercase tracking-wider text-slate-400">Meaning</th>
               </tr>
             </thead>
@@ -288,7 +288,7 @@ export default function SegEmailVerificationPage() {
           </table>
         </div>
         <p className="text-slate-600 text-sm md:text-base font-medium">
-          When we cannot reach a verdict, the credit is refunded automatically. You only pay for
+          When we cannot verify an address, the credit is refunded automatically. You only pay for
           verifications we complete.
         </p>
         <p className="text-slate-600 text-sm md:text-base font-medium">
