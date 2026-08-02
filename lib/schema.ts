@@ -20,12 +20,23 @@ export function faqPageLd(items: FaqItem[]): Record<string, unknown> {
 
 // BreadcrumbList for an inner page: Home (1) -> current page (2).
 export function breadcrumbLd(name: string, path: string): Record<string, unknown> {
+  return breadcrumbTrailLd([{ name, path }])
+}
+
+// BreadcrumbList for a deeper trail. Home is always position 1; each passed
+// crumb follows in order (e.g. hub -> spoke).
+export function breadcrumbTrailLd(crumbs: { name: string; path: string }[]): Record<string, unknown> {
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: SITE },
-      { '@type': 'ListItem', position: 2, name, item: `${SITE}${path}` },
+      ...crumbs.map((c, i) => ({
+        '@type': 'ListItem',
+        position: i + 2,
+        name: c.name,
+        item: `${SITE}${c.path}`,
+      })),
     ],
   }
 }

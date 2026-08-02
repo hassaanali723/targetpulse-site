@@ -119,8 +119,15 @@ export default function Home() {
             <strong className="text-indigo-600 font-extrabold">under 3%</strong>, and the{' '}
             <strong className="text-slate-900 font-extrabold">30% of every B2B list</strong> that other tools flag as &quot;Risky&quot; becomes deliverable again.
           </p>
+          <p className="text-sm text-slate-500 leading-relaxed max-w-xl font-medium !mt-3">
+            Proofpoint, Mimecast and Barracuda block the checks most verifiers rely on. Here is how we{' '}
+            <a href="/seg-email-verification" className="text-indigo-600 font-bold hover:underline">
+              verify emails behind secure email gateways
+            </a>
+            .
+          </p>
 
-          <div className="pt-12 mt-12 border-t border-slate-200/80 space-y-1">
+          <div className="pt-6 !mt-6 border-t border-slate-200/80 space-y-1">
             <h4 className="text-slate-900 font-black text-base">Get 1,000 Free Email Validations</h4>
             <p className="text-slate-500 text-xs font-semibold leading-normal">Start cleaning your list instantly. No credit card required.</p>
           </div>

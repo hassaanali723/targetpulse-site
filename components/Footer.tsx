@@ -1,8 +1,9 @@
-// Server component — no interactivity, so it ships zero client JS.
+// Server component. No interactivity, so it ships zero client JS.
 import React from 'react'
 import { Linkedin, Youtube, Facebook, Instagram, ArrowUpRight } from 'lucide-react'
 import Link from 'next/link'
 import Wordmark from '@/components/Wordmark'
+import { MIMECAST_PAGE_LIVE } from '@/lib/flags'
 
 const socials = [
   { icon: Linkedin, href: 'https://www.linkedin.com/company/giggal-ai/', label: 'LinkedIn' },
@@ -11,9 +12,17 @@ const socials = [
   { icon: Instagram, href: 'https://www.instagram.com/giggal.ai', label: 'Instagram' },
 ]
 
+const solutionsLinks = [
+  { name: 'Catch-all Verification', href: '/catch-all-verification' },
+  { name: 'SEG Verification', href: '/seg-email-verification' },
+  ...(MIMECAST_PAGE_LIVE
+    ? [{ name: 'Mimecast Verification', href: '/mimecast-email-verification' }]
+    : []),
+  { name: 'MCP Server', href: '/mcp' },
+]
+
 const productLinks = [
   { name: 'Email Verifier', href: '/' },
-  { name: 'Catch-All Verification', href: '/catch-all-verification' },
   { name: 'API Reference', href: '/public/docs' },
   { name: 'Pricing', href: '/pricing' },
   { name: 'Sign up free', href: '/sign-up', external: true },
@@ -31,22 +40,25 @@ const legalLinks = [
   { name: 'Cancellation', href: '/terms-of-service#cancellation-policy' },
 ]
 
+const linkClass =
+  'inline-flex items-center gap-1 text-[14px] font-medium text-slate-500 hover:text-indigo-600 transition-colors duration-200'
+const headingClass = 'text-[11px] font-bold uppercase tracking-[0.16em] text-slate-900 mb-4'
+
 export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
     <footer className="border-t border-slate-200 bg-white text-slate-500">
       <div className="max-w-6xl mx-auto px-6 py-16">
-        {/* Top grid: Brand + Product + Company */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 mb-12">
           {/* Brand column */}
-          <div className="md:col-span-5 space-y-4">
+          <div className="md:col-span-4 space-y-4">
             <Link href="/" className="inline-flex items-center" aria-label="Giggal.ai home">
               <Wordmark className="text-2xl" />
             </Link>
             <p className="text-[13.5px] text-slate-500 max-w-sm leading-relaxed font-medium">
-              High-performance SMTP verification that keeps your campaigns landing in real
-              inboxes — including catch-all and accept-all domains other tools skip.
+              High-performance SMTP verification that keeps your campaigns landing in real inboxes,
+              including catch-all and accept-all domains other tools skip.
             </p>
 
             {/* Social icons */}
@@ -66,16 +78,27 @@ export default function Footer() {
             </div>
           </div>
 
+          {/* Solutions column */}
+          <div className="md:col-span-3">
+            <p className={headingClass}>Solutions</p>
+            <ul className="space-y-2.5">
+              {solutionsLinks.map((link) => (
+                <li key={link.name}>
+                  <Link href={link.href} className={linkClass}>
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
           {/* Product column */}
-          <div className="md:col-span-4">
-            <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-slate-900 mb-4">Product</p>
+          <div className="md:col-span-2">
+            <p className={headingClass}>Product</p>
             <ul className="space-y-2.5">
               {productLinks.map((link) => (
                 <li key={link.name}>
-                  <Link
-                    href={link.href}
-                    className="inline-flex items-center gap-1 text-[14px] font-medium text-slate-500 hover:text-indigo-600 transition-colors duration-200"
-                  >
+                  <Link href={link.href} className={linkClass}>
                     {link.name}
                     {link.external && <ArrowUpRight className="w-3 h-3 opacity-60" />}
                   </Link>
@@ -87,14 +110,11 @@ export default function Footer() {
           {/* Company + Legal column */}
           <div className="md:col-span-3 grid grid-cols-2 md:grid-cols-1 gap-8 md:gap-6">
             <div>
-              <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-slate-900 mb-4">Company</p>
+              <p className={headingClass}>Company</p>
               <ul className="space-y-2.5">
                 {companyLinks.map((link) => (
                   <li key={link.name}>
-                    <Link
-                      href={link.href}
-                      className="text-[14px] font-medium text-slate-500 hover:text-indigo-600 transition-colors duration-200"
-                    >
+                    <Link href={link.href} className={linkClass}>
                       {link.name}
                     </Link>
                   </li>
@@ -102,14 +122,11 @@ export default function Footer() {
               </ul>
             </div>
             <div>
-              <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-slate-900 mb-4">Legal</p>
+              <p className={headingClass}>Legal</p>
               <ul className="space-y-2.5">
                 {legalLinks.map((link) => (
                   <li key={link.name}>
-                    <Link
-                      href={link.href}
-                      className="text-[14px] font-medium text-slate-500 hover:text-indigo-600 transition-colors duration-200"
-                    >
+                    <Link href={link.href} className={linkClass}>
                       {link.name}
                     </Link>
                   </li>

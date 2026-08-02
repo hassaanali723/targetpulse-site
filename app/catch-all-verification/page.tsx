@@ -122,6 +122,14 @@ export default function CatchAllVerificationPage() {
             Gateways like Mimecast and Proofpoint, with 99% accuracy.
           </p>
 
+          <p className="text-sm text-slate-500 leading-relaxed max-w-xl font-medium">
+            Running a list full of gateways? See how we verify{' '}
+            <Link href="/seg-email-verification" className="text-indigo-600 font-bold hover:underline">
+              emails protected by SEG gateways
+            </Link>
+            .
+          </p>
+
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
             <a
               href={APP_URL}
@@ -443,7 +451,7 @@ export default function CatchAllVerificationPage() {
           </h2>
           <p className="text-slate-600 text-sm md:text-base font-medium">
             A regular email verification costs 1 credit. A catch-all email verification costs
-            1.5 credits. No monthly fees, no minimums, and credits never expire.
+            1.5 credits when enabled in batch email verification. No monthly fees, no minimums, and credits never expire.
           </p>
         </div>
 

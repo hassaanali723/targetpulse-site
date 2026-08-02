@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next'
+import { MIMECAST_PAGE_LIVE } from '@/lib/flags'
 
 // lastModified uses plain 'YYYY-MM-DD' strings so the emitted <lastmod> is
 // date-only (matching the reviewed sitemap). Each date is the page's real last
@@ -11,6 +12,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: baseUrl, lastModified: '2026-08-01' },
     { url: `${baseUrl}/catch-all-verification`, lastModified: '2026-08-01' },
+    { url: `${baseUrl}/seg-email-verification`, lastModified: '2026-08-02' },
+    // The Mimecast spoke is released in a later deploy (ENABLE_MIMECAST_PAGE);
+    // it only enters the sitemap once it is live so we never list a 404.
+    ...(MIMECAST_PAGE_LIVE
+      ? [{ url: `${baseUrl}/mimecast-email-verification`, lastModified: '2026-08-02' }]
+      : []),
     { url: `${baseUrl}/mcp`, lastModified: '2026-07-21' },
     { url: `${baseUrl}/pricing`, lastModified: '2026-07-29' },
     { url: `${baseUrl}/public/docs`, lastModified: '2026-07-24' },
