@@ -13,6 +13,7 @@ import McpSection from '@/components/landing/McpSection'
 import PricingBlock from '@/components/landing/PricingBlock'
 import FaqAccordion, { type FaqItem } from '@/components/landing/FaqAccordion'
 import JsonLd from '@/components/JsonLd'
+import ObfuscatedEmail from '@/components/ObfuscatedEmail'
 import { softwareApplicationLd } from '@/lib/schema'
 
 // All sign-up / get-started CTAs go straight to the Giggal email verifier dashboard.
@@ -170,7 +171,7 @@ export default function Home() {
                   </div>
                   <div className="p-4 flex-1 flex flex-col justify-between">
                     <p className="text-[11px] sm:text-xs font-mono font-bold text-slate-500 text-center break-all">
-                      henry.schuck@zoominfo.com
+                      <ObfuscatedEmail user="henry.schuck" domain="zoominfo.com" />
                     </p>
                     <div className="py-2.5 px-3 bg-amber-500/10 border border-amber-300 rounded-xl flex items-center justify-center gap-1.5 text-amber-700 font-extrabold text-[11px] shadow-sm">
                       <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0" />
@@ -187,7 +188,7 @@ export default function Home() {
                   </div>
                   <div className="p-4 flex-1 flex flex-col justify-between relative z-10">
                     <p className="text-[11px] sm:text-xs font-mono font-bold text-slate-800 text-center break-all">
-                      henry.schuck@zoominfo.com
+                      <ObfuscatedEmail user="henry.schuck" domain="zoominfo.com" />
                     </p>
                     <div className="py-2.5 px-3 bg-emerald-500 border border-emerald-400 rounded-xl flex items-center justify-center gap-1.5 text-white font-extrabold text-[11px] shadow-md shadow-emerald-500/20">
                       <CheckCircle2 className="w-4 h-4 shrink-0" />

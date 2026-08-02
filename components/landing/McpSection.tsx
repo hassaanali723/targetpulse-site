@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import { Check, Copy, Bot, ArrowRight } from 'lucide-react'
+import ObfuscatedEmail from '@/components/ObfuscatedEmail'
 
 const MCP_URL = 'https://mcp.giggal.ai/mcp'
 
@@ -306,7 +307,7 @@ export default function McpSection({ showImages = false, detailsHref }: McpSecti
 
         <div className="flex items-center gap-2 text-xs text-slate-500 font-semibold border-t border-slate-100 pt-4">
           <Bot className="w-4 h-4 text-indigo-500" />
-          Restart the client after adding, then just ask: <span className="text-slate-700">&ldquo;Is info@giggal.ai deliverable?&rdquo;</span>
+          Restart the client after adding, then just ask: <span className="text-slate-700">&ldquo;Is <ObfuscatedEmail user="info" domain="giggal.ai" /> deliverable?&rdquo;</span>
         </div>
       </div>
 
