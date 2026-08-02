@@ -56,8 +56,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Giggal.ai - Free Email Verification for Catch-all Domains',
-    description: 'Free email verifier built for catch-all and accept-all domains with 99% accuracy. Clean your list, cut bounces, and protect your sender reputation.',
+    // title/description are intentionally NOT set here. Next.js falls back
+    // twitter.title/description -> openGraph.title/description, so each page's
+    // Twitter card derives from its own og values instead of every page
+    // inheriting the homepage's twitter copy.
     images: ['/giggal-logo.png'],
     // Add `creator` and `site` handles once Giggal.ai has an X/Twitter account.
   },
