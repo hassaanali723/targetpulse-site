@@ -8,9 +8,11 @@ import Wordmark from '@/components/Wordmark'
 const SIGNUP_URL = 'https://emailverifier.giggal.ai/sign-up'
 const SIGNIN_URL = 'https://emailverifier.giggal.ai/sign-in'
 
-// Solutions grouped into a dropdown so the top bar stays uncluttered.
+// Catch-all is the flagship, so it stays a top-level item (first). SEG and MCP
+// live under the Solutions dropdown to keep the bar uncluttered.
+const catchAllLink = { name: 'Catch-all Verification', href: '/catch-all-verification' }
+
 const solutionsLinks = [
-  { name: 'Catch-all Verification', href: '/catch-all-verification' },
   { name: 'SEG Verification', href: '/seg-email-verification' },
   { name: 'MCP', href: '/mcp' },
 ]
@@ -52,6 +54,9 @@ export default function Navbar() {
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center space-x-8 text-sm font-bold text-slate-600">
+              <Link href={catchAllLink.href} className="hover:text-indigo-600 transition-colors duration-200">
+                {catchAllLink.name}
+              </Link>
               {/* Solutions dropdown (hover + keyboard focus) */}
               <div className="relative group">
                 <button
@@ -134,6 +139,14 @@ export default function Navbar() {
           isMobileMenuOpen ? 'translate-y-0' : '-translate-y-2'
         }`}>
           <div className="px-6 py-4 space-y-1">
+            <Link
+              href={catchAllLink.href}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center justify-between w-full px-4 py-3 rounded-xl text-slate-700 font-bold hover:bg-slate-50 hover:text-indigo-700 transition-all duration-200"
+            >
+              <span>{catchAllLink.name}</span>
+              <span className="text-slate-300 text-lg">›</span>
+            </Link>
             <p className="px-4 pt-2 pb-1 text-[11px] font-black uppercase tracking-[0.16em] text-slate-400">Solutions</p>
             {solutionsLinks.map((link) => (
               <Link

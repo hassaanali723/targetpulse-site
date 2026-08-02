@@ -110,10 +110,10 @@ export default function CatchAllVerificationPage() {
         {/* Left: Headline + copy */}
         <div className="min-w-0 space-y-6">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900">
-            Catch-All Email Verification with{' '}
             <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">
-              Real Verdicts
-            </span>
+              Catch-All
+            </span>{' '}
+            Email Verification
           </h1>
 
           <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-xl font-medium">
