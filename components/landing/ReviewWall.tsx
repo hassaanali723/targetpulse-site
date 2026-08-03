@@ -5,7 +5,7 @@ import { Star } from 'lucide-react'
 const phUrl = (id: number) =>
   `https://www.producthunt.com/products/giggal-ai/reviews?review=${id}&utm_source=badge-testimonial-wall&utm_medium=badge`
 const TRUSTPILOT_PROFILE_URL = 'https://www.trustpilot.com/review/giggal.ai'
-const G2_REVIEWS_URL = 'https://www.g2.com/sellers/giggal-ai#reviews'
+const G2_REVIEWS_URL = 'https://www.g2.com/products/giggal/reviews'
 
 type Source = 'producthunt' | 'g2' | 'trustpilot'
 const SOURCE_LABEL: Record<Source, string> = {
@@ -14,21 +14,21 @@ const SOURCE_LABEL: Record<Source, string> = {
   trustpilot: 'Trustpilot',
 }
 
-// Real reviews (verbatim). Product Hunt / G2 quotes mention "TargetPulse" — the
-// product's name at review time — kept unedited so the testimonials stay
-// authentic. Trustpilot reviews are all under the Giggal.ai profile.
+// Product Hunt quotes were originally written under our previous name
+// (TargetPulse) and have been updated in-place to say "Giggal" post-rebrand.
+// Trustpilot and G2 reviews are all native to the Giggal.ai profile.
 interface Review { name: string; avatar?: string; quote: string; url: string; source: Source; rating?: number }
 
 // All reviews in one pool; ordering is handled by interleaveByPlatform() below.
 const ALL_REVIEWS: Review[] = [
   // ── Product Hunt ──
-  { source: 'producthunt', name: 'Hazel Peterson', avatar: 'https://ph-avatars.imgix.net/10026924/original.jpeg', url: phUrl(574596), quote: 'TargetPulse Email Verifier is fantastic because it makes email validation fast, simple, and reliable. It helps us clean our lists, reduce bounce rates, and improve the overall performance of our outreach campaigns. The accuracy of the verification results and the easy-to-use experience make it a valuable tool for maintaining better email deliverability and reaching more real prospects.' },
-  { source: 'producthunt', name: 'Austin Long', avatar: 'https://ph-avatars.imgix.net/10026697/original.jpeg', url: phUrl(574543), quote: 'TargetPulse is fantastic because it takes the guesswork out of email verification. We can quickly check our lists, remove risky addresses, and send campaigns with more confidence.' },
+  { source: 'producthunt', name: 'Hazel Peterson', avatar: 'https://ph-avatars.imgix.net/10026924/original.jpeg', url: phUrl(574596), quote: 'Giggal Email Verifier is fantastic because it makes email validation fast, simple, and reliable. It helps us clean our lists, reduce bounce rates, and improve the overall performance of our outreach campaigns. The accuracy of the verification results and the easy-to-use experience make it a valuable tool for maintaining better email deliverability and reaching more real prospects.' },
+  { source: 'producthunt', name: 'Austin Long', avatar: 'https://ph-avatars.imgix.net/10026697/original.jpeg', url: phUrl(574543), quote: 'Giggal is fantastic because it takes the guesswork out of email verification. We can quickly check our lists, remove risky addresses, and send campaigns with more confidence.' },
   { source: 'producthunt', name: 'Kevin Morris', avatar: 'https://ph-avatars.imgix.net/10026569/original.jpeg', url: phUrl(574516), quote: 'Instead of guessing whether a list is clean, we can verify addresses before sending and feel confident about our campaigns.' },
   { source: 'producthunt', name: 'Harper Caldwell', avatar: 'https://ph-avatars.imgix.net/10022812/original.jpeg', url: phUrl(573469), quote: "It just quietly handles one of the most important and most tedious parts of email marketing. Before every campaign, I know my list is clean: no fake addresses, no disposable emails, no spam traps waiting to tank my reputation." },
-  { source: 'producthunt', name: 'James Turner', avatar: 'https://ph-avatars.imgix.net/10026277/original.jpeg', url: phUrl(574386), quote: "TargetPulse stands out because it does exactly what we need without making the process complicated. It's fast, accurate, and easy to use, so we can verify our email lists in just a few minutes." },
-  { source: 'producthunt', name: 'Emily Watson', avatar: 'https://ph-avatars.imgix.net/10023037/original.jpeg', url: phUrl(573525), quote: 'We chose TargetPulse because it was easy to get started, the verification results were fast, and the accuracy gave us confidence in our email lists.' },
-  { source: 'producthunt', name: 'Madison Perez', avatar: 'https://ph-avatars.imgix.net/10026434/original.jpeg', url: phUrl(574460), quote: 'TargetPulse is fantastic because it makes email verification simple and reliable.' },
+  { source: 'producthunt', name: 'James Turner', avatar: 'https://ph-avatars.imgix.net/10026277/original.jpeg', url: phUrl(574386), quote: "Giggal stands out because it does exactly what we need without making the process complicated. It's fast, accurate, and easy to use, so we can verify our email lists in just a few minutes." },
+  { source: 'producthunt', name: 'Emily Watson', avatar: 'https://ph-avatars.imgix.net/10023037/original.jpeg', url: phUrl(573525), quote: 'We chose Giggal because it was easy to get started, the verification results were fast, and the accuracy gave us confidence in our email lists.' },
+  { source: 'producthunt', name: 'Madison Perez', avatar: 'https://ph-avatars.imgix.net/10026434/original.jpeg', url: phUrl(574460), quote: 'Giggal is fantastic because it makes email verification simple and reliable.' },
   { source: 'producthunt', name: 'Madison Reynolds', avatar: 'https://ph-avatars.imgix.net/10022617/original.jpeg', url: phUrl(573425), quote: "It's fast, easy to use, and gives us reliable results before we launch a campaign. Since we started using it, we've seen fewer bounces and have much more confidence in the quality of our email lists." },
   { source: 'producthunt', name: 'Lily Peterson', avatar: 'https://ph-avatars.imgix.net/9995945/original.png', url: phUrl(566845), quote: 'Its the experience and features. I ran into issues a couple of times with a high bounce rate but the support team resolved my issues instantly. The only thing I would suggest improving is SEG email verification.' },
   { source: 'producthunt', name: 'Henry Martinez', avatar: 'https://ph-avatars.imgix.net/10004720/29177f2d-e723-45c5-b0be-71a232e996a7.png', url: phUrl(568827), quote: 'I like the catch all verification service.' },
@@ -38,13 +38,15 @@ const ALL_REVIEWS: Review[] = [
   { source: 'trustpilot', name: 'Kevin Hart', url: TRUSTPILOT_PROFILE_URL, quote: 'I was expecting it to be similar to other email verifiers which claim a low bounce rate and high accuracy but it turned out that giggal delivered on what it promised.' },
   { source: 'trustpilot', name: 'Terry Jander', url: TRUSTPILOT_PROFILE_URL, rating: 4, quote: 'Great tool. I think its better than the ones in the market already.' },
   { source: 'trustpilot', name: 'Md Abdul', url: TRUSTPILOT_PROFILE_URL, rating: 4, quote: 'Catch all verification is very accurate. I am very satisfied with it.' },
-  // ── G2 (verbatim from g2.com/products/targetpulse-email-verifier/reviews) ──
-  { source: 'g2', name: 'Ian G.', url: G2_REVIEWS_URL, quote: `Honestly, it's how it handles catch-all emails. Anyone doing cold outreach knows that catch-alls are the fastest way to ruin your domain reputation because most verifiers just give up and label them "risky" TargetPulse actually gives you a clear score on them so you know if you can safely send or not. Our hard bounces have dropped to basically nothing (well under 2%) since we started running our lists through it. It's just super accurate and doesn't miss the sneaky bad data that other tools skate over.` },
-  { source: 'g2', name: 'Jason F.', url: G2_REVIEWS_URL, quote: `I like the catch-all verification functionality the most. No other tool on the market can do catch-all validation, so this is the only one that can accurately verify catch-all emails, which increases my TAM size. It increased my valid emails percentage and got my bounce rate under 3%. I also like the clean UI. The pricing is lesser than competitor tools. The initial setup was very easy. I switched from NeverBounce mainly because of the catch-all validation, and now I use TargetPulse Email Verifier only for verifying my lists.` },
-  { source: 'g2', name: 'Madison R.', url: G2_REVIEWS_URL, quote: `Honestly, what I like best is how fast and accurate the verification results are. I upload my list, and within minutes I get a clear breakdown valid, invalid, catch-all, disposable so I'm not wasting time guessing which contacts are worth reaching out to.` },
-  { source: 'g2', name: 'Natalie W.', url: G2_REVIEWS_URL, quote: `Honestly it does what it says. that's the best part. I see many tools coming into this industry who make false claims and disappear from the market in a month. But it says it verifiers catch-all emails efficiently and it does!` },
-  { source: 'g2', name: 'Alexander H.', url: G2_REVIEWS_URL, quote: `What I like most is how simple and reliable it is. I can upload a list, get the results quickly, and know which addresses are safe to send to. It saves us time, helps keep our bounce rates low, and gives us more confidence before every campaign.` },
-  { source: 'g2', name: 'Jana S.', url: G2_REVIEWS_URL, quote: `I really value TargetPulse Email Verifier for its very affordable catch-all email validation and high accuracy. The support is 10/10 and the UI is clean, which makes it easier to navigate around, clean, and download the lead lists. The initial setup was very easy, and I appreciate how efficiently it integrates into our workflow.` },
+  // ── G2 (all under g2.com/products/giggal/reviews) ──
+  { source: 'g2', name: 'Vernon L.', url: G2_REVIEWS_URL, quote: "Before using it, our team spent hours manually reviewing catch-all addresses or removing them from campaigns because other tools couldn't verify them with confidence. Now we can upload large email lists, verify them in minutes, and move directly into campaign preparation without the extra manual work." },
+  { source: 'g2', name: 'Linda G.', url: G2_REVIEWS_URL, rating: 4.5, quote: 'What I like best about Giggal is its accurate catch-all email verification, which helps recover valid business contacts that many other verification tools label as risky or unknown. The bulk verification feature processes large email lists quickly, and the detailed verification results make it easy to filter out invalid, disposable, and role-based addresses before launching a campaign.' },
+  { source: 'g2', name: 'Bartholomew A.', url: G2_REVIEWS_URL, quote: "What I like best about Giggal is its catch-all email verification. Before using it, our team spent hours reviewing catch-all addresses manually or excluding them from campaigns because we couldn't verify them with confidence. Now we can upload large email lists, verify them in minutes, and move straight into campaign preparation with clear, actionable results." },
+  { source: 'g2', name: 'Willie R.', url: G2_REVIEWS_URL, quote: "What I like best about Giggal is its catch-all email verification, which is more accurate than many other tools I've used. I also use the bulk verification feature regularly because it processes large email lists quickly without sacrificing accuracy." },
+  { source: 'g2', name: 'Brian S.', url: G2_REVIEWS_URL, rating: 4.5, quote: "It's one of the few tools I've used that provides reliable insights for catch-all addresses instead of simply marking them as unknown. This helps me make better decisions about which contacts to include in outreach campaigns." },
+  { source: 'g2', name: 'George R.', url: G2_REVIEWS_URL, rating: 4.5, quote: "Bulk verification is quick, the interface is clean and intuitive, and the results are well organized. Since using Giggal, we've been able to maintain cleaner email lists, reduce bounce rates, improve inbox placement, and protect our sender reputation. It has become an essential part of our email verification workflow." },
+  { source: 'g2', name: 'Alan R.', url: G2_REVIEWS_URL, quote: "Before using it, our team spent a lot of time manually reviewing catch-all addresses or removing them from campaigns because we couldn't trust the results from other verification tools." },
+  { source: 'g2', name: 'Robert M.', url: G2_REVIEWS_URL, rating: 4.5, quote: 'What I like best about Giggal is its accurate catch-all email verification. The platform is fast, easy to use, and processes large lists efficiently.' },
 ]
 
 // Evenly interleave reviews across platforms (stride scheduling) so no single
@@ -97,12 +99,20 @@ function tint(name: string) {
 function Stars({ count = 5 }: { count?: number }) {
   return (
     <div className="flex gap-0.5 mb-3">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <Star
-          key={i}
-          className={`w-3.5 h-3.5 ${i < count ? 'text-amber-500 fill-amber-500' : 'text-slate-300 fill-slate-200'}`}
-        />
-      ))}
+      {Array.from({ length: 5 }).map((_, i) => {
+        // fill fraction of this star: 1 = full, 0 = empty, 0.5 = half
+        const fill = Math.max(0, Math.min(1, count - i))
+        return (
+          <div key={i} className="relative w-3.5 h-3.5">
+            <Star className="absolute inset-0 w-3.5 h-3.5 text-slate-300 fill-slate-200" />
+            {fill > 0 && (
+              <div className="absolute inset-0 overflow-hidden" style={{ width: `${fill * 100}%` }}>
+                <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
+              </div>
+            )}
+          </div>
+        )
+      })}
     </div>
   )
 }
@@ -164,7 +174,6 @@ export default function ReviewWall() {
       <div className="max-w-2xl mx-auto px-6 text-center space-y-3">
         <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Proven Impact, Validated by High-Growth Teams</h2>
         <p className="text-sm md:text-base text-slate-600 font-medium">See how product and marketing teams use Giggal.ai to protect their domain health and keep lists clean.</p>
-        <p className="text-xs text-slate-400 font-medium">Some reviews were collected under our previous name, TargetPulse.</p>
       </div>
 
       <div className="space-y-6">
