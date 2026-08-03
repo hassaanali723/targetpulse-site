@@ -115,7 +115,9 @@ export default function ReviewBadges() {
               <Star key={i} className="w-5 h-5 text-[#FF492C] fill-[#FF492C]" />
             ))}
           </div>
-          <span className="text-[13px] text-slate-700">(4.8) based on 8 reviews</span>
+          {/* Static — G2 has no free live embed (their widgets need a paid
+              seller plan). Update this line when the G2 profile changes. */}
+          <span className="text-[13px] text-slate-700">(4.8) based on 9 reviews</span>
         </a>
 
         {/* SourceForge — original hex badge (logo + stars + "user reviews"),
