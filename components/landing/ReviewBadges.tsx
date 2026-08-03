@@ -4,7 +4,7 @@ import React from 'react'
 const PH_URL =
   'https://www.producthunt.com/products/giggal-ai/reviews?utm_source=badge-product_rating&utm_medium=badge&utm_source=badge-giggal-ai'
 const G2_URL = 'https://www.g2.com/sellers/giggal-ai#reviews'
-const TRUSTPILOT_URL = 'https://uk.trustpilot.com/review/giggal.ai'
+const TRUSTPILOT_URL = 'https://www.trustpilot.com/review/giggal.ai'
 
 // NOTE: NO hover effect (opacity, transform, filter, etc.) on the link or img.
 // Any CSS property that creates a new stacking context breaks mix-blend-mode

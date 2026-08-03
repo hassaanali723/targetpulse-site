@@ -4,7 +4,7 @@ import { Star } from 'lucide-react'
 
 const phUrl = (id: number) =>
   `https://www.producthunt.com/products/giggal-ai/reviews?review=${id}&utm_source=badge-testimonial-wall&utm_medium=badge`
-const tpUrl = (id: string) => `https://uk.trustpilot.com/reviews/${id}`
+const TRUSTPILOT_PROFILE_URL = 'https://www.trustpilot.com/review/giggal.ai'
 const G2_REVIEWS_URL = 'https://www.g2.com/sellers/giggal-ai#reviews'
 
 type Source = 'producthunt' | 'g2' | 'trustpilot'
@@ -14,9 +14,10 @@ const SOURCE_LABEL: Record<Source, string> = {
   trustpilot: 'Trustpilot',
 }
 
-// Real reviews (verbatim). Quotes mention "TargetPulse" — the product's name at
-// review time — kept unedited so the testimonials stay authentic.
-interface Review { name: string; avatar?: string; quote: string; url: string; source: Source }
+// Real reviews (verbatim). Product Hunt / G2 quotes mention "TargetPulse" — the
+// product's name at review time — kept unedited so the testimonials stay
+// authentic. Trustpilot reviews are all under the Giggal.ai profile.
+interface Review { name: string; avatar?: string; quote: string; url: string; source: Source; rating?: number }
 
 // All reviews in one pool; ordering is handled by interleaveByPlatform() below.
 const ALL_REVIEWS: Review[] = [
@@ -31,10 +32,12 @@ const ALL_REVIEWS: Review[] = [
   { source: 'producthunt', name: 'Madison Reynolds', avatar: 'https://ph-avatars.imgix.net/10022617/original.jpeg', url: phUrl(573425), quote: "It's fast, easy to use, and gives us reliable results before we launch a campaign. Since we started using it, we've seen fewer bounces and have much more confidence in the quality of our email lists." },
   { source: 'producthunt', name: 'Lily Peterson', avatar: 'https://ph-avatars.imgix.net/9995945/original.png', url: phUrl(566845), quote: 'Its the experience and features. I ran into issues a couple of times with a high bounce rate but the support team resolved my issues instantly. The only thing I would suggest improving is SEG email verification.' },
   { source: 'producthunt', name: 'Henry Martinez', avatar: 'https://ph-avatars.imgix.net/10004720/29177f2d-e723-45c5-b0be-71a232e996a7.png', url: phUrl(568827), quote: 'I like the catch all verification service.' },
-  // ── Trustpilot ──
-  { source: 'trustpilot', name: 'Frank Robinson', avatar: 'https://user-images.trustpilot.com/66691191c485c06d5e1ebf8a/73x73.png', url: tpUrl('6a59b8b33b3380c138c4cfa5'), quote: "We just started using Targetpulse. So far, I can say we're very impressed. Seemingly accurate catch all detection and good accuracy when removing bad emails. So far, we've seen less than 2% bounce rate which is better than other Email solutions we've tried. Would recommend to give it a go." },
-  { source: 'trustpilot', name: 'Carlos Smith', url: tpUrl('6a591c513798b207609ddcf6'), quote: 'I switched from Reoon to TargetPulse. I was able to drop my bounce rate from 4% to 1.5%. Very satisfied.' },
-  { source: 'trustpilot', name: 'Connor Nicholson', url: tpUrl('6a567933d05d47524be965c8'), quote: "It has accurate catch-all email verification and that option is included in the general email verification. That's one of my favorite features." },
+  // ── Trustpilot (all under trustpilot.com/review/giggal.ai) ──
+  { source: 'trustpilot', name: 'MD Tanveer Pasha', url: TRUSTPILOT_PROFILE_URL, quote: 'I liked the UI firstly and of course the features. Catch-all verification is their best feature.' },
+  { source: 'trustpilot', name: 'Kabeer Ghani', url: TRUSTPILOT_PROFILE_URL, quote: "Switched from BounceBan to Giggal and love the product. The accuracy is great. I think they should respond quickly to support tickets that's the only thing they should improve right now." },
+  { source: 'trustpilot', name: 'Kevin Hart', url: TRUSTPILOT_PROFILE_URL, quote: 'I was expecting it to be similar to other email verifiers which claim a low bounce rate and high accuracy but it turned out that giggal delivered on what it promised.' },
+  { source: 'trustpilot', name: 'Terry Jander', url: TRUSTPILOT_PROFILE_URL, rating: 4, quote: 'Great tool. I think its better than the ones in the market already.' },
+  { source: 'trustpilot', name: 'Md Abdul', url: TRUSTPILOT_PROFILE_URL, rating: 4, quote: 'Catch all verification is very accurate. I am very satisfied with it.' },
   // ── G2 (verbatim from g2.com/products/targetpulse-email-verifier/reviews) ──
   { source: 'g2', name: 'Ian G.', url: G2_REVIEWS_URL, quote: `Honestly, it's how it handles catch-all emails. Anyone doing cold outreach knows that catch-alls are the fastest way to ruin your domain reputation because most verifiers just give up and label them "risky" TargetPulse actually gives you a clear score on them so you know if you can safely send or not. Our hard bounces have dropped to basically nothing (well under 2%) since we started running our lists through it. It's just super accurate and doesn't miss the sneaky bad data that other tools skate over.` },
   { source: 'g2', name: 'Jason F.', url: G2_REVIEWS_URL, quote: `I like the catch-all verification functionality the most. No other tool on the market can do catch-all validation, so this is the only one that can accurately verify catch-all emails, which increases my TAM size. It increased my valid emails percentage and got my bounce rate under 3%. I also like the clean UI. The pricing is lesser than competitor tools. The initial setup was very easy. I switched from NeverBounce mainly because of the catch-all validation, and now I use TargetPulse Email Verifier only for verifying my lists.` },
@@ -91,11 +94,14 @@ function tint(name: string) {
   return AVATAR_TINTS[sum % AVATAR_TINTS.length]
 }
 
-function Stars() {
+function Stars({ count = 5 }: { count?: number }) {
   return (
     <div className="flex gap-0.5 mb-3">
       {Array.from({ length: 5 }).map((_, i) => (
-        <Star key={i} className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
+        <Star
+          key={i}
+          className={`w-3.5 h-3.5 ${i < count ? 'text-amber-500 fill-amber-500' : 'text-slate-300 fill-slate-200'}`}
+        />
       ))}
     </div>
   )
@@ -129,7 +135,7 @@ function Card({ r }: { r: Review }) {
           <span className="text-[11px] text-slate-500 font-bold block">via {SOURCE_LABEL[r.source]}</span>
         </div>
       </div>
-      <Stars />
+      <Stars count={r.rating ?? 5} />
       <p className="text-sm text-slate-600 leading-relaxed font-semibold line-clamp-4">&ldquo;{r.quote}&rdquo;</p>
     </a>
   )
