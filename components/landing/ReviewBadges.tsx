@@ -2,8 +2,8 @@
 
 import React, { useEffect, useRef } from 'react'
 import Script from 'next/script'
+import { Star } from 'lucide-react'
 
-// Bootstrap scripts expose these globals once loaded.
 declare global {
   interface Window {
     Trustpilot?: { loadFromElement: (el: HTMLElement, forceReload?: boolean) => void }
@@ -14,22 +14,23 @@ const PH_URL =
   'https://www.producthunt.com/products/giggal-ai/reviews?utm_source=badge-product_rating&utm_medium=badge&utm_source=badge-giggal-ai'
 const G2_URL = 'https://www.g2.com/products/giggal/reviews'
 const SOURCEFORGE_URL = 'https://sourceforge.net/software/product/Giggal.ai/'
+const SF_SCRIPT_SRC = 'https://b.sf-syn.com/badge_js?sf_id=4117310&variant_id=sf'
+const TRUSTPILOT_URL = 'https://www.trustpilot.com/review/giggal.ai'
 
-// Shared card style — same dimensions, border, shadow, and hover for every
-// review platform so the row reads as one system. Hover uses ONLY color +
-// shadow changes (no opacity/transform/filter) to avoid creating a new
-// stacking context that would break child-widget rendering.
-const badgeCard =
-  'flex items-center justify-center h-[132px] w-full rounded-2xl border border-slate-200 bg-white ' +
-  'shadow-[0_2px_10px_-4px_rgba(15,23,42,0.05)] px-5 py-4 ' +
-  'hover:border-indigo-300 hover:shadow-[0_10px_28px_-10px_rgba(79,70,229,0.18)] ' +
-  'transition-[border-color,box-shadow] duration-300'
+// Four equal bordered chips, one per platform, each holding that platform's
+// ORIGINAL asset (PH rating embed / G2 logo / SF hex badge / TP Review
+// Collector widget). Height contract: every cell gets the SAME explicit
+// height (works in 1-col, 2-col, and 4-col layouts alike — items-stretch
+// can't equalize a 1-col stack). The PH embed sizes by height (h-full
+// w-auto) so it renders at exactly the shared height too.
+const CELL_H = 'h-[112px]'
+const chip =
+  `${CELL_H} flex flex-col items-center justify-center gap-2 rounded-[10px] bg-white py-3 px-4 transition-colors duration-200`
 
 export default function ReviewBadges() {
   const trustpilotRef = useRef<HTMLDivElement>(null)
 
-  // Re-hydrate Trustpilot in three cases: mount (SPA nav), script-ready
-  // (initial load), and bfcache restore (browser back button).
+  // Trustpilot re-hydration: mount + script-ready + bfcache restore.
   useEffect(() => {
     const rehydrate = () => {
       if (window.Trustpilot && trustpilotRef.current) {
@@ -41,9 +42,26 @@ export default function ReviewBadges() {
     return () => window.removeEventListener('pageshow', rehydrate)
   }, [])
 
+  // SourceForge re-hydration: SF has no reload API — re-inject its script;
+  // it re-scans .sf-root divs each time it runs.
+  useEffect(() => {
+    const rehydrateSF = () => {
+      document
+        .querySelectorAll(`script[src="${SF_SCRIPT_SRC}"]`)
+        .forEach((s) => s.remove())
+      const s = document.createElement('script')
+      s.async = true
+      s.src = SF_SCRIPT_SRC
+      document.body.appendChild(s)
+    }
+    rehydrateSF()
+    window.addEventListener('pageshow', rehydrateSF)
+    return () => window.removeEventListener('pageshow', rehydrateSF)
+  }, [])
+
   return (
     <section className="cv-section max-w-6xl mx-auto px-6 pt-6 pb-24">
-      <div className="text-center max-w-2xl mx-auto space-y-2.5 mb-10">
+      <div className="text-center max-w-2xl mx-auto space-y-2.5 mb-12">
         <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
           Reviewed by Real Teams
         </h2>
@@ -52,15 +70,15 @@ export default function ReviewBadges() {
         </p>
       </div>
 
-      {/* Unified 4-card grid: 1 col mobile → 2 tablet → 4 desktop */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 max-w-5xl mx-auto">
-        {/* Product Hunt */}
+      {/* Four equal rectangles: 1-col mobile, 2-col tablet, 4-col desktop */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-[1060px] mx-auto">
+        {/* Product Hunt — official rating embed (has its own coral border) */}
         <a
           href={PH_URL}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Read Giggal.ai reviews on Product Hunt"
-          className={badgeCard}
+          className={`${CELL_H} flex items-center justify-center`}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -70,61 +88,65 @@ export default function ReviewBadges() {
             height={108}
             loading="lazy"
             decoding="async"
-            className="max-h-[96px] w-auto"
+            className="h-full w-auto max-w-full object-contain"
           />
         </a>
 
-        {/* G2 — sits on a white card so its white PNG background disappears */}
+        {/* G2 — original logo + stars + count, G2 red frame */}
         <a
           href={G2_URL}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Read Giggal.ai reviews on G2"
-          className={badgeCard}
+          className={`${chip} border border-[#FF492C]/50 hover:border-[#FF492C]`}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/reviews/g2.webp"
-            alt="Giggal.ai reviews on G2"
-            width={192}
-            height={192}
+            src="/reviews/G2_logo.svg"
+            alt="G2"
+            width={128}
+            height={128}
             loading="lazy"
             decoding="async"
-            className="max-h-[92px] w-auto"
+            className="h-7 w-auto"
           />
+          <div className="flex gap-1 justify-center">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <Star key={i} className="w-5 h-5 text-[#FF492C] fill-[#FF492C]" />
+            ))}
+          </div>
+          <span className="text-[13px] text-slate-700">(4.8) based on 8 reviews</span>
         </a>
 
-        {/* SourceForge — official badge, hydrated by their b.sf-syn.com script.
-            Cannot wrap in <a> because the script rewrites the div's inner
-            HTML with its own link. */}
-        <div className={badgeCard}>
+        {/* SourceForge — original hex badge (logo + stars + "user reviews"),
+            hydrated in place by their script. Amber frame. */}
+        <div className={`${chip} border border-amber-500/50 hover:border-amber-500`}>
           <div
-            className="sf-root"
+            className="sf-root flex items-center justify-center"
             data-id="4117310"
             data-badge="light-default"
             data-variant-id="sf"
-            style={{ width: '110px' }}
+            style={{ width: '72px' }}
           >
             <a
               href={SOURCEFORGE_URL}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Read Giggal.ai reviews on SourceForge"
-              className="text-slate-500 text-xs"
+              className="text-[13px] font-semibold text-slate-500"
             >
-              Giggal.ai Reviews
+              SourceForge reviews
             </a>
           </div>
         </div>
 
-        {/* Trustpilot Review Collector — same card treatment, widget centered.
-            It's a "leave a review" CTA rather than a rating badge, but the
-            uniform card wraps the visual difference so nothing looks off. */}
-        <div className={badgeCard}>
-          <div className="w-full max-w-[220px]">
+        {/* Trustpilot — UNMODIFIED official Review Collector widget inside a
+            matching green frame. No stars/scores of our own (compliance). */}
+        <div className={`${chip} border border-[#00B67A]/50 hover:border-[#00B67A]`}>
+          <div className="w-full max-w-[210px]">
             <div
               ref={trustpilotRef}
-              className="trustpilot-widget"
+              className="trustpilot-widget w-full"
               data-locale="en-US"
               data-template-id="56278e9abfbbba0bdcd568bc"
               data-businessunit-id="6a5fcced4feea6f63067e572"
@@ -133,12 +155,12 @@ export default function ReviewBadges() {
               data-token="1f1acf6c-b650-429b-b287-089270bd436a"
             >
               <a
-                href="https://www.trustpilot.com/review/giggal.ai"
+                href={TRUSTPILOT_URL}
                 target="_blank"
                 rel="noopener"
-                className="text-slate-500 text-xs"
+                className="text-[13px] font-semibold text-slate-500"
               >
-                Trustpilot
+                Review us on Trustpilot
               </a>
             </div>
           </div>
@@ -153,11 +175,6 @@ export default function ReviewBadges() {
             window.Trustpilot.loadFromElement(trustpilotRef.current, true)
           }
         }}
-      />
-
-      <Script
-        src="https://b.sf-syn.com/badge_js?sf_id=4117310&variant_id=sf"
-        strategy="lazyOnload"
       />
     </section>
   )
