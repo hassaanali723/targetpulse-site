@@ -2,7 +2,6 @@
 
 import React, { useEffect, useRef } from 'react'
 import Script from 'next/script'
-import { Star } from 'lucide-react'
 
 declare global {
   interface Window {
@@ -12,10 +11,8 @@ declare global {
 
 const PH_URL =
   'https://www.producthunt.com/products/giggal-ai/reviews?utm_source=badge-product_rating&utm_medium=badge&utm_source=badge-giggal-ai'
-const G2_URL = 'https://www.g2.com/products/giggal/reviews'
 const SOURCEFORGE_URL = 'https://sourceforge.net/software/product/Giggal.ai/'
 const SF_SCRIPT_SRC = 'https://b.sf-syn.com/badge_js?sf_id=4117310&variant_id=sf'
-const TRUSTPILOT_URL = 'https://www.trustpilot.com/review/giggal.ai'
 
 // Four equal bordered chips, one per platform, each holding that platform's
 // ORIGINAL asset (PH rating embed / G2 logo / SF hex badge / TP Review
@@ -70,8 +67,8 @@ export default function ReviewBadges() {
         </p>
       </div>
 
-      {/* Four equal rectangles: 1-col mobile, 2-col tablet, 4-col desktop */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-[1060px] mx-auto">
+      {/* Three equal rectangles: 1-col mobile, 3-col desktop */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-[800px] mx-auto">
         {/* Product Hunt — official rating embed (has its own coral border) */}
         <a
           href={PH_URL}
@@ -90,34 +87,6 @@ export default function ReviewBadges() {
             decoding="async"
             className="h-full w-auto max-w-full object-contain"
           />
-        </a>
-
-        {/* G2 — original logo + stars + count, G2 red frame */}
-        <a
-          href={G2_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Read Giggal.ai reviews on G2"
-          className={`${chip} border border-[#FF492C]/50 hover:border-[#FF492C]`}
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/reviews/G2_logo.svg"
-            alt="G2"
-            width={128}
-            height={128}
-            loading="lazy"
-            decoding="async"
-            className="h-7 w-auto"
-          />
-          <div className="flex gap-1 justify-center">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <Star key={i} className="w-5 h-5 text-[#FF492C] fill-[#FF492C]" />
-            ))}
-          </div>
-          {/* Static — G2 has no free live embed (their widgets need a paid
-              seller plan). Update this line when the G2 profile changes. */}
-          <span className="text-[13px] text-slate-700">(4.8) based on 9 reviews</span>
         </a>
 
         {/* SourceForge — original hex badge (logo + stars + "user reviews"),
@@ -142,36 +111,40 @@ export default function ReviewBadges() {
           </div>
         </div>
 
-        {/* Trustpilot — UNMODIFIED official Review Collector widget inside a
-            matching green frame. No stars/scores of our own (compliance). */}
+        {/* Trustpilot — official Review Collector TrustBox, snippet kept
+            VERBATIM as provided in the Trustpilot dashboard (attributes,
+            token, and fallback anchor untouched). Only the outer chip is
+            our layout container. */}
         <div className={`${chip} border border-[#00B67A]/50 hover:border-[#00B67A]`}>
           <div className="w-full max-w-[210px]">
+            {/* TrustBox widget - Review Collector */}
             <div
               ref={trustpilotRef}
-              className="trustpilot-widget w-full"
+              className="trustpilot-widget"
               data-locale="en-US"
               data-template-id="56278e9abfbbba0bdcd568bc"
               data-businessunit-id="6a5fcced4feea6f63067e572"
               data-style-height="52px"
               data-style-width="100%"
-              data-token="1f1acf6c-b650-429b-b287-089270bd436a"
+              data-token="86ebd706-f637-4f02-8a2e-81a5348fb7de"
             >
-              <a
-                href={TRUSTPILOT_URL}
-                target="_blank"
-                rel="noopener"
-                className="text-[13px] font-semibold text-slate-500"
-              >
-                Review us on Trustpilot
+              <a href="https://www.trustpilot.com/review/giggal.ai" target="_blank" rel="noopener">
+                Trustpilot
               </a>
             </div>
+            {/* End TrustBox widget */}
           </div>
         </div>
       </div>
 
+      {/* TrustBox script — per Trustpilot's install instructions ("as close
+          to the top of the page as possible"); afterInteractive loads it
+          right after hydration. onLoad + the pageshow effect use Trustpilot's
+          own documented SPA API (Trustpilot.loadFromElement) so the widget
+          survives client-side navigation and bfcache restores. */}
       <Script
         src="https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js"
-        strategy="lazyOnload"
+        strategy="afterInteractive"
         onLoad={() => {
           if (window.Trustpilot && trustpilotRef.current) {
             window.Trustpilot.loadFromElement(trustpilotRef.current, true)

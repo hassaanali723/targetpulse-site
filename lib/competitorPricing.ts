@@ -282,7 +282,7 @@ export const COMPETITORS: Record<string, Competitor> = {
       'No charge for unknown results',
       'Credits never expire',
       'API access with no extra credit cost',
-      'A large Trustpilot review corpus',
+      'A large public review corpus',
     ],
   },
 }

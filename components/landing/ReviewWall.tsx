@@ -4,19 +4,22 @@ import { Star } from 'lucide-react'
 
 const phUrl = (id: number) =>
   `https://www.producthunt.com/products/giggal-ai/reviews?review=${id}&utm_source=badge-testimonial-wall&utm_medium=badge`
-const TRUSTPILOT_PROFILE_URL = 'https://www.trustpilot.com/review/giggal.ai'
 const G2_REVIEWS_URL = 'https://www.g2.com/products/giggal/reviews'
+const SOURCEFORGE_REVIEWS_URL = 'https://sourceforge.net/software/product/Giggal.ai/'
 
-type Source = 'producthunt' | 'g2' | 'trustpilot'
+// NOTE: NO Trustpilot reviews here. Trustpilot's Legal Brand Guidelines
+// prohibit displaying Trustpilot review content outside their official
+// TrustBox widgets — they flagged us for it (Aug 2026). Do not re-add them.
+type Source = 'producthunt' | 'g2' | 'sourceforge'
 const SOURCE_LABEL: Record<Source, string> = {
   producthunt: 'Product Hunt',
   g2: 'G2',
-  trustpilot: 'Trustpilot',
+  sourceforge: 'SourceForge',
 }
 
 // Product Hunt quotes were originally written under our previous name
 // (TargetPulse) and have been updated in-place to say "Giggal" post-rebrand.
-// Trustpilot and G2 reviews are all native to the Giggal.ai profile.
+// G2 and SourceForge reviews are all native to the Giggal.ai profile.
 interface Review { name: string; avatar?: string; quote: string; url: string; source: Source; rating?: number }
 
 // All reviews in one pool; ordering is handled by interleaveByPlatform() below.
@@ -32,12 +35,18 @@ const ALL_REVIEWS: Review[] = [
   { source: 'producthunt', name: 'Madison Reynolds', avatar: 'https://ph-avatars.imgix.net/10022617/original.jpeg', url: phUrl(573425), quote: "It's fast, easy to use, and gives us reliable results before we launch a campaign. Since we started using it, we've seen fewer bounces and have much more confidence in the quality of our email lists." },
   { source: 'producthunt', name: 'Lily Peterson', avatar: 'https://ph-avatars.imgix.net/9995945/original.png', url: phUrl(566845), quote: 'Its the experience and features. I ran into issues a couple of times with a high bounce rate but the support team resolved my issues instantly. The only thing I would suggest improving is SEG email verification.' },
   { source: 'producthunt', name: 'Henry Martinez', avatar: 'https://ph-avatars.imgix.net/10004720/29177f2d-e723-45c5-b0be-71a232e996a7.png', url: phUrl(568827), quote: 'I like the catch all verification service.' },
-  // ── Trustpilot (all under trustpilot.com/review/giggal.ai) ──
-  { source: 'trustpilot', name: 'MD Tanveer Pasha', url: TRUSTPILOT_PROFILE_URL, quote: 'I liked the UI firstly and of course the features. Catch-all verification is their best feature.' },
-  { source: 'trustpilot', name: 'Kabeer Ghani', url: TRUSTPILOT_PROFILE_URL, quote: "Switched from BounceBan to Giggal and love the product. The accuracy is great. I think they should respond quickly to support tickets that's the only thing they should improve right now." },
-  { source: 'trustpilot', name: 'Kevin Hart', url: TRUSTPILOT_PROFILE_URL, quote: 'I was expecting it to be similar to other email verifiers which claim a low bounce rate and high accuracy but it turned out that giggal delivered on what it promised.' },
-  { source: 'trustpilot', name: 'Terry Jander', url: TRUSTPILOT_PROFILE_URL, rating: 4, quote: 'Great tool. I think its better than the ones in the market already.' },
-  { source: 'trustpilot', name: 'Md Abdul', url: TRUSTPILOT_PROFILE_URL, rating: 4, quote: 'Catch all verification is very accurate. I am very satisfied with it.' },
+  // ── SourceForge (all under sourceforge.net/software/product/Giggal.ai) ──
+  // Note: Willie R., George R., Brian S., Robert M., and Linda G. also
+  // reviewed on SourceForge but already appear above via G2 — skipped here
+  // so the same name never shows twice on the wall.
+  { source: 'sourceforge', name: 'James A.', url: SOURCEFORGE_REVIEWS_URL, quote: 'Giggal.ai delivers dependable verification results with a smooth and intuitive workflow. The catch-all verification feature provides useful insights that help reduce uncertainty when reviewing difficult email lists.' },
+  { source: 'sourceforge', name: 'Ross A.', url: SOURCEFORGE_REVIEWS_URL, quote: 'One of the biggest strengths of Giggal.ai is how simple it is to use without sacrificing performance. Uploading lists is quick, results are well organized, and the verification process feels smooth from start to finish.' },
+  { source: 'sourceforge', name: 'Billy W.', url: SOURCEFORGE_REVIEWS_URL, quote: 'Fast and accurate email verification, excellent catch-all detection, easy-to-use interface, quick processing for large lists, lower bounce rates, improved sender reputation, and more confidence before launching email campaigns.' },
+  { source: 'sourceforge', name: 'Christina W.', url: SOURCEFORGE_REVIEWS_URL, quote: 'Giggal has helped us build cleaner email lists and run more successful outreach campaigns. Its catch-all email verification is accurate and gives us the confidence to keep valid contacts while removing risky ones before sending.' },
+  { source: 'sourceforge', name: 'Reuben W.', url: SOURCEFORGE_REVIEWS_URL, quote: "Giggal's biggest strength is its accurate catch-all email verification. It has helped us confidently identify which catch-all addresses are worth contacting, reducing unnecessary bounces and improving overall email deliverability." },
+  { source: 'sourceforge', name: 'Christina B.', url: SOURCEFORGE_REVIEWS_URL, quote: 'The bulk verification feature processes large email lists quickly, and the clear verification results make it easy to decide which contacts are safe to include in campaigns.' },
+  { source: 'sourceforge', name: 'Emily H.', url: SOURCEFORGE_REVIEWS_URL, quote: 'What I like most about Giggal.ai is its ability to accurately verify catch-all email addresses, which are often difficult for traditional verification tools to classify.' },
+  { source: 'sourceforge', name: 'Harper R.', url: SOURCEFORGE_REVIEWS_URL, quote: 'It has been a valuable tool for verifying catch-all email addresses, which are usually one of the hardest parts of maintaining a clean email list.' },
   // ── G2 (all under g2.com/products/giggal/reviews) ──
   { source: 'g2', name: 'Vernon L.', url: G2_REVIEWS_URL, quote: "Before using it, our team spent hours manually reviewing catch-all addresses or removing them from campaigns because other tools couldn't verify them with confidence. Now we can upload large email lists, verify them in minutes, and move directly into campaign preparation without the extra manual work." },
   { source: 'g2', name: 'Linda G.', url: G2_REVIEWS_URL, rating: 4.5, quote: 'What I like best about Giggal is its accurate catch-all email verification, which helps recover valid business contacts that many other verification tools label as risky or unknown. The bulk verification feature processes large email lists quickly, and the detailed verification results make it easy to filter out invalid, disposable, and role-based addresses before launching a campaign.' },
