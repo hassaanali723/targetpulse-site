@@ -212,7 +212,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="font-bold text-lg text-slate-900 mb-2">Call Us</h4>
-                  <p className="text-slate-600">+447577337716</p>
+                  <p className="text-slate-600">+16462697026</p>
                   <p className="text-sm text-slate-500 mt-1">Mon-Fri, 9AM-6PM PKT</p>
                 </div>
               </div>

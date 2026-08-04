@@ -243,7 +243,7 @@ export default function TalkToHumanPage() {
                 </div>
                 <div className="space-y-1">
                   <h4 className="text-base font-extrabold text-slate-900">Call Us</h4>
-                  <p className="text-sm text-slate-600 font-medium">+447577337716</p>
+                  <p className="text-sm text-slate-600 font-medium">+16462697026</p>
                   <p className="text-xs text-slate-500 font-semibold mt-1">Mon-Fri, 9AM-6PM GMT/BST</p>
                 </div>
               </div>
