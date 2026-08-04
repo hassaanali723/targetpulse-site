@@ -1,24 +1,17 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { Menu, X, ChevronDown } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import Wordmark from '@/components/Wordmark'
-import { MIMECAST_PAGE_LIVE } from '@/lib/flags'
 
 const SIGNUP_URL = 'https://emailverifier.giggal.ai/sign-up'
 const SIGNIN_URL = 'https://emailverifier.giggal.ai/sign-in'
 
-// Catch-all is the flagship, so it stays a top-level item (first). SEG and MCP
-// live under the Solutions dropdown to keep the bar uncluttered.
+// Catch-all and SEG are the flagship solutions, so both sit as top-level items.
+// Mimecast is linked from within the SEG verification page, not the nav.
 const catchAllLink = { name: 'Catch-all Verification', href: '/catch-all-verification' }
-
-const solutionsLinks = [
-  { name: 'SEG Verification', href: '/seg-email-verification' },
-  ...(MIMECAST_PAGE_LIVE
-    ? [{ name: 'Mimecast Verification', href: '/mimecast-email-verification' }]
-    : []),
-]
+const segLink = { name: 'SEG Verification', href: '/seg-email-verification' }
 
 const navLinks = [
   { name: 'MCP', href: '/mcp' },
@@ -61,30 +54,9 @@ export default function Navbar() {
               <Link href={catchAllLink.href} className="hover:text-indigo-600 transition-colors duration-200">
                 {catchAllLink.name}
               </Link>
-              {/* Solutions dropdown (hover + keyboard focus) */}
-              <div className="relative group">
-                <button
-                  type="button"
-                  className="flex items-center gap-1 hover:text-indigo-600 group-focus-within:text-indigo-600 transition-colors duration-200"
-                  aria-haspopup="true"
-                >
-                  Solutions
-                  <ChevronDown className="w-3.5 h-3.5" />
-                </button>
-                <div className="absolute left-0 top-full pt-3 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 transition-all duration-200">
-                  <div className="bg-white border border-slate-200 rounded-2xl shadow-lg shadow-slate-200/60 py-2 min-w-[230px]">
-                    {solutionsLinks.map((link) => (
-                      <Link
-                        key={link.name}
-                        href={link.href}
-                        className="block px-4 py-2.5 text-sm font-bold text-slate-600 hover:text-indigo-600 hover:bg-slate-50 transition-colors duration-150"
-                      >
-                        {link.name}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              </div>
+              <Link href={segLink.href} className="hover:text-indigo-600 transition-colors duration-200">
+                {segLink.name}
+              </Link>
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
@@ -151,18 +123,14 @@ export default function Navbar() {
               <span>{catchAllLink.name}</span>
               <span className="text-slate-300 text-lg">›</span>
             </Link>
-            <p className="px-4 pt-2 pb-1 text-[11px] font-black uppercase tracking-[0.16em] text-slate-400">Solutions</p>
-            {solutionsLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="flex items-center justify-between w-full px-4 py-3 rounded-xl text-slate-700 font-bold hover:bg-slate-50 hover:text-indigo-700 transition-all duration-200"
-              >
-                <span>{link.name}</span>
-                <span className="text-slate-300 text-lg">›</span>
-              </Link>
-            ))}
+            <Link
+              href={segLink.href}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center justify-between w-full px-4 py-3 rounded-xl text-slate-700 font-bold hover:bg-slate-50 hover:text-indigo-700 transition-all duration-200"
+            >
+              <span>{segLink.name}</span>
+              <span className="text-slate-300 text-lg">›</span>
+            </Link>
             <div className="my-1 border-t border-slate-100" />
             {navLinks.map((link) => (
               <Link
