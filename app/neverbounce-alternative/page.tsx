@@ -49,7 +49,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'How do Giggal.ai credits expire compared with NeverBounce?',
-    a: 'Giggal.ai credits never expire. A 12-month expiry is widely reported for NeverBounce, but we could not confirm it from their terms, so we do not state it as fact.',
+    a: 'Giggal.ai credits never expire. NeverBounce credits expire 12 months after purchase, stated on its own pricing page.',
   },
   {
     q: 'Does Giggal.ai have an API?',
@@ -115,9 +115,9 @@ export default function NeverBounceAlternativePage() {
       <section className="max-w-3xl mx-auto px-6 pb-16">
         <Bluf
           points={[
-            { k: 'Price', v: 'Hidden behind a calculator. Ours is public: $9.90 at 10k, listed in full.' },
+            { k: 'Price', v: 'Only a $8/1,000 entry is public; higher tiers are calculator-only. Ours: $9.90 at 10k.' },
             { k: 'Catch-all', v: 'We tell you valid or invalid. NeverBounce only flags it (8% resolved, LeadMagic).' },
-            { k: 'Credits', v: 'Never expire. Their expiry is not confirmed from their own terms.' },
+            { k: 'Credits', v: 'Never expire. NeverBounce credits expire 12 months after purchase.' },
             { k: 'Try it', v: '1,000 free credits on a bulk list, no card.' },
           ]}
         />
@@ -139,8 +139,9 @@ export default function NeverBounceAlternativePage() {
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>NeverBounce pricing vs Giggal.ai</h2>
         <p className={proseP}>
-          NeverBounce shows pricing only through a browser calculator, so there is no public figure
-          to compare. Ours is listed in full, with no minimum and no monthly fee.
+          NeverBounce publishes only a $8 entry rate for 1,000 credits ($0.008 each); higher volumes
+          are calculator-only. Ours is listed in full at every tier, with no minimum and no monthly
+          fee.
         </p>
         <PricingLadder competitor={competitor} />
       </section>
@@ -150,8 +151,8 @@ export default function NeverBounceAlternativePage() {
         <h2 className={sectionTitle}>NeverBounce vs Giggal.ai</h2>
         <ComparisonTable competitor={competitor} />
         <p className="text-[13px] text-slate-500 font-medium">
-          A dash means the figure is not public, including NeverBounce’s credit expiry. No estimates
-          stand in for it.
+          A dash means the figure is not public, such as NeverBounce’s higher-volume tiers. No
+          estimates stand in for it.
         </p>
       </section>
 

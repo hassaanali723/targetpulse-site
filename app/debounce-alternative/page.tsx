@@ -147,8 +147,9 @@ export default function DeBounceAlternativePage() {
         </div>
         <p className={proseP}>
           Same list, roughly a third of the credits. This is a credit comparison, exact because both
-          catch-all prices are stated in credits. DeBounce’s per-credit dollar price is only shown
-          through a calculator, so there is no public figure to add here.
+          catch-all prices are stated in credits. In dollars the gap is wider: DeBounce is about
+          $0.0025 a credit at 10,000, so its 10-credit catch-all runs near $0.025 against roughly
+          $0.0015 on Giggal.ai.
         </p>
       </section>
 
@@ -168,8 +169,8 @@ export default function DeBounceAlternativePage() {
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>DeBounce standard pricing</h2>
         <p className={proseP}>
-          Outside catch-all, DeBounce’s per-volume dollar prices show only through a slider, and
-          third-party numbers conflict, so those cells show a dash. Ours are listed in full.
+          Outside catch-all, DeBounce is $25 at 10,000, $135 at 100,000 and $750 at a million, read
+          from its live slider. Both prices are listed in full below.
         </p>
         <PricingLadder competitor={competitor} />
       </section>

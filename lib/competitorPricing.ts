@@ -50,7 +50,7 @@ export interface Competitor {
 
 // The date all competitor facts here were checked. Human-formatted by
 // LastVerifiedNote. If you refresh a vendor, bump its lastVerified, not this.
-export const CHECKED_ON = '2026-08-02'
+export const CHECKED_ON = '2026-08-06'
 
 // ── Independent benchmark ────────────────────────────────────────────────────
 // LeadMagic, published 25 Feb 2026: 10,000 real B2B emails, 28% on catch-all
@@ -97,7 +97,7 @@ export const GIGGAL = {
 
 // ── Competitors ──────────────────────────────────────────────────────────────
 export const COMPETITORS: Record<string, Competitor> = {
-  // VERIFIED from zerobounce.net docs + Terms of Use.
+  // Prices + policies verified live from the pricing calculator (headless Chrome).
   zerobounce: {
     slug: 'zerobounce',
     name: 'ZeroBounce',
@@ -111,8 +111,7 @@ export const COMPETITORS: Record<string, Competitor> = {
     ],
     minimumPurchase: '2,000 credits ($39)',
     freeTier: '100 credits per month',
-    creditsExpire:
-      'For accounts registered after 1 June 2026, credits expire two years after the most recent purchase unless an active ZeroBounce ONE subscription is held. Accounts registered before that date keep non-expiring credits.',
+    creditsExpire: 'Credits never expire',
     chargesForUnknown: false,
     resolvesCatchAll: false,
     catchAllCreditCost: 'Marked Catch-All, not confirmed',
@@ -127,8 +126,9 @@ export const COMPETITORS: Record<string, Competitor> = {
     ],
   },
 
-  // Pricing is THIRD-PARTY only; NeverBounce sells behind a calculator and the
-  // 12-month expiry is unread from their terms. Both stay 'unknown'.
+  // The pricing page publishes only a 1,000-credit entry ($8, $0.008/credit) and
+  // a 12-month credit expiry (both verified live, headless). Higher tiers are not
+  // shown on the page, so 10k/100k/1M stay 'unknown'.
   neverbounce: {
     slug: 'neverbounce',
     name: 'NeverBounce',
@@ -142,7 +142,7 @@ export const COMPETITORS: Record<string, Competitor> = {
     ],
     minimumPurchase: null,
     freeTier: '-',
-    creditsExpire: '-',
+    creditsExpire: 'Credits expire 12 months after purchase',
     chargesForUnknown: null,
     resolvesCatchAll: false,
     catchAllCreditCost: 'Marked Catch-All, not confirmed',
@@ -157,18 +157,18 @@ export const COMPETITORS: Record<string, Competitor> = {
     ],
   },
 
-  // Structure VERIFIED (1 credit per verification, free single mode, rollover,
-  // named gateways). Dollar tiers sit behind a client-side calculator: 'unknown'.
+  // VERIFIED (1 credit per verification, free single mode, rollover, named
+  // gateways). Dollar tiers verified live from the pricing calculator (headless).
   bounceban: {
     slug: 'bounceban',
     name: 'BounceBan',
     pricingUrl: 'https://bounceban.com/pricing',
     lastVerified: CHECKED_ON,
-    startingPrice: { credits: 10000, totalUsd: 40 }, // 10k package via the pricing calculator
+    startingPrice: { credits: 10000, totalUsd: 34 }, // 10k package via the pricing calculator
     tiers: [
-      { credits: 10000, totalUsd: 40, perEmailUsd: 0.004, status: 'verified' },
-      { credits: 100000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
-      { credits: 1000000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
+      { credits: 10000, totalUsd: 34, perEmailUsd: 0.0034, status: 'verified' },
+      { credits: 100000, totalUsd: 255, perEmailUsd: 0.00255, status: 'verified' },
+      { credits: 1000000, totalUsd: 450, perEmailUsd: 0.00045, status: 'verified' },
     ],
     minimumPurchase: null,
     freeTier: 'Unlimited single verifications, but no bulk credits',
@@ -188,17 +188,16 @@ export const COMPETITORS: Record<string, Competitor> = {
     ],
   },
 
-  // Only the 1M price ($449) is on the homepage. Mid tiers are inconsistent
-  // third-party numbers: 'unknown'.
+  // All tiers verified live from the pricing calculator (headless Chrome).
   millionverifier: {
     slug: 'millionverifier',
     name: 'MillionVerifier',
     pricingUrl: 'https://www.millionverifier.com/',
     lastVerified: CHECKED_ON,
-    startingPrice: { credits: 50000, totalUsd: 89 }, // smallest tier with a shown price
+    startingPrice: { credits: 10000, totalUsd: 39 }, // smallest package
     tiers: [
-      { credits: 10000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
-      { credits: 100000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
+      { credits: 10000, totalUsd: 39, perEmailUsd: 0.0039, status: 'verified' },
+      { credits: 100000, totalUsd: 149, perEmailUsd: 0.00149, status: 'verified' },
       { credits: 1000000, totalUsd: 449, perEmailUsd: 0.000449, status: 'verified' },
     ],
     minimumPurchase: null,
@@ -233,7 +232,7 @@ export const COMPETITORS: Record<string, Competitor> = {
       { credits: 1000000, totalUsd: 960, perEmailUsd: 0.00096, status: 'verified' },
     ],
     minimumPurchase: null,
-    freeTier: '100 instant credits on signup, plus roughly 20 free daily credits',
+    freeTier: '600 free credits a month',
     creditsExpire:
       'Instant credits never expire. Daily subscription credits reset each day and do not roll over.',
     chargesForUnknown: false,
@@ -253,18 +252,17 @@ export const COMPETITORS: Record<string, Competitor> = {
   },
 
   // Credit COSTS verified (1 credit standard, 10 credits catch-all, 20 data
-  // enrichment). Dollar tiers sit behind a client-side slider and conflict
-  // across sources: 'unknown'.
+  // enrichment). Dollar tiers verified live from the pricing slider (headless).
   debounce: {
     slug: 'debounce',
     name: 'DeBounce',
     pricingUrl: 'https://debounce.com/pricing/',
     lastVerified: CHECKED_ON,
-    startingPrice: { credits: 5000, totalUsd: 15 }, // 5k package via the pricing calculator
+    startingPrice: { credits: 5000, totalUsd: 15 }, // 5k package via the pricing slider
     tiers: [
-      { credits: 10000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
-      { credits: 100000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
-      { credits: 1000000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
+      { credits: 10000, totalUsd: 25, perEmailUsd: 0.0025, status: 'verified' },
+      { credits: 100000, totalUsd: 135, perEmailUsd: 0.00135, status: 'verified' },
+      { credits: 1000000, totalUsd: 750, perEmailUsd: 0.00075, status: 'verified' },
     ],
     minimumPurchase: null,
     freeTier: '100 credits',
@@ -329,10 +327,10 @@ export function fmtUsd(n: number): string {
 // reads everything from one source.
 export const HUB_LABELS: Record<string, { expiry: string; freeTier: string }> = {
   giggal: { expiry: 'Never', freeTier: '1,000, no card' },
-  zerobounce: { expiry: '2 years, unless subscribed', freeTier: '100 / month' },
-  neverbounce: { expiry: '-', freeTier: '-' },
+  zerobounce: { expiry: 'Never', freeTier: '100 / month' },
+  neverbounce: { expiry: '12 months', freeTier: '-' },
   bounceban: { expiry: 'Never, rolls over', freeTier: 'Unlimited single only' },
   millionverifier: { expiry: 'Never', freeTier: '100 credits' },
-  reoon: { expiry: 'Never, instant credits', freeTier: '100 plus ~20/day' },
+  reoon: { expiry: 'Never, instant credits', freeTier: '600 / month' },
   debounce: { expiry: 'Never', freeTier: '100 credits' },
 }

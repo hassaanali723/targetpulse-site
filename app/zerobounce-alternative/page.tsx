@@ -44,8 +44,8 @@ const faqs: FaqItem[] = [
     a: 'Yes, at every volume. $9.90 vs $129 at 10,000 credits, $76 vs $649 at 100,000, and $680 vs $3,199 at a million. Both prices are dated next to the table.',
   },
   {
-    q: 'Do Giggal.ai credits expire like ZeroBounce credits?',
-    a: 'No. Giggal.ai credits never expire, with no condition. ZeroBounce credits, for accounts registered after 1 June 2026, expire two years after the last purchase unless an active ZeroBounce ONE subscription is held.',
+    q: 'Is there a minimum purchase on ZeroBounce?',
+    a: 'Yes, 2,000 credits for $39. Giggal.ai has no minimum, and you start on 1,000 free credits with no card. Credits never expire on either tool.',
   },
   {
     q: 'What does Giggal.ai do with a catch-all address that ZeroBounce only flags?',
@@ -116,7 +116,7 @@ export default function ZeroBounceAlternativePage() {
           points={[
             { k: 'Price', v: '$9.90 vs $129 per 10,000 credits. The gap holds at every tier.' },
             { k: 'Catch-all', v: 'We tell you valid or invalid. ZeroBounce just marks it Catch-All and leaves you guessing.' },
-            { k: 'Credits', v: 'Never expire. ZeroBounce: 2-year expiry on newer accounts unless subscribed.' },
+            { k: 'Minimum', v: 'None here, start on 1,000 free. ZeroBounce needs a 2,000-credit, $39 minimum.' },
             { k: 'Try it', v: '1,000 free credits on a bulk list, no card.' },
           ]}
         />

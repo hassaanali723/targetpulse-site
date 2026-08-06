@@ -175,7 +175,7 @@ export default function AlternativesHubPage() {
         </div>
         <p className="text-[12px] text-slate-400 font-medium">
           Starting price is each vendor’s smallest available package, so the volume differs by
-          vendor. Prices change over time; this reflects the latest we checked, as of 2 August 2026.
+          vendor. Prices change over time; this reflects the latest we checked, as of 6 August 2026.
         </p>
       </section>
 

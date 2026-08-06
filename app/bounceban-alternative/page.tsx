@@ -43,7 +43,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'Which is cheaper per catch-all address?',
-    a: 'On credit counts BounceBan looks cheaper, a flat 1 credit against 1.5. But a credit is not a price. At 10,000, BounceBan is $40 and Giggal.ai is $9.90, so a BounceBan catch-all is about $0.004 and a Giggal.ai catch-all about $0.0015. Cheaper here, even at 1.5 credits.',
+    a: 'On credit counts BounceBan looks cheaper, a flat 1 credit against 1.5. But a credit is not a price. At 10,000, BounceBan is $34 and Giggal.ai is $9.90, so a BounceBan catch-all is about $0.0034 and a Giggal.ai catch-all about $0.0015. Cheaper here, even at 1.5 credits.',
   },
   {
     q: 'What is the difference in the free tier?',
@@ -147,9 +147,9 @@ export default function BounceBanAlternativePage() {
         <h2 className={sectionTitle}>Price per catch-all address</h2>
         <p className={proseP}>
           A credit comparison would mislead. BounceBan charges a flat 1 credit; we charge 1.5 for a
-          catch-all. But a credit is not a price. At 10,000, BounceBan is $40 and we are $9.90, so a
-          BounceBan credit is about $0.004 and ours is $0.00099. That puts a BounceBan catch-all near
-          $0.004 and a Giggal.ai catch-all near $0.0015, cheaper even at 1.5 credits.
+          catch-all. But a credit is not a price. At 10,000, BounceBan is $34 and we are $9.90, so a
+          BounceBan credit is about $0.0034 and ours is $0.00099. That puts a BounceBan catch-all near
+          $0.0034 and a Giggal.ai catch-all near $0.0015, cheaper even at 1.5 credits.
         </p>
         <PricingLadder competitor={competitor} />
       </section>
