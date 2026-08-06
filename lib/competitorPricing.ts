@@ -143,8 +143,8 @@ export const COMPETITORS: Record<string, Competitor> = {
     freeTier: '-',
     creditsExpire: 'Credits expire 12 months after purchase',
     chargesForUnknown: null,
-    resolvesCatchAll: false,
-    catchAllCreditCost: 'Marked Catch-All, not confirmed',
+    resolvesCatchAll: true, // secondary pattern detection on accept-all (8% resolved in test)
+    catchAllCreditCost: 'Marked Accept-All, resolves few',
     advertisesSegSupport: false,
     claimedAccuracy: '-',
     benchmarkAccuracy: '96.9%',

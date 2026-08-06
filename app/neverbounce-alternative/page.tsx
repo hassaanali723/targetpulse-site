@@ -19,7 +19,7 @@ const APP_URL = 'https://emailverifier.giggal.ai/sign-up'
 const competitor = getCompetitor('neverbounce')
 
 const DESC =
-  'NeverBounce charges $50 per 10,000 and only flags catch-all. Giggal.ai is $9.90 and confirms them, valid or invalid. 1,000 free credits, no card.'
+  'NeverBounce charges $50 per 10,000 and resolves few catch-alls, 8% in one test. Giggal.ai is $9.90 and confirms them. 1,000 free credits, no card.'
 
 export const metadata: Metadata = {
   title: { absolute: 'NeverBounce Alternative | Giggal.ai' },
@@ -45,7 +45,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'What does Giggal.ai do with the catch-all addresses NeverBounce flags?',
-    a: 'It tells you whether the mailbox is real, deliverable or undeliverable, instead of a bare Catch-All tag. NeverBounce resolved 8% of catch-alls in the LeadMagic test. Catch-all is 1.5 credits in a run, 2 standalone.',
+    a: 'It tells you whether the mailbox is real, deliverable or undeliverable, instead of an Accept-All tag. NeverBounce resolved 8% of catch-alls in the LeadMagic test. Catch-all is 1.5 credits in a run, 2 standalone.',
   },
   {
     q: 'How do Giggal.ai credits expire compared with NeverBounce?',
@@ -88,8 +88,8 @@ export default function NeverBounceAlternativePage() {
           that resolves catch-all
         </h1>
         <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium">
-          NeverBounce only flags catch-all addresses without confirming them, and charges $50 per
-          10,000. Giggal.ai confirms those addresses, valid or invalid, at $9.90.
+          NeverBounce resolves few catch-alls, 8% in the LeadMagic test, and charges $50 per 10,000.
+          Giggal.ai confirms those addresses, valid or invalid, at $9.90.
         </p>
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3">
           <a
@@ -115,7 +115,7 @@ export default function NeverBounceAlternativePage() {
         <Bluf
           points={[
             { k: 'Price', v: '$50 at 10k against our $9.90, and $2,500 vs $680 at a million.' },
-            { k: 'Catch-all', v: 'We tell you valid or invalid. NeverBounce only flags it (8% resolved, LeadMagic).' },
+            { k: 'Catch-all', v: 'We tell you valid or invalid. NeverBounce resolves few (8% resolved, LeadMagic).' },
             { k: 'Credits', v: 'Never expire. NeverBounce credits expire 12 months after purchase.' },
             { k: 'Try it', v: '1,000 free credits on a bulk list, no card.' },
           ]}
@@ -126,9 +126,8 @@ export default function NeverBounceAlternativePage() {
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>How Giggal.ai verifies catch-all addresses</h2>
         <p className={proseP}>
-          NeverBounce marks catch-all addresses Catch-All and stops. It resolved 8% of them in the
-          LeadMagic test. We route those addresses down a separate path and return one of four
-          results.
+          NeverBounce marks catch-all addresses Accept-All and resolves few, 8% in the LeadMagic
+          test. We route those addresses down a separate path and return one of four results.
         </p>
         <VerdictExplainer />
         <BenchmarkCallout competitor={competitor} />
