@@ -151,7 +151,7 @@ export default function ZeroBounceAlternativePage() {
         <h2 className={sectionTitle}>ZeroBounce vs Giggal.ai</h2>
         <ComparisonTable competitor={competitor} />
         <p className="text-[13px] text-slate-500 font-medium">
-          ZeroBounce’s 99% accuracy is its own claim, not a measured figure.
+          ZeroBounce’s 99.6% accuracy is its own claim, not a measured figure.
         </p>
       </section>
 

@@ -116,7 +116,7 @@ export const COMPETITORS: Record<string, Competitor> = {
     resolvesCatchAll: false,
     catchAllCreditCost: 'Marked Catch-All, not confirmed',
     advertisesSegSupport: false,
-    claimedAccuracy: 'Claims 99%',
+    claimedAccuracy: 'Claims 99.6%',
     benchmarkAccuracy: '97.8%',
     benchmarkCatchAllResolved: '12%',
     betterFitFor: [
