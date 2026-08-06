@@ -19,7 +19,7 @@ const APP_URL = 'https://emailverifier.giggal.ai/sign-up'
 const competitor = getCompetitor('millionverifier')
 
 const DESC =
-  'MillionVerifier is cheap at volume but only flags catch-all. Giggal.ai confirms them, so you pay less per usable contact. 1,000 free credits, no card.'
+  'MillionVerifier is cheap at volume but marks catch-all Risky. Giggal.ai confirms them, so you pay less per usable contact. 1,000 free credits, no card.'
 
 export const metadata: Metadata = {
   title: { absolute: 'MillionVerifier Alternative | Giggal.ai' },
@@ -114,7 +114,7 @@ export default function MillionVerifierAlternativePage() {
       <section className="max-w-3xl mx-auto px-6 pb-16">
         <Bluf
           points={[
-            { k: 'Catch-all', v: 'We confirm it, valid or invalid. MillionVerifier only flags it (5% resolved, the lowest in the LeadMagic test).' },
+            { k: 'Catch-all', v: 'We confirm it, valid or invalid. MillionVerifier marks most Risky (5% resolved, the lowest in the LeadMagic test).' },
             { k: 'Real cost', v: 'Price per usable contact, not per credit. An address you paid to check but cannot email still cost you.' },
             { k: 'At 1M', v: '$449 vs $680. MillionVerifier costs less per credit at volume.' },
             { k: 'Try it', v: '1,000 free credits on a bulk list, no card.' },
@@ -138,7 +138,7 @@ export default function MillionVerifierAlternativePage() {
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Per credit vs per usable contact</h2>
         <p className={proseP}>
-          Say a list is 30% catch-all. Run it through a tool that only flags catch-all and a third of
+          Say a list is 30% catch-all. Run it through a tool that marks catch-all Risky and a third of
           what you paid to verify comes back unusable. The real cost is the price per credit divided
           by the share of the list you can send to. A cheaper credit that returns only a flag can
           cost more per usable contact than a pricier one that returns a real answer.

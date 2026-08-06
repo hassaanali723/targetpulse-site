@@ -86,7 +86,7 @@ export default function AlternativesHubPage() {
       cell: (slug) => <StartPrice p={COMPETITORS[slug].startingPrice} />,
     },
     {
-      label: 'Resolves catch-all',
+      label: 'Catch-all verification',
       giggal: <YN v={GIGGAL.resolvesCatchAll} />,
       cell: (slug) => <YN v={COMPETITORS[slug].resolvesCatchAll} />,
     },

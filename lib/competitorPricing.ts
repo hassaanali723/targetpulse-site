@@ -113,8 +113,8 @@ export const COMPETITORS: Record<string, Competitor> = {
     freeTier: '100 credits per month',
     creditsExpire: 'Credits never expire',
     chargesForUnknown: false,
-    resolvesCatchAll: false,
-    catchAllCreditCost: 'Marked Catch-All, not confirmed',
+    resolvesCatchAll: true, // offers catch-all handling (AI Scoring)
+    catchAllCreditCost: 'AI score 1-10, not valid/invalid',
     advertisesSegSupport: false,
     claimedAccuracy: 'Claims 99.6%',
     benchmarkAccuracy: '97.8%',
@@ -203,8 +203,8 @@ export const COMPETITORS: Record<string, Competitor> = {
     freeTier: '100 credits',
     creditsExpire: 'Credits never expire',
     chargesForUnknown: false,
-    resolvesCatchAll: false,
-    catchAllCreditCost: 'Marked Risky, not charged, not confirmed',
+    resolvesCatchAll: true, // has a Catch-All Verifier (marks most Risky; ~5% resolved in test)
+    catchAllCreditCost: 'Catch-All Verifier, marks most Risky',
     advertisesSegSupport: false,
     claimedAccuracy: '-',
     benchmarkAccuracy: '95.8%',

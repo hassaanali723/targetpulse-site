@@ -35,7 +35,7 @@ export default function ComparisonTable({ competitor }: { competitor: Competitor
         ),
     },
     {
-      label: 'Confirms catch-all addresses',
+      label: 'Catch-all verification',
       giggal: <YesNo value={GIGGAL.resolvesCatchAll} />,
       competitor: <YesNo value={competitor.resolvesCatchAll} />,
     },

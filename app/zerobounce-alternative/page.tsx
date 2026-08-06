@@ -19,7 +19,7 @@ const APP_URL = 'https://emailverifier.giggal.ai/sign-up'
 const competitor = getCompetitor('zerobounce')
 
 const DESC =
-  'ZeroBounce charges $129 per 10,000 and only flags catch-all addresses. Giggal.ai is $9.90 and confirms them, valid or invalid. 1,000 free credits, no card.'
+  'ZeroBounce charges $129 per 10,000 and scores catch-all 1-10, not valid or invalid. Giggal.ai is $9.90 and confirms them. 1,000 free credits, no card.'
 
 export const metadata: Metadata = {
   title: { absolute: 'ZeroBounce Alternative | Giggal.ai' },
@@ -48,7 +48,7 @@ const faqs: FaqItem[] = [
     a: 'Yes, 2,000 credits for $39. Giggal.ai has no minimum, and you start on 1,000 free credits with no card. Credits never expire on either tool.',
   },
   {
-    q: 'What does Giggal.ai do with a catch-all address that ZeroBounce only flags?',
+    q: 'What does Giggal.ai do with a catch-all address that ZeroBounce only scores?',
     a: 'It tells you whether the mailbox is real, deliverable or undeliverable, instead of a bare Catch-All tag. Catch-all is 1.5 credits in a run, 2 standalone.',
   },
   {
@@ -88,7 +88,7 @@ export default function ZeroBounceAlternativePage() {
           that resolves catch-all
         </h1>
         <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium">
-          Same job, a tenth of the price, and a real answer on the addresses ZeroBounce only marks Catch-All.
+          Same job, a tenth of the price, and a real valid or invalid answer where ZeroBounce only returns a 1-10 score.
           $9.90 per 10,000 credits against $129.
         </p>
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3">
@@ -115,7 +115,7 @@ export default function ZeroBounceAlternativePage() {
         <Bluf
           points={[
             { k: 'Price', v: '$9.90 vs $129 per 10,000 credits. The gap holds at every tier.' },
-            { k: 'Catch-all', v: 'We tell you valid or invalid. ZeroBounce just marks it Catch-All and leaves you guessing.' },
+            { k: 'Catch-all', v: 'We tell you valid or invalid. ZeroBounce returns a 1-10 score, not a real answer.' },
             { k: 'Minimum', v: 'None here, start on 1,000 free. ZeroBounce needs a 2,000-credit, $39 minimum.' },
             { k: 'Try it', v: '1,000 free credits on a bulk list, no card.' },
           ]}
@@ -136,8 +136,9 @@ export default function ZeroBounceAlternativePage() {
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>How Giggal.ai verifies catch-all addresses</h2>
         <p className={proseP}>
-          On a catch-all domain the server accepts every address. ZeroBounce marks it Catch-All and
-          stops. We route those addresses down a separate path and return one of four results.
+          On a catch-all domain the server accepts every address. ZeroBounce scores it 1 to 10 with
+          AI Scoring rather than confirming it. We route those addresses down a separate path and
+          return one of four results.
         </p>
         <VerdictExplainer />
         <p className={proseP}>

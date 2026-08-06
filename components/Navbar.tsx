@@ -8,10 +8,9 @@ import Wordmark from '@/components/Wordmark'
 const SIGNUP_URL = 'https://emailverifier.giggal.ai/sign-up'
 const SIGNIN_URL = 'https://emailverifier.giggal.ai/sign-in'
 
-// Catch-all and SEG are the flagship solutions, so both sit as top-level items.
-// Mimecast is linked from within the SEG verification page, not the nav.
+// Catch-all is the flagship, top-level item. SEG and Mimecast are linked from
+// within the pages, not the nav.
 const catchAllLink = { name: 'Catch-all Verification', href: '/catch-all-verification' }
-const segLink = { name: 'SEG Verification', href: '/seg-email-verification' }
 
 const navLinks = [
   { name: 'MCP', href: '/mcp' },
@@ -53,9 +52,6 @@ export default function Navbar() {
             <nav className="hidden md:flex items-center space-x-8 text-sm font-bold text-slate-600">
               <Link href={catchAllLink.href} className="hover:text-indigo-600 transition-colors duration-200">
                 {catchAllLink.name}
-              </Link>
-              <Link href={segLink.href} className="hover:text-indigo-600 transition-colors duration-200">
-                {segLink.name}
               </Link>
               {navLinks.map((link) => (
                 <Link
@@ -121,14 +117,6 @@ export default function Navbar() {
               className="flex items-center justify-between w-full px-4 py-3 rounded-xl text-slate-700 font-bold hover:bg-slate-50 hover:text-indigo-700 transition-all duration-200"
             >
               <span>{catchAllLink.name}</span>
-              <span className="text-slate-300 text-lg">›</span>
-            </Link>
-            <Link
-              href={segLink.href}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="flex items-center justify-between w-full px-4 py-3 rounded-xl text-slate-700 font-bold hover:bg-slate-50 hover:text-indigo-700 transition-all duration-200"
-            >
-              <span>{segLink.name}</span>
               <span className="text-slate-300 text-lg">›</span>
             </Link>
             <div className="my-1 border-t border-slate-100" />
