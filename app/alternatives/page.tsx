@@ -42,7 +42,7 @@ const BLURBS: Record<string, string> = {
   zerobounce:
     'Marks catch-all addresses Catch-All without confirming the mailbox, and costs $129 at 10k against $9.90 here. Its deliverability suite is what keeps some teams on it.',
   neverbounce:
-    'Resolved 8% of catch-alls in the LeadMagic test and keeps its pricing behind a calculator. A fit mainly if you clean lists inside a CRM.',
+    'Resolved 8% of catch-alls in the LeadMagic test, and its PAYG runs $50 at 10k against our $9.90. A fit mainly if you clean lists inside a CRM.',
   bounceban:
     'Also resolves catch-all and SEG, so it comes down to terms: our 1,000 free bulk credits against a single-only free tier, a full price list against a calculator, 15 named gateways against 3.',
   millionverifier:

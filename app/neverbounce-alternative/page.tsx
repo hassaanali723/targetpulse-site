@@ -19,7 +19,7 @@ const APP_URL = 'https://emailverifier.giggal.ai/sign-up'
 const competitor = getCompetitor('neverbounce')
 
 const DESC =
-  'NeverBounce only flags catch-all addresses. Giggal.ai confirms them, valid or invalid, and lists every price in full. 1,000 free credits, no card.'
+  'NeverBounce charges $50 per 10,000 and only flags catch-all. Giggal.ai is $9.90 and confirms them, valid or invalid. 1,000 free credits, no card.'
 
 export const metadata: Metadata = {
   title: { absolute: 'NeverBounce Alternative | Giggal.ai' },
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
 const faqs: FaqItem[] = [
   {
     q: 'Is Giggal.ai cheaper than NeverBounce?',
-    a: 'NeverBounce shows its pricing only through a calculator, so there is no public figure to line up against. Giggal.ai is $9.90 per 10,000, listed in full. Open their calculator at the same volume to compare.',
+    a: 'Yes, and by a lot. NeverBounce is $50 per 10,000 against Giggal.ai at $9.90, and $2,500 vs $680 at a million. Both publish full tiers, so the gap is easy to check.',
   },
   {
     q: 'What does Giggal.ai do with the catch-all addresses NeverBounce flags?',
@@ -88,9 +88,8 @@ export default function NeverBounceAlternativePage() {
           that resolves catch-all
         </h1>
         <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium">
-          NeverBounce only flags catch-all addresses without confirming them, and hides pricing
-          behind a calculator. We confirm those addresses, valid or invalid, and publish every
-          price.
+          NeverBounce only flags catch-all addresses without confirming them, and charges $50 per
+          10,000. Giggal.ai confirms those addresses, valid or invalid, at $9.90.
         </p>
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3">
           <a
@@ -115,7 +114,7 @@ export default function NeverBounceAlternativePage() {
       <section className="max-w-3xl mx-auto px-6 pb-16">
         <Bluf
           points={[
-            { k: 'Price', v: 'Only a $8/1,000 entry is public; higher tiers are calculator-only. Ours: $9.90 at 10k.' },
+            { k: 'Price', v: '$50 at 10k against our $9.90, and $2,500 vs $680 at a million.' },
             { k: 'Catch-all', v: 'We tell you valid or invalid. NeverBounce only flags it (8% resolved, LeadMagic).' },
             { k: 'Credits', v: 'Never expire. NeverBounce credits expire 12 months after purchase.' },
             { k: 'Try it', v: '1,000 free credits on a bulk list, no card.' },
@@ -139,9 +138,8 @@ export default function NeverBounceAlternativePage() {
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>NeverBounce pricing vs Giggal.ai</h2>
         <p className={proseP}>
-          NeverBounce publishes only a $8 entry rate for 1,000 credits ($0.008 each); higher volumes
-          are calculator-only. Ours is listed in full at every tier, with no minimum and no monthly
-          fee.
+          NeverBounce charges $50 at 10,000, $400 at 100,000 and $2,500 at a million. Giggal.ai is
+          $9.90, $76 and $680 at the same volumes, with no minimum and no monthly fee.
         </p>
         <PricingLadder competitor={competitor} />
       </section>
@@ -151,8 +149,8 @@ export default function NeverBounceAlternativePage() {
         <h2 className={sectionTitle}>NeverBounce vs Giggal.ai</h2>
         <ComparisonTable competitor={competitor} />
         <p className="text-[13px] text-slate-500 font-medium">
-          A dash means the figure is not public, such as NeverBounce’s higher-volume tiers. No
-          estimates stand in for it.
+          A dash means the figure is not public, such as NeverBounce’s free-tier size. No estimates
+          stand in for it.
         </p>
       </section>
 

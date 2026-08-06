@@ -126,19 +126,18 @@ export const COMPETITORS: Record<string, Competitor> = {
     ],
   },
 
-  // The pricing page publishes only a 1,000-credit entry ($8, $0.008/credit) and
-  // a 12-month credit expiry (both verified live, headless). Higher tiers are not
-  // shown on the page, so 10k/100k/1M stay 'unknown'.
+  // PAYG "Basic Plans" table + 12-month expiry verified live from the page data
+  // (headless Chrome). Entry is 1,000 credits for $8 ($0.008/credit).
   neverbounce: {
     slug: 'neverbounce',
     name: 'NeverBounce',
     pricingUrl: 'https://neverbounce.com/pricing',
     lastVerified: CHECKED_ON,
-    startingPrice: { credits: 1000, totalUsd: 8 }, // 1k entry package via the pricing calculator
+    startingPrice: { credits: 1000, totalUsd: 8 }, // 1k entry from the PAYG Basic Plans table
     tiers: [
-      { credits: 10000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
-      { credits: 100000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
-      { credits: 1000000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
+      { credits: 10000, totalUsd: 50, perEmailUsd: 0.005, status: 'verified' },
+      { credits: 100000, totalUsd: 400, perEmailUsd: 0.004, status: 'verified' },
+      { credits: 1000000, totalUsd: 2500, perEmailUsd: 0.0025, status: 'verified' },
     ],
     minimumPurchase: null,
     freeTier: '-',
