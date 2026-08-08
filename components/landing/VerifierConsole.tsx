@@ -475,7 +475,7 @@ function CatchAllResultCard({ result, signupUrl }: { result: ResultState; signup
       <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-4">
         <div className="flex items-center gap-2">
           <VerdictIcon className={`w-4 h-4 shrink-0 ${verdictColor}`} />
-          <span className={`text-sm font-black ${verdictColor}`}>Verdict: {result.title}</span>
+          <span className={`text-sm font-black ${verdictColor}`}>Result: {result.title}</span>
         </div>
         <p className="text-xs text-slate-400 font-semibold leading-relaxed mt-1.5 pl-6">
           {VERDICT_LINE[v]}
