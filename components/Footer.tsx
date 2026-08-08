@@ -23,6 +23,7 @@ const solutionsLinks = [
 
 const productLinks = [
   { name: 'Email Verifier', href: '/' },
+  { name: 'Free catch-all checker', href: '/tools/catch-all-email-checker' },
   { name: 'API Reference', href: '/public/docs' },
   { name: 'Pricing', href: '/pricing' },
   { name: 'Sign up free', href: '/sign-up', external: true },

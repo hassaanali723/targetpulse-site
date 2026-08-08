@@ -256,6 +256,13 @@ export default function CatchAllVerificationPage() {
             reached. Catch-all verification solves this by checking the actual existence of
             the mailbox instead of guessing.
           </p>
+          <p>
+            Want to test a single address before running a list? Use the{' '}
+            <Link href="/tools/catch-all-email-checker" className="text-indigo-600 font-bold hover:underline">
+              free catch-all email checker
+            </Link>
+            .
+          </p>
         </div>
       </section>
 

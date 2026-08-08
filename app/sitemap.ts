@@ -26,6 +26,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/millionverifier-alternative`, lastModified: '2026-08-06' },
     { url: `${baseUrl}/reoon-alternative`, lastModified: '2026-08-06' },
     { url: `${baseUrl}/debounce-alternative`, lastModified: '2026-08-06' },
+    // Free single-address tool wrapping the verification widget.
+    { url: `${baseUrl}/tools/catch-all-email-checker`, lastModified: '2026-08-08' },
     { url: `${baseUrl}/mcp`, lastModified: '2026-07-21' },
     { url: `${baseUrl}/pricing`, lastModified: '2026-07-29' },
     { url: `${baseUrl}/public/docs`, lastModified: '2026-07-24' },

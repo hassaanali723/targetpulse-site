@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import {
-  Mail, Play, Loader2, CircleDashed, CheckCircle2, XCircle, AlertTriangle, HelpCircle, Terminal,
+  Mail, Play, Loader2, CircleDashed, CheckCircle2, XCircle, AlertTriangle, HelpCircle, Terminal, ArrowRight,
 } from 'lucide-react'
 
 type CheckStatus = 'idle' | 'running' | 'ok' | 'warn' | 'error' | 'skip'
@@ -10,18 +10,45 @@ type VerdictType = 'deliverable' | 'catchall' | 'risky' | 'undeliverable' | 'unk
 type LogLevel = 'info' | 'success' | 'warn' | 'error'
 
 interface LogLine { text: string; className: string }
-interface ResultState { type: VerdictType; title: string; desc: string; score?: number }
+interface ResultState {
+  type: VerdictType
+  title: string
+  desc: string
+  score?: number
+  // Catch-all variant only: the checked domain, whether it is catch-all, and
+  // whether the daily free-check limit was hit.
+  domain?: string
+  catchAll?: boolean
+  limited?: boolean
+}
 
-// Shape returned by the /api/verify route (built from the real validation result)
+// Shape returned by the verify routes (built from the real validation result)
 interface ApiLog { step: string; text: string; level: LogLevel }
 interface ApiResult {
   email: string
   domain: string
+  catchAll?: boolean
   steps: Record<string, CheckStatus>
   logs: ApiLog[]
   verdict: { type: VerdictType; title: string; desc: string; score: number }
   meta?: { provider: string | null; mxRecord: string | null; disposable: boolean; role: boolean; freeEmail: boolean }
   error?: string
+  // Catch-all tool only: a soft, friendly quota response (HTTP 200).
+  limited?: boolean
+  message?: string
+}
+
+interface VerifierConsoleProps {
+  // Which API route to POST to. Defaults to the homepage console endpoint.
+  endpoint?: string
+  // 'catchall' renders the catch-all status as a distinct step before the
+  // verdict, for /tools/catch-all-email-checker.
+  variant?: 'console' | 'catchall'
+  // Pre-filled address. Empty by default so the tool never spends a check on
+  // an address the visitor did not choose.
+  defaultEmail?: string
+  // Sign-up URL used by the quota-reached CTA in the catch-all variant.
+  signupUrl?: string
 }
 
 const CHECK_ORDER = ['basic', 'dns', 'catchall', 'mailbox'] as const
@@ -102,8 +129,15 @@ const RESULT_STYLES: Record<VerdictType, {
   },
 }
 
-export default function VerifierConsole() {
-  const [email, setEmail] = useState('info@giggal.ai')
+const SIGNUP_URL = 'https://emailverifier.giggal.ai/sign-up'
+
+export default function VerifierConsole({
+  endpoint = '/api/verify',
+  variant = 'console',
+  defaultEmail = 'info@giggal.ai',
+  signupUrl = SIGNUP_URL,
+}: VerifierConsoleProps = {}) {
+  const [email, setEmail] = useState(defaultEmail)
   const [running, setRunning] = useState(false)
   const [started, setStarted] = useState(false)
   const [logs, setLogs] = useState<LogLine[]>([])
@@ -142,7 +176,7 @@ export default function VerifierConsole() {
     let data: ApiResult | null = null
     let errorMsg = ''
     try {
-      const res = await fetch('/api/verify', {
+      const res = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: value }),
@@ -157,6 +191,20 @@ export default function VerifierConsole() {
     }
 
     if (!alive()) return
+
+    // Friendly quota response (catch-all tool): a soft limit, not an error.
+    if (data?.limited) {
+      setLogs([])
+      setChecks(INITIAL_CHECKS)
+      setResult({
+        type: 'unknown',
+        title: 'Daily limit reached',
+        desc: data.message || 'You have used your free checks for today.',
+        limited: true,
+      })
+      setRunning(false)
+      return
+    }
 
     if (!data) {
       setLogs([])
@@ -191,7 +239,11 @@ export default function VerifierConsole() {
     await sleep(850)
     if (!alive()) return
     setLogs([])
-    setResult({ ...data.verdict })
+    setResult({
+      ...data.verdict,
+      domain: data.domain,
+      catchAll: data.catchAll ?? data.steps.catchall === 'warn',
+    })
     setRunning(false)
   }
 
@@ -264,7 +316,9 @@ export default function VerifierConsole() {
         <div className="lg:col-span-8 p-6 flex flex-col justify-between h-80 lg:h-96">
           <div ref={logScrollRef} className="overflow-y-auto space-y-2.5 font-mono text-xs flex-1">
             {result ? (
-              <ResultCard result={result} />
+              variant === 'catchall'
+                ? <CatchAllResultCard result={result} signupUrl={signupUrl} />
+                : <ResultCard result={result} />
             ) : !started ? (
               <div className="h-full flex flex-col justify-center items-center text-center text-slate-500 py-16 space-y-3">
                 <Terminal className="w-6 h-6 animate-pulse text-indigo-400" />
@@ -326,6 +380,107 @@ function ResultCard({ result }: { result: ResultState }) {
           {scoreLabel}
         </div>
       )}
+    </div>
+  )
+}
+
+// Plain-language line paired with each engine verdict on the catch-all tool.
+const VERDICT_LINE: Record<VerdictType, string> = {
+  deliverable: 'This mailbox exists.',
+  undeliverable: 'This mailbox does not exist.',
+  risky: 'The server accepts mail, but we cannot fully confirm this mailbox.',
+  unknown: 'We could not confirm this mailbox.',
+  catchall: 'We could not confirm this mailbox.',
+  error: '',
+}
+
+// Result panel for /tools/catch-all-email-checker. Shows the catch-all status as
+// a distinct step, then the verdict, so the visitor sees the problem and the
+// answer in sequence. Also renders the friendly quota-reached state.
+function CatchAllResultCard({ result, signupUrl }: { result: ResultState; signupUrl: string }) {
+  if (result.limited) {
+    return (
+      <div className="h-full flex flex-col justify-center items-center text-center p-6 space-y-4 animate-slide-down">
+        <div className="w-14 h-14 rounded-2xl flex items-center justify-center border bg-slate-800/60 border-slate-700">
+          <HelpCircle className="w-7 h-7 text-slate-300" />
+        </div>
+        <div className="space-y-1 max-w-sm">
+          <h4 className="text-lg font-black tracking-tight leading-tight text-slate-100">{result.title}</h4>
+          <p className="text-xs text-slate-400 font-semibold leading-relaxed">{result.desc}</p>
+        </div>
+        <a
+          href={signupUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-black rounded-xl transition-colors"
+        >
+          Get 1,000 free credits
+          <ArrowRight className="w-3.5 h-3.5" />
+        </a>
+      </div>
+    )
+  }
+
+  if (result.type === 'error') {
+    return (
+      <div className="h-full flex flex-col justify-center items-center text-center p-6 space-y-4 animate-slide-down">
+        <div className="w-14 h-14 rounded-2xl flex items-center justify-center border bg-rose-950/40 border-rose-900/60">
+          <AlertTriangle className="w-7 h-7 text-rose-400" />
+        </div>
+        <div className="space-y-1 max-w-sm">
+          <h4 className="text-lg font-black tracking-tight leading-tight text-rose-300">{result.title}</h4>
+          <p className="text-xs text-slate-400 font-semibold leading-relaxed">{result.desc}</p>
+        </div>
+      </div>
+    )
+  }
+
+  const domain = result.domain || ''
+  const invalid = result.title === 'Invalid Email' || !domain
+  if (invalid) {
+    return (
+      <div className="h-full flex flex-col justify-center items-center text-center p-6 space-y-4 animate-slide-down">
+        <div className="w-14 h-14 rounded-2xl flex items-center justify-center border bg-rose-950/40 border-rose-900/60">
+          <XCircle className="w-7 h-7 text-rose-400" />
+        </div>
+        <p className="text-sm text-slate-200 font-bold max-w-sm">That is not a valid email address.</p>
+      </div>
+    )
+  }
+
+  const v = result.type
+  const good = v === 'deliverable'
+  const bad = v === 'undeliverable'
+  const VerdictIcon = good ? CheckCircle2 : bad ? XCircle : v === 'risky' ? AlertTriangle : HelpCircle
+  const verdictColor = good ? 'text-emerald-400' : bad ? 'text-rose-400' : v === 'risky' ? 'text-amber-400' : 'text-slate-300'
+
+  return (
+    <div className="h-full flex flex-col justify-center p-5 sm:p-6 space-y-4 animate-slide-down text-left">
+      {/* Step 1 — catch-all status */}
+      <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-4">
+        <div className="flex items-center gap-2">
+          <AlertTriangle className={`w-4 h-4 shrink-0 ${result.catchAll ? 'text-amber-400' : 'text-slate-500'}`} />
+          <span className="text-sm font-black text-slate-100 break-all">
+            {domain} is {result.catchAll ? 'a catch-all domain' : 'not a catch-all domain'}
+          </span>
+        </div>
+        <p className="text-xs text-slate-400 font-semibold leading-relaxed mt-1.5 pl-6">
+          {result.catchAll
+            ? 'It accepts mail for any address, so a standard SMTP check cannot tell you whether this mailbox exists.'
+            : 'A standard check is reliable here.'}
+        </p>
+      </div>
+
+      {/* Step 2 — verdict */}
+      <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-4">
+        <div className="flex items-center gap-2">
+          <VerdictIcon className={`w-4 h-4 shrink-0 ${verdictColor}`} />
+          <span className={`text-sm font-black ${verdictColor}`}>Verdict: {result.title}</span>
+        </div>
+        <p className="text-xs text-slate-400 font-semibold leading-relaxed mt-1.5 pl-6">
+          {VERDICT_LINE[v]}
+        </p>
+      </div>
     </div>
   )
 }
