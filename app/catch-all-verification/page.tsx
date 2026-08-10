@@ -257,7 +257,11 @@ export default function CatchAllVerificationPage() {
             the mailbox instead of guessing.
           </p>
           <p>
-            Want to test a single address before running a list? Use the{' '}
+            If you are new to the term, our blog covers{' '}
+            <Link href="/blog/what-is-a-catch-all-email-address" className="text-indigo-600 font-bold hover:underline">
+              what a catch-all email address is
+            </Link>{' '}
+            in plain language. To test a single address before running a list, use the{' '}
             <Link href="/tools/catch-all-email-checker" className="text-indigo-600 font-bold hover:underline">
               free catch-all email checker
             </Link>

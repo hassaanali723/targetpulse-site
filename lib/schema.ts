@@ -41,6 +41,28 @@ export function breadcrumbTrailLd(crumbs: { name: string; path: string }[]): Rec
   }
 }
 
+// Article (blog post). Publisher is the shared Organization node from the layout
+// graph (referenced by @id, not duplicated). No author byline is emitted.
+export function articleLd(a: {
+  title: string
+  description: string
+  slug: string
+  datePublished: string
+}): Record<string, unknown> {
+  const url = `${SITE}/blog/${a.slug}`
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    '@id': `${url}#article`,
+    headline: a.title,
+    description: a.description,
+    datePublished: a.datePublished,
+    dateModified: a.datePublished,
+    publisher: { '@id': ORG_ID },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+  }
+}
+
 // SoftwareApplication (homepage). offers.lowPrice/highPrice/offerCount are
 // derived from the same RAW_OFFERS the pricing table renders. No aggregateRating
 // (the reviews were collected on third-party platforms; marking them up as

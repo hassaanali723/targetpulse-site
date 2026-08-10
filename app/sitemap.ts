@@ -28,6 +28,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/debounce-alternative`, lastModified: '2026-08-06' },
     // Free single-address tool wrapping the verification widget.
     { url: `${baseUrl}/tools/catch-all-email-checker`, lastModified: '2026-08-08' },
+    // Blog: index plus the first five educational articles, published together.
+    { url: `${baseUrl}/blog`, lastModified: '2026-08-11' },
+    { url: `${baseUrl}/blog/what-is-a-catch-all-email-address`, lastModified: '2026-08-11' },
+    { url: `${baseUrl}/blog/why-cold-emails-bounce`, lastModified: '2026-08-11' },
+    { url: `${baseUrl}/blog/good-bounce-rate-for-cold-email`, lastModified: '2026-08-11' },
+    { url: `${baseUrl}/blog/what-is-a-secure-email-gateway`, lastModified: '2026-08-11' },
+    { url: `${baseUrl}/blog/what-does-risky-mean-in-email-verification`, lastModified: '2026-08-11' },
     { url: `${baseUrl}/mcp`, lastModified: '2026-07-21' },
     { url: `${baseUrl}/pricing`, lastModified: '2026-07-29' },
     { url: `${baseUrl}/public/docs`, lastModified: '2026-07-24' },

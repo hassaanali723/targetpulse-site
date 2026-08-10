@@ -93,10 +93,15 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Compare column */}
+          {/* Resources column */}
           <div className="md:col-span-2">
-            <p className={headingClass}>Compare</p>
+            <p className={headingClass}>Resources</p>
             <ul className="space-y-2.5">
+              <li>
+                <Link href="/blog" className={linkClass}>
+                  Blog
+                </Link>
+              </li>
               <li>
                 <Link href="/alternatives" className={linkClass}>
                   Compare verifiers
