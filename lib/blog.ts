@@ -18,6 +18,10 @@ export interface PostMeta {
   date: string // YYYY-MM-DD
   author: string
   keyword: string
+  // Optional top banner image, e.g. /blog/catch-all.jpg (file lives in public/).
+  // Empty string when the post has no banner.
+  image: string
+  imageAlt: string
 }
 
 export interface Post extends PostMeta {
@@ -120,6 +124,8 @@ export function getPostBySlug(slug: string): Post | null {
     date: data.date || '',
     author: data.author || '',
     keyword: data.keyword || '',
+    image: data.image || '',
+    imageAlt: data.imageAlt || '',
     contentHtml: renderMarkdown(body),
   }
 }

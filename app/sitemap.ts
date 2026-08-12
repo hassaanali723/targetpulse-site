@@ -26,6 +26,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/millionverifier-alternative`, lastModified: '2026-08-06' },
     { url: `${baseUrl}/reoon-alternative`, lastModified: '2026-08-06' },
     { url: `${baseUrl}/debounce-alternative`, lastModified: '2026-08-06' },
+    // Second wave of competitor pages, review-site-validated pure verifiers.
+    { url: `${baseUrl}/bouncer-alternative`, lastModified: '2026-08-12' },
+    { url: `${baseUrl}/emailable-alternative`, lastModified: '2026-08-12' },
+    { url: `${baseUrl}/clearout-alternative`, lastModified: '2026-08-12' },
+    { url: `${baseUrl}/kickbox-alternative`, lastModified: '2026-08-12' },
+    { url: `${baseUrl}/emaillistverify-alternative`, lastModified: '2026-08-12' },
+    { url: `${baseUrl}/myemailverifier-alternative`, lastModified: '2026-08-12' },
+    { url: `${baseUrl}/briteverify-alternative`, lastModified: '2026-08-12' },
     // Free single-address tool wrapping the verification widget.
     { url: `${baseUrl}/tools/catch-all-email-checker`, lastModified: '2026-08-08' },
     // Blog: index plus the first five educational articles, published together.

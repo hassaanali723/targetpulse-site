@@ -4,6 +4,8 @@ description: A secure email gateway is a filtering layer in front of a company m
 slug: what-is-a-secure-email-gateway
 date: 2026-08-11
 keyword: what is a secure email gateway
+image: /blog/what-is-a-secure-email-gateway.webp
+imageAlt: Illustration for what a secure email gateway is
 ---
 
 A secure email gateway is a filtering layer that sits in front of a company mail server and inspects every message before it is allowed through. If you keep seeing SEG in verification results and want to know what is a secure email gateway in practical terms, it is the checkpoint a company inbound and outbound mail passes through, scanning for threats and enforcing policy on the way. The mail server behind it never sees a message the gateway decides to block.

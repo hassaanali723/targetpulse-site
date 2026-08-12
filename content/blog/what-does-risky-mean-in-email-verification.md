@@ -4,6 +4,8 @@ description: Risky is not an answer, it is the absence of one. Here is what land
 slug: what-does-risky-mean-in-email-verification
 date: 2026-08-11
 keyword: risky email verification meaning
+image: /blog/what-does-risky-mean-in-email-verification.webp
+imageAlt: Illustration for what Risky means in email verification
 ---
 
 Risky is not an answer. It is what a verification tool prints when it could not reach one. If you are looking at a results file with a Risky column and searching for the risky email verification meaning, that is the whole of it. The tool checked the address, could not confirm the mailbox as real, could not prove it fake, and filed it under a label that means unresolved rather than bad.
