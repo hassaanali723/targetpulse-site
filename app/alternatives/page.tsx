@@ -58,8 +58,10 @@ const BLURBS: Record<string, string> = {
     'Marks accept-all addresses Risky without confirming them, and runs $60 at 10k against our $9.90. Fast, with a generous 250-credit free tier.',
   clearout:
     'Returns catch-all as its own status without confirming the mailbox, and prices through a calculator. Bundles an email finder and phone validation.',
-  verifalia:
-    'Returns catch-all as a ServerIsCatchAll status without confirming the mailbox, and prices through a calculator. Developer-first, with a daily free tier.',
+  kickbox:
+    'Flags accept-all with a field rather than resolving it, and prices per verification through a slider. A developer favourite with strong API docs.',
+  emaillistverify:
+    'Billed as the cheap option at $27 per 10k, but we are $9.90 and resolve catch-all, which it returns as ok_for_all without confirming.',
 }
 
 const sectionTitle = 'text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight'

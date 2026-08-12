@@ -15,61 +15,61 @@ import { getCompetitor } from '@/lib/competitorPricing'
 import { ArrowRight } from 'lucide-react'
 
 const APP_URL = 'https://emailverifier.giggal.ai/sign-up'
-const competitor = getCompetitor('verifalia')
+const competitor = getCompetitor('kickbox')
 
 const DESC =
-  'Verifalia returns catch-all as a Risky status without confirming the mailbox, and prices via a calculator. Giggal.ai resolves catch-all at $9.90 per 10,000. 1,000 free credits, no card.'
+  'Kickbox flags accept-all with a field rather than resolving it, and prices per verification through a slider. Giggal.ai resolves catch-all at $9.90 per 10,000. 1,000 free credits, no card.'
 
 export const metadata: Metadata = {
-  title: { absolute: 'Verifalia Alternative | Giggal.ai' },
+  title: { absolute: 'Kickbox Alternative | Giggal.ai' },
   description: DESC,
-  alternates: { canonical: '/verifalia-alternative' },
+  alternates: { canonical: '/kickbox-alternative' },
   openGraph: {
-    title: 'A Verifalia Alternative That Resolves Catch-All',
+    title: 'A Kickbox Alternative That Resolves Catch-All',
     description: DESC,
-    url: 'https://giggal.ai/verifalia-alternative',
+    url: 'https://giggal.ai/kickbox-alternative',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'A Verifalia Alternative That Resolves Catch-All',
+    title: 'A Kickbox Alternative That Resolves Catch-All',
     description: DESC,
   },
 }
 
 const faqs: FaqItem[] = [
   {
-    q: 'Does Giggal.ai resolve catch-all where Verifalia flags it?',
-    a: 'Yes. Verifalia returns catch-all servers as a ServerIsCatchAll status, one of its Risky types, and does not confirm the individual mailbox. Giggal.ai returns a real deliverable or undeliverable result on those addresses, at 1.5 credits in a run or 2 standalone.',
+    q: 'Does Giggal.ai resolve catch-all where Kickbox flags it?',
+    a: 'Yes. Kickbox returns a result plus an accept_all field, and on accept-all domains it sets that flag without confirming the mailbox. Giggal.ai returns a real deliverable or undeliverable result on those addresses, at 1.5 credits in a run or 2 standalone.',
   },
   {
-    q: 'How much does Verifalia cost compared with Giggal.ai?',
-    a: 'Verifalia prices pay-as-you-go through an on-page calculator and does not publish a fixed package price. Giggal.ai publishes $9.90 at 10,000 credits, $76 at 100,000 and $680 at a million. Both keep purchased credits from expiring.',
+    q: 'How much does Kickbox cost compared with Giggal.ai?',
+    a: 'Kickbox prices per verification through a slider, and shows an average of about $0.008 per verification on its own page, without fixed 10,000, 100,000 or 1,000,000 packages. Giggal.ai publishes $9.90 at 10,000 credits, $76 at 100,000 and $680 at a million.',
   },
   {
-    q: 'What is Verifalia better at?',
-    a: 'Verifalia is developer-first, with official SDKs for .NET, Java, PHP, Python, Node and more, configurable quality levels, ISO 27001, on-premise options and 25 free verifications every day. For a team that lives in code and needs those controls, it is a strong fit.',
+    q: 'What is Kickbox better at?',
+    a: 'Kickbox is a developer favourite: a clean real-time API, strong documentation, the Sendex deliverability score, and native integrations with ESPs such as SendGrid, Mailchimp and ActiveCampaign. If you build on the API, it is a solid choice.',
   },
   {
     q: 'Do Giggal.ai credits expire?',
-    a: 'No. Giggal.ai credits never expire. Verifalia purchased credits do not expire either, while its daily free credits reset each day.',
+    a: 'No. Giggal.ai credits never expire. Kickbox does not publish a credit expiry policy on its pricing page, so check with them if that matters to you.',
   },
   {
     q: 'Can I try Giggal.ai before switching?',
-    a: 'Yes. 1,000 free credits, no card, on a bulk upload. Re-run a list Verifalia marked catch-all and see how many resolve to a real result.',
+    a: 'Yes. 1,000 free credits, no card, on a bulk upload. Re-run a list Kickbox flagged accept-all and see how many resolve to a real result.',
   },
 ]
 
 const sectionTitle = 'text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight'
 const proseP = 'text-slate-600 leading-relaxed text-sm md:text-base font-medium'
 
-export default function VerifaliaAlternativePage() {
+export default function KickboxAlternativePage() {
   return (
     <main className="relative min-h-screen bg-slate-50 grid-lines overflow-x-hidden text-slate-800 antialiased">
       <JsonLd
         data={breadcrumbTrailLd([
           { name: 'Alternatives', path: '/alternatives' },
-          { name: 'Verifalia alternative', path: '/verifalia-alternative' },
+          { name: 'Kickbox alternative', path: '/kickbox-alternative' },
         ])}
       />
       <JsonLd data={faqPageLd(faqs)} />
@@ -82,14 +82,13 @@ export default function VerifaliaAlternativePage() {
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900">
           A{' '}
           <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">
-            Verifalia alternative
+            Kickbox alternative
           </span>{' '}
           that resolves catch-all
         </h1>
         <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium">
-          Verifalia is a solid developer-focused verifier with a daily free tier, but on catch-all
-          domains it returns a ServerIsCatchAll status and leaves the mailbox unconfirmed. Giggal.ai
-          returns a real result, at $9.90 per 10,000.
+          Kickbox is a developer favourite with a clean API, but on accept-all domains it sets a flag
+          and leaves the mailbox unconfirmed. Giggal.ai returns a real result, at $9.90 per 10,000.
         </p>
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3">
           <a
@@ -114,9 +113,9 @@ export default function VerifaliaAlternativePage() {
       <section className="max-w-3xl mx-auto px-6 pb-16">
         <Bluf
           points={[
-            { k: 'Catch-all', v: 'We resolve it, valid or invalid. Verifalia returns a ServerIsCatchAll status and stops.' },
-            { k: 'Price', v: 'Verifalia prices through a calculator; we publish $9.90 at 10k, $680 at a million.' },
-            { k: 'Free tier', v: 'Verifalia gives 25 checks a day; we give 1,000 bulk credits, no card.' },
+            { k: 'Catch-all', v: 'We resolve it, valid or invalid. Kickbox sets an accept_all flag and stops.' },
+            { k: 'Price', v: 'Kickbox prices per verification through a slider; we publish $9.90 at 10k, $680 at a million.' },
+            { k: 'Free tier', v: 'Kickbox gives 100 verifications; we give 1,000 bulk credits, no card.' },
             { k: 'Try it', v: '1,000 free credits on a bulk list, no card.' },
           ]}
         />
@@ -126,33 +125,33 @@ export default function VerifaliaAlternativePage() {
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>How Giggal.ai verifies catch-all addresses</h2>
         <p className={proseP}>
-          Verifalia classifies a catch-all server as ServerIsCatchAll, a Risky type, and tells you
-          the mailbox cannot be confirmed by a standard check. That is accurate, but it leaves the
-          decision to you. We route those addresses down a separate path and return one of four
-          results, so the real mailboxes come back deliverable rather than risky.
+          Kickbox returns a deliverability result alongside an accept_all field. On an accept-all
+          domain it sets that flag and hands the address back without confirming the mailbox, which is
+          honest but leaves the decision to you. We route those addresses down a separate path and
+          return one of four results, so the real mailboxes come back deliverable rather than flagged.
         </p>
         <VerdictExplainer />
       </section>
 
       {/* ── PRICING ──────────────────────────────────────────── */}
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
-        <h2 className={sectionTitle}>Verifalia pricing vs Giggal.ai</h2>
+        <h2 className={sectionTitle}>Kickbox pricing vs Giggal.ai</h2>
         <p className={proseP}>
-          Verifalia prices pay-as-you-go through an on-page calculator and does not publish a fixed
-          package price we can quote, so its column below stays blank. Giggal.ai is $9.90 at 10,000,
-          $76 at 100,000 and $680 at a million, published on the pricing page. Purchased credits never
-          expire on either tool.
+          Kickbox prices per verification through a slider, and shows an average around $0.008 per
+          verification on its own page, without fixed 10,000, 100,000 or 1,000,000 packages, so its
+          column below stays blank. Giggal.ai is $9.90 at 10,000, $76 at 100,000 and $680 at a
+          million, published on the pricing page.
         </p>
         <PricingLadder competitor={competitor} />
       </section>
 
       {/* ── FEATURE TABLE ────────────────────────────────────── */}
       <section className="cv-section max-w-4xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
-        <h2 className={sectionTitle}>Verifalia vs Giggal.ai</h2>
+        <h2 className={sectionTitle}>Kickbox vs Giggal.ai</h2>
         <ComparisonTable competitor={competitor} />
         <p className="text-[13px] text-slate-500 font-medium">
-          A dash means the figure is not published. Verifalia prices through a calculator, so no fixed
-          package price is shown.
+          A dash means the figure is not published. Kickbox prices per verification through a slider,
+          so no fixed package price is shown.
         </p>
       </section>
 
@@ -161,9 +160,9 @@ export default function VerifaliaAlternativePage() {
         <h2 className={sectionTitle}>Try it on your own list</h2>
         <ol className="space-y-3">
           {[
-            'Export a list you already checked in Verifalia.',
+            'Export a list you already checked in Kickbox.',
             'Run it here on the 1,000 free credits. No card.',
-            'Look at the rows Verifalia returned as catch-all. Count how many come back real.',
+            'Look at the rows Kickbox flagged accept-all. Count how many come back real.',
           ].map((step, i) => (
             <li key={i} className="flex items-start gap-3 text-slate-700 text-sm md:text-base font-medium">
               <span className="shrink-0 w-6 h-6 rounded-lg bg-indigo-100 text-indigo-700 font-black text-[13px] flex items-center justify-center">
@@ -183,7 +182,7 @@ export default function VerifaliaAlternativePage() {
         <FaqAccordion items={faqs} />
       </section>
 
-      <AltCtaBand headline="Resolve the addresses Verifalia marks catch-all" />
+      <AltCtaBand headline="Resolve the addresses Kickbox flags accept-all" />
 
       <RelatedLinks />
 

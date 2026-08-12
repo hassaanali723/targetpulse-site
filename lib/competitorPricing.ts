@@ -348,37 +348,6 @@ export const COMPETITORS: Record<string, Competitor> = {
   },
 
   // Pay-as-you-go pricing renders client-side from a calculator, so the dollar
-  // tiers stay unknown. Free tier, expiry and catch-all handling verified live.
-  verifalia: {
-    slug: 'verifalia',
-    name: 'Verifalia',
-    pricingUrl: 'https://verifalia.com/pricing',
-    lastVerified: '2026-08-12',
-    startingPrice: null,
-    tiers: [
-      { credits: 10000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
-      { credits: 100000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
-      { credits: 1000000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
-    ],
-    minimumPurchase: null,
-    freeTier: '25 verifications a day, free',
-    creditsExpire: 'Purchased credits never expire; daily free credits reset each day',
-    chargesForUnknown: null,
-    resolvesCatchAll: false, // returns a ServerIsCatchAll (Risky) status, mailbox not confirmed
-    catchAllCreditCost: 'Returned as a ServerIsCatchAll (Risky) status, not confirmed',
-    advertisesSegSupport: false,
-    claimedAccuracy: '-',
-    benchmarkAccuracy: null,
-    benchmarkCatchAllResolved: null,
-    betterFitFor: [
-      'A long track record and developer-first tooling, with official SDKs for .NET, Java, PHP, Python, Node and more',
-      'Configurable quality levels that trade speed for depth',
-      'GDPR and ISO 27001, with on-premise and private-region options for regulated teams',
-      '25 free verifications every day, on an ongoing basis',
-    ],
-  },
-
-  // Pay-as-you-go pricing renders client-side from a calculator, so the dollar
   // tiers stay unknown. Returns Catch-All as its own status (marked risky),
   // charges 1 credit per check excluding Unknown. Verified live.
   clearout: {
@@ -409,6 +378,71 @@ export const COMPETITORS: Record<string, Competitor> = {
       'A large integration list and a well-documented API',
     ],
   },
+
+  // Kickbox blocks automated fetching; data read via a browser-headers request
+  // to its own pages. Prices through a slider (its page shows an average of
+  // about $0.008 per verification), so fixed tiers stay unknown. Flags accept-all
+  // via an accept_all field, does not resolve it.
+  kickbox: {
+    slug: 'kickbox',
+    name: 'Kickbox',
+    pricingUrl: 'https://kickbox.com/pricing',
+    lastVerified: '2026-08-12',
+    startingPrice: null,
+    tiers: [
+      { credits: 10000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
+      { credits: 100000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
+      { credits: 1000000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
+    ],
+    minimumPurchase: null,
+    freeTier: '100 verifications',
+    creditsExpire: 'Not published',
+    chargesForUnknown: null,
+    resolvesCatchAll: false, // flags accept-all via an accept_all field, not resolved
+    catchAllCreditCost: 'Flagged via an accept_all field, not resolved',
+    advertisesSegSupport: false,
+    claimedAccuracy: '-',
+    benchmarkAccuracy: null,
+    benchmarkCatchAllResolved: null,
+    betterFitFor: [
+      'A developer-first API with strong documentation and a real-time verification endpoint',
+      'The Sendex score, a per-address deliverability grade',
+      'Native integrations with major ESPs such as SendGrid, Mailchimp and ActiveCampaign',
+      '100 free verifications to start',
+    ],
+  },
+
+  // Tiers read live from the pricing page: 10k $27, 100k $186. 1M is quote-only
+  // (volume pricing), so that tier stays unknown. Flags accept-all as ok_for_all,
+  // does not resolve it. 97% accuracy claim, credits never expire.
+  emaillistverify: {
+    slug: 'emaillistverify',
+    name: 'EmailListVerify',
+    pricingUrl: 'https://www.emaillistverify.com/pricing',
+    lastVerified: '2026-08-12',
+    startingPrice: { credits: 1000, totalUsd: 5 },
+    tiers: [
+      { credits: 10000, totalUsd: 27, perEmailUsd: 0.0027, status: 'verified' },
+      { credits: 100000, totalUsd: 186, perEmailUsd: 0.00186, status: 'verified' },
+      { credits: 1000000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
+    ],
+    minimumPurchase: null,
+    freeTier: '100 verifications',
+    creditsExpire: 'Credits never expire',
+    chargesForUnknown: null,
+    resolvesCatchAll: false, // returns accept-all as ok_for_all, not resolved
+    catchAllCreditCost: 'Returned as ok_for_all (accept-all), not resolved',
+    advertisesSegSupport: false,
+    claimedAccuracy: 'Claims 97%',
+    benchmarkAccuracy: null,
+    benchmarkCatchAllResolved: null,
+    betterFitFor: [
+      'Among the cheapest per credit, at $27 for 10,000 with free tools alongside',
+      '100 free verifications that never expire',
+      'An email finder plus free utilities like a blacklist checker and DNS health checker',
+      'A long-established, simple pay-as-you-go model',
+    ],
+  },
 }
 
 // Order used by the hub MASTER TABLE only. Kept at six so a 20-wide table never
@@ -435,7 +469,8 @@ export const ALL_COMPETITOR_SLUGS = [
   'bouncer',
   'emailable',
   'clearout',
-  'verifalia',
+  'kickbox',
+  'emaillistverify',
 ] as const
 
 // Helpers
@@ -478,6 +513,7 @@ export const HUB_LABELS: Record<string, { expiry: string; freeTier: string }> = 
   debounce: { expiry: 'Never', freeTier: '100 credits' },
   bouncer: { expiry: 'Never', freeTier: '100 credits' },
   emailable: { expiry: 'Never', freeTier: '250 credits' },
-  verifalia: { expiry: 'Never', freeTier: '25 / day' },
   clearout: { expiry: 'Never', freeTier: '100 credits' },
+  kickbox: { expiry: 'Not published', freeTier: '100 checks' },
+  emaillistverify: { expiry: 'Never', freeTier: '100 checks' },
 }
