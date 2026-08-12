@@ -443,6 +443,70 @@ export const COMPETITORS: Record<string, Competitor> = {
       'A long-established, simple pay-as-you-go model',
     ],
   },
+
+  // JS pricing page; exact tiers not extractable. Its own page states $0.0025
+  // per verification (min 1,000 credits) and 100 free credits daily that reset.
+  // Flags catch-all as a separate status, does not resolve it.
+  myemailverifier: {
+    slug: 'myemailverifier',
+    name: 'MyEmailVerifier',
+    pricingUrl: 'https://myemailverifier.com/pricing',
+    lastVerified: '2026-08-12',
+    startingPrice: null,
+    tiers: [
+      { credits: 10000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
+      { credits: 100000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
+      { credits: 1000000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
+    ],
+    minimumPurchase: '1,000 credits',
+    freeTier: '100 credits a day, free',
+    creditsExpire: 'Credits never expire',
+    chargesForUnknown: null,
+    resolvesCatchAll: false, // flags catch-all as a separate status, not confirmed
+    catchAllCreditCost: 'Returned as a catch-all status, not confirmed',
+    advertisesSegSupport: false,
+    claimedAccuracy: '-',
+    benchmarkAccuracy: null,
+    benchmarkCatchAllResolved: null,
+    betterFitFor: [
+      'A very low headline rate of $0.0025 per verification',
+      '100 free credits every day, which reset rather than expiring after a trial',
+      'Credits that never expire, with bonus-credit promotions at high volume',
+      'A strong public review history across G2, Capterra and Trustpilot',
+    ],
+  },
+
+  // Enterprise verifier from Validity. Pricing is quote-only (contact sales);
+  // Validity states it can run as high as $0.01 per address. Flags accept-all as
+  // risky, does not resolve it.
+  briteverify: {
+    slug: 'briteverify',
+    name: 'BriteVerify',
+    pricingUrl: 'https://www.validity.com/briteverify/pricing/',
+    lastVerified: '2026-08-12',
+    startingPrice: null,
+    tiers: [
+      { credits: 10000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
+      { credits: 100000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
+      { credits: 1000000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
+    ],
+    minimumPurchase: null,
+    freeTier: 'Not published',
+    creditsExpire: 'Not published',
+    chargesForUnknown: null,
+    resolvesCatchAll: false, // groups accept-all as risky, does not confirm the mailbox
+    catchAllCreditCost: 'Grouped as Accept-All (risky), not confirmed',
+    advertisesSegSupport: false,
+    claimedAccuracy: '-',
+    benchmarkAccuracy: null,
+    benchmarkCatchAllResolved: null,
+    betterFitFor: [
+      'Part of Validity, an established deliverability suite with enterprise support',
+      'High throughput, verifying on the order of 4,000 addresses a minute',
+      'Real-time, batch and API verification with usage-based enterprise pricing',
+      'Close relationships with inbox providers and a large data network',
+    ],
+  },
 }
 
 // Order used by the hub MASTER TABLE only. Kept at six so a 20-wide table never
@@ -471,6 +535,8 @@ export const ALL_COMPETITOR_SLUGS = [
   'clearout',
   'kickbox',
   'emaillistverify',
+  'myemailverifier',
+  'briteverify',
 ] as const
 
 // Helpers
@@ -516,4 +582,6 @@ export const HUB_LABELS: Record<string, { expiry: string; freeTier: string }> = 
   clearout: { expiry: 'Never', freeTier: '100 credits' },
   kickbox: { expiry: 'Not published', freeTier: '100 checks' },
   emaillistverify: { expiry: 'Never', freeTier: '100 checks' },
+  myemailverifier: { expiry: 'Never', freeTier: '100 / day' },
+  briteverify: { expiry: 'Not published', freeTier: '-' },
 }

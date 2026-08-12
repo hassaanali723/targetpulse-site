@@ -62,6 +62,10 @@ const BLURBS: Record<string, string> = {
     'Flags accept-all with a field rather than resolving it, and prices per verification through a slider. A developer favourite with strong API docs.',
   emaillistverify:
     'Billed as the cheap option at $27 per 10k, but we are $9.90 and resolve catch-all, which it returns as ok_for_all without confirming.',
+  myemailverifier:
+    'Cheap at $0.0025 a check with 100 free credits a day, but flags catch-all as a status rather than resolving it. We resolve it, and are cheaper still.',
+  briteverify:
+    'An enterprise verifier from Validity that flags accept-all as risky and prices only by quote. We publish $9.90 at 10k and resolve catch-all.',
 }
 
 const sectionTitle = 'text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight'
