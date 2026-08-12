@@ -48,14 +48,21 @@ export function articleLd(a: {
   description: string
   slug: string
   datePublished: string
+  image?: string
 }): Record<string, unknown> {
   const url = `${SITE}/blog/${a.slug}`
+  const image = a.image
+    ? a.image.startsWith('http')
+      ? a.image
+      : `${SITE}${a.image}`
+    : undefined
   return {
     '@context': 'https://schema.org',
     '@type': 'Article',
     '@id': `${url}#article`,
     headline: a.title,
     description: a.description,
+    ...(image ? { image: [image] } : {}),
     datePublished: a.datePublished,
     dateModified: a.datePublished,
     publisher: { '@id': ORG_ID },

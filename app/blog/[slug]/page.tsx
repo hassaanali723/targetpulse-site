@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
@@ -39,6 +40,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   const post = getPostBySlug(params.slug)
   if (!post) return {}
   const url = `https://giggal.ai/blog/${post.slug}`
+  const ogImage = post.image ? `https://giggal.ai${post.image}` : undefined
   return {
     title: post.title,
     description: post.description,
@@ -48,11 +50,13 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
       description: post.description,
       url,
       type: 'article',
+      ...(ogImage ? { images: [{ url: ogImage }] } : {}),
     },
     twitter: {
       card: 'summary_large_image',
       title: post.title,
       description: post.description,
+      ...(ogImage ? { images: [ogImage] } : {}),
     },
   }
 }
@@ -75,6 +79,7 @@ export default function BlogArticlePage({ params }: { params: { slug: string } }
           description: post.description,
           slug: post.slug,
           datePublished: post.date,
+          image: post.image,
         })}
       />
       <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-indigo-500/10 blur-[120px] -z-10 pointer-events-none" />
@@ -90,7 +95,20 @@ export default function BlogArticlePage({ params }: { params: { slug: string } }
           All articles
         </Link>
 
-        <h1 className="mt-6 text-3xl md:text-4xl lg:text-5xl font-black tracking-tight leading-[1.1] text-slate-900">
+        {post.image && (
+          <div className="mt-6 relative aspect-[16/9] w-full overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 card-vivid-shadow">
+            <Image
+              src={post.image}
+              alt={post.imageAlt || post.title}
+              fill
+              priority
+              sizes="(max-width: 768px) 100vw, 768px"
+              className="object-cover"
+            />
+          </div>
+        )}
+
+        <h1 className="mt-8 text-3xl md:text-4xl lg:text-5xl font-black tracking-tight leading-[1.1] text-slate-900">
           {post.title}
         </h1>
 
