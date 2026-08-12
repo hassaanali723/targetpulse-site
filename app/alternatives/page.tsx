@@ -9,6 +9,7 @@ import AltCtaBand from '@/components/alternatives/AltCtaBand'
 import {
   COMPETITORS,
   COMPETITOR_ORDER,
+  ALL_COMPETITOR_SLUGS,
   GIGGAL,
   HUB_LABELS,
   fmtUsd,
@@ -17,7 +18,7 @@ import {
 import { Check, X, ArrowRight } from 'lucide-react'
 
 const DESC =
-  'Compare Giggal.ai with ZeroBounce, NeverBounce, BounceBan, MillionVerifier, Reoon and DeBounce on price, catch-all and SEG support. 1,000 free credits.'
+  'Compare Giggal.ai with ZeroBounce, NeverBounce, Bouncer, Emailable, Clearout and other email verifiers on price, catch-all and SEG support. 1,000 free credits.'
 
 export const metadata: Metadata = {
   title: { absolute: 'Giggal.ai vs Other Email Verifiers | Giggal.ai' },
@@ -51,6 +52,14 @@ const BLURBS: Record<string, string> = {
     'Reports catch-all as a status without confirming the mailbox, and does not advertise SEG support. Priced close to us at 10k, so the result on hard addresses is what decides it.',
   debounce:
     'Charges 10 credits per catch-all as a separate product, against 1.5 here. Standard checks are 1 credit and unknowns are free.',
+  bouncer:
+    'Resolves catch-all too, via Deep Catch-All Verification on Google and Microsoft, but costs $60 at 10k against our $9.90 and does not verify behind gateways. The closest match on results here.',
+  emailable:
+    'Marks accept-all addresses Risky without confirming them, and runs $60 at 10k against our $9.90. Fast, with a generous 250-credit free tier.',
+  clearout:
+    'Returns catch-all as its own status without confirming the mailbox, and prices through a calculator. Bundles an email finder and phone validation.',
+  verifalia:
+    'Returns catch-all as a ServerIsCatchAll status without confirming the mailbox, and prices through a calculator. Developer-first, with a daily free tier.',
 }
 
 const sectionTitle = 'text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight'
@@ -123,9 +132,9 @@ export default function AlternativesHubPage() {
           </span>
         </h1>
         <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium">
-          Six tools people switch between, on the three things that decide a verifier: price,
-          whether it resolves catch-all addresses, and whether it verifies behind secure email
-          gateways.
+          The email verifiers people switch between, on the three things that decide a verifier:
+          price, whether it resolves catch-all addresses, and whether it verifies behind secure
+          email gateways.
         </p>
       </section>
 
@@ -175,7 +184,9 @@ export default function AlternativesHubPage() {
         </div>
         <p className="text-[12px] text-slate-400 font-medium">
           Starting price is each vendor’s smallest available package, so the volume differs by
-          vendor. Prices change over time; this reflects the latest we checked, as of 6 August 2026.
+          vendor. The table shows a selection; the full list of verifiers we compare is below. Prices
+          change over time; each figure reflects the latest date we checked, shown on its comparison
+          page.
         </p>
       </section>
 
@@ -183,7 +194,7 @@ export default function AlternativesHubPage() {
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-8">
         <h2 className={sectionTitle}>Compare Giggal.ai with each email verifier</h2>
         <div className="space-y-6">
-          {COMPETITOR_ORDER.map((slug) => {
+          {ALL_COMPETITOR_SLUGS.map((slug) => {
             const c = COMPETITORS[slug]
             return (
               <div key={slug} className="space-y-1.5">
@@ -229,7 +240,7 @@ export default function AlternativesHubPage() {
             >
               emails protected by SEG gateways
             </Link>
-            . Of the six here, only BounceBan sets out to do the same.
+            . Of the tools here, only BounceBan and Bouncer set out to do the same.
           </p>
         </div>
       </section>

@@ -282,9 +282,138 @@ export const COMPETITORS: Record<string, Competitor> = {
       'A large public review corpus',
     ],
   },
+
+  // Tiers read live from the pricing page (static HTML): 10k $60, 100k $400,
+  // 1M $2,000. Bouncer is one of the few here that resolves catch-all (Deep
+  // Catch-All Verification, supplementary checks on Google/Microsoft).
+  bouncer: {
+    slug: 'bouncer',
+    name: 'Bouncer',
+    pricingUrl: 'https://www.usebouncer.com/pricing/',
+    lastVerified: '2026-08-12',
+    startingPrice: { credits: 1000, totalUsd: 8 },
+    tiers: [
+      { credits: 10000, totalUsd: 60, perEmailUsd: 0.006, status: 'verified' },
+      { credits: 100000, totalUsd: 400, perEmailUsd: 0.004, status: 'verified' },
+      { credits: 1000000, totalUsd: 2000, perEmailUsd: 0.002, status: 'verified' },
+    ],
+    minimumPurchase: null,
+    freeTier: '100 credits',
+    creditsExpire: 'Credits never expire',
+    chargesForUnknown: false,
+    resolvesCatchAll: true, // Deep Catch-All Verification, resolves major providers
+    catchAllCreditCost: 'Deep Catch-All Verification, resolves major providers',
+    advertisesSegSupport: false,
+    claimedAccuracy: 'Claims 99.5%',
+    benchmarkAccuracy: null,
+    benchmarkCatchAllResolved: null,
+    betterFitFor: [
+      'An Email Toxicity Check that flags spam traps and complainers, which Giggal does not offer',
+      'The highest review scores among dedicated verifiers, 4.8 on G2 and 4.9 on Capterra',
+      'A mature real-time verification API and a deliverability toolkit',
+      'SOC 2 Type II and GDPR compliance',
+    ],
+  },
+
+  // Tiers read live from the pricing page data (pay-as-you-go, embedded in the
+  // page): 10k $60, 100k $420, 1M $2,100. Flags accept-all as Risky rather than
+  // resolving it.
+  emailable: {
+    slug: 'emailable',
+    name: 'Emailable',
+    pricingUrl: 'https://emailable.com/pricing/',
+    lastVerified: '2026-08-12',
+    startingPrice: { credits: 5000, totalUsd: 38 },
+    tiers: [
+      { credits: 10000, totalUsd: 60, perEmailUsd: 0.006, status: 'verified' },
+      { credits: 100000, totalUsd: 420, perEmailUsd: 0.0042, status: 'verified' },
+      { credits: 1000000, totalUsd: 2100, perEmailUsd: 0.0021, status: 'verified' },
+    ],
+    minimumPurchase: null,
+    freeTier: '250 credits',
+    creditsExpire: 'Credits never expire',
+    chargesForUnknown: false,
+    resolvesCatchAll: false, // marks accept-all as Risky, does not confirm the mailbox
+    catchAllCreditCost: 'Marked Accept-All / Risky, not resolved',
+    advertisesSegSupport: false,
+    claimedAccuracy: '-',
+    benchmarkAccuracy: null,
+    benchmarkCatchAllResolved: null,
+    betterFitFor: [
+      '250 free credits to start, the largest free tier among these tools',
+      'Rated among the fastest for bulk verification speed',
+      'Around 90 native integrations',
+      'No charge for unknown or duplicate results, and credits never expire',
+    ],
+  },
+
+  // Pay-as-you-go pricing renders client-side from a calculator, so the dollar
+  // tiers stay unknown. Free tier, expiry and catch-all handling verified live.
+  verifalia: {
+    slug: 'verifalia',
+    name: 'Verifalia',
+    pricingUrl: 'https://verifalia.com/pricing',
+    lastVerified: '2026-08-12',
+    startingPrice: null,
+    tiers: [
+      { credits: 10000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
+      { credits: 100000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
+      { credits: 1000000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
+    ],
+    minimumPurchase: null,
+    freeTier: '25 verifications a day, free',
+    creditsExpire: 'Purchased credits never expire; daily free credits reset each day',
+    chargesForUnknown: null,
+    resolvesCatchAll: false, // returns a ServerIsCatchAll (Risky) status, mailbox not confirmed
+    catchAllCreditCost: 'Returned as a ServerIsCatchAll (Risky) status, not confirmed',
+    advertisesSegSupport: false,
+    claimedAccuracy: '-',
+    benchmarkAccuracy: null,
+    benchmarkCatchAllResolved: null,
+    betterFitFor: [
+      'A long track record and developer-first tooling, with official SDKs for .NET, Java, PHP, Python, Node and more',
+      'Configurable quality levels that trade speed for depth',
+      'GDPR and ISO 27001, with on-premise and private-region options for regulated teams',
+      '25 free verifications every day, on an ongoing basis',
+    ],
+  },
+
+  // Pay-as-you-go pricing renders client-side from a calculator, so the dollar
+  // tiers stay unknown. Returns Catch-All as its own status (marked risky),
+  // charges 1 credit per check excluding Unknown. Verified live.
+  clearout: {
+    slug: 'clearout',
+    name: 'Clearout',
+    pricingUrl: 'https://clearout.io/pricing/',
+    lastVerified: '2026-08-12',
+    startingPrice: null,
+    tiers: [
+      { credits: 10000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
+      { credits: 100000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
+      { credits: 1000000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
+    ],
+    minimumPurchase: null,
+    freeTier: '100 credits',
+    creditsExpire: 'Credits never expire and roll over',
+    chargesForUnknown: false,
+    resolvesCatchAll: false, // Catch-All is a separate status, marked risky, not confirmed
+    catchAllCreditCost: 'Returned as a Catch-All status, not confirmed',
+    advertisesSegSupport: false,
+    claimedAccuracy: 'Claims 99%+',
+    benchmarkAccuracy: null,
+    benchmarkCatchAllResolved: null,
+    betterFitFor: [
+      'A combined suite beyond verification, including an email finder and phone-number validation',
+      'A 99%+ accuracy claim with free re-verification',
+      '100 free credits that never expire',
+      'A large integration list and a well-documented API',
+    ],
+  },
 }
 
-// Order used by the hub master table and the footer Compare column.
+// Order used by the hub MASTER TABLE only. Kept at six so a 20-wide table never
+// has to render; the rest of the competitors are linked from the routing list
+// below the table, not added as columns.
 export const COMPETITOR_ORDER = [
   'zerobounce',
   'neverbounce',
@@ -292,6 +421,21 @@ export const COMPETITOR_ORDER = [
   'millionverifier',
   'reoon',
   'debounce',
+] as const
+
+// Every competitor that has a /{slug}-alternative page, in display order. Drives
+// the hub routing list, and should match the sitemap. Newest additions appended.
+export const ALL_COMPETITOR_SLUGS = [
+  'zerobounce',
+  'neverbounce',
+  'bounceban',
+  'millionverifier',
+  'reoon',
+  'debounce',
+  'bouncer',
+  'emailable',
+  'clearout',
+  'verifalia',
 ] as const
 
 // Helpers
@@ -332,4 +476,8 @@ export const HUB_LABELS: Record<string, { expiry: string; freeTier: string }> = 
   millionverifier: { expiry: 'Never', freeTier: '100 credits' },
   reoon: { expiry: 'Never, instant credits', freeTier: '600 / month' },
   debounce: { expiry: 'Never', freeTier: '100 credits' },
+  bouncer: { expiry: 'Never', freeTier: '100 credits' },
+  emailable: { expiry: 'Never', freeTier: '250 credits' },
+  verifalia: { expiry: 'Never', freeTier: '25 / day' },
+  clearout: { expiry: 'Never', freeTier: '100 credits' },
 }
