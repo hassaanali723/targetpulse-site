@@ -35,6 +35,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/blog/good-bounce-rate-for-cold-email`, lastModified: '2026-08-11' },
     { url: `${baseUrl}/blog/what-is-a-secure-email-gateway`, lastModified: '2026-08-11' },
     { url: `${baseUrl}/blog/what-does-risky-mean-in-email-verification`, lastModified: '2026-08-11' },
+    // Integrations hub + per-tool pages.
+    { url: `${baseUrl}/integrations`, lastModified: '2026-08-12' },
+    { url: `${baseUrl}/integrations/zapier`, lastModified: '2026-08-12' },
     { url: `${baseUrl}/mcp`, lastModified: '2026-07-21' },
     { url: `${baseUrl}/pricing`, lastModified: '2026-07-29' },
     { url: `${baseUrl}/public/docs`, lastModified: '2026-07-24' },

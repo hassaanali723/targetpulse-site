@@ -13,6 +13,7 @@ const SIGNIN_URL = 'https://emailverifier.giggal.ai/sign-in'
 const catchAllLink = { name: 'Catch-all Verification', href: '/catch-all-verification' }
 
 const navLinks = [
+  { name: 'Integrations', href: '/integrations' },
   { name: 'MCP', href: '/mcp' },
   { name: 'Pricing', href: '/pricing' },
   { name: 'Earn with us', href: '/affiliates' },
