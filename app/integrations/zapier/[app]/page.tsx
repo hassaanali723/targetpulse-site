@@ -275,11 +275,20 @@ export default function ZapierAppPage({ params }: { params: { app: string } }) {
                 Powered by a catch-all email verifier, not a standard checker
               </h3>
               <p className="text-[14px] text-slate-700 font-medium leading-relaxed">
-                Most checkers stop at syntax and MX records and label anything uncertain as
-                risky. Giggal.ai is a catch-all email verification tool: it runs a deep
-                mailbox existence check on every address coming from {app.name}, resolves
-                catch-all domains with a clear score, and keeps around 30% more of your list
-                usable.{' '}
+                Most verifiers stop at a basic SMTP ping. SEG-protected addresses come back
+                as unknown, and catch-all domains come back as risky. Giggal.ai verifies
+                both. It{' '}
+                <Link
+                  href="/seg-email-verification"
+                  className="font-black text-indigo-600 hover:text-indigo-700"
+                >
+                  bypasses secure email gateways
+                </Link>{' '}
+                like Proofpoint and Mimecast, runs deep verification on catch-all domains,
+                and confirms the mailbox behind every address coming from {app.name} actually
+                exists. Either way you get a clear valid or invalid result, and around 30%
+                more of your list stays usable. That is what makes it a catch-all email
+                verification tool rather than another checker.{' '}
                 <Link
                   href="/catch-all-verification"
                   className="font-black text-indigo-600 hover:text-indigo-700"
