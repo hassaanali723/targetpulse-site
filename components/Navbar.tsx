@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react'
 import { Menu, X } from 'lucide-react'
 import Link from 'next/link'
-import Wordmark from '@/components/Wordmark'
 
 const SIGNUP_URL = 'https://emailverifier.giggal.ai/sign-up'
 const SIGNIN_URL = 'https://emailverifier.giggal.ai/sign-in'
@@ -46,7 +45,14 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-20">
             {/* Logo wordmark */}
             <Link href="/" className="flex-shrink-0" onClick={() => setIsMobileMenuOpen(false)} aria-label="Giggal.ai home">
-              <Wordmark className="text-2xl sm:text-3xl" />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/giggal-logo-wordmark.png"
+                alt="Giggal.ai"
+                width={396}
+                height={96}
+                className="h-7 sm:h-8 w-auto"
+              />
             </Link>
 
             {/* Desktop Navigation */}
