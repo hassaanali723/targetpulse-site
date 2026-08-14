@@ -75,8 +75,10 @@ export const metadata: Metadata = {
     },
   },
   category: 'technology',
-  // Favicon is the Giggal "G." mark at app/icon.svg — Next.js serves it at
-  // /icon.svg and injects the <link rel="icon"> automatically. No override needed.
+  // Favicons come from the official brand mark (public/giggal-catch-all-email-
+  // verifier-icon.png), exported as app/icon.png (tab icon), app/apple-icon.png
+  // (iOS home screen) and app/favicon.ico (legacy /favicon.ico requests).
+  // Next.js serves and <link>s all three automatically by filename convention.
 }
 
 // JSON-LD structured data for rich search results (sitelinks, knowledge panel)
