@@ -84,12 +84,12 @@ const faqJsonLd = {
 }
 
 const integrations = [
-  { name: 'Mailchimp', src: '/integrations/mailchimp.png' },
-  { name: 'HubSpot', src: '/integrations/hubspot.png' },
-  { name: 'SendGrid', src: '/integrations/sendgrid.png' },
-  { name: 'ActiveCampaign', src: '/integrations/activecampaign.png' },
-  { name: 'GetResponse', src: '/integrations/getresponse.png' },
-  { name: 'MailerLite', src: '/integrations/mailerlite.png' },
+  { name: 'Mailchimp', src: '/integrations/giggal-catch-all-email-verification-mailchimp.png' },
+  { name: 'HubSpot', src: '/integrations/giggal-catch-all-email-verification-hubspot.png' },
+  { name: 'SendGrid', src: '/integrations/giggal-catch-all-email-verification-sendgrid.png' },
+  { name: 'ActiveCampaign', src: '/integrations/giggal-catch-all-email-verification-activecampaign.png' },
+  { name: 'GetResponse', src: '/integrations/giggal-catch-all-email-verification-getresponse.png' },
+  { name: 'MailerLite', src: '/integrations/giggal-catch-all-email-verification-mailerlite.png' },
 ]
 
 export default function Home() {
