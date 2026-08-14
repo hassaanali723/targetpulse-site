@@ -30,19 +30,19 @@ const forms: CategoryCopy = {
     `Forms collect whatever people type, and people mistype. Some enter throwaway addresses just to get past the gate. The ${name} integration checks each submitted email the second it arrives, so only real, deliverable addresses make it into your database.`,
   benefits: [
     {
-      title: 'Block fake signups at the source',
+      title: 'Typos get caught while they are still fixable',
       text: (name) =>
-        `Disposable domains, mistyped addresses and made-up emails are flagged the moment a ${name} response lands. Your downstream tools only ever see contacts you can actually reach.`,
+        `Someone fat-fingers their email into a ${name} form and normally you find out weeks later, when the campaign bounces. With verification in the Zap you know within seconds, while there is still a chance to do something about it.`,
     },
     {
-      title: 'Catch-all addresses resolved, not discarded',
+      title: 'Work emails on catch-all domains still count',
       text: () =>
-        'When someone signs up with a work email on a catch-all domain, most verifiers shrug and say risky. Giggal.ai runs deep catch-all verification and returns a clear result with a score, so legitimate business signups are kept.',
+        'Plenty of real signups come from company domains that accept any address. Other tools call those risky and you end up binning genuine leads. Giggal.ai checks the actual mailbox and gives you a score, so you keep them.',
     },
     {
-      title: 'Cleaner data without asking twice',
+      title: 'Nobody has to type their email twice',
       text: (name) =>
-        `No double opt-in friction, no "please re-enter your email" fields. Verification happens silently in the background of your ${name} workflow while the respondent moves on.`,
+        `You do not need confirmation screens or re-enter-your-email fields to keep data clean. The check runs quietly inside the ${name} Zap and the person filling the form never notices.`,
     },
   ],
   routing: (name) =>
@@ -62,19 +62,19 @@ const crm: CategoryCopy = {
     `A CRM is only as good as the contact data inside it. The ${name} integration verifies email addresses as records are created, so your team works a pipeline of reachable people instead of guessing which leads are real.`,
   benefits: [
     {
-      title: 'No more sequences sent to dead mailboxes',
+      title: 'Reps stop writing sequences for dead leads',
       text: (name) =>
-        `Every new ${name} lead is verified before anyone touches it. Reps stop burning time and sender reputation on addresses that were never going to answer.`,
+        `Few things waste a rep's morning like personalizing outreach for a lead whose email bounced on day one. Verify at entry into ${name} and that just stops happening.`,
     },
     {
-      title: 'B2B catch-all leads recovered',
+      title: 'The catch-all leads are usually the good ones',
       text: () =>
-        'Around 30% of B2B emails sit on catch-all domains. Most verifiers mark them risky and your best enterprise leads go to waste. Giggal.ai resolves them into a clear result with a score, so qualified pipeline stays in play.',
+        'Enterprise companies love catch-all domains, which is exactly why so many big-logo leads sit in CRMs marked risky. Giggal.ai checks the actual mailbox and returns a score, so those deals stay workable.',
     },
     {
-      title: 'Data quality that holds up over time',
+      title: 'No more quarterly cleanup projects',
       text: (name) =>
-        `Verification runs on entry, not as a quarterly cleanup project. Your ${name} data stays accurate continuously, and reporting built on it stays trustworthy.`,
+        `Nobody actually does the quarterly data cleanup. When every new ${name} record is verified as it lands, you never need to schedule one again.`,
     },
   ],
   routing: (name) =>
@@ -94,19 +94,19 @@ const emailMarketing: CategoryCopy = {
     `Email lists decay at 20 to 30% a year, and every hard bounce chips away at your sender reputation. The ${name} integration verifies each address as it joins your list, so decay never accumulates and cleanups stop being a recurring emergency.`,
   benefits: [
     {
-      title: 'Bounce rate under 3%, permanently',
+      title: 'Bounces stay low without you thinking about it',
       text: (name) =>
-        `Bad addresses never enter your ${name} list in the first place, so you stop bleeding deliverability with every send. Mailbox providers see a sender who hits real inboxes.`,
+        `Once the Zap is on, bad addresses simply never make it into ${name}. Your bounce rate sits under 3% because there is nothing left to bounce.`,
     },
     {
-      title: 'Catch-all subscribers kept, not purged',
+      title: 'Stop deleting subscribers who are actually real',
       text: () =>
-        'Work emails on catch-all domains are some of your most valuable subscribers, and standard list cleaning throws them out as risky. Giggal.ai resolves catch-all addresses with a deep check and a score, so you keep the subscribers other tools delete.',
+        'List cleaning tools love to purge anything on a catch-all domain, and half of those people are real. Giggal.ai verifies the mailbox itself, so you only remove the ones that are actually gone.',
     },
     {
-      title: 'Sender reputation protected on autopilot',
-      text: (name) =>
-        `Spam traps, disposable domains and dead mailboxes are filtered before your next ${name} campaign, which is exactly what inbox providers reward with placement.`,
+      title: 'Gmail and Outlook notice, in a good way',
+      text: () =>
+        'Inbox providers watch how many of your emails bounce. Send to verified addresses long enough and your campaigns start landing in the inbox instead of the spam folder.',
     },
   ],
   routing: (name) =>
@@ -126,19 +126,19 @@ const marketingAutomation: CategoryCopy = {
     `Automation multiplies whatever you feed it, including bad data. One invalid email in a ${name} nurture flow means wasted sends, skewed engagement stats and polluted lead scores. Verifying on entry keeps the whole machine honest.`,
   benefits: [
     {
-      title: 'Nurture flows that reach real people',
+      title: 'Your flows reach people, not placeholders',
       text: (name) =>
-        `Every contact entering a ${name} journey has a verified, deliverable address. Open and click rates reflect actual humans, not a list padded with dead mailboxes.`,
+        `An automation is only as good as the addresses inside it. When every contact entering ${name} is verified first, opens and clicks describe real people and your decisions get easier.`,
     },
     {
-      title: 'Catch-all leads scored, not skipped',
+      title: 'Catch-all leads keep moving',
       text: () =>
-        'B2B leads on catch-all domains usually stall in automation because no tool can say if they are real. Giggal.ai returns a clear result with a score you can branch on, so those leads keep moving.',
+        'Most tools freeze when a lead sits on a catch-all domain, and the automation quietly fills up with maybes. Giggal.ai checks the mailbox and hands back a score, so the flow can branch instead of stall.',
     },
     {
-      title: 'Lead scoring you can trust',
+      title: 'Lead scores start meaning something again',
       text: () =>
-        'Engagement-based scoring falls apart when a chunk of the database can never engage. Verified-on-entry data means scores measure interest, not deliverability noise.',
+        'It is hard to trust engagement scoring when part of the database could never open an email in the first place. Verify at entry and the scores reflect actual interest.',
     },
   ],
   routing: (name) =>
@@ -158,19 +158,19 @@ const salesOutreach: CategoryCopy = {
     `In cold outreach, a bounce rate above 3% can get a sending domain flagged in days. The ${name} integration verifies every prospect email before a single message goes out, including the catch-all addresses that make up a third of most B2B prospect lists.`,
   benefits: [
     {
-      title: 'Protect the domain you send from',
+      title: 'Your sending domain survives the quarter',
       text: (name) =>
-        `Every ${name} prospect is checked against the live mailbox before outreach starts. Bounces stay rare, and your sending domain keeps its reputation for the campaigns that matter.`,
+        `One bad list can burn a domain you spent months warming up. Checking every ${name} prospect before the first email keeps bounces rare and your domain out of trouble.`,
     },
     {
-      title: 'A third more prospects to work',
+      title: 'Email the prospects everyone else skips',
       text: () =>
-        'Catch-all domains hide roughly 30% of B2B prospects. Other verifiers mark them risky and your TAM shrinks. Giggal.ai resolves them with a score, so you confidently email prospects your competitors skip.',
+        'Roughly a third of B2B addresses live on catch-all domains, and most competitors just drop them. Giggal.ai verifies the mailbox and scores it, which quietly gives you a bigger market from the same list.',
     },
     {
-      title: 'Results built for sequencing logic',
+      title: 'Prospects route themselves by risk',
       text: () =>
-        'Status, risk level and score flow straight into Zapier paths: safe addresses enter the sequence, risky ones get a softer first touch, invalid ones never leave the gate.',
+        'Status, risk level and score arrive as fields in your Zap. Safe addresses go straight into the sequence, borderline ones get a lighter first touch, dead ones never leave the gate.',
     },
   ],
   routing: (name) =>
@@ -190,19 +190,19 @@ const ecommerce: CategoryCopy = {
     `A mistyped email at checkout means a customer who never gets their receipt, their tracking link or your winback campaign. The ${name} integration verifies customer addresses as they are created, so transactional and marketing email both actually arrive.`,
   benefits: [
     {
-      title: 'Order and shipping emails that arrive',
+      title: 'The receipt actually arrives',
       text: (name) =>
-        `Catch checkout typos the moment a ${name} customer record is created, before the missing confirmation email becomes a support ticket.`,
+        `A typo at checkout means no confirmation, no tracking link, and an annoyed support ticket three days later. Verifying the address the moment ${name} creates the customer catches it while it is still easy to fix.`,
     },
     {
-      title: 'Abandoned cart flows with real reach',
+      title: 'Cart reminders that get seen',
       text: () =>
-        'Cart recovery only earns money if the reminder lands. Verified addresses mean your highest-converting automation is not firing into the void.',
+        'Abandoned cart emails are usually your best earner, but only when they land. Verified addresses mean the reminder reaches a person instead of bouncing into nothing.',
     },
     {
-      title: 'Marketing list quality from day one',
+      title: 'Your marketing list grows clean',
       text: () =>
-        'Every buyer added to your email marketing flows is verified on entry, keeping bounce rates low and your store’s sending reputation clean.',
+        'Every buyer joining your email flows is verified on the way in, so the list you build this year does not become the deliverability problem you fight next year.',
     },
   ],
   routing: (name) =>
@@ -221,19 +221,19 @@ const support: CategoryCopy = {
     `Support runs on email: ticket confirmations, resolution updates, satisfaction surveys. The ${name} integration verifies contact addresses as they enter your helpdesk, so your team never resolves a ticket into a void.`,
   benefits: [
     {
-      title: 'Ticket updates that actually land',
+      title: 'Customers actually get your replies',
       text: (name) =>
-        `Verify the requester address as each ${name} contact is created, so status updates and resolutions reach the customer instead of bouncing.`,
+        `It happens more than anyone admits: an agent resolves the ticket and the customer never hears about it because the address was wrong. Verify contacts entering ${name} and the reply lands.`,
     },
     {
-      title: 'Catch-all business contacts confirmed',
+      title: 'Business addresses checked properly',
       text: () =>
-        'B2B customers often write in from catch-all domains. Giggal.ai confirms those mailboxes with a deep check instead of leaving them unknown.',
+        'B2B customers often write in from domains that accept anything, which most tools cannot check. Giggal.ai verifies the actual mailbox, so you know the contact is real.',
     },
     {
-      title: 'Cleaner CSAT and follow-up data',
+      title: 'Surveys go to people who exist',
       text: () =>
-        'Surveys and follow-ups sent to verified addresses return response rates you can actually read, instead of being quietly diluted by dead contacts.',
+        'CSAT numbers look worse than they are when part of the survey list is dead addresses. Verified contacts mean response rates reflect actual sentiment.',
     },
   ],
   routing: (name) =>
@@ -253,19 +253,19 @@ const payments: CategoryCopy = {
     `Billing email is the one category customers genuinely need to receive. The ${name} integration verifies customer addresses as they are created, so receipts, renewal reminders and dunning emails reach the person paying you.`,
   benefits: [
     {
-      title: 'Receipts and invoices that arrive',
+      title: 'Invoices reach the person paying you',
       text: (name) =>
-        `Verify each new ${name} customer address so billing documents land in inboxes, not in your bounce log.`,
+        `Billing email is the one category nobody can afford to lose. Verify each new ${name} customer and receipts, invoices and renewal notices land where they should.`,
     },
     {
-      title: 'Dunning that recovers revenue',
+      title: 'Failed-payment emails that recover revenue',
       text: () =>
-        'Failed-payment recovery depends entirely on the customer seeing the notice. Verified addresses turn dunning from a formality into actual recovered revenue.',
+        'Dunning only works if someone sees it. When the address is verified, a failed card becomes a fixed card instead of silent churn.',
     },
     {
-      title: 'Fewer chargebacks from silence',
+      title: 'Fewer surprise chargebacks',
       text: () =>
-        'Customers who never see a receipt or renewal reminder dispute charges. Verified delivery closes the loop before it becomes a chargeback.',
+        'A customer who never saw the receipt is a customer who disputes the charge. Making sure billing email arrives closes that loop before it opens.',
     },
   ],
   routing: (name) =>
@@ -285,19 +285,19 @@ const spreadsheets: CategoryCopy = {
     `Half the lead lists in the world live in a spreadsheet. The ${name} integration verifies each new row as it is added and writes the result right back, turning a static list into one that cleans itself.`,
   benefits: [
     {
-      title: 'Rows verified as they arrive',
+      title: 'The sheet cleans itself',
       text: (name) =>
-        `Every new ${name} row with an email gets checked automatically. Status, risk level and score are appended to the same row, no manual export and re-import.`,
+        `A new row lands in ${name}, the address gets checked, and the result is written right back next to it. No exporting, no uploading to a separate tool, no re-importing.`,
     },
     {
-      title: 'Catch-all columns finally resolved',
+      title: 'Catch-all rows finally get answers',
       text: () =>
-        'Lists scraped or purchased for B2B are full of catch-all domains. Instead of a column of risky labels, you get clear results with scores you can sort and filter on.',
+        'Scraped and purchased lists are full of catch-all domains, and a column that just says risky tells you nothing. A score you can sort on tells you exactly who to email.',
     },
     {
-      title: 'A list that is always send-ready',
+      title: 'Campaign day needs no prep',
       text: () =>
-        'When campaign day comes, there is no cleanup step. Filter the verified column, export the deliverable rows and send with a bounce rate you already know.',
+        'When the list is verified as it grows, pulling a sending list is just filtering a column. You already know what the bounce rate will be before you hit send.',
     },
   ],
   routing: (name) =>
@@ -317,19 +317,19 @@ const websitePopups: CategoryCopy = {
     `Popups and on-site widgets optimize for the fastest possible signup, which is exactly when people mistype or feed you a throwaway address. The ${name} integration verifies each capture in real time, so growth in signups means growth in reachable subscribers.`,
   benefits: [
     {
-      title: 'Signup quality without extra friction',
+      title: 'Burner emails from discount hunters get filtered',
       text: (name) =>
-        `No confirmation hoops for the visitor. ${name} captures the address, Giggal.ai verifies it in the background, and only deliverable signups reach your list.`,
+        `Run a popup with an incentive and a chunk of signups will be throwaway addresses grabbing the code. Verification catches them the moment ${name} passes them along.`,
     },
     {
-      title: 'Disposable addresses filtered out',
+      title: 'Zero extra steps for the visitor',
       text: () =>
-        'Visitors grabbing a discount with a burner email are caught instantly, keeping incentive-driven campaigns from filling your list with dead weight.',
+        'The signup feels exactly the same to the person subscribing. The check happens in the background of the Zap, and only real addresses continue to your list.',
     },
     {
-      title: 'Real conversion numbers',
+      title: 'Signup numbers you can report with a straight face',
       text: () =>
-        'When every counted signup is a verified one, your popup conversion rates measure actual list growth rather than a mix of subscribers and noise.',
+        'When every counted signup is a verified one, popup conversion numbers describe list growth you can actually email, which makes the reporting worth reading.',
     },
   ],
   routing: (name) =>
