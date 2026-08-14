@@ -39,8 +39,8 @@ export const metadata: Metadata = {
 
 const faqs: FaqItem[] = [
   {
-    q: 'Is Giggal.ai cheaper than Reoon?',
-    a: 'Barely. $9.90 vs $11.90 at 10,000 credits. That gap is too small to switch over. The real difference is what each does with catch-all and gateway addresses.',
+    q: 'How do the two compare on price?',
+    a: '$9.90 vs $11.90 at 10,000 credits, so the two are close on price. The difference that matters is what each does with catch-all and gateway addresses.',
   },
   {
     q: 'What does Giggal.ai do with catch-all addresses that Reoon does not?',

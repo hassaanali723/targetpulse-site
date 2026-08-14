@@ -1,3 +1,7 @@
+// Shared scaffold for competitor alternative pages. The earlier pages are
+// standalone; this renders the same structure from a config so the second wave
+// of pages stays consistent without copying 180 lines each. Every fact still
+// comes from competitorPricing.ts via the slug.
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Navbar from '@/components/Navbar'
@@ -8,7 +12,6 @@ import { faqPageLd, breadcrumbTrailLd } from '@/lib/schema'
 import PricingLadder from '@/components/alternatives/PricingLadder'
 import ComparisonTable from '@/components/alternatives/ComparisonTable'
 import VerdictExplainer from '@/components/alternatives/VerdictExplainer'
-import BenchmarkCallout from '@/components/alternatives/BenchmarkCallout'
 import Bluf from '@/components/alternatives/Bluf'
 import AltCtaBand from '@/components/alternatives/AltCtaBand'
 import RelatedLinks from '@/components/alternatives/RelatedLinks'
@@ -16,64 +19,61 @@ import { getCompetitor } from '@/lib/competitorPricing'
 import { ArrowRight } from 'lucide-react'
 
 const APP_URL = 'https://emailverifier.giggal.ai/sign-up'
-const competitor = getCompetitor('neverbounce')
 
-const DESC =
-  'NeverBounce charges $50 per 10,000 and resolves few catch-alls, 8% in one test. Giggal.ai is $9.90 and confirms them. 1,000 free credits, no card.'
-
-export const metadata: Metadata = {
-  title: { absolute: 'NeverBounce Alternative | Giggal.ai' },
-  description: DESC,
-  alternates: { canonical: '/neverbounce-alternative' },
-  openGraph: {
-    title: 'A NeverBounce Alternative That Resolves Catch-All',
-    description: DESC,
-    url: 'https://giggal.ai/neverbounce-alternative',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'A NeverBounce Alternative That Resolves Catch-All',
-    description: DESC,
-  },
+export interface AltPageConfig {
+  slug: string
+  metaTitle: string // absolute <title>
+  ogTitle: string
+  desc: string
+  h1Article: string // "A" or "An"
+  h1Tail: string
+  heroP: string
+  bluf: { k: string; v: string }[]
+  catchAllHeading: string
+  catchAllProse: string
+  pricingHeading: string
+  pricingProse: string
+  pricingNote?: string
+  featureNote?: string
+  testStep3: string
+  faqs: FaqItem[]
+  ctaHeadline: string
 }
 
-const faqs: FaqItem[] = [
-  {
-    q: 'How do the two compare on price?',
-    a: 'NeverBounce is $50 per 10,000 against Giggal.ai at $9.90, and $2,500 vs $680 at a million. Both publish full tiers, so the numbers are easy to check.',
-  },
-  {
-    q: 'What does Giggal.ai do with the catch-all addresses NeverBounce flags?',
-    a: 'It tells you whether the mailbox is real, deliverable or undeliverable, instead of an Accept-All tag. NeverBounce resolved 8% of catch-alls in the LeadMagic test. Catch-all is 1.5 credits in a run, 2 standalone.',
-  },
-  {
-    q: 'How do Giggal.ai credits expire compared with NeverBounce?',
-    a: 'Giggal.ai credits never expire. NeverBounce credits expire 12 months after purchase, stated on its own pricing page.',
-  },
-  {
-    q: 'Does Giggal.ai have an API?',
-    a: 'Yes. Giggal.ai has public API docs and an MCP server, so you can verify from your own tools and workflows.',
-  },
-  {
-    q: 'Can I try Giggal.ai before switching?',
-    a: 'Yes. 1,000 free credits, no card, on a bulk upload. Re-run a list you cleaned in NeverBounce and check the Catch-All rows.',
-  },
-]
+export function altMetadata(cfg: AltPageConfig): Metadata {
+  return {
+    title: { absolute: cfg.metaTitle },
+    description: cfg.desc,
+    alternates: { canonical: `/${cfg.slug}-alternative` },
+    openGraph: {
+      title: cfg.ogTitle,
+      description: cfg.desc,
+      url: `https://giggal.ai/${cfg.slug}-alternative`,
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: cfg.ogTitle,
+      description: cfg.desc,
+    },
+  }
+}
 
 const sectionTitle = 'text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight'
 const proseP = 'text-slate-600 leading-relaxed text-sm md:text-base font-medium'
 
-export default function NeverBounceAlternativePage() {
+export default function AltPageScaffold({ config }: { config: AltPageConfig }) {
+  const competitor = getCompetitor(config.slug)
+
   return (
     <main className="relative min-h-screen bg-slate-50 grid-lines overflow-x-hidden text-slate-800 antialiased">
       <JsonLd
         data={breadcrumbTrailLd([
           { name: 'Alternatives', path: '/alternatives' },
-          { name: 'NeverBounce alternative', path: '/neverbounce-alternative' },
+          { name: `${competitor.name} alternative`, path: `/${config.slug}-alternative` },
         ])}
       />
-      <JsonLd data={faqPageLd(faqs)} />
+      <JsonLd data={faqPageLd(config.faqs)} />
       <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-indigo-500/10 blur-[120px] -z-10 pointer-events-none" />
 
       <Navbar />
@@ -81,15 +81,14 @@ export default function NeverBounceAlternativePage() {
       {/* ── HERO ─────────────────────────────────────────────── */}
       <section className="max-w-3xl mx-auto px-6 pt-28 md:pt-32 pb-12 text-center space-y-6">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900">
-          A{' '}
+          {config.h1Article}{' '}
           <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">
-            NeverBounce alternative
+            {competitor.name} alternative
           </span>{' '}
-          that resolves catch-all
+          {config.h1Tail}
         </h1>
         <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium">
-          NeverBounce resolves few catch-alls, 8% in the LeadMagic test, and charges $50 per 10,000.
-          Giggal.ai confirms those addresses, valid or invalid, at $9.90.
+          {config.heroP}
         </p>
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3">
           <a
@@ -112,45 +111,30 @@ export default function NeverBounceAlternativePage() {
 
       {/* ── BOTTOM LINE ──────────────────────────────────────── */}
       <section className="max-w-3xl mx-auto px-6 pb-16">
-        <Bluf
-          points={[
-            { k: 'Price', v: '$50 at 10k against our $9.90, and $2,500 vs $680 at a million.' },
-            { k: 'Catch-all', v: 'We tell you valid or invalid. NeverBounce resolves few (8% resolved, LeadMagic).' },
-            { k: 'Credits', v: 'Never expire. NeverBounce credits expire 12 months after purchase.' },
-            { k: 'Try it', v: '1,000 free credits on a bulk list, no card.' },
-          ]}
-        />
+        <Bluf points={config.bluf} />
       </section>
 
       {/* ── CATCH-ALL ────────────────────────────────────────── */}
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
-        <h2 className={sectionTitle}>How Giggal.ai verifies catch-all addresses</h2>
-        <p className={proseP}>
-          NeverBounce marks catch-all addresses Accept-All and resolves few, 8% in the LeadMagic
-          test. We route those addresses down a separate path and return one of four results.
-        </p>
+        <h2 className={sectionTitle}>{config.catchAllHeading}</h2>
+        <p className={proseP}>{config.catchAllProse}</p>
         <VerdictExplainer />
-        <BenchmarkCallout competitor={competitor} />
       </section>
 
       {/* ── PRICING ──────────────────────────────────────────── */}
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
-        <h2 className={sectionTitle}>NeverBounce pricing vs Giggal.ai</h2>
-        <p className={proseP}>
-          NeverBounce charges $50 at 10,000, $400 at 100,000 and $2,500 at a million. Giggal.ai is
-          $9.90, $76 and $680 at the same volumes, with no minimum and no monthly fee.
-        </p>
+        <h2 className={sectionTitle}>{config.pricingHeading}</h2>
+        <p className={proseP}>{config.pricingProse}</p>
         <PricingLadder competitor={competitor} />
       </section>
 
       {/* ── FEATURE TABLE ────────────────────────────────────── */}
       <section className="cv-section max-w-4xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
-        <h2 className={sectionTitle}>NeverBounce vs Giggal.ai</h2>
+        <h2 className={sectionTitle}>{competitor.name} vs Giggal.ai</h2>
         <ComparisonTable competitor={competitor} />
-        <p className="text-[13px] text-slate-500 font-medium">
-          A dash means the figure is not public, such as NeverBounce’s free-tier size. No estimates
-          stand in for it.
-        </p>
+        {config.featureNote && (
+          <p className="text-[13px] text-slate-500 font-medium">{config.featureNote}</p>
+        )}
       </section>
 
       {/* ── TEST IT ──────────────────────────────────────────── */}
@@ -158,9 +142,9 @@ export default function NeverBounceAlternativePage() {
         <h2 className={sectionTitle}>Try it on your own list</h2>
         <ol className="space-y-3">
           {[
-            'Export a list you already cleaned in NeverBounce.',
+            `Export a list you already checked in ${competitor.name}.`,
             'Run it here on the 1,000 free credits. No card.',
-            'Look at the rows NeverBounce marked Catch-All. Count how many come back real.',
+            config.testStep3,
           ].map((step, i) => (
             <li key={i} className="flex items-start gap-3 text-slate-700 text-sm md:text-base font-medium">
               <span className="shrink-0 w-6 h-6 rounded-lg bg-indigo-100 text-indigo-700 font-black text-[13px] flex items-center justify-center">
@@ -177,10 +161,10 @@ export default function NeverBounceAlternativePage() {
         <div className="text-center space-y-3">
           <h2 className={sectionTitle}>Frequently asked questions</h2>
         </div>
-        <FaqAccordion items={faqs} />
+        <FaqAccordion items={config.faqs} />
       </section>
 
-      <AltCtaBand headline="Turn NeverBounce Catch-All rows into real results" />
+      <AltCtaBand headline={config.ctaHeadline} />
 
       <RelatedLinks />
 

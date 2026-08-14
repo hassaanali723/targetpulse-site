@@ -18,7 +18,7 @@ const APP_URL = 'https://emailverifier.giggal.ai/sign-up'
 const competitor = getCompetitor('kickbox')
 
 const DESC =
-  'Kickbox flags accept-all with a field rather than resolving it, and prices per verification through a slider. Giggal.ai resolves catch-all at $9.90 per 10,000. 1,000 free credits, no card.'
+  'Kickbox flags accept-all with a field rather than resolving it, at $70 per 10,000 one-time. Giggal.ai resolves catch-all at $9.90 per 10,000. 1,000 free credits, no card.'
 
 export const metadata: Metadata = {
   title: { absolute: 'Kickbox Alternative | Giggal.ai' },
@@ -44,7 +44,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'How much does Kickbox cost compared with Giggal.ai?',
-    a: 'Kickbox prices per verification through a slider, and shows an average of about $0.008 per verification on its own page, without fixed 10,000, 100,000 or 1,000,000 packages. Giggal.ai publishes $9.90 at 10,000 credits, $76 at 100,000 and $680 at a million.',
+    a: 'Kickbox publishes a fixed one-time price table: $70 at 10,000, $500 at 100,000 and $2,999 at a million. Giggal.ai is $9.90 at 10,000 credits, $76 at 100,000 and $680 at a million.',
   },
   {
     q: 'What is Kickbox better at?',
@@ -114,7 +114,7 @@ export default function KickboxAlternativePage() {
         <Bluf
           points={[
             { k: 'Catch-all', v: 'We resolve it, valid or invalid. Kickbox sets an accept_all flag and stops.' },
-            { k: 'Price', v: 'Kickbox prices per verification through a slider; we publish $9.90 at 10k, $680 at a million.' },
+            { k: 'Price', v: 'Kickbox is $70 at 10k and $2,999 at a million; we are $9.90 and $680.' },
             { k: 'Free tier', v: 'Kickbox gives 100 verifications; we give 1,000 bulk credits, no card.' },
             { k: 'Try it', v: '1,000 free credits on a bulk list, no card.' },
           ]}
@@ -137,10 +137,9 @@ export default function KickboxAlternativePage() {
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Kickbox pricing vs Giggal.ai</h2>
         <p className={proseP}>
-          Kickbox prices per verification through a slider, and shows an average around $0.008 per
-          verification on its own page, without fixed 10,000, 100,000 or 1,000,000 packages, so its
-          column below stays blank. Giggal.ai is $9.90 at 10,000, $76 at 100,000 and $680 at a
-          million, published on the pricing page.
+          Kickbox publishes a fixed one-time price table: $70 at 10,000, $500 at 100,000 and $2,999 at
+          a million. Giggal.ai is $9.90 at 10,000, $76 at 100,000 and $680 at a million. Both are
+          one-time credits, and neither charges for unknown or indeterminate results.
         </p>
         <PricingLadder competitor={competitor} />
       </section>
@@ -150,8 +149,7 @@ export default function KickboxAlternativePage() {
         <h2 className={sectionTitle}>Kickbox vs Giggal.ai</h2>
         <ComparisonTable competitor={competitor} />
         <p className="text-[13px] text-slate-500 font-medium">
-          A dash means the figure is not published. Kickbox prices per verification through a slider,
-          so no fixed package price is shown.
+          A dash means the vendor does not publish that figure, such as Kickbox’s accuracy claim.
         </p>
       </section>
 

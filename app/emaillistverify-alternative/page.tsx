@@ -18,7 +18,7 @@ const APP_URL = 'https://emailverifier.giggal.ai/sign-up'
 const competitor = getCompetitor('emaillistverify')
 
 const DESC =
-  'EmailListVerify is cheap but returns accept-all as ok_for_all without confirming it. Giggal.ai resolves catch-all and is $9.90 per 10,000 against $27. 1,000 free credits, no card.'
+  'EmailListVerify returns accept-all as ok_for_all without confirming it. Giggal.ai resolves catch-all and is $9.90 per 10,000 against its $27. 1,000 free credits, no card.'
 
 export const metadata: Metadata = {
   title: { absolute: 'EmailListVerify Alternative | Giggal.ai' },
@@ -39,8 +39,8 @@ export const metadata: Metadata = {
 
 const faqs: FaqItem[] = [
   {
-    q: 'Is Giggal.ai cheaper than EmailListVerify?',
-    a: 'Yes. $9.90 vs $27 at 10,000 credits and $76 vs $186 at 100,000. EmailListVerify prices its million tier by quote, so we cannot compare it directly there. Credits never expire on either tool.',
+    q: 'How do the two compare on price?',
+    a: 'Giggal.ai is $9.90 at 10,000 credits and $76 at 100,000, against $27 and $186 on EmailListVerify. EmailListVerify prices its million tier by quote, so there is no published figure to compare there. Credits never expire on either tool.',
   },
   {
     q: 'What does Giggal.ai do with accept-all addresses that EmailListVerify does not?',
@@ -48,7 +48,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'What is EmailListVerify better at?',
-    a: 'It is one of the cheaper verifiers, gives 100 free verifications that never expire, and bundles free tools like a blacklist checker and a DNS health checker, plus an email finder. If raw price is the priority, it is a fair pick.',
+    a: 'It gives 100 free verifications that never expire, bundles free tools like a blacklist checker and a DNS health checker, and includes an email finder.',
   },
   {
     q: 'How accurate is EmailListVerify?',
@@ -87,9 +87,8 @@ export default function EmailListVerifyAlternativePage() {
           that resolves catch-all
         </h1>
         <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium">
-          EmailListVerify is one of the cheaper verifiers, but on accept-all domains it returns
-          ok_for_all and leaves the mailbox unconfirmed. Giggal.ai returns a real result, and is $9.90
-          per 10,000 against its $27.
+          On accept-all domains EmailListVerify returns ok_for_all and leaves the mailbox unconfirmed.
+          Giggal.ai returns a real result, and is $9.90 per 10,000 against its $27.
         </p>
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3">
           <a
@@ -115,7 +114,7 @@ export default function EmailListVerifyAlternativePage() {
         <Bluf
           points={[
             { k: 'Catch-all', v: 'We resolve it, valid or invalid. EmailListVerify returns ok_for_all and stops.' },
-            { k: 'Price', v: '$27 at 10k against our $9.90, and $186 vs $76 at 100k. Cheaper here, and it resolves catch-all.' },
+            { k: 'Price', v: '$27 at 10k against our $9.90, and $186 vs $76 at 100k. Every tier published.' },
             { k: 'Free tier', v: 'EmailListVerify gives 100 verifications; we give 1,000 bulk credits, no card.' },
             { k: 'Try it', v: '1,000 free credits on a bulk list, no card.' },
           ]}
@@ -139,9 +138,8 @@ export default function EmailListVerifyAlternativePage() {
         <h2 className={sectionTitle}>EmailListVerify pricing vs Giggal.ai</h2>
         <p className={proseP}>
           EmailListVerify charges $27 at 10,000 and $186 at 100,000, and prices a million by quote.
-          Giggal.ai is $9.90, $76 and $680 at those volumes, published in full. EmailListVerify is
-          sold as the cheap option, but Giggal.ai is cheaper still and resolves catch-all. Credits
-          never expire on either tool.
+          Giggal.ai is $9.90, $76 and $680 at those volumes, published in full, and resolves
+          catch-all. Credits never expire on either tool.
         </p>
         <PricingLadder competitor={competitor} />
       </section>
@@ -151,8 +149,8 @@ export default function EmailListVerifyAlternativePage() {
         <h2 className={sectionTitle}>EmailListVerify vs Giggal.ai</h2>
         <ComparisonTable competitor={competitor} />
         <p className="text-[13px] text-slate-500 font-medium">
-          A dash means the figure is not public, such as EmailListVerify’s million-credit price, which
-          is quote-only. No estimate stands in for it.
+          A dash marks a figure the vendor does not publish. EmailListVerify’s million-credit price is
+          quote-only, shown as “Quote only” in the price table. No estimate stands in for it.
         </p>
       </section>
 
@@ -183,7 +181,7 @@ export default function EmailListVerifyAlternativePage() {
         <FaqAccordion items={faqs} />
       </section>
 
-      <AltCtaBand headline="Cheaper than EmailListVerify, and it resolves catch-all" />
+      <AltCtaBand headline="Resolve the addresses EmailListVerify leaves as ok_for_all" />
 
       <RelatedLinks />
 

@@ -39,8 +39,8 @@ export const metadata: Metadata = {
 
 const faqs: FaqItem[] = [
   {
-    q: 'Is Giggal.ai cheaper than Emailable?',
-    a: 'Yes. $9.90 vs $60 at 10,000, $76 vs $420 at 100,000, and $680 vs $2,100 at a million. Both publish full price lists and credits never expire on either.',
+    q: 'How do the two compare on price?',
+    a: '$9.90 vs $60 at 10,000, $76 vs $420 at 100,000, and $680 vs $2,100 at a million. Both publish full price lists and credits never expire on either.',
   },
   {
     q: 'What does Giggal.ai do with accept-all addresses that Emailable does not?',

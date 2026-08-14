@@ -47,7 +47,7 @@ const BLURBS: Record<string, string> = {
   bounceban:
     'Also resolves catch-all and SEG, so it comes down to terms: our 1,000 free bulk credits against a single-only free tier, a full price list against a calculator, 15 named gateways against 3.',
   millionverifier:
-    'Does not resolve catch-all, 5% in the LeadMagic test, the lowest here. Cheaper per credit at a million, but that pays to check a segment you still cannot use.',
+    'Does not resolve catch-all, 5% in the LeadMagic test, the lowest here. A low per-credit rate at a million, but that pays to check a segment you still cannot use.',
   reoon:
     'Reports catch-all as a status without confirming the mailbox, and does not advertise SEG support. Priced close to us at 10k, so the result on hard addresses is what decides it.',
   debounce:
@@ -57,24 +57,38 @@ const BLURBS: Record<string, string> = {
   emailable:
     'Marks accept-all addresses Risky without confirming them, and runs $60 at 10k against our $9.90. Fast, with a generous 250-credit free tier.',
   clearout:
-    'Returns catch-all as its own status without confirming the mailbox, and prices through a calculator. Bundles an email finder and phone validation.',
+    'Returns catch-all as its own status without confirming the mailbox, at $65 per 10,000 pay-as-you-go. Bundles an email finder and phone validation.',
   kickbox:
-    'Flags accept-all with a field rather than resolving it, and prices per verification through a slider. A developer favourite with strong API docs.',
+    'Flags accept-all with a field rather than resolving it, at $70 per 10,000 one-time. A developer favourite with strong API docs.',
   emaillistverify:
-    'Billed as the cheap option at $27 per 10k, but we are $9.90 and resolve catch-all, which it returns as ok_for_all without confirming.',
+    'At $27 per 10k, where we are $9.90, and it returns catch-all as ok_for_all without confirming. We resolve it.',
   myemailverifier:
-    'Cheap at $0.0025 a check with 100 free credits a day, but flags catch-all as a status rather than resolving it. We resolve it, and are cheaper still.',
+    '$15 at 10k and $349 at a million, but flags catch-all rather than resolving it. We resolve it, and add SEG.',
   briteverify:
-    'An enterprise verifier from Validity that flags accept-all as risky and prices only by quote. We publish $9.90 at 10k and resolve catch-all.',
+    'An enterprise verifier from Validity that flags accept-all as risky, with published bundles around $80 per 10,000. We publish $9.90 at 10k and resolve catch-all.',
+  scrubby:
+    'Validates catch-all and SEG too, but at $80 per 10k and 3 credits per catch-all. We are $9.90 and 1.5 credits, with 1,000 free bulk credits.',
+  quickemailverification:
+    '$60 per 10k, and returns catch-all as a status without confirming it. We resolve it, at $9.90.',
+  mailfloss:
+    'A subscription tool that auto-cleans your ESP list daily but flags catch-all rather than resolving it. We resolve it, pay-as-you-go at $9.90.',
+  bounceless:
+    'Now resolves catch-all too, but bills 5 credits each against our 1.5, at $29 per 10k. We add SEG and 1,000 free bulk credits.',
+  hunter:
+    'A finder-first platform where verification is bundled into monthly plans. We are a dedicated verifier that resolves catch-all, at a published $9.90 per 10,000.',
+  snovio:
+    'A finder and outreach platform with verification bundled into its credits. We resolve catch-all and publish a flat per-credit price.',
+  apollo:
+    'A sales platform where verification is one feature; it claims 91% on catch-all. We are a dedicated verifier that resolves catch-all and SEG, pay-as-you-go.',
 }
 
 const sectionTitle = 'text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight'
 const proseP = 'text-slate-600 leading-relaxed text-sm md:text-base font-medium'
 
-// Each vendor's smallest published package (count + price). Calculator-only
-// vendors have no fixed package price to show.
+// Each vendor's smallest published package (count + price). Subscription and
+// per-seat platforms have no one-time package, shown as "Per plan".
 function StartPrice({ p }: { p: { credits: number; totalUsd: number } | null }) {
-  if (!p) return <span className="text-slate-400 font-semibold">Calculator</span>
+  if (!p) return <span className="text-slate-400 font-semibold">Per plan</span>
   return (
     <span className="inline-flex flex-col leading-tight">
       <span className="font-black">{fmtUsd(p.totalUsd)}</span>
@@ -246,7 +260,9 @@ export default function AlternativesHubPage() {
             >
               emails protected by SEG gateways
             </Link>
-            . Of the tools here, only BounceBan and Bouncer set out to do the same.
+            . Several tools here now attempt catch-all, including BounceBan, Bouncer, Scrubby and
+            Bounceless, at varying depth and price. Giggal.ai resolves it at 1.5 credits and also
+            verifies behind 15 named secure email gateways.
           </p>
         </div>
       </section>

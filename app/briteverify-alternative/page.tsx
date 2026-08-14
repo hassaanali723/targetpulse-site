@@ -18,7 +18,7 @@ const APP_URL = 'https://emailverifier.giggal.ai/sign-up'
 const competitor = getCompetitor('briteverify')
 
 const DESC =
-  'BriteVerify from Validity flags accept-all as risky and prices only by quote. Giggal.ai resolves catch-all and publishes $9.90 per 10,000. 1,000 free credits, no card.'
+  'BriteVerify from Validity flags accept-all as risky, with published bundles around $80 per 10,000 and a million by quote. Giggal.ai resolves catch-all and publishes $9.90 per 10,000. 1,000 free credits, no card.'
 
 export const metadata: Metadata = {
   title: { absolute: 'BriteVerify Alternative | Giggal.ai' },
@@ -44,7 +44,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'How much does BriteVerify cost compared with Giggal.ai?',
-    a: 'BriteVerify prices by quote; its pricing page routes you to contact sales, and Validity states the cost can run as high as $0.01 per address. Giggal.ai publishes its price in full: $9.90 at 10,000 credits, $76 at 100,000 and $680 at a million, with no sales call.',
+    a: 'BriteVerify’s self-serve bundles were $80 at 10,000 and $600 at 100,000, with a million priced by quote; Validity has since moved the pricing page to a sales quote. Giggal.ai publishes its price in full: $9.90 at 10,000 credits, $76 at 100,000 and $680 at a million, with no sales call.',
   },
   {
     q: 'What is BriteVerify better at?',
@@ -87,9 +87,9 @@ export default function BriteVerifyAlternativePage() {
           that resolves catch-all
         </h1>
         <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium">
-          BriteVerify is Validity&apos;s enterprise verifier, priced only by quote, and on accept-all
-          domains it flags the address risky rather than confirming the mailbox. Giggal.ai returns a
-          real result, at a published $9.90 per 10,000.
+          BriteVerify is Validity&apos;s verifier, and on accept-all domains it flags the address risky
+          rather than confirming the mailbox. Its self-serve bundles were $80 per 10,000, now moved to
+          a sales quote. Giggal.ai returns a real result, at a published $9.90 per 10,000.
         </p>
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3">
           <a
@@ -115,7 +115,7 @@ export default function BriteVerifyAlternativePage() {
         <Bluf
           points={[
             { k: 'Catch-all', v: 'We resolve it, valid or invalid. BriteVerify groups accept-all as risky and stops.' },
-            { k: 'Price', v: 'BriteVerify is quote-only, up to $0.01 a check. We publish $9.90 at 10k, $680 at a million.' },
+            { k: 'Price', v: 'BriteVerify’s bundles are $80 at 10k and $600 at 100k; a million is quote-only. We are $9.90 and $680.' },
             { k: 'Gateways', v: 'We verify behind 15 secure email gateways; BriteVerify does not advertise it.' },
             { k: 'Try it', v: '1,000 free credits on a bulk list, no card and no sales call.' },
           ]}
@@ -138,10 +138,10 @@ export default function BriteVerifyAlternativePage() {
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>BriteVerify pricing vs Giggal.ai</h2>
         <p className={proseP}>
-          BriteVerify does not publish a price. Its pricing page routes to contact sales, and Validity
-          states the cost can run as high as $0.01 per address, so its column below stays blank.
-          Giggal.ai publishes its full price list: $9.90 at 10,000, $76 at 100,000 and $680 at a
-          million, with no sales call and no minimum.
+          BriteVerify’s self-serve bundles were $80 at 10,000 and $600 at 100,000, with a million
+          priced by quote. Validity has since moved the pricing page to a sales quote, so treat these
+          as its last published rates. Giggal.ai publishes its full price list: $9.90 at 10,000, $76
+          at 100,000 and $680 at a million, with no sales call and no minimum.
         </p>
         <PricingLadder competitor={competitor} />
       </section>
@@ -151,8 +151,8 @@ export default function BriteVerifyAlternativePage() {
         <h2 className={sectionTitle}>BriteVerify vs Giggal.ai</h2>
         <ComparisonTable competitor={competitor} />
         <p className="text-[13px] text-slate-500 font-medium">
-          A dash means the figure is not published. BriteVerify prices by quote, so no package price
-          or free tier is shown.
+          A dash or “Quote only” marks a figure Validity does not publish, such as its million-credit
+          price, free tier and accuracy claim.
         </p>
       </section>
 
