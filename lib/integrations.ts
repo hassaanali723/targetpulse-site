@@ -36,7 +36,8 @@ export interface Integration {
   slug: string
   name: string
   description: string
-  category: IntegrationCategory
+  /** Loose string so programmatic Zapier apps can bring their own categories. */
+  category: string
   connection: ConnectionType
   /** Internal detail page (preferred) or external destination. */
   href: string
@@ -57,7 +58,7 @@ export const INTEGRATIONS: Integration[] = [
   // ── Flagship ────────────────────────────────────────────────────────────
   {
     slug: 'zapier',
-    icon: '/integrations/zapier.png',
+    icon: '/integrations/giggal-catch-all-email-verification-zapier.png',
     name: 'Zapier',
     description:
       'Verify emails and resolve catch-all addresses automatically in 8,000+ apps. No code required.',
@@ -69,7 +70,7 @@ export const INTEGRATIONS: Integration[] = [
   },
   {
     slug: 'claude',
-    icon: '/integrations/claude.png',
+    icon: '/integrations/giggal-catch-all-email-verification-claude.png',
     name: 'Claude',
     description:
       'Let Claude verify emails through the Giggal.ai MCP server, straight from a conversation.',
@@ -81,7 +82,7 @@ export const INTEGRATIONS: Integration[] = [
   },
   {
     slug: 'chatgpt',
-    icon: '/integrations/chatgpt.png',
+    icon: '/integrations/giggal-catch-all-email-verification-chatgpt.png',
     name: 'ChatGPT',
     description:
       'Connect ChatGPT to Giggal.ai and verify single emails or check results without leaving the chat.',
@@ -117,7 +118,7 @@ export const INTEGRATIONS: Integration[] = [
   // Connect the tool, import contacts, verify, and push clean lists back.
   {
     slug: 'mailchimp',
-    icon: '/integrations/mailchimp.png',
+    icon: '/integrations/giggal-catch-all-email-verification-mailchimp.png',
     name: 'Mailchimp',
     description:
       'Import Mailchimp audiences into Giggal.ai, verify them, and keep only deliverable subscribers.',
@@ -130,7 +131,7 @@ export const INTEGRATIONS: Integration[] = [
   },
   {
     slug: 'mailgun',
-    icon: '/integrations/mailgun.png',
+    icon: '/integrations/giggal-catch-all-email-verification-mailgun.png',
     name: 'Mailgun',
     description:
       'Connect Mailgun and verify your sending lists before campaigns ever hit the wire.',
@@ -143,7 +144,7 @@ export const INTEGRATIONS: Integration[] = [
   },
   {
     slug: 'mailjet',
-    icon: '/integrations/mailjet.png',
+    icon: '/integrations/giggal-catch-all-email-verification-mailjet.png',
     name: 'Mailjet',
     description:
       'Pull Mailjet contact lists into Giggal.ai for verification and catch-all resolution.',
@@ -156,7 +157,7 @@ export const INTEGRATIONS: Integration[] = [
   },
   {
     slug: 'sendgrid',
-    icon: '/integrations/sendgrid.png',
+    icon: '/integrations/giggal-catch-all-email-verification-sendgrid.png',
     name: 'SendGrid',
     description:
       'Verify SendGrid contacts in bulk to protect your sender reputation and inbox placement.',
@@ -168,7 +169,7 @@ export const INTEGRATIONS: Integration[] = [
   },
   {
     slug: 'activecampaign',
-    icon: '/integrations/activecampaign.png',
+    icon: '/integrations/giggal-catch-all-email-verification-activecampaign.png',
     name: 'ActiveCampaign',
     description:
       'Import ActiveCampaign contacts, verify them, and clean risky addresses before sends.',
@@ -181,7 +182,7 @@ export const INTEGRATIONS: Integration[] = [
   },
   {
     slug: 'campaign-monitor',
-    icon: '/integrations/campaignmonitor.png',
+    icon: '/integrations/giggal-catch-all-email-verification-campaignmonitor.png',
     name: 'Campaign Monitor',
     description:
       'Connect Campaign Monitor and validate every subscriber list inside Giggal.ai.',
@@ -193,7 +194,7 @@ export const INTEGRATIONS: Integration[] = [
   },
   {
     slug: 'getresponse',
-    icon: '/integrations/getresponse.png',
+    icon: '/integrations/giggal-catch-all-email-verification-getresponse.png',
     name: 'GetResponse',
     description:
       'Verify GetResponse lists to cut bounces and recover catch-all contacts other tools drop.',
@@ -205,7 +206,7 @@ export const INTEGRATIONS: Integration[] = [
   },
   {
     slug: 'aweber',
-    icon: '/integrations/aweber.png',
+    icon: '/integrations/giggal-catch-all-email-verification-aweber.png',
     name: 'AWeber',
     description:
       'Import AWeber subscribers for verification and push back a clean, deliverable list.',
@@ -218,7 +219,7 @@ export const INTEGRATIONS: Integration[] = [
   },
   {
     slug: 'mailerlite',
-    icon: '/integrations/mailerlite.png',
+    icon: '/integrations/giggal-catch-all-email-verification-mailerlite.png',
     name: 'MailerLite',
     description:
       'Connect MailerLite and verify subscriber lists before your next campaign goes out.',
@@ -231,7 +232,7 @@ export const INTEGRATIONS: Integration[] = [
   },
   {
     slug: 'drip',
-    icon: '/integrations/drip.png',
+    icon: '/integrations/giggal-catch-all-email-verification-drip.png',
     name: 'Drip',
     description:
       'Validate Drip contacts in bulk and keep automated flows pointed at real mailboxes.',
@@ -243,7 +244,7 @@ export const INTEGRATIONS: Integration[] = [
   },
   {
     slug: 'elastic-email',
-    icon: '/integrations/elasticemail.png',
+    icon: '/integrations/giggal-catch-all-email-verification-elasticemail.png',
     name: 'Elastic Email',
     description:
       'Import Elastic Email lists for deep verification, including catch-all and SEG checks.',
@@ -256,7 +257,7 @@ export const INTEGRATIONS: Integration[] = [
 
   {
     slug: 'reply-io',
-    icon: '/integrations/reply.png',
+    icon: '/integrations/giggal-catch-all-email-verification-reply.png',
     name: 'Reply.io',
     description:
       'Verify prospect emails before Reply.io sequences fire, so outreach only hits real mailboxes.',
@@ -268,7 +269,7 @@ export const INTEGRATIONS: Integration[] = [
   },
   {
     slug: 'zoho-crm',
-    icon: '/integrations/zohocrm.png',
+    icon: '/integrations/giggal-catch-all-email-verification-zohocrm.png',
     name: 'Zoho CRM',
     description:
       'Import Zoho CRM contacts and leads for verification and keep your pipeline data clean.',
@@ -288,31 +289,31 @@ export const INTEGRATIONS: Integration[] = [
       'Verify new rows as they are added and write results back to your sheet automatically.',
     category: 'Spreadsheets',
     connection: 'zapier',
-    href: '/integrations/zapier',
+    href: '/integrations/zapier/google-sheets',
     iconSlug: 'googlesheets',
     brandColor: '#34A853',
   },
   {
     slug: 'hubspot',
-    icon: '/integrations/hubspot.png',
+    icon: '/integrations/giggal-catch-all-email-verification-hubspot.png',
     name: 'HubSpot',
     description:
       'Verify new HubSpot contacts on creation so invalid and risky emails never reach your CRM.',
     category: 'CRM',
     connection: 'zapier',
-    href: '/integrations/zapier',
+    href: '/integrations/zapier/hubspot',
     iconSlug: 'hubspot',
     brandColor: '#FF7A59',
   },
   {
     slug: 'salesforce',
-    icon: '/integrations/salesforce.png',
+    icon: '/integrations/giggal-catch-all-email-verification-salesforce.png',
     name: 'Salesforce',
     description:
       'Keep Salesforce leads clean by verifying every new lead email the moment it lands.',
     category: 'CRM',
     connection: 'zapier',
-    href: '/integrations/zapier',
+    href: '/integrations/zapier/salesforce',
     iconSlug: 'salesforce',
     brandColor: '#00A1E0',
   },
@@ -323,7 +324,7 @@ export const INTEGRATIONS: Integration[] = [
       'Verify emails captured in Typeform responses before they flow into your tools.',
     category: 'Forms',
     connection: 'zapier',
-    href: '/integrations/zapier',
+    href: '/integrations/zapier/typeform',
     iconSlug: 'typeform',
     brandColor: '#262627',
   },
@@ -372,7 +373,7 @@ export const ZAPIER_WORKFLOWS: ZapierWorkflow[] = [
   {
     title: 'Verify new HubSpot contacts automatically',
     apps: 'HubSpot + Giggal.ai',
-    icon: '/integrations/hubspot.png',
+    icon: '/integrations/giggal-catch-all-email-verification-hubspot.png',
     brandColor: '#FF7A59',
     description:
       'When a contact is created in HubSpot, Giggal.ai verifies the email, resolves catch-all domains, and writes the result back to a contact property.',
@@ -388,7 +389,7 @@ export const ZAPIER_WORKFLOWS: ZapierWorkflow[] = [
   {
     title: 'Clean Salesforce leads on entry',
     apps: 'Salesforce + Giggal.ai',
-    icon: '/integrations/salesforce.png',
+    icon: '/integrations/giggal-catch-all-email-verification-salesforce.png',
     brandColor: '#00A1E0',
     description:
       'Every new Salesforce lead is verified before your SDRs touch it, so nobody wastes a sequence on a dead mailbox.',
@@ -396,7 +397,7 @@ export const ZAPIER_WORKFLOWS: ZapierWorkflow[] = [
   {
     title: 'Gate Mailchimp signups',
     apps: 'Mailchimp + Giggal.ai',
-    icon: '/integrations/mailchimp.png',
+    icon: '/integrations/giggal-catch-all-email-verification-mailchimp.png',
     brandColor: '#FFE01B',
     description:
       'Verify subscribers the moment they sign up and only add deliverable addresses to your Mailchimp audience.',

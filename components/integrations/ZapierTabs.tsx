@@ -60,7 +60,7 @@ export default function ZapierTabs() {
       <aside className="lg:sticky lg:top-28 bg-white border-2 border-slate-200 rounded-3xl p-8 card-vivid-shadow text-center">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/integrations/zapier.png"
+          src="/integrations/giggal-catch-all-email-verification-zapier.png"
           alt="Zapier"
           width={112}
           height={112}

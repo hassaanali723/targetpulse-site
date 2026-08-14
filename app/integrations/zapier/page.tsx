@@ -5,7 +5,19 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import JsonLd from '@/components/JsonLd'
 import { breadcrumbTrailLd, faqPageLd } from '@/lib/schema'
+import fs from 'fs'
+import path from 'path'
 import { ZAPIER_GUIDE_STEPS, ZAPIER_APP_URL, SIGNUP_URL } from '@/lib/integrations'
+import { ZAPIER_APPS, ZAPIER_APP_LOGO_DIR, zapierAppLogo, zapierAppLogoAlt } from '@/lib/zapierApps'
+
+// Logos that actually exist on disk, resolved once at build time so cards
+// with a missing file render a lettermark instead of a broken image.
+const EXISTING_LOGOS = new Set(
+  fs
+    .readdirSync(path.join(process.cwd(), 'public', ZAPIER_APP_LOGO_DIR.slice(1)))
+    .filter((f) => f.endsWith('.png'))
+    .map((f) => f.replace(/^giggal-catch-all-email-verification-/, '').replace(/\.png$/, ''))
+)
 import ZapierTabs from '@/components/integrations/ZapierTabs'
 import type { FaqItem } from '@/components/landing/FaqAccordion'
 
@@ -108,7 +120,7 @@ export default function ZapierIntegrationPage() {
           <div className="w-20 h-20 rounded-2xl bg-white border-2 border-slate-200 card-vivid-shadow flex items-center justify-center">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/integrations/zapier.png"
+              src="/integrations/giggal-catch-all-email-verification-zapier.png"
               alt="Zapier"
               width={40}
               height={40}
@@ -206,6 +218,55 @@ export default function ZapierIntegrationPage() {
               lead automatically.
             </p>
           </div>
+        </div>
+      </section>
+
+      {/* App directory: every app with its own integration page */}
+      <section className="max-w-6xl mx-auto px-6 py-14">
+        <div className="text-center mb-10">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-3">
+            Verify Emails From Any of These Apps
+          </h2>
+          <p className="text-[15px] text-slate-600 font-medium max-w-2xl mx-auto">
+            Connect Giggal.ai with your CRM, forms, email marketing and ecommerce tools
+            through Zapier. Pick your app for a step-by-step setup guide.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+          {ZAPIER_APPS.map((a) => (
+            <Link
+              key={a.slug}
+              href={`/integrations/zapier/${a.slug}`}
+              className="group flex items-center gap-3.5 bg-white border-2 border-slate-200 rounded-2xl px-4 py-3.5 card-vivid-shadow hover:border-indigo-500 transition-colors duration-200"
+            >
+              {EXISTING_LOGOS.has(a.slug) ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={zapierAppLogo(a.slug)}
+                  alt={zapierAppLogoAlt(a.name)}
+                  width={36}
+                  height={36}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-9 h-9 rounded-lg object-contain shrink-0"
+                />
+              ) : (
+                <span
+                  className="w-9 h-9 rounded-lg bg-indigo-600 text-white text-sm font-black flex items-center justify-center shrink-0"
+                  aria-hidden="true"
+                >
+                  {a.name[0]}
+                </span>
+              )}
+              <span className="min-w-0 flex-1">
+                <span className="block text-[13.5px] font-black text-slate-800 group-hover:text-indigo-700 transition-colors truncate">
+                  {a.name}
+                </span>
+                <span className="block text-[11px] font-bold text-slate-400 truncate">{a.category}</span>
+              </span>
+              <ArrowUpRight className="w-3.5 h-3.5 text-slate-300 group-hover:text-indigo-500 transition-colors shrink-0" />
+            </Link>
+          ))}
         </div>
       </section>
 

@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import { MIMECAST_PAGE_LIVE } from '@/lib/flags'
+import { ZAPIER_APPS } from '@/lib/zapierApps'
 
 // lastModified uses plain 'YYYY-MM-DD' strings so the emitted <lastmod> is
 // date-only (matching the reviewed sitemap). Each date is the page's real last
@@ -45,7 +46,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/blog/what-does-risky-mean-in-email-verification`, lastModified: '2026-08-11' },
     // Integrations hub + per-tool pages.
     { url: `${baseUrl}/integrations`, lastModified: '2026-08-12' },
-    { url: `${baseUrl}/integrations/zapier`, lastModified: '2026-08-12' },
+    { url: `${baseUrl}/integrations/zapier`, lastModified: '2026-08-14' },
+    // One page per app that connects through Zapier (lib/zapierApps.ts).
+    ...ZAPIER_APPS.map((a) => ({
+      url: `${baseUrl}/integrations/zapier/${a.slug}`,
+      lastModified: '2026-08-14',
+    })),
     { url: `${baseUrl}/mcp`, lastModified: '2026-07-21' },
     { url: `${baseUrl}/pricing`, lastModified: '2026-07-29' },
     { url: `${baseUrl}/public/docs`, lastModified: '2026-07-24' },
