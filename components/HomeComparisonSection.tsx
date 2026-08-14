@@ -35,11 +35,11 @@ export default function HomeComparisonSection() {
           <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-primary-700">Price comparison</span>
         </div>
         <h2 className="text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-slate-900 mb-4 leading-[1.1]">
-          Get up to <span className="bg-gradient-to-r from-primary-600 to-accent-500 bg-clip-text text-transparent">5× more emails</span> per dollar
+          The same volumes, <span className="bg-gradient-to-r from-primary-600 to-accent-500 bg-clip-text text-transparent">priced side by side</span>
         </h2>
         <p className="text-[16px] text-slate-500 max-w-2xl mx-auto leading-relaxed">
-          Same verification quality. A fraction of the price. Here&apos;s how Giggal.ai stacks up
-          against the top-known email verifiers.
+          Published rates for the same monthly verification volumes, shown next to the top-known
+          email verifiers. The numbers are theirs, sourced below.
         </p>
       </div>
 
@@ -57,9 +57,6 @@ export default function HomeComparisonSection() {
                     <th className="px-5 py-4 bg-primary-50 border-l border-r border-primary-100/70 w-[26%]">
                       <div className="flex items-center justify-center gap-2 flex-wrap">
                         <span className="text-[13px] md:text-[14px] font-extrabold text-primary-700">Giggal.ai</span>
-                        <span className="inline-flex items-center gap-1 bg-accent-500 text-primary-900 text-[8px] font-extrabold px-1.5 py-0.5 rounded-full uppercase tracking-wider whitespace-nowrap">
-                          Best
-                        </span>
                       </div>
                     </th>
                     <th className="px-5 py-4 text-[13px] md:text-[14px] font-bold text-slate-500 text-center bg-slate-50/60 w-[23%]">
@@ -72,9 +69,6 @@ export default function HomeComparisonSection() {
                 </thead>
                 <tbody>
                   {rows.map((row, i) => {
-                    const cheapest = Math.min(row.neverbounce, row.zerobounce)
-                    const savingsX = (cheapest / row.giggal).toFixed(1)
-
                     return (
                       <tr
                         key={i}
@@ -104,25 +98,21 @@ export default function HomeComparisonSection() {
                         <td className={`px-5 py-6 align-middle text-center border-l border-r border-primary-100/70 ${
                           row.highlight ? 'bg-primary-50/80' : 'bg-primary-50/50'
                         }`}>
-                          <div className="text-2xl md:text-3xl font-extrabold text-primary-700 leading-none mb-2">
+                          <div className="text-2xl md:text-3xl font-extrabold text-primary-700 leading-none">
                             {formatPrice(row.giggal)}
                           </div>
-                          <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-white border border-emerald-200/60 px-2 py-0.5 rounded-full">
-                            <TrendingDown className="w-2.5 h-2.5" />
-                            {savingsX}× cheaper
-                          </span>
                         </td>
 
                         {/* NeverBounce cell */}
                         <td className="px-5 py-6 align-middle text-center">
-                          <div className="text-xl md:text-2xl font-bold text-slate-400 line-through decoration-rose-400/60 decoration-[1.5px] leading-none">
+                          <div className="text-xl md:text-2xl font-bold text-slate-500 leading-none">
                             {formatPrice(row.neverbounce)}
                           </div>
                         </td>
 
                         {/* ZeroBounce cell */}
                         <td className="px-5 py-6 align-middle text-center">
-                          <div className="text-xl md:text-2xl font-bold text-slate-400 line-through decoration-rose-400/60 decoration-[1.5px] leading-none">
+                          <div className="text-xl md:text-2xl font-bold text-slate-500 leading-none">
                             {formatPrice(row.zerobounce)}
                           </div>
                         </td>

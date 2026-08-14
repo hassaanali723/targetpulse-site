@@ -18,7 +18,7 @@ const APP_URL = 'https://emailverifier.giggal.ai/sign-up'
 const competitor = getCompetitor('clearout')
 
 const DESC =
-  'Clearout returns catch-all as its own status without confirming the mailbox, and prices via a calculator. Giggal.ai resolves catch-all at $9.90 per 10,000. 1,000 free credits, no card.'
+  'Clearout returns catch-all as its own status without confirming the mailbox, at $65 per 10,000 pay-as-you-go. Giggal.ai resolves catch-all at $9.90 per 10,000. 1,000 free credits, no card.'
 
 export const metadata: Metadata = {
   title: { absolute: 'Clearout Alternative | Giggal.ai' },
@@ -44,7 +44,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'How much does Clearout cost compared with Giggal.ai?',
-    a: 'Clearout prices through an on-page calculator and does not publish a fixed package price. Giggal.ai publishes $9.90 at 10,000 credits, $76 at 100,000 and $680 at a million. Clearout does not charge for Unknown results, and credits never expire on either tool.',
+    a: 'Clearout is pay-as-you-go, and its rate steps down by volume: $65 at 10,000, $400 at 100,000 and $1,400 at a million. Giggal.ai is $9.90 at 10,000 credits, $76 at 100,000 and $680 at a million. Clearout does not charge for Unknown results, and credits never expire on either tool.',
   },
   {
     q: 'What is Clearout better at?',
@@ -115,7 +115,7 @@ export default function ClearoutAlternativePage() {
         <Bluf
           points={[
             { k: 'Catch-all', v: 'We resolve it, valid or invalid. Clearout returns a Catch-All status and stops.' },
-            { k: 'Price', v: 'Clearout prices through a calculator; we publish $9.90 at 10k, $680 at a million.' },
+            { k: 'Price', v: 'Clearout is $65 at 10k and $1,400 at a million; we are $9.90 and $680.' },
             { k: 'Free tier', v: 'Clearout gives 100 credits; we give 1,000 bulk credits, no card.' },
             { k: 'Try it', v: '1,000 free credits on a bulk list, no card.' },
           ]}
@@ -138,10 +138,10 @@ export default function ClearoutAlternativePage() {
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Clearout pricing vs Giggal.ai</h2>
         <p className={proseP}>
-          Clearout prices pay-as-you-go through an on-page calculator and does not publish a fixed
-          package price we can quote, so its column below stays blank. Giggal.ai is $9.90 at 10,000,
-          $76 at 100,000 and $680 at a million, published on the pricing page. Credits never expire on
-          either tool, and neither charges for unknown results.
+          Clearout is pay-as-you-go, and its per-credit rate steps down by volume: $65 at 10,000, $400
+          at 100,000 and $1,400 at a million, read from Clearout’s own pricing data. Giggal.ai is
+          $9.90 at 10,000, $76 at 100,000 and $680 at a million. Credits never expire on either tool,
+          and neither charges for unknown results.
         </p>
         <PricingLadder competitor={competitor} />
       </section>
@@ -150,10 +150,6 @@ export default function ClearoutAlternativePage() {
       <section className="cv-section max-w-4xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Clearout vs Giggal.ai</h2>
         <ComparisonTable competitor={competitor} />
-        <p className="text-[13px] text-slate-500 font-medium">
-          A dash means the figure is not published. Clearout prices through a calculator, so no fixed
-          package price is shown.
-        </p>
       </section>
 
       {/* ── TEST IT ──────────────────────────────────────────── */}

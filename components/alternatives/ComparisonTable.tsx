@@ -29,9 +29,14 @@ export default function ComparisonTable({ competitor }: { competitor: Competitor
       giggal: <span className="font-black text-indigo-700">{fmtUsd(gPrice.totalUsd!)}</span>,
       competitor:
         cPrice && cPrice.status !== 'unknown' && cPrice.totalUsd !== null ? (
-          <span className="font-bold">{fmtUsd(cPrice.totalUsd)}</span>
+          <span className="font-bold">
+            {fmtUsd(cPrice.totalUsd)}
+            {cPrice.perMonth && (
+              <span className="text-[11px] font-semibold text-slate-400 ml-0.5">/mo</span>
+            )}
+          </span>
         ) : (
-          <span className="text-slate-400 font-semibold">-</span>
+          <span className="text-slate-400 font-semibold">{cPrice?.note ?? '-'}</span>
         ),
     },
     {

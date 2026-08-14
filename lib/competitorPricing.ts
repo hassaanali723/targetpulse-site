@@ -20,9 +20,11 @@ export type Verification = 'verified' | 'estimate' | 'unknown'
 
 export interface PricingTier {
   credits: number
-  totalUsd: number | null // null when unknown
+  totalUsd: number | null // null when unknown; for subscription tiers, the monthly plan price
   perEmailUsd: number | null
   status: Verification
+  perMonth?: boolean // totalUsd is a recurring monthly plan price, not a one-time purchase
+  note?: string // short label shown in place of a dash when there is no one-time price (e.g. "Quote", "Enterprise", "Per seat")
 }
 
 export interface Competitor {
@@ -46,6 +48,8 @@ export interface Competitor {
   benchmarkAccuracy: string | null // LeadMagic overall, if tested
   benchmarkCatchAllResolved: string | null // LeadMagic catch-alls resolved, if tested
   betterFitFor: string[] // honest, specific strengths
+  pricingModel?: 'onetime' | 'subscription' | 'seat' // default onetime; subscription/seat platforms do not sell per-volume verification
+  pricingBasisNote?: string // footnote under the pricing ladder when the numbers are not one-time per-volume prices
 }
 
 // The date all competitor facts here were checked. Human-formatted by
@@ -115,7 +119,7 @@ export const COMPETITORS: Record<string, Competitor> = {
     chargesForUnknown: false,
     resolvesCatchAll: true, // offers catch-all handling (AI Scoring)
     catchAllCreditCost: 'AI score 1-10, not valid/invalid',
-    advertisesSegSupport: false,
+    advertisesSegSupport: true, // pricing page: "validate all, including catch-alls and protected by SEGs"
     claimedAccuracy: 'Claims 99.6%',
     benchmarkAccuracy: '97.8%',
     benchmarkCatchAllResolved: '12%',
@@ -140,7 +144,7 @@ export const COMPETITORS: Record<string, Competitor> = {
       { credits: 1000000, totalUsd: 2500, perEmailUsd: 0.0025, status: 'verified' },
     ],
     minimumPurchase: null,
-    freeTier: '-',
+    freeTier: '10 credits on signup',
     creditsExpire: 'Credits expire 12 months after purchase',
     chargesForUnknown: null,
     resolvesCatchAll: true, // secondary pattern detection on accept-all (8% resolved in test)
@@ -167,7 +171,7 @@ export const COMPETITORS: Record<string, Competitor> = {
     tiers: [
       { credits: 10000, totalUsd: 34, perEmailUsd: 0.0034, status: 'verified' },
       { credits: 100000, totalUsd: 255, perEmailUsd: 0.00255, status: 'verified' },
-      { credits: 1000000, totalUsd: 450, perEmailUsd: 0.00045, status: 'verified' },
+      { credits: 1000000, totalUsd: 1450, perEmailUsd: 0.00145, status: 'verified' },
     ],
     minimumPurchase: null,
     freeTier: 'Unlimited single verifications, but no bulk credits',
@@ -203,14 +207,14 @@ export const COMPETITORS: Record<string, Competitor> = {
     freeTier: '100 credits',
     creditsExpire: 'Credits never expire',
     chargesForUnknown: false,
-    resolvesCatchAll: true, // has a Catch-All Verifier (marks most Risky; ~5% resolved in test)
-    catchAllCreditCost: 'Catch-All Verifier, marks most Risky',
+    resolvesCatchAll: true, // has a Catch-All Verifier (resolves ~30-40%, marks the rest Risky)
+    catchAllCreditCost: 'Catch-All Verifier, resolves 30-40%, rest Risky',
     advertisesSegSupport: false,
-    claimedAccuracy: '-',
+    claimedAccuracy: 'Claims 99%+',
     benchmarkAccuracy: '95.8%',
     benchmarkCatchAllResolved: '5%',
     betterFitFor: [
-      'Cheaper at high volume, $449 per 1,000,000 verifications',
+      '$449 per 1,000,000 verifications',
       'No charge for risky or catch-all results at all',
       'Credits never expire',
       'ISO 27001 certified',
@@ -238,7 +242,7 @@ export const COMPETITORS: Record<string, Competitor> = {
     resolvesCatchAll: false,
     catchAllCreditCost: 'Reported as a status, not confirmed',
     advertisesSegSupport: false,
-    claimedAccuracy: '-',
+    claimedAccuracy: 'Claims 99%',
     benchmarkAccuracy: null,
     benchmarkCatchAllResolved: null,
     betterFitFor: [
@@ -246,7 +250,7 @@ export const COMPETITORS: Record<string, Competitor> = {
       'A free daily credit allowance that continues indefinitely',
       'A longer review history on G2 and Capterra',
       'A WordPress plugin',
-      'Cheaper daily-subscription pricing for teams verifying continuously',
+      'A daily-subscription option for teams verifying continuously',
     ],
   },
 
@@ -304,7 +308,7 @@ export const COMPETITORS: Record<string, Competitor> = {
     resolvesCatchAll: true, // Deep Catch-All Verification, resolves major providers
     catchAllCreditCost: 'Deep Catch-All Verification, resolves major providers',
     advertisesSegSupport: false,
-    claimedAccuracy: 'Claims 99.5%',
+    claimedAccuracy: 'Claims over 99%',
     benchmarkAccuracy: null,
     benchmarkCatchAllResolved: null,
     betterFitFor: [
@@ -335,8 +339,8 @@ export const COMPETITORS: Record<string, Competitor> = {
     chargesForUnknown: false,
     resolvesCatchAll: false, // marks accept-all as Risky, does not confirm the mailbox
     catchAllCreditCost: 'Marked Accept-All / Risky, not resolved',
-    advertisesSegSupport: false,
-    claimedAccuracy: '-',
+    advertisesSegSupport: true, // advertises SEG *detection* (Proofpoint, Mimecast, Barracuda), flags not resolves
+    claimedAccuracy: 'Claims 99%',
     benchmarkAccuracy: null,
     benchmarkCatchAllResolved: null,
     betterFitFor: [
@@ -347,19 +351,21 @@ export const COMPETITORS: Record<string, Competitor> = {
     ],
   },
 
-  // Pay-as-you-go pricing renders client-side from a calculator, so the dollar
-  // tiers stay unknown. Returns Catch-All as its own status (marked risky),
-  // charges 1 credit per check excluding Unknown. Verified live.
+  // PAYG dollar tiers read from Clearout's own live pricing API
+  // (api.clearout.io/public/products), the same source its calculator reads.
+  // Volume-slab per-credit rates: $0.0065 at 10k, $0.004 at 100k, $0.0014 at 1M.
+  // One-time credits, never expire. Returns Catch-All as its own status (risky),
+  // charges 1 credit per check excluding Unknown.
   clearout: {
     slug: 'clearout',
     name: 'Clearout',
     pricingUrl: 'https://clearout.io/pricing/',
-    lastVerified: '2026-08-12',
-    startingPrice: null,
+    lastVerified: '2026-08-14',
+    startingPrice: { credits: 5000, totalUsd: 40 },
     tiers: [
-      { credits: 10000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
-      { credits: 100000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
-      { credits: 1000000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
+      { credits: 10000, totalUsd: 65, perEmailUsd: 0.0065, status: 'verified' },
+      { credits: 100000, totalUsd: 400, perEmailUsd: 0.004, status: 'verified' },
+      { credits: 1000000, totalUsd: 1400, perEmailUsd: 0.0014, status: 'verified' },
     ],
     minimumPurchase: null,
     freeTier: '100 credits',
@@ -368,7 +374,7 @@ export const COMPETITORS: Record<string, Competitor> = {
     resolvesCatchAll: false, // Catch-All is a separate status, marked risky, not confirmed
     catchAllCreditCost: 'Returned as a Catch-All status, not confirmed',
     advertisesSegSupport: false,
-    claimedAccuracy: 'Claims 99%+',
+    claimedAccuracy: 'Claims 99%',
     benchmarkAccuracy: null,
     benchmarkCatchAllResolved: null,
     betterFitFor: [
@@ -379,25 +385,26 @@ export const COMPETITORS: Record<string, Competitor> = {
     ],
   },
 
-  // Kickbox blocks automated fetching; data read via a browser-headers request
-  // to its own pages. Prices through a slider (its page shows an average of
-  // about $0.008 per verification), so fixed tiers stay unknown. Flags accept-all
-  // via an accept_all field, does not resolve it.
+  // Kickbox blocks automated fetching; the pricing page publishes a FIXED
+  // one-time bucket table (not a per-credit slider), read from dated Wayback
+  // snapshots of kickbox.com/pricing (May + Aug 2026, byte-identical): 10k $70,
+  // 100k $500, 1M $2,999. Flags accept-all via an accept_all field, does not
+  // resolve it. Unknown/indeterminate results are refunded.
   kickbox: {
     slug: 'kickbox',
     name: 'Kickbox',
     pricingUrl: 'https://kickbox.com/pricing',
-    lastVerified: '2026-08-12',
-    startingPrice: null,
+    lastVerified: '2026-08-14',
+    startingPrice: { credits: 500, totalUsd: 5 },
     tiers: [
-      { credits: 10000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
-      { credits: 100000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
-      { credits: 1000000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
+      { credits: 10000, totalUsd: 70, perEmailUsd: 0.007, status: 'verified' },
+      { credits: 100000, totalUsd: 500, perEmailUsd: 0.005, status: 'verified' },
+      { credits: 1000000, totalUsd: 2999, perEmailUsd: 0.002999, status: 'verified' },
     ],
     minimumPurchase: null,
     freeTier: '100 verifications',
     creditsExpire: 'Not published',
-    chargesForUnknown: null,
+    chargesForUnknown: false, // pricing page: "Unknown Verification Results Are Free"
     resolvesCatchAll: false, // flags accept-all via an accept_all field, not resolved
     catchAllCreditCost: 'Flagged via an accept_all field, not resolved',
     advertisesSegSupport: false,
@@ -424,7 +431,7 @@ export const COMPETITORS: Record<string, Competitor> = {
     tiers: [
       { credits: 10000, totalUsd: 27, perEmailUsd: 0.0027, status: 'verified' },
       { credits: 100000, totalUsd: 186, perEmailUsd: 0.00186, status: 'verified' },
-      { credits: 1000000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
+      { credits: 1000000, totalUsd: null, perEmailUsd: null, status: 'unknown', note: 'Quote only' },
     ],
     minimumPurchase: null,
     freeTier: '100 verifications',
@@ -437,26 +444,26 @@ export const COMPETITORS: Record<string, Competitor> = {
     benchmarkAccuracy: null,
     benchmarkCatchAllResolved: null,
     betterFitFor: [
-      'Among the cheapest per credit, at $27 for 10,000 with free tools alongside',
+      'A low per-credit price, $27 for 10,000, with free tools alongside',
       '100 free verifications that never expire',
       'An email finder plus free utilities like a blacklist checker and DNS health checker',
       'A long-established, simple pay-as-you-go model',
     ],
   },
 
-  // JS pricing page; exact tiers not extractable. Its own page states $0.0025
-  // per verification (min 1,000 credits) and 100 free credits daily that reset.
-  // Flags catch-all as a separate status, does not resolve it.
+  // Volume-tiered pay-as-you-go slab table read from the vendor's own page data
+  // (with a +5% bonus-credits promo): 10k $15, 100k $99, 1M $349. Credits never
+  // expire. Flags catch-all as a separate status, does not resolve it.
   myemailverifier: {
     slug: 'myemailverifier',
     name: 'MyEmailVerifier',
     pricingUrl: 'https://myemailverifier.com/pricing',
     lastVerified: '2026-08-12',
-    startingPrice: null,
+    startingPrice: { credits: 1000, totalUsd: 4 },
     tiers: [
-      { credits: 10000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
-      { credits: 100000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
-      { credits: 1000000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
+      { credits: 10000, totalUsd: 15, perEmailUsd: 0.0015, status: 'verified' },
+      { credits: 100000, totalUsd: 99, perEmailUsd: 0.00099, status: 'verified' },
+      { credits: 1000000, totalUsd: 349, perEmailUsd: 0.000349, status: 'verified' },
     ],
     minimumPurchase: '1,000 credits',
     freeTier: '100 credits a day, free',
@@ -476,24 +483,30 @@ export const COMPETITORS: Record<string, Competitor> = {
     ],
   },
 
-  // Enterprise verifier from Validity. Pricing is quote-only (contact sales);
-  // Validity states it can run as high as $0.01 per address. Flags accept-all as
-  // risky, does not resolve it.
+  // Verifier from Validity. Self-serve pay-as-you-go bundles (1 credit = 1
+  // verification): 10k $80, 100k $600. A million is above the published range
+  // (top self-serve bundle is 500k $2,250), so 1M is quote-only. Rates read from
+  // dated Wayback snapshots of Validity's own pricing page (2025-08 and 2023-06,
+  // identical); the LIVE page has since removed the table and now redirects, so
+  // it is effectively quote-only today. Flags accept-all as risky, does not
+  // resolve it. Credits expire 12 months after purchase.
   briteverify: {
     slug: 'briteverify',
     name: 'BriteVerify',
     pricingUrl: 'https://www.validity.com/briteverify/pricing/',
-    lastVerified: '2026-08-12',
-    startingPrice: null,
+    lastVerified: '2026-08-14',
+    startingPrice: { credits: 5000, totalUsd: 40 },
     tiers: [
-      { credits: 10000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
-      { credits: 100000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
-      { credits: 1000000, totalUsd: null, perEmailUsd: null, status: 'unknown' },
+      { credits: 10000, totalUsd: 80, perEmailUsd: 0.008, status: 'verified' },
+      { credits: 100000, totalUsd: 600, perEmailUsd: 0.006, status: 'verified' },
+      { credits: 1000000, totalUsd: null, perEmailUsd: null, status: 'unknown', note: 'Quote only' },
     ],
     minimumPurchase: null,
     freeTier: 'Not published',
-    creditsExpire: 'Not published',
+    creditsExpire: 'Credits expire 12 months after purchase',
     chargesForUnknown: null,
+    pricingBasisNote:
+      'BriteVerify has removed its self-serve rate table from the live page (now quote-only). These are Validity’s last published pay-as-you-go bundle prices; confirm a current quote before relying on them.',
     resolvesCatchAll: false, // groups accept-all as risky, does not confirm the mailbox
     catchAllCreditCost: 'Grouped as Accept-All (risky), not confirmed',
     advertisesSegSupport: false,
@@ -505,6 +518,254 @@ export const COMPETITORS: Record<string, Competitor> = {
       'High throughput, verifying on the order of 4,000 addresses a minute',
       'Real-time, batch and API verification with usage-based enterprise pricing',
       'Close relationships with inbox providers and a large data network',
+    ],
+  },
+
+  // ── Finder / outreach platforms (verification is a bundled feature) ─────────
+  // These are not per-credit verifiers, so their dollar tiers stay unknown and
+  // the pages compare a dedicated verifier against a bundled platform.
+
+  // Subscription platform with pooled credits (verification is 0.5 credit each),
+  // read from hunter.io/pricing: Free 50 credits, Starter $49/mo (2,000cr),
+  // Growth $149/mo (10,000cr), Scale $299/mo (25,000cr), Enterprise custom. The
+  // smallest plan covering 10,000 verifications/mo is Growth ($149/mo);
+  // 100k and 1M/mo exceed the top standard plan, so they are enterprise-quoted.
+  hunter: {
+    slug: 'hunter',
+    name: 'Hunter',
+    pricingUrl: 'https://hunter.io/pricing',
+    lastVerified: '2026-08-14',
+    startingPrice: null,
+    pricingModel: 'subscription',
+    tiers: [
+      { credits: 10000, totalUsd: 149, perEmailUsd: null, status: 'verified', perMonth: true },
+      { credits: 100000, totalUsd: null, perEmailUsd: null, status: 'unknown', note: 'Enterprise' },
+      { credits: 1000000, totalUsd: null, perEmailUsd: null, status: 'unknown', note: 'Enterprise' },
+    ],
+    pricingBasisNote:
+      'Hunter is sold as a monthly subscription with pooled credits (verification is 0.5 credit each). The 10k figure is the smallest monthly plan that covers that many verifications (Growth, billed monthly; annual billing is lower). Higher volumes are enterprise-quoted. Giggal.ai figures are one-time pay-as-you-go.',
+    minimumPurchase: null,
+    freeTier: '50 credits a month, free',
+    creditsExpire: 'Plan credits reset each month',
+    chargesForUnknown: null,
+    resolvesCatchAll: false, // flags accept-all, does not resolve it
+    catchAllCreditCost: 'Flagged as accept-all, not resolved',
+    advertisesSegSupport: false,
+    claimedAccuracy: '-',
+    benchmarkAccuracy: null,
+    benchmarkCatchAllResolved: null,
+    betterFitFor: [
+      'A leading email finder and domain search, which Giggal does not do',
+      'Built-in cold outreach campaigns from the same tool',
+      'A very large integration surface and public API',
+      'A strong fit if prospecting and verifying in one platform matters more than price',
+    ],
+  },
+
+  // Subscription platform with pooled credits (1 credit per verification), read
+  // from snov.io/pricing: Starter $39/mo (1,000cr), Pro S $99 (5,000cr),
+  // Pro M $189 (20,000cr), Pro L $369 (50,000cr), Ultra $738 (100,000cr);
+  // annual billing is ~25% less. The smallest plan covering 10,000
+  // verifications/mo is Pro M ($189/mo); 100k is Ultra ($738/mo); 1M is custom.
+  snovio: {
+    slug: 'snovio',
+    name: 'Snov.io',
+    pricingUrl: 'https://snov.io/pricing',
+    lastVerified: '2026-08-14',
+    startingPrice: null,
+    pricingModel: 'subscription',
+    tiers: [
+      { credits: 10000, totalUsd: 189, perEmailUsd: null, status: 'verified', perMonth: true },
+      { credits: 100000, totalUsd: 738, perEmailUsd: null, status: 'verified', perMonth: true },
+      { credits: 1000000, totalUsd: null, perEmailUsd: null, status: 'unknown', note: 'Custom' },
+    ],
+    pricingBasisNote:
+      'Snov.io is sold as a monthly subscription with pooled credits (1 credit per verification). Figures are the smallest monthly plan that covers that many verifications (billed monthly; annual billing is about 25% less). A million a month is a custom plan. Giggal.ai figures are one-time pay-as-you-go.',
+    minimumPurchase: null,
+    freeTier: '50 credits on the free trial',
+    creditsExpire: 'Plan credits roll over while the subscription is active',
+    chargesForUnknown: null,
+    resolvesCatchAll: false,
+    catchAllCreditCost: 'Flagged, not resolved',
+    advertisesSegSupport: false,
+    claimedAccuracy: '-',
+    benchmarkAccuracy: null,
+    benchmarkCatchAllResolved: null,
+    betterFitFor: [
+      'An email finder plus drip campaigns and a lightweight CRM',
+      'LinkedIn prospecting tools alongside verification',
+      'One platform for finding, verifying and sending',
+      'A large integration list and public API',
+    ],
+  },
+
+  // Sales-intelligence platform priced per user seat (Basic $49, Professional
+  // $79, Organization $119 per user/mo billed annually; free plan too). Email
+  // verification consumes email credits, which are fair-use-unlimited on paid
+  // plans, so there is no per-volume verification price to quote. Verified from
+  // apollo.io/pricing and Apollo's own help center.
+  apollo: {
+    slug: 'apollo',
+    name: 'Apollo',
+    pricingUrl: 'https://www.apollo.io/pricing',
+    lastVerified: '2026-08-14',
+    startingPrice: null,
+    pricingModel: 'seat',
+    tiers: [
+      { credits: 10000, totalUsd: null, perEmailUsd: null, status: 'unknown', note: 'Per seat' },
+      { credits: 100000, totalUsd: null, perEmailUsd: null, status: 'unknown', note: 'Per seat' },
+      { credits: 1000000, totalUsd: null, perEmailUsd: null, status: 'unknown', note: 'Per seat' },
+    ],
+    pricingBasisNote:
+      'Apollo is priced per user seat (from $49/user per month billed annually), and verification is bundled with fair-use-unlimited email credits rather than sold by volume, so there is no per-verification price to compare. Giggal.ai figures are one-time pay-as-you-go.',
+    minimumPurchase: null,
+    freeTier: 'Free plan with limited monthly credits',
+    creditsExpire: 'Plan credits reset each month, no rollover',
+    chargesForUnknown: null,
+    resolvesCatchAll: true, // claims a 7-step process distinguishing valid/invalid on catch-all
+    catchAllCreditCost: 'Claims to distinguish valid/invalid on catch-all (91%)',
+    advertisesSegSupport: false,
+    claimedAccuracy: 'Claims 91%',
+    benchmarkAccuracy: null,
+    benchmarkCatchAllResolved: null,
+    betterFitFor: [
+      'A very large B2B contact and company database, which Giggal does not offer',
+      'Sales engagement, sequences and a dialer in one platform',
+      'A free-forever starter plan',
+      'A fit when you need data and outreach, not just verification',
+    ],
+  },
+
+  // ── Mid-tier verifiers ──────────────────────────────────────────────────────
+
+  // Catch-all specialist. Validates catch-all (and SEG-protected) addresses where
+  // others return Unknown, 98.7% accuracy, 200 free credits. Pay-as-you-go is a
+  // flat $0.008 per credit (10k $80, 100k $800); "Deep" catch-all verification
+  // costs 3 credits per email. 1M is enterprise/demo-quote, so left unknown.
+  scrubby: {
+    slug: 'scrubby',
+    name: 'Scrubby',
+    pricingUrl: 'https://scrubby.io/pricing',
+    lastVerified: '2026-08-12',
+    startingPrice: null,
+    tiers: [
+      { credits: 10000, totalUsd: 80, perEmailUsd: 0.008, status: 'verified' },
+      { credits: 100000, totalUsd: 800, perEmailUsd: 0.008, status: 'verified' },
+      { credits: 1000000, totalUsd: null, perEmailUsd: null, status: 'unknown', note: 'Quote only' },
+    ],
+    minimumPurchase: null,
+    freeTier: '200 credits',
+    creditsExpire: 'Pay-as-you-go credits never expire; plan credits roll over',
+    chargesForUnknown: null,
+    resolvesCatchAll: true, // validates catch-all where others return Unknown
+    catchAllCreditCost: 'Deep (catch-all) verification is 3 credits per email',
+    advertisesSegSupport: true, // page: "standard, catch-all, and SEG-protected domains"
+    claimedAccuracy: 'Claims 98.7%',
+    benchmarkAccuracy: null,
+    benchmarkCatchAllResolved: null,
+    betterFitFor: [
+      'A tool built specifically to recover catch-all and risky addresses',
+      'A 200-credit free tier to test on your own list',
+      'Both pay-as-you-go and subscription billing',
+      'A single, focused job rather than a broad suite',
+    ],
+  },
+
+  // Persistent (pay-as-you-go) credit table read from the /plans page: 10k $60,
+  // 100k $320, 1M $1,350; entry $4 for 500 credits; 100 free credits a day;
+  // credits never expire. 99% accuracy claim. Flags catch-all.
+  quickemailverification: {
+    slug: 'quickemailverification',
+    name: 'QuickEmailVerification',
+    pricingUrl: 'https://quickemailverification.com/plans',
+    lastVerified: '2026-08-12',
+    startingPrice: { credits: 500, totalUsd: 4 },
+    tiers: [
+      { credits: 10000, totalUsd: 60, perEmailUsd: 0.006, status: 'verified' },
+      { credits: 100000, totalUsd: 320, perEmailUsd: 0.0032, status: 'verified' },
+      { credits: 1000000, totalUsd: 1350, perEmailUsd: 0.00135, status: 'verified' },
+    ],
+    minimumPurchase: null,
+    freeTier: '100 credits a day, free',
+    creditsExpire: 'Persistent pay-as-you-go credits never expire',
+    chargesForUnknown: null,
+    resolvesCatchAll: false, // returns catch-all as a status, not confirmed
+    catchAllCreditCost: 'Returned as a catch-all status, not confirmed',
+    advertisesSegSupport: false,
+    claimedAccuracy: 'Claims 99%',
+    benchmarkAccuracy: null,
+    benchmarkCatchAllResolved: null,
+    betterFitFor: [
+      '100 free credits every day, plus a monthly free allowance',
+      'Persistent pay-as-you-go credits that never expire',
+      'A low entry price from $4 for 500 credits',
+      'An established real-time API',
+    ],
+  },
+
+  // Subscription auto-cleaning tool (Lite $29/mo for 10k, Business $59/mo, Pro
+  // $209/mo), but it also sells one-time PREPAID credits read from its own page
+  // JS: 10k $40, 100k $300, 1M $1,200. Prepaid credits never expire. 7-day trial.
+  // Connects to ~40 email platforms and cleans lists daily. Flags catch-all.
+  mailfloss: {
+    slug: 'mailfloss',
+    name: 'Mailfloss',
+    pricingUrl: 'https://mailfloss.com/pricing/',
+    lastVerified: '2026-08-12',
+    startingPrice: { credits: 1000, totalUsd: 8 },
+    tiers: [
+      { credits: 10000, totalUsd: 40, perEmailUsd: 0.004, status: 'verified' },
+      { credits: 100000, totalUsd: 300, perEmailUsd: 0.003, status: 'verified' },
+      { credits: 1000000, totalUsd: 1200, perEmailUsd: 0.0012, status: 'verified' },
+    ],
+    minimumPurchase: null,
+    freeTier: '7-day free trial',
+    creditsExpire: 'Prepaid credits never expire; subscription credits reset monthly',
+    chargesForUnknown: null,
+    resolvesCatchAll: false,
+    catchAllCreditCost: 'Flagged, not resolved',
+    advertisesSegSupport: false,
+    claimedAccuracy: '-',
+    benchmarkAccuracy: null,
+    benchmarkCatchAllResolved: null,
+    betterFitFor: [
+      'Automatic daily cleaning wired directly into your email platform',
+      'Around 40 native integrations, including Mailchimp, Klaviyo and HubSpot',
+      'A set-and-forget subscription rather than manual uploads',
+      'Both subscription and prepaid-credit options',
+    ],
+  },
+
+  // Site redesigned since last check. Real pay-as-you-go tiers read from its
+  // page: 10k $29, 100k $159, 1M $579. 1,000 free credits, no card; PAYG credits
+  // never expire. Now RESOLVES catch-all via a "Deep catch-all" add-on that costs
+  // 5 credits fresh (3 if cached) per catch-all, with unresolved ones refunded.
+  bounceless: {
+    slug: 'bounceless',
+    name: 'Bounceless',
+    pricingUrl: 'https://bounceless.io/pricing',
+    lastVerified: '2026-08-12',
+    startingPrice: { credits: 5000, totalUsd: 19 },
+    tiers: [
+      { credits: 10000, totalUsd: 29, perEmailUsd: 0.0029, status: 'verified' },
+      { credits: 100000, totalUsd: 159, perEmailUsd: 0.00159, status: 'verified' },
+      { credits: 1000000, totalUsd: 579, perEmailUsd: 0.000579, status: 'verified' },
+    ],
+    minimumPurchase: null,
+    freeTier: '1,000 credits',
+    creditsExpire: 'Pay-as-you-go credits never expire',
+    chargesForUnknown: null,
+    resolvesCatchAll: true,
+    catchAllCreditCost: 'Deep catch-all resolution, 5 credits fresh or 3 cached',
+    advertisesSegSupport: false,
+    claimedAccuracy: '-',
+    benchmarkAccuracy: null,
+    benchmarkCatchAllResolved: null,
+    betterFitFor: [
+      'A sliding volume rate, as low as $0.28 per 1,000 at high volume',
+      'A simple, low-cost pay-as-you-go model',
+      'Bulk list cleaning and a real-time API',
+      'A straightforward single-purpose verifier',
     ],
   },
 }
@@ -537,6 +798,13 @@ export const ALL_COMPETITOR_SLUGS = [
   'emaillistverify',
   'myemailverifier',
   'briteverify',
+  'scrubby',
+  'quickemailverification',
+  'mailfloss',
+  'bounceless',
+  'hunter',
+  'snovio',
+  'apollo',
 ] as const
 
 // Helpers
@@ -572,7 +840,7 @@ export function fmtUsd(n: number): string {
 export const HUB_LABELS: Record<string, { expiry: string; freeTier: string }> = {
   giggal: { expiry: 'Never', freeTier: '1,000, no card' },
   zerobounce: { expiry: 'Never', freeTier: '100 / month' },
-  neverbounce: { expiry: '12 months', freeTier: '-' },
+  neverbounce: { expiry: '12 months', freeTier: '10 on signup' },
   bounceban: { expiry: 'Never, rolls over', freeTier: 'Unlimited single only' },
   millionverifier: { expiry: 'Never', freeTier: '100 credits' },
   reoon: { expiry: 'Never, instant credits', freeTier: '600 / month' },
@@ -584,4 +852,11 @@ export const HUB_LABELS: Record<string, { expiry: string; freeTier: string }> = 
   emaillistverify: { expiry: 'Never', freeTier: '100 checks' },
   myemailverifier: { expiry: 'Never', freeTier: '100 / day' },
   briteverify: { expiry: 'Not published', freeTier: '-' },
+  scrubby: { expiry: 'Never (PAYG)', freeTier: '200 credits' },
+  quickemailverification: { expiry: 'Never (PAYG)', freeTier: '100 / day' },
+  mailfloss: { expiry: 'Never (prepaid)', freeTier: '7-day trial' },
+  bounceless: { expiry: 'Never (PAYG)', freeTier: '1,000 credits' },
+  hunter: { expiry: 'Monthly reset', freeTier: '50 / month' },
+  snovio: { expiry: 'Rolls over', freeTier: '50 trial' },
+  apollo: { expiry: 'Monthly reset', freeTier: 'Free plan' },
 }

@@ -19,7 +19,7 @@ const APP_URL = 'https://emailverifier.giggal.ai/sign-up'
 const competitor = getCompetitor('millionverifier')
 
 const DESC =
-  'MillionVerifier is cheap at volume but marks catch-all Risky. Giggal.ai confirms them, so you pay less per usable contact. 1,000 free credits, no card.'
+  'MillionVerifier is $449 per million but marks catch-all Risky. Giggal.ai confirms those addresses, so more of the list comes back usable. 1,000 free credits, no card.'
 
 export const metadata: Metadata = {
   title: { absolute: 'MillionVerifier Alternative | Giggal.ai' },
@@ -40,8 +40,8 @@ export const metadata: Metadata = {
 
 const faqs: FaqItem[] = [
   {
-    q: 'Is Giggal.ai cheaper than MillionVerifier?',
-    a: 'Not at high volume. At a million, MillionVerifier is $449 against $680, so it costs less per credit there. The comparison that matters is price per usable contact, because the two hand back different things on catch-all addresses.',
+    q: 'How do the two compare on price?',
+    a: 'At a million, MillionVerifier is $449 and Giggal.ai is $680. The number that matters is price per usable contact, because the two hand back different things on catch-all addresses, and a flagged address is one you cannot email.',
   },
   {
     q: 'What does Giggal.ai do with catch-all addresses that MillionVerifier does not?',
@@ -88,7 +88,7 @@ export default function MillionVerifierAlternativePage() {
           that resolves catch-all
         </h1>
         <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium">
-          MillionVerifier is cheap at volume and does not bill catch-all results. It also does not
+          MillionVerifier is $449 per million and does not bill catch-all results. It also does not
           resolve them. We do, which changes how much of a list you can actually use.
         </p>
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3">
@@ -116,7 +116,7 @@ export default function MillionVerifierAlternativePage() {
           points={[
             { k: 'Catch-all', v: 'We confirm it, valid or invalid. MillionVerifier marks most Risky (5% resolved, the lowest in the LeadMagic test).' },
             { k: 'Real cost', v: 'Price per usable contact, not per credit. An address you paid to check but cannot email still cost you.' },
-            { k: 'At 1M', v: '$449 vs $680. MillionVerifier costs less per credit at volume.' },
+            { k: 'At 1M', v: '$449 vs $680. What each returns on catch-all decides the cost per usable contact.' },
             { k: 'Try it', v: '1,000 free credits on a bulk list, no card.' },
           ]}
         />
@@ -140,13 +140,13 @@ export default function MillionVerifierAlternativePage() {
         <p className={proseP}>
           Say a list is 30% catch-all. Run it through a tool that marks catch-all Risky and a third of
           what you paid to verify comes back unusable. The real cost is the price per credit divided
-          by the share of the list you can send to. A cheaper credit that returns only a flag can
-          cost more per usable contact than a pricier one that returns a real answer.
+          by the share of the list you can send to. A credit that returns only a flag can cost more
+          per usable contact than one that returns a real answer.
         </p>
         <PricingLadder competitor={competitor} />
         <p className={proseP}>
-          At a million, MillionVerifier is cheaper per credit: $449 against $680. Your catch-all
-          share is what decides the real cost per usable contact.
+          At a million, MillionVerifier is $449 and Giggal.ai is $680. Your catch-all share is what
+          decides the real cost per usable contact.
         </p>
       </section>
 

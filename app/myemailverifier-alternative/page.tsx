@@ -18,7 +18,7 @@ const APP_URL = 'https://emailverifier.giggal.ai/sign-up'
 const competitor = getCompetitor('myemailverifier')
 
 const DESC =
-  'MyEmailVerifier is cheap and gives 100 free credits a day, but flags catch-all as a status without confirming it. Giggal.ai resolves catch-all at $9.90 per 10,000. 1,000 free credits, no card.'
+  'MyEmailVerifier gives 100 free credits a day but flags catch-all as a status without confirming it. Giggal.ai resolves catch-all at $9.90 per 10,000. 1,000 free credits, no card.'
 
 export const metadata: Metadata = {
   title: { absolute: 'MyEmailVerifier Alternative | Giggal.ai' },
@@ -44,7 +44,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'How much does MyEmailVerifier cost compared with Giggal.ai?',
-    a: 'MyEmailVerifier prices per verification, and its page states a rate of $0.0025 from a minimum of 1,000 credits, without fixed 10,000, 100,000 or 1,000,000 packages. Giggal.ai publishes $9.90 at 10,000 credits, which works out lower per check, and $680 at a million.',
+    a: 'MyEmailVerifier publishes a volume-tiered table: $15 at 10,000, $99 at 100,000 and $349 at a million. Giggal.ai is $9.90, $76 and $680 at those volumes. Both keep credits from expiring, so the difference that matters is that we resolve catch-all and it flags it.',
   },
   {
     q: 'What is MyEmailVerifier better at?',
@@ -87,9 +87,9 @@ export default function MyEmailVerifierAlternativePage() {
           that resolves catch-all
         </h1>
         <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium">
-          MyEmailVerifier is one of the cheapest verifiers, with 100 free credits a day, but on
-          catch-all domains it returns a status and leaves the mailbox unconfirmed. Giggal.ai returns
-          a real result, at $9.90 per 10,000.
+          MyEmailVerifier is a low-cost verifier with 100 free credits a day, but on catch-all
+          domains it returns a status and leaves the mailbox unconfirmed. Giggal.ai returns a real
+          result, at $9.90 per 10,000.
         </p>
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3">
           <a
@@ -115,7 +115,7 @@ export default function MyEmailVerifierAlternativePage() {
         <Bluf
           points={[
             { k: 'Catch-all', v: 'We resolve it, valid or invalid. MyEmailVerifier flags it as a status and stops.' },
-            { k: 'Price', v: 'It lists $0.0025 a check; we are $9.90 per 10,000, which is lower per check.' },
+            { k: 'Price', v: 'MyEmailVerifier is $15 at 10k and $349 at a million; we are $9.90 and $680.' },
             { k: 'Free tier', v: 'It gives 100 credits a day; we give 1,000 bulk credits, no card.' },
             { k: 'Try it', v: '1,000 free credits on a bulk list, no card.' },
           ]}
@@ -138,10 +138,10 @@ export default function MyEmailVerifierAlternativePage() {
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>MyEmailVerifier pricing vs Giggal.ai</h2>
         <p className={proseP}>
-          MyEmailVerifier prices per verification, listing $0.0025 a check from a minimum of 1,000
-          credits, without fixed 10,000, 100,000 or 1,000,000 packages, so its column below stays
-          blank. Giggal.ai is $9.90 at 10,000, $76 at 100,000 and $680 at a million, which is lower
-          per check. Credits never expire on either tool.
+          MyEmailVerifier publishes a volume-tiered table: $15 at 10,000, $99 at 100,000 and $349 at
+          a million, with credits that never expire. Giggal.ai is $9.90, $76 and $680 at those
+          volumes. The split that matters is catch-all: we resolve it where MyEmailVerifier only
+          flags it.
         </p>
         <PricingLadder competitor={competitor} />
       </section>
@@ -150,10 +150,6 @@ export default function MyEmailVerifierAlternativePage() {
       <section className="cv-section max-w-4xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>MyEmailVerifier vs Giggal.ai</h2>
         <ComparisonTable competitor={competitor} />
-        <p className="text-[13px] text-slate-500 font-medium">
-          A dash means the figure is not published as a fixed package. MyEmailVerifier prices per
-          verification from a slider.
-        </p>
       </section>
 
       {/* ── TEST IT ──────────────────────────────────────────── */}

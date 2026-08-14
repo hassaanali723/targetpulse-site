@@ -40,8 +40,8 @@ export const metadata: Metadata = {
 
 const faqs: FaqItem[] = [
   {
-    q: 'Is Giggal.ai cheaper than ZeroBounce?',
-    a: 'Yes, at every volume. $9.90 vs $129 at 10,000 credits, $76 vs $649 at 100,000, and $680 vs $3,199 at a million. Both prices are dated next to the table.',
+    q: 'How do the two compare on price?',
+    a: '$9.90 vs $129 at 10,000 credits, $76 vs $649 at 100,000, and $680 vs $3,199 at a million. Both prices are dated next to the table.',
   },
   {
     q: 'Is there a minimum purchase on ZeroBounce?',

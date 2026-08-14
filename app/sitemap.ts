@@ -34,6 +34,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/emaillistverify-alternative`, lastModified: '2026-08-12' },
     { url: `${baseUrl}/myemailverifier-alternative`, lastModified: '2026-08-12' },
     { url: `${baseUrl}/briteverify-alternative`, lastModified: '2026-08-12' },
+    // Mid-tier verifiers and finder/outreach platforms.
+    { url: `${baseUrl}/scrubby-alternative`, lastModified: '2026-08-12' },
+    { url: `${baseUrl}/quickemailverification-alternative`, lastModified: '2026-08-12' },
+    { url: `${baseUrl}/mailfloss-alternative`, lastModified: '2026-08-12' },
+    { url: `${baseUrl}/bounceless-alternative`, lastModified: '2026-08-12' },
+    { url: `${baseUrl}/hunter-alternative`, lastModified: '2026-08-12' },
+    { url: `${baseUrl}/snovio-alternative`, lastModified: '2026-08-12' },
+    { url: `${baseUrl}/apollo-alternative`, lastModified: '2026-08-12' },
     // Free single-address tool wrapping the verification widget.
     { url: `${baseUrl}/tools/catch-all-email-checker`, lastModified: '2026-08-08' },
     // Blog: index plus the first five educational articles, published together.

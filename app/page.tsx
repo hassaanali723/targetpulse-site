@@ -296,8 +296,8 @@ export default function Home() {
               path: (<><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /></>),
             },
             {
-              bg: 'bg-amber-500 shadow-amber-500/10', title: 'Lowest Industry Cost',
-              body: 'Get access to verified catch-alls and standard cleanings at a fraction of the cost of legacy platforms.',
+              bg: 'bg-amber-500 shadow-amber-500/10', title: 'Transparent, Published Pricing',
+              body: 'Access verified catch-alls and standard cleanings on a public, pay-as-you-go price list, with every volume tier shown in full.',
               path: (<><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" /><line x1="7" y1="7" x2="7.01" y2="7" strokeWidth={3} /></>),
             },
             {

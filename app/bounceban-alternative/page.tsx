@@ -42,8 +42,8 @@ const faqs: FaqItem[] = [
     a: 'On the hard part, yes. Both return a real result on catch-all and SEG-protected addresses without sending an email. The comparison is the terms around that: price transparency, the free tier, and how many gateways each names.',
   },
   {
-    q: 'Which is cheaper per catch-all address?',
-    a: 'On credit counts BounceBan looks cheaper, a flat 1 credit against 1.5. But a credit is not a price. At 10,000, BounceBan is $34 and Giggal.ai is $9.90, so a BounceBan catch-all is about $0.0034 and a Giggal.ai catch-all about $0.0015. Cheaper here, even at 1.5 credits.',
+    q: 'What does a catch-all address cost on each?',
+    a: 'On credit counts, BounceBan charges a flat 1 credit and Giggal.ai charges 1.5. But a credit is not a price. At 10,000, BounceBan is $34 and Giggal.ai is $9.90, so a BounceBan catch-all works out near $0.0034 and a Giggal.ai catch-all near $0.0015.',
   },
   {
     q: 'What is the difference in the free tier?',
@@ -79,7 +79,7 @@ export default function BounceBanAlternativePage() {
       {/* ── HERO ─────────────────────────────────────────────── */}
       <section className="max-w-3xl mx-auto px-6 pt-28 md:pt-32 pb-12 text-center space-y-6">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900">
-          A cheaper{' '}
+          A{' '}
           <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">
             BounceBan alternative
           </span>{' '}
@@ -149,7 +149,7 @@ export default function BounceBanAlternativePage() {
           A credit comparison would mislead. BounceBan charges a flat 1 credit; we charge 1.5 for a
           catch-all. But a credit is not a price. At 10,000, BounceBan is $34 and we are $9.90, so a
           BounceBan credit is about $0.0034 and ours is $0.00099. That puts a BounceBan catch-all near
-          $0.0034 and a Giggal.ai catch-all near $0.0015, cheaper even at 1.5 credits.
+          $0.0034 and a Giggal.ai catch-all near $0.0015.
         </p>
         <PricingLadder competitor={competitor} />
       </section>

@@ -26,14 +26,14 @@ export const metadata: Metadata = {
   description: DESC,
   alternates: { canonical: '/debounce-alternative' },
   openGraph: {
-    title: 'A DeBounce Alternative With Cheaper Catch-All',
+    title: 'A DeBounce Alternative With Catch-All in the Same Run',
     description: DESC,
     url: 'https://giggal.ai/debounce-alternative',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'A DeBounce Alternative With Cheaper Catch-All',
+    title: 'A DeBounce Alternative With Catch-All in the Same Run',
     description: DESC,
   },
 }
@@ -85,7 +85,7 @@ export default function DeBounceAlternativePage() {
           <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">
             DeBounce alternative
           </span>{' '}
-          with cheaper catch-all
+          with catch-all in the same run
         </h1>
         <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium">
           DeBounce charges 10 credits per catch-all address, as a separate product. We charge 1.5 in

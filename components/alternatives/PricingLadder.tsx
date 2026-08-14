@@ -48,12 +48,17 @@ export default function PricingLadder({ competitor }: { competitor: Competitor }
                     {c && c.status !== 'unknown' && c.totalUsd !== null ? (
                       <>
                         {fmtUsd(c.totalUsd)}
+                        {c.perMonth && (
+                          <span className="text-[11px] font-semibold text-slate-400 ml-0.5">
+                            /mo
+                          </span>
+                        )}
                         {c.status === 'estimate' && (
                           <sup className="text-[10px] text-slate-400 ml-0.5">est</sup>
                         )}
                       </>
                     ) : (
-                      <span className="text-slate-400 font-semibold">-</span>
+                      <span className="text-slate-400 font-semibold">{c?.note ?? '-'}</span>
                     )}
                   </td>
                 </tr>
@@ -67,6 +72,12 @@ export default function PricingLadder({ competitor }: { competitor: Competitor }
         <p className="text-[11px] text-slate-400 font-medium">
           <sup>est</sup> Estimate from third-party sources, not confirmed on {competitor.name}’s
           pricing page.
+        </p>
+      )}
+
+      {competitor.pricingBasisNote && (
+        <p className="text-[11px] text-slate-400 font-medium leading-relaxed">
+          {competitor.pricingBasisNote}
         </p>
       )}
 

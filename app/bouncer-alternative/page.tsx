@@ -25,22 +25,22 @@ export const metadata: Metadata = {
   description: DESC,
   alternates: { canonical: '/bouncer-alternative' },
   openGraph: {
-    title: 'A Bouncer Alternative at a Fraction of the Price',
+    title: 'A Bouncer Alternative That Verifies Behind Gateways',
     description: DESC,
     url: 'https://giggal.ai/bouncer-alternative',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'A Bouncer Alternative at a Fraction of the Price',
+    title: 'A Bouncer Alternative That Verifies Behind Gateways',
     description: DESC,
   },
 }
 
 const faqs: FaqItem[] = [
   {
-    q: 'Is Giggal.ai cheaper than Bouncer?',
-    a: 'Yes, by a wide margin. Bouncer is $60 per 10,000 against Giggal.ai at $9.90, and $2,000 vs $680 at a million. Both publish full price lists, so the gap is easy to check.',
+    q: 'How do the two compare on price?',
+    a: 'Bouncer is $60 per 10,000 against Giggal.ai at $9.90, and $2,000 vs $680 at a million. Both publish full price lists, so the numbers are easy to check.',
   },
   {
     q: 'Does Bouncer resolve catch-all addresses like Giggal.ai?',
@@ -52,7 +52,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'What is Bouncer better at?',
-    a: 'Bouncer has an Email Toxicity Check that flags spam traps and complainers, the highest review scores among dedicated verifiers, and SOC 2 Type II compliance. If those matter more than price or gateway coverage, it is a strong tool.',
+    a: 'Bouncer has an Email Toxicity Check that flags spam traps and complainers, the highest review scores among dedicated verifiers, and SOC 2 Type II compliance. If those matter more than gateway coverage, it is a strong tool.',
   },
   {
     q: 'Can I try Giggal.ai before switching?',
@@ -84,7 +84,7 @@ export default function BouncerAlternativePage() {
           <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">
             Bouncer alternative
           </span>{' '}
-          at a fraction of the price
+          that verifies behind gateways
         </h1>
         <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium">
           Bouncer is a strong verifier and one of the few that resolves catch-all addresses. Giggal.ai
