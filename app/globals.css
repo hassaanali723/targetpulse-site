@@ -133,6 +133,35 @@
   }
 }
 
+/* Running gradient border for featured integration tiles (Zapier, n8n).
+   A conic gradient sweeps around the border while the card interior stays
+   white via padding-box/border-box layering. --border-angle needs @property
+   to animate; browsers without it just show a static gradient border. */
+@property --border-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+.featured-tile {
+  border: 2px solid transparent;
+  background:
+    linear-gradient(#ffffff, #ffffff) padding-box,
+    conic-gradient(
+      from var(--border-angle),
+      #4f46e5 0deg,
+      #10b981 120deg,
+      #6366f1 200deg,
+      #4f46e5 360deg
+    ) border-box;
+  animation: border-spin 3.5s linear infinite;
+}
+@keyframes border-spin {
+  to { --border-angle: 360deg; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .featured-tile { animation: none; }
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;

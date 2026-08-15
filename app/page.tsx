@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import React from 'react'
+import Link from 'next/link'
 import {
   BookOpen, AlertTriangle, CheckCircle2, Plus,
 } from 'lucide-react'
@@ -83,13 +84,15 @@ const faqJsonLd = {
   })),
 }
 
+// Zapier and n8n lead the strip with an animated border (featured); the rest
+// link to the integrations hub.
 const integrations = [
-  { name: 'Mailchimp', src: '/integrations/giggal-catch-all-email-verification-mailchimp.png' },
-  { name: 'HubSpot', src: '/integrations/giggal-catch-all-email-verification-hubspot.png' },
-  { name: 'SendGrid', src: '/integrations/giggal-catch-all-email-verification-sendgrid.png' },
-  { name: 'ActiveCampaign', src: '/integrations/giggal-catch-all-email-verification-activecampaign.png' },
-  { name: 'GetResponse', src: '/integrations/giggal-catch-all-email-verification-getresponse.png' },
-  { name: 'MailerLite', src: '/integrations/giggal-catch-all-email-verification-mailerlite.png' },
+  { name: 'Zapier', src: '/integrations/giggal-catch-all-email-verification-zapier.png', href: '/integrations/zapier', featured: true },
+  { name: 'n8n', src: '/integrations/giggal-catch-all-email-verification-n8n.png', href: '/integrations/n8n', featured: true },
+  { name: 'Mailchimp', src: '/integrations/giggal-catch-all-email-verification-mailchimp.png', href: '/integrations' },
+  { name: 'HubSpot', src: '/integrations/giggal-catch-all-email-verification-hubspot.png', href: '/integrations/zapier/hubspot' },
+  { name: 'SendGrid', src: '/integrations/giggal-catch-all-email-verification-sendgrid.png', href: '/integrations' },
+  { name: 'ActiveCampaign', src: '/integrations/giggal-catch-all-email-verification-activecampaign.png', href: '/integrations' },
 ]
 
 export default function Home() {
@@ -331,18 +334,29 @@ export default function Home() {
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-6 justify-items-center">
             {integrations.map((int) => (
-              <div key={int.name} className="bg-white border-2 border-slate-200/80 rounded-2xl p-5 w-full flex flex-col items-center hover:border-indigo-500 hover:-translate-y-1 transition-all card-vivid-shadow">
+              <Link
+                key={int.name}
+                href={int.href}
+                className={`${
+                  int.featured
+                    ? 'featured-tile'
+                    : 'bg-white border-2 border-slate-200/80 hover:border-indigo-500'
+                } rounded-2xl p-5 w-full flex flex-col items-center hover:-translate-y-1 transition-all card-vivid-shadow`}
+              >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={int.src} width={32} height={32} loading="lazy" decoding="async" className="w-8 h-8 mb-3 object-contain" alt={`${int.name} logo`} />
+                <img src={int.src} width={32} height={32} loading="lazy" decoding="async" className="w-8 h-8 mb-3 object-contain rounded-md" alt={`${int.name} email verification integration with Giggal.ai`} />
                 <span className="text-xs font-black text-slate-800">{int.name}</span>
-              </div>
+              </Link>
             ))}
-            <div className="border-2 border-dashed border-slate-300 bg-slate-50/40 rounded-2xl p-5 w-full flex flex-col items-center justify-center hover:border-indigo-500 hover:-translate-y-1 transition-all">
+            <Link
+              href="/integrations"
+              className="border-2 border-dashed border-slate-300 bg-slate-50/40 rounded-2xl p-5 w-full flex flex-col items-center justify-center hover:border-indigo-500 hover:-translate-y-1 transition-all"
+            >
               <div className="w-8 h-8 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-500 mb-3 shadow-sm">
                 <Plus className="w-4 h-4" />
               </div>
-              <span className="text-xs font-black text-slate-500">20+ More</span>
-            </div>
+              <span className="text-xs font-black text-slate-500">80+ More</span>
+            </Link>
           </div>
         </div>
       </section>
