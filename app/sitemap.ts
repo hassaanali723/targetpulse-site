@@ -55,6 +55,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Integrations hub + per-tool pages.
     { url: `${baseUrl}/integrations`, lastModified: '2026-08-12' },
     { url: `${baseUrl}/integrations/zapier`, lastModified: '2026-08-14' },
+    { url: `${baseUrl}/integrations/n8n`, lastModified: '2026-08-16' },
     // One page per app that connects through Zapier (lib/zapierApps.ts).
     ...ZAPIER_APPS.map((a) => ({
       url: `${baseUrl}/integrations/zapier/${a.slug}`,

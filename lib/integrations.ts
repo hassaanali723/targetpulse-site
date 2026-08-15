@@ -69,6 +69,17 @@ export const INTEGRATIONS: Integration[] = [
     brandColor: '#FF4F00',
   },
   {
+    slug: 'n8n',
+    icon: '/integrations/giggal-catch-all-email-verification-n8n.png',
+    name: 'n8n',
+    description:
+      'Verify single emails and whole lists inside n8n workflows with the official Giggal.ai community node.',
+    category: 'Automation',
+    connection: 'direct',
+    href: '/integrations/n8n',
+    brandColor: '#EA4B71',
+  },
+  {
     slug: 'claude',
     icon: '/integrations/giggal-catch-all-email-verification-claude.png',
     name: 'Claude',
