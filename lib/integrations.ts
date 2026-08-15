@@ -480,7 +480,7 @@ export const ZAPIER_GUIDE_STEPS: {
   },
   {
     title: 'Connect your Giggal.ai account',
-    text: 'Zapier asks for your API key the first time. Create one at emailverifier.giggal.ai under the developer settings, paste it in, and click Connect. New accounts get 1,000 free credits with no card required.',
+    text: 'Zapier asks for your API key the first time. In your Giggal.ai dashboard, open the Developer API tab and click Create API Key, then paste it in and click Connect. New accounts get 1,000 free credits with no card required.',
     image: '/integrations/zapier-integration/giggal-zapier-integration-step4.png',
     imageAlt: 'Connecting the Giggal.ai account to Zapier with an API key',
   },

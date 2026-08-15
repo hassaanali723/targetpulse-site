@@ -69,7 +69,7 @@ const INSTALL_STEPS = [
   },
   {
     title: 'Paste your API key',
-    text: 'Grab an API key from your Giggal.ai dashboard (Settings, then API Keys) and paste it into the API Key field. Save, and the credential is ready for every Giggal.ai node in your instance. New accounts come with 1,000 free credits, no card needed.',
+    text: 'In your Giggal.ai dashboard, open the Developer API tab in the sidebar and click Create API Key. Paste the key into the API Key field and save. The credential is now ready for every Giggal.ai node in your instance. New accounts come with 1,000 free credits, no card needed.',
     image: '/integrations/n8n/giggal-n8n-step4-add-api-key.png',
     imageAlt: 'Adding the Giggal.ai API key to the n8n credential',
   },
@@ -105,7 +105,7 @@ const BATCH_STEPS = [
 const FAQ: FaqItem[] = [
   {
     q: 'Does the Giggal.ai node work on n8n Cloud?',
-    a: 'Right now the node installs on self-hosted n8n through Settings and Community nodes, which takes about a minute. The package is going through n8n listing review, and once that lands it will be installable on n8n Cloud as well.',
+    a: 'Yes. Install it through Settings and Community nodes, connect your API key, and it works the same on n8n Cloud and self-hosted instances.',
   },
   {
     q: 'Is the community node safe to install?',

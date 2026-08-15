@@ -882,16 +882,17 @@ export default function ApiReferencePage() {
                   Get an API key
                 </div>
                 <p className="text-[14px] text-slate-600 mb-2 leading-relaxed">
-                  Create an API key from your Giggal.ai dashboard under Settings → API Keys. Each
-                  key is scoped to your account, tracks its own usage, and can be revoked at any time.
+                  Create an API key from your Giggal.ai dashboard: open the Developer API tab in the
+                  sidebar and click Create API Key. Each key is scoped to your account, tracks its
+                  own usage, and can be revoked at any time.
                 </p>
                 <a
-                  href={`${APP_URL}/settings/api-keys`}
+                  href={`${APP_URL}/developer-api`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 text-indigo-600 hover:text-indigo-700 font-bold text-[14px]"
                 >
-                  Open API Keys settings <ArrowRight className="w-3.5 h-3.5" />
+                  Open the Developer API tab <ArrowRight className="w-3.5 h-3.5" />
                 </a>
               </div>
 
@@ -1065,7 +1066,7 @@ export default function ApiReferencePage() {
               </p>
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
                 <a
-                  href={`${APP_URL}/settings/api-keys`}
+                  href={`${APP_URL}/developer-api`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white text-indigo-700 font-black text-[14px] hover:bg-indigo-50 transition-colors"

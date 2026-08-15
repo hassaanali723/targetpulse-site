@@ -70,7 +70,7 @@ function buildSteps(app: ZapierApp, copy: CategoryCopy): { title: string; text: 
     },
     {
       title: 'Connect your Giggal.ai account',
-      text: 'Paste your API key from the Giggal.ai dashboard the first time Zapier asks. New accounts get 1,000 free credits with no card required, enough to test the whole flow.',
+      text: 'The first time Zapier asks, grab a key from your Giggal.ai dashboard: open the Developer API tab and click Create API Key. New accounts get 1,000 free credits with no card required, enough to test the whole flow.',
       image: GUIDE_IMAGES.connect,
       imageAlt: 'Connecting a Giggal.ai account to Zapier with an API key',
     },
