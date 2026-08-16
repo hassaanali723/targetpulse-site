@@ -50,6 +50,9 @@ const nextConfig = {
     return [
       // API docs moved from /api-reference → /public/docs
       { source: '/api-reference', destination: '/public/docs', permanent: true },
+      // Old favicon URL Google still has cached; the SVG was replaced by
+      // app/icon.png when the official brand mark landed.
+      { source: '/icon.svg', destination: '/icon.png', permanent: true },
     ]
   },
 }
