@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import { MIMECAST_PAGE_LIVE } from '@/lib/flags'
+import { allPairs } from '@/lib/compare'
 import { ZAPIER_APPS } from '@/lib/zapierApps'
 
 // lastModified uses plain 'YYYY-MM-DD' strings so the emitted <lastmod> is
@@ -45,6 +46,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/apollo-alternative`, lastModified: '2026-08-12' },
     // Free single-address tool wrapping the verification widget.
     { url: `${baseUrl}/tools/catch-all-email-checker`, lastModified: '2026-08-08' },
+    // Programmatic head-to-head comparison hub + one page per competitor pair
+    // (lib/compare.ts allPairs()). Future competitors auto-include their pairs.
+    { url: `${baseUrl}/compare`, lastModified: '2026-08-16' },
+    ...allPairs().map(({ a, b }) => ({
+      url: `${baseUrl}/compare/${a}-vs-${b}`,
+      lastModified: '2026-08-16',
+    })),
     // Blog: index plus the first five educational articles, published together.
     { url: `${baseUrl}/blog`, lastModified: '2026-08-11' },
     { url: `${baseUrl}/blog/what-is-a-catch-all-email-address`, lastModified: '2026-08-11' },
