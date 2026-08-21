@@ -60,7 +60,7 @@ returns valid or invalid instead of a shrug.
 - Entry price: ${usd(entry.price)} for ${num(entry.credits)} credits
 - ${num(ten.credits)} credits: ${usd(ten.price)}
 - ${num(million.credits)} credits: ${usd(million.price)}
-- Catch-all cost: ${GIGGAL.catchAllCreditCost}
+- Credit cost: 1 credit per email verification, whatever the address type
 
 ## Key pages
 - [Homepage](${SITE}/): catch-all, risky and SEG-protected email verification
@@ -143,8 +143,8 @@ and no monthly minimum.
 ${priceLines}
 
 Free tier: ${GIGGAL.freeTier}. No credit card.
-Catch-all addresses cost ${GIGGAL.catchAllCreditCost}, because resolving them is
-more work than an ordinary lookup.
+One credit verifies one email address, including catch-all, accept-all and
+SEG-protected addresses.
 
 ## Using it from an AI assistant
 Giggal.ai runs a remote MCP (Model Context Protocol) server at ${MCP}. Claude,
