@@ -106,14 +106,18 @@ export default function Footer() {
                   Blog
                 </Link>
               </li>
+              {/* These two both lead to comparison content, so the labels have
+                  to say which is which. /alternatives is the ranked guide we
+                  wrote; /compare is the generated head-to-head grid. "Compare
+                  verifiers" and "Tool comparisons" read as the same thing. */}
               <li>
                 <Link href="/alternatives" className={linkClass}>
-                  Compare verifiers
+                  Verifier buying guide
                 </Link>
               </li>
               <li>
                 <Link href="/compare" className={linkClass}>
-                  Tool comparisons
+                  Head-to-head comparisons
                 </Link>
               </li>
             </ul>
