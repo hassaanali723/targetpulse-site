@@ -111,6 +111,11 @@ export default function Footer() {
                   Compare verifiers
                 </Link>
               </li>
+              <li>
+                <Link href="/compare" className={linkClass}>
+                  Tool comparisons
+                </Link>
+              </li>
             </ul>
           </div>
 

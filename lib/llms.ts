@@ -72,6 +72,7 @@ returns valid or invalid instead of a shrug.
 - [API docs](${SITE}/public/docs)
 - [Integrations](${SITE}/integrations): Zapier, n8n and ${ZAPIER_APPS.length} connected apps
 - [Alternatives](${SITE}/alternatives): ranked comparison against ${ALL_COMPETITOR_SLUGS.length} verifiers
+- [Compare](${SITE}/compare): head-to-head pages for every pair of those verifiers, Giggal included or not
 - [Blog](${SITE}/blog)
 
 ## Full version
@@ -171,6 +172,8 @@ list: ${SITE}/integrations
 
 ## How Giggal compares to other verifiers
 Ranked comparison with methodology and check dates: ${SITE}/alternatives
+Head-to-head pages for every pair of the verifiers below, including pairs
+that do not involve Giggal at all: ${SITE}/compare
 
 ${competitorLines}
 
