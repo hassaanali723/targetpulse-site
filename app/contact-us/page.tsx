@@ -274,7 +274,7 @@ export default function TalkToHumanPage() {
             Prefer to Skip the Wait?
           </h2>
           <p className="text-sm text-indigo-100 max-w-lg mx-auto font-medium">
-            Start verifying emails instantly with 1,000 free credits — no credit card required.
+            Start verifying emails instantly with 1,000 free credits. No credit card required.
           </p>
           <div className="pt-4">
             <Link

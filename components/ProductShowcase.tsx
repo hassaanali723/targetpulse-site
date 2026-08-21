@@ -41,7 +41,7 @@ export default function ProductShowcase() {
               {/* Features */}
               <div className="space-y-4 mb-10">
                 {[
-                  { icon: <CheckCircle2 className="w-6 h-6" />, text: '99% Accuracy Rate' },
+                  { icon: <CheckCircle2 className="w-6 h-6" />, text: '98.5% Accuracy Rate' },
                   { icon: <Zap className="w-6 h-6" />, text: 'Real-time Verification' },
                   { icon: <Shield className="w-6 h-6" />, text: 'Protect Your Reputation' },
                   { icon: <TrendingUp className="w-6 h-6" />, text: '50% Better Deliverability' }

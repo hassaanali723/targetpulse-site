@@ -14,6 +14,7 @@ export const metadata: Metadata = {
     'Connect Giggal.ai to Zapier, Mailchimp, SendGrid, Clay, Google Sheets and more. Verify emails and resolve catch-all addresses inside the tools you already use, no code required.',
   alternates: { canonical: '/integrations' },
   openGraph: {
+    siteName: 'Giggal.ai',
     title: 'Email Verification Integrations | Giggal.ai',
     description:
       'Connect the Giggal.ai catch-all email verifier to Zapier, Mailchimp, SendGrid, Clay, Google Sheets and more.',

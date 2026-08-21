@@ -7,7 +7,7 @@ export default function EmailVerifierStats() {
   const stats = [
     {
       icon: <CheckCircle className="w-8 h-8" />,
-      value: '99%',
+      value: '98.5%',
       label: 'Accuracy Rate',
       color: 'from-green-500 to-emerald-600'
     },

@@ -27,6 +27,7 @@ export const metadata: Metadata = {
     'Connect Giggal.ai to 8,000+ apps with Zapier. Verify emails in real time, resolve catch-all addresses other verifiers mark risky, and keep every list clean automatically. No code required.',
   alternates: { canonical: '/integrations/zapier' },
   openGraph: {
+    siteName: 'Giggal.ai',
     title: 'Zapier Email Verification Integration | Giggal.ai',
     description:
       'Verify emails and resolve catch-all addresses in 8,000+ apps with the Giggal.ai Zapier integration. Real-time verification for HubSpot, Google Sheets, Salesforce and more.',

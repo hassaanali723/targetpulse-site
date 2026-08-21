@@ -7,6 +7,7 @@ export const metadata: Metadata = {
     canonical: '/contact-us',
   },
   openGraph: {
+    siteName: 'Giggal.ai',
     title: 'Contact Us - Giggal.ai Email Verifier',
     description: 'Get in touch with Giggal.ai for support, inquiries, or any questions about our email verification tool.',
     url: 'https://giggal.ai/contact-us',

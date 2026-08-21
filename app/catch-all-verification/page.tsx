@@ -55,7 +55,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'How accurate is catch-all verification?',
-    a: 'Around 99% on standard business lists. Instead of guessing based on SMTP responses alone, we verify the true existence of the mailbox so the verdict you see is the one that holds up when you actually send.',
+    a: 'Around 98.5% on standard business lists. Instead of guessing based on SMTP responses alone, we verify the true existence of the mailbox so the result you see is the one that holds up when you actually send.',
   },
   {
     q: 'Will catch-all verification slow down my main list?',
@@ -67,7 +67,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'What happens if a catch-all check comes back as Unknown?',
-    a: 'That is rare, but if we cannot reach a verdict the credit is refunded automatically. You only pay for verifications we can complete.',
+    a: 'That is rare, but if we cannot reach a result the credit is refunded automatically. You only pay for verifications we can complete.',
   },
 ]
 
@@ -119,7 +119,7 @@ export default function CatchAllVerificationPage() {
           <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-xl font-medium">
             Most verifiers stop at catch-all and accept-all domains. Giggal.ai confirms the
             true existence of each mailbox, including addresses sitting behind Secure Email
-            Gateways like Mimecast and Proofpoint, with 99% accuracy.
+            Gateways like Mimecast and Proofpoint, with 98.5% accuracy.
           </p>
 
           <p className="text-sm text-slate-500 leading-relaxed max-w-xl font-medium">
@@ -279,7 +279,7 @@ export default function CatchAllVerificationPage() {
           </h2>
           <p className="text-slate-600 text-sm md:text-base font-medium">
             Every catch-all address goes through multiple layers of verification that combine
-            into a single clear verdict. You see Valid or Invalid, not a technical report.
+            into a single clear result. You see Valid or Invalid, not a technical report.
           </p>
         </div>
 
@@ -306,7 +306,7 @@ export default function CatchAllVerificationPage() {
         <div className="text-center max-w-2xl mx-auto space-y-3">
           <p className="text-[11px] font-black uppercase tracking-[0.2em] text-indigo-600">Clear Results</p>
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
-            From guesswork to clear verdicts
+            From guesswork to clear results
           </h2>
           <p className="text-slate-600 text-sm md:text-base font-medium">
             See the difference between a typical verifier and Giggal.ai on the same list of
@@ -382,7 +382,7 @@ export default function CatchAllVerificationPage() {
 
             <p className="text-[12px] text-indigo-800 font-semibold leading-relaxed">
               Around 8,400 more deliverable contacts recovered from the catch-all pile.
-              Every address gets a clear verdict.
+              Every address gets a clear result.
             </p>
           </div>
         </div>
@@ -522,7 +522,7 @@ export default function CatchAllVerificationPage() {
       <section className="cv-section max-w-6xl mx-auto px-6 pb-24">
         <div className="bg-indigo-600 rounded-3xl p-12 md:p-16 text-center text-white space-y-6 shadow-xl relative overflow-hidden">
           <h2 className="text-3xl md:text-4xl font-extrabold leading-tight tracking-tight text-white">
-            Get clear verdicts on every catch-all address
+            Get clear results on every catch-all address
           </h2>
           <p className="text-sm text-indigo-100 max-w-lg mx-auto font-medium">
             Start with 1,000 free credits. No card required. See what your list really looks like.

@@ -15,7 +15,7 @@ import {
 const AFFILIATE_SIGNUP_URL = 'https://targetpulse.endorsely.com/'
 
 const benefits = [
-  { Icon: Repeat,       wrap: 'bg-indigo-600 shadow-indigo-600/10',   title: '20% recurring',       body: 'Earn on every payment your referrals make — month after month, year after year.' },
+  { Icon: Repeat,       wrap: 'bg-indigo-600 shadow-indigo-600/10',   title: '20% recurring',       body: 'Earn on every payment your referrals make, month after month, year after year.' },
   { Icon: InfinityIcon, wrap: 'bg-emerald-500 shadow-emerald-500/10', title: 'No earnings cap',      body: "Refer 10 customers or 10,000. There's no ceiling on what you can earn." },
   { Icon: Calendar,     wrap: 'bg-violet-600 shadow-violet-600/10',   title: '3-month attribution', body: 'You get credit if your referral signs up within 3 months of clicking your link.' },
   { Icon: Wallet,       wrap: 'bg-amber-500 shadow-amber-500/10',     title: 'Monthly payouts',     body: 'Get paid every month via PayPal or Wise once you hit the $50 minimum.' },
@@ -38,7 +38,7 @@ const steps = [
     Icon: Wallet,
     wrap: 'bg-violet-600 shadow-violet-600/10',
     title: 'Get paid monthly',
-    body: 'Earn 20% of every payment your referrals make — automatically tracked and paid out each month.',
+    body: 'Earn 20% of every payment your referrals make, tracked automatically and paid out each month.',
   },
 ]
 
@@ -59,7 +59,7 @@ const exampleRows = [
 const faqs: FaqItem[] = [
   {
     q: 'When and how do I get paid?',
-    a: "Payouts go out monthly via PayPal or Wise (your choice), once your unpaid balance reaches $50. There's no rolling holdback — once a referral pays, the commission is yours.",
+    a: "Payouts go out monthly via PayPal or Wise (your choice), once your unpaid balance reaches $50. There's no rolling holdback. Once a referral pays, the commission is yours.",
   },
   {
     q: 'How long does the commission last?',
@@ -75,7 +75,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'Can I promote on YouTube, blogs, and paid ads?',
-    a: 'Yes to YouTube, blogs, newsletters, social media, and Reddit. Paid ads on our brand keywords (e.g. "Giggal.ai") are not allowed — anything else is fair game.',
+    a: 'Yes to YouTube, blogs, newsletters, social media, and Reddit. Paid ads on our brand keywords (e.g. "Giggal.ai") are not allowed. Anything else is fair game.',
   },
   {
     q: 'Do I need to be a customer to join?',
@@ -83,7 +83,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'Is there a minimum payout threshold?',
-    a: 'Yes — $50. Unpaid commission rolls over month to month until you hit the threshold, then gets paid out automatically.',
+    a: 'Yes, $50. Unpaid commission rolls over month to month until you hit the threshold, then gets paid out automatically.',
   },
 ]
 
@@ -110,7 +110,7 @@ export default function AffiliatesPage() {
 
           <p className="text-base md:text-lg text-slate-600 font-medium leading-relaxed max-w-2xl mx-auto">
             Share <Wordmark className="align-baseline" /> with your audience and earn a 20% commission on every payment your
-            referrals make — for as long as they stay a customer. No caps, no expiry.
+            referrals make, for as long as they stay a customer. No caps, no expiry.
           </p>
 
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 pt-2">

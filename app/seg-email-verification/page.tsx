@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   description: DESC,
   alternates: { canonical: '/seg-email-verification' },
   openGraph: {
+    siteName: 'Giggal.ai',
     title: 'Verify Emails Behind Secure Email Gateways',
     description: DESC,
     url: 'https://giggal.ai/seg-email-verification',

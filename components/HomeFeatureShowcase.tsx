@@ -10,7 +10,7 @@ import { useReveal } from '@/lib/useReveal'
 
 const stats = [
   { icon: Zap, value: 'Real-Time', label: 'Live Results' },
-  { icon: CheckCircle, value: '99%', label: 'Accuracy Rate' },
+  { icon: CheckCircle, value: '98.5%', label: 'Accuracy Rate' },
   { icon: Clock, value: '<1s', label: 'Per Email' },
   { icon: TrendingUp, value: '95%', label: 'Better Delivery' },
 ]

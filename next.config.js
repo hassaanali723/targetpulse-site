@@ -9,7 +9,9 @@ const nextConfig = {
   images: {
     // Serve modern formats; next/image negotiates AVIF → WebP → original.
     formats: ['image/avif', 'image/webp'],
-    domains: ['images.unsplash.com', 'source.unsplash.com'],
+    // `domains` was deprecated in favour of `remotePatterns`. The unsplash hosts
+    // it used to list are already covered by the wildcard below, so dropping it
+    // changes nothing about which images load.
     remotePatterns: [
       {
         protocol: 'https',

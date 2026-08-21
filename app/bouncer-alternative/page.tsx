@@ -25,6 +25,7 @@ export const metadata: Metadata = {
   description: DESC,
   alternates: { canonical: '/bouncer-alternative' },
   openGraph: {
+    siteName: 'Giggal.ai',
     title: 'A Bouncer Alternative That Verifies Behind Gateways',
     description: DESC,
     url: 'https://giggal.ai/bouncer-alternative',

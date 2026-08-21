@@ -170,7 +170,7 @@ export default function HomePricingSection() {
           rel="noopener noreferrer"
           className="group inline-flex items-center gap-2 px-8 py-3.5 bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white rounded-xl font-bold text-[15px] transition-all duration-200 shadow-[0_4px_24px_rgba(41,92,81,0.25)] hover:shadow-[0_6px_28px_rgba(41,92,81,0.35)]"
         >
-          Get Started — 1,000 Free Credits
+          Get Started With 1,000 Free Credits
           <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
         </a>
         <p className="mt-3 text-[12px] text-slate-400 font-medium">

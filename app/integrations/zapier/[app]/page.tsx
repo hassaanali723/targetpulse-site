@@ -34,6 +34,7 @@ export function generateMetadata({ params }: { params: { app: string } }): Metad
     description,
     alternates: { canonical: `/integrations/zapier/${app.slug}` },
     openGraph: {
+      siteName: 'Giggal.ai',
       title: `${title} | Giggal.ai`,
       description,
       url: `https://giggal.ai/integrations/zapier/${app.slug}`,

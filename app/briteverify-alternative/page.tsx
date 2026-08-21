@@ -25,6 +25,7 @@ export const metadata: Metadata = {
   description: DESC,
   alternates: { canonical: '/briteverify-alternative' },
   openGraph: {
+    siteName: 'Giggal.ai',
     title: 'A BriteVerify Alternative That Resolves Catch-All',
     description: DESC,
     url: 'https://giggal.ai/briteverify-alternative',

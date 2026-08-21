@@ -26,7 +26,7 @@ export const organizationSchema = {
   },
   sameAs: [
     'https://www.linkedin.com/company/giggal-ai/',
-    'https://www.youtube.com/@TargetPulseOfficial',
+    'https://www.youtube.com/@giggal-ai',
     'https://www.facebook.com/share/1D31DYxZL5/',
     'https://www.instagram.com/giggal.ai',
     'https://www.producthunt.com/products/giggal-ai',

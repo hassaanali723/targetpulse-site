@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   description: DESC,
   alternates: { canonical: '/tools/catch-all-email-checker' },
   openGraph: {
+    siteName: 'Giggal.ai',
     title: 'Free Catch-All Email Checker',
     description: DESC,
     url: 'https://giggal.ai/tools/catch-all-email-checker',

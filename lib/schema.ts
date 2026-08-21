@@ -86,8 +86,25 @@ export function softwareApplicationLd(): Record<string, unknown> {
     applicationSubCategory: 'Email Verification',
     operatingSystem: 'Web',
     description:
-      'Verify any email including catch-all, risky and SEG-protected addresses with 99% accuracy.',
+      'Verify any email including catch-all, risky and SEG-protected addresses with 98.5% accuracy.',
     publisher: { '@id': ORG_ID },
+    // featureList is the part an answer engine can lift wholesale when someone
+    // asks what the tool actually does, so each line is one concrete capability
+    // rather than a benefit statement.
+    featureList: [
+      'Catch-all and accept-all email verification with a valid or invalid result',
+      'SEG-protected mailbox verification behind Proofpoint, Mimecast and Barracuda',
+      'Deep mailbox existence check over SMTP',
+      'Bulk list verification from CSV or TXT',
+      'Disposable and role-based address detection',
+      'REST API and remote MCP server for Claude, ChatGPT, Cursor and VS Code',
+      'Zapier and n8n integrations',
+      'Export results as CSV, Excel or JSON',
+    ],
+    softwareHelp: { '@type': 'CreativeWork', url: `${SITE}/public/docs` },
+    // The MCP directory listing is the one third-party page that describes the
+    // software itself rather than the company.
+    sameAs: ['https://glama.ai/mcp/servers/giggal-ai/giggal-mcp'],
     offers: {
       '@type': 'AggregateOffer',
       priceCurrency: 'USD',
@@ -95,5 +112,75 @@ export function softwareApplicationLd(): Record<string, unknown> {
       highPrice: Math.max(...prices).toFixed(2),
       offerCount: String(RAW_OFFERS.length),
     },
+  }
+}
+
+// TechArticle for the API reference. Answer engines treat developer docs as a
+// strong signal that a product is real and callable, but only if the page
+// declares itself as documentation rather than another marketing page.
+export function apiDocsLd(): Record<string, unknown> {
+  const url = `${SITE}/public/docs`
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'TechArticle',
+    '@id': `${url}#techarticle`,
+    headline: 'Giggal.ai API Reference',
+    description:
+      'REST API for verifying single emails, running bulk batches, and deep-checking catch-all and SEG-protected addresses. JSON endpoints, API key auth, billed per successful verification.',
+    url,
+    proficiencyLevel: 'Beginner',
+    about: { '@id': `${SITE}/#software` },
+    publisher: { '@id': ORG_ID },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+  }
+}
+
+// Generic ItemList. Used by the blog index and the alternatives hub so a model
+// reading either page gets an ordered, extractable list instead of having to
+// infer ranking from card layout.
+export function itemListLd(opts: {
+  id: string
+  name: string
+  description?: string
+  items: { name: string; url: string; description?: string }[]
+}): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    '@id': opts.id,
+    name: opts.name,
+    ...(opts.description ? { description: opts.description } : {}),
+    itemListOrder: 'https://schema.org/ItemListOrderAscending',
+    numberOfItems: opts.items.length,
+    itemListElement: opts.items.map((it, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: it.name,
+      url: it.url,
+      ...(it.description ? { description: it.description } : {}),
+    })),
+  }
+}
+
+// HowTo. Used on the MCP page, where the question people ask an assistant is
+// literally "how do I connect this", and a step list is the shape of the answer.
+export function howToLd(opts: {
+  id: string
+  name: string
+  description: string
+  steps: { name: string; text: string }[]
+}): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    '@id': opts.id,
+    name: opts.name,
+    description: opts.description,
+    step: opts.steps.map((s, i) => ({
+      '@type': 'HowToStep',
+      position: i + 1,
+      name: s.name,
+      text: s.text,
+    })),
   }
 }

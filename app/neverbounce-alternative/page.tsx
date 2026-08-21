@@ -26,6 +26,7 @@ export const metadata: Metadata = {
   description: DESC,
   alternates: { canonical: '/neverbounce-alternative' },
   openGraph: {
+    siteName: 'Giggal.ai',
     title: 'A NeverBounce Alternative That Resolves Catch-All',
     description: DESC,
     url: 'https://giggal.ai/neverbounce-alternative',

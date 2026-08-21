@@ -20,7 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       ? [{ url: `${baseUrl}/mimecast-email-verification`, lastModified: '2026-08-02' }]
       : []),
     // Competitor comparison hub + the six alternative pages, all released together.
-    { url: `${baseUrl}/alternatives`, lastModified: '2026-08-06' },
+    { url: `${baseUrl}/alternatives`, lastModified: '2026-08-21' },
     { url: `${baseUrl}/zerobounce-alternative`, lastModified: '2026-08-06' },
     { url: `${baseUrl}/neverbounce-alternative`, lastModified: '2026-08-06' },
     { url: `${baseUrl}/bounceban-alternative`, lastModified: '2026-08-06' },
@@ -43,15 +43,30 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/hunter-alternative`, lastModified: '2026-08-12' },
     { url: `${baseUrl}/snovio-alternative`, lastModified: '2026-08-12' },
     { url: `${baseUrl}/apollo-alternative`, lastModified: '2026-08-12' },
+    // Catch-all specialists and finder platforms. These are the tools that show
+    // up when an answer engine is asked who actually resolves accept-all
+    // addresses, which is why they got pages of their own.
+    { url: `${baseUrl}/findymail-alternative`, lastModified: '2026-08-21' },
+    { url: `${baseUrl}/leadmagic-alternative`, lastModified: '2026-08-21' },
+    { url: `${baseUrl}/allegrow-alternative`, lastModified: '2026-08-21' },
+    { url: `${baseUrl}/listmint-alternative`, lastModified: '2026-08-21' },
+    { url: `${baseUrl}/anymailfinder-alternative`, lastModified: '2026-08-21' },
+    { url: `${baseUrl}/no2bounce-alternative`, lastModified: '2026-08-21' },
+    { url: `${baseUrl}/instantly-alternative`, lastModified: '2026-08-21' },
     // Free single-address tool wrapping the verification widget.
     { url: `${baseUrl}/tools/catch-all-email-checker`, lastModified: '2026-08-08' },
     // Blog: index plus the first five educational articles, published together.
-    { url: `${baseUrl}/blog`, lastModified: '2026-08-11' },
+    { url: `${baseUrl}/blog`, lastModified: '2026-08-21' },
     { url: `${baseUrl}/blog/what-is-a-catch-all-email-address`, lastModified: '2026-08-11' },
     { url: `${baseUrl}/blog/why-cold-emails-bounce`, lastModified: '2026-08-11' },
     { url: `${baseUrl}/blog/good-bounce-rate-for-cold-email`, lastModified: '2026-08-11' },
     { url: `${baseUrl}/blog/what-is-a-secure-email-gateway`, lastModified: '2026-08-11' },
     { url: `${baseUrl}/blog/what-does-risky-mean-in-email-verification`, lastModified: '2026-08-11' },
+    // Second wave: the queries answer engines get asked directly.
+    { url: `${baseUrl}/blog/how-to-verify-emails-behind-secure-email-gateways`, lastModified: '2026-08-21' },
+    { url: `${baseUrl}/blog/verify-emails-inside-claude-and-chatgpt`, lastModified: '2026-08-21' },
+    { url: `${baseUrl}/blog/how-to-reduce-email-bounce-rate`, lastModified: '2026-08-21' },
+    { url: `${baseUrl}/blog/how-accurate-are-email-verification-tools`, lastModified: '2026-08-21' },
     // Integrations hub + per-tool pages.
     { url: `${baseUrl}/integrations`, lastModified: '2026-08-12' },
     { url: `${baseUrl}/integrations/zapier`, lastModified: '2026-08-14' },

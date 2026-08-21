@@ -45,7 +45,7 @@ export default function EmailVerifierCTA() {
             </div>
             <div className="flex items-center space-x-2">
               <CheckCircle2 className="w-6 h-6 text-green-400" />
-              <span>99% accuracy</span>
+              <span>98.5% accuracy</span>
             </div>
           </div>
 

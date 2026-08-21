@@ -39,7 +39,7 @@ export default function HomeIntegrationsSection() {
           Pull emails from the tools you already use
         </h2>
         <p className="text-[15px] text-slate-500 max-w-2xl mx-auto leading-relaxed">
-          Connect your CRM and email marketing platforms directly — import contacts in one click,
+          Connect your CRM and email marketing platforms directly. Import contacts in one click,
           verify in Giggal.ai, and keep your lists clean without manual exports.
         </p>
       </div>

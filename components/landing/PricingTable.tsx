@@ -96,7 +96,9 @@ export default function PricingTable() {
                     {index > 0 && savingsPercent > 0 ? (
                       <span className="bg-emerald-50 text-emerald-600 text-[11px] px-2 py-0.5 rounded-lg font-extrabold border border-emerald-200 shadow-sm shrink-0">Save {savingsPercent}%</span>
                     ) : (
-                      <span className="text-slate-300 font-bold">&mdash;</span>
+                      // Base tier has nothing to save against. Plain hyphen
+                      // rather than an em dash, which the copy rules exclude.
+                      <span className="text-slate-300 font-bold" aria-label="No discount">-</span>
                     )}
                   </div>
                 </div>

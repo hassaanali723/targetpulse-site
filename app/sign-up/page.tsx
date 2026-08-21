@@ -11,13 +11,14 @@ const SIGNUP_URL = 'https://emailverifier.giggal.ai/sign-up'
 
 export const metadata: Metadata = {
   title: 'Sign Up Free, 1,000 Free Email Verification Credits',
-  description: 'Create your free Giggal.ai account in seconds. Get 1,000 free verification credits, no credit card required. Verify catch-all and accept-all email domains with 99% accuracy.',
+  description: 'Create your free Giggal.ai account in seconds. Get 1,000 free verification credits, no credit card required. Verify catch-all and accept-all email domains with 98.5% accuracy.',
   alternates: {
     canonical: '/sign-up',
   },
   openGraph: {
+    siteName: 'Giggal.ai',
     title: 'Sign Up Free, Giggal.ai Email Verifier',
-    description: 'Get 1,000 free verification credits to start. No credit card required. Verify catch-all and accept-all email domains with 99% accuracy.',
+    description: 'Get 1,000 free verification credits to start. No credit card required. Verify catch-all and accept-all email domains with 98.5% accuracy.',
     url: 'https://giggal.ai/sign-up',
     type: 'website',
   },
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
 const perks = [
   { Icon: Sparkles, wrap: 'bg-indigo-600 shadow-indigo-600/10',   title: '1,000 free credits',     body: 'Verify your first 1,000 emails on us. No card required, no expiry.' },
   { Icon: Zap,      wrap: 'bg-emerald-500 shadow-emerald-500/10', title: 'Real-time results',      body: 'Upload a list and watch verifications stream in instantly.' },
-  { Icon: Shield,   wrap: 'bg-violet-600 shadow-violet-600/10',   title: 'Catch-all verification', body: 'Get clear valid or invalid verdicts on catch-all domains other tools skip.' },
+  { Icon: Shield,   wrap: 'bg-violet-600 shadow-violet-600/10',   title: 'Catch-all verification', body: 'Get clear valid or invalid results on catch-all domains other tools skip.' },
   { Icon: Gauge,    wrap: 'bg-amber-500 shadow-amber-500/10',     title: 'Pay-as-you-go pricing',  body: 'From $5 for 3,000 credits. Credits never expire, cancel anytime.' },
 ]
 
@@ -59,7 +60,7 @@ export default function SignUpPage() {
         </h1>
 
         <p className="text-base md:text-lg text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed">
-          Create your free Giggal.ai account in under 30 seconds. Verify your first 1,000 emails on us —
+          Create your free Giggal.ai account in under 30 seconds. Verify your first 1,000 emails on us,
           including catch-all and accept-all domains other tools mark as "unknown."
         </p>
 
@@ -101,7 +102,7 @@ export default function SignUpPage() {
             Everything you need to clean your email list
           </h2>
           <p className="text-slate-600 text-sm md:text-base font-medium">
-            Full access to every feature on the free trial — no gated tools, no asterisks.
+            Full access to every feature on the free trial. No gated tools, no asterisks.
           </p>
         </div>
 

@@ -46,6 +46,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
     description: post.description,
     alternates: { canonical: `/blog/${post.slug}` },
     openGraph: {
+      siteName: 'Giggal.ai',
       title: post.title,
       description: post.description,
       url,

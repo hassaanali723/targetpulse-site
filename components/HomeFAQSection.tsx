@@ -8,7 +8,7 @@ import { useReveal } from '@/lib/useReveal'
 const faqs = [
   {
     question: 'Is Giggal.ai Email Verifier free to use?',
-    answer: 'Yes. You get 1,000 free verification credits to start — no credit card required. After that, pay only for what you use with our pay-as-you-go pricing. No monthly fees; buy credits when you need them and use them at your own pace.',
+    answer: 'Yes. You get 1,000 free verification credits to start, with no credit card required. After that, pay only for what you use with our pay-as-you-go pricing. No monthly fees; buy credits when you need them and use them at your own pace.',
   },
   {
     question: 'How do I verify my email list?',
@@ -32,7 +32,7 @@ const faqs = [
   },
   {
     question: 'Can I verify catch-all emails?',
-    answer: 'Yes — and we go far deeper than most tools that just mark catch-alls as “Unknown.” Our AI-powered detection scores every catch-all address across three signals: Domain Intelligence (SPF/DKIM/DMARC, SSL, domain reputation), AI Pattern Analysis (name structure, character patterns, human-likeness), and Mailbox Behavior (deep SMTP probing). You get a clear confidence rating — High (90%+ likely deliverable), Medium, Low, or Very Low — so you know exactly which catch-all addresses are safe to keep.',
+    answer: 'Yes, and we go far deeper than most tools that just mark catch-alls as “Unknown.” Our AI-powered detection scores every catch-all address across three signals: Domain Intelligence (SPF/DKIM/DMARC, SSL, domain reputation), AI Pattern Analysis (name structure, character patterns, human-likeness), and Mailbox Behavior (deep SMTP probing). You get a clear confidence rating of High (90%+ likely deliverable), Medium, Low or Very Low, so you know exactly which catch-all addresses are safe to keep.',
   },
 ]
 

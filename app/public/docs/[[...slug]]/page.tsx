@@ -4,7 +4,7 @@ import React, { useState, useMemo, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import Navbar from '@/components/Navbar'
 import JsonLd from '@/components/JsonLd'
-import { breadcrumbLd } from '@/lib/schema'
+import { breadcrumbLd, apiDocsLd } from '@/lib/schema'
 import Footer from '@/components/Footer'
 import { ChevronDown, Search, ArrowRight } from 'lucide-react'
 
@@ -420,7 +420,7 @@ const groups: SidebarGroup[] = [
         method: 'POST',
         path: '/v1/verify-batch',
         title: 'Submit a bulk verification job',
-        description: 'Submit up to 50,000 emails per job. Processing is asynchronous — poll GET /v1/jobs/:jobId for progress. Pass an Idempotency-Key header to safely retry job creation without double charges.',
+        description: 'Submit up to 50,000 emails per job. Processing is asynchronous, so poll GET /v1/jobs/:jobId for progress. Pass an Idempotency-Key header to safely retry job creation without double charges.',
         bodyParams: [
           { name: 'emails', type: 'string[]', required: true, description: 'Array of email addresses to verify. Max 50,000 per job. Duplicates and invalid syntax are stripped server-side.' },
           { name: 'name', type: 'string', description: 'Optional human-readable label for the job. Shown in your dashboard.' },
@@ -452,7 +452,7 @@ const groups: SidebarGroup[] = [
         method: 'GET',
         path: '/v1/jobs/:jobId/results',
         title: 'Get bulk job results',
-        description: 'Once status is "completed", fetch per-email results. Results are paginated — pass page and limit query params. Results are retained for 48 hours (see resultsExpiresAt on the job).',
+        description: 'Once status is "completed", fetch per-email results. Results are paginated, so pass page and limit query params. Results are retained for 48 hours (see resultsExpiresAt on the job).',
         params: [
           { name: 'jobId', type: 'string', required: true, description: 'The job ID.' },
           { name: 'page', type: 'integer', description: 'Page number, defaults to 1.' },
@@ -510,7 +510,7 @@ const groups: SidebarGroup[] = [
         method: 'GET',
         path: '/v1/catchall/:taskId/results',
         title: 'Get catch-all task results',
-        description: 'Fetch paginated per-email verdicts with the underlying scoring breakdown (domain triage signals and domain age).',
+        description: 'Fetch paginated per-email results with the underlying scoring breakdown (domain triage signals and domain age).',
         params: [
           { name: 'taskId', type: 'string', required: true, description: 'The task ID.' },
           { name: 'page', type: 'integer', description: 'Page number, defaults to 1.' },
@@ -840,6 +840,7 @@ export default function ApiReferencePage() {
   return (
     <main className="relative min-h-screen bg-slate-50 text-slate-800 antialiased">
       <JsonLd data={breadcrumbLd('API Documentation', '/public/docs')} />
+      <JsonLd data={apiDocsLd()} />
       <Navbar />
 
       <div className="max-w-[1400px] mx-auto px-6 lg:px-8 pt-24">
@@ -914,7 +915,7 @@ export default function ApiReferencePage() {
 
               <div>
                 <div className="text-[10px] font-black uppercase tracking-[0.16em] text-slate-500 mb-2">
-                  Quick start — verify one email with cURL
+                  Quick start: verify one email with cURL
                 </div>
                 <pre className="text-[12px] font-mono bg-slate-950 text-slate-100 rounded-lg px-4 py-3 overflow-x-auto">
                   <code>{`curl -X POST ${BASE_URL}/verify \\
@@ -934,7 +935,7 @@ export default function ApiReferencePage() {
 
               <div>
                 <div className="text-[10px] font-black uppercase tracking-[0.16em] text-slate-500 mb-2">
-                  Option 1 — Bearer token
+                  Option 1: Bearer token
                 </div>
                 <pre className="text-[12px] font-mono bg-slate-950 text-slate-100 rounded-lg px-4 py-3 overflow-x-auto">
                   <code>{`Authorization: Bearer tp_live_xxxxxxxxxxxxxxxxxxxxxxxxx`}</code>
@@ -943,7 +944,7 @@ export default function ApiReferencePage() {
 
               <div>
                 <div className="text-[10px] font-black uppercase tracking-[0.16em] text-slate-500 mb-2">
-                  Option 2 — X-API-Key header
+                  Option 2: X-API-Key header
                 </div>
                 <pre className="text-[12px] font-mono bg-slate-950 text-slate-100 rounded-lg px-4 py-3 overflow-x-auto">
                   <code>{`X-API-Key: tp_live_xxxxxxxxxxxxxxxxxxxxxxxxx`}</code>
@@ -952,7 +953,7 @@ export default function ApiReferencePage() {
 
               <p className="text-[13px] text-slate-500 leading-relaxed">
                 Missing, invalid, or revoked keys return HTTP 401. Never expose API keys in
-                client-side code — proxy calls through your backend instead.
+                client-side code. Proxy calls through your backend instead.
               </p>
 
               <div>
@@ -1003,7 +1004,7 @@ export default function ApiReferencePage() {
                     <tr><td className="px-4 py-3 font-mono font-semibold text-slate-900">404 Not Found</td><td className="px-4 py-3 text-slate-600">Job or task ID does not exist under your account.</td></tr>
                     <tr><td className="px-4 py-3 font-mono font-semibold text-slate-900">409 Conflict</td><td className="px-4 py-3 text-slate-600">Job is not in the required state (e.g. requesting results before completion).</td></tr>
                     <tr><td className="px-4 py-3 font-mono font-semibold text-slate-900">410 Gone</td><td className="px-4 py-3 text-slate-600">Job results have passed the 48-hour retention window.</td></tr>
-                    <tr><td className="px-4 py-3 font-mono font-semibold text-slate-900">429 Too Many Requests</td><td className="px-4 py-3 text-slate-600">Rate limit exceeded — back off and retry.</td></tr>
+                    <tr><td className="px-4 py-3 font-mono font-semibold text-slate-900">429 Too Many Requests</td><td className="px-4 py-3 text-slate-600">Rate limit exceeded, so back off and retry.</td></tr>
                     <tr><td className="px-4 py-3 font-mono font-semibold text-slate-900">500 / 502 / 503</td><td className="px-4 py-3 text-slate-600">Server or upstream verification service is temporarily unavailable.</td></tr>
                   </tbody>
                 </table>
@@ -1032,7 +1033,7 @@ export default function ApiReferencePage() {
                   </table>
                 </div>
                 <p className="text-[13px] text-slate-600 mt-3 leading-relaxed">
-                  The three-tier split exists because polling naturally happens more often than batch creation — you might poll every few seconds while a job runs, so <span className="font-mono text-[12px] bg-slate-100 px-1.5 py-0.5 rounded">600 / 15 min</span> ({'≈'} 40/min) gives you room without hammering the backend.
+                  The three-tier split exists because polling naturally happens more often than batch creation, since you might poll every few seconds while a job runs, so <span className="font-mono text-[12px] bg-slate-100 px-1.5 py-0.5 rounded">600 / 15 min</span> ({'≈'} 40/min) gives you room without hammering the backend.
                 </p>
               </div>
 
@@ -1053,7 +1054,7 @@ export default function ApiReferencePage() {
               </div>
 
               <p className="text-[13px] text-slate-600">
-                Need higher limits? <Link href="/contact-us" className="text-indigo-600 hover:text-indigo-700 font-bold">Talk to us</Link> — we routinely lift limits for verified integration partners.
+                Need higher limits? <Link href="/contact-us" className="text-indigo-600 hover:text-indigo-700 font-bold">Talk to us</Link>. We routinely lift limits for verified integration partners.
               </p>
             </section>
 

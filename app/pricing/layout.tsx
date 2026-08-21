@@ -7,6 +7,7 @@ export const metadata: Metadata = {
     canonical: '/pricing',
   },
   openGraph: {
+    siteName: 'Giggal.ai',
     title: 'Pricing - Giggal.ai Email Verifier',
     description: 'Simple, transparent email verification pricing. Pay only for what you verify. No monthly fees, no subscriptions.',
     url: 'https://giggal.ai/pricing',

@@ -42,7 +42,7 @@ export default function EmailVerifierHero() {
               <div className="grid sm:grid-cols-2 gap-4 mb-10">
                 {[
                   'Bulk email validation',
-                  '99% accuracy rate',
+                  '98.5% accuracy rate',
                   'Real-time verification',
                   'Detailed reports'
                 ].map((feature, index) => (

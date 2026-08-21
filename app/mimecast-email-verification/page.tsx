@@ -18,6 +18,7 @@ export const metadata: Metadata = {
   description: DESC,
   alternates: { canonical: '/mimecast-email-verification' },
   openGraph: {
+    siteName: 'Giggal.ai',
     title: 'Mimecast Email Verification',
     description: DESC,
     url: 'https://giggal.ai/mimecast-email-verification',

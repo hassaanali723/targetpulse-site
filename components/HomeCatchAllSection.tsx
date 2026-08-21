@@ -55,7 +55,7 @@ export default function HomeCatchAllSection() {
               addresses protected by Secure Email Gateways.
             </p>
             <p className="text-[17px] text-slate-500 mb-10 leading-relaxed">
-              Every catch-all email gets a clear verdict: Valid or Invalid. No more guesswork.
+              Every catch-all email gets a clear result: Valid or Invalid. No more guesswork.
             </p>
 
             {/* Signals */}
@@ -145,7 +145,7 @@ export default function HomeCatchAllSection() {
 
               <p className="mt-4 text-[12px] text-primary-800 font-medium leading-relaxed">
                 Around 8,400 more deliverable contacts recovered from the catch-all pile.
-                Every address gets a clear verdict.
+                Every address gets a clear result.
               </p>
             </div>
           </div>

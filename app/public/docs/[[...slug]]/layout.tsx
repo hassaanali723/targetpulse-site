@@ -6,6 +6,7 @@ export const metadata: Metadata = {
     'Integrate Giggal.ai email verification into your product. REST API for single and bulk verification, catch-all detection, credits, and results. Auth via API key.',
   alternates: { canonical: '/public/docs' },
   openGraph: {
+    siteName: 'Giggal.ai',
     title: 'Giggal.ai API Reference | Email Verification API',
     description:
       'Integrate Giggal.ai email verification into your product. REST API for single and bulk verification, catch-all detection, credits, and results.',

@@ -3,14 +3,15 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Catch-All Email Verification',
   description:
-    'Verify catch-all and accept-all email addresses with clear valid or invalid results. Stop guessing on Risky and Unknown labels. 99% accuracy, free to start.',
+    'Verify catch-all and accept-all email addresses with clear valid or invalid results. Stop guessing on Risky and Unknown labels. 98.5% accuracy, free to start.',
   alternates: {
     canonical: '/catch-all-verification',
   },
   openGraph: {
+    siteName: 'Giggal.ai',
     title: 'Catch-All Email Verification | Giggal.ai',
     description:
-      'Verify catch-all and accept-all email addresses with clear valid or invalid results. 99% accuracy, free to start.',
+      'Verify catch-all and accept-all email addresses with clear valid or invalid results. 98.5% accuracy, free to start.',
     url: 'https://giggal.ai/catch-all-verification',
     type: 'website',
   },
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Catch-All Email Verification | Giggal.ai',
     description:
-      'Verify catch-all and accept-all email addresses with clear valid or invalid results. 99% accuracy, free to start.',
+      'Verify catch-all and accept-all email addresses with clear valid or invalid results. 98.5% accuracy, free to start.',
   },
 }
 

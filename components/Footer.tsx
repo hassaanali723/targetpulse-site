@@ -5,9 +5,12 @@ import Link from 'next/link'
 import Wordmark from '@/components/Wordmark'
 import { MIMECAST_PAGE_LIVE } from '@/lib/flags'
 
+// Only profiles that carry the Giggal name. A social href is still text on the
+// page, so a profile on an old handle would put that name in the footer of
+// every page on the site.
 const socials = [
   { icon: Linkedin, href: 'https://www.linkedin.com/company/giggal-ai/', label: 'LinkedIn' },
-  { icon: Youtube, href: 'https://www.youtube.com/@TargetPulseOfficial', label: 'YouTube' },
+  { icon: Youtube, href: 'https://www.youtube.com/@giggal-ai', label: 'YouTube' },
   { icon: Facebook, href: 'https://www.facebook.com/share/1D31DYxZL5/', label: 'Facebook' },
   { icon: Instagram, href: 'https://www.instagram.com/giggal.ai', label: 'Instagram' },
 ]

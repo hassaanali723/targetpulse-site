@@ -25,6 +25,7 @@ export const metadata: Metadata = {
   description: DESC,
   alternates: { canonical: '/clearout-alternative' },
   openGraph: {
+    siteName: 'Giggal.ai',
     title: 'A Clearout Alternative That Resolves Catch-All',
     description: DESC,
     url: 'https://giggal.ai/clearout-alternative',

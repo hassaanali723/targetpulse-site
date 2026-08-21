@@ -26,6 +26,7 @@ export const metadata: Metadata = {
   description: DESC,
   alternates: { canonical: '/millionverifier-alternative' },
   openGraph: {
+    siteName: 'Giggal.ai',
     title: 'A MillionVerifier Alternative That Resolves Catch-All',
     description: DESC,
     url: 'https://giggal.ai/millionverifier-alternative',

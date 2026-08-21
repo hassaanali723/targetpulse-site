@@ -25,12 +25,13 @@ export const metadata: Metadata = {
     absolute: 'Email Verifier with Catch-All & SEG Verification | Giggal.ai',
   },
   description:
-    'Verify any email including catch-all, risky and SEG-protected addresses. 99% accuracy, bounce rate under 3%. 1,000 free credits, no card required.',
+    'Verify any email including catch-all, risky and SEG-protected addresses. 98.5% accuracy, bounce rate under 3%. 1,000 free credits, no card required.',
   alternates: { canonical: '/' },
   openGraph: {
+    siteName: 'Giggal.ai',
     title: 'Giggal.ai - Verify Catch-All, Risky & SEG-Protected Emails',
     description:
-      'Verify any email including catch-all, risky and SEG-protected addresses. 99% accuracy, bounce rate under 3%. 1,000 free credits, no card required.',
+      'Verify any email including catch-all, risky and SEG-protected addresses. 98.5% accuracy, bounce rate under 3%. 1,000 free credits, no card required.',
     url: 'https://giggal.ai',
     type: 'website',
   },
@@ -38,7 +39,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Giggal.ai - Verify Catch-All, Risky & SEG-Protected Emails',
     description:
-      'Verify any email including catch-all, risky and SEG-protected addresses. 99% accuracy, bounce rate under 3%. 1,000 free credits, no card required.',
+      'Verify any email including catch-all, risky and SEG-protected addresses. 98.5% accuracy, bounce rate under 3%. 1,000 free credits, no card required.',
   },
 }
 
@@ -46,11 +47,11 @@ export const metadata: Metadata = {
 const faqItems: FaqItem[] = [
   {
     q: 'How do I verify catch-all, accept-all, and SEG-protected emails?',
-    a: 'Giggal.ai is built specifically for catch-all email verification. We check whether each address is a real, active mailbox even on domains that accept every email or sit behind Secure Email Gateways like Mimecast, Proofpoint, and Barracuda. You get a clear valid or invalid verdict instead of the "risky" label other tools give up with. Around 30% of every B2B list is catch-all. Instead of writing off the whole pile, Giggal.ai tells you which addresses are actually valid so you keep the real leads hiding inside.',
+    a: 'Giggal.ai is built specifically for catch-all email verification. We check whether each address is a real, active mailbox even on domains that accept every email or sit behind Secure Email Gateways like Mimecast, Proofpoint, and Barracuda. You get a clear valid or invalid result instead of the "risky" label other tools give up with. Around 30% of every B2B list is catch-all. Instead of writing off the whole pile, Giggal.ai tells you which addresses are actually valid so you keep the real leads hiding inside.',
   },
   {
     q: 'How accurate is Giggal.ai email verification?',
-    a: 'Giggal.ai maintains around 99% accuracy on standard business lists. Our deep mailbox existence check goes beyond basic format and domain checks to confirm whether the mailbox is truly reachable. That keeps typical bounce rates under 3% on cleaned lists.',
+    a: 'Giggal.ai maintains around 98.5% accuracy on standard business lists. Our deep mailbox existence check goes beyond basic format and domain checks to confirm whether the mailbox is truly reachable. That keeps typical bounce rates under 3% on cleaned lists.',
   },
   {
     q: 'Can I verify millions of emails at once?',
@@ -224,7 +225,7 @@ export default function Home() {
         <div className="text-center max-w-2xl mx-auto space-y-3">
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">What is a Catch-All/Accept-All?</h2>
           <p className="text-slate-600 text-sm font-medium">
-            Catch-all domains are configured by IT departments to accept all incoming emails—even for users that don&apos;t exist. Since standard tools can&apos;t tell if a real mailbox is behind them, they label them as &quot;risky&quot; and force a blind gamble:
+            Catch-all domains are configured by IT departments to accept all incoming emails, even for users that don&apos;t exist. Since standard tools can&apos;t tell if a real mailbox is behind them, they label them as &quot;risky&quot; and force a blind gamble:
           </p>
         </div>
 

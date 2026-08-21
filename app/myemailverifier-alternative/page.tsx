@@ -25,6 +25,7 @@ export const metadata: Metadata = {
   description: DESC,
   alternates: { canonical: '/myemailverifier-alternative' },
   openGraph: {
+    siteName: 'Giggal.ai',
     title: 'A MyEmailVerifier Alternative That Resolves Catch-All',
     description: DESC,
     url: 'https://giggal.ai/myemailverifier-alternative',

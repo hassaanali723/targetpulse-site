@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import JsonLd from '@/components/JsonLd'
-import { breadcrumbLd } from '@/lib/schema'
+import { breadcrumbLd, itemListLd } from '@/lib/schema'
 import { getAllPosts } from '@/lib/blog'
 import { ArrowRight } from 'lucide-react'
 
@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   description: DESC,
   alternates: { canonical: '/blog' },
   openGraph: {
+    siteName: 'Giggal.ai',
     title: 'Giggal.ai Blog',
     description: DESC,
     url: 'https://giggal.ai/blog',
@@ -44,6 +45,19 @@ export default function BlogIndexPage() {
   return (
     <main className="relative min-h-screen bg-slate-50 grid-lines overflow-x-hidden text-slate-800 antialiased">
       <JsonLd data={breadcrumbLd('Blog', '/blog')} />
+      {/* The index as an ordered list. Without this a model reading /blog sees
+          a grid of cards and has to guess what the site actually covers. */}
+      <JsonLd
+        data={itemListLd({
+          id: 'https://giggal.ai/blog#posts',
+          name: 'Giggal.ai guides to catch-all verification and deliverability',
+          items: posts.map((p) => ({
+            name: p.title,
+            url: `https://giggal.ai/blog/${p.slug}`,
+            description: p.description,
+          })),
+        })}
+      />
       <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-indigo-500/10 blur-[120px] -z-10 pointer-events-none" />
 
       <Navbar />

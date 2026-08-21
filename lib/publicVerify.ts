@@ -61,7 +61,7 @@ export async function runVerification(email: string, ip: string): Promise<Verify
       return {
         ok: false,
         status: 429,
-        error: json?.message || 'Guest limit reached — 5 verifications per hour. Sign up for unlimited.',
+        error: json?.message || 'Guest limit reached. 5 verifications per hour, so sign up for unlimited.',
       }
     }
     if (!res.ok || !json?.success || !json?.data) {
@@ -140,7 +140,7 @@ export function mapResult(email: string, data: any): VerifyResult {
   }
   logs.push({
     step: 'dns',
-    text: `[SUCCESS] Secure SMTP channel active${provider ? ` — ${provider}` : ''}${mx ? ` (${mx})` : ''}.`,
+    text: `[SUCCESS] Secure SMTP channel active${provider ? `, ${provider}` : ''}${mx ? ` (${mx})` : ''}.`,
     level: 'success',
   })
 
@@ -165,18 +165,18 @@ export function mapResult(email: string, data: any): VerifyResult {
 
   let verdict: VerifyResult['verdict']
   if (status === 'deliverable') {
-    logs.push({ step: 'mailbox', text: `[SUCCESS] Server accepted recipient — mailbox is active.`, level: 'success' })
+    logs.push({ step: 'mailbox', text: `[SUCCESS] Server accepted recipient, mailbox is active.`, level: 'success' })
     steps.mailbox = 'ok'
     verdict = {
       type: 'deliverable',
       title: 'Deliverable',
       desc: catchAll
-        ? 'Verified deliverable on a catch-all domain via deep verification — safe to send.'
+        ? 'Verified deliverable on a catch-all domain via deep verification, safe to send.'
         : 'SMTP validation passed. The mailbox is fully active.',
       score,
     }
   } else if (status === 'undeliverable') {
-    logs.push({ step: 'mailbox', text: `[FAILED] Server rejected recipient — mailbox not found.`, level: 'error' })
+    logs.push({ step: 'mailbox', text: `[FAILED] Server rejected recipient, mailbox not found.`, level: 'error' })
     steps.mailbox = 'error'
     verdict = {
       type: 'undeliverable',
@@ -184,8 +184,8 @@ export function mapResult(email: string, data: any): VerifyResult {
       desc: attrs.disposable
         ? 'This is a disposable email address.'
         : catchAll
-          ? 'Deep catch-all verification found no active mailbox — this address will bounce.'
-          : "This mailbox doesn't exist — sending here will bounce.",
+          ? 'Deep catch-all verification found no active mailbox, so this address will bounce.'
+          : "This mailbox doesn't exist, so sending here will bounce.",
       score,
     }
   } else if (status === 'risky') {
@@ -199,8 +199,8 @@ export function mapResult(email: string, data: any): VerifyResult {
       type: 'unknown',
       title: 'Unknown',
       desc: catchAll
-        ? "Catch-all domain — we couldn't confirm this specific mailbox."
-        : "Inconclusive — the mail server didn't give a clear answer.",
+        ? "Catch-all domain, so we couldn't confirm this specific mailbox."
+        : "Inconclusive, the mail server didn't give a clear answer.",
       score,
     }
   }

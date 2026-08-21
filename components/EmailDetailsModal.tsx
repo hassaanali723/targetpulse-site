@@ -320,7 +320,7 @@ export default function EmailDetailsModal({ open, onClose, emailDetails }: Props
           <div className="rounded-2xl bg-gradient-to-br from-primary-50 to-accent-50 border border-primary-100 p-5 text-center">
             <Mail className="w-8 h-8 text-primary-600 mx-auto mb-2" />
             <p className="text-sm font-semibold text-slate-800 mb-1">Need to verify your full list?</p>
-            <p className="text-xs text-slate-500 mb-4">Upload CSV files, verify in bulk, and get detailed reports — all in the app.</p>
+            <p className="text-xs text-slate-500 mb-4">Upload CSV files, verify in bulk, and get detailed reports, all in the app.</p>
             <a
               href="https://emailverifier.giggal.ai/sign-up"
               className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-xl text-sm font-semibold hover:from-primary-700 hover:to-primary-800 hover:shadow-lg transition-all duration-200"

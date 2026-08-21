@@ -26,6 +26,7 @@ export const metadata: Metadata = {
   description: DESC,
   alternates: { canonical: '/debounce-alternative' },
   openGraph: {
+    siteName: 'Giggal.ai',
     title: 'A DeBounce Alternative With Catch-All in the Same Run',
     description: DESC,
     url: 'https://giggal.ai/debounce-alternative',

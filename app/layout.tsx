@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     default: 'Giggal.ai - Free Email Verification for Catch-all Domains',
     template: '%s | Giggal.ai',
   },
-  description: 'Free email verifier built for catch-all and accept-all domains with 99% accuracy. Clean your list, cut bounces, and protect your sender reputation.',
+  description: 'Free email verifier built for catch-all and accept-all domains with 98.5% accuracy. Clean your list, cut bounces, and protect your sender reputation.',
   authors: [{ name: 'Giggal.ai', url: baseUrl }],
   creator: 'Giggal.ai',
   publisher: 'Giggal.ai',
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Giggal.ai - Free Email Verification for Catch-all Domains',
-    description: 'Free email verifier built for catch-all and accept-all domains with 99% accuracy. Clean your list, cut bounces, and protect your sender reputation.',
+    description: 'Free email verifier built for catch-all and accept-all domains with 98.5% accuracy. Clean your list, cut bounces, and protect your sender reputation.',
     url: baseUrl,
     siteName: 'Giggal.ai',
     images: [
@@ -75,6 +75,9 @@ export const metadata: Metadata = {
     },
   },
   category: 'technology',
+  // public/manifest.json existed but nothing referenced it, so it was never
+  // fetched. Declaring it here is what makes the install metadata real.
+  manifest: '/manifest.json',
   // Favicons come from the official brand mark (public/giggal-catch-all-email-
   // verifier-icon.png), exported as app/icon.png (tab icon), app/apple-icon.png
   // (iOS home screen) and app/favicon.ico (legacy /favicon.ico requests).
@@ -96,12 +99,34 @@ const jsonLd = {
       },
       description:
         'Email verification tool that verifies catch-all, risky and SEG-protected addresses with a clear valid or invalid result.',
-      // Only profiles that already carry the Giggal.ai name. G2, Trustpilot and
-      // YouTube still resolve to TargetPulse-branded profiles and are added in a
-      // later task once migrated.
+      alternateName: ['Giggal', 'Giggal AI'],
+      // Topical association. These are the subjects Giggal should be considered
+      // an authority on, and the phrasing matches how people actually ask.
+      knowsAbout: [
+        'Catch-all email verification',
+        'Accept-all email verification',
+        'SEG-protected email verification',
+        'Email deliverability',
+        'Bounce rate reduction',
+        'Email list cleaning',
+        'B2B email validation',
+      ],
+      // Every profile that carries the Giggal name. The review and directory
+      // listings matter more than the social ones here: they are the only
+      // third-party corroboration an answer engine has that Giggal is a real
+      // product, so they go first.
+      //
+      // The Trustpilot entry is a plain profile URL. It is not review content
+      // and carries no rating, so it does not run into the same Legal Brand
+      // Guidelines restriction that keeps Trustpilot quotes out of ReviewWall.
       sameAs: [
-        'https://www.linkedin.com/company/giggal-ai/',
+        'https://www.g2.com/products/giggal/reviews',
+        'https://www.trustpilot.com/review/giggal.ai',
+        'https://sourceforge.net/software/product/Giggal.ai/',
         'https://www.producthunt.com/products/giggal-ai',
+        'https://glama.ai/mcp/servers/giggal-ai/giggal-mcp',
+        'https://www.linkedin.com/company/giggal-ai/',
+        'https://www.youtube.com/@giggal-ai',
         'https://www.facebook.com/share/1D31DYxZL5/',
         'https://www.instagram.com/giggal.ai',
       ],
@@ -116,7 +141,11 @@ const jsonLd = {
       '@id': `${baseUrl}/#website`,
       url: baseUrl,
       name: 'Giggal.ai',
-      alternateName: ['Giggal.ai Email Verifier', 'Giggal.ai Email Validator'],
+      // This node is what Google reads to decide the site name shown above a
+      // result, in place of the bare domain. Its docs specify a SINGLE
+      // alternateName; an array here is non-standard and risks the whole
+      // property being ignored, so the fallback is one plain string.
+      alternateName: 'Giggal',
       description: 'Email Verifier & Email List Cleaner',
       publisher: {
         '@id': `${baseUrl}/#organization`,

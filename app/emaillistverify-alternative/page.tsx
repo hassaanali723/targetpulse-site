@@ -25,6 +25,7 @@ export const metadata: Metadata = {
   description: DESC,
   alternates: { canonical: '/emaillistverify-alternative' },
   openGraph: {
+    siteName: 'Giggal.ai',
     title: 'An EmailListVerify Alternative That Resolves Catch-All',
     description: DESC,
     url: 'https://giggal.ai/emaillistverify-alternative',
@@ -52,7 +53,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'How accurate is EmailListVerify?',
-    a: 'EmailListVerify states 97% accuracy on its own site. Giggal.ai verifies at 99% and returns a real result on the catch-all and SEG-protected addresses that EmailListVerify leaves as ok_for_all.',
+    a: 'EmailListVerify states 97% accuracy on its own site. Giggal.ai verifies at 98.5% and returns a real result on the catch-all and SEG-protected addresses that EmailListVerify leaves as ok_for_all.',
   },
   {
     q: 'Can I try Giggal.ai before switching?',

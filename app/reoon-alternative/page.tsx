@@ -25,6 +25,7 @@ export const metadata: Metadata = {
   description: DESC,
   alternates: { canonical: '/reoon-alternative' },
   openGraph: {
+    siteName: 'Giggal.ai',
     title: 'A Reoon Alternative for Catch-All and SEG',
     description: DESC,
     url: 'https://giggal.ai/reoon-alternative',

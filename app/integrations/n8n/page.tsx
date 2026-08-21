@@ -16,6 +16,7 @@ export const metadata: Metadata = {
     'Verify emails inside n8n with the official Giggal.ai community node. Single checks, bulk jobs and catch-all email verification, straight from your workflows. Install n8n-nodes-giggal from npm.',
   alternates: { canonical: '/integrations/n8n' },
   openGraph: {
+    siteName: 'Giggal.ai',
     title: 'n8n Email Verification Integration | Giggal.ai',
     description:
       'Verify emails inside n8n with the official Giggal.ai community node. Single checks, bulk jobs and catch-all verification in your workflows.',

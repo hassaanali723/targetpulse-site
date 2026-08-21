@@ -57,7 +57,7 @@ const TOOLS: Tool[] = [
     id: 'claude', name: 'Claude',
     setup: {
       kind: 'connector',
-      subtitle: 'Add Giggal.ai as a custom connector in Claude — no config files, no API key to paste.',
+      subtitle: 'Add Giggal.ai as a custom connector in Claude. No config files, no API key to paste.',
       steps: [
         {
           text: <>In Claude (web or desktop), open <span className="font-semibold text-slate-700">Settings → Connectors</span>.</>,
@@ -80,7 +80,7 @@ const TOOLS: Tool[] = [
           alt: 'Giggal.ai connector page with the Connect button',
         },
         {
-          text: <>Click <span className="font-semibold text-slate-700">Allow</span> to grant <span className="font-mono text-slate-700">verify:read</span> — verify addresses, check credits, and look up past verifications.</>,
+          text: <>Click <span className="font-semibold text-slate-700">Allow</span> to grant <span className="font-mono text-slate-700">verify:read</span>, which covers verifying addresses, checking credits and looking up past verifications.</>,
           img: '/mcp/claude/5-allow.jpeg',
           alt: 'Giggal.ai authorization screen asking to allow Claude access',
         },
@@ -91,7 +91,7 @@ const TOOLS: Tool[] = [
     id: 'chatgpt', name: 'ChatGPT',
     setup: {
       kind: 'connector',
-      subtitle: 'Add Giggal.ai as a custom plugin in ChatGPT — connected over OAuth, no API key to paste.',
+      subtitle: 'Add Giggal.ai as a custom plugin in ChatGPT, connected over OAuth, with no API key to paste.',
       steps: [
         {
           text: <>In ChatGPT, open <span className="font-semibold text-slate-700">Plugins</span> from the sidebar, then click the <span className="font-semibold text-slate-700">+</span> in the top right.</>,
@@ -109,7 +109,7 @@ const TOOLS: Tool[] = [
           alt: 'Add Giggal.ai to ChatGPT prompt with the Sign in with Giggal.ai button',
         },
         {
-          text: <>Click <span className="font-semibold text-slate-700">Allow</span> to grant <span className="font-mono text-slate-700">verify:read</span> — verify addresses, check credits, and look up past verifications.</>,
+          text: <>Click <span className="font-semibold text-slate-700">Allow</span> to grant <span className="font-mono text-slate-700">verify:read</span>, which covers verifying addresses, checking credits and looking up past verifications.</>,
           img: '/mcp/chatgpt/4-allow.jpeg',
           alt: 'Giggal.ai authorization screen asking to allow ChatGPT access',
         },
@@ -149,7 +149,7 @@ const TOOLS: Tool[] = [
   },
   {
     id: 'cline', name: 'Cline',
-    setup: { kind: 'config', boxLabel: 'cline_mcp_settings.json', files: ['~/Library/Application Support/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json'], code: jsonConfig('mcpServers'), note: <>{REPLACE_KEY} macOS path shown — adjust for your OS.</> },
+    setup: { kind: 'config', boxLabel: 'cline_mcp_settings.json', files: ['~/Library/Application Support/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json'], code: jsonConfig('mcpServers'), note: <>{REPLACE_KEY} macOS path shown, so adjust for your OS.</> },
   },
   {
     id: 'zed', name: 'Zed',
@@ -226,7 +226,7 @@ export default function McpSection({ showImages = false, detailsHref }: McpSecti
       <div className="text-center max-w-2xl mx-auto space-y-3">
         <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Connect your favourite AI.</h2>
         <p className="text-sm md:text-base text-slate-600 font-medium">
-          Plug Giggal.ai into your AI agent over MCP and verify emails — catch-all included — right inside Claude, Cursor, VS Code and more.
+          Plug Giggal.ai into your AI agent over MCP and verify emails, catch-all included, right inside Claude, Cursor, VS Code and more.
         </p>
       </div>
 

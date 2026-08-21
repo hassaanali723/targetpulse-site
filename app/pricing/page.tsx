@@ -24,7 +24,7 @@ const features = [
 
 const howItWorks = [
   { Icon: CreditCard, wrap: 'bg-indigo-600 shadow-indigo-600/10', title: '1 Credit = 1 Email', body: 'Each standard email verification uses exactly one credit from your balance.' },
-  { Icon: TrendingDown, wrap: 'bg-emerald-500 shadow-emerald-500/10', title: 'Volume savings', body: 'Buy more credits, pay less per credit — from $0.0017 down to $0.0007.' },
+  { Icon: TrendingDown, wrap: 'bg-emerald-500 shadow-emerald-500/10', title: 'Volume savings', body: 'Buy more credits, pay less per credit, from $0.0017 down to $0.0007.' },
   { Icon: Percent, wrap: 'bg-violet-600 shadow-violet-600/10', title: '10% subscription discount', body: 'Subscribe monthly and save 10% automatically on every package.' },
   { Icon: InfinityIcon, wrap: 'bg-amber-500 shadow-amber-500/10', title: 'Credits never expire', body: 'Use your credits anytime. They stay in your account until you need them.' },
 ]
@@ -35,7 +35,7 @@ const faqs: FaqItem[] = [
   { q: 'What happens if I run out of credits?', a: 'Simply purchase more credits anytime. Your account is topped up instantly.' },
   { q: 'Do you offer refunds?', a: 'Credits are generally non-refundable. We handle exceptional circumstances on a case-by-case basis. See our Refund Policy for details.' },
   { q: 'Is there a minimum purchase?', a: 'The minimum purchase is 3,000 credits ($5.00). You also get 1,000 free trial credits before purchasing.' },
-  { q: 'Do credits expire?', a: 'Never. Your credits stay in your account until you use them — no rush, no pressure.' },
+  { q: 'Do credits expire?', a: 'Never. Your credits stay in your account until you use them. No rush, no pressure.' },
 ]
 
 export default function PricingPage() {
@@ -56,7 +56,7 @@ export default function PricingPage() {
         </h1>
         <p className="text-base md:text-lg text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed">
           Pay only for what you use. No monthly fees, no hidden charges, and credits never expire.
-          Start with <strong className="text-indigo-600 font-extrabold">1,000 free trial credits</strong> — no card required.
+          Start with <strong className="text-indigo-600 font-extrabold">1,000 free trial credits</strong>, no card required.
         </p>
       </section>
 

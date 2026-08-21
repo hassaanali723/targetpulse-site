@@ -24,6 +24,7 @@ export const metadata: Metadata = {
   description: DESC,
   alternates: { canonical: '/bounceban-alternative' },
   openGraph: {
+    siteName: 'Giggal.ai',
     title: 'A BounceBan Alternative for Catch-All and SEG',
     description: DESC,
     url: 'https://giggal.ai/bounceban-alternative',

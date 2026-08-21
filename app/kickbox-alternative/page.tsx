@@ -25,6 +25,7 @@ export const metadata: Metadata = {
   description: DESC,
   alternates: { canonical: '/kickbox-alternative' },
   openGraph: {
+    siteName: 'Giggal.ai',
     title: 'A Kickbox Alternative That Resolves Catch-All',
     description: DESC,
     url: 'https://giggal.ai/kickbox-alternative',

@@ -25,6 +25,7 @@ export const metadata: Metadata = {
   description: DESC,
   alternates: { canonical: '/emailable-alternative' },
   openGraph: {
+    siteName: 'Giggal.ai',
     title: 'An Emailable Alternative That Resolves Catch-All',
     description: DESC,
     url: 'https://giggal.ai/emailable-alternative',

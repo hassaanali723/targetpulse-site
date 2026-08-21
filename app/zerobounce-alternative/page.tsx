@@ -26,6 +26,7 @@ export const metadata: Metadata = {
   description: DESC,
   alternates: { canonical: '/zerobounce-alternative' },
   openGraph: {
+    siteName: 'Giggal.ai',
     title: 'A ZeroBounce Alternative Built for Catch-All Lists',
     description: DESC,
     url: 'https://giggal.ai/zerobounce-alternative',
@@ -53,7 +54,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'How accurate is Giggal.ai on catch-all addresses?',
-    a: 'Giggal.ai verifies at 99% accuracy, and returns a real deliverable or undeliverable result on catch-all and SEG-protected addresses that most tools only flag without confirming.',
+    a: 'Giggal.ai verifies at 98.5% accuracy, and returns a real deliverable or undeliverable result on catch-all and SEG-protected addresses that most tools only flag without confirming.',
   },
   {
     q: 'Can I test Giggal.ai before paying?',
