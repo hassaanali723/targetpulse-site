@@ -133,7 +133,7 @@ export default function ComparePage({ params }: { params: { versus: string } }) 
           </h2>
           <p className={`${proseP} max-w-2xl mx-auto`}>
             {A} and {B} each leave a pile of catch-all and gateway-protected addresses unconfirmed.
-            Giggal.ai returns a real result on those at 1.5 credits, verifies behind 15 secure email
+            Giggal.ai returns a real result on those at a flat 1 credit, verifies behind 15 secure email
             gateways, and publishes a flat $9.90 per 10,000 with credits that never expire.
           </p>
           <a

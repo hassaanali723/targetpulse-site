@@ -50,7 +50,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'What does Giggal.ai do with a catch-all address that ZeroBounce only scores?',
-    a: 'It tells you whether the mailbox is real, deliverable or undeliverable, instead of a bare Catch-All tag. Catch-all is 1.5 credits in a run, 2 standalone.',
+    a: 'It tells you whether the mailbox is real, deliverable or undeliverable, instead of a bare Catch-All tag. Every verification on Giggal.ai is a flat 1 credit.',
   },
   {
     q: 'How accurate is Giggal.ai on catch-all addresses?',

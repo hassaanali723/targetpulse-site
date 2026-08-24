@@ -45,7 +45,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'What does Giggal.ai do with accept-all addresses that Emailable does not?',
-    a: 'It tells you whether the mailbox is real, deliverable or undeliverable. Emailable marks accept-all addresses Risky and does not confirm them, because it does not guess. Catch-all is 1.5 credits in a run, 2 standalone.',
+    a: 'It tells you whether the mailbox is real, deliverable or undeliverable. Emailable marks accept-all addresses Risky and does not confirm them, because it does not guess. Every verification on Giggal.ai is a flat 1 credit.',
   },
   {
     q: 'Does Emailable charge for those Risky results?',

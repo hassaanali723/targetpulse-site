@@ -35,7 +35,7 @@ const cfg: AltPageConfig = {
     },
     {
       q: 'How does Giggal.ai handle catch-all where Snov.io flags it?',
-      a: 'Snov.io flags catch-all without confirming the mailbox. Giggal.ai returns a real deliverable or undeliverable result, at 1.5 credits in a run or 2 standalone.',
+      a: 'Snov.io flags catch-all without confirming the mailbox. Giggal.ai returns a real deliverable or undeliverable result, at a flat 1 credit per email.',
     },
     {
       q: 'How does the pricing compare?',

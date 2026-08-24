@@ -91,7 +91,7 @@ export const GIGGAL = {
   startingPrice: { credits: MIN_GIGGAL_OFFER.credits, totalUsd: MIN_GIGGAL_OFFER.price },
   freeTier: '1,000 credits, no card, usable on bulk',
   creditsExpire: 'Credits never expire, with no condition.',
-  catchAllCreditCost: '1.5 credits in the same run, 2 credits standalone',
+  catchAllCreditCost: '1 credit, the same as any other verification',
   resolvesCatchAll: true,
   advertisesSegSupport: true, // 15 detected gateways
   segGatewayCount: 15,
@@ -973,13 +973,12 @@ export const COMPETITORS: Record<string, Competitor> = {
     creditsExpire: 'Credits never expire, with no monthly usage limit',
     chargesForUnknown: null,
     resolvesCatchAll: true,
-    catchAllCreditCost: 'Included in the standard credit, no surcharge published',
+    catchAllCreditCost: '1 credit per email, the same as standard',
     advertisesSegSupport: true, // names Proofpoint, Mimecast and Cisco
     claimedAccuracy: 'Claims over 97% on catch-all addresses',
     benchmarkAccuracy: null,
     benchmarkCatchAllResolved: null,
     betterFitFor: [
-      'No credit surcharge on catch-all addresses, where we bill 1.5',
       'A published price ladder with seven volume steps',
       'Credits that never expire, the same as ours',
     ],

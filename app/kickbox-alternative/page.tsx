@@ -41,7 +41,7 @@ export const metadata: Metadata = {
 const faqs: FaqItem[] = [
   {
     q: 'Does Giggal.ai resolve catch-all where Kickbox flags it?',
-    a: 'Yes. Kickbox returns a result plus an accept_all field, and on accept-all domains it sets that flag without confirming the mailbox. Giggal.ai returns a real deliverable or undeliverable result on those addresses, at 1.5 credits in a run or 2 standalone.',
+    a: 'Yes. Kickbox returns a result plus an accept_all field, and on accept-all domains it sets that flag without confirming the mailbox. Giggal.ai returns a real deliverable or undeliverable result on those addresses, at a flat 1 credit per email.',
   },
   {
     q: 'How much does Kickbox cost compared with Giggal.ai?',

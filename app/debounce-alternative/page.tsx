@@ -42,11 +42,11 @@ export const metadata: Metadata = {
 const faqs: FaqItem[] = [
   {
     q: 'How much does catch-all checking cost on DeBounce versus Giggal.ai?',
-    a: 'DeBounce charges 10 credits per catch-all address, as a separate product. Giggal.ai charges 1.5 in the same run as standard checks. On a 10,000-address list that is 30% catch-all, DeBounce spends about 37,000 credits and Giggal.ai about 11,500.',
+    a: 'DeBounce charges 10 credits per catch-all address, as a separate product. Giggal.ai charges a flat 1 credit across all addresses in the same run. On a 10,000-address list that is 30% catch-all, DeBounce spends about 37,000 credits while Giggal.ai spends exactly 10,000 credits.',
   },
   {
     q: 'Does DeBounce actually resolve catch-all, or just charge more?',
-    a: 'It returns results through a real catch-all product. But in the LeadMagic test it resolved 6% of catch-all addresses, so those 10-credit checks cleared a small share in that run. Giggal.ai charges 1.5 credits for the same job.',
+    a: 'It returns results through a real catch-all product. But in the LeadMagic test it resolved 6% of catch-all addresses, so those 10-credit checks cleared a small share in that run. Giggal.ai charges a flat 1 credit for the same job.',
   },
   {
     q: 'Do Giggal.ai credits expire the way DeBounce credits do?',
@@ -54,7 +54,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'Is catch-all a separate product on Giggal.ai?',
-    a: 'No. Catch-all is verified in the same run at 1.5 credits, not billed as a separate add-on.',
+    a: 'No. Catch-all is verified in the same run at a flat 1 credit, not billed as a separate add-on.',
   },
   {
     q: 'Can I test Giggal.ai before switching?',
@@ -141,16 +141,15 @@ export default function DeBounceAlternativePage() {
           <div className="rounded-2xl border-2 border-indigo-100 bg-white p-6 card-vivid-shadow ring-2 ring-indigo-600/5 space-y-2">
             <p className="text-[11px] font-black uppercase tracking-wider text-indigo-600">Giggal.ai</p>
             <p className="text-sm text-slate-600 font-medium leading-relaxed">
-              7,000 standard at 1 credit, plus 3,000 catch-all at 1.5 credits.
+              10,000 emails verified at a flat 1 credit each.
             </p>
-            <p className="text-3xl font-black text-indigo-700">~11,500 credits</p>
+            <p className="text-3xl font-black text-indigo-700">10,000 credits</p>
           </div>
         </div>
         <p className={proseP}>
-          Same list, roughly a third of the credits. This is a credit comparison, exact because both
-          catch-all prices are stated in credits. In dollars the gap is wider: DeBounce is about
-          $0.0025 a credit at 10,000, so its 10-credit catch-all runs near $0.025 against roughly
-          $0.0015 on Giggal.ai.
+          Same list, under a third of the credits. In dollars the gap is even wider: DeBounce is about
+          $0.0025 a credit at 10,000, so its 10-credit catch-all runs near $0.025 against
+          $0.00099 on Giggal.ai.
         </p>
       </section>
 

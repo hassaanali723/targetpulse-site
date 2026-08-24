@@ -8,29 +8,29 @@ const cfg: AltPageConfig = {
   h1Article: 'A',
   h1Tail: 'that costs less per email',
   heroP:
-    'no2bounce is the closest match here on terms rather than on marketing: catch-all resolved, gateways named, credits that never expire, a published price ladder. The comparison is narrow and mostly comes down to price and gateway coverage, with one honest point in their favour on catch-all-heavy lists.',
+    'no2bounce is the closest match here on terms rather than on marketing: catch-all resolved, gateways named, credits that never expire, a published price ladder. The comparison comes down to price ($9.90 vs $17 at 10k), free tier size (1,000 vs 100), and gateway coverage (15 vs 3).',
   bluf: [
     { k: 'Both resolve catch-all', v: 'Both commit to a result on accept-all domains rather than labelling them.' },
     { k: 'Price', v: '$17 per 10,000 there, $9.90 here. $721 per million there, $680 here.' },
-    { k: 'Catch-all surcharge', v: 'They publish no surcharge. We bill 1.5 credits, so on a heavily catch-all list the gap narrows.' },
+    { k: 'Credits per email', v: 'Every verification on both tools is a flat 1 credit.' },
     { k: 'Gateways', v: 'They name Proofpoint, Mimecast and Cisco. We detect 15, Barracuda included.' },
   ],
   catchAllHeading: 'How Giggal.ai verifies catch-all addresses',
   catchAllProse:
-    'Both tools run multi-layer detection rather than sending a test message, and both return a real result on addresses that other verifiers hand back marked risky. no2bounce claims over 97% on catch-all and lists Microsoft 365, Google Workspace, Proofpoint, Mimecast and Cisco. Giggal.ai claims 98.5% on standard business lists and detects 15 named secure email gateways. The place to be careful is the credit maths: no2bounce publishes no catch-all surcharge, while Giggal.ai bills 1.5 credits inside a run. On a list that is 30% catch-all, Giggal.ai works out around $12.85 per 10,000 against their $17, so we are still cheaper, but by less than the headline suggests.',
+    'Both tools run multi-layer detection rather than sending a test message, and both return a real result on addresses that other verifiers hand back marked risky. no2bounce claims over 97% on catch-all and lists Microsoft 365, Google Workspace, Proofpoint, Mimecast and Cisco. Giggal.ai claims 98.5% on standard business lists and detects 15 named secure email gateways. Both tools charge a flat 1 credit per email, so Giggal.ai is consistently cheaper across the board ($9.90 vs $17 per 10,000, $76 vs $126 at 100k, and $680 vs $721 at 1M).',
   pricingHeading: 'no2bounce pricing vs Giggal.ai',
   pricingProse:
     'no2bounce publishes a seven-step ladder: $17 for 10,000, $41 for 25,000, $72 for 50,000, $126 for 100,000, $254 for 250,000, $424 for 500,000 and $721 for a million. Credits never expire and there is no monthly usage limit, and new accounts get 100 free credits with no card. Giggal.ai is $9.90 for 10,000, $76 for 100,000 and $680 for a million, credits never expire, and the free tier is 1,000 credits usable on a bulk upload rather than 100.',
-  testStep3: 'Compare the catch-all rows, and check the credit spend against the surcharge difference.',
+  testStep3: 'Compare the catch-all rows, and check the resolution rate and speed.',
   ctaHeadline: 'Same job, lower per-email price',
   faqs: [
     {
       q: 'Is Giggal.ai a good no2bounce alternative?',
-      a: 'They do the same job, so it comes down to numbers. Giggal.ai is $9.90 per 10,000 against $17, detects 15 named secure email gateways against their five, and gives 1,000 free credits against 100. no2bounce publishes no catch-all surcharge, which narrows the price gap on catch-all-heavy lists.',
+      a: 'They do the same job, so it comes down to numbers. Giggal.ai is $9.90 per 10,000 against $17, detects 15 named secure email gateways against their five, and gives 1,000 free credits against 100. Both tools bill a flat 1 credit per email.',
     },
     {
       q: 'Which is cheaper on a list that is mostly catch-all?',
-      a: 'Giggal.ai, but by less than the sticker price implies. We bill 1.5 credits per catch-all inside a run, so a list that is 30% catch-all costs about $12.85 per 10,000 here against $17 there. On a list of ordinary addresses the comparison is the straight $9.90 against $17.',
+      a: 'Giggal.ai. Both tools charge a flat 1 credit per email, so Giggal.ai is consistently cheaper across every list and volume tier ($9.90 vs $17 per 10,000 credits).',
     },
     {
       q: 'How do the gateway claims compare?',

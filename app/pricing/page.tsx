@@ -23,7 +23,7 @@ const features = [
 ]
 
 const howItWorks = [
-  { Icon: CreditCard, wrap: 'bg-indigo-600 shadow-indigo-600/10', title: '1 Credit = 1 Email', body: 'Each standard email verification uses exactly one credit from your balance.' },
+  { Icon: CreditCard, wrap: 'bg-indigo-600 shadow-indigo-600/10', title: '1 Credit = 1 Email', body: 'Each email verification uses exactly one credit from your balance, including catch-all and SEG-protected addresses.' },
   { Icon: TrendingDown, wrap: 'bg-emerald-500 shadow-emerald-500/10', title: 'Volume savings', body: 'Buy more credits, pay less per credit, from $0.0017 down to $0.0007.' },
   { Icon: Percent, wrap: 'bg-violet-600 shadow-violet-600/10', title: '10% subscription discount', body: 'Subscribe monthly and save 10% automatically on every package.' },
   { Icon: InfinityIcon, wrap: 'bg-amber-500 shadow-amber-500/10', title: 'Credits never expire', body: 'Use your credits anytime. They stay in your account until you need them.' },

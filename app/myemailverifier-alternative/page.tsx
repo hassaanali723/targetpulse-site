@@ -41,7 +41,7 @@ export const metadata: Metadata = {
 const faqs: FaqItem[] = [
   {
     q: 'Does Giggal.ai resolve catch-all where MyEmailVerifier flags it?',
-    a: 'Yes. MyEmailVerifier returns catch-all addresses as a separate status and does not confirm the mailbox. Giggal.ai returns a real deliverable or undeliverable result on those addresses, at 1.5 credits in a run or 2 standalone.',
+    a: 'Yes. MyEmailVerifier returns catch-all addresses as a separate status and does not confirm the mailbox. Giggal.ai returns a real deliverable or undeliverable result on those addresses, at a flat 1 credit per email.',
   },
   {
     q: 'How much does MyEmailVerifier cost compared with Giggal.ai?',

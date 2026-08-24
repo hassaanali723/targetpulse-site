@@ -117,7 +117,7 @@ export interface Comparison {
 
 const GIGGAL_EDGE = {
   catchAll:
-    'Giggal.ai resolves catch-all addresses to a real deliverable or undeliverable result at 1.5 credits in a run, or 2 standalone.',
+    'Giggal.ai resolves catch-all addresses to a real deliverable or undeliverable result at a flat 1 credit per email.',
   pricing:
     'Giggal.ai publishes a flat pay-as-you-go price, $9.90 at 10,000, $76 at 100,000 and $680 at a million, with credits that never expire.',
   seg: `Giggal.ai detects ${GIGGAL.segGatewayCount} named secure email gateways including Mimecast, Proofpoint and Barracuda, and returns a real result on addresses behind them.`,
@@ -205,11 +205,11 @@ export function buildComparison(aSlug: string, bSlug: string): Comparison {
     },
     {
       q: `Do ${A} or ${B} resolve catch-all addresses?`,
-      a: `${caResolve(a)}. ${caResolve(b_)}. Giggal.ai resolves catch-all to a real deliverable or undeliverable result at 1.5 credits in a run and also verifies behind ${GIGGAL.segGatewayCount} secure email gateways.`,
+      a: `${caResolve(a)}. ${caResolve(b_)}. Giggal.ai resolves catch-all to a real deliverable or undeliverable result at a flat 1 credit per email and also verifies behind ${GIGGAL.segGatewayCount} secure email gateways.`,
     },
     {
       q: `Is there a better option than ${A} or ${B}?`,
-      a: `Giggal.ai is built for the hard addresses both tend to skip. It resolves catch-all to a real result at 1.5 credits, verifies behind ${GIGGAL.segGatewayCount} secure email gateways, and publishes a flat price of $9.90 per 10,000 with credits that never expire. You can run a list on 1,000 free credits, no card.`,
+      a: `Giggal.ai is built for the hard addresses both tend to skip. It resolves catch-all to a real result at a flat 1 credit per email, verifies behind ${GIGGAL.segGatewayCount} secure email gateways, and publishes a flat price of $9.90 per 10,000 with credits that never expire. You can run a list on 1,000 free credits, no card.`,
     },
     {
       q: `Can I try Giggal.ai before deciding?`,

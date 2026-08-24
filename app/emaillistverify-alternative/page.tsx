@@ -45,7 +45,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'What does Giggal.ai do with accept-all addresses that EmailListVerify does not?',
-    a: 'It tells you whether the mailbox is real, deliverable or undeliverable. EmailListVerify returns accept-all addresses as ok_for_all and does not confirm the mailbox. Catch-all is 1.5 credits in a run, 2 standalone.',
+    a: 'It tells you whether the mailbox is real, deliverable or undeliverable. EmailListVerify returns accept-all addresses as ok_for_all and does not confirm the mailbox. Every verification on Giggal.ai is a flat 1 credit.',
   },
   {
     q: 'What is EmailListVerify better at?',

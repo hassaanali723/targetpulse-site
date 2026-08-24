@@ -55,7 +55,7 @@ That label is awkward in a dashboard. It is worse in a conversation, because the
 
 ## Cost and a sensible precaution
 
-Verifications through MCP spend the same credits as anywhere else. A standard address is one credit, a catch-all is 1.5 inside a run or 2 on its own, and the free tier is 1,000 credits with no card. Credits do not expire.
+Verifications through MCP spend the same credits as anywhere else. Every address verification is a flat 1 credit (including catch-all and SEG-protected addresses), and the free tier is 1,000 credits with no card. Credits do not expire.
 
 The precaution is straightforward: an assistant will do what you ask, including running a larger job than you meant. Ask for the credit balance before anything big, and paste addresses rather than pointing it at a file you have not looked at. Neither of these is specific to verification, but the failure mode with a metered API is more annoying than usual.
 

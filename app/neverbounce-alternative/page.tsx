@@ -46,7 +46,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'What does Giggal.ai do with the catch-all addresses NeverBounce flags?',
-    a: 'It tells you whether the mailbox is real, deliverable or undeliverable, instead of an Accept-All tag. NeverBounce resolved 8% of catch-alls in the LeadMagic test. Catch-all is 1.5 credits in a run, 2 standalone.',
+    a: 'It tells you whether the mailbox is real, deliverable or undeliverable, instead of an Accept-All tag. NeverBounce resolved 8% of catch-alls in the LeadMagic test. Every verification on Giggal.ai is a flat 1 credit.',
   },
   {
     q: 'How do Giggal.ai credits expire compared with NeverBounce?',

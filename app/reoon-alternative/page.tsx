@@ -45,7 +45,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'What does Giggal.ai do with catch-all addresses that Reoon does not?',
-    a: 'It returns a real deliverable or undeliverable result. Reoon reports catch-all as a status and leaves it there. Catch-all is 1.5 credits in a run, 2 standalone. Reoon was not in the LeadMagic test, so there is no independent catch-all figure for it.',
+    a: 'It returns a real deliverable or undeliverable result at a flat 1 credit per email. Reoon reports catch-all as a status and leaves it there. Reoon was not in the LeadMagic test, so there is no independent catch-all figure for it.',
   },
   {
     q: 'Does Reoon verify behind secure email gateways?',

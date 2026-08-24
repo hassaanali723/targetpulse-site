@@ -62,7 +62,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'Does verifying behind a gateway cost extra?',
-    a: 'No. A standard verification is 1 credit regardless of what sits in front of the domain. Catch-all verification is priced separately at 1.5 credits when enabled during the run, or 2 credits standalone.',
+    a: 'No. Every email verification is a flat 1 credit, regardless of whether the domain sits behind a Secure Email Gateway, is a catch-all, or is a standard mailbox.',
   },
   {
     q: 'What happens if you still cannot verify an address?',
@@ -306,11 +306,11 @@ export default function SegEmailVerificationPage() {
         <div className="text-center max-w-2xl mx-auto space-y-3">
           <h2 className={sectionTitle}>Pay only for what you verify</h2>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
           <div className="bg-white border-2 border-slate-200 rounded-3xl p-6 sm:p-8 card-vivid-shadow text-left space-y-3">
             <div className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider text-slate-500 bg-slate-100 px-3 py-1 rounded-full">
               <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
-              Standard
+              Standard &amp; SEG
             </div>
             <div className="text-3xl font-black text-slate-900">1 credit</div>
             <div className="text-[13px] text-slate-500 font-semibold">per email verification</div>
@@ -318,17 +318,9 @@ export default function SegEmailVerificationPage() {
           <div className="bg-white border-2 border-indigo-100 rounded-3xl p-6 sm:p-8 card-vivid-shadow ring-2 ring-indigo-600/5 text-left space-y-3">
             <div className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider text-indigo-700 bg-indigo-100 px-3 py-1 rounded-full">
               <span className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
-              Catch-All, same run
+              Catch-All
             </div>
-            <div className="text-3xl font-black text-indigo-700">1.5 credits</div>
-            <div className="text-[13px] text-slate-500 font-semibold">per catch-all email</div>
-          </div>
-          <div className="bg-white border-2 border-slate-200 rounded-3xl p-6 sm:p-8 card-vivid-shadow text-left space-y-3">
-            <div className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider text-slate-500 bg-slate-100 px-3 py-1 rounded-full">
-              <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
-              Catch-All, standalone
-            </div>
-            <div className="text-3xl font-black text-slate-900">2 credits</div>
+            <div className="text-3xl font-black text-indigo-700">1 credit</div>
             <div className="text-[13px] text-slate-500 font-semibold">per catch-all email</div>
           </div>
         </div>

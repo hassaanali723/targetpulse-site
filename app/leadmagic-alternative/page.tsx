@@ -35,7 +35,7 @@ const cfg: AltPageConfig = {
     },
     {
       q: 'How do the two handle catch-all domains?',
-      a: 'Both resolve them rather than returning risky. LeadMagic publishes benchmark data on how many catch-alls it resolves, which is unusually transparent. Giggal.ai resolves catch-all at 1.5 credits inside a run or 2 standalone, and adds secure email gateway verification that LeadMagic does not publish.',
+      a: 'Both resolve them rather than returning risky. LeadMagic publishes benchmark data on how many catch-alls it resolves, which is unusually transparent. Giggal.ai resolves catch-all at a flat 1 credit per email, and adds secure email gateway verification that LeadMagic does not publish.',
     },
     {
       q: 'What does the pricing look like side by side?',

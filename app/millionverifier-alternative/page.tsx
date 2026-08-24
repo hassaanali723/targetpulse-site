@@ -46,7 +46,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'What does Giggal.ai do with catch-all addresses that MillionVerifier does not?',
-    a: 'It tells you whether the mailbox is real, deliverable or undeliverable. MillionVerifier marks them Risky and does not confirm the mailbox, 5% resolved in the LeadMagic test, the lowest measured. Catch-all is 1.5 credits in a run, 2 standalone.',
+    a: 'It tells you whether the mailbox is real, deliverable or undeliverable. MillionVerifier marks them Risky and does not confirm the mailbox (5% resolved in the LeadMagic test, the lowest measured). Every verification on Giggal.ai is a flat 1 credit.',
   },
   {
     q: 'Does MillionVerifier charge for catch-all or unknown results?',

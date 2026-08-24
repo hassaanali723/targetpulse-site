@@ -35,7 +35,7 @@ const cfg: AltPageConfig = {
     },
     {
       q: 'How do the two handle catch-all domains?',
-      a: 'Both commit to a result instead of returning risky. Findymail says catch-all verification recovers around 23% more valid emails. Giggal.ai resolves catch-all at 1.5 credits inside a run or 2 standalone, and adds secure email gateway verification that Findymail does not advertise.',
+      a: 'Both commit to a result instead of returning risky. Findymail says catch-all verification recovers around 23% more valid emails. Giggal.ai resolves catch-all at a flat 1 credit per email, and adds secure email gateway verification that Findymail does not advertise.',
     },
     {
       q: 'What does the pricing look like side by side?',

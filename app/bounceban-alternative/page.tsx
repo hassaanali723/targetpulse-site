@@ -44,7 +44,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'What does a catch-all address cost on each?',
-    a: 'On credit counts, BounceBan charges a flat 1 credit and Giggal.ai charges 1.5. But a credit is not a price. At 10,000, BounceBan is $34 and Giggal.ai is $9.90, so a BounceBan catch-all works out near $0.0034 and a Giggal.ai catch-all near $0.0015.',
+    a: 'Both charge a flat 1 credit per email verification. At 10,000 credits, BounceBan is $34 and Giggal.ai is $9.90, so a BounceBan catch-all works out to $0.0034 while Giggal.ai is $0.00099.',
   },
   {
     q: 'What is the difference in the free tier?',
@@ -56,7 +56,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'How does Giggal.ai price catch-all verification?',
-    a: 'Catch-all is 1.5 credits when enabled in a run, or 2 standalone. Standard verification is 1 credit.',
+    a: 'Every email verification is a flat 1 credit, including catch-all and SEG-protected addresses.',
   },
 ]
 
@@ -147,10 +147,9 @@ export default function BounceBanAlternativePage() {
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Price per catch-all address</h2>
         <p className={proseP}>
-          A credit comparison would mislead. BounceBan charges a flat 1 credit; we charge 1.5 for a
-          catch-all. But a credit is not a price. At 10,000, BounceBan is $34 and we are $9.90, so a
-          BounceBan credit is about $0.0034 and ours is $0.00099. That puts a BounceBan catch-all near
-          $0.0034 and a Giggal.ai catch-all near $0.0015.
+          Both BounceBan and Giggal.ai charge a flat 1 credit per verification.
+          The difference is price: at 10,000 credits, BounceBan is $34 and Giggal.ai is $9.90, making Giggal.ai
+          more than 70% cheaper ($0.00099 vs $0.0034 per email).
         </p>
         <PricingLadder competitor={competitor} />
       </section>

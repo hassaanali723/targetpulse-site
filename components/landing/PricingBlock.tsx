@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import { MailCheck, Forward, BadgePercent, MailPlus } from 'lucide-react'
+import { MailCheck, Check, ShieldCheck, MailPlus } from 'lucide-react'
 import PricingTable from '@/components/landing/PricingTable'
 
 /**
@@ -17,18 +17,17 @@ export default function PricingBlock() {
         <div className="inline-flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-x-6 gap-y-2.5 bg-slate-50 border border-slate-200 rounded-2xl px-5 py-2.5 text-center sm:text-left">
           <div className="flex items-center space-x-2.5 whitespace-nowrap text-xs font-bold text-slate-700">
             <MailCheck className="w-4 h-4 text-emerald-600" />
-            <span>1 Standard Validation = <strong className="text-emerald-700 font-extrabold">1 Credit</strong></span>
+            <span>Standard Validation = <strong className="text-emerald-700 font-extrabold">1 Credit</strong></span>
           </div>
           <div className="hidden sm:block h-3.5 w-px bg-slate-300" />
           <div className="flex items-center space-x-2.5 whitespace-nowrap text-xs font-bold text-slate-700">
-            <Forward className="w-4 h-4 text-amber-600" />
-            <span>1 Catch-All Validation = <strong className="text-amber-700 font-extrabold">2 Credits</strong></span>
+            <Check className="w-4 h-4 text-indigo-600" />
+            <span>Catch-All Validation = <strong className="text-indigo-700 font-extrabold">1 Credit</strong></span>
           </div>
           <div className="hidden sm:block h-3.5 w-px bg-slate-300" />
           <div className="flex items-center space-x-2.5 whitespace-nowrap text-xs font-bold text-slate-700">
-            <BadgePercent className="w-4 h-4 text-indigo-600" />
-            <span>Add Catch-All while validating = <strong className="text-indigo-700 font-extrabold">1.5 Credits</strong></span>
-            <span className="bg-indigo-100 text-indigo-700 text-[9px] px-1.5 py-0.5 rounded-md font-bold">Save 25%</span>
+            <ShieldCheck className="w-4 h-4 text-violet-600" />
+            <span>SEG Gateway Verification = <strong className="text-violet-700 font-extrabold">1 Credit</strong></span>
           </div>
         </div>
       </div>

@@ -45,7 +45,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'Does Bouncer resolve catch-all addresses like Giggal.ai?',
-    a: 'Bouncer is one of the few tools that does, through its Deep Catch-All Verification on Google and Microsoft domains. Giggal.ai resolves catch-all too, at 1.5 credits in a run or 2 standalone, and also verifies addresses sitting behind secure email gateways, which Bouncer does not.',
+    a: 'Bouncer is one of the few tools that does, through its Deep Catch-All Verification on Google and Microsoft domains. Giggal.ai resolves catch-all too, at a flat 1 credit per email, and also verifies addresses sitting behind secure email gateways, which Bouncer does not.',
   },
   {
     q: 'What does Giggal.ai do that Bouncer does not?',
@@ -129,7 +129,7 @@ export default function BouncerAlternativePage() {
         <p className={proseP}>
           Bouncer resolves catch-all with its Deep Catch-All Verification on Google and Microsoft
           domains, so on that front the two tools agree. The difference is what happens next. Giggal.ai
-          resolves catch-all at 1.5 credits in a run, and goes further to verify addresses hidden
+          resolves catch-all at a flat 1 credit, and goes further to verify addresses hidden
           behind secure email gateways such as Mimecast, Proofpoint and Barracuda, which Bouncer does
           not cover. Every address comes back as one of four results.
         </p>

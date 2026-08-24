@@ -54,7 +54,7 @@ Does it name the gateways it detects? A vendor doing real work here will publish
 
 Does it return valid or invalid, or does it return a label? Ask specifically what the output looks like for an address behind Mimecast. If the answer is that you get a risky flag and a confidence score, you have bought a slightly better label.
 
-What does it cost on the addresses that need the work? Gateway and catch-all resolution costs a vendor more to run, so most price it differently. Some charge a multiple of a standard credit. Some meter it from a separate, smaller allowance that runs out before the standard one. Neither is unreasonable, but you want to know before you upload a list that is 40% enterprise domains. Giggal.ai bills these at 1.5 credits inside a run, from the same balance as everything else.
+What does it cost on the addresses that need the work? Gateway and catch-all resolution costs a vendor more to run, so most price it differently. Some charge a multiple of a standard credit. Some meter it from a separate, smaller allowance that runs out before the standard one. Neither is unreasonable, but you want to know before you upload a list that is 40% enterprise domains. Giggal.ai bills all verifications at a flat 1 credit per address, from the same balance as everything else.
 
 ## The practical sequence
 

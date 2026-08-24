@@ -41,7 +41,7 @@ export const metadata: Metadata = {
 const faqs: FaqItem[] = [
   {
     q: 'Does Giggal.ai resolve catch-all where Clearout flags it?',
-    a: 'Yes. Clearout returns four statuses, Valid, Invalid, Catch-All and Unknown, and marks the Catch-All ones risky without confirming the mailbox. Giggal.ai returns a real deliverable or undeliverable result on those addresses, at 1.5 credits in a run or 2 standalone.',
+    a: 'Yes. Clearout returns four statuses, Valid, Invalid, Catch-All and Unknown, and marks the Catch-All ones risky without confirming the mailbox. Giggal.ai returns a real deliverable or undeliverable result on those addresses, at a flat 1 credit per email.',
   },
   {
     q: 'How much does Clearout cost compared with Giggal.ai?',

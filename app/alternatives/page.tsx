@@ -80,7 +80,7 @@ const BLURBS: Record<string, string> = {
   reoon:
     'Reports catch-all as a status without confirming the mailbox, and does not advertise SEG support. Priced close to us at 10k, so the result on hard addresses is what decides it.',
   debounce:
-    'Charges 10 credits per catch-all as a separate product, against 1.5 here. Standard checks are 1 credit and unknowns are free.',
+    'Charges 10 credits per catch-all as a separate product, against 1 credit flat here. Standard checks are 1 credit and unknowns are free.',
   bouncer:
     'Resolves catch-all too, via Deep Catch-All Verification on Google and Microsoft, but costs $60 at 10k against our $9.90 and does not verify behind gateways. The closest match on results here.',
   emailable:
@@ -96,13 +96,13 @@ const BLURBS: Record<string, string> = {
   briteverify:
     'An enterprise verifier from Validity that flags accept-all as risky, with published bundles around $80 per 10,000. We publish $9.90 at 10k and resolve catch-all.',
   scrubby:
-    'Validates catch-all and SEG too, but at $80 per 10k and 3 credits per catch-all. We are $9.90 and 1.5 credits, with 1,000 free bulk credits.',
+    'Validates catch-all and SEG too, but at $80 per 10k and 3 credits per catch-all. We are $9.90 and 1 credit flat, with 1,000 free bulk credits.',
   quickemailverification:
     '$60 per 10k, and returns catch-all as a status without confirming it. We resolve it, at $9.90.',
   mailfloss:
     'A subscription tool that auto-cleans your ESP list daily but flags catch-all rather than resolving it. We resolve it, pay-as-you-go at $9.90.',
   bounceless:
-    'Now resolves catch-all too, but bills 5 credits each against our 1.5, at $29 per 10k. We add SEG and 1,000 free bulk credits.',
+    'Now resolves catch-all too, but bills 5 credits each against our 1 credit flat, at $29 per 10k. We add SEG and 1,000 free bulk credits.',
   hunter:
     'A finder-first platform where verification is bundled into monthly plans. We are a dedicated verifier that resolves catch-all, at a published $9.90 per 10,000.',
   snovio:
@@ -120,7 +120,7 @@ const BLURBS: Record<string, string> = {
   anymailfinder:
     'Verifies catch-all rather than skipping it, and claims 98.9% accuracy at 86.4% coverage. Monthly subscription at $199 for 10,000 against our $9.90 one-time, and it finds addresses, which we do not.',
   no2bounce:
-    'Catch-all, named gateways and credits that never expire, the same shape as us, at $17 per 10,000 against our $9.90. It adds no surcharge on catch-all, where we bill 1.5 credits, so at a catch-all-heavy list the gap narrows.',
+    'Catch-all, named gateways and credits that never expire, the same shape as us, at $17 per 10,000 against our $9.90. Giggal.ai is cheaper across the board.',
   instantly:
     'A sending platform where verification is one feature billed at 0.25 credit per lead, so 10,000 a month needs the $197 plan. It sends the campaign too, which we do not.',
 }
@@ -437,7 +437,7 @@ export default function AlternativesHubPage() {
               emails protected by SEG gateways
             </Link>
             . Several tools here now attempt catch-all, including BounceBan, Bouncer, Scrubby and
-            Bounceless, at varying depth and price. Giggal.ai resolves it at 1.5 credits and also
+            Bounceless, at varying depth and price. Giggal.ai resolves it at a flat 1 credit and also
             verifies behind 15 named secure email gateways.
           </p>
         </div>

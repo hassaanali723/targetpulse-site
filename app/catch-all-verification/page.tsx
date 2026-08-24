@@ -50,8 +50,8 @@ const faqs: FaqItem[] = [
     a: 'A catch-all domain accepts every email sent to it, even addresses that do not exist. The server simply replies "yes, this exists" to any address, which is why traditional SMTP checks cannot tell you whether the mailbox is real.',
   },
   {
-    q: 'Why does catch-all verification cost more credits?',
-    a: 'A standard verification is a single check. A catch-all verification runs deeper, including direct mailbox checks on addresses protected by Secure Email Gateways. That extra work is why it costs 1.5 credits when you enable it during verification, or 2 credits if you run it separately on a list you already verified.',
+    q: 'Do catch-all verifications cost extra credits?',
+    a: 'No. Catch-all verification is billed at a flat 1 credit per email, exactly the same as a standard verification.',
   },
   {
     q: 'How accurate is catch-all verification?',
@@ -63,7 +63,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'Can I verify only the catch-all emails from a list I already cleaned somewhere else?',
-    a: 'Yes. Open Catch-All Detection in your dashboard, paste or upload only the addresses you want to check, and verify just those. Standalone checks cost 2 credits per email. If your list is not verified yet, run it in one pass instead and pay 1.5.',
+    a: 'Yes. Open Catch-All Detection in your dashboard, paste or upload only the addresses you want to check, and verify just those. Standalone checks cost the same flat 1 credit per email.',
   },
   {
     q: 'What happens if a catch-all check comes back as Unknown?',
@@ -88,9 +88,9 @@ const EMAIL_COUNT = 49621
 export default function CatchAllVerificationPage() {
   const [toggleOn, setToggleOn] = useState(true)
 
-  const rate = toggleOn ? 1.5 : 1
-  const total = Math.round(EMAIL_COUNT * rate)
-  const extra = total - EMAIL_COUNT
+  const rate = 1
+  const total = EMAIL_COUNT
+  const extra = 0
 
   return (
     <main className="relative min-h-screen bg-slate-50 grid-lines overflow-x-hidden text-slate-800 antialiased">
@@ -405,8 +405,7 @@ export default function CatchAllVerificationPage() {
             <h3 className="text-base font-black text-slate-900 leading-tight">During bulk verification</h3>
             <p className="text-[13px] sm:text-sm text-slate-500 font-semibold leading-relaxed">
               When you upload a list, flip on the Include Catch-All Verification toggle.
-              Every regular and catch-all address is checked in one run. Catch-all addresses
-              cost 1.5 credits each instead of 1.
+              Every regular and catch-all address is checked in one run at a flat 1 credit per email.
             </p>
             <div className="text-[12px] text-slate-400 font-bold">Best for fresh lists you have not verified yet.</div>
           </div>
@@ -419,7 +418,7 @@ export default function CatchAllVerificationPage() {
             <p className="text-[13px] sm:text-sm text-slate-500 font-semibold leading-relaxed">
               Already ran a list without catch-all verification? Open Catch-All Detection in
               your dashboard, paste or upload only the catch-all addresses, and verify just
-              those. 2 credits per email.
+              those at the same 1 credit per email.
             </p>
             <div className="text-[12px] text-slate-400 font-bold">Best for lists you cleaned somewhere else and want to recover.</div>
           </div>
@@ -461,8 +460,7 @@ export default function CatchAllVerificationPage() {
             Pay only for what you verify
           </h2>
           <p className="text-slate-600 text-sm md:text-base font-medium">
-            A regular email verification costs 1 credit. A catch-all email verification costs
-            1.5 credits when enabled in batch email verification. No monthly fees, no minimums, and credits never expire.
+            Every email verification costs exactly 1 credit, including catch-all, accept-all, and SEG-protected addresses. No monthly minimums, and credits never expire.
           </p>
         </div>
 
@@ -480,7 +478,7 @@ export default function CatchAllVerificationPage() {
               <span className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
               Catch-All
             </div>
-            <div className="text-3xl font-black text-indigo-700">1.5 credits</div>
+            <div className="text-3xl font-black text-indigo-700">1 credit</div>
             <div className="text-[13px] text-slate-500 font-semibold">per catch-all verification</div>
           </div>
         </div>

@@ -250,12 +250,12 @@ export const COMPARE_PROFILES: Record<string, CompareProfile> = {
     category: 'Catch-all specialist',
     oneLiner: 'A verifier built around catch-all detection with a published volume price ladder.',
     catchAllApproach:
-      'Resolves catch-all addresses with no credit surcharge, and names Microsoft 365, Google Workspace, Proofpoint, Mimecast and Cisco.',
+      'Resolves catch-all addresses at a flat 1 credit, and names Microsoft 365, Google Workspace, Proofpoint, Mimecast and Cisco.',
     limitations: [
       'Free tier is 100 credits, so testing a bulk list needs a purchase',
       'Names five mail platforms rather than a broader gateway list',
     ],
-    bestFor: 'Teams with catch-all heavy lists that would rather not pay a per-address surcharge.',
+    bestFor: 'Teams that want a 7-step published price ladder and basic gateway coverage.',
   },
   instantly: {
     category: 'Finder & outreach platform',
