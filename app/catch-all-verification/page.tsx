@@ -464,22 +464,29 @@ export default function CatchAllVerificationPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
-          <div className="bg-white border-2 border-slate-200 rounded-3xl p-6 sm:p-8 card-vivid-shadow text-left space-y-3">
-            <div className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider text-slate-500 bg-slate-100 px-3 py-1 rounded-full">
-              <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
-              Standard
-            </div>
-            <div className="text-3xl font-black text-slate-900">1 credit</div>
-            <div className="text-[13px] text-slate-500 font-semibold">per email verification</div>
-          </div>
-          <div className="bg-white border-2 border-indigo-100 rounded-3xl p-6 sm:p-8 card-vivid-shadow ring-2 ring-indigo-600/5 text-left space-y-3">
+        {/* One card, not two. A Standard card and a Catch-All card both
+            reading "1 credit" invites the reader to hunt for the difference,
+            which is the opposite of what flat pricing is meant to communicate.
+            The address types belong under the single price, as a list of what
+            it covers. */}
+        <div className="max-w-md mx-auto">
+          <div className="bg-white border-2 border-indigo-100 rounded-3xl p-8 card-vivid-shadow ring-2 ring-indigo-600/5 text-center space-y-4">
             <div className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider text-indigo-700 bg-indigo-100 px-3 py-1 rounded-full">
               <span className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
-              Catch-All
+              Every address
             </div>
-            <div className="text-3xl font-black text-indigo-700">1 credit</div>
-            <div className="text-[13px] text-slate-500 font-semibold">per catch-all verification</div>
+            <div>
+              <div className="text-5xl font-black text-indigo-700 leading-none">1 credit</div>
+              <div className="text-[13px] text-slate-500 font-semibold mt-2">per email verification</div>
+            </div>
+            <ul className="pt-4 border-t border-slate-100 space-y-2 text-left">
+              {['Standard addresses', 'Catch-all and accept-all domains', 'SEG-protected mailboxes'].map((t) => (
+                <li key={t} className="flex items-center gap-2.5 text-[13px] font-semibold text-slate-600">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                  {t}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 

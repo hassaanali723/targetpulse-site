@@ -1,34 +1,32 @@
 import React from 'react'
 import Link from 'next/link'
-import { MailCheck, Check, ShieldCheck, MailPlus } from 'lucide-react'
+import { MailCheck, MailPlus } from 'lucide-react'
 import PricingTable from '@/components/landing/PricingTable'
 
 /**
  * Shared pricing widget used on both the landing page and the /pricing page,
- * so the pricing UI is identical everywhere. Contains: the credit-cost formula
- * chips, the interactive PricingTable, and the "custom volume" contact banner.
+ * so the pricing UI is identical everywhere. Contains: the credit-cost line,
+ * the interactive PricingTable, and the "custom volume" contact banner.
  * Render your own section heading above it.
  */
 export default function PricingBlock() {
   return (
     <>
-      {/* Credit formula chips */}
+      {/* Credit formula. This used to be three chips, one per address type,
+          each ending "= 1 Credit". Three prices that happen to be identical
+          reads as three prices; the whole point of the pricing change is that
+          there is only one. So it is one line now, with the hard address types
+          named in passing rather than priced separately. */}
       <div className="flex justify-center">
-        <div className="inline-flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-x-6 gap-y-2.5 bg-slate-50 border border-slate-200 rounded-2xl px-5 py-2.5 text-center sm:text-left">
-          <div className="flex items-center space-x-2.5 whitespace-nowrap text-xs font-bold text-slate-700">
-            <MailCheck className="w-4 h-4 text-emerald-600" />
-            <span>Standard Validation = <strong className="text-emerald-700 font-extrabold">1 Credit</strong></span>
-          </div>
-          <div className="hidden sm:block h-3.5 w-px bg-slate-300" />
-          <div className="flex items-center space-x-2.5 whitespace-nowrap text-xs font-bold text-slate-700">
-            <Check className="w-4 h-4 text-indigo-600" />
-            <span>Catch-All Validation = <strong className="text-indigo-700 font-extrabold">1 Credit</strong></span>
-          </div>
-          <div className="hidden sm:block h-3.5 w-px bg-slate-300" />
-          <div className="flex items-center space-x-2.5 whitespace-nowrap text-xs font-bold text-slate-700">
-            <ShieldCheck className="w-4 h-4 text-violet-600" />
-            <span>SEG Gateway Verification = <strong className="text-violet-700 font-extrabold">1 Credit</strong></span>
-          </div>
+        <div className="inline-flex items-center gap-2.5 bg-slate-50 border border-slate-200 rounded-2xl px-5 py-2.5 text-center sm:text-left">
+          <MailCheck className="w-4 h-4 text-indigo-600 shrink-0" />
+          <p className="text-xs font-bold text-slate-700">
+            1 Email Validation{' '}
+            <span className="font-semibold text-slate-500">
+              (catch-all/accept-all verification &amp; SEG bypass included)
+            </span>{' '}
+            = <strong className="text-indigo-700 font-extrabold">1 Credit</strong>
+          </p>
         </div>
       </div>
 
