@@ -1,12 +1,13 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { Sparkles, X } from 'lucide-react'
+import { Mail, X } from 'lucide-react'
 
-const KEY = 'giggal-rebrand-banner-dismissed'
+const KEY = 'giggal-puremail-banner-dismissed'
 
 /**
- * Slim rebrand notice pinned above the navbar on the landing page.
+ * Slim notice pinned above the navbar on the landing page, pointing at our
+ * sister product PureMail.
  * Layout offsets (navbar top + hero padding) are driven by the `has-ann`
  * class on the landing <main>, so dismissing the bar reverts them in CSS —
  * see the ".has-ann" rules in globals.css.
@@ -32,12 +33,19 @@ export default function AnnouncementBar() {
   return (
     <div className="fixed top-0 inset-x-0 z-[60] h-10 bg-gradient-to-r from-indigo-600 via-indigo-600 to-emerald-600 text-white">
       <div className="max-w-6xl mx-auto h-full px-6 flex items-center justify-center relative">
-        <p className="flex items-center gap-2 text-[12px] sm:text-[13px] font-bold tracking-tight text-center">
-          <Sparkles className="w-3.5 h-3.5 shrink-0 text-emerald-200" />
-          <span>
-            <span className="font-black">Giggal.ai</span>
-            <span className="text-indigo-100 font-semibold"> is now Giggal.ai</span>
-            <span className="hidden sm:inline text-indigo-100 font-semibold">. We finally got a name that fits.</span>
+        <p className="flex items-center gap-2 text-[12px] sm:text-[13px] font-bold tracking-tight text-center pr-8">
+          <Mail className="w-3.5 h-3.5 shrink-0 text-emerald-200" />
+          <span className="text-indigo-50 font-semibold">
+            Get dedicated Google and Outlook inboxes from{' '}
+            <a
+              href="https://puremail.ai"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-black text-white underline decoration-white/40 underline-offset-2 hover:decoration-white transition-colors"
+            >
+              PureMail
+            </a>
+            , $2.90 per inbox a month.
           </span>
         </p>
         <button
