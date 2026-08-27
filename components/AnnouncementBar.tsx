@@ -38,7 +38,7 @@ export default function AnnouncementBar() {
           <span className="text-indigo-50 font-semibold">
             Get dedicated Google and Outlook inboxes from{' '}
             <a
-              href="https://puremail.ai"
+              href="https://puremail.ai/?utm_source=giggal"
               target="_blank"
               rel="noopener noreferrer"
               className="font-black text-white underline decoration-white/40 underline-offset-2 hover:decoration-white transition-colors"
