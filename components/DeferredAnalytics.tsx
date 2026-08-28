@@ -10,8 +10,11 @@ import { useEffect } from 'react'
 // gesture within moments, so real analytics coverage is effectively unchanged;
 // only zero-interaction hits (bots, synthetic Lighthouse runs) are skipped,
 // which is exactly the traffic we don't want inflating the tools anyway.
+// GA4 property "Giggal.ai" (547350178) and its own Clarity project. Both are
+// giggal.ai only. targetpulse.net is a separate live site with its own Clarity
+// project (wx383m5xrf) and no GA4 tag, so nothing here should ever point at it.
 const GA_ID = 'G-QM6FPBZXDL'
-const CLARITY_ID = 'wx383m5xrf'
+const CLARITY_ID = 'y9mq34f1u5'
 
 declare global {
   interface Window {
