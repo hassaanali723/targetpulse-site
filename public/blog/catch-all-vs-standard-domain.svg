@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 300" role="img" aria-label="Email verification on a standard domain versus a catch-all domain. The standard mail server accepts a real address and rejects a fake one, returning Valid and Invalid. The catch-all server accepts both, so the verifier can only return Risky.">
+  <rect x="1" y="1" width="718" height="298" rx="16" fill="#ffffff" stroke="#e6ebf2"/>
+  <defs>
+    <marker id="ca_ar" markerWidth="9" markerHeight="9" refX="7.5" refY="3.2" orient="auto"><polygon points="0,0 8,3.2 0,6.4" fill="#334155"/></marker>
+    <marker id="ca_arA" markerWidth="9" markerHeight="9" refX="7.5" refY="3.2" orient="auto"><polygon points="0,0 8,3.2 0,6.4" fill="#a8620a"/></marker>
+  </defs>
+  <line x1="360" y1="24" x2="360" y2="284" stroke="#334155" stroke-opacity=".16" stroke-dasharray="3 5"/>
+  <text x="24" y="30" font-family="Hanken Grotesk,system-ui,sans-serif" font-size="13" font-weight="700" fill="#334155">Standard domain</text>
+  <rect x="150" y="70" width="66" height="160" rx="9" fill="none" stroke="#334155" stroke-opacity=".55"/>
+  <text x="183" y="145" text-anchor="middle" font-family="Hanken Grotesk,system-ui,sans-serif" font-size="11.5" font-weight="600" fill="#334155">mail</text>
+  <text x="183" y="160" text-anchor="middle" font-family="Hanken Grotesk,system-ui,sans-serif" font-size="11.5" font-weight="600" fill="#334155">server</text>
+  <text x="24" y="108" font-family="IBM Plex Mono,ui-monospace,monospace" font-size="11.5" fill="#334155">jane@acme.com</text>
+  <line x1="24" y1="118" x2="148" y2="118" stroke="#334155" stroke-width="1.4" marker-end="url(#ca_ar)"/>
+  <line x1="216" y1="118" x2="300" y2="118" stroke="#12805c" stroke-width="1.6" marker-end="url(#ca_ar)"/>
+  <text x="308" y="114" font-family="IBM Plex Mono,ui-monospace,monospace" font-size="11" fill="#12805c">250 OK</text>
+  <text x="308" y="128" font-family="Hanken Grotesk,system-ui,sans-serif" font-size="11" font-weight="700" fill="#12805c">Valid</text>
+  <text x="24" y="196" font-family="IBM Plex Mono,ui-monospace,monospace" font-size="11.5" fill="#334155">xqwp@acme.com</text>
+  <line x1="24" y1="206" x2="148" y2="206" stroke="#334155" stroke-width="1.4" marker-end="url(#ca_ar)"/>
+  <line x1="216" y1="206" x2="300" y2="206" stroke="#c0362c" stroke-width="1.6" marker-end="url(#ca_ar)"/>
+  <text x="308" y="202" font-family="IBM Plex Mono,ui-monospace,monospace" font-size="11" fill="#c0362c">550 reject</text>
+  <text x="308" y="216" font-family="Hanken Grotesk,system-ui,sans-serif" font-size="11" font-weight="700" fill="#c0362c">Invalid</text>
+  <text x="384" y="30" font-family="Hanken Grotesk,system-ui,sans-serif" font-size="13" font-weight="700" fill="#334155">Catch-all domain</text>
+  <rect x="510" y="70" width="66" height="160" rx="9" fill="none" stroke="#a8620a" stroke-opacity=".8"/>
+  <text x="543" y="139" text-anchor="middle" font-family="Hanken Grotesk,system-ui,sans-serif" font-size="11.5" font-weight="600" fill="#334155">mail</text>
+  <text x="543" y="154" text-anchor="middle" font-family="Hanken Grotesk,system-ui,sans-serif" font-size="11.5" font-weight="600" fill="#334155">server</text>
+  <text x="543" y="169" text-anchor="middle" font-family="Hanken Grotesk,system-ui,sans-serif" font-size="9.5" fill="#a8620a">accepts all</text>
+  <text x="384" y="108" font-family="IBM Plex Mono,ui-monospace,monospace" font-size="11.5" fill="#334155">jane@brand.com</text>
+  <line x1="384" y1="118" x2="508" y2="118" stroke="#334155" stroke-width="1.4" marker-end="url(#ca_ar)"/>
+  <line x1="576" y1="118" x2="648" y2="118" stroke="#a8620a" stroke-width="1.6" marker-end="url(#ca_arA)"/>
+  <text x="656" y="114" font-family="IBM Plex Mono,ui-monospace,monospace" font-size="11" fill="#a8620a">250 OK</text>
+  <text x="656" y="128" font-family="Hanken Grotesk,system-ui,sans-serif" font-size="11" font-weight="700" fill="#a8620a">Risky</text>
+  <text x="384" y="196" font-family="IBM Plex Mono,ui-monospace,monospace" font-size="11.5" fill="#334155">xqwp@brand.com</text>
+  <line x1="384" y1="206" x2="508" y2="206" stroke="#334155" stroke-width="1.4" marker-end="url(#ca_ar)"/>
+  <line x1="576" y1="206" x2="648" y2="206" stroke="#a8620a" stroke-width="1.6" marker-end="url(#ca_arA)"/>
+  <text x="656" y="202" font-family="IBM Plex Mono,ui-monospace,monospace" font-size="11" fill="#a8620a">250 OK</text>
+  <text x="656" y="216" font-family="Hanken Grotesk,system-ui,sans-serif" font-size="11" font-weight="700" fill="#a8620a">Risky</text>
+</svg>

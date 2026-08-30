@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 210" role="img" aria-label="A verification probe reaches the Secure Email Gateway named in the MX record, such as Proofpoint or Mimecast. The gateway answers the probe itself and forwards only clean mail to the internal mail server, so the real mailbox status stays hidden and the verifier returns Unknown.">
+  <rect x="1" y="1" width="718" height="208" rx="16" fill="#ffffff" stroke="#e6ebf2"/>
+  <defs>
+    <marker id="seg_ar" markerWidth="9" markerHeight="9" refX="7.5" refY="3.2" orient="auto"><polygon points="0,0 8,3.2 0,6.4" fill="#334155"/></marker>
+  </defs>
+  <rect x="14" y="78" width="96" height="54" rx="9" fill="none" stroke="#334155" stroke-opacity=".55"/>
+  <text x="62" y="102" text-anchor="middle" font-family="Hanken Grotesk,system-ui,sans-serif" font-size="12" font-weight="700" fill="#334155">Verifier</text>
+  <text x="62" y="118" text-anchor="middle" font-family="Hanken Grotesk,system-ui,sans-serif" font-size="10" fill="#334155">sends probe</text>
+  <line x1="110" y1="105" x2="214" y2="105" stroke="#334155" stroke-width="1.5" marker-end="url(#seg_ar)"/>
+  <text x="162" y="97" text-anchor="middle" font-family="IBM Plex Mono,ui-monospace,monospace" font-size="10" fill="#334155">MX &#8594; SEG</text>
+  <rect x="216" y="60" width="150" height="90" rx="11" fill="none" stroke="#2456e6" stroke-width="2"/>
+  <text x="291" y="90" text-anchor="middle" font-family="Hanken Grotesk,system-ui,sans-serif" font-size="13" font-weight="800" fill="#2456e6">SEG gateway</text>
+  <text x="291" y="108" text-anchor="middle" font-family="Hanken Grotesk,system-ui,sans-serif" font-size="10" fill="#334155">Proofpoint / Mimecast</text>
+  <text x="291" y="122" text-anchor="middle" font-family="Hanken Grotesk,system-ui,sans-serif" font-size="10" fill="#334155">Barracuda / Cisco</text>
+  <text x="291" y="140" text-anchor="middle" font-family="Hanken Grotesk,system-ui,sans-serif" font-size="9.5" font-style="italic" fill="#2456e6">answers the probe itself</text>
+  <line x1="366" y1="105" x2="470" y2="105" stroke="#334155" stroke-width="1.5" marker-end="url(#seg_ar)"/>
+  <text x="418" y="97" text-anchor="middle" font-family="Hanken Grotesk,system-ui,sans-serif" font-size="9.5" fill="#334155">clean mail only</text>
+  <rect x="472" y="78" width="104" height="54" rx="9" fill="none" stroke="#334155" stroke-opacity=".55"/>
+  <text x="524" y="100" text-anchor="middle" font-family="Hanken Grotesk,system-ui,sans-serif" font-size="11.5" font-weight="700" fill="#334155">Mail server</text>
+  <text x="524" y="116" text-anchor="middle" font-family="Hanken Grotesk,system-ui,sans-serif" font-size="10" fill="#334155">real mailbox</text>
+  <line x1="472" y1="150" x2="576" y2="150" stroke="#334155" stroke-opacity=".4" stroke-dasharray="3 4"/>
+  <text x="524" y="166" text-anchor="middle" font-family="Hanken Grotesk,system-ui,sans-serif" font-size="9.5" fill="#334155" opacity=".7">status hidden behind SEG</text>
+  <text x="620" y="70" text-anchor="middle" font-family="Hanken Grotesk,system-ui,sans-serif" font-size="10" fill="#334155">result</text>
+  <rect x="590" y="80" width="116" height="30" rx="15" fill="#ece9f4" stroke="#5b5570" stroke-opacity=".4"/>
+  <text x="648" y="100" text-anchor="middle" font-family="IBM Plex Mono,ui-monospace,monospace" font-size="12" font-weight="700" fill="#5b5570">Unknown</text>
+</svg>

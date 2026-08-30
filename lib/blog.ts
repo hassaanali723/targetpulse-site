@@ -6,7 +6,8 @@ import path from 'path'
 // (at build time via generateStaticParams) so every word is in the raw HTML.
 //
 // The renderer supports exactly the subset these posts use: H2/H3, paragraphs,
-// links, bold (used only in table cells), one table, and short bullet lists.
+// links, bold (used only in table cells), one table, short bullet lists, and
+// figures (a standalone image line, with an optional caption line below it).
 // It is deliberately small rather than a full CommonMark implementation.
 
 const POSTS_DIR = path.join(process.cwd(), 'content', 'blog')
@@ -83,6 +84,19 @@ function renderTable(lines: string[]): string {
   return `<div class="blog-table-wrap"><table class="blog-table">${thead}${tbody}</table></div>`
 }
 
+// A standalone image line, optionally followed by a caption line.
+const IMAGE_RE = /^!\[([^\]]*)\]\(([^)]+)\)\s*$/
+
+function renderFigure(lines: string[]): string {
+  const m = IMAGE_RE.exec(lines[0].trim())
+  if (!m) return `<p>${inline(lines.join(' '))}</p>`
+  const alt = escapeHtml(m[1]).replace(/"/g, '&quot;')
+  const src = m[2].trim()
+  const caption = lines.slice(1).join(' ').trim()
+  const cap = caption ? `<figcaption>${inline(caption)}</figcaption>` : ''
+  return `<figure class="blog-figure"><img src="${src}" alt="${alt}" loading="lazy" />${cap}</figure>`
+}
+
 function renderMarkdown(body: string): string {
   const blocks = body.trim().split(/\n{2,}/)
   const html: string[] = []
@@ -92,6 +106,8 @@ function renderMarkdown(body: string): string {
       html.push(`<h3>${inline(block.slice(4).trim())}</h3>`)
     } else if (block.startsWith('## ')) {
       html.push(`<h2>${inline(block.slice(3).trim())}</h2>`)
+    } else if (IMAGE_RE.test(lines[0].trim())) {
+      html.push(renderFigure(lines))
     } else if (lines.every((l) => l.trim().startsWith('|'))) {
       html.push(renderTable(lines))
     } else if (lines.every((l) => l.trim().startsWith('- '))) {

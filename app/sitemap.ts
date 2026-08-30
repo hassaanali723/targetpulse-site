@@ -75,6 +75,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/blog/verify-emails-inside-claude-and-chatgpt`, lastModified: '2026-08-21' },
     { url: `${baseUrl}/blog/how-to-reduce-email-bounce-rate`, lastModified: '2026-08-21' },
     { url: `${baseUrl}/blog/how-accurate-are-email-verification-tools`, lastModified: '2026-08-21' },
+    // Comparison guide.
+    { url: `${baseUrl}/blog/best-email-verification-tools`, lastModified: '2026-08-30' },
     // Integrations hub + per-tool pages.
     { url: `${baseUrl}/integrations`, lastModified: '2026-08-12' },
     { url: `${baseUrl}/integrations/zapier`, lastModified: '2026-08-14' },

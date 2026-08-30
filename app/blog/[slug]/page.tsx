@@ -34,6 +34,7 @@ const CTA_HEADLINE: Record<string, string> = {
   'good-bounce-rate-for-cold-email': 'Get your bounce rate under control',
   'what-is-a-secure-email-gateway': 'Verify addresses behind email gateways',
   'what-does-risky-mean-in-email-verification': 'Turn Risky rows into real answers',
+  'best-email-verification-tools': 'Resolve the catch-all and SEG rows others flag',
 }
 
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {

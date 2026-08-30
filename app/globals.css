@@ -278,3 +278,11 @@
 }
 .blog-table th { background: #f8fafc; color: #0f172a; font-weight: 700; }
 .blog-table td { color: #475569; }
+.blog-figure { margin: 1.75rem 0; }
+.blog-figure img {
+  width: 100%; height: auto; display: block;
+  border: 1px solid #e2e8f0; border-radius: 0.75rem; background: #ffffff;
+}
+.blog-figure figcaption {
+  margin-top: 0.6rem; font-size: 0.85rem; color: #64748b; line-height: 1.5;
+}
