@@ -8,7 +8,8 @@ import AltCtaBand from '@/components/alternatives/AltCtaBand'
 import JsonLd from '@/components/JsonLd'
 import { articleLd, breadcrumbTrailLd } from '@/lib/schema'
 import { getPostBySlug, getPostSlugs } from '@/lib/blog'
-import { ArrowLeft } from 'lucide-react'
+import TableOfContents from '@/components/blog/TableOfContents'
+import { Home, ChevronRight } from 'lucide-react'
 
 export const dynamicParams = false
 
@@ -68,7 +69,7 @@ export default function BlogArticlePage({ params }: { params: { slug: string } }
   if (!post) notFound()
 
   return (
-    <main className="relative min-h-screen bg-slate-50 grid-lines overflow-x-hidden text-slate-800 antialiased">
+    <main className="relative min-h-screen bg-slate-50 grid-lines overflow-x-clip text-slate-800 antialiased">
       <JsonLd
         data={breadcrumbTrailLd([
           { name: 'Blog', path: '/blog' },
@@ -88,40 +89,73 @@ export default function BlogArticlePage({ params }: { params: { slug: string } }
 
       <Navbar />
 
-      <article className="max-w-3xl mx-auto px-6 pt-28 md:pt-32 pb-16">
-        <Link
-          href="/blog"
-          className="inline-flex items-center gap-1.5 text-sm font-bold text-slate-500 hover:text-indigo-600 transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          All articles
-        </Link>
-
-        {post.image && (
-          <div className="mt-6 relative aspect-[16/9] w-full overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 card-vivid-shadow">
-            <Image
-              src={post.image}
-              alt={post.imageAlt || post.title}
-              fill
-              priority
-              sizes="(max-width: 768px) 100vw, 768px"
-              className="object-cover"
-            />
-          </div>
-        )}
-
-        <h1 className="mt-8 text-3xl md:text-4xl lg:text-5xl font-black tracking-tight leading-[1.1] text-slate-900">
-          {post.title}
-        </h1>
-
-        <div className="mt-4 text-sm text-slate-500 font-medium">
-          <time dateTime={post.date}>{formatDate(post.date)}</time>
-        </div>
+      <article
+        className={`mx-auto px-6 pt-28 md:pt-32 pb-16 ${
+          post.toc.length >= 4 ? 'max-w-6xl' : 'max-w-3xl'
+        }`}
+      >
+        <nav aria-label="Breadcrumb" className="blog-breadcrumb">
+          <Link href="/">
+            <Home aria-hidden="true" />
+            Home
+          </Link>
+          <ChevronRight aria-hidden="true" className="sep" />
+          <Link href="/blog">Blog</Link>
+          <ChevronRight aria-hidden="true" className="sep" />
+          <span className="current" aria-current="page">
+            {post.title}
+          </span>
+        </nav>
 
         <div
-          className="blog-prose mt-10"
-          dangerouslySetInnerHTML={{ __html: post.contentHtml }}
-        />
+          className={
+            post.toc.length >= 4
+              ? 'mt-6 lg:grid lg:grid-cols-[17rem_minmax(0,1fr)] lg:gap-16'
+              : 'mt-6'
+          }
+        >
+          {post.toc.length >= 4 && (
+            <aside className="hidden lg:block">
+              <div className="sticky top-28 max-h-[calc(100vh-8rem)] overflow-auto pr-2">
+                <TableOfContents items={post.toc} variant="side" />
+              </div>
+            </aside>
+          )}
+
+          <div className="min-w-0">
+            {post.image && (
+              <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 card-vivid-shadow">
+                <Image
+                  src={post.image}
+                  alt={post.imageAlt || post.title}
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 720px"
+                  className="object-cover"
+                />
+              </div>
+            )}
+
+            <h1 className="mt-8 text-3xl md:text-4xl font-black tracking-tight leading-[1.1] text-slate-900">
+              {post.title}
+            </h1>
+
+            <div className="mt-4 text-sm text-slate-500 font-medium">
+              <time dateTime={post.date}>{formatDate(post.date)}</time>
+            </div>
+
+            {post.toc.length >= 4 && (
+              <div className="lg:hidden mt-8">
+                <TableOfContents items={post.toc} variant="box" />
+              </div>
+            )}
+
+            <div
+              className="blog-prose mt-10"
+              dangerouslySetInnerHTML={{ __html: post.contentHtml }}
+            />
+          </div>
+        </div>
       </article>
 
       <AltCtaBand headline={CTA_HEADLINE[post.slug] || 'Verify your list with Giggal.ai'} />

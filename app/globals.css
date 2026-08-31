@@ -286,3 +286,48 @@
 .blog-figure figcaption {
   margin-top: 0.6rem; font-size: 0.85rem; color: #64748b; line-height: 1.5;
 }
+/* Breadcrumb trail above the article. */
+.blog-breadcrumb {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem;
+  font-size: 0.8rem; color: #94a3b8;
+}
+.blog-breadcrumb a {
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  color: #64748b; font-weight: 600;
+}
+.blog-breadcrumb a:hover { color: #4f46e5; }
+.blog-breadcrumb svg { width: 0.95rem; height: 0.95rem; }
+.blog-breadcrumb .sep { color: #cbd5e1; }
+.blog-breadcrumb .current {
+  color: #94a3b8; font-weight: 500;
+  max-width: 24ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+/* Shared ToC eyebrow. */
+.blog-toc-title {
+  margin: 0 0 0.7rem; font-size: 0.72rem; font-weight: 800;
+  letter-spacing: 0.09em; text-transform: uppercase; color: #94a3b8;
+}
+/* Sticky left-rail table of contents (desktop). */
+.blog-toc-side ul { list-style: none; margin: 0; padding: 0; border-left: 1px solid #e2e8f0; }
+.blog-toc-side li { margin: 0; }
+.blog-toc-side a {
+  display: block; padding: 0.3rem 0 0.3rem 0.9rem; margin-left: -1px;
+  border-left: 2px solid transparent;
+  color: #64748b; font-size: 0.85rem; line-height: 1.4; font-weight: 500;
+  text-decoration: none; transition: color .15s ease, border-color .15s ease;
+}
+.blog-toc-side a:hover { color: #4f46e5; }
+.blog-toc-side a.is-active { color: #4f46e5; font-weight: 700; border-left-color: #4f46e5; }
+/* Boxed table of contents (mobile / narrow screens). */
+.blog-toc {
+  padding: 1.1rem 1.35rem;
+  background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.75rem;
+}
+.blog-toc ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.4rem; }
+.blog-toc li { color: #475569; font-size: 0.95rem; line-height: 1.4; }
+.blog-toc a { color: #4f46e5; font-weight: 600; text-decoration: none; }
+.blog-toc a:hover { text-decoration: underline; }
+.blog-toc a.is-active { text-decoration: underline; }
+/* Anchor jumps clear the sticky navbar. */
+.blog-prose h2, .blog-prose h3 { scroll-margin-top: 96px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }

@@ -25,8 +25,15 @@ export interface PostMeta {
   imageAlt: string
 }
 
+export interface TocItem {
+  id: string
+  text: string
+}
+
 export interface Post extends PostMeta {
   contentHtml: string
+  // One entry per H2, in document order, for the table of contents.
+  toc: TocItem[]
 }
 
 function parseFrontmatter(raw: string): { data: Record<string, string>; body: string } {
@@ -97,15 +104,38 @@ function renderFigure(lines: string[]): string {
   return `<figure class="blog-figure"><img src="${src}" alt="${alt}" loading="lazy" />${cap}</figure>`
 }
 
-function renderMarkdown(body: string): string {
+// Stable, URL-safe anchor id from heading text (e.g. "1. What a catch-all" ->
+// "1-what-a-catch-all"). Collisions are suffixed -2, -3, ... within a post.
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '')
+}
+
+function renderMarkdown(body: string): { html: string; toc: TocItem[] } {
   const blocks = body.trim().split(/\n{2,}/)
   const html: string[] = []
+  const toc: TocItem[] = []
+  const used = new Set<string>()
+  const uniqueId = (raw: string): string => {
+    const base = slugify(raw) || 'section'
+    let id = base
+    let n = 2
+    while (used.has(id)) id = `${base}-${n++}`
+    used.add(id)
+    return id
+  }
   for (const block of blocks) {
     const lines = block.split('\n')
     if (block.startsWith('### ')) {
-      html.push(`<h3>${inline(block.slice(4).trim())}</h3>`)
+      const raw = block.slice(4).trim()
+      html.push(`<h3 id="${uniqueId(raw)}">${inline(raw)}</h3>`)
     } else if (block.startsWith('## ')) {
-      html.push(`<h2>${inline(block.slice(3).trim())}</h2>`)
+      const raw = block.slice(3).trim()
+      const id = uniqueId(raw)
+      toc.push({ id, text: raw })
+      html.push(`<h2 id="${id}">${inline(raw)}</h2>`)
     } else if (IMAGE_RE.test(lines[0].trim())) {
       html.push(renderFigure(lines))
     } else if (lines.every((l) => l.trim().startsWith('|'))) {
@@ -117,7 +147,7 @@ function renderMarkdown(body: string): string {
       html.push(`<p>${inline(lines.join(' '))}</p>`)
     }
   }
-  return html.join('\n')
+  return { html: html.join('\n'), toc }
 }
 
 export function getPostSlugs(): string[] {
@@ -133,6 +163,7 @@ export function getPostBySlug(slug: string): Post | null {
   if (!fs.existsSync(file)) return null
   const raw = fs.readFileSync(file, 'utf8')
   const { data, body } = parseFrontmatter(raw)
+  const { html, toc } = renderMarkdown(body)
   return {
     title: data.title || slug,
     description: data.description || '',
@@ -142,7 +173,8 @@ export function getPostBySlug(slug: string): Post | null {
     keyword: data.keyword || '',
     image: data.image || '',
     imageAlt: data.imageAlt || '',
-    contentHtml: renderMarkdown(body),
+    contentHtml: html,
+    toc,
   }
 }
 
@@ -151,7 +183,7 @@ export function getAllPosts(): PostMeta[] {
     .map((slug) => {
       const p = getPostBySlug(slug)
       if (!p) return null
-      const { contentHtml, ...meta } = p
+      const { contentHtml, toc, ...meta } = p
       return meta
     })
     .filter((p): p is PostMeta => p !== null)
