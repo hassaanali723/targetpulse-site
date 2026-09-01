@@ -1,13 +1,13 @@
 import type { Metadata } from 'next'
 import React from 'react'
 import Link from 'next/link'
-import {
-  BookOpen, AlertTriangle, CheckCircle2, Plus,
-} from 'lucide-react'
+import { BookOpen, Plus, Star, CheckCircle2 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import AnnouncementBar from '@/components/AnnouncementBar'
 import Footer from '@/components/Footer'
 import Wordmark from '@/components/Wordmark'
+import HeroCheck from '@/components/landing/HeroCheck'
+import ProductPreview from '@/components/landing/ProductPreview'
 import VerifierConsole from '@/components/landing/VerifierConsole'
 import ReviewBadges from '@/components/landing/ReviewBadges'
 import ReviewWall from '@/components/landing/ReviewWall'
@@ -15,7 +15,6 @@ import McpSection from '@/components/landing/McpSection'
 import PricingBlock from '@/components/landing/PricingBlock'
 import FaqAccordion, { type FaqItem } from '@/components/landing/FaqAccordion'
 import JsonLd from '@/components/JsonLd'
-import ObfuscatedEmail from '@/components/ObfuscatedEmail'
 import { softwareApplicationLd } from '@/lib/schema'
 
 // All sign-up / get-started CTAs go straight to the Giggal email verifier dashboard.
@@ -118,8 +117,8 @@ export default function Home() {
         {/* Copy */}
         <div className="lg:col-span-6 space-y-8 text-left">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900">
-            Verify Catch-All, <br />
-            <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">Risky &amp; SEG-Protected Emails</span>
+            Verify Every Email, <br />
+            <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">Even Catch-All &amp; SEG-Protected</span>
           </h1>
           <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-xl font-medium">
             Giggal.ai runs a deep mailbox existence check on every address. Your bounce rate stays{' '}
@@ -127,11 +126,11 @@ export default function Home() {
             <strong className="text-slate-900 font-extrabold">30% of every B2B list</strong> that other tools flag as &quot;Risky&quot; becomes deliverable again.
           </p>
           <p className="text-sm text-slate-500 leading-relaxed max-w-xl font-medium !mt-3">
-            Proofpoint, Mimecast and Barracuda block the checks most verifiers rely on. Here is how we{' '}
-            <a href="/seg-email-verification" className="text-indigo-600 font-bold hover:underline">
-              verify emails behind secure email gateways
-            </a>
-            .
+            On catch-all domains, and behind gateways like Proofpoint and Mimecast, most verifiers can only return a &quot;risky&quot; guess. See how our{' '}
+            <a href="/catch-all-verification" className="text-indigo-600 font-bold hover:underline">
+              catch-all email verification
+            </a>{' '}
+            returns a clear valid or invalid instead.
           </p>
 
           <div className="pt-6 !mt-6 border-t border-slate-200/80 space-y-1">
@@ -155,55 +154,62 @@ export default function Home() {
               <BookOpen className="w-4 h-4 text-indigo-600" /> See Pricing
             </a>
           </div>
+
+          <div className="flex items-center gap-3 !mt-6 text-xs font-semibold text-slate-500">
+            <span className="flex items-center gap-0.5 text-amber-400" aria-hidden="true">
+              <Star className="w-3.5 h-3.5 fill-current" /><Star className="w-3.5 h-3.5 fill-current" /><Star className="w-3.5 h-3.5 fill-current" /><Star className="w-3.5 h-3.5 fill-current" /><Star className="w-3.5 h-3.5 fill-current" />
+            </span>
+            <span>4.8 on G2 &middot; 500M+ emails verified</span>
+          </div>
         </div>
 
-        {/* Showcase widget */}
+        {/* Single-check hero visual */}
         <div className="lg:col-span-6">
-          <div className="gradient-border glow-recommendation">
-            <div className="gradient-border-content p-6 sm:p-8 space-y-6 bg-white relative overflow-hidden">
-              <div className="absolute -right-16 -top-16 w-36 h-32 rounded-full bg-indigo-500/5 blur-3xl pointer-events-none" />
+          <HeroCheck />
+        </div>
+      </section>
 
-              <div className="text-center">
-                <h3 className="text-2xl font-black text-slate-900 tracking-tight leading-tight">
-                  Validate Risky Emails Instantly
-                </h3>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 items-center">
-                {/* Generic platform deck */}
-                <div className="bg-slate-50/50 border-2 border-slate-200/80 rounded-2xl overflow-hidden flex flex-col justify-between h-[160px] card-vivid-shadow">
-                  <div className="bg-slate-100 text-center text-[11px] font-black text-slate-700 uppercase tracking-wider border-b border-slate-200/50 flex items-center justify-center h-12 shrink-0">
-                    Generic Platform
-                  </div>
-                  <div className="p-4 flex-1 flex flex-col justify-between">
-                    <p className="text-[11px] sm:text-xs font-mono font-bold text-slate-500 text-center break-all">
-                      <ObfuscatedEmail user="henry.schuck" domain="zoominfo.com" />
-                    </p>
-                    <div className="py-2.5 px-3 bg-amber-500/10 border border-amber-300 rounded-xl flex items-center justify-center gap-1.5 text-amber-700 font-extrabold text-[11px] shadow-sm">
-                      <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0" />
-                      <span>Catch-All / Unknown</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Giggal deck (highlighted) */}
-                <div className="bg-white border-2 border-indigo-600/40 rounded-2xl overflow-hidden flex flex-col justify-between h-[172px] card-vivid-shadow shadow-indigo-600/10 shadow-lg relative ring-2 ring-indigo-600/5 transform scale-[1.03] sm:scale-105 z-10 origin-center">
-                  <div className="absolute -right-8 -top-8 w-16 h-16 rounded-full bg-indigo-500/5 blur-xl pointer-events-none" />
-                  <div className="bg-white text-center border-b border-indigo-100 flex items-center justify-center h-12 shrink-0">
-                    <Wordmark className="text-sm sm:text-base" />
-                  </div>
-                  <div className="p-4 flex-1 flex flex-col justify-between relative z-10">
-                    <p className="text-[11px] sm:text-xs font-mono font-bold text-slate-800 text-center break-all">
-                      <ObfuscatedEmail user="henry.schuck" domain="zoominfo.com" />
-                    </p>
-                    <div className="py-2.5 px-3 bg-emerald-500 border border-emerald-400 rounded-xl flex items-center justify-center gap-1.5 text-white font-extrabold text-[11px] shadow-md shadow-emerald-500/20">
-                      <CheckCircle2 className="w-4 h-4 shrink-0" />
-                      <span>Deliverable</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+      {/* Stats bar */}
+      <section className="max-w-6xl mx-auto px-6 -mt-8 md:-mt-12 pb-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-slate-200 rounded-2xl overflow-hidden border border-slate-200 card-vivid-shadow">
+          {[
+            { n: '500M+', l: 'Emails verified' },
+            { n: '98.5%', l: 'Accuracy on business lists' },
+            { n: 'Under 3%', l: 'Bounce rate maintained' },
+            { n: '1,000', l: 'Free credits, no card' },
+          ].map((s) => (
+            <div key={s.l} className="bg-white px-5 py-6 text-center">
+              <div className="text-2xl md:text-3xl font-black text-indigo-600 tracking-tight tabular-nums">{s.n}</div>
+              <div className="text-[11px] md:text-xs font-bold text-slate-500 mt-1 leading-tight">{s.l}</div>
             </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Product: bulk results dashboard */}
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-10 pb-20">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="space-y-5 order-2 lg:order-1">
+            <span className="inline-block text-xs font-black uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-lg">Bulk email verification</span>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">Bulk email verification for your whole list in minutes</h2>
+            <p className="text-slate-600 text-sm md:text-base font-medium leading-relaxed">
+              Upload a CSV or Excel file of up to 50,000 emails and Giggal.ai&apos;s bulk email verification returns each address as deliverable or undeliverable. The email verification tool also resolves the catch-all, accept-all and SEG-protected addresses that other email verifiers only mark as risky, so you can export a clean list.
+            </p>
+            <ul className="space-y-2.5">
+              {[
+                'Bulk email verification for up to 50,000 emails per file, with real-time results',
+                'Catch-all, accept-all and SEG-protected email verification resolved to a real result',
+                'Export your verified email list as CSV or Excel',
+              ].map((t) => (
+                <li key={t} className="flex items-start gap-2.5 text-sm font-semibold text-slate-700">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                  <span>{t}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="order-1 lg:order-2">
+            <ProductPreview />
           </div>
         </div>
       </section>
@@ -213,7 +219,7 @@ export default function Home() {
         <div className="max-w-3xl mx-auto space-y-4">
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Verify Any Email in Real-Time</h2>
           <p className="text-slate-600 leading-relaxed text-sm md:text-base font-medium max-w-2xl mx-auto">
-            Test emails for free to see our engine check spelling, locate mail servers, and ping mailboxes in real-time.
+            Test emails for free to see our engine check spelling, locate mail servers, and confirm real mailbox existence in real-time.
           </p>
         </div>
         <VerifierConsole />
@@ -378,7 +384,7 @@ export default function Home() {
       <section id="faq" className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-16">
         <div className="text-center space-y-3">
           <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">Frequently Asked Questions</h2>
-          <p className="text-sm text-slate-600 font-bold">Everything you need to know about our SMTP socket logic and server pings.</p>
+          <p className="text-sm text-slate-600 font-bold">Everything you need to know about how Giggal verifies deliverability, including catch-all and SEG-protected addresses.</p>
         </div>
         <FaqAccordion items={faqItems} />
       </section>

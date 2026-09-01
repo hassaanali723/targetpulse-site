@@ -12,14 +12,16 @@ const jakarta = Plus_Jakarta_Sans({
   variable: '--font-jakarta',
 })
 
-// Mono is only used for small code/email snippets below the fold. Do NOT
-// preload it — its preload otherwise competes with the LCP font on the
-// critical path. It still loads lazily via display: swap when needed.
+// Mono now appears in the hero verifier (above the fold), so preload it
+// alongside the primary face. With display:'optional' + no preload it kept
+// missing its ~100ms block window and rendering in the fallback mono for the
+// whole pageview, which read as the font "loading weirdly." Preloading puts it
+// on the critical path so email/code snippets show the right face from paint.
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
   display: 'optional',
-  preload: false,
+  preload: true,
   variable: '--font-jetbrains-mono',
 })
 

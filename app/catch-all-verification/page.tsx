@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
@@ -83,14 +83,60 @@ const faqJsonLd = {
   })),
 }
 
-const EMAIL_COUNT = 49621
+// Illustrative list split shown in the interactive card.
+// OFF: catch-all addresses (~30% of the list) sit in the "Risky" bucket.
+// ON: that bucket resolves, roughly 80% deliverable, 20% undeliverable.
+const OFF = { deliverable: 27204, undeliverable: 7531, risky: 14886 }
+const ON = { deliverable: 39113, undeliverable: 10508, risky: 0 }
+
+// Tween a number toward its target so the redistribution reads as movement.
+function useCountUp(target: number, duration = 700) {
+  const [val, setVal] = useState(target)
+  const prev = useRef(target)
+  useEffect(() => {
+    const from = prev.current
+    const to = target
+    prev.current = target
+    if (from === to) return
+    let raf = 0
+    const start = performance.now()
+    const step = (t: number) => {
+      const p = Math.min(1, (t - start) / duration)
+      const eased = 1 - Math.pow(1 - p, 3)
+      setVal(Math.round(from + (to - from) * eased))
+      if (p < 1) raf = requestAnimationFrame(step)
+    }
+    raf = requestAnimationFrame(step)
+    return () => cancelAnimationFrame(raf)
+  }, [target, duration])
+  return val
+}
+
+const TONES = {
+  emerald: { card: 'bg-emerald-50 border-emerald-100', label: 'text-emerald-700', num: 'text-emerald-600' },
+  rose: { card: 'bg-rose-50 border-rose-100', label: 'text-rose-600', num: 'text-rose-600' },
+  amber: { card: 'bg-amber-50 border-amber-100', label: 'text-amber-700', num: 'text-amber-600' },
+} as const
+
+function StatCard({
+  label, value, tone, resolved,
+}: { label: string; value: number; tone: keyof typeof TONES; resolved?: boolean }) {
+  const shown = useCountUp(value)
+  const t = TONES[tone]
+  return (
+    <div className={`rounded-xl border p-3 text-center transition-all duration-500 ${resolved ? 'bg-slate-50 border-slate-100 opacity-60' : t.card}`}>
+      <div className={`text-[9px] font-black uppercase tracking-wider mb-1 ${resolved ? 'text-slate-400' : t.label}`}>{label}</div>
+      <div className={`text-lg font-black tabular-nums ${resolved ? 'text-slate-400' : t.num}`}>{shown.toLocaleString()}</div>
+      <div className="text-[9px] font-semibold mt-0.5 h-3 leading-3">
+        {resolved && <span className="text-emerald-600">resolved</span>}
+      </div>
+    </div>
+  )
+}
 
 export default function CatchAllVerificationPage() {
-  const [toggleOn, setToggleOn] = useState(true)
-
-  const rate = 1
-  const total = EMAIL_COUNT
-  const extra = 0
+  const [toggleOn, setToggleOn] = useState(false)
+  const counts = toggleOn ? ON : OFF
 
   return (
     <main className="relative min-h-screen bg-slate-50 grid-lines overflow-x-hidden text-slate-800 antialiased">
@@ -159,7 +205,7 @@ export default function CatchAllVerificationPage() {
             <div className="bg-indigo-600 px-6 py-5 text-white">
               <div className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-[0.16em] text-emerald-300 mb-2">
                 <Sparkles className="w-3 h-3" />
-                Deep Verification Enabled
+                {toggleOn ? 'Deep verification enabled' : 'Standard verification'}
               </div>
               <div className="text-xl font-black mb-1">Confirm Email Validation</div>
               <div className="text-[12px] text-white/70">leads_2026.csv</div>
@@ -167,22 +213,9 @@ export default function CatchAllVerificationPage() {
 
             <div className="p-5">
               <div className="grid grid-cols-3 gap-2 mb-5">
-                <div className="rounded-xl bg-slate-50 border border-slate-100 p-3 text-center">
-                  <div className="text-[9px] font-black uppercase tracking-wider text-slate-400 mb-1">Emails</div>
-                  <div className="text-lg font-black text-slate-900">{EMAIL_COUNT.toLocaleString()}</div>
-                </div>
-                <div className="rounded-xl bg-slate-50 border border-slate-100 p-3 text-center">
-                  <div className="text-[9px] font-black uppercase tracking-wider text-slate-400 mb-1">Rate</div>
-                  <div className="text-lg font-black text-slate-900 transition-all">{rate}</div>
-                  <div className="text-[9px] text-slate-400 font-semibold">credits / email</div>
-                </div>
-                <div className={`rounded-xl p-3 text-center transition-colors ${toggleOn ? 'bg-indigo-50 border border-indigo-100' : 'bg-slate-50 border border-slate-100'}`}>
-                  <div className={`text-[9px] font-black uppercase tracking-wider mb-1 ${toggleOn ? 'text-indigo-700' : 'text-slate-400'}`}>Total</div>
-                  <div className={`text-lg font-black ${toggleOn ? 'text-indigo-700' : 'text-slate-900'}`}>{total.toLocaleString()}</div>
-                  {extra > 0 && (
-                    <div className="text-[9px] text-indigo-600 font-bold">+{extra.toLocaleString()}</div>
-                  )}
-                </div>
+                <StatCard label="Deliverable" value={counts.deliverable} tone="emerald" />
+                <StatCard label="Undeliverable" value={counts.undeliverable} tone="rose" />
+                <StatCard label="Risky" value={counts.risky} tone="amber" resolved={toggleOn} />
               </div>
 
               <div className="rounded-2xl border-2 border-indigo-200 bg-indigo-50/40 p-4">
