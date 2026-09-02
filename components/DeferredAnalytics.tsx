@@ -25,12 +25,18 @@ declare global {
 
 function loadGA() {
   window.dataLayer = window.dataLayer || []
-  const gtag = (...args: unknown[]) => {
-    window.dataLayer!.push(args)
+  // GA4's gtag.js only processes dataLayer entries that are the native
+  // `arguments` object. A rest-spread arrow pushes a plain array instead,
+  // which gtag.js silently ignores, so no /collect hit is ever sent and GA
+  // records nothing. Use the official classic-function form.
+  /* eslint-disable prefer-rest-params */
+  function gtag() {
+    window.dataLayer!.push(arguments)
   }
-  window.gtag = gtag
-  gtag('js', new Date())
-  gtag('config', GA_ID)
+  /* eslint-enable prefer-rest-params */
+  window.gtag = gtag as (...args: unknown[]) => void
+  window.gtag('js', new Date())
+  window.gtag('config', GA_ID)
 
   const s = document.createElement('script')
   s.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`
