@@ -1,6 +1,8 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
+import { usePathname } from 'next/navigation'
+import { initAnalytics, trackPageView } from '@/lib/analytics'
 
 // GA4 + Microsoft Clarity are loaded on the first real user gesture (scroll,
 // pointer, key, touch, wheel) instead of during page load. Their combined
@@ -60,6 +62,20 @@ function loadClarity() {
 }
 
 export default function DeferredAnalytics() {
+  const pathname = usePathname()
+  // The first render's pathname is already covered by gtag('config'), which
+  // sends its own page_view. Only *subsequent* client-side navigations need
+  // an explicit one, so skip the initial run to avoid double-counting.
+  const firstRun = useRef(true)
+
+  useEffect(() => {
+    if (firstRun.current) {
+      firstRun.current = false
+      return
+    }
+    trackPageView(pathname)
+  }, [pathname])
+
   useEffect(() => {
     let started = false
     const events = ['scroll', 'pointerdown', 'pointermove', 'keydown', 'touchstart', 'wheel']
@@ -70,12 +86,34 @@ export default function DeferredAnalytics() {
       events.forEach((e) => window.removeEventListener(e, start))
       loadGA()
       loadClarity()
+      // Journey instrumentation attaches only after GA exists, so no events
+      // are collected into a void. The gesture that triggers this is itself
+      // the user's first interaction, so nothing meaningful precedes it.
+      initAnalytics()
     }
 
     const opts: AddEventListenerOptions = { once: true, passive: true }
     events.forEach((e) => window.addEventListener(e, start, opts))
 
-    return () => events.forEach((e) => window.removeEventListener(e, start))
+    // Gesture alone under-counts: a visitor who reads the page and leaves
+    // without scrolling or tapping was never recorded at all, so bounces and
+    // short reads were structurally invisible. Fall back to a timer so every
+    // real session is counted. It runs well after LCP, and defers to an idle
+    // slot, so the original reason for deferring (keeping ~800 ms of
+    // third-party work off the LCP critical path) still holds.
+    const idle = (cb: () => void) =>
+      'requestIdleCallback' in window
+        ? (window as unknown as {
+            requestIdleCallback: (c: () => void, o?: { timeout: number }) => void
+          }).requestIdleCallback(cb, { timeout: 2000 })
+        : cb()
+
+    const timer = window.setTimeout(() => idle(start), 3000)
+
+    return () => {
+      window.clearTimeout(timer)
+      events.forEach((e) => window.removeEventListener(e, start))
+    }
   }, [])
 
   return null
