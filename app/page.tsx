@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import React from 'react'
 import Link from 'next/link'
-import { BookOpen, Plus, Star, CheckCircle2 } from 'lucide-react'
+import { BookOpen, Plus, Star, CheckCircle2, ArrowRight } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import AnnouncementBar from '@/components/AnnouncementBar'
 import Footer from '@/components/Footer'
@@ -16,6 +16,20 @@ import PricingBlock from '@/components/landing/PricingBlock'
 import FaqAccordion, { type FaqItem } from '@/components/landing/FaqAccordion'
 import JsonLd from '@/components/JsonLd'
 import { softwareApplicationLd } from '@/lib/schema'
+
+// The eight competitors with the most search demand. Each links to its existing
+// /{brand}-alternative page; those pages now carry the head-to-head links, so
+// this is the top of the crawl path into the 351 comparison pages.
+const SWITCHERS = [
+  { name: 'ZeroBounce', href: '/zerobounce-alternative', blurb: 'Resolve the catch-all addresses ZeroBounce returns as unknown.' },
+  { name: 'NeverBounce', href: '/neverbounce-alternative', blurb: 'Pay-as-you-go pricing with credits that never expire.' },
+  { name: 'Bouncer', href: '/bouncer-alternative', blurb: 'Catch-all and SEG-protected mailboxes resolved, not just flagged.' },
+  { name: 'Hunter', href: '/hunter-alternative', blurb: 'A dedicated verifier instead of a finder with verification bundled in.' },
+  { name: 'Kickbox', href: '/kickbox-alternative', blurb: 'Flat 1 credit per email, with no monthly commitment.' },
+  { name: 'Emailable', href: '/emailable-alternative', blurb: 'Four clear results on accept-all domains, not a risky label.' },
+  { name: 'MillionVerifier', href: '/millionverifier-alternative', blurb: 'Catch-all resolution built in rather than sold separately.' },
+  { name: 'Apollo', href: '/apollo-alternative', blurb: 'Verification built for deliverability, not bundled into a sales suite.' },
+]
 
 // All sign-up / get-started CTAs go straight to the Giggal email verifier dashboard.
 const SIGNUP_URL = 'https://emailverifier.giggal.ai/sign-up'
@@ -367,6 +381,47 @@ export default function Home() {
               <span className="text-xs font-black text-slate-500">80+ More</span>
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* Switching from another verifier — puts the /{brand}-alternative tier
+          on the highest-authority page on the site. Those pages were reachable
+          only from the footer and /alternatives before, which is part of why
+          the comparison pages hanging off them went uncrawled. */}
+      <section className="cv-section max-w-6xl mx-auto px-6 py-24 border-t border-slate-200 space-y-12">
+        <div className="text-center max-w-2xl mx-auto space-y-4">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
+            Switching from another verifier?
+          </h2>
+          <p className="text-sm md:text-base text-slate-600 font-medium">
+            See how Giggal.ai compares on catch-all handling, pricing and accuracy.
+          </p>
+        </div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {SWITCHERS.map((s) => (
+            <Link
+              key={s.href}
+              href={s.href}
+              className="group rounded-2xl border-2 border-slate-200 bg-white p-5 space-y-2 hover:border-indigo-300 hover:-translate-y-0.5 transition-all card-vivid-shadow"
+            >
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-sm font-black text-slate-900">{s.name}</span>
+                <ArrowRight className="w-4 h-4 text-slate-300 group-hover:text-indigo-500 transition-colors" />
+              </div>
+              <p className="text-[13px] text-slate-500 font-semibold leading-normal">{s.blurb}</p>
+            </Link>
+          ))}
+        </div>
+
+        <div className="text-center">
+          <Link
+            href="/alternatives"
+            className="inline-flex items-center gap-2 text-sm font-extrabold text-indigo-600 hover:text-indigo-700 transition-colors"
+          >
+            Compare verifiers
+            <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
       </section>
 

@@ -108,11 +108,14 @@ export default function Footer() {
               </li>
               {/* These two both lead to comparison content, so the labels have
                   to say which is which. /alternatives is the ranked guide we
-                  wrote; /compare is the generated head-to-head grid. "Compare
-                  verifiers" and "Tool comparisons" read as the same thing. */}
+                  wrote; /compare is the generated head-to-head grid below.
+                  "Verifier comparison" stays distinct from "Head-to-head
+                  comparisons" without implying the competitors are the best
+                  option. The header nav uses "Compare verifiers" for the same
+                  URL, which is fine — nav and footer need not match. */}
               <li>
                 <Link href="/alternatives" className={linkClass}>
-                  Verifier buying guide
+                  Verifier comparison
                 </Link>
               </li>
               <li>

@@ -6,7 +6,7 @@ import Footer from '@/components/Footer'
 import JsonLd from '@/components/JsonLd'
 import { breadcrumbTrailLd } from '@/lib/schema'
 import { versusSlug } from '@/lib/compare'
-import { ALL_COMPETITOR_SLUGS, getCompetitor } from '@/lib/competitorPricing'
+import { getCompetitor } from '@/lib/competitorPricing'
 
 export const metadata: Metadata = {
   title: { absolute: 'Compare Email Verification Tools | Giggal.ai' },
@@ -40,16 +40,6 @@ export default function CompareHub() {
     slug: versusSlug(a, b),
     label: `${getCompetitor(a).name} vs ${getCompetitor(b).name}`,
   }))
-
-  // Full index, grouped by the canonical first competitor so every pair is
-  // listed exactly once.
-  const groups = ALL_COMPETITOR_SLUGS.map((a, i) => ({
-    name: getCompetitor(a).name,
-    pairs: ALL_COMPETITOR_SLUGS.slice(i + 1).map((b) => ({
-      slug: versusSlug(a, b),
-      label: `${getCompetitor(a).name} vs ${getCompetitor(b).name}`,
-    })),
-  })).filter((g) => g.pairs.length)
 
   return (
     <main className="relative min-h-screen bg-slate-50 grid-lines overflow-x-hidden text-slate-800 antialiased">
@@ -89,27 +79,26 @@ export default function CompareHub() {
         </div>
       </section>
 
-      {/* ── FULL INDEX ───────────────────────────────────────── */}
-      <section className="max-w-4xl mx-auto px-6 py-10 space-y-8 border-t border-slate-200">
-        <h2 className={sectionTitle}>All comparisons</h2>
-        <div className="space-y-8">
-          {groups.map((g) => (
-            <div key={g.name} className="space-y-3">
-              <h3 className="text-sm font-black uppercase tracking-wider text-slate-400">{g.name}</h3>
-              <div className="flex flex-wrap gap-2">
-                {g.pairs.map((p) => (
-                  <Link
-                    key={p.slug}
-                    href={`/compare/${p.slug}`}
-                    className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-[13px] font-semibold text-slate-600 hover:border-indigo-300 hover:text-indigo-700 transition-all"
-                  >
-                    {p.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
+      {/* ── BROWSE BY TOOL ───────────────────────────────────────
+          This used to list all 351 pairs inline. That divided the hub's link
+          value 351 ways, which Google read as a signal these pages did not
+          matter — 129 of them were never crawled. The full index now lives one
+          hop away: /alternatives ranks every tool, and each tool's own page
+          carries its head-to-head links. Same destinations, far fewer links
+          competing for the same authority. */}
+      <section className="max-w-4xl mx-auto px-6 py-10 space-y-6 border-t border-slate-200">
+        <h2 className={sectionTitle}>Browse every comparison by tool</h2>
+        <p className="text-base md:text-lg text-slate-600 leading-relaxed font-medium max-w-2xl">
+          Every verifier we track has its own page, with a full list of its head-to-head
+          matchups against the rest, plus pricing and catch-all handling side by side.
+        </p>
+        <Link
+          href="/alternatives"
+          className="group inline-flex items-center gap-2 px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold rounded-xl text-sm shadow-md shadow-indigo-600/10 hover:-translate-y-0.5 transition-all"
+        >
+          Compare verifiers
+          <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+        </Link>
       </section>
 
       <Footer />

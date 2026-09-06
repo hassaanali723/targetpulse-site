@@ -12,11 +12,13 @@ const SIGNIN_URL = 'https://emailverifier.giggal.ai/sign-in'
 const catchAllLink = { name: 'Catch-all Verification', href: '/catch-all-verification' }
 
 const navLinks = [
+  // /alternatives is the hub the comparison pages now hang off, so it needs a
+  // site-wide entry point rather than a footer-only link.
+  { name: 'Compare verifiers', href: '/alternatives' },
   { name: 'Integrations', href: '/integrations' },
   { name: 'MCP', href: '/mcp' },
   { name: 'Pricing', href: '/pricing' },
   { name: 'Earn with us', href: '/affiliates' },
-  { name: 'Talk to us', href: '/contact-us' },
 ]
 
 export default function Navbar() {

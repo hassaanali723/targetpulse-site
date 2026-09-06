@@ -10,6 +10,7 @@ import ComparisonTable from '@/components/alternatives/ComparisonTable'
 import Bluf from '@/components/alternatives/Bluf'
 import AltCtaBand from '@/components/alternatives/AltCtaBand'
 import RelatedLinks from '@/components/alternatives/RelatedLinks'
+import HeadToHeadComparisons from '@/components/alternatives/HeadToHeadComparisons'
 import { getCompetitor } from '@/lib/competitorPricing'
 import { ArrowRight } from 'lucide-react'
 
@@ -182,6 +183,9 @@ export default function BounceBanAlternativePage() {
           ))}
         </ol>
       </section>
+
+      {/* ── HEAD-TO-HEAD ─────────────────────────────────────── */}
+      <HeadToHeadComparisons slug="bounceban" />
 
       {/* ── FAQ ──────────────────────────────────────────────── */}
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-10">

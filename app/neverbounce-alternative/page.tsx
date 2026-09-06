@@ -12,6 +12,7 @@ import BenchmarkCallout from '@/components/alternatives/BenchmarkCallout'
 import Bluf from '@/components/alternatives/Bluf'
 import AltCtaBand from '@/components/alternatives/AltCtaBand'
 import RelatedLinks from '@/components/alternatives/RelatedLinks'
+import HeadToHeadComparisons from '@/components/alternatives/HeadToHeadComparisons'
 import { getCompetitor } from '@/lib/competitorPricing'
 import { ArrowRight } from 'lucide-react'
 
@@ -172,6 +173,9 @@ export default function NeverBounceAlternativePage() {
           ))}
         </ol>
       </section>
+
+      {/* ── HEAD-TO-HEAD ─────────────────────────────────────── */}
+      <HeadToHeadComparisons slug="neverbounce" />
 
       {/* ── FAQ ──────────────────────────────────────────────── */}
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-10">
