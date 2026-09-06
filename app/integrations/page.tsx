@@ -6,6 +6,7 @@ import Footer from '@/components/Footer'
 import JsonLd from '@/components/JsonLd'
 import { breadcrumbLd } from '@/lib/schema'
 import IntegrationsGrid from '@/components/integrations/IntegrationsGrid'
+import ZapierAppList from '@/components/integrations/ZapierAppList'
 import { SIGNUP_URL } from '@/lib/integrations'
 
 export const metadata: Metadata = {
@@ -46,6 +47,11 @@ export default function IntegrationsPage() {
       <section className="max-w-6xl mx-auto px-6 pb-20">
         <IntegrationsGrid />
       </section>
+
+      {/* Server-rendered index of every Zapier app page. The grid above
+          paginates client-side, so only four of these URLs reached the HTML and
+          the rest were never crawled. */}
+      <ZapierAppList />
 
       {/* API fallback band */}
       <section className="max-w-6xl mx-auto px-6 pb-24">
