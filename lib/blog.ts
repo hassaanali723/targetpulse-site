@@ -66,7 +66,7 @@ function inline(text: string): string {
   out = out.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_m, label: string, href: string) => {
     const external = /^https?:\/\//.test(href)
     const attrs = external
-      ? ` target="_blank" rel="noopener noreferrer"`
+      ? ` target="_blank" rel="noopener noreferrer nofollow"`
       : ''
     return `<a href="${href}" class="blog-link"${attrs}>${label}</a>`
   })
