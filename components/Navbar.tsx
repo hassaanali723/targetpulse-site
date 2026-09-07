@@ -7,6 +7,15 @@ import Link from 'next/link'
 const SIGNUP_URL = 'https://emailverifier.giggal.ai/sign-up'
 const SIGNIN_URL = 'https://emailverifier.giggal.ai/sign-in'
 
+// The desktop nav switches on at lg, not md. At md (768px) the full row needs
+// roughly 1010px, so every tablet in portrait — iPad Mini, Air, 10th-gen — got
+// a nav whose items wrapped onto two and three lines, with the wordmark
+// colliding with the first link. Tablets keep the hamburger instead.
+// whitespace-nowrap on both groups stops a label breaking mid-phrase if the
+// row is ever tight again. Tracks are tighter at lg and open up at xl: at
+// exactly 1024 the full-width spacing pushed the sign-up button past the right
+// edge, while spacing it evenly here keeps every item clear of its neighbour.
+
 // Catch-all is the flagship, top-level item. SEG and Mimecast are linked from
 // within the pages, not the nav.
 const catchAllLink = { name: 'Catch-all Verification', href: '/catch-all-verification' }
@@ -58,7 +67,7 @@ export default function Navbar() {
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-8 text-sm font-bold text-slate-600">
+            <nav className="hidden lg:flex items-center space-x-5 xl:space-x-8 text-sm font-bold text-slate-600 whitespace-nowrap">
               <Link href={catchAllLink.href} className="hover:text-indigo-600 transition-colors duration-200">
                 {catchAllLink.name}
               </Link>
@@ -74,7 +83,7 @@ export default function Navbar() {
             </nav>
 
             {/* Desktop CTA */}
-            <div className="hidden md:flex items-center gap-6">
+            <div className="hidden lg:flex items-center gap-4 xl:gap-6 whitespace-nowrap">
               <a
                 href={SIGNIN_URL}
                 target="_blank"
@@ -95,7 +104,7 @@ export default function Navbar() {
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors"
+              className="lg:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle menu"
             >
@@ -109,7 +118,7 @@ export default function Navbar() {
       </header>
 
       {/* Mobile Menu */}
-      <div className={`fixed inset-0 z-40 md:hidden transition-all duration-300 ${
+      <div className={`fixed inset-0 z-40 lg:hidden transition-all duration-300 ${
         isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
       }`}>
         <div
