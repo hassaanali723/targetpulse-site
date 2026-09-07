@@ -1,8 +1,11 @@
 'use client'
 
 import React, { useState } from 'react'
-import Link from 'next/link'
 import { RAW_OFFERS } from '@/components/landing/pricingOffers'
+
+// Checkout lives in the dashboard, not on this site. Same host the navbar's
+// sign-in/sign-up links use.
+const DASHBOARD_PRICING_URL = 'https://emailverifier.giggal.ai/pricing'
 
 // payRate = pack total ÷ credits; subRate = payRate × (1 − 0.10) monthly discount.
 const SUBSCRIPTION_DISCOUNT_RATE = 0.1
@@ -114,8 +117,26 @@ export default function PricingTable() {
 
                 {/* CTA */}
                 <div className="col-span-12 md:col-span-2 flex justify-end">
-                  <Link
-                    href="/sign-up"
+                  {/* Straight to the dashboard's pricing page, where checkout
+                      actually happens. This used to point at /sign-up — a second
+                      marketing page — so "Buy" opened another pitch instead of a
+                      purchase, and the reader had to find pricing again inside
+                      the app. Signed-out visitors are handled by Clerk: the
+                      route is protected, so they get /sign-in?redirect_url=…
+                      and come back here authenticated, query string intact.
+
+                      credits + mode carry the row the reader actually clicked,
+                      so the dashboard can scroll to and highlight it instead of
+                      dropping them at the top of a nine-row table. The credit
+                      tiers are identical on both sides, and `mode` is
+                      translated to the dashboard's own naming (payg /
+                      subscription) rather than this component's pay / sub. */}
+                  <a
+                    href={`${DASHBOARD_PRICING_URL}?credits=${offer.credits}&mode=${
+                      mode === 'pay' ? 'payg' : 'subscription'
+                    }`}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className={`w-full md:w-auto px-6 py-2.5 text-xs font-black rounded-xl transition-all text-center ${
                       offer.popular
                         ? 'bg-indigo-600 text-white hover:bg-indigo-700'
@@ -123,7 +144,7 @@ export default function PricingTable() {
                     }`}
                   >
                     {btnText}
-                  </Link>
+                  </a>
                 </div>
               </div>
             )
