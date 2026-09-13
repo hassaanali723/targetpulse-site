@@ -10,13 +10,14 @@ import ZapierAppList from '@/components/integrations/ZapierAppList'
 import { SIGNUP_URL } from '@/lib/integrations'
 
 export const metadata: Metadata = {
-  title: 'Email Verification Integrations',
+  title: { absolute: 'Email Verification Integrations: Zapier, n8n, CRMs | Giggal.ai' },
   description:
-    'Connect Giggal.ai to Zapier, Mailchimp, SendGrid, Clay, Google Sheets and more. Verify emails and resolve catch-all addresses inside the tools you already use, no code required.',
+    'Email verification integrations for Zapier, n8n, HubSpot, Mailchimp and Google Sheets. Verify emails and resolve catch-all addresses inside your stack, no code.',
   alternates: { canonical: '/integrations' },
   openGraph: {
     siteName: 'Giggal.ai',
-    title: 'Email Verification Integrations | Giggal.ai',
+    images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai email verification' }],
+    title: 'Email Verification Integrations: Zapier, n8n, CRMs',
     description:
       'Connect the Giggal.ai catch-all email verifier to Zapier, Mailchimp, SendGrid, Clay, Google Sheets and more.',
     url: 'https://giggal.ai/integrations',
@@ -33,8 +34,8 @@ export default function IntegrationsPage() {
       {/* Hero */}
       <section className="max-w-6xl mx-auto px-6 pt-32 md:pt-36 pb-12 text-center">
         <h1 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 mb-5 text-balance">
-          Verify Emails Inside the{' '}
-          <span className="gradient-text">Tools You Already Use</span>
+          Email verification integrations for the{' '}
+          <span className="gradient-text">tools you already use</span>
         </h1>
         <p className="text-[16px] text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium">
           Connect Giggal.ai&apos;s catch-all email verifier to your email marketing platform,

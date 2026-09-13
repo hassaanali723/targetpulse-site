@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     siteName: 'Giggal.ai',
+    images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai email verification' }],
     title: 'Sign Up Free, Giggal.ai Email Verifier',
     description: 'Get 1,000 free verification credits to start. No credit card required. Verify catch-all and accept-all email domains with 98.5% accuracy.',
     url: 'https://giggal.ai/sign-up',

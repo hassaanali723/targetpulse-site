@@ -40,7 +40,7 @@ export default function AnnouncementBar() {
             <a
               href="https://puremail.ai/?utm_source=giggal"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="nofollow noopener noreferrer"
               className="font-black text-white underline decoration-white/40 underline-offset-2 hover:decoration-white transition-colors"
             >
               PureMail

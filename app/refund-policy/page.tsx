@@ -3,7 +3,7 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
-  title: 'Refund Policy | Giggal.ai',
+  title: 'Refund Policy',
   description: 'Refund Policy for Giggal.ai email verification tool.',
   alternates: {
     canonical: '/refund-policy',

@@ -3,7 +3,7 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
-  title: 'Terms of Service | Giggal.ai',
+  title: 'Terms of Service',
   description: 'Terms of Service and conditions for using Giggal.ai email verification tool.',
   alternates: {
     canonical: '/terms-of-service',

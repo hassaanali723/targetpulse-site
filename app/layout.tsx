@@ -45,14 +45,9 @@ export const metadata: Metadata = {
     description: 'Free email verifier built for catch-all and accept-all domains with 98.5% accuracy. Clean your list, cut bounces, and protect your sender reputation.',
     url: baseUrl,
     siteName: 'Giggal.ai',
-    images: [
-      {
-        url: '/giggal-logo.png',
-        width: 1200,
-        height: 630,
-        alt: 'Giggal.ai Email Verifier',
-      },
-    ],
+    // The share card comes from app/opengraph-image.png (a real 1200 x 630
+    // card). The 2048 x 2048 logo used to be declared here with the wrong
+    // dimensions, which is why shares rendered a cropped square.
     locale: 'en_US',
     type: 'website',
   },
@@ -62,7 +57,7 @@ export const metadata: Metadata = {
     // twitter.title/description -> openGraph.title/description, so each page's
     // Twitter card derives from its own og values instead of every page
     // inheriting the homepage's twitter copy.
-    images: ['/giggal-logo.png'],
+    // Image comes from app/twitter-image.png.
     // Add `creator` and `site` handles once Giggal.ai has an X/Twitter account.
   },
   robots: {

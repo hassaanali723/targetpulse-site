@@ -10,15 +10,19 @@ import { faqPageLd, breadcrumbLd } from '@/lib/schema'
 import { ArrowRight } from 'lucide-react'
 
 const DESC =
-  'Check whether an email on a catch-all domain is real. Most checkers stop at "catch-all" and leave you guessing. We return valid or invalid. Free, no signup.'
+  'Free email checker with no signup. Verify any address, including catch-all domains most tools mark risky, and get a valid or invalid answer in seconds.'
 
 export const metadata: Metadata = {
-  title: { absolute: 'Free Catch-All Email Checker | Giggal.ai' },
+  // Interim: this page owns the "free email checker" queries until a generic
+  // /email-verifier page exists. When it does, the title goes back to
+  // "Free Catch-All Email Checker & Verifier" and those terms move with it.
+  title: { absolute: 'Free Email Checker & Catch-All Verifier | Giggal.ai' },
   description: DESC,
   alternates: { canonical: '/tools/catch-all-email-checker' },
   openGraph: {
     siteName: 'Giggal.ai',
-    title: 'Free Catch-All Email Checker',
+    images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai email verification' }],
+    title: 'Free Email Checker & Catch-All Verifier',
     description: DESC,
     url: 'https://giggal.ai/tools/catch-all-email-checker',
     type: 'website',
@@ -26,7 +30,7 @@ export const metadata: Metadata = {
   // Set explicitly so this route never inherits the homepage's Twitter strings.
   twitter: {
     card: 'summary_large_image',
-    title: 'Free Catch-All Email Checker',
+    title: 'Free Email Checker & Catch-All Verifier',
     description: DESC,
   },
 }
@@ -38,8 +42,16 @@ const faqs: FaqItem[] = [
     a: 'No. A catch-all domain accepts mail for every address, real or not. The mailbox behind it might be perfectly active. Catch-all describes how the domain is configured, not whether a person is there.',
   },
   {
+    q: 'Is this a free email verifier or just a syntax check?',
+    a: 'A full verifier. Syntax is the first step, then the MX lookup, then an SMTP conversation with the mail server to confirm the mailbox. On catch-all domains it goes one step further and resolves the address to valid or invalid.',
+  },
+  {
+    q: 'What does "valid" mean on a catch-all domain?',
+    a: 'That the mailbox was confirmed, not just that the domain accepted the recipient. A plain catch-all label only tells you the server says yes to everything. Valid here means the address passed the extra checks that separate a real mailbox from one that will bounce or vanish.',
+  },
+  {
     q: 'How many checks do I get?',
-    a: 'Five per day, no signup and no card. Each check runs a full verification, which is why the number is small. For a whole list, sign up and use your 1,000 free credits.',
+    a: 'A handful of free checks, with no signup and no card. Each check runs the full verification, which is why the number is small. For a whole list, sign up and use your 1,000 free credits.',
   },
   {
     q: 'Is catch-all the same as accept-all?',
@@ -61,7 +73,7 @@ const proseP = 'text-slate-600 leading-relaxed text-sm md:text-base font-medium'
 export default function CatchAllEmailCheckerPage() {
   return (
     <main className="relative min-h-screen bg-slate-50 grid-lines overflow-x-hidden text-slate-800 antialiased">
-      <JsonLd data={breadcrumbLd('Free Catch-All Email Checker', '/tools/catch-all-email-checker')} />
+      <JsonLd data={breadcrumbLd('Free Email Checker', '/tools/catch-all-email-checker')} />
       <JsonLd data={faqPageLd(faqs)} />
       <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-indigo-500/10 blur-[120px] -z-10 pointer-events-none" />
 
@@ -70,14 +82,15 @@ export default function CatchAllEmailCheckerPage() {
       {/* ── HERO ─────────────────────────────────────────────── */}
       <section className="max-w-3xl mx-auto px-6 pt-28 md:pt-32 pb-10 text-center space-y-6">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900">
-          Free{' '}
+          Free email checker that{' '}
           <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">
-            catch-all email checker
+            resolves catch-all addresses
           </span>
         </h1>
         <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium">
-          Enter an email address on a catch-all domain and find out whether the mailbox actually
-          exists. Most free checkers tell you the domain is catch-all and stop there.
+          Verify an email address in seconds: syntax, MX records and a live SMTP check on the
+          mailbox itself. On catch-all domains, where most free checkers stop at a label, this one
+          keeps going and returns valid or invalid.
         </p>
       </section>
 
@@ -89,13 +102,87 @@ export default function CatchAllEmailCheckerPage() {
           defaultEmail=""
         />
         <p className="text-center text-[13px] text-slate-500 font-medium mt-4">
-          Five free checks a day. No signup, no card. Enter one address to run a live check.
+          Free, no signup, no card. One address per check, full SMTP-level verification.
+        </p>
+      </section>
+
+      {/* ── HOW A CHECK WORKS ────────────────────────────────── */}
+      <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
+        <h2 className={sectionTitle}>How to check if an email address is valid</h2>
+        <p className={proseP}>
+          A proper check has four stages, and the free tools that only do the first one are the
+          reason so many &quot;verified&quot; lists still bounce.
+        </p>
+        <ol className="list-decimal pl-6 space-y-3 text-slate-600 text-sm md:text-base font-medium leading-relaxed">
+          <li>
+            <strong className="text-slate-900">Syntax.</strong> Is the address well formed: one @,
+            a valid local part, a domain with a TLD. This catches typos and nothing else.
+          </li>
+          <li>
+            <strong className="text-slate-900">MX lookup.</strong> Does the domain publish mail
+            exchanger records. No MX means no mailbox can exist there, so the address is dead
+            before any message is sent.
+          </li>
+          <li>
+            <strong className="text-slate-900">SMTP mailbox probe.</strong> Open a conversation
+            with the receiving server, name the recipient, and read the reply. A 250 means the
+            mailbox is accepted; a 550 means it is not there.
+          </li>
+          <li>
+            <strong className="text-slate-900">Catch-all resolution.</strong> If the server said
+            yes to a random address too, step three proved nothing. This is where most checkers
+            print &quot;catch-all&quot; and stop. Giggal runs the extra signals that separate a real
+            mailbox from an accept-all reply and returns valid or invalid.
+          </li>
+        </ol>
+        <p className={proseP}>
+          The result panel above shows each stage as it completes, plus the mail provider, the
+          MX host, and whether the address is disposable, role-based or on a free provider.
+        </p>
+      </section>
+
+      {/* ── WHAT THE CHECKER REPORTS ─────────────────────────── */}
+      <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
+        <h2 className={sectionTitle}>What this email checker tells you</h2>
+        <p className={proseP}>
+          Each check ends in one of three verdicts. <strong className="text-slate-900">Valid</strong>{' '}
+          means the mailbox accepted the recipient and passed the extra signals, so mail sent to it
+          should land. <strong className="text-slate-900">Invalid</strong> means the address failed
+          syntax, has no mail server, or the server rejected the mailbox outright, so it will hard
+          bounce. <strong className="text-slate-900">Unknown</strong> is rare here and means the
+          server did not answer in time or is greylisting new senders; retry later rather than
+          treating it as dead.
+        </p>
+        <p className={proseP}>
+          Under the verdict, the panel lists the details a deliverability check depends on: the
+          mail provider (Google Workspace, Microsoft 365, a gateway such as Proofpoint), the MX
+          host that answered, whether the address is <strong className="text-slate-900">disposable</strong>{' '}
+          (a temporary inbox that will vanish), <strong className="text-slate-900">role-based</strong>{' '}
+          (info@, sales@, support@, which are shared inboxes and poor outreach targets) and whether
+          it sits on a <strong className="text-slate-900">free provider</strong> like Gmail or
+          Yahoo, which matters when you are qualifying B2B leads.
+        </p>
+        <h3 className="text-xl md:text-2xl font-extrabold text-slate-900 tracking-tight pt-2">
+          When to use a single-email check
+        </h3>
+        <ul className="list-disc pl-6 space-y-2 text-slate-600 text-sm md:text-base font-medium leading-relaxed">
+          <li>Before replying to an inbound lead whose address looks typed by hand.</li>
+          <li>When a form signup bounces and you want to know if the address ever existed.</li>
+          <li>To test one address from a purchased list before paying to clean the whole file.</li>
+          <li>To confirm a contact on a catch-all domain that another tool marked &quot;risky&quot;.</li>
+        </ul>
+        <p className={proseP}>
+          For a whole list, the single checker is the wrong tool: sign up, upload the file, and{' '}
+          <Link href="/catch-all-verification" className="text-indigo-600 font-bold hover:underline">
+            bulk email verification
+          </Link>{' '}
+          runs the same checks on every row, 1,000 credits free and no card.
         </p>
       </section>
 
       {/* ── WHAT CATCH-ALL DOES TO A CHECK ───────────────────── */}
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
-        <h2 className={sectionTitle}>What a catch-all domain does to a check</h2>
+        <h2 className={sectionTitle}>What a catch-all domain does to an email check</h2>
         <p className={proseP}>
           A checker verifies a mailbox by opening an SMTP conversation with the receiving server and
           naming the recipient. On most domains the server answers honestly: it accepts addresses
@@ -111,7 +198,7 @@ export default function CatchAllEmailCheckerPage() {
 
       {/* ── WHY FREE CHECKERS STOP ───────────────────────────── */}
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
-        <h2 className={sectionTitle}>Why most free checkers stop at &quot;catch-all&quot;</h2>
+        <h2 className={sectionTitle}>Why most free email checkers stop at &quot;catch-all&quot;</h2>
         <p className={proseP}>
           Detecting a catch-all domain is cheap. A tool looks up the domain&apos;s mail servers, opens
           one connection, and offers a random address that almost certainly does not exist. If the
@@ -120,8 +207,8 @@ export default function CatchAllEmailCheckerPage() {
           catch-all. Working out which mailboxes are real behind that domain is a different job. It
           takes more probes, more signals, and infrastructure that holds a clean sending reputation
           while it works, so most free tools stop at the label and hand the rest back to you. This
-          checker runs the full verification instead, and that is why it is capped at a few checks a
-          day.
+          checker runs the full verification instead, which is why it is limited to a handful of
+          checks per visitor.
         </p>
       </section>
 
@@ -158,6 +245,7 @@ export default function CatchAllEmailCheckerPage() {
         <div className="border-t border-slate-200 pt-8 space-y-3">
           {[
             { href: '/catch-all-verification', label: 'verify catch-all & risky emails' },
+            { href: '/blog/what-is-a-catch-all-email-address', label: 'what a catch-all email address is' },
             { href: '/seg-email-verification', label: 'emails protected by SEG gateways' },
             { href: '/pricing', label: 'pricing and credits' },
           ].map((l) => (

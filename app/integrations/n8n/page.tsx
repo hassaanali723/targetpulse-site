@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/integrations/n8n' },
   openGraph: {
     siteName: 'Giggal.ai',
+    images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai email verification' }],
     title: 'n8n Email Verification Integration | Giggal.ai',
     description:
       'Verify emails inside n8n with the official Giggal.ai community node. Single checks, bulk jobs and catch-all verification in your workflows.',

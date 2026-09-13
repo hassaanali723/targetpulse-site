@@ -13,13 +13,14 @@ const SIGNUP_URL = 'https://emailverifier.giggal.ai/sign-up'
 const MCP_URL = 'https://mcp.giggal.ai/mcp'
 
 export const metadata: Metadata = {
-  title: 'Email Verification Tool for Claude & ChatGPT',
+  title: { absolute: 'Email Verification MCP Server for Claude & ChatGPT | Giggal.ai' },
   description:
     'Connect Giggal.ai to Claude, ChatGPT, Cursor and VS Code over MCP and verify emails inside the conversation. Catch-all addresses resolved, not labelled.',
   alternates: { canonical: '/mcp' },
   openGraph: {
     siteName: 'Giggal.ai',
-    title: 'An Email Verification Tool That Runs Inside Claude and ChatGPT',
+    images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai email verification' }],
+    title: 'Email Verification MCP Server for Claude & ChatGPT',
     description:
       'Giggal.ai ships a remote MCP server, so Claude, ChatGPT, Cursor and VS Code can verify emails directly. Catch-all verification included.',
     url: 'https://giggal.ai/mcp',
@@ -27,7 +28,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'An Email Verification Tool That Runs Inside Claude and ChatGPT',
+    title: 'Email Verification MCP Server for Claude & ChatGPT',
     description:
       'Giggal.ai ships a remote MCP server, so Claude, ChatGPT, Cursor and VS Code can verify emails directly. Catch-all verification included.',
   },

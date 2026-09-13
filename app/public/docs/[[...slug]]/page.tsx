@@ -851,7 +851,7 @@ export default function ApiReferencePage() {
             {/* Hero */}
             <section className="pt-6 pb-10 border-b border-slate-200">
               <h1 className="text-3xl md:text-4xl font-black tracking-tight text-slate-900 mb-3">
-                Giggal.ai API Reference
+                Email verification API reference
               </h1>
               <p className="text-[15px] text-slate-600 leading-relaxed max-w-2xl">
                 Verify single emails, run bulk batches, and deep-check catch-all and SEG-protected

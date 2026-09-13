@@ -26,20 +26,21 @@ export interface SitemapEntry {
 // canonical relationship — so it is not a duplicate and is not listed here.
 export function coreEntries(): SitemapEntry[] {
   return [
-    { path: '', lastModified: '2026-08-01' },
-    { path: '/catch-all-verification', lastModified: '2026-08-01' },
+    // 2026-09-13: title, H1 and copy retarget (plans/07 in targetpulse-seo).
+    { path: '', lastModified: '2026-09-13' },
+    { path: '/catch-all-verification', lastModified: '2026-09-13' },
     { path: '/seg-email-verification', lastModified: '2026-08-02' },
     ...(MIMECAST_PAGE_LIVE
       ? [{ path: '/mimecast-email-verification', lastModified: '2026-08-02' }]
       : []),
-    { path: '/tools/catch-all-email-checker', lastModified: '2026-08-08' },
-    { path: '/mcp', lastModified: '2026-07-21' },
+    { path: '/tools/catch-all-email-checker', lastModified: '2026-09-13' },
+    { path: '/mcp', lastModified: '2026-09-13' },
     // API reference. Kept in the sitemap — the URL set is unchanged from the
     // previous single sitemap, only regrouped.
-    { path: '/public/docs', lastModified: '2026-07-24' },
-    { path: '/pricing', lastModified: '2026-07-29' },
+    { path: '/public/docs', lastModified: '2026-09-13' },
+    { path: '/pricing', lastModified: '2026-09-13' },
     { path: '/sign-up', lastModified: '2026-07-21' },
-    { path: '/affiliates', lastModified: '2026-07-21' },
+    { path: '/affiliates', lastModified: '2026-09-13' },
     { path: '/contact-us', lastModified: '2026-07-21' },
     { path: '/privacy-policy', lastModified: '2026-02-04' },
     { path: '/terms-of-service', lastModified: '2026-02-04' },
@@ -50,8 +51,8 @@ export function coreEntries(): SitemapEntry[] {
 // ── alternatives ────────────────────────────────────────────────────────
 // Per-brand release dates, preserved verbatim from the previous sitemap.
 const ALT_DATES: Record<string, string> = {
-  zerobounce: '2026-08-06',
-  neverbounce: '2026-08-06',
+  zerobounce: '2026-09-13',
+  neverbounce: '2026-09-13',
   bounceban: '2026-08-06',
   millionverifier: '2026-08-06',
   reoon: '2026-08-06',
@@ -63,7 +64,7 @@ const ALT_DATES: Record<string, string> = {
   emaillistverify: '2026-08-12',
   myemailverifier: '2026-08-12',
   briteverify: '2026-08-12',
-  scrubby: '2026-08-12',
+  scrubby: '2026-09-13',
   quickemailverification: '2026-08-12',
   mailfloss: '2026-08-12',
   bounceless: '2026-08-12',
@@ -118,15 +119,15 @@ export function blogEntries(): SitemapEntry[] {
   const posts = getAllPosts()
   // The index's real last-change date is the newest post's date. Omitted rather
   // than faked when there are no posts.
-  const newest = posts.reduce<string | undefined>(
-    (max, p) => (p.date && (!max || p.date > max) ? p.date : max),
-    undefined
-  )
+  const newest = posts.reduce<string | undefined>((max, p) => {
+    const d = p.updated || p.date
+    return d && (!max || d > max) ? d : max
+  }, undefined)
   return [
     { path: '/blog', lastModified: newest },
     ...posts.map((p) => ({
       path: `/blog/${p.slug}`,
-      lastModified: p.date || undefined,
+      lastModified: p.updated || p.date || undefined,
     })),
   ]
 }

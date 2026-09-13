@@ -4,7 +4,7 @@ const cfg: AltPageConfig = {
   slug: 'scrubby',
   metaTitle: 'Scrubby Alternative | Giggal.ai',
   ogTitle: 'A Scrubby Alternative With Flat, Published Pricing',
-  desc: 'Scrubby resolves catch-all and SEG too, at $0.008 a credit and 3 credits per catch-all ($0.024/ea), with a million priced by quote. Giggal.ai is $9.90 per 10,000 and a flat 1 credit per catch-all ($0.00099/ea), every tier published. 1,000 free credits, no card.',
+  desc: 'Scrubby resolves catch-all too, at $80 per 10,000 plus 3 credits per catch-all. Giggal.ai is $9.90 per 10,000, 1 credit per catch-all. 1,000 free credits.',
   h1Article: 'A',
   h1Tail: 'with flat, published pricing',
   heroP:

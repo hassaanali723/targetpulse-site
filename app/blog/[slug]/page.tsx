@@ -42,7 +42,9 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   const post = getPostBySlug(params.slug)
   if (!post) return {}
   const url = `https://giggal.ai/blog/${post.slug}`
-  const ogImage = post.image ? `https://giggal.ai${post.image}` : undefined
+  // Posts without a cover image fall back to the site card rather than shipping
+  // with no og:image at all.
+  const ogImage = post.image ? `https://giggal.ai${post.image}` : 'https://giggal.ai/og-card.png'
   return {
     title: post.title,
     description: post.description,
@@ -82,6 +84,7 @@ export default function BlogArticlePage({ params }: { params: { slug: string } }
           description: post.description,
           slug: post.slug,
           datePublished: post.date,
+          dateModified: post.updated || post.date,
           image: post.image,
         })}
       />

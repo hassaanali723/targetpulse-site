@@ -131,7 +131,10 @@ function Card({ r }: { r: Review }) {
     <a
       href={r.url}
       target="_blank"
-      rel="noopener noreferrer"
+      // Dozens of cards point at the same two review listings. The platform
+      // badges above already carry one followed link each, so the card links
+      // are nofollow: they exist for the reader, not for link equity.
+      rel="nofollow noopener noreferrer"
       className="shrink-0 w-[320px] sm:w-[360px] h-[220px] bg-white border-2 border-slate-200 rounded-3xl p-6 card-vivid-shadow hover:border-indigo-500 transition-colors flex flex-col"
     >
       <div className="flex items-center gap-3.5 mb-3">

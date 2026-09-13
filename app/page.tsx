@@ -35,25 +35,29 @@ const SWITCHERS = [
 const SIGNUP_URL = 'https://emailverifier.giggal.ai/sign-up'
 
 export const metadata: Metadata = {
+  // Primary query: "email verification service" (C4). The bare head terms
+  // belong to the tool page once /email-verifier exists; until then the home
+  // carries "software" and "tool" wording in the hero as secondaries.
   title: {
-    absolute: 'Email Verifier with Catch-All & SEG Verification | Giggal.ai',
+    absolute: 'Email Verification Service: Catch-All & SEG Resolved | Giggal.ai',
   },
   description:
-    'Verify any email including catch-all, risky and SEG-protected addresses. 98.5% accuracy, bounce rate under 3%. 1,000 free credits, no card required.',
+    'Email verification service that confirms catch-all and SEG-protected mailboxes instead of marking them risky. 98.5% accuracy, 1,000 free credits, no card.',
   alternates: { canonical: '/' },
   openGraph: {
     siteName: 'Giggal.ai',
-    title: 'Giggal.ai - Verify Catch-All, Risky & SEG-Protected Emails',
+    images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai email verification' }],
+    title: 'Email Verification Service: Catch-All & SEG Resolved',
     description:
-      'Verify any email including catch-all, risky and SEG-protected addresses. 98.5% accuracy, bounce rate under 3%. 1,000 free credits, no card required.',
+      'Email verification service that confirms catch-all and SEG-protected mailboxes instead of marking them risky. 98.5% accuracy, 1,000 free credits, no card.',
     url: 'https://giggal.ai',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Giggal.ai - Verify Catch-All, Risky & SEG-Protected Emails',
+    title: 'Email Verification Service: Catch-All & SEG Resolved',
     description:
-      'Verify any email including catch-all, risky and SEG-protected addresses. 98.5% accuracy, bounce rate under 3%. 1,000 free credits, no card required.',
+      'Email verification service that confirms catch-all and SEG-protected mailboxes instead of marking them risky. 98.5% accuracy, 1,000 free credits, no card.',
   },
 }
 
@@ -131,16 +135,20 @@ export default function Home() {
         {/* Copy */}
         <div className="lg:col-span-6 space-y-8 text-left">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900">
-            Verify Every Email, <br />
-            <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">Even Catch-All &amp; SEG-Protected</span>
+            Email verification service that resolves <br />
+            <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">catch-all &amp; SEG-protected addresses</span>
           </h1>
           <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-xl font-medium">
-            Giggal.ai runs a deep mailbox existence check on every address. Your bounce rate stays{' '}
+            Email verification software that runs a deep mailbox existence check on every address, not a syntax pass. Your bounce rate stays{' '}
             <strong className="text-indigo-600 font-extrabold">under 3%</strong>, and the{' '}
             <strong className="text-slate-900 font-extrabold">30% of every B2B list</strong> that other tools flag as &quot;Risky&quot; becomes deliverable again.
           </p>
           <p className="text-sm text-slate-500 leading-relaxed max-w-xl font-medium !mt-3">
-            On catch-all domains, and behind gateways like Proofpoint and Mimecast, most verifiers can only return a &quot;risky&quot; guess. See how our{' '}
+            On catch-all domains, and behind{' '}
+            <Link href="/seg-email-verification" className="text-indigo-600 font-bold hover:underline">
+              gateways like Proofpoint and Mimecast
+            </Link>
+            , most verifiers can only return a &quot;risky&quot; guess. See how our{' '}
             <a href="/catch-all-verification" className="text-indigo-600 font-bold hover:underline">
               catch-all email verification
             </a>{' '}
@@ -161,12 +169,12 @@ export default function Home() {
             >
               Start Free
             </a>
-            <a
-              href="#pricing"
+            <Link
+              href="/pricing"
               className="px-8 py-3.5 bg-white border border-slate-300 hover:border-slate-800 hover:bg-slate-50 font-bold rounded-xl text-slate-700 hover:text-slate-950 transition-all text-center text-sm flex items-center justify-center gap-2 shadow-sm"
             >
               <BookOpen className="w-4 h-4 text-indigo-600" /> See Pricing
-            </a>
+            </Link>
           </div>
 
           <div className="flex items-center gap-3 !mt-6 text-xs font-semibold text-slate-500">
@@ -245,9 +253,13 @@ export default function Home() {
       {/* Catch-all educational */}
       <section className="cv-section max-w-5xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-12">
         <div className="text-center max-w-2xl mx-auto space-y-3">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">What is a Catch-All/Accept-All?</h2>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Why catch-all addresses need a real verdict</h2>
           <p className="text-slate-600 text-sm font-medium">
-            Catch-all domains are configured by IT departments to accept all incoming emails, even for users that don&apos;t exist. Since standard tools can&apos;t tell if a real mailbox is behind them, they label them as &quot;risky&quot; and force a blind gamble:
+            A{' '}
+            <Link href="/blog/what-is-a-catch-all-email-address" className="text-indigo-600 font-bold hover:underline">
+              catch-all domain
+            </Link>{' '}
+            accepts mail for every address, real or not, so the SMTP reply standard tools rely on carries no information. They print &quot;risky&quot; and leave you with a blind gamble on a third of your list:
           </p>
         </div>
 
@@ -293,9 +305,17 @@ export default function Home() {
       {/* Feature showcase */}
       <section id="features-showcase" className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-16">
         <div className="text-center max-w-2xl mx-auto space-y-3">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Robust Tools For Uncompromising Scale</h2>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Bulk cleaning, API and integrations on one credit balance</h2>
           <p className="text-slate-600 text-sm font-medium">
-            From bulk contact cleaning to custom application hook-ups, keep your sales pipeline filled with active prospects.
+            Upload a list, call the{' '}
+            <Link href="/public/docs" className="text-indigo-600 font-bold hover:underline">
+              REST API
+            </Link>
+            , or connect a CRM. Every route runs the same verification, and the{' '}
+            <Link href="/blog" className="text-indigo-600 font-bold hover:underline">
+              deliverability guides
+            </Link>{' '}
+            explain what each result means for your sender reputation.
           </p>
         </div>
 

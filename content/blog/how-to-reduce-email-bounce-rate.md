@@ -1,14 +1,31 @@
 ---
-title: How to reduce your email bounce rate
-description: A working sequence for getting a bounce rate down, what each step is actually worth, and why list cleaning fixes most of it but not all of it.
+title: "Email Bounce Rate: Benchmarks and How to Reduce It"
+description: What email bounce rate is, the benchmarks for marketing, transactional and cold email, and a working sequence for getting a high rate down.
 slug: how-to-reduce-email-bounce-rate
 date: 2026-08-21
-keyword: email verification tool to reduce bounce rate
+updated: 2026-09-13
+keyword: what is email bounce rate
 ---
 
 A high bounce rate is rarely one problem. It is usually three or four small ones stacked up, and people tend to attack them in the wrong order, starting with the interesting technical work and finishing with the boring list hygiene that would have fixed most of it.
 
 So this is ordered by how much each step is actually worth, not by how satisfying it is to do.
+
+## What is email bounce rate?
+
+Email bounce rate is the share of messages in a send that were returned undelivered: bounced messages divided by messages sent, as a percentage. Send 10,000, get 250 back, and the bounce rate is 2.5 percent. Most tools report it per campaign and split it into hard bounces (the address or domain does not exist) and soft bounces (full mailbox, busy server, temporary block). Mailbox providers watch the hard-bounce share most closely, because it is the clearest sign of a list that was never verified.
+
+## Bounce rate benchmarks
+
+The acceptable number depends on the kind of mail, because providers judge each differently.
+
+| Send type | Healthy | Watch | Damaging |
+|---|---|---|---|
+| Marketing to an opted-in list | under 1% | 1 to 2% | over 2% |
+| Transactional (receipts, resets) | under 0.5% | 0.5 to 1% | over 1% |
+| Cold outreach | under 2% | 2 to 5% | over 5% |
+
+Cold email gets a wider band because the list is colder by definition, but it is also judged harder once it crosses the line: a cold campaign at 6 percent draws blocks faster than a newsletter at the same rate. The bands are what deliverability teams use in practice; Google and Yahoo's bulk-sender rules put the spam-complaint ceiling at 0.3 percent, and a bounce rate above these bands tends to travel with complaints.
 
 ## First, know which kind you have
 

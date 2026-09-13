@@ -51,8 +51,8 @@ export default function PricingPage() {
       {/* Hero */}
       <section className="max-w-6xl mx-auto px-6 pt-28 md:pt-32 pb-16 text-center space-y-6">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900">
-          Simple, Transparent{' '}
-          <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">Pricing</span>
+          Email verification{' '}
+          <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">pricing</span>
         </h1>
         <p className="text-base md:text-lg text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed">
           Pay only for what you use. No monthly fees, no hidden charges, and credits never expire.

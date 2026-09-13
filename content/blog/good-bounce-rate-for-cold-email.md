@@ -1,8 +1,9 @@
 ---
-title: What is a good bounce rate for cold email?
+title: What Is a Good Bounce Rate for Cold Email?
 description: A good bounce rate for cold email is under 2 percent. Here are the bands, why cold is judged harder, and what to do at each level.
 slug: good-bounce-rate-for-cold-email
 date: 2026-08-11
+updated: 2026-09-13
 keyword: what is a good bounce rate for cold email
 image: /blog/good-bounce-rate-for-cold-email.webp
 imageAlt: Illustration for a good cold email bounce rate
@@ -11,6 +12,8 @@ imageAlt: Illustration for a good cold email bounce rate
 A good bounce rate for cold email is under 2 percent. If you are asking what is a good bounce rate for cold email, that is the number to aim for, and anything above 5 percent is doing active damage to your ability to reach an inbox. Between those two figures is a band that needs attention but is not yet an emergency.
 
 ## The three bands and what each one means
+
+These are the cold-email bands. For marketing and transactional mail, which are judged on tighter numbers, see the [bounce rate benchmarks](/blog/how-to-reduce-email-bounce-rate) table.
 
 The thresholds are easier to act on as a table than as prose.
 

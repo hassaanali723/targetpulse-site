@@ -23,11 +23,12 @@ const DESC =
   'NeverBounce charges $50 per 10,000 and resolves few catch-alls, 8% in one test. Giggal.ai is $9.90 and confirms them. 1,000 free credits, no card.'
 
 export const metadata: Metadata = {
-  title: { absolute: 'NeverBounce Alternative | Giggal.ai' },
+  title: { absolute: 'NeverBounce Alternative: Pricing and Accuracy | Giggal.ai' },
   description: DESC,
   alternates: { canonical: '/neverbounce-alternative' },
   openGraph: {
     siteName: 'Giggal.ai',
+    images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai email verification' }],
     title: 'A NeverBounce Alternative That Resolves Catch-All',
     description: DESC,
     url: 'https://giggal.ai/neverbounce-alternative',

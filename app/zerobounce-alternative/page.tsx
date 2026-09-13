@@ -23,11 +23,12 @@ const DESC =
   'ZeroBounce charges $129 per 10,000 and scores catch-all 1-10, not valid or invalid. Giggal.ai is $9.90 and confirms them. 1,000 free credits, no card.'
 
 export const metadata: Metadata = {
-  title: { absolute: 'ZeroBounce Alternative | Giggal.ai' },
+  title: { absolute: 'ZeroBounce Alternative: Pricing and Catch-All | Giggal.ai' },
   description: DESC,
   alternates: { canonical: '/zerobounce-alternative' },
   openGraph: {
     siteName: 'Giggal.ai',
+    images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai email verification' }],
     title: 'A ZeroBounce Alternative Built for Catch-All Lists',
     description: DESC,
     url: 'https://giggal.ai/zerobounce-alternative',

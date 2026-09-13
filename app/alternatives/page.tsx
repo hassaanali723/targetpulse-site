@@ -21,8 +21,11 @@ import { Check, X, ArrowRight } from 'lucide-react'
 // vendor is added to competitorPricing.ts. +1 for Giggal itself.
 const TOOL_COUNT = ALL_COMPETITOR_SLUGS.length + 1
 
-const TITLE = `${TOOL_COUNT} Best Catch-All Email Verification Tools, Ranked`
-const DESC = `Catch-all email verification tools ranked on whether they resolve accept-all addresses, whether they verify behind secure email gateways, and what they cost.`
+// Primary query: "best email verification tools" (350 / KD 22). This hub is the
+// only page on the site that targets it; the blog comparison post targets
+// "best email verification software" instead.
+const TITLE = `${TOOL_COUNT} Best Email Verification Tools, Ranked (2026)`
+const DESC = `The 28 best email verification tools compared on catch-all handling, secure email gateway support, accuracy and price per 10,000 emails. Updated 2026.`
 
 export const metadata: Metadata = {
   title: { absolute: `${TITLE} | Giggal.ai` },
@@ -30,6 +33,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/alternatives' },
   openGraph: {
     siteName: 'Giggal.ai',
+    images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai email verification' }],
     title: TITLE,
     description: DESC,
     url: 'https://giggal.ai/alternatives',
@@ -248,9 +252,9 @@ export default function AlternativesHubPage() {
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900">
           {TOOL_COUNT} best{' '}
           <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">
-            catch-all email verification tools
+            email verification tools
           </span>
-          , ranked
+          , ranked on catch-all, SEG and price (2026)
         </h1>
         <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium">
           Almost every verifier handles a clean domain. The list below is ordered by what happens

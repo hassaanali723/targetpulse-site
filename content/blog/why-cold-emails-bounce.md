@@ -1,14 +1,19 @@
 ---
-title: Why cold emails bounce
-description: The real reasons cold emails bounce, hard versus soft, ordered by how common they are, and which ones verification can fix and which it cannot.
+title: Why Do Emails Bounce? Causes and What to Do Next
+description: Why emails bounce, hard versus soft, the causes in order of how common they are on cold campaigns, what a bounced email means, and what to do with one.
 slug: why-cold-emails-bounce
 date: 2026-08-11
-keyword: why do cold emails bounce
+updated: 2026-09-13
+keyword: why do emails bounce
 image: /blog/why-cold-emails-bounce.webp
 imageAlt: Illustration for why cold emails bounce
 ---
 
 Cold emails bounce when the receiving server refuses the message and returns it instead of delivering it. If you have just run a campaign and want to know why do cold emails bounce more than your ordinary mail, most of it comes down to two things. You are contacting people who never asked to hear from you, so the list is colder and less accurate, and you are sending from a domain the recipient's server has no history with. The individual reasons sit underneath those two.
+
+## What is a bounced email?
+
+A bounced email is a message the receiving mail server refused and sent back, with a reason code, instead of putting it in a mailbox. The reply comes from the server, not the person, and it arrives as a non-delivery report (NDR) in the sender's inbox or the sending tool's bounce log. The code in that report is the useful part: a 5xx code is a permanent refusal, a 4xx code is a temporary one. "Bounced email meaning" questions almost always come down to reading that code.
 
 ## Hard bounces and soft bounces are not the same problem
 
@@ -33,11 +38,19 @@ The order matters because the top two, dead addresses and dead domains, are the 
 
 You can often read the cause straight from the bounce message. A line like 550 5.1.1 user unknown is a hard bounce for an address that does not exist. A 451 4.7.1 greylisted, try again later is a soft, temporary refusal that usually clears on the retry. Learning to read the code saves you from guessing at the reason.
 
+## What does "email bounce back" mean?
+
+Bounce back is the everyday name for the same thing: your message came back to you. The wording in the report varies by provider. Gmail says "Address not found", Microsoft 365 says "Recipient address rejected", and Postfix-style servers quote the raw SMTP line, 550 5.1.1 User unknown. All three mean the mailbox is not there. A bounce back that mentions "mailbox full", "greylisted" or "try again later" is temporary and will usually clear on the retry your sending tool makes.
+
 ## Not every bounce is a list problem
 
 It is tempting to read every bounce as a bad address, but a real share of cold-email bounces have nothing to do with your list. If your sending domain is new and has not been warmed up, servers treat it with suspicion and reject more of your mail. A brand new domain sending a few hundred cold emails on its first day will see bounces that a six-month-old domain sending the same list would not. If your SPF, DKIM or DMARC records are missing or set up wrong, some providers refuse you before they even look at the recipient.
 
 Neither of those is fixed by cleaning addresses. They are sender-side problems, and they show up as bounces that look identical to a dead-address bounce until you read the reason behind them.
+
+## What do I do with a bounced email?
+
+One address: read the code. A 5.1.1 or "user unknown" means the mailbox is gone; remove it and, if the contact matters, find their current address rather than retrying. A 4.x.x or "mailbox full" means wait; your tool retries on its own. A 5.7.1 or "blocked" points at your sending domain, not the recipient, so check SPF, DKIM and DMARC before sending anything else. If you are not sure whether an address is still live, run it through the [free email checker](/tools/catch-all-email-checker) before you send again.
 
 ## What to do after a campaign bounces
 

@@ -1,25 +1,26 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Catch-All Email Verification',
+  title: { absolute: 'Catch-All Email Verification: Valid, Not Risky | Giggal.ai' },
   description:
-    'Verify catch-all and accept-all email addresses with clear valid or invalid results. Stop guessing on Risky and Unknown labels. 98.5% accuracy, free to start.',
+    'Catch-all email verification that returns valid or invalid for accept-all domains, including mailboxes behind Mimecast and Proofpoint. 98.5% accuracy.',
   alternates: {
     canonical: '/catch-all-verification',
   },
   openGraph: {
     siteName: 'Giggal.ai',
-    title: 'Catch-All Email Verification | Giggal.ai',
+    images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai email verification' }],
+    title: 'Catch-All Email Verification: Valid, Not Risky',
     description:
-      'Verify catch-all and accept-all email addresses with clear valid or invalid results. 98.5% accuracy, free to start.',
+      'Catch-all email verification that returns valid or invalid for accept-all domains, including mailboxes behind Mimecast and Proofpoint. 98.5% accuracy.',
     url: 'https://giggal.ai/catch-all-verification',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Catch-All Email Verification | Giggal.ai',
+    title: 'Catch-All Email Verification: Valid, Not Risky',
     description:
-      'Verify catch-all and accept-all email addresses with clear valid or invalid results. 98.5% accuracy, free to start.',
+      'Catch-all email verification that returns valid or invalid for accept-all domains, including mailboxes behind Mimecast and Proofpoint. 98.5% accuracy.',
   },
 }
 

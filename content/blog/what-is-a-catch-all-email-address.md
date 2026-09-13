@@ -1,9 +1,10 @@
 ---
-title: What is a catch-all email address?
-description: A catch-all domain accepts mail for every name, real or not. Here is what that means, why companies set one up, and what a catch-all result tells you.
+title: "What Is a Catch-All Email? Meaning and Verification"
+description: A catch-all email address sits on a domain that accepts mail for every name, real or not. What that means, why companies set one up, and how to verify one.
 slug: what-is-a-catch-all-email-address
 date: 2026-08-11
-keyword: what is a catch-all email address
+updated: 2026-09-13
+keyword: what is a catch all email
 image: /blog/what-is-a-catch-all-email-address.webp
 imageAlt: Illustration for what a catch-all email address is
 ---
@@ -28,7 +29,7 @@ Staff turnover pushes companies the same way. When someone leaves, mail keeps ar
 
 In practice, most catch-all domains are run by a small IT team that decided accepting mail was less work than maintaining a list of valid recipients.
 
-## Catch-all and accept-all describe the same setup
+## Catch-all email address vs accept-all: the same setup
 
 You will see both terms, sometimes on the same results screen. Catch-all is the older and more common label. Accept-all is what some providers and tools print instead. There is no difference in behaviour between them. Both mean the receiving server has agreed to take mail addressed to any name at the domain. If one tool says catch-all and another says accept-all, they are telling you the same thing.
 
@@ -49,6 +50,8 @@ This is why tools file catch-all addresses under a cautious status, often Risky 
 They are not an edge case. On a typical business list a sizeable minority of addresses sit on catch-all domains, and the figure climbs the more your contacts work at mid-sized and larger companies, where shared aliases and managed mail are the norm. The big consumer webmail providers almost never behave this way, so a list of personal addresses shows very few. A list of work addresses can show a great many. That mix is the reason the catch-all label turns up most often on exactly the lists that matter to sales and outreach, and why deciding how to treat it is worth a few minutes rather than a blanket rule.
 
 ## What to do with them next
+
+To check a single catch-all address right now, the [free email checker](/tools/catch-all-email-checker) runs the full verification and returns valid or invalid rather than the catch-all label.
 
 You have three honest choices. Delete every catch-all address and accept that you are throwing away contacts who would have opened your mail. Send to them anyway and accept a higher bounce rate and the reputation cost that follows. Or check them at a deeper level than the standard SMTP test, which is the only option that keeps the real contacts without the bounces.
 

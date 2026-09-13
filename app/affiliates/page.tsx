@@ -102,7 +102,7 @@ export default function AffiliatesPage() {
       <section className="max-w-6xl mx-auto px-6 pt-28 md:pt-32 pb-16">
         <div className="max-w-3xl mx-auto text-center space-y-6">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 leading-[1.05]">
-            Earn 20% recurring
+            Earn 20% recurring{' '}
             <span className="block bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent pb-2">
               every month, forever
             </span>

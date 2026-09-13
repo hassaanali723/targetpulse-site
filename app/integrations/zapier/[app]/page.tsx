@@ -28,13 +28,17 @@ export function generateMetadata({ params }: { params: { app: string } }): Metad
   const app = getZapierApp(params.app)
   if (!app) return {}
   const title = `${app.name} Email Verification with Zapier`
-  const description = categoryCopy(app.category).hero(app.name, app.triggerExample)
+  // The hero line doubles as on-page copy and runs past 250 characters; the
+  // snippet Google shows is cut at about 160, so the meta description is its
+  // own short sentence.
+  const description = `Verify ${app.name} emails in real time with the Giggal.ai Zapier integration: catch-all addresses resolved, typos and disposable emails stopped. No code.`
   return {
     title,
     description,
     alternates: { canonical: `/integrations/zapier/${app.slug}` },
     openGraph: {
       siteName: 'Giggal.ai',
+      images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai email verification' }],
       title: `${title} | Giggal.ai`,
       description,
       url: `https://giggal.ai/integrations/zapier/${app.slug}`,

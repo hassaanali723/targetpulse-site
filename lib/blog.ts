@@ -17,6 +17,8 @@ export interface PostMeta {
   description: string
   slug: string
   date: string // YYYY-MM-DD
+  // Optional YYYY-MM-DD of the last substantive edit; falls back to `date`.
+  updated: string
   author: string
   keyword: string
   // Optional top banner image, e.g. /blog/catch-all.jpg (file lives in public/).
@@ -169,6 +171,7 @@ export function getPostBySlug(slug: string): Post | null {
     description: data.description || '',
     slug: data.slug || slug,
     date: data.date || '',
+    updated: data.updated || '',
     author: data.author || '',
     keyword: data.keyword || '',
     image: data.image || '',

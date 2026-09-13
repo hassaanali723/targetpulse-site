@@ -11,19 +11,20 @@ const DESC =
   'Guides on catch-all addresses, secure email gateways, bounce rates and email verification. Plain explanations for people cleaning real lists.'
 
 export const metadata: Metadata = {
-  title: { absolute: 'Blog | Giggal.ai' },
+  title: { absolute: 'Email Verification & Deliverability Blog | Giggal.ai' },
   description: DESC,
   alternates: { canonical: '/blog' },
   openGraph: {
     siteName: 'Giggal.ai',
-    title: 'Giggal.ai Blog',
+    images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai email verification' }],
+    title: 'Email Verification & Deliverability Blog',
     description: DESC,
     url: 'https://giggal.ai/blog',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Giggal.ai Blog',
+    title: 'Email Verification & Deliverability Blog',
     description: DESC,
   },
 }
@@ -64,7 +65,7 @@ export default function BlogIndexPage() {
 
       <section className="max-w-3xl mx-auto px-6 pt-28 md:pt-32 pb-10">
         <h1 className="text-4xl md:text-5xl font-black tracking-tight leading-[1.05] text-slate-900">
-          Blog
+          Email verification and deliverability guides
         </h1>
         <p className="mt-4 text-base md:text-lg text-slate-600 leading-relaxed font-medium">
           Plain explanations of catch-all addresses, secure email gateways, bounce rates and what

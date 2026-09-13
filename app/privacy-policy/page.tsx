@@ -3,7 +3,7 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | Giggal.ai',
+  title: 'Privacy Policy',
   description: 'Privacy Policy for Giggal.ai email verification tool.',
   alternates: {
     canonical: '/privacy-policy',

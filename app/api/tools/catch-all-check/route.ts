@@ -33,7 +33,7 @@ const hits = new Map<string, number[]>()
 const cache = new Map<string, { at: number; result: VerifyResult }>()
 
 const LIMIT_MESSAGE =
-  'You have used your 5 free checks for today. Sign up for 1,000 free credits, no card required, to verify your whole list.'
+  'You have used your free checks for today. Sign up for 1,000 free credits, no card required, to verify your whole list.'
 
 function recentHits(ip: string): number[] {
   const now = Date.now()

@@ -48,6 +48,7 @@ export function articleLd(a: {
   description: string
   slug: string
   datePublished: string
+  dateModified?: string
   image?: string
 }): Record<string, unknown> {
   const url = `${SITE}/blog/${a.slug}`
@@ -64,7 +65,7 @@ export function articleLd(a: {
     description: a.description,
     ...(image ? { image: [image] } : {}),
     datePublished: a.datePublished,
-    dateModified: a.datePublished,
+    dateModified: a.dateModified || a.datePublished,
     publisher: { '@id': ORG_ID },
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
   }

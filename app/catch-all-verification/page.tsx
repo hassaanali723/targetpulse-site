@@ -157,9 +157,9 @@ export default function CatchAllVerificationPage() {
         <div className="min-w-0 space-y-6">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900">
             <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">
-              Catch-All
+              Catch-all email verification
             </span>{' '}
-            Email Verification
+            with a real answer on every address
           </h1>
 
           <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-xl font-medium">
@@ -288,6 +288,15 @@ export default function CatchAllVerificationPage() {
             damaged sender reputation. Or delete them and lose real customers you could have
             reached. Catch-all verification solves this by checking the actual existence of
             the mailbox instead of guessing.
+          </p>
+          <h3 className="text-xl md:text-2xl font-extrabold text-slate-900 tracking-tight pt-2">
+            Catch-all and accept-all mean the same thing
+          </h3>
+          <p>
+            Some verifiers print &quot;accept all&quot;, others &quot;catch-all&quot; or
+            &quot;catchall&quot;. They describe one setup: a domain whose mail server returns a
+            250 OK for any recipient, so the usual mailbox check has nothing to go on. Whatever
+            label your last tool used, the fix is the same, and it is the one this page describes.
           </p>
           <p>
             If you are new to the term, our blog covers{' '}

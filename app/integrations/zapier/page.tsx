@@ -22,13 +22,14 @@ import ZapierTabs from '@/components/integrations/ZapierTabs'
 import type { FaqItem } from '@/components/landing/FaqAccordion'
 
 export const metadata: Metadata = {
-  title: 'Zapier Email Verification Integration',
+  title: { absolute: 'Zapier Email Verification for 8,000+ Apps | Giggal.ai' },
   description:
-    'Connect Giggal.ai to 8,000+ apps with Zapier. Verify emails in real time, resolve catch-all addresses other verifiers mark risky, and keep every list clean automatically. No code required.',
+    'Zapier email verification for 8,000+ apps. Verify emails in real time, resolve catch-all addresses other tools mark risky, and keep every list clean. No code.',
   alternates: { canonical: '/integrations/zapier' },
   openGraph: {
     siteName: 'Giggal.ai',
-    title: 'Zapier Email Verification Integration | Giggal.ai',
+    images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai email verification' }],
+    title: 'Zapier Email Verification for 8,000+ Apps',
     description:
       'Verify emails and resolve catch-all addresses in 8,000+ apps with the Giggal.ai Zapier integration. Real-time verification for HubSpot, Google Sheets, Salesforce and more.',
     url: 'https://giggal.ai/integrations/zapier',
@@ -133,7 +134,7 @@ export default function ZapierIntegrationPage() {
         </div>
 
         <h1 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 mb-5 text-balance">
-          Zapier Email Verification <span className="gradient-text">Integration</span>
+          Zapier email verification for <span className="gradient-text">8,000+ apps</span>
         </h1>
         <p className="text-[16px] text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium mb-8">
           Connect Giggal.ai to 8,000+ apps and verify every email the moment it enters your

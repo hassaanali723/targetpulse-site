@@ -19,6 +19,7 @@ export const metadata: Metadata = {
       'See how the top email verification tools compare on price, catch-all handling and accuracy, with Giggal.ai on every page.',
     url: 'https://giggal.ai/compare',
     type: 'website',
+    images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai email verification' }],
   },
 }
 

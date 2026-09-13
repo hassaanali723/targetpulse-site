@@ -31,7 +31,13 @@ export function generateMetadata({ params }: { params: { versus: string } }): Me
     title: { absolute: c.metaTitle },
     description: c.metaDescription,
     alternates: { canonical: `/compare/${params.versus}` },
-    openGraph: { title: c.ogTitle, description: c.metaDescription, url, type: 'website' },
+    openGraph: {
+      title: c.ogTitle,
+      description: c.metaDescription,
+      url,
+      type: 'website',
+      images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai email verification' }],
+    },
     twitter: { card: 'summary_large_image', title: c.ogTitle, description: c.metaDescription },
   }
 }

@@ -27,6 +27,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/bouncer-alternative' },
   openGraph: {
     siteName: 'Giggal.ai',
+    images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai email verification' }],
     title: 'A Bouncer Alternative That Verifies Behind Gateways',
     description: DESC,
     url: 'https://giggal.ai/bouncer-alternative',

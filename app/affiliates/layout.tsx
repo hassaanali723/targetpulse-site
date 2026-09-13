@@ -1,15 +1,16 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Earn with Us: Affiliate Program',
+  title: { absolute: 'Affiliate Program: 20% Recurring on Verification | Giggal.ai' },
   description:
-    'Join the Giggal.ai affiliate program and earn 20% recurring commission on every payment your referrals make. 3-month attribution window, monthly payouts via PayPal or Wise, no earnings cap. Free to join.',
+    'Join the Giggal.ai affiliate program: 20% recurring commission on every payment your referrals make, 3-month attribution, monthly payouts, no earnings cap.',
   alternates: {
     canonical: '/affiliates',
   },
   openGraph: {
     siteName: 'Giggal.ai',
-    title: 'Earn with Us: Giggal.ai Affiliate Program',
+    images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai email verification' }],
+    title: 'Affiliate Program: 20% Recurring on Verification',
     description:
       'Earn 20% recurring commission for every customer you refer to Giggal.ai. Forever. No caps.',
     url: 'https://giggal.ai/affiliates',
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Earn with Us: Giggal.ai Affiliate Program',
+    title: 'Affiliate Program: 20% Recurring on Verification',
     description:
       'Earn 20% recurring commission for every customer you refer to Giggal.ai. Forever. No caps.',
   },

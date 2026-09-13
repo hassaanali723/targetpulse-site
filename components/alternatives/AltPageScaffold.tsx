@@ -48,6 +48,7 @@ export function altMetadata(cfg: AltPageConfig): Metadata {
     alternates: { canonical: `/${cfg.slug}-alternative` },
     openGraph: {
       siteName: 'Giggal.ai',
+      images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai email verification' }],
       title: cfg.ogTitle,
       description: cfg.desc,
       url: `https://giggal.ai/${cfg.slug}-alternative`,

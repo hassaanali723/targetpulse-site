@@ -61,7 +61,7 @@ export async function runVerification(email: string, ip: string): Promise<Verify
       return {
         ok: false,
         status: 429,
-        error: json?.message || 'Guest limit reached. 5 verifications per hour, so sign up for unlimited.',
+        error: json?.message || 'Guest limit reached for now. Sign up for 1,000 free credits and unlimited checks.',
       }
     }
     if (!res.ok || !json?.success || !json?.data) {
