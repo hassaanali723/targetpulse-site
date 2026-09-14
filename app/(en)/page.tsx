@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   // belong to the tool page once /email-verifier exists; until then the home
   // carries "software" and "tool" wording in the hero as secondaries.
   title: {
-    absolute: 'Email Verification Service: Bulk, Catch-All Resolved | Giggal.ai',
+    absolute: 'Email Verification Service: Catch-All Resolved | Giggal.ai',
   },
   description:
     'Email verification service and bulk email verifier with a real valid or invalid on every address, catch-all included. 98.5% accuracy, 1,000 free credits.',
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   openGraph: {
     siteName: 'Giggal.ai',
     images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai email verification' }],
-    title: 'Email Verification Service: Bulk, Catch-All Resolved',
+    title: 'Email Verification Service: Catch-All Resolved',
     description:
       'Email verification service and bulk email verifier with a real valid or invalid on every address, catch-all included. 98.5% accuracy, 1,000 free credits.',
     url: 'https://giggal.ai',
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Email Verification Service: Bulk, Catch-All Resolved',
+    title: 'Email Verification Service: Catch-All Resolved',
     description:
       'Email verification service and bulk email verifier with a real valid or invalid on every address, catch-all included. 98.5% accuracy, 1,000 free credits.',
   },
