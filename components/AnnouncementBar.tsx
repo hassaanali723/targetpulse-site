@@ -12,7 +12,21 @@ const KEY = 'giggal-puremail-banner-dismissed'
  * class on the landing <main>, so dismissing the bar reverts them in CSS —
  * see the ".has-ann" rules in globals.css.
  */
-export default function AnnouncementBar() {
+export type AnnouncementStrings = {
+  text: string
+  brand: string
+  tail: string
+  dismiss: string
+}
+
+const EN: AnnouncementStrings = {
+  text: 'Get dedicated Google and Outlook inboxes from',
+  brand: 'PureMail',
+  tail: ', $2.90 per inbox a month.',
+  dismiss: 'Dismiss announcement',
+}
+
+export default function AnnouncementBar({ strings = EN }: { strings?: AnnouncementStrings }) {
   const [hidden, setHidden] = useState(false)
 
   useEffect(() => {
@@ -36,21 +50,21 @@ export default function AnnouncementBar() {
         <p className="flex items-center gap-2 text-[12px] sm:text-[13px] font-bold tracking-tight text-center pr-8">
           <Mail className="w-3.5 h-3.5 shrink-0 text-emerald-200" />
           <span className="text-indigo-50 font-semibold">
-            Get dedicated Google and Outlook inboxes from{' '}
+            {strings.text}{' '}
             <a
               href="https://puremail.ai/?utm_source=giggal"
               target="_blank"
               rel="nofollow noopener noreferrer"
               className="font-black text-white underline decoration-white/40 underline-offset-2 hover:decoration-white transition-colors"
             >
-              PureMail
+              {strings.brand}
             </a>
-            , $2.90 per inbox a month.
+            {strings.tail}
           </span>
         </p>
         <button
           onClick={dismiss}
-          aria-label="Dismiss announcement"
+          aria-label={strings.dismiss}
           className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 p-1 rounded-md text-white/80 hover:text-white hover:bg-white/15 transition-colors"
         >
           <X className="w-3.5 h-3.5" />

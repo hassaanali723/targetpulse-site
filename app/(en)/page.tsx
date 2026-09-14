@@ -1,0 +1,504 @@
+import type { Metadata } from 'next'
+import React from 'react'
+import Link from 'next/link'
+import { BookOpen, Plus, Star, CheckCircle2, ArrowRight } from 'lucide-react'
+import Navbar from '@/components/Navbar'
+import AnnouncementBar from '@/components/AnnouncementBar'
+import Footer from '@/components/Footer'
+import Wordmark from '@/components/Wordmark'
+import HeroCheck from '@/components/landing/HeroCheck'
+import ProductPreview from '@/components/landing/ProductPreview'
+import VerifierConsole from '@/components/landing/VerifierConsole'
+import ReviewBadges from '@/components/landing/ReviewBadges'
+import ReviewWall from '@/components/landing/ReviewWall'
+import McpSection from '@/components/landing/McpSection'
+import PricingBlock from '@/components/landing/PricingBlock'
+import FaqAccordion, { type FaqItem } from '@/components/landing/FaqAccordion'
+import JsonLd from '@/components/JsonLd'
+import { softwareApplicationLd } from '@/lib/schema'
+import { hreflangAlternates } from '@/lib/i18n/clusters'
+
+// The eight competitors with the most search demand. Each links to its existing
+// /{brand}-alternative page; those pages now carry the head-to-head links, so
+// this is the top of the crawl path into the 351 comparison pages.
+const SWITCHERS = [
+  { name: 'ZeroBounce', href: '/zerobounce-alternative', blurb: 'Resolve the catch-all addresses ZeroBounce returns as unknown.' },
+  { name: 'NeverBounce', href: '/neverbounce-alternative', blurb: 'Pay-as-you-go pricing with credits that never expire.' },
+  { name: 'Bouncer', href: '/bouncer-alternative', blurb: 'Catch-all and SEG-protected mailboxes resolved, not just flagged.' },
+  { name: 'Hunter', href: '/hunter-alternative', blurb: 'A dedicated verifier instead of a finder with verification bundled in.' },
+  { name: 'Kickbox', href: '/kickbox-alternative', blurb: 'Flat 1 credit per email, with no monthly commitment.' },
+  { name: 'Emailable', href: '/emailable-alternative', blurb: 'Four clear results on accept-all domains, not a risky label.' },
+  { name: 'MillionVerifier', href: '/millionverifier-alternative', blurb: 'Catch-all resolution built in rather than sold separately.' },
+  { name: 'Apollo', href: '/apollo-alternative', blurb: 'Verification built for deliverability, not bundled into a sales suite.' },
+]
+
+// All sign-up / get-started CTAs go straight to the Giggal email verifier dashboard.
+const SIGNUP_URL = 'https://emailverifier.giggal.ai/sign-up'
+
+export const metadata: Metadata = {
+  // Primary query: "email verification service" (C4). The bare head terms
+  // belong to the tool page once /email-verifier exists; until then the home
+  // carries "software" and "tool" wording in the hero as secondaries.
+  title: {
+    absolute: 'Email Verification Service: Bulk, Catch-All Resolved | Giggal.ai',
+  },
+  description:
+    'Email verification service and bulk email verifier with a real valid or invalid on every address, catch-all included. 98.5% accuracy, 1,000 free credits.',
+  alternates: { canonical: '/', languages: hreflangAlternates('home') },
+  openGraph: {
+    siteName: 'Giggal.ai',
+    images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai email verification' }],
+    title: 'Email Verification Service: Bulk, Catch-All Resolved',
+    description:
+      'Email verification service and bulk email verifier with a real valid or invalid on every address, catch-all included. 98.5% accuracy, 1,000 free credits.',
+    url: 'https://giggal.ai',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Email Verification Service: Bulk, Catch-All Resolved',
+    description:
+      'Email verification service and bulk email verifier with a real valid or invalid on every address, catch-all included. 98.5% accuracy, 1,000 free credits.',
+  },
+}
+
+// Single source of truth for the FAQ — rendered visibly AND emitted as JSON-LD.
+const faqItems: FaqItem[] = [
+  {
+    q: 'How do I verify catch-all and accept-all emails?',
+    a: 'Giggal.ai is built specifically for catch-all email verification. We check whether each address is a real, active mailbox even on domains that accept every email, and the same check holds behind gateways like Mimecast and Proofpoint. You get a clear valid or invalid result instead of the "risky" label other tools give up with. Around 30% of every B2B list is catch-all. Instead of writing off the whole pile, Giggal.ai tells you which addresses are actually valid so you keep the real leads hiding inside.',
+  },
+  {
+    q: 'How accurate is Giggal.ai email verification?',
+    a: 'Giggal.ai maintains around 98.5% accuracy on standard business lists. Our deep mailbox existence check goes beyond basic format and domain checks to confirm whether the mailbox is truly reachable. That keeps typical bounce rates under 3% on cleaned lists.',
+  },
+  {
+    q: 'Can I verify millions of emails at once?',
+    a: 'Yes. Giggal.ai is built for verification at scale. Upload a list of thousands or even millions of email addresses and our cloud infrastructure processes them concurrently, returning fully verified results in minutes. No throttling, no daily caps, no waiting queue.',
+  },
+  {
+    q: 'Does Giggal.ai support MCP (Model Context Protocol) for Claude and AI agents?',
+    a: 'Yes. Giggal.ai has an official MCP server that lets Claude Desktop and other AI agents verify email addresses directly during conversations. Install the Giggal MCP once, then ask Claude to verify any email or list on the fly. No dashboard hopping required.',
+  },
+  {
+    q: 'Can I verify email lists in bulk?',
+    a: 'Yes. Upload a CSV or TXT file with your email list and Giggal.ai verifies thousands of addresses in minutes. You get back a clean, categorized list ready to export as CSV, Excel, or JSON. No manual work required.',
+  },
+  {
+    q: 'How does email verification improve deliverability?',
+    a: 'By removing invalid, fake, and undeliverable addresses before you send, you cut bounce rates, avoid spam traps, and protect your sender reputation. That leads directly to better inbox placement and higher engagement across your campaigns.',
+  },
+  {
+    q: 'Is Giggal.ai email verification free to try?',
+    a: 'Yes. Giggal.ai gives you 1,000 free verification credits to start, with no credit card required. That is enough to verify a small list end-to-end and see the accuracy before committing to a paid plan. Credits never expire.',
+  },
+]
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+}
+
+// Zapier and n8n lead the strip with an animated border (featured); the rest
+// link to the integrations hub.
+const integrations = [
+  { name: 'Zapier', src: '/integrations/giggal-catch-all-email-verification-zapier.png', href: '/integrations/zapier', featured: true },
+  { name: 'n8n', src: '/integrations/giggal-catch-all-email-verification-n8n.png', href: '/integrations/n8n', featured: true },
+  { name: 'Mailchimp', src: '/integrations/giggal-catch-all-email-verification-mailchimp.png', href: '/integrations' },
+  { name: 'HubSpot', src: '/integrations/giggal-catch-all-email-verification-hubspot.png', href: '/integrations/zapier/hubspot' },
+  { name: 'SendGrid', src: '/integrations/giggal-catch-all-email-verification-sendgrid.png', href: '/integrations' },
+  { name: 'ActiveCampaign', src: '/integrations/giggal-catch-all-email-verification-activecampaign.png', href: '/integrations' },
+]
+
+export default function Home() {
+  return (
+    <main className="has-ann relative min-h-screen bg-slate-50 grid-lines overflow-x-hidden text-slate-800 antialiased">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <JsonLd data={softwareApplicationLd()} />
+
+      {/* Ambient light effects */}
+      <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-indigo-500/10 blur-[120px] -z-10 pointer-events-none" />
+      <div className="absolute top-[600px] right-1/4 w-[500px] h-[500px] rounded-full bg-emerald-500/[0.06] blur-[100px] -z-10 pointer-events-none" />
+
+      <AnnouncementBar />
+      <Navbar />
+
+      {/* Hero */}
+      <section className="max-w-6xl mx-auto px-6 pt-28 md:pt-32 pb-24 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+        {/* Copy */}
+        <div className="lg:col-span-6 space-y-8 text-left">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900">
+            Email verification service that resolves <br />
+            <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">every address, catch-all included</span>
+          </h1>
+          <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-xl font-medium">
+            Email verification software that runs a deep mailbox existence check on every address, not a syntax pass. Your bounce rate stays{' '}
+            <strong className="text-indigo-600 font-extrabold">under 3%</strong>, and the{' '}
+            <strong className="text-slate-900 font-extrabold">30% of every B2B list</strong> that other tools flag as &quot;Risky&quot; becomes deliverable again.
+          </p>
+          <p className="text-sm text-slate-500 leading-relaxed max-w-xl font-medium !mt-3">
+            <a href="#bulk" className="text-indigo-600 font-bold hover:underline">
+              Bulk email verification
+            </a>{' '}
+            of up to 50,000 addresses per file, an API, and a clear result on the 30% of every B2B list that other tools mark risky. That holds on{' '}
+            <a href="/catch-all-verification" className="text-indigo-600 font-bold hover:underline">
+              catch-all domains
+            </a>{' '}
+            and behind{' '}
+            <Link href="/seg-email-verification" className="text-indigo-600 font-bold hover:underline">
+              gateways like Proofpoint and Mimecast
+            </Link>
+            .
+          </p>
+
+          <div className="pt-6 !mt-6 border-t border-slate-200/80 space-y-1">
+            <p className="text-slate-900 font-black text-base">Get 1,000 Free Email Validations</p>
+            <p className="text-slate-500 text-xs font-semibold leading-normal">Start cleaning your list instantly. No credit card required.</p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <a
+              href={SIGNUP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-3.5 bg-indigo-600 hover:bg-indigo-700 font-extrabold rounded-xl text-white shadow-md shadow-indigo-600/10 hover:-translate-y-0.5 transition-all text-center text-sm sm:w-auto"
+            >
+              Start Free
+            </a>
+            <Link
+              href="/pricing"
+              className="px-8 py-3.5 bg-white border border-slate-300 hover:border-slate-800 hover:bg-slate-50 font-bold rounded-xl text-slate-700 hover:text-slate-950 transition-all text-center text-sm flex items-center justify-center gap-2 shadow-sm"
+            >
+              <BookOpen className="w-4 h-4 text-indigo-600" /> See Pricing
+            </Link>
+          </div>
+
+          <p className="!mt-4 text-sm font-semibold text-slate-600">
+            Or{' '}
+            <a href="#verify" className="text-indigo-600 font-bold hover:underline">
+              check one address free
+            </a>
+            , no account needed.
+          </p>
+
+          <div className="flex items-center gap-3 !mt-6 text-xs font-semibold text-slate-500">
+            <span className="flex items-center gap-0.5 text-amber-400" aria-hidden="true">
+              <Star className="w-3.5 h-3.5 fill-current" /><Star className="w-3.5 h-3.5 fill-current" /><Star className="w-3.5 h-3.5 fill-current" /><Star className="w-3.5 h-3.5 fill-current" /><Star className="w-3.5 h-3.5 fill-current" />
+            </span>
+            <span>4.8 on G2 &middot; 500M+ emails verified</span>
+          </div>
+        </div>
+
+        {/* Single-check hero visual */}
+        <div className="lg:col-span-6">
+          <HeroCheck />
+        </div>
+      </section>
+
+      {/* Stats bar */}
+      <section className="max-w-6xl mx-auto px-6 -mt-8 md:-mt-12 pb-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-slate-200 rounded-2xl overflow-hidden border border-slate-200 card-vivid-shadow">
+          {[
+            { n: '500M+', l: 'Emails verified' },
+            { n: '98.5%', l: 'Accuracy on business lists' },
+            { n: 'Under 3%', l: 'Bounce rate maintained' },
+            { n: '1,000', l: 'Free credits, no card' },
+          ].map((s) => (
+            <div key={s.l} className="bg-white px-5 py-6 text-center">
+              <div className="text-2xl md:text-3xl font-black text-indigo-600 tracking-tight tabular-nums">{s.n}</div>
+              <div className="text-[11px] md:text-xs font-bold text-slate-500 mt-1 leading-tight">{s.l}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Product: bulk results dashboard */}
+      <section id="bulk" className="cv-section max-w-6xl mx-auto px-6 pt-10 pb-20 scroll-mt-28">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="space-y-5 order-2 lg:order-1">
+            <span className="inline-block text-xs font-black uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-lg">Bulk email verification</span>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">Bulk email verification for your whole list in minutes</h2>
+            <p className="text-slate-600 text-sm md:text-base font-medium leading-relaxed">
+              Upload a CSV or Excel file of up to 50,000 emails and Giggal.ai&apos;s bulk email verification returns each address as deliverable or undeliverable. The email verification tool also resolves the catch-all, accept-all and SEG-protected addresses that other email verifiers only mark as risky, so you can export a clean list.
+            </p>
+            <ul className="space-y-2.5">
+              {[
+                'Bulk email verification for up to 50,000 emails per file, with real-time results',
+                'Catch-all, accept-all and SEG-protected email verification resolved to a real result',
+                'Export your verified email list as CSV or Excel',
+              ].map((t) => (
+                <li key={t} className="flex items-start gap-2.5 text-sm font-semibold text-slate-700">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                  <span>{t}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="order-1 lg:order-2">
+            <ProductPreview />
+          </div>
+        </div>
+      </section>
+
+      {/* Real-time verifier console */}
+      <section id="verify" className="cv-section max-w-6xl mx-auto px-6 pb-24 text-center space-y-12 scroll-mt-28">
+        <div className="max-w-3xl mx-auto space-y-4">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Verify Any Email in Real-Time</h2>
+          <p className="text-slate-600 leading-relaxed text-sm md:text-base font-medium max-w-2xl mx-auto">
+            Test emails for free to see our engine check spelling, locate mail servers, and confirm real mailbox existence in real-time.
+          </p>
+        </div>
+        <VerifierConsole />
+      </section>
+
+      {/* Review-platform badges */}
+      <ReviewBadges />
+
+      {/* Catch-all educational */}
+      <section className="cv-section max-w-5xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-12">
+        <div className="text-center max-w-2xl mx-auto space-y-3">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Why catch-all addresses need a real verdict</h2>
+          <p className="text-slate-600 text-sm font-medium">
+            A{' '}
+            <Link href="/blog/what-is-a-catch-all-email-address" className="text-indigo-600 font-bold hover:underline">
+              catch-all domain
+            </Link>{' '}
+            accepts mail for every address, real or not, so the SMTP reply standard tools rely on carries no information. They print &quot;risky&quot; and leave you with a blind gamble on a third of your list:
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
+          {/* Standard checkers */}
+          <div className="bg-white border-2 border-slate-200 rounded-3xl p-6 sm:p-8 flex flex-col items-center text-center space-y-4 card-vivid-shadow">
+            <span className="text-xs font-black uppercase tracking-wider text-slate-400 bg-slate-100 px-3 py-1 rounded-lg">Standard Checkers</span>
+            <span className="text-6xl sm:text-7xl font-black text-rose-500 tracking-tight leading-none mt-2">35%</span>
+            <span className="text-xs font-extrabold text-rose-600 uppercase tracking-wider">Average Bounce Rate Risk</span>
+            <div className="w-full max-w-[200px] h-2 bg-slate-100 rounded-full overflow-hidden mt-2">
+              <div className="h-full bg-rose-500 rounded-full" style={{ width: '80%' }} />
+            </div>
+            <p className="text-[11px] text-slate-500 font-bold leading-relaxed max-w-xs pt-2">
+              Forces you to throw away valuable business leads or risk getting your outbound domains blocked.
+            </p>
+          </div>
+
+          {/* Giggal verification */}
+          <div className="bg-white border-2 border-indigo-100 rounded-3xl p-6 sm:p-8 flex flex-col items-center text-center space-y-4 card-vivid-shadow ring-2 ring-indigo-600/5 relative overflow-hidden">
+            <div className="absolute -right-8 -top-8 w-16 h-16 rounded-full bg-emerald-500/5 blur-xl pointer-events-none" />
+            <div className="flex items-center bg-indigo-50/60 border border-indigo-100/60 px-4 py-2 rounded-2xl">
+              <Wordmark className="text-base sm:text-lg" />
+              <span className="text-[9px] font-black uppercase text-indigo-600 tracking-wider bg-white px-2 py-0.5 rounded-md shadow-sm ml-2.5">Verified</span>
+            </div>
+            <span className="text-6xl sm:text-7xl font-black text-emerald-500 tracking-tight leading-none mt-2">&lt;3%</span>
+            <span className="text-xs font-extrabold text-emerald-600 uppercase tracking-wider">Guaranteed Outbound Bounces</span>
+            <div className="w-full max-w-[200px] h-2 bg-slate-100 rounded-full overflow-hidden mt-2">
+              <div className="h-full bg-emerald-500 rounded-full" style={{ width: '5%' }} />
+            </div>
+            <p className="text-[11px] text-slate-500 font-bold leading-relaxed max-w-xs pt-2">
+              Safely identifies active corporate mailboxes instantly so you can outreach with complete confidence.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Reviews — real Product Hunt testimonial wall */}
+      <ReviewWall />
+
+      {/* MCP — connect your favourite AI (compact; full guide lives on /mcp) */}
+      <McpSection detailsHref="/mcp" />
+
+      {/* Feature showcase */}
+      <section id="features-showcase" className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-16">
+        <div className="text-center max-w-2xl mx-auto space-y-3">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Bulk cleaning, API and integrations on one credit balance</h2>
+          <p className="text-slate-600 text-sm font-medium">
+            Upload a list, call the{' '}
+            <Link href="/public/docs" className="text-indigo-600 font-bold hover:underline">
+              REST API
+            </Link>
+            , or connect a CRM. Every route runs the same verification, and the{' '}
+            <Link href="/blog" className="text-indigo-600 font-bold hover:underline">
+              deliverability guides
+            </Link>{' '}
+            explain what each result means for your sender reputation.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[
+            {
+              bg: 'bg-indigo-600 shadow-indigo-600/10', title: 'Bulk List Cleaning',
+              body: 'Upload CSV or TXT lists to verify thousands of outbound prospects concurrently in just a few minutes.',
+              path: (<><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" /><polyline points="10 9 9 9 8 9" /></>),
+            },
+            {
+              bg: 'bg-emerald-500 shadow-emerald-500/10', title: 'Catch-All Verification',
+              body: 'Confirm delivery states on corporate catch-all domains that standard checkers incorrectly label as unknown.',
+              path: (<><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><circle cx="12" cy="11" r="3" /><path d="m14.5 13.5 2 2" /></>),
+            },
+            {
+              bg: 'bg-violet-600 shadow-violet-600/10', title: 'Developer API Support',
+              body: 'Integrate sub-second email socket verification directly into your registration forms or custom applications.',
+              path: (<><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" /><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7 7l1.71-1.71" /></>),
+            },
+            {
+              bg: 'bg-blue-600 shadow-blue-600/10', title: 'CRM & App Integrations',
+              body: 'Sync cleaned, deliverable contacts automatically with HubSpot, Mailchimp, and leading outbound systems.',
+              path: (<><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /></>),
+            },
+            {
+              bg: 'bg-amber-500 shadow-amber-500/10', title: 'Transparent, Published Pricing',
+              body: 'Access verified catch-alls and standard cleanings on a public, pay-as-you-go price list, with every volume tier shown in full.',
+              path: (<><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" /><line x1="7" y1="7" x2="7.01" y2="7" strokeWidth={3} /></>),
+            },
+            {
+              bg: 'bg-rose-500 shadow-rose-500/10', title: 'Priority Technical Support',
+              body: 'Get direct, sub-minute technical assistance from our core email delivery and server engineers via Slack.',
+              path: (<><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /><path d="M8 10h.01" /><path d="M12 10h.01" /><path d="M16 10h.01" /></>),
+            },
+          ].map((f) => (
+            <div key={f.title} className="bg-white border-2 border-slate-200 rounded-2xl p-6 min-h-[200px] hover:border-indigo-500/30 transition-all duration-300 card-vivid-shadow flex flex-col justify-start text-left space-y-4">
+              <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-white shadow-md shrink-0 ${f.bg}`}>
+                <svg viewBox="0 0 24 24" className="w-6 h-6" stroke="currentColor" fill="none" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+                  {f.path}
+                </svg>
+              </div>
+              <div className="space-y-1">
+                <h3 className="text-base font-black text-slate-900 leading-tight">{f.title}</h3>
+                <p className="text-[13px] sm:text-sm text-slate-500 font-semibold leading-normal">{f.body}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Integrations */}
+      <section id="integrations" className="cv-section bg-slate-100 py-24 border-y-2 border-slate-200">
+        <div className="max-w-6xl mx-auto px-6 space-y-16">
+          <div className="text-center max-w-2xl mx-auto space-y-3">
+            <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">Connect Your Marketing Stack</h2>
+            <p className="text-sm text-slate-600 font-bold">Giggal.ai connects directly with leading CRM and Email Service Providers to sync cleaned contacts automatically.</p>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-6 justify-items-center">
+            {integrations.map((int) => (
+              <Link
+                key={int.name}
+                href={int.href}
+                className={`${
+                  int.featured
+                    ? 'featured-tile'
+                    : 'bg-white border-2 border-slate-200/80 hover:border-indigo-500'
+                } rounded-2xl p-5 w-full flex flex-col items-center hover:-translate-y-1 transition-all card-vivid-shadow`}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={int.src} width={32} height={32} loading="lazy" decoding="async" className="w-8 h-8 mb-3 object-contain rounded-md" alt={`${int.name} email verification integration with Giggal.ai`} />
+                <span className="text-xs font-black text-slate-800">{int.name}</span>
+              </Link>
+            ))}
+            <Link
+              href="/integrations"
+              className="border-2 border-dashed border-slate-300 bg-slate-50/40 rounded-2xl p-5 w-full flex flex-col items-center justify-center hover:border-indigo-500 hover:-translate-y-1 transition-all"
+            >
+              <div className="w-8 h-8 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-500 mb-3 shadow-sm">
+                <Plus className="w-4 h-4" />
+              </div>
+              <span className="text-xs font-black text-slate-500">80+ More</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Switching from another verifier — puts the /{brand}-alternative tier
+          on the highest-authority page on the site. Those pages were reachable
+          only from the footer and /alternatives before, which is part of why
+          the comparison pages hanging off them went uncrawled. */}
+      <section className="cv-section max-w-6xl mx-auto px-6 py-24 border-t border-slate-200 space-y-12">
+        <div className="text-center max-w-2xl mx-auto space-y-4">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
+            Switching from another verifier?
+          </h2>
+          <p className="text-sm md:text-base text-slate-600 font-medium">
+            See how Giggal.ai compares on catch-all handling, pricing and accuracy.
+          </p>
+        </div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {SWITCHERS.map((s) => (
+            <Link
+              key={s.href}
+              href={s.href}
+              className="group rounded-2xl border-2 border-slate-200 bg-white p-5 space-y-2 hover:border-indigo-300 hover:-translate-y-0.5 transition-all card-vivid-shadow"
+            >
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-sm font-black text-slate-900">{s.name}</span>
+                <ArrowRight className="w-4 h-4 text-slate-300 group-hover:text-indigo-500 transition-colors" />
+              </div>
+              <p className="text-[13px] text-slate-500 font-semibold leading-normal">{s.blurb}</p>
+            </Link>
+          ))}
+        </div>
+
+        <div className="text-center">
+          <Link
+            href="/alternatives"
+            className="inline-flex items-center gap-2 text-sm font-extrabold text-indigo-600 hover:text-indigo-700 transition-colors"
+          >
+            Compare verifiers
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </section>
+
+      {/* Pricing */}
+      <section id="pricing" className="cv-section max-w-6xl mx-auto px-6 py-24 border-t border-slate-200 space-y-12">
+        <div className="text-center max-w-2xl mx-auto space-y-4">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Simple, Flexible Pricing</h2>
+          <p className="text-sm md:text-base text-slate-600 font-medium">No hidden fees. Choose between one-time credit packages or monthly plans to fit your outbound email volume.</p>
+        </div>
+
+        <PricingBlock />
+      </section>
+
+      {/* FAQ */}
+      <section id="faq" className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-16">
+        <div className="text-center space-y-3">
+          <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">Frequently Asked Questions</h2>
+          <p className="text-sm text-slate-600 font-bold">Everything you need to know about how Giggal verifies deliverability, including catch-all and SEG-protected addresses.</p>
+        </div>
+        <FaqAccordion items={faqItems} />
+      </section>
+
+      {/* Final CTA */}
+      <section className="cv-section max-w-6xl mx-auto px-6 pb-24">
+        <div className="bg-indigo-600 rounded-3xl p-12 md:p-16 text-center text-white space-y-6 shadow-xl relative overflow-hidden">
+          <h2 className="text-3xl md:text-4xl font-extrabold leading-tight tracking-tight text-white">
+            Optimize Your Email Marketing Delivery Today
+          </h2>
+          <p className="text-sm text-indigo-100 max-w-lg mx-auto font-medium">
+            Prune invalid subscribers, identify risky catch-alls, and secure your email reputation. Set up your account for free.
+          </p>
+          <div className="pt-4">
+            <a
+              href={SIGNUP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-12 py-5 bg-white hover:bg-indigo-50 text-indigo-600 font-extrabold rounded-2xl text-base transition-all shadow-md inline-block hover:scale-[1.03] active:scale-95 duration-200"
+            >
+              Get Started For Free
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+    </main>
+  )
+}

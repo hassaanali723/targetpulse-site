@@ -12,6 +12,7 @@ import { MIMECAST_PAGE_LIVE } from '@/lib/flags'
 import { allPairs } from '@/lib/compare'
 import { ZAPIER_APPS } from '@/lib/zapierApps'
 import { getAllPosts } from '@/lib/blog'
+import { italianUrls } from '@/lib/i18n/clusters'
 
 export const SITE = 'https://giggal.ai'
 
@@ -27,7 +28,8 @@ export interface SitemapEntry {
 export function coreEntries(): SitemapEntry[] {
   return [
     // 2026-09-13: title, H1 and copy retarget (plans/07 in targetpulse-seo).
-    { path: '', lastModified: '2026-09-13' },
+    // 2026-09-14: hero retarget off SEG onto bulk (plans/09).
+    { path: '', lastModified: '2026-09-14' },
     { path: '/catch-all-verification', lastModified: '2026-09-13' },
     { path: '/seg-email-verification', lastModified: '2026-08-02' },
     ...(MIMECAST_PAGE_LIVE
@@ -129,6 +131,23 @@ export function blogEntries(): SitemapEntry[] {
       path: `/blog/${p.slug}`,
       lastModified: p.updated || p.date || undefined,
     })),
+  ]
+}
+
+// ── italian ─────────────────────────────────────────────────────────────
+// Every Italian URL, from the cluster map plus the Italian-only pages. The
+// lastmod is the launch date for the static pages and the post's own date
+// for the blog; both change only when the content does.
+const IT_LAUNCH = '2026-09-14'
+export function itEntries(): SitemapEntry[] {
+  const posts = getAllPosts('it')
+  const postPaths = new Set(posts.map((p) => `/it/blog/${p.slug}`))
+  const pages = italianUrls()
+    .filter((u) => !postPaths.has(u))
+    .map((path) => ({ path, lastModified: IT_LAUNCH }))
+  return [
+    ...pages,
+    ...posts.map((p) => ({ path: `/it/blog/${p.slug}`, lastModified: p.updated || p.date || undefined })),
   ]
 }
 

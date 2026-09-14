@@ -4,16 +4,17 @@ import React, { useEffect, useState } from 'react'
 import { CheckCircle2, XCircle, ShieldCheck, MousePointer2, Loader2 } from 'lucide-react'
 
 // Animated single-check hero: types through real addresses, moves a cursor to
-// click Verify, then flips the result. Honest data (our own mailboxes resolve
-// deliverable; one invented dead address shows the undeliverable state).
+// click Verify, then flips the result. Only our own domains appear (giggal.ai,
+// targetpulse.net, puremail.ai); the one undeliverable example is an invented
+// mailbox on our own catch-all domain, never a third party's address.
 type Item = { email: string; status: 'deliverable' | 'undeliverable'; score: number; reason: string; tag?: string }
 
 const ITEMS: Item[] = [
   { email: 'info@giggal.ai', status: 'deliverable', score: 99, reason: 'Real mailbox confirmed' },
   { email: 'hassaan@targetpulse.net', status: 'deliverable', score: 97, reason: 'Active business mailbox' },
   { email: 'support@puremail.ai', status: 'deliverable', score: 98, reason: 'Real mailbox confirmed' },
-  { email: 'mamnoon@coreroute.uk', status: 'undeliverable', score: 8, reason: 'Catch-all domain, mailbox not found', tag: 'catch-all' },
-  { email: 'hello@onelittleweb.com', status: 'deliverable', score: 90, reason: 'Catch-all domain, real mailbox confirmed', tag: 'catch-all' },
+  { email: 'nobody-here@giggal.ai', status: 'undeliverable', score: 8, reason: 'Catch-all domain, mailbox not found', tag: 'catch-all' },
+  { email: 'hello@targetpulse.net', status: 'deliverable', score: 90, reason: 'Catch-all domain, real mailbox confirmed', tag: 'catch-all' },
 ]
 
 const CHIPS = ['All basic checks', 'Catch-all verification & SEG bypass', 'Mailbox existence']

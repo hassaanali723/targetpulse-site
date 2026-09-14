@@ -152,16 +152,25 @@ function renderMarkdown(body: string): { html: string; toc: TocItem[] } {
   return { html: html.join('\n'), toc }
 }
 
-export function getPostSlugs(): string[] {
-  if (!fs.existsSync(POSTS_DIR)) return []
+// Localized posts live in a subfolder per language (content/blog/it/...).
+// The English functions read the top level only: readdirSync lists the
+// subfolder as a directory entry without ".md", so it is filtered out.
+export type BlogLocale = 'en' | 'it'
+function postsDir(locale: BlogLocale): string {
+  return locale === 'en' ? POSTS_DIR : path.join(POSTS_DIR, locale)
+}
+
+export function getPostSlugs(locale: BlogLocale = 'en'): string[] {
+  const dir = postsDir(locale)
+  if (!fs.existsSync(dir)) return []
   return fs
-    .readdirSync(POSTS_DIR)
+    .readdirSync(dir)
     .filter((f) => f.endsWith('.md'))
     .map((f) => f.replace(/\.md$/, ''))
 }
 
-export function getPostBySlug(slug: string): Post | null {
-  const file = path.join(POSTS_DIR, `${slug}.md`)
+export function getPostBySlug(slug: string, locale: BlogLocale = 'en'): Post | null {
+  const file = path.join(postsDir(locale), `${slug}.md`)
   if (!fs.existsSync(file)) return null
   const raw = fs.readFileSync(file, 'utf8')
   const { data, body } = parseFrontmatter(raw)
@@ -181,10 +190,10 @@ export function getPostBySlug(slug: string): Post | null {
   }
 }
 
-export function getAllPosts(): PostMeta[] {
-  return getPostSlugs()
+export function getAllPosts(locale: BlogLocale = 'en'): PostMeta[] {
+  return getPostSlugs(locale)
     .map((slug) => {
-      const p = getPostBySlug(slug)
+      const p = getPostBySlug(slug, locale)
       if (!p) return null
       const { contentHtml, toc, ...meta } = p
       return meta

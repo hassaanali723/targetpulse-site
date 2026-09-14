@@ -10,8 +10,8 @@ type Row = { email: string; status: 'deliverable' | 'undeliverable' | 'unknown';
 const ROWS: Row[] = [
   { email: 'info@giggal.ai', status: 'deliverable', score: 99 },
   { email: 'hassaan@targetpulse.net', status: 'deliverable', score: 97 },
-  { email: 'hello@onelittleweb.com', status: 'deliverable', score: 90, tag: 'catch-all' },
-  { email: 'mamnoon@coreroute.uk', status: 'undeliverable', score: 8, tag: 'catch-all' },
+  { email: 'hello@targetpulse.net', status: 'deliverable', score: 90, tag: 'catch-all' },
+  { email: 'nobody-here@giggal.ai', status: 'undeliverable', score: 8, tag: 'catch-all' },
 ]
 
 const STATUS: Record<Row['status'], string> = {

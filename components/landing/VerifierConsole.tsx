@@ -49,6 +49,41 @@ interface VerifierConsoleProps {
   defaultEmail?: string
   // Sign-up URL used by the quota-reached CTA in the catch-all variant.
   signupUrl?: string
+  // Every visible label. Defaults to English; the Italian pages pass
+  // lib/i18n/it.ts `console`. The API stays English and returns verdict
+  // types; the card maps the type to the local title and line.
+  strings?: ConsoleStrings
+}
+
+export interface ConsoleStrings {
+  header: string
+  live: string
+  actionLabel: string
+  actionTitle: string
+  placeholder: string
+  ariaInput: string
+  button: string
+  buttonRunning: string
+  diagnostics: string
+  checks: Record<CheckKey, string>
+  idleTitle: string
+  idleText: string
+  spawning: string
+  initLog: string
+  limitTitle: string
+  limitText: string
+  limitButton: string
+  errorTitle: string
+  errorFailed: string
+  errorUnreachable: string
+  invalidSyntax: string
+  isCatchAll: string
+  notCatchAll: string
+  catchAllText: string
+  notCatchAllText: string
+  resultLabel: string
+  verdictTitle: Record<VerdictType, string>
+  verdictLine: Record<VerdictType, string>
 }
 
 const CHECK_ORDER = ['basic', 'dns', 'catchall', 'mailbox'] as const
@@ -59,6 +94,47 @@ const CHECK_LABELS: Record<CheckKey, string> = {
   dns: 'Locating mail servers',
   catchall: 'Validating catch-all',
   mailbox: 'Mailbox existence check',
+}
+
+// The English strings, unchanged from when they were inline. Passing nothing
+// renders exactly what the page rendered before the prop existed.
+export const EN_CONSOLE_STRINGS: ConsoleStrings = {
+  header: 'Real Time Tester',
+  live: 'Live Probe',
+  actionLabel: 'Verifier Action',
+  actionTitle: 'Recipient Handshake',
+  placeholder: 'Email address to verify...',
+  ariaInput: 'Email address to verify',
+  button: 'Analyze Handshake',
+  buttonRunning: 'Analyzing',
+  diagnostics: 'Diagnostics Status',
+  checks: CHECK_LABELS,
+  idleTitle: 'Ready to trace handshakes',
+  idleText: 'Enter a corporate or consumer address in the console input to run a live DNS + SMTP probe.',
+  spawning: 'SPAWNING DIAGNOSTIC THREADS...',
+  initLog: '[INIT] Opening secure verification socket...',
+  limitTitle: 'Daily limit reached',
+  limitText: 'You have used your free checks for today.',
+  limitButton: 'Get 1,000 free credits',
+  errorTitle: 'Verification Error',
+  errorFailed: 'Verification failed. Please try again.',
+  errorUnreachable: 'Could not reach the verification service.',
+  invalidSyntax: 'That is not a valid email address.',
+  isCatchAll: 'a catch-all domain',
+  notCatchAll: 'not a catch-all domain',
+  catchAllText: 'It accepts mail for any address, so a standard SMTP check cannot tell you whether this mailbox exists.',
+  notCatchAllText: 'A standard check is reliable here.',
+  resultLabel: 'Result',
+  // Empty title means "use the title the API sent" (the English pages).
+  verdictTitle: { deliverable: '', undeliverable: '', risky: '', unknown: '', catchall: '', error: '' },
+  verdictLine: {
+    deliverable: 'This mailbox exists.',
+    undeliverable: 'This mailbox does not exist.',
+    risky: 'The server accepts mail, but we cannot fully confirm this mailbox.',
+    unknown: 'We could not confirm this mailbox.',
+    catchall: 'We could not confirm this mailbox.',
+    error: '',
+  },
 }
 
 const INITIAL_CHECKS: Record<CheckKey, CheckStatus> = {
@@ -136,7 +212,9 @@ export default function VerifierConsole({
   variant = 'console',
   defaultEmail = 'info@giggal.ai',
   signupUrl = SIGNUP_URL,
+  strings = EN_CONSOLE_STRINGS,
 }: VerifierConsoleProps = {}) {
+  const t = strings
   const [email, setEmail] = useState(defaultEmail)
   const [running, setRunning] = useState(false)
   const [started, setStarted] = useState(false)
@@ -171,7 +249,7 @@ export default function VerifierConsole({
 
     // Kick off the real probe. Show the first step as active while we wait.
     setCheck('basic', 'running')
-    appendLog('[INIT] Opening secure verification socket...', 'info')
+    appendLog(t.initLog, 'info')
 
     let data: ApiResult | null = null
     let errorMsg = ''
@@ -183,11 +261,11 @@ export default function VerifierConsole({
       })
       data = await res.json().catch(() => null)
       if (!res.ok || !data || data.error) {
-        errorMsg = data?.error || 'Verification failed. Please try again.'
+        errorMsg = (t === EN_CONSOLE_STRINGS && data?.error) || t.errorFailed
         data = null
       }
     } catch {
-      errorMsg = 'Could not reach the verification service.'
+      errorMsg = t.errorUnreachable
     }
 
     if (!alive()) return
@@ -198,8 +276,8 @@ export default function VerifierConsole({
       setChecks(INITIAL_CHECKS)
       setResult({
         type: 'unknown',
-        title: 'Daily limit reached',
-        desc: data.message || 'You have used your free checks for today.',
+        title: t.limitTitle,
+        desc: (t === EN_CONSOLE_STRINGS && data.message) || t.limitText,
         limited: true,
       })
       setRunning(false)
@@ -209,7 +287,7 @@ export default function VerifierConsole({
     if (!data) {
       setLogs([])
       setChecks(INITIAL_CHECKS)
-      setResult({ type: 'error', title: 'Verification Error', desc: errorMsg })
+      setResult({ type: 'error', title: t.errorTitle, desc: errorMsg })
       setRunning(false)
       return
     }
@@ -258,8 +336,8 @@ export default function VerifierConsole({
           <span className="w-3 h-3 rounded-full bg-amber-500/80 inline-block" />
           <span className="w-3 h-3 rounded-full bg-emerald-500/80 inline-block" />
         </div>
-        <span className="text-[10px] sm:text-xs font-mono font-bold text-slate-500 uppercase tracking-widest">Real Time Tester</span>
-        <div className="text-[10px] bg-slate-800 px-2 py-0.5 rounded font-mono text-emerald-400 font-bold shrink-0">Live Probe</div>
+        <span className="text-[10px] sm:text-xs font-mono font-bold text-slate-500 uppercase tracking-widest">{t.header}</span>
+        <div className="text-[10px] bg-slate-800 px-2 py-0.5 rounded font-mono text-emerald-400 font-bold shrink-0">{t.live}</div>
       </div>
 
       {/* Split layout */}
@@ -267,8 +345,8 @@ export default function VerifierConsole({
         {/* Sidebar control panel */}
         <div className="lg:col-span-4 bg-slate-900/60 p-6 border-r border-slate-800/60 space-y-6">
           <div className="space-y-1">
-            <span className="text-[9px] text-slate-500 font-black uppercase tracking-wider">Verifier Action</span>
-            <h4 className="text-sm font-black text-white">Recipient Handshake</h4>
+            <span className="text-[9px] text-slate-500 font-black uppercase tracking-wider">{t.actionLabel}</span>
+            <h4 className="text-sm font-black text-white">{t.actionTitle}</h4>
           </div>
 
           {/* Input + button */}
@@ -279,8 +357,8 @@ export default function VerifierConsole({
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 onKeyDown={(e) => { if (e.key === 'Enter') runProbe() }}
-                placeholder="Email address to verify..."
-                aria-label="Email address to verify"
+                placeholder={t.placeholder}
+                aria-label={t.ariaInput}
                 className="w-full h-11 pl-10 pr-4 bg-slate-950 border border-slate-800 rounded-xl focus:border-indigo-500 focus:outline-none text-xs font-mono text-slate-100 font-bold"
               />
               <Mail className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
@@ -293,19 +371,19 @@ export default function VerifierConsole({
               }`}
             >
               {running
-                ? (<><Loader2 className="w-3.5 h-3.5 animate-spin" /> Analyzing...</>)
-                : (<><Play className="w-3.5 h-3.5" /> Analyze Handshake</>)}
+                ? (<><Loader2 className="w-3.5 h-3.5 animate-spin" /> {t.buttonRunning}...</>)
+                : (<><Play className="w-3.5 h-3.5" /> {t.button}</>)}
             </button>
           </div>
 
           {/* Diagnostics checklist */}
           <div className="border-t border-slate-800/60 pt-5 space-y-3.5">
-            <span className="text-[9px] text-slate-500 font-black uppercase tracking-wider block">Diagnostics Status</span>
+            <span className="text-[9px] text-slate-500 font-black uppercase tracking-wider block">{t.diagnostics}</span>
             <div className="space-y-3 text-xs font-bold font-mono">
               {CHECK_ORDER.map((key) => (
                 <div key={key} className={`flex items-center space-x-2 ${CHECK_COLOR[checks[key]]}`}>
                   <CheckIcon status={checks[key]} />
-                  <span>{CHECK_LABELS[key]}</span>
+                  <span>{t.checks[key]}</span>
                 </div>
               ))}
             </div>
@@ -317,21 +395,19 @@ export default function VerifierConsole({
           <div ref={logScrollRef} className="overflow-y-auto space-y-2.5 font-mono text-xs flex-1">
             {result ? (
               variant === 'catchall'
-                ? <CatchAllResultCard result={result} signupUrl={signupUrl} />
-                : <ResultCard result={result} />
+                ? <CatchAllResultCard result={result} signupUrl={signupUrl} t={t} />
+                : <ResultCard result={result} t={t} />
             ) : !started ? (
               <div className="h-full flex flex-col justify-center items-center text-center text-slate-500 py-16 space-y-3">
                 <Terminal className="w-6 h-6 animate-pulse text-indigo-400" />
-                <p className="font-bold text-slate-400">Ready to trace handshakes</p>
-                <p className="text-[10px] max-w-xs leading-normal">
-                  Enter a corporate or consumer address in the console input to run a live DNS + SMTP probe.
-                </p>
+                <p className="font-bold text-slate-400">{t.idleTitle}</p>
+                <p className="text-[10px] max-w-xs leading-normal">{t.idleText}</p>
               </div>
             ) : (
               <div className="space-y-2 text-indigo-400">
                 <div className="flex items-center space-x-2">
                   <span className="text-emerald-500 font-black">&gt;</span>
-                  <span className="animate-pulse">SPAWNING DIAGNOSTIC THREADS...</span>
+                  <span className="animate-pulse">{t.spawning}</span>
                 </div>
                 <div className="space-y-1.5 text-slate-400">
                   {logs.map((line, i) => (
@@ -358,7 +434,7 @@ export default function VerifierConsole({
   )
 }
 
-function ResultCard({ result }: { result: ResultState }) {
+function ResultCard({ result, t }: { result: ResultState; t: ConsoleStrings }) {
   const s = RESULT_STYLES[result.type]
   const Icon = s.Icon
   const showScore = typeof result.score === 'number' && result.type !== 'error'
@@ -372,7 +448,7 @@ function ResultCard({ result }: { result: ResultState }) {
         <Icon className={`w-7 h-7 ${s.icon}`} />
       </div>
       <div className="space-y-1 max-w-sm">
-        <h4 className={`text-lg font-black tracking-tight leading-tight ${s.heading}`}>{result.title}</h4>
+        <h4 className={`text-lg font-black tracking-tight leading-tight ${s.heading}`}>{t.verdictTitle[result.type] || result.title}</h4>
         <p className="text-xs text-slate-400 font-semibold leading-relaxed">{result.desc}</p>
       </div>
       {showScore && (
@@ -384,20 +460,12 @@ function ResultCard({ result }: { result: ResultState }) {
   )
 }
 
-// Plain-language line paired with each engine verdict on the catch-all tool.
-const VERDICT_LINE: Record<VerdictType, string> = {
-  deliverable: 'This mailbox exists.',
-  undeliverable: 'This mailbox does not exist.',
-  risky: 'The server accepts mail, but we cannot fully confirm this mailbox.',
-  unknown: 'We could not confirm this mailbox.',
-  catchall: 'We could not confirm this mailbox.',
-  error: '',
-}
+// The plain-language line for each verdict lives in ConsoleStrings.verdictLine.
 
 // Result panel for /tools/catch-all-email-checker. Shows the catch-all status as
 // a distinct step, then the verdict, so the visitor sees the problem and the
 // answer in sequence. Also renders the friendly quota-reached state.
-function CatchAllResultCard({ result, signupUrl }: { result: ResultState; signupUrl: string }) {
+function CatchAllResultCard({ result, signupUrl, t }: { result: ResultState; signupUrl: string; t: ConsoleStrings }) {
   if (result.limited) {
     return (
       <div className="h-full flex flex-col justify-center items-center text-center p-6 space-y-4 animate-slide-down">
@@ -414,7 +482,7 @@ function CatchAllResultCard({ result, signupUrl }: { result: ResultState; signup
           rel="noopener noreferrer"
           className="inline-flex items-center gap-1.5 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-black rounded-xl transition-colors"
         >
-          Get 1,000 free credits
+          {t.limitButton}
           <ArrowRight className="w-3.5 h-3.5" />
         </a>
       </div>
@@ -443,7 +511,7 @@ function CatchAllResultCard({ result, signupUrl }: { result: ResultState; signup
         <div className="w-14 h-14 rounded-2xl flex items-center justify-center border bg-rose-950/40 border-rose-900/60">
           <XCircle className="w-7 h-7 text-rose-400" />
         </div>
-        <p className="text-sm text-slate-200 font-bold max-w-sm">That is not a valid email address.</p>
+        <p className="text-sm text-slate-200 font-bold max-w-sm">{t.invalidSyntax}</p>
       </div>
     )
   }
@@ -461,13 +529,11 @@ function CatchAllResultCard({ result, signupUrl }: { result: ResultState; signup
         <div className="flex items-center gap-2">
           <AlertTriangle className={`w-4 h-4 shrink-0 ${result.catchAll ? 'text-amber-400' : 'text-slate-500'}`} />
           <span className="text-sm font-black text-slate-100 break-all">
-            {domain} is {result.catchAll ? 'a catch-all domain' : 'not a catch-all domain'}
+            {domain} {t === EN_CONSOLE_STRINGS ? 'is' : ''} {result.catchAll ? t.isCatchAll : t.notCatchAll}
           </span>
         </div>
         <p className="text-xs text-slate-400 font-semibold leading-relaxed mt-1.5 pl-6">
-          {result.catchAll
-            ? 'It accepts mail for any address, so a standard SMTP check cannot tell you whether this mailbox exists.'
-            : 'A standard check is reliable here.'}
+          {result.catchAll ? t.catchAllText : t.notCatchAllText}
         </p>
       </div>
 
@@ -475,10 +541,10 @@ function CatchAllResultCard({ result, signupUrl }: { result: ResultState; signup
       <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-4">
         <div className="flex items-center gap-2">
           <VerdictIcon className={`w-4 h-4 shrink-0 ${verdictColor}`} />
-          <span className={`text-sm font-black ${verdictColor}`}>Result: {result.title}</span>
+          <span className={`text-sm font-black ${verdictColor}`}>{t.resultLabel}: {t.verdictTitle[v] || result.title}</span>
         </div>
         <p className="text-xs text-slate-400 font-semibold leading-relaxed mt-1.5 pl-6">
-          {VERDICT_LINE[v]}
+          {t.verdictLine[v]}
         </p>
       </div>
     </div>

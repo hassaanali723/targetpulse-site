@@ -1,0 +1,183 @@
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import Image from 'next/image'
+import { notFound } from 'next/navigation'
+import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
+import AltCtaBand from '@/components/alternatives/AltCtaBand'
+import JsonLd from '@/components/JsonLd'
+import { articleLd, breadcrumbTrailLd } from '@/lib/schema'
+import { getPostBySlug, getPostSlugs } from '@/lib/blog'
+import { CLUSTERS, hreflangAlternates, type ClusterId } from '@/lib/i18n/clusters'
+import TableOfContents from '@/components/blog/TableOfContents'
+import { Home, ChevronRight } from 'lucide-react'
+
+export const dynamicParams = false
+
+// Posts that also exist in Italian carry hreflang tags; the rest do not.
+function clusterFor(slug: string): ClusterId | undefined {
+  const path = `/blog/${slug}`
+  for (const [id, c] of Object.entries(CLUSTERS)) {
+    if ((c as { en: string }).en === path) return id as ClusterId
+  }
+  return undefined
+}
+
+export function generateStaticParams() {
+  return getPostSlugs().map((slug) => ({ slug }))
+}
+
+function formatDate(iso: string): string {
+  if (!iso) return ''
+  const [y, m, d] = iso.split('-').map(Number)
+  const months = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December',
+  ]
+  if (!y || !m || !d) return iso
+  return `${d} ${months[m - 1]} ${y}`
+}
+
+// Slightly varied CTA headline per article; the offer line is fixed in AltCtaBand.
+const CTA_HEADLINE: Record<string, string> = {
+  'what-is-a-catch-all-email-address': 'See what your catch-all addresses really are',
+  'why-cold-emails-bounce': 'Cut your bounce rate before the next send',
+  'good-bounce-rate-for-cold-email': 'Get your bounce rate under control',
+  'what-is-a-secure-email-gateway': 'Verify addresses behind email gateways',
+  'what-does-risky-mean-in-email-verification': 'Turn Risky rows into real answers',
+  'best-email-verification-tools': 'Resolve the catch-all and SEG rows others flag',
+}
+
+export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
+  const post = getPostBySlug(params.slug)
+  if (!post) return {}
+  const url = `https://giggal.ai/blog/${post.slug}`
+  const cluster = clusterFor(post.slug)
+  // Posts without a cover image fall back to the site card rather than shipping
+  // with no og:image at all.
+  const ogImage = post.image ? `https://giggal.ai${post.image}` : 'https://giggal.ai/og-card.png'
+  return {
+    title: post.title,
+    description: post.description,
+    alternates: {
+      canonical: `/blog/${post.slug}`,
+      ...(cluster ? { languages: hreflangAlternates(cluster) } : {}),
+    },
+    openGraph: {
+      siteName: 'Giggal.ai',
+      title: post.title,
+      description: post.description,
+      url,
+      type: 'article',
+      ...(ogImage ? { images: [{ url: ogImage }] } : {}),
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.description,
+      ...(ogImage ? { images: [ogImage] } : {}),
+    },
+  }
+}
+
+export default function BlogArticlePage({ params }: { params: { slug: string } }) {
+  const post = getPostBySlug(params.slug)
+  if (!post) notFound()
+
+  return (
+    <main className="relative min-h-screen bg-slate-50 grid-lines overflow-x-clip text-slate-800 antialiased">
+      <JsonLd
+        data={breadcrumbTrailLd([
+          { name: 'Blog', path: '/blog' },
+          { name: post.title, path: `/blog/${post.slug}` },
+        ])}
+      />
+      <JsonLd
+        data={articleLd({
+          title: post.title,
+          description: post.description,
+          slug: post.slug,
+          datePublished: post.date,
+          dateModified: post.updated || post.date,
+          image: post.image,
+        })}
+      />
+      <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-indigo-500/10 blur-[120px] -z-10 pointer-events-none" />
+
+      <Navbar />
+
+      <article
+        className={`mx-auto px-6 pt-28 md:pt-32 pb-16 ${
+          post.toc.length >= 4 ? 'max-w-6xl' : 'max-w-3xl'
+        }`}
+      >
+        <nav aria-label="Breadcrumb" className="blog-breadcrumb">
+          <Link href="/">
+            <Home aria-hidden="true" />
+            Home
+          </Link>
+          <ChevronRight aria-hidden="true" className="sep" />
+          <Link href="/blog">Blog</Link>
+          <ChevronRight aria-hidden="true" className="sep" />
+          <span className="current" aria-current="page">
+            {post.title}
+          </span>
+        </nav>
+
+        <div
+          className={
+            post.toc.length >= 4
+              ? 'mt-6 lg:grid lg:grid-cols-[17rem_minmax(0,1fr)] lg:gap-16'
+              : 'mt-6'
+          }
+        >
+          {post.toc.length >= 4 && (
+            <aside className="hidden lg:block">
+              <div className="sticky top-28 max-h-[calc(100vh-8rem)] overflow-auto pr-2">
+                <TableOfContents items={post.toc} variant="side" />
+              </div>
+            </aside>
+          )}
+
+          <div className="min-w-0">
+            {post.image && (
+              <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 card-vivid-shadow">
+                <Image
+                  src={post.image}
+                  alt={post.imageAlt || post.title}
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 720px"
+                  className="object-cover"
+                />
+              </div>
+            )}
+
+            <h1 className="mt-8 text-3xl md:text-4xl font-black tracking-tight leading-[1.1] text-slate-900">
+              {post.title}
+            </h1>
+
+            <div className="mt-4 text-sm text-slate-500 font-medium">
+              <time dateTime={post.date}>{formatDate(post.date)}</time>
+            </div>
+
+            {post.toc.length >= 4 && (
+              <div className="lg:hidden mt-8">
+                <TableOfContents items={post.toc} variant="box" />
+              </div>
+            )}
+
+            <div
+              className="blog-prose mt-10"
+              dangerouslySetInnerHTML={{ __html: post.contentHtml }}
+            />
+          </div>
+        </div>
+      </article>
+
+      <AltCtaBand headline={CTA_HEADLINE[post.slug] || 'Verify your list with Giggal.ai'} />
+
+      <Footer />
+    </main>
+  )
+}

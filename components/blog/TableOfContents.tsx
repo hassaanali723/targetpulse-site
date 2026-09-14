@@ -10,9 +10,14 @@ type TocItem = { id: string; text: string }
 export default function TableOfContents({
   items,
   variant,
+  title = 'On this page',
+  ariaLabel = 'Table of contents',
 }: {
   items: TocItem[]
   variant: 'side' | 'box'
+  // Localized pages pass their own heading and aria label.
+  title?: string
+  ariaLabel?: string
 }) {
   const [activeId, setActiveId] = useState<string>('')
 
@@ -37,10 +42,10 @@ export default function TableOfContents({
 
   return (
     <nav
-      aria-label="Table of contents"
+      aria-label={ariaLabel}
       className={variant === 'side' ? 'blog-toc-side' : 'blog-toc'}
     >
-      <p className="blog-toc-title">On this page</p>
+      <p className="blog-toc-title">{title}</p>
       <ul>
         {items.map((item) => (
           <li key={item.id}>

@@ -66,6 +66,13 @@ export default function Footer() {
               including catch-all and accept-all domains other tools skip.
             </p>
 
+            {/* Other languages. Plain links so the crawl path to the Italian
+                site exists from every English page, not only from the head tags. */}
+            <p className="text-[12px] font-medium text-slate-500">
+              Language: <span className="font-bold text-slate-800">English</span> ·{' '}
+              <Link href="/it" hrefLang="it" lang="it" className="hover:text-indigo-600">Italiano</Link>
+            </p>
+
             {/* Social icons */}
             <div className="flex items-center gap-2 pt-1">
               {socials.map(({ icon: Icon, href, label }) => (

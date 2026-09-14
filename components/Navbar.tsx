@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import { Menu, X } from 'lucide-react'
 import Link from 'next/link'
+import LanguageSwitcher, { LanguageSwitcherInline } from '@/components/i18n/LanguageSwitcher'
 
 const SIGNUP_URL = 'https://emailverifier.giggal.ai/sign-up'
 const SIGNIN_URL = 'https://emailverifier.giggal.ai/sign-in'
@@ -84,6 +85,9 @@ export default function Navbar() {
 
             {/* Desktop CTA */}
             <div className="hidden lg:flex items-center gap-4 xl:gap-6 whitespace-nowrap">
+              {/* Same page in Italian, or the Italian home when there is none.
+                  Text link so it adds nothing to the LCP path. */}
+              <LanguageSwitcher current="en" />
               <a
                 href={SIGNIN_URL}
                 target="_blank"
@@ -149,6 +153,7 @@ export default function Navbar() {
                 <span className="text-slate-300 text-lg">›</span>
               </Link>
             ))}
+            <LanguageSwitcherInline current="en" />
           </div>
           <div className="px-6 pb-8 pt-3 border-t border-slate-100 space-y-3">
             <a

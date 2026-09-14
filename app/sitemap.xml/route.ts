@@ -12,6 +12,7 @@ export function GET() {
       'sitemap-compare.xml',
       'sitemap-integrations.xml',
       'sitemap-blog.xml',
+      'sitemap-it.xml',
     ]),
     { headers: XML_HEADERS }
   )

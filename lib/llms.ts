@@ -75,6 +75,9 @@ returns valid or invalid instead of a shrug.
 - [Compare](${SITE}/compare): head-to-head pages for every pair of those verifiers, Giggal included or not
 - [Blog](${SITE}/blog)
 
+## Other languages
+- Italiano: [Verifica email gratis](${SITE}/it/verifica-email), [pagina iniziale](${SITE}/it), [prezzi](${SITE}/it/prezzi)
+
 ## Full version
 ${SITE}/llms-full.txt
 `

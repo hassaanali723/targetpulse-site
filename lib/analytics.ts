@@ -17,7 +17,13 @@ export function track(name: string, params: Params = {}): void {
   if (typeof window === 'undefined') return
   // dataLayer exists before gtag.js finishes downloading; pushes queue up and
   // flush on load, so events fired early are not lost.
-  window.gtag?.('event', name, { ...params, page_path: location.pathname })
+  // `locale` comes from <html lang>, so every event on the Italian site can be
+  // split from the English one in GA4 without a second property.
+  window.gtag?.('event', name, {
+    ...params,
+    page_path: location.pathname,
+    locale: document.documentElement.lang || 'en',
+  })
 }
 
 // ── helpers ─────────────────────────────────────────────────────────────
