@@ -91,18 +91,17 @@ export default function HomeIt() {
             <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">che risolve i catch-all</span>
           </h1>
           <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-xl font-medium">
-            Un servizio di verifica email che controlla l&apos;esistenza reale di ogni casella, non
-            solo la sintassi. Il tuo tasso di rimbalzo resta{' '}
-            <strong className="text-indigo-600 font-extrabold">sotto il 3%</strong> e il{' '}
+            Software di verifica email che controlla la casella reale, non solo la sintassi. Tasso di
+            rimbalzo{' '}
+            <strong className="text-indigo-600 font-extrabold">sotto il 3%</strong>, e il{' '}
             <strong className="text-slate-900 font-extrabold">30% di ogni lista B2B</strong> che gli
-            altri strumenti segnano come &quot;a rischio&quot; torna consegnabile.
+            altri segnano &quot;a rischio&quot; torna consegnabile.
           </p>
           <p className="text-sm text-slate-500 leading-relaxed max-w-xl font-medium !mt-3">
             <a href="#blocco" className="text-indigo-600 font-bold hover:underline">
               Verifica in blocco
             </a>{' '}
-            fino a 50.000 indirizzi per file, una API e un risultato chiaro sul 30% di ogni lista B2B che
-            gli altri strumenti segnano a rischio. Vale anche sui{' '}
+            fino a 50.000 indirizzi per file, più una API. Funziona sui{' '}
             <Link href="/it/verifica-catch-all" className="text-indigo-600 font-bold hover:underline">
               domini catch-all
             </Link>{' '}

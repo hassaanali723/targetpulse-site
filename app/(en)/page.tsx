@@ -140,15 +140,15 @@ export default function Home() {
             <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">that resolves catch-all</span>
           </h1>
           <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-xl font-medium">
-            Email verification software that runs a deep mailbox existence check on every address, not a syntax pass. Your bounce rate stays{' '}
+            Email verification software that checks the mailbox itself, not just the syntax. Bounce rate{' '}
             <strong className="text-indigo-600 font-extrabold">under 3%</strong>, and the{' '}
-            <strong className="text-slate-900 font-extrabold">30% of every B2B list</strong> that other tools flag as &quot;Risky&quot; becomes deliverable again.
+            <strong className="text-slate-900 font-extrabold">30% of every B2B list</strong> other tools call &quot;Risky&quot; comes back deliverable.
           </p>
           <p className="text-sm text-slate-500 leading-relaxed max-w-xl font-medium !mt-3">
             <a href="#bulk" className="text-indigo-600 font-bold hover:underline">
               Bulk email verification
             </a>{' '}
-            of up to 50,000 addresses per file, an API, and a clear result on the 30% of every B2B list that other tools mark risky. That holds on{' '}
+            up to 50,000 addresses per file, plus an API. Works on{' '}
             <a href="/catch-all-verification" className="text-indigo-600 font-bold hover:underline">
               catch-all domains
             </a>{' '}
