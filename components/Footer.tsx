@@ -118,8 +118,8 @@ export default function Footer() {
                   wrote; /compare is the generated head-to-head grid below.
                   "Verifier comparison" stays distinct from "Head-to-head
                   comparisons" without implying the competitors are the best
-                  option. The header nav uses "Compare verifiers" for the same
-                  URL, which is fine — nav and footer need not match. */}
+                  option. The top nav does not link /alternatives; this footer
+                  link, the AltCtaBand and the home block carry it. */}
               <li>
                 <Link href="/alternatives" className={linkClass}>
                   Verifier comparison
