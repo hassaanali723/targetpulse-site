@@ -136,8 +136,8 @@ export default function Home() {
         {/* Copy */}
         <div className="lg:col-span-6 space-y-8 text-left">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900">
-            Email verification service that resolves <br />
-            <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">every address, catch-all included</span>
+            Email verification service <br />
+            <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">that resolves catch-all</span>
           </h1>
           <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-xl font-medium">
             Email verification software that runs a deep mailbox existence check on every address, not a syntax pass. Your bounce rate stays{' '}
