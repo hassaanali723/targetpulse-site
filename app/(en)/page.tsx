@@ -449,9 +449,9 @@ export default function Home() {
         <div className="text-center">
           <Link
             href="/alternatives"
-            className="inline-flex items-center gap-2 text-sm font-extrabold text-indigo-600 hover:text-indigo-700 transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border-2 border-indigo-200 bg-white text-sm font-extrabold text-indigo-700 hover:border-indigo-400 hover:bg-indigo-50 transition-all shadow-sm"
           >
-            Compare verifiers
+            Compare all 28 verifiers
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
