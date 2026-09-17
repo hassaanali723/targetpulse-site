@@ -77,6 +77,8 @@ returns valid or invalid instead of a shrug.
 
 ## Other languages
 - Italiano: [Verifica email gratis](${SITE}/it/verifica-email), [pagina iniziale](${SITE}/it), [prezzi](${SITE}/it/prezzi)
+- Deutsch: [E-Mail-Adresse kostenlos prüfen](${SITE}/de/email-adresse-pruefen), [Startseite](${SITE}/de), [Preise](${SITE}/de/preise)
+- Español: [Validar correo gratis](${SITE}/es/validar-correo), [inicio](${SITE}/es), [precios](${SITE}/es/precios)
 
 ## Full version
 ${SITE}/llms-full.txt

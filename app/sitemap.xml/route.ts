@@ -13,6 +13,8 @@ export function GET() {
       'sitemap-integrations.xml',
       'sitemap-blog.xml',
       'sitemap-it.xml',
+      'sitemap-de.xml',
+      'sitemap-es.xml',
     ]),
     { headers: XML_HEADERS }
   )

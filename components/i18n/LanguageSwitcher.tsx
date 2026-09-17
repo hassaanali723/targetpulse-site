@@ -16,6 +16,8 @@ import { CLUSTERS, LOCALES, type Cluster, type Locale } from '@/lib/i18n/cluster
 const LOCALE_META: Record<Locale, { native: string; short: string }> = {
   en: { native: 'English', short: 'EN' },
   it: { native: 'Italiano', short: 'IT' },
+  de: { native: 'Deutsch', short: 'DE' },
+  es: { native: 'Español', short: 'ES' },
 }
 
 function alternateOf(pathname: string, from: Locale, target: Locale): string {
@@ -61,7 +63,7 @@ function CheckIcon() {
   )
 }
 
-const LABEL: Record<Locale, string> = { en: 'Language', it: 'Lingua' }
+const LABEL: Record<Locale, string> = { en: 'Language', it: 'Lingua', de: 'Sprache', es: 'Idioma' }
 
 /** Desktop: globe + current code, opens a dropdown listing all languages. */
 export default function LanguageSwitcher({
