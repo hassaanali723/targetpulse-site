@@ -22,7 +22,7 @@ const DESC =
   'Reoon and Giggal.ai are close on price, $11.90 vs $9.90 at 10,000. Giggal.ai resolves catch-all and verifies behind SEGs. 1,000 free credits, no card.'
 
 export const metadata: Metadata = {
-  title: { absolute: 'Reoon Alternative | Giggal.ai' },
+  title: { absolute: 'Reoon Email Verifier Alternative: Catch-All at $9.90 | Giggal.ai' },
   description: DESC,
   alternates: { canonical: '/reoon-alternative' },
   openGraph: {

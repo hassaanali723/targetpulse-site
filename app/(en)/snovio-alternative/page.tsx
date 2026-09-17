@@ -2,9 +2,9 @@ import AltPageScaffold, { altMetadata, type AltPageConfig } from '@/components/a
 
 const cfg: AltPageConfig = {
   slug: 'snovio',
-  metaTitle: 'Snov.io Alternative | Giggal.ai',
+  metaTitle: 'Snov.io Alternative for Email Verification | Giggal.ai',
   ogTitle: 'A Snov.io Alternative Built for Email Verification',
-  desc: 'Snov.io is a finder and outreach platform where verification is bundled into its credits. Giggal.ai is a dedicated verifier that resolves catch-all, at $9.90 per 10,000. 1,000 free credits, no card.',
+  desc: 'Snov.io bundles verification into finder and outreach credits. Giggal.ai is a verifier that resolves catch-all at $9.90 per 10,000. 1,000 free credits.',
   h1Article: 'A',
   h1Tail: 'built for verification',
   heroP:

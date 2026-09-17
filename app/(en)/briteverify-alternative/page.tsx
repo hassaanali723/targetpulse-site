@@ -19,10 +19,10 @@ const APP_URL = 'https://emailverifier.giggal.ai/sign-up'
 const competitor = getCompetitor('briteverify')
 
 const DESC =
-  'BriteVerify from Validity flags accept-all as risky, with published bundles around $80 per 10,000 and a million by quote. Giggal.ai resolves catch-all and publishes $9.90 per 10,000. 1,000 free credits, no card.'
+  'BriteVerify flags accept-all as risky and prices a million by quote. Giggal.ai resolves catch-all and publishes $9.90 per 10,000. 1,000 free credits, no card.'
 
 export const metadata: Metadata = {
-  title: { absolute: 'BriteVerify Alternative | Giggal.ai' },
+  title: { absolute: 'BriteVerify Alternative: Catch-All Resolved, Priced | Giggal.ai' },
   description: DESC,
   alternates: { canonical: '/briteverify-alternative' },
   openGraph: {

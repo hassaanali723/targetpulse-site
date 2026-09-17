@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { isZapierIndexed, NOINDEX_ROBOTS } from '@/lib/indexPolicy'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import fs from 'fs'
@@ -33,6 +34,9 @@ export function generateMetadata({ params }: { params: { app: string } }): Metad
   // own short sentence.
   const description = `Verify ${app.name} emails in real time with the Giggal.ai Zapier integration: catch-all addresses resolved, typos and disposable emails stopped. No code.`
   return {
+    // C6: six app pages are indexed (lib/indexPolicy.ts); the other 67 stay
+    // live and followable but out of the index until rewritten.
+    ...(isZapierIndexed(app.slug) ? {} : { robots: NOINDEX_ROBOTS }),
     title,
     description,
     alternates: { canonical: `/integrations/zapier/${app.slug}` },

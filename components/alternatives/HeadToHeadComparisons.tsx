@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { versusSlug } from '@/lib/compare'
 import { ALL_COMPETITOR_SLUGS, getCompetitor } from '@/lib/competitorPricing'
+import { isAltIndexed, isCompareIndexed } from '@/lib/indexPolicy'
 
 // Head-to-head links for one brand.
 //
@@ -17,7 +18,13 @@ import { ALL_COMPETITOR_SLUGS, getCompetitor } from '@/lib/competitorPricing'
 export default function HeadToHeadComparisons({ slug }: { slug: string }) {
   const self = getCompetitor(slug)
 
-  const links = ALL_COMPETITOR_SLUGS.filter((other) => other !== slug).map((other) => ({
+  // An indexed brand page links only the indexed pairs (C7, Sprint 0 item 4):
+  // 26 links to noindexed pages would waste most of the page's link value.
+  // Noindexed tier-C pages keep the full block.
+  const indexedPage = isAltIndexed(slug)
+  const links = ALL_COMPETITOR_SLUGS.filter((other) => other !== slug)
+    .filter((other) => !indexedPage || isCompareIndexed(versusSlug(slug, other)))
+    .map((other) => ({
     slug: versusSlug(slug, other),
     // Anchor always reads "{This brand} vs {Other}" no matter which side is
     // canonically first in the URL, so the text stays natural on the page it
@@ -33,8 +40,9 @@ export default function HeadToHeadComparisons({ slug }: { slug: string }) {
         {self.name} head-to-head comparisons
       </h2>
       <p className="text-base text-slate-600 leading-relaxed font-medium max-w-2xl">
-        See how {self.name} stacks up against every other verifier we track, with
-        Giggal.ai on each page as a third option.
+        See how {self.name} stacks up against the verifiers we track most, with
+        Giggal.ai on each page as a third option. The full grid is on the{' '}
+        <Link href="/compare" className="text-indigo-600 font-bold hover:underline">comparison hub</Link>.
       </p>
       <div className="flex flex-wrap gap-2">
         {links.map((l) => (

@@ -20,10 +20,10 @@ const APP_URL = 'https://emailverifier.giggal.ai/sign-up'
 const competitor = getCompetitor('millionverifier')
 
 const DESC =
-  'MillionVerifier is $449 per million but marks catch-all Risky. Giggal.ai confirms those addresses, so more of the list comes back usable. 1,000 free credits, no card.'
+  'MillionVerifier is $449 per million but marks catch-all Risky. Giggal.ai confirms those addresses, so more of the list comes back usable. 1,000 free credits.'
 
 export const metadata: Metadata = {
-  title: { absolute: 'MillionVerifier Alternative | Giggal.ai' },
+  title: { absolute: 'MillionVerifier Alternative: Catch-All, Not Risky | Giggal.ai' },
   description: DESC,
   alternates: { canonical: '/millionverifier-alternative' },
   openGraph: {

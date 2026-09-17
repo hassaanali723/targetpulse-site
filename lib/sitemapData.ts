@@ -11,8 +11,9 @@
 import { MIMECAST_PAGE_LIVE } from '@/lib/flags'
 import { allPairs } from '@/lib/compare'
 import { ZAPIER_APPS } from '@/lib/zapierApps'
+import { isAltIndexed, isCompareIndexed, isZapierIndexed, pastSitemapGrace } from '@/lib/indexPolicy'
 import { getAllPosts } from '@/lib/blog'
-import { italianUrls } from '@/lib/i18n/clusters'
+import { italianUrls, localeUrls } from '@/lib/i18n/clusters'
 
 export const SITE = 'https://giggal.ai'
 
@@ -85,21 +86,28 @@ const ALT_DATES: Record<string, string> = {
 export function alternativesEntries(): SitemapEntry[] {
   return [
     { path: '/alternatives', lastModified: '2026-08-21' },
-    ...Object.entries(ALT_DATES).map(([slug, lastModified]) => ({
-      path: `/${slug}-alternative`,
-      lastModified,
-    })),
+    ...Object.entries(ALT_DATES)
+      .filter(([slug]) => !pastSitemapGrace() || isAltIndexed(slug))
+      .map(([slug, lastModified]) => ({
+        path: `/${slug}-alternative`,
+        lastModified,
+      })),
   ]
 }
 
 // ── compare ─────────────────────────────────────────────────────────────
 export function compareEntries(): SitemapEntry[] {
+  // Noindexed pairs stay listed for one crawl cycle after the noindex ships,
+  // then leave (lib/indexPolicy.ts).
+  const drop = pastSitemapGrace()
   return [
     { path: '/compare', lastModified: '2026-08-16' },
-    ...allPairs().map(({ a, b }) => ({
-      path: `/compare/${a}-vs-${b}`,
-      lastModified: '2026-08-16',
-    })),
+    ...allPairs()
+      .filter(({ a, b }) => !drop || isCompareIndexed(`${a}-vs-${b}`))
+      .map(({ a, b }) => ({
+        path: `/compare/${a}-vs-${b}`,
+        lastModified: '2026-08-16',
+      })),
   ]
 }
 
@@ -109,7 +117,7 @@ export function integrationsEntries(): SitemapEntry[] {
     { path: '/integrations', lastModified: '2026-08-12' },
     { path: '/integrations/zapier', lastModified: '2026-08-14' },
     { path: '/integrations/n8n', lastModified: '2026-08-16' },
-    ...ZAPIER_APPS.map((a) => ({
+    ...ZAPIER_APPS.filter((a) => !pastSitemapGrace() || isZapierIndexed(a.slug)).map((a) => ({
       path: `/integrations/zapier/${a.slug}`,
       lastModified: '2026-08-14',
     })),
@@ -149,6 +157,18 @@ export function itEntries(): SitemapEntry[] {
     ...pages,
     ...posts.map((p) => ({ path: `/it/blog/${p.slug}`, lastModified: p.updated || p.date || undefined })),
   ]
+}
+
+
+// German and Spanish: no blog, so every entry is a page with the wave's ship
+// date until a page's content changes (plans/10).
+const DE_LAUNCH = '2026-09-16'
+const ES_LAUNCH = '2026-09-16'
+export function deEntries(): SitemapEntry[] {
+  return localeUrls('de').map((path) => ({ path, lastModified: DE_LAUNCH }))
+}
+export function esEntries(): SitemapEntry[] {
+  return localeUrls('es').map((path) => ({ path, lastModified: ES_LAUNCH }))
 }
 
 // ── XML rendering ───────────────────────────────────────────────────────

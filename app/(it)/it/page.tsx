@@ -104,10 +104,6 @@ export default function HomeIt() {
             fino a 50.000 indirizzi per file, più una API. Funziona sui{' '}
             <Link href="/it/verifica-catch-all" className="text-indigo-600 font-bold hover:underline">
               domini catch-all
-            </Link>{' '}
-            e dietro{' '}
-            <Link href="/it/verifica-seg" className="text-indigo-600 font-bold hover:underline">
-              gateway come Proofpoint e Mimecast
             </Link>
             .
           </p>

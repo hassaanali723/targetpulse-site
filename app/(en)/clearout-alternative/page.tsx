@@ -19,10 +19,10 @@ const APP_URL = 'https://emailverifier.giggal.ai/sign-up'
 const competitor = getCompetitor('clearout')
 
 const DESC =
-  'Clearout returns catch-all as its own status without confirming the mailbox, at $65 per 10,000 pay-as-you-go. Giggal.ai resolves catch-all at $9.90 per 10,000. 1,000 free credits, no card.'
+  'Clearout returns catch-all as a status without confirming the mailbox, at $65 per 10,000. Giggal.ai resolves it at $9.90 per 10,000. 1,000 free credits.'
 
 export const metadata: Metadata = {
-  title: { absolute: 'Clearout Alternative | Giggal.ai' },
+  title: { absolute: 'Clearout Alternative: Catch-All Resolved, $9.90/10k | Giggal.ai' },
   description: DESC,
   alternates: { canonical: '/clearout-alternative' },
   openGraph: {

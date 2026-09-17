@@ -19,10 +19,10 @@ const APP_URL = 'https://emailverifier.giggal.ai/sign-up'
 const competitor = getCompetitor('emaillistverify')
 
 const DESC =
-  'EmailListVerify returns accept-all as ok_for_all without confirming it. Giggal.ai resolves catch-all and is $9.90 per 10,000 against its $27. 1,000 free credits, no card.'
+  'EmailListVerify returns accept-all as ok_for_all without confirming it. Giggal.ai resolves catch-all at $9.90 per 10,000 against $27. 1,000 free credits.'
 
 export const metadata: Metadata = {
-  title: { absolute: 'EmailListVerify Alternative | Giggal.ai' },
+  title: { absolute: 'EmailListVerify Alternative: Accept-All Resolved | Giggal.ai' },
   description: DESC,
   alternates: { canonical: '/emaillistverify-alternative' },
   openGraph: {

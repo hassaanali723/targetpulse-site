@@ -19,10 +19,10 @@ const APP_URL = 'https://emailverifier.giggal.ai/sign-up'
 const competitor = getCompetitor('emailable')
 
 const DESC =
-  'Emailable is fast but marks accept-all as Risky without confirming the mailbox. Giggal.ai resolves catch-all and costs $9.90 per 10,000 against $60. 1,000 free credits, no card.'
+  'Emailable is fast but marks accept-all as Risky without confirming it. Giggal.ai resolves catch-all at $9.90 per 10,000 against $60. 1,000 free credits.'
 
 export const metadata: Metadata = {
-  title: { absolute: 'Emailable Alternative | Giggal.ai' },
+  title: { absolute: 'Emailable Alternative: Accept-All Fixed, $9.90/10k | Giggal.ai' },
   description: DESC,
   alternates: { canonical: '/emailable-alternative' },
   openGraph: {

@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { ZAPIER_APPS } from '@/lib/zapierApps'
+import { isZapierIndexed } from '@/lib/indexPolicy'
 
 // Plain, always-visible index of every Zapier app page.
 //
@@ -36,6 +37,7 @@ export default function ZapierAppList() {
             <li key={a.slug} className="break-inside-avoid">
               <Link
                 href={`/integrations/zapier/${a.slug}`}
+                rel={isZapierIndexed(a.slug) ? undefined : 'nofollow'}
                 className="text-[13px] font-medium text-slate-500 hover:text-indigo-600 transition-colors"
               >
                 {a.name}

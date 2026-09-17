@@ -3,6 +3,7 @@
 // of pages stays consistent without copying 180 lines each. Every fact still
 // comes from competitorPricing.ts via the slug.
 import type { Metadata } from 'next'
+import { isAltIndexed, NOINDEX_ROBOTS } from '@/lib/indexPolicy'
 import Link from 'next/link'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
@@ -43,6 +44,8 @@ export interface AltPageConfig {
 
 export function altMetadata(cfg: AltPageConfig): Metadata {
   return {
+    // C7 tier C: zero-demand brand pages stay live and linked but noindex.
+    ...(isAltIndexed(cfg.slug) ? {} : { robots: NOINDEX_ROBOTS }),
     title: { absolute: cfg.metaTitle },
     description: cfg.desc,
     alternates: { canonical: `/${cfg.slug}-alternative` },

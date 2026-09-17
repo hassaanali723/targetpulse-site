@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { NOINDEX_ROBOTS } from '@/lib/indexPolicy'
 import Link from 'next/link'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
@@ -22,6 +23,7 @@ const DESC =
   'MyEmailVerifier gives 100 free credits a day but flags catch-all as a status without confirming it. Giggal.ai resolves catch-all at $9.90 per 10,000. 1,000 free credits, no card.'
 
 export const metadata: Metadata = {
+  robots: NOINDEX_ROBOTS, // C7 tier C: zero brand demand
   title: { absolute: 'MyEmailVerifier Alternative | Giggal.ai' },
   description: DESC,
   alternates: { canonical: '/myemailverifier-alternative' },

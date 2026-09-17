@@ -19,10 +19,10 @@ const APP_URL = 'https://emailverifier.giggal.ai/sign-up'
 const competitor = getCompetitor('bouncer')
 
 const DESC =
-  'Bouncer resolves catch-all too, but costs $60 per 10,000 against Giggal.ai at $9.90, and Giggal also verifies behind secure email gateways. 1,000 free credits, no card.'
+  'Bouncer resolves catch-all too, but costs $60 per 10,000 against Giggal.ai at $9.90, and Giggal verifies behind secure gateways. 1,000 free credits, no card.'
 
 export const metadata: Metadata = {
-  title: { absolute: 'Bouncer Alternative | Giggal.ai' },
+  title: { absolute: 'Bouncer Alternative: Catch-All Resolved, $9.90/10k | Giggal.ai' },
   description: DESC,
   alternates: { canonical: '/bouncer-alternative' },
   openGraph: {

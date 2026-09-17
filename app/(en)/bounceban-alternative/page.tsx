@@ -21,7 +21,7 @@ const DESC =
   'BounceBan and Giggal.ai both resolve catch-all and SEG. Giggal.ai adds a 1,000-credit bulk free tier and a full public price list. Try it free, no card.'
 
 export const metadata: Metadata = {
-  title: { absolute: 'BounceBan Alternative | Giggal.ai' },
+  title: { absolute: 'BounceBan Alternative: Catch-All, Free Tier, Prices | Giggal.ai' },
   description: DESC,
   alternates: { canonical: '/bounceban-alternative' },
   openGraph: {

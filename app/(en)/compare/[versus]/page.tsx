@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { isCompareIndexed, NOINDEX_ROBOTS } from '@/lib/indexPolicy'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ArrowRight } from 'lucide-react'
@@ -28,6 +29,9 @@ export function generateMetadata({ params }: { params: { versus: string } }): Me
   const c = buildComparison(pair.a, pair.b)
   const url = `https://giggal.ai/compare/${params.versus}`
   return {
+    // C7: only the whitelisted and Search-Console-protected pairs are indexed
+    // (lib/indexPolicy.ts); the rest stay live and followable.
+    ...(isCompareIndexed(params.versus) ? {} : { robots: NOINDEX_ROBOTS }),
     title: { absolute: c.metaTitle },
     description: c.metaDescription,
     alternates: { canonical: `/compare/${params.versus}` },

@@ -3,7 +3,6 @@ import React from 'react'
 import { Linkedin, Youtube, Facebook, Instagram, ArrowUpRight } from 'lucide-react'
 import Link from 'next/link'
 import Wordmark from '@/components/Wordmark'
-import { MIMECAST_PAGE_LIVE } from '@/lib/flags'
 
 // Only profiles that carry the Giggal name. A social href is still text on the
 // page, so a profile on an old handle would put that name in the footer of
@@ -15,12 +14,11 @@ const socials = [
   { icon: Instagram, href: 'https://www.instagram.com/giggal.ai', label: 'Instagram' },
 ]
 
+// The SEG and Mimecast pages stay live as product support pages but carry no
+// search demand (plans/11 item 10), so the sitewide footer no longer links
+// them; the catch-all page and the blog do.
 const solutionsLinks = [
   { name: 'Catch-all Verification', href: '/catch-all-verification' },
-  { name: 'SEG Verification', href: '/seg-email-verification' },
-  ...(MIMECAST_PAGE_LIVE
-    ? [{ name: 'Mimecast Verification', href: '/mimecast-email-verification' }]
-    : []),
   { name: 'MCP Server', href: '/mcp' },
 ]
 
@@ -113,21 +111,15 @@ export default function Footer() {
                   Blog
                 </Link>
               </li>
-              {/* These two both lead to comparison content, so the labels have
-                  to say which is which. /alternatives is the ranked guide we
-                  wrote; /compare is the generated head-to-head grid below.
-                  "Verifier comparison" stays distinct from "Head-to-head
-                  comparisons" without implying the competitors are the best
-                  option. The top nav does not link /alternatives; this footer
-                  link, the AltCtaBand and the home block carry it. */}
+              {/* /alternatives is the ranked guide we wrote. The generated
+                  /compare grid left the footer (plans/11 item 8): a 125-word
+                  hub was the second most linked page on the site. The
+                  alternative pages and the pairs themselves still link it.
+                  The top nav does not link /alternatives; this footer link,
+                  the AltCtaBand and the home block carry it. */}
               <li>
                 <Link href="/alternatives" className={linkClass}>
                   Verifier comparison
-                </Link>
-              </li>
-              <li>
-                <Link href="/compare" className={linkClass}>
-                  Head-to-head comparisons
                 </Link>
               </li>
             </ul>

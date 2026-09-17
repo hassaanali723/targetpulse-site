@@ -2,9 +2,9 @@ import AltPageScaffold, { altMetadata, type AltPageConfig } from '@/components/a
 
 const cfg: AltPageConfig = {
   slug: 'hunter',
-  metaTitle: 'Hunter Alternative | Giggal.ai',
+  metaTitle: 'Hunter Email Verifier Alternative: Catch-All Fixed | Giggal.ai',
   ogTitle: 'A Hunter Alternative Built for Email Verification',
-  desc: 'Hunter is a finder-first platform where verification is bundled into monthly plans. Giggal.ai is a dedicated verifier that resolves catch-all, at $9.90 per 10,000. 1,000 free credits, no card.',
+  desc: 'Hunter bundles verification into finder plans. Giggal.ai is a dedicated verifier that resolves catch-all at $9.90 per 10,000. 1,000 free credits, no card.',
   h1Article: 'A',
   h1Tail: 'built for verification',
   heroP:

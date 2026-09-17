@@ -151,11 +151,7 @@ export default function Home() {
             up to 50,000 addresses per file, plus an API. Works on{' '}
             <a href="/catch-all-verification" className="text-indigo-600 font-bold hover:underline">
               catch-all domains
-            </a>{' '}
-            and behind{' '}
-            <Link href="/seg-email-verification" className="text-indigo-600 font-bold hover:underline">
-              gateways like Proofpoint and Mimecast
-            </Link>
+            </a>
             .
           </p>
 
@@ -227,13 +223,13 @@ export default function Home() {
             <span className="inline-block text-xs font-black uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-lg">Bulk email verification</span>
             <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">Bulk email verification for your whole list in minutes</h2>
             <p className="text-slate-600 text-sm md:text-base font-medium leading-relaxed">
-              Upload a CSV or Excel file of up to 50,000 emails and Giggal.ai&apos;s bulk email verification returns each address as deliverable or undeliverable. The email verification tool also resolves the catch-all, accept-all and SEG-protected addresses that other email verifiers only mark as risky, so you can export a clean list.
+              Upload a CSV or Excel file of up to 50,000 emails and get every address back as deliverable or undeliverable. Catch-all and accept-all addresses that other email verifiers mark as risky come back resolved, so you export a clean list.
             </p>
             <ul className="space-y-2.5">
               {[
-                'Bulk email verification for up to 50,000 emails per file, with real-time results',
-                'Catch-all, accept-all and SEG-protected email verification resolved to a real result',
-                'Export your verified email list as CSV or Excel',
+                'Up to 50,000 emails per file, results as they come in',
+                'Catch-all and accept-all addresses resolved, not marked risky',
+                'Export the verified email list as CSV or Excel',
               ].map((t) => (
                 <li key={t} className="flex items-start gap-2.5 text-sm font-semibold text-slate-700">
                   <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />

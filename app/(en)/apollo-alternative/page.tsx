@@ -2,9 +2,9 @@ import AltPageScaffold, { altMetadata, type AltPageConfig } from '@/components/a
 
 const cfg: AltPageConfig = {
   slug: 'apollo',
-  metaTitle: 'Apollo Alternative | Giggal.ai',
+  metaTitle: 'Apollo Alternative for Email Verification | Giggal.ai',
   ogTitle: 'An Apollo Alternative for Dedicated Email Verification',
-  desc: 'Apollo is a sales platform where verification is one feature; it claims 91% on catch-all. Giggal.ai is a dedicated verifier that resolves catch-all and SEG, at $9.90 per 10,000. 1,000 free credits, no card.',
+  desc: 'Apollo is a sales platform where verification is one feature, claiming 91% on catch-all. Giggal.ai is a dedicated verifier at $9.90 per 10,000, 1,000 free.',
   h1Article: 'An',
   h1Tail: 'for dedicated verification',
   heroP:

@@ -19,10 +19,10 @@ const APP_URL = 'https://emailverifier.giggal.ai/sign-up'
 const competitor = getCompetitor('kickbox')
 
 const DESC =
-  'Kickbox flags accept-all with a field rather than resolving it, at $70 per 10,000 one-time. Giggal.ai resolves catch-all at $9.90 per 10,000. 1,000 free credits, no card.'
+  'Kickbox flags accept-all with a field rather than resolving it, at $70 per 10,000. Giggal.ai resolves catch-all at $9.90 per 10,000. 1,000 free credits.'
 
 export const metadata: Metadata = {
-  title: { absolute: 'Kickbox Alternative | Giggal.ai' },
+  title: { absolute: 'Kickbox Alternative: Accept-All Resolved, $9.90/10k | Giggal.ai' },
   description: DESC,
   alternates: { canonical: '/kickbox-alternative' },
   openGraph: {

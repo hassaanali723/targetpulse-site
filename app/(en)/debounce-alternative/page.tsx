@@ -23,7 +23,7 @@ const DESC =
   'DeBounce charges 10 credits per catch-all check as a separate product. Giggal.ai charges 1.5 and resolves them in the same run. 1,000 free credits, no card.'
 
 export const metadata: Metadata = {
-  title: { absolute: 'DeBounce Alternative | Giggal.ai' },
+  title: { absolute: 'DeBounce Alternative: Catch-All Resolved in One Run | Giggal.ai' },
   description: DESC,
   alternates: { canonical: '/debounce-alternative' },
   openGraph: {

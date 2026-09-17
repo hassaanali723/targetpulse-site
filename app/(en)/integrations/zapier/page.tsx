@@ -9,6 +9,7 @@ import fs from 'fs'
 import path from 'path'
 import { ZAPIER_GUIDE_STEPS, ZAPIER_APP_URL, SIGNUP_URL } from '@/lib/integrations'
 import { ZAPIER_APPS, ZAPIER_APP_LOGO_DIR, zapierAppLogo, zapierAppLogoAlt } from '@/lib/zapierApps'
+import { isZapierIndexed } from '@/lib/indexPolicy'
 
 // Logos that actually exist on disk, resolved once at build time so cards
 // with a missing file render a lettermark instead of a broken image.
@@ -239,6 +240,7 @@ export default function ZapierIntegrationPage() {
             <Link
               key={a.slug}
               href={`/integrations/zapier/${a.slug}`}
+              rel={isZapierIndexed(a.slug) ? undefined : 'nofollow'}
               className="group flex items-center gap-3.5 bg-white border-2 border-slate-200 rounded-2xl px-4 py-3.5 card-vivid-shadow hover:border-indigo-500 transition-colors duration-200"
             >
               {EXISTING_LOGOS.has(a.slug) ? (
