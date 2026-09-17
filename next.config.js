@@ -55,6 +55,12 @@ const nextConfig = {
       // Old favicon URL Google still has cached; the SVG was replaced by
       // app/icon.png when the official brand mark landed.
       { source: '/icon.svg', destination: '/icon.png', permanent: true },
+      // Free checker moved to the root on 2026-09-18 to match the localized
+      // tool pages (/it/verifica-email, /de/email-adresse-pruefen). The team
+      // had already placed links on /email-verifier before the page existed,
+      // so that URL forwards too. Both point straight at the final URL.
+      { source: '/tools/catch-all-email-checker', destination: '/email-checker', permanent: true },
+      { source: '/email-verifier', destination: '/email-checker', permanent: true },
     ]
   },
 }

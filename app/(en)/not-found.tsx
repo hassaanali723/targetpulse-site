@@ -17,7 +17,7 @@ export default function NotFound() {
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
           <Link
-            href="/tools/catch-all-email-checker"
+            href="/email-checker"
             className="px-8 py-3.5 bg-indigo-600 hover:bg-indigo-700 font-extrabold rounded-xl text-white shadow-md shadow-indigo-600/10 transition-all text-sm"
           >
             Free email checker

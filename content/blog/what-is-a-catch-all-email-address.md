@@ -51,7 +51,7 @@ They are not an edge case. On a typical business list a sizeable minority of add
 
 ## What to do with them next
 
-To check a single catch-all address right now, the [free email checker](/tools/catch-all-email-checker) runs the full verification and returns valid or invalid rather than the catch-all label.
+To check a single catch-all address right now, the [free email checker](/email-checker) runs the full verification and returns valid or invalid rather than the catch-all label.
 
 You have three honest choices. Delete every catch-all address and accept that you are throwing away contacts who would have opened your mail. Send to them anyway and accept a higher bounce rate and the reputation cost that follows. Or check them at a deeper level than the standard SMTP test, which is the only option that keeps the real contacts without the bounces.
 

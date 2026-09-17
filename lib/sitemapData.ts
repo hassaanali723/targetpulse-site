@@ -36,7 +36,7 @@ export function coreEntries(): SitemapEntry[] {
     ...(MIMECAST_PAGE_LIVE
       ? [{ path: '/mimecast-email-verification', lastModified: '2026-08-02' }]
       : []),
-    { path: '/tools/catch-all-email-checker', lastModified: '2026-09-13' },
+    { path: '/email-checker', lastModified: '2026-09-18' },
     { path: '/mcp', lastModified: '2026-09-13' },
     // API reference. Kept in the sitemap — the URL set is unchanged from the
     // previous single sitemap, only regrouped.

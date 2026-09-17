@@ -50,7 +50,7 @@ Neither of those is fixed by cleaning addresses. They are sender-side problems, 
 
 ## What do I do with a bounced email?
 
-One address: read the code. A 5.1.1 or "user unknown" means the mailbox is gone; remove it and, if the contact matters, find their current address rather than retrying. A 4.x.x or "mailbox full" means wait; your tool retries on its own. A 5.7.1 or "blocked" points at your sending domain, not the recipient, so check SPF, DKIM and DMARC before sending anything else. If you are not sure whether an address is still live, run it through the [free email checker](/tools/catch-all-email-checker) before you send again.
+One address: read the code. A 5.1.1 or "user unknown" means the mailbox is gone; remove it and, if the contact matters, find their current address rather than retrying. A 4.x.x or "mailbox full" means wait; your tool retries on its own. A 5.7.1 or "blocked" points at your sending domain, not the recipient, so check SPF, DKIM and DMARC before sending anything else. If you are not sure whether an address is still live, run it through the [free email checker](/email-checker) before you send again.
 
 ## What to do after a campaign bounces
 

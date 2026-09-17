@@ -42,7 +42,7 @@ interface VerifierConsoleProps {
   // Which API route to POST to. Defaults to the homepage console endpoint.
   endpoint?: string
   // 'catchall' renders the catch-all status as a distinct step before the
-  // verdict, for /tools/catch-all-email-checker.
+  // verdict, for /email-checker.
   variant?: 'console' | 'catchall'
   // Pre-filled address. Empty by default so the tool never spends a check on
   // an address the visitor did not choose.
@@ -462,7 +462,7 @@ function ResultCard({ result, t }: { result: ResultState; t: ConsoleStrings }) {
 
 // The plain-language line for each verdict lives in ConsoleStrings.verdictLine.
 
-// Result panel for /tools/catch-all-email-checker. Shows the catch-all status as
+// Result panel for /email-checker. Shows the catch-all status as
 // a distinct step, then the verdict, so the visitor sees the problem and the
 // answer in sequence. Also renders the friendly quota-reached state.
 function CatchAllResultCard({ result, signupUrl, t }: { result: ResultState; signupUrl: string; t: ConsoleStrings }) {

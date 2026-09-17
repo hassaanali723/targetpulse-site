@@ -14,24 +14,26 @@ const DESC =
   'Free email checker with no signup. Verify any address, including catch-all domains most tools mark risky, and get a valid or invalid answer in seconds.'
 
 export const metadata: Metadata = {
-  // Interim: this page owns the "free email checker" queries until a generic
-  // /email-verifier page exists. When it does, the title goes back to
-  // "Free Catch-All Email Checker & Verifier" and those terms move with it.
-  title: { absolute: 'Free Email Checker & Catch-All Verifier | Giggal.ai' },
+  // The English tool page. Head term is "email checker" (21k/mo US, 12k GB);
+  // targets: email address checker (GB), email checker free (GB), email
+  // verifier (IN). Catch-all stays in the H1 as the differentiator, not the
+  // title. Was /tools/catch-all-email-checker until 2026-09-18 (301 in
+  // next.config.js).
+  title: { absolute: 'Free Email Checker: Verify Any Email Address | Giggal.ai' },
   description: DESC,
-  alternates: { canonical: '/tools/catch-all-email-checker', languages: hreflangAlternates('tool') },
+  alternates: { canonical: '/email-checker', languages: hreflangAlternates('tool') },
   openGraph: {
     siteName: 'Giggal.ai',
     images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai email verification' }],
-    title: 'Free Email Checker & Catch-All Verifier',
+    title: 'Free Email Checker: Verify Any Email Address',
     description: DESC,
-    url: 'https://giggal.ai/tools/catch-all-email-checker',
+    url: 'https://giggal.ai/email-checker',
     type: 'website',
   },
   // Set explicitly so this route never inherits the homepage's Twitter strings.
   twitter: {
     card: 'summary_large_image',
-    title: 'Free Email Checker & Catch-All Verifier',
+    title: 'Free Email Checker: Verify Any Email Address',
     description: DESC,
   },
 }
@@ -74,7 +76,7 @@ const proseP = 'text-slate-600 leading-relaxed text-sm md:text-base font-medium'
 export default function CatchAllEmailCheckerPage() {
   return (
     <main className="relative min-h-screen bg-slate-50 grid-lines overflow-x-hidden text-slate-800 antialiased">
-      <JsonLd data={breadcrumbLd('Free Email Checker', '/tools/catch-all-email-checker')} />
+      <JsonLd data={breadcrumbLd('Free Email Checker', '/email-checker')} />
       <JsonLd data={faqPageLd(faqs)} />
       <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-indigo-500/10 blur-[120px] -z-10 pointer-events-none" />
 

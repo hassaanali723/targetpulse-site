@@ -23,9 +23,9 @@ export interface Cluster {
 }
 
 export const CLUSTERS = {
-  // The English member of the tool cluster is the catch-all checker until a
-  // generic /email-verifier page exists; then this one line changes.
-  tool: { en: '/tools/catch-all-email-checker', it: '/it/verifica-email', de: '/de/email-adresse-pruefen', es: '/es/validar-correo' },
+  // English member is /email-checker (renamed from /tools/catch-all-email-checker
+  // on 2026-09-18; both old URLs 301 there, see next.config.js).
+  tool: { en: '/email-checker', it: '/it/verifica-email', de: '/de/email-adresse-pruefen', es: '/es/validar-correo' },
   home: { en: '/', it: '/it', de: '/de', es: '/es' },
   pricing: { en: '/pricing', it: '/it/prezzi', de: '/de/preise', es: '/es/precios' },
   catchall: { en: '/catch-all-verification', it: '/it/verifica-catch-all', de: '/de/catch-all-verifizierung', es: '/es/verificacion-catch-all' },

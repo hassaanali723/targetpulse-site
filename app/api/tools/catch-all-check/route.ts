@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { EMAIL_RE, invalidSyntax, runVerification, type VerifyResult } from '@/lib/publicVerify'
 
 /**
- * Free catch-all checker endpoint for /tools/catch-all-email-checker.
+ * Free catch-all checker endpoint for /email-checker.
  *
  * Same verification as the homepage console (shared `lib/publicVerify`), but
  * with a tighter public-abuse policy because each check runs a real SMTP + deep
