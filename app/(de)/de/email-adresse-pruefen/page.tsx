@@ -42,7 +42,7 @@ export const metadata: Metadata = {
 const faqs: FaqItem[] = [
   {
     q: 'Wie prüfe ich, ob eine E-Mail-Adresse gültig ist?',
-    a: 'Adresse oben eingeben und auf "Jetzt prüfen" klicken. Der E-Mail-Prüfer testet die Syntax, sucht die Mailserver der Domain, fragt den Server per SMTP nach dem Postfach und löst Catch-all-Domains auf. Nach wenigen Sekunden steht das Ergebnis: gültig, ungültig oder unbekannt.',
+    a: 'Adresse oben eingeben und auf "Jetzt prüfen" klicken. Der E-Mail-Prüfer testet die Syntax, sucht die Mailserver der Domain, fragt den Server per SMTP nach dem Postfach und löst Catch-all-Domains auf. Nach wenigen Sekunden steht das Ergebnis: gültig, ungültig oder unbekannt. So lässt sich jede E-Mail-Adresse überprüfen, ohne eine Nachricht zu senden.',
   },
   {
     q: 'Wird eine E-Mail an die Adresse gesendet?',
@@ -57,16 +57,16 @@ const faqs: FaqItem[] = [
     a: 'Eine Catch-all-Domain (auch Accept-all) nimmt Post an jede Adresse an, auch an erfundene. Ein normaler Check bekommt immer ein Ja und kann nicht sagen, ob das Postfach existiert. Giggal führt zusätzliche Prüfungen aus und liefert auch auf diesen Domains gültig oder ungültig.',
   },
   {
-    q: 'Funktioniert die Prüfung mit Gmail, Outlook, GMX und Web.de?',
-    a: 'Ja. Gmail, Google Workspace, Outlook und Microsoft 365 antworten zuverlässig. GMX und Web.de antworten ebenfalls, setzen aber bei neuen Absendern manchmal Greylisting ein; dann kann das Ergebnis "unbekannt" sein. In dem Fall lohnt ein zweiter Versuch.',
+    q: 'Was ist ein E-Mail-Checker und was prüft er?',
+    a: 'Das Werkzeug auf dieser Seite. Ein E-Mail-Checker prüft die Syntax, die MX-Einträge der Domain, das Postfach per SMTP und ob die Domain Catch-all ist; dazu erkennt er Wegwerfadressen, Rollenkonten und Freemail-Anbieter. Es wird keine E-Mail an die Adresse gesendet.',
   },
   {
     q: 'Was heißt "unbekannt"?',
     a: 'Der Server hat nicht rechtzeitig geantwortet oder wendet Greylisting an. Das heißt nicht, dass das Postfach nicht existiert: Prüfen Sie die Adresse später noch einmal, bevor Sie sie verwerfen.',
   },
   {
-    q: 'Wie viele Prüfungen sind kostenlos?',
-    a: 'Einige Prüfungen pro Tag, ohne Anmeldung und ohne Karte. Jede Prüfung führt den vollständigen SMTP-Test aus, deshalb ist die Zahl begrenzt. Für eine ganze Liste registrieren Sie sich und nutzen die 1.000 Gratis-Credits.',
+    q: 'Prüft der Checker, ob meine E-Mail-Adresse gehackt oder in einem Datenleck war?',
+    a: 'Nein. Dieser E-Mail-Checker prüft, ob eine Adresse existiert und Post annimmt. Ob eine Adresse in einem Datenleck aufgetaucht ist, sagen Ihnen der Identity Leak Checker des Hasso-Plattner-Instituts oder die Hinweise des BSI.',
   },
   {
     q: 'Werden die eingegebenen Adressen gespeichert?',
@@ -156,10 +156,11 @@ export default function EmailAdressePruefenPage() {
 
       {/* ── WAS DER CHECK TESTET ─────────────────────────────── */}
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
-        <h2 className={sectionTitle}>E-Mail-Adresse kostenlos prüfen: was der Check Schritt für Schritt testet</h2>
+        <h2 className={sectionTitle}>E-Mail-Checker: E-Mail-Adresse kostenlos prüfen, Schritt für Schritt</h2>
         <p className={proseP}>
-          Eine ernsthafte Prüfung hat vier Schritte. Kostenlose Tools, die nach dem ersten aufhören,
-          sind der Grund, warum so viele &quot;geprüfte&quot; Listen weiter bouncen.
+          E-Mail-Checker, E-Mail-Prüfer oder Verifizierer: gemeint ist dasselbe Werkzeug.
+          E-Mail-Adresse prüfen kostenlos und ohne Anmeldung: das sind die vier Schritte dahinter. Kostenlose Tools, die nach dem ersten aufhören, sind der Grund, warum so viele
+          &quot;geprüfte&quot; Listen weiter bouncen.
         </p>
         <ol className="list-decimal pl-6 space-y-3 text-slate-600 text-sm md:text-base font-medium leading-relaxed">
           <li>
@@ -193,10 +194,12 @@ export default function EmailAdressePruefenPage() {
 
       {/* ── DREI WÖRTER, EIN TEST ────────────────────────────── */}
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
-        <h2 className={sectionTitle}>E-Mail verifizieren, validieren, prüfen: drei Wörter, ein Test</h2>
+        <h2 className={sectionTitle}>E-Mail-Adresse überprüfen, verifizieren, validieren: drei Wörter, ein Test</h2>
         <p className={proseP}>
-          Im Sprachgebrauch heißt es mal E-Mail-Adresse validieren, mal verifizieren, mal einfach
-          Mailadresse prüfen oder E-Mail testen. Streng genommen prüft die Validierung nur die Form
+          Ob Sie eine E-Mail-Adresse überprüfen lassen, mehrere E-Mail-Adressen prüfen, eine E-Mail
+          testen oder eine E-Mail verifizieren wollen: der Test ist derselbe. Geschrieben wird es auch
+          Emailadresse prüfen oder Emailadressen prüfen, mal E-Mail-Adresse validieren, mal einfach
+          Mailadresse prüfen. Streng genommen prüft die Validierung nur die Form
           der Adresse (Syntax, Domain), die Verifizierung fragt den Mailserver und bestätigt, dass
           das Postfach existiert. Dieser E-Mail-Prüfer macht beides in einem Durchgang, und das
           Ergebnis heißt auf jeder Seite dasselbe: gültig, ungültig, unbekannt.

@@ -168,7 +168,7 @@ export default function ComoSaberSeUmEmailExistePage() {
         </p>
       </section>
 
-      <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-12 border-t border-slate-200 space-y-4">
+      <section id="verdadeiro-ou-falso" className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-12 border-t border-slate-200 space-y-4">
         <h2 className={sectionTitle}>Como saber se um e-mail é verdadeiro ou falso</h2>
         <p className={proseP}>
           Existir e ser verdadeiro são perguntas diferentes. A verificação confirma que a caixa existe;

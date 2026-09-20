@@ -114,9 +114,10 @@ export default function VerifierAdresseMailPage() {
 
       {/* ── VÉRIFICATEUR MAIL : LE RÉSULTAT ──────────────────── */}
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
-        <h2 className={sectionTitle}>Vérificateur mail&nbsp;: ce que le résultat signifie</h2>
+        <h2 className={sectionTitle}>Vérificateur mail ou vérificateur d&apos;adresse email&nbsp;: ce que le résultat signifie</h2>
         <p className={proseP}>
-          Chaque vérification se termine par l&apos;un de trois verdicts. <strong className="text-slate-900">Valide</strong>{' '}
+          Une vérification mail sérieuse, vérifier un mail, vérifier un email ou vérifier une adresse email
+          avant l&apos;envoi, se termine par l&apos;un de trois verdicts. <strong className="text-slate-900">Valide</strong>{' '}
           signifie que le serveur a confirmé la boîte et qu&apos;elle a passé les contrôles supplémentaires&nbsp;: un
           email à cette adresse devrait arriver. <strong className="text-slate-900">Invalide</strong> signifie
           que la syntaxe est fausse, que le domaine n&apos;a pas de serveur de messagerie ou que le serveur a
@@ -152,10 +153,11 @@ export default function VerifierAdresseMailPage() {
 
       {/* ── TESTER UNE ADRESSE MAIL : ÉTAPE PAR ÉTAPE ────────── */}
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
-        <h2 className={sectionTitle}>Tester une adresse mail&nbsp;: ce que le test vérifie, étape par étape</h2>
+        <h2 className={sectionTitle}>Test d&apos;adresse mail&nbsp;: ce que le test vérifie, étape par étape</h2>
         <p className={proseP}>
-          Un test sérieux compte quatre étapes. Les outils gratuits qui s&apos;arrêtent à la première sont la
-          raison pour laquelle tant de listes «&nbsp;vérifiées&nbsp;» continuent de rebondir.
+          Tester une adresse mail, ou faire une vérification d&apos;adresse mail, compte quatre étapes.
+          Les outils gratuits qui s&apos;arrêtent à la première sont la raison pour laquelle tant de
+          listes «&nbsp;vérifiées&nbsp;» continuent de rebondir.
         </p>
         <ol className="list-decimal pl-6 space-y-3 text-slate-600 text-sm md:text-base font-medium leading-relaxed">
           <li>
@@ -234,8 +236,8 @@ export default function VerifierAdresseMailPage() {
         <h2 className={sectionTitle}>Vérifier une liste entière&nbsp;: en masse, API et intégrations</h2>
         <p className={proseP}>
           Le contrôle unitaire sert pour une adresse à la fois. Pour un fichier entier, inscrivez-vous,
-          importez le CSV et la vérification en masse exécute les mêmes contrôles sur chaque ligne, catch-all
-          compris. Les 1&nbsp;000 premiers crédits sont offerts, sans carte. Les{' '}
+          importez le CSV et la vérification mail en masse exécute les mêmes contrôles sur chaque ligne,
+          catch-all compris. Les 1&nbsp;000 premiers crédits sont offerts, sans carte. Les{' '}
           <Link href="/fr/tarifs" className="text-indigo-600 font-bold hover:underline">
             tarifs
           </Link>{' '}

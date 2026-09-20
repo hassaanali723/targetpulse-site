@@ -111,7 +111,8 @@ export default function GibtEsDieseEmailAdressePage() {
         <p className="text-base md:text-lg text-slate-600 leading-relaxed font-medium">
           Eine E-Mail-Adresse existiert, wenn der Mailserver ihrer Domain das Postfach annimmt,
           sobald man es ihm in einem SMTP-Gespräch nennt. Das lässt sich fragen, ohne eine Nachricht
-          zu senden: Genau das tut das Tool unten in wenigen Sekunden. Auf Catch-all-Domains, die
+          zu senden: Genau das tut das Tool unten in wenigen Sekunden. Gibt es die E-Mail-Adresse,
+          oder gibt es sie nicht: die Antwort kommt vom Server selbst. Auf Catch-all-Domains, die
           alles annehmen, braucht es zusätzliche Prüfungen, und auch die führt es aus.
         </p>
       </section>

@@ -161,8 +161,9 @@ export default function ValidarCorreoPage() {
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Validador de correo electrónico: qué comprueba paso a paso</h2>
         <p className={proseP}>
-          Una validación seria tiene cuatro pasos. Las herramientas gratis que se quedan en el primero
-          son la razón por la que tantas listas &quot;verificadas&quot; siguen rebotando.
+          Un validador de email serio, o verificador email como también se busca, tiene cuatro pasos.
+          Las herramientas gratis que se quedan en el primero son la razón por la que tantas listas
+          &quot;verificadas&quot; siguen rebotando.
         </p>
         <ol className="list-decimal pl-6 space-y-3 text-slate-600 text-sm md:text-base font-medium leading-relaxed">
           <li>
@@ -189,16 +190,19 @@ export default function ValidarCorreoPage() {
         </ol>
         <p className={proseP}>
           El panel de arriba muestra cada paso mientras se completa, más el proveedor, el host MX y si la
-          dirección es desechable, de rol o de un proveedor gratuito.
+          dirección es desechable, de rol o de un proveedor gratuito. Sirve para validar correo
+          electrónico uno a uno; para verificar emails por miles está la validación en bloque.
         </p>
       </section>
 
-      {/* ── COMPROBAR EMAIL (ESPAÑA) ─────────────────────────── */}
+      {/* ── COMPROBAR CORREO (ESPAÑA) ────────────────────────── */}
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
-        <h2 className={sectionTitle}>Comprobar email: el verificador para España</h2>
+        <h2 className={sectionTitle}>Comprobar correo o comprobar email: el verificador para España</h2>
         <p className={proseP}>
-          En España se dice comprobar email o verificar email; en México, Perú y Colombia, validar correo
-          o verificar correo electrónico. Es la misma comprobación: el verificador de email de esta página
+          En España se dice comprobar correo, comprobar email, validar email o verificar email; en
+          México, Perú y Colombia, validar correo o verificar correo electrónico. Comprobar correo
+          electrónico o comprobar una dirección de correo es la misma comprobación: el verificador de
+          email de esta página
           consulta el servidor del dominio, resuelve los dominios catch-all y funciona igual con
           direcciones de empresas españolas, de Gmail o de Outlook. No hay versiones por país: una sola
           herramienta para todo el español.

@@ -67,6 +67,14 @@ const faqs: FaqItem[] = [
     q: 'Como saber se um e-mail existe?',
     a: 'Com a verificação SMTP desta página, em segundos. Os outros métodos, com seus limites, estão no guia "Como saber se um e-mail existe?": pesquisa na web, leitura do bounce, recuperação de senha e uma mensagem para um endereço propositalmente errado.',
   },
+  {
+    q: 'Como validar um e-mail?',
+    a: 'Passando pelos quatro passos: sintaxe, registros MX, verificação SMTP da caixa e resolução catch-all. Conferir só o formato não é validar; um endereço bem escrito pode apontar para uma caixa que não existe. O validador desta página faz os quatro de uma vez.',
+  },
+  {
+    q: 'Como verificar um e-mail grátis?',
+    a: 'Digite o endereço no verificador de e-mail gratuito acima e clique em Verificar. Sem cadastro, sem cartão, sem enviar mensagem. Para uma lista inteira, o cadastro dá 1.000 créditos grátis.',
+  },
 ]
 
 const sectionTitle = 'text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight'
@@ -129,7 +137,7 @@ export default function VerificacaoDeEmailPage() {
           <strong className="text-slate-900">de função</strong> (contato@, vendas@, suporte@: caixas
           compartilhadas, ruins para outreach) e se está em um{' '}
           <strong className="text-slate-900">provedor gratuito</strong> como Gmail ou Outlook, um dado útil
-          ao qualificar contatos B2B.
+          ao qualificar contatos B2B. É tudo o que você precisa para confirmar um e-mail antes de enviar.
         </p>
       </section>
 
@@ -138,14 +146,19 @@ export default function VerificacaoDeEmailPage() {
         <h2 className={sectionTitle}>Como saber se um e-mail existe?</h2>
         <p className={proseP}>
           Um e-mail existe se o servidor do seu domínio aceita aquela caixa quando ela é proposta em uma
-          conversa SMTP. Dá para perguntar sem enviar nada: é o que a ferramenta acima faz. Antes de
+          conversa SMTP. Dá para perguntar sem enviar nada: verificar se o e-mail existe é o que a
+          ferramenta acima faz. Antes de
           responder a um contato anotado à mão, quando um formulário devolve bounce ou para testar um
           endereço de uma lista comprada, a pergunta é a mesma. Os quatro métodos que funcionam, com seus
           limites, estão no guia{' '}
           <Link href="/pt-br/verificacao-de-email/como-saber-se-um-email-existe" className="text-indigo-600 font-bold hover:underline">
             Como saber se um e-mail existe?
           </Link>
-          .
+          . O mesmo guia explica como{' '}
+          <Link href="/pt-br/verificacao-de-email/como-saber-se-um-email-existe#verdadeiro-ou-falso" className="text-indigo-600 font-bold hover:underline">
+            verificar se um e-mail é falso
+          </Link>
+          , que é outra pergunta.
         </p>
       </section>
 
@@ -187,10 +200,10 @@ export default function VerificacaoDeEmailPage() {
 
       {/* ── CONSULTAR E-MAIL ─────────────────────────────────── */}
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
-        <h2 className={sectionTitle}>Consultar e-mail: o que a consulta mostra sobre um endereço</h2>
+        <h2 className={sectionTitle}>Consulta de e-mail: o que consultar um e-mail mostra sobre um endereço</h2>
         <p className={proseP}>
-          No Brasil se diz consultar e-mail, checar e-mail ou conferir e-mail; é a mesma verificação. A
-          consulta mostra se o endereço é válido, qual provedor responde por ele, se o domínio é catch-all
+          No Brasil se escreve consulta email, consulta de e-mail, consultar e-mail, checar e-mail ou
+          conferir e-mail; é a mesma verificação. A consulta mostra se o endereço é válido, qual provedor responde por ele, se o domínio é catch-all
           e se a caixa é descartável, de função ou de um provedor gratuito. O que a consulta não mostra é
           quem usa o endereço: nenhuma verificação SMTP devolve nome, empresa ou perfil, e uma ferramenta
           que promete isso está buscando em outras fontes, não no servidor de e-mail. Para saber se vale a
@@ -202,12 +215,15 @@ export default function VerificacaoDeEmailPage() {
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Validador de e-mail: como saber se o e-mail é válido</h2>
         <p className={proseP}>
-          Um e-mail válido é mais do que um e-mail bem escrito. Muitos validadores conferem só o formato
+          Um validador de e-mail online, ou validador de email gratuito como este, é mais do que um
+          corretor de formato. Muitos validadores conferem só o formato
           (arroba, domínio, extensão) e chamam isso de validação; um endereço com formato perfeito em um
           domínio sem servidores de e-mail continua inválido, e um endereço bem formado em um domínio
           real pode apontar para uma caixa que não existe. Validar e-mail, aqui, é passar pelos quatro
           passos acima: sintaxe, MX, SMTP e resolução catch-all. Só o último confirma que a caixa existe
-          de verdade, e é ele que separa um validador de e-mail de um corretor ortográfico.
+          de verdade, e é ele que separa um validador de e-mail de um corretor ortográfico. O mesmo
+          teste serve para verificar endereço de e-mail um a um aqui e para a validação de e-mails em
+          lote depois do cadastro.
         </p>
       </section>
 
