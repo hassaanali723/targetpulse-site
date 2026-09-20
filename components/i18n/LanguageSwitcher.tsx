@@ -20,6 +20,45 @@ const LOCALE_META: Record<Locale, { native: string; short: string }> = {
   es: { native: 'Español', short: 'ES' },
 }
 
+// Flags as inline SVG rather than emoji: Windows renders flag emoji as two
+// letters ("US"), which is most of the desktop audience. 3:2 ratio, 20x14.
+function Flag({ locale, className = '' }: { locale: Locale; className?: string }) {
+  const common = { viewBox: '0 0 60 40', 'aria-hidden': true, className: `w-5 h-[14px] rounded-[2px] shrink-0 ${className}` } as const
+  switch (locale) {
+    case 'en':
+      return (
+        <svg {...common}>
+          <rect width="60" height="40" fill="#B22234" />
+          {[3, 9, 15, 21, 27, 33].map((y) => <rect key={y} y={y} width="60" height="3" fill="#fff" />)}
+          <rect width="24" height="21" fill="#3C3B6E" />
+        </svg>
+      )
+    case 'it':
+      return (
+        <svg {...common}>
+          <rect width="20" height="40" fill="#009246" />
+          <rect x="20" width="20" height="40" fill="#fff" />
+          <rect x="40" width="20" height="40" fill="#CE2B37" />
+        </svg>
+      )
+    case 'de':
+      return (
+        <svg {...common}>
+          <rect width="60" height="13.4" fill="#000" />
+          <rect y="13.3" width="60" height="13.4" fill="#DD0000" />
+          <rect y="26.6" width="60" height="13.4" fill="#FFCE00" />
+        </svg>
+      )
+    case 'es':
+      return (
+        <svg {...common}>
+          <rect width="60" height="40" fill="#AA151B" />
+          <rect y="10" width="60" height="20" fill="#F1BF00" />
+        </svg>
+      )
+  }
+}
+
 function alternateOf(pathname: string, from: Locale, target: Locale): string {
   if (from === target) return pathname
   const clean = pathname.replace(/\/$/, '') || '/'
@@ -104,7 +143,7 @@ export default function LanguageSwitcher({
         title={LABEL[current]}
         className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-sm font-bold text-slate-600 hover:text-indigo-600 hover:bg-slate-50 transition-colors"
       >
-        <GlobeIcon className="w-[18px] h-[18px]" />
+        <Flag locale={current} />
         <span>{LOCALE_META[current].short}</span>
         <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" className={`w-3.5 h-3.5 transition-transform ${open ? 'rotate-180' : ''}`}>
           <path fillRule="evenodd" d="M5.3 7.3a1 1 0 0 1 1.4 0L10 10.6l3.3-3.3a1 1 0 1 1 1.4 1.4l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 0-1.4z" clipRule="evenodd" />
@@ -133,7 +172,10 @@ export default function LanguageSwitcher({
                   active ? 'text-indigo-700 bg-indigo-50' : 'text-slate-700 hover:bg-slate-50 hover:text-indigo-700'
                 }`}
               >
-                <span>{LOCALE_META[loc].native}</span>
+                <span className="flex items-center gap-2.5">
+                  <Flag locale={loc} />
+                  {LOCALE_META[loc].native}
+                </span>
                 {active ? <CheckIcon /> : <span className="text-xs font-bold text-slate-400">{LOCALE_META[loc].short}</span>}
               </Link>
             )
@@ -163,12 +205,13 @@ export function LanguageSwitcherInline({ current }: { current: Locale }) {
               hrefLang={loc}
               lang={loc}
               aria-current={active ? 'true' : undefined}
-              className={`rounded-lg border px-3 py-1.5 text-sm font-semibold transition-colors ${
+              className={`inline-flex items-center gap-2 rounded-lg border px-3 py-1.5 text-sm font-semibold transition-colors ${
                 active
                   ? 'border-indigo-200 bg-indigo-50 text-indigo-700'
                   : 'border-slate-200 text-slate-700 hover:border-indigo-200 hover:text-indigo-700'
               }`}
             >
+              <Flag locale={loc} />
               {LOCALE_META[loc].native}
             </Link>
           )
