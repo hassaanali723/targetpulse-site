@@ -3,6 +3,7 @@ import React from 'react'
 import { Linkedin, Youtube, Facebook, Instagram, ArrowUpRight } from 'lucide-react'
 import Link from 'next/link'
 import Wordmark from '@/components/Wordmark'
+import { HREFLANG_CODE } from '@/lib/i18n/clusters'
 import { getStrings, STRINGS, type L10nLocale } from '@/lib/i18n/strings'
 
 const socials = [
@@ -71,7 +72,7 @@ export default function FooterL10n({ locale }: { locale: L10nLocale }) {
               {others.map((l) => (
                 <React.Fragment key={l}>
                   {' · '}
-                  <Link href={STRINGS[l].home} hrefLang={l} lang={l} className="hover:text-indigo-600">{STRINGS[l].nativeName}</Link>
+                  <Link href={STRINGS[l].home} hrefLang={HREFLANG_CODE[l]} lang={HREFLANG_CODE[l]} className="hover:text-indigo-600">{STRINGS[l].nativeName}</Link>
                 </React.Fragment>
               ))}
             </p>

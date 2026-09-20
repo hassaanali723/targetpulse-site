@@ -172,8 +172,8 @@ export function esEntries(): SitemapEntry[] {
 }
 
 // Portuguese (Brazil) and French: same shape (plans/12).
-const PT_BR_LAUNCH = '2026-09-19'
-const FR_LAUNCH = '2026-09-19'
+const PT_BR_LAUNCH = '2026-09-21'
+const FR_LAUNCH = '2026-09-21'
 export function ptBrEntries(): SitemapEntry[] {
   return localeUrls('pt-br').map((path) => ({ path, lastModified: PT_BR_LAUNCH }))
 }
