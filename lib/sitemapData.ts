@@ -171,6 +171,16 @@ export function esEntries(): SitemapEntry[] {
   return localeUrls('es').map((path) => ({ path, lastModified: ES_LAUNCH }))
 }
 
+// Portuguese (Brazil) and French: same shape (plans/12).
+const PT_BR_LAUNCH = '2026-09-19'
+const FR_LAUNCH = '2026-09-19'
+export function ptBrEntries(): SitemapEntry[] {
+  return localeUrls('pt-br').map((path) => ({ path, lastModified: PT_BR_LAUNCH }))
+}
+export function frEntries(): SitemapEntry[] {
+  return localeUrls('fr').map((path) => ({ path, lastModified: FR_LAUNCH }))
+}
+
 // ── XML rendering ───────────────────────────────────────────────────────
 function escapeXml(s: string): string {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')

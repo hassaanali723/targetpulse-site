@@ -79,6 +79,8 @@ returns valid or invalid instead of a shrug.
 - Italiano: [Verifica email gratis](${SITE}/it/verifica-email), [pagina iniziale](${SITE}/it), [prezzi](${SITE}/it/prezzi)
 - Deutsch: [E-Mail-Adresse kostenlos prüfen](${SITE}/de/email-adresse-pruefen), [Startseite](${SITE}/de), [Preise](${SITE}/de/preise)
 - Español: [Validar correo gratis](${SITE}/es/validar-correo), [inicio](${SITE}/es), [precios](${SITE}/es/precios)
+- Português (Brasil): [Verificação de e-mail grátis](${SITE}/pt-br/verificacao-de-email), [início](${SITE}/pt-br), [preços](${SITE}/pt-br/precos)
+- Français: [Vérifier une adresse mail gratuitement](${SITE}/fr/verifier-adresse-mail), [accueil](${SITE}/fr), [tarifs](${SITE}/fr/tarifs)
 
 ## Full version
 ${SITE}/llms-full.txt

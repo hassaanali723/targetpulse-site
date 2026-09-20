@@ -5,6 +5,8 @@ import type { Locale } from '@/lib/i18n/clusters'
 import * as it from '@/lib/i18n/it'
 import * as de from '@/lib/i18n/de'
 import * as es from '@/lib/i18n/es'
+import * as ptBr from '@/lib/i18n/pt-br'
+import * as fr from '@/lib/i18n/fr'
 
 export type L10nLocale = Exclude<Locale, 'en'>
 
@@ -49,6 +51,16 @@ export const STRINGS: Record<L10nLocale, LocaleStrings> = {
     nav: es.nav, footer: es.footer, announcement: es.announcement, cta: es.cta, consoleStrings: es.consoleStrings,
     pricing: es.pricing, notFound: es.notFound, legal: es.legal, home: '/es', nativeName: 'Español', ogLocale: 'es_LA',
     legalHeading: es.footer.legalHeading, formatDate: es.formatDateEs, number: es.esNumber, usd: es.esUsd,
+  },
+  'pt-br': {
+    nav: ptBr.nav, footer: ptBr.footer, announcement: ptBr.announcement, cta: ptBr.cta, consoleStrings: ptBr.consoleStrings,
+    pricing: ptBr.pricing, notFound: ptBr.notFound, legal: ptBr.legal, home: '/pt-br', nativeName: 'Português (Brasil)', ogLocale: 'pt_BR',
+    legalHeading: ptBr.footer.legalHeading, formatDate: ptBr.formatDatePtBr, number: ptBr.ptBrNumber, usd: ptBr.ptBrUsd,
+  },
+  fr: {
+    nav: fr.nav, footer: fr.footer, announcement: fr.announcement, cta: fr.cta, consoleStrings: fr.consoleStrings,
+    pricing: fr.pricing, notFound: fr.notFound, legal: fr.legal, home: '/fr', nativeName: 'Français', ogLocale: 'fr_FR',
+    legalHeading: fr.footer.legalHeading, formatDate: fr.formatDateFr, number: fr.frNumber, usd: fr.frUsd,
   },
 }
 

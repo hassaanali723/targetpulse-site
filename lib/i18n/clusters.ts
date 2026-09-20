@@ -8,38 +8,47 @@
 // canonicalises elsewhere is worse than no tag.
 //
 // `x-default` is always the English member. Language codes are language-only
-// (`it`, `de`, `es`): each page serves every country that speaks the language
-// (plans/04-phase2 4.3, plans/10 section 2).
+// (`it`, `de`, `es`, `fr`): each page serves every country that speaks the
+// language (plans/04-phase2 4.3, plans/10 section 2). The one regioned code is
+// `pt-BR`, because the Portuguese demand is Brazilian (plans/12 section 8
+// item 9); its URL prefix stays lower-case, `/pt-br/`.
 
-export type Locale = 'en' | 'it' | 'de' | 'es'
+export type Locale = 'en' | 'it' | 'de' | 'es' | 'pt-br' | 'fr'
 
-export const LOCALES: Locale[] = ['en', 'it', 'de', 'es']
+export const LOCALES: Locale[] = ['en', 'it', 'de', 'es', 'pt-br', 'fr']
+
+/** The hreflang attribute value for a locale (only Brazil differs from its URL prefix). */
+export const HREFLANG_CODE: Record<Locale, string> = {
+  en: 'en', it: 'it', de: 'de', es: 'es', 'pt-br': 'pt-BR', fr: 'fr',
+}
 
 export interface Cluster {
   en: string
   it?: string
   de?: string
   es?: string
+  'pt-br'?: string
+  fr?: string
 }
 
 export const CLUSTERS = {
   // English member is /email-checker (renamed from /tools/catch-all-email-checker
   // on 2026-09-18; both old URLs 301 there, see next.config.js).
-  tool: { en: '/email-checker', it: '/it/verifica-email', de: '/de/email-adresse-pruefen', es: '/es/validar-correo' },
-  home: { en: '/', it: '/it', de: '/de', es: '/es' },
-  pricing: { en: '/pricing', it: '/it/prezzi', de: '/de/preise', es: '/es/precios' },
-  catchall: { en: '/catch-all-verification', it: '/it/verifica-catch-all', de: '/de/catch-all-verifizierung', es: '/es/verificacion-catch-all' },
+  tool: { en: '/email-checker', it: '/it/verifica-email', de: '/de/email-adresse-pruefen', es: '/es/validar-correo', 'pt-br': '/pt-br/verificacao-de-email', fr: '/fr/verifier-adresse-mail' },
+  home: { en: '/', it: '/it', de: '/de', es: '/es', 'pt-br': '/pt-br', fr: '/fr' },
+  pricing: { en: '/pricing', it: '/it/prezzi', de: '/de/preise', es: '/es/precios', 'pt-br': '/pt-br/precos', fr: '/fr/tarifs' },
+  catchall: { en: '/catch-all-verification', it: '/it/verifica-catch-all', de: '/de/catch-all-verifizierung', es: '/es/verificacion-catch-all', 'pt-br': '/pt-br/verificacao-catch-all', fr: '/fr/verification-catch-all' },
   seg: { en: '/seg-email-verification', it: '/it/verifica-seg' },
-  integrations: { en: '/integrations', it: '/it/integrazioni', de: '/de/integrationen', es: '/es/integraciones' },
-  contact: { en: '/contact-us', it: '/it/contatti', de: '/de/kontakt', es: '/es/contacto' },
-  signup: { en: '/sign-up', it: '/it/registrati', de: '/de/registrieren', es: '/es/registro' },
+  integrations: { en: '/integrations', it: '/it/integrazioni', de: '/de/integrationen', es: '/es/integraciones', 'pt-br': '/pt-br/integracoes', fr: '/fr/integrations' },
+  contact: { en: '/contact-us', it: '/it/contatti', de: '/de/kontakt', es: '/es/contacto', 'pt-br': '/pt-br/contato', fr: '/fr/contact' },
+  signup: { en: '/sign-up', it: '/it/registrati', de: '/de/registrieren', es: '/es/registro', 'pt-br': '/pt-br/cadastro', fr: '/fr/inscription' },
   blog: { en: '/blog', it: '/it/blog' },
   postCatchAll: { en: '/blog/what-is-a-catch-all-email-address', it: '/it/blog/cos-e-un-indirizzo-email-catch-all' },
   postBounce: { en: '/blog/why-cold-emails-bounce', it: '/it/blog/perche-le-email-rimbalzano' },
   postAccuracy: { en: '/blog/how-accurate-are-email-verification-tools', it: '/it/blog/quanto-sono-precisi-gli-strumenti-di-verifica-email' },
-  terms: { en: '/terms-of-service', it: '/it/termini', de: '/de/agb', es: '/es/terminos' },
-  privacy: { en: '/privacy-policy', it: '/it/privacy', de: '/de/datenschutz', es: '/es/privacidad' },
-  refund: { en: '/refund-policy', it: '/it/rimborsi', de: '/de/rueckerstattung', es: '/es/reembolsos' },
+  terms: { en: '/terms-of-service', it: '/it/termini', de: '/de/agb', es: '/es/terminos', 'pt-br': '/pt-br/termos', fr: '/fr/conditions' },
+  privacy: { en: '/privacy-policy', it: '/it/privacy', de: '/de/datenschutz', es: '/es/privacidad', 'pt-br': '/pt-br/privacidade', fr: '/fr/confidentialite' },
+  refund: { en: '/refund-policy', it: '/it/rimborsi', de: '/de/rueckerstattung', es: '/es/reembolsos', 'pt-br': '/pt-br/reembolsos', fr: '/fr/remboursements' },
 } satisfies Record<string, Cluster>
 
 export type ClusterId = keyof typeof CLUSTERS
@@ -57,7 +66,7 @@ export function hreflangAlternates(clusterId: ClusterId): Record<string, string>
   for (const loc of LOCALES) {
     if (loc === 'en') continue
     const u = c[loc]
-    if (u) out[loc] = `${SITE}${u}`
+    if (u) out[HREFLANG_CODE[loc]] = `${SITE}${u}`
   }
   return out
 }
@@ -80,6 +89,8 @@ export const LOCALE_ONLY_URLS: Record<Exclude<Locale, 'en'>, string[]> = {
   it: ['/it/verifica-email/email-esistente'],
   de: ['/de/email-adresse-pruefen/gibt-es-diese-email-adresse'],
   es: ['/es/validar-correo/como-saber-si-un-correo-existe'],
+  'pt-br': ['/pt-br/verificacao-de-email/como-saber-se-um-email-existe'],
+  fr: ['/fr/verifier-adresse-mail/comment-savoir-si-une-adresse-mail-est-valide'],
 }
 
 /** Every URL of one locale, for its sitemap and llms.txt. */

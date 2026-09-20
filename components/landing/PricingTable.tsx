@@ -43,9 +43,12 @@ export interface PricingStrings {
   mobSave: string
   mobPrice: string
   // Number formatting: BCP 47 locale for toLocaleString, and whether the
-  // dollar sign goes after the number (Italian style: 9,90 $).
+  // dollar sign goes after the number (Italian style: 9,90 $). Brazilian
+  // Portuguese writes the symbol first with a space and a country marker
+  // (US$ 9,90), which is what currencyPrefix is for.
   numberLocale: string
   currencySuffix: boolean
+  currencyPrefix?: string
 }
 
 // English, unchanged from the inline strings this component used to carry.
@@ -76,6 +79,7 @@ export const EN_PRICING_STRINGS: PricingStrings = {
 
 function money(t: PricingStrings, n: number, digits: number): string {
   const num = n.toLocaleString(t.numberLocale, { minimumFractionDigits: digits, maximumFractionDigits: digits })
+  if (t.currencyPrefix) return `${t.currencyPrefix}${num}`
   return t.currencySuffix ? `${num} $` : `$${num}`
 }
 
