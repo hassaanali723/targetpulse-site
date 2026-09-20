@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
-import { CLUSTERS, LOCALES, type Cluster, type Locale } from '@/lib/i18n/clusters'
+import { CLUSTERS, HREFLANG_CODE, LOCALES, type Cluster, type Locale } from '@/lib/i18n/clusters'
 
 // Language menu: a globe button that opens a list of every locale in LOCALES.
 // Each entry links to the same page in that language, or to that language's
@@ -18,45 +18,8 @@ const LOCALE_META: Record<Locale, { native: string; short: string }> = {
   it: { native: 'Italiano', short: 'IT' },
   de: { native: 'Deutsch', short: 'DE' },
   es: { native: 'Español', short: 'ES' },
-}
-
-// Flags as inline SVG rather than emoji: Windows renders flag emoji as two
-// letters ("US"), which is most of the desktop audience. 3:2 ratio, 20x14.
-function Flag({ locale, className = '' }: { locale: Locale; className?: string }) {
-  const common = { viewBox: '0 0 60 40', 'aria-hidden': true, className: `w-5 h-[14px] rounded-[2px] shrink-0 ${className}` } as const
-  switch (locale) {
-    case 'en':
-      return (
-        <svg {...common}>
-          <rect width="60" height="40" fill="#B22234" />
-          {[3, 9, 15, 21, 27, 33].map((y) => <rect key={y} y={y} width="60" height="3" fill="#fff" />)}
-          <rect width="24" height="21" fill="#3C3B6E" />
-        </svg>
-      )
-    case 'it':
-      return (
-        <svg {...common}>
-          <rect width="20" height="40" fill="#009246" />
-          <rect x="20" width="20" height="40" fill="#fff" />
-          <rect x="40" width="20" height="40" fill="#CE2B37" />
-        </svg>
-      )
-    case 'de':
-      return (
-        <svg {...common}>
-          <rect width="60" height="13.4" fill="#000" />
-          <rect y="13.3" width="60" height="13.4" fill="#DD0000" />
-          <rect y="26.6" width="60" height="13.4" fill="#FFCE00" />
-        </svg>
-      )
-    case 'es':
-      return (
-        <svg {...common}>
-          <rect width="60" height="40" fill="#AA151B" />
-          <rect y="10" width="60" height="20" fill="#F1BF00" />
-        </svg>
-      )
-  }
+  'pt-br': { native: 'Português (Brasil)', short: 'PT' },
+  fr: { native: 'Français', short: 'FR' },
 }
 
 function alternateOf(pathname: string, from: Locale, target: Locale): string {
@@ -70,6 +33,63 @@ function alternateOf(pathname: string, from: Locale, target: Locale): string {
     }
   }
   return CLUSTERS.home[target] ?? '/'
+}
+
+// Inline SVG flags, simplified to the shapes people recognise at 20px: no
+// stars on the US canton, no coat of arms on the Spanish band. Inline so the
+// menu needs no image requests. English gets the US flag, the primary market.
+const FLAG_PATHS: Record<Locale, React.ReactNode> = {
+  en: (
+    <>
+      <rect width="20" height="14" fill="#fff" />
+      {[0, 2, 4, 6, 8, 10, 12].map((y) => (
+        <rect key={y} y={y} width="20" height="1" fill="#b22234" />
+      ))}
+      <rect width="8" height="7" fill="#3c3b6e" />
+    </>
+  ),
+  it: (
+    <>
+      <rect width="7" height="14" fill="#009246" />
+      <rect x="7" width="6" height="14" fill="#fff" />
+      <rect x="13" width="7" height="14" fill="#ce2b37" />
+    </>
+  ),
+  de: (
+    <>
+      <rect width="20" height="5" fill="#000" />
+      <rect y="5" width="20" height="4" fill="#dd0000" />
+      <rect y="9" width="20" height="5" fill="#ffce00" />
+    </>
+  ),
+  es: (
+    <>
+      <rect width="20" height="14" fill="#c60b1e" />
+      <rect y="3.5" width="20" height="7" fill="#ffc400" />
+    </>
+  ),
+  'pt-br': (
+    <>
+      <rect width="20" height="14" fill="#009c3b" />
+      <path d="M10 1.5 18.5 7 10 12.5 1.5 7z" fill="#ffdf00" />
+      <circle cx="10" cy="7" r="3.2" fill="#002776" />
+    </>
+  ),
+  fr: (
+    <>
+      <rect width="7" height="14" fill="#0055a4" />
+      <rect x="7" width="6" height="14" fill="#fff" />
+      <rect x="13" width="7" height="14" fill="#ef4135" />
+    </>
+  ),
+}
+
+function Flag({ locale, className = '' }: { locale: Locale; className?: string }) {
+  return (
+    <svg viewBox="0 0 20 14" aria-hidden="true" className={`shrink-0 rounded-[3px] ring-1 ring-slate-900/10 ${className}`}>
+      {FLAG_PATHS[locale]}
+    </svg>
+  )
 }
 
 function GlobeIcon({ className = '' }: { className?: string }) {
@@ -102,7 +122,7 @@ function CheckIcon() {
   )
 }
 
-const LABEL: Record<Locale, string> = { en: 'Language', it: 'Lingua', de: 'Sprache', es: 'Idioma' }
+const LABEL: Record<Locale, string> = { en: 'Language', it: 'Lingua', de: 'Sprache', es: 'Idioma', 'pt-br': 'Idioma', fr: 'Langue' }
 
 /** Desktop: globe + current code, opens a dropdown listing all languages. */
 export default function LanguageSwitcher({
@@ -143,7 +163,7 @@ export default function LanguageSwitcher({
         title={LABEL[current]}
         className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-sm font-bold text-slate-600 hover:text-indigo-600 hover:bg-slate-50 transition-colors"
       >
-        <Flag locale={current} />
+        <Flag locale={current} className="w-5 h-3.5" />
         <span>{LOCALE_META[current].short}</span>
         <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" className={`w-3.5 h-3.5 transition-transform ${open ? 'rotate-180' : ''}`}>
           <path fillRule="evenodd" d="M5.3 7.3a1 1 0 0 1 1.4 0L10 10.6l3.3-3.3a1 1 0 1 1 1.4 1.4l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 0-1.4z" clipRule="evenodd" />
@@ -154,7 +174,7 @@ export default function LanguageSwitcher({
         <div
           role="menu"
           aria-label={LABEL[current]}
-          className="absolute right-0 mt-2 w-44 rounded-xl border border-slate-200 bg-white p-1.5 shadow-lg shadow-slate-900/10 z-50"
+          className="absolute right-0 mt-2 w-52 rounded-xl border border-slate-200 bg-white p-1.5 shadow-lg shadow-slate-900/10 z-50"
         >
           {LOCALES.map((loc) => {
             const active = loc === current
@@ -163,8 +183,8 @@ export default function LanguageSwitcher({
               <Link
                 key={loc}
                 href={href}
-                hrefLang={loc}
-                lang={loc}
+                hrefLang={HREFLANG_CODE[loc]}
+                lang={HREFLANG_CODE[loc]}
                 role="menuitem"
                 aria-current={active ? 'true' : undefined}
                 onClick={() => setOpen(false)}
@@ -173,7 +193,7 @@ export default function LanguageSwitcher({
                 }`}
               >
                 <span className="flex items-center gap-2.5">
-                  <Flag locale={loc} />
+                  <Flag locale={loc} className="w-5 h-3.5" />
                   {LOCALE_META[loc].native}
                 </span>
                 {active ? <CheckIcon /> : <span className="text-xs font-bold text-slate-400">{LOCALE_META[loc].short}</span>}
@@ -202,8 +222,8 @@ export function LanguageSwitcherInline({ current }: { current: Locale }) {
             <Link
               key={loc}
               href={alternateOf(pathname, current, loc)}
-              hrefLang={loc}
-              lang={loc}
+              hrefLang={HREFLANG_CODE[loc]}
+              lang={HREFLANG_CODE[loc]}
               aria-current={active ? 'true' : undefined}
               className={`inline-flex items-center gap-2 rounded-lg border px-3 py-1.5 text-sm font-semibold transition-colors ${
                 active
@@ -211,7 +231,7 @@ export function LanguageSwitcherInline({ current }: { current: Locale }) {
                   : 'border-slate-200 text-slate-700 hover:border-indigo-200 hover:text-indigo-700'
               }`}
             >
-              <Flag locale={loc} />
+              <Flag locale={loc} className="w-5 h-3.5" />
               {LOCALE_META[loc].native}
             </Link>
           )
