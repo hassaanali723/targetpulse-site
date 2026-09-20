@@ -1037,6 +1037,20 @@ export default function ApiReferencePage() {
                 </p>
               </div>
 
+              {/* Sits above the 429 block so integrators see it before they read about limits being hit. */}
+              <div className="rounded-xl border border-indigo-200 bg-indigo-50 px-5 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <div>
+                  <p className="text-sm font-bold text-slate-900">Need higher limits?</p>
+                  <p className="text-[13px] text-slate-600 leading-relaxed">We routinely lift limits for verified integration partners.</p>
+                </div>
+                <Link
+                  href="/contact-us"
+                  className="shrink-0 inline-flex items-center justify-center px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-bold hover:bg-indigo-700 transition-colors"
+                >
+                  Talk to us
+                </Link>
+              </div>
+
               <div>
                 <h3 className="text-lg font-bold text-slate-900 mb-3">429 response format</h3>
                 <p className="text-[13px] text-slate-600 mb-3 leading-relaxed">
@@ -1052,10 +1066,6 @@ export default function ApiReferencePage() {
                   Back off using the <code className="font-mono text-[12px] bg-slate-100 px-1.5 py-0.5 rounded">RateLimit-Reset</code> header value (seconds until the window resets) before retrying.
                 </p>
               </div>
-
-              <p className="text-[13px] text-slate-600">
-                Need higher limits? <Link href="/contact-us" className="text-indigo-600 hover:text-indigo-700 font-bold">Talk to us</Link>. We routinely lift limits for verified integration partners.
-              </p>
             </section>
 
             {/* Final CTA */}
