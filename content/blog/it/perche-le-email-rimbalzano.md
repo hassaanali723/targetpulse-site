@@ -6,6 +6,7 @@ date: 2026-09-13
 keyword: perché le email rimbalzano
 image: /blog/why-cold-emails-bounce.webp
 imageAlt: Illustrazione sul perché le email a freddo rimbalzano
+cta: Abbassa il tasso di rimbalzo prima del prossimo invio
 ---
 
 Un'email rimbalza quando il server ricevente rifiuta il messaggio e lo rimanda indietro invece di consegnarlo. Se hai appena lanciato una campagna e ti chiedi perché le email a freddo rimbalzano più della posta normale, quasi tutto si riduce a due cose. Stai scrivendo a persone che non hanno chiesto di sentirti, quindi la lista è più fredda e meno precisa, e stai inviando da un dominio con cui il server del destinatario non ha nessuna storia. Le singole cause stanno sotto queste due.

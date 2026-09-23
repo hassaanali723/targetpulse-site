@@ -1,5 +1,6 @@
 import fs from 'fs'
 import path from 'path'
+import { localizeHref, type Locale } from '@/lib/i18n/clusters'
 
 // Blog content lives as markdown files in content/blog/. Adding a post means
 // adding a file, no component edits. We render markdown to HTML on the server
@@ -25,6 +26,8 @@ export interface PostMeta {
   // Empty string when the post has no banner.
   image: string
   imageAlt: string
+  // Optional per-post CTA band headline (localized posts carry it in frontmatter).
+  cta: string
 }
 
 export interface TocItem {
@@ -63,31 +66,33 @@ function escapeHtml(s: string): string {
 }
 
 // Inline formatting for a single text run: escape, then links, then bold.
-function inline(text: string): string {
+// In a localized post, internal links go to the same page in that language
+// when it exists; links that stay on an English page are marked hreflang="en".
+function inline(text: string, locale: BlogLocale = 'en'): string {
   let out = escapeHtml(text)
   out = out.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_m, label: string, href: string) => {
     const external = /^https?:\/\//.test(href)
-    const attrs = external
-      ? ` target="_blank" rel="noopener noreferrer nofollow"`
-      : ''
-    return `<a href="${href}" class="blog-link"${attrs}>${label}</a>`
+    if (external) return `<a href="${href}" class="blog-link" target="_blank" rel="noopener noreferrer nofollow">${label}</a>`
+    const loc = localizeHref(href, locale)
+    const lang = loc.localized ? '' : ' hreflang="en"'
+    return `<a href="${loc.href}" class="blog-link"${lang}>${label}</a>`
   })
   out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
   return out
 }
 
-function renderTable(lines: string[]): string {
+function renderTable(lines: string[], locale: BlogLocale): string {
   const rows = lines.map((l) =>
     l.replace(/^\|/, '').replace(/\|\s*$/, '').split('|').map((c) => c.trim()),
   )
   const header = rows[0]
   const body = rows.slice(2) // rows[1] is the |---|---| separator
   const thead =
-    '<thead><tr>' + header.map((c) => `<th>${inline(c)}</th>`).join('') + '</tr></thead>'
+    '<thead><tr>' + header.map((c) => `<th>${inline(c, locale)}</th>`).join('') + '</tr></thead>'
   const tbody =
     '<tbody>' +
     body
-      .map((r) => '<tr>' + r.map((c) => `<td>${inline(c)}</td>`).join('') + '</tr>')
+      .map((r) => '<tr>' + r.map((c) => `<td>${inline(c, locale)}</td>`).join('') + '</tr>')
       .join('') +
     '</tbody>'
   return `<div class="blog-table-wrap"><table class="blog-table">${thead}${tbody}</table></div>`
@@ -96,13 +101,13 @@ function renderTable(lines: string[]): string {
 // A standalone image line, optionally followed by a caption line.
 const IMAGE_RE = /^!\[([^\]]*)\]\(([^)]+)\)\s*$/
 
-function renderFigure(lines: string[]): string {
+function renderFigure(lines: string[], locale: BlogLocale): string {
   const m = IMAGE_RE.exec(lines[0].trim())
-  if (!m) return `<p>${inline(lines.join(' '))}</p>`
+  if (!m) return `<p>${inline(lines.join(' '), locale)}</p>`
   const alt = escapeHtml(m[1]).replace(/"/g, '&quot;')
   const src = m[2].trim()
   const caption = lines.slice(1).join(' ').trim()
-  const cap = caption ? `<figcaption>${inline(caption)}</figcaption>` : ''
+  const cap = caption ? `<figcaption>${inline(caption, locale)}</figcaption>` : ''
   return `<figure class="blog-figure"><img src="${src}" alt="${alt}" loading="lazy" />${cap}</figure>`
 }
 
@@ -115,7 +120,7 @@ function slugify(text: string): string {
     .replace(/(^-|-$)/g, '')
 }
 
-function renderMarkdown(body: string): { html: string; toc: TocItem[] } {
+function renderMarkdown(body: string, locale: BlogLocale): { html: string; toc: TocItem[] } {
   const blocks = body.trim().split(/\n{2,}/)
   const html: string[] = []
   const toc: TocItem[] = []
@@ -132,30 +137,31 @@ function renderMarkdown(body: string): { html: string; toc: TocItem[] } {
     const lines = block.split('\n')
     if (block.startsWith('### ')) {
       const raw = block.slice(4).trim()
-      html.push(`<h3 id="${uniqueId(raw)}">${inline(raw)}</h3>`)
+      html.push(`<h3 id="${uniqueId(raw)}">${inline(raw, locale)}</h3>`)
     } else if (block.startsWith('## ')) {
       const raw = block.slice(3).trim()
       const id = uniqueId(raw)
       toc.push({ id, text: raw })
-      html.push(`<h2 id="${id}">${inline(raw)}</h2>`)
+      html.push(`<h2 id="${id}">${inline(raw, locale)}</h2>`)
     } else if (IMAGE_RE.test(lines[0].trim())) {
-      html.push(renderFigure(lines))
+      html.push(renderFigure(lines, locale))
     } else if (lines.every((l) => l.trim().startsWith('|'))) {
-      html.push(renderTable(lines))
+      html.push(renderTable(lines, locale))
     } else if (lines.every((l) => l.trim().startsWith('- '))) {
-      const items = lines.map((l) => `<li>${inline(l.trim().slice(2))}</li>`).join('')
+      const items = lines.map((l) => `<li>${inline(l.trim().slice(2), locale)}</li>`).join('')
       html.push(`<ul>${items}</ul>`)
     } else {
-      html.push(`<p>${inline(lines.join(' '))}</p>`)
+      html.push(`<p>${inline(lines.join(' '), locale)}</p>`)
     }
   }
   return { html: html.join('\n'), toc }
 }
 
-// Localized posts live in a subfolder per language (content/blog/it/...).
-// The English functions read the top level only: readdirSync lists the
-// subfolder as a directory entry without ".md", so it is filtered out.
-export type BlogLocale = 'en' | 'it'
+// Localized posts live in a subfolder per language (content/blog/it/...,
+// content/blog/pt-br/...). The English functions read the top level only:
+// readdirSync lists the subfolders as directory entries without ".md", so
+// they are filtered out.
+export type BlogLocale = Locale
 function postsDir(locale: BlogLocale): string {
   return locale === 'en' ? POSTS_DIR : path.join(POSTS_DIR, locale)
 }
@@ -174,7 +180,7 @@ export function getPostBySlug(slug: string, locale: BlogLocale = 'en'): Post | n
   if (!fs.existsSync(file)) return null
   const raw = fs.readFileSync(file, 'utf8')
   const { data, body } = parseFrontmatter(raw)
-  const { html, toc } = renderMarkdown(body)
+  const { html, toc } = renderMarkdown(body, locale)
   return {
     title: data.title || slug,
     description: data.description || '',
@@ -185,6 +191,7 @@ export function getPostBySlug(slug: string, locale: BlogLocale = 'en'): Post | n
     keyword: data.keyword || '',
     image: data.image || '',
     imageAlt: data.imageAlt || '',
+    cta: data.cta || '',
     contentHtml: html,
     toc,
   }

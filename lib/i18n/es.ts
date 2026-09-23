@@ -34,7 +34,7 @@ export const footer = {
   resources: {
     heading: 'Recursos',
     links: [
-      { name: 'Blog (en inglés)', href: '/blog' },
+      { name: 'Blog', href: '/es/blog' },
       { name: 'Comparativa de verificadores (en inglés)', href: '/alternatives' },
       { name: 'Documentación de la API (en inglés)', href: '/public/docs' },
     ],

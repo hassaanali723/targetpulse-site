@@ -3,13 +3,13 @@ import BlogArticleL10n, { blogArticleMetadata, blogArticleParams } from '@/compo
 export const dynamicParams = false
 
 export function generateStaticParams() {
-  return blogArticleParams('it')
+  return blogArticleParams('fr')
 }
 
 export function generateMetadata({ params }: { params: { slug: string } }) {
-  return blogArticleMetadata('it', params.slug)
+  return blogArticleMetadata('fr', params.slug)
 }
 
 export default function Page({ params }: { params: { slug: string } }) {
-  return <BlogArticleL10n locale="it" slug={params.slug} />
+  return <BlogArticleL10n locale="fr" slug={params.slug} />
 }

@@ -147,16 +147,22 @@ export function blogEntries(): SitemapEntry[] {
 // lastmod is the launch date for the static pages and the post's own date
 // for the blog; both change only when the content does.
 const IT_LAUNCH = '2026-09-14'
+// Pages carry the language's ship date; blog posts carry their own date, and
+// the blog hub the date of its newest post.
+function localeEntries(locale: 'it' | 'de' | 'es' | 'pt-br' | 'fr', launch: string): SitemapEntry[] {
+  const posts = getAllPosts(locale)
+  const hub = `/${locale}/blog`
+  const postDate = new Map(posts.map((p) => [`${hub}/${p.slug}`, p.updated || p.date]))
+  const newest = posts.map((p) => p.updated || p.date).sort().pop()
+  return localeUrls(locale)
+    .filter((u) => u === hub || postDate.has(u) || !u.startsWith(`${hub}/`))
+    .map((path) => ({
+      path,
+      lastModified: postDate.get(path) || (path === hub && newest ? newest : launch),
+    }))
+}
 export function itEntries(): SitemapEntry[] {
-  const posts = getAllPosts('it')
-  const postPaths = new Set(posts.map((p) => `/it/blog/${p.slug}`))
-  const pages = italianUrls()
-    .filter((u) => !postPaths.has(u))
-    .map((path) => ({ path, lastModified: IT_LAUNCH }))
-  return [
-    ...pages,
-    ...posts.map((p) => ({ path: `/it/blog/${p.slug}`, lastModified: p.updated || p.date || undefined })),
-  ]
+  return localeEntries('it', IT_LAUNCH)
 }
 
 
@@ -165,20 +171,20 @@ export function itEntries(): SitemapEntry[] {
 const DE_LAUNCH = '2026-09-16'
 const ES_LAUNCH = '2026-09-16'
 export function deEntries(): SitemapEntry[] {
-  return localeUrls('de').map((path) => ({ path, lastModified: DE_LAUNCH }))
+  return localeEntries('de', DE_LAUNCH)
 }
 export function esEntries(): SitemapEntry[] {
-  return localeUrls('es').map((path) => ({ path, lastModified: ES_LAUNCH }))
+  return localeEntries('es', ES_LAUNCH)
 }
 
 // Portuguese (Brazil) and French: same shape (plans/12).
 const PT_BR_LAUNCH = '2026-09-21'
 const FR_LAUNCH = '2026-09-21'
 export function ptBrEntries(): SitemapEntry[] {
-  return localeUrls('pt-br').map((path) => ({ path, lastModified: PT_BR_LAUNCH }))
+  return localeEntries('pt-br', PT_BR_LAUNCH)
 }
 export function frEntries(): SitemapEntry[] {
-  return localeUrls('fr').map((path) => ({ path, lastModified: FR_LAUNCH }))
+  return localeEntries('fr', FR_LAUNCH)
 }
 
 // ── XML rendering ───────────────────────────────────────────────────────

@@ -1,11 +1,12 @@
 ---
-title: "Cos'è un indirizzo email catch-all e come verificarlo"
+title: "Indirizzo email catch-all: cos'è e come verificarlo"
 description: Un dominio catch-all accetta la posta per qualsiasi nome, reale o no. Cosa significa, perché le aziende lo configurano così e come verificare questi indirizzi.
 slug: cos-e-un-indirizzo-email-catch-all
 date: 2026-09-13
-keyword: cos'è un indirizzo email catch-all
+keyword: indirizzo email catch-all
 image: /blog/what-is-a-catch-all-email-address.webp
 imageAlt: Illustrazione di un indirizzo email catch-all
+cta: Scopri cosa sono davvero i tuoi indirizzi catch-all
 ---
 
 Un indirizzo email catch-all è un indirizzo su un dominio configurato per accettare la posta per qualsiasi nome, che dietro ci sia una casella reale oppure no. Se hai appena visto un indirizzo segnato come catch-all in un report di verifica, la versione breve è questa: l'etichetta descrive il dominio, non la persona. Il dominio accetta tutto. Un messaggio a vendite@, un nome scritto male o un dipendente andato via anni fa arrivano comunque da qualche parte invece di essere rifiutati.

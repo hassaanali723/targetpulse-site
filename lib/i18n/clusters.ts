@@ -42,10 +42,19 @@ export const CLUSTERS = {
   integrations: { en: '/integrations', it: '/it/integrazioni', de: '/de/integrationen', es: '/es/integraciones', 'pt-br': '/pt-br/integracoes', fr: '/fr/integrations' },
   contact: { en: '/contact-us', it: '/it/contatti', de: '/de/kontakt', es: '/es/contacto', 'pt-br': '/pt-br/contato', fr: '/fr/contact' },
   signup: { en: '/sign-up', it: '/it/registrati', de: '/de/registrieren', es: '/es/registro', 'pt-br': '/pt-br/cadastro', fr: '/fr/inscription' },
-  blog: { en: '/blog', it: '/it/blog' },
-  postCatchAll: { en: '/blog/what-is-a-catch-all-email-address', it: '/it/blog/cos-e-un-indirizzo-email-catch-all' },
-  postBounce: { en: '/blog/why-cold-emails-bounce', it: '/it/blog/perche-le-email-rimbalzano' },
-  postAccuracy: { en: '/blog/how-accurate-are-email-verification-tools', it: '/it/blog/quanto-sono-precisi-gli-strumenti-di-verifica-email' },
+  blog: { en: '/blog', it: '/it/blog', de: '/de/blog', es: '/es/blog', 'pt-br': '/pt-br/blog', fr: '/fr/blog' },
+  // One cluster per blog post: every post exists in all six languages, and a
+  // localized post's internal links are rewritten through this map (lib/blog.ts).
+  postBestTools: { en: '/blog/best-email-verification-tools', it: '/it/blog/migliori-software-per-verificare-le-email', de: '/de/blog/beste-e-mail-verifizierungstools', es: '/es/blog/mejores-herramientas-de-verificacion-de-correo', 'pt-br': '/pt-br/blog/melhores-verificadores-de-email', fr: '/fr/blog/meilleurs-outils-de-verification-email' },
+  postGoodBounce: { en: '/blog/good-bounce-rate-for-cold-email', it: '/it/blog/tasso-di-rimbalzo-ideale-cold-email', de: '/de/blog/gute-bounce-rate-cold-e-mail', es: '/es/blog/tasa-de-rebote-aceptable-cold-email', 'pt-br': '/pt-br/blog/taxa-de-bounce-ideal-cold-email', fr: '/fr/blog/bon-taux-de-rebond-cold-email' },
+  postAccuracy: { en: '/blog/how-accurate-are-email-verification-tools', it: '/it/blog/quanto-sono-precisi-gli-strumenti-di-verifica-email', de: '/de/blog/wie-genau-sind-e-mail-verifizierungstools', es: '/es/blog/que-tan-precisos-son-los-verificadores-de-correo', 'pt-br': '/pt-br/blog/qual-a-precisao-dos-verificadores-de-email', fr: '/fr/blog/quelle-est-la-precision-des-verificateurs-email' },
+  postReduceBounce: { en: '/blog/how-to-reduce-email-bounce-rate', it: '/it/blog/come-ridurre-il-tasso-di-rimbalzo-email', de: '/de/blog/e-mail-bounce-rate-senken', es: '/es/blog/como-reducir-la-tasa-de-rebote', 'pt-br': '/pt-br/blog/como-reduzir-a-taxa-de-bounce', fr: '/fr/blog/comment-reduire-le-taux-de-rebond' },
+  postSegVerify: { en: '/blog/how-to-verify-emails-behind-secure-email-gateways', it: '/it/blog/verificare-email-dietro-gateway-di-sicurezza', de: '/de/blog/e-mails-hinter-sicherheits-gateways-pruefen', es: '/es/blog/verificar-correos-tras-un-gateway-de-seguridad', 'pt-br': '/pt-br/blog/verificar-emails-atras-de-gateways-de-seguranca', fr: '/fr/blog/verifier-un-email-derriere-une-passerelle-securisee' },
+  postClaude: { en: '/blog/verify-emails-inside-claude-and-chatgpt', it: '/it/blog/verificare-email-in-claude-e-chatgpt', de: '/de/blog/e-mails-in-claude-und-chatgpt-pruefen', es: '/es/blog/verificar-correos-en-claude-y-chatgpt', 'pt-br': '/pt-br/blog/verificar-emails-no-claude-e-no-chatgpt', fr: '/fr/blog/verifier-emails-dans-claude-et-chatgpt' },
+  postRisky: { en: '/blog/what-does-risky-mean-in-email-verification', it: '/it/blog/email-rischiosa-cosa-significa', de: '/de/blog/was-bedeutet-riskant-bei-der-e-mail-pruefung', es: '/es/blog/que-significa-arriesgado-al-validar-un-correo', 'pt-br': '/pt-br/blog/o-que-significa-arriscado-ao-verificar-emails', fr: '/fr/blog/que-signifie-risque-verification-email' },
+  postCatchAll: { en: '/blog/what-is-a-catch-all-email-address', it: '/it/blog/cos-e-un-indirizzo-email-catch-all', de: '/de/blog/was-ist-eine-catch-all-e-mail-adresse', es: '/es/blog/que-es-un-correo-catch-all', 'pt-br': '/pt-br/blog/o-que-e-um-email-catch-all', fr: '/fr/blog/qu-est-ce-qu-une-adresse-email-catch-all' },
+  postSeg: { en: '/blog/what-is-a-secure-email-gateway', it: '/it/blog/cos-e-un-secure-email-gateway', de: '/de/blog/was-ist-ein-secure-email-gateway', es: '/es/blog/que-es-un-secure-email-gateway', 'pt-br': '/pt-br/blog/o-que-e-um-secure-email-gateway', fr: '/fr/blog/qu-est-ce-qu-un-secure-email-gateway' },
+  postBounce: { en: '/blog/why-cold-emails-bounce', it: '/it/blog/perche-le-email-rimbalzano', de: '/de/blog/warum-cold-e-mails-bouncen', es: '/es/blog/por-que-rebotan-los-correos', 'pt-br': '/pt-br/blog/por-que-emails-dao-bounce', fr: '/fr/blog/pourquoi-un-email-rebondit' },
   terms: { en: '/terms-of-service', it: '/it/termini', de: '/de/agb', es: '/es/terminos', 'pt-br': '/pt-br/termos', fr: '/fr/conditions' },
   privacy: { en: '/privacy-policy', it: '/it/privacy', de: '/de/datenschutz', es: '/es/privacidad', 'pt-br': '/pt-br/privacidade', fr: '/fr/confidentialite' },
   refund: { en: '/refund-policy', it: '/it/rimborsi', de: '/de/rueckerstattung', es: '/es/reembolsos', 'pt-br': '/pt-br/reembolsos', fr: '/fr/remboursements' },
@@ -69,6 +78,26 @@ export function hreflangAlternates(clusterId: ClusterId): Record<string, string>
     if (u) out[HREFLANG_CODE[loc]] = `${SITE}${u}`
   }
   return out
+}
+
+/**
+ * `href` (an English path, optionally with #hash or ?query) rewritten to the
+ * same page in `locale` when the page exists there; otherwise unchanged.
+ * Used by the blog renderer so a localized post links to localized pages.
+ */
+export function localizeHref(href: string, locale: Locale): { href: string; localized: boolean } {
+  if (locale === 'en' || !href.startsWith('/')) return { href, localized: true }
+  const m = /^([^?#]*)(.*)$/.exec(href)
+  const path = (m?.[1] || '/').replace(/\/$/, '') || '/'
+  const rest = m?.[2] || ''
+  if (path === `/${locale}` || path.startsWith(`/${locale}/`)) return { href, localized: true }
+  for (const c of Object.values(CLUSTERS) as Cluster[]) {
+    if (c.en === path) {
+      const there = c[locale]
+      return there ? { href: there + rest, localized: true } : { href, localized: false }
+    }
+  }
+  return { href, localized: false }
 }
 
 /** The URL of `locale`'s page in the cluster, or that locale's home if the page has no alternate. */

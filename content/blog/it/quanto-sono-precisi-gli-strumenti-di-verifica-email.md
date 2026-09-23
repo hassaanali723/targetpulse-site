@@ -1,9 +1,10 @@
 ---
-title: "Quanto sono precisi gli strumenti di verifica email"
+title: "Quanto sono precisi i verificatori di email davvero?"
 description: Ogni verificatore dichiara tra il 97 e il 99 percento. Cosa misura quel numero, perché sono tutti simili e come provare uno strumento sulla tua lista.
 slug: quanto-sono-precisi-gli-strumenti-di-verifica-email
 date: 2026-09-13
-keyword: precisione strumenti di verifica email
+keyword: quanto sono precisi i verificatori di email
+cta: Mettilo alla prova sulla tua lista
 ---
 
 Apri la pagina dei prezzi di dieci verificatori di email e troverai dieci dichiarazioni di precisione tra il 97% e il 99,9%. Ne pubblichiamo una anche noi. I numeri sono così vicini tra loro da non dire quasi niente, un esito strano per una misura che dovrebbe aiutarti a scegliere.
@@ -64,4 +65,4 @@ Giggal.ai dichiara il 98,5% di precisione sulle liste aziendali standard e tassi
 
 Preferiremmo essere giudicati sulla copertura. L'obiettivo di progetto era restituire valido o non valido sugli indirizzi catch-all e dietro gateway invece di un'etichetta, su quindici gateway riconosciuti, così che il gruppo a rischio sia piccolo invece di un terzo del file. Se regge sui tuoi dati è una domanda a cui il tuo campione da 500 indirizzi risponde meglio di questa pagina.
 
-Il piano gratuito è di 1.000 crediti, senza carta, e funziona sul caricamento in blocco proprio perché il test sia possibile. Se vuoi prima il contesto, abbiamo scritto [cos'è un indirizzo catch-all](/it/blog/cos-e-un-indirizzo-email-catch-all) e [come vengono verificate le caselle dietro i gateway](/it/verifica-seg).
+Il piano gratuito è di 1.000 crediti, senza carta, e funziona sul caricamento in blocco proprio perché il test sia possibile. Per controllare un singolo indirizzo prima, usa la [verifica email](/email-checker). Se vuoi prima il contesto, abbiamo scritto [cos'è un indirizzo catch-all](/it/blog/cos-e-un-indirizzo-email-catch-all) e [come vengono verificate le caselle dietro i gateway](/it/verifica-seg).
