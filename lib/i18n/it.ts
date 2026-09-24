@@ -38,6 +38,9 @@ export const footer = {
     links: [
       { name: 'Blog', href: '/it/blog' },
       { name: 'Confronto verificatori (in inglese)', href: '/alternatives' },
+      { name: 'Alternativa a ZeroBounce', href: '/it/alternativa-a-zerobounce' },
+      { name: 'Alternativa a NeverBounce', href: '/it/alternativa-a-neverbounce' },
+      { name: 'Alternativa a Snov.io', href: '/it/alternativa-a-snovio' },
       { name: 'Documentazione API (in inglese)', href: '/public/docs' },
     ],
   },

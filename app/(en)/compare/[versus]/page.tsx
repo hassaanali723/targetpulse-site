@@ -16,6 +16,7 @@ import {
   versusSlug,
 } from '@/lib/compare'
 import { ALL_COMPETITOR_SLUGS, getCompetitor } from '@/lib/competitorPricing'
+import { clusterOfEnglish, hreflangAlternates } from '@/lib/i18n/clusters'
 
 const APP_URL = 'https://emailverifier.giggal.ai/sign-up'
 
@@ -28,13 +29,15 @@ export function generateMetadata({ params }: { params: { versus: string } }): Me
   if (!pair) return {}
   const c = buildComparison(pair.a, pair.b)
   const url = `https://giggal.ai/compare/${params.versus}`
+  // plans/15: the pairs that exist in other languages carry hreflang.
+  const cluster = clusterOfEnglish(`/compare/${params.versus}`)
   return {
     // C7: only the whitelisted and Search-Console-protected pairs are indexed
     // (lib/indexPolicy.ts); the rest stay live and followable.
     ...(isCompareIndexed(params.versus) ? {} : { robots: NOINDEX_ROBOTS }),
     title: { absolute: c.metaTitle },
     description: c.metaDescription,
-    alternates: { canonical: `/compare/${params.versus}` },
+    alternates: { canonical: `/compare/${params.versus}`, ...(cluster ? { languages: hreflangAlternates(cluster) } : {}) },
     openGraph: {
       title: c.ogTitle,
       description: c.metaDescription,

@@ -55,6 +55,18 @@ export const CLUSTERS = {
   postCatchAll: { en: '/blog/what-is-a-catch-all-email-address', it: '/it/blog/cos-e-un-indirizzo-email-catch-all', de: '/de/blog/was-ist-eine-catch-all-e-mail-adresse', es: '/es/blog/que-es-un-correo-catch-all', 'pt-br': '/pt-br/blog/o-que-e-um-email-catch-all', fr: '/fr/blog/qu-est-ce-qu-une-adresse-email-catch-all' },
   postSeg: { en: '/blog/what-is-a-secure-email-gateway', it: '/it/blog/cos-e-un-secure-email-gateway', de: '/de/blog/was-ist-ein-secure-email-gateway', es: '/es/blog/que-es-un-secure-email-gateway', 'pt-br': '/pt-br/blog/o-que-e-um-secure-email-gateway', fr: '/fr/blog/qu-est-ce-qu-un-secure-email-gateway' },
   postBounce: { en: '/blog/why-cold-emails-bounce', it: '/it/blog/perche-le-email-rimbalzano', de: '/de/blog/warum-cold-e-mails-bouncen', es: '/es/blog/por-que-rebotan-los-correos', 'pt-br': '/pt-br/blog/por-que-emails-dao-bounce', fr: '/fr/blog/pourquoi-un-email-rebondit' },
+  // Alternative and comparison pages with local brand demand (plans/15). A
+  // language is listed only where every brand on the page is searched in that
+  // market, so some clusters are partial.
+  altZerobounce: { en: '/zerobounce-alternative', it: '/it/alternativa-a-zerobounce', de: '/de/zerobounce-alternative', es: '/es/alternativa-a-zerobounce', 'pt-br': '/pt-br/alternativa-ao-zerobounce', fr: '/fr/alternative-a-zerobounce' },
+  altNeverbounce: { en: '/neverbounce-alternative', it: '/it/alternativa-a-neverbounce', de: '/de/neverbounce-alternative', es: '/es/alternativa-a-neverbounce', 'pt-br': '/pt-br/alternativa-ao-neverbounce', fr: '/fr/alternative-a-neverbounce' },
+  altHunter: { en: '/hunter-alternative', de: '/de/hunter-alternative', es: '/es/alternativa-a-hunter', 'pt-br': '/pt-br/alternativa-ao-hunter', fr: '/fr/alternative-a-hunter' },
+  altSnovio: { en: '/snovio-alternative', it: '/it/alternativa-a-snovio', de: '/de/snovio-alternative', es: '/es/alternativa-a-snovio', 'pt-br': '/pt-br/alternativa-ao-snovio', fr: '/fr/alternative-a-snovio' },
+  altApollo: { en: '/apollo-alternative', fr: '/fr/alternative-a-apollo' },
+  altInstantly: { en: '/instantly-alternative', de: '/de/instantly-alternative' },
+  cmpZerobounceNeverbounce: { en: '/compare/zerobounce-vs-neverbounce', it: '/it/confronto/zerobounce-vs-neverbounce', de: '/de/vergleich/zerobounce-vs-neverbounce', es: '/es/comparativa/zerobounce-vs-neverbounce', 'pt-br': '/pt-br/comparativo/zerobounce-vs-neverbounce', fr: '/fr/comparatif/zerobounce-vs-neverbounce' },
+  cmpZerobounceHunter: { en: '/compare/zerobounce-vs-hunter', de: '/de/vergleich/zerobounce-vs-hunter', es: '/es/comparativa/zerobounce-vs-hunter', 'pt-br': '/pt-br/comparativo/zerobounce-vs-hunter', fr: '/fr/comparatif/zerobounce-vs-hunter' },
+  cmpNeverbounceHunter: { en: '/compare/neverbounce-vs-hunter', de: '/de/vergleich/neverbounce-vs-hunter', es: '/es/comparativa/neverbounce-vs-hunter', 'pt-br': '/pt-br/comparativo/neverbounce-vs-hunter', fr: '/fr/comparatif/neverbounce-vs-hunter' },
   terms: { en: '/terms-of-service', it: '/it/termini', de: '/de/agb', es: '/es/terminos', 'pt-br': '/pt-br/termos', fr: '/fr/conditions' },
   privacy: { en: '/privacy-policy', it: '/it/privacy', de: '/de/datenschutz', es: '/es/privacidad', 'pt-br': '/pt-br/privacidade', fr: '/fr/confidentialite' },
   refund: { en: '/refund-policy', it: '/it/rimborsi', de: '/de/rueckerstattung', es: '/es/reembolsos', 'pt-br': '/pt-br/reembolsos', fr: '/fr/remboursements' },
@@ -98,6 +110,14 @@ export function localizeHref(href: string, locale: Locale): { href: string; loca
     }
   }
   return { href, localized: false }
+}
+
+/** The cluster whose English member is `path`, if the page exists in another language. */
+export function clusterOfEnglish(path: string): ClusterId | undefined {
+  for (const [id, c] of Object.entries(CLUSTERS) as [ClusterId, Cluster][]) {
+    if (c.en === path) return id
+  }
+  return undefined
 }
 
 /** The URL of `locale`'s page in the cluster, or that locale's home if the page has no alternate. */

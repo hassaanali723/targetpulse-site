@@ -15,6 +15,7 @@ import RelatedLinks from '@/components/alternatives/RelatedLinks'
 import HeadToHeadComparisons from '@/components/alternatives/HeadToHeadComparisons'
 import { getCompetitor } from '@/lib/competitorPricing'
 import { ArrowRight } from 'lucide-react'
+import { hreflangAlternates } from '@/lib/i18n/clusters'
 
 const APP_URL = 'https://emailverifier.giggal.ai/sign-up'
 const competitor = getCompetitor('zerobounce')
@@ -25,7 +26,7 @@ const DESC =
 export const metadata: Metadata = {
   title: { absolute: 'ZeroBounce Alternative: Pricing and Catch-All | Giggal.ai' },
   description: DESC,
-  alternates: { canonical: '/zerobounce-alternative' },
+  alternates: { canonical: '/zerobounce-alternative', languages: hreflangAlternates('altZerobounce') },
   openGraph: {
     siteName: 'Giggal.ai',
     images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai email verification' }],

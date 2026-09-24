@@ -13,7 +13,7 @@ import { allPairs } from '@/lib/compare'
 import { ZAPIER_APPS } from '@/lib/zapierApps'
 import { isAltIndexed, isCompareIndexed, isZapierIndexed, pastSitemapGrace } from '@/lib/indexPolicy'
 import { getAllPosts } from '@/lib/blog'
-import { italianUrls, localeUrls } from '@/lib/i18n/clusters'
+import { CLUSTERS, italianUrls, localeUrls, type Cluster } from '@/lib/i18n/clusters'
 
 export const SITE = 'https://giggal.ai'
 
@@ -149,6 +149,15 @@ export function blogEntries(): SitemapEntry[] {
 const IT_LAUNCH = '2026-09-14'
 // Pages carry the language's ship date; blog posts carry their own date, and
 // the blog hub the date of its newest post.
+// plans/15: the localized alternative and comparison pages shipped later
+// than their language, so they carry their own ship date.
+const COMPETITOR_PAGES_SHIPPED = '2026-09-24'
+const competitorPageUrls = new Set(
+  Object.entries(CLUSTERS)
+    .filter(([id]) => id.startsWith('alt') || id.startsWith('cmp'))
+    .flatMap(([, c]) => Object.values(c as Cluster)),
+)
+
 function localeEntries(locale: 'it' | 'de' | 'es' | 'pt-br' | 'fr', launch: string): SitemapEntry[] {
   const posts = getAllPosts(locale)
   const hub = `/${locale}/blog`
@@ -158,7 +167,9 @@ function localeEntries(locale: 'it' | 'de' | 'es' | 'pt-br' | 'fr', launch: stri
     .filter((u) => u === hub || postDate.has(u) || !u.startsWith(`${hub}/`))
     .map((path) => ({
       path,
-      lastModified: postDate.get(path) || (path === hub && newest ? newest : launch),
+      lastModified:
+        postDate.get(path) ||
+        (path === hub && newest ? newest : competitorPageUrls.has(path) ? COMPETITOR_PAGES_SHIPPED : launch),
     }))
 }
 export function itEntries(): SitemapEntry[] {

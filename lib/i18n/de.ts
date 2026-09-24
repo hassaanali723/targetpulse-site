@@ -36,6 +36,11 @@ export const footer = {
     links: [
       { name: 'Blog', href: '/de/blog' },
       { name: 'Verifizierer im Vergleich (Englisch)', href: '/alternatives' },
+      { name: 'ZeroBounce Alternative', href: '/de/zerobounce-alternative' },
+      { name: 'NeverBounce Alternative', href: '/de/neverbounce-alternative' },
+      { name: 'Hunter Alternative', href: '/de/hunter-alternative' },
+      { name: 'Snov.io Alternative', href: '/de/snovio-alternative' },
+      { name: 'Instantly Alternative', href: '/de/instantly-alternative' },
       { name: 'API-Dokumentation (Englisch)', href: '/public/docs' },
     ],
   },

@@ -19,6 +19,7 @@ import RelatedLinks from '@/components/alternatives/RelatedLinks'
 import HeadToHeadComparisons from '@/components/alternatives/HeadToHeadComparisons'
 import { getCompetitor } from '@/lib/competitorPricing'
 import { ArrowRight } from 'lucide-react'
+import { clusterOfEnglish, hreflangAlternates } from '@/lib/i18n/clusters'
 
 const APP_URL = 'https://emailverifier.giggal.ai/sign-up'
 
@@ -43,12 +44,14 @@ export interface AltPageConfig {
 }
 
 export function altMetadata(cfg: AltPageConfig): Metadata {
+  // plans/15: pages that exist in other languages carry hreflang.
+  const cluster = clusterOfEnglish(`/${cfg.slug}-alternative`)
   return {
     // C7 tier C: zero-demand brand pages stay live and linked but noindex.
     ...(isAltIndexed(cfg.slug) ? {} : { robots: NOINDEX_ROBOTS }),
     title: { absolute: cfg.metaTitle },
     description: cfg.desc,
-    alternates: { canonical: `/${cfg.slug}-alternative` },
+    alternates: { canonical: `/${cfg.slug}-alternative`, ...(cluster ? { languages: hreflangAlternates(cluster) } : {}) },
     openGraph: {
       siteName: 'Giggal.ai',
       images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai email verification' }],
