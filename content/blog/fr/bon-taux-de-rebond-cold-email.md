@@ -4,8 +4,8 @@ description: Un bon taux de rebond en cold emailing est sous les 2 pour cent. Vo
 slug: bon-taux-de-rebond-cold-email
 date: 2026-09-23
 keyword: bon taux de rebond en cold emailing
-image: /blog/good-bounce-rate-for-cold-email.webp
-imageAlt: Illustration d'un bon taux de rebond en cold emailing
+image: /blog/covers/fr/bon-taux-de-rebond-cold-email.webp
+imageAlt: Quel est un bon taux de rebond en cold emailing ?
 cta: Gardez vos campagnes sous les 2 pour cent
 ---
 

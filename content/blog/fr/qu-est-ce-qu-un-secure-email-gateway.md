@@ -4,8 +4,8 @@ description: Un secure email gateway filtre le courrier devant le serveur de mes
 slug: qu-est-ce-qu-un-secure-email-gateway
 date: 2026-09-23
 keyword: qu'est-ce qu'un secure email gateway
-image: /blog/what-is-a-secure-email-gateway.webp
-imageAlt: Illustration de ce qu'est un secure email gateway
+image: /blog/covers/fr/qu-est-ce-qu-un-secure-email-gateway.webp
+imageAlt: Qu'est-ce qu'un secure email gateway (SEG) ?
 cta: Vérifiez aussi les adresses derrière un SEG
 ---
 

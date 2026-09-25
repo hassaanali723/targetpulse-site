@@ -4,6 +4,8 @@ description: Verbinden Sie ein E-Mail-Verifizierungstool per MCP mit Claude, Cha
 slug: e-mails-in-claude-und-chatgpt-pruefen
 date: 2026-09-23
 keyword: e-mails direkt in claude und chatgpt prüfen
+image: /blog/covers/de/e-mails-in-claude-und-chatgpt-pruefen.webp
+imageAlt: E-Mails direkt in Claude und ChatGPT prüfen
 cta: E-Mails prüfen, ohne den Chat zu verlassen
 ---
 

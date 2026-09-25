@@ -4,6 +4,8 @@ description: Conecta una herramienta de verificación a Claude, ChatGPT, Cursor 
 slug: verificar-correos-en-claude-y-chatgpt
 date: 2026-09-23
 keyword: verificar correos en claude y chatgpt
+image: /blog/covers/es/verificar-correos-en-claude-y-chatgpt.webp
+imageAlt: Cómo verificar correos en Claude y ChatGPT
 cta: Verifica correos sin salir del chat
 ---
 

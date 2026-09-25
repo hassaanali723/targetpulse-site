@@ -4,8 +4,8 @@ description: Por que e-mails dão bounce, hard bounce e soft bounce, as causas m
 slug: por-que-emails-dao-bounce
 date: 2026-09-23
 keyword: por que e-mails dão bounce
-image: /blog/why-cold-emails-bounce.webp
-imageAlt: Ilustração sobre por que cold e-mails dão bounce
+image: /blog/covers/pt-br/por-que-emails-dao-bounce.webp
+imageAlt: Por que e-mails dão bounce? Causas e o que fazer
 cta: Reduza sua taxa de bounce antes do próximo envio
 ---
 

@@ -4,8 +4,8 @@ description: Rischiosa non è una risposta, è la sua assenza. Ecco cosa finisce
 slug: email-rischiosa-cosa-significa
 date: 2026-09-23
 keyword: email rischiosa
-image: /blog/what-does-risky-mean-in-email-verification.webp
-imageAlt: Illustrazione su cosa significa email rischiosa nella verifica
+image: /blog/covers/it/email-rischiosa-cosa-significa.webp
+imageAlt: Email "rischiosa": cosa significa nel risultato
 cta: Trasforma le email rischiose in risposte vere
 ---
 

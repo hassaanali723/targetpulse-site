@@ -4,8 +4,8 @@ description: Une adresse catch-all se trouve sur un domaine qui accepte le courr
 slug: qu-est-ce-qu-une-adresse-email-catch-all
 date: 2026-09-23
 keyword: qu'est-ce qu'une adresse email catch-all
-image: /blog/what-is-a-catch-all-email-address.webp
-imageAlt: Illustration de ce qu'est une adresse email catch-all
+image: /blog/covers/fr/qu-est-ce-qu-une-adresse-email-catch-all.webp
+imageAlt: Qu'est-ce qu'une adresse email catch-all ?
 cta: Découvrez ce que sont vraiment vos adresses catch-all
 ---
 

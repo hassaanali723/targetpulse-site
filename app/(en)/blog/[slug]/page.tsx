@@ -140,8 +140,10 @@ export default function BlogArticlePage({ params }: { params: { slug: string } }
           )}
 
           <div className="min-w-0">
+            {/* Cover banners are 1200x630, so the frame uses that ratio and
+                nothing is cropped. */}
             {post.image && (
-              <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 card-vivid-shadow">
+              <div className="relative aspect-[1200/630] w-full overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 card-vivid-shadow">
                 <Image
                   src={post.image}
                   alt={post.imageAlt || post.title}

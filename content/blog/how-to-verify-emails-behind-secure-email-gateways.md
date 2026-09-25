@@ -4,6 +4,8 @@ description: Proofpoint, Mimecast and Barracuda accept every address at the edge
 slug: how-to-verify-emails-behind-secure-email-gateways
 date: 2026-08-21
 keyword: seg protected email verification tool
+image: /blog/covers/how-to-verify-emails-behind-secure-email-gateways.webp
+imageAlt: Proofpoint, Mimecast and Barracuda accepting every address at the gateway edge
 ---
 
 If you have ever exported a verification report and noticed that a suspicious number of your best enterprise contacts came back unknown, there is a decent chance a secure email gateway was in the way. Not a catch-all domain, though the symptom looks identical. A gateway.

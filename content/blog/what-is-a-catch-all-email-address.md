@@ -5,8 +5,8 @@ slug: what-is-a-catch-all-email-address
 date: 2026-08-11
 updated: 2026-09-13
 keyword: what is a catch all email
-image: /blog/what-is-a-catch-all-email-address.webp
-imageAlt: Illustration for what a catch-all email address is
+image: /blog/covers/what-is-a-catch-all-email-address.webp
+imageAlt: A catch-all domain accepting every address, real or not
 ---
 
 A catch-all email address is an address at a domain that has been configured to accept mail for every possible name, whether or not a real mailbox sits behind it. If you have just seen an address flagged catch-all in a verification report and typed what is a catch-all email address into a search box, the short version is that the label describes the domain, not the person. The domain accepts anything. A message to sales@, a name someone mistyped, or an employee who left years ago all land somewhere instead of getting refused.

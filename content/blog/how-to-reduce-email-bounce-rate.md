@@ -5,6 +5,8 @@ slug: how-to-reduce-email-bounce-rate
 date: 2026-08-21
 updated: 2026-09-13
 keyword: what is email bounce rate
+image: /blog/covers/how-to-reduce-email-bounce-rate.webp
+imageAlt: Email bounce rate benchmarks: hard bounces under 0.3 percent and 22.5 percent yearly list decay
 ---
 
 A high bounce rate is rarely one problem. It is usually three or four small ones stacked up, and people tend to attack them in the wrong order, starting with the interesting technical work and finishing with the boring list hygiene that would have fixed most of it.

@@ -4,8 +4,8 @@ description: Ein Secure Email Gateway ist eine Filterschicht vor dem Mailserver 
 slug: was-ist-ein-secure-email-gateway
 date: 2026-09-23
 keyword: was ist ein secure email gateway
-image: /blog/what-is-a-secure-email-gateway.webp
-imageAlt: Illustration dazu, was ein Secure Email Gateway ist
+image: /blog/covers/de/was-ist-ein-secure-email-gateway.webp
+imageAlt: Was ist ein Secure Email Gateway (SEG)?
 cta: Prüfen Sie auch Adressen hinter einem SEG
 ---
 

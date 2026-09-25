@@ -4,6 +4,8 @@ description: Proofpoint, Mimecast und Barracuda nehmen jede Adresse an und brech
 slug: e-mails-hinter-sicherheits-gateways-pruefen
 date: 2026-09-23
 keyword: e-mails hinter sicherheits-gateways prüfen
+image: /blog/covers/de/e-mails-hinter-sicherheits-gateways-pruefen.webp
+imageAlt: E-Mails hinter Sicherheits-Gateways prüfen
 cta: Holen Sie Kontakte hinter Gateways zurück
 ---
 

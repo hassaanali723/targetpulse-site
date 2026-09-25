@@ -4,8 +4,8 @@ description: Perché le email rimbalzano, hard bounce e soft bounce, le cause pi
 slug: perche-le-email-rimbalzano
 date: 2026-09-13
 keyword: perché le email rimbalzano
-image: /blog/why-cold-emails-bounce.webp
-imageAlt: Illustrazione sul perché le email a freddo rimbalzano
+image: /blog/covers/it/perche-le-email-rimbalzano.webp
+imageAlt: Perché le email rimbalzano: cause e cosa fare
 cta: Abbassa il tasso di rimbalzo prima del prossimo invio
 ---
 

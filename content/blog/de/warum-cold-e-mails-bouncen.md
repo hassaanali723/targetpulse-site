@@ -4,8 +4,8 @@ description: Warum E-Mails bouncen, Hard Bounce gegen Soft Bounce, die häufigst
 slug: warum-cold-e-mails-bouncen
 date: 2026-09-23
 keyword: warum bouncen e-mails
-image: /blog/why-cold-emails-bounce.webp
-imageAlt: Illustration dazu, warum Cold E-Mails bouncen
+image: /blog/covers/de/warum-cold-e-mails-bouncen.webp
+imageAlt: Warum bouncen E-Mails? Ursachen und was zu tun ist
 cta: Senken Sie Ihre Bounce-Rate vor dem nächsten Versand
 ---
 

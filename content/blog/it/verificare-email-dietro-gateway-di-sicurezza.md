@@ -4,6 +4,8 @@ description: Proofpoint, Mimecast e Barracuda accettano ogni indirizzo e rompono
 slug: verificare-email-dietro-gateway-di-sicurezza
 date: 2026-09-23
 keyword: verificare email dietro i gateway di sicurezza
+image: /blog/covers/it/verificare-email-dietro-gateway-di-sicurezza.webp
+imageAlt: Come verificare email dietro i gateway di sicurezza
 cta: Recupera i contatti bloccati dai gateway
 ---
 

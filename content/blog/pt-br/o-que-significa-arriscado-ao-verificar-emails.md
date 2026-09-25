@@ -4,8 +4,8 @@ description: Arriscado não é uma resposta, é a falta de uma. Veja o que cai n
 slug: o-que-significa-arriscado-ao-verificar-emails
 date: 2026-09-23
 keyword: arriscado ao verificar e-mails
-image: /blog/what-does-risky-mean-in-email-verification.webp
-imageAlt: Ilustração sobre o que significa arriscado ao verificar e-mails
+image: /blog/covers/pt-br/o-que-significa-arriscado-ao-verificar-emails.webp
+imageAlt: O que significa "arriscado" ao verificar e-mails?
 cta: Transforme arriscado em respostas reais
 ---
 

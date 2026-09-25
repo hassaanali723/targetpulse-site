@@ -4,8 +4,8 @@ description: Pourquoi un email rebondit, rebond dur contre rebond doux, les caus
 slug: pourquoi-un-email-rebondit
 date: 2026-09-23
 keyword: pourquoi un email rebondit
-image: /blog/why-cold-emails-bounce.webp
-imageAlt: Illustration expliquant pourquoi les cold emails rebondissent
+image: /blog/covers/fr/pourquoi-un-email-rebondit.webp
+imageAlt: Pourquoi un email rebondit : causes et solutions
 cta: Réduisez votre taux de rebond avant le prochain envoi
 ---
 

@@ -10,6 +10,10 @@ export interface BlogStrings {
   intro: string
   listName: string
   readMore: string
+  // Pagination on the hub: page 2 and later live at <hub>/page/<n>.
+  prevPage: string
+  nextPage: string
+  paginationAria: string
   breadcrumbAria: string
   home: string
   tocTitle: string
@@ -26,6 +30,9 @@ export const BLOG_STRINGS: Record<L10nLocale, BlogStrings> = {
     intro: 'Spiegazioni chiare su indirizzi catch-all, gateway di sicurezza, tassi di rimbalzo e cosa significano davvero i risultati di una verifica.',
     listName: 'Guide Giggal.ai su verifica email e deliverability',
     readMore: "Leggi l'articolo",
+    prevPage: 'Precedente',
+    nextPage: 'Successiva',
+    paginationAria: 'Paginazione del blog',
     breadcrumbAria: 'Percorso',
     home: 'Pagina iniziale',
     tocTitle: 'In questa pagina',
@@ -40,6 +47,9 @@ export const BLOG_STRINGS: Record<L10nLocale, BlogStrings> = {
     intro: 'Klare Erklärungen zu Catch-all-Adressen, Sicherheits-Gateways, Bounce-Raten und dazu, was die Ergebnisse einer E-Mail-Prüfung wirklich bedeuten.',
     listName: 'Giggal.ai Leitfäden zu E-Mail-Verifizierung und Zustellbarkeit',
     readMore: 'Artikel lesen',
+    prevPage: 'Zurück',
+    nextPage: 'Weiter',
+    paginationAria: 'Blog-Seitennavigation',
     breadcrumbAria: 'Brotkrumen',
     home: 'Startseite',
     tocTitle: 'Auf dieser Seite',
@@ -54,6 +64,9 @@ export const BLOG_STRINGS: Record<L10nLocale, BlogStrings> = {
     intro: 'Explicaciones claras sobre correos catch-all, gateways de seguridad, tasas de rebote y lo que de verdad significan los resultados de una validación.',
     listName: 'Guías de Giggal.ai sobre verificación de correo y entregabilidad',
     readMore: 'Leer el artículo',
+    prevPage: 'Anterior',
+    nextPage: 'Siguiente',
+    paginationAria: 'Paginación del blog',
     breadcrumbAria: 'Ruta de navegación',
     home: 'Inicio',
     tocTitle: 'En esta página',
@@ -68,6 +81,9 @@ export const BLOG_STRINGS: Record<L10nLocale, BlogStrings> = {
     intro: 'Explicações claras sobre e-mails catch-all, gateways de segurança, taxas de bounce e o que os resultados de uma verificação realmente significam.',
     listName: 'Guias da Giggal.ai sobre verificação de e-mail e entregabilidade',
     readMore: 'Ler o artigo',
+    prevPage: 'Anterior',
+    nextPage: 'Próxima',
+    paginationAria: 'Paginação do blog',
     breadcrumbAria: 'Navegação estrutural',
     home: 'Início',
     tocTitle: 'Nesta página',
@@ -82,6 +98,9 @@ export const BLOG_STRINGS: Record<L10nLocale, BlogStrings> = {
     intro: 'Des explications claires sur les adresses catch-all, les passerelles de sécurité, les taux de rebond et ce que signifient vraiment les résultats d\u2019une vérification.',
     listName: 'Guides Giggal.ai sur la vérification d\u2019email et la délivrabilité',
     readMore: 'Lire l\u2019article',
+    prevPage: 'Précédent',
+    nextPage: 'Suivant',
+    paginationAria: 'Pagination du blog',
     breadcrumbAria: 'Fil d\u2019Ariane',
     home: 'Accueil',
     tocTitle: 'Sur cette page',

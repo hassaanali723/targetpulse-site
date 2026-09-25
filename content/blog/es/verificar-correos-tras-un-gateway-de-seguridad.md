@@ -4,6 +4,8 @@ description: Proofpoint, Mimecast y Barracuda aceptan cualquier dirección y rom
 slug: verificar-correos-tras-un-gateway-de-seguridad
 date: 2026-09-23
 keyword: verificar correos tras un gateway de seguridad
+image: /blog/covers/es/verificar-correos-tras-un-gateway-de-seguridad.webp
+imageAlt: Verificar correos tras un gateway de seguridad
 cta: Recupera los contactos detrás de gateways
 ---
 

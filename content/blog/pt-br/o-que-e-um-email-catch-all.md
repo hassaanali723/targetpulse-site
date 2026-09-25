@@ -4,8 +4,8 @@ description: Um e-mail catch-all fica em um domínio que aceita e-mail para qual
 slug: o-que-e-um-email-catch-all
 date: 2026-09-23
 keyword: o que é um e-mail catch-all
-image: /blog/what-is-a-catch-all-email-address.webp
-imageAlt: Ilustração sobre o que é um e-mail catch-all
+image: /blog/covers/pt-br/o-que-e-um-email-catch-all.webp
+imageAlt: O que é um e-mail catch-all e como verificá-lo
 cta: Descubra o que seus endereços catch-all realmente são
 ---
 

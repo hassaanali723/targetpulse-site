@@ -106,7 +106,7 @@ export default function BlogArticleL10n({ locale, slug }: { locale: L10nLocale; 
 
           <div className="min-w-0">
             {post.image && (
-              <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 card-vivid-shadow">
+              <div className="relative aspect-[1200/630] w-full overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 card-vivid-shadow">
                 <Image src={post.image} alt={post.imageAlt || post.title} fill priority sizes="(max-width: 1024px) 100vw, 720px" className="object-cover" />
               </div>
             )}

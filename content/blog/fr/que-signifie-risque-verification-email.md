@@ -4,8 +4,8 @@ description: Risqué n'est pas une réponse, c'est son absence. Ce qui tombe dan
 slug: que-signifie-risque-verification-email
 date: 2026-09-23
 keyword: risqué en vérification d'email
-image: /blog/what-does-risky-mean-in-email-verification.webp
-imageAlt: Illustration de ce que signifie risqué en vérification d'email
+image: /blog/covers/fr/que-signifie-risque-verification-email.webp
+imageAlt: Que signifie « risqué » en vérification d'email ?
 cta: Transformez le risqué en vraies réponses
 ---
 

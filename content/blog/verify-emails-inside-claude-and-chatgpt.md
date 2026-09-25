@@ -4,6 +4,8 @@ description: Connect an email verification tool to Claude, ChatGPT, Cursor or VS
 slug: verify-emails-inside-claude-and-chatgpt
 date: 2026-08-21
 keyword: claude chatgpt email verification tool
+image: /blog/covers/verify-emails-inside-claude-and-chatgpt.webp
+imageAlt: Verifying email addresses inside Claude and ChatGPT over MCP
 ---
 
 Most email verification still happens the same way it did in 2015. You export a CSV, open a browser tab, upload the file, wait, download a different CSV, and import it somewhere. It works. It is also four context switches for what is fundamentally one question: is this mailbox real.

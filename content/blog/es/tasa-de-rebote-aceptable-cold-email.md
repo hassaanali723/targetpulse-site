@@ -4,8 +4,8 @@ description: Una tasa de rebote aceptable en cold email está por debajo del 2 p
 slug: tasa-de-rebote-aceptable-cold-email
 date: 2026-09-23
 keyword: tasa de rebote aceptable en cold email
-image: /blog/good-bounce-rate-for-cold-email.webp
-imageAlt: Ilustración de una tasa de rebote aceptable en cold email
+image: /blog/covers/es/tasa-de-rebote-aceptable-cold-email.webp
+imageAlt: Tasa de rebote aceptable en cold email: las cifras
 cta: Mantén tus campañas por debajo del 2 por ciento
 ---
 

@@ -4,6 +4,8 @@ description: Todo verificador diz entre 97 e 99 por cento. O que esse número me
 slug: qual-a-precisao-dos-verificadores-de-email
 date: 2026-09-23
 keyword: precisão dos verificadores de e-mail
+image: /blog/covers/pt-br/qual-a-precisao-dos-verificadores-de-email.webp
+imageAlt: Qual a precisão dos verificadores de e-mail?
 cta: Teste na sua própria lista
 ---
 

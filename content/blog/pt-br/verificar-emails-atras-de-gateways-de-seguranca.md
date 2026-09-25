@@ -4,6 +4,8 @@ description: Proofpoint, Mimecast e Barracuda aceitam qualquer endereço e quebr
 slug: verificar-emails-atras-de-gateways-de-seguranca
 date: 2026-09-23
 keyword: verificar e-mails atrás de gateways de segurança
+image: /blog/covers/pt-br/verificar-emails-atras-de-gateways-de-seguranca.webp
+imageAlt: Verificar e-mails atrás de gateways de segurança
 cta: Recupere os contatos atrás de gateways
 ---
 

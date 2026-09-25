@@ -4,8 +4,8 @@ description: Riskant ist keine Antwort, sondern das Fehlen einer. Was im Topf Ri
 slug: was-bedeutet-riskant-bei-der-e-mail-pruefung
 date: 2026-09-23
 keyword: riskant bei der e-mail-prüfung
-image: /blog/what-does-risky-mean-in-email-verification.webp
-imageAlt: Illustration dazu, was riskant bei der E-Mail-Prüfung bedeutet
+image: /blog/covers/de/was-bedeutet-riskant-bei-der-e-mail-pruefung.webp
+imageAlt: Was bedeutet "riskant" bei der E-Mail-Prüfung?
 cta: Machen Sie aus riskant eine echte Antwort
 ---
 

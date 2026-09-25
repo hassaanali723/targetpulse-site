@@ -5,8 +5,8 @@ slug: why-cold-emails-bounce
 date: 2026-08-11
 updated: 2026-09-13
 keyword: why do emails bounce
-image: /blog/why-cold-emails-bounce.webp
-imageAlt: Illustration for why cold emails bounce
+image: /blog/covers/why-cold-emails-bounce.webp
+imageAlt: SMTP bounce codes: 550 5.1.1 hard, 4.x.x soft and 5.7.1 blocked
 ---
 
 Cold emails bounce when the receiving server refuses the message and returns it instead of delivering it. If you have just run a campaign and want to know why do cold emails bounce more than your ordinary mail, most of it comes down to two things. You are contacting people who never asked to hear from you, so the list is colder and less accurate, and you are sending from a domain the recipient's server has no history with. The individual reasons sit underneath those two.

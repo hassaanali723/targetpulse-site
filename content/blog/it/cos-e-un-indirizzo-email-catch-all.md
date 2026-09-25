@@ -4,8 +4,8 @@ description: Un dominio catch-all accetta la posta per qualsiasi nome, reale o n
 slug: cos-e-un-indirizzo-email-catch-all
 date: 2026-09-13
 keyword: indirizzo email catch-all
-image: /blog/what-is-a-catch-all-email-address.webp
-imageAlt: Illustrazione di un indirizzo email catch-all
+image: /blog/covers/it/cos-e-un-indirizzo-email-catch-all.webp
+imageAlt: Indirizzo email catch-all: cos'è e come verificarlo
 cta: Scopri cosa sono davvero i tuoi indirizzi catch-all
 ---
 

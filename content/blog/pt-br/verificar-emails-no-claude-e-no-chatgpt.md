@@ -4,6 +4,8 @@ description: Conecte uma ferramenta de verificação de e-mail ao Claude, ChatGP
 slug: verificar-emails-no-claude-e-no-chatgpt
 date: 2026-09-23
 keyword: verificar e-mails no claude e no chatgpt
+image: /blog/covers/pt-br/verificar-emails-no-claude-e-no-chatgpt.webp
+imageAlt: Como verificar e-mails no Claude e no ChatGPT
 cta: Verifique e-mails sem sair do chat
 ---
 

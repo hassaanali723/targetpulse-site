@@ -4,6 +4,8 @@ description: Qué es la tasa de rebote del correo, las cifras de referencia para
 slug: como-reducir-la-tasa-de-rebote
 date: 2026-09-23
 keyword: tasa de rebote del correo
+image: /blog/covers/es/como-reducir-la-tasa-de-rebote.webp
+imageAlt: Tasa de rebote del correo: cifras y cómo reducirla
 cta: Pon bajo control tu tasa de rebote
 ---
 

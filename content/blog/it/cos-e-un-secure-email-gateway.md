@@ -4,8 +4,8 @@ description: Un secure email gateway è uno strato di filtro davanti al server d
 slug: cos-e-un-secure-email-gateway
 date: 2026-09-23
 keyword: cos'è un secure email gateway
-image: /blog/what-is-a-secure-email-gateway.webp
-imageAlt: Illustrazione di cos'è un secure email gateway
+image: /blog/covers/it/cos-e-un-secure-email-gateway.webp
+imageAlt: Cos'è un secure email gateway (SEG) e come funziona
 cta: Verifica anche gli indirizzi dietro un SEG
 ---
 

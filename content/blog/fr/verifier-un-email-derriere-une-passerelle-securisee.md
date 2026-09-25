@@ -4,6 +4,8 @@ description: Proofpoint, Mimecast et Barracuda acceptent toute adresse et cassen
 slug: verifier-un-email-derriere-une-passerelle-securisee
 date: 2026-09-23
 keyword: vérifier un email derrière une passerelle sécurisée
+image: /blog/covers/fr/verifier-un-email-derriere-une-passerelle-securisee.webp
+imageAlt: Vérifier un email derrière une passerelle sécurisée
 cta: Récupérez les contacts derrière les passerelles
 ---
 

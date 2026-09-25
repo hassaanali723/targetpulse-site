@@ -4,8 +4,8 @@ description: Eine Catch-all-Adresse liegt auf einer Domain, die Post für jeden 
 slug: was-ist-eine-catch-all-e-mail-adresse
 date: 2026-09-23
 keyword: was ist eine catch-all-e-mail
-image: /blog/what-is-a-catch-all-email-address.webp
-imageAlt: Illustration dazu, was eine Catch-all-E-Mail-Adresse ist
+image: /blog/covers/de/was-ist-eine-catch-all-e-mail-adresse.webp
+imageAlt: Was ist eine Catch-all-E-Mail? Bedeutung und Prüfung
 cta: Finden Sie heraus, was Ihre Catch-all-Adressen wirklich sind
 ---
 

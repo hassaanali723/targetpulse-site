@@ -4,6 +4,8 @@ description: O que é a taxa de bounce de e-mail, as referências para marketing
 slug: como-reduzir-a-taxa-de-bounce
 date: 2026-09-23
 keyword: taxa de bounce de e-mail
+image: /blog/covers/pt-br/como-reduzir-a-taxa-de-bounce.webp
+imageAlt: Taxa de bounce de e-mail: referências e como reduzir
 cta: Coloque sua taxa de bounce sob controle
 ---
 

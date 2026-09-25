@@ -4,6 +4,8 @@ description: Was die E-Mail-Bounce-Rate ist, Richtwerte für Marketing-, Transak
 slug: e-mail-bounce-rate-senken
 date: 2026-09-23
 keyword: e-mail-bounce-rate
+image: /blog/covers/de/e-mail-bounce-rate-senken.webp
+imageAlt: E-Mail-Bounce-Rate: Richtwerte und wie man sie senkt
 cta: Bringen Sie Ihre Bounce-Rate unter Kontrolle
 ---
 

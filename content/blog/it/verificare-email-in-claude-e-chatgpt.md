@@ -4,6 +4,8 @@ description: Collega uno strumento di verifica email a Claude, ChatGPT, Cursor o
 slug: verificare-email-in-claude-e-chatgpt
 date: 2026-09-23
 keyword: verificare email in claude e chatgpt
+image: /blog/covers/it/verificare-email-in-claude-e-chatgpt.webp
+imageAlt: Come verificare email in Claude e ChatGPT
 cta: Verifica email senza uscire dalla chat
 ---
 

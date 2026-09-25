@@ -4,6 +4,8 @@ description: Ce qu'est le taux de rebond email, les repères pour le marketing, 
 slug: comment-reduire-le-taux-de-rebond
 date: 2026-09-23
 keyword: taux de rebond email
+image: /blog/covers/fr/comment-reduire-le-taux-de-rebond.webp
+imageAlt: Taux de rebond email : repères et comment le réduire
 cta: Reprenez le contrôle de votre taux de rebond
 ---
 

@@ -4,8 +4,8 @@ description: Un buon tasso di rimbalzo per le cold email è sotto il 2 percento.
 slug: tasso-di-rimbalzo-ideale-cold-email
 date: 2026-09-23
 keyword: buon tasso di rimbalzo per le cold email
-image: /blog/good-bounce-rate-for-cold-email.webp
-imageAlt: Illustrazione di un buon tasso di rimbalzo per le cold email
+image: /blog/covers/it/tasso-di-rimbalzo-ideale-cold-email.webp
+imageAlt: Qual è un buon tasso di rimbalzo per le cold email?
 cta: Tieni le tue campagne sotto il 2 percento
 ---
 

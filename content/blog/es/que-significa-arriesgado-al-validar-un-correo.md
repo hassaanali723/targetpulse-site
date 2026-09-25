@@ -4,8 +4,8 @@ description: Arriesgado no es una respuesta, es la falta de una. Qué cae en el 
 slug: que-significa-arriesgado-al-validar-un-correo
 date: 2026-09-23
 keyword: arriesgado al validar un correo
-image: /blog/what-does-risky-mean-in-email-verification.webp
-imageAlt: Ilustración sobre qué significa arriesgado al validar un correo
+image: /blog/covers/es/que-significa-arriesgado-al-validar-un-correo.webp
+imageAlt: ¿Qué significa "arriesgado" al validar un correo?
 cta: Convierte lo arriesgado en respuestas reales
 ---
 

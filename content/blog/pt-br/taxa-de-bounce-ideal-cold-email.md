@@ -4,8 +4,8 @@ description: Uma boa taxa de bounce para cold e-mail fica abaixo de 2 por cento.
 slug: taxa-de-bounce-ideal-cold-email
 date: 2026-09-23
 keyword: boa taxa de bounce para cold e-mail
-image: /blog/good-bounce-rate-for-cold-email.webp
-imageAlt: Ilustração de uma boa taxa de bounce para cold e-mail
+image: /blog/covers/pt-br/taxa-de-bounce-ideal-cold-email.webp
+imageAlt: Qual é uma boa taxa de bounce para cold e-mail?
 cta: Mantenha suas campanhas abaixo de 2 por cento
 ---
 

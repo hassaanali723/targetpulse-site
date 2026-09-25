@@ -4,8 +4,8 @@ description: Eine gute Bounce-Rate bei Cold E-Mails liegt unter 2 Prozent. Hier 
 slug: gute-bounce-rate-cold-e-mail
 date: 2026-09-23
 keyword: gute bounce-rate bei cold e-mails
-image: /blog/good-bounce-rate-for-cold-email.webp
-imageAlt: Illustration zu einer guten Bounce-Rate bei Cold E-Mails
+image: /blog/covers/de/gute-bounce-rate-cold-e-mail.webp
+imageAlt: Was ist eine gute Bounce-Rate bei Cold E-Mails?
 cta: Halten Sie Ihre Kampagnen unter 2 Prozent
 ---
 

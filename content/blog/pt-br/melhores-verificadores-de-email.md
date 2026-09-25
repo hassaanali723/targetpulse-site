@@ -4,8 +4,8 @@ description: Seis verificadores de e-mail testados com endereços catch-all e pr
 slug: melhores-verificadores-de-email
 date: 2026-09-23
 keyword: melhores verificadores de e-mail
-image: /blog/best-email-verification-tools-comparison-v2.png
-imageAlt: As melhores ferramentas de verificação de e-mail de 2026 para endereços catch-all, accept-all e protegidos por SEG
+image: /blog/covers/pt-br/melhores-verificadores-de-email.webp
+imageAlt: Melhores verificadores de e-mail de 2026, testados
 cta: Resolva as linhas catch-all e SEG que os outros só marcam
 ---
 

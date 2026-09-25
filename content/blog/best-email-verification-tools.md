@@ -5,8 +5,8 @@ slug: best-email-verification-tools
 date: 2026-08-30
 updated: 2026-09-13
 keyword: best email verification software
-image: /blog/best-email-verification-tools-comparison-v2.png
-imageAlt: Best email verification tools of 2026 for catch-all, accept-all, and SEG-protected addresses
+image: /blog/covers/best-email-verification-tools.webp
+imageAlt: Six email verification tools tested on catch-all and gateway-protected addresses
 ---
 
 ## The short version

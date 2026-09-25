@@ -4,6 +4,8 @@ description: Cos'è il tasso di rimbalzo delle email, i valori di riferimento pe
 slug: come-ridurre-il-tasso-di-rimbalzo-email
 date: 2026-09-23
 keyword: tasso di rimbalzo email
+image: /blog/covers/it/come-ridurre-il-tasso-di-rimbalzo-email.webp
+imageAlt: Tasso di rimbalzo email: valori medi e come ridurlo
 cta: Riporta sotto controllo il tuo tasso di rimbalzo
 ---
 

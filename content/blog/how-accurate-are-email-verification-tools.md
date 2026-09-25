@@ -3,7 +3,10 @@ title: How accurate are email verification tools, really
 description: Every verifier claims somewhere between 97 and 99 percent. Here is what that number is measuring, why the claims are all so similar, and how to test one on your own list.
 slug: how-accurate-are-email-verification-tools
 date: 2026-08-21
+updated: 2026-09-25
 keyword: email verification tool with high accuracy
+image: /blog/covers/how-accurate-are-email-verification-tools.webp
+imageAlt: Email verification accuracy claims of 97 to 99.9 percent and what they leave out
 ---
 
 Open the pricing page of any ten email verifiers and you will find ten accuracy claims between 97% and 99.9%. We publish one too. The numbers are so tightly clustered that they carry almost no information, which is a strange outcome for a metric that is supposed to help you choose.
@@ -28,7 +31,7 @@ Which means the headline accuracy figure is largely a measurement of performance
 
 Two categories break the standard check, and how a tool handles them is the real product difference.
 
-Catch-all domains accept mail for every possible address, real or not. The server is configured to take anything so that shared aliases, typos and departed staff all land somewhere. Ask it about a mailbox that was never created and it says yes. Around 30% of a typical B2B list sits on domains like this.
+[Catch-all domains](/blog/what-is-a-catch-all-email-address) accept mail for every possible address, real or not. The server is configured to take anything so that shared aliases, typos and departed staff all land somewhere. Ask it about a mailbox that was never created and it says yes. Around 30% of a typical B2B list sits on domains like this.
 
 Secure email gateways produce the same symptom for a different reason. Proofpoint, Mimecast, Barracuda and similar products filter mail at the perimeter and accept everything before deciding what to do with it, so the acceptance you get back means nothing about whether a mailbox exists. Enterprise domains are heavily represented here, which means the contacts you care about most are the ones most likely to be affected.
 
@@ -64,4 +67,4 @@ Giggal.ai claims 98.5% accuracy on standard business lists, and typical bounce r
 
 What we would rather be judged on is coverage. The design goal was to return valid or invalid on catch-all and gateway-protected addresses instead of a label, across fifteen named gateways, so that the risky bucket is small rather than a third of the file. Whether that holds on your data is a question your own 500-address sample answers better than this page can.
 
-The free tier is 1,000 credits, no card required, and it works on a bulk upload specifically so the test is possible. If you want the background first, we have written up [what a catch-all address is](/blog/what-is-a-catch-all-email-address), [what risky actually means](/blog/what-does-risky-mean-in-email-verification), and [how gateway-protected mailboxes get verified](/blog/how-to-verify-emails-behind-secure-email-gateways).
+The free tier is 1,000 credits, no card required, and it works on a bulk upload specifically so the test is possible. To check a single address first, use the [email address checker](/email-checker). If you want the background first, we have written up [what risky actually means](/blog/what-does-risky-mean-in-email-verification) and [how gateway-protected mailboxes get verified](/blog/how-to-verify-emails-behind-secure-email-gateways).

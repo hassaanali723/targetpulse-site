@@ -4,6 +4,8 @@ description: Chaque vérificateur annonce entre 97 et 99 pour cent. Ce que mesur
 slug: quelle-est-la-precision-des-verificateurs-email
 date: 2026-09-23
 keyword: précision des vérificateurs d'email
+image: /blog/covers/fr/quelle-est-la-precision-des-verificateurs-email.webp
+imageAlt: Quelle est la précision des vérificateurs d'email ?
 cta: Testez-le sur votre propre liste
 ---
 

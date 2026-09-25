@@ -4,8 +4,8 @@ description: Por qué rebotan los correos, rebote duro frente a rebote suave, la
 slug: por-que-rebotan-los-correos
 date: 2026-09-23
 keyword: por qué rebotan los correos
-image: /blog/why-cold-emails-bounce.webp
-imageAlt: Ilustración sobre por qué rebotan los correos en frío
+image: /blog/covers/es/por-que-rebotan-los-correos.webp
+imageAlt: ¿Por qué rebotan los correos? Causas y qué hacer
 cta: Baja tu tasa de rebote antes del próximo envío
 ---
 
