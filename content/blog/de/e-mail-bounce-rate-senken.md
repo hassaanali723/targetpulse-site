@@ -3,6 +3,7 @@ title: "E-Mail-Bounce-Rate: Richtwerte und wie man sie senkt"
 description: Was die E-Mail-Bounce-Rate ist, Richtwerte für Marketing-, Transaktions- und Cold E-Mails und eine funktionierende Reihenfolge, um eine hohe Rate zu senken.
 slug: e-mail-bounce-rate-senken
 date: 2026-09-23
+updated: 2026-09-26
 keyword: e-mail-bounce-rate
 image: /blog/covers/de/e-mail-bounce-rate-senken.webp
 imageAlt: E-Mail-Bounce-Rate: Richtwerte und wie man sie senkt
@@ -27,7 +28,34 @@ Die akzeptable Zahl hängt von der Art der Post ab, weil Anbieter jede Art ander
 | Transaktional (Belege, Passwort-Resets) | unter 0,5% | 0,5 bis 1% | über 1% |
 | Cold Outreach | unter 2% | 2 bis 5% | über 5% |
 
+![Gesunde, zu beobachtende und schädliche Bounce-Raten für Marketing-, Transaktions- und Cold-E-Mails](/blog/fig-de-bounce-rate-bands.webp)
+Dieselbe Bounce-Rate ist bei einer Versandart in Ordnung und bei einer anderen ein Problem.
+
 Cold E-Mails bekommen eine breitere Spanne, weil die Liste per Definition kälter ist, werden aber auch härter beurteilt, sobald sie die Grenze überschreiten: Eine Cold-Kampagne mit 6 Prozent zieht schneller Sperren auf sich als ein Newsletter mit derselben Rate. Diese Spannen nutzen Zustellbarkeitsteams in der Praxis; die Regeln von Google und Yahoo für Massenversender legen die Obergrenze für Spam-Beschwerden bei 0,3 Prozent fest, und eine Bounce-Rate über diesen Spannen geht meist mit Beschwerden einher.
+
+## Wie hoch ist die durchschnittliche E-Mail-Bounce-Rate?
+
+Am häufigsten genannt wird eine Zahl um 2 bis 2,5 Prozent über alle Versender hinweg. Nehmen Sie sie als Kuriosität und nicht als Zielwert, denn dieser Durchschnitt fasst Versender zusammen, deren Listen fast nichts gemeinsam haben, und die Streuung darin ist weit größer, als die Zahl vermuten lässt.
+
+Wer nach der durchschnittlichen Bounce-Rate nach Branche sucht, findet eine Tabelle, die auf Dutzenden Seiten wiederholt wird, mit ordentlichen Werten für E-Commerce, Gesundheitswesen, Bildung und so weiter. Diese Zahlen gehen fast alle auf eine einzige Benchmark-Seite von Mailchimp zurück, und dort stehen heute nur Öffnungsraten, Klickraten und Abmelderaten. Eine Bounce-Tabelle nach Branche gibt es dort nicht. Die Seiten, die diese Werte zitieren, zitieren größtenteils einander, und mehrere davon verkaufen selbst E-Mail-Verifizierung.
+
+Die Branche ist ohnehin ein schwacher Indikator. Zwei SaaS-Firmen derselben Kategorie liegen um eine Größenordnung auseinander, wenn die eine ihre Liste über Anmeldeformulare aufgebaut und die andere sie gekauft hat. Was die Zahl wirklich vorhersagt, ist die Herkunft der Adressen und ihr Alter.
+
+| Woher die Liste stammt | Typische Gesamt-Bounce-Rate | Warum |
+|---|---|---|
+| Consumer mit Einwilligung, Versand in den letzten 90 Tagen | unter 0,5% | Die Adressen sind selbst angegeben und kürzlich bestätigt |
+| Business mit Einwilligung, Versand in den letzten 90 Tagen | unter 1% | Dasselbe, aber Firmenpostfächer werden geschlossen, wenn jemand geht |
+| Business mit Einwilligung, seit 12 Monaten unberührt | 2 bis 5% | Rund ein Viertel der B2B-Kontaktdaten veraltet pro Jahr |
+| Cold B2B, vor dem Versand verifiziert | 1 bis 3% | Der Rest sind meist Catch-all-Domains, die ein Verifizierer nicht auflösen konnte |
+| Cold B2B, nicht verifiziert | 5 bis 15% | Nichts hat die Adressen entfernt, die es nicht mehr gibt |
+| Gekauft oder gescrapt, nicht verifiziert | 10 bis 30% | Weiterverkaufte Daten altern im Regal des Anbieters, bevor sie bei Ihnen ankommen |
+
+![Typische E-Mail-Bounce-Rate nach Herkunft der Liste, von Consumer mit Einwilligung unter 0,5 Prozent bis gekauft und unverifiziert bei 10 bis 30 Prozent](/blog/fig-de-bounce-by-list-source.webp)
+Zwischen der obersten und der untersten Zeile liegt der Faktor sechzig. Kein Branchendurchschnitt deckt eine solche Spanne ab.
+
+B2B liegt auf jeder vergleichbaren Stufe höher als B2C, aus einem Grund, der nichts mit der Branche zu tun hat: Menschen wechseln den Job, und ein Firmenpostfach wird dann meist geschlossen. Eine private Adresse bei einem kostenlosen Anbieter kann jahrelang ungenutzt bleiben und trotzdem Post annehmen.
+
+Die nützliche Frage ist also nicht, wie Ihre Rate im Branchenvergleich dasteht. Sie lautet, welche der Zeilen oben Ihre Liste beschreibt und ob Sie den einen Schritt gemacht haben, der sie verschiebt.
 
 ## Zuerst: Wissen, welche Art Sie haben
 
@@ -60,7 +88,10 @@ Ein Verifizierer prüft die Syntax, bestätigt, dass die Domain existiert und Ma
 
 Auf eine Sache müssen Sie hier achten, und sie ist der Grund, warum viele verifizieren und trotzdem bouncen. Rund 30 % einer B2B-Liste liegen auf Catch-all-Domains, die Post für jede mögliche Adresse annehmen, ob ein Postfach existiert oder nicht. Die meisten Verifizierer können diese nicht auflösen und liefern sie als riskant, unbekannt oder Accept-all zurück. Dann haben Sie zwei schlechte Optionen: ein Drittel Ihrer Liste löschen oder trotzdem senden und es auf die harte Tour herausfinden.
 
-Löschen ist die sicherere der beiden und das, was die meisten tun, weshalb sich eine verifizierte Liste trotzdem dünn anfühlen kann. Ein Verifizierer, der Catch-all-Adressen in ein echtes gültig oder ungültig auflöst, befreit Sie von dieser Wahl. Dafür ist Giggal.ai mit seiner [Catch-all-Verifizierung](/catch-all-verification) gebaut, und dieselbe Behandlung gilt für Postfächer hinter Secure Email Gateways wie Proofpoint und Mimecast, die aus einem anderen Grund auf ähnliche Weise scheitern.
+![Ringdiagramm: rund 70 Prozent einer B2B-Liste lassen sich sauber auflösen, rund 30 Prozent liegen auf Catch-all-Domains](/blog/fig-de-catch-all-share.webp)
+Das orange Segment ist der Teil, den eine Standardprüfung unbeantwortet zurückgibt, und daher kommen die Bounces, mit denen Sie nicht gerechnet haben.
+
+Löschen ist die sicherere der beiden und das, was die meisten tun, weshalb sich eine verifizierte Liste trotzdem dünn anfühlen kann. Ein Verifizierer, der Catch-all-Adressen in ein echtes gültig oder ungültig auflöst, befreit Sie von dieser Wahl. Dafür ist [Giggal.ai](/) mit seiner [Catch-all-Verifizierung](/catch-all-verification) gebaut, und dieselbe Behandlung gilt für Postfächer hinter Secure Email Gateways wie Proofpoint und Mimecast, die aus einem anderen Grund auf ähnliche Weise scheitern.
 
 ## Dann: Entfernen Sie die Adressen, die nie funktioniert hätten
 
@@ -82,9 +113,13 @@ Wenn Sie Listen kaufen, verifizieren Sie sie am Tag der Lieferung, nicht am Tag 
 
 ## Die Authentifizierungsarbeit
 
-Das senkt Bounces nicht direkt, und das sollte man klar sagen, weil es ständig als Mittel gegen Bounces empfohlen wird. SPF, DKIM und DMARC bestimmen, ob empfangende Server Ihnen glauben, dass Sie sind, wer Sie vorgeben zu sein. Sind sie falsch eingerichtet, werden Nachrichten abgelehnt oder als Spam abgelegt, was in manchen Berichten neben den Bounces auftaucht und die Diagnose trübt.
+Das galt lange als etwas, das Bounces nicht senkt, und dieser Rat ist schlecht gealtert. SPF, DKIM und DMARC bestimmen, ob empfangende Server Ihnen glauben, dass Sie sind, wer Sie vorgeben zu sein, und zwei der größten Anbieter weisen Post inzwischen ganz ab, wenn sie fehlen.
 
-Richten Sie sie richtig ein, prüfen Sie sie einmal mit einem der kostenlosen DMARC-Checker, und denken Sie dann nicht mehr darüber nach. Sind Ihre Bounces Fehler wegen nicht existierender Postfächer, hilft keine DNS-Arbeit.
+Microsoft weist seit dem 5. Mai 2025 unauthentifizierte Massenmail an Outlook.com-, Hotmail- und Live-Adressen zurück. Wer mehr als 5.000 Nachrichten pro Tag ohne alle drei Einträge versendet, erhält `550 5.7.15 Access denied, sending domain does not meet the required authentication level`. Das ist ein 5xx-Code, Ihr Versandtool verbucht ihn also als Hard Bounce, gegen ein Postfach, das existiert und die Nachricht angenommen hätte. Google hat im November 2025 in dieselbe Richtung verschärft und legt verdächtige Post nicht mehr in den Spam, sondern weist sie auf SMTP-Ebene ab.
+
+Praktisch heißt das: Eine Lücke in der Authentifizierung taucht heute in Ihrem Bounce-Report auf statt still in Ihrer Öffnungsrate. Wenn ein großer Teil Ihrer Bounces 5.7.x-Codes trägt und Ihre Empfänger sich bei Outlook oder Gmail ballen, ist nicht die Liste das Problem, und sie erneut zu verifizieren hilft nicht.
+
+Richten Sie die drei Einträge sauber ein, prüfen Sie sie einmal mit einem der kostenlosen DMARC-Checker, und denken Sie dann nicht mehr daran. Sind Ihre Bounces dagegen Fehler wegen nicht existierender Postfächer, die den Code 5.1.1 tragen, ändert keine DNS-Arbeit etwas daran.
 
 ## Wärmen Sie eine neue Domain auf
 

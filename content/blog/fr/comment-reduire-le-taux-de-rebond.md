@@ -3,6 +3,7 @@ title: "Taux de rebond email : repères et comment le réduire"
 description: Ce qu'est le taux de rebond email, les repères pour le marketing, le transactionnel et le cold email, et une séquence pour faire baisser un taux élevé.
 slug: comment-reduire-le-taux-de-rebond
 date: 2026-09-23
+updated: 2026-09-26
 keyword: taux de rebond email
 image: /blog/covers/fr/comment-reduire-le-taux-de-rebond.webp
 imageAlt: Taux de rebond email : repères et comment le réduire
@@ -27,7 +28,34 @@ Le chiffre acceptable dépend du type de courrier, parce que les fournisseurs ju
 | Transactionnel (reçus, réinitialisations) | moins de 0,5% | de 0,5 à 1% | plus de 1% |
 | Prospection à froid | moins de 2% | de 2 à 5% | plus de 5% |
 
+![Fourchettes saine, à surveiller et nuisible du taux de rebond pour les emails marketing, transactionnels et à froid](/blog/fig-fr-bounce-rate-bands.webp)
+Le même taux de rebond est correct sur un type d'envoi et problématique sur un autre.
+
 Le cold email a une fourchette plus large parce que la liste est plus froide par définition, mais il est aussi jugé plus durement dès qu'il franchit la limite : une campagne à froid à 6 pour cent attire les blocages plus vite qu'une newsletter au même taux. Ces fourchettes sont celles qu'utilisent en pratique les équipes de délivrabilité ; les règles de Google et Yahoo pour les expéditeurs en masse fixent le plafond des plaintes pour spam à 0,3 pour cent, et un taux de rebond au-dessus de ces fourchettes s'accompagne souvent de plaintes.
+
+## Quel est le taux de rebond moyen d'un email ?
+
+Le chiffre le plus souvent cité tourne autour de 2 à 2,5 pour cent, tous expéditeurs confondus. Prenez-le comme une anecdote et non comme un objectif, car cette moyenne rassemble des expéditeurs dont les listes n'ont presque rien en commun, et la dispersion à l'intérieur est bien plus large que le chiffre ne le laisse croire.
+
+Si vous cherchez le taux de rebond moyen par secteur, vous trouverez un tableau repris sur des dizaines de sites, avec des valeurs bien rangées pour l'ecommerce, la santé, l'éducation et le reste. Ces chiffres remontent presque tous à une seule page de références de Mailchimp, et cette page ne publie aujourd'hui que des taux d'ouverture, de clic et de désabonnement. Il n'y a pas de tableau des rebonds par secteur. Les sites qui citent ces valeurs se citent en grande partie les uns les autres, et plusieurs d'entre eux vendent de la vérification d'email.
+
+Le secteur reste de toute façon un mauvais indicateur. Deux entreprises SaaS de la même catégorie auront des taux de rebond séparés par un ordre de grandeur si l'une a construit sa liste avec des formulaires et l'autre l'a achetée. Ce qui prédit vraiment le chiffre, c'est d'où viennent les adresses et depuis combien de temps.
+
+| D'où vient la liste | Rebond total typique | Pourquoi |
+|---|---|---|
+| Grand public avec consentement, envoi dans les 90 derniers jours | moins de 0,5% | Les adresses sont données par la personne et confirmées récemment |
+| Professionnel avec consentement, envoi dans les 90 derniers jours | moins de 1% | Pareil, mais les boîtes professionnelles ferment quand quelqu'un part |
+| Professionnel avec consentement, inactive depuis 12 mois | de 2 à 5% | Environ un quart des données de contact B2B vieillit en un an |
+| B2B à froid, vérifiée avant envoi | de 1 à 3% | Le reste, ce sont surtout des domaines catch-all qu'un vérificateur n'a pas su trancher |
+| B2B à froid, non vérifiée | de 5 à 15% | Rien n'a retiré les adresses qui n'existent plus |
+| Achetée ou collectée, non vérifiée | de 10 à 30% | Les données revendues vieillissent chez le fournisseur avant d'arriver chez vous |
+
+![Taux de rebond typique selon l'origine de la liste, du grand public avec consentement sous 0,5 pour cent à la liste achetée et non vérifiée entre 10 et 30 pour cent](/blog/fig-fr-bounce-by-list-source.webp)
+Entre la première ligne et la dernière, il y a un facteur soixante. Aucune moyenne sectorielle ne couvre un tel écart.
+
+Le B2B est plus haut que le B2C à chaque étape équivalente, pour une raison qui n'a rien à voir avec le secteur : les gens changent d'emploi, et la boîte professionnelle ferme en général à ce moment-là. Une adresse personnelle chez un fournisseur gratuit peut rester inutilisée des années et continuer d'accepter le courrier.
+
+La question utile n'est donc pas de savoir où se situe votre taux face à votre secteur. C'est de savoir laquelle des lignes ci-dessus décrit votre liste, et si vous avez fait la seule étape qui la déplace.
 
 ## D'abord, savoir quel type vous avez
 
@@ -60,7 +88,10 @@ Un vérificateur contrôle la syntaxe, confirme que le domaine existe et a des s
 
 Il y a un point à surveiller, et c'est la raison pour laquelle beaucoup de gens vérifient et rebondissent quand même. Environ 30 % d'une liste professionnelle se trouve sur des domaines catch-all, qui acceptent le courrier pour n'importe quelle adresse possible, que la boîte existe ou non. La plupart des vérificateurs ne savent pas les résoudre et les renvoient comme risqués, inconnus ou accept-all. Il vous reste alors deux mauvaises options : supprimer un tiers de votre liste, ou envoyer et l'apprendre à vos dépens.
 
-Supprimer est la plus sûre des deux et c'est ce que fait presque tout le monde, ce qui explique qu'une liste vérifiée puisse sembler maigre. Un vérificateur qui transforme les adresses catch-all en vrai valide ou invalide vous sort de ce choix. C'est pour cela qu'est conçu Giggal.ai, avec sa [vérification catch-all](/catch-all-verification), et il applique le même traitement aux boîtes derrière les secure email gateways comme Proofpoint et Mimecast, qui échouent de façon similaire pour une autre raison.
+![Graphique en anneau : environ 70 pour cent d'une liste B2B se résout proprement et environ 30 pour cent se trouve sur des domaines catch-all](/blog/fig-fr-catch-all-share.webp)
+La part orange est ce qu'une vérification standard renvoie sans réponse, et c'est de là que viennent les rebonds que vous n'aviez pas prévus.
+
+Supprimer est la plus sûre des deux et c'est ce que fait presque tout le monde, ce qui explique qu'une liste vérifiée puisse sembler maigre. Un vérificateur qui transforme les adresses catch-all en vrai valide ou invalide vous sort de ce choix. C'est pour cela qu'est conçu [Giggal.ai](/), avec sa [vérification catch-all](/catch-all-verification), et il applique le même traitement aux boîtes derrière les secure email gateways comme Proofpoint et Mimecast, qui échouent de façon similaire pour une autre raison.
 
 ## Ensuite, retirez les adresses qui n'auraient jamais marché
 
@@ -82,9 +113,13 @@ Si vous achetez des listes, vérifiez-les le jour où elles arrivent et non le j
 
 ## Le travail d'authentification
 
-Cela ne réduit pas directement les rebonds, et il vaut mieux le dire clairement, car on le recommande sans cesse comme remède aux rebonds. SPF, DKIM et DMARC déterminent si les serveurs destinataires vous croient quand vous dites qui vous êtes. S'ils sont mal configurés, les messages sont refusés ou classés en spam, ce qui apparaît dans certains rapports à côté des rebonds et brouille le diagnostic.
+Cela figurait parmi les choses qui ne réduisent pas les rebonds, et ce conseil a mal vieilli. SPF, DKIM et DMARC déterminent si les serveurs destinataires vous croient quand vous dites qui vous êtes, et deux des plus gros fournisseurs refusent désormais le courrier quand ils manquent.
 
-Configurez-les correctement, vérifiez-les une fois avec l'un des vérificateurs DMARC gratuits, puis n'y pensez plus. Si vos rebonds sont des erreurs de boîte inexistante, aucun travail sur le DNS n'aidera.
+Microsoft a commencé à refuser les envois en masse non authentifiés vers les adresses Outlook.com, Hotmail et Live le 5 mai 2025. Au-delà de 5 000 messages par jour sans les trois enregistrements, vous recevez `550 5.7.15 Access denied, sending domain does not meet the required authentication level`. C'est un code 5xx, donc votre outil d'envoi l'enregistre comme un rebond dur, contre une boîte qui existe et qui aurait accepté le message. Google a serré dans le même sens en novembre 2025, en passant du classement en spam au refus au niveau SMTP.
+
+Concrètement, une faille d'authentification apparaît aujourd'hui dans votre rapport de rebonds plutôt que, discrètement, dans votre taux d'ouverture. Si une part importante de vos rebonds porte des codes 5.7.x et que vos destinataires sont concentrés chez Outlook ou Gmail, le problème n'est pas la liste, et la vérifier à nouveau n'y changera rien.
+
+Configurez proprement les trois enregistrements, vérifiez-les une fois avec l'un des vérificateurs DMARC gratuits, puis n'y pensez plus. Si en revanche vos rebonds sont des erreurs de boîte inexistante, qui portent le code 5.1.1, aucun travail sur le DNS ne les changera.
 
 ## Chauffez le domaine s'il est neuf
 

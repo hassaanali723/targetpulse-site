@@ -3,6 +3,7 @@ title: "Tasso di rimbalzo email: valori medi e come ridurlo"
 description: Cos'è il tasso di rimbalzo delle email, i valori di riferimento per marketing, transazionali e cold email, e una sequenza concreta per abbassarlo.
 slug: come-ridurre-il-tasso-di-rimbalzo-email
 date: 2026-09-23
+updated: 2026-09-26
 keyword: tasso di rimbalzo email
 image: /blog/covers/it/come-ridurre-il-tasso-di-rimbalzo-email.webp
 imageAlt: Tasso di rimbalzo email: valori medi e come ridurlo
@@ -27,7 +28,34 @@ Il numero accettabile dipende dal tipo di posta, perché i provider giudicano ci
 | Transazionale (ricevute, reset) | sotto lo 0,5% | dallo 0,5 all'1% | oltre l'1% |
 | Outreach a freddo | sotto il 2% | dal 2 al 5% | oltre il 5% |
 
+![Fasce sana, da tenere d'occhio e dannosa del tasso di rimbalzo per email di marketing, transazionali e a freddo](/blog/fig-it-bounce-rate-bands.webp)
+Lo stesso tasso di rimbalzo va bene su un tipo di invio ed è un problema su un altro.
+
 Le cold email hanno una fascia più ampia perché la lista è più fredda per definizione, ma vengono anche giudicate più duramente quando superano la soglia: una campagna a freddo al 6 percento attira blocchi più in fretta di una newsletter allo stesso tasso. Queste fasce sono quelle che usano in pratica i team di deliverability; le regole di Google e Yahoo per i mittenti di grandi volumi fissano il limite dei reclami spam allo 0,3 percento, e un tasso di rimbalzo sopra queste fasce tende ad andare insieme ai reclami.
+
+## Qual è il tasso di rimbalzo medio delle email?
+
+La cifra che si cita più spesso è intorno al 2 o 2,5 percento su tutti i mittenti. Trattala come una curiosità e non come un obiettivo, perché quella media mette insieme mittenti le cui liste non hanno quasi nulla in comune, e la dispersione al suo interno è molto più ampia di quanto il numero lasci intendere.
+
+Se cerchi il tasso di rimbalzo medio per settore trovi una tabella ripetuta su decine di siti, con cifre ordinate per ecommerce, sanità, istruzione e così via. Quei numeri risalgono quasi tutti a una sola pagina di benchmark di Mailchimp, e oggi quella pagina pubblica soltanto tassi di apertura, di clic e di disiscrizione. Una tabella dei rimbalzi per settore non c'è. I siti che citano quelle cifre in gran parte si citano tra loro, e diversi di essi vendono servizi di verifica email.
+
+Il settore è comunque un indicatore debole. Due aziende SaaS della stessa categoria avranno tassi di rimbalzo diversi di un ordine di grandezza se una ha costruito la lista con i moduli di iscrizione e l'altra l'ha comprata. Quello che predice davvero il numero è da dove arrivano gli indirizzi e da quanto tempo.
+
+| Da dove arriva la lista | Rimbalzo totale tipico | Perché |
+|---|---|---|
+| Consumer con consenso, inviata negli ultimi 90 giorni | sotto lo 0,5% | Gli indirizzi sono dichiarati dalla persona e confermati di recente |
+| Business con consenso, inviata negli ultimi 90 giorni | sotto l'1% | Uguale, ma le caselle aziendali vengono chiuse quando qualcuno se ne va |
+| Business con consenso, ferma da 12 mesi | dal 2 al 5% | Circa un quarto dei dati di contatto B2B invecchia in un anno |
+| B2B a freddo, verificata prima dell'invio | dall'1 al 3% | Il residuo sono soprattutto domini catch-all che il verificatore non ha risolto |
+| B2B a freddo, non verificata | dal 5 al 15% | Niente ha tolto gli indirizzi che non esistono più |
+| Comprata o raccolta, non verificata | dal 10 al 30% | I dati rivenduti invecchiano sullo scaffale del fornitore prima di arrivare a te |
+
+![Tasso di rimbalzo tipico per origine della lista, dal consumer con consenso sotto lo 0,5 percento alla lista comprata e non verificata dal 10 al 30 percento](/blog/fig-it-bounce-by-list-source.webp)
+Tra la prima riga e l'ultima ci sono sessanta volte di differenza. Nessuna media di settore copre un intervallo simile.
+
+Il B2B sta più in alto del B2C a ogni stadio equivalente, per un motivo che non ha nulla a che vedere con il settore: le persone cambiano lavoro, e una casella aziendale di solito viene chiusa quando succede. Un indirizzo personale su un provider gratuito può restare inutilizzato per anni e continuare ad accettare posta.
+
+Quindi la domanda utile non è come il tuo tasso si confronta con quello del tuo settore. È quale delle righe qui sopra descrive la tua lista, e se hai fatto l'unico passo che la sposta.
 
 ## Prima di tutto, capisci che tipo di rimbalzo hai
 
@@ -60,7 +88,10 @@ Un verificatore controlla la sintassi, conferma che il dominio esista e abbia se
 
 C'è una cosa a cui fare attenzione, ed è il motivo per cui molti verificano e rimbalzano lo stesso. Circa il 30% di una lista aziendale si trova su domini catch-all, che accettano posta per qualsiasi indirizzo possibile, che la casella esista o no. La maggior parte dei verificatori non riesce a risolverli e li restituisce come rischiosi, sconosciuti o accept-all. A quel punto hai due opzioni cattive: cancellare un terzo della lista, oppure inviare e scoprirlo a tue spese.
 
-Cancellare è la più sicura delle due ed è quello che fa quasi tutti, per questo una lista verificata può sembrare comunque scarna. Un verificatore che risolve gli indirizzi catch-all in un vero valida o non valida ti toglie da quella scelta. È ciò per cui è costruito Giggal.ai, con la sua [verifica catch-all](/catch-all-verification), e applica lo stesso trattamento alle caselle dietro i secure email gateway come Proofpoint e Mimecast, che falliscono in modo simile per un motivo diverso.
+![Grafico ad anello: circa il 70 percento di una lista B2B si risolve in modo pulito e circa il 30 percento sta su domini catch-all](/blog/fig-it-catch-all-share.webp)
+La fetta arancione è la parte che un controllo standard restituisce senza risposta, ed è da lì che arrivano i rimbalzi che non ti aspettavi.
+
+Cancellare è la più sicura delle due ed è quello che fa quasi tutti, per questo una lista verificata può sembrare comunque scarna. Un verificatore che risolve gli indirizzi catch-all in un vero valida o non valida ti toglie da quella scelta. È ciò per cui è costruito [Giggal.ai](/), con la sua [verifica catch-all](/catch-all-verification), e applica lo stesso trattamento alle caselle dietro i secure email gateway come Proofpoint e Mimecast, che falliscono in modo simile per un motivo diverso.
 
 ## Poi togli gli indirizzi che non avrebbero mai funzionato
 
@@ -82,9 +113,13 @@ Se compri liste, verificale il giorno in cui arrivano e non il giorno in cui inv
 
 ## Il lavoro di autenticazione
 
-Questo non riduce direttamente i rimbalzi, ed è bene essere chiari, perché viene consigliato di continuo come rimedio ai rimbalzi. SPF, DKIM e DMARC decidono se i server riceventi si fidano che tu sia chi dici di essere. Se li sbagli, i messaggi vengono rifiutati o finiscono nello spam, e in alcuni report questo compare insieme ai rimbalzi e confonde la diagnosi.
+Questo rientrava tra le cose che non riducono i rimbalzi, e quel consiglio è invecchiato male. SPF, DKIM e DMARC decidono se i server riceventi si fidano che tu sia chi dici di essere, e due dei provider più grandi oggi rifiutano la posta quando mancano.
 
-Configurali bene, verificali una volta con uno dei tanti controlli DMARC gratuiti, e poi smetti di pensarci. Se i tuoi rimbalzi sono errori di casella inesistente, nessun lavoro sul DNS ti aiuterà.
+Microsoft ha iniziato a rifiutare la posta di massa non autenticata verso gli indirizzi Outlook.com, Hotmail e Live il 5 maggio 2025. Chi invia più di 5.000 messaggi al giorno senza tutti e tre i record riceve `550 5.7.15 Access denied, sending domain does not meet the required authentication level`. È un codice 5xx, quindi il tuo strumento di invio lo registra come rimbalzo permanente, contro una casella che esiste e che avrebbe accettato il messaggio. Google ha stretto nella stessa direzione a novembre 2025, passando dal mettere la posta sospetta nello spam al rifiutarla a livello SMTP.
+
+L'effetto pratico è che oggi una lacuna nell'autenticazione compare nel report dei rimbalzi, invece che in silenzio nel tasso di apertura. Se una quota importante dei tuoi rimbalzi porta codici 5.7.x e i tuoi destinatari sono concentrati su Outlook o Gmail, il problema non è la lista, e verificarla di nuovo non servirà.
+
+Configura bene i tre record, verificali una volta con uno dei controlli DMARC gratuiti, e poi smetti di pensarci. Se invece i tuoi rimbalzi sono errori di casella inesistente, che portano il codice 5.1.1, nessun lavoro sul DNS li cambierà.
 
 ## Scalda il dominio se è nuovo
 
