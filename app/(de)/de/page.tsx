@@ -61,7 +61,7 @@ const content: HomeContent = {
   consoleTitle: 'Eine Adresse in Echtzeit prüfen',
   consoleText: 'Derselbe Motor wie bei der Massenprüfung, eine Adresse nach der anderen. Kostenlos und ohne Anmeldung.',
   catchAll: {
-    title: 'Warum Catch-all-Adressen ein echtes Urteil brauchen',
+    title: 'Warum Catch-all-Adressen ein echtes Ergebnis brauchen',
     intro: (
       <>
         Eine{' '}
@@ -100,7 +100,7 @@ const content: HomeContent = {
   faq: [
     {
       q: 'Was macht Giggal.ai anders als andere Verifizierer?',
-      a: 'Es löst Catch-all-Adressen und Adressen hinter Sicherheits-Gateways (Mimecast, Proofpoint, Barracuda) mit einem klaren Urteil auf, gültig oder ungültig, statt mit dem Etikett "riskant", bei dem andere Tools aufgeben. In einer B2B-Liste ist das etwa ein Drittel der Adressen.',
+      a: 'Es löst Catch-all-Adressen und Adressen hinter Sicherheits-Gateways (Mimecast, Proofpoint, Barracuda) mit einem klaren Ergebnis auf, gültig oder ungültig, statt mit dem Etikett "riskant", bei dem andere Tools aufgeben. In einer B2B-Liste ist das etwa ein Drittel der Adressen.',
     },
     {
       q: 'Wie genau ist die Prüfung?',

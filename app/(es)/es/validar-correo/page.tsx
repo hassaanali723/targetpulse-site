@@ -123,7 +123,7 @@ export default function ValidarCorreoPage() {
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Qué significa el resultado</h2>
         <p className={proseP}>
-          Cada comprobación termina con uno de tres veredictos. <strong className="text-slate-900">Válido</strong>{' '}
+          Cada comprobación termina con uno de tres resultados. <strong className="text-slate-900">Válido</strong>{' '}
           significa que el servidor confirmó el buzón y pasó las comprobaciones adicionales: un correo
           a esa dirección debería llegar. <strong className="text-slate-900">No válido</strong> significa
           que la sintaxis es incorrecta, el dominio no tiene servidores de correo o el servidor rechazó el
@@ -132,7 +132,7 @@ export default function ValidarCorreoPage() {
           lugar de darlo por muerto.
         </p>
         <p className={proseP}>
-          Debajo del veredicto están los detalles de los que depende la entrega: el proveedor (Google
+          Debajo del resultado están los detalles de los que depende la entrega: el proveedor (Google
           Workspace, Microsoft 365, un gateway como Proofpoint), el host MX que respondió, si la dirección
           es <strong className="text-slate-900">desechable</strong> (un buzón temporal que desaparecerá),{' '}
           <strong className="text-slate-900">de rol</strong> (info@, ventas@, soporte@: buzones compartidos,
@@ -161,7 +161,7 @@ export default function ValidarCorreoPage() {
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Validador de correo electrónico: qué comprueba paso a paso</h2>
         <p className={proseP}>
-          Un validador de email serio, o verificador email como también se busca, tiene cuatro pasos.
+          Un validador de email serio tiene cuatro pasos.
           Las herramientas gratis que se quedan en el primero son la razón por la que tantas listas
           &quot;verificadas&quot; siguen rebotando.
         </p>
@@ -197,12 +197,10 @@ export default function ValidarCorreoPage() {
 
       {/* ── COMPROBAR CORREO (ESPAÑA) ────────────────────────── */}
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
-        <h2 className={sectionTitle}>Comprobar correo o comprobar email: el verificador para España</h2>
+        <h2 className={sectionTitle}>Comprobar correo: el verificador para España</h2>
         <p className={proseP}>
-          En España se dice comprobar correo, comprobar email, validar email o verificar email; en
-          México, Perú y Colombia, validar correo o verificar correo electrónico. Comprobar correo
-          electrónico o comprobar una dirección de correo es la misma comprobación: el verificador de
-          email de esta página
+          En España se suele decir comprobar el correo; en México, Perú y Colombia, validar el correo.
+          Es la misma comprobación: el verificador de email de esta página
           consulta el servidor del dominio, resuelve los dominios catch-all y funciona igual con
           direcciones de empresas españolas, de Gmail o de Outlook. No hay versiones por país: una sola
           herramienta para todo el español.

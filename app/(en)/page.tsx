@@ -261,7 +261,7 @@ export default function Home() {
       {/* Catch-all educational */}
       <section className="cv-section max-w-5xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-12">
         <div className="text-center max-w-2xl mx-auto space-y-3">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Why catch-all addresses need a real verdict</h2>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Why catch-all addresses need a real result</h2>
           <p className="text-slate-600 text-sm font-medium">
             A{' '}
             <Link href="/blog/what-is-a-catch-all-email-address" className="text-indigo-600 font-bold hover:underline">

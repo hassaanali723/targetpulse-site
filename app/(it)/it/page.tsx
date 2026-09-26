@@ -41,7 +41,7 @@ export const metadata: Metadata = {
 const faqItems: FaqItem[] = [
   {
     q: 'Cosa fa Giggal.ai di diverso dagli altri verificatori?',
-    a: 'Risolve gli indirizzi catch-all e quelli protetti da gateway di sicurezza (Mimecast, Proofpoint, Barracuda) con un verdetto chiaro, valida o non valida, invece dell\'etichetta "a rischio" con cui gli altri strumenti si arrendono. Su una lista B2B quegli indirizzi sono circa un terzo del totale.',
+    a: 'Risolve gli indirizzi catch-all e quelli protetti da gateway di sicurezza (Mimecast, Proofpoint, Barracuda) con un risultato chiaro, valida o non valida, invece dell\'etichetta "a rischio" con cui gli altri strumenti si arrendono. Su una lista B2B quegli indirizzi sono circa un terzo del totale.',
   },
   {
     q: 'Quanto è precisa la verifica?',
@@ -173,7 +173,7 @@ export default function HomeIt() {
       {/* Catch-all */}
       <section className="cv-section max-w-5xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-12">
         <div className="text-center max-w-2xl mx-auto space-y-3">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Perché gli indirizzi catch-all hanno bisogno di un verdetto vero</h2>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Perché gli indirizzi catch-all hanno bisogno di un risultato vero</h2>
           <p className="text-slate-600 text-sm font-medium">
             Un{' '}
             <Link href="/it/blog/cos-e-un-indirizzo-email-catch-all" className="text-indigo-600 font-bold hover:underline">

@@ -62,7 +62,7 @@ const content: HomeContent = {
   consoleTitle: 'Verifica un correo en tiempo real',
   consoleText: 'El mismo motor que la validación en bloque, una dirección a la vez. Gratis y sin registro.',
   catchAll: {
-    title: 'Por qué las direcciones catch-all necesitan un veredicto real',
+    title: 'Por qué las direcciones catch-all necesitan un resultado real',
     intro: (
       <>
         Un{' '}
@@ -102,7 +102,7 @@ const content: HomeContent = {
   faq: [
     {
       q: '¿Qué hace Giggal.ai distinto de otros verificadores?',
-      a: 'Resuelve las direcciones catch-all y las protegidas por gateways de seguridad (Mimecast, Proofpoint, Barracuda) con un veredicto claro, válido o no válido, en lugar de la etiqueta "arriesgado" con la que otras herramientas se rinden. En una lista B2B esas direcciones son cerca de un tercio del total.',
+      a: 'Resuelve las direcciones catch-all y las protegidas por gateways de seguridad (Mimecast, Proofpoint, Barracuda) con un resultado claro, válido o no válido, en lugar de la etiqueta "arriesgado" con la que otras herramientas se rinden. En una lista B2B esas direcciones son cerca de un tercio del total.',
     },
     {
       q: '¿Qué tan precisa es la verificación?',

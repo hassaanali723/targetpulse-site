@@ -62,7 +62,7 @@ const content: HomeContent = {
   consoleTitle: 'Vérifiez une adresse en temps réel',
   consoleText: 'Le même moteur que la vérification en masse, une adresse à la fois. Gratuit et sans inscription.',
   catchAll: {
-    title: 'Pourquoi les adresses catch-all ont besoin d’un vrai verdict',
+    title: 'Pourquoi les adresses catch-all ont besoin d’un vrai résultat',
     intro: (
       <>
         Un{' '}
@@ -102,7 +102,7 @@ const content: HomeContent = {
   faq: [
     {
       q: 'Qu’est-ce qui distingue Giggal.ai des autres vérificateurs ?',
-      a: 'Il résout les adresses catch-all et celles protégées par des passerelles de sécurité (Mimecast, Proofpoint, Barracuda) avec un verdict clair, valide ou invalide, au lieu de l’étiquette « risqué » sur laquelle les autres outils abandonnent. Dans une liste B2B, ces adresses représentent environ un tiers du total.',
+      a: 'Il résout les adresses catch-all et celles protégées par des passerelles de sécurité (Mimecast, Proofpoint, Barracuda) avec un résultat clair, valide ou invalide, au lieu de l’étiquette « risqué » sur laquelle les autres outils abandonnent. Dans une liste B2B, ces adresses représentent environ un tiers du total.',
     },
     {
       q: 'Quelle est la précision de la vérification ?',

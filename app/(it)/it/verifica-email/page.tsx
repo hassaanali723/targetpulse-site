@@ -49,7 +49,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'Verifica mail e verifica email sono la stessa cosa?',
-    a: 'Sì. "Mail" è la parola di tutti i giorni, "email" quella formale: il controllo è lo stesso, e lo strumento di questa pagina lo esegue su qualsiasi indirizzo. Vale anche per controllo mail, controllo email e verifica indirizzo email.',
+    a: 'Sì. "Mail" è la parola di tutti i giorni, "email" quella formale: il controllo è lo stesso, e lo strumento di questa pagina lo esegue su qualsiasi indirizzo.',
   },
   {
     q: 'La verifica funziona con Gmail, Outlook e le PEC?',
@@ -118,8 +118,7 @@ export default function VerificaEmailPage() {
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Verifica indirizzo email: come verificare se un indirizzo è valido</h2>
         <p className={proseP}>
-          Un controllo indirizzo email serio, cioè verificare indirizzo email fino alla casella, ha
-          quattro passaggi. Gli strumenti gratuiti che si
+          Un controllo serio dell&apos;indirizzo email ha quattro passaggi. Gli strumenti gratuiti che si
           fermano al primo sono il motivo per cui tante liste &quot;verificate&quot; continuano a
           rimbalzare.
         </p>
@@ -155,11 +154,10 @@ export default function VerificaEmailPage() {
 
       {/* ── COSA DICE LO STRUMENTO ───────────────────────────── */}
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
-        <h2 className={sectionTitle}>Verifica mail o verifica email: cosa ti dice questo strumento</h2>
+        <h2 className={sectionTitle}>Verifica mail: cosa ti dice questo strumento</h2>
         <p className={proseP}>
-          In italiano si dice verifica mail, verifica email o controllo mail: è lo stesso controllo,
-          e lo strumento qui sopra lo esegue in pochi secondi. Ogni controllo termina con uno di tre
-          verdetti. <strong className="text-slate-900">Valida</strong>{' '}
+          Lo strumento qui sopra esegue il controllo in pochi secondi, e ogni controllo termina con
+          uno di tre risultati. <strong className="text-slate-900">Valida</strong>{' '}
           significa che la casella ha accettato il destinatario e superato i controlli aggiuntivi:
           la posta inviata dovrebbe arrivare. <strong className="text-slate-900">Non valida</strong>{' '}
           significa che l&apos;indirizzo ha una sintassi sbagliata, non ha server di posta o il server
@@ -168,7 +166,7 @@ export default function VerificaEmailPage() {
           più tardi invece di considerarla morta.
         </p>
         <p className={proseP}>
-          Sotto il verdetto trovi i dettagli da cui dipende la consegna: il provider (Google
+          Sotto il risultato trovi i dettagli da cui dipende la consegna: il provider (Google
           Workspace, Microsoft 365, un gateway come Proofpoint), l&apos;host MX che ha risposto, se
           l&apos;indirizzo è <strong className="text-slate-900">usa e getta</strong> (una casella
           temporanea che sparirà), <strong className="text-slate-900">di ruolo</strong> (info@,
@@ -186,8 +184,7 @@ export default function VerificaEmailPage() {
           una connessione e propone un indirizzo casuale che quasi certamente non esiste. Se il
           server lo accetta, il dominio accetta tutto, e la risposta arriva in un solo scambio. Per
           questo quasi ogni controllo email gratuito ti dirà volentieri che un dominio è catch-all.
-          Controlla email e dominio insieme: su questi domini la verifica indirizzo mail da sola non
-          basta. Capire quali caselle sono reali dietro quel dominio è un altro lavoro: servono più sonde,
+          Su questi domini controllare solo l&apos;indirizzo non basta. Capire quali caselle sono reali dietro quel dominio è un altro lavoro: servono più sonde,
           più segnali e un&apos;infrastruttura con una reputazione di invio pulita. Su una lista B2B
           gli indirizzi catch-all sono spesso un terzo dei contatti, e cancellarli in blocco butta
           via clienti veri. Giggal li risolve uno per uno e ti dice quali tenere. Per i dettagli sul
@@ -201,13 +198,12 @@ export default function VerificaEmailPage() {
 
       {/* ── EMAIL ESISTENTE ──────────────────────────────────── */}
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
-        <h2 className={sectionTitle}>Verifica email esistente e verifica email attiva: quando serve</h2>
+        <h2 className={sectionTitle}>Verifica email esistente: quando serve</h2>
         <p className={proseP}>
           Prima di rispondere a un contatto scritto a mano, quando un modulo di iscrizione rimbalza,
           per provare un indirizzo di una lista acquistata prima di pulirla tutta. In ogni caso la
-          domanda è la stessa: questa casella esiste ed è attiva? La verifica esistenza mail, cioè
-          la verifica email se esiste davvero, è quello che fa lo strumento qui sopra in pochi
-          secondi. Abbiamo raccolto i tre metodi che funzionano,
+          domanda è la stessa: questa casella esiste ed è attiva? È quello che lo strumento qui
+          sopra controlla in pochi secondi. Abbiamo raccolto i tre metodi che funzionano,
           con i loro limiti, in una guida su{' '}
           <Link href="/it/verifica-email/email-esistente" className="text-indigo-600 font-bold hover:underline">
             come verificare se un indirizzo email esiste
@@ -220,8 +216,7 @@ export default function VerificaEmailPage() {
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Verifica email valida: gli errori più comuni</h2>
         <p className={proseP}>
-          Verificare email o verificare mail prima dell&apos;invio serve soprattutto contro tre
-          errori. Gli indirizzi non validi che vediamo più spesso sono di questi tre tipi. Gli errori di battitura
+          Verificare le email prima dell&apos;invio serve soprattutto contro tre errori. Gli indirizzi non validi che vediamo più spesso sono di questi tre tipi. Gli errori di battitura
           nel dominio (gmial.com, hotmial.it) passano qualsiasi controllo visivo e falliscono al
           record MX. Le caselle usa e getta sono valide oggi e sparite tra una settimana: un
           verificatore le riconosce dal dominio. Gli account di ruolo (info@, amministrazione@)

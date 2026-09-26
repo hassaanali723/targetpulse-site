@@ -119,7 +119,7 @@ export default function EmailAdressePruefenPage() {
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Was das Ergebnis bedeutet</h2>
         <p className={proseP}>
-          Jede Prüfung endet mit einem von drei Urteilen. <strong className="text-slate-900">Gültig</strong>{' '}
+          Jede Prüfung endet mit einem von drei Ergebnissen. <strong className="text-slate-900">Gültig</strong>{' '}
           heißt: Der Mailserver hat das Postfach bestätigt und die zusätzlichen Prüfungen bestanden;
           eine Mail an diese Adresse sollte ankommen. <strong className="text-slate-900">Ungültig</strong>{' '}
           heißt: Die Syntax ist falsch, die Domain hat keine Mailserver oder der Server hat das
@@ -129,7 +129,7 @@ export default function EmailAdressePruefenPage() {
           prüfen, statt die Adresse abzuschreiben.
         </p>
         <p className={proseP}>
-          Unter dem Urteil stehen die Details, von denen die Zustellung abhängt: der Anbieter (Google
+          Unter dem Ergebnis stehen die Details, von denen die Zustellung abhängt: der Anbieter (Google
           Workspace, Microsoft 365, ein Gateway wie Proofpoint), der MX-Host, der geantwortet hat,
           ob die Adresse <strong className="text-slate-900">Wegwerf</strong> ist (ein temporäres
           Postfach, das bald verschwindet), <strong className="text-slate-900">Rollen-Adresse</strong>{' '}
@@ -158,8 +158,8 @@ export default function EmailAdressePruefenPage() {
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>E-Mail-Checker: E-Mail-Adresse kostenlos prüfen, Schritt für Schritt</h2>
         <p className={proseP}>
-          E-Mail-Checker, E-Mail-Prüfer oder Verifizierer: gemeint ist dasselbe Werkzeug.
-          E-Mail-Adresse prüfen kostenlos und ohne Anmeldung: das sind die vier Schritte dahinter. Kostenlose Tools, die nach dem ersten aufhören, sind der Grund, warum so viele
+          Ein gründlicher E-Mail-Checker arbeitet in vier Schritten. Kostenlose Tools, die nach dem
+          ersten aufhören, sind der Grund, warum so viele
           &quot;geprüfte&quot; Listen weiter bouncen.
         </p>
         <ol className="list-decimal pl-6 space-y-3 text-slate-600 text-sm md:text-base font-medium leading-relaxed">
@@ -196,10 +196,8 @@ export default function EmailAdressePruefenPage() {
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>E-Mail-Adresse überprüfen, verifizieren, validieren: drei Wörter, ein Test</h2>
         <p className={proseP}>
-          Ob Sie eine E-Mail-Adresse überprüfen lassen, mehrere E-Mail-Adressen prüfen, eine E-Mail
-          testen oder eine E-Mail verifizieren wollen: der Test ist derselbe. Geschrieben wird es auch
-          Emailadresse prüfen oder Emailadressen prüfen, mal E-Mail-Adresse validieren, mal einfach
-          Mailadresse prüfen. Streng genommen prüft die Validierung nur die Form
+          Ob Sie eine E-Mail-Adresse überprüfen oder eine E-Mail verifizieren wollen, der Test ist
+          derselbe. Streng genommen prüft die Validierung nur die Form
           der Adresse (Syntax, Domain), die Verifizierung fragt den Mailserver und bestätigt, dass
           das Postfach existiert. Dieser E-Mail-Prüfer macht beides in einem Durchgang, und das
           Ergebnis heißt auf jeder Seite dasselbe: gültig, ungültig, unbekannt.

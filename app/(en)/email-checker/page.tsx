@@ -11,7 +11,7 @@ import { ArrowRight } from 'lucide-react'
 import { hreflangAlternates } from '@/lib/i18n/clusters'
 
 const DESC =
-  'Free email checker with no signup. Verify any address, including catch-all domains most tools mark risky, and get a valid or invalid answer in seconds.'
+  'Free email checker and verifier, no signup. Verify any address, including catch-all domains most tools mark risky, and get a valid or invalid answer in seconds.'
 
 export const metadata: Metadata = {
   // The English tool page. Head term is "email checker" (21k/mo US, 12k GB);
@@ -19,13 +19,13 @@ export const metadata: Metadata = {
   // verifier (IN). Catch-all stays in the H1 as the differentiator, not the
   // title. Was /tools/catch-all-email-checker until 2026-09-18 (301 in
   // next.config.js).
-  title: { absolute: 'Free Email Checker: Verify Any Email Address | Giggal.ai' },
+  title: { absolute: 'Free Email Checker & Verifier: Verify Any Address | Giggal.ai' },
   description: DESC,
   alternates: { canonical: '/email-checker', languages: hreflangAlternates('tool') },
   openGraph: {
     siteName: 'Giggal.ai',
     images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai email verification' }],
-    title: 'Free Email Checker: Verify Any Email Address',
+    title: 'Free Email Checker & Verifier: Verify Any Address',
     description: DESC,
     url: 'https://giggal.ai/email-checker',
     type: 'website',
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   // Set explicitly so this route never inherits the homepage's Twitter strings.
   twitter: {
     card: 'summary_large_image',
-    title: 'Free Email Checker: Verify Any Email Address',
+    title: 'Free Email Checker & Verifier: Verify Any Address',
     description: DESC,
   },
 }
@@ -85,7 +85,7 @@ export default function CatchAllEmailCheckerPage() {
       {/* ── HERO ─────────────────────────────────────────────── */}
       <section className="max-w-3xl mx-auto px-6 pt-28 md:pt-32 pb-10 text-center space-y-6">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900">
-          Free email checker that{' '}
+          Free email checker and verifier that{' '}
           <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">
             resolves catch-all addresses
           </span>
@@ -148,7 +148,7 @@ export default function CatchAllEmailCheckerPage() {
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>What this email checker tells you</h2>
         <p className={proseP}>
-          Each check ends in one of three verdicts. <strong className="text-slate-900">Valid</strong>{' '}
+          Each check ends in one of three results. <strong className="text-slate-900">Valid</strong>{' '}
           means the mailbox accepted the recipient and passed the extra signals, so mail sent to it
           should land. <strong className="text-slate-900">Invalid</strong> means the address failed
           syntax, has no mail server, or the server rejected the mailbox outright, so it will hard
@@ -157,7 +157,7 @@ export default function CatchAllEmailCheckerPage() {
           treating it as dead.
         </p>
         <p className={proseP}>
-          Under the verdict, the panel lists the details a deliverability check depends on: the
+          Under the result, the panel lists the details a deliverability check depends on: the
           mail provider (Google Workspace, Microsoft 365, a gateway such as Proofpoint), the MX
           host that answered, whether the address is <strong className="text-slate-900">disposable</strong>{' '}
           (a temporary inbox that will vanish), <strong className="text-slate-900">role-based</strong>{' '}

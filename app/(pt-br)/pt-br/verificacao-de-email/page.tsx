@@ -200,10 +200,9 @@ export default function VerificacaoDeEmailPage() {
 
       {/* ── CONSULTAR E-MAIL ─────────────────────────────────── */}
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
-        <h2 className={sectionTitle}>Consulta de e-mail: o que consultar um e-mail mostra sobre um endereço</h2>
+        <h2 className={sectionTitle}>Consulta de e-mail: o que ela mostra sobre um endereço</h2>
         <p className={proseP}>
-          No Brasil se escreve consulta email, consulta de e-mail, consultar e-mail, checar e-mail ou
-          conferir e-mail; é a mesma verificação. A consulta mostra se o endereço é válido, qual provedor responde por ele, se o domínio é catch-all
+          No Brasil se diz consultar, checar ou conferir um e-mail; é a mesma verificação. A consulta mostra se o endereço é válido, qual provedor responde por ele, se o domínio é catch-all
           e se a caixa é descartável, de função ou de um provedor gratuito. O que a consulta não mostra é
           quem usa o endereço: nenhuma verificação SMTP devolve nome, empresa ou perfil, e uma ferramenta
           que promete isso está buscando em outras fontes, não no servidor de e-mail. Para saber se vale a
@@ -215,15 +214,14 @@ export default function VerificacaoDeEmailPage() {
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Validador de e-mail: como saber se o e-mail é válido</h2>
         <p className={proseP}>
-          Um validador de e-mail online, ou validador de email gratuito como este, é mais do que um
-          corretor de formato. Muitos validadores conferem só o formato
+          Um validador de e-mail gratuito como este é mais do que um corretor de formato. Muitos validadores conferem só o formato
           (arroba, domínio, extensão) e chamam isso de validação; um endereço com formato perfeito em um
           domínio sem servidores de e-mail continua inválido, e um endereço bem formado em um domínio
           real pode apontar para uma caixa que não existe. Validar e-mail, aqui, é passar pelos quatro
           passos acima: sintaxe, MX, SMTP e resolução catch-all. Só o último confirma que a caixa existe
           de verdade, e é ele que separa um validador de e-mail de um corretor ortográfico. O mesmo
-          teste serve para verificar endereço de e-mail um a um aqui e para a validação de e-mails em
-          lote depois do cadastro.
+          teste serve para verificar um endereço por vez aqui e para validar listas inteiras depois do
+          cadastro.
         </p>
       </section>
 

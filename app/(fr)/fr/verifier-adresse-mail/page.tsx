@@ -114,10 +114,10 @@ export default function VerifierAdresseMailPage() {
 
       {/* ── VÉRIFICATEUR MAIL : LE RÉSULTAT ──────────────────── */}
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
-        <h2 className={sectionTitle}>Vérificateur mail ou vérificateur d&apos;adresse email&nbsp;: ce que le résultat signifie</h2>
+        <h2 className={sectionTitle}>Vérificateur mail&nbsp;: ce que le résultat signifie</h2>
         <p className={proseP}>
-          Une vérification mail sérieuse, vérifier un mail, vérifier un email ou vérifier une adresse email
-          avant l&apos;envoi, se termine par l&apos;un de trois verdicts. <strong className="text-slate-900">Valide</strong>{' '}
+          Avant l&apos;envoi, chaque vérification d&apos;adresse email se termine par l&apos;un de trois
+          résultats. <strong className="text-slate-900">Valide</strong>{' '}
           signifie que le serveur a confirmé la boîte et qu&apos;elle a passé les contrôles supplémentaires&nbsp;: un
           email à cette adresse devrait arriver. <strong className="text-slate-900">Invalide</strong> signifie
           que la syntaxe est fausse, que le domaine n&apos;a pas de serveur de messagerie ou que le serveur a
@@ -126,7 +126,7 @@ export default function VerifierAdresseMailPage() {
           réessayez plus tard plutôt que de considérer l&apos;adresse comme morte.
         </p>
         <p className={proseP}>
-          Sous le verdict se trouvent les détails dont dépend la délivrabilité&nbsp;: le fournisseur (Google
+          Sous le résultat se trouvent les détails dont dépend la délivrabilité&nbsp;: le fournisseur (Google
           Workspace, Microsoft 365, une passerelle comme Proofpoint), l&apos;hôte MX qui a répondu, si
           l&apos;adresse est <strong className="text-slate-900">jetable</strong> (une boîte temporaire qui va
           disparaître), <strong className="text-slate-900">générique</strong> (contact@, ventes@, support@&nbsp;:
@@ -155,7 +155,7 @@ export default function VerifierAdresseMailPage() {
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Test d&apos;adresse mail&nbsp;: ce que le test vérifie, étape par étape</h2>
         <p className={proseP}>
-          Tester une adresse mail, ou faire une vérification d&apos;adresse mail, compte quatre étapes.
+          Une vérification d&apos;adresse mail sérieuse compte quatre étapes.
           Les outils gratuits qui s&apos;arrêtent à la première sont la raison pour laquelle tant de
           listes «&nbsp;vérifiées&nbsp;» continuent de rebondir.
         </p>
