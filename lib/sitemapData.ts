@@ -17,6 +17,10 @@ import { CLUSTERS, italianUrls, localeUrls, type Cluster } from '@/lib/i18n/clus
 
 export const SITE = 'https://giggal.ai'
 
+// The six homes were rebuilt on this date (new sections and copy, plan 16);
+// their lastmod moves here, every other page keeps its own date.
+const HOMES_REDESIGNED = '2026-09-27'
+
 export interface SitemapEntry {
   path: string
   lastModified?: string
@@ -30,7 +34,7 @@ export function coreEntries(): SitemapEntry[] {
   return [
     // 2026-09-13: title, H1 and copy retarget (plans/07 in targetpulse-seo).
     // 2026-09-14: hero retarget off SEG onto bulk (plans/09).
-    { path: '', lastModified: '2026-09-14' },
+    { path: '', lastModified: HOMES_REDESIGNED },
     { path: '/catch-all-verification', lastModified: '2026-09-13' },
     { path: '/seg-email-verification', lastModified: '2026-08-02' },
     ...(MIMECAST_PAGE_LIVE
@@ -169,7 +173,13 @@ function localeEntries(locale: 'it' | 'de' | 'es' | 'pt-br' | 'fr', launch: stri
       path,
       lastModified:
         postDate.get(path) ||
-        (path === hub && newest ? newest : competitorPageUrls.has(path) ? COMPETITOR_PAGES_SHIPPED : launch),
+        (path === hub && newest
+          ? newest
+          : path === CLUSTERS.home[locale]
+            ? HOMES_REDESIGNED
+            : competitorPageUrls.has(path)
+              ? COMPETITOR_PAGES_SHIPPED
+              : launch),
     }))
 }
 export function itEntries(): SitemapEntry[] {

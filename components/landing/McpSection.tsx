@@ -1,8 +1,8 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
-import { Check, Copy, Bot, ArrowRight } from 'lucide-react'
+import { Check, Copy, ArrowRight } from 'lucide-react'
 import ObfuscatedEmail from '@/components/ObfuscatedEmail'
 
 const MCP_URL = 'https://mcp.giggal.ai/mcp'
@@ -48,9 +48,9 @@ type Setup =
   | { kind: 'command'; boxLabel: string; code: string; note?: React.ReactNode }
   | { kind: 'config'; boxLabel: string; files: string[]; code: string; note?: React.ReactNode }
 
-interface Tool { id: string; name: string; logo?: string; setup: Setup }
+interface Tool { id: string; name: string; setup: Setup }
 
-const REPLACE_KEY = <>Replace <span className="font-mono text-slate-700">YOUR_API_KEY</span> with your key from your Giggal.ai dashboard.</>
+const REPLACE_KEY = <>Replace <span className="font-mono text-white">YOUR_API_KEY</span> with your key from your Giggal.ai dashboard.</>
 
 const TOOLS: Tool[] = [
   {
@@ -60,27 +60,27 @@ const TOOLS: Tool[] = [
       subtitle: 'Add Giggal.ai as a custom connector in Claude. No config files, no API key to paste.',
       steps: [
         {
-          text: <>In Claude (web or desktop), open <span className="font-semibold text-slate-700">Settings → Connectors</span>.</>,
+          text: <>In Claude (web or desktop), open <span className="font-semibold text-white">Settings → Connectors</span>.</>,
           img: '/mcp/claude/1-connectors.jpeg',
           alt: 'Claude Settings with the Connectors tab open',
         },
         {
-          text: <>Click <span className="font-semibold text-slate-700">Add</span> → <span className="font-semibold text-slate-700">Add custom connector</span>.</>,
+          text: <>Click <span className="font-semibold text-white">Add</span> → <span className="font-semibold text-white">Add custom connector</span>.</>,
           img: '/mcp/claude/2-add-custom-connector.jpeg',
           alt: 'The Add menu open showing Add custom connector',
         },
         {
-          text: <>Name it <span className="font-mono text-slate-700">Giggal.ai</span>, paste the MCP URL below, then click <span className="font-semibold text-slate-700">Add</span>.</>,
+          text: <>Name it <span className="font-mono text-white">Giggal.ai</span>, paste the MCP URL below, then click <span className="font-semibold text-white">Add</span>.</>,
           img: '/mcp/claude/3-paste-url.jpeg',
           alt: 'Add custom connector dialog with the Giggal.ai MCP URL filled in',
         },
         {
-          text: <>Open the <span className="font-semibold text-slate-700">Giggal.ai</span> connector and click <span className="font-semibold text-slate-700">Connect</span>.</>,
+          text: <>Open the <span className="font-semibold text-white">Giggal.ai</span> connector and click <span className="font-semibold text-white">Connect</span>.</>,
           img: '/mcp/claude/4-connect.jpeg',
           alt: 'Giggal.ai connector page with the Connect button',
         },
         {
-          text: <>Click <span className="font-semibold text-slate-700">Allow</span> to grant <span className="font-mono text-slate-700">verify:read</span>, which covers verifying addresses, checking credits and looking up past verifications.</>,
+          text: <>Click <span className="font-semibold text-white">Allow</span> to grant <span className="font-mono text-white">verify:read</span>, which covers verifying addresses, checking credits and looking up past verifications.</>,
           img: '/mcp/claude/5-allow.jpeg',
           alt: 'Giggal.ai authorization screen asking to allow Claude access',
         },
@@ -94,22 +94,22 @@ const TOOLS: Tool[] = [
       subtitle: 'Add Giggal.ai as a custom plugin in ChatGPT, connected over OAuth, with no API key to paste.',
       steps: [
         {
-          text: <>In ChatGPT, open <span className="font-semibold text-slate-700">Plugins</span> from the sidebar, then click the <span className="font-semibold text-slate-700">+</span> in the top right.</>,
+          text: <>In ChatGPT, open <span className="font-semibold text-white">Plugins</span> from the sidebar, then click the <span className="font-semibold text-white">+</span> in the top right.</>,
           img: '/mcp/chatgpt/1-plugins.jpeg',
           alt: 'ChatGPT Plugins page with the add button in the top right',
         },
         {
-          text: <>Name it <span className="font-mono text-slate-700">Giggal.ai</span>, set <span className="font-semibold text-slate-700">Server URL</span> to the MCP URL below, choose <span className="font-semibold text-slate-700">Authentication → OAuth</span>, tick the confirmation, then click <span className="font-semibold text-slate-700">Create</span>.</>,
+          text: <>Name it <span className="font-mono text-white">Giggal.ai</span>, set <span className="font-semibold text-white">Server URL</span> to the MCP URL below, choose <span className="font-semibold text-white">Authentication → OAuth</span>, tick the confirmation, then click <span className="font-semibold text-white">Create</span>.</>,
           img: '/mcp/chatgpt/2-new-plugin.jpeg',
           alt: 'ChatGPT New Plugin dialog with the Giggal.ai MCP server URL and OAuth selected',
         },
         {
-          text: <>Open the <span className="font-semibold text-slate-700">Giggal.ai</span> plugin, click <span className="font-semibold text-slate-700">Connect</span>, then <span className="font-semibold text-slate-700">Sign in with Giggal.ai</span>.</>,
+          text: <>Open the <span className="font-semibold text-white">Giggal.ai</span> plugin, click <span className="font-semibold text-white">Connect</span>, then <span className="font-semibold text-white">Sign in with Giggal.ai</span>.</>,
           img: '/mcp/chatgpt/3-connect.jpeg',
           alt: 'Add Giggal.ai to ChatGPT prompt with the Sign in with Giggal.ai button',
         },
         {
-          text: <>Click <span className="font-semibold text-slate-700">Allow</span> to grant <span className="font-mono text-slate-700">verify:read</span>, which covers verifying addresses, checking credits and looking up past verifications.</>,
+          text: <>Click <span className="font-semibold text-white">Allow</span> to grant <span className="font-mono text-white">verify:read</span>, which covers verifying addresses, checking credits and looking up past verifications.</>,
           img: '/mcp/chatgpt/4-allow.jpeg',
           alt: 'Giggal.ai authorization screen asking to allow ChatGPT access',
         },
@@ -120,7 +120,7 @@ const TOOLS: Tool[] = [
     id: 'claude-code', name: 'Claude Code',
     setup: {
       kind: 'command', boxLabel: 'Terminal', code: claudeCodeCmd,
-      note: <>{REPLACE_KEY} Already have a <span className="font-mono text-slate-700">giggal</span> server? Run <span className="font-mono text-slate-700">claude mcp remove giggal --scope user</span> first, then re-add.</>,
+      note: <>{REPLACE_KEY} Already have a <span className="font-mono text-white">giggal</span> server? Run <span className="font-mono text-white">claude mcp remove giggal --scope user</span> first, then re-add.</>,
     },
   },
   {
@@ -129,8 +129,8 @@ const TOOLS: Tool[] = [
       kind: 'config', boxLabel: 'config.toml', files: ['~/.codex/config.toml', '%USERPROFILE%\\.codex\\config.toml'], code: codexToml,
       note: (
         <>
-          Codex reads the token from an env var. Set it, reload your shell, then fully quit &amp; reopen Codex and run <span className="font-mono text-slate-700">/mcp</span> to confirm:
-          <span className="mt-2 block bg-slate-100 border border-slate-200 rounded-lg p-2.5 font-mono text-[11px] text-slate-700 whitespace-pre-wrap">{`echo 'export GIGGAL_API_KEY="tp_live_..."' >> ~/.zshrc\nsource ~/.zshrc`}</span>
+          Codex reads the token from an env var. Set it, reload your shell, then fully quit &amp; reopen Codex and run <span className="font-mono text-white">/mcp</span> to confirm:
+          <span className="mt-2 block bg-white/5 border border-white/10 rounded-lg p-2.5 font-mono text-[11px] text-slate-200 whitespace-pre-wrap">{`echo 'export GIGGAL_API_KEY="tp_live_..."' >> ~/.zshrc\nsource ~/.zshrc`}</span>
         </>
       ),
     },
@@ -145,7 +145,7 @@ const TOOLS: Tool[] = [
   },
   {
     id: 'vscode', name: 'VS Code',
-    setup: { kind: 'config', boxLabel: 'mcp.json', files: ['.vscode/mcp.json'], code: jsonConfig('servers'), note: <>{REPLACE_KEY} VS Code uses <span className="font-mono text-slate-700">&quot;servers&quot;</span> instead of <span className="font-mono text-slate-700">&quot;mcpServers&quot;</span>.</> },
+    setup: { kind: 'config', boxLabel: 'mcp.json', files: ['.vscode/mcp.json'], code: jsonConfig('servers'), note: <>{REPLACE_KEY} VS Code uses <span className="font-mono text-white">&quot;servers&quot;</span> instead of <span className="font-mono text-white">&quot;mcpServers&quot;</span>.</> },
   },
   {
     id: 'cline', name: 'Cline',
@@ -157,26 +157,65 @@ const TOOLS: Tool[] = [
   },
 ]
 
-function initials(name: string) {
-  const words = name.replace(/[^A-Za-z ]/g, '').split(/\s+/).filter(Boolean)
-  if (words.length === 1) return words[0].slice(0, 2).toUpperCase()
-  return words.map((w) => w[0]).slice(0, 2).join('').toUpperCase()
+// Every visible string, so a localized home can pass its own. Tool steps and
+// notes are overridden per tool id; anything not given stays English.
+export interface McpStrings {
+  title: string
+  subtitle: string
+  toolsAria: string
+  groups: [string, string]
+  pasteInto: string
+  or: string
+  serverUrl: string
+  copy: string
+  copied: string
+  copyAria: string
+  restart: string
+  askBefore: string
+  askAfter: string
+  guide: string
+  tools?: Record<string, { subtitle?: string; steps?: React.ReactNode[]; note?: React.ReactNode }>
 }
 
-function Logo({ tool, size }: { tool: Tool; size: 'sm' | 'lg' }) {
-  const box = size === 'lg' ? 'w-10 h-10 text-sm' : 'w-7 h-7 text-[11px]'
-  if (tool.logo) {
-    // eslint-disable-next-line @next/next/no-img-element
-    return <img src={tool.logo} alt={tool.name} className={`${box} object-contain shrink-0`} />
-  }
-  return (
-    <span className={`${box} rounded-lg bg-slate-100 border border-slate-200 flex items-center justify-center font-black text-slate-500 shrink-0`}>
-      {initials(tool.name)}
-    </span>
-  )
+export const MCP_STRINGS_EN: McpStrings = {
+  title: 'Connect your favourite AI.',
+  subtitle: 'Plug Giggal.ai into your AI agent over MCP and verify emails, catch-all included, right inside Claude, Cursor, VS Code and more.',
+  toolsAria: 'AI tools',
+  groups: ['Chat apps', 'Code editors'],
+  pasteInto: 'Paste into',
+  or: ' or ',
+  serverUrl: 'MCP Server URL',
+  copy: 'Copy',
+  copied: 'Copied',
+  copyAria: 'Copy to clipboard',
+  restart: 'Restart the client after adding, then just ask:',
+  askBefore: '\u201cIs ',
+  askAfter: ' deliverable?\u201d',
+  guide: 'See the full setup guide',
 }
 
-function CopyButton({ text, label = 'Copy' }: { text: string; label?: string }) {
+// TOOLS with a locale's step and note text swapped in (screenshots kept).
+function localizeTools(s: McpStrings): Tool[] {
+  if (!s.tools) return TOOLS
+  return TOOLS.map((tool) => {
+    const o = s.tools?.[tool.id]
+    if (!o) return tool
+    const setup = tool.setup
+    if (setup.kind === 'connector') {
+      return {
+        ...tool,
+        setup: {
+          ...setup,
+          subtitle: o.subtitle ?? setup.subtitle,
+          steps: setup.steps.map((st, i) => ({ ...st, text: o.steps?.[i] ?? st.text })),
+        },
+      }
+    }
+    return { ...tool, setup: { ...setup, note: o.note ?? setup.note } }
+  })
+}
+
+function CopyButton({ text, s }: { text: string; s: McpStrings }) {
   const [copied, setCopied] = useState(false)
   const copy = async () => {
     try {
@@ -188,23 +227,140 @@ function CopyButton({ text, label = 'Copy' }: { text: string; label?: string }) 
   return (
     <button
       onClick={copy}
-      className="shrink-0 flex items-center gap-1.5 px-3 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-black rounded-lg transition-colors"
-      aria-label={`${label} to clipboard`}
+      className="shrink-0 flex items-center gap-1.5 px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white text-xs font-bold rounded-md transition-colors"
+      aria-label={s.copyAria}
     >
-      {copied ? <><Check className="w-3.5 h-3.5" /> Copied</> : <><Copy className="w-3.5 h-3.5" /> {label}</>}
+      {copied ? <><Check className="w-3.5 h-3.5" /> {s.copied}</> : <><Copy className="w-3.5 h-3.5" /> {s.copy}</>}
     </button>
   )
 }
 
-function CodeBox({ label, code }: { label: string; code: string }) {
+// Small syntax colouring for the code boxes. Each rule is a sticky regex
+// tried at the current position; anything unmatched stays plain.
+type Lang = 'json' | 'toml' | 'shell' | 'url'
+const STR = '"(?:[^"\\\\]|\\\\.)*"'
+const RULES: Record<Lang, [RegExp, string][]> = {
+  json: [
+    [new RegExp(STR + '(?=\\s*:)', 'y'), 'text-sky-300'],
+    [new RegExp(STR, 'y'), 'text-emerald-300'],
+    [new RegExp('[{}\\[\\],:]', 'y'), 'text-slate-500'],
+  ],
+  toml: [
+    [new RegExp('\\[[^\\]\\n]+\\]', 'y'), 'text-amber-300'],
+    [new RegExp(STR, 'y'), 'text-emerald-300'],
+    [new RegExp('[A-Za-z_][\\w-]*(?=\\s*=)', 'y'), 'text-sky-300'],
+    [new RegExp('=', 'y'), 'text-slate-500'],
+  ],
+  shell: [
+    [new RegExp('claude mcp (?:add|remove)', 'y'), 'text-amber-300'],
+    [new RegExp(STR, 'y'), 'text-emerald-300'],
+    [new RegExp('https?://\\S+', 'y'), 'text-emerald-300'],
+    [new RegExp('--?[A-Za-z][\\w-]*', 'y'), 'text-sky-300'],
+    [new RegExp('\\\\(?=\\n|$)', 'y'), 'text-slate-500'],
+  ],
+  url: [],
+}
+
+function highlight(code: string, lang: Lang): React.ReactNode[] {
+  const out: React.ReactNode[] = []
+  let plain = ''
+  let i = 0
+  while (i < code.length) {
+    let hit = false
+    for (const [re, cls] of RULES[lang]) {
+      re.lastIndex = i
+      const m = re.exec(code)
+      if (m && m[0].length > 0) {
+        if (plain) { out.push(plain); plain = '' }
+        out.push(<span key={i} className={cls}>{m[0]}</span>)
+        i += m[0].length
+        hit = true
+        break
+      }
+    }
+    if (!hit) plain += code[i++]
+  }
+  if (plain) out.push(plain)
+  return out
+}
+
+function CodeBox({ label, code, lang = 'url', s }: { label: string; code: string; lang?: Lang; s: McpStrings }) {
   return (
-    <div className="bg-slate-950 rounded-xl border border-slate-800 overflow-hidden">
-      <div className="flex items-center justify-between px-4 py-2 border-b border-slate-800/80">
-        <span className="text-[10px] font-mono font-bold text-slate-500 uppercase tracking-widest">{label}</span>
-        <CopyButton text={code} label="Copy" />
+    <div className="bg-slate-950 rounded-xl overflow-hidden ring-1 ring-white/10">
+      <div className="flex items-center justify-between gap-3 pl-4 pr-2 py-2 border-b border-white/10">
+        <span className="text-xs font-mono text-slate-400 truncate">{label}</span>
+        <CopyButton text={code} s={s} />
       </div>
-      <pre className="p-4 overflow-x-auto font-mono text-xs sm:text-[13px] text-slate-300 leading-relaxed"><code>{code}</code></pre>
+      <pre className="p-4 overflow-x-auto font-mono text-[13px] text-slate-100 leading-relaxed"><code>{highlight(code, lang)}</code></pre>
     </div>
+  )
+}
+
+// Tool list groups. Chat apps connect over OAuth; the rest take a config file
+// or a terminal command.
+const GROUPS: string[][] = [
+  ['claude', 'chatgpt'],
+  ['claude-code', 'codex', 'cursor', 'windsurf', 'vscode', 'cline', 'zed'],
+]
+
+// One tool's setup: title, steps or config, and notes.
+function SetupBody({ tool, showImages, s: t }: { tool: Tool; showImages: boolean; s: McpStrings }) {
+  const s = tool.setup
+  return (
+    <>
+      <h3 className="text-xl font-extrabold text-white">{tool.name}</h3>
+
+      {s.kind === 'connector' ? (
+        <>
+          <p className="mt-2 text-base text-slate-300">{s.subtitle}</p>
+          <ol className={`mt-6 ${showImages ? 'space-y-8' : 'space-y-4'}`}>
+            {s.steps.map((step, i) => (
+              <li key={i} className="flex gap-3.5">
+                <span className="shrink-0 w-7 h-7 rounded-full bg-indigo-500 text-white text-sm font-bold flex items-center justify-center">{i + 1}</span>
+                <div className="flex-1 min-w-0 pt-0.5">
+                  <p className="text-base text-slate-300 leading-relaxed">{step.text}</p>
+                  {showImages && step.img && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={step.img}
+                      alt={step.alt || ''}
+                      loading="lazy"
+                      className="mt-4 w-full rounded-xl border border-white/10 bg-slate-800"
+                    />
+                  )}
+                </div>
+              </li>
+            ))}
+          </ol>
+          <div className="mt-6">
+            <CodeBox label={t.serverUrl} code={MCP_URL} s={t} />
+          </div>
+        </>
+      ) : (
+        <>
+          {s.kind === 'config' && (
+            <p className="mt-2 text-base text-slate-300 leading-relaxed">
+              {t.pasteInto}{' '}
+              {s.files.map((f, i) => (
+                <React.Fragment key={f}>
+                  {i > 0 && t.or}
+                  <code className="font-mono text-sm bg-white/10 rounded px-1.5 py-0.5 text-slate-100 break-all">{f}</code>
+                </React.Fragment>
+              ))}
+            </p>
+          )}
+          <div className="mt-5">
+            <CodeBox
+              label={s.boxLabel}
+              code={s.code}
+              lang={s.kind === 'command' ? 'shell' : s.boxLabel.endsWith('.toml') ? 'toml' : 'json'}
+              s={t}
+            />
+          </div>
+          {s.note && <div className="mt-4 text-sm text-slate-400 leading-relaxed">{s.note}</div>}
+        </>
+      )}
+    </>
   )
 }
 
@@ -213,112 +369,124 @@ interface McpSectionProps {
   showImages?: boolean
   /** When set, renders a "full setup guide" link (landing page → /mcp). */
   detailsHref?: string
+  /** Top border line. The home page draws its own section dividers. */
+  divider?: boolean
+  /** Localized text; English when left out. */
+  strings?: McpStrings
 }
 
-export default function McpSection({ showImages = false, detailsHref }: McpSectionProps) {
+export default function McpSection({ showImages = false, detailsHref, divider = true, strings = MCP_STRINGS_EN }: McpSectionProps) {
+  const s = strings
+  const tools = React.useMemo(() => localizeTools(s), [s])
   const [selected, setSelected] = useState('claude')
-  const tool = TOOLS.find((t) => t.id === selected) ?? TOOLS[0]
-  const s = tool.setup
+  const tool = tools.find((t) => t.id === selected) ?? tools[0]
+
+  // Keep the window at the tallest tool's height. Home page only: the /mcp
+  // guide has screenshots and is meant to grow.
+  const measureRef = useRef<HTMLDivElement>(null)
+  const [measuring, setMeasuring] = useState(false)
+  const [minH, setMinH] = useState<number | undefined>(undefined)
+
+  // Re-measure whenever the panel's width changes (first layout, styles or
+  // fonts arriving, window resize), not on height changes, so it settles.
+  const bodyRef = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    if (showImages || !bodyRef.current) return
+    let lastWidth = -1
+    const ro = new ResizeObserver(([entry]) => {
+      const w = Math.round(entry.contentRect.width)
+      if (w !== lastWidth) {
+        lastWidth = w
+        setMeasuring(true)
+      }
+    })
+    ro.observe(bodyRef.current)
+    document.fonts?.ready.then(() => setMeasuring(true))
+    return () => ro.disconnect()
+  }, [showImages])
+
+  useEffect(() => {
+    if (!measuring || !measureRef.current) return
+    const heights = Array.from(measureRef.current.children, (c) => (c as HTMLElement).offsetHeight)
+    const tallest = Math.max(0, ...heights)
+    if (tallest > 0) setMinH(tallest)
+    setMeasuring(false)
+  }, [measuring])
 
   return (
-    <section id="mcp" className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-24 border-t border-slate-200 space-y-10">
+    <section id="mcp" className={`cv-section max-w-6xl mx-auto px-6 py-20 md:py-24 ${divider ? 'border-t border-slate-200' : ''}`}>
       {/* Header */}
-      <div className="text-center max-w-2xl mx-auto space-y-3">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Connect your favourite AI.</h2>
-        <p className="text-sm md:text-base text-slate-600 font-medium">
-          Plug Giggal.ai into your AI agent over MCP and verify emails, catch-all included, right inside Claude, Cursor, VS Code and more.
-        </p>
+      <div className="text-center max-w-2xl mx-auto">
+        <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">{s.title}</h2>
+        <p className="mt-4 text-base md:text-lg text-slate-600">{s.subtitle}</p>
       </div>
 
-      {/* Tool selector row */}
-      <div className="flex flex-wrap items-center justify-center gap-2.5">
-        {TOOLS.map((t) => {
-          const active = t.id === selected
-          return (
-            <button
-              key={t.id}
-              onClick={() => setSelected(t.id)}
-              className={`flex items-center gap-2 px-3.5 py-2 rounded-xl border-2 text-sm font-bold transition-all ${
-                active
-                  ? 'border-indigo-500 bg-indigo-50 text-indigo-700 shadow-sm'
-                  : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:-translate-y-0.5'
-              }`}
-            >
-              <Logo tool={t} size="sm" />
-              {t.name}
-            </button>
-          )
-        })}
-      </div>
-
-      {/* Setup panel */}
-      <div className="max-w-3xl mx-auto bg-white border-2 border-slate-200 rounded-3xl p-6 sm:p-8 card-vivid-shadow space-y-5">
-        <div key={selected} className="space-y-5 animate-[slideUp_0.28s_ease-out]">
-        <div className="flex items-center gap-3.5">
-          <Logo tool={tool} size="lg" />
-          <div className="leading-tight">
-            <span className="block text-[11px] font-bold uppercase tracking-wider text-slate-400">Connect Giggal.ai in</span>
-            <span className="text-lg font-black text-slate-900">{tool.name}</span>
-          </div>
+      {/* One dark app-style window: tool list on the left, setup on the right */}
+      <div className="mt-12 max-w-5xl mx-auto rounded-3xl bg-slate-900 overflow-hidden shadow-[0_24px_60px_-24px_rgba(15,23,42,0.5)] grid grid-cols-1 md:grid-cols-[220px_minmax(0,1fr)]">
+        {/* Tool list: a column on desktop, one scrolling row on phones */}
+        <div
+          role="tablist"
+          aria-label={s.toolsAria}
+          className="flex md:flex-col gap-1.5 md:gap-0.5 overflow-x-auto md:overflow-visible p-4 md:p-5 bg-slate-950/50 border-b md:border-b-0 md:border-r border-white/10"
+        >
+          {GROUPS.map((ids, gi) => (
+            <React.Fragment key={s.groups[gi]}>
+              <p className={`hidden md:block px-3 pb-2 text-xs font-semibold text-slate-500 ${gi > 0 ? 'pt-6' : 'pt-1'}`}>{s.groups[gi]}</p>
+              {ids.map((id) => {
+                const t = tools.find((x) => x.id === id)
+                if (!t) return null
+                const active = t.id === selected
+                return (
+                  <button
+                    key={t.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={active}
+                    onClick={() => setSelected(t.id)}
+                    className={`shrink-0 text-left px-3.5 py-2 md:py-2.5 rounded-lg text-[15px] transition-colors ${
+                      active
+                        ? 'bg-indigo-600 md:bg-indigo-500/20 text-white font-bold md:shadow-[inset_3px_0_0_#818cf8]'
+                        : 'border border-white/10 md:border-0 text-slate-400 font-semibold hover:text-white hover:bg-white/5'
+                    }`}
+                  >
+                    {t.name}
+                  </button>
+                )
+              })}
+            </React.Fragment>
+          ))}
         </div>
 
-        {s.kind === 'connector' ? (
-          <div className="space-y-4">
-            <p className="text-sm text-slate-600 font-medium">{s.subtitle}</p>
-            <ol className={showImages ? 'space-y-6' : 'space-y-2.5'}>
-              {s.steps.map((step, i) => (
-                <li key={i} className="space-y-3">
-                  <div className="flex gap-3 text-sm text-slate-700 font-medium leading-relaxed">
-                    <span className="shrink-0 w-5 h-5 rounded-full bg-indigo-100 text-indigo-700 text-[11px] font-black flex items-center justify-center mt-0.5">{i + 1}</span>
-                    <span>{step.text}</span>
+        {/* Setup panel */}
+        <div role="tabpanel" className="p-6 sm:p-8">
+          <div ref={bodyRef} className="relative" style={minH ? { minHeight: minH } : undefined}>
+            <SetupBody tool={tool} showImages={showImages} s={s} />
+            {/* Invisible copies of every tool's setup, measured after load and
+                on resize so the window keeps the tallest height and does not
+                jump when you switch tools. Client only, never in the HTML. */}
+            {measuring && (
+              <div ref={measureRef} aria-hidden="true" className="absolute inset-x-0 top-0 invisible pointer-events-none">
+                {tools.map((x) => (
+                  <div key={x.id}>
+                    <SetupBody tool={x} showImages={false} s={s} />
                   </div>
-                  {showImages && step.img && (
-                    <div className="pl-8">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={step.img}
-                        alt={step.alt || ''}
-                        loading="lazy"
-                        className="w-full rounded-xl border-2 border-slate-200 bg-slate-50 shadow-sm"
-                      />
-                    </div>
-                  )}
-                </li>
-              ))}
-            </ol>
-            <CodeBox label="MCP Server URL" code={MCP_URL} />
-          </div>
-        ) : (
-          <>
-            {s.kind === 'config' && (
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="text-[11px] font-black uppercase tracking-wider text-slate-500">Paste into</span>
-                {s.files.map((f) => (
-                  <code key={f} className="font-mono text-xs bg-slate-100 border border-slate-200 rounded px-2 py-0.5 text-slate-700 break-all">{f}</code>
                 ))}
               </div>
             )}
-            <CodeBox label={s.boxLabel} code={s.code} />
-            {s.note && <div className="text-xs text-slate-500 font-medium leading-relaxed">{s.note}</div>}
-          </>
-        )}
+          </div>
 
-        </div>
-
-        <div className="flex items-center gap-2 text-xs text-slate-500 font-semibold border-t border-slate-100 pt-4">
-          <Bot className="w-4 h-4 text-indigo-500" />
-          Restart the client after adding, then just ask: <span className="text-slate-700">&ldquo;Is <ObfuscatedEmail user="info" domain="giggal.ai" /> deliverable?&rdquo;</span>
+          <p className="mt-6 pt-5 border-t border-white/10 text-sm text-slate-400">
+            {s.restart}{' '}
+            <span className="font-semibold text-white">{s.askBefore}<ObfuscatedEmail user="info" domain="giggal.ai" />{s.askAfter}</span>
+          </p>
         </div>
       </div>
 
       {/* Landing page → full guide (with screenshots) on /mcp */}
       {detailsHref && (
-        <div className="text-center">
-          <Link
-            href={detailsHref}
-            className="group inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-white border-2 border-slate-200 hover:border-indigo-500 font-bold rounded-xl text-slate-700 hover:text-indigo-700 transition-all text-sm card-vivid-shadow"
-          >
-            See the full setup guide
+        <div className="mt-8 text-center">
+          <Link href={detailsHref} className="group inline-flex items-center gap-2 text-base font-bold text-indigo-600 hover:underline">
+            {s.guide}
             <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
           </Link>
         </div>

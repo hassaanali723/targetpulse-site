@@ -31,7 +31,10 @@ const navLinks = [
   { name: 'Earn with us', href: '/affiliates' },
 ]
 
-export default function Navbar() {
+// tone="dark" is used by the home page only, where the navbar sits on the
+// slate hero. Every other page keeps the default light navbar.
+export default function Navbar({ tone = 'light' }: { tone?: 'light' | 'dark' }) {
+  const dark = tone === 'dark'
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
@@ -49,34 +52,44 @@ export default function Navbar() {
   return (
     <>
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-xl ${
-        isScrolled
-          ? 'bg-white/95 border-b border-slate-200 shadow-sm'
-          : 'bg-white/90 border-b border-transparent'
+        dark
+          ? isScrolled
+            ? 'bg-slate-900/95 border-b border-white/10 shadow-sm'
+            : 'bg-slate-900 border-b border-white/10'
+          : isScrolled
+            ? 'bg-white/95 border-b border-slate-200 shadow-sm'
+            : 'bg-white/90 border-b border-transparent'
       }`}>
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex items-center justify-between h-20">
             {/* Logo wordmark */}
             <Link href="/" className="flex-shrink-0" onClick={() => setIsMobileMenuOpen(false)} aria-label="Giggal.ai home">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/giggal-logo-wordmark.png"
-                alt="Giggal.ai"
-                width={396}
-                height={96}
-                className="h-7 sm:h-8 w-auto"
-              />
+              {dark ? (
+                <span className="text-2xl sm:text-[28px] font-black tracking-tight leading-none text-white">
+                  Gig<span className="brand-wordmark-accent-light">gal.ai</span>
+                </span>
+              ) : (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src="/giggal-logo-wordmark.png"
+                  alt="Giggal.ai"
+                  width={396}
+                  height={96}
+                  className="h-7 sm:h-8 w-auto"
+                />
+              )}
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-5 xl:space-x-8 text-sm font-bold text-slate-600 whitespace-nowrap">
-              <Link href={catchAllLink.href} className="hover:text-indigo-600 transition-colors duration-200">
+            <nav className={`hidden lg:flex items-center space-x-5 xl:space-x-8 text-sm font-bold whitespace-nowrap ${dark ? 'text-slate-300' : 'text-slate-600'}`}>
+              <Link href={catchAllLink.href} className={`${dark ? 'hover:text-white' : 'hover:text-indigo-600'} transition-colors duration-200`}>
                 {catchAllLink.name}
               </Link>
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="hover:text-indigo-600 transition-colors duration-200"
+                  className={`${dark ? 'hover:text-white' : 'hover:text-indigo-600'} transition-colors duration-200`}
                 >
                   {link.name}
                 </Link>
@@ -87,12 +100,12 @@ export default function Navbar() {
             <div className="hidden lg:flex items-center gap-4 xl:gap-6 whitespace-nowrap">
               {/* Same page in Italian, or the Italian home when there is none.
                   Text link so it adds nothing to the LCP path. */}
-              <LanguageSwitcher current="en" />
+              <LanguageSwitcher current="en" tone={tone} />
               <a
                 href={SIGNIN_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm font-bold text-slate-600 hover:text-indigo-600 transition-colors"
+                className={`text-sm font-bold transition-colors ${dark ? 'text-slate-300 hover:text-white' : 'text-slate-600 hover:text-indigo-600'}`}
               >
                 Log in
               </a>
@@ -108,13 +121,13 @@ export default function Navbar() {
 
             {/* Mobile Menu Button */}
             <button
-              className="lg:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors"
+              className={`lg:hidden p-2 rounded-lg transition-colors ${dark ? 'hover:bg-white/10' : 'hover:bg-slate-100'}`}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen
-                ? <X className="w-5 h-5 text-slate-700" />
-                : <Menu className="w-5 h-5 text-slate-700" />
+                ? <X className={`w-5 h-5 ${dark ? 'text-white' : 'text-slate-700'}`} />
+                : <Menu className={`w-5 h-5 ${dark ? 'text-white' : 'text-slate-700'}`} />
               }
             </button>
           </div>

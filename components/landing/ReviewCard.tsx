@@ -87,3 +87,21 @@ export function Card({ r }: { r: Review }) {
     </a>
   )
 }
+
+// One sliding row of review cards. The row is drawn twice so translateX(-50%)
+// lands on an identical frame, which makes the loop seamless.
+export function MarqueeRow({ items, reverse, duration }: { items: Review[]; reverse?: boolean; duration: string }) {
+  const doubled = [...items, ...items]
+  return (
+    <div className="marquee-viewport">
+      <div
+        className={`marquee-track${reverse ? ' marquee-reverse' : ''}`}
+        style={{ animationDuration: duration }}
+      >
+        {doubled.map((r, i) => (
+          <Card key={`${r.url}-${i}`} r={r} />
+        ))}
+      </div>
+    </div>
+  )
+}

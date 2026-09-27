@@ -128,9 +128,11 @@ const LABEL: Record<Locale, string> = { en: 'Language', it: 'Lingua', de: 'Sprac
 export default function LanguageSwitcher({
   current,
   className = '',
+  tone = 'light',
 }: {
   current: Locale
   className?: string
+  tone?: 'light' | 'dark'
 }) {
   const pathname = usePathname() || '/'
   const [open, setOpen] = useState(false)
@@ -161,7 +163,9 @@ export default function LanguageSwitcher({
         aria-expanded={open}
         aria-label={LABEL[current]}
         title={LABEL[current]}
-        className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-sm font-bold text-slate-600 hover:text-indigo-600 hover:bg-slate-50 transition-colors"
+        className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-sm font-bold transition-colors ${
+          tone === 'dark' ? 'text-slate-300 hover:text-white hover:bg-white/10' : 'text-slate-600 hover:text-indigo-600 hover:bg-slate-50'
+        }`}
       >
         <Flag locale={current} className="w-5 h-3.5" />
         <span>{LOCALE_META[current].short}</span>
@@ -174,7 +178,9 @@ export default function LanguageSwitcher({
         <div
           role="menu"
           aria-label={LABEL[current]}
-          className="absolute right-0 mt-2 w-52 rounded-xl border border-slate-200 bg-white p-1.5 shadow-lg shadow-slate-900/10 z-50"
+          className={`absolute right-0 mt-2 w-52 rounded-xl border p-1.5 shadow-lg z-50 ${
+            tone === 'dark' ? 'border-slate-700 bg-slate-800 shadow-black/30' : 'border-slate-200 bg-white shadow-slate-900/10'
+          }`}
         >
           {LOCALES.map((loc) => {
             const active = loc === current
@@ -189,14 +195,16 @@ export default function LanguageSwitcher({
                 aria-current={active ? 'true' : undefined}
                 onClick={() => setOpen(false)}
                 className={`flex items-center justify-between rounded-lg px-3 py-2 text-sm font-semibold transition-colors ${
-                  active ? 'text-indigo-700 bg-indigo-50' : 'text-slate-700 hover:bg-slate-50 hover:text-indigo-700'
+                  tone === 'dark'
+                    ? active ? 'text-white bg-indigo-600/30' : 'text-slate-200 hover:bg-slate-700 hover:text-white'
+                    : active ? 'text-indigo-700 bg-indigo-50' : 'text-slate-700 hover:bg-slate-50 hover:text-indigo-700'
                 }`}
               >
                 <span className="flex items-center gap-2.5">
                   <Flag locale={loc} className="w-5 h-3.5" />
                   {LOCALE_META[loc].native}
                 </span>
-                {active ? <CheckIcon /> : <span className="text-xs font-bold text-slate-400">{LOCALE_META[loc].short}</span>}
+                {active ? <CheckIcon /> : <span className={`text-xs font-bold ${tone === 'dark' ? 'text-slate-500' : 'text-slate-400'}`}>{LOCALE_META[loc].short}</span>}
               </Link>
             )
           })}

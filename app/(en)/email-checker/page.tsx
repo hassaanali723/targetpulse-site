@@ -103,6 +103,7 @@ export default function CatchAllEmailCheckerPage() {
           variant="catchall"
           endpoint="/api/tools/catch-all-check"
           defaultEmail=""
+          emailFromQuery
         />
         <p className="text-center text-[13px] text-slate-500 font-medium mt-4">
           Free, no signup, no card. One address per check, full SMTP-level verification.

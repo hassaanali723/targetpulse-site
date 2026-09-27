@@ -85,6 +85,54 @@
   }
 
   /* Crisp low-lift card shadow */
+  /* Grid texture for dark sections (home hero on slate). */
+  .grid-lines-dark {
+    background-size: 40px 40px;
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  }
+
+  /* Home hero backdrop on slate. Three quiet layers behind the content:
+     a grid that shows in the middle and fades out to the edges, a soft
+     indigo light from the top behind the headline, and a faint emerald glow
+     low on the right. Pseudo-elements sit behind the text (isolation). */
+  .hero-art {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+  .hero-art::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-size: 48px 48px;
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 38%, #000 25%, transparent 78%);
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 38%, #000 25%, transparent 78%);
+  }
+  .hero-art::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background:
+      radial-gradient(ellipse 55% 45% at 50% -5%, rgba(99, 102, 241, 0.30), transparent 70%),
+      radial-gradient(ellipse 30% 30% at 88% 95%, rgba(16, 185, 129, 0.10), transparent 70%);
+  }
+
+  /* Wordmark accent on dark backgrounds: lighter indigo to emerald. */
+  .brand-wordmark-accent-light {
+    background: linear-gradient(to right, #818cf8, #34d399);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
   .card-vivid-shadow {
     box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(15, 23, 42, 0.04);
   }
@@ -215,6 +263,9 @@
 /* Reviews marquee — two rows, opposite directions, seamless infinite loop */
 .marquee-viewport {
   overflow: hidden;
+  /* Room above and below so the cards' shadows are not cut off. The rows
+     sit flush; this padding is the gap between them. */
+  padding: 6px 0 30px;
   -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
   mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
 }

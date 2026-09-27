@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, type Review, type Source } from './ReviewCard'
+import { MarqueeRow, type Review, type Source } from './ReviewCard'
 import ReviewWallMore from './ReviewWallMore'
 
 const phUrl = (id: number) =>
@@ -81,37 +81,35 @@ const ROW_ONE = MIXED.slice(0, 5)
 const ROW_TWO = MIXED.slice(5, WALL)
 const REST = MIXED.slice(WALL)
 
-function MarqueeRow({ items, reverse, duration }: { items: Review[]; reverse?: boolean; duration: string }) {
-  // Render the row twice so translateX(-50%) lands on an identical frame → seamless.
-  const doubled = [...items, ...items]
-  return (
-    <div className="marquee-viewport">
-      <div
-        className={`marquee-track${reverse ? ' marquee-reverse' : ''}`}
-        style={{ animationDuration: duration }}
-      >
-        {doubled.map((r, i) => (
-          <Card key={`${r.url}-${i}`} r={r} />
-        ))}
-      </div>
-    </div>
-  )
+// Visible text, so a localized home can pass its own. The reviews stay in
+// English as written (translating a review misrepresents it, plans/08 D4).
+export interface ReviewWallStrings {
+  title: string
+  sub: string
+  showAll: string // "{n}" = number of hidden reviews
+  showFewer: string
 }
 
-export default function ReviewWall() {
+export const REVIEW_WALL_EN: ReviewWallStrings = {
+  title: 'What customers say about Giggal.ai',
+  sub: 'Straight from G2, Product Hunt and SourceForge.',
+  showAll: 'Show all {n} more reviews',
+  showFewer: 'Show fewer reviews',
+}
+
+export default function ReviewWall({ strings: s = REVIEW_WALL_EN }: { strings?: ReviewWallStrings }) {
   return (
-    <section id="reviews" className="cv-section pt-12 pb-24 border-t border-slate-200 space-y-12 overflow-hidden">
+    <section id="reviews" className="cv-section py-20 md:py-24 space-y-12 overflow-hidden">
       <div className="max-w-2xl mx-auto px-6 text-center space-y-3">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Proven Impact, Validated by High-Growth Teams</h2>
-        <p className="text-sm md:text-base text-slate-600 font-medium">See how product and marketing teams use Giggal.ai to protect their domain health and keep lists clean.</p>
+        <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">{s.title}</h2>
+        <p className="text-base md:text-lg text-slate-600">{s.sub}</p>
       </div>
 
-      <div className="space-y-6">
+      <div>
         <MarqueeRow items={ROW_ONE} duration="36s" />
         <MarqueeRow items={ROW_TWO} reverse duration="32s" />
+        <ReviewWallMore reviews={REST} showAll={s.showAll} showFewer={s.showFewer} />
       </div>
-
-      <ReviewWallMore reviews={REST} />
     </section>
   )
 }

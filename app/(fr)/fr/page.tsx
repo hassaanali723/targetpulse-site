@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import HomeL10n, { type HomeContent } from '@/components/l10n/Home'
+import { MCP, REVIEW_BADGES, REVIEW_WALL } from '@/components/l10n/homeShared'
 import { hreflangAlternates } from '@/lib/i18n/clusters'
 
 // French home. No head term of its own in the data (the demand sits on
@@ -28,103 +29,147 @@ export const metadata: Metadata = {
   twitter: { card: 'summary_large_image', title: 'Service de vérification d’adresses email', description: DESC },
 }
 
+const heroLink = 'text-white font-semibold underline decoration-emerald-400 decoration-2 underline-offset-4 hover:decoration-white'
 const link = 'text-indigo-600 font-bold hover:underline'
 
 const content: HomeContent = {
   h1Lead: 'Vérification d’adresses email',
   h1Accent: 'qui résout le catch-all',
-  para1: (
+  heroSub: (
     <>
-      Un service de vérification d&apos;email qui contrôle la boîte elle-même, pas seulement la syntaxe. Taux de rebond{' '}
-      <strong className="text-indigo-600 font-extrabold">sous 3&nbsp;%</strong>, et les{' '}
-      <strong className="text-slate-900 font-extrabold">30&nbsp;% de chaque liste B2B</strong> que les autres outils
-      marquent «&nbsp;risqué&nbsp;» redeviennent délivrables.
+      Service de vérification d&apos;email avec vérification en masse&nbsp;: découvrez quelles adresses sont réelles, même sur les{' '}
+      <Link href="/fr/verification-catch-all" className={heroLink}>domaines catch-all</Link>.
     </>
   ),
-  para2: (
-    <>
-      <a href="#masse" className={link}>Vérification en masse</a> jusqu&apos;à 50&nbsp;000 adresses par fichier, plus une API.
-      Fonctionne sur les{' '}
-      <Link href="/fr/verification-catch-all" className={link}>domaines catch-all</Link>.
-    </>
-  ),
-  freeTitle: '1 000 vérifications offertes',
-  freeText: 'Commencez à nettoyer votre liste maintenant. Sans carte bancaire.',
-  ctaPrimary: { label: 'Vérifier une adresse gratuitement', href: '/fr/verifier-adresse-mail' },
-  ctaSecondary: { label: 'Voir les tarifs', href: '/fr/tarifs' },
-  proof: 'Plus de 500 millions d’emails vérifiés',
+  rating: { score: '4,9', on: 'sur', reviews: '(129 avis)' },
+  email: { label: 'Adresse email à vérifier', placeholder: 'nom@entreprise.fr', button: 'Vérifier gratuitement' },
+  listQuestion: 'Une liste entière à nettoyer\u00a0?',
+  listCta: 'Obtenez 1\u00a0000 vérifications d’email offertes',
+  noCard: 'Sans carte bancaire.',
   stats: [
-    { n: '500M+', l: 'Emails vérifiés' },
-    { n: '98,5 %', l: 'Précision sur les listes B2B' },
-    { n: '< 3 %', l: 'Taux de rebond après nettoyage' },
-    { n: '1 000', l: 'Crédits offerts, sans carte' },
+    { n: '500\u00a0M', suf: '+', l: 'Emails vérifiés' },
+    { n: '98,5', suf: '\u00a0%', l: 'Précision sur les listes B2B' },
+    { pre: '<\u00a0', n: '3', suf: '\u00a0%', l: 'Taux de rebond après nettoyage' },
+    { n: '1\u00a0000', l: 'Crédits offerts, sans carte' },
   ],
-  consoleTitle: 'Vérifiez une adresse en temps réel',
-  consoleText: 'Le même moteur que la vérification en masse, une adresse à la fois. Gratuit et sans inscription.',
+  bulk: {
+    id: 'masse',
+    title: 'Vérification d’emails en masse pour toute votre liste',
+    sub: 'Importez votre liste une seule fois\u00a0: nous vérifions chaque adresse qu’elle contient.',
+    points: [
+      'Un statut valide ou invalide pour chaque adresse',
+      'Une vraie réponse, même pour les adresses catch-all',
+      'CSV ou Excel, jusqu’à 50\u00a0000 adresses par fichier',
+      'Téléchargez la liste nettoyée dès qu’elle est prête',
+    ],
+  },
   catchAll: {
-    title: 'Pourquoi les adresses catch-all ont besoin d’un vrai résultat',
+    title: 'Pourquoi les adresses catch-all méritent votre attention',
     intro: (
       <>
-        Un{' '}
-        <Link href="/fr/verification-catch-all" className={link}>domaine catch-all</Link> accepte le courrier pour
-        n&apos;importe quelle adresse, qu&apos;elle existe ou non, donc la réponse SMTP sur laquelle les outils
-        standards s&apos;appuient ne dit rien. Ils écrivent «&nbsp;risqué&nbsp;» et vous laissent parier à
-        l&apos;aveugle sur un tiers de la liste&nbsp;:
+        Certains serveurs de messagerie d’entreprise acceptent n’importe quelle adresse, réelle ou
+        inventée. C’est ce qu’on appelle un{' '}
+        <Link href="/fr/verification-catch-all" className={link}>domaine catch-all</Link>. La plupart des
+        vérificateurs ne voient pas la différence, classent ces emails comme «&nbsp;risqué&nbsp;» et vous laissent
+        décider.
       </>
     ),
-    standardLabel: 'Vérificateurs standards',
-    standardStat: '35 %',
-    standardCaption: 'Risque de rebond moyen',
-    standardText: 'Ils vous obligent à jeter des contacts valides ou à risquer le blocage de vos domaines d’envoi.',
-    verifiedBadge: 'Vérifié',
-    verifiedStat: '< 3 %',
-    verifiedCaption: 'Rebonds à l’envoi',
-    verifiedText: 'Identifie les boîtes professionnelles actives pour que votre prospection soit lue.',
+    others: 'La plupart des vérificateurs',
+    othersDetail: 'Catch-all, pas de réponse claire',
+    ourDetail: 'Catch-all, boîte trouvée',
+    risky: 'Risqué',
+    deliverable: 'Délivrable',
+    othersText: 'À vous de choisir\u00a0: envoyer et risquer un rebond, ou supprimer un contact qui existe peut-être.',
+    ourText: 'Vous savez que l’adresse est réelle\u00a0: vous envoyez sans hésiter.',
   },
-  featuresId: 'masse',
-  featuresTitle: 'Vérificateur et testeur d’email : nettoyage en masse, API et intégrations avec un seul solde',
-  featuresText: 'Importez une liste, appelez l’API ou connectez votre CRM : chaque chemin exécute la même vérification d’adresse email.',
-  features: [
-    { title: 'Nettoyage de listes en masse', body: 'Importez un fichier CSV ou TXT et vérifiez des milliers de contacts en quelques minutes, doublons supprimés.' },
-    { title: 'Vérification catch-all', body: 'Confirme la délivrabilité sur les domaines professionnels catch-all que les contrôles standards marquent « inconnu ».' },
-    { title: 'Passerelles de sécurité', body: 'Vérifie les boîtes derrière Proofpoint, Mimecast et Barracuda, là où la plupart des vérificateurs s’arrêtent.' },
-    { title: 'API pour les développeurs', body: 'Intégrez la vérification en temps réel dans vos formulaires d’inscription ou vos applications.' },
-    { title: 'Intégrations', body: 'Synchronisez les contacts vérifiés avec HubSpot, Mailchimp, Zapier, n8n et vos outils de prospection habituels.' },
-    { title: 'Tarifs publics', body: 'Chaque palier de volume est publié, à l’usage ou par abonnement avec 10 % de remise.' },
-  ],
-  pricingId: 'tarifs',
-  pricingTitle: 'Des tarifs simples, en dollars',
-  pricingText: 'Vous ne payez que ce que vous utilisez. Les crédits n’expirent pas.',
-  contactHref: '/fr/contact',
-  faqTitle: 'Questions fréquentes',
-  faqMore: 'D’autres questions ?',
-  faqMoreLink: 'Écrivez-nous',
-  faq: [
-    {
-      q: 'Qu’est-ce qui distingue Giggal.ai des autres vérificateurs ?',
-      a: 'Il résout les adresses catch-all et celles protégées par des passerelles de sécurité (Mimecast, Proofpoint, Barracuda) avec un résultat clair, valide ou invalide, au lieu de l’étiquette « risqué » sur laquelle les autres outils abandonnent. Dans une liste B2B, ces adresses représentent environ un tiers du total.',
+  features: {
+    title: 'Vérificateur et testeur d’email : nettoyage en masse, API et intégrations avec un seul solde',
+    intro: 'Importez une liste, appelez l’API ou connectez votre CRM : chaque chemin exécute la même vérification d’adresse email.',
+    items: [
+      { title: 'Nettoyage de listes en masse', body: 'Importez un fichier CSV ou Excel et obtenez les résultats en quelques minutes.', points: ['Jusqu’à 50\u00a0000 adresses par fichier', 'Liste nettoyée téléchargeable en CSV'], link: 'Nettoyer une liste gratuitement' },
+      { title: 'Vérification catch-all', body: 'Une vraie réponse sur les domaines catch-all, plutôt qu’un «\u00a0inconnu\u00a0».', points: ['Un crédit, comme toute autre vérification', 'Fonctionne derrière des passerelles comme Mimecast et Proofpoint'], link: 'Comment fonctionne la vérification catch-all' },
+      { title: 'API pour les développeurs', body: 'Vérifiez les adresses dans vos formulaires d’inscription et vos applications.', points: ['Une adresse ou une liste entière par appel', 'Clés API depuis votre tableau de bord'], link: 'Documentation de l’API (en anglais)' },
+      { title: 'Intégrations CRM et applications', body: 'Envoyez les contacts nettoyés vers HubSpot, Mailchimp et bien d’autres.', points: ['Fonctionne avec les outils que vous utilisez déjà', 'Zapier et n8n pour tout le reste'], link: 'Voir toutes les intégrations' },
+      { title: 'Paiement à l’usage', body: 'Tous les prix sont publics. Les crédits n’expirent pas.', points: ['Sans engagement mensuel', 'Rechargez seulement quand vous en avez besoin'], link: 'Voir tous les tarifs' },
+      { title: 'Support prioritaire', body: 'Bloqué sur un point\u00a0? Nos ingénieurs vous aident directement.', points: ['De vraies personnes, pas un bot', 'Par email ou via le formulaire de contact'], link: 'Contacter le support' },
+    ],
+    preview: {
+      done: 'Terminé',
+      deliverable: 'Délivrable',
+      undeliverable: 'Non délivrable',
+      otherTools: 'Autres outils',
+      risky: 'Risqué',
+      credit: '1 crédit',
+      email: '1 email',
+      creditNote: 'Les vérifications catch-all coûtent le même prix.',
+      reply: '24 heures',
+      replyNote: 'Notre délai de réponse habituel.',
     },
-    {
-      q: 'Quelle est la précision de la vérification ?',
-      a: '98,5 % sur les listes professionnelles, avec un taux de rebond qui reste sous 3 % après nettoyage. Les résultats « inconnu » sont remboursés en crédits.',
-    },
-    {
-      q: 'Comment fonctionnent les crédits ?',
-      a: 'Une vérification consomme un crédit, quel que soit le type d’adresse : catch-all et passerelle compris. Les crédits n’expirent pas. Les 1 000 premiers sont offerts, sans carte.',
-    },
-    {
-      q: 'Puis-je importer un fichier ?',
-      a: 'Oui : CSV, TXT ou Excel. Les résultats arrivent en quelques minutes même sur de grandes listes, avec export CSV, Excel ou JSON et doublons supprimés.',
-    },
-    {
-      q: 'Y a-t-il une API ?',
-      a: 'Oui, une API REST avec vérification unitaire et en masse, plus un serveur MCP pour vérifier depuis Claude, ChatGPT et Cursor. La documentation est en anglais.',
-    },
-    {
-      q: 'Puis-je tester une seule adresse sans m’inscrire ?',
-      a: 'Oui, avec le vérificateur d’email gratuit : sans inscription, sans carte, sans envoyer le moindre message au destinataire.',
-    },
-  ],
+  },
+  pricing: {
+    id: 'tarifs',
+    claimTop: 'Petit prix.',
+    claimBottom: 'Excellent rapport qualité-prix.',
+    fallbackTitle: 'Des tarifs simples, en dollars',
+    priceLine: (p) => `${p} pour 10\u00a0000 emails, vérification catch-all comprise.`,
+    claim: { before: '', link: 'Comparez avec les autres vérificateurs', after: '.' },
+    text: 'Vous ne payez que ce que vous utilisez. Les crédits n’expirent pas.',
+  },
+  switcher: {
+    id: 'alternatives',
+    title: 'Vous changez de vérificateur\u00a0?',
+    intro: 'Comparez Giggal.ai aux autres outils de vérification d’email\u00a0: catch-all, prix et précision.',
+    items: [
+      { name: 'ZeroBounce', href: '/fr/alternative-a-zerobounce', blurb: 'Résolvez les adresses catch-all que ZeroBounce classe comme inconnues.' },
+      { name: 'NeverBounce', href: '/fr/alternative-a-neverbounce', blurb: 'Paiement à l’usage, avec des crédits qui n’expirent jamais.' },
+      { name: 'Hunter', href: '/fr/alternative-a-hunter', blurb: 'Un vérificateur dédié plutôt qu’un outil de recherche d’emails avec vérification incluse.' },
+      { name: 'Snov.io', href: '/fr/alternative-a-snovio', blurb: 'Un vérificateur dédié, pas un simple module de plateforme de prospection.' },
+      { name: 'Apollo', href: '/fr/alternative-a-apollo', blurb: 'Une vérification pensée pour la délivrabilité, pas greffée sur une suite commerciale.' },
+      { name: 'ZeroBounce vs NeverBounce', href: '/fr/comparatif/zerobounce-vs-neverbounce', blurb: 'Les deux outils comparés sur le catch-all, les prix et les crédits.' },
+    ],
+    all: 'Comparer les 28 vérificateurs (en anglais)',
+  },
+  integrations: {
+    title: 'Connectez vos outils marketing',
+    sub: 'Giggal.ai se connecte aux principaux CRM et services d’emailing pour synchroniser automatiquement les contacts nettoyés.',
+    more: 'Plus de 80 autres',
+    alt: (n) => `Intégration ${n} pour la vérification d’email avec Giggal.ai`,
+  },
+  reviewBadges: REVIEW_BADGES.fr,
+  reviewWall: REVIEW_WALL.fr,
+  mcp: MCP.fr,
+  faq: {
+    title: 'Questions fréquentes',
+    sub: 'Des réponses courtes sur le catch-all, la précision, les prix et la configuration.',
+    more: 'D’autres questions ?',
+    moreLink: 'Écrivez-nous',
+    items: [
+      {
+        q: 'Qu’est-ce qui distingue Giggal.ai des autres vérificateurs ?',
+        a: 'Il résout les adresses catch-all et celles protégées par des passerelles de sécurité (Mimecast, Proofpoint, Barracuda) avec un résultat clair, valide ou invalide, au lieu de l’étiquette « risqué » sur laquelle les autres outils abandonnent. Dans une liste B2B, ces adresses représentent environ un tiers du total.',
+      },
+      {
+        q: 'Quelle est la précision de la vérification ?',
+        a: '98,5 % sur les listes professionnelles, avec un taux de rebond qui reste sous 3 % après nettoyage. Les résultats « inconnu » sont remboursés en crédits.',
+      },
+      {
+        q: 'Comment fonctionnent les crédits ?',
+        a: 'Une vérification consomme un crédit, quel que soit le type d’adresse : catch-all et passerelle compris. Les crédits n’expirent pas. Les 1 000 premiers sont offerts, sans carte.',
+      },
+      {
+        q: 'Puis-je importer un fichier ?',
+        a: 'Oui\u00a0: CSV ou Excel, jusqu’à 50\u00a0000 adresses par fichier. Les résultats arrivent en quelques minutes même sur de grandes listes, et la liste nettoyée se télécharge en CSV.',
+      },
+      {
+        q: 'Y a-t-il une API ?',
+        a: 'Oui, une API REST avec vérification unitaire et en masse, plus un serveur MCP pour vérifier depuis Claude, ChatGPT et Cursor. La documentation est en anglais.',
+      },
+      {
+        q: 'Puis-je tester une seule adresse sans m’inscrire ?',
+        a: 'Oui, avec le vérificateur d’email gratuit : sans inscription, sans carte, sans envoyer le moindre message au destinataire.',
+      },
+    ],
+  },
   ctaHeadline: 'Commencez avec 1 000 vérifications offertes',
 }
 

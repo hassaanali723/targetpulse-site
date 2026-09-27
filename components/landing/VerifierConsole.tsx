@@ -49,6 +49,9 @@ interface VerifierConsoleProps {
   defaultEmail?: string
   // Sign-up URL used by the quota-reached CTA in the catch-all variant.
   signupUrl?: string
+  // Read ?email= from the URL and run that check once on load. Set on
+  // /email-checker, which the home page's hero email box submits to.
+  emailFromQuery?: boolean
   // Every visible label. Defaults to English; the Italian pages pass
   // lib/i18n/it.ts `console`. The API stays English and returns verdict
   // types; the card maps the type to the local title and line.
@@ -213,6 +216,7 @@ export default function VerifierConsole({
   defaultEmail = 'info@giggal.ai',
   signupUrl = SIGNUP_URL,
   strings = EN_CONSOLE_STRINGS,
+  emailFromQuery = false,
 }: VerifierConsoleProps = {}) {
   const t = strings
   const [email, setEmail] = useState(defaultEmail)
@@ -229,8 +233,22 @@ export default function VerifierConsole({
     if (logScrollRef.current) logScrollRef.current.scrollTop = logScrollRef.current.scrollHeight
   }, [logs])
 
-  async function runProbe() {
-    const value = email.trim()
+  // Arriving from the home page's hero box (/email-checker?email=...): fill
+  // the input with that address and run it once. Read on the client so the
+  // page stays statically rendered.
+  useEffect(() => {
+    if (!emailFromQuery) return
+    const q = new URLSearchParams(window.location.search).get('email')?.trim()
+    if (!q || q.length > 254 || !q.includes('@')) return
+    setEmail(q)
+    runProbe(q)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  // `override` is the address from the URL; button and Enter pass nothing
+  // (or a click event), so they use the input's value.
+  async function runProbe(override?: unknown) {
+    const value = (typeof override === 'string' ? override : email).trim()
     if (!value || running) return
 
     const runId = ++runIdRef.current

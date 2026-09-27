@@ -1,156 +1,133 @@
-'use client'
+import { Star, ArrowRight } from 'lucide-react'
 
-import React, { useEffect, useRef } from 'react'
-import Script from 'next/script'
-
-declare global {
-  interface Window {
-    Trustpilot?: { loadFromElement: (el: HTMLElement, forceReload?: boolean) => void }
-  }
+// One plain card per review platform: name, score, stars, review count and a
+// link to the reviews. Scores are typed in by hand, so update them here when
+// they change. A platform with `rating: null` shows the link only.
+// Trustpilot has no card (too few reviews to show a score); it keeps a small
+// "leave a review" link under the cards so reviews can still come in.
+type Platform = {
+  name: string
+  logo: string
+  href: string
+  rating: number | null
+  reviews: number | null
 }
 
-const PH_URL =
-  'https://www.producthunt.com/products/giggal-ai/reviews?utm_source=badge-product_rating&utm_medium=badge&utm_source=badge-giggal-ai'
-const SOURCEFORGE_URL = 'https://sourceforge.net/software/product/Giggal.ai/'
-const SF_SCRIPT_SRC = 'https://b.sf-syn.com/badge_js?sf_id=4117310&variant_id=sf'
+const PLATFORMS: Platform[] = [
+  {
+    name: 'Product Hunt',
+    logo: '/reviews/producthunt-logo.svg',
+    href: 'https://www.producthunt.com/products/giggal-ai/reviews',
+    rating: 4.9,
+    reviews: 54,
+  },
+  {
+    name: 'SourceForge',
+    logo: '/reviews/sourceforge-logo.svg',
+    href: 'https://sourceforge.net/software/product/Giggal.ai/',
+    rating: 4.9,
+    reviews: 129,
+  },
+  {
+    name: 'G2',
+    logo: '/reviews/G2_logo.svg',
+    href: 'https://www.g2.com/products/giggal/reviews',
+    rating: null,
+    reviews: null,
+  },
+]
 
-// Four equal bordered chips, one per platform, each holding that platform's
-// ORIGINAL asset (PH rating embed / G2 logo / SF hex badge / TP Review
-// Collector widget). Height contract: every cell gets the SAME explicit
-// height (works in 1-col, 2-col, and 4-col layouts alike — items-stretch
-// can't equalize a 1-col stack). The PH embed sizes by height (h-full
-// w-auto) so it renders at exactly the shared height too.
-const CELL_H = 'h-[112px]'
-const chip =
-  `${CELL_H} flex flex-col items-center justify-center gap-2 rounded-[10px] bg-white py-3 px-4 transition-colors duration-200`
+const TRUSTPILOT_URL = 'https://www.trustpilot.com/review/giggal.ai'
 
-export default function ReviewBadges() {
-  const trustpilotRef = useRef<HTMLDivElement>(null)
+// Visible text, so a localized home can pass its own.
+export interface ReviewBadgeStrings {
+  heading: string
+  readOn: (platform: string) => string
+  rating: (n: number) => string
+  reviews: (n: number) => string
+  verified: string
+  read: string
+  used: string
+  leave: string
+}
 
-  // Trustpilot re-hydration: mount + script-ready + bfcache restore.
-  useEffect(() => {
-    const rehydrate = () => {
-      if (window.Trustpilot && trustpilotRef.current) {
-        window.Trustpilot.loadFromElement(trustpilotRef.current, true)
-      }
-    }
-    rehydrate()
-    window.addEventListener('pageshow', rehydrate)
-    return () => window.removeEventListener('pageshow', rehydrate)
-  }, [])
+export const REVIEW_BADGES_EN: ReviewBadgeStrings = {
+  heading: 'Reviewed by Real Teams',
+  readOn: (platform) => `Read Giggal.ai reviews on ${platform}`,
+  rating: (n) => n.toFixed(1),
+  reviews: (n) => `${n} reviews`,
+  verified: 'Verified user reviews',
+  read: 'Read reviews',
+  used: 'Used Giggal.ai?',
+  leave: 'Leave a review on Trustpilot',
+}
 
-  // SourceForge re-hydration: SF has no reload API — re-inject its script;
-  // it re-scans .sf-root divs each time it runs.
-  useEffect(() => {
-    const rehydrateSF = () => {
-      document
-        .querySelectorAll(`script[src="${SF_SCRIPT_SRC}"]`)
-        .forEach((s) => s.remove())
-      const s = document.createElement('script')
-      s.async = true
-      s.src = SF_SCRIPT_SRC
-      document.body.appendChild(s)
-    }
-    rehydrateSF()
-    window.addEventListener('pageshow', rehydrateSF)
-    return () => window.removeEventListener('pageshow', rehydrateSF)
-  }, [])
-
+export default function ReviewBadges({ strings: s = REVIEW_BADGES_EN }: { strings?: ReviewBadgeStrings }) {
   return (
-    <section className="cv-section max-w-6xl mx-auto px-6 pt-6 pb-24">
-      <div className="text-center max-w-2xl mx-auto space-y-2.5 mb-12">
-        <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
-          Reviewed by Real Teams
-        </h2>
-        <p className="text-sm text-slate-600 font-medium">
-          Rated and trusted across the platforms buyers actually check.
-        </p>
+    <section className="cv-section max-w-5xl mx-auto px-6 py-20 md:py-24">
+      <div className="text-center max-w-2xl mx-auto mb-12">
+        <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">{s.heading}</h2>
       </div>
 
-      {/* Three equal rectangles: 1-col mobile, 3-col desktop */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-[800px] mx-auto">
-        {/* Product Hunt — official rating embed (has its own coral border) */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-4xl mx-auto">
+        {PLATFORMS.map((p) => (
+          <a
+            key={p.name}
+            href={p.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={s.readOn(p.name)}
+            className="group bg-white border border-slate-200 hover:border-slate-300 rounded-2xl p-6 flex flex-col items-center text-center transition-colors"
+          >
+            <div className="flex items-center gap-2.5">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={p.logo} alt="" aria-hidden="true" width={32} height={32} loading="lazy" className="w-8 h-8 object-contain" />
+              <span className="text-base font-bold text-slate-900">{p.name}</span>
+            </div>
+
+            {p.rating !== null ? (
+              <>
+                <p className="mt-5 text-4xl font-extrabold text-slate-900 leading-none">
+                  {s.rating(p.rating)}
+                  <span className="text-lg font-semibold text-slate-400"> / 5</span>
+                </p>
+                <div className="mt-3 flex gap-0.5" aria-hidden="true">
+                  {[0, 1, 2, 3, 4].map((i) => (
+                    <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
+                  ))}
+                </div>
+                {p.reviews !== null && <p className="mt-2 text-sm text-slate-500">{s.reviews(p.reviews)}</p>}
+              </>
+            ) : (
+              <>
+                <div className="mt-5 flex gap-0.5" aria-hidden="true">
+                  {[0, 1, 2, 3, 4].map((i) => (
+                    <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
+                  ))}
+                </div>
+                <p className="mt-2 text-sm text-slate-500">{s.verified}</p>
+              </>
+            )}
+
+            <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-indigo-600 group-hover:underline">
+              {s.read}
+              <ArrowRight className="w-4 h-4" />
+            </span>
+          </a>
+        ))}
+      </div>
+
+      <p className="mt-8 text-center text-sm text-slate-500">
+        {s.used}{' '}
         <a
-          href={PH_URL}
+          href={TRUSTPILOT_URL}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Read Giggal.ai reviews on Product Hunt"
-          className={`${CELL_H} flex items-center justify-center`}
+          className="font-bold text-slate-700 hover:text-indigo-600 hover:underline"
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="https://api.producthunt.com/widgets/embed-image/v1/product_rating.svg?product_id=1181039&theme=light"
-            alt="Giggal.ai on Product Hunt"
-            width={242}
-            height={108}
-            loading="lazy"
-            decoding="async"
-            className="h-full w-auto max-w-full object-contain"
-          />
+          {s.leave}
         </a>
-
-        {/* SourceForge — original hex badge (logo + stars + "user reviews"),
-            hydrated in place by their script. Amber frame. */}
-        <div className={`${chip} border border-amber-500/50 hover:border-amber-500`}>
-          <div
-            className="sf-root flex items-center justify-center"
-            data-id="4117310"
-            data-badge="light-default"
-            data-variant-id="sf"
-            style={{ width: '72px' }}
-          >
-            <a
-              href={SOURCEFORGE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Read Giggal.ai reviews on SourceForge"
-              className="text-[13px] font-semibold text-slate-500"
-            >
-              SourceForge reviews
-            </a>
-          </div>
-        </div>
-
-        {/* Trustpilot — official Review Collector TrustBox, snippet kept
-            VERBATIM as provided in the Trustpilot dashboard (attributes,
-            token, and fallback anchor untouched). Only the outer chip is
-            our layout container. */}
-        <div className={`${chip} border border-[#00B67A]/50 hover:border-[#00B67A]`}>
-          <div className="w-full max-w-[210px]">
-            {/* TrustBox widget - Review Collector */}
-            <div
-              ref={trustpilotRef}
-              className="trustpilot-widget"
-              data-locale="en-US"
-              data-template-id="56278e9abfbbba0bdcd568bc"
-              data-businessunit-id="6a5fcced4feea6f63067e572"
-              data-style-height="52px"
-              data-style-width="100%"
-              data-token="86ebd706-f637-4f02-8a2e-81a5348fb7de"
-            >
-              <a href="https://www.trustpilot.com/review/giggal.ai" target="_blank" rel="noopener">
-                Trustpilot
-              </a>
-            </div>
-            {/* End TrustBox widget */}
-          </div>
-        </div>
-      </div>
-
-      {/* TrustBox script — per Trustpilot's install instructions ("as close
-          to the top of the page as possible"); afterInteractive loads it
-          right after hydration. onLoad + the pageshow effect use Trustpilot's
-          own documented SPA API (Trustpilot.loadFromElement) so the widget
-          survives client-side navigation and bfcache restores. */}
-      <Script
-        src="https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js"
-        strategy="afterInteractive"
-        onLoad={() => {
-          if (window.Trustpilot && trustpilotRef.current) {
-            window.Trustpilot.loadFromElement(trustpilotRef.current, true)
-          }
-        }}
-      />
+      </p>
     </section>
   )
 }

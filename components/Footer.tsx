@@ -2,7 +2,6 @@
 import React from 'react'
 import { Linkedin, Youtube, Facebook, Instagram, ArrowUpRight } from 'lucide-react'
 import Link from 'next/link'
-import Wordmark from '@/components/Wordmark'
 
 // Only profiles that carry the Giggal name. A social href is still text on the
 // page, so a profile on an old handle would put that name in the footer of
@@ -43,32 +42,54 @@ const legalLinks = [
   { name: 'Cancellation', href: '/terms-of-service#cancellation-policy' },
 ]
 
+// Every other language home, in the site's language order (lib/i18n/clusters
+// LOCALES). Names and homes match lib/i18n/strings.ts.
+const otherLanguages = [
+  { href: '/it', lang: 'it', name: 'Italiano' },
+  { href: '/de', lang: 'de', name: 'Deutsch' },
+  { href: '/es', lang: 'es', name: 'Español' },
+  { href: '/pt-br', lang: 'pt-BR', name: 'Português (Brasil)' },
+  { href: '/fr', lang: 'fr', name: 'Français' },
+]
+
+// Dark footer, the same slate as the home page hero.
 const linkClass =
-  'inline-flex items-center gap-1 text-[14px] font-medium text-slate-500 hover:text-indigo-600 transition-colors duration-200'
-const headingClass = 'text-[11px] font-bold uppercase tracking-[0.16em] text-slate-900 mb-4'
+  'inline-flex items-center gap-1 text-[14px] font-medium text-slate-400 hover:text-white transition-colors duration-200'
+const headingClass = 'text-[11px] font-bold uppercase tracking-[0.16em] text-white mb-4'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="border-t border-slate-200 bg-white text-slate-500">
+    <footer className="relative bg-slate-900 text-slate-400">
+      <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-indigo-400/60 to-transparent" />
       <div className="max-w-6xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 mb-12">
           {/* Brand column */}
           <div className="md:col-span-3 space-y-4">
             <Link href="/" className="inline-flex items-center" aria-label="Giggal.ai home">
-              <Wordmark className="text-2xl" />
+              <span className="text-2xl font-black tracking-tight leading-none text-white">
+                Gig<span className="brand-wordmark-accent-light">gal.ai</span>
+              </span>
             </Link>
-            <p className="text-[13.5px] text-slate-500 max-w-sm leading-relaxed font-medium">
+            <p className="text-[13.5px] text-slate-400 max-w-sm leading-relaxed font-medium">
               High-performance SMTP verification that keeps your campaigns landing in real inboxes,
               including catch-all and accept-all domains other tools skip.
             </p>
 
-            {/* Other languages. Plain links so the crawl path to the Italian
-                site exists from every English page, not only from the head tags. */}
-            <p className="text-[12px] font-medium text-slate-500">
-              Language: <span className="font-bold text-slate-800">English</span> ·{' '}
-              <Link href="/it" hrefLang="it" lang="it" className="hover:text-indigo-600">Italiano</Link>
+            {/* Other languages. Plain links so the crawl path to every
+                language site exists from every English page, not only from
+                the head tags. */}
+            <p className="text-[12.5px] font-medium text-slate-400 leading-relaxed">
+              Language: <span className="font-bold text-white">English</span>
+              {otherLanguages.map((l) => (
+                <React.Fragment key={l.href}>
+                  {' · '}
+                  <Link href={l.href} hrefLang={l.lang} lang={l.lang} className="hover:text-white">
+                    {l.name}
+                  </Link>
+                </React.Fragment>
+              ))}
             </p>
 
             {/* Social icons */}
@@ -80,7 +101,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-9 h-9 rounded-lg bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-indigo-50 hover:border-indigo-200 hover:text-indigo-600 transition-all duration-200"
+                  className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:bg-white/10 hover:text-white transition-all duration-200"
                 >
                   <Icon className="w-4 h-4" />
                 </a>
@@ -170,11 +191,11 @@ export default function Footer() {
         </div>
 
         {/* Divider + copyright */}
-        <div className="pt-8 border-t border-slate-100 text-center">
+        <div className="pt-8 border-t border-white/10 text-center">
           <p className="text-[12px] font-medium text-slate-500">
             © {currentYear}{' '}
-            <span className="font-bold text-slate-800">
-              Gig<span className="brand-wordmark-accent">gal.ai</span>
+            <span className="font-bold text-white">
+              Gig<span className="brand-wordmark-accent-light">gal.ai</span>
             </span>
             . All rights reserved.
           </p>

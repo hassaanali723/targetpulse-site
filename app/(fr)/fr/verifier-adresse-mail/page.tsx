@@ -101,6 +101,7 @@ export default function VerifierAdresseMailPage() {
       {/* ── L'OUTIL ──────────────────────────────────────────── */}
       <section className="cv-section max-w-5xl mx-auto px-6 pb-16">
         <VerifierConsole
+          emailFromQuery
           variant="catchall"
           endpoint="/api/tools/catch-all-check"
           defaultEmail=""
