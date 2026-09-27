@@ -78,6 +78,9 @@ function inline(text: string, locale: BlogLocale = 'en'): string {
     return `<a href="${loc.href}" class="blog-link"${lang}>${label}</a>`
   })
   out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+  // Inline code for SMTP codes and addresses, e.g. `550 5.1.1`. Text is
+  // already escaped above, so the contents are safe to wrap as-is.
+  out = out.replace(/`([^`]+)`/g, '<code class="blog-code">$1</code>')
   return out
 }
 

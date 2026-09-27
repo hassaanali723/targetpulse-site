@@ -65,24 +65,30 @@ export function FeaturedPostCard({ post, readMore }: { post: PostCardData; readM
     <article className="group">
       <Link
         href={post.href}
-        className="grid overflow-hidden rounded-3xl border border-slate-200 bg-white transition-all duration-200 hover:border-indigo-200 hover:shadow-2xl hover:shadow-indigo-900/10 md:grid-cols-2"
+        className="grid overflow-hidden rounded-3xl border border-slate-200 bg-white transition-all duration-200 hover:border-indigo-200 hover:shadow-2xl hover:shadow-indigo-900/10 md:grid-cols-2 md:items-center"
       >
+        {/* The frame keeps the cover's own 1200x630 ratio at every width, so the
+            logo and headline are never cropped. If the text column is taller,
+            the frame sits centred on the card's dark cover colour instead of
+            being stretched and cropped. */}
         {post.image ? (
-          <div className="relative aspect-[1200/630] w-full overflow-hidden bg-slate-100 md:aspect-auto md:h-full md:min-h-[300px]">
-            <Image
-              src={post.image}
-              alt={post.imageAlt || post.title}
-              fill
-              priority
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-            />
+          <div className="flex w-full items-center self-stretch bg-[#1e1b4b]">
+            <div className="relative aspect-[1200/630] w-full overflow-hidden">
+              <Image
+                src={post.image}
+                alt={post.imageAlt || post.title}
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+              />
+            </div>
           </div>
         ) : (
-          <div className="aspect-[1200/630] w-full bg-gradient-to-br from-indigo-950 to-indigo-800 md:aspect-auto md:h-full" />
+          <div className="aspect-[1200/630] w-full self-stretch bg-gradient-to-br from-indigo-950 to-indigo-800" />
         )}
 
-        <div className="flex flex-col justify-center p-7 md:p-10">
+        <div className="flex flex-col justify-center p-7 md:p-9">
           <time dateTime={post.date} className="text-[12px] font-bold uppercase tracking-wider text-indigo-600">
             {post.dateLabel}
           </time>
