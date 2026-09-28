@@ -12,6 +12,7 @@ export function GET() {
       'sitemap-compare.xml',
       'sitemap-integrations.xml',
       'sitemap-blog.xml',
+      'sitemap-glossary.xml',
       'sitemap-it.xml',
       'sitemap-de.xml',
       'sitemap-es.xml',

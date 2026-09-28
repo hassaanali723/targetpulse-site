@@ -35,6 +35,7 @@ export const footer = {
     heading: 'Recursos',
     links: [
       { name: 'Blog', href: '/es/blog' },
+      { name: 'Glosario', href: '/es/glosario' },
       { name: 'Comparativa de verificadores (en inglés)', href: '/alternatives' },
       { name: 'Alternativa a ZeroBounce', href: '/es/alternativa-a-zerobounce' },
       { name: 'Alternativa a NeverBounce', href: '/es/alternativa-a-neverbounce' },

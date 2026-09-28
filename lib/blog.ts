@@ -41,7 +41,7 @@ export interface Post extends PostMeta {
   toc: TocItem[]
 }
 
-function parseFrontmatter(raw: string): { data: Record<string, string>; body: string } {
+export function parseFrontmatter(raw: string): { data: Record<string, string>; body: string } {
   const match = /^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/.exec(raw)
   if (!match) return { data: {}, body: raw }
   const data: Record<string, string> = {}
@@ -123,7 +123,7 @@ function slugify(text: string): string {
     .replace(/(^-|-$)/g, '')
 }
 
-function renderMarkdown(body: string, locale: BlogLocale): { html: string; toc: TocItem[] } {
+export function renderMarkdown(body: string, locale: BlogLocale): { html: string; toc: TocItem[] } {
   const blocks = body.trim().split(/\n{2,}/)
   const html: string[] = []
   const toc: TocItem[] = []

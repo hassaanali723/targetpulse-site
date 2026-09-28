@@ -35,6 +35,7 @@ export const footer = {
     heading: 'Ressourcen',
     links: [
       { name: 'Blog', href: '/de/blog' },
+      { name: 'Glossar', href: '/de/glossar' },
       { name: 'Verifizierer im Vergleich (Englisch)', href: '/alternatives' },
       { name: 'ZeroBounce Alternative', href: '/de/zerobounce-alternative' },
       { name: 'NeverBounce Alternative', href: '/de/neverbounce-alternative' },

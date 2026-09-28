@@ -132,6 +132,11 @@ export default function Footer() {
                   Blog
                 </Link>
               </li>
+              <li>
+                <Link href="/glossary" className={linkClass}>
+                  Glossary
+                </Link>
+              </li>
               {/* /alternatives is the ranked guide we wrote. The generated
                   /compare grid left the footer (plans/11 item 8): a 125-word
                   hub was the second most linked page on the site. The

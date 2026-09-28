@@ -14,6 +14,7 @@ export const nav = {
     { name: 'Integrazioni', href: '/it/integrazioni' },
     { name: 'Prezzi', href: '/it/prezzi' },
     { name: 'Blog', href: '/it/blog' },
+      { name: 'Glossario', href: '/it/glossario' },
     { name: 'Contatti', href: '/it/contatti' },
   ],
   login: 'Accedi',

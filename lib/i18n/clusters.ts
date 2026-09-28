@@ -13,6 +13,8 @@
 // `pt-BR`, because the Portuguese demand is Brazilian (plans/12 section 8
 // item 9); its URL prefix stays lower-case, `/pt-br/`.
 
+import { GLOSSARY_CLUSTERS } from '@/lib/i18n/glossary'
+
 export type Locale = 'en' | 'it' | 'de' | 'es' | 'pt-br' | 'fr'
 
 export const LOCALES: Locale[] = ['en', 'it', 'de', 'es', 'pt-br', 'fr']
@@ -71,6 +73,10 @@ export const CLUSTERS = {
   terms: { en: '/terms-of-service', it: '/it/termini', de: '/de/agb', es: '/es/terminos', 'pt-br': '/pt-br/termos', fr: '/fr/conditions' },
   privacy: { en: '/privacy-policy', it: '/it/privacy', de: '/de/datenschutz', es: '/es/privacidad', 'pt-br': '/pt-br/privacidade', fr: '/fr/confidentialite' },
   refund: { en: '/refund-policy', it: '/it/rimborsi', de: '/de/rueckerstattung', es: '/es/reembolsos', 'pt-br': '/pt-br/reembolsos', fr: '/fr/remboursements' },
+  // The glossary hub and its 60 terms live in lib/i18n/glossary.ts (generated
+  // from the term list) and are spread in here so every consumer of CLUSTERS
+  // treats them like any other page.
+  ...GLOSSARY_CLUSTERS,
 } satisfies Record<string, Cluster>
 
 export type ClusterId = keyof typeof CLUSTERS

@@ -13,6 +13,8 @@ import { allPairs } from '@/lib/compare'
 import { ZAPIER_APPS } from '@/lib/zapierApps'
 import { isAltIndexed, isCompareIndexed, isZapierIndexed, pastSitemapGrace } from '@/lib/indexPolicy'
 import { getAllPosts } from '@/lib/blog'
+import { getAllTerms } from '@/lib/glossary'
+import { GLOSSARY_HUB } from '@/lib/i18n/glossary'
 import { CLUSTERS, italianUrls, localeUrls, type Cluster } from '@/lib/i18n/clusters'
 
 export const SITE = 'https://giggal.ai'
@@ -146,6 +148,18 @@ export function blogEntries(): SitemapEntry[] {
   ]
 }
 
+// ── glossary ────────────────────────────────────────────────────────────
+// The English glossary. Each term carries its own date; the hub carries the
+// newest term's date. Localized terms are listed in their language's sitemap.
+export function glossaryEntries(): SitemapEntry[] {
+  const terms = getAllTerms()
+  const newest = terms.map((t) => t.updated || t.date).sort().pop()
+  return [
+    { path: GLOSSARY_HUB.en, lastModified: newest },
+    ...terms.map((t) => ({ path: `${GLOSSARY_HUB.en}/${t.slug}`, lastModified: t.updated || t.date || undefined })),
+  ]
+}
+
 // ── italian ─────────────────────────────────────────────────────────────
 // Every Italian URL, from the cluster map plus the Italian-only pages. The
 // lastmod is the launch date for the static pages and the post's own date
@@ -167,15 +181,25 @@ function localeEntries(locale: 'it' | 'de' | 'es' | 'pt-br' | 'fr', launch: stri
   const hub = `/${locale}/blog`
   const postDate = new Map(posts.map((p) => [`${hub}/${p.slug}`, p.updated || p.date]))
   const newest = posts.map((p) => p.updated || p.date).sort().pop()
+  // Glossary terms: only the ones whose file exists in this language are
+  // listed, each with its own date; the glossary hub takes the newest.
+  const ghub = GLOSSARY_HUB[locale]
+  const terms = getAllTerms(locale)
+  const termDate = new Map(terms.map((t) => [`${ghub}/${t.slug}`, t.updated || t.date]))
+  const newestTerm = terms.map((t) => t.updated || t.date).sort().pop()
   return localeUrls(locale)
     .filter((u) => u === hub || postDate.has(u) || !u.startsWith(`${hub}/`))
+    .filter((u) => u === ghub || termDate.has(u) || !u.startsWith(`${ghub}/`))
     .map((path) => ({
       path,
       lastModified:
         postDate.get(path) ||
+        termDate.get(path) ||
         (path === hub && newest
           ? newest
-          : path === CLUSTERS.home[locale]
+          : path === ghub
+            ? newestTerm
+            : path === CLUSTERS.home[locale]
             ? HOMES_REDESIGNED
             : competitorPageUrls.has(path)
               ? COMPETITOR_PAGES_SHIPPED

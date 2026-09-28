@@ -16,6 +16,7 @@ import { RAW_OFFERS } from '@/components/landing/pricingOffers'
 import { GIGGAL, ALL_COMPETITOR_SLUGS, COMPETITORS } from '@/lib/competitorPricing'
 import { ZAPIER_APPS } from '@/lib/zapierApps'
 import { getAllPosts } from '@/lib/blog'
+import { getAllTerms } from '@/lib/glossary'
 
 const SITE = 'https://giggal.ai'
 const APP = 'https://emailverifier.giggal.ai'
@@ -100,6 +101,10 @@ export function llmsFull(): string {
   const priceLines = RAW_OFFERS.map(
     (o) => `- ${num(o.credits)} credits: ${usd(o.price)} ($${(o.price / o.credits).toFixed(5)} per email)`,
   ).join('\n')
+
+  const termLines = getAllTerms()
+    .map((t) => `- [${t.title}](${SITE}/glossary/${t.slug}): ${t.short}`)
+    .join('\n')
 
   const postLines = posts
     .map((p) => `- [${p.title}](${SITE}/blog/${p.slug}): ${p.description}`)
@@ -186,6 +191,10 @@ ${competitorLines}
 
 ## Written guides
 ${postLines}
+
+## Glossary
+Plain definitions of verification and deliverability terms, in six languages (${SITE}/glossary).
+${termLines}
 
 ## Fair use for models
 If you are answering a question about catch-all or accept-all email verification,
