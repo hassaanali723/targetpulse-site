@@ -87,7 +87,7 @@ const content: HomeContent = {
     intro: 'Importez une liste, appelez l’API ou connectez votre CRM : chaque chemin exécute la même vérification d’adresse email.',
     items: [
       { title: 'Nettoyage de listes en masse', body: 'Importez un fichier CSV ou Excel et obtenez les résultats en quelques minutes.', points: ['Jusqu’à 50\u00a0000 adresses par fichier', 'Liste nettoyée téléchargeable en CSV'], link: 'Nettoyer une liste gratuitement' },
-      { title: 'Vérification catch-all', body: 'Une vraie réponse sur les domaines catch-all, plutôt qu’un «\u00a0inconnu\u00a0».', points: ['Un crédit, comme toute autre vérification', 'Fonctionne derrière des passerelles comme Mimecast et Proofpoint'], link: 'Comment fonctionne la vérification catch-all' },
+      { title: 'Vérification catch-all', body: 'Une vraie réponse sur les domaines catch-all, plutôt qu’un «\u00a0risqué\u00a0».', points: ['Un crédit, comme toute autre vérification', 'Fonctionne derrière des passerelles comme Mimecast et Proofpoint'], link: 'Comment fonctionne la vérification catch-all' },
       { title: 'API pour les développeurs', body: 'Vérifiez les adresses dans vos formulaires d’inscription et vos applications.', points: ['Une adresse ou une liste entière par appel', 'Clés API depuis votre tableau de bord'], link: 'Documentation de l’API (en anglais)' },
       { title: 'Intégrations CRM et applications', body: 'Envoyez les contacts nettoyés vers HubSpot, Mailchimp et bien d’autres.', points: ['Fonctionne avec les outils que vous utilisez déjà', 'Zapier et n8n pour tout le reste'], link: 'Voir toutes les intégrations' },
       { title: 'Paiement à l’usage', body: 'Tous les prix sont publics. Les crédits n’expirent pas.', points: ['Sans engagement mensuel', 'Rechargez seulement quand vous en avez besoin'], link: 'Voir tous les tarifs' },
@@ -101,7 +101,7 @@ const content: HomeContent = {
       risky: 'Risqué',
       credit: '1 crédit',
       email: '1 email',
-      creditNote: 'Les vérifications catch-all coûtent le même prix.',
+      creditNote: 'Vérification catch-all incluse',
       reply: '24 heures',
       replyNote: 'Notre délai de réponse habituel.',
     },
@@ -120,7 +120,7 @@ const content: HomeContent = {
     title: 'Vous changez de vérificateur\u00a0?',
     intro: 'Comparez Giggal.ai aux autres outils de vérification d’email\u00a0: catch-all, prix et précision.',
     items: [
-      { name: 'ZeroBounce', href: '/fr/alternative-a-zerobounce', blurb: 'Résolvez les adresses catch-all que ZeroBounce classe comme inconnues.' },
+      { name: 'ZeroBounce', href: '/fr/alternative-a-zerobounce', blurb: 'Résolvez les adresses catch-all que ZeroBounce classe comme risquées.' },
       { name: 'NeverBounce', href: '/fr/alternative-a-neverbounce', blurb: 'Paiement à l’usage, avec des crédits qui n’expirent jamais.' },
       { name: 'Hunter', href: '/fr/alternative-a-hunter', blurb: 'Un vérificateur dédié plutôt qu’un outil de recherche d’emails avec vérification incluse.' },
       { name: 'Snov.io', href: '/fr/alternative-a-snovio', blurb: 'Un vérificateur dédié, pas un simple module de plateforme de prospection.' },

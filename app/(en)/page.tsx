@@ -19,7 +19,7 @@ import { hreflangAlternates } from '@/lib/i18n/clusters'
 // /{brand}-alternative page; those pages now carry the head-to-head links, so
 // this is the top of the crawl path into the 351 comparison pages.
 const SWITCHERS = [
-  { name: 'ZeroBounce', href: '/zerobounce-alternative', blurb: 'Resolve the catch-all addresses ZeroBounce returns as unknown.' },
+  { name: 'ZeroBounce', href: '/zerobounce-alternative', blurb: 'Resolve the catch-all addresses ZeroBounce marks as risky.' },
   { name: 'NeverBounce', href: '/neverbounce-alternative', blurb: 'Pay-as-you-go pricing with credits that never expire.' },
   { name: 'Bouncer', href: '/bouncer-alternative', blurb: 'Catch-all and SEG-protected mailboxes resolved, not just flagged.' },
   { name: 'Hunter', href: '/hunter-alternative', blurb: 'A dedicated verifier instead of a finder with verification bundled in.' },
@@ -89,7 +89,7 @@ const FEATURES: {
   },
   {
     title: 'Catch-all verification',
-    body: 'A real answer on catch-all domains, not "unknown".',
+    body: 'A real answer on catch-all domains, not "risky".',
     points: ['Same 1 credit as any other check', 'Works behind gateways like Mimecast and Proofpoint'],
     iconBg: 'bg-emerald-500',
     panelBg: 'bg-emerald-50',
@@ -174,7 +174,7 @@ const FEATURES: {
         <p className="text-4xl md:text-5xl font-extrabold text-slate-900">
           1 credit <span className="text-amber-500">=</span> 1 email
         </p>
-        <p className="mt-3 text-sm text-slate-500">Catch-all checks cost the same.</p>
+        <p className="mt-3 text-sm text-slate-500">Catch-all verification included</p>
       </div>
     ),
   },
