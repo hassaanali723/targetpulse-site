@@ -125,7 +125,8 @@ export default function TermArticle({ locale, slug }: { locale: Locale; slug: st
 
       {locale === 'en' ? <Navbar /> : <NavbarL10n locale={locale as L10nLocale} />}
 
-      <article className="mx-auto max-w-3xl px-6 pt-28 md:pt-32 pb-16">
+      {/* Same container width as the hub and the navbar, so the left edge lines up. */}
+      <article className="mx-auto max-w-6xl px-6 pt-28 md:pt-32 pb-16">
         <nav aria-label={g.breadcrumbAria} className="blog-breadcrumb">
           <Link href={home}>
             <Home aria-hidden="true" />
@@ -139,7 +140,7 @@ export default function TermArticle({ locale, slug }: { locale: Locale; slug: st
 
         <p className="mt-8 text-[12px] font-bold uppercase tracking-wider text-indigo-600">{g.categories[term.category]}</p>
         <h1 className="mt-2 text-3xl md:text-4xl font-black tracking-tight leading-[1.1] text-slate-900">{term.title}</h1>
-        <p className="mt-5 text-lg md:text-xl font-medium leading-relaxed text-slate-700">{term.short}</p>
+        <p className="mt-5 max-w-4xl text-lg md:text-xl font-medium leading-relaxed text-slate-700">{term.short}</p>
         <div className="mt-4 text-sm text-slate-500 font-medium">
           {g.updated} <time dateTime={term.updated || term.date}>{dateLabel}</time>
         </div>

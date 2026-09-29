@@ -1,40 +1,40 @@
 ---
 title: Spam filter
-description: What a spam filter looks at when it decides where your email goes, the difference between a rejection and the spam folder, and the numbers Google publishes for senders.
+description: What a spam filter checks when it decides where your email goes, the difference between a rejection and the spam folder, and the spam rate limits Google publishes.
 slug: spam-filter
 date: 2026-09-29
 updated: 2026-09-29
 keyword: spam filter
-short: A spam filter is the system a mailbox provider uses to decide whether an incoming email goes to the inbox, the spam folder, or nowhere. It scores the sender, the message and how past recipients reacted.
+short: A spam filter is the system a mailbox provider uses to decide if an incoming email goes to the inbox, to the spam folder, or is rejected. It checks the sender, the email content, and how past recipients reacted to emails from that sender.
 related: spam-score, complaint-rate, ip-reputation, domain-reputation, deliverability, spam-trap
-cta: Send to real addresses and the filters have less to hold against you
+cta: Send to real addresses and spam filters have less to hold against you
 ---
 
 ## What a spam filter does
 
-Every mailbox provider runs one. Gmail, Outlook.com, Yahoo and the company mail servers behind a [secure email gateway](/glossary/secure-email-gateway) all decide, message by message, whether to deliver, divert or refuse.
+Every mailbox provider has a spam filter. Gmail, Outlook.com and Yahoo have one. Company mail servers behind a [secure email gateway](/glossary/secure-email-gateway) have one. The filter checks every incoming email and decides to deliver it, move it to spam, or reject it.
 
-The decision happens in two places.
+The decision happens at one of two points.
 
-**At the door.** The receiving server can refuse the email during the SMTP conversation. You get a bounce with a `5.7.x` code, for example Gmail's `550 5.7.1` for a policy block or `550 5.7.28` for an unusual rate of unsolicited mail from your IP. This is a rejection. The email never enters the mailbox.
+**During the SMTP connection.** The receiving server can reject the email before accepting it. You get a bounce with a `5.7.x` code. Examples: Gmail's `550 5.7.1` for a policy block, or `550 5.7.28` for an unusual amount of unwanted email from your IP address. The email never reaches the mailbox.
 
-**After acceptance.** The server takes the email and then files it in the inbox, in promotions, or in spam. You get no bounce. The only signs are lower open rates and what Google Postmaster Tools reports.
+**After the email is accepted.** The server accepts the email and then puts it in the inbox, the promotions tab, or the spam folder. You do not get a bounce. The only signs are lower open rates and the data in Google Postmaster Tools.
 
-## What the filter looks at
+## What the filter checks
 
-Providers do not publish their rules, but the inputs are known.
+Providers do not publish their exact rules. These are the known inputs:
 
-- **Authentication.** Whether [SPF](/glossary/spf), [DKIM](/glossary/dkim) and [DMARC](/glossary/dmarc) pass. Google and Microsoft now reject bulk mail that fails them.
-- **Reputation.** The history of your sending domain and IP address. See [domain reputation](/glossary/domain-reputation) and [IP reputation](/glossary/ip-reputation).
-- **Complaints.** How often recipients click "report spam". Google's guidelines say to keep the rate reported in Postmaster Tools below 0.10 percent and never reach 0.30 percent.
-- **Bounces.** How often you send to addresses that do not exist. A list nobody verified looks like a spammer's list.
-- **Engagement.** Whether people open, reply, delete unread or move your mail.
-- **Content.** Links, attachments, images, and patterns that match known spam. This matters less than it used to. Reputation and authentication carry more weight.
+- **Authentication.** Whether [SPF](/glossary/spf), [DKIM](/glossary/dkim) and [DMARC](/glossary/dmarc) pass. Google and Microsoft now reject bulk email that fails these checks.
+- **Reputation.** The sending history of your domain and IP address. See [domain reputation](/glossary/domain-reputation) and [IP reputation](/glossary/ip-reputation).
+- **Complaints.** How often recipients click "report spam". Google's guidelines say to keep the complaint rate in Postmaster Tools below 0.10 percent and never reach 0.30 percent.
+- **Bounces.** How often you send to addresses that do not exist. A list with many dead addresses looks like a list that was bought or scraped.
+- **Engagement.** Whether people open your emails, reply to them, delete them without reading, or move them to another folder.
+- **Content.** Links, attachments, images and text patterns that match known spam. Content matters less than it used to. Reputation and authentication matter more.
 
 ## Why senders get filtered
 
-Most filtering is not about the words in the email. It is about who you are sending to. A list with dead addresses produces bounces. A list of people who never asked for the mail produces complaints. Both feed the filter, and both come from the same source: addresses that were never checked.
+Most filtering is not caused by the words in the email. It is caused by the list. Dead addresses cause bounces. People who did not ask for your email cause complaints. Both problems come from addresses that were never checked.
 
 ## How a verifier helps
 
-A verifier does not talk to spam filters. It removes the addresses that would have fed them. Running a list through an [email address checker](/email-checker) before a send takes out the mailboxes that no longer exist, the disposable addresses, and the role accounts that generate complaints. The [email bounce rate](/blog/how-to-reduce-email-bounce-rate) guide shows how much of a list that usually is.
+A verifier does not interact with spam filters. It removes the addresses that cause bounces and complaints. Run your list through an [email address checker](/email-checker) before you send. It removes mailboxes that no longer exist. It also removes disposable addresses and role accounts like info@, which get more complaints. The [email bounce rate](/blog/how-to-reduce-email-bounce-rate) guide shows how large this share of a list usually is.

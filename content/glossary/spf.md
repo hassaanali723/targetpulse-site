@@ -1,43 +1,56 @@
 ---
 title: SPF record
-description: What an SPF record is, what it looks like, how receiving servers use it, the ten-lookup limit, and the bounce codes you get when it fails.
+description: What an SPF record is, what it looks like, how receiving servers check it, the limit of ten DNS lookups, and the bounce codes you get when the check fails.
 slug: spf
 date: 2026-09-29
 updated: 2026-09-29
 keyword: spf record
-short: An SPF record is a line in your domain's DNS that lists the servers allowed to send email for that domain. Receiving servers check it to decide whether an email that claims to come from you really did.
+short: An SPF record is a DNS record on your domain that lists the servers allowed to send email for that domain. Receiving servers check it to confirm that an email claiming to come from your domain was sent by one of your servers.
 related: dkim, dmarc, dmarc-alignment, dns-txt-record, email-spoofing, return-path
-cta: Authentication fixes one kind of bounce. Verification fixes the other
+cta: Authentication fixes one type of bounce. Verification fixes the other
 ---
 
 ## What an SPF record is
 
-SPF stands for Sender Policy Framework. It is defined in RFC 7208. The record is a [DNS TXT record](/glossary/dns-txt-record) on your domain. It says: these are the servers that may send email using my domain name.
+SPF stands for Sender Policy Framework. It is defined in RFC 7208. An SPF record is a [DNS TXT record](/glossary/dns-txt-record) on your domain. It lists the servers that are allowed to send email using your domain name.
 
 A simple SPF record looks like this:
 
 `v=spf1 include:_spf.google.com -all`
 
-Read it left to right. `v=spf1` says this is an SPF record. `include:_spf.google.com` says any server that Google lists may send for this domain. `-all` says reject everything else. A softer ending, `~all`, says treat everything else as suspicious but do not reject it.
+Each part has a meaning:
 
-## How receiving servers use it
+- `v=spf1` says this is an SPF record.
+- `include:_spf.google.com` says every server that Google lists is allowed to send for this domain.
+- `-all` says reject email from every other server.
+- `~all` is a softer ending. It says treat email from other servers as suspicious but do not reject it.
 
-When an email arrives, the receiving server looks at the domain in the [Return-Path](/glossary/return-path), the address bounces go back to. It fetches that domain's SPF record. Then it checks whether the IP address that delivered the email is on the list.
+## How receiving servers check it
 
-- **Pass.** The IP is listed. The email is who it says it is.
-- **Fail.** The IP is not listed and the record ends in `-all`. The server may reject the email.
-- **Softfail.** The IP is not listed and the record ends in `~all`. The email is accepted but marked.
+When an email arrives, the receiving server reads the domain in the [Return-Path](/glossary/return-path). The Return-Path is the address that bounces are sent to. The server gets the SPF record for that domain. Then it checks if the IP address that delivered the email is in the record.
 
-Microsoft Exchange Online rejects a failing email with `5.7.23 The message was rejected because of Sender Policy Framework violation`. Gmail's `550 5.7.26` covers a message that is not authenticated at all. Both codes start with a 5, so your sending tool records them as [hard bounces](/glossary/hard-bounce), even though the address was fine.
+- **Pass.** The IP address is in the record. The email came from an allowed server.
+- **Fail.** The IP address is not in the record and the record ends with `-all`. The server may reject the email.
+- **Softfail.** The IP address is not in the record and the record ends with `~all`. The server accepts the email but marks it as suspicious.
 
-## Who has to have one
+Microsoft Exchange Online rejects a failing email with `5.7.23 The message was rejected because of Sender Policy Framework violation`. Gmail returns `550 5.7.26` for an email that has no authentication at all. Both codes start with 5. Your sending tool records them as [hard bounces](/glossary/hard-bounce), even though the address is fine.
 
-Everyone who sends bulk mail. Google's sender guidelines require SPF and DKIM for anyone sending 5,000 or more messages a day to Gmail, plus DMARC. Microsoft has enforced the same three records for domains sending over 5,000 a day to Outlook.com, Hotmail and Live since 5 May 2025. Below that volume the records are still the difference between the inbox and the spam folder.
+## Who needs an SPF record
 
-## The ten-lookup limit
+Everyone who sends bulk email needs one. Google's sender guidelines require SPF and DKIM for senders of 5,000 or more messages a day to Gmail. They also require DMARC. Microsoft requires the same three records for domains that send more than 5,000 emails a day to Outlook.com, Hotmail and Live. Microsoft started enforcing this on 5 May 2025.
 
-RFC 7208 limits an SPF check to ten DNS lookups. Every `include:`, `a`, `mx` and `redirect` in your record counts, and so do the lookups inside the records you include. Go over ten and the check returns a permanent error, which most receivers treat as a fail. This is the most common way a correct-looking SPF record breaks: a company adds one tool after another until the eleventh lookup silently turns the whole record off.
+If you send less than that, the records still matter. Without them, your email is more likely to go to the spam folder.
 
-## SPF is one of three
+## The limit of ten DNS lookups
 
-SPF checks the sending server. [DKIM](/glossary/dkim) checks that the message was not changed in transit. [DMARC](/glossary/dmarc) ties the two to the visible From address and tells receivers what to do when they fail. A domain needs all three. The [hard bounce vs soft bounce](/blog/hard-bounce-vs-soft-bounce) guide shows what the failure codes look like in a bounce report.
+RFC 7208 limits an SPF check to ten DNS lookups. Every `include:`, `a`, `mx` and `redirect` in your record counts as one lookup. Lookups inside the records you include also count. If the total is more than ten, the check returns a permanent error. Most receiving servers treat this error as a fail.
+
+This is the most common way an SPF record breaks. A company adds one email tool after another to the record. When the eleventh lookup is added, the whole record stops working.
+
+## SPF is one of three records
+
+- SPF checks which server sent the email.
+- [DKIM](/glossary/dkim) checks that the email was not changed after it was sent.
+- [DMARC](/glossary/dmarc) connects both checks to the From address that the reader sees. It also tells receiving servers what to do when the checks fail.
+
+A domain needs all three. The [hard bounce vs soft bounce](/blog/hard-bounce-vs-soft-bounce) guide shows what the failure codes look like in a bounce report.
