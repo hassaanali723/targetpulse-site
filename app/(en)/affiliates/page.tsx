@@ -12,7 +12,7 @@ import {
   MailCheck, Megaphone, BookOpen, Building2,
 } from 'lucide-react'
 
-const AFFILIATE_SIGNUP_URL = 'https://targetpulse.endorsely.com/'
+const AFFILIATE_SIGNUP_URL = 'https://giggal.endorsely.com/'
 
 const benefits = [
   { Icon: Repeat,       wrap: 'bg-indigo-600 shadow-indigo-600/10',   title: '20% recurring',       body: 'Earn on every payment your referrals make, month after month, year after year.' },
