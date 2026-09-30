@@ -153,7 +153,7 @@ export default function ContactPageL10n({ locale, content: c }: { locale: L10nLo
                 <div className="w-12 h-12 rounded-xl flex items-center justify-center text-white shadow-md shrink-0 bg-indigo-600"><Mail className="w-6 h-6" /></div>
                 <div className="space-y-1">
                   <h3 className="text-base font-extrabold text-slate-900">{c.emailTitle}</h3>
-                  <p className="text-sm text-slate-600 font-medium">info@giggal.ai</p>
+                  <p className="text-sm text-slate-600 font-medium"><a href="mailto:info@giggal.ai" className="hover:text-indigo-600 transition-colors">info@giggal.ai</a></p>
                 </div>
               </div>
             </div>
@@ -162,7 +162,14 @@ export default function ContactPageL10n({ locale, content: c }: { locale: L10nLo
                 <div className="w-12 h-12 rounded-xl flex items-center justify-center text-white shadow-md shrink-0 bg-emerald-500"><Phone className="w-6 h-6" /></div>
                 <div className="space-y-1">
                   <h3 className="text-base font-extrabold text-slate-900">{c.phoneTitle}</h3>
-                  <p className="text-sm text-slate-600 font-medium">+16462697026</p>
+                  <p className="text-sm text-slate-600 font-medium">
+                    <a href="tel:+447577337716" className="hover:text-emerald-600 transition-colors">+44 7577 337716</a>
+                    <span className="text-slate-400"> (UK)</span>
+                  </p>
+                  <p className="text-sm text-slate-600 font-medium">
+                    <a href="tel:+16462697026" className="hover:text-emerald-600 transition-colors">+1 646 269 7026</a>
+                    <span className="text-slate-400"> (US)</span>
+                  </p>
                   <p className="text-xs text-slate-500 font-semibold mt-1">{c.phoneHours}</p>
                 </div>
               </div>

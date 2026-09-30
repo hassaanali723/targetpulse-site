@@ -205,6 +205,10 @@ export default function Footer() {
             </span>
             . All rights reserved.
           </p>
+          <p className="mt-2 text-[12px] text-slate-500">
+            Giggal.ai is operated by TargetPulse Ltd, London, United Kingdom. Abuse reports:{' '}
+            <a href="mailto:abuse@giggal.ai" className="text-slate-400 hover:text-white transition-colors">abuse@giggal.ai</a>
+          </p>
         </div>
       </div>
     </footer>

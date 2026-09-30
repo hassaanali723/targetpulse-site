@@ -69,6 +69,8 @@ export const footer = {
   ],
   legalHeading: 'Mentions',
   rights: 'Tous droits réservés.',
+  operatedBy: 'Giggal.ai est exploité par TargetPulse Ltd, Londres, Royaume-Uni.',
+  abuseReports: 'Signalements d’abus :',
   language: 'Langue',
 }
 

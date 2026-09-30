@@ -108,6 +108,10 @@ export default function FooterL10n({ locale }: { locale: L10nLocale }) {
             </span>
             . {footer.rights}
           </p>
+          <p className="mt-2 text-[12px] text-slate-500">
+            {footer.operatedBy} {footer.abuseReports}{' '}
+            <a href="mailto:abuse@giggal.ai" className="text-slate-400 hover:text-white transition-colors">abuse@giggal.ai</a>
+          </p>
         </div>
       </div>
     </footer>

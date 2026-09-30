@@ -212,7 +212,8 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="font-bold text-lg text-slate-900 mb-2">Call Us</h4>
-                  <p className="text-slate-600">+16462697026</p>
+                  <p className="text-slate-600"><a href="tel:+447577337716" className="hover:text-emerald-600 transition-colors">+44 7577 337716</a> <span className="text-slate-400">(UK)</span></p>
+                  <p className="text-slate-600"><a href="tel:+16462697026" className="hover:text-emerald-600 transition-colors">+1 646 269 7026</a> <span className="text-slate-400">(US)</span></p>
                   <p className="text-sm text-slate-500 mt-1">Mon-Fri, 9AM-6PM PKT</p>
                 </div>
               </div>

@@ -230,7 +230,9 @@ export default function TalkToHumanPage() {
                 </div>
                 <div className="space-y-1">
                   <h4 className="text-base font-extrabold text-slate-900">Email Us</h4>
-                  <p className="text-sm text-slate-600 font-medium">info@giggal.ai</p>
+                  <p className="text-sm text-slate-600 font-medium">
+                    <a href="mailto:info@giggal.ai" className="hover:text-indigo-600 transition-colors">info@giggal.ai</a>
+                  </p>
                 </div>
               </div>
             </div>
@@ -243,7 +245,14 @@ export default function TalkToHumanPage() {
                 </div>
                 <div className="space-y-1">
                   <h4 className="text-base font-extrabold text-slate-900">Call Us</h4>
-                  <p className="text-sm text-slate-600 font-medium">+16462697026</p>
+                  <p className="text-sm text-slate-600 font-medium">
+                    <a href="tel:+447577337716" className="hover:text-emerald-600 transition-colors">+44 7577 337716</a>
+                    <span className="text-slate-400"> (UK)</span>
+                  </p>
+                  <p className="text-sm text-slate-600 font-medium">
+                    <a href="tel:+16462697026" className="hover:text-emerald-600 transition-colors">+1 646 269 7026</a>
+                    <span className="text-slate-400"> (US)</span>
+                  </p>
                   <p className="text-xs text-slate-500 font-semibold mt-1">Mon-Fri, 9AM-6PM GMT/BST</p>
                 </div>
               </div>

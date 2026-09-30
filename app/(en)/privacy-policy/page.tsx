@@ -27,7 +27,7 @@ export default function PrivacyPolicyPage() {
           <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">Policy</span>
         </h1>
         <p className="text-sm md:text-base text-slate-500 font-semibold">
-          Last Updated: February 4, 2026
+          Last Updated: October 1, 2026
         </p>
       </section>
 
@@ -36,6 +36,9 @@ export default function PrivacyPolicyPage() {
         <div className="bg-white border-2 border-slate-200 rounded-3xl p-6 sm:p-8 md:p-10 card-vivid-shadow [&_strong]:font-bold [&_strong]:text-slate-900">
 
           <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight mt-10 mb-4 first:mt-0 scroll-mt-28">1. Introduction</h2>
+          <p className="text-slate-600 leading-relaxed mb-4">
+            This service is operated by <strong>TargetPulse Ltd</strong> (&quot;we&quot;, &quot;us&quot;), a company registered in England and Wales under number 17079825, with its registered office at Office 17366, 182-184 High Street North, East Ham, London E6 2JA. TargetPulse Ltd is the data controller for personal data processed through Giggal.ai. Contact: <a href="mailto:info@giggal.ai" className="text-indigo-600 font-semibold hover:underline">info@giggal.ai</a>. Abuse reports: <a href="mailto:abuse@giggal.ai" className="text-indigo-600 font-semibold hover:underline">abuse@giggal.ai</a>.
+          </p>
           <p className="text-slate-600 leading-relaxed mb-4">
             Giggal.ai ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our email verification services and website.
           </p>

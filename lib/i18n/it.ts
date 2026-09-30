@@ -68,6 +68,8 @@ export const footer = {
     { name: 'Rimborsi', href: '/it/rimborsi' },
   ],
   rights: 'Tutti i diritti riservati.',
+  operatedBy: 'Giggal.ai è gestito da TargetPulse Ltd, Londra, Regno Unito.',
+  abuseReports: 'Segnalazioni di abuso:',
   language: 'Lingua',
 }
 

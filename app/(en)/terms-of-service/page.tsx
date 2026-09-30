@@ -27,7 +27,7 @@ export default function TermsOfServicePage() {
           <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">Service</span>
         </h1>
         <p className="text-sm md:text-base text-slate-500 font-semibold">
-          Last Updated: February 4, 2026
+          Last Updated: October 1, 2026
         </p>
       </section>
 
@@ -37,10 +37,13 @@ export default function TermsOfServicePage() {
 
           <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight mt-10 mb-4 first:mt-0 scroll-mt-28">1. Acceptance of Terms</h2>
           <p className="text-slate-600 leading-relaxed mb-4">
+            This service is operated by <strong>TargetPulse Ltd</strong> (&quot;we&quot;, &quot;us&quot;), a company registered in England and Wales under number 17079825, with its registered office at Office 17366, 182-184 High Street North, East Ham, London E6 2JA. TargetPulse Ltd is the data controller for personal data processed through Giggal.ai. Contact: <a href="mailto:info@giggal.ai" className="text-indigo-600 font-semibold hover:underline">info@giggal.ai</a>. Abuse reports: <a href="mailto:abuse@giggal.ai" className="text-indigo-600 font-semibold hover:underline">abuse@giggal.ai</a>.
+          </p>
+          <p className="text-slate-600 leading-relaxed mb-4">
             By accessing and using Giggal.ai's services, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.
           </p>
           <p className="text-slate-600 leading-relaxed mb-4">
-            These Terms of Service govern your use of the Giggal.ai Email Verifier service operated by <strong>Hassaan Ali Mehmood</strong>, doing business as <strong>Giggal.ai</strong>.
+            These Terms of Service govern your use of the Giggal.ai Email Verifier service operated by <strong>TargetPulse Ltd</strong>, trading as <strong>Giggal.ai</strong>.
           </p>
 
           <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight mt-10 mb-4 scroll-mt-28">2. Description of Service</h2>
