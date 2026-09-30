@@ -46,7 +46,7 @@ const G10K = giggalTierAt(10000).totalUsd ?? 0
 // section's keywords ("list cleaning", "catch-all"); points are short facts.
 const FEATURES: {
   title: string
-  body: string
+  body: React.ReactNode
   points: string[]
   iconBg: string
   panelBg: string
@@ -58,7 +58,15 @@ const FEATURES: {
 }[] = [
   {
     title: 'Bulk list cleaning',
-    body: 'Upload a CSV or Excel file, get results in minutes.',
+    body: (
+      <>
+        Upload a CSV or Excel file for{' '}
+        <Link href="/email-list-cleaning" className="text-indigo-600 font-semibold hover:underline">
+          email list cleaning
+        </Link>
+        , get results in minutes.
+      </>
+    ),
     points: ['Up to 50,000 addresses per file', 'Download the clean list as a CSV'],
     iconBg: 'bg-indigo-600',
     panelBg: 'bg-indigo-50',

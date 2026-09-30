@@ -7,8 +7,12 @@ const APP_URL = 'https://emailverifier.giggal.ai/sign-up'
 
 export default function AltCtaBand({
   headline = 'Run a list and compare the results',
+  supporting = '1,000 free credits, no card required.',
+  buttonText = 'Start verifying for free',
 }: {
   headline?: string
+  supporting?: string
+  buttonText?: string
 }) {
   return (
     <section className="cv-section max-w-6xl mx-auto px-6 pb-24">
@@ -17,7 +21,7 @@ export default function AltCtaBand({
           {headline}
         </h2>
         <p className="text-sm text-indigo-100 max-w-lg mx-auto font-medium">
-          1,000 free credits, no card required.
+          {supporting}
         </p>
         <div className="pt-4">
           <a
@@ -26,7 +30,7 @@ export default function AltCtaBand({
             rel="noopener noreferrer"
             className="group inline-flex items-center gap-2 px-12 py-5 bg-white hover:bg-indigo-50 text-indigo-600 font-extrabold rounded-2xl text-base transition-all shadow-md hover:scale-[1.03] active:scale-95 duration-200"
           >
-            Start verifying for free
+            {buttonText}
             <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
           </a>
         </div>

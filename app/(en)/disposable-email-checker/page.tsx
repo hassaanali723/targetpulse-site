@@ -252,7 +252,11 @@ export default function DisposableEmailCheckerPage() {
           For a whole list, one address at a time is too slow.
         </p>
         <p className={proseP}>
-          In the Giggal dashboard you can upload a CSV or TXT file and check the whole list at once. Every
+          In the Giggal dashboard you can upload a CSV or TXT file to our{' '}
+          <Link href="/email-list-cleaning" className="text-indigo-600 font-bold hover:underline">
+            email list cleaning service
+          </Link>{' '}
+          and check the whole list at once. Every
           address is checked for disposable domains, role accounts such as info@ or sales@, and whether the
           mailbox exists. On{' '}
           <Link href="/catch-all-verification" className="text-indigo-600 font-bold hover:underline">

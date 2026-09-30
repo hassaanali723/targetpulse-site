@@ -60,7 +60,7 @@ Then look at the ratio. If a large fraction of a fresh list bounced on the first
 
 ## The list source is usually the real story
 
-Where a list came from predicts how it will bounce. A list you exported from your own CRM, made of people who have replied to you before, bounces very little. A list scraped from the web or bought from a broker bounces far more, because the addresses were collected once and never checked again, and a slice of them died in the time since. If you know a list is bought or scraped, assume some of it is stale and verify before the first send rather than learning it from the bounce report.
+Where a list came from predicts how it will bounce. A list you exported from your own CRM, made of people who have replied to you before, bounces very little. A list scraped from the web or bought from a broker bounces far more, because the addresses were collected once and never checked again, and a slice of them died in the time since. If you know a list is bought or scraped, assume some of it is stale and run it through an [email list cleaner](/email-list-cleaning) before the first send rather than learning it from the bounce report.
 
 ## Where verification helps, and where it does not
 

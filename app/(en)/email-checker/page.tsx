@@ -180,10 +180,10 @@ export default function CatchAllEmailCheckerPage() {
         </ul>
         <p className={proseP}>
           For a whole list, the single checker is the wrong tool: sign up, upload the file, and{' '}
-          <Link href="/catch-all-verification" className="text-indigo-600 font-bold hover:underline">
-            bulk email verification
+          <Link href="/email-list-cleaning" className="text-indigo-600 font-bold hover:underline">
+            clean your email list
           </Link>{' '}
-          runs the same checks on every row, 1,000 credits free and no card.
+          with the same checks run on every row, 1,000 credits free and no card.
         </p>
       </section>
 

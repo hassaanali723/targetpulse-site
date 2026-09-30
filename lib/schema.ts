@@ -185,3 +185,31 @@ export function howToLd(opts: {
     })),
   }
 }
+
+// Service schema for /email-list-cleaning.
+export function emailListCleaningServiceLd(): Record<string, unknown> {
+  const prices = RAW_OFFERS.map((o) => o.price)
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': `${SITE}/email-list-cleaning#service`,
+    url: `${SITE}/email-list-cleaning`,
+    name: 'Giggal.ai Email List Cleaning Service',
+    serviceType: 'Email list cleaning and verification',
+    description:
+      'Email list cleaning service that removes invalid, disposable and duplicate emails and resolves catch-alls instead of deleting them. 1,000 free credits.',
+    provider: {
+      '@type': 'Organization',
+      name: 'Giggal.ai',
+      url: SITE,
+    },
+    offers: {
+      '@type': 'AggregateOffer',
+      priceCurrency: 'USD',
+      lowPrice: Math.min(...prices).toFixed(2),
+      highPrice: Math.max(...prices).toFixed(2),
+      offerCount: RAW_OFFERS.length,
+    },
+  }
+}
+

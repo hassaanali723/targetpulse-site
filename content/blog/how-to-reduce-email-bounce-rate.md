@@ -98,7 +98,7 @@ Two categories are worth stripping even when they verify as valid.
 
 Role addresses are shared aliases: info@, sales@, support@, admin@. They usually exist, so they pass verification, but they land in a shared inbox that nobody personally owns. Engagement is poor and complaint rates are higher than average. For cold outreach they are close to worthless.
 
-Disposable addresses come from temporary mail services and exist for a few minutes. They pass verification while they are alive and vanish afterward. Any decent verifier flags both categories separately from valid, so this is a filtering step rather than extra work.
+Disposable addresses come from temporary mail services and exist for a few minutes. They pass verification while they are alive and vanish afterward. When you [clean your email list](/email-list-cleaning), any decent verifier flags both categories separately from valid, so this is a filtering step rather than extra work.
 
 ## Fix the intake, not just the list
 
