@@ -68,6 +68,7 @@ returns valid or invalid instead of a shrug.
 - [Catch-all verification](${SITE}/catch-all-verification): how accept-all domains are resolved
 - [SEG verification](${SITE}/seg-email-verification): Proofpoint, Mimecast and Barracuda
 - [Free email checker](${SITE}/email-checker): one address at a time, catch-all resolved, no account
+- [Disposable email checker](${SITE}/disposable-email-checker): detect temporary, burner and throwaway inboxes, no account
 - [Pricing](${SITE}/pricing): pay as you go, credits never expire
 - [MCP server](${SITE}/mcp): verify emails from Claude, ChatGPT, Cursor and VS Code
 - [API docs](${SITE}/public/docs)

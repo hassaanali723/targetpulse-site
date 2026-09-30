@@ -15,11 +15,12 @@ interface ResultState {
   title: string
   desc: string
   score?: number
-  // Catch-all variant only: the checked domain, whether it is catch-all, and
-  // whether the daily free-check limit was hit.
+  // Catch-all and disposable variants: domain, flags, and quota status
   domain?: string
   catchAll?: boolean
   limited?: boolean
+  disposable?: boolean
+  meta?: ApiResult['meta']
 }
 
 // Shape returned by the verify routes (built from the real validation result)
@@ -41,9 +42,8 @@ interface ApiResult {
 interface VerifierConsoleProps {
   // Which API route to POST to. Defaults to the homepage console endpoint.
   endpoint?: string
-  // 'catchall' renders the catch-all status as a distinct step before the
-  // verdict, for /email-checker.
-  variant?: 'console' | 'catchall'
+  // 'catchall' renders catch-all status, 'disposable' renders temporary email detection
+  variant?: 'console' | 'catchall' | 'disposable'
   // Pre-filled address. Empty by default so the tool never spends a check on
   // an address the visitor did not choose.
   defaultEmail?: string
@@ -339,6 +339,8 @@ export default function VerifierConsole({
       ...data.verdict,
       domain: data.domain,
       catchAll: data.catchAll ?? data.steps.catchall === 'warn',
+      disposable: data.meta?.disposable,
+      meta: data.meta,
     })
     setRunning(false)
   }
@@ -414,7 +416,9 @@ export default function VerifierConsole({
             {result ? (
               variant === 'catchall'
                 ? <CatchAllResultCard result={result} signupUrl={signupUrl} t={t} />
-                : <ResultCard result={result} t={t} />
+                : variant === 'disposable'
+                  ? <DisposableResultCard result={result} signupUrl={signupUrl} t={t} />
+                  : <ResultCard result={result} t={t} />
             ) : !started ? (
               <div className="h-full flex flex-col justify-center items-center text-center text-slate-500 py-16 space-y-3">
                 <Terminal className="w-6 h-6 animate-pulse text-indigo-400" />
@@ -568,3 +572,146 @@ function CatchAllResultCard({ result, signupUrl, t }: { result: ResultState; sig
     </div>
   )
 }
+
+function DisposableResultCard({
+  result,
+  signupUrl,
+  t,
+}: {
+  result: ResultState
+  signupUrl: string
+  t: ConsoleStrings
+}) {
+  if (result.limited) {
+    return (
+      <div className="h-full flex flex-col justify-center items-center text-center p-6 space-y-4 animate-slide-down">
+        <div className="w-14 h-14 rounded-2xl flex items-center justify-center border bg-slate-800/60 border-slate-700">
+          <HelpCircle className="w-7 h-7 text-slate-300" />
+        </div>
+        <div className="space-y-1 max-w-sm">
+          <h4 className="text-lg font-black tracking-tight leading-tight text-slate-100">{result.title}</h4>
+          <p className="text-xs text-slate-400 font-semibold leading-relaxed">{result.desc}</p>
+        </div>
+        <a
+          href={signupUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-black rounded-xl transition-colors"
+        >
+          {t.limitButton}
+          <ArrowRight className="w-3.5 h-3.5" />
+        </a>
+      </div>
+    )
+  }
+
+  if (result.type === 'error') {
+    return (
+      <div className="h-full flex flex-col justify-center items-center text-center p-6 space-y-4 animate-slide-down">
+        <div className="w-14 h-14 rounded-2xl flex items-center justify-center border bg-rose-950/40 border-rose-900/60">
+          <AlertTriangle className="w-7 h-7 text-rose-400" />
+        </div>
+        <div className="space-y-1 max-w-sm">
+          <h4 className="text-lg font-black tracking-tight leading-tight text-rose-300">{result.title}</h4>
+          <p className="text-xs text-slate-400 font-semibold leading-relaxed">{result.desc}</p>
+        </div>
+      </div>
+    )
+  }
+
+  const domain = result.domain || ''
+  const invalid = result.title === 'Invalid Email' || !domain
+  if (invalid) {
+    return (
+      <div className="h-full flex flex-col justify-center items-center text-center p-6 space-y-4 animate-slide-down">
+        <div className="w-14 h-14 rounded-2xl flex items-center justify-center border bg-rose-950/40 border-rose-900/60">
+          <XCircle className="w-7 h-7 text-rose-400" />
+        </div>
+        <p className="text-sm text-slate-200 font-bold max-w-sm">{t.invalidSyntax}</p>
+      </div>
+    )
+  }
+
+  const isDisposable = !!result.disposable
+  const v = result.type
+  const good = v === 'deliverable'
+  const bad = v === 'undeliverable'
+  const VerdictIcon = good ? CheckCircle2 : bad ? XCircle : v === 'risky' ? AlertTriangle : HelpCircle
+  const verdictColor = good ? 'text-emerald-400' : bad ? 'text-rose-400' : v === 'risky' ? 'text-amber-400' : 'text-slate-300'
+
+  return (
+    <div className="h-full flex flex-col justify-center p-5 sm:p-6 space-y-3.5 animate-slide-down text-left">
+      {/* Step 1 — Disposable Status */}
+      <div className={`rounded-xl border p-4 ${
+        isDisposable
+          ? 'border-rose-900/70 bg-rose-950/40'
+          : 'border-emerald-900/60 bg-emerald-950/30'
+      }`}>
+        <div className="flex items-center gap-2">
+          {isDisposable ? (
+            <XCircle className="w-4 h-4 shrink-0 text-rose-400" />
+          ) : (
+            <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-400" />
+          )}
+          <span className={`text-sm font-black break-all ${isDisposable ? 'text-rose-300' : 'text-emerald-300'}`}>
+            {domain} {isDisposable ? 'is a disposable email domain' : 'is NOT a disposable domain'}
+          </span>
+        </div>
+        <p className="text-xs text-slate-400 font-semibold leading-relaxed mt-1.5 pl-6">
+          {isDisposable
+            ? 'This address uses a temporary inbox service. Messages sent here will expire or bounce.'
+            : 'This is a standard email domain, not a temporary or disposable mail service.'}
+        </p>
+      </div>
+
+      {/* Step 2 — Mailbox deliverability result */}
+      <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-4">
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2">
+            <VerdictIcon className={`w-4 h-4 shrink-0 ${verdictColor}`} />
+            <span className={`text-sm font-black ${verdictColor}`}>
+              Mailbox Status: {t.verdictTitle[v] || result.title}
+            </span>
+          </div>
+          {typeof result.score === 'number' && (
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded border border-slate-700 text-slate-400">
+              Score: {result.score}%
+            </span>
+          )}
+        </div>
+        <p className="text-xs text-slate-400 font-semibold leading-relaxed mt-1.5 pl-6">
+          {isDisposable
+            ? 'Temporary addresses expire quickly and cause hard bounces. Filter them from your list.'
+            : t.verdictLine[v] || result.desc}
+        </p>
+      </div>
+
+      {/* Meta attributes badges */}
+      {result.meta && (
+        <div className="flex flex-wrap items-center gap-2 text-[10px] font-mono text-slate-400 pt-1">
+          {result.meta.provider && (
+            <span className="px-2 py-1 rounded bg-slate-900 border border-slate-800 text-slate-300">
+              Provider: <strong className="text-white">{result.meta.provider}</strong>
+            </span>
+          )}
+          {result.meta.freeEmail && (
+            <span className="px-2 py-1 rounded bg-slate-900 border border-slate-800 text-slate-300">
+              Free Provider: <strong className="text-white">Yes</strong>
+            </span>
+          )}
+          {result.meta.role && (
+            <span className="px-2 py-1 rounded bg-slate-900 border border-slate-800 text-amber-300">
+              Role Account: <strong>Yes</strong>
+            </span>
+          )}
+          {result.catchAll && (
+            <span className="px-2 py-1 rounded bg-slate-900 border border-slate-800 text-amber-300">
+              Catch-All: <strong>Yes</strong>
+            </span>
+          )}
+        </div>
+      )}
+    </div>
+  )
+}
+

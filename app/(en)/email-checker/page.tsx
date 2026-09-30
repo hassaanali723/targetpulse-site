@@ -160,7 +160,10 @@ export default function CatchAllEmailCheckerPage() {
         <p className={proseP}>
           Under the result, the panel lists the details a deliverability check depends on: the
           mail provider (Google Workspace, Microsoft 365, a gateway such as Proofpoint), the MX
-          host that answered, whether the address is <strong className="text-slate-900">disposable</strong>{' '}
+          host that answered, whether the address is{' '}
+          <Link href="/disposable-email-checker" className="text-indigo-600 font-bold hover:underline">
+            disposable
+          </Link>{' '}
           (a temporary inbox that will vanish), <strong className="text-slate-900">role-based</strong>{' '}
           (info@, sales@, support@, which are shared inboxes and poor outreach targets) and whether
           it sits on a <strong className="text-slate-900">free provider</strong> like Gmail or
@@ -248,6 +251,7 @@ export default function CatchAllEmailCheckerPage() {
       <section className="cv-section max-w-3xl mx-auto px-6 pb-24">
         <div className="border-t border-slate-200 pt-8 space-y-3">
           {[
+            { href: '/disposable-email-checker', label: 'detect disposable & temporary emails' },
             { href: '/catch-all-verification', label: 'verify catch-all & risky emails' },
             { href: '/blog/what-is-a-catch-all-email-address', label: 'what a catch-all email address is' },
             { href: '/seg-email-verification', label: 'emails protected by SEG gateways' },
