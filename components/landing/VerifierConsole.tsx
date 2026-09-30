@@ -16,6 +16,7 @@ interface ResultState {
   desc: string
   score?: number
   // Catch-all and disposable variants: domain, flags, and quota status
+  email?: string
   domain?: string
   catchAll?: boolean
   limited?: boolean
@@ -99,6 +100,19 @@ const CHECK_LABELS: Record<CheckKey, string> = {
   mailbox: 'Mailbox existence check',
 }
 
+// The disposable tool reports two checks only. Its API route returns steps
+// and logs for exactly these keys, so the sidebar never shows a mail-server
+// or mailbox check that this tool does not report.
+const DISPOSABLE_ORDER = ['basic', 'disposable'] as const
+const DISPOSABLE_LABELS: Record<(typeof DISPOSABLE_ORDER)[number], string> = {
+  basic: 'Basic validation checks',
+  disposable: 'Disposable domain check',
+}
+
+function initialChecks(order: readonly string[]): Record<string, CheckStatus> {
+  return Object.fromEntries(order.map((k) => [k, 'idle' as CheckStatus]))
+}
+
 // The English strings, unchanged from when they were inline. Passing nothing
 // renders exactly what the page rendered before the prop existed.
 export const EN_CONSOLE_STRINGS: ConsoleStrings = {
@@ -116,8 +130,8 @@ export const EN_CONSOLE_STRINGS: ConsoleStrings = {
   idleText: 'Enter a corporate or consumer address in the console input to run a live DNS + SMTP probe.',
   spawning: 'SPAWNING DIAGNOSTIC THREADS...',
   initLog: '[INIT] Opening secure verification socket...',
-  limitTitle: 'Daily limit reached',
-  limitText: 'You have used your free checks for today.',
+  limitTitle: 'Guest limit reached',
+  limitText: 'You have used your 5 free checks for this hour. Sign up for 1,000 free credits, no card required, to verify your whole list.',
   limitButton: 'Get 1,000 free credits',
   errorTitle: 'Verification Error',
   errorFailed: 'Verification failed. Please try again.',
@@ -138,10 +152,6 @@ export const EN_CONSOLE_STRINGS: ConsoleStrings = {
     catchall: 'We could not confirm this mailbox.',
     error: '',
   },
-}
-
-const INITIAL_CHECKS: Record<CheckKey, CheckStatus> = {
-  basic: 'idle', dns: 'idle', catchall: 'idle', mailbox: 'idle',
 }
 
 const CHECK_COLOR: Record<CheckStatus, string> = {
@@ -219,11 +229,16 @@ export default function VerifierConsole({
   emailFromQuery = false,
 }: VerifierConsoleProps = {}) {
   const t = strings
+  const order: readonly string[] = variant === 'disposable' ? DISPOSABLE_ORDER : CHECK_ORDER
+  const labelFor = (key: string) =>
+    variant === 'disposable'
+      ? DISPOSABLE_LABELS[key as (typeof DISPOSABLE_ORDER)[number]]
+      : t.checks[key as CheckKey]
   const [email, setEmail] = useState(defaultEmail)
   const [running, setRunning] = useState(false)
   const [started, setStarted] = useState(false)
   const [logs, setLogs] = useState<LogLine[]>([])
-  const [checks, setChecks] = useState<Record<CheckKey, CheckStatus>>(INITIAL_CHECKS)
+  const [checks, setChecks] = useState<Record<string, CheckStatus>>(() => initialChecks(order))
   const [result, setResult] = useState<ResultState | null>(null)
   const runIdRef = useRef(0)
   const logScrollRef = useRef<HTMLDivElement>(null)
@@ -257,7 +272,7 @@ export default function VerifierConsole({
     setRunning(true)
     setStarted(true)
     setResult(null)
-    setChecks(INITIAL_CHECKS)
+    setChecks(initialChecks(order))
     setLogs([])
 
     const appendLog = (text: string, level: LogLevel) =>
@@ -291,7 +306,7 @@ export default function VerifierConsole({
     // Friendly quota response (catch-all tool): a soft limit, not an error.
     if (data?.limited) {
       setLogs([])
-      setChecks(INITIAL_CHECKS)
+      setChecks(initialChecks(order))
       setResult({
         type: 'unknown',
         title: t.limitTitle,
@@ -304,14 +319,14 @@ export default function VerifierConsole({
 
     if (!data) {
       setLogs([])
-      setChecks(INITIAL_CHECKS)
+      setChecks(initialChecks(order))
       setResult({ type: 'error', title: t.errorTitle, desc: errorMsg })
       setRunning(false)
       return
     }
 
     // Reset the primed "running" state; drive everything from the real payload.
-    setChecks(INITIAL_CHECKS)
+    setChecks(initialChecks(order))
     setLogs([])
     await sleep(200)
 
@@ -328,7 +343,7 @@ export default function VerifierConsole({
     }
     if (!alive()) return
     // Finalize every step from the authoritative statuses.
-    for (const key of CHECK_ORDER) {
+    for (const key of order) {
       if (data.steps[key]) setCheck(key, data.steps[key])
     }
 
@@ -337,6 +352,7 @@ export default function VerifierConsole({
     setLogs([])
     setResult({
       ...data.verdict,
+      email: data.email,
       domain: data.domain,
       catchAll: data.catchAll ?? data.steps.catchall === 'warn',
       disposable: data.meta?.disposable,
@@ -400,10 +416,10 @@ export default function VerifierConsole({
           <div className="border-t border-slate-800/60 pt-5 space-y-3.5">
             <span className="text-[9px] text-slate-500 font-black uppercase tracking-wider block">{t.diagnostics}</span>
             <div className="space-y-3 text-xs font-bold font-mono">
-              {CHECK_ORDER.map((key) => (
-                <div key={key} className={`flex items-center space-x-2 ${CHECK_COLOR[checks[key]]}`}>
-                  <CheckIcon status={checks[key]} />
-                  <span>{t.checks[key]}</span>
+              {order.map((key) => (
+                <div key={key} className={`flex items-center space-x-2 ${CHECK_COLOR[checks[key] ?? 'idle']}`}>
+                  <CheckIcon status={checks[key] ?? 'idle'} />
+                  <span>{labelFor(key)}</span>
                 </div>
               ))}
             </div>
@@ -418,7 +434,7 @@ export default function VerifierConsole({
                 ? <CatchAllResultCard result={result} signupUrl={signupUrl} t={t} />
                 : variant === 'disposable'
                   ? <DisposableResultCard result={result} signupUrl={signupUrl} t={t} />
-                  : <ResultCard result={result} t={t} />
+                  : <ResultCard result={result} signupUrl={signupUrl} t={t} />
             ) : !started ? (
               <div className="h-full flex flex-col justify-center items-center text-center text-slate-500 py-16 space-y-3">
                 <Terminal className="w-6 h-6 animate-pulse text-indigo-400" />
@@ -456,7 +472,31 @@ export default function VerifierConsole({
   )
 }
 
-function ResultCard({ result, t }: { result: ResultState; t: ConsoleStrings }) {
+function ResultCard({ result, signupUrl, t }: { result: ResultState; signupUrl: string; t: ConsoleStrings }) {
+  // Backend guest limit reached: show the sign-up card, same as the tools.
+  if (result.limited) {
+    return (
+      <div className="h-full flex flex-col justify-center items-center text-center p-6 space-y-4 animate-slide-down">
+        <div className="w-14 h-14 rounded-2xl flex items-center justify-center border bg-slate-800/60 border-slate-700">
+          <HelpCircle className="w-7 h-7 text-slate-300" />
+        </div>
+        <div className="space-y-1 max-w-sm">
+          <h4 className="text-lg font-black tracking-tight leading-tight text-slate-100">{result.title}</h4>
+          <p className="text-xs text-slate-400 font-semibold leading-relaxed">{result.desc}</p>
+        </div>
+        <a
+          href={signupUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-black rounded-xl transition-colors"
+        >
+          {t.limitButton}
+          <ArrowRight className="w-3.5 h-3.5" />
+        </a>
+      </div>
+    )
+  }
+
   const s = RESULT_STYLES[result.type]
   const Icon = s.Icon
   const showScore = typeof result.score === 'number' && result.type !== 'error'
@@ -632,16 +672,15 @@ function DisposableResultCard({
     )
   }
 
+  // This card answers one question: is the domain a disposable mail service?
+  // The backend response also carries the full deliverability verdict, but
+  // showing it here would blur this tool with the verifier. "Not disposable"
+  // gets a link to the verifier instead. See docs/DISPOSABLE_CHECK_GUIDE.md.
   const isDisposable = !!result.disposable
-  const v = result.type
-  const good = v === 'deliverable'
-  const bad = v === 'undeliverable'
-  const VerdictIcon = good ? CheckCircle2 : bad ? XCircle : v === 'risky' ? AlertTriangle : HelpCircle
-  const verdictColor = good ? 'text-emerald-400' : bad ? 'text-rose-400' : v === 'risky' ? 'text-amber-400' : 'text-slate-300'
+  const verifierHref = `/email-checker?email=${encodeURIComponent(result.email || '')}`
 
   return (
     <div className="h-full flex flex-col justify-center p-5 sm:p-6 space-y-3.5 animate-slide-down text-left">
-      {/* Step 1 — Disposable Status */}
       <div className={`rounded-xl border p-4 ${
         isDisposable
           ? 'border-rose-900/70 bg-rose-950/40'
@@ -654,61 +693,28 @@ function DisposableResultCard({
             <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-400" />
           )}
           <span className={`text-sm font-black break-all ${isDisposable ? 'text-rose-300' : 'text-emerald-300'}`}>
-            {domain} {isDisposable ? 'is a disposable email domain' : 'is NOT a disposable domain'}
+            {domain} {isDisposable ? 'is a disposable email domain' : 'is not a disposable email domain'}
           </span>
         </div>
         <p className="text-xs text-slate-400 font-semibold leading-relaxed mt-1.5 pl-6">
           {isDisposable
-            ? 'This address uses a temporary inbox service. Messages sent here will expire or bounce.'
-            : 'This is a standard email domain, not a temporary or disposable mail service.'}
+            ? 'This domain is a disposable or temporary mail service. Do not add this address to your list.'
+            : 'This domain is not on the list of disposable and temporary mail services. This does not tell you whether the mailbox exists.'}
         </p>
       </div>
 
-      {/* Step 2 — Mailbox deliverability result */}
-      <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-4">
-        <div className="flex items-center justify-between gap-2">
-          <div className="flex items-center gap-2">
-            <VerdictIcon className={`w-4 h-4 shrink-0 ${verdictColor}`} />
-            <span className={`text-sm font-black ${verdictColor}`}>
-              Mailbox Status: {t.verdictTitle[v] || result.title}
-            </span>
-          </div>
-          {typeof result.score === 'number' && (
-            <span className="text-[10px] font-mono px-2 py-0.5 rounded border border-slate-700 text-slate-400">
-              Score: {result.score}%
-            </span>
-          )}
-        </div>
-        <p className="text-xs text-slate-400 font-semibold leading-relaxed mt-1.5 pl-6">
-          {isDisposable
-            ? 'Temporary addresses expire quickly and cause hard bounces. Filter them from your list.'
-            : t.verdictLine[v] || result.desc}
-        </p>
-      </div>
-
-      {/* Meta attributes badges */}
-      {result.meta && (
-        <div className="flex flex-wrap items-center gap-2 text-[10px] font-mono text-slate-400 pt-1">
-          {result.meta.provider && (
-            <span className="px-2 py-1 rounded bg-slate-900 border border-slate-800 text-slate-300">
-              Provider: <strong className="text-white">{result.meta.provider}</strong>
-            </span>
-          )}
-          {result.meta.freeEmail && (
-            <span className="px-2 py-1 rounded bg-slate-900 border border-slate-800 text-slate-300">
-              Free Provider: <strong className="text-white">Yes</strong>
-            </span>
-          )}
-          {result.meta.role && (
-            <span className="px-2 py-1 rounded bg-slate-900 border border-slate-800 text-amber-300">
-              Role Account: <strong>Yes</strong>
-            </span>
-          )}
-          {result.catchAll && (
-            <span className="px-2 py-1 rounded bg-slate-900 border border-slate-800 text-amber-300">
-              Catch-All: <strong>Yes</strong>
-            </span>
-          )}
+      {!isDisposable && (
+        <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-4">
+          <p className="text-xs text-slate-400 font-semibold leading-relaxed">
+            To find out whether this mailbox exists and accepts mail, run it through the email checker.
+          </p>
+          <a
+            href={verifierHref}
+            className="mt-3 inline-flex items-center gap-1.5 px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-black rounded-xl transition-colors"
+          >
+            Check if this address is deliverable
+            <ArrowRight className="w-3.5 h-3.5" />
+          </a>
         </div>
       )}
     </div>

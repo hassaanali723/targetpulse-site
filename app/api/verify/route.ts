@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { EMAIL_RE, invalidSyntax, runVerification } from '@/lib/publicVerify'
+import { EMAIL_RE, invalidSyntax, runVerification, getVisitorIp } from '@/lib/publicVerify'
 
 /**
  * Public "real-time verifier" endpoint for the landing-page console.
@@ -9,26 +9,20 @@ import { EMAIL_RE, invalidSyntax, runVerification } from '@/lib/publicVerify'
  * giggal.ai exactly, including the deep catch-all flow that resolves to
  * valid/invalid.
  *
+ * Rate limiting: the backend's guest limit (5 checks per visitor IP per
+ * hour) is the only limit. The visitor's IP is passed through so the backend
+ * counts per visitor. A backend 429 is returned as a `limited: true` payload
+ * (HTTP 200) so the console shows the sign-up card, same as the tool routes.
+ * There is no site-side limiter.
+ *
  * Required env (server-only):
- *   BACKEND_URL   e.g. http://localhost:5050 (dev) or the Railway backend URL.
- *                 Falls back to NEXT_PUBLIC_BACKEND_URL if set.
+ *   BACKEND_URL         e.g. http://localhost:5050 (dev) or the Railway backend URL.
+ *                       Falls back to NEXT_PUBLIC_BACKEND_URL if set.
+ *   PUBLIC_SITE_TOKEN   lets the backend trust the forwarded visitor IP.
  */
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
-
-// ---- naive per-instance rate limit (demo abuse guard) -------------------
-const WINDOW_MS = 10 * 60 * 1000 // 10 minutes
-const MAX_PER_WINDOW = 15
-const hits = new Map<string, number[]>()
-
-function rateLimited(ip: string): boolean {
-  const now = Date.now()
-  const arr = (hits.get(ip) || []).filter((t) => now - t < WINDOW_MS)
-  arr.push(now)
-  hits.set(ip, arr)
-  return arr.length > MAX_PER_WINDOW
-}
 
 export async function POST(req: Request) {
   let email = ''
@@ -44,16 +38,12 @@ export async function POST(req: Request) {
     return NextResponse.json(invalidSyntax(email))
   }
 
-  const ip =
-    req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
-    req.headers.get('x-real-ip') ||
-    'unknown'
-  if (rateLimited(ip)) {
-    return NextResponse.json({ error: 'Too many requests. Please try again in a few minutes.' }, { status: 429 })
-  }
-
-  const out = await runVerification(email, ip)
+  const out = await runVerification(email, getVisitorIp(req))
   if (!out.ok) {
+    if (out.status === 429) {
+      // Backend guest limit. Soft response so the console shows the CTA.
+      return NextResponse.json({ limited: true, message: out.error })
+    }
     return NextResponse.json({ error: out.error }, { status: out.status })
   }
   return NextResponse.json(out.result)

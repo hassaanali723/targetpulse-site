@@ -9,9 +9,23 @@
 // Server-only: this calls an internal backend with a server-side URL and must
 // never be imported into a client component.
 
-import { isDisposableDomain } from './disposableDomains'
-
 export const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+/**
+ * The visitor's real IP for per-visitor quotas and for the backend's
+ * per-guest rate limit. giggal.ai is proxied by Cloudflare, which sets
+ * cf-connecting-ip to the true client and cannot be spoofed through the edge.
+ * The x-forwarded-for fallback is for local dev only: its first entry is
+ * whatever the client chose to send.
+ */
+export function getVisitorIp(req: Request): string {
+  return (
+    req.headers.get('cf-connecting-ip')?.trim() ||
+    req.headers.get('x-real-ip')?.trim() ||
+    req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+    'unknown'
+  )
+}
 
 export type StepStatus = 'ok' | 'warn' | 'error' | 'skip'
 export type LogLevel = 'info' | 'success' | 'warn' | 'error'
@@ -33,6 +47,10 @@ export type VerifyOutcome =
   | { ok: true; result: VerifyResult }
   | { ok: false; status: number; error: string }
 
+// Console output when the backend flags the domain as disposable. The backend
+// answers from its list before any DNS or SMTP work, so the log must not claim
+// a mail-server lookup happened. The backend reports these as undeliverable
+// with a score of 0; we mirror that verdict.
 export function disposableResult(email: string, domain: string): VerifyResult {
   const DOMAIN = domain.toUpperCase()
   return {
@@ -41,23 +59,21 @@ export function disposableResult(email: string, domain: string): VerifyResult {
     catchAll: false,
     steps: {
       basic: 'ok',
-      dns: 'ok',
+      dns: 'skip',
       catchall: 'skip',
       mailbox: 'error',
     },
     logs: [
       { step: 'basic', text: `[BASIC] Validating syntax and structure for ${email}...`, level: 'info' },
       { step: 'basic', text: `[SUCCESS] Address format is valid.`, level: 'success' },
-      { step: 'dns', text: `[DNS] Locating active mail servers for [${DOMAIN}]...`, level: 'info' },
-      { step: 'dns', text: `[SUCCESS] Secure SMTP channel active for disposable registry.`, level: 'success' },
-      { step: 'disposable', text: `[DISPOSABLE] Scanning domain against 75,000+ temporary & burner registries...`, level: 'info' },
-      { step: 'disposable', text: `[WARNING] ${DOMAIN} is a confirmed temporary/throwaway email service.`, level: 'warn' },
-      { step: 'mailbox', text: `[RESULT] Temporary inboxes expire quickly and produce hard bounces.`, level: 'error' },
+      { step: 'disposable', text: `[DISPOSABLE] Checking ${DOMAIN} against the disposable mail registry...`, level: 'info' },
+      { step: 'disposable', text: `[WARNING] ${DOMAIN} is a disposable or temporary mail service.`, level: 'warn' },
+      { step: 'mailbox', text: `[RESULT] Mailbox check skipped. Disposable addresses are reported as undeliverable.`, level: 'error' },
     ],
     verdict: {
       type: 'undeliverable',
       title: 'Disposable Email',
-      desc: 'This is a temporary disposable email address that will expire or bounce.',
+      desc: 'This domain is a disposable or temporary mail service.',
       score: 0,
     },
     meta: {
@@ -74,14 +90,9 @@ export function disposableResult(email: string, domain: string): VerifyResult {
 // outcome; the caller decides the HTTP status. `ip` is forwarded so the backend
 // rate-limits per visitor.
 export async function runVerification(email: string, ip: string): Promise<VerifyOutcome> {
-  const domain = email.split('@')[1]?.toLowerCase() || ''
-
-  // COST OPTIMIZATION: Check local 75,000+ disposable domain database first.
-  // If disposable, immediately return local result in ~5ms, saving 100% of backend network, proxy, and SMTP socket costs.
-  if (domain && isDisposableDomain(domain)) {
-    return { ok: true, result: disposableResult(email, domain) }
-  }
-
+  // Disposable detection happens in the backend (single source of truth,
+  // refreshed on a schedule). It short-circuits before any SMTP probe, so
+  // there is nothing to save by checking locally, and a local copy drifts.
   const base = process.env.BACKEND_URL || process.env.NEXT_PUBLIC_BACKEND_URL
   if (!base) {
     return { ok: false, status: 503, error: 'Verification service is not configured.' }
@@ -91,12 +102,26 @@ export async function runVerification(email: string, ip: string): Promise<Verify
   // The public validator runs SMTP + deep catch-all verification — give it room.
   const timeout = setTimeout(() => controller.abort(), 60_000)
   try {
+    // The backend limits guests to 5 checks per hour per IP. Every visitor
+    // of this site reaches it from the same server IP, so we pass the
+    // visitor's IP explicitly. The backend honours X-Visitor-IP only when
+    // X-Site-Token matches its PUBLIC_SITE_TOKEN; without the token all site
+    // visitors would share one bucket.
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json',
+      'X-Forwarded-For': ip,
+    }
+    const siteToken = process.env.PUBLIC_SITE_TOKEN
+    if (siteToken) {
+      headers['X-Site-Token'] = siteToken
+      headers['X-Visitor-IP'] = ip
+    } else {
+      console.warn('[verify] PUBLIC_SITE_TOKEN is not set; backend will rate-limit all site visitors as one IP')
+    }
+
     const res = await fetch(`${base.replace(/\/$/, '')}/api/public/validate-email`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Forwarded-For': ip,
-      },
+      headers,
       cache: 'no-store',
       signal: controller.signal,
       body: JSON.stringify({ email }),
@@ -156,6 +181,11 @@ export function mapResult(email: string, data: any): VerifyResult {
   const general = details.general ?? {}
 
   const domain: string = (general.domain || email.split('@')[1] || '').toString()
+  if (attrs.disposable) {
+    // Backend flagged the domain as disposable: keep the dedicated console
+    // output for that verdict.
+    return disposableResult(email, domain)
+  }
   const DOMAIN = domain.toUpperCase()
   const status: string = (data?.status || 'unknown').toString()
   const score: number = Number.isFinite(data?.deliverability_score) ? data.deliverability_score : 0

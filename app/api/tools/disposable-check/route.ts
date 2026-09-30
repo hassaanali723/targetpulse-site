@@ -1,36 +1,80 @@
 import { NextResponse } from 'next/server'
-import { EMAIL_RE, invalidSyntax, runVerification, disposableResult, type VerifyResult } from '@/lib/publicVerify'
-import { isDisposableDomain } from '@/lib/disposableDomains'
+import { EMAIL_RE, invalidSyntax, runVerification, type LogLevel, type StepStatus, type VerifyResult, getVisitorIp } from '@/lib/publicVerify'
 
 /**
  * Free disposable email checker endpoint for /disposable-email-checker.
  *
- * Cost Optimization & Architecture:
- *   1. Immediate local short-circuit: Checks against 75,000+ disposable domains locally.
- *      If disposable, returns instantly (~5ms) and SKIPS the backend server completely.
- *      This saves 100% of backend proxy, CPU, and SMTP costs on throwaway lookups.
- *   2. Only non-disposable addresses are forwarded to the backend for live SMTP / MX checks.
- *   3. Rate-limited to 5 free checks per IP per rolling 24 hours (soft quota with signup CTA).
- *   4. Results are cached for 24h.
+ * Same policy as the catch-all tool (`/api/tools/catch-all-check`):
+ *
+ *   - Every address goes to the backend public validator through the shared
+ *     `runVerification`. The backend owns the disposable-domain list (100,000+
+ *     domains, refreshed every six hours, admin overrides) and answers
+ *     disposable domains before any SMTP work. For other domains it runs its
+ *     full check. There is no local copy of the list: a copy kept here
+ *     drifted and reported real throwaway domains as fine.
+ *     See docs/DISPOSABLE_CHECK_GUIDE.md.
+ *   - This route reports ONLY the disposable answer. The backend response
+ *     also carries the deliverability verdict, but this tool must not show
+ *     it (that is the verifier's job), so the steps and logs returned here
+ *     cover two checks: syntax and the disposable registry.
+ *   - The ONLY rate limit is the backend's guest limit (5 checks per IP per
+ *     hour). A backend 429 becomes a `limited: true` payload (HTTP 200) so
+ *     the console shows a sign-up CTA. No second, site-side quota.
+ *   - Results are cached per address for 24h. Repeats are free.
+ *   - Other backend errors are returned as errors. We never invent a result
+ *     when the backend did not answer.
+ *
+ * The cache is in-memory and per-instance, same as the catch-all route.
  */
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
 const DAY_MS = 24 * 60 * 60 * 1000
-const MAX_PER_DAY = 5
 
-// ip -> timestamps of counted checks in current window
-const hits = new Map<string, number[]>()
+// Shape the disposable console renders. `steps` has only the two checks
+// this tool performs, so the sidebar never shows a mailbox check that did
+// not happen.
+interface DisposableToolResult {
+  email: string
+  domain: string
+  disposable: boolean
+  steps: Record<'basic' | 'disposable', StepStatus>
+  logs: { step: string; text: string; level: LogLevel }[]
+  verdict: VerifyResult['verdict']
+  meta: VerifyResult['meta']
+}
+
 // normalized email -> cached result
-const cache = new Map<string, { at: number; result: VerifyResult }>()
+const cache = new Map<string, { at: number; result: DisposableToolResult }>()
 
-const LIMIT_MESSAGE =
-  'You have used your free disposable email checks for today. Sign up for 1,000 free credits, no card required, to verify your whole list.'
+// Cloudflare-aware; the old x-forwarded-for[0] read was visitor-controlled.
+function visitorIp(req: Request): string {
+  return getVisitorIp(req)
+}
 
-function recentHits(ip: string): number[] {
-  const now = Date.now()
-  return (hits.get(ip) || []).filter((t) => now - t < DAY_MS)
+// Reduce the backend's full result to the disposable answer.
+function toToolResult(r: VerifyResult): DisposableToolResult {
+  const disposable = !!r.meta.disposable
+  const DOMAIN = r.domain.toUpperCase()
+  return {
+    email: r.email,
+    domain: r.domain,
+    disposable,
+    steps: { basic: 'ok', disposable: disposable ? 'error' : 'ok' },
+    logs: [
+      { step: 'basic', text: `[BASIC] Validating syntax and structure for ${r.email}...`, level: 'info' },
+      { step: 'basic', text: `[SUCCESS] Address format is valid.`, level: 'success' },
+      { step: 'disposable', text: `[DISPOSABLE] Checking ${DOMAIN} against the disposable mail registry...`, level: 'info' },
+      disposable
+        ? { step: 'disposable', text: `[RESULT] ${DOMAIN} is a disposable or temporary mail service.`, level: 'error' }
+        : { step: 'disposable', text: `[RESULT] ${DOMAIN} is not a known disposable mail service.`, level: 'success' },
+    ],
+    verdict: disposable
+      ? { type: 'undeliverable', title: 'Disposable Email', desc: 'This domain is a disposable or temporary mail service.', score: 0 }
+      : { type: 'unknown', title: 'Not Disposable', desc: 'This domain is not a known disposable mail service.', score: 0 },
+    meta: r.meta,
+  }
 }
 
 export async function POST(req: Request) {
@@ -44,108 +88,28 @@ export async function POST(req: Request) {
 
   if (!email) return NextResponse.json({ error: 'Email is required.' }, { status: 400 })
   if (email.length > 254 || !EMAIL_RE.test(email)) {
+    // Syntax failures never touch the backend, so they are free.
     return NextResponse.json(invalidSyntax(email))
   }
 
   const key = email.toLowerCase()
-  const domain = email.split('@')[1]?.toLowerCase() || ''
 
-  // 1. Cached address check — free, does not touch quota
+  // Cached address: free, does not touch the backend or its guest limit.
   const cached = cache.get(key)
   if (cached && Date.now() - cached.at < DAY_MS) {
     return NextResponse.json({ ...cached.result, cached: true })
   }
 
-  // 2. Rate limit guard
-  const ip =
-    req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
-    req.headers.get('x-real-ip') ||
-    'unknown'
-
-  const counted = recentHits(ip)
-  if (counted.length >= MAX_PER_DAY) {
-    hits.set(ip, counted)
-    return NextResponse.json({ limited: true, message: LIMIT_MESSAGE })
-  }
-
-  // 3. COST SAVER: Check local 75,000+ disposable domain database
-  const isDisposable = isDisposableDomain(domain)
-
-  let finalResult: VerifyResult
-
-  if (isDisposable) {
-    // SHORT-CIRCUIT: Domain is 100% disposable.
-    // Skip backend entirely — saves 100% of backend network & SMTP costs!
-    finalResult = disposableResult(email, domain)
-  } else {
-    // Domain is not on disposable list: call backend for full DNS, MX, and SMTP verification
-    const out = await runVerification(email, ip)
-
-    if (out.ok) {
-      finalResult = {
-        ...out.result,
-        meta: {
-          ...out.result.meta,
-          disposable: out.result.meta?.disposable || false,
-        },
-      }
-
-      // Ensure disposable diagnostic log is present
-      const hasDisposableLog = finalResult.logs.some((l) => l.step === 'disposable')
-      if (!hasDisposableLog) {
-        finalResult.logs.splice(2, 0, {
-          step: 'disposable',
-          text: `[DISPOSABLE] Scanning domain against 75,000+ temporary & burner registries...`,
-          level: 'info',
-        })
-        finalResult.logs.splice(3, 0, {
-          step: 'disposable',
-          text: finalResult.meta.disposable
-            ? `[WARNING] ${domain.toUpperCase()} is a confirmed temporary/throwaway email service.`
-            : `[SUCCESS] Domain is permanent (not a disposable email provider).`,
-          level: finalResult.meta.disposable ? 'warn' : 'success',
-        })
-      }
-    } else {
-      // Fallback if backend is unavailable
-      finalResult = {
-        email,
-        domain,
-        catchAll: false,
-        steps: {
-          basic: 'ok',
-          dns: 'ok',
-          catchall: 'skip',
-          mailbox: 'warn',
-        },
-        logs: [
-          { step: 'basic', text: `[BASIC] Validating syntax and structure for ${email}...`, level: 'info' },
-          { step: 'basic', text: `[SUCCESS] Address format is valid.`, level: 'success' },
-          { step: 'disposable', text: `[DISPOSABLE] Scanning domain against 75,000+ temporary & burner registries...`, level: 'info' },
-          { step: 'disposable', text: `[SUCCESS] Domain is permanent (not a disposable email provider).`, level: 'success' },
-          { step: 'mailbox', text: `[INFO] Standard domain format confirmed.`, level: 'info' },
-        ],
-        verdict: {
-          type: 'deliverable',
-          title: 'Standard Email',
-          desc: 'Standard email address on a persistent domain (not disposable).',
-          score: 85,
-        },
-        meta: {
-          provider: null,
-          mxRecord: null,
-          disposable: false,
-          role: false,
-          freeEmail: false,
-        },
-      }
+  const out = await runVerification(email, visitorIp(req))
+  if (!out.ok) {
+    if (out.status === 429) {
+      // Backend guest limit. Soft response so the console shows the CTA.
+      return NextResponse.json({ limited: true, message: out.error })
     }
+    return NextResponse.json({ error: out.error }, { status: out.status })
   }
 
-  // Cache and count successful check
-  cache.set(key, { at: Date.now(), result: finalResult })
-  counted.push(Date.now())
-  hits.set(ip, counted)
-
-  return NextResponse.json(finalResult)
+  const result = toToolResult(out.result)
+  cache.set(key, { at: Date.now(), result })
+  return NextResponse.json(result)
 }
