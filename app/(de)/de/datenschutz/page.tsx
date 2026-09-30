@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 }
 
 const sections: LegalSection[] = [
-  { heading: '1. Einleitung', paragraphs: ['Giggal.ai ("wir") verpflichtet sich zum Schutz Ihrer Privatsphäre. Diese Erklärung beschreibt, wie wir Ihre Daten erheben, nutzen, weitergeben und schützen, wenn Sie unsere E-Mail-Verifizierungsdienste und unsere Website nutzen.']},
+  { heading: '1. Einleitung', paragraphs: ['Der Dienst wird von TargetPulse Ltd ("wir") betrieben, einer in England und Wales unter der Nummer 17079825 eingetragenen Gesellschaft mit Sitz in Office 17366, 182-184 High Street North, East Ham, London E6 2JA, Vereinigtes Königreich. TargetPulse Ltd ist Verantwortlicher für die über Giggal.ai verarbeiteten personenbezogenen Daten. Kontakt: info@giggal.ai. Missbrauchsmeldungen: abuse@giggal.ai.', 'Giggal.ai ("wir") verpflichtet sich zum Schutz Ihrer Privatsphäre. Diese Erklärung beschreibt, wie wir Ihre Daten erheben, nutzen, weitergeben und schützen, wenn Sie unsere E-Mail-Verifizierungsdienste und unsere Website nutzen.']},
   { heading: '2. Welche Daten wir erheben' },
   { heading: '2.1 Personenbezogene Daten', level: 3, paragraphs: ['Wir können personenbezogene Daten erheben, die Sie uns freiwillig mitteilen, wenn Sie:'], list: [
     'Ein Konto registrieren', 'Credits oder ein Abo kaufen', 'Den Support kontaktieren', 'E-Mail-Listen zur Prüfung übermitteln', 'Kontakt- oder Supportformulare der Website nutzen',

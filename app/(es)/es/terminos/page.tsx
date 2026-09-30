@@ -11,8 +11,9 @@ export const metadata: Metadata = {
 
 const sections: LegalSection[] = [
   { heading: '1. Aceptación de los términos', paragraphs: [
+    'El servicio está operado por TargetPulse Ltd ("nosotros"), sociedad registrada en Inglaterra y Gales con el número 17079825 y domicilio social en Office 17366, 182-184 High Street North, East Ham, Londres E6 2JA, Reino Unido. TargetPulse Ltd es el responsable del tratamiento de los datos personales tratados a través de Giggal.ai. Contacto: info@giggal.ai. Denuncias de abuso: abuse@giggal.ai.',
     'Al acceder a los servicios de Giggal.ai y usarlos, aceptas quedar vinculado por los términos y condiciones de este acuerdo. Si no vas a cumplirlos, no uses el servicio.',
-    'Estos Términos del servicio regulan el uso del servicio Giggal.ai Email Verifier, operado por Hassaan Ali Mehmood bajo el nombre comercial Giggal.ai.',
+    'Estos Términos del servicio regulan el uso del servicio Giggal.ai Email Verifier, operado por TargetPulse Ltd bajo el nombre comercial Giggal.ai.',
   ]},
   { heading: '2. Descripción del servicio', paragraphs: [
     'Giggal.ai Email Verifier es una herramienta en la nube que ayuda a los equipos a limpiar y validar listas de correo. Los usuarios suben archivos CSV o direcciones individuales y nosotros comprobamos entregabilidad, sintaxis y estado del buzón para reducir las direcciones no válidas y mejorar la entrega.',
