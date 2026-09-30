@@ -196,9 +196,9 @@ const RELATED_LINKS = [
     desc: 'How Giggal resolves accept-all business domains to deliverable or undeliverable.',
   },
   {
-    title: 'How email verification works',
+    title: 'How accurate are email verifiers?',
     href: '/blog/how-accurate-are-email-verification-tools',
-    desc: 'The technical mechanics of how mail servers confirm a mailbox without sending an email.',
+    desc: 'What the 97–99% accuracy claims measure, and how to test a verifier on your own list.',
   },
   {
     title: 'Why cold emails bounce',
@@ -208,17 +208,17 @@ const RELATED_LINKS = [
   {
     title: 'How to reduce email bounce rate',
     href: '/blog/how-to-reduce-email-bounce-rate',
-    desc: 'Actionable deliverability fixes to keep your sender reputation safe and under 2%.',
+    desc: 'What causes a high bounce rate and how to bring it down.',
   },
   {
     title: 'Good bounce rate for cold email',
     href: '/blog/good-bounce-rate-for-cold-email',
-    desc: 'Standard deliverability benchmarks to aim for on warmed and cold outreach campaigns.',
+    desc: 'Under 2% is healthy. What to do at 2–5% and above 5%.',
   },
   {
     title: 'Email verification API',
     href: '/public/docs',
-    desc: 'Verify addresses in real time at signup or process batch files programmatically.',
+    desc: 'Check addresses at sign-up or clean files from your own code.',
   },
 ]
 
@@ -245,7 +245,7 @@ export default function EmailListCleaningPage() {
           </span>
         </h1>
         <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-3xl mx-auto font-medium">
-          Upload your list and get it back clean in minutes. Our email list cleaning service removes invalid, disposable, role-based and duplicate addresses before they bounce and hurt your sender reputation. Unlike most list cleaners, it doesn&apos;t dump every catch-all address into a &quot;risky&quot; pile. It checks each one and tells you which to keep.
+          Upload your list and get it back clean in minutes. Our email list cleaning service removes invalid, disposable, role-based and duplicate addresses before they bounce and hurt your sender reputation. Many list cleaners dump every catch-all address into a &quot;risky&quot; pile. We check each one and tell you which to keep.
         </p>
 
         <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -400,18 +400,18 @@ export default function EmailListCleaningPage() {
         </p>
       </section>
 
-      {/* ── 4. WHY MOST CLEANERS DELETE GOOD LEADS ─────────────── */}
+      {/* ── 4. WHY MANY CLEANERS FLAG GOOD LEADS AS RISKY ──────── */}
       <section className="cv-section max-w-4xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
-        <h2 className={sectionTitle}>Why most email list cleaners delete good leads</h2>
+        <h2 className={sectionTitle}>Why many email list cleaners flag good leads as risky</h2>
         <p className={proseP}>
           Many company mail servers accept every address, real or made up. That&apos;s a{' '}
           <Link href="/blog/what-is-a-catch-all-email-address" className="text-indigo-600 font-bold hover:underline">
             catch-all domain
           </Link>
-          . On these domains a standard check gets the same &quot;yes&quot; for a real mailbox and a typo, so most email list cleaning services label the address &quot;risky&quot; and leave the decision to you.
+          . On these domains a standard check gets the same &quot;yes&quot; for a real mailbox and a typo. Many email list cleaning services stop there, label the address &quot;risky&quot; and leave the decision to you.
         </p>
         <p className={proseP}>
-          On a typical B2B list, around 30% of addresses sit on catch-all or gateway-protected domains. Delete them and you throw away real buyers. Send to them and the dead ones bounce.
+          On B2B lists these domains are common. Larger companies often sit behind security gateways that hide the mailbox. Delete these addresses and you throw away real buyers. Send to them and the dead ones bounce.
         </p>
         <p className={proseP}>
           Giggal resolves each catch-all address to valid or invalid for the same 1 credit as any other check. It also works on domains behind{' '}
@@ -434,7 +434,7 @@ export default function EmailListCleaningPage() {
         <div className="text-center max-w-2xl mx-auto space-y-3">
           <h2 className={sectionTitle}>Email list cleaning pricing</h2>
           <p className={proseP}>
-            Pay per email, not per month. One credit cleans one address, catch-all checks included. Credits never expire, and your first 1,000 are free.
+            Pay for the emails you clean, with no monthly commitment. One credit cleans one address, catch-all checks included. Credits never expire, and your first 1,000 are free.
           </p>
         </div>
 
@@ -449,54 +449,34 @@ export default function EmailListCleaningPage() {
       </section>
 
       {/* ── 7. HOW OFTEN TO CLEAN ──────────────────────────────── */}
-      <section className="cv-section max-w-4xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8">
-        <div className="space-y-4">
-          <h2 className={sectionTitle}>How often should you clean your email list?</h2>
-          <p className={proseP}>
-            Addresses go stale on their own. People change jobs, companies change domains, and old inboxes get shut down. B2B lists go stale fastest. Clean your list:
-          </p>
-          <ul className="list-disc pl-6 space-y-2 text-slate-600 text-sm md:text-base font-medium leading-relaxed marker:text-indigo-500">
-            <li>Before a campaign to any list you haven&apos;t cleaned in the last few months.</li>
-            <li>Right after you import a purchased, scraped or enriched list.</li>
-            <li>
-              When your bounce rate starts climbing. For cold email,{' '}
-              <Link href="/blog/good-bounce-rate-for-cold-email" className="text-indigo-600 font-bold hover:underline">
-                stay under 2%
-              </Link>
-              .
-            </li>
-            <li>On a regular schedule for any list you send to often.</li>
-          </ul>
-        </div>
-
-        <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
-          <table className="w-full text-left border-collapse text-sm">
-            <thead>
-              <tr className="border-b border-slate-200 bg-slate-50/75">
-                <th className="py-3.5 px-5 font-bold text-slate-900">List type</th>
-                <th className="py-3.5 px-5 font-bold text-slate-900">How often</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100">
-              <tr>
-                <td className="py-3.5 px-5 font-semibold text-slate-800">High-volume cold outreach</td>
-                <td className="py-3.5 px-5 text-slate-600">Every 2 to 4 weeks</td>
-              </tr>
-              <tr>
-                <td className="py-3.5 px-5 font-semibold text-slate-800">Marketing newsletter</td>
-                <td className="py-3.5 px-5 text-slate-600">Every 1 to 3 months</td>
-              </tr>
-              <tr>
-                <td className="py-3.5 px-5 font-semibold text-slate-800">Transactional / product users</td>
-                <td className="py-3.5 px-5 text-slate-600">Continuous via API, or quarterly bulk check</td>
-              </tr>
-              <tr>
-                <td className="py-3.5 px-5 font-semibold text-slate-800">B2B sales list</td>
-                <td className="py-3.5 px-5 text-slate-600">Before every major campaign</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+      <section className="cv-section max-w-4xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
+        <h2 className={sectionTitle}>How often should you clean your email list?</h2>
+        <p className={proseP}>
+          Addresses go stale on their own. People change jobs, companies change domains, and old inboxes get shut down. B2B lists go stale fastest. Clean your list:
+        </p>
+        <ul className="list-disc pl-6 space-y-2 text-slate-600 text-sm md:text-base font-medium leading-relaxed marker:text-indigo-500">
+          <li>Before a campaign to any list you haven&apos;t cleaned in the last few months.</li>
+          <li>Right after you import a purchased, scraped or enriched list.</li>
+          <li>
+            When your bounce rate starts climbing. For cold email,{' '}
+            <Link href="/blog/good-bounce-rate-for-cold-email" className="text-indigo-600 font-bold hover:underline">
+              stay under 2%
+            </Link>
+            .
+          </li>
+          <li>On a regular schedule for any list you send to often.</li>
+        </ul>
+        <p className={proseP}>
+          Regular cleaning is what people mean by email hygiene: keeping only addresses that exist and can receive your mail. It&apos;s the simplest way to{' '}
+          <Link href="/blog/how-to-reduce-email-bounce-rate" className="text-indigo-600 font-bold hover:underline">
+            reduce your bounce rate
+          </Link>
+          . To keep bad addresses out in the first place, verify new sign-ups in real time with the{' '}
+          <Link href="/public/docs" className="text-indigo-600 font-bold hover:underline">
+            API
+          </Link>
+          .
+        </p>
       </section>
 
       {/* ── 8. WHERE IT ALREADY LIVES ──────────────────────────── */}
@@ -575,19 +555,14 @@ export default function EmailListCleaningPage() {
       {/* ── 11. CTA BLOCK ──────────────────────────────────────── */}
       <AltCtaBand
         headline="Clean your email list in minutes"
-        supporting="1,000 free credits, no credit card required. Up to 50,000 addresses per file."
+        supporting="1,000 free credits, no card needed. Up to 50,000 addresses per file."
         buttonText="Clean my list free"
       />
 
       {/* ── 12. RELATED TOOLS & GUIDES ─────────────────────────── */}
       <section className="cv-section max-w-5xl mx-auto px-6 pb-24">
         <div className="border-t border-slate-200 pt-12 space-y-8">
-          <div className="space-y-2">
-            <h2 className={sectionTitle}>Related tools and guides</h2>
-            <p className={proseP}>
-              Guides, benchmarks and tools to help keep your sender reputation protected.
-            </p>
-          </div>
+          <h2 className={sectionTitle}>Related tools and guides</h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {RELATED_LINKS.map((item) => (
