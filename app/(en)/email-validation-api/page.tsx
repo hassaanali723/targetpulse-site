@@ -637,7 +637,7 @@ form.addEventListener('submit', async (e) => {
               <tr>
                 <td className="py-3.5 px-4 font-mono text-xs text-indigo-700">data.status</td>
                 <td className="py-3.5 px-4 text-slate-500 font-mono text-xs">string</td>
-                <td className="py-3.5 px-4 text-slate-600">Primary delivery status: &quot;deliverable&quot;, &quot;undeliverable&quot;, &quot;risky&quot;, &quot;unknown&quot;.</td>
+                <td className="py-3.5 px-4 text-slate-600">Primary delivery status: &quot;deliverable&quot;, &quot;undeliverable&quot;, &quot;unknown&quot;.</td>
               </tr>
               <tr>
                 <td className="py-3.5 px-4 font-mono text-xs text-indigo-700">data.deliverability_score</td>

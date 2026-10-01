@@ -265,11 +265,6 @@ export default function EmailVerificationApiPage() {
                   <td className="py-3.5 px-4 text-slate-700 font-medium">Do not send. Remove from campaigns to avoid hard bounces.</td>
                 </tr>
                 <tr>
-                  <td className="py-3.5 px-4 font-semibold font-mono text-amber-700">risky</td>
-                  <td className="py-3.5 px-4 text-slate-600">Server accepted recipient, but flags such as role account, mailbox full, or poor reputation indicate risk.</td>
-                  <td className="py-3.5 px-4 text-slate-700 font-medium">Review attributes. Exclude from cold campaigns or send with low volume.</td>
-                </tr>
-                <tr>
                   <td className="py-3.5 px-4 font-semibold font-mono text-slate-700">unknown</td>
                   <td className="py-3.5 px-4 text-slate-600">Inconclusive server response, typically due to greylisting or connection timeout.</td>
                   <td className="py-3.5 px-4 text-slate-700 font-medium">Retry check later. Credits used for unknown answers are refunded automatically.</td>
@@ -606,7 +601,7 @@ const res = await fetch('https://api.giggal.ai/v1/verify', {
 
 const data = await res.json();
 if (data.success) {
-  console.log('Status:', data.data.status); // deliverable, undeliverable, risky, unknown
+  console.log('Status:', data.data.status); // deliverable, undeliverable, unknown
   console.log('Catch-all result:', data.data.catch_all_verdict); // valid | invalid
 } else {
   console.error('Verification error:', data.error);
