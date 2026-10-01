@@ -75,7 +75,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'How are catch-all addresses handled?',
-    a: 'On catch-all domains, a standard mail server reports that every address is acceptable, which causes ordinary tools to return "risky" or "unknown". Our email verification API executes in-line deep catch-all verification using domain intelligence, mail gateway profiling, and directory heuristics. It returns a definitive valid or invalid verdict along with a catch_all_score between 0 and 100, saving you from discarding real leads.',
+    a: 'On catch-all domains, a standard mail server reports that every address is acceptable, which causes ordinary tools to return "risky" or "unknown". Our verification engine executes in-line deep catch-all verification using domain intelligence, mail gateway profiling, and directory heuristics. It returns a definitive valid or invalid verdict along with a catch_all_score between 0 and 100, saving you from discarding real leads.',
   },
   {
     q: 'What does "unknown" mean, and am I charged for it?',
@@ -132,7 +132,7 @@ export default function EmailVerificationApiPage() {
           <p className="text-base md:text-lg text-slate-600 leading-relaxed font-medium">
             Check any address over SMTP with one REST call. On catch-all domains, where most APIs stop at
             &quot;accept-all&quot; or &quot;risky&quot;, you get a valid or invalid verdict in the same response.
-            Our email verification api gives engineering teams clean JSON data to protect sender reputation across
+            Our email verification API gives engineering teams clean JSON data to protect sender reputation across
             outreach pipelines.
           </p>
         </div>
@@ -287,21 +287,20 @@ export default function EmailVerificationApiPage() {
         <div className="space-y-4">
           <h2 className={sectionTitle}>Catch-all addresses resolved in the same call</h2>
           <p className={proseP}>
-            Standard SMTP checks fail on catch-all domains. When a company configures its mail server to accept
-            every incoming address, standard verification tools see a &quot;yes&quot; for real employees and fake
-            typos alike. Lacking deeper verification, most tools tag the contact as &quot;risky&quot; or &quot;accept-all&quot;
-            and dump the decision back on you.
+            Standard SMTP checks fail on catch-all domains. When a company mail server accepts
+            every incoming address, standard tools see a positive response for real mailboxes and fake
+            typos alike. Unable to verify further, most tools tag the address &quot;risky&quot; or &quot;accept-all&quot;
+            and leave the decision to you.
           </p>
           <p className={proseP}>
-            Around 30% of a typical B2B list sits on catch-all domains or domains protected by secure email gateways (SEGs)
-            like Proofpoint, Mimecast, Cisco, and Barracuda. Deleting every catch-all address throws away roughly one in three
-            qualified buyers. Sending to them unverified causes fatal bounce spikes.
+            Around 30% of a typical B2B list sits on catch-all domains or domains behind secure email gateways (SEGs)
+            like Proofpoint and Mimecast. Deleting them discards real buyers; sending unverified causes bounce spikes.
           </p>
           <p className={proseP}>
-            Our verification engine performs in-line deep catch-all resolution. It interrogates directory signals,
-            server responses, and gateway profiles to generate a <code className="font-mono text-sm bg-slate-100 px-1 text-slate-800">catch_all_verdict</code> (&quot;valid&quot; or &quot;invalid&quot;)
+            Our verification engine performs in-line deep catch-all resolution. It interrogates directory signals
+            and server responses to return a definitive <code className="font-mono text-sm bg-slate-100 px-1 text-slate-800">catch_all_verdict</code> (&quot;valid&quot; or &quot;invalid&quot;)
             and a calibrated <code className="font-mono text-sm bg-slate-100 px-1 text-slate-800">catch_all_score</code> (0–100).
-            Learn more about our methodology for{' '}
+            Learn more in our dedicated guides on{' '}
             <Link href="/catch-all-verification" className="text-indigo-600 font-bold hover:underline">
               catch-all verification
             </Link>{' '}
@@ -399,7 +398,7 @@ export default function EmailVerificationApiPage() {
               <span className="font-mono text-xs font-bold text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-md">POST /v1/verify-batch</span>
               <span className="text-xs font-semibold text-slate-500">Up to 50k emails</span>
             </div>
-            <h3 className="text-base font-bold text-slate-900">Bulk email verification API</h3>
+            <h3 className="text-base font-bold text-slate-900">Bulk email verification</h3>
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
               Asynchronous processing for up to 50,000 addresses per job. Strips duplicates and invalid syntax server-side.
               Supports the <code className="font-mono text-xs bg-slate-100 px-1 text-slate-700">Idempotency-Key</code> header to prevent double-charges.
@@ -474,7 +473,7 @@ export default function EmailVerificationApiPage() {
               <tr>
                 <td className="py-3.5 px-4 font-bold text-slate-800">Free Email</td>
                 <td className="py-3.5 px-4 font-mono text-xs text-indigo-600">details.attributes.free_email</td>
-                <td className="py-3.5 px-4 text-slate-600">Flags consumer domains (gmail.com, yahoo.com). Enforce corporate domains on B2B forms.</td>
+                <td className="py-3.5 px-4 text-slate-600">Flags consumer webmail domains (gmail.com, yahoo.com) to separate personal inboxes from corporate prospects.</td>
               </tr>
               <tr>
                 <td className="py-3.5 px-4 font-bold text-slate-800">Catch-All</td>
@@ -511,8 +510,7 @@ export default function EmailVerificationApiPage() {
         <div className="space-y-3">
           <h2 className={sectionTitle}>Where teams use the email verification API</h2>
           <p className={proseP}>
-            Our email verification service api integrates seamlessly into modern engineering pipelines, CRM automations,
-            and data warehouses.
+            Our endpoints integrate seamlessly into modern engineering pipelines, CRM automations, and data warehouses.
           </p>
         </div>
 
@@ -584,7 +582,7 @@ export default function EmailVerificationApiPage() {
         <div className="space-y-3">
           <h2 className={sectionTitle}>Code examples</h2>
           <p className={proseP}>
-            Server-side snippets for single and bulk workflows. Keep your API key safe in server environment variables.
+            Server-side snippets for single and bulk checks. Keep your API key in environment variables.
           </p>
         </div>
 
@@ -707,9 +705,9 @@ const results = await resultsRes.json();`}</code>
         <PricingTable />
 
         <p className="text-center text-sm text-slate-500 font-medium">
-          Need custom volume or dedicated infrastructure? See our full{' '}
+          Need higher enterprise volume? See our full{' '}
           <Link href="/pricing" className="text-indigo-600 font-bold hover:underline">
-            pricing and credit tiers
+            pricing tiers
           </Link>
           .
         </p>
@@ -752,13 +750,13 @@ const results = await resultsRes.json();`}</code>
           <div className="rounded-2xl border border-slate-200 bg-white p-6 space-y-3 shadow-sm">
             <h3 className="text-base font-bold text-slate-900">HTTP status error codes</h3>
             <ul className="space-y-2 text-xs sm:text-sm text-slate-600">
-              <li><strong className="font-mono text-slate-900">400 Bad Request:</strong> Invalid email syntax or malformed JSON.</li>
-              <li><strong className="font-mono text-slate-900">401 Unauthorized:</strong> Missing, revoked or invalid API key.</li>
-              <li><strong className="font-mono text-slate-900">402 Payment Required:</strong> Insufficient credits balance.</li>
-              <li><strong className="font-mono text-slate-900">404 Not Found:</strong> Specified job ID or task does not exist.</li>
-              <li><strong className="font-mono text-slate-900">409 Conflict:</strong> Idempotency key collision with different payload.</li>
-              <li><strong className="font-mono text-slate-900">410 Gone:</strong> Batch results have expired (kept for 48 hours).</li>
-              <li><strong className="font-mono text-slate-900">429 Too Many Requests:</strong> Rate limit exceeded.</li>
+              <li><strong className="font-mono text-slate-900">400 Bad Request:</strong> Invalid syntax or malformed JSON body.</li>
+              <li><strong className="font-mono text-slate-900">401 Unauthorized:</strong> Missing, expired, or invalid API key.</li>
+              <li><strong className="font-mono text-slate-900">402 Payment Required:</strong> Insufficient account credit balance.</li>
+              <li><strong className="font-mono text-slate-900">404 Not Found:</strong> Requested job ID does not exist.</li>
+              <li><strong className="font-mono text-slate-900">409 Conflict:</strong> Idempotency key payload collision.</li>
+              <li><strong className="font-mono text-slate-900">410 Gone:</strong> Batch job results expired after 48 hours.</li>
+              <li><strong className="font-mono text-slate-900">429 Too Many Requests:</strong> Rate limit threshold exceeded.</li>
             </ul>
           </div>
         </div>
@@ -790,7 +788,7 @@ const results = await resultsRes.json();`}</code>
                 ))}
               </div>
               <p className="text-sm text-slate-600 leading-relaxed italic">
-                &quot;Before using it, our team spent hours manually reviewing catch-all addresses or removing them from campaigns because other tools couldn&apos;t verify them with confidence. Now we can upload large email lists, verify them in minutes, and move directly into campaign preparation without the extra manual work.&quot;
+                &quot;Before Giggal, our team spent hours manually reviewing catch-all addresses because other tools couldn&apos;t verify them with confidence. Now we upload large email lists, verify them in minutes, and move directly into campaign preparation.&quot;
               </p>
             </div>
             <div className="pt-2 border-t border-slate-100 flex items-center justify-between">

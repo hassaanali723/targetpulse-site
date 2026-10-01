@@ -53,6 +53,7 @@ const FEATURES: {
   linkColor: string
   // 'SIGNUP' = the sign-up URL (declared further down the file)
   link: { href: string; label: string }
+  secondaryLink?: { href: string; label: string }
   icon: React.ReactNode
   visual: React.ReactNode
 }[] = [
@@ -616,12 +617,12 @@ export default function Home() {
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                       </Link>
                     )}
-                    {(f as any).secondaryLink && (
+                    {f.secondaryLink && (
                       <Link
-                        href={(f as any).secondaryLink.href}
+                        href={f.secondaryLink.href}
                         className="group inline-flex items-center gap-1.5 text-base font-bold text-slate-500 hover:text-slate-800 hover:underline transition-colors"
                       >
-                        {(f as any).secondaryLink.label}
+                        {f.secondaryLink.label}
                         <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-slate-700 group-hover:translate-x-0.5 transition-transform" />
                       </Link>
                     )}
