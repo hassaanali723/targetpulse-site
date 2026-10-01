@@ -54,13 +54,11 @@ export const metadata: Metadata = {
     description: DESC,
     url: 'https://giggal.ai/email-validation-api',
     type: 'website',
-    images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai email validation API' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Email Validation API for Real-Time Signup Checks',
     description: DESC,
-    images: ['/og-card.png'],
   },
 }
 
@@ -79,7 +77,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'Does it detect disposable and temporary addresses?',
-    a: 'Yes. Every check inspects the domain against our registry of over 100,000 disposable, throwaway, and temporary email domains. If a match is found, details.attributes.disposable returns true and the status is set to undeliverable, allowing your backend to block temporary accounts instantly.',
+    a: 'Yes. Every check inspects the domain against our registry of over 100,000 disposable, throwaway, and temporary email domains. If a match is found, details.attributes.disposable returns true and the status is set to undeliverable, allowing your backend to block temporary accounts.',
   },
   {
     q: 'Should I block role-based addresses like info@?',
@@ -314,7 +312,7 @@ await createUser({ email });`}</code>
           <p className={proseP}>
             Why the fail-open pattern is essential for user conversion: Front-end signup forms represent the highest-friction
             step in your acquisition funnel. If your application prevents registration whenever an external network hop
-            experiences latency, you risk abandoning high-intent customers. By setting a strict 3-to-4 second timeout and
+            experiences latency, you risk abandoning high-intent customers. By setting an explicit timeout and
             automatically permitting the registration if the timeout elapses, you preserve conversion rates while queuing the
             unverified record for a background re-check.
           </p>
@@ -390,7 +388,7 @@ app.post('/api/signup', async (req, res) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ email }),
-      signal: AbortSignal.timeout(4000), // 4-second timeout
+      signal: AbortSignal.timeout(timeoutMs), // fail-open timeout
     });
 
     const result = await apiRes.json();
@@ -444,7 +442,7 @@ def signup():
             "https://api.giggal.ai/v1/verify",
             headers={"Authorization": f"Bearer {os.environ['GIGGAL_API_KEY']}"},
             json={"email": email},
-            timeout=4
+            timeout=timeout_seconds  # fail open on timeout
         )
         data = resp.json().get("data", {})
         if data.get("status") == "undeliverable":

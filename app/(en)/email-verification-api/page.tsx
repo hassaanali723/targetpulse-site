@@ -54,13 +54,11 @@ export const metadata: Metadata = {
     description: DESC,
     url: 'https://giggal.ai/email-verification-api',
     type: 'website',
-    images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai email verification API' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Email Verification API with Catch-All Resolution',
     description: DESC,
-    images: ['/og-card.png'],
   },
 }
 
@@ -83,7 +81,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'How many emails can I verify per request?',
-    a: 'Single verification requests check one email synchronously per call with an instant JSON response. For list verification, our bulk API endpoint accepts up to 50,000 email addresses per batch job asynchronously. You can track progress through job polling and retrieve paginated results when processing completes.',
+    a: 'Single verification requests check one email synchronously per call with a direct JSON response. For list verification, our bulk API endpoint accepts up to 50,000 email addresses per batch job asynchronously. You can track progress through job polling and retrieve paginated results when processing completes.',
   },
   {
     q: 'Can I verify emails from Claude, ChatGPT or Cursor?',
@@ -386,7 +384,7 @@ export default function EmailVerificationApiPage() {
             <h3 className="text-base font-bold text-slate-900">Single email verification</h3>
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
               Synchronous verification for a single email address. Runs complete SMTP validation, domain diagnostics, and
-              deep catch-all resolution in-line. Response arrives in seconds.
+              deep catch-all resolution in-line. Returns a complete JSON result.
             </p>
             <Link href="/public/docs" className="inline-flex items-center gap-1 text-xs font-bold text-indigo-600 hover:underline pt-2">
               View endpoint docs <ArrowRight className="w-3 h-3" />
@@ -537,7 +535,7 @@ export default function EmailVerificationApiPage() {
           <div className="rounded-2xl border border-slate-200 bg-white p-6 space-y-3 shadow-sm">
             <h3 className="text-base font-bold text-slate-900">Lead enrichment pipelines</h3>
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              Trigger instant SMTP checks whenever inbound SDR or outbound enrichment tools find new corporate emails,
+              Trigger automated SMTP checks whenever inbound SDR or outbound enrichment tools find new corporate emails,
               guaranteeing valid contacts before reps reach out.
             </p>
           </div>
