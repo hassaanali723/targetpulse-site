@@ -6,6 +6,7 @@ import Navbar from '@/components/Navbar'
 import JsonLd from '@/components/JsonLd'
 import { breadcrumbLd, apiDocsLd } from '@/lib/schema'
 import Footer from '@/components/Footer'
+import EmailOff from '@/components/EmailOff'
 import { ChevronDown, Search, ArrowRight } from 'lucide-react'
 
 const BASE_URL = 'https://api.giggal.ai/v1'
@@ -662,9 +663,11 @@ function ResponsePanel({ endpoint }: { endpoint: Endpoint }) {
             )
           })}
         </div>
-        <pre className="text-[12px] leading-relaxed text-slate-100 font-mono overflow-x-auto max-h-[400px] overflow-y-auto">
-          <code>{active.body}</code>
-        </pre>
+        <EmailOff>
+          <pre className="text-[12px] leading-relaxed text-slate-100 font-mono overflow-x-auto max-h-[400px] overflow-y-auto">
+            <code>{active.body}</code>
+          </pre>
+        </EmailOff>
       </div>
     </div>
   )
@@ -848,6 +851,21 @@ export default function ApiReferencePage() {
           <Sidebar goTo={goTo} />
 
           <div className="flex-1 min-w-0 pb-24">
+            {/* Overview Banner */}
+            <div className="pt-6">
+              <div className="rounded-xl border border-indigo-200/80 bg-indigo-50/80 px-4 py-3 text-sm text-slate-700">
+                Looking for an overview? See the{' '}
+                <Link href="/email-verification-api" className="font-bold text-indigo-700 hover:underline">
+                  email verification API
+                </Link>
+                , or the{' '}
+                <Link href="/email-validation-api" className="font-bold text-indigo-700 hover:underline">
+                  email validation API for signup forms
+                </Link>
+                .
+              </div>
+            </div>
+
             {/* Hero */}
             <section className="pt-6 pb-10 border-b border-slate-200">
               <h1 className="text-3xl md:text-4xl font-black tracking-tight text-slate-900 mb-3">
@@ -917,12 +935,14 @@ export default function ApiReferencePage() {
                 <div className="text-[10px] font-black uppercase tracking-[0.16em] text-slate-500 mb-2">
                   Quick start: verify one email with cURL
                 </div>
-                <pre className="text-[12px] font-mono bg-slate-950 text-slate-100 rounded-lg px-4 py-3 overflow-x-auto">
-                  <code>{`curl -X POST ${BASE_URL}/verify \\
+                <EmailOff>
+                  <pre className="text-[12px] font-mono bg-slate-950 text-slate-100 rounded-lg px-4 py-3 overflow-x-auto">
+                    <code>{`curl -X POST ${BASE_URL}/verify \\
   -H "Authorization: Bearer tp_live_xxxxxxxxxxxxxxxxxxxxxxxxx" \\
   -H "Content-Type: application/json" \\
   -d '{"email":"info@giggal.ai"}'`}</code>
-                </pre>
+                  </pre>
+                </EmailOff>
               </div>
             </section>
 

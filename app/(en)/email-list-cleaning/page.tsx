@@ -196,7 +196,7 @@ const RELATED_LINKS = [
     desc: 'How Giggal resolves accept-all business domains to deliverable or undeliverable.',
   },
   {
-    title: 'How accurate are email verifiers?',
+    title: 'How accurate email verification is',
     href: '/blog/how-accurate-are-email-verification-tools',
     desc: 'What the 97–99% accuracy claims measure, and how to test a verifier on your own list.',
   },
@@ -217,7 +217,7 @@ const RELATED_LINKS = [
   },
   {
     title: 'Email verification API',
-    href: '/public/docs',
+    href: '/email-verification-api',
     desc: 'Check addresses at sign-up or clean files from your own code.',
   },
 ]

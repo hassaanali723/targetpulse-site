@@ -227,7 +227,11 @@ export default function DisposableEmailCheckerPage() {
             <h3 className="text-base font-bold text-slate-900">Free trial abuse</h3>
             <p className="text-xs md:text-sm text-slate-600 leading-relaxed">
               One person can create many trial accounts with a new disposable address each time. Blocking these
-              addresses at signup stops most of it.
+              addresses at signup stops most of it. You can automate this on registration forms with our{' '}
+              <Link href="/email-validation-api" className="text-indigo-600 font-bold hover:underline">
+                email validation API
+              </Link>
+              .
             </p>
           </div>
 
@@ -281,6 +285,7 @@ export default function DisposableEmailCheckerPage() {
       <section className="cv-section max-w-3xl mx-auto px-6 pb-24">
         <div className="border-t border-slate-200 pt-8 space-y-3">
           {[
+            { href: '/email-validation-api', label: 'email validation API: block disposable signups in real time' },
             { href: '/email-checker', label: 'free email checker: does this mailbox exist?' },
             { href: '/catch-all-verification', label: 'verify catch-all and risky emails' },
             { href: '/seg-email-verification', label: 'verify emails behind secure email gateways' },

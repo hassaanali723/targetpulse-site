@@ -45,6 +45,8 @@ export function coreEntries(): SitemapEntry[] {
     { path: '/email-checker', lastModified: '2026-09-18' },
     { path: '/disposable-email-checker', lastModified: '2026-09-30' },
     { path: '/email-list-cleaning', lastModified: '2026-10-01' },
+    { path: '/email-verification-api', lastModified: '2026-10-01' },
+    { path: '/email-validation-api', lastModified: '2026-10-01' },
     { path: '/mcp', lastModified: '2026-09-13' },
     // API reference. Kept in the sitemap — the URL set is unchanged from the
     // previous single sitemap, only regrouped.

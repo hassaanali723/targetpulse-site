@@ -127,7 +127,8 @@ const FEATURES: {
     iconBg: 'bg-violet-600',
     panelBg: 'bg-violet-50',
     linkColor: 'text-violet-600',
-    link: { href: '/public/docs', label: 'Read the API docs' },
+    link: { href: '/email-verification-api', label: 'Email verification API' },
+    secondaryLink: { href: '/public/docs', label: 'Read the API docs' },
     icon: (<><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></>),
     visual: (
       <pre className="rounded-xl bg-slate-900 p-5 font-mono text-[13px] leading-relaxed text-slate-300 overflow-x-auto">
@@ -603,7 +604,7 @@ export default function Home() {
                       </li>
                     ))}
                   </ul>
-                  <div className="mt-auto pt-7">
+                  <div className="mt-auto pt-7 flex flex-wrap items-center gap-x-5 gap-y-2">
                     {f.link.href === 'SIGNUP' ? (
                       <a href={SIGNUP_URL} target="_blank" rel="noopener noreferrer" className={linkClass}>
                         {f.link.label}
@@ -613,6 +614,15 @@ export default function Home() {
                       <Link href={f.link.href} className={linkClass}>
                         {f.link.label}
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                      </Link>
+                    )}
+                    {(f as any).secondaryLink && (
+                      <Link
+                        href={(f as any).secondaryLink.href}
+                        className="group inline-flex items-center gap-1.5 text-base font-bold text-slate-500 hover:text-slate-800 hover:underline transition-colors"
+                      >
+                        {(f as any).secondaryLink.label}
+                        <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-slate-700 group-hover:translate-x-0.5 transition-transform" />
                       </Link>
                     )}
                   </div>

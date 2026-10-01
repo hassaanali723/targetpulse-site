@@ -213,3 +213,30 @@ export function emailListCleaningServiceLd(): Record<string, unknown> {
   }
 }
 
+// SoftwareApplication schema for API landing pages (/email-verification-api, /email-validation-api)
+export function apiSoftwareApplicationLd(opts: {
+  name: string
+  url: string
+  description: string
+}): Record<string, unknown> {
+  const prices = RAW_OFFERS.map((o) => o.price)
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    '@id': `${opts.url}#software`,
+    name: opts.name,
+    url: opts.url,
+    applicationCategory: 'DeveloperApplication',
+    operatingSystem: 'Any',
+    description: opts.description,
+    publisher: { '@id': ORG_ID },
+    offers: {
+      '@type': 'AggregateOffer',
+      priceCurrency: 'USD',
+      lowPrice: Math.min(...prices).toFixed(2),
+      highPrice: Math.max(...prices).toFixed(2),
+      offerCount: RAW_OFFERS.length,
+    },
+  }
+}
+

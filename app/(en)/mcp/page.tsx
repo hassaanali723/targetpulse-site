@@ -232,7 +232,14 @@ export default function McpPage() {
             >
               verifying emails inside Claude and ChatGPT
             </Link>
-            .
+            . Under the hood, the MCP server is powered by the same engine as the{' '}
+            <Link
+              href="/email-verification-api"
+              className="text-indigo-700 hover:text-indigo-800 font-extrabold transition-colors"
+            >
+              email verification API
+            </Link>
+            , giving your agent direct access to full SMTP checks and deep catch-all resolution.
           </p>
         </div>
       </section>

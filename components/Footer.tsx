@@ -27,6 +27,8 @@ const productLinks = [
   { name: 'Free email checker', href: '/email-checker' },
   { name: 'Disposable email checker', href: '/disposable-email-checker' },
   { name: 'Integrations', href: '/integrations' },
+  { name: 'Email verification API', href: '/email-verification-api' },
+  { name: 'Email validation API', href: '/email-validation-api' },
   { name: 'API Reference', href: '/public/docs' },
   { name: 'Pricing', href: '/pricing' },
   { name: 'Sign up free', href: '/sign-up', external: true },
