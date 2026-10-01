@@ -72,6 +72,8 @@ returns valid or invalid instead of a shrug.
 - [Pricing](${SITE}/pricing): pay as you go, credits never expire
 - [MCP server](${SITE}/mcp): verify emails from Claude, ChatGPT, Cursor and VS Code
 - [API docs](${SITE}/public/docs)
+- [Email verification API](${SITE}/email-verification-api): real-time single and batch verification REST API
+- [Email validation API](${SITE}/email-validation-api): signup form and lead validation REST API
 - [Integrations](${SITE}/integrations): Zapier, n8n and ${ZAPIER_APPS.length} connected apps
 - [Alternatives](${SITE}/alternatives): ranked comparison against ${ALL_COMPETITOR_SLUGS.length} verifiers
 - [Compare](${SITE}/compare): head-to-head pages for every pair of those verifiers, Giggal included or not
