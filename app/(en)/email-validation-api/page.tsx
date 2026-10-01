@@ -85,7 +85,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'What happens with catch-all domains at signup?',
-    a: 'Catch-all domains accept all recipient addresses unconditionally, making standard SMTP checks inconclusive. Our API runs in-line deep catch-all verification to evaluate whether the mailbox exists. If catch_all_verdict is "valid", you can safely allow signup; if "invalid", the address will bounce and should be stopped.',
+    a: 'Catch-all domains accept all recipient addresses unconditionally, making standard SMTP checks inconclusive. Our API runs in-line deep catch-all verification to evaluate whether the mailbox exists. If the catch-all check returns "valid", you can safely allow signup; if "invalid", the address will bounce and should be stopped.',
   },
   {
     q: "What should my form do if the API doesn't answer in time?",
@@ -197,21 +197,21 @@ await createUser({ email });`}</code>
           <p className={proseP}>
             A regular expression checks only string structure: whether an @ symbol exists, if the domain format looks
             plausible, and whether characters fall within standard ASCII ranges. Regex answers only whether an input
-            looks like an email address—not whether anyone can receive messages there.
+            looks like an email address, not whether anyone can receive messages there.
           </p>
           <p className={proseP}>
             Typing <code className="font-mono text-sm bg-slate-100 px-1 text-slate-800">user@example.com</code> or{' '}
             <code className="font-mono text-sm bg-slate-100 px-1 text-slate-800">asdf12345@gmail.com</code> passes every
-            RFC-compliant regex perfectly. Yet one domain may possess no active mail servers, and the other mailbox may
+            RFC-compliant regex perfectly. Yet one domain may have no active mail servers, and the other mailbox may
             not exist.
           </p>
           <p className={proseP}>
-            Our email validation api json service goes far beyond regular expressions. In a single synchronized request,
+            Our email validation api json service goes far beyond regular expressions. In a single request,
             it inspects DNS records, performs MX host lookups, connects to the destination mail server to test mailbox
             responsiveness, and verifies the domain against extensive disposable lists.
           </p>
           <p className={proseP}>
-            Furthermore, rigid regex patterns often introduce false rejections. Custom expressions frequently reject
+            Rigid regex patterns also cause false rejections. Custom expressions frequently reject
             uncommon top-level domains like .studio or .cloud, valid international characters, or legitimate addresses
             with unusual punctuation. Our API handles all RFC 5322 syntax specifications automatically, eliminating the need
             to maintain fragile regex libraries in your codebase.
@@ -289,7 +289,7 @@ await createUser({ email });`}</code>
               <tr>
                 <td className="py-3.5 px-4 font-bold text-indigo-700">Catch-All</td>
                 <td className="py-3.5 px-4 font-mono text-xs text-slate-600">details.attributes.catch_all === true</td>
-                <td className="py-3.5 px-4 text-slate-700 font-medium">Follow catch_all_verdict. If &quot;valid&quot; allow; if &quot;invalid&quot; block; if null permit registration.</td>
+                <td className="py-3.5 px-4 text-slate-700 font-medium">Check <code className="font-mono text-xs bg-slate-100 px-1 text-slate-700">catch_all_verdict</code>: if &quot;valid&quot; allow; if &quot;invalid&quot; block; if null permit registration.</td>
               </tr>
               <tr>
                 <td className="py-3.5 px-4 font-bold text-slate-700">Unknown</td>
@@ -306,15 +306,14 @@ await createUser({ email });`}</code>
         <div className="space-y-4">
           <h2 className={sectionTitle}>Add email validation to your signup form</h2>
           <p className={proseP}>
-            Follow this four-step sequence to integrate real-time validation safely. Because requests involve private API
-            credentials, the check must always be orchestrated from your backend server.
+            Follow this four-step sequence to integrate real-time validation safely. Because requests require your private API
+            key, run the check from your backend server.
           </p>
           <p className={proseP}>
-            Why the fail-open pattern is essential for user conversion: Front-end signup forms represent the highest-friction
-            step in your acquisition funnel. If your application prevents registration whenever an external network hop
-            experiences latency, you risk abandoning high-intent customers. By setting an explicit timeout and
-            automatically permitting the registration if the timeout elapses, you preserve conversion rates while queuing the
-            unverified record for a background re-check.
+            Why the fail-open pattern matters: Signup forms are sensitive to delays. If an external API call
+            experiences network latency, blocking the form could lose a real customer. Setting a short timeout and
+            automatically allowing the registration to proceed ensures legitimate users are not turned away, while your backend
+            queues the address for a background check later.
           </p>
         </div>
 
@@ -558,7 +557,7 @@ form.addEventListener('submit', async (e) => {
         <div className="space-y-3">
           <h2 className={sectionTitle}>Where to validate emails in real time</h2>
           <p className={proseP}>
-            Deploy real-time validation across all inbound lead capture touchpoints in your product ecosystem.
+            Validate email addresses wherever users submit forms across your product.
           </p>
         </div>
 
@@ -638,7 +637,7 @@ form.addEventListener('submit', async (e) => {
               <tr>
                 <td className="py-3.5 px-4 font-mono text-xs text-indigo-700">data.status</td>
                 <td className="py-3.5 px-4 text-slate-500 font-mono text-xs">string</td>
-                <td className="py-3.5 px-4 text-slate-600">Primary delivery verdict: &quot;deliverable&quot;, &quot;undeliverable&quot;, &quot;risky&quot;, &quot;unknown&quot;.</td>
+                <td className="py-3.5 px-4 text-slate-600">Primary delivery status: &quot;deliverable&quot;, &quot;undeliverable&quot;, &quot;risky&quot;, &quot;unknown&quot;.</td>
               </tr>
               <tr>
                 <td className="py-3.5 px-4 font-mono text-xs text-indigo-700">data.deliverability_score</td>

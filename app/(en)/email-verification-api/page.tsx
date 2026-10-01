@@ -27,7 +27,7 @@ import { breadcrumbLd, faqPageLd, apiSoftwareApplicationLd } from '@/lib/schema'
 const SIGNUP_URL = 'https://emailverifier.giggal.ai/sign-up'
 const TITLE = 'Email Verification API with Catch-All Resolution | Giggal.ai'
 const DESC =
-  'Real-time email verification API with SMTP mailbox checks and catch-all verdicts in one JSON response. Bulk jobs up to 50,000. 1,000 free credits.'
+  'Real-time email verification API with SMTP mailbox checks and catch-all resolution in one JSON response. Bulk jobs up to 50,000. 1,000 free credits.'
 
 export const metadata: Metadata = {
   title: {
@@ -73,7 +73,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'How are catch-all addresses handled?',
-    a: 'On catch-all domains, a standard mail server reports that every address is acceptable, which causes ordinary tools to return "risky" or "unknown". Giggal runs a deep mailbox existence check and returns a valid or invalid verdict with a catch_all_score from 0 to 100, saving you from discarding real leads.',
+    a: 'On catch-all domains, a standard mail server reports that every address is acceptable, which causes ordinary tools to return "risky" or "unknown". Giggal runs a deep mailbox existence check and returns a valid or invalid result with a catch_all_score from 0 to 100, saving you from discarding real leads.',
   },
   {
     q: 'What does "unknown" mean, and am I charged for it?',
@@ -129,7 +129,7 @@ export default function EmailVerificationApiPage() {
           </h1>
           <p className="text-base md:text-lg text-slate-600 leading-relaxed font-medium">
             Check any address over SMTP with one REST call. On catch-all domains, where most APIs stop at
-            &quot;accept-all&quot; or &quot;risky&quot;, you get a valid or invalid verdict in the same response.
+            &quot;accept-all&quot; or &quot;risky&quot;, you get a valid or invalid answer in the same response.
             Our email verification API gives engineering teams clean JSON data to protect sender reputation across
             outreach pipelines.
           </p>
@@ -186,7 +186,7 @@ export default function EmailVerificationApiPage() {
           <p className={proseP}>
             A single call returns full deliverability data. You receive the
             top-level deliverability status, risk evaluation, numerical deliverability score, mailbox attributes,
-            and in-line catch-all verdicts.
+            and in-line catch-all results.
           </p>
         </div>
 
@@ -241,7 +241,7 @@ export default function EmailVerificationApiPage() {
         <div className="space-y-4 pt-2">
           <h3 className="text-xl font-bold text-slate-900">How to handle response status values</h3>
           <p className={proseP}>
-            The primary verdict is delivered in the <code className="font-mono text-sm bg-slate-100 px-1.5 py-0.5 rounded text-indigo-700">status</code> field.
+            The primary delivery status is returned in the <code className="font-mono text-sm bg-slate-100 px-1.5 py-0.5 rounded text-indigo-700">status</code> field.
             Here is how your backend application should interpret and route each enum value:
           </p>
           <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
@@ -296,8 +296,8 @@ export default function EmailVerificationApiPage() {
           </p>
           <p className={proseP}>
             Our verification engine performs in-line deep catch-all resolution. It runs a deep mailbox existence check
-            to return a definitive <code className="font-mono text-sm bg-slate-100 px-1 text-slate-800">catch_all_verdict</code> (&quot;valid&quot; or &quot;invalid&quot;)
-            and a calibrated <code className="font-mono text-sm bg-slate-100 px-1 text-slate-800">catch_all_score</code> (0–100).
+            to return a <code className="font-mono text-sm bg-slate-100 px-1 text-slate-800">catch_all_verdict</code> (&quot;valid&quot; or &quot;invalid&quot;)
+            and a <code className="font-mono text-sm bg-slate-100 px-1 text-slate-800">catch_all_score</code> from 0 to 100.
             Learn more in our dedicated guides on{' '}
             <Link href="/catch-all-verification" className="text-indigo-600 font-bold hover:underline">
               catch-all verification
@@ -345,7 +345,7 @@ export default function EmailVerificationApiPage() {
               </span>
               <div>
                 <p className="text-sm font-bold text-slate-900">Giggal.ai API</p>
-                <p className="text-xs text-indigo-600 font-semibold">Definitive verdict in-line</p>
+                <p className="text-xs text-indigo-600 font-semibold">Resolves catch-alls in-line</p>
               </div>
             </div>
             <pre className="rounded-xl bg-slate-900 p-4 font-mono text-xs text-emerald-300 leading-relaxed overflow-x-auto border border-indigo-500/30">
@@ -413,7 +413,7 @@ export default function EmailVerificationApiPage() {
             </div>
             <h3 className="text-base font-bold text-slate-900">Job polling and results</h3>
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              Poll job progress with <code className="font-mono text-xs bg-slate-100 px-1 text-slate-700">GET /v1/jobs/:jobId</code> every 10–15 seconds.
+              Poll job progress with <code className="font-mono text-xs bg-slate-100 px-1 text-slate-700">GET /v1/jobs/:jobId</code> every 10 to 15 seconds.
               Retrieve paginated results up to 500 records per page. Results are stored safely for 48 hours.
             </p>
             <Link href="/public/docs" className="inline-flex items-center gap-1 text-xs font-bold text-indigo-600 hover:underline pt-2">
@@ -429,7 +429,7 @@ export default function EmailVerificationApiPage() {
             <h3 className="text-base font-bold text-slate-900">Bulk catch-all resolution</h3>
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
               Run deep catch-all resolution across addresses flagged as catch-all from a completed bulk job. Download results
-              as a clean CSV with score and verdict columns.
+              as a clean CSV with score and status columns.
             </p>
             <Link href="/public/docs" className="inline-flex items-center gap-1 text-xs font-bold text-indigo-600 hover:underline pt-2">
               View catch-all docs <ArrowRight className="w-3 h-3" />
@@ -443,7 +443,7 @@ export default function EmailVerificationApiPage() {
         <div className="space-y-3">
           <h2 className={sectionTitle}>Flags in every response</h2>
           <p className={proseP}>
-            Beyond valid or invalid, every response contains rich metadata attributes to help you segment leads,
+            Beyond valid or invalid, every response includes detailed mailbox attributes to help you segment leads,
             prevent abuse, and apply automated filtering rules.
           </p>
         </div>
@@ -476,7 +476,7 @@ export default function EmailVerificationApiPage() {
               <tr>
                 <td className="py-3.5 px-4 font-bold text-slate-800">Catch-All</td>
                 <td className="py-3.5 px-4 font-mono text-xs text-indigo-600">details.attributes.catch_all</td>
-                <td className="py-3.5 px-4 text-slate-600">Flags whether the host accepts all mail. Use with catch_all_verdict to recover leads.</td>
+                <td className="py-3.5 px-4 text-slate-600">Flags whether the host accepts all mail. Use with <code className="font-mono text-xs bg-slate-100 px-1 text-slate-700">catch_all_verdict</code> to recover valid leads.</td>
               </tr>
               <tr>
                 <td className="py-3.5 px-4 font-bold text-slate-800">Plus Tag</td>
@@ -508,7 +508,7 @@ export default function EmailVerificationApiPage() {
         <div className="space-y-3">
           <h2 className={sectionTitle}>Where teams use the email verification API</h2>
           <p className={proseP}>
-            Our endpoints integrate seamlessly into modern engineering pipelines, CRM automations, and data warehouses.
+            Our endpoints connect directly to data pipelines, CRM workflows, and databases.
           </p>
         </div>
 
@@ -517,7 +517,7 @@ export default function EmailVerificationApiPage() {
             <h3 className="text-base font-bold text-slate-900">CRM and data warehouse sync</h3>
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
               Verify contact data continuously before syncing to Salesforce, HubSpot, or Snowflake. Clean stale records
-              on schedule and maintain pristine data hygiene.
+              on schedule and keep contact data accurate.
             </p>
           </div>
 
@@ -569,7 +569,7 @@ export default function EmailVerificationApiPage() {
               <Link href="/email-validation-api" className="text-indigo-600 font-bold hover:underline">
                 email validation API
               </Link>{' '}
-              tailored for real-time form checks.
+              built for real-time form checks.
             </p>
           </div>
         </div>
@@ -607,7 +607,7 @@ const res = await fetch('https://api.giggal.ai/v1/verify', {
 const data = await res.json();
 if (data.success) {
   console.log('Status:', data.data.status); // deliverable, undeliverable, risky, unknown
-  console.log('Catch-all verdict:', data.data.catch_all_verdict); // valid | invalid
+  console.log('Catch-all result:', data.data.catch_all_verdict); // valid | invalid
 } else {
   console.error('Verification error:', data.error);
 }`}</code>
@@ -642,7 +642,7 @@ result = response.json()
 if result.get("success"):
     data = result["data"]
     print("Status:", data["status"])
-    print("Catch-All Verdict:", data.get("catch_all_verdict"))
+    print("Catch-All Result:", data.get("catch_all_verdict"))
 else:
     print("Error:", result.get("error"))`}</code>
             </pre>
@@ -653,7 +653,7 @@ else:
         <div className="space-y-4 pt-4">
           <h3 className="text-xl font-bold text-slate-900">Bulk workflow: submit, poll, and fetch results</h3>
           <p className={proseP}>
-            Submitting a batch job takes one call. Poll every 10–15 seconds until the job status reaches <code className="font-mono text-xs bg-slate-100 px-1 text-slate-700">completed</code>.
+            Submitting a batch job takes one call. Poll every 10 to 15 seconds until the job status reaches <code className="font-mono text-xs bg-slate-100 px-1 text-slate-700">completed</code>.
           </p>
           <EmailOff>
             <div className="rounded-2xl bg-slate-900 border border-slate-800 shadow-xl overflow-hidden text-left">
