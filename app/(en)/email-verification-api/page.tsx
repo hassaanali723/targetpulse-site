@@ -69,11 +69,11 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'How does the API check an address without sending an email?',
-    a: 'The API initiates a direct SMTP handshake with the recipient mail server. It performs DNS and MX lookups, establishes an encrypted mail exchange socket, and simulates sending a message up to the RCPT TO command. The remote mail server responds indicating whether the mailbox exists. The connection is terminated cleanly before any message headers or body are transmitted, so your recipient never receives an email.',
+    a: 'The API initiates a direct SMTP handshake with the recipient mail server. It performs DNS and MX lookups, connects to the destination mail server, and simulates sending a message up to the RCPT TO command. The remote mail server responds indicating whether the mailbox exists. The connection is terminated cleanly before any message headers or body are transmitted, so your recipient never receives an email.',
   },
   {
     q: 'How are catch-all addresses handled?',
-    a: 'On catch-all domains, a standard mail server reports that every address is acceptable, which causes ordinary tools to return "risky" or "unknown". Our verification engine executes in-line deep catch-all verification using domain intelligence, mail gateway profiling, and directory heuristics. It returns a definitive valid or invalid verdict along with a catch_all_score between 0 and 100, saving you from discarding real leads.',
+    a: 'On catch-all domains, a standard mail server reports that every address is acceptable, which causes ordinary tools to return "risky" or "unknown". Giggal runs a deep mailbox existence check and returns a valid or invalid verdict with a catch_all_score from 0 to 100, saving you from discarding real leads.',
   },
   {
     q: 'What does "unknown" mean, and am I charged for it?',
@@ -85,7 +85,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'Can I verify emails from Claude, ChatGPT or Cursor?',
-    a: 'Yes. Giggal.ai hosts an official remote MCP (Model Context Protocol) server at https://mcp.giggal.ai/mcp. You can configure Claude Desktop, ChatGPT, Cursor, or VS Code with your API key to verify single addresses or full lists directly from your conversation without writing custom integration code.',
+    a: 'Yes. Giggal.ai hosts an official remote MCP (Model Context Protocol) server at https://mcp.giggal.ai/mcp. Claude and ChatGPT connect to the hosted server via OAuth with no API key required. For local developer workflows in Cursor, VS Code, and other clients, you can configure the local giggal-mcp server with your API key to verify addresses directly from your editor.',
   },
   {
     q: "What's the difference between an email verification API and an email validation API?",
@@ -184,7 +184,7 @@ export default function EmailVerificationApiPage() {
         <div className="space-y-3">
           <h2 className={sectionTitle}>What one API call returns</h2>
           <p className={proseP}>
-            A single call returns full deliverability intelligence. You receive the
+            A single call returns full deliverability data. You receive the
             top-level deliverability status, risk evaluation, numerical deliverability score, mailbox attributes,
             and in-line catch-all verdicts.
           </p>
@@ -266,7 +266,7 @@ export default function EmailVerificationApiPage() {
                 </tr>
                 <tr>
                   <td className="py-3.5 px-4 font-semibold font-mono text-amber-700">risky</td>
-                  <td className="py-3.5 px-4 text-slate-600">Server accepted recipient, but flags such as role account, mailbox full, or poor reputation signal risk.</td>
+                  <td className="py-3.5 px-4 text-slate-600">Server accepted recipient, but flags such as role account, mailbox full, or poor reputation indicate risk.</td>
                   <td className="py-3.5 px-4 text-slate-700 font-medium">Review attributes. Exclude from cold campaigns or send with low volume.</td>
                 </tr>
                 <tr>
@@ -295,8 +295,8 @@ export default function EmailVerificationApiPage() {
             like Proofpoint and Mimecast. Deleting them discards real buyers; sending unverified causes bounce spikes.
           </p>
           <p className={proseP}>
-            Our verification engine performs in-line deep catch-all resolution. It interrogates directory signals
-            and server responses to return a definitive <code className="font-mono text-sm bg-slate-100 px-1 text-slate-800">catch_all_verdict</code> (&quot;valid&quot; or &quot;invalid&quot;)
+            Our verification engine performs in-line deep catch-all resolution. It runs a deep mailbox existence check
+            to return a definitive <code className="font-mono text-sm bg-slate-100 px-1 text-slate-800">catch_all_verdict</code> (&quot;valid&quot; or &quot;invalid&quot;)
             and a calibrated <code className="font-mono text-sm bg-slate-100 px-1 text-slate-800">catch_all_score</code> (0–100).
             Learn more in our dedicated guides on{' '}
             <Link href="/catch-all-verification" className="text-indigo-600 font-bold hover:underline">
@@ -536,7 +536,7 @@ export default function EmailVerificationApiPage() {
             <h3 className="text-base font-bold text-slate-900">Lead enrichment pipelines</h3>
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
               Trigger automated SMTP checks whenever inbound SDR or outbound enrichment tools find new corporate emails,
-              guaranteeing valid contacts before reps reach out.
+              so reps only contact verified addresses.
             </p>
           </div>
 

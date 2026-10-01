@@ -377,6 +377,8 @@ await createUser({ email });`}</code>
               </div>
               <pre className="p-5 text-xs sm:text-[13px] font-mono text-slate-200 overflow-x-auto leading-relaxed">
                 <code>{`// server.js (Express Route)
+const timeoutMs = 5000; // adjust to what your form can tolerate
+
 app.post('/api/signup', async (req, res) => {
   const { email, password } = req.body;
 
@@ -432,6 +434,7 @@ import os, requests
 from flask import Flask, request, jsonify
 
 app = Flask(__name__)
+timeout_seconds = 5  # adjust to what your form can tolerate
 
 @app.route("/api/signup", methods=["POST"])
 def signup():
@@ -563,7 +566,7 @@ form.addEventListener('submit', async (e) => {
           <div className="rounded-2xl border border-slate-200 bg-white p-6 space-y-3 shadow-sm">
             <h3 className="text-base font-bold text-slate-900">User registration forms</h3>
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              Prevent registration spam and guarantee that welcome emails and verification links land in active inboxes.
+              Prevent registration spam and help ensure welcome emails and verification links reach active inboxes.
             </p>
           </div>
 
