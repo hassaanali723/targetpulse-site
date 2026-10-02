@@ -1,6 +1,6 @@
 ---
 title: Filtro antispam
-description: Cosa controlla un filtro antispam quando decide dove va la tua email, la differenza tra un rifiuto e la cartella spam, e i limiti sul tasso di spam che Google pubblica.
+description: Cosa controlla un filtro antispam prima di consegnare, spostare o rifiutare la tua email, la differenza tra rifiuto e cartella spam e i limiti di Google.
 slug: filtro-antispam
 date: 2026-09-29
 updated: 2026-09-29

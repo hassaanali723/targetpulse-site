@@ -12,7 +12,7 @@ const SIGNUP_URL = 'https://emailverifier.giggal.ai/sign-up'
 
 export const metadata: Metadata = {
   title: 'Sign Up Free, 1,000 Free Email Verification Credits',
-  description: 'Create your free Giggal.ai account in seconds. Get 1,000 free verification credits, no credit card required. Verify catch-all and accept-all email domains with 98.5% accuracy.',
+  description: 'Create your free Giggal.ai account and get 1,000 verification credits, no credit card required. Verify catch-all emails with 98.5% accuracy.',
   alternates: {
     canonical: '/sign-up',
     languages: hreflangAlternates('signup'),

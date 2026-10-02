@@ -11,7 +11,7 @@ import { hreflangAlternates } from '@/lib/i18n/clusters'
 
 const APP_URL = 'https://emailverifier.giggal.ai/sign-up'
 const DESC =
-  'Proofpoint, Mimecast, Barracuda and other gateways block the SMTP checks most verifiers rely on. Giggal.ai returns real valid or invalid results behind 15 secure email gateways.'
+  'Proofpoint, Mimecast, Barracuda and other gateways block the checks most verifiers use. Giggal.ai returns valid or invalid behind 15 secure email gateways.'
 
 export const metadata: Metadata = {
   title: { absolute: 'Verify Emails Behind Secure Email Gateways | Giggal.ai' },

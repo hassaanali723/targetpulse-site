@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: 'Informativa sulla privacy',
   description: 'Come Giggal.ai raccoglie, usa e protegge i tuoi dati quando usi il servizio di verifica email. Traduzione di cortesia; fa fede la versione inglese.',
   alternates: { canonical: '/it/privacy', languages: hreflangAlternates('privacy') },
-  openGraph: { siteName: 'Giggal.ai', locale: 'it_IT', title: 'Informativa sulla privacy', url: 'https://giggal.ai/it/privacy', type: 'website' },
+  openGraph: { siteName: 'Giggal.ai', locale: 'it_IT', title: 'Informativa sulla privacy', url: 'https://giggal.ai/it/privacy', type: 'website', images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai' }] },
 }
 
 const sections: LegalSection[] = [

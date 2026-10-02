@@ -1,6 +1,6 @@
 ---
 title: Spam trap
-description: Ce qu'est une spam trap, les trois types et comment chacun entre dans une liste, ce qui se passe quand vous envoyez à l'une d'elles et comment les garder hors de votre liste.
+description: Ce qu'est une spam trap, les trois types et comment chacun arrive dans une liste, ce qui se passe si vous en touchez une et comment les éviter.
 slug: spam-trap
 date: 2026-09-29
 updated: 2026-09-29

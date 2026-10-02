@@ -1,6 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import { localizeHref, type Locale } from '@/lib/i18n/clusters'
+import { GLOSSARY_TERMS } from '@/lib/i18n/glossary'
 
 // Blog content lives as markdown files in content/blog/. Adding a post means
 // adding a file, no component edits. We render markdown to HTML on the server
@@ -15,6 +16,9 @@ const POSTS_DIR = path.join(process.cwd(), 'content', 'blog')
 
 export interface PostMeta {
   title: string
+  // Optional shorter <title> for search results. The H1, cards and breadcrumb
+  // keep `title`. Empty string when the post has none.
+  seoTitle: string
   description: string
   slug: string
   date: string // YYYY-MM-DD
@@ -65,14 +69,31 @@ function escapeHtml(s: string): string {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 }
 
+const GLOSSARY_DIR = path.join(process.cwd(), 'content', 'glossary')
+
+// True when the glossary term `enSlug` has a written page in `locale`. The
+// glossary plans 60 terms but writes them in batches, and every planned term
+// already has a URL in CLUSTERS, so a link to an unwritten term would 404.
+function glossaryTermWritten(enSlug: string, locale: BlogLocale): boolean {
+  const slugs = GLOSSARY_TERMS[enSlug as keyof typeof GLOSSARY_TERMS]
+  if (!slugs) return false
+  const slug = locale === 'en' ? enSlug : slugs[locale as Exclude<BlogLocale, 'en'>]
+  const dir = locale === 'en' ? GLOSSARY_DIR : path.join(GLOSSARY_DIR, locale)
+  return !!slug && fs.existsSync(path.join(dir, `${slug}.md`))
+}
+
 // Inline formatting for a single text run: escape, then links, then bold.
 // In a localized post, internal links go to the same page in that language
 // when it exists; links that stay on an English page are marked hreflang="en".
+// A link to a glossary term that is not written yet renders as plain text, and
+// becomes a link again on its own once the term's file exists.
 function inline(text: string, locale: BlogLocale = 'en'): string {
   let out = escapeHtml(text)
   out = out.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_m, label: string, href: string) => {
     const external = /^https?:\/\//.test(href)
     if (external) return `<a href="${href}" class="blog-link" target="_blank" rel="noopener noreferrer nofollow">${label}</a>`
+    const term = /^\/glossary\/([a-z0-9-]+)\/?$/.exec(href.split(/[?#]/)[0])
+    if (term && !glossaryTermWritten(term[1], locale)) return label
     const loc = localizeHref(href, locale)
     const lang = loc.localized ? '' : ' hreflang="en"'
     return `<a href="${loc.href}" class="blog-link"${lang}>${label}</a>`
@@ -186,6 +207,7 @@ export function getPostBySlug(slug: string, locale: BlogLocale = 'en'): Post | n
   const { html, toc } = renderMarkdown(body, locale)
   return {
     title: data.title || slug,
+    seoTitle: data.seoTitle || '',
     description: data.description || '',
     slug: data.slug || slug,
     date: data.date || '',

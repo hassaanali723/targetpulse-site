@@ -1,6 +1,6 @@
 ---
 title: How accurate are email verification tools, really
-description: Every verifier claims somewhere between 97 and 99 percent. Here is what that number is measuring, why the claims are all so similar, and how to test one on your own list.
+description: Every verifier claims 97 to 99 percent accuracy. What that number measures, why the claims all look the same, and how to test a verifier on your own list.
 slug: how-accurate-are-email-verification-tools
 date: 2026-08-21
 updated: 2026-09-25

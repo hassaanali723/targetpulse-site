@@ -5,10 +5,20 @@ import { hreflangAlternates } from '@/lib/i18n/clusters'
 
 export const metadata: Metadata = {
   title: 'Terms of Service',
-  description: 'Terms of Service and conditions for using Giggal.ai email verification tool.',
+  description: 'The terms for using Giggal.ai email verification: your account, credit purchases and subscriptions, how credits are used, and the rules of the service.',
   alternates: {
     canonical: '/terms-of-service',
     languages: hreflangAlternates('terms'),
+  },
+  // Own Open Graph block: without it the page inherits the layout's, whose
+  // og:url is the homepage (Ahrefs: "Open Graph URL not matching canonical").
+  openGraph: {
+    siteName: 'Giggal.ai',
+    title: 'Terms of Service',
+    description: 'The terms for using Giggal.ai email verification: your account, credit purchases and subscriptions, how credits are used, and the rules of the service.',
+    url: 'https://giggal.ai/terms-of-service',
+    type: 'website',
+    images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai email verification' }],
   },
 }
 

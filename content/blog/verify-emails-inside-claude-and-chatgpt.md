@@ -1,6 +1,6 @@
 ---
 title: How to verify emails inside Claude and ChatGPT
-description: Connect an email verification tool to Claude, ChatGPT, Cursor or VS Code over MCP, and check addresses in the conversation instead of exporting a CSV to a dashboard.
+description: Connect an email verification tool to Claude, ChatGPT, Cursor or VS Code over MCP and check addresses in the chat instead of exporting a CSV file.
 slug: verify-emails-inside-claude-and-chatgpt
 date: 2026-08-21
 keyword: claude chatgpt email verification tool

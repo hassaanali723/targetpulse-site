@@ -1,6 +1,6 @@
 ---
 title: Filtre anti-spam
-description: Ce qu'un filtre anti-spam vérifie quand il décide où va votre e-mail, la différence entre un refus et le dossier spam, et les limites de taux de spam que Google publie.
+description: Ce qu'un filtre anti-spam vérifie avant de livrer, déplacer ou refuser votre e-mail, la différence entre un refus et le dossier spam, et les limites de Google.
 slug: filtre-anti-spam
 date: 2026-09-29
 updated: 2026-09-29

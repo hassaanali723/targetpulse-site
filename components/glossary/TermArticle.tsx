@@ -102,7 +102,9 @@ export default function TermArticle({ locale, slug }: { locale: Locale; slug: st
           '@id': `${SITE}${path}#term`,
           name: term.title,
           description: term.short,
-          inLanguage: HREFLANG_CODE[locale],
+          // No inLanguage here: schema.org allows it on CreativeWork (the
+          // Article below carries it) but not on DefinedTerm, and the
+          // validator flagged it on every glossary page.
           url: `${SITE}${path}`,
           inDefinedTermSet: { '@type': 'DefinedTermSet', '@id': `${SITE}${hub}#set`, name: g.listName, url: `${SITE}${hub}` },
         }}

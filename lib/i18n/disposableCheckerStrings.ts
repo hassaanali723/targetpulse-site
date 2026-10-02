@@ -54,10 +54,10 @@ export interface CheckerStrings {
 }
 
 const en: CheckerStrings = {
-  metaTitle: 'Free Disposable Email Checker: Detect Fake & Temporary Inboxes | Giggal.ai',
+  metaTitle: 'Disposable Email Checker: Detect Fake & Temp Inboxes | Giggal.ai',
   ogTitle: 'Free Disposable Email Checker: Detect Fake & Temporary Inboxes',
   description:
-    'Free disposable email checker to detect fake and temporary inboxes. Matched against 100,000+ disposable domains, updated every six hours. Five free checks an hour, no signup.',
+    'Free disposable email checker to detect fake and temporary inboxes. Checks 100,000+ disposable domains, updated every six hours. No signup needed.',
   ogAlt: 'Giggal.ai disposable email checker',
   crumb: 'Disposable Email Checker',
   h1: 'Free disposable email checker to',
@@ -170,10 +170,10 @@ const en: CheckerStrings = {
 }
 
 const it: CheckerStrings = {
-  metaTitle: 'Verifica Email Temporanea Gratis: Scopri le Email False e Usa e Getta | Giggal.ai',
+  metaTitle: 'Verifica Gratis le Email Temporanee e Usa e Getta | Giggal.ai',
   ogTitle: 'Verifica email temporanea gratis: scopri le email false e usa e getta',
   description:
-    "Verifica email temporanea gratuita per scoprire le email false e usa e getta. Il dominio viene confrontato con oltre 100.000 domini usa e getta, aggiornati ogni sei ore. Cinque controlli gratuiti all'ora, senza registrazione.",
+    'Verifica gratuita delle email temporanee per scoprire le email false e usa e getta. Controlla oltre 100.000 domini usa e getta, aggiornati ogni sei ore.',
   ogLocale: 'it_IT',
   ogAlt: 'Giggal.ai verifica email temporanea',
   crumb: 'Verifica email temporanea',
@@ -306,10 +306,10 @@ const it: CheckerStrings = {
 }
 
 const de: CheckerStrings = {
-  metaTitle: 'Wegwerf-E-Mail prüfen: gefälschte und temporäre Adressen erkennen | Giggal.ai',
+  metaTitle: 'Wegwerf-E-Mail prüfen: Fake-E-Mail-Adressen erkennen | Giggal.ai',
   ogTitle: 'Wegwerf-E-Mail prüfen: gefälschte und temporäre Adressen erkennen',
   description:
-    'Kostenloser Wegwerf-E-Mail-Prüfer, der gefälschte und temporäre Adressen erkennt. Abgleich mit mehr als 100.000 Wegwerf-Domains, alle sechs Stunden aktualisiert. Fünf kostenlose Prüfungen pro Stunde, ohne Anmeldung.',
+    'Kostenloser Wegwerf-E-Mail-Prüfer für gefälschte und temporäre Adressen. Abgleich mit mehr als 100.000 Wegwerf-Domains, alle sechs Stunden aktualisiert.',
   ogLocale: 'de_DE',
   ogAlt: 'Giggal.ai Wegwerf-E-Mail-Prüfer',
   crumb: 'Wegwerf-E-Mail-Prüfer',
@@ -443,10 +443,10 @@ const de: CheckerStrings = {
 }
 
 const es: CheckerStrings = {
-  metaTitle: 'Verificador de Correo Desechable Gratis: Detecta Correos Falsos y Temporales | Giggal.ai',
+  metaTitle: 'Verificador de Correo Desechable y Temporal Gratis | Giggal.ai',
   ogTitle: 'Verificador de correo desechable gratis: detecta correos falsos y temporales',
   description:
-    'Verificador de correo desechable gratis para detectar correos falsos y temporales. Compara el dominio con más de 100.000 dominios desechables, actualizados cada seis horas. Cinco comprobaciones gratis por hora, sin registro.',
+    'Verificador de correo desechable gratis para detectar correos falsos y temporales. Compara con más de 100.000 dominios, actualizados cada seis horas.',
   ogLocale: 'es_LA',
   ogAlt: 'Giggal.ai verificador de correo desechable',
   crumb: 'Verificador de correo desechable',
@@ -579,10 +579,10 @@ const es: CheckerStrings = {
 }
 
 const ptBr: CheckerStrings = {
-  metaTitle: 'Verificador de E-mail Descartável Grátis: Detecte E-mails Falsos e Temporários | Giggal.ai',
+  metaTitle: 'Verificador de E-mail Descartável e Temporário Grátis | Giggal.ai',
   ogTitle: 'Verificador de e-mail descartável grátis: detecte e-mails falsos e temporários',
   description:
-    'Verificador de e-mail descartável grátis para detectar e-mails falsos e temporários. O domínio é comparado com mais de 100.000 domínios descartáveis, atualizados a cada seis horas. Cinco verificações grátis por hora, sem cadastro.',
+    'Verificador de e-mail descartável grátis para detectar e-mails falsos e temporários. Compara com mais de 100.000 domínios, atualizados a cada seis horas.',
   ogLocale: 'pt_BR',
   ogAlt: 'Giggal.ai verificador de e-mail descartável',
   crumb: 'Verificador de e-mail descartável',
@@ -715,9 +715,9 @@ const ptBr: CheckerStrings = {
 }
 
 const fr: CheckerStrings = {
-  metaTitle: `Vérifier une Adresse Mail Jetable${NB}: Détecter les Fausses Adresses | Giggal.ai`,
+  metaTitle: `Vérifier une Adresse Mail Jetable ou Temporaire | Giggal.ai`,
   ogTitle: `Vérifier une adresse mail jetable${NB}: détecter les fausses adresses et les boîtes temporaires`,
-  description: `Vérificateur gratuit d’adresse mail jetable pour détecter les fausses adresses et les boîtes temporaires. Le domaine est comparé à plus de 100${NB}000 domaines jetables, mis à jour toutes les six heures. Cinq vérifications gratuites par heure, sans inscription.`,
+  description: `Vérificateur gratuit d’adresse mail jetable pour repérer les fausses adresses. Plus de 100${NB}000 domaines jetables, mis à jour toutes les six heures.`,
   ogLocale: 'fr_FR',
   ogAlt: `Giggal.ai vérificateur d’adresse mail jetable`,
   crumb: `Vérificateur d’adresse mail jetable`,

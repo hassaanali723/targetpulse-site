@@ -5,10 +5,20 @@ import { hreflangAlternates } from '@/lib/i18n/clusters'
 
 export const metadata: Metadata = {
   title: 'Refund Policy',
-  description: 'Refund Policy for Giggal.ai email verification tool.',
+  description: 'How Giggal.ai refunds work for pay-as-you-go credits and subscriptions, free trial credits, service quality issues, chargebacks and how to request a refund.',
   alternates: {
     canonical: '/refund-policy',
     languages: hreflangAlternates('refund'),
+  },
+  // Own Open Graph block: without it the page inherits the layout's, whose
+  // og:url is the homepage (Ahrefs: "Open Graph URL not matching canonical").
+  openGraph: {
+    siteName: 'Giggal.ai',
+    title: 'Refund Policy',
+    description: 'How Giggal.ai refunds work for pay-as-you-go credits and subscriptions, free trial credits, service quality issues, chargebacks and how to request a refund.',
+    url: 'https://giggal.ai/refund-policy',
+    type: 'website',
+    images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai email verification' }],
   },
 }
 

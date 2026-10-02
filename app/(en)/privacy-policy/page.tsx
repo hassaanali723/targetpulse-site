@@ -5,10 +5,20 @@ import { hreflangAlternates } from '@/lib/i18n/clusters'
 
 export const metadata: Metadata = {
   title: 'Privacy Policy',
-  description: 'Privacy Policy for Giggal.ai email verification tool.',
+  description: 'How Giggal.ai, run by TargetPulse Ltd, collects, uses, shares and protects your data when you verify emails, how long it is kept, and your rights under GDPR.',
   alternates: {
     canonical: '/privacy-policy',
     languages: hreflangAlternates('privacy'),
+  },
+  // Own Open Graph block: without it the page inherits the layout's, whose
+  // og:url is the homepage (Ahrefs: "Open Graph URL not matching canonical").
+  openGraph: {
+    siteName: 'Giggal.ai',
+    title: 'Privacy Policy',
+    description: 'How Giggal.ai, run by TargetPulse Ltd, collects, uses, shares and protects your data when you verify emails, how long it is kept, and your rights under GDPR.',
+    url: 'https://giggal.ai/privacy-policy',
+    type: 'website',
+    images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai email verification' }],
   },
 }
 

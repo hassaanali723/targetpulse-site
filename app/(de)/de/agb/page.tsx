@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: 'Allgemeine Geschäftsbedingungen (AGB)',
   description: 'Nutzungsbedingungen des E-Mail-Verifizierungsdienstes Giggal.ai. Unverbindliche Übersetzung; die englische Fassung ist maßgeblich.',
   alternates: { canonical: '/de/agb', languages: hreflangAlternates('terms') },
-  openGraph: { siteName: 'Giggal.ai', locale: 'de_DE', title: 'Allgemeine Geschäftsbedingungen', url: 'https://giggal.ai/de/agb', type: 'website' },
+  openGraph: { siteName: 'Giggal.ai', locale: 'de_DE', title: 'Allgemeine Geschäftsbedingungen', url: 'https://giggal.ai/de/agb', type: 'website', images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai' }] },
 }
 
 const sections: LegalSection[] = [

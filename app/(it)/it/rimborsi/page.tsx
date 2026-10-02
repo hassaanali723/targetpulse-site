@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: 'Politica sui rimborsi',
   description: 'Quando e come Giggal.ai rimborsa i crediti di verifica email. Traduzione di cortesia; fa fede la versione inglese.',
   alternates: { canonical: '/it/rimborsi', languages: hreflangAlternates('refund') },
-  openGraph: { siteName: 'Giggal.ai', locale: 'it_IT', title: 'Politica sui rimborsi', url: 'https://giggal.ai/it/rimborsi', type: 'website' },
+  openGraph: { siteName: 'Giggal.ai', locale: 'it_IT', title: 'Politica sui rimborsi', url: 'https://giggal.ai/it/rimborsi', type: 'website', images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai' }] },
 }
 
 const sections: LegalSection[] = [

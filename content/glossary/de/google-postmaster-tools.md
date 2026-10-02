@@ -1,6 +1,6 @@
 ---
 title: Google Postmaster Tools
-description: Was Google Postmaster Tools über die E-Mails zeigt, die Sie an Gmail senden, wie Sie es einrichten, die Spam-Rate-Grenzen, die Google veröffentlicht, und was es nicht zeigt.
+description: Was Google Postmaster Tools über Ihre E-Mails an Gmail zeigt, wie Sie es einrichten, welche Spam-Rate-Grenzen Google setzt und was das Tool nicht zeigt.
 slug: google-postmaster-tools
 date: 2026-09-29
 updated: 2026-09-29

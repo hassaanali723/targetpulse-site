@@ -228,6 +228,7 @@ export function buildComparison(aSlug: string, bSlug: string): Comparison {
     faqs,
     metaTitle: `${A} vs ${B} Comparison | Giggal.ai`,
     ogTitle: `${A} vs ${B}, and how Giggal.ai compares`,
-    metaDescription: `Comparing ${A} and ${B}? See how the two email verifiers line up on price, catch-all handling and accuracy, plus where Giggal.ai lands on the same list.`,
+    // 121 to 147 characters for every pair of the 27 brands (Ahrefs flags over 160).
+    metaDescription: `${A} vs ${B}: how the two email verifiers compare on price, catch-all handling and accuracy, and where Giggal.ai fits.`,
   }
 }

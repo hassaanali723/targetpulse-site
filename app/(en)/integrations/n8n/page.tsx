@@ -13,7 +13,7 @@ const NPM_URL = 'https://www.npmjs.com/package/n8n-nodes-giggal'
 export const metadata: Metadata = {
   title: 'n8n Email Verification Integration',
   description:
-    'Verify emails inside n8n with the official Giggal.ai community node. Single checks, bulk jobs and catch-all email verification, straight from your workflows. Install n8n-nodes-giggal from npm.',
+    'Verify emails inside n8n with the official Giggal.ai community node: single checks, bulk jobs and catch-all verification. Install n8n-nodes-giggal from npm.',
   alternates: { canonical: '/integrations/n8n' },
   openGraph: {
     siteName: 'Giggal.ai',

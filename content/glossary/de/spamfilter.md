@@ -1,6 +1,6 @@
 ---
 title: Spamfilter
-description: Was ein Spamfilter prüft, wenn er entscheidet, wohin Ihre E-Mail geht, der Unterschied zwischen einer Ablehnung und dem Spam-Ordner, und die Spam-Rate-Grenzen, die Google veröffentlicht.
+description: Was ein Spamfilter prüft, bevor er Ihre E-Mail zustellt, verschiebt oder ablehnt, der Unterschied zum Spam-Ordner und die Spam-Rate-Grenzen von Google.
 slug: spamfilter
 date: 2026-09-29
 updated: 2026-09-29

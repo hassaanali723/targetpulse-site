@@ -1,6 +1,7 @@
 ---
 title: "Rebote duro vs rebote suave: qué significa cada uno y qué hacer"
-description: La diferencia entre un rebote duro (hard bounce) y un rebote suave (soft bounce) explicada de forma sencilla. Cómo leer el código de rebote, por qué las herramientas etiquetan el mismo rebote de forma distinta y qué tasa de rebote duro es segura.
+seoTitle: "Rebote duro vs rebote suave: qué es y qué hacer"
+description: Rebote duro (hard bounce) y rebote suave explicados: cómo leer el código, por qué las herramientas lo etiquetan distinto y qué tasa de rebote es segura.
 slug: rebote-duro-vs-rebote-suave
 date: 2026-09-27
 updated: 2026-09-27

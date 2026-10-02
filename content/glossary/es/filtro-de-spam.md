@@ -1,6 +1,6 @@
 ---
 title: Filtro de spam
-description: Qué comprueba un filtro de spam cuando decide adónde va tu correo, la diferencia entre un rechazo y la carpeta de spam, y los límites de tasa de spam que publica Google.
+description: Qué comprueba un filtro de spam antes de entregar, mover o rechazar tu correo, en qué se diferencia un rechazo de la carpeta de spam y los límites de Google.
 slug: filtro-de-spam
 date: 2026-09-29
 updated: 2026-09-29

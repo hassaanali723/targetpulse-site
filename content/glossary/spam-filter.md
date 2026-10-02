@@ -1,6 +1,6 @@
 ---
 title: Spam filter
-description: What a spam filter checks when it decides where your email goes, the difference between a rejection and the spam folder, and the spam rate limits Google publishes.
+description: What a spam filter checks before it delivers, files or rejects your email, how a rejection differs from the spam folder, and Google's spam rate limits.
 slug: spam-filter
 date: 2026-09-29
 updated: 2026-09-29

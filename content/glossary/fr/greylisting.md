@@ -1,6 +1,6 @@
 ---
 title: Greylisting
-description: Ce qu'est le greylisting, pourquoi un serveur refuse votre premier e-mail et accepte le second, combien de temps dure généralement le délai et comment cela affecte les résultats de vérification.
+description: Ce qu'est le greylisting, pourquoi un serveur refuse votre premier e-mail et accepte le second, la durée du délai et son effet sur la vérification.
 slug: greylisting
 date: 2026-09-29
 updated: 2026-09-29

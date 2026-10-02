@@ -1,6 +1,6 @@
 ---
 title: MX-Eintrag
-description: Was ein MX-Eintrag ist, wie Mailserver ihn nutzen, um den Zielserver zu finden, was die Prioritätszahl bedeutet und was ein fehlender MX-Eintrag einem Verifizierer sagt.
+description: Was ein MX-Eintrag ist, wie Mailserver damit den Zielserver finden, was die Prioritätszahl bedeutet und was ein fehlender MX-Eintrag verrät.
 slug: mx-eintrag
 date: 2026-09-29
 updated: 2026-09-29

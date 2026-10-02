@@ -1,6 +1,6 @@
 ---
 title: Record MX
-description: Cos'è un record MX, come i server di posta lo usano per trovare dove consegnare le email, cosa significa il numero di priorità e cosa dice a un verificatore un record MX mancante.
+description: Cos'è un record MX, come i server di posta lo usano per trovare la destinazione, cosa significa la priorità e cosa indica un record MX mancante.
 slug: record-mx
 date: 2026-09-29
 updated: 2026-09-29

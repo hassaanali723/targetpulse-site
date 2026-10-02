@@ -24,7 +24,8 @@ function AppMark({ w }: { w: ZapierWorkflow }) {
         style={{ backgroundColor: w.brandColor ?? '#4F46E5' }}
         aria-hidden="true"
       >
-        {w.apps[0]}
+        {/* The partner app's initial, whichever side of "+" it is on. */}
+        {(w.apps.split('+').map((s) => s.trim()).find((s) => !/giggal/i.test(s)) ?? w.apps)[0]}
       </span>
     )
   }

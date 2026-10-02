@@ -1,6 +1,6 @@
 ---
 title: How to verify emails behind secure email gateways
-description: Proofpoint, Mimecast and Barracuda accept every address at the edge, which breaks the check most verifiers rely on. Here is what actually happens on those domains and how to get a real answer.
+description: Proofpoint, Mimecast and Barracuda accept every address at the edge, which breaks normal verification. What happens on those domains and how to get an answer.
 slug: how-to-verify-emails-behind-secure-email-gateways
 date: 2026-08-21
 keyword: seg protected email verification tool

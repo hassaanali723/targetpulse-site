@@ -1,6 +1,6 @@
 ---
 title: Enregistrement MX
-description: Ce qu'est un enregistrement MX, comment les serveurs de messagerie l'utilisent pour trouver le serveur de destination, ce que signifie le numéro de priorité et ce qu'un enregistrement MX absent indique à un vérificateur.
+description: Ce qu'est un enregistrement MX, comment les serveurs l'utilisent pour trouver la destination, ce que veut dire la priorité et ce qu'indique un MX absent.
 slug: enregistrement-mx
 date: 2026-09-29
 updated: 2026-09-29

@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: 'Rückerstattungsrichtlinie für Credits',
   description: 'Wann Giggal.ai Credits erstattet: Test-Credits, Einmalkäufe, Abos, Ausnahmefälle und Bearbeitungszeiten. Unverbindliche Übersetzung, die englische Fassung gilt.',
   alternates: { canonical: '/de/rueckerstattung', languages: hreflangAlternates('refund') },
-  openGraph: { siteName: 'Giggal.ai', locale: 'de_DE', title: 'Rückerstattungsrichtlinie', url: 'https://giggal.ai/de/rueckerstattung', type: 'website' },
+  openGraph: { siteName: 'Giggal.ai', locale: 'de_DE', title: 'Rückerstattungsrichtlinie', url: 'https://giggal.ai/de/rueckerstattung', type: 'website', images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai' }] },
 }
 
 const sections: LegalSection[] = [

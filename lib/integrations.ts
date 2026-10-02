@@ -347,7 +347,8 @@ export const INTEGRATIONS: Integration[] = [
     category: 'Automation',
     connection: 'zapier',
     href: '/integrations/zapier',
-    iconSlug: 'slack',
+    // No iconSlug: the Simple Icons CDN no longer serves Slack's logo (404),
+    // so the card shows its lettermark tile in Slack's brand colour instead.
     brandColor: '#4A154B',
   },
 ]
@@ -424,7 +425,8 @@ export const ZAPIER_WORKFLOWS: ZapierWorkflow[] = [
   {
     title: 'Alert your team in Slack',
     apps: 'Giggal.ai + Slack',
-    iconSlug: 'slack',
+    // No iconSlug: the Simple Icons CDN no longer serves Slack's logo (404),
+    // so the card shows its lettermark tile in Slack's brand colour instead.
     brandColor: '#4A154B',
     description:
       'Post a Slack message when a verification finishes or when a high-value lead turns out to be catch-all deliverable.',

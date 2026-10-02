@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: 'Politique de remboursement des crédits',
   description: 'Quand Giggal.ai rembourse des crédits : crédits d’essai, achats uniques, abonnements, cas exceptionnels et délais. Version de courtoisie, l’anglais prévaut.',
   alternates: { canonical: '/fr/remboursements', languages: hreflangAlternates('refund') },
-  openGraph: { siteName: 'Giggal.ai', locale: 'fr_FR', title: 'Politique de remboursement', url: 'https://giggal.ai/fr/remboursements', type: 'website' },
+  openGraph: { siteName: 'Giggal.ai', locale: 'fr_FR', title: 'Politique de remboursement', url: 'https://giggal.ai/fr/remboursements', type: 'website', images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai' }] },
 }
 
 const sections: LegalSection[] = [

@@ -1,6 +1,7 @@
 ---
 title: "Hard bounce e soft bounce: cosa significano e cosa fare"
-description: La differenza tra hard bounce e soft bounce spiegata in modo semplice. Come leggere il codice di rimbalzo, perché gli strumenti etichettano lo stesso bounce in modo diverso e quale tasso di hard bounce è sicuro.
+seoTitle: "Hard bounce e soft bounce: significato e cosa fare"
+description: Hard bounce e soft bounce spiegati in modo semplice: come leggere il codice, perché gli strumenti lo classificano diversamente e quale tasso è sicuro.
 slug: hard-bounce-e-soft-bounce
 date: 2026-09-27
 updated: 2026-09-27

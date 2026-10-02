@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import '../../globals.css'
 import DeferredAnalytics from '@/components/DeferredAnalytics'
+import { EmailOffRoot } from '@/components/EmailOff'
 import { jakarta, jetbrainsMono } from '@/lib/fonts'
 
 // Root layout for the French site, so that <html lang="fr">
@@ -80,7 +81,7 @@ export default function FrenchRootLayout({ children }: { children: React.ReactNo
         <DeferredAnalytics />
       </head>
       <body className="font-sans" suppressHydrationWarning>
-        {children}
+        <EmailOffRoot>{children}</EmailOffRoot>
       </body>
     </html>
   )

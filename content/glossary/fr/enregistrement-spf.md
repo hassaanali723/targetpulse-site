@@ -1,6 +1,6 @@
 ---
 title: Enregistrement SPF
-description: Ce qu'est un enregistrement SPF, à quoi il ressemble, comment les serveurs de réception le vérifient, la limite de dix requêtes DNS et les codes de rebond que vous recevez quand le contrôle échoue.
+description: Ce qu'est un enregistrement SPF, à quoi il ressemble, comment les serveurs le vérifient, la limite de dix requêtes DNS et les codes de rebond en cas d'échec.
 slug: enregistrement-spf
 date: 2026-09-29
 updated: 2026-09-29

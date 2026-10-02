@@ -1,6 +1,6 @@
 ---
 title: Registro SPF
-description: Qué es un registro SPF, cómo es, cómo lo comprueban los servidores receptores, el límite de diez consultas DNS y los códigos de rebote que recibes cuando la comprobación falla.
+description: Qué es un registro SPF, cómo es, cómo lo comprueban los servidores, el límite de diez consultas DNS y qué códigos de rebote recibes si falla.
 slug: registro-spf
 date: 2026-09-29
 updated: 2026-09-29

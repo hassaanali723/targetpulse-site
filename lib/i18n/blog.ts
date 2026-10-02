@@ -92,7 +92,7 @@ export const BLOG_STRINGS: Record<L10nLocale, BlogStrings> = {
   },
   fr: {
     hubTitle: 'Blog Vérification d\u2019Email et Délivrabilité | Giggal.ai',
-    hubDesc: 'Guides en français sur les adresses catch-all, les passerelles de sécurité, les taux de rebond et la vérification d\u2019email, pour ceux qui nettoient de vraies listes.',
+    hubDesc: 'Guides en français sur les adresses catch-all, les passerelles de sécurité, les taux de rebond et la vérification d\u2019email pour nettoyer de vraies listes.',
     hubOgTitle: 'Blog vérification d\u2019email et délivrabilité',
     h1: 'Guides de vérification d\u2019email et de délivrabilité',
     intro: 'Des explications claires sur les adresses catch-all, les passerelles de sécurité, les taux de rebond et ce que signifient vraiment les résultats d\u2019une vérification.',

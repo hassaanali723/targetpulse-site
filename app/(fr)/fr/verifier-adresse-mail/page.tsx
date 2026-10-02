@@ -25,7 +25,7 @@ const DESC =
   'Vérifiez si une adresse mail existe et est valide, sans envoyer de message : syntaxe, MX, SMTP, catch-all et adresses jetables. Gratuit, sans inscription.'
 
 export const metadata: Metadata = {
-  title: { absolute: 'Vérifier une Adresse Mail : Testeur d’Email Gratuit | Giggal.ai' },
+  title: { absolute: "Vérifier une Adresse Mail : Testeur d'Email Gratuit | Giggal.ai" },
   description: DESC,
   alternates: { canonical: PATH, languages: hreflangAlternates('tool') },
   openGraph: {

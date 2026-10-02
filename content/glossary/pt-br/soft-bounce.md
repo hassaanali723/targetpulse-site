@@ -1,6 +1,6 @@
 ---
 title: Soft bounce
-description: O que é um soft bounce, as causas comuns e os seus códigos, por quanto tempo as ferramentas de envio tentam de novo e quando remover um endereço que continua dando soft bounce.
+description: O que é um soft bounce, as causas comuns e os seus códigos, por quanto tempo as ferramentas tentam de novo e quando remover um endereço da lista.
 slug: soft-bounce
 date: 2026-09-29
 updated: 2026-09-29

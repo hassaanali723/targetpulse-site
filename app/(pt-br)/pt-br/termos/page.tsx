@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: 'Termos de serviço da Giggal.ai',
   description: 'Termos e condições de uso do serviço de verificação de e-mail Giggal.ai. Tradução de cortesia; prevalece a versão em inglês.',
   alternates: { canonical: '/pt-br/termos', languages: hreflangAlternates('terms') },
-  openGraph: { siteName: 'Giggal.ai', locale: 'pt_BR', title: 'Termos de serviço', url: 'https://giggal.ai/pt-br/termos', type: 'website' },
+  openGraph: { siteName: 'Giggal.ai', locale: 'pt_BR', title: 'Termos de serviço', url: 'https://giggal.ai/pt-br/termos', type: 'website', images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai' }] },
 }
 
 const sections: LegalSection[] = [

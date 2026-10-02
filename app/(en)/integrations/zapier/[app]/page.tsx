@@ -200,7 +200,7 @@ export default function ZapierAppPage({ params }: { params: { app: string } }) {
           <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white border-2 border-slate-200 card-vivid-shadow flex items-center justify-center">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/integrations/zapier.png"
+              src="/integrations/giggal-catch-all-email-verification-zapier.png"
               alt="Zapier"
               width={40}
               height={40}

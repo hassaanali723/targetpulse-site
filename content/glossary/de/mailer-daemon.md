@@ -1,6 +1,6 @@
 ---
 title: Mailer-Daemon
-description: Was eine Mailer-Daemon-Nachricht ist, warum Sie eine bekommen, wie Sie den Code darin lesen und was Sie tun, wenn Sie eine für eine E-Mail bekommen, die Sie nicht gesendet haben.
+description: Was eine Mailer-Daemon-Nachricht ist, wie Sie den Code darin lesen und was Sie tun, wenn sie zu einer E-Mail gehört, die Sie nie gesendet haben.
 slug: mailer-daemon
 date: 2026-09-29
 updated: 2026-09-29

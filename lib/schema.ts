@@ -106,9 +106,12 @@ export function softwareApplicationLd(): Record<string, unknown> {
     // The MCP directory listing is the one third-party page that describes the
     // software itself rather than the company.
     sameAs: ['https://glama.ai/mcp/servers/giggal-ai/giggal-mcp'],
+    // Google's Software App rich result requires offers.price, so the lowest
+    // price is repeated there. Without it the page fails validation.
     offers: {
       '@type': 'AggregateOffer',
       priceCurrency: 'USD',
+      price: Math.min(...prices).toFixed(2),
       lowPrice: Math.min(...prices).toFixed(2),
       highPrice: Math.max(...prices).toFixed(2),
       offerCount: String(RAW_OFFERS.length),
@@ -233,6 +236,7 @@ export function apiSoftwareApplicationLd(opts: {
     offers: {
       '@type': 'AggregateOffer',
       priceCurrency: 'USD',
+      price: Math.min(...prices).toFixed(2),
       lowPrice: Math.min(...prices).toFixed(2),
       highPrice: Math.max(...prices).toFixed(2),
       offerCount: RAW_OFFERS.length,

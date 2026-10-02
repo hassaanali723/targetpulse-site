@@ -1,6 +1,6 @@
 ---
 title: Mailer-Daemon
-description: Ce qu'est un message du Mailer-Daemon, pourquoi vous en recevez un, comment lire le code qu'il contient et que faire quand vous en recevez un pour un e-mail que vous n'avez pas envoyé.
+description: Ce qu'est un message du Mailer-Daemon, comment lire le code qu'il contient et que faire s'il concerne un e-mail que vous n'avez pas envoyé.
 slug: mailer-daemon
 date: 2026-09-29
 updated: 2026-09-29

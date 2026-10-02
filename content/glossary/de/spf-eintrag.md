@@ -1,6 +1,6 @@
 ---
 title: SPF-Eintrag
-description: Was ein SPF-Eintrag ist, wie er aussieht, wie empfangende Server ihn prüfen, das Limit von zehn DNS-Abfragen und die Bounce-Codes, die Sie bekommen, wenn die Prüfung fehlschlägt.
+description: Was ein SPF-Eintrag ist, wie er aussieht, wie Server ihn prüfen, das Limit von zehn DNS-Abfragen und welche Bounce-Codes ein Fehlschlag auslöst.
 slug: spf-eintrag
 date: 2026-09-29
 updated: 2026-09-29

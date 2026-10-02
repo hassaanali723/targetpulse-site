@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import '../globals.css'
 import DeferredAnalytics from '@/components/DeferredAnalytics'
+import { EmailOffRoot } from '@/components/EmailOff'
 // Primary UI typeface (the hero H1, the LCP element) and the mono face used
 // in the hero verifier. Both are preloaded; the definitions live in lib/fonts
 // so the Italian root layout in app/(it) renders the same font CSS.
@@ -228,7 +229,7 @@ export default function RootLayout({
         <DeferredAnalytics />
       </head>
       <body className="font-sans" suppressHydrationWarning>
-        {children}
+        <EmailOffRoot>{children}</EmailOffRoot>
       </body>
     </html>
   )

@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: 'Conditions d’utilisation de Giggal.ai',
   description: 'Conditions générales d’utilisation du service de vérification d’email Giggal.ai. Traduction de courtoisie ; la version anglaise prévaut.',
   alternates: { canonical: '/fr/conditions', languages: hreflangAlternates('terms') },
-  openGraph: { siteName: 'Giggal.ai', locale: 'fr_FR', title: 'Conditions d’utilisation', url: 'https://giggal.ai/fr/conditions', type: 'website' },
+  openGraph: { siteName: 'Giggal.ai', locale: 'fr_FR', title: 'Conditions d’utilisation', url: 'https://giggal.ai/fr/conditions', type: 'website', images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai' }] },
 }
 
 const sections: LegalSection[] = [

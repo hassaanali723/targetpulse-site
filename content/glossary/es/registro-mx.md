@@ -1,6 +1,6 @@
 ---
 title: Registro MX
-description: Qué es un registro MX, cómo lo usan los servidores de correo para encontrar el servidor de destino, qué significa el número de prioridad y qué le dice a un verificador un registro MX que falta.
+description: Qué es un registro MX, cómo lo usan los servidores de correo para encontrar el destino, qué significa la prioridad y qué indica un registro MX que falta.
 slug: registro-mx
 date: 2026-09-29
 updated: 2026-09-29

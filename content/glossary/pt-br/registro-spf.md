@@ -1,6 +1,6 @@
 ---
 title: Registro SPF
-description: O que é um registro SPF, como ele é, como os servidores de destino o verificam, o limite de dez consultas DNS e os códigos de bounce que você recebe quando a verificação falha.
+description: O que é um registro SPF, como ele é, como os servidores o verificam, o limite de dez consultas DNS e os códigos de bounce que você recebe se falhar.
 slug: registro-spf
 date: 2026-09-29
 updated: 2026-09-29

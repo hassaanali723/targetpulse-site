@@ -36,7 +36,7 @@ export function blogArticleMetadata(locale: L10nLocale, slug: string): Metadata 
   const ogImage = post.image ? `https://giggal.ai${post.image}` : 'https://giggal.ai/og-card.png'
   const cluster = clusterFor(locale, post.slug)
   return {
-    title: post.title,
+    title: post.seoTitle || post.title,
     description: post.description,
     alternates: { canonical: path, ...(cluster ? { languages: hreflangAlternates(cluster) } : {}) },
     openGraph: {

@@ -1,6 +1,6 @@
 ---
 title: Greylisting
-description: Was Greylisting ist, warum ein Server Ihre erste E-Mail ablehnt und die zweite annimmt, wie lang die Verzögerung meist ist und wie sie Prüfergebnisse beeinflusst.
+description: Was Greylisting ist, warum ein Server Ihre erste E-Mail ablehnt und die zweite annimmt, wie lang die Verzögerung ist und was sie für Prüfungen bedeutet.
 slug: greylisting
 date: 2026-09-29
 updated: 2026-09-29

@@ -1,6 +1,7 @@
 ---
 title: "Hard Bounce vs Soft Bounce: What Each One Means and What to Do"
-description: The difference between a hard bounce and a soft bounce in plain English. How to read the bounce code, why tools label the same bounce differently, and what hard bounce rate is safe.
+seoTitle: "Hard Bounce vs Soft Bounce: Meaning and What to Do"
+description: The difference between a hard bounce and a soft bounce in plain English: how to read the bounce code, why tools label it differently, and safe bounce rates.
 slug: hard-bounce-vs-soft-bounce
 date: 2026-09-27
 updated: 2026-09-27

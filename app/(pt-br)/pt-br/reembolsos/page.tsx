@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: 'Política de reembolso de créditos',
   description: 'Quando a Giggal.ai reembolsa créditos: créditos de teste, compras únicas, assinaturas, casos excepcionais e prazos. Versão de cortesia, prevalece o inglês.',
   alternates: { canonical: '/pt-br/reembolsos', languages: hreflangAlternates('refund') },
-  openGraph: { siteName: 'Giggal.ai', locale: 'pt_BR', title: 'Política de reembolso', url: 'https://giggal.ai/pt-br/reembolsos', type: 'website' },
+  openGraph: { siteName: 'Giggal.ai', locale: 'pt_BR', title: 'Política de reembolso', url: 'https://giggal.ai/pt-br/reembolsos', type: 'website', images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai' }] },
 }
 
 const sections: LegalSection[] = [

@@ -1,6 +1,6 @@
 ---
 title: Record SPF
-description: Cos'è un record SPF, com'è fatto, come lo controllano i server di destinazione, il limite di dieci ricerche DNS e i codici di rimbalzo che ricevi quando il controllo fallisce.
+description: Cos'è un record SPF, com'è fatto, come lo controllano i server, il limite di dieci ricerche DNS e i codici di rimbalzo che ricevi se fallisce.
 slug: record-spf
 date: 2026-09-29
 updated: 2026-09-29

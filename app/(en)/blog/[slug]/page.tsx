@@ -57,7 +57,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   // with no og:image at all.
   const ogImage = post.image ? `https://giggal.ai${post.image}` : 'https://giggal.ai/og-card.png'
   return {
-    title: post.title,
+    title: post.seoTitle || post.title,
     description: post.description,
     alternates: {
       canonical: `/blog/${post.slug}`,

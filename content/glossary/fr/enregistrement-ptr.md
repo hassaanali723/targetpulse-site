@@ -1,6 +1,6 @@
 ---
 title: Enregistrement PTR
-description: Ce qu'est un enregistrement PTR, pourquoi les serveurs de messagerie le vérifient, ce qui se passe quand une IP expéditrice n'a pas d'enregistrement PTR et comment en configurer un.
+description: Ce qu'est un enregistrement PTR, pourquoi les serveurs de messagerie le vérifient, ce qui se passe s'il manque et comment en configurer un.
 slug: enregistrement-ptr
 date: 2026-09-29
 updated: 2026-09-29

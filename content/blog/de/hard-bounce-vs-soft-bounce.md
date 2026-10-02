@@ -1,6 +1,7 @@
 ---
 title: "Hard Bounce vs. Soft Bounce: Was beides bedeutet und was zu tun ist"
-description: Der Unterschied zwischen Hard Bounce und Soft Bounce einfach erklärt. Wie Sie den Bounce-Code lesen, warum Tools denselben Bounce unterschiedlich einstufen und welche Hard-Bounce-Rate sicher ist.
+seoTitle: "Hard Bounce vs. Soft Bounce: Bedeutung und Lösung"
+description: Hard Bounce und Soft Bounce einfach erklärt: wie Sie den Bounce-Code lesen, warum Tools denselben Bounce anders einstufen und welche Bounce-Rate sicher ist.
 slug: hard-bounce-vs-soft-bounce
 date: 2026-09-27
 updated: 2026-09-27

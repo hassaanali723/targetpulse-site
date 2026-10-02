@@ -59,7 +59,7 @@ const en: ProvidersStrings = {
   metaTitle: 'Disposable Email Providers and Domains List | Giggal.ai',
   ogTitle: 'Disposable Email Providers and Domains List',
   description:
-    'A list of the major disposable and temporary email providers and the domains they use. See which services create throwaway inboxes, and check any address against 100,000+ disposable domains.',
+    'A list of the major disposable and temporary email providers and the domains they use, plus a free check against 100,000+ disposable domains.',
   ogAlt: 'Giggal.ai disposable email providers and domains',
   crumb: 'Disposable Email Providers',
   h1: 'Disposable email providers',
@@ -177,7 +177,7 @@ const it: ProvidersStrings = {
   metaTitle: 'Servizi di Email Temporanea e Lista dei Domini | Giggal.ai',
   ogTitle: 'Servizi di email temporanea e lista dei domini',
   description:
-    "Elenco dei principali servizi di email temporanea e usa e getta e dei domini che usano. Scopri quali servizi creano caselle usa e getta e controlla qualsiasi indirizzo su oltre 100.000 domini.",
+    'Elenco dei principali servizi di email temporanea e usa e getta e dei domini che usano, con un controllo gratuito su oltre 100.000 domini.',
   ogLocale: 'it_IT',
   ogAlt: 'Giggal.ai servizi di email temporanea e domini',
   crumb: 'Servizi di email temporanea',
@@ -296,7 +296,7 @@ const de: ProvidersStrings = {
   metaTitle: 'Wegwerf-E-Mail-Anbieter und Domain-Liste | Giggal.ai',
   ogTitle: 'Wegwerf-E-Mail-Anbieter und Domain-Liste',
   description:
-    'Liste der wichtigsten Anbieter für Wegwerf-E-Mails und temporäre E-Mail-Adressen, mit den Domains, die sie nutzen. Prüfen Sie jede Adresse gegen mehr als 100.000 Wegwerf-Domains.',
+    'Liste der wichtigsten Wegwerf-E-Mail-Anbieter und ihrer Domains, mit einer kostenlosen Prüfung gegen mehr als 100.000 Wegwerf-Domains.',
   ogLocale: 'de_DE',
   ogAlt: 'Giggal.ai Wegwerf-E-Mail-Anbieter und Domains',
   crumb: 'Wegwerf-E-Mail-Anbieter',
@@ -415,7 +415,7 @@ const es: ProvidersStrings = {
   metaTitle: 'Proveedores de Correo Desechable y Lista de Dominios | Giggal.ai',
   ogTitle: 'Proveedores de correo desechable y lista de dominios',
   description:
-    'Lista de los principales proveedores de correo desechable y temporal y de los dominios que usan. Mira qué servicios crean bandejas desechables y comprueba cualquier dirección contra más de 100.000 dominios.',
+    'Lista de los principales proveedores de correo desechable y temporal y sus dominios, con una comprobación gratis contra más de 100.000 dominios.',
   ogLocale: 'es_LA',
   ogAlt: 'Giggal.ai proveedores de correo desechable y dominios',
   crumb: 'Proveedores de correo desechable',
@@ -534,7 +534,7 @@ const ptBr: ProvidersStrings = {
   metaTitle: 'Provedores de E-mail Descartável e Lista de Domínios | Giggal.ai',
   ogTitle: 'Provedores de e-mail descartável e lista de domínios',
   description:
-    'Lista dos principais provedores de e-mail descartável e temporário e dos domínios que eles usam. Veja quais serviços criam caixas descartáveis e verifique qualquer endereço contra mais de 100.000 domínios.',
+    'Lista dos principais provedores de e-mail descartável e temporário e dos seus domínios, com uma verificação grátis contra mais de 100.000 domínios.',
   ogLocale: 'pt_BR',
   ogAlt: 'Giggal.ai provedores de e-mail descartável e domínios',
   crumb: 'Provedores de e-mail descartável',
@@ -652,7 +652,7 @@ const ptBr: ProvidersStrings = {
 const fr: ProvidersStrings = {
   metaTitle: `Fournisseurs d’Adresse Mail Jetable et Liste des Domaines | Giggal.ai`,
   ogTitle: `Fournisseurs d’adresse mail jetable et liste des domaines`,
-  description: `Liste des principaux fournisseurs d’adresse mail jetable et temporaire et des domaines qu’ils utilisent. Voyez quels services créent des boîtes jetables et vérifiez une adresse parmi plus de 100${NB}000 domaines.`,
+  description: `Liste des principaux fournisseurs d’adresse mail jetable et temporaire et de leurs domaines, avec une vérification gratuite parmi plus de 100${NB}000 domaines.`,
   ogLocale: 'fr_FR',
   ogAlt: `Giggal.ai fournisseurs d’adresse mail jetable et domaines`,
   crumb: `Fournisseurs d’adresse mail jetable`,
