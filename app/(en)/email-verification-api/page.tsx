@@ -119,10 +119,10 @@ export default function EmailVerificationApiPage() {
       <Navbar />
 
       {/* ── 1. HERO ────────────────────────────────────────────── */}
-      <section className="max-w-5xl mx-auto px-6 pt-28 md:pt-34 pb-16 text-center space-y-8">
+      <section className="max-w-6xl mx-auto px-6 pt-28 md:pt-34 pb-16 text-center space-y-8">
         <div className="space-y-4 max-w-3xl mx-auto">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.08] text-slate-900">
-            Email verification API that{' '}
+            Email verification API that also{' '}
             <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">
               resolves catch-all addresses
             </span>
@@ -180,7 +180,7 @@ export default function EmailVerificationApiPage() {
       </section>
 
       {/* ── 2. WHAT ONE API CALL RETURNS ──────────────────────── */}
-      <section className="cv-section max-w-5xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8">
         <div className="space-y-3">
           <h2 className={sectionTitle}>What one API call returns</h2>
           <p className={proseP}>
@@ -276,7 +276,7 @@ export default function EmailVerificationApiPage() {
       </section>
 
       {/* ── 3. CATCH-ALL ADDRESSES RESOLVED ────────────────────── */}
-      <section className="cv-section max-w-5xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8">
         <div className="space-y-4">
           <h2 className={sectionTitle}>Catch-all addresses resolved in the same call</h2>
           <p className={proseP}>
@@ -361,7 +361,7 @@ export default function EmailVerificationApiPage() {
       </section>
 
       {/* ── 4. ENDPOINTS FOR SINGLE, BULK AND CATCH-ALL ────────── */}
-      <section className="cv-section max-w-5xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8">
         <div className="space-y-3">
           <h2 className={sectionTitle}>Endpoints for single, bulk and catch-all checks</h2>
           <p className={proseP}>
@@ -434,7 +434,7 @@ export default function EmailVerificationApiPage() {
       </section>
 
       {/* ── 5. FLAGS IN EVERY RESPONSE ─────────────────────────── */}
-      <section className="cv-section max-w-5xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8">
         <div className="space-y-3">
           <h2 className={sectionTitle}>Flags in every response</h2>
           <p className={proseP}>
@@ -499,7 +499,7 @@ export default function EmailVerificationApiPage() {
       </section>
 
       {/* ── 6. WHERE TEAMS USE THE API ─────────────────────────── */}
-      <section className="cv-section max-w-5xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8">
         <div className="space-y-3">
           <h2 className={sectionTitle}>Where teams use the email verification API</h2>
           <p className={proseP}>
@@ -571,7 +571,7 @@ export default function EmailVerificationApiPage() {
       </section>
 
       {/* ── 7. CODE EXAMPLES ───────────────────────────────────── */}
-      <section className="cv-section max-w-5xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8">
         <div className="space-y-3">
           <h2 className={sectionTitle}>Code examples</h2>
           <p className={proseP}>
@@ -684,7 +684,7 @@ const results = await resultsRes.json();`}</code>
       </section>
 
       {/* ── 8. PRICING ─────────────────────────────────────────── */}
-      <section className="cv-section max-w-5xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8">
         <div className="text-center max-w-2xl mx-auto space-y-3">
           <h2 className={sectionTitle}>Email verification API pricing</h2>
           <p className={proseP}>
@@ -707,7 +707,7 @@ const results = await resultsRes.json();`}</code>
       </section>
 
       {/* ── 9. RATE LIMITS AND ERRORS ──────────────────────────── */}
-      <section className="cv-section max-w-5xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8">
         <div className="space-y-3">
           <h2 className={sectionTitle}>Rate limits and errors</h2>
           <p className={proseP}>
@@ -764,7 +764,7 @@ const results = await resultsRes.json();`}</code>
       </section>
 
       {/* ── 10. REVIEWS ────────────────────────────────────────── */}
-      <section className="cv-section max-w-5xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8">
         <div className="text-center max-w-2xl mx-auto space-y-3">
           <h2 className={sectionTitle}>What customers say</h2>
           <p className={proseP}>

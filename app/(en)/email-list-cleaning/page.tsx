@@ -11,7 +11,7 @@ import AltCtaBand from '@/components/alternatives/AltCtaBand'
 import { breadcrumbLd, faqPageLd, emailListCleaningServiceLd } from '@/lib/schema'
 
 const SIGNUP_URL = 'https://emailverifier.giggal.ai/sign-up'
-const TITLE = 'Email List Cleaning Service That Keeps Catch-All Leads | Giggal.ai'
+const TITLE = 'Email List Cleaning Service That Resolves Catch-All Leads | Giggal.ai'
 const DESC =
   'Email list cleaning service that removes invalid, disposable and duplicate emails and resolves catch-alls instead of deleting them. 1,000 free credits.'
 
@@ -78,7 +78,7 @@ const beforeAfter: BeforeAfterData | null = null
 function BeforeAfterSection({ data }: { data: BeforeAfterData | null }) {
   if (!data) return null
   return (
-    <section className="cv-section max-w-4xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
+    <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
       <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
         Before and after: a real cleaned list
       </h2>
@@ -237,15 +237,15 @@ export default function EmailListCleaningPage() {
       <Navbar />
 
       {/* ── 1. HERO ────────────────────────────────────────────── */}
-      <section className="max-w-4xl mx-auto px-6 pt-28 md:pt-32 pb-16 text-center space-y-6">
+      <section className="max-w-6xl mx-auto px-6 pt-28 md:pt-32 pb-16 text-center space-y-6">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900">
-          Email List Cleaning Service That{' '}
+          Email list cleaning service that also{' '}
           <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">
-            Keeps Your Real Catch-All Leads
+            resolves catch-all leads
           </span>
         </h1>
         <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-3xl mx-auto font-medium">
-          Upload your list and get it back clean in minutes. Our email list cleaning service removes invalid, disposable, role-based and duplicate addresses before they bounce and hurt your sender reputation. Many list cleaners dump every catch-all address into a &quot;risky&quot; pile. We check each one and tell you which to keep.
+          Upload your list and get it back clean in minutes. Our email list cleaning service removes invalid, disposable, role-based and duplicate addresses before they bounce and hurt your sender reputation. Many list cleaners mark every catch-all address as &quot;risky&quot; and leave the choice to you. We check each one and tell you which one is safe to send.
         </p>
 
         <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -299,7 +299,7 @@ export default function EmailListCleaningPage() {
       </section>
 
       {/* ── 2. THREE STEPS ───────────────────────────────────────── */}
-      <section className="cv-section max-w-5xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8">
         <div className="text-center max-w-2xl mx-auto space-y-3">
           <h2 className={sectionTitle}>Clean your email list in three steps</h2>
         </div>
@@ -338,7 +338,7 @@ export default function EmailListCleaningPage() {
       </section>
 
       {/* ── 3. WHAT IT REMOVES ───────────────────────────────────── */}
-      <section className="cv-section max-w-5xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8">
         <div className="space-y-3">
           <h2 className={sectionTitle}>What email list cleaning removes</h2>
         </div>
@@ -401,7 +401,7 @@ export default function EmailListCleaningPage() {
       </section>
 
       {/* ── 4. WHY MANY CLEANERS FLAG GOOD LEADS AS RISKY ──────── */}
-      <section className="cv-section max-w-4xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
+      <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Why many email list cleaners flag good leads as risky</h2>
         <p className={proseP}>
           Many company mail servers accept every address, real or made up. That&apos;s a{' '}
@@ -430,7 +430,7 @@ export default function EmailListCleaningPage() {
       <BeforeAfterSection data={beforeAfter} />
 
       {/* ── 6. PRICING ─────────────────────────────────────────── */}
-      <section id="pricing" className="cv-section max-w-5xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8 scroll-mt-28">
+      <section id="pricing" className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8 scroll-mt-28">
         <div className="text-center max-w-2xl mx-auto space-y-3">
           <h2 className={sectionTitle}>Email list cleaning pricing</h2>
           <p className={proseP}>
@@ -449,7 +449,7 @@ export default function EmailListCleaningPage() {
       </section>
 
       {/* ── 7. HOW OFTEN TO CLEAN ──────────────────────────────── */}
-      <section className="cv-section max-w-4xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
+      <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>How often should you clean your email list?</h2>
         <p className={proseP}>
           Addresses go stale on their own. People change jobs, companies change domains, and old inboxes get shut down. B2B lists go stale fastest. Clean your list:
@@ -480,7 +480,7 @@ export default function EmailListCleaningPage() {
       </section>
 
       {/* ── 8. WHERE IT ALREADY LIVES ──────────────────────────── */}
-      <section className="cv-section max-w-4xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
+      <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Clean up your email list where it already lives</h2>
         <p className={proseP}>
           You don&apos;t have to export and re-import by hand.
@@ -526,7 +526,7 @@ export default function EmailListCleaningPage() {
       </section>
 
       {/* ── 9. CLEANING VS VERIFICATION ────────────────────────── */}
-      <section className="cv-section max-w-4xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
+      <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Email list cleaning vs email verification</h2>
         <p className={proseP}>
           They use the same checks. Email verification answers the question for one address. Email list cleaning runs those checks on a whole file and gives you back a list you can send to. You&apos;ll also see it called email scrubbing or using an email list cleaner. It&apos;s the same job.
@@ -560,7 +560,7 @@ export default function EmailListCleaningPage() {
       />
 
       {/* ── 12. RELATED TOOLS & GUIDES ─────────────────────────── */}
-      <section className="cv-section max-w-5xl mx-auto px-6 pb-24">
+      <section className="cv-section max-w-6xl mx-auto px-6 pb-24">
         <div className="border-t border-slate-200 pt-12 space-y-8">
           <h2 className={sectionTitle}>Related tools and guides</h2>
 

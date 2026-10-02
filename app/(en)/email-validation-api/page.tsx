@@ -119,7 +119,7 @@ export default function EmailValidationApiPage() {
       <Navbar />
 
       {/* ── 1. HERO ────────────────────────────────────────────── */}
-      <section className="max-w-5xl mx-auto px-6 pt-28 md:pt-34 pb-16 text-center space-y-8">
+      <section className="max-w-6xl mx-auto px-6 pt-28 md:pt-34 pb-16 text-center space-y-8">
         <div className="space-y-4 max-w-3xl mx-auto">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.08] text-slate-900">
             Real-time email validation API for{' '}
@@ -191,7 +191,7 @@ await createUser({ email });`}</code>
       </section>
 
       {/* ── 2. WHY REGEX ALONE ISN'T EMAIL VALIDATION ──────────── */}
-      <section className="cv-section max-w-5xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8">
         <div className="space-y-4">
           <h2 className={sectionTitle}>Why regex alone isn&apos;t email validation</h2>
           <p className={proseP}>
@@ -246,7 +246,7 @@ await createUser({ email });`}</code>
       </section>
 
       {/* ── 3. WHAT TO BLOCK, FLAG OR ALLOW AT SIGNUP ───────────── */}
-      <section className="cv-section max-w-5xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8">
         <div className="space-y-3">
           <h2 className={sectionTitle}>What to block, flag or allow at signup</h2>
           <p className={proseP}>
@@ -302,7 +302,7 @@ await createUser({ email });`}</code>
       </section>
 
       {/* ── 4. ADD EMAIL VALIDATION TO YOUR SIGNUP FORM ────────── */}
-      <section id="add-to-form" className="cv-section max-w-5xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8 scroll-mt-24">
+      <section id="add-to-form" className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8 scroll-mt-24">
         <div className="space-y-4">
           <h2 className={sectionTitle}>Add email validation to your signup form</h2>
           <p className={proseP}>
@@ -503,7 +503,7 @@ form.addEventListener('submit', async (e) => {
       </section>
 
       {/* ── 5. STOP DISPOSABLE AND FAKE SIGNUPS ────────────────── */}
-      <section className="cv-section max-w-5xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8">
         <div className="space-y-4">
           <h2 className={sectionTitle}>Stop disposable and fake signups</h2>
           <p className={proseP}>
@@ -553,7 +553,7 @@ form.addEventListener('submit', async (e) => {
       </section>
 
       {/* ── 6. WHERE TO VALIDATE EMAILS IN REAL TIME ───────────── */}
-      <section className="cv-section max-w-5xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8">
         <div className="space-y-3">
           <h2 className={sectionTitle}>Where to validate emails in real time</h2>
           <p className={proseP}>
@@ -611,7 +611,7 @@ form.addEventListener('submit', async (e) => {
       </section>
 
       {/* ── 7. RESPONSE FIELDS YOU'LL USE AT SIGNUP ────────────── */}
-      <section className="cv-section max-w-5xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8">
         <div className="space-y-3">
           <h2 className={sectionTitle}>Response fields you&apos;ll use at signup</h2>
           <p className={proseP}>
@@ -678,7 +678,7 @@ form.addEventListener('submit', async (e) => {
       </section>
 
       {/* ── 8. PRICING ─────────────────────────────────────────── */}
-      <section className="cv-section max-w-5xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8">
         <div className="text-center max-w-2xl mx-auto space-y-3">
           <h2 className={sectionTitle}>Email validation API pricing</h2>
           <p className={proseP}>
