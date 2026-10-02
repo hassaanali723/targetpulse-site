@@ -26,6 +26,9 @@ const HOMES_REDESIGNED = '2026-09-27'
 export interface SitemapEntry {
   path: string
   lastModified?: string
+  // Optional <priority>, set only on the six main pages below. Google says it
+  // ignores this tag; it is kept to match the old targetpulse.net sitemap.
+  priority?: string
 }
 
 // ── core ────────────────────────────────────────────────────────────────
@@ -36,8 +39,8 @@ export function coreEntries(): SitemapEntry[] {
   return [
     // 2026-09-13: title, H1 and copy retarget (plans/07 in targetpulse-seo).
     // 2026-09-14: hero retarget off SEG onto bulk (plans/09).
-    { path: '', lastModified: HOMES_REDESIGNED },
-    { path: '/catch-all-verification', lastModified: '2026-09-13' },
+    { path: '', lastModified: HOMES_REDESIGNED, priority: '1' },
+    { path: '/catch-all-verification', lastModified: '2026-09-13', priority: '0.85' },
     { path: '/seg-email-verification', lastModified: '2026-08-02' },
     ...(MIMECAST_PAGE_LIVE
       ? [{ path: '/mimecast-email-verification', lastModified: '2026-08-02' }]
@@ -52,10 +55,10 @@ export function coreEntries(): SitemapEntry[] {
     // API reference. Kept in the sitemap — the URL set is unchanged from the
     // previous single sitemap, only regrouped.
     { path: '/public/docs', lastModified: '2026-09-13' },
-    { path: '/pricing', lastModified: '2026-09-13' },
-    { path: '/sign-up', lastModified: '2026-07-21' },
-    { path: '/affiliates', lastModified: '2026-09-13' },
-    { path: '/contact-us', lastModified: '2026-07-21' },
+    { path: '/pricing', lastModified: '2026-09-13', priority: '0.9' },
+    { path: '/sign-up', lastModified: '2026-07-21', priority: '0.95' },
+    { path: '/affiliates', lastModified: '2026-09-13', priority: '0.9' },
+    { path: '/contact-us', lastModified: '2026-07-21', priority: '0.6' },
     { path: '/privacy-policy', lastModified: '2026-02-04' },
     { path: '/terms-of-service', lastModified: '2026-02-04' },
     { path: '/refund-policy', lastModified: '2026-02-04' },
@@ -257,7 +260,8 @@ export function renderUrlSet(entries: SitemapEntry[]): string {
     .map((e) => {
       const loc = `    <loc>${escapeXml(`${SITE}${e.path}`)}</loc>`
       const mod = e.lastModified ? `\n    <lastmod>${e.lastModified}</lastmod>` : ''
-      return `  <url>\n${loc}${mod}\n  </url>`
+      const pri = e.priority ? `\n    <priority>${e.priority}</priority>` : ''
+      return `  <url>\n${loc}${mod}${pri}\n  </url>`
     })
     .join('\n')
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`
