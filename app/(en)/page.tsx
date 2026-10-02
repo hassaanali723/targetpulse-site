@@ -238,14 +238,14 @@ export const metadata: Metadata = {
     absolute: 'Email Verification Service: Resolve Catch-All Emails | Giggal.ai',
   },
   description:
-    'Email verification service and bulk email verifier with a real valid or invalid on every address, catch-all included. 98.5% accuracy, 1,000 free credits.',
+    'Email verification service and bulk email verifier with a real valid or invalid result on every address, including catch-all verification. 98.5% accuracy, 1,000 free credits.',
   alternates: { canonical: '/', languages: hreflangAlternates('home') },
   openGraph: {
     siteName: 'Giggal.ai',
     images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai email verification' }],
     title: 'Email Verification Service: Resolve Catch-All Emails',
     description:
-      'Email verification service and bulk email verifier with a real valid or invalid on every address, catch-all included. 98.5% accuracy, 1,000 free credits.',
+      'Email verification service and bulk email verifier with a real valid or invalid result on every address, including catch-all verification. 98.5% accuracy, 1,000 free credits.',
     url: 'https://giggal.ai',
     type: 'website',
   },
@@ -253,7 +253,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Email Verification Service: Resolve Catch-All Emails',
     description:
-      'Email verification service and bulk email verifier with a real valid or invalid on every address, catch-all included. 98.5% accuracy, 1,000 free credits.',
+      'Email verification service and bulk email verifier with a real valid or invalid result on every address, including catch-all verification. 98.5% accuracy, 1,000 free credits.',
   },
 }
 
