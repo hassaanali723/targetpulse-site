@@ -73,6 +73,13 @@ export const CLUSTERS = {
   terms: { en: '/terms-of-service', it: '/it/termini', de: '/de/agb', es: '/es/terminos', 'pt-br': '/pt-br/termos', fr: '/fr/conditions' },
   privacy: { en: '/privacy-policy', it: '/it/privacy', de: '/de/datenschutz', es: '/es/privacidad', 'pt-br': '/pt-br/privacidade', fr: '/fr/confidentialite' },
   refund: { en: '/refund-policy', it: '/it/rimborsi', de: '/de/rueckerstattung', es: '/es/reembolsos', 'pt-br': '/pt-br/reembolsos', fr: '/fr/remboursements' },
+  // Directory of disposable email providers and domains (components/disposable/
+  // ProvidersPage.tsx). Slugs use the glossary's data-backed term per language.
+  // The disposable email checker tool (components/disposable/CheckerPage.tsx).
+  // Slugs follow each language's checker slug (verifica-email, email-adresse-
+  // pruefen, verificacao-de-email, verifier-adresse-mail) plus the glossary term.
+  disposableChecker: { en: '/disposable-email-checker', it: '/it/verifica-email-temporanea', de: '/de/wegwerf-e-mail-pruefen', es: '/es/verificar-correo-desechable', 'pt-br': '/pt-br/verificador-de-e-mail-descartavel', fr: '/fr/verifier-adresse-mail-jetable' },
+  disposableProviders: { en: '/disposable-email-providers', it: '/it/servizi-email-temporanea', de: '/de/wegwerf-e-mail-anbieter', es: '/es/proveedores-de-correo-desechable', 'pt-br': '/pt-br/provedores-de-e-mail-descartavel', fr: '/fr/fournisseurs-adresse-mail-jetable' },
   // The glossary hub and its 60 terms live in lib/i18n/glossary.ts (generated
   // from the term list) and are spread in here so every consumer of CLUSTERS
   // treats them like any other page.

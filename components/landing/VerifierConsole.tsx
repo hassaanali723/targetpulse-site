@@ -57,6 +57,8 @@ interface VerifierConsoleProps {
   // lib/i18n/it.ts `console`. The API stays English and returns verdict
   // types; the card maps the type to the local title and line.
   strings?: ConsoleStrings
+  // Labels of the 'disposable' variant. Defaults to English.
+  disposableStrings?: DisposableConsoleStrings
 }
 
 export interface ConsoleStrings {
@@ -104,9 +106,66 @@ const CHECK_LABELS: Record<CheckKey, string> = {
 // and logs for exactly these keys, so the sidebar never shows a mail-server
 // or mailbox check that this tool does not report.
 const DISPOSABLE_ORDER = ['basic', 'disposable'] as const
-const DISPOSABLE_LABELS: Record<(typeof DISPOSABLE_ORDER)[number], string> = {
-  basic: 'Basic validation checks',
-  disposable: 'Disposable domain check',
+
+// Every visible label of the disposable variant (sidebar, result card, log
+// lines). English is the default; the localized disposable checker pages pass
+// their own (lib/i18n/disposableCheckerStrings.ts).
+export interface DisposableConsoleStrings {
+  checks: Record<(typeof DISPOSABLE_ORDER)[number], string>
+  isDisposable: string
+  notDisposable: string
+  disposableText: string
+  notDisposableText: string
+  deliverPrompt: string
+  deliverButton: string
+  // The free email checker in the page's language; the button adds ?email=.
+  verifierPath: string
+  // Log lines in the page's language, with {email} and {domain} placeholders.
+  // When absent (English), the console plays the API's own log lines, which
+  // are these same lines in English.
+  logs?: {
+    basicStart: string
+    basicOk: string
+    basicFail: string
+    registry: string
+    isDisposable: string
+    notDisposable: string
+  }
+}
+
+export const EN_DISPOSABLE_STRINGS: DisposableConsoleStrings = {
+  checks: { basic: 'Basic validation checks', disposable: 'Disposable domain check' },
+  isDisposable: 'is a disposable email domain',
+  notDisposable: 'is not a disposable email domain',
+  disposableText: 'This domain is a disposable or temporary mail service. Do not add this address to your list.',
+  notDisposableText:
+    'This domain is not on the list of disposable and temporary mail services. This does not tell you whether the mailbox exists.',
+  deliverPrompt: 'To find out whether this mailbox exists and accepts mail, run it through the email checker.',
+  deliverButton: 'Check if this address is deliverable',
+  verifierPath: '/email-checker',
+}
+
+// Rebuilds the disposable route's log lines (app/api/tools/disposable-check)
+// in the page's language. The route's lines depend only on the email, the
+// domain and the disposable flag, so nothing is lost.
+function localizedDisposableLogs(data: ApiResult, logs: NonNullable<DisposableConsoleStrings['logs']>): ApiLog[] {
+  const fill = (s: string) =>
+    s.replace('{email}', data.email || '').replace('{domain}', (data.domain || '').toUpperCase())
+  if (data.steps.basic === 'error') {
+    return [
+      { step: 'basic', text: fill(logs.basicStart), level: 'info' },
+      { step: 'basic', text: fill(logs.basicFail), level: 'error' },
+    ]
+  }
+  const disposable = !!data.meta?.disposable
+  return [
+    { step: 'basic', text: fill(logs.basicStart), level: 'info' },
+    { step: 'basic', text: fill(logs.basicOk), level: 'success' },
+    { step: 'disposable', text: fill(logs.registry), level: 'info' },
+    disposable
+      ? { step: 'disposable', text: fill(logs.isDisposable), level: 'error' }
+      : { step: 'disposable', text: fill(logs.notDisposable), level: 'success' },
+  ]
 }
 
 function initialChecks(order: readonly string[]): Record<string, CheckStatus> {
@@ -227,12 +286,14 @@ export default function VerifierConsole({
   signupUrl = SIGNUP_URL,
   strings = EN_CONSOLE_STRINGS,
   emailFromQuery = false,
+  disposableStrings = EN_DISPOSABLE_STRINGS,
 }: VerifierConsoleProps = {}) {
   const t = strings
+  const ds = disposableStrings
   const order: readonly string[] = variant === 'disposable' ? DISPOSABLE_ORDER : CHECK_ORDER
   const labelFor = (key: string) =>
     variant === 'disposable'
-      ? DISPOSABLE_LABELS[key as (typeof DISPOSABLE_ORDER)[number]]
+      ? ds.checks[key as (typeof DISPOSABLE_ORDER)[number]]
       : t.checks[key as CheckKey]
   const [email, setEmail] = useState(defaultEmail)
   const [running, setRunning] = useState(false)
@@ -330,8 +391,10 @@ export default function VerifierConsole({
     setLogs([])
     await sleep(200)
 
+    const playLogs = variant === 'disposable' && ds.logs ? localizedDisposableLogs(data, ds.logs) : data.logs
+
     let current: string | null = null
-    for (const line of data.logs) {
+    for (const line of playLogs) {
       if (!alive()) return
       if (line.step !== current) {
         if (current) setCheck(current, data.steps[current] ?? 'ok')
@@ -433,7 +496,7 @@ export default function VerifierConsole({
               variant === 'catchall'
                 ? <CatchAllResultCard result={result} signupUrl={signupUrl} t={t} />
                 : variant === 'disposable'
-                  ? <DisposableResultCard result={result} signupUrl={signupUrl} t={t} />
+                  ? <DisposableResultCard result={result} signupUrl={signupUrl} t={t} ds={ds} />
                   : <ResultCard result={result} signupUrl={signupUrl} t={t} />
             ) : !started ? (
               <div className="h-full flex flex-col justify-center items-center text-center text-slate-500 py-16 space-y-3">
@@ -617,10 +680,12 @@ function DisposableResultCard({
   result,
   signupUrl,
   t,
+  ds,
 }: {
   result: ResultState
   signupUrl: string
   t: ConsoleStrings
+  ds: DisposableConsoleStrings
 }) {
   if (result.limited) {
     return (
@@ -677,7 +742,7 @@ function DisposableResultCard({
   // showing it here would blur this tool with the verifier. "Not disposable"
   // gets a link to the verifier instead. See docs/DISPOSABLE_CHECK_GUIDE.md.
   const isDisposable = !!result.disposable
-  const verifierHref = `/email-checker?email=${encodeURIComponent(result.email || '')}`
+  const verifierHref = `${ds.verifierPath}?email=${encodeURIComponent(result.email || '')}`
 
   return (
     <div className="h-full flex flex-col justify-center p-5 sm:p-6 space-y-3.5 animate-slide-down text-left">
@@ -693,26 +758,22 @@ function DisposableResultCard({
             <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-400" />
           )}
           <span className={`text-sm font-black break-all ${isDisposable ? 'text-rose-300' : 'text-emerald-300'}`}>
-            {domain} {isDisposable ? 'is a disposable email domain' : 'is not a disposable email domain'}
+            {domain} {isDisposable ? ds.isDisposable : ds.notDisposable}
           </span>
         </div>
         <p className="text-xs text-slate-400 font-semibold leading-relaxed mt-1.5 pl-6">
-          {isDisposable
-            ? 'This domain is a disposable or temporary mail service. Do not add this address to your list.'
-            : 'This domain is not on the list of disposable and temporary mail services. This does not tell you whether the mailbox exists.'}
+          {isDisposable ? ds.disposableText : ds.notDisposableText}
         </p>
       </div>
 
       {!isDisposable && (
         <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-4">
-          <p className="text-xs text-slate-400 font-semibold leading-relaxed">
-            To find out whether this mailbox exists and accepts mail, run it through the email checker.
-          </p>
+          <p className="text-xs text-slate-400 font-semibold leading-relaxed">{ds.deliverPrompt}</p>
           <a
             href={verifierHref}
             className="mt-3 inline-flex items-center gap-1.5 px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-black rounded-xl transition-colors"
           >
-            Check if this address is deliverable
+            {ds.deliverButton}
             <ArrowRight className="w-3.5 h-3.5" />
           </a>
         </div>

@@ -43,7 +43,8 @@ export function coreEntries(): SitemapEntry[] {
       ? [{ path: '/mimecast-email-verification', lastModified: '2026-08-02' }]
       : []),
     { path: '/email-checker', lastModified: '2026-09-18' },
-    { path: '/disposable-email-checker', lastModified: '2026-09-30' },
+    { path: '/disposable-email-checker', lastModified: '2026-10-02' },
+    { path: '/disposable-email-providers', lastModified: '2026-10-02' },
     { path: '/email-list-cleaning', lastModified: '2026-10-01' },
     { path: '/email-verification-api', lastModified: '2026-10-01' },
     { path: '/email-validation-api', lastModified: '2026-10-01' },
@@ -180,6 +181,14 @@ const competitorPageUrls = new Set(
     .flatMap(([, c]) => Object.values(c as Cluster)),
 )
 
+// The disposable email checker and providers directory shipped in all
+// languages on this date.
+const DISPOSABLE_PROVIDERS_SHIPPED = '2026-10-02'
+const disposableProvidersUrls = new Set<string>([
+  ...Object.values(CLUSTERS.disposableChecker),
+  ...Object.values(CLUSTERS.disposableProviders),
+])
+
 function localeEntries(locale: 'it' | 'de' | 'es' | 'pt-br' | 'fr', launch: string): SitemapEntry[] {
   const posts = getAllPosts(locale)
   const hub = `/${locale}/blog`
@@ -207,7 +216,9 @@ function localeEntries(locale: 'it' | 'de' | 'es' | 'pt-br' | 'fr', launch: stri
             ? HOMES_REDESIGNED
             : competitorPageUrls.has(path)
               ? COMPETITOR_PAGES_SHIPPED
-              : launch),
+              : disposableProvidersUrls.has(path)
+                ? DISPOSABLE_PROVIDERS_SHIPPED
+                : launch),
     }))
 }
 export function itEntries(): SitemapEntry[] {
