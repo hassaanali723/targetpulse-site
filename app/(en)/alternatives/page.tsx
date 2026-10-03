@@ -76,7 +76,7 @@ interface CheapestItem {
   p10k: { text: string; num: number }
   p100k: string
   p1m: string
-  resolvesCatchAll: boolean
+  resolvesCatchAll: boolean | 'Partial'
 }
 
 function tierPrice(tiers: PricingTier[], credits: number): { text: string; num: number } {
@@ -84,10 +84,18 @@ function tierPrice(tiers: PricingTier[], credits: number): { text: string; num: 
   if (!t || t.totalUsd === null || t.status === 'unknown') {
     return { text: 'Not published', num: Infinity }
   }
+  const noteSuffix = t.note ? ` (${t.note})` : ''
   return {
-    text: `${fmtUsd(t.totalUsd)}${t.perMonth ? '/month' : ''}`,
+    text: `${fmtUsd(t.totalUsd)}${t.perMonth ? '/month' : ''}${noteSuffix}`,
     num: t.totalUsd,
   }
+}
+
+const PARTIAL_CATCH_ALL_SLUGS = new Set(['zerobounce', 'neverbounce', 'millionverifier'])
+
+function getCatchAllStatus(slug: string): boolean | 'Partial' {
+  if (PARTIAL_CATCH_ALL_SLUGS.has(slug)) return 'Partial'
+  return COMPETITORS[slug].resolvesCatchAll
 }
 
 const CHEAPEST_ORDER: CheapestItem[] = [
@@ -109,7 +117,7 @@ const CHEAPEST_ORDER: CheapestItem[] = [
       p10k: tierPrice(c.tiers, 10000),
       p100k: tierPrice(c.tiers, 100000).text,
       p1m: tierPrice(c.tiers, 1000000).text,
-      resolvesCatchAll: c.resolvesCatchAll,
+      resolvesCatchAll: getCatchAllStatus(slug),
     }
   }),
 ].sort((a, b) => a.p10k.num - b.p10k.num || a.name.localeCompare(b.name))
@@ -118,7 +126,7 @@ const CHEAPEST_ORDER: CheapestItem[] = [
 // summarises, the pages argue.
 const BLURBS: Record<string, string> = {
   zerobounce:
-    'Marks catch-all addresses Catch-All without confirming the mailbox, and costs $129 at 10k against $9.90 here. Its deliverability suite is what keeps some teams on it.',
+    'Marks catch-all addresses Catch-All without confirming the mailbox, and costs $99 at 10k against $9.90 here. Its deliverability suite is what keeps some teams on it.',
   neverbounce:
     'Resolved 8% of catch-alls in the LeadMagic test, and its PAYG runs $50 at 10k against our $9.90. A fit mainly if you clean lists inside a CRM.',
   bounceban:
@@ -189,7 +197,15 @@ function StartPrice({ p }: { p: { credits: number; totalUsd: number } | null }) 
   )
 }
 
-function YN({ v }: { v: boolean }) {
+function YN({ v }: { v: boolean | 'Partial' }) {
+  if (v === 'Partial') {
+    return (
+      <span className="inline-flex items-center justify-center gap-1 font-semibold">
+        <span className="w-2 h-2 rounded-full bg-amber-500 inline-block shrink-0" aria-hidden="true" />
+        <span className="text-amber-700">Partial</span>
+      </span>
+    )
+  }
   return (
     <span className="inline-flex items-center justify-center gap-1 font-semibold">
       {v ? (
@@ -223,13 +239,14 @@ function FactRow({
   seg,
   price,
 }: {
-  catchAll: boolean
+  catchAll: boolean | 'Partial'
   seg: boolean
   price: string
 }) {
+  const catchAllText = typeof catchAll === 'string' ? catchAll : catchAll ? 'Yes' : 'No'
   return (
     <p className="text-[13px] font-semibold text-slate-600 flex flex-wrap gap-x-4 gap-y-1">
-      <span>Resolves catch-all: {catchAll ? 'Yes' : 'No'}</span>
+      <span>Resolves catch-all: {catchAllText}</span>
       <span className="text-slate-300" aria-hidden="true">
         |
       </span>
@@ -254,7 +271,7 @@ export default function AlternativesHubPage() {
     {
       label: 'Catch-all verification',
       giggal: <YN v={GIGGAL.resolvesCatchAll} />,
-      cell: (slug) => <YN v={COMPETITORS[slug].resolvesCatchAll} />,
+      cell: (slug) => <YN v={getCatchAllStatus(slug)} />,
     },
     {
       label: 'SEG verifier',
@@ -506,7 +523,7 @@ export default function AlternativesHubPage() {
                   <RankBadge n={i + 2} /> {c.name}
                 </h3>
                 <FactRow
-                  catchAll={c.resolvesCatchAll}
+                  catchAll={getCatchAllStatus(slug)}
                   seg={c.advertisesSegSupport}
                   price={price}
                 />

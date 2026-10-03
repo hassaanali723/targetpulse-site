@@ -106,10 +106,10 @@ export const COMPETITORS: Record<string, Competitor> = {
     slug: 'zerobounce',
     name: 'ZeroBounce',
     pricingUrl: 'https://www.zerobounce.net/pricing/',
-    lastVerified: CHECKED_ON,
+    lastVerified: '2026-09-13',
     startingPrice: { credits: 2000, totalUsd: 39 }, // minimum purchase
     tiers: [
-      { credits: 10000, totalUsd: 129, perEmailUsd: 0.0129, status: 'verified' },
+      { credits: 10000, totalUsd: 99, perEmailUsd: 0.0099, status: 'verified' },
       { credits: 100000, totalUsd: 649, perEmailUsd: 0.00649, status: 'verified' },
       { credits: 1000000, totalUsd: 3199, perEmailUsd: 0.003199, status: 'verified' },
     ],
@@ -862,7 +862,7 @@ export const COMPETITORS: Record<string, Competitor> = {
     tiers: [
       { credits: 10000, totalUsd: 139, perEmailUsd: null, status: 'estimate', perMonth: true },
       { credits: 100000, totalUsd: 1340, perEmailUsd: null, status: 'verified', perMonth: true },
-      { credits: 1000000, totalUsd: 1340, perEmailUsd: null, status: 'verified', perMonth: true },
+      { credits: 1000000, totalUsd: 1340, perEmailUsd: null, status: 'verified', perMonth: true, note: 'unlimited' },
     ],
     pricingBasisNote:
       'Allegrow is a monthly subscription. Starter is $99 a month for 5,000 contacts, with add-on credits at $8 per 1,000, so 10,000 a month works out at $139; that is our arithmetic on their published rates, not a plan they list. The 100,000 and 1,000,000 rows are Scale Plus Unlimited at $1,340 a month billed annually, which is unlimited verification. Giggal.ai figures are one-time pay-as-you-go.',
