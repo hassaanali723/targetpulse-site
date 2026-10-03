@@ -66,11 +66,11 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'Is this email address real?',
-    a: 'A real email address has valid syntax, points to a domain with active mail exchange (MX) records, and connects to an active mailbox. You can confirm this by pasting the address into the checker above to test its mail server response directly. If the server confirms the recipient without bouncing, the address is real.',
+    a: 'A real email address has valid syntax, a domain with MX records and a mailbox the server accepts. Paste it into the checker above to test all three. On catch-all domains the server accepts every address, so the checker runs extra signals before it calls an address valid.',
   },
   {
     q: 'How can I tell if an email address is fake?',
-    a: 'Look for common warning signs like misspelled domain names, throwaway disposable providers, missing MX records, or syntax errors. A fake address will also fail a live SMTP handshake because the destination mail server rejects the recipient. The tool above tests all of these indicators in a single check.',
+    a: 'Look for misspelled domains, disposable providers, missing MX records and syntax errors. On most domains the mail server also rejects a fake mailbox during the SMTP check. On catch-all domains it accepts everything, so the checker runs extra signals to separate real mailboxes from fake ones.',
   },
   {
     q: 'How do I check if an email address is active?',
@@ -78,11 +78,11 @@ const faqs: FaqItem[] = [
   },
   {
     q: "Is there a way to verify someone's email address for free?",
-    a: 'Yes. You can paste any address into the single verifier above to run a complete syntax, MX, and SMTP check without creating an account or entering a credit card. For larger batches, you can create a free account to verify up to 1,000 email addresses at no cost.',
+    a: 'Yes. The checker above gives you a few free checks with no account or card, each running syntax, MX and SMTP checks. For more, create a free account and verify up to 1,000 addresses at no cost.',
   },
   {
     q: 'Can I check if an email exists without sending an email?',
-    a: 'Yes. An email verifier connects directly to the recipient\'s mail server and initiates an SMTP handshake, asking if the mailbox exists. It disconnects before transmitting any actual message data, so no email is ever sent to the inbox. The owner will never know a check took place.',
+    a: 'Yes. An email verifier connects directly to the recipient\'s mail server and initiates an SMTP handshake, asking if the mailbox exists. It disconnects before transmitting any actual message data, so no email is ever sent to the inbox.',
   },
   {
     q: 'Can I check a whole list here?',
@@ -246,8 +246,9 @@ export default function CatchAllEmailCheckerPage() {
             that vanishes after a few minutes or hours.
           </li>
           <li>
-            <strong className="text-slate-900">Role addresses:</strong> Prefixes like info@, sales@,
-            or admin@ that point to shared distribution lists rather than an individual person.
+            <strong className="text-slate-900">Role addresses:</strong> info@, sales@ or admin@ are
+            usually real mailboxes, but they reach a shared inbox rather than a person, so treat
+            them with care in outreach.
           </li>
           <li>
             <strong className="text-slate-900">Random-string local parts:</strong> Nonsense character
@@ -260,8 +261,8 @@ export default function CatchAllEmailCheckerPage() {
             catch-all domain
           </Link>
           , the server accepts every message it receives, even if the address was invented on the
-          spot. Standard verification tools cannot separate a real email from a nonexistent mailbox
-          on these domains without evaluating extra delivery signals.
+          spot. Standard tools cannot separate a real email from a nonexistent mailbox there. This
+          checker runs extra signals and still returns valid or invalid.
         </p>
         <p className={proseP}>
           If you are unsure whether an address in your contacts is valid, paste it into the checker
