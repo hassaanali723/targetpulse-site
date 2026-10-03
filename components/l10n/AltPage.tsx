@@ -84,7 +84,7 @@ function YesNo({ value, locale }: { value: boolean | 'partial' | null; locale: L
   if (value === 'partial') {
     return (
       <span className="inline-flex items-center gap-1.5 text-amber-700 font-bold text-[13px]">
-        <span className="w-2 h-2 rounded-full bg-amber-500 inline-block shrink-0" aria-hidden="true" /> Partial
+        <span className="w-2 h-2 rounded-full bg-amber-500 inline-block shrink-0" aria-hidden="true" /> {ui.partial}
       </span>
     )
   }

@@ -41,6 +41,7 @@ export interface AltUi {
   checked: (name: string, date: string) => [string, string, string] // before link, link text, after
   yes: string
   no: string
+  partial: string
   rows: {
     price10k: string
     catchAll: string
@@ -87,6 +88,7 @@ export const ALT_UI: Record<L10nLocale, AltUi> = {
     checked: (n, d) => [`Prezzi di ${n} verificati il ${d}. I prezzi possono essere cambiati, vedi la `, `pagina prezzi di ${n}`, '.'],
     yes: 'Sì',
     no: 'No',
+    partial: 'Parziale',
     rows: {
       price10k: 'Prezzo per 10.000 crediti',
       catchAll: 'Verifica catch-all',
@@ -139,6 +141,7 @@ export const ALT_UI: Record<L10nLocale, AltUi> = {
     checked: (n, d) => [`Preise von ${n} geprüft am ${d}. Preise können sich geändert haben, siehe die `, `Preisseite von ${n}`, '.'],
     yes: 'Ja',
     no: 'Nein',
+    partial: 'Teilweise',
     rows: {
       price10k: 'Preis für 10.000 Credits',
       catchAll: 'Catch-all-Verifizierung',
@@ -191,6 +194,7 @@ export const ALT_UI: Record<L10nLocale, AltUi> = {
     checked: (n, d) => [`Precios de ${n} comprobados el ${d}. Los precios pueden haber cambiado, consulta la `, `página de precios de ${n}`, '.'],
     yes: 'Sí',
     no: 'No',
+    partial: 'Parcial',
     rows: {
       price10k: 'Precio por 10.000 créditos',
       catchAll: 'Verificación catch-all',
@@ -243,6 +247,7 @@ export const ALT_UI: Record<L10nLocale, AltUi> = {
     checked: (n, d) => [`Preços do ${n} conferidos em ${d}. Os preços podem ter mudado, veja a `, `página de preços do ${n}`, '.'],
     yes: 'Sim',
     no: 'Não',
+    partial: 'Parcial',
     rows: {
       price10k: 'Preço por 10.000 créditos',
       catchAll: 'Verificação catch-all',
@@ -295,6 +300,7 @@ export const ALT_UI: Record<L10nLocale, AltUi> = {
     checked: (n, d) => [`Tarifs de ${n} vérifiés le ${d}. Les prix ont pu changer, voir la `, `page de tarifs de ${n}`, '.'],
     yes: 'Oui',
     no: 'Non',
+    partial: 'Partiel',
     rows: {
       price10k: 'Prix pour 10 000 crédits',
       catchAll: 'Vérification catch-all',

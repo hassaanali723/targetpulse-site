@@ -146,7 +146,12 @@ const LANG: Record<L10nLocale, Lang> = {
       { q: `Esiste un'opzione migliore di ${A} o ${B}?`, a: 'Giggal.ai è costruito per gli indirizzi difficili che entrambi tendono a saltare. Risolve il catch-all in un risultato vero a 1 credito fisso per email, verifica dietro 15 secure email gateway e pubblica un prezzo fisso di 9,90 $ per 10.000 con crediti che non scadono mai. Puoi provare una lista con 1.000 crediti gratis, senza carta.' },
       { q: 'Posso provare Giggal.ai prima di decidere?', a: `Sì. Giggal.ai dà 1.000 crediti gratis senza carta, utilizzabili su un caricamento in blocco, così puoi passare la stessa lista che testeresti con ${A} o ${B} e confrontare le righe catch-all.` },
     ],
-    caResolve: (c) => (c.resolvesCatchAll ? `${c.name} restituisce un risultato sugli indirizzi catch-all` : `${c.name} segnala il catch-all senza confermare la casella`),
+    caResolve: (c) =>
+      c.resolvesCatchAll === 'partial'
+        ? `${c.name} restituisce un risultato su alcuni indirizzi catch-all`
+        : c.resolvesCatchAll
+        ? `${c.name} restituisce un risultato sugli indirizzi catch-all`
+        : `${c.name} segnala il catch-all senza confermare la casella`,
     desc: (A, B) => `Stai scegliendo tra ${A} e ${B}? Ecco come i due verificatori si confrontano su prezzo, catch-all e precisione, e dove si colloca Giggal.ai.`,
     og: (A, B) => `${A} vs ${B}, e come si colloca Giggal.ai`,
     ui: {
@@ -189,7 +194,12 @@ const LANG: Record<L10nLocale, Lang> = {
       { q: `Gibt es eine bessere Option als ${A} oder ${B}?`, a: 'Giggal.ai ist für die schwierigen Adressen gebaut, die beide gern auslassen. Es löst Catch-all zu einem echten Ergebnis auf, pauschal 1 Credit pro E-Mail, prüft hinter 15 Secure Email Gateways und veröffentlicht einen Festpreis von 9,90 $ pro 10.000 mit Credits, die nie verfallen. Sie können eine Liste mit 1.000 Gratis-Credits prüfen, ohne Karte.' },
       { q: 'Kann ich Giggal.ai vor der Entscheidung testen?', a: `Ja. Giggal.ai gibt 1.000 Gratis-Credits ohne Karte, auch für einen Massen-Upload, damit Sie dieselbe Liste prüfen können, die Sie mit ${A} oder ${B} testen würden, und die Catch-all-Zeilen vergleichen.` },
     ],
-    caResolve: (c) => (c.resolvesCatchAll ? `${c.name} liefert für Catch-all-Adressen ein Ergebnis` : `${c.name} markiert Catch-all, ohne das Postfach zu bestätigen`),
+    caResolve: (c) =>
+      c.resolvesCatchAll === 'partial'
+        ? `${c.name} liefert für einige Catch-all-Adressen ein Ergebnis`
+        : c.resolvesCatchAll
+        ? `${c.name} liefert für Catch-all-Adressen ein Ergebnis`
+        : `${c.name} markiert Catch-all, ohne das Postfach zu bestätigen`,
     desc: (A, B) => `${A} oder ${B}? So schneiden die beiden E-Mail-Verifizierer bei Preis, Catch-all und Genauigkeit ab, und wo Giggal.ai bei derselben Liste landet.`,
     og: (A, B) => `${A} vs ${B}, und wo Giggal.ai steht`,
     ui: {
@@ -232,7 +242,12 @@ const LANG: Record<L10nLocale, Lang> = {
       { q: `¿Hay una opción mejor que ${A} o ${B}?`, a: 'Giggal.ai está hecho para las direcciones difíciles que ambos suelen saltarse. Resuelve el catch-all en un resultado real a 1 crédito fijo por correo, verifica detrás de 15 secure email gateways y publica un precio fijo de 9,90 $ por 10.000 con créditos que no caducan nunca. Puedes probar una lista con 1.000 créditos gratis, sin tarjeta.' },
       { q: '¿Puedo probar Giggal.ai antes de decidir?', a: `Sí. Giggal.ai da 1.000 créditos gratis sin tarjeta, válidos en una carga masiva, así que puedes pasar la misma lista que probarías en ${A} o ${B} y comparar las filas catch-all.` },
     ],
-    caResolve: (c) => (c.resolvesCatchAll ? `${c.name} devuelve un resultado en las direcciones catch-all` : `${c.name} marca el catch-all sin confirmar el buzón`),
+    caResolve: (c) =>
+      c.resolvesCatchAll === 'partial'
+        ? `${c.name} devuelve un resultado en algunas direcciones catch-all`
+        : c.resolvesCatchAll
+        ? `${c.name} devuelve un resultado en las direcciones catch-all`
+        : `${c.name} marca el catch-all sin confirmar el buzón`,
     desc: (A, B) => `¿Comparas ${A} y ${B}? Así se sitúan los dos verificadores en precio, catch-all y precisión, y dónde queda Giggal.ai con la misma lista.`,
     og: (A, B) => `${A} vs ${B}, y dónde queda Giggal.ai`,
     ui: {
@@ -275,7 +290,12 @@ const LANG: Record<L10nLocale, Lang> = {
       { q: `Existe uma opção melhor que ${A} ou ${B}?`, a: 'A Giggal.ai é feita para os endereços difíceis que os dois costumam pular. Resolve o catch-all em um resultado real a 1 crédito fixo por e-mail, verifica atrás de 15 secure email gateways e publica um preço fixo de US$ 9,90 por 10.000 com créditos que nunca expiram. Você pode testar uma lista com 1.000 créditos grátis, sem cartão.' },
       { q: 'Posso testar a Giggal.ai antes de decidir?', a: `Sim. A Giggal.ai dá 1.000 créditos grátis sem cartão, válidos em envio em massa, então você pode passar a mesma lista que testaria no ${A} ou no ${B} e comparar as linhas catch-all.` },
     ],
-    caResolve: (c) => (c.resolvesCatchAll ? `O ${c.name} devolve um resultado em endereços catch-all` : `O ${c.name} marca o catch-all sem confirmar a caixa`),
+    caResolve: (c) =>
+      c.resolvesCatchAll === 'partial'
+        ? `O ${c.name} devolve um resultado em alguns endereços catch-all`
+        : c.resolvesCatchAll
+        ? `O ${c.name} devolve um resultado em endereços catch-all`
+        : `O ${c.name} marca o catch-all sem confirmar a caixa`,
     desc: (A, B) => `Comparando ${A} e ${B}? Veja como os dois verificadores se saem em preço, catch-all e precisão, e onde a Giggal.ai fica na mesma lista.`,
     og: (A, B) => `${A} vs ${B}, e onde fica a Giggal.ai`,
     ui: {
@@ -318,7 +338,12 @@ const LANG: Record<L10nLocale, Lang> = {
       { q: `Existe-t-il une meilleure option que ${A} ou ${B} ?`, a: `Giggal.ai est conçu pour les adresses difficiles que les deux laissent souvent de côté. Il transforme le catch-all en vrai résultat à 1 crédit fixe par email, vérifie derrière 15 secure email gateways et publie un prix fixe de 9,90 $ les 10${K}000 avec des crédits qui n'expirent jamais. Vous pouvez tester une liste avec 1${K}000 crédits gratuits, sans carte.` },
       { q: 'Puis-je tester Giggal.ai avant de décider ?', a: `Oui. Giggal.ai offre 1${K}000 crédits gratuits sans carte, utilisables sur un import en masse, pour passer la même liste que vous testeriez avec ${A} ou ${B} et comparer les lignes catch-all.` },
     ],
-    caResolve: (c) => (c.resolvesCatchAll ? `${c.name} renvoie un résultat sur les adresses catch-all` : `${c.name} signale le catch-all sans confirmer la boîte`),
+    caResolve: (c) =>
+      c.resolvesCatchAll === 'partial'
+        ? `${c.name} renvoie un résultat sur certaines adresses catch-all`
+        : c.resolvesCatchAll
+        ? `${c.name} renvoie un résultat sur les adresses catch-all`
+        : `${c.name} signale le catch-all sans confirmer la boîte`,
     desc: (A, B) => `Vous comparez ${A} et ${B} ? Voici comment les deux vérificateurs se situent sur le prix, le catch-all et la précision, et où se place Giggal.ai.`,
     og: (A, B) => `${A} vs ${B}, et où se situe Giggal.ai`,
     ui: {

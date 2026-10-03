@@ -53,6 +53,13 @@ function Cell({ v, strong, locale }: { v: CmpValue; strong?: boolean; locale: L1
   const ui = ALT_UI[locale]
   if (v.kind === 'bool') {
     if (v.yes === null) return <span className="text-slate-400 font-semibold text-[13px]">-</span>
+    if (v.yes === 'partial') {
+      return (
+        <span className="inline-flex items-center gap-1.5 text-amber-700 font-bold text-[13px]">
+          <span className="w-2 h-2 rounded-full bg-amber-500 inline-block shrink-0" aria-hidden="true" /> {ui.partial}
+        </span>
+      )
+    }
     return v.yes ? (
       <span className="inline-flex items-center gap-1.5 text-emerald-700 font-bold text-[13px]">
         <Check className="w-4 h-4" /> {ui.yes}
