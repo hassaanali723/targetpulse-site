@@ -96,7 +96,12 @@ export function llmsFull(): string {
 
   const competitorLines = ALL_COMPETITOR_SLUGS.map((slug) => {
     const c = COMPETITORS[slug]
-    const resolves = c.resolvesCatchAll ? 'resolves catch-alls' : 'does not resolve catch-alls'
+    const resolves =
+      c.resolvesCatchAll === 'partial'
+        ? 'partially resolves catch-alls'
+        : c.resolvesCatchAll
+        ? 'resolves catch-alls'
+        : 'does not resolve catch-alls'
     const seg = c.advertisesSegSupport ? 'advertises SEG support' : 'no published SEG support'
     return `- ${c.name} (${SITE}/${slug}-alternative): ${resolves}, ${seg}. Better fit for: ${c.betterFitFor.join('; ')}.`
   }).join('\n')

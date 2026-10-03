@@ -157,7 +157,7 @@ Every tool on this list already does the basics well: syntax checks, disposable 
 |---|---|---|---|
 | Giggal.ai | 98.5% | Under 3% | 1,000 free, $9.90/10k |
 | BounceBan | 97%+ | Under 3% | 100 free, ~$34/10k |
-| ZeroBounce | 99.6% | No claim | 5 free/mo, $99/10k |
+| ZeroBounce | 99.6% | No claim | 5 free/mo, $129 one-time, or $99/month (ZeroBounce ONE) |
 | MillionVerifier | 99% | Refund if >4% | 500 free, $39/10k |
 | Reoon | 99% | Refunds unknowns | 600 free +20/day, $12/10k |
 | NeverBounce | 97-99% | Under 2% | 10 free, $8/1k |
@@ -184,7 +184,7 @@ A mature, full-suite platform with 99.6% claimed accuracy and a 5x-refund guaran
 
 **[Integrations](https://www.zerobounce.net/integrations):** 60+ native, including HubSpot, Salesforce, Mailchimp, Constant Contact, MailerLite, AWeber, Zoho CRM, Shopify, and WordPress, plus Zapier.
 
-**[Pricing](https://www.zerobounce.net/pricing):** 5 free/mo, $99 / 10,000
+**[Pricing](https://www.zerobounce.net/pricing):** 5 free/mo, $129 one-time, or $99/month (ZeroBounce ONE)
 
 ### MillionVerifier
 

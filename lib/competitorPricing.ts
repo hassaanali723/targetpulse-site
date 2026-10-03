@@ -41,7 +41,7 @@ export interface Competitor {
   freeTier: string
   creditsExpire: string // plain sentence, or "Not published"
   chargesForUnknown: boolean | null // null = we did not confirm
-  resolvesCatchAll: boolean // does it return a real result on catch-alls
+  resolvesCatchAll: boolean | 'partial' // does it return a real result on catch-alls
   catchAllCreditCost: string // e.g. "1 credit", "10 credits", "Marked Catch-All, not confirmed"
   advertisesSegSupport: boolean
   claimedAccuracy: string // e.g. "Claims 99%", or "Not published"
@@ -106,10 +106,10 @@ export const COMPETITORS: Record<string, Competitor> = {
     slug: 'zerobounce',
     name: 'ZeroBounce',
     pricingUrl: 'https://www.zerobounce.net/pricing/',
-    lastVerified: '2026-09-13',
+    lastVerified: CHECKED_ON,
     startingPrice: { credits: 2000, totalUsd: 39 }, // minimum purchase
     tiers: [
-      { credits: 10000, totalUsd: 99, perEmailUsd: 0.0099, status: 'verified' },
+      { credits: 10000, totalUsd: 129, perEmailUsd: 0.0129, status: 'verified' },
       { credits: 100000, totalUsd: 649, perEmailUsd: 0.00649, status: 'verified' },
       { credits: 1000000, totalUsd: 3199, perEmailUsd: 0.003199, status: 'verified' },
     ],
@@ -117,7 +117,7 @@ export const COMPETITORS: Record<string, Competitor> = {
     freeTier: '100 credits per month',
     creditsExpire: 'Credits never expire',
     chargesForUnknown: false,
-    resolvesCatchAll: true, // offers catch-all handling (AI Scoring)
+    resolvesCatchAll: 'partial', // offers catch-all handling (AI Scoring)
     catchAllCreditCost: 'AI score 1-10, not valid/invalid',
     advertisesSegSupport: true, // pricing page: "validate all, including catch-alls and protected by SEGs"
     claimedAccuracy: 'Claims 99.6%',
@@ -147,7 +147,7 @@ export const COMPETITORS: Record<string, Competitor> = {
     freeTier: '10 credits on signup',
     creditsExpire: 'Credits expire 12 months after purchase',
     chargesForUnknown: null,
-    resolvesCatchAll: true, // secondary pattern detection on accept-all (8% resolved in test)
+    resolvesCatchAll: 'partial', // secondary pattern detection on accept-all (8% resolved in test)
     catchAllCreditCost: 'Marked Accept-All, resolves few',
     advertisesSegSupport: false,
     claimedAccuracy: '-',
@@ -207,7 +207,7 @@ export const COMPETITORS: Record<string, Competitor> = {
     freeTier: '100 credits',
     creditsExpire: 'Credits never expire',
     chargesForUnknown: false,
-    resolvesCatchAll: true, // has a Catch-All Verifier (resolves ~30-40%, marks the rest Risky)
+    resolvesCatchAll: 'partial', // has a Catch-All Verifier (resolves ~30-40%, marks the rest Risky)
     catchAllCreditCost: 'Catch-All Verifier, resolves 30-40%, rest Risky',
     advertisesSegSupport: false,
     claimedAccuracy: 'Claims 99%+',

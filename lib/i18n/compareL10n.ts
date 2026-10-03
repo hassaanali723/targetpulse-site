@@ -370,7 +370,7 @@ export function buildComparisonL10n(locale: L10nLocale, versus: string): Compari
   }
   const gp = (n: number) => usdL(locale, giggalTierAt(n).totalUsd as number)
   const t = (text: string): CmpValue => ({ kind: 'text', text })
-  const bo = (yes: boolean | null): CmpValue => ({ kind: 'bool', yes })
+  const bo = (yes: boolean | 'partial' | null): CmpValue => ({ kind: 'bool', yes })
   const r = L.rows
   const rows: CmpRow[] = [
     { label: r[0], a: t(pa.category), b: t(pb.category), giggal: t(g.category) },

@@ -83,9 +83,9 @@ const freeClause = (c: Competitor) =>
   c.freeTier === 'Not published' ? 'lists no free tier' : `offers ${lc(c.freeTier)} to start`
 
 // ── Table model (serialisable; the component renders bool as icons) ───────────
-export type CmpValue = { kind: 'text'; text: string } | { kind: 'bool'; yes: boolean | null }
+export type CmpValue = { kind: 'text'; text: string } | { kind: 'bool'; yes: boolean | 'partial' | null }
 const t = (text: string): CmpValue => ({ kind: 'text', text })
-const b = (yes: boolean | null): CmpValue => ({ kind: 'bool', yes })
+const b = (yes: boolean | 'partial' | null): CmpValue => ({ kind: 'bool', yes })
 
 export interface CmpRow {
   label: string
@@ -163,7 +163,9 @@ export function buildComparison(aSlug: string, bSlug: string): Comparison {
     `Below we walk through how they price, what they do with catch-all addresses, and how accurate each claims to be, and we show where Giggal.ai lands on the same list so you have a third number to weigh.`
 
   const caResolve = (c: Competitor) =>
-    c.resolvesCatchAll
+    c.resolvesCatchAll === 'partial'
+      ? `${c.name} returns a result on some catch-all addresses`
+      : c.resolvesCatchAll
       ? `${c.name} returns a result on catch-all addresses`
       : `${c.name} flags catch-all without confirming the mailbox`
 

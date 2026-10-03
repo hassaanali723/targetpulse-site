@@ -60,7 +60,8 @@ function rankScore(slug: string): [number, number, number] {
   const c = COMPETITORS[slug]
   const ten = c.tiers.find((t) => t.credits === 10000)
   const price = ten && ten.totalUsd !== null && ten.status !== 'unknown' ? ten.totalUsd : Infinity
-  return [c.resolvesCatchAll ? 0 : 1, c.advertisesSegSupport ? 0 : 1, price]
+  const band = c.resolvesCatchAll === true ? 0 : c.resolvesCatchAll === 'partial' ? 1 : 2
+  return [band, c.advertisesSegSupport ? 0 : 1, price]
 }
 
 const RANKED = [...ALL_COMPETITOR_SLUGS].sort((a, b) => {
@@ -76,7 +77,7 @@ interface CheapestItem {
   p10k: { text: string; num: number }
   p100k: string
   p1m: string
-  resolvesCatchAll: boolean | 'Partial'
+  resolvesCatchAll: boolean | 'partial'
 }
 
 function tierPrice(tiers: PricingTier[], credits: number): { text: string; num: number } {
@@ -89,13 +90,6 @@ function tierPrice(tiers: PricingTier[], credits: number): { text: string; num: 
     text: `${fmtUsd(t.totalUsd)}${t.perMonth ? '/month' : ''}${noteSuffix}`,
     num: t.totalUsd,
   }
-}
-
-const PARTIAL_CATCH_ALL_SLUGS = new Set(['zerobounce', 'neverbounce', 'millionverifier'])
-
-function getCatchAllStatus(slug: string): boolean | 'Partial' {
-  if (PARTIAL_CATCH_ALL_SLUGS.has(slug)) return 'Partial'
-  return COMPETITORS[slug].resolvesCatchAll
 }
 
 const CHEAPEST_ORDER: CheapestItem[] = [
@@ -117,7 +111,7 @@ const CHEAPEST_ORDER: CheapestItem[] = [
       p10k: tierPrice(c.tiers, 10000),
       p100k: tierPrice(c.tiers, 100000).text,
       p1m: tierPrice(c.tiers, 1000000).text,
-      resolvesCatchAll: getCatchAllStatus(slug),
+      resolvesCatchAll: c.resolvesCatchAll,
     }
   }),
 ].sort((a, b) => a.p10k.num - b.p10k.num || a.name.localeCompare(b.name))
@@ -126,7 +120,7 @@ const CHEAPEST_ORDER: CheapestItem[] = [
 // summarises, the pages argue.
 const BLURBS: Record<string, string> = {
   zerobounce:
-    'Marks catch-all addresses Catch-All without confirming the mailbox, and costs $99 at 10k against $9.90 here. Its deliverability suite is what keeps some teams on it.',
+    'Marks catch-all addresses Catch-All without confirming the mailbox, and costs $129 at 10k against $9.90 here. Its deliverability suite is what keeps some teams on it.',
   neverbounce:
     'Resolved 8% of catch-alls in the LeadMagic test, and its PAYG runs $50 at 10k against our $9.90. A fit mainly if you clean lists inside a CRM.',
   bounceban:
@@ -197,8 +191,8 @@ function StartPrice({ p }: { p: { credits: number; totalUsd: number } | null }) 
   )
 }
 
-function YN({ v }: { v: boolean | 'Partial' }) {
-  if (v === 'Partial') {
+function YN({ v }: { v: boolean | 'partial' }) {
+  if (v === 'partial') {
     return (
       <span className="inline-flex items-center justify-center gap-1 font-semibold">
         <span className="w-2 h-2 rounded-full bg-amber-500 inline-block shrink-0" aria-hidden="true" />
@@ -239,11 +233,11 @@ function FactRow({
   seg,
   price,
 }: {
-  catchAll: boolean | 'Partial'
+  catchAll: boolean | 'partial'
   seg: boolean
   price: string
 }) {
-  const catchAllText = typeof catchAll === 'string' ? catchAll : catchAll ? 'Yes' : 'No'
+  const catchAllText = catchAll === 'partial' ? 'Partial' : catchAll ? 'Yes' : 'No'
   return (
     <p className="text-[13px] font-semibold text-slate-600 flex flex-wrap gap-x-4 gap-y-1">
       <span>Resolves catch-all: {catchAllText}</span>
@@ -271,7 +265,7 @@ export default function AlternativesHubPage() {
     {
       label: 'Catch-all verification',
       giggal: <YN v={GIGGAL.resolvesCatchAll} />,
-      cell: (slug) => <YN v={getCatchAllStatus(slug)} />,
+      cell: (slug) => <YN v={COMPETITORS[slug].resolvesCatchAll} />,
     },
     {
       label: 'SEG verifier',
@@ -357,7 +351,8 @@ export default function AlternativesHubPage() {
             <li>
               <strong className="text-slate-900">Does it resolve catch-all?</strong> A tool that
               returns a real valid or invalid result on an accept-all domain ranks above one that
-              hands the address back labelled Catch-All, Risky or Unknown.
+              hands the address back labelled Catch-All, Risky or Unknown. Partial means the tool
+              resolves only some catch-all addresses and returns the rest as Catch-All or Risky.
             </li>
             <li>
               <strong className="text-slate-900">Does it verify behind a secure email gateway?</strong>{' '}
@@ -523,7 +518,7 @@ export default function AlternativesHubPage() {
                   <RankBadge n={i + 2} /> {c.name}
                 </h3>
                 <FactRow
-                  catchAll={getCatchAllStatus(slug)}
+                  catchAll={c.resolvesCatchAll}
                   seg={c.advertisesSegSupport}
                   price={price}
                 />
