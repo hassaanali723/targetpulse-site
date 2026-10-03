@@ -11,7 +11,7 @@ imageAlt: Six email verification tools tested on catch-all and gateway-protected
 
 ## The short version
 
-This is a test of six email verification software options on the addresses that break most verifiers. For the full ranked list of 28 tools by catch-all handling, SEG support and price, see the [best email verification tools](/alternatives) hub.
+This is a test of six email verification software options on the addresses that break most verifiers. For the full ranked list of 28 tools by catch-all handling, SEG support and price, see the [full comparison of 28 verifiers](/alternatives) hub.
 
 The hardest part of choosing an email verification tool in 2026 is catch-all and SEG-protected addresses. Around 30% of a B2B email list sits on catch-all (also called accept-all) or SEG-protected domains, the two cases where a mail server will not tell a verifier whether a mailbox really exists. On catch-all domains the server accepts every address, so verifiers return Risky. On SEG-protected domains a security gateway hides the real server, so verifiers return Unknown. This guide explains catch-all and SEG email verification from the ground up, then compares the six best email verifiers of 2026 on whether they actually resolve these addresses or only flag them. It answers the real question: is there a genuine way to verify catch-all and SEG-protected emails, and if so, why doesn't every tool do it? The answers will help you pick the verifier that fits your own list.
 

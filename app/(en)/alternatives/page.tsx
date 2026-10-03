@@ -14,6 +14,7 @@ import {
   HUB_LABELS,
   fmtUsd,
   fmtCredits,
+  type PricingTier,
 } from '@/lib/competitorPricing'
 import { Check, X, ArrowRight } from 'lucide-react'
 
@@ -21,11 +22,9 @@ import { Check, X, ArrowRight } from 'lucide-react'
 // vendor is added to competitorPricing.ts. +1 for Giggal itself.
 const TOOL_COUNT = ALL_COMPETITOR_SLUGS.length + 1
 
-// Primary query: "best email verification tools" (350 / KD 22). This hub is the
-// only page on the site that targets it; the blog comparison post targets
-// "best email verification software" instead.
-const TITLE = `${TOOL_COUNT} Best Email Verification Tools, Ranked (2026)`
-const DESC = `The 28 best email verification tools compared on catch-all handling, secure email gateway support, accuracy and price per 10,000 emails. Updated 2026.`
+// Retargeted for email verifier comparison and price ("cheap / cheapest email verifier").
+const TITLE = `Email Verifier Comparison: ${TOOL_COUNT} Tools by Price, Catch-All & SEG (2026)`
+const DESC = `Compare ${TOOL_COUNT} email verifiers on price per 10,000, catch-all and SEG support. See the cheapest options and what each one leaves out.`
 
 export const metadata: Metadata = {
   title: { absolute: `${TITLE} | Giggal.ai` },
@@ -69,6 +68,51 @@ const RANKED = [...ALL_COMPETITOR_SLUGS].sort((a, b) => {
   const [bx, by, bz] = rankScore(b)
   return ax - bx || ay - by || az - bz || COMPETITORS[a].name.localeCompare(COMPETITORS[b].name)
 })
+
+interface CheapestItem {
+  name: string
+  href: string
+  isGiggal?: boolean
+  p10k: { text: string; num: number }
+  p100k: string
+  p1m: string
+  resolvesCatchAll: boolean
+}
+
+function tierPrice(tiers: PricingTier[], credits: number): { text: string; num: number } {
+  const t = tiers.find((x) => x.credits === credits)
+  if (!t || t.totalUsd === null || t.status === 'unknown') {
+    return { text: 'Not published', num: Infinity }
+  }
+  return {
+    text: `${fmtUsd(t.totalUsd)}${t.perMonth ? '/month' : ''}`,
+    num: t.totalUsd,
+  }
+}
+
+const CHEAPEST_ORDER: CheapestItem[] = [
+  {
+    name: GIGGAL.name,
+    href: '/',
+    isGiggal: true,
+    p10k: tierPrice(GIGGAL.tiers, 10000),
+    p100k: tierPrice(GIGGAL.tiers, 100000).text,
+    p1m: tierPrice(GIGGAL.tiers, 1000000).text,
+    resolvesCatchAll: GIGGAL.resolvesCatchAll,
+  },
+  ...ALL_COMPETITOR_SLUGS.map((slug) => {
+    const c = COMPETITORS[slug]
+    return {
+      name: c.name,
+      href: `/${slug}-alternative`,
+      isGiggal: false,
+      p10k: tierPrice(c.tiers, 10000),
+      p100k: tierPrice(c.tiers, 100000).text,
+      p1m: tierPrice(c.tiers, 1000000).text,
+      resolvesCatchAll: c.resolvesCatchAll,
+    }
+  }),
+].sort((a, b) => a.p10k.num - b.p10k.num || a.name.localeCompare(b.name))
 
 // One-line routing summaries. Different copy from each deep page: the hub
 // summarises, the pages argue.
@@ -137,18 +181,29 @@ const proseP = 'text-slate-600 leading-relaxed text-sm md:text-base font-medium'
 function StartPrice({ p }: { p: { credits: number; totalUsd: number } | null }) {
   if (!p) return <span className="text-slate-400 font-semibold">Per plan</span>
   return (
-    <span className="inline-flex flex-col leading-tight">
+    <span className="inline-flex items-center justify-center gap-1.5 leading-tight whitespace-nowrap">
       <span className="font-black">{fmtUsd(p.totalUsd)}</span>
-      <span className="text-[10px] font-semibold text-slate-400">{fmtCredits(p.credits)} credits</span>
+      <span className="text-slate-400">·</span>
+      <span className="text-[11px] font-semibold text-slate-500">{fmtCredits(p.credits)} credits</span>
     </span>
   )
 }
 
 function YN({ v }: { v: boolean }) {
-  return v ? (
-    <Check className="w-4 h-4 text-emerald-600 inline" aria-label="Yes" />
-  ) : (
-    <X className="w-4 h-4 text-slate-400 inline" aria-label="No" />
+  return (
+    <span className="inline-flex items-center justify-center gap-1 font-semibold">
+      {v ? (
+        <>
+          <Check className="w-4 h-4 text-emerald-600 inline shrink-0" aria-hidden="true" />
+          <span className="text-emerald-700">Yes</span>
+        </>
+      ) : (
+        <>
+          <X className="w-4 h-4 text-slate-400 inline shrink-0" aria-hidden="true" />
+          <span className="text-slate-500">No</span>
+        </>
+      )}
+    </span>
   )
 }
 
@@ -250,11 +305,11 @@ export default function AlternativesHubPage() {
       {/* ── HERO ─────────────────────────────────────────────── */}
       <section className="max-w-3xl mx-auto px-6 pt-28 md:pt-32 pb-14 text-center space-y-6">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900">
-          {TOOL_COUNT} best{' '}
+          Compare {TOOL_COUNT}{' '}
           <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">
             email verification tools
-          </span>
-          , ranked on catch-all, SEG and price (2026)
+          </span>{' '}
+          on price, catch-all and SEG
         </h1>
         <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium">
           Almost every verifier handles a clean domain. The list below is ordered by what happens
@@ -264,6 +319,16 @@ export default function AlternativesHubPage() {
         <p className="text-sm text-slate-500 font-medium">
           We publish this list and we sell one of the tools on it, so the ranking method is spelled
           out below and every price carries the date we checked it.
+        </p>
+        <p className="text-sm md:text-base text-slate-600 font-medium">
+          Want our tested shortlist? See the{' '}
+          <Link
+            href="/blog/best-email-verification-tools"
+            className="text-indigo-700 hover:text-indigo-800 font-bold underline underline-offset-2 transition-colors"
+          >
+            best email verification software
+          </Link>
+          .
         </p>
       </section>
 
@@ -345,6 +410,57 @@ export default function AlternativesHubPage() {
           change over time; each figure reflects the latest date we checked, shown on its comparison
           page.
         </p>
+      </section>
+
+      {/* ── CHEAPEST EMAIL VERIFIERS TABLE ──────────────────── */}
+      <section className="cv-section max-w-6xl mx-auto px-6 pb-20 space-y-6">
+        <div className="space-y-2">
+          <h2 className={sectionTitle}>Cheapest email verifiers at 10k, 100k and 1M emails</h2>
+          <p className={proseP}>
+            The same tools sorted by what they cost at three list sizes. Prices are taken from each
+            vendor&apos;s public pricing page on the date shown on its comparison page.
+          </p>
+        </div>
+        <div className="overflow-x-auto rounded-2xl border-2 border-slate-200 card-vivid-shadow bg-white">
+          <table className="w-full text-left border-collapse min-w-[720px]">
+            <thead>
+              <tr className="bg-slate-50 border-b-2 border-slate-200 text-[11px] font-black uppercase tracking-wider text-slate-500">
+                <th className="px-4 py-3">Tool</th>
+                <th className="px-4 py-3">10,000 emails</th>
+                <th className="px-4 py-3">100,000 emails</th>
+                <th className="px-4 py-3">1,000,000 emails</th>
+                <th className="px-4 py-3 text-center">Resolves catch-all</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 text-[12px] md:text-[13px]">
+              {CHEAPEST_ORDER.map((row) => (
+                <tr
+                  key={row.name}
+                  className={`align-middle ${row.isGiggal ? 'bg-indigo-50/40 font-bold' : ''}`}
+                >
+                  <td className="px-4 py-3.5 font-bold text-slate-900">
+                    <Link
+                      href={row.href}
+                      className={
+                        row.isGiggal
+                          ? 'text-indigo-700 hover:text-indigo-900 font-black'
+                          : 'hover:text-indigo-700 transition-colors'
+                      }
+                    >
+                      {row.name}
+                    </Link>
+                  </td>
+                  <td className="px-4 py-3.5 font-semibold text-slate-700">{row.p10k.text}</td>
+                  <td className="px-4 py-3.5 font-medium text-slate-600">{row.p100k}</td>
+                  <td className="px-4 py-3.5 font-medium text-slate-600">{row.p1m}</td>
+                  <td className="px-4 py-3.5 text-center">
+                    <YN v={row.resolvesCatchAll} />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </section>
 
       {/* ── THE RANKED LIST ──────────────────────────────────── */}
