@@ -65,6 +65,26 @@ const faqs: FaqItem[] = [
     a: 'Detecting that a domain is catch-all takes one lookup. Working out whether a specific mailbox exists behind it takes considerably more, so most free tools do the cheap part and leave the rest to you.',
   },
   {
+    q: 'Is this email address real?',
+    a: 'A real email address has valid syntax, points to a domain with active mail exchange (MX) records, and connects to an active mailbox. You can confirm this by pasting the address into the checker above to test its mail server response directly. If the server confirms the recipient without bouncing, the address is real.',
+  },
+  {
+    q: 'How can I tell if an email address is fake?',
+    a: 'Look for common warning signs like misspelled domain names, throwaway disposable providers, missing MX records, or syntax errors. A fake address will also fail a live SMTP handshake because the destination mail server rejects the recipient. The tool above tests all of these indicators in a single check.',
+  },
+  {
+    q: 'How do I check if an email address is active?',
+    a: 'You can check if an address is active by running an SMTP probe that asks the receiving mail server if the specific mailbox exists. The server responds with an acceptance code if the inbox is open and active, or a rejection code if it is closed or dead. This process confirms status without sending a message to the recipient.',
+  },
+  {
+    q: "Is there a way to verify someone's email address for free?",
+    a: 'Yes. You can paste any address into the single verifier above to run a complete syntax, MX, and SMTP check without creating an account or entering a credit card. For larger batches, you can create a free account to verify up to 1,000 email addresses at no cost.',
+  },
+  {
+    q: 'Can I check if an email exists without sending an email?',
+    a: 'Yes. An email verifier connects directly to the recipient\'s mail server and initiates an SMTP handshake, asking if the mailbox exists. It disconnects before transmitting any actual message data, so no email is ever sent to the inbox. The owner will never know a check took place.',
+  },
+  {
     q: 'Can I check a whole list here?',
     a: 'Not on this page. Sign up for 1,000 free credits, no card required, and upload the list.',
   },
@@ -184,6 +204,68 @@ export default function CatchAllEmailCheckerPage() {
             clean your email list
           </Link>{' '}
           with the same checks run on every row, 1,000 credits free and no card.
+        </p>
+      </section>
+
+      {/* ── IS THIS A REAL EMAIL ADDRESS? ─────────────────────── */}
+      <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
+        <h2 className={sectionTitle}>Is this a real email address? How to tell if an email is fake</h2>
+        <p className={proseP}>
+          A real email address means the mailbox actually exists on the receiving mail server and is
+          configured to accept incoming messages. It proves technical deliverability, meaning mail
+          sent there will not bounce back as undeliverable. However, verifying that an address exists
+          does not prove who owns the account, whether the sender name is authentic, or how
+          frequently someone opens the inbox.
+        </p>
+        <p className={proseP}>
+          When someone submits a fake email, it almost always fails one or more specific technical
+          checks. Common signs of a fake email address include:
+        </p>
+        <ul className="list-disc pl-6 space-y-2 text-slate-600 text-sm md:text-base font-medium leading-relaxed">
+          <li>
+            <strong className="text-slate-900">Broken syntax:</strong> Missing @ symbols, illegal
+            punctuation, extra spaces, or an incomplete domain name that violates standard RFC
+            formatting rules.
+          </li>
+          <li>
+            <strong className="text-slate-900">Typo domains:</strong> Common typos of major email
+            providers, such as gmial.com or yaho.com, which either lack mail servers or bounce all
+            incoming messages.
+          </li>
+          <li>
+            <strong className="text-slate-900">Missing MX records:</strong> If a domain does not
+            publish mail exchanger records in its DNS settings, no mail server exists to receive
+            messages for that address.
+          </li>
+          <li>
+            <strong className="text-slate-900">Disposable domains:</strong> Temporary mailboxes
+            created on a{' '}
+            <Link href="/disposable-email-checker" className="text-indigo-600 font-bold hover:underline">
+              disposable domain
+            </Link>{' '}
+            that vanishes after a few minutes or hours.
+          </li>
+          <li>
+            <strong className="text-slate-900">Role addresses:</strong> Prefixes like info@, sales@,
+            or admin@ that point to shared distribution lists rather than an individual person.
+          </li>
+          <li>
+            <strong className="text-slate-900">Random-string local parts:</strong> Nonsense character
+            sequences generated by automated bots, scrapers, or visitors filling out test forms.
+          </li>
+        </ul>
+        <p className={proseP}>
+          Catch-all domains complicate things further. When an organization runs a{' '}
+          <Link href="/catch-all-verification" className="text-indigo-600 font-bold hover:underline">
+            catch-all domain
+          </Link>
+          , the server accepts every message it receives, even if the address was invented on the
+          spot. Standard verification tools cannot separate a real email from a nonexistent mailbox
+          on these domains without evaluating extra delivery signals.
+        </p>
+        <p className={proseP}>
+          If you are unsure whether an address in your contacts is valid, paste it into the checker
+          above to test the mail server directly.
         </p>
       </section>
 
