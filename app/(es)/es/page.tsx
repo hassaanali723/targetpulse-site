@@ -14,27 +14,27 @@ const DESC =
   'Servicio de verificación de correo que devuelve válido o no válido en dominios catch-all, no "arriesgado". 98,5 % de precisión, bulk, API, 1.000 créditos.'
 
 export const metadata: Metadata = {
-  title: { absolute: 'Servicio de Verificación de Correo Electrónico | Giggal.ai' },
+  title: { absolute: 'Servicio de Verificación de Correo y Verificación Masiva | Giggal.ai' },
   description: DESC,
   alternates: { canonical: '/es', languages: hreflangAlternates('home') },
   openGraph: {
     siteName: 'Giggal.ai',
     locale: 'es_LA',
-    title: 'Servicio de verificación de correo electrónico',
+    title: 'Servicio de verificación de correo y verificación masiva',
     description: DESC,
     url: 'https://giggal.ai/es',
     type: 'website',
     images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai verificación de correo' }],
   },
-  twitter: { card: 'summary_large_image', title: 'Servicio de verificación de correo electrónico', description: DESC },
+  twitter: { card: 'summary_large_image', title: 'Servicio de verificación de correo y verificación masiva', description: DESC },
 }
 
 const heroLink = 'text-white font-semibold underline decoration-emerald-400 decoration-2 underline-offset-4 hover:decoration-white'
 const link = 'text-indigo-600 font-bold hover:underline'
 
 const content: HomeContent = {
-  h1Lead: 'Verificación de correo electrónico',
-  h1Accent: 'que resuelve el catch-all',
+  h1Lead: 'Servicio de verificación de correo',
+  h1Accent: 'para reducir los rebotes',
   heroSub: (
     <>
       Servicio de verificación de correo con validación en bloque: descubre qué direcciones son reales, incluso en{' '}

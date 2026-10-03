@@ -15,19 +15,19 @@ const DESC =
   'Servizio di verifica email e verifica in blocco con un chiaro valida o non valida su ogni indirizzo, catch-all inclusi. 98,5% di precisione, 1.000 crediti.'
 
 export const metadata: Metadata = {
-  title: { absolute: 'Verifica Email per Liste e Domini Catch-All | Giggal.ai' },
+  title: { absolute: 'Servizio di Verifica Email e Verifica in Blocco | Giggal.ai' },
   description: DESC,
   alternates: { canonical: '/it', languages: hreflangAlternates('home') },
   openGraph: {
     siteName: 'Giggal.ai',
     locale: 'it_IT',
-    title: 'Verifica email per liste e domini catch-all',
+    title: 'Servizio di verifica email e verifica in blocco',
     description: DESC,
     url: 'https://giggal.ai/it',
     type: 'website',
     images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai verifica email' }],
   },
-  twitter: { card: 'summary_large_image', title: 'Verifica email per liste e domini catch-all', description: DESC },
+  twitter: { card: 'summary_large_image', title: 'Servizio di verifica email e verifica in blocco', description: DESC },
 }
 
 const heroLink = 'text-white font-semibold underline decoration-emerald-400 decoration-2 underline-offset-4 hover:decoration-white'
@@ -35,7 +35,7 @@ const link = 'text-indigo-600 font-bold hover:underline'
 
 const content: HomeContent = {
   h1Lead: 'Servizio di verifica email',
-  h1Accent: 'che risolve i catch-all',
+  h1Accent: 'per ridurre i rimbalzi',
   heroSub: (
     <>
       Software di verifica email per la verifica in blocco: scopri quali indirizzi sono reali, anche sui{' '}

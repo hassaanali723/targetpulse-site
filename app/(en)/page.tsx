@@ -235,7 +235,7 @@ export const metadata: Metadata = {
   // belong to the tool page once /email-verifier exists; until then the home
   // carries "software" and "tool" wording in the hero as secondaries.
   title: {
-    absolute: 'Email Verification Service: Resolve Catch-All Emails | Giggal.ai',
+    absolute: 'Email Verification Service & Bulk Email Verifier | Giggal.ai',
   },
   description:
     'Email verification service and bulk email verifier with a real valid or invalid result on every address, including catch-all verification. 98.5% accuracy, 1,000 free credits.',
@@ -243,7 +243,7 @@ export const metadata: Metadata = {
   openGraph: {
     siteName: 'Giggal.ai',
     images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai email verification' }],
-    title: 'Email Verification Service: Resolve Catch-All Emails',
+    title: 'Email Verification Service & Bulk Email Verifier',
     description:
       'Email verification service and bulk email verifier with a real valid or invalid result on every address, including catch-all verification. 98.5% accuracy, 1,000 free credits.',
     url: 'https://giggal.ai',
@@ -251,7 +251,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Email Verification Service: Resolve Catch-All Emails',
+    title: 'Email Verification Service & Bulk Email Verifier',
     description:
       'Email verification service and bulk email verifier with a real valid or invalid result on every address, including catch-all verification. 98.5% accuracy, 1,000 free credits.',
   },
@@ -332,7 +332,8 @@ export default function Home() {
 
       {/* Hero: one centered column on the slate ink colour. The navbar runs
           dark on this page (tone="dark") so the two read as one block. The H1
-          keeps the page's primary keyword "email verification service"; the
+          keeps the page's primary keyword "email verification service" plus a
+          plain benefit; the <title> carries the keywords instead; the
           subheading carries "bulk email verification" and "email verification
           software" in one 15-word line (plan 09 keyword placement, plan 16). */}
       <section className="bg-slate-900 hero-art text-white pt-28 md:pt-32 pb-14 md:pb-16">
@@ -340,9 +341,7 @@ export default function Home() {
         <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-indigo-400/60 to-transparent" />
         <div className="max-w-3xl mx-auto px-6 pt-10 md:pt-16 text-center">
           <h1 className="text-[40px] leading-[1.08] md:text-6xl md:leading-[1.04] font-extrabold tracking-tight text-white [text-wrap:balance]">
-            Email Verification Service
-            <br />
-            Resolve Catch-All Emails
+            Email Verification Service to Reduce Email Bounces
           </h1>
 
           <p className="mt-7 text-xl md:text-2xl leading-relaxed text-slate-300 max-w-2xl mx-auto [text-wrap:balance]">

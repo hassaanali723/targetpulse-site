@@ -13,27 +13,27 @@ const DESC =
   'E-Mail-Verifizierung, die auf Catch-all-Domains gültig oder ungültig liefert statt "riskant". 98,5 % Genauigkeit, Massenprüfung, API, 1.000 Credits gratis.'
 
 export const metadata: Metadata = {
-  title: { absolute: 'E-Mail-Verifizierung für Catch-All-Domains | Giggal.ai' },
+  title: { absolute: 'E-Mail-Verifizierungsdienst und Massenprüfung | Giggal.ai' },
   description: DESC,
   alternates: { canonical: '/de', languages: hreflangAlternates('home') },
   openGraph: {
     siteName: 'Giggal.ai',
     locale: 'de_DE',
-    title: 'E-Mail-Verifizierung für Catch-All-Domains',
+    title: 'E-Mail-Verifizierungsdienst und Massenprüfung',
     description: DESC,
     url: 'https://giggal.ai/de',
     type: 'website',
     images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai E-Mail-Verifizierung' }],
   },
-  twitter: { card: 'summary_large_image', title: 'E-Mail-Verifizierung für Catch-All-Domains', description: DESC },
+  twitter: { card: 'summary_large_image', title: 'E-Mail-Verifizierungsdienst und Massenprüfung', description: DESC },
 }
 
 const heroLink = 'text-white font-semibold underline decoration-emerald-400 decoration-2 underline-offset-4 hover:decoration-white'
 const link = 'text-indigo-600 font-bold hover:underline'
 
 const content: HomeContent = {
-  h1Lead: 'E-Mail-Verifizierung,',
-  h1Accent: 'die Catch-all auflöst',
+  h1Lead: 'E-Mail-Verifizierungsdienst',
+  h1Accent: 'für weniger Bounces',
   heroSub: (
     <>
       E-Mail-Verifizierungsdienst mit Massenprüfung: Sie sehen, welche Adressen echt sind, auch auf{' '}

@@ -14,27 +14,27 @@ const DESC =
   'Vérification d’email qui confirme la boîte sur les domaines catch-all : taux de rebond sous 3 %, vérification en masse, API et 1 000 crédits offerts sans carte.'
 
 export const metadata: Metadata = {
-  title: { absolute: 'Service de Vérification d’Adresses Email | Giggal.ai' },
+  title: { absolute: "Service de Vérification d'Email et Vérification en Masse | Giggal.ai" },
   description: DESC,
   alternates: { canonical: '/fr', languages: hreflangAlternates('home') },
   openGraph: {
     siteName: 'Giggal.ai',
     locale: 'fr_FR',
-    title: 'Service de vérification d’adresses email',
+    title: "Service de vérification d'email et vérification en masse",
     description: DESC,
     url: 'https://giggal.ai/fr',
     type: 'website',
     images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai vérification d’email' }],
   },
-  twitter: { card: 'summary_large_image', title: 'Service de vérification d’adresses email', description: DESC },
+  twitter: { card: 'summary_large_image', title: "Service de vérification d'email et vérification en masse", description: DESC },
 }
 
 const heroLink = 'text-white font-semibold underline decoration-emerald-400 decoration-2 underline-offset-4 hover:decoration-white'
 const link = 'text-indigo-600 font-bold hover:underline'
 
 const content: HomeContent = {
-  h1Lead: 'Vérification d’adresses email',
-  h1Accent: 'qui résout le catch-all',
+  h1Lead: 'Service de vérification d’email',
+  h1Accent: 'pour réduire les rebonds',
   heroSub: (
     <>
       Service de vérification d&apos;email avec vérification en masse&nbsp;: découvrez quelles adresses sont réelles, même sur les{' '}

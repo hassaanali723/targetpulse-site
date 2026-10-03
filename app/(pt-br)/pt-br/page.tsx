@@ -14,27 +14,27 @@ const DESC =
   'Verificação de e-mail que confirma a caixa em domínios catch-all: taxa de bounce abaixo de 3%, verificação em massa, API e 1.000 créditos grátis sem cartão.'
 
 export const metadata: Metadata = {
-  title: { absolute: 'Serviço de Verificação de E-mail para Catch-all | Giggal.ai' },
+  title: { absolute: 'Serviço de Verificação de E-mail e Verificação em Massa | Giggal.ai' },
   description: DESC,
   alternates: { canonical: '/pt-br', languages: hreflangAlternates('home') },
   openGraph: {
     siteName: 'Giggal.ai',
     locale: 'pt_BR',
-    title: 'Serviço de verificação de e-mail para catch-all',
+    title: 'Serviço de verificação de e-mail e verificação em massa',
     description: DESC,
     url: 'https://giggal.ai/pt-br',
     type: 'website',
     images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai verificação de e-mail' }],
   },
-  twitter: { card: 'summary_large_image', title: 'Serviço de verificação de e-mail para catch-all', description: DESC },
+  twitter: { card: 'summary_large_image', title: 'Serviço de verificação de e-mail e verificação em massa', description: DESC },
 }
 
 const heroLink = 'text-white font-semibold underline decoration-emerald-400 decoration-2 underline-offset-4 hover:decoration-white'
 const link = 'text-indigo-600 font-bold hover:underline'
 
 const content: HomeContent = {
-  h1Lead: 'Verificação de e-mail',
-  h1Accent: 'que resolve o catch-all',
+  h1Lead: 'Serviço de verificação de e-mail',
+  h1Accent: 'para reduzir os bounces',
   heroSub: (
     <>
       Serviço de verificação de e-mail para listas inteiras: descubra quais endereços são reais, mesmo em{' '}
