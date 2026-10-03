@@ -41,7 +41,7 @@ const content: HomeContent = {
       <Link href="/es/verificacion-catch-all" className={heroLink}>dominios catch-all</Link>.
     </>
   ),
-  rating: { score: '4,9', on: 'en', reviews: '(129 reseñas)' },
+  rating: { on: 'en', reviews: (n) => `(${n} reseñas)` },
   email: { label: 'Correo que quieres validar', placeholder: 'nombre@empresa.com', button: 'Validar gratis' },
   listQuestion: '¿Vas a limpiar una lista entera?',
   listCta: 'Consigue 1.000 validaciones de correo gratis',

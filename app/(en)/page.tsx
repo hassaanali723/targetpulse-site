@@ -7,6 +7,11 @@ import Navbar from '@/components/Navbar'
 import AnnouncementBar from '@/components/AnnouncementBar'
 import Footer from '@/components/Footer'
 import ReviewBadges from '@/components/landing/ReviewBadges'
+import MotionRuntime from '@/components/landing/MotionRuntime'
+import AwardShelf from '@/components/landing/AwardShelf'
+import BulkScanDemo from '@/components/landing/BulkScanDemo'
+import IntegrationOrbit from '@/components/landing/IntegrationOrbit'
+import { getSourceForgeStats } from '@/lib/reviewStats'
 import ReviewWall from '@/components/landing/ReviewWall'
 import McpSection from '@/components/landing/McpSection'
 import PricingBlock from '@/components/landing/PricingBlock'
@@ -84,7 +89,7 @@ const FEATURES: {
           {[
             { email: 'anna@acme.com', ok: true },
             { email: 'j.doe@globex.io', ok: false },
-            { email: 'sara@northwind.co', ok: true },
+            { email: 'info@activarmor.com', ok: true },
             { email: 'mark@initech.com', ok: true },
           ].map((r) => (
             <li key={r.email} className="flex items-center justify-between gap-3 px-4 py-3">
@@ -107,7 +112,7 @@ const FEATURES: {
     icon: (<><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><path d="m9 12 2 2 4-4" /></>),
     visual: (
       <>
-        <p className="text-sm font-semibold text-slate-800">sara@northwind.co</p>
+        <p className="text-sm font-semibold text-slate-800">info@activarmor.com</p>
         <ul className="mt-3 divide-y divide-slate-100 rounded-xl bg-white shadow-[0_1px_3px_rgba(15,23,42,0.08)]">
           <li className="flex items-center justify-between gap-3 px-4 py-3">
             <span className="text-sm text-slate-500">Other tools</span>
@@ -222,7 +227,7 @@ function StatusBadge({ tone, children }: { tone: 'good' | 'bad' | 'warn'; childr
 function SectionRule() {
   return (
     <div aria-hidden="true" className="max-w-6xl mx-auto px-6">
-      <div className="h-px bg-slate-200" />
+      <div className="sr-draw h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent" />
     </div>
   )
 }
@@ -314,7 +319,9 @@ const integrations = [
   { name: 'ActiveCampaign', src: '/integrations/giggal-catch-all-email-verification-activecampaign.png', href: '/integrations' },
 ]
 
-export default function Home() {
+export default async function Home() {
+  const sourceforge = await getSourceForgeStats()
+
   return (
     <main className="has-ann relative min-h-screen bg-slate-50 grid-lines overflow-x-clip text-slate-800 antialiased">
       <script
@@ -327,6 +334,7 @@ export default function Home() {
       <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-indigo-500/10 blur-[120px] -z-10 pointer-events-none" />
       <div className="absolute top-[600px] right-1/4 w-[500px] h-[500px] rounded-full bg-emerald-500/[0.06] blur-[100px] -z-10 pointer-events-none" />
 
+      <MotionRuntime />
       <AnnouncementBar />
       <Navbar tone="dark" />
 
@@ -336,15 +344,29 @@ export default function Home() {
           plain benefit; the <title> carries the keywords instead; the
           subheading carries "bulk email verification" and "email verification
           software" in one 15-word line (plan 09 keyword placement, plan 16). */}
-      <section className="bg-slate-900 hero-art text-white pt-28 md:pt-32 pb-14 md:pb-16">
+      <section data-spotlight className="bg-slate-900 hero-art text-white pt-28 md:pt-32 pb-32 md:pb-44">
         {/* Thin horizon line where the dark top meets the light page. */}
         <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-indigo-400/60 to-transparent" />
+        {/* Moving light behind the content: drifting colour orbs and beams
+            along the grid lines (globals.css, "Home hero motion"). */}
+        <div aria-hidden="true" className="hero-orbs">
+          <span />
+          <span />
+          <span />
+        </div>
+        <div aria-hidden="true" className="hero-beams">
+          <span className="beam-x" />
+          <span className="beam-x" />
+          <span className="beam-y" />
+          <span className="beam-y" />
+        </div>
+        <div aria-hidden="true" className="hero-spot" />
         <div className="max-w-3xl mx-auto px-6 pt-10 md:pt-16 text-center">
           <h1 className="text-[40px] leading-[1.08] md:text-6xl md:leading-[1.04] font-extrabold tracking-tight text-white [text-wrap:balance]">
             Email Verification Service to Reduce Email Bounces
           </h1>
 
-          <p className="mt-7 text-xl md:text-2xl leading-relaxed text-slate-300 max-w-2xl mx-auto [text-wrap:balance]">
+          <p className="hero-rise hero-rise-1 mt-7 text-xl md:text-2xl leading-relaxed text-slate-300 max-w-2xl mx-auto [text-wrap:balance]">
             Bulk email verification software that shows which email addresses are real, even on{' '}
             <Link
               href="/catch-all-verification"
@@ -355,11 +377,10 @@ export default function Home() {
             .
           </p>
 
-          {/* SourceForge rating: 4.9 from 129 reviews, read from SourceForge's
-              own badge feed (b.sf-syn.com, sf_id 4117310) on 2026-09-27.
-              Update the numbers when they change. Visual only, no rating
+          {/* SourceForge rating, read live from SourceForge's badge feed and
+              cached for a day (lib/reviewStats.ts). Visual only, no rating
               markup (C10). */}
-          <div className="mt-8 md:mt-10 flex items-center justify-center gap-4 md:gap-5">
+          <div className="hero-rise hero-rise-2 mt-8 md:mt-10 flex items-center justify-center gap-4 md:gap-5">
             <span aria-hidden="true" className="h-px w-10 sm:w-16 md:w-24 bg-gradient-to-r from-transparent to-slate-500" />
             <a
               href="https://sourceforge.net/software/product/Giggal.ai/"
@@ -367,7 +388,7 @@ export default function Home() {
               rel="noopener noreferrer"
               className="group inline-flex items-center gap-2.5 text-sm md:text-base text-slate-400"
             >
-              <span className="flex items-center gap-0.5 text-amber-400" aria-hidden="true">
+              <span className="star-pop flex items-center gap-0.5 text-amber-400" aria-hidden="true">
                 <Star className="w-4 h-4 fill-current" />
                 <Star className="w-4 h-4 fill-current" />
                 <Star className="w-4 h-4 fill-current" />
@@ -375,9 +396,9 @@ export default function Home() {
                 <Star className="w-4 h-4 fill-current" />
               </span>
               <span>
-                <strong className="text-white">4.9</strong> on{' '}
+                <strong className="text-white">{sourceforge.rating.toFixed(1)}</strong> on{' '}
                 <span className="group-hover:text-slate-300 group-hover:underline underline-offset-4">SourceForge</span>{' '}
-                (129 reviews)
+                ({sourceforge.count} reviews)
               </span>
             </a>
             <span aria-hidden="true" className="h-px w-10 sm:w-16 md:w-24 bg-gradient-to-l from-transparent to-slate-500" />
@@ -386,9 +407,10 @@ export default function Home() {
           {/* One free check: a plain GET form, so it works without JavaScript.
               It opens /email-checker?email=..., which fills the checker and
               runs it (VerifierConsole emailFromQuery). */}
-          {/* Brand gradient border (indigo to emerald) with a soft indigo glow
-              that brightens on focus; the inside stays dark so it does not glare. */}
-          <div className="mt-8 md:mt-10 max-w-xl mx-auto p-[1.5px] rounded-2xl bg-gradient-to-r from-indigo-500 via-indigo-400 to-emerald-400 shadow-[0_0_40px_-12px_rgba(99,102,241,0.7)] focus-within:shadow-[0_0_56px_-8px_rgba(99,102,241,0.9)] transition-shadow">
+          {/* Brand gradient border (indigo to emerald) that slowly circles the
+              box (.hero-ring), with a soft indigo glow that brightens on focus;
+              the inside stays dark so it does not glare. */}
+          <div className="hero-ring hero-rise hero-rise-3 mt-8 md:mt-10 max-w-xl mx-auto p-[1.5px] rounded-2xl shadow-[0_0_40px_-12px_rgba(99,102,241,0.7)] focus-within:shadow-[0_0_56px_-8px_rgba(99,102,241,0.9)] transition-shadow">
           <form
             action="/email-checker"
             method="get"
@@ -419,37 +441,41 @@ export default function Home() {
               the only warm colour in the hero (it matches the review stars),
               so it stands apart from the indigo and emerald around it. Anchor keeps "free email
               validations" (keyword map, /email-verifier terms). */}
-          <div className="mt-10 md:mt-12 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+          <div className="hero-rise hero-rise-4 mt-10 md:mt-12 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
             <span className="text-base md:text-lg text-slate-300 font-medium">Cleaning a whole list?</span>
             <a
               href={SIGNUP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-900 font-extrabold text-base shadow-lg shadow-amber-500/20 transition-colors"
+              data-magnetic
+              className="cta-shine group inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-900 font-extrabold text-base shadow-lg shadow-amber-500/20 transition-colors"
             >
               Get 1,000 free email validations
               <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </a>
           </div>
-          <p className="mt-5 text-sm text-slate-400">No card needed.</p>
+          <p className="hero-rise hero-rise-4 mt-5 text-sm text-slate-400">No card needed.</p>
         </div>
       </section>
+
+      {/* Award badges, fanned across the hero's bottom edge. */}
+      <AwardShelf />
 
       {/* Stats: four calm cards on the light page, right under the hero. Thin
           border and a light shadow, no overlap with the hero, so they do not
           compete with the hero's heading and email box. */}
       <section className="max-w-5xl mx-auto px-6 pt-12 md:pt-14 pb-20 md:pb-24">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+        <div data-inview className="sr-stagger grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
           {[
             { pre: '', n: '500M', suf: '+', l: 'Emails verified' },
             { pre: '', n: '98.5', suf: '%', l: 'Accuracy on business lists' },
             { pre: '<', n: '3', suf: '%', l: 'Bounce rate on cleaned lists' },
             { pre: '', n: '1,000', suf: '', l: 'Free credits, no card' },
           ].map((s) => (
-            <div key={s.l} className="bg-white border border-slate-200 rounded-2xl px-4 py-6 text-center shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
+            <div key={s.l} className="stat-card bg-white border border-slate-200 rounded-2xl px-4 py-6 text-center shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
               <div className="text-2xl md:text-3xl leading-none font-extrabold tracking-tight text-slate-900 tabular-nums">
                 {s.pre && <span className="text-indigo-600">{s.pre}</span>}
-                {s.n}
+                <span data-count>{s.n}</span>
                 {s.suf && <span className="text-indigo-600">{s.suf}</span>}
               </div>
               <div className="mt-2 text-sm text-slate-500 font-medium leading-snug">{s.l}</div>
@@ -461,18 +487,20 @@ export default function Home() {
       <SectionRule />
 
       {/* Product: bulk results dashboard */}
-      <section id="bulk" className="cv-section max-w-5xl mx-auto px-6 py-20 md:py-24 scroll-mt-28">
+      <section id="bulk" className="cv-section max-w-6xl mx-auto px-6 py-20 md:py-24 scroll-mt-28">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div>
         {/* Keyword: "bulk email verification" in the H2 (owned by the home
             until /bulk-email-verifier exists, plan 09). Heading and a
             checklist only; no product preview. */}
-        <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight text-center">
+        <h2 className="sr-rise text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight text-center lg:text-left">
           Bulk email verification for your whole list
         </h2>
         {/* Keyword: "bulk email verifier service" (home, KD 36), once. */}
-        <p className="mt-4 text-lg md:text-xl text-slate-600 text-center max-w-2xl mx-auto">
+        <p className="sr-rise mt-4 text-lg md:text-xl text-slate-600 text-center lg:text-left max-w-2xl mx-auto lg:mx-0">
           Upload your list once. Our bulk email verifier service checks every address on it.
         </p>
-        <ul className="mt-12 w-fit max-w-full mx-auto space-y-4">
+        <ul className="sr-stagger mt-10 w-fit max-w-full mx-auto lg:mx-0 space-y-4">
           {[
             'Deliverable or undeliverable for every address',
             'Catch-all addresses get a real answer too',
@@ -487,6 +515,9 @@ export default function Home() {
             </li>
           ))}
         </ul>
+        </div>
+        <BulkScanDemo />
+        </div>
       </section>
 
       <SectionRule />
@@ -494,7 +525,7 @@ export default function Home() {
       {/* Catch-all explainer. Plan 07: keep this H2 and the link to the
           catch-all blog post. */}
       <section className="cv-section max-w-4xl mx-auto px-6 py-20 md:py-24">
-        <div className="text-center max-w-2xl mx-auto">
+        <div className="sr-rise text-center max-w-2xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight [text-wrap:balance]">Why catch-all addresses need attention</h2>
           <p className="mt-5 text-lg text-slate-600 leading-relaxed">
             Some company mail servers accept every address, real or made up. That is a{' '}
@@ -508,8 +539,8 @@ export default function Home() {
 
         {/* The same catch-all address, two results. Left is muted, right is
             the one we want the eye to land on. */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
-          <div className="rounded-2xl border border-slate-200 bg-slate-100 p-6 md:p-7">
+        <div data-inview className="sim mt-12 grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+          <div className="sr-left rounded-2xl border border-slate-200 bg-slate-100 p-6 md:p-7">
             <div className="flex items-center gap-2.5">
               <span className="w-8 h-8 rounded-lg bg-slate-200/70 text-slate-500 flex items-center justify-center">
                 <HelpCircle className="w-4 h-4" />
@@ -517,33 +548,40 @@ export default function Home() {
               <p className="text-base font-bold text-slate-500">Most email checkers</p>
             </div>
             <div className="mt-5 flex items-center gap-3 rounded-xl bg-white border border-slate-200 px-4 py-3.5">
-              <span className="hidden sm:flex shrink-0 w-10 h-10 rounded-full bg-slate-100 text-slate-500 font-bold items-center justify-center">S</span>
+              <span className="hidden sm:flex shrink-0 w-10 h-10 rounded-full bg-slate-100 text-slate-500 font-bold items-center justify-center">I</span>
               <div className="flex-1 min-w-0">
-                <p className="text-[15px] font-semibold text-slate-800 truncate">sara@northwind.co</p>
+                <p className="text-[15px] font-semibold text-slate-800 truncate">info@activarmor.com</p>
                 <p className="text-xs text-slate-400 truncate">Catch-all, no clear answer</p>
               </div>
-              <StatusBadge tone="warn">Risky</StatusBadge>
+              <span className="sim-slot sim-risky">
+                <span aria-hidden="true" className="sim-spin" />
+                <span className="sim-badge"><StatusBadge tone="warn">Risky</StatusBadge></span>
+              </span>
             </div>
             <p className="mt-5 text-base text-slate-600 leading-relaxed">
               Now it&apos;s on you. Send and risk a bounce, or delete a lead that might be real.
             </p>
           </div>
 
-          <div className="relative rounded-2xl border border-indigo-200 bg-white p-6 md:p-7 shadow-[0_16px_40px_-20px_rgba(79,70,229,0.45)]">
-            <div aria-hidden="true" className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-indigo-400 to-transparent" />
+          <div className="sr-right relative rounded-2xl border border-indigo-200 bg-white p-6 md:p-7 shadow-[0_16px_40px_-20px_rgba(79,70,229,0.45)]">
+            <div aria-hidden="true" className="line-sweep absolute inset-x-6 top-0 h-[2px] rounded-full" />
             <div className="flex items-center gap-2.5">
-              <span className="w-8 h-8 rounded-lg bg-indigo-600 text-white flex items-center justify-center">
+              <span className="pulse-ring w-8 h-8 rounded-lg bg-indigo-600 text-white flex items-center justify-center">
                 <ShieldCheck className="w-4 h-4" />
+                <span aria-hidden="true" className="sim-probe" />
               </span>
               <p className="text-base font-bold text-slate-900">Giggal.ai</p>
             </div>
             <div className="mt-5 flex items-center gap-3 rounded-xl bg-white border border-slate-200 px-4 py-3.5">
-              <span className="hidden sm:flex shrink-0 w-10 h-10 rounded-full bg-indigo-50 text-indigo-600 font-bold items-center justify-center">S</span>
+              <span className="hidden sm:flex shrink-0 w-10 h-10 rounded-full bg-indigo-50 text-indigo-600 font-bold items-center justify-center">I</span>
               <div className="flex-1 min-w-0">
-                <p className="text-[15px] font-semibold text-slate-800 truncate">sara@northwind.co</p>
+                <p className="text-[15px] font-semibold text-slate-800 truncate">info@activarmor.com</p>
                 <p className="text-xs text-slate-400 truncate">Catch-all, mailbox found</p>
               </div>
-              <StatusBadge tone="good">Deliverable</StatusBadge>
+              <span className="sim-slot sim-good">
+                <span aria-hidden="true" className="sim-spin" />
+                <span className="sim-badge"><StatusBadge tone="good">Deliverable</StatusBadge></span>
+              </span>
             </div>
             <p className="mt-5 text-base text-slate-600 leading-relaxed">
               You know it&apos;s real, so you send it. No guessing.
@@ -558,7 +596,7 @@ export default function Home() {
           reputation" and the REST API and deliverability guides links. One
           short line per card, so the service names carry the section. */}
       <section id="features-showcase" className="max-w-6xl mx-auto px-6 py-20 md:py-24">
-        <div className="text-center max-w-2xl mx-auto">
+        <div className="sr-rise text-center max-w-2xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight [text-wrap:balance]">Bulk cleaning, API and integrations on one credit balance</h2>
           <p className="mt-5 text-base md:text-lg text-slate-600 leading-relaxed">
             Upload a list, call the{' '}
@@ -583,11 +621,14 @@ export default function Home() {
               <div
                 key={f.title}
                 style={{ ['--stack-top' as string]: `${128 + i * 22}px` }}
-                className="md:sticky md:top-[var(--stack-top)] rounded-3xl border border-slate-200/80 bg-white overflow-hidden grid md:grid-cols-2 md:min-h-[360px] shadow-[0_-10px_30px_-24px_rgba(15,23,42,0.35)]"
+                data-tilt
+                data-spotlight
+                className="spotlight md:sticky md:top-[var(--stack-top)] rounded-3xl border border-slate-200/80 bg-white overflow-clip grid md:grid-cols-2 md:min-h-[360px] shadow-[0_-10px_30px_-24px_rgba(15,23,42,0.35)]"
               >
+                <span aria-hidden="true" className="tilt-glare" />
                 {/* Text half */}
                 <div className="p-8 md:p-10 flex flex-col">
-                  <span className={`w-12 h-12 rounded-xl text-white shadow-md flex items-center justify-center ${f.iconBg}`}>
+                  <span className={`icon-float w-12 h-12 rounded-xl text-white shadow-md flex items-center justify-center ${f.iconBg}`}>
                     <svg viewBox="0 0 24 24" className="w-6 h-6" stroke="currentColor" fill="none" strokeWidth={2.25} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                       {f.icon}
                     </svg>
@@ -642,7 +683,7 @@ export default function Home() {
       <SectionRule />
 
       {/* Review-platform badges */}
-      <ReviewBadges />
+      <ReviewBadges sourceforge={sourceforge} />
 
       <SectionRule />
 
@@ -657,13 +698,13 @@ export default function Home() {
             while the price data backs it (lowest verified price at 10,000 and
             100,000 emails). No competitor prices are shown here; the full
             comparison lives on /alternatives. */}
-        <div className="text-center max-w-3xl mx-auto">
+        <div className="sr-rise text-center max-w-3xl mx-auto">
           <h2 className="text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.05]">
             {PRICE_CLAIM ? (
               <>
                 Lowest price.
                 <br />
-                <span className="text-indigo-600">Highest value.</span>
+                <span className="text-shimmer">Highest value.</span>
               </>
             ) : (
               'Simple, Flexible Pricing'
@@ -686,7 +727,9 @@ export default function Home() {
           </p>
         </div>
 
-        <PricingBlock />
+        <div className="sr-rise">
+          <PricingBlock />
+        </div>
       </section>
 
       <SectionRule />
@@ -697,7 +740,7 @@ export default function Home() {
           the comparison pages hanging off them went uncrawled. */}
       <section className="cv-section max-w-6xl mx-auto px-6 py-20 md:py-24">
         <div className="grid lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-10 lg:gap-16 items-start">
-          <div className="lg:sticky lg:top-32 text-center lg:text-left">
+          <div className="sr-rise lg:sticky lg:top-32 text-center lg:text-left">
             <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
               Switching from another verifier?
             </h2>
@@ -713,12 +756,12 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="bg-white border border-slate-200 rounded-2xl divide-y divide-slate-100 overflow-hidden">
+          <div data-spotlight className="spotlight relative sr-stagger bg-white border border-slate-200 rounded-2xl divide-y divide-slate-100 overflow-clip">
             {SWITCHERS.map((s) => (
               <Link
                 key={s.href}
                 href={s.href}
-                className="group flex items-center gap-4 sm:gap-6 px-5 sm:px-6 py-4 hover:bg-indigo-50/60 transition-colors"
+                className="row-accent group flex items-center gap-4 sm:gap-6 px-5 sm:px-6 py-4 hover:bg-indigo-50/60 transition-colors"
               >
                 <span className="w-32 sm:w-40 shrink-0 text-base font-bold text-slate-900">{s.name}</span>
                 <span className="flex-1 min-w-0 text-sm sm:text-[15px] text-slate-600 leading-snug">{s.blurb}</span>
@@ -732,37 +775,15 @@ export default function Home() {
       {/* Integrations */}
       <section id="integrations" className="cv-section bg-slate-100 py-20 md:py-24 border-y border-slate-200">
         <div className="max-w-6xl mx-auto px-6 space-y-12">
-          <div className="text-center max-w-2xl mx-auto space-y-3">
+          <div className="sr-rise text-center max-w-2xl mx-auto space-y-3">
             <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Connect Your Marketing Stack</h2>
             <p className="text-sm text-slate-600 font-bold">Giggal.ai connects directly with leading CRM and Email Service Providers to sync cleaned contacts automatically.</p>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-6 justify-items-center">
-            {integrations.map((int) => (
-              <Link
-                key={int.name}
-                href={int.href}
-                className={`${
-                  int.featured
-                    ? 'featured-tile'
-                    : 'bg-white border-2 border-slate-200/80 hover:border-indigo-500'
-                } rounded-2xl p-5 w-full flex flex-col items-center hover:-translate-y-1 transition-all card-vivid-shadow`}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={int.src} width={32} height={32} loading="lazy" decoding="async" className="w-8 h-8 mb-3 object-contain rounded-md" alt={`${int.name} email verification integration with Giggal.ai`} />
-                <span className="text-xs font-black text-slate-800">{int.name}</span>
-              </Link>
-            ))}
-            <Link
-              href="/integrations"
-              className="border-2 border-dashed border-slate-300 bg-slate-50/40 rounded-2xl p-5 w-full flex flex-col items-center justify-center hover:border-indigo-500 hover:-translate-y-1 transition-all"
-            >
-              <div className="w-8 h-8 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-500 mb-3 shadow-sm">
-                <Plus className="w-4 h-4" />
-              </div>
-              <span className="text-xs font-black text-slate-500">80+ More</span>
-            </Link>
-          </div>
+          <IntegrationOrbit
+            items={integrations.map((int) => ({ ...int, alt: `${int.name} email verification integration with Giggal.ai` }))}
+            more={{ href: '/integrations', label: '80+ More' }}
+          />
         </div>
       </section>
 
@@ -773,16 +794,18 @@ export default function Home() {
 
       {/* FAQ */}
       <section id="faq" className="cv-section max-w-3xl mx-auto px-6 py-20 md:py-24 space-y-12">
-        <div className="text-center space-y-3">
+        <div className="sr-rise text-center space-y-3">
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Frequently Asked Questions</h2>
           <p className="text-base text-slate-600">Short answers on catch-all checks, accuracy, pricing and setup.</p>
         </div>
-        <FaqAccordion items={faqItems} />
+        <div className="sr-stagger-deep">
+          <FaqAccordion items={faqItems} />
+        </div>
       </section>
 
       {/* Final CTA */}
       <section className="cv-section max-w-6xl mx-auto px-6 pb-20 md:pb-24">
-        <div className="bg-indigo-600 rounded-3xl p-12 md:p-16 text-center text-white space-y-6 shadow-xl relative overflow-hidden">
+        <div className="sr-pop isolate bg-indigo-600 rounded-3xl p-12 md:p-16 text-center text-white space-y-6 shadow-xl relative overflow-hidden">
           <h2 className="text-3xl md:text-4xl font-extrabold leading-tight tracking-tight text-white">
             Optimize Your Email Marketing Delivery Today
           </h2>
@@ -794,10 +817,17 @@ export default function Home() {
               href={SIGNUP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-12 py-5 bg-white hover:bg-indigo-50 text-indigo-600 font-extrabold rounded-2xl text-base transition-all shadow-md inline-block hover:scale-[1.03] active:scale-95 duration-200"
+              data-magnetic
+              className="cta-shine on-light px-12 py-5 bg-white hover:bg-indigo-50 text-indigo-600 font-extrabold rounded-2xl text-base transition-all shadow-md inline-block hover:scale-[1.03] active:scale-95 duration-200"
             >
               Get Started For Free
             </a>
+          </div>
+          {/* Drifting light inside the card (globals.css, .cta-orbs). Last
+              child, so the space-y margins above do not change. */}
+          <div aria-hidden="true" className="cta-orbs">
+            <span />
+            <span />
           </div>
         </div>
       </section>

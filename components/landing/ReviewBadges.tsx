@@ -1,8 +1,10 @@
 import { Star, ArrowRight } from 'lucide-react'
+import { PRODUCT_HUNT_RATING, PRODUCT_HUNT_REVIEWS, type ReviewStats } from '@/lib/reviewStats'
 
 // One plain card per review platform: name, score, stars, review count and a
-// link to the reviews. Scores are typed in by hand, so update them here when
-// they change. A platform with `rating: null` shows the link only.
+// link to the reviews. SourceForge numbers are read live (lib/reviewStats.ts)
+// and passed in; Product Hunt shows a rounded count. A platform with
+// `rating: null` shows the link only.
 // Trustpilot has no card (too few reviews to show a score); it keeps a small
 // "leave a review" link under the cards so reviews can still come in.
 type Platform = {
@@ -10,23 +12,23 @@ type Platform = {
   logo: string
   href: string
   rating: number | null
-  reviews: number | null
+  reviews: string | null
 }
 
-const PLATFORMS: Platform[] = [
+const platforms = (sourceforge: ReviewStats): Platform[] => [
   {
     name: 'Product Hunt',
     logo: '/reviews/producthunt-logo.svg',
     href: 'https://www.producthunt.com/products/giggal-ai/reviews',
-    rating: 4.9,
-    reviews: 54,
+    rating: PRODUCT_HUNT_RATING,
+    reviews: PRODUCT_HUNT_REVIEWS,
   },
   {
     name: 'SourceForge',
     logo: '/reviews/sourceforge-logo.svg',
     href: 'https://sourceforge.net/software/product/Giggal.ai/',
-    rating: 4.9,
-    reviews: 129,
+    rating: sourceforge.rating,
+    reviews: String(sourceforge.count),
   },
   {
     name: 'G2',
@@ -44,7 +46,7 @@ export interface ReviewBadgeStrings {
   heading: string
   readOn: (platform: string) => string
   rating: (n: number) => string
-  reviews: (n: number) => string
+  reviews: (n: string) => string
   verified: string
   read: string
   used: string
@@ -62,22 +64,29 @@ export const REVIEW_BADGES_EN: ReviewBadgeStrings = {
   leave: 'Leave a review on Trustpilot',
 }
 
-export default function ReviewBadges({ strings: s = REVIEW_BADGES_EN }: { strings?: ReviewBadgeStrings }) {
+export default function ReviewBadges({
+  strings: s = REVIEW_BADGES_EN,
+  sourceforge,
+}: {
+  strings?: ReviewBadgeStrings
+  sourceforge: ReviewStats
+}) {
   return (
     <section className="cv-section max-w-5xl mx-auto px-6 py-20 md:py-24">
-      <div className="text-center max-w-2xl mx-auto mb-12">
+      <div className="sr-rise text-center max-w-2xl mx-auto mb-12">
         <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">{s.heading}</h2>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-4xl mx-auto">
-        {PLATFORMS.map((p) => (
+      <div className="sr-stagger grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-4xl mx-auto">
+        {platforms(sourceforge).map((p) => (
           <a
             key={p.name}
             href={p.href}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={s.readOn(p.name)}
-            className="group bg-white border border-slate-200 hover:border-slate-300 rounded-2xl p-6 flex flex-col items-center text-center transition-colors"
+            data-spotlight
+            className="spotlight relative group bg-white border border-slate-200 hover:border-indigo-200 rounded-2xl p-6 flex flex-col items-center text-center shadow-[0_1px_2px_rgba(15,23,42,0.04)] hover:shadow-[0_18px_40px_-18px_rgba(79,70,229,0.35)] hover:-translate-y-1 transition-[transform,box-shadow,border-color] duration-300 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
           >
             <div className="flex items-center gap-2.5">
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -111,7 +120,7 @@ export default function ReviewBadges({ strings: s = REVIEW_BADGES_EN }: { string
 
             <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-indigo-600 group-hover:underline">
               {s.read}
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </span>
           </a>
         ))}

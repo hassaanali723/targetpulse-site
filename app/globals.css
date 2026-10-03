@@ -392,3 +392,831 @@
 /* Anchor jumps clear the sticky navbar. */
 .blog-prose h2, .blog-prose h3 { scroll-margin-top: 96px; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* ── Home hero motion ───────────────────────────────────────────────────
+   Quiet movement for the slate hero on every language home. CSS only:
+   transforms, opacity and one animated gradient angle, so nothing blocks
+   rendering and no script loads. The H1 is never animated (it is the LCP
+   element). Everything stops under prefers-reduced-motion.
+
+   1. Orbs: three soft colour lights drifting behind the content.
+   2. Beams: thin light streaks running along the grid lines.
+   3. Ring: the light around the email box slowly circles it.
+   4. Shine: a sweep of light across the amber sign-up button now and then.
+   5. Entrance: the lines under the H1 rise in one after another, and the
+      rating stars pop in. */
+.hero-orbs,
+.hero-beams {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.hero-orbs span {
+  position: absolute;
+  border-radius: 9999px;
+  will-change: transform;
+}
+.hero-orbs span:nth-child(1) {
+  width: 560px;
+  height: 560px;
+  left: -180px;
+  top: -160px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.24), transparent 65%);
+  animation: hero-orb-a 22s ease-in-out infinite alternate;
+}
+.hero-orbs span:nth-child(2) {
+  width: 520px;
+  height: 520px;
+  right: -200px;
+  top: 28%;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.15), transparent 65%);
+  animation: hero-orb-b 26s ease-in-out infinite alternate;
+}
+.hero-orbs span:nth-child(3) {
+  width: 440px;
+  height: 440px;
+  left: 38%;
+  bottom: -260px;
+  background: radial-gradient(circle, rgba(129, 140, 248, 0.16), transparent 65%);
+  animation: hero-orb-c 30s ease-in-out infinite alternate;
+}
+@keyframes hero-orb-a { to { transform: translate3d(140px, 90px, 0) scale(1.1); } }
+@keyframes hero-orb-b { to { transform: translate3d(-160px, -70px, 0) scale(1.08); } }
+@keyframes hero-orb-c { to { transform: translate3d(-120px, -110px, 0) scale(1.12); } }
+
+/* Same fade as the grid in .hero-art::before, so the beams only show where
+   the grid shows. Beam offsets are multiples of the 48px grid. */
+.hero-beams {
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 38%, #000 25%, transparent 78%);
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 38%, #000 25%, transparent 78%);
+}
+.hero-beams span {
+  position: absolute;
+  display: block;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+.hero-beams .beam-x {
+  left: 0;
+  width: 180px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(165, 180, 252, 0.95), transparent);
+  animation: hero-beam-x 8s linear infinite;
+}
+.hero-beams .beam-y {
+  top: 0;
+  width: 1px;
+  height: 180px;
+  background: linear-gradient(180deg, transparent, rgba(110, 231, 183, 0.9), transparent);
+  animation: hero-beam-y 9s linear infinite;
+}
+.hero-beams span:nth-child(1) { top: 192px; animation-delay: -1s; }
+.hero-beams span:nth-child(2) { top: 432px; animation-delay: -5s; animation-duration: 10s; }
+.hero-beams span:nth-child(3) { left: 336px; animation-delay: -2s; }
+.hero-beams span:nth-child(4) { left: calc(100% - 336px); animation-delay: -6.5s; animation-duration: 11s; }
+@keyframes hero-beam-x {
+  0% { transform: translateX(-200px); opacity: 0; }
+  10%, 80% { opacity: 1; }
+  100% { transform: translateX(100vw); opacity: 0; }
+}
+@keyframes hero-beam-y {
+  0% { transform: translateY(-200px); opacity: 0; }
+  10%, 80% { opacity: 1; }
+  100% { transform: translateY(1000px); opacity: 0; }
+}
+
+/* Uses --border-angle from .featured-tile above. Browsers without @property
+   show the same colours as a still ring. */
+.hero-ring {
+  background: conic-gradient(
+    from var(--border-angle),
+    #6366f1 0deg,
+    #a5b4fc 70deg,
+    #34d399 150deg,
+    #6366f1 230deg,
+    #818cf8 300deg,
+    #6366f1 360deg
+  );
+  animation: border-spin 7s linear infinite;
+}
+
+.cta-shine {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.cta-shine::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 40%;
+  z-index: -1;
+  background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+  transform: translateX(-140%);
+  animation: cta-shine 6s ease-in-out 1.8s infinite;
+}
+@keyframes cta-shine {
+  0% { transform: translateX(-140%); }
+  20%, 100% { transform: translateX(360%); }
+}
+
+.hero-rise { animation: hero-rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.hero-rise-1 { animation-delay: 0.06s; }
+.hero-rise-2 { animation-delay: 0.14s; }
+.hero-rise-3 { animation-delay: 0.22s; }
+.hero-rise-4 { animation-delay: 0.3s; }
+@keyframes hero-rise {
+  from { opacity: 0; transform: translate3d(0, 14px, 0); }
+  to { opacity: 1; transform: none; }
+}
+
+.star-pop > * { animation: star-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+.star-pop > *:nth-child(1) { animation-delay: 0.35s; }
+.star-pop > *:nth-child(2) { animation-delay: 0.42s; }
+.star-pop > *:nth-child(3) { animation-delay: 0.49s; }
+.star-pop > *:nth-child(4) { animation-delay: 0.56s; }
+.star-pop > *:nth-child(5) { animation-delay: 0.63s; }
+@keyframes star-pop {
+  from { opacity: 0; transform: scale(0.3) rotate(-35deg); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-orbs span,
+  .hero-ring,
+  .hero-rise,
+  .star-pop > * { animation: none; }
+  .hero-beams,
+  .cta-shine::after { display: none; }
+}
+
+/* ── Home section motion ────────────────────────────────────────────────
+   Light movement for the sections under the hero, on every language home.
+   CSS only, no script.
+
+   Scroll reveals (.sr-*) are scroll-driven animations: the browser ties them
+   to the scroll position and runs them off the main thread. Browsers without
+   animation-timeline support skip the whole block and show the page as it
+   always was, fully visible, so nothing can stay hidden. Reveals only fade
+   and move; they never change layout, so they add no layout shift.
+
+   A reveal measures against its nearest scroll container, and
+   overflow: hidden makes one. So a box that holds reveals must clip with
+   overflow: clip (Tailwind overflow-clip) instead, or the reveal can stop
+   half way. Sticky elements do not get reveals either: they stop moving
+   while pinned, so the reveal would freeze.
+
+   Ambient loops (sweep, pulse, shimmer, float) are small and use transform,
+   opacity or background-position only. Everything stops under
+   prefers-reduced-motion. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .sr-rise,
+    .sr-left,
+    .sr-right,
+    .sr-pop,
+    .sr-draw,
+    .sr-stagger > *,
+    .sr-stagger-deep > * > * {
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: view();
+      /* "cover" counts from the moment the element's top enters the view,
+         so short cards and blocks taller than the screen both finish their
+         reveal while still in the lower part of the screen. */
+      animation-range: cover 0% cover 22%;
+    }
+    .sr-rise,
+    .sr-stagger > *,
+    .sr-stagger-deep > * > * { animation-name: sr-rise; }
+    .sr-left { animation-name: sr-left; }
+    .sr-right { animation-name: sr-right; }
+    .sr-pop { animation-name: sr-pop; }
+    .sr-draw { animation-name: sr-draw; animation-range: cover 5% cover 30%; }
+
+    /* Siblings in one row enter the view together, so later ones start a
+       little further into the scroll. That reads as a stagger. */
+    .sr-stagger > :nth-child(2), .sr-stagger-deep > * > :nth-child(2) { animation-range: cover 3% cover 25%; }
+    .sr-stagger > :nth-child(3), .sr-stagger-deep > * > :nth-child(3) { animation-range: cover 6% cover 28%; }
+    .sr-stagger > :nth-child(4), .sr-stagger-deep > * > :nth-child(4) { animation-range: cover 9% cover 31%; }
+    .sr-stagger > :nth-child(5), .sr-stagger-deep > * > :nth-child(5) { animation-range: cover 11% cover 33%; }
+    .sr-stagger > :nth-child(6), .sr-stagger-deep > * > :nth-child(6) { animation-range: cover 13% cover 35%; }
+    .sr-stagger > :nth-child(7), .sr-stagger-deep > * > :nth-child(7) { animation-range: cover 15% cover 37%; }
+    .sr-stagger > :nth-child(n + 8), .sr-stagger-deep > * > :nth-child(n + 8) { animation-range: cover 17% cover 39%; }
+  }
+}
+/* The reveals animate the separate translate and scale properties, not
+   transform, so hover lifts written with transform still work on top. */
+@keyframes sr-rise {
+  from { opacity: 0; translate: 0 28px; }
+  to { opacity: 1; translate: 0 0; }
+}
+@keyframes sr-left {
+  from { opacity: 0; translate: -40px 0; }
+  to { opacity: 1; translate: 0 0; }
+}
+@keyframes sr-right {
+  from { opacity: 0; translate: 40px 0; }
+  to { opacity: 1; translate: 0 0; }
+}
+@keyframes sr-pop {
+  from { opacity: 0; scale: 0.94; translate: 0 16px; }
+  to { opacity: 1; scale: 1; translate: 0 0; }
+}
+@keyframes sr-draw {
+  from { scale: 0 1; opacity: 0; }
+  to { scale: 1 1; opacity: 1; }
+}
+
+/* Stat cards: lift on hover, with a brand hairline drawn across the top. */
+.stat-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.stat-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 2px;
+  background: linear-gradient(90deg, #6366f1, #34d399);
+  transform: scaleX(0);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.stat-card:hover {
+  transform: translateY(-4px);
+  border-color: rgb(199 210 254);
+  box-shadow: 0 18px 40px -20px rgba(79, 70, 229, 0.35);
+}
+.stat-card:hover::before { transform: scaleX(1); }
+
+/* Light that runs along the top edge of the Giggal.ai result card. */
+.line-sweep {
+  background: linear-gradient(90deg, transparent 0%, transparent 35%, #818cf8 50%, #34d399 58%, transparent 70%, transparent 100%);
+  background-size: 250% 100%;
+  animation: line-sweep 3.6s ease-in-out infinite;
+}
+@keyframes line-sweep {
+  from { background-position: 100% 0; }
+  to { background-position: -50% 0; }
+}
+
+/* Soft ring that keeps spreading out from an icon. */
+.pulse-ring { position: relative; }
+.pulse-ring::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.45);
+  animation: pulse-ring 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.45); }
+  70%, 100% { box-shadow: 0 0 0 12px rgba(99, 102, 241, 0); }
+}
+
+/* Gradient text that slowly moves, for the second line of the pricing H2. */
+.text-shimmer {
+  background: linear-gradient(90deg, #4f46e5 0%, #6366f1 30%, #10b981 50%, #6366f1 70%, #4f46e5 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #4f46e5;
+  animation: text-shimmer 6s linear infinite;
+}
+@keyframes text-shimmer {
+  to { background-position: -200% center; }
+}
+
+/* Feature icons float gently. */
+.icon-float { animation: icon-float 5s ease-in-out infinite; }
+@keyframes icon-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+/* Switcher rows: an indigo bar grows on the left edge on hover. */
+.row-accent { position: relative; }
+.row-accent::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, #6366f1, #34d399);
+  transform: scaleY(0);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.row-accent:hover::before { transform: scaleY(1); }
+
+/* Final CTA band: drifting light inside the indigo card. */
+.cta-orbs {
+  position: absolute;
+  inset: 0;
+  /* The card spaces its children with space-y margins; this layer must not
+     take one, or it starts below the card's top edge. */
+  margin: 0 !important;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.cta-orbs span {
+  position: absolute;
+  border-radius: 9999px;
+  will-change: transform;
+}
+.cta-orbs span:nth-child(1) {
+  width: 420px;
+  height: 420px;
+  left: -120px;
+  top: -200px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.18), transparent 65%);
+  animation: hero-orb-a 18s ease-in-out infinite alternate;
+}
+.cta-orbs span:nth-child(2) {
+  width: 460px;
+  height: 460px;
+  right: -160px;
+  bottom: -240px;
+  background: radial-gradient(circle, rgba(52, 211, 153, 0.28), transparent 65%);
+  animation: hero-orb-b 22s ease-in-out infinite alternate;
+}
+.cta-shine.on-light::after {
+  background: linear-gradient(105deg, transparent, rgba(99, 102, 241, 0.22), transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .line-sweep,
+  .pulse-ring::after,
+  .text-shimmer,
+  .icon-float,
+  .cta-orbs span { animation: none; }
+  .stat-card,
+  .stat-card::before,
+  .row-accent::before { transition: none; }
+  .stat-card:hover { transform: none; }
+}
+
+/* ── Home motion, part 2: pointer effects ───────────────────────────────
+   Values come from components/landing/MotionRuntime.tsx (mouse only). */
+
+/* Light that follows the mouse: a soft glow on the surface and a bright
+   edge on the border. The surface glow sits between the background and the
+   content (isolation + negative z-index). */
+.spotlight { isolation: isolate; } /* the element brings its own position */
+.spotlight::before,
+.spotlight::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.spotlight::before {
+  z-index: -1;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(99, 102, 241, 0.09), transparent 45%);
+}
+.spotlight::after {
+  z-index: 2;
+  padding: 1.5px;
+  background: radial-gradient(280px circle at var(--mx, 50%) var(--my, 50%), rgba(99, 102, 241, 0.95), rgba(52, 211, 153, 0.7) 35%, transparent 70%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+.spotlight.is-lit::before,
+.spotlight.is-lit::after { opacity: 1; }
+.spotlight-dark::before {
+  background: radial-gradient(460px circle at var(--mx, 50%) var(--my, 50%), rgba(129, 140, 248, 0.16), transparent 45%);
+}
+
+/* Hero: brighter grid lines around the mouse, like a torch on the grid. */
+.hero-spot {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  background-size: 48px 48px;
+  background-image:
+    linear-gradient(to right, rgba(165, 180, 252, 0.4) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(165, 180, 252, 0.4) 1px, transparent 1px),
+    radial-gradient(240px circle at var(--mx, 50%) var(--my, 50%), rgba(99, 102, 241, 0.18), transparent 70%);
+  background-position: 0 0, 0 0, 0 0;
+  background-repeat: repeat, repeat, no-repeat;
+  -webkit-mask-image: radial-gradient(240px circle at var(--mx, 50%) var(--my, 50%), #000, transparent 75%);
+  mask-image: radial-gradient(240px circle at var(--mx, 50%) var(--my, 50%), #000, transparent 75%);
+}
+.is-lit > .hero-spot { opacity: 1; }
+
+/* 3D tilt toward the mouse, with a glare that follows it. */
+[data-tilt] {
+  transform: perspective(1400px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-tilt].is-tilting { transition-duration: 0.15s; }
+.tilt-glare {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  background: radial-gradient(520px circle at var(--gx, 50%) var(--gy, 50%), rgba(255, 255, 255, 0.5), transparent 40%);
+  mix-blend-mode: overlay;
+}
+.is-tilting > .tilt-glare { opacity: 1; }
+
+/* Buttons that lean toward the mouse. Uses the translate property, so the
+   button's own hover scale still works. */
+[data-magnetic] {
+  translate: var(--tx, 0px) var(--ty, 0px);
+  transition: translate 0.35s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s, transform 0.2s;
+}
+
+/* ── Home motion, part 3: bulk scan demo ────────────────────────────────
+   Finished state by default. Under .motion-ready the loop runs once the demo
+   is in view: the scan line walks down, each row shows a spinner, then its
+   result pops in; the progress bar fills; then it all starts again. */
+.scan-demo .scan-spin { opacity: 0; }
+.scan-line { opacity: 0; }
+.motion-ready .scan-demo.is-in .scan-line {
+  background: linear-gradient(90deg, rgba(99, 102, 241, 0), rgba(99, 102, 241, 0.12) 30%, rgba(52, 211, 153, 0.16) 70%, rgba(52, 211, 153, 0));
+  box-shadow: inset 0 -1px 0 rgba(99, 102, 241, 0.35);
+  animation: scan-line 6s linear infinite;
+}
+/* Rows are 48px tall with a 6px gap (h-12, space-y-1.5): 54px apart. The
+   line reaches row 5 as that row resolves (4 x 0.6s delay + 12% of 6s). */
+@keyframes scan-line {
+  0% { opacity: 0; transform: translateY(0); }
+  4% { opacity: 1; transform: translateY(0); }
+  56% { opacity: 1; transform: translateY(calc(4 * 54px)); }
+  64%, 100% { opacity: 0; transform: translateY(calc(4 * 54px)); }
+}
+.motion-ready .scan-demo.is-in .scan-spin {
+  animation: scan-spin 0.7s linear infinite, scan-spin-show 6s linear infinite both;
+  animation-delay: 0s, calc(var(--i) * 0.6s);
+}
+.motion-ready .scan-demo.is-in .scan-result {
+  animation: scan-result 6s cubic-bezier(0.34, 1.56, 0.64, 1) infinite both;
+  animation-delay: calc(var(--i) * 0.6s);
+}
+.motion-ready .scan-demo.is-in .scan-row {
+  animation: scan-row 6s ease infinite both;
+  animation-delay: calc(var(--i) * 0.6s);
+}
+.motion-ready .scan-demo.is-in .scan-score {
+  transform-origin: left;
+  animation: scan-score 6s cubic-bezier(0.16, 1, 0.3, 1) infinite both;
+  animation-delay: calc(var(--i) * 0.6s);
+}
+@keyframes scan-spin { to { rotate: 360deg; } }
+@keyframes scan-spin-show {
+  0% { opacity: 1; }
+  12% { opacity: 1; }
+  14%, 100% { opacity: 0; }
+}
+@keyframes scan-result {
+  0%, 12% { opacity: 0; scale: 0.3; }
+  18% { opacity: 1; scale: 1; }
+  88% { opacity: 1; scale: 1; }
+  96%, 100% { opacity: 0; scale: 0.6; }
+}
+@keyframes scan-row {
+  0%, 10% { background: rgba(238, 242, 255, 0.9); }
+  20%, 100% { background: transparent; }
+}
+@keyframes scan-score {
+  0%, 12% { transform: scaleX(0); }
+  30%, 92% { transform: scaleX(1); }
+  100% { transform: scaleX(0); }
+}
+.motion-ready .scan-demo.is-in .scan-progress {
+  transform-origin: left;
+  animation: scan-progress 6s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+@keyframes scan-progress {
+  0% { transform: scaleX(0.05); }
+  62%, 92% { transform: scaleX(1); }
+  100% { transform: scaleX(0.05); }
+}
+.motion-ready .scan-demo.is-in .scan-live-dot { animation: live-dot 1.2s ease-in-out infinite; }
+@keyframes live-dot {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
+  50% { box-shadow: 0 0 0 5px rgba(16, 185, 129, 0); }
+}
+
+/* ── Home motion, part 4: the catch-all story ───────────────────────────
+   Both cards start checking when the pair comes into view. "Most checkers"
+   gives up on Risky with a shake; Giggal.ai sends its check down to the
+   address and lands on Deliverable with a burst. Finished state without JS. */
+.sim-slot { position: relative; display: inline-flex; align-items: center; justify-content: center; }
+.sim-spin { display: none; }
+.sim-badge { position: relative; display: inline-flex; }
+.sim-probe { display: none; }
+.motion-ready .sim-spin {
+  display: block;
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 9999px;
+  border: 2px solid rgb(226 232 240);
+  border-top-color: #6366f1;
+  opacity: 0;
+}
+.motion-ready .sim-badge { opacity: 0; scale: 0.5; }
+.motion-ready .sim.is-in .sim-spin {
+  animation: scan-spin 0.7s linear infinite, sim-spin-life var(--t) linear forwards;
+}
+@keyframes sim-spin-life {
+  0%, 96% { opacity: 1; }
+  100% { opacity: 0; }
+}
+.motion-ready .sim.is-in .sim-badge {
+  animation: sim-pop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) var(--t) forwards;
+}
+.motion-ready .sim.is-in .sim-risky .sim-badge {
+  animation:
+    sim-pop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) var(--t) forwards,
+    sim-shake 0.5s ease-in-out calc(var(--t) + 0.55s);
+}
+.sim-risky { --t: 1.4s; }
+.sim-good { --t: 2.6s; }
+@keyframes sim-pop {
+  from { opacity: 0; scale: 0.5; }
+  to { opacity: 1; scale: 1; }
+}
+@keyframes sim-shake {
+  0%, 100% { translate: 0 0; }
+  20% { translate: -4px 0; }
+  40% { translate: 4px 0; }
+  60% { translate: -3px 0; }
+  80% { translate: 2px 0; }
+}
+.sim-good .sim-badge::after {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border-radius: 9999px;
+  border: 2px solid #34d399;
+  opacity: 0;
+  pointer-events: none;
+}
+.motion-ready .sim.is-in .sim-good .sim-badge::after {
+  animation: sim-burst 0.9s ease-out calc(var(--t) + 0.1s) both;
+}
+@keyframes sim-burst {
+  from { opacity: 0.9; scale: 0.8; }
+  to { opacity: 0; scale: 1.9; }
+}
+/* The check travelling from the Giggal.ai shield down to the address. */
+.motion-ready .sim-probe {
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 2px;
+  height: 20px;
+  margin-left: -1px;
+  border-radius: 2px;
+  background: repeating-linear-gradient(to bottom, #818cf8 0 4px, transparent 4px 8px);
+  opacity: 0;
+}
+.motion-ready .sim.is-in .sim-probe {
+  animation: sim-probe-run 0.5s linear 6, sim-probe-life 2.9s linear forwards;
+}
+@keyframes sim-probe-run { from { background-position: 0 0; } to { background-position: 0 16px; } }
+@keyframes sim-probe-life {
+  0% { opacity: 1; }
+  88% { opacity: 1; background: repeating-linear-gradient(to bottom, #818cf8 0 4px, transparent 4px 8px); }
+  92% { opacity: 1; background: #34d399; }
+  100% { opacity: 0.0; background: #34d399; }
+}
+
+/* ── Home motion, part 5: integrations orbit ──────────────────────────── */
+.orbit {
+  position: relative;
+  width: min(100%, 560px);
+  aspect-ratio: 1;
+  container-type: inline-size;
+}
+.orbit-ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  border-radius: 9999px;
+  border: 1.5px dashed rgba(99, 102, 241, 0.28);
+  pointer-events: none;
+}
+.orbit-ring-inner { width: 50cqw; height: 50cqw; }
+.orbit-ring-outer { width: 86cqw; height: 86cqw; border-color: rgba(100, 116, 139, 0.22); }
+.orbit-track {
+  position: absolute;
+  inset: 0;
+  animation: orbit-spin 60s linear infinite;
+}
+.orbit-track-outer { animation-duration: 90s; animation-direction: reverse; }
+.orbit-slot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  rotate: var(--a);
+}
+.orbit-spoke {
+  position: absolute;
+  left: 0;
+  top: -0.5px;
+  width: var(--r);
+  height: 1px;
+  overflow: hidden;
+  background: linear-gradient(90deg, rgba(99, 102, 241, 0.05), rgba(99, 102, 241, 0.3));
+}
+.orbit-spoke::after {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 30%;
+  height: 3px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, transparent, #34d399, #818cf8);
+  animation: spoke-pulse 2.8s cubic-bezier(0.55, 0, 0.45, 1) var(--d, 0s) infinite;
+}
+@keyframes spoke-pulse {
+  from { translate: -100% 0; }
+  to { translate: 340% 0; }
+}
+.orbit-pos {
+  position: absolute;
+  left: var(--r);
+  top: 0;
+  translate: -50% -50%;
+  rotate: calc(-1 * var(--a));
+}
+.orbit-upright { animation: orbit-spin 60s linear infinite reverse; }
+.orbit-track-outer .orbit-upright { animation-duration: 90s; animation-direction: normal; }
+.orbit:hover .orbit-track,
+.orbit:hover .orbit-upright,
+.orbit:focus-within .orbit-track,
+.orbit:focus-within .orbit-upright { animation-play-state: paused; }
+@keyframes orbit-spin { to { rotate: 360deg; } }
+.orbit-tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(46px, 13cqw, 70px);
+  height: clamp(46px, 13cqw, 70px);
+  border-radius: 18px;
+  background: #fff;
+  border: 1px solid rgb(226 232 240);
+  box-shadow: 0 10px 24px -14px rgba(15, 23, 42, 0.35);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+a.orbit-tile:hover {
+  transform: scale(1.14);
+  border-color: rgb(165 180 252);
+  box-shadow: 0 16px 34px -14px rgba(79, 70, 229, 0.55);
+}
+.orbit-tile-featured {
+  border: 2px solid transparent;
+  background:
+    linear-gradient(#ffffff, #ffffff) padding-box,
+    conic-gradient(from var(--border-angle), #4f46e5 0deg, #10b981 120deg, #6366f1 200deg, #4f46e5 360deg) border-box;
+  animation: border-spin 3.5s linear infinite;
+}
+.orbit-tile-ghost {
+  width: clamp(36px, 10cqw, 54px);
+  height: clamp(36px, 10cqw, 54px);
+  border-radius: 14px;
+  opacity: 0.6;
+  box-shadow: none;
+}
+.orbit-core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  width: 22cqw;
+  height: 22cqw;
+  border-radius: 28%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  box-shadow: 0 24px 60px -18px rgba(79, 70, 229, 0.55), 0 0 0 1px rgba(99, 102, 241, 0.18);
+}
+.orbit-core-wave {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 2px solid rgba(99, 102, 241, 0.4);
+  animation: core-wave 3s ease-out infinite;
+}
+.orbit-core-wave-2 { animation-delay: 1.5s; }
+@keyframes core-wave {
+  from { scale: 1; opacity: 0.8; }
+  to { scale: 1.9; opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orbit-track,
+  .orbit-upright,
+  .orbit-spoke::after,
+  .orbit-core-wave,
+  .orbit-tile-featured { animation: none; }
+  [data-tilt],
+  [data-magnetic] { transition: none; }
+}
+
+/* ── Award shelf (components/landing/AwardShelf.tsx) ─────────────────────
+   Badges fanned in an arc across the hero's bottom edge. The slot carries
+   the arc (transform) and the drop-in (translate + opacity); the float sits
+   on its own wrapper; the link carries the hover lift. Separate elements and
+   separate properties, so none of the motions cancel each other. The drop-in
+   is plain CSS, so it plays on first paint without waiting for any script. */
+.award-slot {
+  transform: translateY(var(--y, 0px)) rotate(var(--rot, 0deg)) scale(var(--s, 1));
+  transform-origin: 50% 0;
+  animation: award-drop 0.9s cubic-bezier(0.34, 1.45, 0.64, 1) var(--drop, 0.3s) both;
+}
+@keyframes award-drop {
+  from { opacity: 0; translate: 0 -46px; }
+  to { opacity: 1; translate: 0 0; }
+}
+.award-float { animation: award-float 5.5s ease-in-out var(--float, 0s) infinite; }
+@keyframes award-float {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -7px; }
+}
+.award {
+  position: relative;
+  display: block;
+  width: clamp(80px, 8.6vw, 116px);
+  filter: drop-shadow(0 14px 18px rgba(15, 23, 42, 0.3));
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), filter 0.45s ease;
+}
+.award img { display: block; width: 100%; height: auto; user-select: none; }
+.award:hover,
+.award:focus-visible {
+  transform: translateY(-14px) scale(1.12) rotate(calc(-1 * var(--rot, 0deg)));
+  outline: none;
+}
+.award-sf:hover, .award-sf:focus-visible { filter: drop-shadow(0 18px 26px rgba(249, 115, 22, 0.5)); }
+.award-sd:hover, .award-sd:focus-visible { filter: drop-shadow(0 18px 26px rgba(13, 148, 136, 0.5)); }
+.award-tbs:hover, .award-tbs:focus-visible { filter: drop-shadow(0 18px 26px rgba(37, 99, 235, 0.5)); }
+/* A glint that sweeps across each badge, clipped to the badge's own shape
+   (the badge image is its mask), passing along the row like a wave. */
+.award::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  -webkit-mask: var(--mask) center / contain no-repeat;
+  mask: var(--mask) center / contain no-repeat;
+  background: linear-gradient(110deg, transparent 38%, rgba(255, 255, 255, 0.8) 50%, transparent 62%);
+  background-size: 260% 100%;
+  background-position: 160% 0;
+  animation: award-glint 7s ease-in-out calc(1.8s + var(--glint, 0s)) infinite;
+}
+@keyframes award-glint {
+  0% { background-position: 160% 0; }
+  16%, 100% { background-position: -60% 0; }
+}
+/* Phones: a slow strip. Items carry their own side padding (no gap), so the
+   repeated half lines up exactly and the loop has no jump. */
+.award-strip-viewport {
+  overflow: hidden;
+  padding: 8px 0 22px;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.award-strip-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-x 38s linear infinite;
+}
+.award-strip-track > div { padding: 0 8px; }
+.award-strip-viewport .award { width: 86px; }
+.award-strip-viewport:active .award-strip-track { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) {
+  .award-slot,
+  .award-float,
+  .award::after,
+  .award-strip-track { animation: none; }
+  .award-strip-viewport { overflow-x: auto; }
+}

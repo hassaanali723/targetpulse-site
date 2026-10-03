@@ -116,7 +116,7 @@ export default function PricingTable({ strings = EN_PRICING_STRINGS }: { strings
       </div>
 
       {/* Pricing table */}
-      <div className="bg-white border-2 border-slate-200 rounded-3xl overflow-hidden card-vivid-shadow">
+      <div data-spotlight className="spotlight relative bg-white border-2 border-slate-200 rounded-3xl overflow-hidden card-vivid-shadow">
         {/* Header (desktop only) */}
         <div className="hidden md:grid grid-cols-12 gap-4 bg-slate-50 pl-7 pr-8 py-5 border-b-2 border-slate-200 text-[10px] font-black text-slate-400 uppercase tracking-wider">
           <div className="col-span-3">{t.colVolume}</div>

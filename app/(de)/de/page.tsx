@@ -40,7 +40,7 @@ const content: HomeContent = {
       <Link href="/de/catch-all-verifizierung" className={heroLink}>Catch-all-Domains</Link>.
     </>
   ),
-  rating: { score: '4,9', on: 'auf', reviews: '(129 Bewertungen)' },
+  rating: { on: 'auf', reviews: (n) => `(${n} Bewertungen)` },
   email: { label: 'Zu prüfende E-Mail-Adresse', placeholder: 'name@firma.de', button: 'Gratis prüfen' },
   listQuestion: 'Eine ganze Liste bereinigen?',
   listCta: '1.000 kostenlose E-Mail-Prüfungen sichern',

@@ -416,13 +416,13 @@ export default function McpSection({ showImages = false, detailsHref, divider = 
   return (
     <section id="mcp" className={`cv-section max-w-6xl mx-auto px-6 py-20 md:py-24 ${divider ? 'border-t border-slate-200' : ''}`}>
       {/* Header */}
-      <div className="text-center max-w-2xl mx-auto">
+      <div className="sr-rise text-center max-w-2xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">{s.title}</h2>
         <p className="mt-4 text-base md:text-lg text-slate-600">{s.subtitle}</p>
       </div>
 
       {/* One dark app-style window: tool list on the left, setup on the right */}
-      <div className="mt-12 max-w-5xl mx-auto rounded-3xl bg-slate-900 overflow-hidden shadow-[0_24px_60px_-24px_rgba(15,23,42,0.5)] grid grid-cols-1 md:grid-cols-[220px_minmax(0,1fr)]">
+      <div data-spotlight className="spotlight spotlight-dark relative sr-pop mt-12 max-w-5xl mx-auto rounded-3xl bg-slate-900 overflow-hidden shadow-[0_24px_60px_-24px_rgba(15,23,42,0.5)] grid grid-cols-1 md:grid-cols-[220px_minmax(0,1fr)]">
         {/* Tool list: a column on desktop, one scrolling row on phones */}
         <div
           role="tablist"

@@ -42,7 +42,7 @@ const content: HomeContent = {
       <Link href="/it/verifica-catch-all" className={heroLink}>domini catch-all</Link>.
     </>
   ),
-  rating: { score: '4,9', on: 'su', reviews: '(129 recensioni)' },
+  rating: { on: 'su', reviews: (n) => `(${n} recensioni)` },
   email: { label: 'Indirizzo email da verificare', placeholder: 'nome@azienda.it', button: 'Verifica gratis' },
   listQuestion: 'Devi pulire un’intera lista?',
   listCta: 'Ottieni 1.000 verifiche email gratis',

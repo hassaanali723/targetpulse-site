@@ -2,11 +2,12 @@
 import { ArrowRight, Check } from 'lucide-react'
 import { getStrings, SIGNUP_URL, type L10nLocale } from '@/lib/i18n/strings'
 
-export default function CtaBandL10n({ locale, headline }: { locale: L10nLocale; headline?: string }) {
+// `motion` adds the drifting light and button shine used on the homes.
+export default function CtaBandL10n({ locale, headline, motion = false }: { locale: L10nLocale; headline?: string; motion?: boolean }) {
   const { cta } = getStrings(locale)
   return (
     <section className="cv-section max-w-6xl mx-auto px-6 pb-20 md:pb-24">
-      <div className="bg-indigo-600 rounded-3xl p-12 md:p-16 text-center text-white space-y-6 shadow-xl relative overflow-hidden">
+      <div className={`${motion ? 'sr-pop isolate ' : ''}bg-indigo-600 rounded-3xl p-12 md:p-16 text-center text-white space-y-6 shadow-xl relative overflow-hidden`}>
         <h2 className="text-3xl md:text-4xl font-extrabold leading-tight tracking-tight text-white">{headline ?? cta.headline}</h2>
         <p className="text-sm text-indigo-100 max-w-lg mx-auto font-medium">{cta.offer}</p>
         <div className="pt-4">
@@ -14,7 +15,8 @@ export default function CtaBandL10n({ locale, headline }: { locale: L10nLocale; 
             href={SIGNUP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center gap-2 px-12 py-5 bg-white hover:bg-indigo-50 text-indigo-600 font-extrabold rounded-2xl text-base transition-all shadow-md hover:scale-[1.03] active:scale-95 duration-200"
+            data-magnetic={motion ? '' : undefined}
+            className={`${motion ? 'cta-shine on-light ' : ''}group inline-flex items-center gap-2 px-12 py-5 bg-white hover:bg-indigo-50 text-indigo-600 font-extrabold rounded-2xl text-base transition-all shadow-md hover:scale-[1.03] active:scale-95 duration-200`}
           >
             {cta.button}
             <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
@@ -27,6 +29,12 @@ export default function CtaBandL10n({ locale, headline }: { locale: L10nLocale; 
             </span>
           ))}
         </div>
+        {motion && (
+          <div aria-hidden="true" className="cta-orbs">
+            <span />
+            <span />
+          </div>
+        )}
       </div>
     </section>
   )
