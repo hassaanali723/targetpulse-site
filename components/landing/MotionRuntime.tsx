@@ -11,7 +11,6 @@ import { useEffect } from 'react'
 //   [data-spotlight] gets --mx/--my, the pointer position inside it, for a
 //                   light that follows the mouse.
 //   [data-tilt]     gets --rx/--ry, a small 3D tilt toward the pointer.
-//   [data-magnetic] gets --tx/--ty, a short pull toward the pointer.
 //
 // Pages render complete without this script: final numbers, final states, no
 // hidden content. It adds .motion-ready to <html> before any start state is
@@ -108,21 +107,12 @@ export default function MotionRuntime() {
         tilt.classList.add('is-tilting')
         active.add(tilt)
       }
-      const mag = target?.closest<HTMLElement>('[data-magnetic]')
-      if (mag) {
-        const r = mag.getBoundingClientRect()
-        mag.style.setProperty('--tx', `${((ev.clientX - (r.left + r.width / 2)) * 0.25).toFixed(1)}px`)
-        mag.style.setProperty('--ty', `${((ev.clientY - (r.top + r.height / 2)) * 0.35).toFixed(1)}px`)
-        active.add(mag)
-      }
       // Reset whatever the pointer has left.
       touched.forEach((el) => {
         if (active.has(el)) return
         el.classList.remove('is-lit', 'is-tilting')
         el.style.removeProperty('--rx')
         el.style.removeProperty('--ry')
-        el.style.removeProperty('--tx')
-        el.style.removeProperty('--ty')
         touched.delete(el)
       })
       active.forEach((el) => touched.add(el))
@@ -138,8 +128,6 @@ export default function MotionRuntime() {
         el.classList.remove('is-lit', 'is-tilting')
         el.style.removeProperty('--rx')
         el.style.removeProperty('--ry')
-        el.style.removeProperty('--tx')
-        el.style.removeProperty('--ty')
       })
       touched.clear()
     }

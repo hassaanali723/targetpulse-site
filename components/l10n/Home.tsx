@@ -291,7 +291,6 @@ export default async function HomeL10n({ locale, content: c }: { locale: L10nLoc
               href={SIGNUP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              data-magnetic
               className="cta-shine group inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-900 font-extrabold text-base shadow-lg shadow-amber-500/20 transition-colors"
             >
               {c.listCta}

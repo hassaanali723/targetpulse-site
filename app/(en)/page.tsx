@@ -447,7 +447,6 @@ export default async function Home() {
               href={SIGNUP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              data-magnetic
               className="cta-shine group inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-900 font-extrabold text-base shadow-lg shadow-amber-500/20 transition-colors"
             >
               Get 1,000 free email validations
@@ -817,7 +816,6 @@ export default async function Home() {
               href={SIGNUP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              data-magnetic
               className="cta-shine on-light px-12 py-5 bg-white hover:bg-indigo-50 text-indigo-600 font-extrabold rounded-2xl text-base transition-all shadow-md inline-block hover:scale-[1.03] active:scale-95 duration-200"
             >
               Get Started For Free

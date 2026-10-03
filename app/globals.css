@@ -838,12 +838,6 @@
 }
 .is-tilting > .tilt-glare { opacity: 1; }
 
-/* Buttons that lean toward the mouse. Uses the translate property, so the
-   button's own hover scale still works. */
-[data-magnetic] {
-  translate: var(--tx, 0px) var(--ty, 0px);
-  transition: translate 0.35s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s, transform 0.2s;
-}
 
 /* ── Home motion, part 3: bulk scan demo ────────────────────────────────
    Finished state by default. Under .motion-ready the loop runs once the demo
@@ -1138,8 +1132,7 @@ a.orbit-tile:hover {
   .orbit-spoke::after,
   .orbit-core-wave,
   .orbit-tile-featured { animation: none; }
-  [data-tilt],
-  [data-magnetic] { transition: none; }
+  [data-tilt] { transition: none; }
 }
 
 /* ── Award shelf (components/landing/AwardShelf.tsx) ─────────────────────

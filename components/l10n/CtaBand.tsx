@@ -15,7 +15,6 @@ export default function CtaBandL10n({ locale, headline, motion = false }: { loca
             href={SIGNUP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            data-magnetic={motion ? '' : undefined}
             className={`${motion ? 'cta-shine on-light ' : ''}group inline-flex items-center gap-2 px-12 py-5 bg-white hover:bg-indigo-50 text-indigo-600 font-extrabold rounded-2xl text-base transition-all shadow-md hover:scale-[1.03] active:scale-95 duration-200`}
           >
             {cta.button}
