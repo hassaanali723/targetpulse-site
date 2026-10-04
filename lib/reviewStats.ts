@@ -8,7 +8,8 @@
 //
 // Product Hunt has no keyless feed (its API needs a token, and its own review
 // badge shows no numbers), so its count is a rounded floor that stays true as
-// reviews come in. G2 has no public feed and shows no number at all.
+// reviews come in. Capterra has no public feed either, so its score is typed
+// in by hand. G2 has no public feed and shows no number at all.
 
 export interface ReviewStats {
   rating: number
@@ -41,3 +42,8 @@ export async function getSourceForgeStats(): Promise<ReviewStats> {
 // hand when the real count passes the next step of 10.
 export const PRODUCT_HUNT_RATING = 4.9
 export const PRODUCT_HUNT_REVIEWS = '50+'
+
+// Capterra: 5.0 from 7 reviews, read from the rating data on Capterra's own
+// product page (capterra.com/p/10053924/Giggal-ai/) on 2026-10-04. The count
+// is not shown, so it cannot go stale; check the score when reviews come in.
+export const CAPTERRA_RATING = 5

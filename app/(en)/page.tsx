@@ -227,7 +227,7 @@ function StatusBadge({ tone, children }: { tone: 'good' | 'bad' | 'warn'; childr
 function SectionRule() {
   return (
     <div aria-hidden="true" className="max-w-6xl mx-auto px-6">
-      <div className="sr-draw h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent" />
+      <div className="h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent" />
     </div>
   )
 }
@@ -366,7 +366,7 @@ export default async function Home() {
             Email Verification Service to Reduce Email Bounces
           </h1>
 
-          <p className="hero-rise hero-rise-1 mt-7 text-xl md:text-2xl leading-relaxed text-slate-300 max-w-2xl mx-auto [text-wrap:balance]">
+          <p className="mt-7 text-xl md:text-2xl leading-relaxed text-slate-300 max-w-2xl mx-auto [text-wrap:balance]">
             Bulk email verification software that shows which email addresses are real, even on{' '}
             <Link
               href="/catch-all-verification"
@@ -380,7 +380,7 @@ export default async function Home() {
           {/* SourceForge rating, read live from SourceForge's badge feed and
               cached for a day (lib/reviewStats.ts). Visual only, no rating
               markup (C10). */}
-          <div className="hero-rise hero-rise-2 mt-8 md:mt-10 flex items-center justify-center gap-4 md:gap-5">
+          <div className="mt-8 md:mt-10 flex items-center justify-center gap-4 md:gap-5">
             <span aria-hidden="true" className="h-px w-10 sm:w-16 md:w-24 bg-gradient-to-r from-transparent to-slate-500" />
             <a
               href="https://sourceforge.net/software/product/Giggal.ai/"
@@ -388,7 +388,7 @@ export default async function Home() {
               rel="noopener noreferrer"
               className="group inline-flex items-center gap-2.5 text-sm md:text-base text-slate-400"
             >
-              <span className="star-pop flex items-center gap-0.5 text-amber-400" aria-hidden="true">
+              <span className="flex items-center gap-0.5 text-amber-400" aria-hidden="true">
                 <Star className="w-4 h-4 fill-current" />
                 <Star className="w-4 h-4 fill-current" />
                 <Star className="w-4 h-4 fill-current" />
@@ -410,7 +410,7 @@ export default async function Home() {
           {/* Brand gradient border (indigo to emerald) that slowly circles the
               box (.hero-ring), with a soft indigo glow that brightens on focus;
               the inside stays dark so it does not glare. */}
-          <div className="hero-ring hero-rise hero-rise-3 mt-8 md:mt-10 max-w-xl mx-auto p-[1.5px] rounded-2xl shadow-[0_0_40px_-12px_rgba(99,102,241,0.7)] focus-within:shadow-[0_0_56px_-8px_rgba(99,102,241,0.9)] transition-shadow">
+          <div className="hero-ring mt-8 md:mt-10 max-w-xl mx-auto p-[1.5px] rounded-2xl shadow-[0_0_40px_-12px_rgba(99,102,241,0.7)] focus-within:shadow-[0_0_56px_-8px_rgba(99,102,241,0.9)] transition-shadow">
           <form
             action="/email-checker"
             method="get"
@@ -441,7 +441,7 @@ export default async function Home() {
               the only warm colour in the hero (it matches the review stars),
               so it stands apart from the indigo and emerald around it. Anchor keeps "free email
               validations" (keyword map, /email-verifier terms). */}
-          <div className="hero-rise hero-rise-4 mt-10 md:mt-12 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+          <div className="mt-10 md:mt-12 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
             <span className="text-base md:text-lg text-slate-300 font-medium">Cleaning a whole list?</span>
             <a
               href={SIGNUP_URL}
@@ -453,7 +453,7 @@ export default async function Home() {
               <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </a>
           </div>
-          <p className="hero-rise hero-rise-4 mt-5 text-sm text-slate-400">No card needed.</p>
+          <p className="mt-5 text-sm text-slate-400">No card needed.</p>
         </div>
       </section>
 
@@ -464,7 +464,7 @@ export default async function Home() {
           border and a light shadow, no overlap with the hero, so they do not
           compete with the hero's heading and email box. */}
       <section className="max-w-5xl mx-auto px-6 pt-12 md:pt-14 pb-20 md:pb-24">
-        <div data-inview className="sr-stagger grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+        <div data-inview className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
           {[
             { pre: '', n: '500M', suf: '+', l: 'Emails verified' },
             { pre: '', n: '98.5', suf: '%', l: 'Accuracy on business lists' },
@@ -492,14 +492,14 @@ export default async function Home() {
         {/* Keyword: "bulk email verification" in the H2 (owned by the home
             until /bulk-email-verifier exists, plan 09). Heading and a
             checklist only; no product preview. */}
-        <h2 className="sr-rise text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight text-center lg:text-left">
+        <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight text-center lg:text-left">
           Bulk email verification for your whole list
         </h2>
         {/* Keyword: "bulk email verifier service" (home, KD 36), once. */}
-        <p className="sr-rise mt-4 text-lg md:text-xl text-slate-600 text-center lg:text-left max-w-2xl mx-auto lg:mx-0">
+        <p className="mt-4 text-lg md:text-xl text-slate-600 text-center lg:text-left max-w-2xl mx-auto lg:mx-0">
           Upload your list once. Our bulk email verifier service checks every address on it.
         </p>
-        <ul className="sr-stagger mt-10 w-fit max-w-full mx-auto lg:mx-0 space-y-4">
+        <ul className="mt-10 w-fit max-w-full mx-auto lg:mx-0 space-y-4">
           {[
             'Deliverable or undeliverable for every address',
             'Catch-all addresses get a real answer too',
@@ -524,7 +524,7 @@ export default async function Home() {
       {/* Catch-all explainer. Plan 07: keep this H2 and the link to the
           catch-all blog post. */}
       <section className="cv-section max-w-4xl mx-auto px-6 py-20 md:py-24">
-        <div className="sr-rise text-center max-w-2xl mx-auto">
+        <div className="text-center max-w-2xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight [text-wrap:balance]">Why catch-all addresses need attention</h2>
           <p className="mt-5 text-lg text-slate-600 leading-relaxed">
             Some company mail servers accept every address, real or made up. That is a{' '}
@@ -539,7 +539,7 @@ export default async function Home() {
         {/* The same catch-all address, two results. Left is muted, right is
             the one we want the eye to land on. */}
         <div data-inview className="sim mt-12 grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
-          <div className="sr-left rounded-2xl border border-slate-200 bg-slate-100 p-6 md:p-7">
+          <div className="rounded-2xl border border-slate-200 bg-slate-100 p-6 md:p-7">
             <div className="flex items-center gap-2.5">
               <span className="w-8 h-8 rounded-lg bg-slate-200/70 text-slate-500 flex items-center justify-center">
                 <HelpCircle className="w-4 h-4" />
@@ -562,7 +562,7 @@ export default async function Home() {
             </p>
           </div>
 
-          <div className="sr-right relative rounded-2xl border border-indigo-200 bg-white p-6 md:p-7 shadow-[0_16px_40px_-20px_rgba(79,70,229,0.45)]">
+          <div className="relative rounded-2xl border border-indigo-200 bg-white p-6 md:p-7 shadow-[0_16px_40px_-20px_rgba(79,70,229,0.45)]">
             <div aria-hidden="true" className="line-sweep absolute inset-x-6 top-0 h-[2px] rounded-full" />
             <div className="flex items-center gap-2.5">
               <span className="pulse-ring w-8 h-8 rounded-lg bg-indigo-600 text-white flex items-center justify-center">
@@ -595,7 +595,7 @@ export default async function Home() {
           reputation" and the REST API and deliverability guides links. One
           short line per card, so the service names carry the section. */}
       <section id="features-showcase" className="max-w-6xl mx-auto px-6 py-20 md:py-24">
-        <div className="sr-rise text-center max-w-2xl mx-auto">
+        <div className="text-center max-w-2xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight [text-wrap:balance]">Bulk cleaning, API and integrations on one credit balance</h2>
           <p className="mt-5 text-base md:text-lg text-slate-600 leading-relaxed">
             Upload a list, call the{' '}
@@ -697,7 +697,7 @@ export default async function Home() {
             while the price data backs it (lowest verified price at 10,000 and
             100,000 emails). No competitor prices are shown here; the full
             comparison lives on /alternatives. */}
-        <div className="sr-rise text-center max-w-3xl mx-auto">
+        <div className="text-center max-w-3xl mx-auto">
           <h2 className="text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.05]">
             {PRICE_CLAIM ? (
               <>
@@ -726,9 +726,7 @@ export default async function Home() {
           </p>
         </div>
 
-        <div className="sr-rise">
-          <PricingBlock />
-        </div>
+        <PricingBlock />
       </section>
 
       <SectionRule />
@@ -739,7 +737,7 @@ export default async function Home() {
           the comparison pages hanging off them went uncrawled. */}
       <section className="cv-section max-w-6xl mx-auto px-6 py-20 md:py-24">
         <div className="grid lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-10 lg:gap-16 items-start">
-          <div className="sr-rise lg:sticky lg:top-32 text-center lg:text-left">
+          <div className="lg:sticky lg:top-32 text-center lg:text-left">
             <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
               Switching from another verifier?
             </h2>
@@ -755,7 +753,7 @@ export default async function Home() {
             </Link>
           </div>
 
-          <div data-spotlight className="spotlight relative sr-stagger bg-white border border-slate-200 rounded-2xl divide-y divide-slate-100 overflow-clip">
+          <div data-spotlight className="spotlight relative bg-white border border-slate-200 rounded-2xl divide-y divide-slate-100 overflow-clip">
             {SWITCHERS.map((s) => (
               <Link
                 key={s.href}
@@ -774,7 +772,7 @@ export default async function Home() {
       {/* Integrations */}
       <section id="integrations" className="cv-section bg-slate-100 py-20 md:py-24 border-y border-slate-200">
         <div className="max-w-6xl mx-auto px-6 space-y-12">
-          <div className="sr-rise text-center max-w-2xl mx-auto space-y-3">
+          <div className="text-center max-w-2xl mx-auto space-y-3">
             <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Connect Your Marketing Stack</h2>
             <p className="text-sm text-slate-600 font-bold">Giggal.ai connects directly with leading CRM and Email Service Providers to sync cleaned contacts automatically.</p>
           </div>
@@ -793,18 +791,16 @@ export default async function Home() {
 
       {/* FAQ */}
       <section id="faq" className="cv-section max-w-3xl mx-auto px-6 py-20 md:py-24 space-y-12">
-        <div className="sr-rise text-center space-y-3">
+        <div className="text-center space-y-3">
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Frequently Asked Questions</h2>
           <p className="text-base text-slate-600">Short answers on catch-all checks, accuracy, pricing and setup.</p>
         </div>
-        <div className="sr-stagger-deep">
-          <FaqAccordion items={faqItems} />
-        </div>
+        <FaqAccordion items={faqItems} />
       </section>
 
       {/* Final CTA */}
       <section className="cv-section max-w-6xl mx-auto px-6 pb-20 md:pb-24">
-        <div className="sr-pop isolate bg-indigo-600 rounded-3xl p-12 md:p-16 text-center text-white space-y-6 shadow-xl relative overflow-hidden">
+        <div className="isolate bg-indigo-600 rounded-3xl p-12 md:p-16 text-center text-white space-y-6 shadow-xl relative overflow-hidden">
           <h2 className="text-3xl md:text-4xl font-extrabold leading-tight tracking-tight text-white">
             Optimize Your Email Marketing Delivery Today
           </h2>

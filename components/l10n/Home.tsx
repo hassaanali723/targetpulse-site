@@ -99,7 +99,7 @@ export interface HomeContent {
 function SectionRule() {
   return (
     <div aria-hidden="true" className="max-w-6xl mx-auto px-6">
-      <div className="sr-draw h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent" />
+      <div className="h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent" />
     </div>
   )
 }
@@ -244,9 +244,9 @@ export default async function HomeL10n({ locale, content: c }: { locale: L10nLoc
             {c.h1Accent}
           </h1>
 
-          <p className="hero-rise hero-rise-1 mt-7 text-xl md:text-2xl leading-relaxed text-slate-300 max-w-2xl mx-auto [text-wrap:balance]">{c.heroSub}</p>
+          <p className="mt-7 text-xl md:text-2xl leading-relaxed text-slate-300 max-w-2xl mx-auto [text-wrap:balance]">{c.heroSub}</p>
 
-          <div className="hero-rise hero-rise-2 mt-8 md:mt-10 flex items-center justify-center gap-4 md:gap-5">
+          <div className="mt-8 md:mt-10 flex items-center justify-center gap-4 md:gap-5">
             <span aria-hidden="true" className="h-px w-10 sm:w-16 md:w-24 bg-gradient-to-r from-transparent to-slate-500" />
             <a
               href="https://sourceforge.net/software/product/Giggal.ai/"
@@ -254,7 +254,7 @@ export default async function HomeL10n({ locale, content: c }: { locale: L10nLoc
               rel="noopener noreferrer"
               className="group inline-flex items-center gap-2.5 text-sm md:text-base text-slate-400"
             >
-              <span className="star-pop flex items-center gap-0.5 text-amber-400" aria-hidden="true">
+              <span className="flex items-center gap-0.5 text-amber-400" aria-hidden="true">
                 {[0, 1, 2, 3, 4].map((i) => <Star key={i} className="w-4 h-4 fill-current" />)}
               </span>
               <span>
@@ -267,7 +267,7 @@ export default async function HomeL10n({ locale, content: c }: { locale: L10nLoc
           </div>
 
           {/* One free check: opens the locale's checker, which fills in and runs it. */}
-          <div className="hero-ring hero-rise hero-rise-3 mt-8 md:mt-10 max-w-xl mx-auto p-[1.5px] rounded-2xl shadow-[0_0_40px_-12px_rgba(99,102,241,0.7)] focus-within:shadow-[0_0_56px_-8px_rgba(99,102,241,0.9)] transition-shadow">
+          <div className="hero-ring mt-8 md:mt-10 max-w-xl mx-auto p-[1.5px] rounded-2xl shadow-[0_0_40px_-12px_rgba(99,102,241,0.7)] focus-within:shadow-[0_0_56px_-8px_rgba(99,102,241,0.9)] transition-shadow">
             <form action={toolHref} method="get" className="flex flex-col sm:flex-row gap-2 bg-slate-900 rounded-[15px] p-2">
               <label htmlFor="hero-email" className="sr-only">{c.email.label}</label>
               <input
@@ -285,7 +285,7 @@ export default async function HomeL10n({ locale, content: c }: { locale: L10nLoc
             </form>
           </div>
 
-          <div className="hero-rise hero-rise-4 mt-10 md:mt-12 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+          <div className="mt-10 md:mt-12 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
             <span className="text-base md:text-lg text-slate-300 font-medium">{c.listQuestion}</span>
             <a
               href={SIGNUP_URL}
@@ -297,7 +297,7 @@ export default async function HomeL10n({ locale, content: c }: { locale: L10nLoc
               <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </a>
           </div>
-          <p className="hero-rise hero-rise-4 mt-5 text-sm text-slate-400">{c.noCard}</p>
+          <p className="mt-5 text-sm text-slate-400">{c.noCard}</p>
         </div>
       </section>
 
@@ -306,7 +306,7 @@ export default async function HomeL10n({ locale, content: c }: { locale: L10nLoc
 
       {/* Stats */}
       <section className="max-w-5xl mx-auto px-6 pt-12 md:pt-14 pb-20 md:pb-24">
-        <div data-inview className="sr-stagger grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+        <div data-inview className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
           {c.stats.map((s) => (
             <div key={s.l} className="stat-card bg-white border border-slate-200 rounded-2xl px-4 py-6 text-center shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
               <div className="text-2xl md:text-3xl leading-none font-extrabold tracking-tight text-slate-900 tabular-nums">
@@ -326,9 +326,9 @@ export default async function HomeL10n({ locale, content: c }: { locale: L10nLoc
       <section id={c.bulk.id} className="cv-section max-w-6xl mx-auto px-6 py-20 md:py-24 scroll-mt-28">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
         <div>
-        <h2 className="sr-rise text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight text-center lg:text-left [text-wrap:balance]">{c.bulk.title}</h2>
-        <p className="sr-rise mt-4 text-lg md:text-xl text-slate-600 text-center lg:text-left max-w-2xl mx-auto lg:mx-0">{c.bulk.sub}</p>
-        <ul className="sr-stagger mt-10 w-fit max-w-full mx-auto lg:mx-0 space-y-4">
+        <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight text-center lg:text-left [text-wrap:balance]">{c.bulk.title}</h2>
+        <p className="mt-4 text-lg md:text-xl text-slate-600 text-center lg:text-left max-w-2xl mx-auto lg:mx-0">{c.bulk.sub}</p>
+        <ul className="mt-10 w-fit max-w-full mx-auto lg:mx-0 space-y-4">
           {c.bulk.points.map((t) => (
             <li key={t} className="flex items-center gap-3.5 text-base md:text-[17px] text-slate-700">
               <span className="w-7 h-7 shrink-0 rounded-full bg-emerald-500 flex items-center justify-center shadow-sm shadow-emerald-500/30" aria-hidden="true">
@@ -347,12 +347,12 @@ export default async function HomeL10n({ locale, content: c }: { locale: L10nLoc
 
       {/* Catch-all */}
       <section className="cv-section max-w-4xl mx-auto px-6 py-20 md:py-24">
-        <div className="sr-rise text-center max-w-2xl mx-auto">
+        <div className="text-center max-w-2xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight [text-wrap:balance]">{c.catchAll.title}</h2>
           <p className="mt-5 text-lg text-slate-600 leading-relaxed">{c.catchAll.intro}</p>
         </div>
         <div data-inview className="sim mt-12 grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
-          <div className="sr-left rounded-2xl border border-slate-200 bg-slate-100 p-6 md:p-7">
+          <div className="rounded-2xl border border-slate-200 bg-slate-100 p-6 md:p-7">
             <div className="flex items-center gap-2.5">
               <span className="w-8 h-8 rounded-lg bg-slate-200/70 text-slate-500 flex items-center justify-center">
                 <HelpCircle className="w-4 h-4" />
@@ -373,7 +373,7 @@ export default async function HomeL10n({ locale, content: c }: { locale: L10nLoc
             <p className="mt-5 text-base text-slate-600 leading-relaxed">{c.catchAll.othersText}</p>
           </div>
 
-          <div className="sr-right relative rounded-2xl border border-indigo-200 bg-white p-6 md:p-7 shadow-[0_16px_40px_-20px_rgba(79,70,229,0.45)]">
+          <div className="relative rounded-2xl border border-indigo-200 bg-white p-6 md:p-7 shadow-[0_16px_40px_-20px_rgba(79,70,229,0.45)]">
             <div aria-hidden="true" className="line-sweep absolute inset-x-6 top-0 h-[2px] rounded-full" />
             <div className="flex items-center gap-2.5">
               <span className="pulse-ring w-8 h-8 rounded-lg bg-indigo-600 text-white flex items-center justify-center">
@@ -402,7 +402,7 @@ export default async function HomeL10n({ locale, content: c }: { locale: L10nLoc
 
       {/* Features: one card each, stacking on scroll on desktop */}
       <section id="features-showcase" className="max-w-6xl mx-auto px-6 py-20 md:py-24">
-        <div className="sr-rise text-center max-w-2xl mx-auto">
+        <div className="text-center max-w-2xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight [text-wrap:balance]">{f.title}</h2>
           <p className="mt-5 text-base md:text-lg text-slate-600 leading-relaxed">{f.intro}</p>
         </div>
@@ -469,7 +469,7 @@ export default async function HomeL10n({ locale, content: c }: { locale: L10nLoc
 
       {/* Pricing */}
       <section id={c.pricing.id} className="cv-section max-w-6xl mx-auto px-6 py-20 md:py-24 space-y-12 scroll-mt-28">
-        <div className="sr-rise text-center max-w-3xl mx-auto">
+        <div className="text-center max-w-3xl mx-auto">
           <h2 className="text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.05]">
             {PRICE_CLAIM ? (
               <>
@@ -504,9 +504,7 @@ export default async function HomeL10n({ locale, content: c }: { locale: L10nLoc
             </p>
           </div>
         </div>
-        <div className="sr-rise">
-          <PricingTable strings={pricing} />
-        </div>
+        <PricingTable strings={pricing} />
         <div className="bg-indigo-50/50 border-2 border-dashed border-indigo-200 rounded-3xl p-6 text-center max-w-2xl mx-auto shadow-sm">
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <div className="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 shrink-0 border border-indigo-200/30">
@@ -528,7 +526,7 @@ export default async function HomeL10n({ locale, content: c }: { locale: L10nLoc
       {/* Switching from another verifier: the locale's alternative pages */}
       <section id={c.switcher.id} className="cv-section max-w-6xl mx-auto px-6 py-20 md:py-24 scroll-mt-28">
         <div className="grid lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-10 lg:gap-16 items-start">
-          <div className="sr-rise lg:sticky lg:top-32 text-center lg:text-left">
+          <div className="lg:sticky lg:top-32 text-center lg:text-left">
             <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">{c.switcher.title}</h2>
             <p className="mt-4 text-base md:text-lg text-slate-600 leading-relaxed">{c.switcher.intro}</p>
             <Link
@@ -540,7 +538,7 @@ export default async function HomeL10n({ locale, content: c }: { locale: L10nLoc
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
-          <div data-spotlight className="spotlight relative sr-stagger bg-white border border-slate-200 rounded-2xl divide-y divide-slate-100 overflow-clip">
+          <div data-spotlight className="spotlight relative bg-white border border-slate-200 rounded-2xl divide-y divide-slate-100 overflow-clip">
             {c.switcher.items.map((s) => (
               <Link
                 key={s.href}
@@ -559,7 +557,7 @@ export default async function HomeL10n({ locale, content: c }: { locale: L10nLoc
       {/* Integrations */}
       <section className="cv-section bg-slate-100 py-20 md:py-24 border-y border-slate-200">
         <div className="max-w-6xl mx-auto px-6 space-y-12">
-          <div className="sr-rise text-center max-w-2xl mx-auto space-y-3">
+          <div className="text-center max-w-2xl mx-auto space-y-3">
             <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">{c.integrations.title}</h2>
             <p className="text-sm text-slate-600 font-bold">{c.integrations.sub}</p>
           </div>
@@ -577,13 +575,11 @@ export default async function HomeL10n({ locale, content: c }: { locale: L10nLoc
 
       {/* FAQ */}
       <section className="cv-section max-w-3xl mx-auto px-6 py-20 md:py-24 space-y-12">
-        <div className="sr-rise text-center space-y-3">
+        <div className="text-center space-y-3">
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">{c.faq.title}</h2>
           <p className="text-base text-slate-600">{c.faq.sub}</p>
         </div>
-        <div className="sr-stagger-deep">
-          <FaqAccordion items={c.faq.items} />
-        </div>
+        <FaqAccordion items={c.faq.items} />
         <p className="text-center text-sm text-slate-500 font-medium">
           {c.faq.more}{' '}
           <Link href={CLUSTERS.contact[locale]} className={`${link} inline-flex items-center gap-1`}>

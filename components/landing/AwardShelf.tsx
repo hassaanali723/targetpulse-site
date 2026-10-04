@@ -8,8 +8,8 @@
 // not use (ratings collected on other sites, site rule C10). Each badge links
 // to its review page with the vendor's badge campaign tag, as the embed does.
 //
-// Motion is CSS only (globals.css, "Award shelf"): a drop-in from the centre,
-// a slow float, a glint that sweeps across the row, and a lift on hover.
+// Motion is CSS only (globals.css, "Award shelf"): a lift on hover, and the
+// slow strip on phones. The arc itself stays still, for speed.
 
 const SF = 'https://sourceforge.net/software/product/Giggal.ai/?pk_campaign=badge&pk_source=vendor'
 const SD = 'https://slashdot.org/software/p/Giggal.ai/?pk_campaign=badge&pk_source=vendor'
@@ -41,27 +41,21 @@ function BadgeLink({ b, i, arc, dup = false }: { b: Badge; i: number; arc: boole
         ['--y' as string]: `${d * d * 4.5}px`,
         ['--rot' as string]: `${d * 3}deg`,
         ['--s' as string]: d === 0 ? '1.18' : '1',
-        ['--drop' as string]: `${0.35 + Math.abs(d) * 0.08}s`,
-        ['--float' as string]: `${(i % 3) * -1.6}s`,
-        ['--glint' as string]: `${i * 0.12}s`,
       }
-    : { ['--glint' as string]: `${(i % BADGES.length) * 0.12}s` }
+    : undefined
   const src = `/badges/${b.file}.svg`
   return (
     <div className={arc ? 'award-slot' : 'award-slot-strip'} style={style}>
-      <div className="award-float">
-        <a
-          href={b.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          tabIndex={dup ? -1 : undefined}
-          className={`award award-${b.tone}`}
-          style={{ ['--mask' as string]: `url(${src})` }}
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={src} alt={dup ? '' : `Giggal.ai: ${b.alt}`} width={b.w} height={b.h} loading="lazy" decoding="async" draggable={false} />
-        </a>
-      </div>
+      <a
+        href={b.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        tabIndex={dup ? -1 : undefined}
+        className={`award award-${b.tone}`}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={src} alt={dup ? '' : `Giggal.ai: ${b.alt}`} width={b.w} height={b.h} loading="lazy" decoding="async" draggable={false} />
+      </a>
     </div>
   )
 }

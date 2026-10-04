@@ -9,8 +9,11 @@ import { useEffect } from 'react'
 //                   starts its CSS animation (the demos play when seen).
 //   [data-count]    counts up from zero to its own text when first seen.
 //   [data-spotlight] gets --mx/--my, the pointer position inside it, for a
-//                   light that follows the mouse.
-//   [data-tilt]     gets --rx/--ry, a small 3D tilt toward the pointer.
+//                   light that follows the mouse. In the hero the light is a
+//                   child (.hero-spot) moved with a transform instead, so the
+//                   big hero is never restyled on mouse move.
+//   [data-tilt]     gets a small 3D tilt toward the pointer, written straight
+//                   to its transform; its glare child gets --gx/--gy.
 //
 // Pages render complete without this script: final numbers, final states, no
 // hidden content. It adds .motion-ready to <html> before any start state is
@@ -79,6 +82,11 @@ export default function MotionRuntime() {
 
     let frame = 0
     let last: PointerEvent | null = null
+    const reset = (el: HTMLElement) => {
+      el.classList.remove('is-lit', 'is-tilting')
+      el.querySelector(':scope > .hero-spot')?.classList.remove('is-on')
+      if (el.hasAttribute('data-tilt')) el.style.removeProperty('transform')
+    }
     const touched = new Set<HTMLElement>()
 
     const apply = () => {
@@ -87,32 +95,37 @@ export default function MotionRuntime() {
       if (!ev) return
       const target = ev.target as Element | null
       const active = new Set<HTMLElement>()
+      // Read every box first, then write, so the browser lays out once.
       const spot = target?.closest<HTMLElement>('[data-spotlight]')
-      if (spot) {
-        const r = spot.getBoundingClientRect()
-        spot.style.setProperty('--mx', `${ev.clientX - r.left}px`)
-        spot.style.setProperty('--my', `${ev.clientY - r.top}px`)
-        spot.classList.add('is-lit')
+      const tilt = target?.closest<HTMLElement>('[data-tilt]')
+      const sr = spot?.getBoundingClientRect()
+      const tr = tilt?.getBoundingClientRect()
+      if (spot && sr) {
+        const glow = spot.querySelector<HTMLElement>(':scope > .hero-spot')
+        if (glow) {
+          glow.style.transform = `translate3d(${ev.clientX - sr.left}px, ${ev.clientY - sr.top}px, 0)`
+          glow.classList.add('is-on')
+        } else {
+          spot.style.setProperty('--mx', `${ev.clientX - sr.left}px`)
+          spot.style.setProperty('--my', `${ev.clientY - sr.top}px`)
+          spot.classList.add('is-lit')
+        }
         active.add(spot)
       }
-      const tilt = target?.closest<HTMLElement>('[data-tilt]')
-      if (tilt) {
-        const r = tilt.getBoundingClientRect()
-        const x = (ev.clientX - r.left) / r.width - 0.5
-        const y = (ev.clientY - r.top) / r.height - 0.5
-        tilt.style.setProperty('--ry', `${(x * 5).toFixed(2)}deg`)
-        tilt.style.setProperty('--rx', `${(-y * 5).toFixed(2)}deg`)
-        tilt.style.setProperty('--gx', `${((x + 0.5) * 100).toFixed(1)}%`)
-        tilt.style.setProperty('--gy', `${((y + 0.5) * 100).toFixed(1)}%`)
+      if (tilt && tr) {
+        const x = (ev.clientX - tr.left) / tr.width - 0.5
+        const y = (ev.clientY - tr.top) / tr.height - 0.5
+        tilt.style.transform = `perspective(1400px) rotateX(${(-y * 5).toFixed(2)}deg) rotateY(${(x * 5).toFixed(2)}deg)`
+        const glare = tilt.querySelector<HTMLElement>(':scope > .tilt-glare')
+        glare?.style.setProperty('--gx', `${((x + 0.5) * 100).toFixed(1)}%`)
+        glare?.style.setProperty('--gy', `${((y + 0.5) * 100).toFixed(1)}%`)
         tilt.classList.add('is-tilting')
         active.add(tilt)
       }
       // Reset whatever the pointer has left.
       touched.forEach((el) => {
         if (active.has(el)) return
-        el.classList.remove('is-lit', 'is-tilting')
-        el.style.removeProperty('--rx')
-        el.style.removeProperty('--ry')
+        reset(el)
         touched.delete(el)
       })
       active.forEach((el) => touched.add(el))
@@ -124,11 +137,7 @@ export default function MotionRuntime() {
     }
     const onLeave = () => {
       last = null
-      touched.forEach((el) => {
-        el.classList.remove('is-lit', 'is-tilting')
-        el.style.removeProperty('--rx')
-        el.style.removeProperty('--ry')
-      })
+      touched.forEach(reset)
       touched.clear()
     }
     document.addEventListener('pointermove', onMove, { passive: true })

@@ -25,6 +25,12 @@ export const REVIEW_BADGES: Record<L10nLocale, ReviewBadgeStrings> = {
     read: 'Leggi le recensioni',
     used: 'Usi Giggal.ai?',
     leave: 'Lascia una recensione su Trustpilot',
+    points: [
+      { title: '1.000 crediti gratis', text: 'Nessuna carta richiesta per iniziare.' },
+      { title: 'I crediti non scadono mai', text: 'Li compri una volta e li usi quando ti servono.' },
+      { title: 'Risposte vere sui catch-all', text: 'Valida o non valida, non "rischiosa".' },
+      { title: 'Nessun costo per i risultati sconosciuti', text: 'Paghi solo per un risultato chiaro.' },
+    ],
   },
   de: {
     heading: 'Bewertet von echten Teams',
@@ -35,6 +41,12 @@ export const REVIEW_BADGES: Record<L10nLocale, ReviewBadgeStrings> = {
     read: 'Bewertungen lesen',
     used: 'Sie nutzen Giggal.ai?',
     leave: 'Bewerten Sie uns auf Trustpilot',
+    points: [
+      { title: '1.000 Gratis-Credits', text: 'Zum Start ist keine Karte nötig.' },
+      { title: 'Credits verfallen nie', text: 'Einmal kaufen und nutzen, wann Sie sie brauchen.' },
+      { title: 'Echte Antworten bei Catch-all', text: 'Gültig oder ungültig, nicht „riskant“.' },
+      { title: 'Keine Kosten für unbekannte Ergebnisse', text: 'Sie zahlen nur für ein klares Ergebnis.' },
+    ],
   },
   es: {
     heading: 'Valorado por equipos reales',
@@ -45,6 +57,12 @@ export const REVIEW_BADGES: Record<L10nLocale, ReviewBadgeStrings> = {
     read: 'Leer reseñas',
     used: '¿Usas Giggal.ai?',
     leave: 'Deja una reseña en Trustpilot',
+    points: [
+      { title: '1.000 créditos gratis', text: 'No necesitas tarjeta para empezar.' },
+      { title: 'Los créditos nunca caducan', text: 'Los compras una vez y los usas cuando los necesites.' },
+      { title: 'Respuestas reales en catch-all', text: 'Válido o no válido, no "arriesgado".' },
+      { title: 'Sin costo por resultados desconocidos', text: 'Solo pagas por un resultado claro.' },
+    ],
   },
   'pt-br': {
     heading: 'Avaliada por equipes de verdade',
@@ -55,6 +73,12 @@ export const REVIEW_BADGES: Record<L10nLocale, ReviewBadgeStrings> = {
     read: 'Ler avaliações',
     used: 'Usa a Giggal.ai?',
     leave: 'Deixe uma avaliação no Trustpilot',
+    points: [
+      { title: '1.000 créditos grátis', text: 'Não precisa de cartão para começar.' },
+      { title: 'Os créditos nunca expiram', text: 'Você compra uma vez e usa quando precisar.' },
+      { title: 'Respostas reais em catch-all', text: 'Válido ou inválido, não "arriscado".' },
+      { title: 'Sem custo por resultados desconhecidos', text: 'Você só paga por um resultado claro.' },
+    ],
   },
   fr: {
     heading: 'Noté par de vraies équipes',
@@ -65,6 +89,12 @@ export const REVIEW_BADGES: Record<L10nLocale, ReviewBadgeStrings> = {
     read: 'Lire les avis',
     used: 'Vous utilisez Giggal.ai ?',
     leave: 'Laissez un avis sur Trustpilot',
+    points: [
+      { title: '1 000 crédits offerts', text: 'Aucune carte requise pour commencer.' },
+      { title: 'Les crédits n’expirent jamais', text: 'Vous les achetez une fois et les utilisez quand vous en avez besoin.' },
+      { title: 'De vraies réponses sur les catch-all', text: 'Valide ou invalide, pas « risquée ».' },
+      { title: 'Aucun frais pour les résultats inconnus', text: 'Vous ne payez que pour un résultat clair.' },
+    ],
   },
 }
 
