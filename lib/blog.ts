@@ -8,9 +8,9 @@ import { GLOSSARY_TERMS } from '@/lib/i18n/glossary'
 // (at build time via generateStaticParams) so every word is in the raw HTML.
 //
 // The renderer supports exactly the subset these posts use: H2/H3, paragraphs,
-// links, bold (used only in table cells), one table, short bullet lists,
-// fenced code blocks (<pre class="blog-pre"><code>), and figures (a standalone
-// image line, with an optional caption line below it).
+// links, bold (used only in table cells), one table, bullet lists,
+// ordered lists (<ol><li>), fenced code blocks (<pre class="blog-pre"><code>),
+// and figures (a standalone image line, with an optional caption line below it).
 // It is deliberately small rather than a full CommonMark implementation.
 
 const POSTS_DIR = path.join(process.cwd(), 'content', 'blog')
@@ -145,6 +145,9 @@ function slugify(text: string): string {
     .replace(/(^-|-$)/g, '')
 }
 
+const isBullet = (l: string): boolean => l.trim().startsWith('- ')
+const isOrdered = (l: string): boolean => /^\d+\.\s+/.test(l.trim())
+
 function splitBlocks(body: string): string[] {
   const lines = body.replace(/\r\n/g, '\n').trim().split('\n')
   const blocks: string[] = []
@@ -179,9 +182,34 @@ function splitBlocks(body: string): string[] {
         blocks.push(current.join('\n'))
         current = []
       }
-    } else {
-      current.push(line)
+      continue
     }
+
+    if (current.length > 0) {
+      const currentIsBullet = isBullet(current[0])
+      const currentIsOrdered = isOrdered(current[0])
+      const lineIsBullet = isBullet(line)
+      const lineIsOrdered = isOrdered(line)
+      const currentIsHeading = current[0].trim().startsWith('#')
+      const lineIsHeading = line.trim().startsWith('#')
+      const currentIsTable = current[0].trim().startsWith('|')
+      const lineIsTable = line.trim().startsWith('|')
+
+      if (
+        currentIsHeading ||
+        lineIsHeading ||
+        (lineIsBullet && !currentIsBullet) ||
+        (lineIsOrdered && !currentIsOrdered) ||
+        ((currentIsBullet || currentIsOrdered) && !lineIsBullet && !lineIsOrdered) ||
+        (lineIsTable && !currentIsTable) ||
+        (currentIsTable && !lineIsTable)
+      ) {
+        blocks.push(current.join('\n'))
+        current = []
+      }
+    }
+
+    current.push(line)
   }
 
   if (current.length > 0) {
@@ -221,9 +249,14 @@ export function renderMarkdown(body: string, locale: BlogLocale): { html: string
       html.push(renderFigure(lines, locale))
     } else if (lines.every((l) => l.trim().startsWith('|'))) {
       html.push(renderTable(lines, locale))
-    } else if (lines.every((l) => l.trim().startsWith('- '))) {
+    } else if (lines.every(isBullet)) {
       const items = lines.map((l) => `<li>${inline(l.trim().slice(2), locale)}</li>`).join('')
       html.push(`<ul>${items}</ul>`)
+    } else if (lines.every(isOrdered)) {
+      const items = lines
+        .map((l) => `<li>${inline(l.trim().replace(/^\d+\.\s+/, ''), locale)}</li>`)
+        .join('')
+      html.push(`<ol>${items}</ol>`)
     } else {
       html.push(`<p>${inline(lines.join(' '), locale)}</p>`)
     }
