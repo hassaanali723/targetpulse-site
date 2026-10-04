@@ -11,7 +11,7 @@ imageAlt: Six email verification tools tested on catch-all and gateway-protected
 
 ## The short version
 
-This is a test of six email verification software options on the addresses that break most verifiers. For the full ranked list of 28 tools by catch-all handling, SEG support and price, see the [full comparison of 28 verifiers](/alternatives) hub.
+This is a test of six email verification software options on the addresses that break most verifiers. For the full ranked list of 28 tools by catch-all handling, SEG support and price, see the [full comparison of 28 verifiers](/alternatives).
 
 The hardest part of choosing an email verification tool in 2026 is catch-all and SEG-protected addresses. Around 30% of a B2B email list sits on catch-all (also called accept-all) or SEG-protected domains, the two cases where a mail server will not tell a verifier whether a mailbox really exists. On catch-all domains the server accepts every address, so verifiers return Risky. On SEG-protected domains a security gateway hides the real server, so verifiers return Unknown. This guide explains catch-all and SEG email verification from the ground up, then compares the six best email verifiers of 2026 on whether they actually resolve these addresses or only flag them. It answers the real question: is there a genuine way to verify catch-all and SEG-protected emails, and if so, why doesn't every tool do it? The answers will help you pick the verifier that fits your own list.
 
@@ -146,10 +146,10 @@ Every tool on this list already does the basics well: syntax checks, disposable 
 |---|---|---|---|---|
 | Giggal.ai | Yes | Yes | Native (Claude + ChatGPT) | 4.8 · 4.1 |
 | BounceBan | Yes | Yes | Official MCP | 4.8 · 3.1 |
-| ZeroBounce | Yes | Undocumented | Official MCP | 4.7 · 4.8 |
-| MillionVerifier | Detection only | No | Via Apify | 4.2 · 4.1 |
+| ZeroBounce | Partial | Yes | Official MCP | 4.7 · 4.8 |
+| MillionVerifier | Partial | No | Via Apify | 4.2 · 4.1 |
 | Reoon | Detection only | No | No | 4.8 · None |
-| NeverBounce | Detection only | No | No | 4.1 · 2.0 |
+| NeverBounce | Partial | No | No | 4.1 · 2.0 |
 
 **Accuracy and pricing.**
 
@@ -180,7 +180,7 @@ Focused on the same hard cases as Giggal. It claims 97%+ overall accuracy and 85
 
 ### ZeroBounce
 
-A mature, full-suite platform with 99.6% claimed accuracy and a 5x-refund guarantee, though that guarantee only covers addresses it marks valid, not catch-all or unknown. It verifies catch-all addresses, but does not publicly document how it handles SEG-protected mail behind gateways like Proofpoint and Mimecast. It offers an official MCP server for Claude, Cursor, and VS Code, plus 60+ integrations. It carries the highest public ratings here, G2 4.7 and Trustpilot 4.8, and sits at the premium end on price.
+A mature, full-suite platform with 99.6% claimed accuracy and a 5x-refund guarantee, though that guarantee only covers addresses it marks valid, not catch-all or unknown. It gives catch-all addresses an AI score from 1 to 10 rather than confirming each mailbox, and says it can recognize and classify many domains behind gateways like Proofpoint and Mimecast. It offers an official MCP server for Claude, Cursor, and VS Code, plus 60+ integrations. It carries the highest public ratings here, G2 4.7 and Trustpilot 4.8, and sits at the premium end on price.
 
 **[Integrations](https://www.zerobounce.net/integrations):** 60+ native, including HubSpot, Salesforce, Mailchimp, Constant Contact, MailerLite, AWeber, Zoho CRM, Shopify, and WordPress, plus Zapier.
 
@@ -188,7 +188,7 @@ A mature, full-suite platform with 99.6% claimed accuracy and a 5x-refund guaran
 
 ### MillionVerifier
 
-Before 2023 it was the only cheapest option at scale, with one million credits for $449 and credits that never expire. After 2023 BounceBan and [Giggal](/) launched with much better pricing. It detects catch-all domains and flags them but does not resolve the individual mailbox, and it does not verify behind a SEG. It backs results with a refund if hard bounces pass 4% and does not charge for catch-all or unknown results. An MCP server is available through Apify.
+Before 2023 it was the only cheapest option at scale, with one million credits for $449 and credits that never expire. After 2023 BounceBan and [Giggal](/) launched with much better pricing. Its Catch-All Verifier resolves roughly 30 to 40% of accept-all addresses and marks the rest Risky, and it does not verify behind a SEG. It backs results with a refund if hard bounces pass 4% and does not charge for catch-all or unknown results. An MCP server is available through Apify.
 
 **Integrations:** Mailchimp, HubSpot, ActiveCampaign, Salesforce, ConvertKit, and Intercom among 30+, plus Zapier and Make, with EverClean daily auto-cleaning.
 
@@ -204,7 +204,7 @@ Fast, low-cost bulk verification with 99% claimed accuracy. It detects catch-all
 
 ### NeverBounce
 
-A dependable standard verifier with a real-time API and a bounce-back guarantee that refunds the credit if a verified address bounces. It detects catch-all and flags it but does not resolve the mailbox, and it does not verify behind a SEG. There is no MCP. Per-email pricing starts around $0.008 and drops to roughly $0.003 at high volume.
+A dependable standard verifier with a real-time API and a bounce-back guarantee that refunds the credit if a verified address bounces. It resolves only a small share of catch-all addresses (8% in LeadMagic's test) and flags the rest, and it does not verify behind a SEG. There is no MCP. Per-email pricing starts around $0.008 and drops to roughly $0.003 at high volume.
 
 **[Integrations](https://www.neverbounce.com/integrations):** Mailchimp, HubSpot, Marketo, Salesforce Marketing Cloud, Drip, Campaign Monitor, iContact, and MailerLite, plus Zapier.
 

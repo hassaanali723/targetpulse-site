@@ -146,10 +146,10 @@ Chaque outil de cette liste fait déjà bien l'essentiel : contrôle de syntaxe,
 |---|---|---|---|---|
 | Giggal.ai | Oui | Oui | Natif (Claude + ChatGPT) | 4.8 · 4.1 |
 | BounceBan | Oui | Oui | MCP officiel | 4.8 · 3.1 |
-| ZeroBounce | Oui | Non documenté | MCP officiel | 4.7 · 4.8 |
-| MillionVerifier | Détection seule | Non | Via Apify | 4.2 · 4.1 |
+| ZeroBounce | Partiel | Oui | MCP officiel | 4.7 · 4.8 |
+| MillionVerifier | Partiel | Non | Via Apify | 4.2 · 4.1 |
 | Reoon | Détection seule | Non | Non | 4.8 · Aucune |
-| NeverBounce | Détection seule | Non | Non | 4.1 · 2.0 |
+| NeverBounce | Partiel | Non | Non | 4.1 · 2.0 |
 
 **Précision et prix.**
 
@@ -157,7 +157,7 @@ Chaque outil de cette liste fait déjà bien l'essentiel : contrôle de syntaxe,
 |---|---|---|---|
 | Giggal.ai | 98.5% | Moins de 3% | 1 000 gratuits, $9.90/10k |
 | BounceBan | 97%+ | Moins de 3% | 100 gratuits, ~$34/10k |
-| ZeroBounce | 99.6% | Aucun engagement | 5 gratuits/mois, $99/10k |
+| ZeroBounce | 99.6% | Aucun engagement | 5 gratuits/mois, $129 en paiement unique ou $99/mois (ZeroBounce ONE) |
 | MillionVerifier | 99% | Remboursement si >4% | 500 gratuits, $39/10k |
 | Reoon | 99% | Rembourse les inconnus | 600 gratuits +20/jour, $12/10k |
 | NeverBounce | 97-99% | Moins de 2% | 10 gratuits, $8/1k |
@@ -180,17 +180,17 @@ Centré sur les mêmes cas difficiles que Giggal. Il annonce plus de 97 % de pr�
 
 ### ZeroBounce
 
-Une plateforme mature et complète avec 99,6 % de précision annoncée et une garantie de remboursement de 5 fois, qui ne couvre toutefois que les adresses qu'elle marque valides, pas les catch-all ni les inconnues. Elle vérifie les adresses catch-all, mais ne documente pas publiquement comment elle traite le courrier protégé par une SEG derrière des passerelles comme Proofpoint et Mimecast. Elle propose un serveur MCP officiel pour Claude, Cursor et VS Code, ainsi que plus de 60 intégrations. Elle a les notes publiques les plus élevées de cette liste, G2 4,7 et Trustpilot 4,8, et se situe dans le haut de gamme en prix.
+Une plateforme mature et complète avec 99,6 % de précision annoncée et une garantie de remboursement de 5 fois, qui ne couvre toutefois que les adresses qu'elle marque valides, pas les catch-all ni les inconnues. Elle attribue aux adresses catch-all un score IA de 1 à 10 plutôt que de confirmer chaque boîte, et affirme pouvoir reconnaître et classer de nombreux domaines derrière des passerelles comme Proofpoint et Mimecast. Elle propose un serveur MCP officiel pour Claude, Cursor et VS Code, ainsi que plus de 60 intégrations. Elle a les notes publiques les plus élevées de cette liste, G2 4,7 et Trustpilot 4,8, et se situe dans le haut de gamme en prix.
 
 **[Intégrations](https://www.zerobounce.net/integrations) :** plus de 60 natives, dont HubSpot, Salesforce, Mailchimp, Constant Contact, MailerLite, AWeber, Zoho CRM, Shopify et WordPress, plus Zapier.
 
-**[Tarifs](https://www.zerobounce.net/pricing) :** 5 gratuits/mois, $99 / 10 000
+**[Tarifs](https://www.zerobounce.net/pricing) :** 5 gratuits/mois, $129 en paiement unique ou $99/mois (ZeroBounce ONE)
 
 **Comparatif :** [Alternative à ZeroBounce](/zerobounce-alternative) · [ZeroBounce vs NeverBounce](/compare/zerobounce-vs-neverbounce)
 
 ### MillionVerifier
 
-Avant 2023, c'était la seule option vraiment bon marché à grande échelle, avec un million de crédits pour $449 et des crédits qui n'expirent jamais. Après 2023, BounceBan et [Giggal](/) sont arrivés avec des prix bien meilleurs. Il détecte les domaines catch-all et les signale, mais ne résout pas la boîte individuelle, et il ne vérifie pas derrière une SEG. Il garantit ses résultats par un remboursement si les rebonds durs dépassent 4 % et ne facture pas les résultats catch-all ou inconnus. Un serveur MCP est disponible via Apify.
+Avant 2023, c'était la seule option vraiment bon marché à grande échelle, avec un million de crédits pour $449 et des crédits qui n'expirent jamais. Après 2023, BounceBan et [Giggal](/) sont arrivés avec des prix bien meilleurs. Son Catch-All Verifier résout environ 30 à 40 % des adresses accept-all et marque le reste comme risqué, et il ne vérifie pas derrière une SEG. Il garantit ses résultats par un remboursement si les rebonds durs dépassent 4 % et ne facture pas les résultats catch-all ou inconnus. Un serveur MCP est disponible via Apify.
 
 **Intégrations :** Mailchimp, HubSpot, ActiveCampaign, Salesforce, ConvertKit et Intercom parmi plus de 30, plus Zapier et Make, avec le nettoyage automatique quotidien EverClean.
 
@@ -206,7 +206,7 @@ Une vérification en masse rapide et bon marché avec 99 % de précision annonc�
 
 ### NeverBounce
 
-Un vérificateur standard fiable, avec une API en temps réel et une garantie qui rembourse le crédit si une adresse vérifiée rebondit. Il détecte les catch-all et les signale, mais ne résout pas la boîte, et il ne vérifie pas derrière une SEG. Il n'y a pas de MCP. Le prix par email commence autour de $0,008 et descend à environ $0,003 à fort volume.
+Un vérificateur standard fiable, avec une API en temps réel et une garantie qui rembourse le crédit si une adresse vérifiée rebondit. Il ne résout qu'une petite part des adresses catch-all (8 % lors du test de LeadMagic) et signale le reste, et il ne vérifie pas derrière une SEG. Il n'y a pas de MCP. Le prix par email commence autour de $0,008 et descend à environ $0,003 à fort volume.
 
 **[Intégrations](https://www.neverbounce.com/integrations) :** Mailchimp, HubSpot, Marketo, Salesforce Marketing Cloud, Drip, Campaign Monitor, iContact et MailerLite, plus Zapier.
 
