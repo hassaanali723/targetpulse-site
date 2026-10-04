@@ -94,7 +94,7 @@ The rua tag tells receivers where to send aggregate reports, usually daily XML f
 _dmarc.example.com TXT "v=DMARC1; p=none; rua=mailto:dmarc@example.com"
 ```
 
-On 20 May 2026, the Internet Engineering Task Force published RFC 9989 on the Standards Track, alongside RFC 9990 for aggregate reporting and RFC 9991 for failure reporting. These new standards officially obsolete RFC 7489 and RFC 9091. Existing records starting with `v=DMARC1` continue to work, but the updated specification adjusts several operational tags. The percentage tag (`pct`) and report format tag (`rf`) are retired and no longer part of the standard, while the reporting interval tag (`ri`) is classified as historic. Senders testing policy rollouts now use the new `t` tag for test mode, and administrators can define policies for non-existent subdomains using the `np` tag. If your current DNS record contains a percentage tag, plan to remove it.
+In May 2026, the Internet Engineering Task Force published RFC 9989 on the Standards Track, alongside RFC 9990 for aggregate reporting and RFC 9991 for failure reporting. These new standards officially obsolete RFC 7489 and RFC 9091. Existing records starting with `v=DMARC1` continue to work, but the updated specification adjusts several operational tags. The percentage tag (`pct`) and report format tag (`rf`) are retired and no longer part of the standard, while the reporting interval tag (`ri`) is classified as historic. Senders testing policy rollouts now use the new `t` tag for test mode, and administrators can define policies for non-existent subdomains using the `np` tag. If your current DNS record contains a percentage tag, plan to remove it.
 
 ## How a receiving server checks a message
 
@@ -134,7 +134,7 @@ Work through these in order:
 2. Publish a single unified [SPF record](/glossary/spf) covering authorized sending servers, keeping total lookups under 10.
 3. Turn on custom DKIM signing using your own domain for every sending platform and publish the matching selector records in DNS.
 4. Ensure your sending IP addresses have valid forward DNS and a matching [PTR record](/glossary/ptr-record) configured in reverse DNS.
-5. Publish an initial DMARC record at `_dmarc` with `p=none` and an active `rua` mailbox to start receiving aggregate XML reports.
+5. Publish an initial [DMARC record](/blog/what-is-a-dmarc-record) at `_dmarc` with `p=none` and an active `rua` mailbox to start receiving aggregate XML reports.
 6. Register your sending domain in [Google Postmaster Tools](/glossary/postmaster-tools) to monitor domain reputation, delivery errors, and spam complaint rates.
 7. Review your aggregate DMARC reports for a few weeks to verify that every legitimate sending stream achieves SPF or DKIM alignment.
 8. Advance your DMARC policy from `p=none` to `p=quarantine`, evaluate delivery stability, and then move your policy to `p=reject`.
