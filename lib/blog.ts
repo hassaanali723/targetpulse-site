@@ -8,8 +8,9 @@ import { GLOSSARY_TERMS } from '@/lib/i18n/glossary'
 // (at build time via generateStaticParams) so every word is in the raw HTML.
 //
 // The renderer supports exactly the subset these posts use: H2/H3, paragraphs,
-// links, bold (used only in table cells), one table, short bullet lists, and
-// figures (a standalone image line, with an optional caption line below it).
+// links, bold (used only in table cells), one table, short bullet lists,
+// fenced code blocks (<pre class="blog-pre"><code>), and figures (a standalone
+// image line, with an optional caption line below it).
 // It is deliberately small rather than a full CommonMark implementation.
 
 const POSTS_DIR = path.join(process.cwd(), 'content', 'blog')
@@ -144,8 +145,54 @@ function slugify(text: string): string {
     .replace(/(^-|-$)/g, '')
 }
 
+function splitBlocks(body: string): string[] {
+  const lines = body.replace(/\r\n/g, '\n').trim().split('\n')
+  const blocks: string[] = []
+  let current: string[] = []
+  let inCode = false
+
+  for (const line of lines) {
+    if (line.trim().startsWith('```')) {
+      if (!inCode) {
+        if (current.length > 0) {
+          blocks.push(current.join('\n'))
+          current = []
+        }
+        inCode = true
+        current.push(line)
+      } else {
+        current.push(line)
+        blocks.push(current.join('\n'))
+        current = []
+        inCode = false
+      }
+      continue
+    }
+
+    if (inCode) {
+      current.push(line)
+      continue
+    }
+
+    if (line.trim() === '') {
+      if (current.length > 0) {
+        blocks.push(current.join('\n'))
+        current = []
+      }
+    } else {
+      current.push(line)
+    }
+  }
+
+  if (current.length > 0) {
+    blocks.push(current.join('\n'))
+  }
+
+  return blocks
+}
+
 export function renderMarkdown(body: string, locale: BlogLocale): { html: string; toc: TocItem[] } {
-  const blocks = body.trim().split(/\n{2,}/)
+  const blocks = splitBlocks(body)
   const html: string[] = []
   const toc: TocItem[] = []
   const used = new Set<string>()
@@ -159,7 +206,10 @@ export function renderMarkdown(body: string, locale: BlogLocale): { html: string
   }
   for (const block of blocks) {
     const lines = block.split('\n')
-    if (block.startsWith('### ')) {
+    if (lines[0].trim().startsWith('```')) {
+      const codeLines = lines.slice(1, lines[lines.length - 1].trim().startsWith('```') ? -1 : undefined)
+      html.push(`<pre class="blog-pre"><code>${escapeHtml(codeLines.join('\n'))}</code></pre>`)
+    } else if (block.startsWith('### ')) {
       const raw = block.slice(4).trim()
       html.push(`<h3 id="${uniqueId(raw)}">${inline(raw, locale)}</h3>`)
     } else if (block.startsWith('## ')) {

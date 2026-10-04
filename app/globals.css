@@ -328,6 +328,38 @@
   padding: 0.1rem 0.35rem;
   white-space: nowrap;
 }
+.blog-prose pre.blog-pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: #1e1b4b;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  padding: 0.85rem 1.1rem;
+  overflow-x: auto;
+}
+.blog-prose pre.blog-pre code {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  white-space: pre;
+}
+@media (prefers-color-scheme: dark) {
+  .blog-prose pre.blog-pre {
+    background: #0f172a;
+    border-color: #1e293b;
+    color: #e2e8f0;
+  }
+}
+.dark .blog-prose pre.blog-pre {
+  background: #0f172a;
+  border-color: #1e293b;
+  color: #e2e8f0;
+}
 .blog-table-wrap { overflow-x: auto; }
 .blog-table {
   width: 100%; border-collapse: collapse; font-size: 0.9rem;

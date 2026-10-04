@@ -51,7 +51,7 @@ An address that was closed when someone left their job also falls into this grou
 
 **Kind two: you are blocked.** The address is real. But the receiving server will not accept mail from you. These bounces have codes that start with 5.7:
 
-- `550 5.7.1` means a policy block.
+- [550 5.7.1](/blog/550-5-7-1-error) means a policy block.
 - `550 5.7.26` means Gmail rejected your email because your domain is not authenticated.
 - `550 5.7.30` means your email failed a DKIM check.
 
@@ -166,7 +166,7 @@ Soft bounces are the opposite. Leave them alone. Your sending tool will retry on
 
 Because a hard bounce measures whether the email was accepted. It does not measure whether the address exists. Four things cause a 5xx bounce on a real, working mailbox.
 
-**Your email is not authenticated.** On 5 May 2025, Microsoft started enforcing SPF, DKIM and DMARC for any domain sending more than 5,000 emails a day to Outlook.com, Hotmail and Live addresses. First it moved failing mail to junk. Then it started rejecting it with `550 5.7.15 Access denied, sending domain does not meet the required authentication level`. Google requires the same three records from bulk senders. Gmail's `550 5.7.26` and `550 5.7.30` codes are what a missing record looks like from your side. All of these codes start with 5. So they land in your hard bounce column, even though the addresses would have accepted the email.
+**Your email is not authenticated.** On 5 May 2025, Microsoft started enforcing SPF, DKIM and DMARC for any domain sending more than 5,000 emails a day to Outlook.com, Hotmail and Live addresses. First it moved failing mail to junk. Then it started rejecting it with `550 5.7.515 Access denied, sending domain does not meet the required authentication level`. Google requires the same three records from bulk senders. Gmail's `550 5.7.26` and `550 5.7.30` codes are what a missing record looks like from your side. All of these codes start with 5. So they land in your hard bounce column, even though the addresses would have accepted the email.
 
 **The company blocks unknown addresses at the door.** Microsoft Exchange can be set to reject any address that is not in the company directory. It does this with `5.4.1 Recipient address rejected: Access denied`. Most of the time that is a true hard bounce. Sometimes it is a new employee whose mailbox has not been added yet. This is why a verifier that checks the mailbox itself gives you a better answer than the bounce did.
 
