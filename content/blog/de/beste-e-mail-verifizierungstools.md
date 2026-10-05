@@ -11,7 +11,7 @@ cta: Klären Sie die Catch-all- und SEG-Zeilen, die andere nur markieren
 
 ## Die Kurzfassung
 
-Dies ist ein Test von sechs Tools zur E-Mail-Verifizierung an den Adressen, an denen die meisten Verifizierer scheitern. Die vollständige Rangliste von 28 Tools nach Catch-all-Behandlung, SEG-Unterstützung und Preis finden Sie in der [Übersicht der besten E-Mail-Verifizierungstools](/alternatives) (auf Englisch).
+Dies ist ein Test von sechs Tools zur E-Mail-Verifizierung an den Adressen, an denen die meisten Verifizierer scheitern. Die vollständige Rangliste von 28 Tools nach Catch-all-Behandlung, SEG-Unterstützung und Preis finden Sie im [Vergleich von 28 Verifizierungstools](/alternatives) (auf Englisch).
 
 Das Schwierigste bei der Wahl eines E-Mail-Verifizierungstools im Jahr 2026 sind Catch-all- und SEG-geschützte Adressen. Rund 30 % einer B2B-E-Mail-Liste liegen auf Catch-all-Domains (auch Accept-all genannt) oder SEG-geschützten Domains, den beiden Fällen, in denen ein Mailserver einem Verifizierer nicht verrät, ob ein Postfach wirklich existiert. Auf Catch-all-Domains nimmt der Server jede Adresse an, also melden Verifizierer Riskant. Auf SEG-geschützten Domains verbirgt ein Sicherheits-Gateway den echten Server, also melden Verifizierer Unbekannt. Dieser Leitfaden erklärt die Verifizierung von Catch-all und SEG von Grund auf und vergleicht dann die sechs besten Verifizierer 2026 danach, ob sie diese Adressen tatsächlich auflösen oder nur markieren. Er beantwortet die eigentliche Frage: Gibt es einen echten Weg, Catch-all- und SEG-geschützte E-Mails zu verifizieren, und wenn ja, warum macht es nicht jedes Tool? Die Antworten helfen Ihnen, den Verifizierer zu wählen, der zu Ihrer Liste passt.
 

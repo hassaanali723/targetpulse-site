@@ -73,7 +73,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'Does validation send an email to the user?',
-    a: 'No message is ever dispatched. The API executes an SMTP socket handshake with the destination mail exchanger and simulates delivery up to the recipient verification command. It closes the session before any email data or body content is transmitted, ensuring zero inbox noise for your users.',
+    a: 'No message is ever dispatched. The API checks whether the mailbox exists. It closes the connection before any email data or body content is transmitted, ensuring zero inbox noise for your users.',
   },
   {
     q: 'Does it detect disposable and temporary addresses?',
@@ -85,7 +85,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'What happens with catch-all domains at signup?',
-    a: 'Catch-all domains accept all recipient addresses unconditionally, making standard SMTP checks inconclusive. Our API runs in-line deep catch-all verification to evaluate whether the mailbox exists. If the catch-all check returns "valid", you can safely allow signup; if "invalid", the address will bounce and should be stopped.',
+    a: 'Catch-all domains accept all recipient addresses unconditionally, making standard checks inconclusive. Our API runs in-line deep catch-all verification to evaluate whether the mailbox exists. If the catch-all check returns "valid", you can safely allow signup; if "invalid", the address will bounce and should be stopped.',
   },
   {
     q: "What should my form do if the API doesn't answer in time?",
@@ -128,7 +128,7 @@ export default function EmailValidationApiPage() {
             </span>
           </h1>
           <p className="text-base md:text-lg text-slate-600 leading-relaxed font-medium">
-            Validate addresses as users submit them: syntax, mail server and mailbox in one call, with disposable and
+            Validate addresses as users submit them: mail server and whether the mailbox exists in one call, with disposable and
             role-based flags so you decide what to accept. Our email validation api blocks bad data at the door,
             keeping fake accounts out of your database.
           </p>
@@ -237,9 +237,9 @@ await createUser({ email });`}</code>
 
           <div className="rounded-2xl border border-slate-200 bg-white p-6 space-y-3 shadow-sm">
             <div className="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold text-sm">3</div>
-            <h3 className="text-base font-bold text-slate-900">SMTP socket handshake</h3>
+            <h3 className="text-base font-bold text-slate-900">Mailbox check</h3>
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              Talks to the remote mail exchange socket directly to confirm whether the specific mailbox exists and has storage space.
+              Communicates with the remote mail server directly to confirm whether the specific mailbox exists and can receive mail.
             </p>
           </div>
         </div>
@@ -632,7 +632,7 @@ form.addEventListener('submit', async (e) => {
               <tr>
                 <td className="py-3.5 px-4 font-mono text-xs text-indigo-700">data.is_valid</td>
                 <td className="py-3.5 px-4 text-slate-500 font-mono text-xs">boolean</td>
-                <td className="py-3.5 px-4 text-slate-600">Quick boolean check. True when address syntax and mail server tests pass.</td>
+                <td className="py-3.5 px-4 text-slate-600">Quick boolean check. True when domain and mailbox verification checks pass.</td>
               </tr>
               <tr>
                 <td className="py-3.5 px-4 font-mono text-xs text-indigo-700">data.status</td>
@@ -642,7 +642,7 @@ form.addEventListener('submit', async (e) => {
               <tr>
                 <td className="py-3.5 px-4 font-mono text-xs text-indigo-700">data.deliverability_score</td>
                 <td className="py-3.5 px-4 text-slate-500 font-mono text-xs">number (0-100)</td>
-                <td className="py-3.5 px-4 text-slate-600">Quality score based on socket responses, MX stability, and reputation checks.</td>
+                <td className="py-3.5 px-4 text-slate-600">Quality score based on mailbox responses, MX stability, and reputation checks.</td>
               </tr>
               <tr>
                 <td className="py-3.5 px-4 font-mono text-xs text-indigo-700">data.details.attributes.disposable</td>

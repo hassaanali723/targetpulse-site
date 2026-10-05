@@ -27,7 +27,7 @@ import { breadcrumbLd, faqPageLd, apiSoftwareApplicationLd } from '@/lib/schema'
 const SIGNUP_URL = 'https://emailverifier.giggal.ai/sign-up'
 const TITLE = 'Email Verification API with Catch-All Resolution | Giggal.ai'
 const DESC =
-  'Real-time email verification API with SMTP mailbox checks and catch-all resolution in one JSON response. Bulk jobs up to 50,000. 1,000 free credits.'
+  'Real-time email verification API that checks whether each mailbox exists, with catch-all resolution in one JSON response. Bulk jobs up to 50,000. 1,000 free credits.'
 
 export const metadata: Metadata = {
   title: {
@@ -65,15 +65,15 @@ export const metadata: Metadata = {
 const faqs: FaqItem[] = [
   {
     q: 'Is there a free email verification API?',
-    a: 'Yes. Every new account receives 1,000 free credits immediately upon registration, with no credit card required. You can generate an API key in your developer dashboard and start sending verification requests right away. The free credits never expire and grant full access to every endpoint, including live SMTP verification and deep catch-all resolution.',
+    a: 'Yes. Every new account receives 1,000 free credits immediately upon registration, with no credit card required. You can generate an API key in your developer dashboard and start sending verification requests right away. The free credits never expire and grant full access to every endpoint, including full mailbox checks and deep catch-all resolution.',
   },
   {
     q: 'How does the API check an address without sending an email?',
-    a: 'The API initiates a direct SMTP handshake with the recipient mail server. It performs DNS and MX lookups, connects to the destination mail server, and simulates sending a message up to the RCPT TO command. The remote mail server responds indicating whether the mailbox exists. The connection is terminated cleanly before any message headers or body are transmitted, so your recipient never receives an email.',
+    a: 'The API checks whether the mailbox exists. It performs DNS and MX lookups, connects to the destination mail server, and checks whether the specific mailbox exists and can receive mail. The connection is closed cleanly before any message is transmitted, so your recipient never receives an email.',
   },
   {
     q: 'How are catch-all addresses handled?',
-    a: 'On catch-all domains, a standard mail server reports that every address is acceptable, which causes ordinary tools to return "risky" or "unknown". Giggal runs a deep mailbox existence check and returns a valid or invalid result with a catch_all_score from 0 to 100, saving you from discarding real leads.',
+    a: 'On catch-all domains, a standard mail server reports that every address is acceptable, which causes ordinary tools to return "risky" or "unknown". Giggal checks whether the mailbox exists and returns a valid or invalid result with a catch_all_score from 0 to 100, saving you from discarding real leads.',
   },
   {
     q: 'What does "unknown" mean, and am I charged for it?',
@@ -89,7 +89,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: "What's the difference between an email verification API and an email validation API?",
-    a: 'An email verification API evaluates whether an actual mailbox exists by communicating with mail servers over SMTP, checking DNS records, and resolving catch-all addresses across sales lists and customer databases. An email validation API focuses primarily on real-time front-end checks at signup forms to verify syntax, identify disposable domains, and block fake accounts on submission. If you need form protection, explore our email validation API.',
+    a: 'An email verification API evaluates whether an actual mailbox exists by communicating directly with destination mail servers, checking DNS records, and resolving catch-all addresses across sales lists and customer databases. An email validation API focuses primarily on real-time front-end checks at signup forms to verify format, identify disposable domains, and block fake accounts on submission. If you need form protection, explore our email validation API.',
   },
   {
     q: 'What should I look for in an email verification API?',
@@ -128,7 +128,7 @@ export default function EmailVerificationApiPage() {
             </span>
           </h1>
           <p className="text-base md:text-lg text-slate-600 leading-relaxed font-medium">
-            Check any address over SMTP with one REST call. On catch-all domains, where most APIs stop at
+            Check whether any mailbox exists with one REST call. On catch-all domains, where most APIs stop at
             &quot;accept-all&quot; or &quot;risky&quot;, you get a valid or invalid answer in the same response.
             Our email verification API gives engineering teams clean JSON data to protect sender reputation across
             outreach pipelines.
@@ -280,7 +280,7 @@ export default function EmailVerificationApiPage() {
         <div className="space-y-4">
           <h2 className={sectionTitle}>Catch-all addresses resolved in the same call</h2>
           <p className={proseP}>
-            Standard SMTP checks fail on catch-all domains. When a company mail server accepts
+            Standard checks fail on catch-all domains. When a company mail server accepts
             every incoming address, standard tools see a positive response for real mailboxes and fake
             typos alike. Unable to verify further, most tools tag the address &quot;risky&quot; or &quot;accept-all&quot;
             and leave the decision to you.
@@ -290,7 +290,7 @@ export default function EmailVerificationApiPage() {
             like Proofpoint and Mimecast. Deleting them discards real buyers; sending unverified causes bounce spikes.
           </p>
           <p className={proseP}>
-            Our verification engine performs in-line deep catch-all resolution. It runs a deep mailbox existence check
+            Our verification engine performs in-line deep catch-all resolution. It checks whether the mailbox exists
             to return a <code className="font-mono text-sm bg-slate-100 px-1 text-slate-800">catch_all_verdict</code> (&quot;valid&quot; or &quot;invalid&quot;)
             and a <code className="font-mono text-sm bg-slate-100 px-1 text-slate-800">catch_all_score</code> from 0 to 100.
             Learn more in our dedicated guides on{' '}
@@ -378,8 +378,8 @@ export default function EmailVerificationApiPage() {
             </div>
             <h3 className="text-base font-bold text-slate-900">Single email verification</h3>
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              Synchronous verification for a single email address. Runs complete SMTP validation, domain diagnostics, and
-              deep catch-all resolution in-line. Returns a complete JSON result.
+              Synchronous verification for a single email address. Checks if the email address exists, runs domain diagnostics and
+              resolves catch-all addresses in-line. Returns a complete JSON result.
             </p>
             <Link href="/public/docs" className="inline-flex items-center gap-1 text-xs font-bold text-indigo-600 hover:underline pt-2">
               View endpoint docs <ArrowRight className="w-3 h-3" />
@@ -530,7 +530,7 @@ export default function EmailVerificationApiPage() {
           <div className="rounded-2xl border border-slate-200 bg-white p-6 space-y-3 shadow-sm">
             <h3 className="text-base font-bold text-slate-900">Lead enrichment pipelines</h3>
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              Trigger automated SMTP checks whenever inbound SDR or outbound enrichment tools find new corporate emails,
+              Trigger automated mailbox checks whenever inbound SDR or outbound enrichment tools find new corporate emails,
               so reps only contact verified addresses.
             </p>
           </div>
@@ -840,7 +840,7 @@ const results = await resultsRes.json();`}</code>
         <div className="text-center space-y-3">
           <h2 className={sectionTitle}>Email verification API FAQ</h2>
           <p className={proseP}>
-            Common technical questions about authentication, SMTP checks, and catch-all handling.
+            Common technical questions about authentication, mailbox checks, and catch-all handling.
           </p>
         </div>
         <FaqAccordion items={faqs} />

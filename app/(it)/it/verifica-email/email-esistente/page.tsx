@@ -17,7 +17,7 @@ import { consoleStrings, SIGNUP_URL } from '@/lib/i18n/it'
 
 const PATH = '/it/verifica-email/email-esistente'
 const DESC =
-  'Come verificare se un indirizzo email esiste senza inviare messaggi: controllo SMTP, record MX e ricerca manuale, con i limiti di ognuno e uno strumento gratis.'
+  'Come verificare se un indirizzo email esiste senza inviare messaggi: verifica della casella, record MX e ricerca manuale, con i limiti di ognuno e uno strumento gratis.'
 
 export const metadata: Metadata = {
   title: { absolute: 'Verifica Email Esistente: Come Sapere se Esiste | Giggal.ai' },
@@ -36,8 +36,8 @@ export const metadata: Metadata = {
 
 const steps = [
   {
-    name: 'Verifica SMTP senza inviare email',
-    text: 'Uno strumento di verifica apre una conversazione con il server di posta del dominio, indica il destinatario e legge il codice di risposta: 250 se la casella è accettata, 550 se non esiste. Nessun messaggio viene consegnato.',
+    name: 'Verifica della casella senza inviare email',
+    text: 'Uno strumento di verifica controlla se l\'indirizzo email esiste, senza inviare alcun messaggio.',
   },
   {
     name: 'Cerca il record MX del dominio',
@@ -52,7 +52,7 @@ const steps = [
 const faqs: FaqItem[] = [
   {
     q: "Posso sapere se un'email esiste senza inviare nulla?",
-    a: 'Sì. La verifica SMTP chiede al server di posta se la casella esiste e legge la risposta senza consegnare messaggi. È il metodo che usa lo strumento in questa pagina.',
+    a: 'Sì. La verifica controlla se l\'indirizzo email esiste, senza inviare alcun messaggio. È il metodo che usa lo strumento in questa pagina.',
   },
   {
     q: 'Se il messaggio non torna indietro, l\'indirizzo esiste?',
@@ -64,7 +64,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'Le PEC si possono verificare?',
-    a: 'Solo in parte: molti server PEC non rispondono alle richieste SMTP standard. Il controllo del record MX funziona, quello della singola casella spesso no.',
+    a: 'Solo in parte: molti server PEC non rispondono alle richieste standard di verifica. Il controllo del record MX funziona, quello della singola casella spesso no.',
   },
   {
     q: 'Cosa faccio con un indirizzo che non esiste?',
@@ -105,10 +105,10 @@ export default function EmailEsistentePage() {
           Come verificare se un indirizzo email esiste
         </h1>
         <p className="text-base md:text-lg text-slate-600 leading-relaxed font-medium">
-          Un indirizzo email esiste se il server di posta del suo dominio accetta quella casella
-          quando gliela si propone in una conversazione SMTP. Si può chiedere senza inviare nessun
-          messaggio: è quello che fa lo strumento qui sotto in pochi secondi. Sui domini catch-all,
-          che accettano tutto, servono controlli in più, e li esegue anche quelli.
+          Un indirizzo email esiste se la sua casella è stata creata ed è attiva.
+          Si può verificare senza inviare nessun messaggio: è quello che fa lo
+          strumento qui sotto in pochi secondi. Sui domini catch-all, che accettano tutto, servono
+          controlli in più, e li esegue anche quelli.
         </p>
       </section>
 

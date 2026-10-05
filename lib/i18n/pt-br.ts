@@ -23,7 +23,7 @@ export const nav = {
 
 export const footer = {
   blurb:
-    'Verificação SMTP de alto desempenho para que suas campanhas cheguem a caixas reais, incluindo os domínios catch-all e accept-all que outras ferramentas pulam.',
+    'Verificação de e-mail que confere se cada caixa de e-mail existe para que suas campanhas cheguem a caixas de entrada reais, incluindo os domínios catch-all e accept-all que outras ferramentas pulam.',
   solutions: {
     heading: 'Soluções',
     links: [
@@ -89,9 +89,9 @@ export const cta = {
 
 export const consoleStrings = {
   header: 'Teste em tempo real',
-  live: 'Sonda ativa',
+  live: 'Teste ao vivo',
   actionLabel: 'Ação',
-  actionTitle: 'Handshake com o destinatário',
+  actionTitle: 'Verificação da caixa',
   placeholder: 'Digite um e-mail para verificar...',
   ariaInput: 'E-mail a verificar',
   button: 'Verificar',
@@ -101,10 +101,10 @@ export const consoleStrings = {
     basic: 'Verificações básicas',
     dns: 'Busca dos servidores de e-mail',
     catchall: 'Verificação catch-all',
-    mailbox: 'Existência da caixa',
+    mailbox: 'Verificação da caixa de e-mail',
   },
   idleTitle: 'Pronto para verificar',
-  idleText: 'Digite um endereço corporativo ou pessoal para disparar uma sonda DNS e SMTP ao vivo.',
+  idleText: 'Digite um endereço corporativo ou pessoal para verificar se a caixa existe.',
   spawning: 'INICIANDO VERIFICAÇÕES...',
   initLog: '[INIT] Abrindo o socket seguro de verificação...',
   limitTitle: 'Limite de visitante atingido',
@@ -116,7 +116,7 @@ export const consoleStrings = {
   invalidSyntax: 'Isso não é um endereço de e-mail válido.',
   isCatchAll: 'é um domínio catch-all',
   notCatchAll: 'não é um domínio catch-all',
-  catchAllText: 'Aceita e-mail para qualquer endereço, então uma verificação SMTP padrão não consegue dizer se esta caixa existe.',
+  catchAllText: 'Aceita e-mail para qualquer endereço, então uma verificação básica não consegue dizer se esta caixa existe.',
   notCatchAllText: 'Aqui uma verificação padrão é confiável.',
   resultLabel: 'Resultado',
   verdictTitle: {

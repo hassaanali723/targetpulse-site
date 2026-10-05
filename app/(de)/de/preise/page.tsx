@@ -36,9 +36,9 @@ const content: PricingContent = {
   includedTitle: 'In jedem Paket enthalten',
   includedText: 'Alle Funktionen, in allen Paketen. Keine Stufen, keine Sperren.',
   features: [
-    'Syntaxprüfung',
+    'Postfachprüfung',
     'Domain- und MX-Prüfung',
-    'SMTP-Prüfung des Postfachs',
+    'Erkennung von E-Mail-Gateways',
     'Erkennung von Wegwerfadressen',
     'Erkennung von Rollen-Adressen',
     'Catch-all-Verifizierung',

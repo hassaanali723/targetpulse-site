@@ -47,7 +47,7 @@ const content: CatchAllContent = {
   whatKicker: 'O contexto',
   whatTitle: 'O que é um domínio catch-all',
   whatParas: [
-    'Um domínio catch-all aceita todo e-mail que recebe, mesmo para endereços que não existem. O servidor responde com uma aceitação genérica a qualquer endereço, então uma verificação SMTP comum não consegue saber se há uma caixa real por trás.',
+    'Um domínio catch-all aceita todo e-mail que recebe, mesmo para endereços que não existem. O servidor responde com uma aceitação genérica a qualquer endereço, então uma verificação comum não consegue saber se há uma caixa real por trás.',
     'Em uma lista comercial típica cerca de 30 % dos contatos estão em domínios catch-all. A maioria das ferramentas reconhece o padrão, desiste e marca tudo como arriscado ou desconhecido. Você fica com uma lista longa de contatos que não pode usar com segurança.',
     'Sobram duas opções, as duas ruins: enviar e arriscar bounces, spam traps e uma reputação danificada, ou apagar e perder clientes reais. A verificação catch-all resolve o problema conferindo a existência real da caixa em vez de adivinhar.',
   ],
@@ -59,7 +59,7 @@ const content: CatchAllContent = {
   howTitle: 'Como a Giggal.ai verifica os e-mails catch-all',
   howText: 'Cada endereço catch-all passa por vários níveis de verificação que se combinam em um único resultado claro. Você vê válido ou inválido, não um relatório técnico.',
   signals: [
-    { title: 'Verificação profunda da caixa', body: 'Confirmamos a existência real de cada caixa, não só que o domínio aceita tudo. Onde uma verificação SMTP padrão vê uma aceitação genérica e para, nós seguimos até uma resposta real.' },
+    { title: 'Verificação profunda da caixa', body: 'Confirmamos a existência real de cada caixa, não só que o domínio aceita tudo. Onde uma verificação padrão vê uma aceitação genérica e para, nós seguimos até uma resposta real.' },
     { title: 'Sinais de confiança do domínio', body: 'Analisamos a configuração de cada domínio: registros SPF, DKIM e DMARC, certificados SSL e reputação da hospedagem. Domínios bem configurados hospedam caixas reais com muito mais frequência.' },
     { title: 'Gateways de segurança', body: 'Os endereços protegidos por gateways como Mimecast, Proofpoint e Barracuda são verificados diretamente. O gateway deixa de esconder se há uma caixa real atrás do endereço.' },
   ],
@@ -82,9 +82,9 @@ const content: CatchAllContent = {
   ],
   faqTitle: 'Perguntas frequentes',
   faq: [
-    { q: 'O que é um domínio catch-all?', a: 'Um domínio que aceita qualquer e-mail enviado, mesmo para endereços que não existem. O servidor responde "sim, existe" a qualquer endereço, por isso as verificações SMTP tradicionais não conseguem saber se uma caixa específica é real.' },
+    { q: 'O que é um domínio catch-all?', a: 'Um domínio que aceita qualquer e-mail enviado, mesmo para endereços que não existem. O servidor responde "sim, existe" a qualquer endereço, por isso as verificações tradicionais não conseguem saber se uma caixa específica é real.' },
     { q: 'A verificação catch-all custa créditos extras?', a: 'Não. Custa 1 crédito por e-mail, exatamente como uma verificação padrão.' },
-    { q: 'Qual é a precisão da verificação catch-all?', a: 'Cerca de 98,5 % em listas corporativas. Em vez de adivinhar só pelas respostas SMTP, verificamos a existência real da caixa, então o resultado se mantém também na hora do envio.' },
+    { q: 'Qual é a precisão da verificação catch-all?', a: 'Cerca de 98,5 % em listas corporativas. Em vez de adivinhar só por respostas superficiais, verificamos a existência real da caixa, então o resultado se mantém também na hora do envio.' },
     { q: 'Ela deixa a verificação do resto da lista mais lenta?', a: 'Não. As verificações catch-all rodam em paralelo com a verificação normal, não depois. A lista completa termina no mesmo tempo.' },
     { q: 'Posso verificar só os endereços catch-all de uma lista já limpa em outro lugar?', a: 'Sim. No painel abra Catch-All Detection, cole ou envie só os endereços que quer conferir e verifique. O custo é o mesmo: 1 crédito por e-mail.' },
     { q: 'O que acontece se uma verificação catch-all devolve "desconhecido"?', a: 'É raro, mas se não chegamos a um resultado o crédito é devolvido automaticamente. Você só paga pelas verificações concluídas.' },

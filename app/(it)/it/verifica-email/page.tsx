@@ -20,7 +20,7 @@ import { consoleStrings, SIGNUP_URL } from '@/lib/i18n/it'
 
 const PATH = '/it/verifica-email'
 const DESC =
-  'Verifica gratis se un indirizzo email esiste ed è valido, senza inviare nessuna email. Controllo di sintassi, DNS, SMTP e domini catch-all in pochi secondi.'
+  'Verifica gratis se un indirizzo email esiste ed è valido, senza inviare nessuna email. Controllo di DNS, esistenza dell\'email e domini catch-all in pochi secondi.'
 
 export const metadata: Metadata = {
   title: { absolute: 'Verifica Email Gratis: Scopri se Esiste | Giggal.ai' },
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
 const faqs: FaqItem[] = [
   {
     q: "Lo strumento invia un'email all'indirizzo?",
-    a: 'No. La verifica avviene con una conversazione SMTP con il server di posta del dominio: chiediamo se la casella esiste e leggiamo la risposta, senza consegnare nessun messaggio. Il destinatario non riceve nulla.',
+    a: 'No. Chiediamo al server di posta del dominio se la casella esiste e leggiamo la risposta, senza consegnare nessun messaggio. Il destinatario non riceve nulla.',
   },
   {
     q: 'Cosa significa "catch-all"?',
@@ -53,7 +53,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'La verifica funziona con Gmail, Outlook e le PEC?',
-    a: 'Sì con Gmail, Google Workspace, Outlook e Microsoft 365, dove il server risponde in modo affidabile. Le caselle PEC usano server che spesso non rispondono alle richieste SMTP standard: in quel caso il risultato può essere "sconosciuta".',
+    a: 'Sì con Gmail, Google Workspace, Outlook e Microsoft 365, dove il server risponde in modo affidabile. Le caselle PEC usano server che spesso non rispondono alle richieste standard di verifica: in quel caso il risultato può essere "sconosciuta".',
   },
   {
     q: 'Cosa vuol dire "sconosciuta"?',
@@ -69,7 +69,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'Che differenza c\'è tra verifica e validazione?',
-    a: 'La validazione controlla la forma dell\'indirizzo (sintassi, dominio). La verifica va oltre: interroga il server di posta e conferma che la casella esista. Questo strumento fa entrambe le cose.',
+    a: 'La validazione controlla la forma dell\'indirizzo e i record di dominio. La verifica va oltre: verifica se l\'indirizzo email esiste. Questo strumento fa entrambe le cose.',
   },
 ]
 
@@ -95,7 +95,7 @@ export default function VerificaEmailPage() {
           </span>
         </h1>
         <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium">
-          Controlla sintassi, server di posta, casella SMTP e domini catch-all in pochi secondi.
+          Controlla server di posta, esistenza dell&apos;email e domini catch-all in pochi secondi.
           Nessuna registrazione, nessuna email inviata al destinatario.
         </p>
       </section>
@@ -111,7 +111,7 @@ export default function VerificaEmailPage() {
           strings={consoleStrings}
         />
         <p className="text-center text-[13px] text-slate-500 font-medium mt-4">
-          Gratis, senza registrazione, senza carta. Un indirizzo per controllo, verifica SMTP completa.
+          Gratis, senza registrazione, senza carta. Un indirizzo per controllo, con verifica completa dell&apos;esistenza dell&apos;email.
         </p>
       </section>
 
@@ -125,7 +125,7 @@ export default function VerificaEmailPage() {
         </p>
         <ol className="list-decimal pl-6 space-y-3 text-slate-600 text-sm md:text-base font-medium leading-relaxed">
           <li>
-            <strong className="text-slate-900">Sintassi.</strong> L&apos;indirizzo è scritto bene:
+            <strong className="text-slate-900">Formato.</strong> L&apos;indirizzo è scritto bene:
             una sola chiocciola, una parte locale valida, un dominio con estensione. Questo passaggio
             trova gli errori di battitura e nient&apos;altro.
           </li>
@@ -135,9 +135,9 @@ export default function VerificaEmailPage() {
             ancora di inviare.
           </li>
           <li>
-            <strong className="text-slate-900">Verifica SMTP della casella.</strong> Apriamo una
-            conversazione con il server ricevente, indichiamo il destinatario e leggiamo la risposta.
-            Un codice 250 significa che la casella è accettata, un 550 che non esiste.
+            <strong className="text-slate-900">Verifica esistenza email.</strong> Controlliamo
+            se l&apos;indirizzo email esiste, senza inviare alcun messaggio. Il
+            risultato indica se la casella esiste o no.
           </li>
           <li>
             <strong className="text-slate-900">Risoluzione catch-all.</strong> Se il server ha detto
@@ -232,7 +232,7 @@ export default function VerificaEmailPage() {
         <p className={proseP}>
           Il controllo singolo serve per un indirizzo alla volta. Per un file intero registrati,
           carica il CSV e la{' '}
-          <Link href="/it/verifica-catch-all" className="text-indigo-600 font-bold hover:underline">
+          <Link href="/it" className="text-indigo-600 font-bold hover:underline">
             verifica in blocco
           </Link>{' '}
           esegue gli stessi controlli su ogni riga, catch-all compresi. I primi 1.000 crediti sono

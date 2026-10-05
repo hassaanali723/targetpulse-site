@@ -63,7 +63,7 @@ function toToolResult(r: VerifyResult): DisposableToolResult {
     disposable,
     steps: { basic: 'ok', disposable: disposable ? 'error' : 'ok' },
     logs: [
-      { step: 'basic', text: `[BASIC] Validating syntax and structure for ${r.email}...`, level: 'info' },
+      { step: 'basic', text: `[BASIC] Validating address format for ${r.email}...`, level: 'info' },
       { step: 'basic', text: `[SUCCESS] Address format is valid.`, level: 'success' },
       { step: 'disposable', text: `[DISPOSABLE] Checking ${DOMAIN} against the disposable mail registry...`, level: 'info' },
       disposable

@@ -16,17 +16,17 @@ const sections: LegalSection[] = [
     'Estos Términos del servicio regulan el uso del servicio Giggal.ai Email Verifier, operado por TargetPulse Ltd bajo el nombre comercial Giggal.ai.',
   ]},
   { heading: '2. Descripción del servicio', paragraphs: [
-    'Giggal.ai Email Verifier es una herramienta en la nube que ayuda a los equipos a limpiar y validar listas de correo. Los usuarios suben archivos CSV o direcciones individuales y nosotros comprobamos entregabilidad, sintaxis y estado del buzón para reducir las direcciones no válidas y mejorar la entrega.',
+    'Giggal.ai Email Verifier es una herramienta en la nube que ayuda a los equipos a limpiar y validar listas de correo. Los usuarios suben archivos CSV o direcciones individuales y nosotros comprobamos entregabilidad, registros de dominio y existencia del buzón para reducir las direcciones no válidas y mejorar la entrega.',
     'El Servicio se presta con sujeción a estos Términos y a cualquier condición adicional aplicable.',
   ]},
   { heading: '2.1 Servicio de verificación de correo', level: 3, paragraphs: ['Nuestro servicio principal es la verificación y validación de correos electrónicos, que incluye:'], list: [
-    'Validación de sintaxis: comprobación del formato y la estructura de la dirección',
+    'Detección de pasarelas: identificación de filtros y pasarelas de seguridad (SEG)',
     'Validación de dominio: comprobación de que el dominio existe y tiene registros MX válidos',
     'Verificación del buzón: comprobación de que la dirección concreta existe y puede recibir correo',
     'Detección de correos desechables: identificación de direcciones temporales',
     'Detección de cuentas de rol: identificación de direcciones genéricas (p. ej. info@, soporte@)',
     'Detección catch-all: identificación de dominios que aceptan cualquier dirección',
-    'Validación SMTP: verificación en tiempo real mediante el protocolo SMTP',
+    'Verificación en tiempo real: comprobación de si el buzón del destinatario existe',
     'Verificación en bloque: procesamiento de miles de direcciones a la vez',
   ]},
   { heading: '2.2 Sistema de créditos', level: 3, paragraphs: ['El servicio funciona con créditos:'], list: [

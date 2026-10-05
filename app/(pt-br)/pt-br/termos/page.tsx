@@ -16,17 +16,17 @@ const sections: LegalSection[] = [
     'Estes Termos de serviço regem o uso do serviço Giggal.ai Email Verifier, operado pela TargetPulse Ltd sob o nome comercial Giggal.ai.',
   ]},
   { heading: '2. Descrição do serviço', paragraphs: [
-    'O Giggal.ai Email Verifier é uma ferramenta na nuvem que ajuda equipes a limpar e validar listas de e-mail. Os usuários enviam arquivos CSV ou endereços individuais e nós conferimos entregabilidade, sintaxe e status da caixa para reduzir os endereços inválidos e melhorar a entrega.',
+    'O Giggal.ai Email Verifier é uma ferramenta na nuvem que ajuda equipes a limpar e validar listas de e-mail. Os usuários enviam arquivos CSV ou endereços individuais e nós conferimos entregabilidade, registros de domínio e existência da caixa para reduzir os endereços inválidos e melhorar a entrega.',
     'O Serviço é prestado sujeito a estes Termos e a quaisquer condições adicionais aplicáveis.',
   ]},
   { heading: '2.1 Serviço de verificação de e-mail', level: 3, paragraphs: ['Nosso serviço principal é a verificação e validação de e-mails, que inclui:'], list: [
-    'Validação de sintaxe: verificação do formato e da estrutura do endereço',
+    'Detecção de gateways: identificação de filtros e gateways de segurança (SEG)',
     'Validação de domínio: verificação de que o domínio existe e tem registros MX válidos',
     'Verificação da caixa: verificação de que o endereço específico existe e pode receber e-mail',
     'Detecção de e-mails descartáveis: identificação de endereços temporários',
     'Detecção de contas de função: identificação de endereços genéricos (por exemplo, contato@, suporte@)',
     'Detecção catch-all: identificação de domínios que aceitam qualquer endereço',
-    'Validação SMTP: verificação em tempo real pelo protocolo SMTP',
+    'Verificação em tempo real: verificação da existência da caixa de e-mail do destinatário',
     'Verificação em massa: processamento de milhares de endereços de uma vez',
   ]},
   { heading: '2.2 Sistema de créditos', level: 3, paragraphs: ['O serviço funciona com créditos:'], list: [

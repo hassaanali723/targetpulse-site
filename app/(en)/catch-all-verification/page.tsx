@@ -21,7 +21,7 @@ const signals = [
     Icon: Mail,
     wrap: 'bg-indigo-600 shadow-indigo-600/10',
     title: 'Deep Mailbox Verification',
-    body: 'We confirm the true existence of each mailbox, not just whether the domain accepts everything. Where standard SMTP checks see a generic acceptance and stop, we keep going until we reach a real answer.',
+    body: 'We confirm the true existence of each mailbox, not just whether the domain accepts everything. Where standard verification checks see a generic acceptance and stop, we keep going until we reach a real answer.',
   },
   {
     Icon: Globe,
@@ -47,7 +47,7 @@ const audience = [
 const faqs: FaqItem[] = [
   {
     q: 'What is a catch-all email domain?',
-    a: 'A catch-all domain accepts every email sent to it, even addresses that do not exist. The server simply replies "yes, this exists" to any address, which is why traditional SMTP checks cannot tell you whether the mailbox is real.',
+    a: 'A catch-all domain accepts every email sent to it, even addresses that do not exist. The server simply replies "yes, this exists" to any address, which is why traditional checks cannot tell you whether the mailbox is real.',
   },
   {
     q: 'Do catch-all verifications cost extra credits?',
@@ -55,7 +55,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'How accurate is catch-all verification?',
-    a: 'Around 98.5% on standard business lists. Instead of guessing based on SMTP responses alone, we verify the true existence of the mailbox so the result you see is the one that holds up when you actually send.',
+    a: 'Around 98.5% on standard business lists. Instead of guessing based on surface-level responses alone, we verify the true existence of the mailbox so the result you see is the one that holds up when you actually send.',
   },
   {
     q: 'Will catch-all verification slow down my main list?',
@@ -275,7 +275,7 @@ export default function CatchAllVerificationPage() {
           <p>
             A catch-all domain accepts every email sent to it, even addresses that do not
             exist. The server replies with a generic acceptance to any address, so a normal
-            SMTP check cannot tell you whether a real mailbox is behind the address.
+            check cannot tell you whether a real mailbox is behind the address.
           </p>
           <p>
             On a typical sales or marketing list, around 30 percent of contacts sit on

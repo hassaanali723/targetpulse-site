@@ -36,9 +36,9 @@ const content: PricingContent = {
   includedTitle: 'Todo incluido en cada paquete',
   includedText: 'Todas las funciones, en todos los paquetes. Sin niveles, sin bloqueos.',
   features: [
-    'Comprobación de sintaxis',
+    'Comprobación del buzón',
     'Verificación del dominio y los registros MX',
-    'Verificación SMTP del buzón',
+    'Detección de pasarelas SEG',
     'Detección de correos desechables',
     'Detección de cuentas de rol',
     'Verificación catch-all',

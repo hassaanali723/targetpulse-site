@@ -45,8 +45,8 @@ const faqs: FaqItem[] = [
     a: 'No. A catch-all domain accepts mail for every address, real or not. The mailbox behind it might be perfectly active. Catch-all describes how the domain is configured, not whether a person is there.',
   },
   {
-    q: 'Is this a free email verifier or just a syntax check?',
-    a: 'A full verifier. Syntax is the first step, then the MX lookup, then an SMTP conversation with the mail server to confirm the mailbox. On catch-all domains it goes one step further and resolves the address to valid or invalid.',
+    q: 'Is there a free email checker that actually works?',
+    a: 'A full verifier checks whether the mailbox exists, and detects catch-all domains. On catch-all domains it goes one step further and resolves the address to valid or invalid.',
   },
   {
     q: 'What does "valid" mean on a catch-all domain?',
@@ -66,23 +66,23 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'Is this email address real?',
-    a: 'A real email address has valid syntax, a domain with MX records and a mailbox the server accepts. Paste it into the checker above to test all three. On catch-all domains the server accepts every address, so the checker runs extra signals before it calls an address valid.',
+    a: 'A real email address has a domain with MX records and a mailbox the server accepts. Paste it into the checker above to test whether the mailbox exists. On catch-all domains the server accepts every address, so the checker runs extra signals before it calls an address valid.',
   },
   {
     q: 'How can I tell if an email address is fake?',
-    a: 'Look for misspelled domains, disposable providers, missing MX records and syntax errors. On most domains the mail server also rejects a fake mailbox during the SMTP check. On catch-all domains it accepts everything, so the checker runs extra signals to separate real mailboxes from fake ones.',
+    a: "Look for misspelled domains, disposable providers, missing MX records and syntax errors. On most domains a fake mailbox simply doesn't exist, and the check shows that. On catch-all domains it accepts everything, so the checker runs extra signals to separate real mailboxes from fake ones.",
   },
   {
     q: 'How do I check if an email address is active?',
-    a: 'You can check if an address is active by running an SMTP probe that asks the receiving mail server if the specific mailbox exists. The server responds with an acceptance code if the inbox is open and active, or a rejection code if it is closed or dead. This process confirms status without sending a message to the recipient.',
+    a: 'Paste the address into the checker above. It confirms whether the mailbox exists, without sending a message. That tells you the mailbox is there, not that someone reads it, and on catch-all domains the checker runs extra signals before calling an address valid.',
   },
   {
     q: "Is there a way to verify someone's email address for free?",
-    a: 'Yes. The checker above gives you a few free checks with no account or card, each running syntax, MX and SMTP checks. For more, create a free account and verify up to 1,000 addresses at no cost.',
+    a: 'Yes. The checker above gives you a few free checks with no account or card, and each one tells you whether the mailbox exists. For more, create a free account and verify up to 1,000 addresses at no cost.',
   },
   {
     q: 'Can I check if an email exists without sending an email?',
-    a: 'Yes. An email verifier connects directly to the recipient\'s mail server and initiates an SMTP handshake, asking if the mailbox exists. It disconnects before transmitting any actual message data, so no email is ever sent to the inbox.',
+    a: "Yes. The checker confirms whether the mailbox exists without sending anything to it, so nothing ever lands in the person's inbox.",
   },
   {
     q: 'Can I check a whole list here?',
@@ -111,9 +111,9 @@ export default function CatchAllEmailCheckerPage() {
           </span>
         </h1>
         <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium">
-          Verify an email address in seconds: syntax, MX records and a live SMTP check on the
-          mailbox itself. On catch-all domains, where most free checkers stop at a label, this one
-          keeps going and returns valid or invalid.
+          Verify an email address in seconds: MX records and a live check on whether the mailbox
+          exists. On catch-all domains, where most free checkers stop at a label, this one keeps
+          going and returns valid or invalid.
         </p>
       </section>
 
@@ -126,7 +126,7 @@ export default function CatchAllEmailCheckerPage() {
           emailFromQuery
         />
         <p className="text-center text-[13px] text-slate-500 font-medium mt-4">
-          Free, no signup, no card. One address per check, full SMTP-level verification.
+          Free, no signup, no card. One address per check, full mailbox check.
         </p>
       </section>
 
@@ -139,7 +139,7 @@ export default function CatchAllEmailCheckerPage() {
         </p>
         <ol className="list-decimal pl-6 space-y-3 text-slate-600 text-sm md:text-base font-medium leading-relaxed">
           <li>
-            <strong className="text-slate-900">Syntax.</strong> Is the address well formed: one @,
+            <strong className="text-slate-900">Format validation.</strong> Is the address well formed: one @,
             a valid local part, a domain with a TLD. This catches typos and nothing else.
           </li>
           <li>
@@ -148,9 +148,9 @@ export default function CatchAllEmailCheckerPage() {
             before any message is sent.
           </li>
           <li>
-            <strong className="text-slate-900">SMTP mailbox probe.</strong> Open a conversation
-            with the receiving server, name the recipient, and read the reply. A 250 means the
-            mailbox is accepted; a 550 means it is not there.
+            <strong className="text-slate-900">Mailbox check.</strong> We check whether the
+            mailbox exists, without sending an email. An acceptance means the mailbox exists;
+            a rejection means it is not there.
           </li>
           <li>
             <strong className="text-slate-900">Catch-all resolution.</strong> If the server said
@@ -274,8 +274,7 @@ export default function CatchAllEmailCheckerPage() {
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>What a catch-all domain does to an email check</h2>
         <p className={proseP}>
-          A checker verifies a mailbox by opening an SMTP conversation with the receiving server and
-          naming the recipient. On most domains the server answers honestly: it accepts addresses
+          A checker verifies whether the mailbox exists, without sending an email. On most domains the server answers honestly: it accepts addresses
           that exist and rejects the ones that do not. A catch-all domain is set up to accept every
           recipient it is offered. Ask it about a real employee and it says yes. Ask it about a name
           you invented on the spot and it says yes to that too. The reply is identical either way, so
@@ -295,7 +294,7 @@ export default function CatchAllEmailCheckerPage() {
           server accepts it, the domain accepts everything, and the tool has its answer in a single
           round trip. That is why nearly every free checker will readily tell you a domain is
           catch-all. Working out which mailboxes are real behind that domain is a different job. It
-          takes more probes, more signals, and infrastructure that holds a clean sending reputation
+          takes deeper analysis, more signals, and infrastructure that holds a clean sending reputation
           while it works, so most free tools stop at the label and hand the rest back to you. This
           checker runs the full verification instead, which is why it is limited to a handful of
           checks per visitor.

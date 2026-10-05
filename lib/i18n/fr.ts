@@ -23,7 +23,7 @@ export const nav = {
 
 export const footer = {
   blurb:
-    'Vérification SMTP haute performance pour que vos campagnes atteignent de vraies boîtes, y compris sur les domaines catch-all et accept-all que les autres outils laissent de côté.',
+    'Vérification d’email qui contrôle si chaque boîte existe pour que vos campagnes atteignent de vraies boîtes de réception, y compris sur les domaines catch-all et accept-all que les autres outils laissent de côté.',
   solutions: {
     heading: 'Solutions',
     links: [
@@ -90,9 +90,9 @@ export const cta = {
 
 export const consoleStrings = {
   header: 'Test en temps réel',
-  live: 'Sonde active',
+  live: 'Test en direct',
   actionLabel: 'Action',
-  actionTitle: 'Handshake avec le destinataire',
+  actionTitle: 'Vérification de la boîte',
   placeholder: 'Saisissez une adresse email à vérifier...',
   ariaInput: 'Adresse email à vérifier',
   button: 'Vérifier',
@@ -102,10 +102,10 @@ export const consoleStrings = {
     basic: 'Vérifications de base',
     dns: 'Recherche des serveurs de messagerie',
     catchall: 'Vérification catch-all',
-    mailbox: 'Existence de la boîte',
+    mailbox: 'Vérification de la boîte mail',
   },
   idleTitle: 'Prêt à vérifier',
-  idleText: 'Saisissez une adresse professionnelle ou personnelle pour lancer une sonde DNS et SMTP en direct.',
+  idleText: 'Saisissez une adresse professionnelle ou personnelle pour vérifier si la boîte existe.',
   spawning: 'LANCEMENT DES VÉRIFICATIONS...',
   initLog: '[INIT] Ouverture du socket sécurisé de vérification...',
   limitTitle: 'Limite invité atteinte',
@@ -117,7 +117,7 @@ export const consoleStrings = {
   invalidSyntax: 'Ce n’est pas une adresse email valide.',
   isCatchAll: 'est un domaine catch-all',
   notCatchAll: 'n’est pas un domaine catch-all',
-  catchAllText: 'Il accepte le courrier pour n’importe quelle adresse, donc une vérification SMTP standard ne peut pas dire si cette boîte existe.',
+  catchAllText: 'Il accepte le courrier pour n’importe quelle adresse, donc une vérification de base ne peut pas dire si cette boîte existe.',
   notCatchAllText: 'Ici, une vérification standard est fiable.',
   resultLabel: 'Résultat',
   verdictTitle: {

@@ -32,6 +32,17 @@ function alternateOf(pathname: string, from: Locale, target: Locale): string {
       if (there) return there
     }
   }
+  // For paginated subpages (e.g. /blog/page/2, /it/blog/page/2), link to the matching locale hub
+  const unpaged = clean.replace(/\/page\/\d+$/, '')
+  if (unpaged !== clean) {
+    for (const c of Object.values(CLUSTERS) as Cluster[]) {
+      const here = c[from]
+      if (here && (here.replace(/\/$/, '') || '/') === unpaged) {
+        const there = c[target]
+        if (there) return there
+      }
+    }
+  }
   return CLUSTERS.home[target] ?? '/'
 }
 

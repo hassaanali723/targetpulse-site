@@ -10,7 +10,7 @@ export default function EmailVerifierFeatures() {
     {
       icon: <CheckCircle2 className="w-12 h-12" />,
       title: 'Deliverable Emails',
-      description: 'Valid email addresses that are safe to send to. These emails passed all validation checks including syntax, domain, and SMTP verification.',
+      description: 'Valid email addresses that are safe to send to. These emails passed all checks, confirming domain records and that the mailbox exists.',
       color: '#10b981',
       bgColor: 'from-green-500 to-emerald-600',
       stats: '100% Score'
@@ -18,7 +18,7 @@ export default function EmailVerifierFeatures() {
     {
       icon: <XCircle className="w-12 h-12" />,
       title: 'Undeliverable Emails',
-      description: 'Invalid or non-existent email addresses. Includes invalid format, non-existent domains, rejected emails, and invalid SMTP configurations.',
+      description: 'Invalid or non-existent email addresses. Includes invalid format, non-existent domains, and mailboxes rejected by the mail server.',
       color: '#ef4444',
       bgColor: 'from-red-500 to-rose-600',
       stats: '0% Score'
@@ -34,7 +34,7 @@ export default function EmailVerifierFeatures() {
     {
       icon: <HelpCircle className="w-12 h-12" />,
       title: 'Unknown Status',
-      description: 'Emails that couldn\'t be verified due to connection issues, timeouts, or SMTP unavailability. May require manual verification.',
+      description: 'Emails that couldn\'t be verified due to connection issues, timeouts, or temporary mail server unavailability. May require manual verification.',
       color: '#6b7280',
       bgColor: 'from-gray-500 to-gray-600',
       stats: 'N/A'

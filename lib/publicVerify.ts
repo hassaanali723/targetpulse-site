@@ -64,7 +64,7 @@ export function disposableResult(email: string, domain: string): VerifyResult {
       mailbox: 'error',
     },
     logs: [
-      { step: 'basic', text: `[BASIC] Validating syntax and structure for ${email}...`, level: 'info' },
+      { step: 'basic', text: `[BASIC] Validating address format and domain for ${email}...`, level: 'info' },
       { step: 'basic', text: `[SUCCESS] Address format is valid.`, level: 'success' },
       { step: 'disposable', text: `[DISPOSABLE] Checking ${DOMAIN} against the disposable mail registry...`, level: 'info' },
       { step: 'disposable', text: `[WARNING] ${DOMAIN} is a disposable or temporary mail service.`, level: 'warn' },
@@ -91,7 +91,7 @@ export function disposableResult(email: string, domain: string): VerifyResult {
 // rate-limits per visitor.
 export async function runVerification(email: string, ip: string): Promise<VerifyOutcome> {
   // Disposable detection happens in the backend (single source of truth,
-  // refreshed on a schedule). It short-circuits before any SMTP probe, so
+  // refreshed on a schedule). It short-circuits before any mailbox check, so
   // there is nothing to save by checking locally, and a local copy drifts.
   const base = process.env.BACKEND_URL || process.env.NEXT_PUBLIC_BACKEND_URL
   if (!base) {
@@ -99,7 +99,7 @@ export async function runVerification(email: string, ip: string): Promise<Verify
   }
 
   const controller = new AbortController()
-  // The public validator runs SMTP + deep catch-all verification — give it room.
+  // The public validator runs mailbox check + deep catch-all verification — give it room.
   const timeout = setTimeout(() => controller.abort(), 60_000)
   try {
     // The backend limits guests to 5 checks per hour per IP. Every visitor
@@ -163,7 +163,7 @@ export function invalidSyntax(email: string): VerifyResult {
     catchAll: false,
     steps: { basic: 'error', dns: 'skip', catchall: 'skip', mailbox: 'skip' },
     logs: [
-      { step: 'basic', text: `[BASIC] Checking syntax and structure for ${email}...`, level: 'info' },
+      { step: 'basic', text: `[BASIC] Checking address format and domain for ${email}...`, level: 'info' },
       { step: 'basic', text: `[FAILED] Address is not a valid email format.`, level: 'error' },
     ],
     verdict: { type: 'undeliverable', title: 'Invalid Email', desc: 'The address is not a valid email format.', score: 0 },
@@ -197,8 +197,8 @@ export function mapResult(email: string, data: any): VerifyResult {
   const logs: VerifyResult['logs'] = []
   const steps: VerifyResult['steps'] = { basic: 'ok', dns: 'ok', catchall: 'ok', mailbox: 'ok' }
 
-  // Step 1 — syntax
-  logs.push({ step: 'basic', text: `[BASIC] Validating syntax and domain structure...`, level: 'info' })
+  // Step 1 — address format
+  logs.push({ step: 'basic', text: `[BASIC] Validating address format and domain structure...`, level: 'info' })
   logs.push({ step: 'basic', text: `[SUCCESS] Address format is valid.`, level: 'success' })
 
   // Step 2 — mail servers
@@ -217,12 +217,12 @@ export function mapResult(email: string, data: any): VerifyResult {
   }
   logs.push({
     step: 'dns',
-    text: `[SUCCESS] Secure SMTP channel active${provider ? `, ${provider}` : ''}${mx ? ` (${mx})` : ''}.`,
+    text: `[SUCCESS] Mail server reachable${provider ? `, ${provider}` : ''}${mx ? ` (${mx})` : ''}.`,
     level: 'success',
   })
 
   // Step 3 — catch-all (the backend resolved it; reflect that here)
-  logs.push({ step: 'catchall', text: `[CATCH-ALL] Probing recipient acceptance policy...`, level: 'info' })
+  logs.push({ step: 'catchall', text: `[CATCH-ALL] Checking recipient acceptance policy...`, level: 'info' })
   if (catchAll) {
     logs.push({ step: 'catchall', text: `[WARNING] Domain accepts all recipients (catch-all).`, level: 'warn' })
     logs.push({ step: 'catchall', text: `[VERIFY] Running deep catch-all verification (domain + directory signals)...`, level: 'info' })
@@ -238,7 +238,7 @@ export function mapResult(email: string, data: any): VerifyResult {
   }
 
   // Step 4 — final verdict (driven by the backend's resolved status)
-  logs.push({ step: 'mailbox', text: `[SMTP] Querying recipient socket deliverability state...`, level: 'info' })
+  logs.push({ step: 'mailbox', text: `[CHECK] Checking if mailbox exists...`, level: 'info' })
 
   let verdict: VerifyResult['verdict']
   if (status === 'deliverable') {
@@ -249,7 +249,7 @@ export function mapResult(email: string, data: any): VerifyResult {
       title: 'Deliverable',
       desc: catchAll
         ? 'Verified deliverable on a catch-all domain via deep verification, safe to send.'
-        : 'SMTP validation passed. The mailbox is fully active.',
+        : 'Mailbox verified. The mailbox is fully active.',
       score,
     }
   } else if (status === 'undeliverable') {

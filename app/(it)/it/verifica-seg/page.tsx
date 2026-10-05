@@ -48,7 +48,7 @@ const VERDICTS = [
 
 const faqs: FaqItem[] = [
   { q: 'Un gateway di sicurezza significa che l\'indirizzo non è valido?', a: 'No. Il gateway è un filtro, non un segnale sulla casella che sta dietro. Moltissimi indirizzi validi e attivi si trovano dietro Proofpoint o Mimecast. Il gateway li rende solo più difficili da controllare.' },
-  { q: 'Perché gli altri verificatori restituiscono "sconosciuta" su questi indirizzi?', a: 'La maggior parte interroga direttamente il server di posta via SMTP. Dietro un gateway la domanda viene intercettata e riceve risposta dal gateway stesso, progettato per non dire nulla di utile. Senza una risposta, il verificatore non ha niente da riportare.' },
+  { q: 'Perché gli altri verificatori restituiscono "sconosciuta" su questi indirizzi?', a: 'La maggior parte si collega direttamente al server di posta per verificare la casella. Dietro un gateway la domanda viene intercettata e riceve risposta dal gateway stesso, progettato per non dire nulla di utile. Senza una risposta, il verificatore non ha niente da riportare.' },
   { q: 'Quali gateway gestisce Giggal.ai?', a: 'Quindici, tra cui Proofpoint, Mimecast, Barracuda, Cisco IronPort, Sophos, Trend Micro, Symantec, Fortinet e Forcepoint. Il riconoscimento è automatico dai record MX del dominio.' },
   { q: 'Devo separare gli indirizzi protetti da SEG prima di caricare la lista?', a: 'No. Carica la lista così com\'è. I domini dietro un gateway vengono riconosciuti e instradati in automatico durante la verifica.' },
   { q: 'Verificare dietro un gateway costa di più?', a: 'No. Ogni verifica costa 1 credito, che il dominio sia dietro un gateway, catch-all o una casella standard.' },
@@ -108,39 +108,38 @@ export default function VerificaSegPage() {
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Perché i gateway rompono la verifica email</h2>
         <p className={proseP}>
-          La verifica standard apre una conversazione SMTP con il server di posta e chiede, in
-          pratica, se una casella esiste. Su un dominio normale il server risponde e il verificatore
-          registra valida o non valida.
+          La verifica standard controlla se la casella esiste. Su un dominio normale il server
+          risponde e il verificatore registra valida o non valida.
         </p>
         <p className={proseP}>
-          Dietro un gateway quella conversazione non arriva mai al server. Il gateway la intercetta
-          e risponde al posto suo. I gateway sono costruiti proprio per impedire questo tipo di
-          sondaggio, perché la stessa tecnica viene usata da chi attacca per mappare gli utenti di
-          un&apos;azienda. Così il gateway dà una risposta volutamente vaga, accetta ogni indirizzo che
-          esista o no, oppure rifiuta la connessione.
+          Dietro un gateway quella domanda non arriva mai al server. Il gateway la intercetta e
+          risponde al posto suo. I gateway sono costruiti proprio per impedire la mappatura degli
+          utenti aziendali. Così il gateway dà una risposta volutamente vaga, accetta ogni indirizzo
+          che esista o no, oppure rifiuta la connessione.
         </p>
         <p className={proseP}>
           Il verificatore resta senza nulla da trasformare in un risultato. Segna l&apos;indirizzo come
           sconosciuto o a rischio, e il contatto resta irrisolto. Su una lista aziendale, dove una
           quota rilevante di domini sta dietro un gateway, è una parte vera della lista che non puoi
-          usare con sicurezza. Riprovare peggiora le cose: sondare più volte un endpoint che rifiuta
-          il controllo fa segnalare l&apos;IP di invio, e da lì i risultati peggiorano su ogni dominio.
-          Per questo Giggal.ai salta del tutto l&apos;SMTP sui gateway che si comportano così.
+          usare con sicurezza. Riprovare peggiora le cose: interrogare ripetutamente un endpoint che
+          rifiuta il controllo fa segnalare l&apos;IP di invio, e da lì i risultati peggiorano su ogni
+          dominio. Per questo Giggal.ai usa percorsi di verifica alternativi sui gateway che si
+          comportano così.
         </p>
       </section>
 
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Come Giggal.ai verifica dietro un gateway</h2>
         <p className={proseP}>
-          Giggal.ai legge prima i record MX del dominio, prima di qualsiasi sonda, per capire cosa c&apos;è
+          Giggal.ai legge prima i record MX del dominio per capire cosa c&apos;è
           davanti alla casella. Questo ci dice se il dominio risponde direttamente o sta dietro un
           gateway.
         </p>
         <p className={proseP}>
           I domini dietro un gateway seguono un percorso di verifica diverso da quelli che rispondono
-          direttamente. Dove il gateway rifiuta il sondaggio SMTP, il risultato non dipende affatto da
-          quella risposta: verifichiamo l&apos;indirizzo con un altro segnale, così torna comunque valida
-          o non valida dove un controllo SMTP semplice non restituirebbe nulla.
+          direttamente. Dove il gateway rifiuta il controllo diretto, il risultato non dipende affatto
+          da quella risposta: verifichiamo l&apos;indirizzo con un altro segnale, così torna comunque
+          valida o non valida dove un controllo standard non restituirebbe nulla.
         </p>
         <p className={proseP}>
           I gateway restituiscono anche risposte pensate per nascondere se una casella esiste.
@@ -176,16 +175,16 @@ export default function VerificaSegPage() {
           <h2 className={sectionTitle}>Mimecast</h2>
           <p className={proseP}>
             Mimecast è costruito per impedire a chiunque di capire quali caselle esistono su un
-            dominio, e risponde alle sonde con una risposta volutamente vaga. Giggal.ai riconosce
-            questo comportamento e salta del tutto l&apos;SMTP verso Mimecast, invece di provocare la
-            risposta e pagarne il prezzo in reputazione. Verifica l&apos;indirizzo per un&apos;altra strada.
+            dominio, e risponde con una risposta volutamente vaga. Giggal.ai riconosce
+            questo comportamento ed evita di provocare la risposta e pagarne il prezzo in reputazione.
+            Verifica per un&apos;altra strada se l&apos;indirizzo email esiste.
           </p>
         </div>
         <div className="space-y-4">
           <h2 className={sectionTitle}>Barracuda</h2>
           <p className={proseP}>
             Barracuda è comune sui domini delle medie imprese e, come gli altri gateway, sta davanti
-            al vero server di posta. Un verificatore standard che sonda un dominio Barracuda via SMTP
+            al vero server di posta. Un verificatore standard che controlla un dominio Barracuda
             di solito non ottiene una risposta chiara sulla casella. Giggal.ai lo riconosce e usa il
             percorso gateway anche qui.
           </p>

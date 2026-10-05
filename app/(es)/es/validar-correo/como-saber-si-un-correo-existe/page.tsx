@@ -18,7 +18,7 @@ import { consoleStrings, SIGNUP_URL } from '@/lib/i18n/es'
 
 const PATH = '/es/validar-correo/como-saber-si-un-correo-existe'
 const DESC =
-  'Cómo saber si un correo existe sin enviar un mensaje: comprobación SMTP, registros MX y búsqueda manual, con los límites de cada método y un verificador gratis.'
+  'Cómo saber si un correo existe sin enviar un mensaje: comprobación del buzón, registros MX y búsqueda manual, con los límites de cada método y un verificador gratis.'
 
 export const metadata: Metadata = {
   title: { absolute: '¿Cómo Saber si un Correo Existe? Guía y Verificador | Giggal.ai' },
@@ -37,8 +37,8 @@ export const metadata: Metadata = {
 
 const steps = [
   {
-    name: 'Comprobación SMTP sin enviar un correo',
-    text: 'Un verificador abre una conversación con el servidor de correo del dominio, indica el destinatario y lee el código de respuesta: 250 si el buzón se acepta, 550 si no existe. No se entrega ningún mensaje.',
+    name: 'Comprobar si el correo existe sin enviar un mensaje',
+    text: 'Un verificador comprueba si el correo existe, sin enviar ningún mensaje.',
   },
   {
     name: 'Consultar los registros MX del dominio',
@@ -57,11 +57,11 @@ const steps = [
 const faqs: FaqItem[] = [
   {
     q: '¿Cómo saber si un correo electrónico existe sin enviar nada?',
-    a: 'Con la comprobación SMTP: se pregunta al servidor de correo si el buzón existe y se lee la respuesta sin entregar ningún mensaje. Es el método que usa la herramienta de esta página.',
+    a: 'Comprobando si el correo existe, sin enviar ningún mensaje. Es el método que usa la herramienta de esta página.',
   },
   {
     q: '¿Cómo comprobar si existe un correo de Gmail?',
-    a: 'Igual que cualquier otro: Gmail responde a la comprobación SMTP y confirma o rechaza el buzón. Escribe la dirección en el verificador de arriba; en unos segundos verás válido o no válido.',
+    a: 'Igual que cualquier otro: En Gmail, la comprobación confirma si el buzón existe o no. Escribe la dirección en el verificador de arriba; en unos segundos verás válido o no válido.',
   },
   {
     q: 'Si el mensaje no rebota, ¿el correo existe?',
@@ -69,7 +69,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: '¿Cómo saber si un correo está activo?',
-    a: 'Un buzón activo responde 250 a la comprobación SMTP. Si responde tarde o aplica greylisting, el resultado es "desconocido": vuelve a probar más tarde antes de descartarlo.',
+    a: 'Si el buzón está activo, la comprobación lo confirma. Si responde tarde o aplica greylisting, el resultado es "desconocido": vuelve a probar más tarde antes de descartarlo.',
   },
   {
     q: '¿Por qué el resultado dice "desconocido"?',
@@ -114,10 +114,10 @@ export default function ComoSaberSiUnCorreoExistePage() {
           ¿Cómo saber si un correo existe? Cuatro métodos y un verificador
         </h1>
         <p className="text-base md:text-lg text-slate-600 leading-relaxed font-medium">
-          Un correo existe si el servidor de correo de su dominio acepta ese buzón cuando se le propone
-          en una conversación SMTP. Se puede preguntar sin enviar ningún mensaje: es lo que hace la
-          herramienta de abajo en unos segundos. En los dominios catch-all, que aceptan todo, hacen falta
-          comprobaciones adicionales, y también las ejecuta.
+          Un correo existe si su buzón está creado y activo.
+          Se puede preguntar sin enviar ningún mensaje: es lo que hace la herramienta de abajo en unos
+          segundos. En los dominios catch-all, que aceptan todo, hacen falta comprobaciones adicionales,
+          y también las ejecuta.
         </p>
       </section>
 

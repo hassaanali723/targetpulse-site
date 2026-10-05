@@ -423,7 +423,7 @@ const groups: SidebarGroup[] = [
         title: 'Submit a bulk verification job',
         description: 'Submit up to 50,000 emails per job. Processing is asynchronous, so poll GET /v1/jobs/:jobId for progress. Pass an Idempotency-Key header to safely retry job creation without double charges.',
         bodyParams: [
-          { name: 'emails', type: 'string[]', required: true, description: 'Array of email addresses to verify. Max 50,000 per job. Duplicates and invalid syntax are stripped server-side.' },
+          { name: 'emails', type: 'string[]', required: true, description: 'Array of email addresses to verify. Max 50,000 per job. Duplicates and malformed addresses are stripped server-side.' },
           { name: 'name', type: 'string', description: 'Optional human-readable label for the job. Shown in your dashboard.' },
         ],
         responses: [

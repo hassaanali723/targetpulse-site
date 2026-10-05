@@ -71,7 +71,7 @@ const en: CheckerStrings = {
     'Disposable services register new domains all the time. A list that is not updated misses them. This is why the check runs on the Giggal verification service and not on a file inside this website.',
   how: [
     {
-      title: 'Syntax check',
+      title: 'Address format check',
       text: 'The tool checks that the address has a valid format: a local part, one @ sign and a domain. This runs before anything is sent to the server.',
     },
     {
@@ -84,7 +84,7 @@ const en: CheckerStrings = {
     },
     {
       title: 'Deliverability is a separate check',
-      text: 'To find out whether the mailbox exists and accepts mail, use the free email checker. It connects to the mail server and asks. This page only answers the disposable question.',
+      text: 'To find out whether the mailbox exists and accepts mail, use the free email checker. It checks whether the mailbox exists. This page only answers the disposable question.',
     },
   ],
   servicesTitle: 'Common disposable email services',
@@ -188,7 +188,7 @@ const it: CheckerStrings = {
     'I servizi usa e getta registrano nuovi domini di continuo. Una lista che non viene aggiornata li perde. Per questo il controllo gira sul servizio di verifica di Giggal e non su un file dentro questo sito.',
   how: [
     {
-      title: 'Controllo della sintassi',
+      title: 'Controllo del formato',
       text: "Lo strumento controlla che l'indirizzo abbia un formato valido: una parte locale, una sola @ e un dominio. Questo avviene prima di inviare qualcosa al server.",
     },
     {
@@ -201,7 +201,7 @@ const it: CheckerStrings = {
     },
     {
       title: 'La validità è un controllo a parte',
-      text: "Per sapere se la casella esiste e riceve posta, usa la verifica email gratuita. Si collega al server di posta e lo chiede. Questa pagina risponde solo alla domanda sull'usa e getta.",
+      text: "Per sapere se la casella esiste e riceve posta, usa la verifica email gratuita. Verifica se l'indirizzo email esiste. Questa pagina risponde solo alla domanda sull'usa e getta.",
     },
   ],
   servicesTitle: 'Servizi di email usa e getta comuni',
@@ -238,7 +238,7 @@ const it: CheckerStrings = {
   bulkTitle: 'Controllo singolo o controllo in blocco',
   bulkParas: [
     "Lo strumento qui sopra controlla un indirizzo alla volta. È utile per una registrazione sospetta o un singolo lead. Per un'intera lista, un indirizzo alla volta è troppo lento.",
-    "Nella dashboard di Giggal puoi caricare un file CSV o TXT nel nostro [servizio di pulizia della lista email](/email-list-cleaning) e controllare tutta la lista in una volta. Ogni indirizzo viene controllato per domini usa e getta, account di ruolo come info@ o sales@ e per l'esistenza della casella. Sui [domini catch-all](/catch-all-verification), dove un controllo standard non può confermare una casella, Giggal esegue un controllo più approfondito. Un account gratuito include 1.000 crediti.",
+    "Nella dashboard di Giggal puoi caricare un file CSV o TXT nel nostro [servizio di pulizia della lista email](/email-list-cleaning) e controllare tutta la lista in una volta. Ogni indirizzo viene controllato per domini usa e getta, account di ruolo come info@ o sales@ e per capire se esiste davvero. Sui [domini catch-all](/catch-all-verification), dove un controllo standard non può confermare una casella, Giggal esegue un controllo più approfondito. Un account gratuito include 1.000 crediti.",
   ],
   faqTitle: 'Domande sul controllo delle email usa e getta',
   faqs: [
@@ -272,7 +272,7 @@ const it: CheckerStrings = {
     },
     {
       q: 'Posso controllare le email usa e getta in blocco?',
-      a: "Sì. Carica un file CSV o TXT nella dashboard di Giggal. Ogni indirizzo viene controllato per domini usa e getta, account di ruolo, domini catch-all e per l'esistenza della casella.",
+      a: "Sì. Carica un file CSV o TXT nella dashboard di Giggal. Ogni indirizzo viene controllato per domini usa e getta, account di ruolo, domini catch-all e per capire se esiste davvero.",
     },
   ],
   ctaBand: 'Blocca le email usa e getta e pulisci la tua lista',
@@ -294,7 +294,7 @@ const it: CheckerStrings = {
     deliverButton: 'Controlla se questo indirizzo è valido',
     verifierPath: '/it/verifica-email',
     logs: {
-      basicStart: '[BASIC] Controllo di sintassi e struttura per {email}...',
+      basicStart: '[BASIC] Controllo del formato per {email}...',
       basicOk: "[SUCCESS] Il formato dell'indirizzo è valido.",
       basicFail: "[FAILED] L'indirizzo non ha un formato email valido.",
       registry: '[DISPOSABLE] Controllo di {domain} nel registro dei domini usa e getta...',
@@ -324,7 +324,7 @@ const de: CheckerStrings = {
     'Wegwerfdienste registrieren ständig neue Domains. Eine Liste, die nicht aktualisiert wird, übersieht sie. Deshalb läuft die Prüfung im Prüfdienst von Giggal und nicht über eine Datei auf dieser Website.',
   how: [
     {
-      title: 'Syntaxprüfung',
+      title: 'Formatprüfung',
       text: 'Das Tool prüft, ob die Adresse ein gültiges Format hat: einen lokalen Teil, genau ein @-Zeichen und eine Domain. Das passiert, bevor etwas an den Server gesendet wird.',
     },
     {
@@ -337,7 +337,7 @@ const de: CheckerStrings = {
     },
     {
       title: 'Die Gültigkeit ist eine eigene Prüfung',
-      text: 'Ob das Postfach existiert und E-Mails annimmt, prüfen Sie mit dem kostenlosen E-Mail-Prüfer. Er verbindet sich mit dem Mailserver und fragt nach. Diese Seite beantwortet nur die Frage nach der Wegwerf-Domain.',
+      text: 'Ob das Postfach existiert und E-Mails annimmt, prüfen Sie mit dem kostenlosen E-Mail-Prüfer. Er prüft, ob die E-Mail-Adresse wirklich existiert. Diese Seite beantwortet nur die Frage nach der Wegwerf-Domain.',
     },
   ],
   servicesTitle: 'Bekannte Wegwerf-E-Mail-Dienste',
@@ -431,7 +431,7 @@ const de: CheckerStrings = {
     deliverButton: 'Prüfen, ob diese Adresse gültig ist',
     verifierPath: '/de/email-adresse-pruefen',
     logs: {
-      basicStart: '[BASIC] Syntax und Struktur von {email} werden geprüft...',
+      basicStart: '[BASIC] Format von {email} wird geprüft...',
       basicOk: '[SUCCESS] Das Adressformat ist gültig.',
       basicFail: '[FAILED] Die Adresse hat kein gültiges E-Mail-Format.',
       registry: '[DISPOSABLE] {domain} wird mit dem Register der Wegwerf-Domains abgeglichen...',
@@ -461,7 +461,7 @@ const es: CheckerStrings = {
     'Los servicios desechables registran dominios nuevos todo el tiempo. Una lista que no se actualiza los pierde. Por eso la comprobación se hace en el servicio de verificación de Giggal y no con un archivo dentro de este sitio.',
   how: [
     {
-      title: 'Comprobación de sintaxis',
+      title: 'Comprobación de formato',
       text: 'La herramienta comprueba que la dirección tenga un formato válido: una parte local, una sola @ y un dominio. Esto ocurre antes de enviar nada al servidor.',
     },
     {
@@ -474,7 +474,7 @@ const es: CheckerStrings = {
     },
     {
       title: 'La validez es otra comprobación',
-      text: 'Para saber si el buzón existe y acepta correo, usa el verificador de email gratis. Se conecta al servidor de correo y lo pregunta. Esta página solo responde si el dominio es desechable.',
+      text: 'Para saber si el buzón existe y acepta correo, usa el verificador de email gratis. Comprueba si el buzón existe. Esta página solo responde si el dominio es desechable.',
     },
   ],
   servicesTitle: 'Servicios de correo desechable comunes',
@@ -567,7 +567,7 @@ const es: CheckerStrings = {
     deliverButton: 'Comprobar si esta dirección es válida',
     verifierPath: '/es/validar-correo',
     logs: {
-      basicStart: '[BASIC] Comprobando la sintaxis y la estructura de {email}...',
+      basicStart: '[BASIC] Comprobando el formato de {email}...',
       basicOk: '[SUCCESS] El formato de la dirección es válido.',
       basicFail: '[FAILED] La dirección no tiene un formato de correo válido.',
       registry: '[DISPOSABLE] Comprobando {domain} en el registro de dominios desechables...',
@@ -597,7 +597,7 @@ const ptBr: CheckerStrings = {
     'Os serviços descartáveis registram domínios novos o tempo todo. Uma lista que não é atualizada deixa esses domínios passarem. Por isso a verificação roda no serviço de verificação da Giggal, e não em um arquivo dentro deste site.',
   how: [
     {
-      title: 'Verificação de sintaxe',
+      title: 'Verificação de formato',
       text: 'A ferramenta confere se o endereço tem um formato válido: uma parte local, um único @ e um domínio. Isso acontece antes de qualquer envio ao servidor.',
     },
     {
@@ -610,7 +610,7 @@ const ptBr: CheckerStrings = {
     },
     {
       title: 'A validade é outra verificação',
-      text: 'Para saber se a caixa existe e aceita e-mails, use o verificador de e-mail grátis. Ele se conecta ao servidor de e-mail e pergunta. Esta página só responde se o domínio é descartável.',
+      text: 'Para saber se a caixa existe e aceita e-mails, use o verificador de e-mail grátis. Ele confere se a caixa de e-mail existe. Esta página só responde se o domínio é descartável.',
     },
   ],
   servicesTitle: 'Serviços de e-mail descartável comuns',
@@ -703,7 +703,7 @@ const ptBr: CheckerStrings = {
     deliverButton: 'Verificar se este endereço é válido',
     verifierPath: '/pt-br/verificacao-de-email',
     logs: {
-      basicStart: '[BASIC] Verificando a sintaxe e a estrutura de {email}...',
+      basicStart: '[BASIC] Verificando o formato de {email}...',
       basicOk: '[SUCCESS] O formato do endereço é válido.',
       basicFail: '[FAILED] O endereço não tem um formato de e-mail válido.',
       registry: '[DISPOSABLE] Verificando {domain} no registro de domínios descartáveis...',
@@ -729,7 +729,7 @@ const fr: CheckerStrings = {
   howIntro: `Les services jetables enregistrent sans cesse de nouveaux domaines. Une liste qui n’est pas mise à jour les rate. C’est pourquoi la vérification tourne sur le service de vérification de Giggal et non sur un fichier de ce site.`,
   how: [
     {
-      title: `Vérification de la syntaxe`,
+      title: `Vérification du format`,
       text: `L’outil vérifie que l’adresse a un format valide${NB}: une partie locale, un seul @ et un domaine. Cela se fait avant tout envoi au serveur.`,
     },
     {
@@ -742,7 +742,7 @@ const fr: CheckerStrings = {
     },
     {
       title: `La validité est une vérification à part`,
-      text: `Pour savoir si la boîte existe et accepte les messages, utilisez le testeur d’email gratuit. Il se connecte au serveur de messagerie et lui pose la question. Cette page répond seulement à la question du jetable.`,
+      text: `Pour savoir si la boîte existe et accepte les messages, utilisez le testeur d’email gratuit. Il vérifie si la boîte mail existe. Cette page répond seulement à la question du jetable.`,
     },
   ],
   servicesTitle: `Services d’email jetable courants`,
@@ -777,7 +777,7 @@ const fr: CheckerStrings = {
   bulkTitle: `Vérification unitaire ou en masse`,
   bulkParas: [
     `L’outil ci-dessus vérifie une adresse à la fois. Il sert pour une inscription suspecte ou un seul lead. Pour une liste entière, une adresse à la fois est trop lent.`,
-    `Dans le tableau de bord de Giggal, vous pouvez envoyer un fichier CSV ou TXT à notre [service de nettoyage de liste email](/email-list-cleaning) et vérifier toute la liste en une fois. Chaque adresse est vérifiée pour les domaines jetables, les comptes de rôle comme info@ ou sales@ et l’existence de la boîte. Sur les [domaines catch-all](/catch-all-verification), où une vérification standard ne peut pas confirmer une boîte, Giggal fait une vérification plus poussée. Un compte gratuit inclut 1${NB}000 crédits.`,
+    `Dans le tableau de bord de Giggal, vous pouvez envoyer un fichier CSV ou TXT à notre [service de nettoyage de liste email](/email-list-cleaning) et vérifier toute la liste en une fois. Chaque adresse est vérifiée pour les domaines jetables, les comptes de rôle comme info@ ou sales@ et l’existence de la boîte mail. Sur les [domaines catch-all](/catch-all-verification), où une vérification standard ne peut pas confirmer une boîte, Giggal fait une vérification plus poussée. Un compte gratuit inclut 1${NB}000 crédits.`,
   ],
   faqTitle: `Questions sur la vérification d’email jetable`,
   faqs: [
@@ -811,7 +811,7 @@ const fr: CheckerStrings = {
     },
     {
       q: `Puis-je vérifier des adresses jetables en masse${NB}?`,
-      a: `Oui. Envoyez un fichier CSV ou TXT dans le tableau de bord de Giggal. Chaque adresse est vérifiée pour les domaines jetables, les comptes de rôle, les domaines catch-all et l’existence de la boîte.`,
+      a: `Oui. Envoyez un fichier CSV ou TXT dans le tableau de bord de Giggal. Chaque adresse est vérifiée pour les domaines jetables, les comptes de rôle, les domaines catch-all et l’existence de la boîte mail.`,
     },
   ],
   ctaBand: `Bloquez les emails jetables et nettoyez votre liste`,
@@ -832,7 +832,7 @@ const fr: CheckerStrings = {
     deliverButton: `Vérifier si cette adresse est valide`,
     verifierPath: '/fr/verifier-adresse-mail',
     logs: {
-      basicStart: `[BASIC] Vérification de la syntaxe et de la structure de {email}...`,
+      basicStart: `[BASIC] Vérification du format de {email}...`,
       basicOk: `[SUCCESS] Le format de l’adresse est valide.`,
       basicFail: `[FAILED] L’adresse n’a pas un format email valide.`,
       registry: `[DISPOSABLE] Vérification de {domain} dans le registre des domaines jetables...`,

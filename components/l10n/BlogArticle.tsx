@@ -11,7 +11,7 @@ import TableOfContents from '@/components/blog/TableOfContents'
 import { ORG_ID } from '@/lib/schema'
 import { breadcrumbL10n } from '@/lib/i18n/schema'
 import { CLUSTERS, HREFLANG_CODE, hreflangAlternates, type Cluster, type ClusterId } from '@/lib/i18n/clusters'
-import { getPostBySlug, getPostSlugs } from '@/lib/blog'
+import { getImageDimensions, getPostBySlug, getPostSlugs } from '@/lib/blog'
 import { getStrings, type L10nLocale } from '@/lib/i18n/strings'
 import { BLOG_STRINGS } from '@/lib/i18n/blog'
 
@@ -33,7 +33,10 @@ export function blogArticleMetadata(locale: L10nLocale, slug: string): Metadata 
   const post = getPostBySlug(slug, locale)
   if (!post) return {}
   const path = `${CLUSTERS.blog[locale]}/${post.slug}`
-  const ogImage = post.image ? `https://giggal.ai${post.image}` : 'https://giggal.ai/og-card.png'
+  const ogImagePath = post.image || '/og-card.png'
+  const ogImageUrl = post.image ? `https://giggal.ai${post.image}` : 'https://giggal.ai/og-card.png'
+  const { width: imgWidth, height: imgHeight } = getImageDimensions(ogImagePath)
+  const imgAlt = post.image ? (post.imageAlt || post.title) : 'Giggal.ai'
   const cluster = clusterFor(locale, post.slug)
   return {
     title: post.seoTitle || post.title,
@@ -46,9 +49,26 @@ export function blogArticleMetadata(locale: L10nLocale, slug: string): Metadata 
       description: post.description,
       url: `https://giggal.ai${path}`,
       type: 'article',
-      images: [{ url: ogImage }],
+      images: [
+        {
+          url: ogImageUrl,
+          width: imgWidth,
+          height: imgHeight,
+          alt: imgAlt,
+        },
+      ],
     },
-    twitter: { card: 'summary_large_image', title: post.title, description: post.description, images: [ogImage] },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.description,
+      images: [
+        {
+          url: ogImageUrl,
+          alt: imgAlt,
+        },
+      ],
+    },
   }
 }
 
@@ -75,6 +95,11 @@ export default function BlogArticleL10n({ locale, slug }: { locale: L10nLocale; 
           ...(post.image ? { image: [`https://giggal.ai${post.image}`] } : {}),
           datePublished: post.date,
           dateModified: post.updated || post.date,
+          author: {
+            '@type': 'Organization',
+            name: 'Giggal.ai',
+            url: 'https://giggal.ai',
+          },
           publisher: { '@id': ORG_ID },
           mainEntityOfPage: { '@type': 'WebPage', '@id': `https://giggal.ai${path}` },
         }}

@@ -55,7 +55,7 @@ PostgreSQL also provides the `citext` extension, which compares strings case-ins
 Watch out for the lowercasing trap in backend languages, particularly Java. In Java, calling `email.toLowerCase()` uses the server's default locale. In a Turkish locale, the uppercase Latin letter `I` converts to `ı` (a dotless small letter i) instead of `i`, breaking addresses like `INFO@example.com`. To prevent this bug, pass `Locale.ROOT`:
 
 ```java
-// Locale.ROOT avoids language-specific letter mapping like Turkish dotted I
+// Locale.ROOT avoids language-specific letter mapping like Turkish dotless i
 String cleanEmail = email.toLowerCase(Locale.ROOT);
 ```
 

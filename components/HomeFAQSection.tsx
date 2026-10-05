@@ -16,7 +16,7 @@ const faqs = [
   },
   {
     question: 'How accurate is Giggal.ai Email Verifier?',
-    answer: 'We aim for high accuracy through multiple checks: syntax, MX/domain, role-based and free-mail detection, disposable screening, blacklist checks, SMTP mailbox verification, and catch-all detection. This helps you maintain strong deliverability and a healthy sender reputation.',
+    answer: 'We aim for high accuracy through multiple checks: MX and domain validation, role-based and free-mail detection, disposable screening, blocklist checks, mailbox checks, and catch-all detection. This helps you maintain strong deliverability and a healthy sender reputation.',
   },
   {
     question: 'How many emails can I verify with one credit?',
@@ -32,7 +32,7 @@ const faqs = [
   },
   {
     question: 'Can I verify catch-all emails?',
-    answer: 'Yes, and we go far deeper than most tools that just mark catch-alls as “Unknown.” Our AI-powered detection scores every catch-all address across three signals: Domain Intelligence (SPF/DKIM/DMARC, SSL, domain reputation), AI Pattern Analysis (name structure, character patterns, human-likeness), and Mailbox Behavior (deep SMTP probing). You get a clear confidence rating of High (90%+ likely deliverable), Medium, Low or Very Low, so you know exactly which catch-all addresses are safe to keep.',
+    answer: 'Yes, and we go far deeper than most tools that just mark catch-alls as “Unknown.” Our AI-powered detection scores every catch-all address across three signals: Domain Intelligence (SPF/DKIM/DMARC, SSL, domain reputation), AI Pattern Analysis (name structure, character patterns, human-likeness), and Mailbox Behavior (mailbox check). You get a clear confidence rating of High (90%+ likely deliverable), Medium, Low or Very Low, so you know exactly which catch-all addresses are safe to keep.',
   },
 ]
 

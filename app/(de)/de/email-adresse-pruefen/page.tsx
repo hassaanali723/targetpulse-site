@@ -21,7 +21,7 @@ import { consoleStrings, SIGNUP_URL } from '@/lib/i18n/de'
 
 const PATH = '/de/email-adresse-pruefen'
 const DESC =
-  'E-Mail-Adresse prüfen, ohne eine Mail zu senden: Syntax, MX, SMTP, Catch-all und Wegwerf-Domains in Sekunden. Kostenloser E-Mail-Prüfer ohne Anmeldung.'
+  'E-Mail-Adresse prüfen, ohne eine Mail zu senden: MX-Einträge, Postfachprüfung, Catch-all und Wegwerf-Domains in Sekunden. Kostenloser E-Mail-Prüfer ohne Anmeldung.'
 
 export const metadata: Metadata = {
   title: { absolute: 'E-Mail-Adresse prüfen: Kostenloser E-Mail-Checker | Giggal.ai' },
@@ -42,15 +42,15 @@ export const metadata: Metadata = {
 const faqs: FaqItem[] = [
   {
     q: 'Wie prüfe ich, ob eine E-Mail-Adresse gültig ist?',
-    a: 'Adresse oben eingeben und auf "Jetzt prüfen" klicken. Der E-Mail-Prüfer testet die Syntax, sucht die Mailserver der Domain, fragt den Server per SMTP nach dem Postfach und löst Catch-all-Domains auf. Nach wenigen Sekunden steht das Ergebnis: gültig, ungültig oder unbekannt. So lässt sich jede E-Mail-Adresse überprüfen, ohne eine Nachricht zu senden.',
+    a: 'Adresse oben eingeben und auf "Jetzt prüfen" klicken. Der E-Mail-Prüfer sucht die Mailserver der Domain, prüft, ob die E-Mail-Adresse wirklich existiert, und löst Catch-all-Domains auf. Nach wenigen Sekunden steht das Ergebnis: gültig, ungültig oder unbekannt. So lässt sich jede E-Mail-Adresse überprüfen, ohne eine Nachricht zu senden.',
   },
   {
     q: 'Wird eine E-Mail an die Adresse gesendet?',
-    a: 'Nein. Die Prüfung ist ein SMTP-Gespräch mit dem Mailserver der Domain: wir fragen, ob das Postfach existiert, und lesen die Antwort, ohne eine Nachricht zuzustellen. Der Empfänger bekommt nichts.',
+    a: 'Nein. Wir prüfen, ob die E-Mail-Adresse wirklich existiert, ohne eine Mail zu senden. Der Empfänger bekommt nichts.',
   },
   {
     q: 'Gibt es diese E-Mail-Adresse wirklich?',
-    a: 'Das ist genau die Frage, die der SMTP-Schritt beantwortet: Der Server der Domain bestätigt oder verneint das Postfach. Wem die Adresse gehört, kann keine Prüfung sagen. Mehr dazu in der Anleitung "Gibt es diese E-Mail-Adresse?".',
+    a: 'Das ist genau die Frage, die die Postfachprüfung beantwortet: Der Server der Domain bestätigt oder verneint das Postfach. Wem die Adresse gehört, kann keine Prüfung sagen. Mehr dazu in der Anleitung "Gibt es diese E-Mail-Adresse?".',
   },
   {
     q: 'Was bedeutet "Catch-all"?',
@@ -58,7 +58,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'Was ist ein E-Mail-Checker und was prüft er?',
-    a: 'Das Werkzeug auf dieser Seite. Ein E-Mail-Checker prüft die Syntax, die MX-Einträge der Domain, das Postfach per SMTP und ob die Domain Catch-all ist; dazu erkennt er Wegwerfadressen, Rollenkonten und Freemail-Anbieter. Es wird keine E-Mail an die Adresse gesendet.',
+    a: 'Das Werkzeug auf dieser Seite. Ein E-Mail-Checker prüft die MX-Einträge der Domain, ob das Postfach existiert und ob die Domain Catch-all ist; dazu erkennt er Wegwerfadressen, Rollenkonten und Freemail-Anbieter. Es wird keine E-Mail an die Adresse gesendet.',
   },
   {
     q: 'Was heißt "unbekannt"?',
@@ -96,8 +96,8 @@ export default function EmailAdressePruefenPage() {
           </span>
         </h1>
         <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium">
-          Prüfen Sie, ob eine E-Mail-Adresse existiert und zustellbar ist: Syntax, Mailserver,
-          SMTP-Postfach und Catch-all-Domains in Sekunden. Es wird keine E-Mail an die Adresse gesendet.
+          Prüfen Sie, ob eine E-Mail-Adresse existiert und zustellbar ist: Mailserver,
+          Postfachprüfung und Catch-all-Domains in Sekunden. Es wird keine E-Mail an die Adresse gesendet.
         </p>
       </section>
 
@@ -112,7 +112,7 @@ export default function EmailAdressePruefenPage() {
           strings={consoleStrings}
         />
         <p className="text-center text-[13px] text-slate-500 font-medium mt-4">
-          Kostenlos, ohne Anmeldung, ohne Karte. Eine Adresse pro Prüfung, vollständiger SMTP-Test.
+          Kostenlos, ohne Anmeldung, ohne Karte. Eine Adresse pro Prüfung, vollständige Postfachprüfung.
         </p>
       </section>
 
@@ -144,7 +144,7 @@ export default function EmailAdressePruefenPage() {
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Gibt es diese E-Mail-Adresse? Existenz prüfen</h2>
         <p className={proseP}>
-          Ob eine Adresse existiert, beantwortet der SMTP-Schritt: Der Mailserver der Domain
+          Ob eine Adresse existiert, beantwortet die Postfachprüfung: Der Mailserver der Domain
           bestätigt das Postfach oder lehnt es ab. Was keine Prüfung sagen kann, ist, wem die
           Adresse gehört; dafür gibt es keine öffentliche Datenbank. Wann sich die Prüfung lohnt,
           welche drei Methoden funktionieren und wo ihre Grenzen liegen, steht in der Anleitung{' '}
@@ -165,7 +165,7 @@ export default function EmailAdressePruefenPage() {
         </p>
         <ol className="list-decimal pl-6 space-y-3 text-slate-600 text-sm md:text-base font-medium leading-relaxed">
           <li>
-            <strong className="text-slate-900">Syntax.</strong> Ist die Adresse richtig geschrieben:
+            <strong className="text-slate-900">Formatprüfung.</strong> Ist die Adresse richtig geschrieben:
             ein @, ein gültiger lokaler Teil, eine Domain mit Endung? Dieser Schritt findet Tippfehler
             und sonst nichts.
           </li>
@@ -175,9 +175,9 @@ export default function EmailAdressePruefenPage() {
             eine Mail unterwegs ist.
           </li>
           <li>
-            <strong className="text-slate-900">SMTP-Prüfung des Postfachs.</strong> Wir öffnen ein
-            Gespräch mit dem empfangenden Server, nennen den Empfänger und lesen die Antwort. Ein
-            Code 250 heißt, das Postfach wird angenommen, ein 550 heißt, es existiert nicht.
+            <strong className="text-slate-900">Postfachprüfung.</strong> Wir prüfen,
+            ob die E-Mail-Adresse wirklich existiert, ohne eine Mail zu senden. Das
+            Ergebnis zeigt, ob das Postfach existiert oder nicht.
           </li>
           <li>
             <strong className="text-slate-900">Catch-all-Auflösung.</strong> Hat der Server auch zu
@@ -199,8 +199,7 @@ export default function EmailAdressePruefenPage() {
         <p className={proseP}>
           Ob Sie eine E-Mail-Adresse überprüfen oder eine E-Mail verifizieren wollen, der Test ist
           derselbe. Streng genommen prüft die Validierung nur die Form
-          der Adresse (Syntax, Domain), die Verifizierung fragt den Mailserver und bestätigt, dass
-          das Postfach existiert. Dieser E-Mail-Prüfer macht beides in einem Durchgang, und das
+          der Adresse (Syntax, Domain), die Verifizierung prüft, ob die E-Mail-Adresse wirklich existiert. Dieser E-Mail-Prüfer macht beides in einem Durchgang, und das
           Ergebnis heißt auf jeder Seite dasselbe: gültig, ungültig, unbekannt.
         </p>
       </section>

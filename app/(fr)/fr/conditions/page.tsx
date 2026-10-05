@@ -16,17 +16,17 @@ const sections: LegalSection[] = [
     'Les présentes Conditions d’utilisation régissent l’usage du service Giggal.ai Email Verifier, exploité par TargetPulse Ltd sous le nom commercial Giggal.ai.',
   ]},
   { heading: '2. Description du service', paragraphs: [
-    'Giggal.ai Email Verifier est un outil en ligne qui aide les équipes à nettoyer et valider des listes d’adresses email. Les utilisateurs importent des fichiers CSV ou des adresses individuelles et nous contrôlons la délivrabilité, la syntaxe et l’état de la boîte pour réduire les adresses invalides et améliorer la délivrabilité.',
+    'Giggal.ai Email Verifier est un outil en ligne qui aide les équipes à nettoyer et valider des listes d’adresses email. Les utilisateurs importent des fichiers CSV ou des adresses individuelles et nous contrôlons la délivrabilité, les enregistrements de domaine et l’existence de la boîte pour réduire les adresses invalides et améliorer la délivrabilité.',
     'Le Service est fourni sous réserve des présentes Conditions et de toute condition supplémentaire applicable.',
   ]},
   { heading: '2.1 Service de vérification d’email', level: 3, paragraphs: ['Notre service principal est la vérification et la validation d’adresses email, qui comprend :'], list: [
-    'Validation de la syntaxe : contrôle du format et de la structure de l’adresse',
+    'Détection des passerelles : identification des passerelles de sécurité (SEG)',
     'Validation du domaine : contrôle que le domaine existe et possède des enregistrements MX valides',
     'Vérification de la boîte : contrôle que l’adresse précise existe et peut recevoir du courrier',
     'Détection des adresses jetables : identification des adresses temporaires',
     'Détection des adresses génériques : identification des adresses de rôle (par exemple contact@, support@)',
     'Détection catch-all : identification des domaines qui acceptent n’importe quelle adresse',
-    'Validation SMTP : vérification en temps réel par le protocole SMTP',
+    'Vérification en temps réel : vérification de l’existence de la boîte mail du destinataire',
     'Vérification en masse : traitement de milliers d’adresses à la fois',
   ]},
   { heading: '2.2 Système de crédits', level: 3, paragraphs: ['Le service fonctionne avec des crédits :'], list: [

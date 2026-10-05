@@ -25,7 +25,7 @@ export const nav = {
 
 export const footer = {
   blurb:
-    'Verifica SMTP ad alte prestazioni che fa arrivare le tue campagne in caselle reali, compresi i domini catch-all e accept-all che gli altri strumenti saltano.',
+    'Verifica email che controlla se ogni casella esiste per far arrivare le tue campagne in caselle di posta reali, compresi i domini catch-all e accept-all che gli altri strumenti saltano.',
   solutions: {
     heading: 'Soluzioni',
     links: [
@@ -89,9 +89,9 @@ export const cta = {
 
 export const consoleStrings = {
   header: 'Test in tempo reale',
-  live: 'Sonda attiva',
+  live: 'Test dal vivo',
   actionLabel: 'Azione',
-  actionTitle: 'Handshake con il destinatario',
+  actionTitle: 'Verifica della casella',
   placeholder: 'Indirizzo email da verificare...',
   ariaInput: 'Indirizzo email da verificare',
   button: 'Avvia la verifica',
@@ -101,10 +101,10 @@ export const consoleStrings = {
     basic: 'Controlli di base',
     dns: 'Ricerca dei server di posta',
     catchall: 'Verifica catch-all',
-    mailbox: 'Esistenza della casella',
+    mailbox: 'Verifica esistenza email',
   },
   idleTitle: 'Pronto per la verifica',
-  idleText: 'Inserisci un indirizzo aziendale o personale per avviare una sonda DNS e SMTP dal vivo.',
+  idleText: 'Inserisci un indirizzo aziendale o personale per verificare se la casella esiste.',
   spawning: 'AVVIO DEI CONTROLLI...',
   initLog: '[INIT] Apertura del socket di verifica sicuro...',
   limitTitle: 'Limite ospite raggiunto',
@@ -116,7 +116,7 @@ export const consoleStrings = {
   invalidSyntax: 'Questo non è un indirizzo email valido.',
   isCatchAll: 'è un dominio catch-all',
   notCatchAll: 'non è un dominio catch-all',
-  catchAllText: 'Accetta posta per qualsiasi indirizzo, quindi un controllo SMTP standard non può dire se questa casella esiste.',
+  catchAllText: 'Accetta posta per qualsiasi indirizzo, quindi un controllo di base non può dire se questa casella esiste.',
   notCatchAllText: 'Qui un controllo standard è affidabile.',
   resultLabel: 'Risultato',
   verdictTitle: {

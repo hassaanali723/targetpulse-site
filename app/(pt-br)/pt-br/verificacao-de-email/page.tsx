@@ -21,7 +21,7 @@ import { consoleStrings, SIGNUP_URL } from '@/lib/i18n/pt-br'
 
 const PATH = '/pt-br/verificacao-de-email'
 const DESC =
-  'Verifique se um endereço de e-mail existe e é válido sem enviar mensagem: sintaxe, MX, SMTP, catch-all e e-mails descartáveis em segundos. Grátis, sem cadastro.'
+  'Verifique se um endereço de e-mail existe e é válido sem enviar mensagem: MX, existência da caixa de e-mail, catch-all e e-mails descartáveis em segundos. Grátis, sem cadastro.'
 
 export const metadata: Metadata = {
   title: { absolute: 'Verificação de E-mail Grátis: Verificador Online | Giggal.ai' },
@@ -45,11 +45,11 @@ export const metadata: Metadata = {
 const faqs: FaqItem[] = [
   {
     q: 'Como verificar o e-mail?',
-    a: 'Digite o endereço acima e clique em Verificar. O verificador pergunta ao servidor de e-mail do domínio se aquela caixa existe e lê a resposta, sem enviar nenhuma mensagem. Em alguns segundos você tem o resultado: válido, inválido ou desconhecido.',
+    a: 'Digite o endereço acima e clique em Verificar. O verificador confere se a caixa de e-mail existe, sem enviar nenhuma mensagem. Em alguns segundos você tem o resultado: válido, inválido ou desconhecido.',
   },
   {
     q: 'Vocês enviam uma mensagem ao endereço?',
-    a: 'Não. A verificação usa uma conversa SMTP: a ferramenta abre a conexão com o servidor, informa o destinatário e lê o código de resposta (250 se a caixa é aceita, 550 se não existe). O destinatário não recebe nada.',
+    a: 'Não. O verificador confere se a caixa de e-mail existe, sem enviar nenhuma mensagem. O destinatário não recebe nada.',
   },
   {
     q: 'O que significa "arriscado"?',
@@ -57,7 +57,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'Verificação de e-mail e consulta de e-mail são a mesma coisa?',
-    a: 'Na prática, sim: consultar um e-mail é perguntar ao servidor se a caixa existe, e é isso que a verificação faz. A consulta mostra se o endereço é válido, se o domínio é catch-all, se é descartável ou de função. Ela não mostra quem é o dono do endereço.',
+    a: 'Na prática, sim: consultar um e-mail é conferir se a caixa de e-mail existe, e é isso que a verificação faz. A consulta mostra se o endereço é válido, se o domínio é catch-all, se é descartável ou de função. Ela não mostra quem é o dono do endereço.',
   },
   {
     q: 'Posso verificar e-mails em massa?',
@@ -65,11 +65,11 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'Como saber se um e-mail existe?',
-    a: 'Com a verificação SMTP desta página, em segundos. Os outros métodos, com seus limites, estão no guia "Como saber se um e-mail existe?": pesquisa na web, leitura do bounce, recuperação de senha e uma mensagem para um endereço propositalmente errado.',
+    a: 'Consultando se o e-mail existe com a ferramenta desta página, em segundos. Os outros métodos, com seus limites, estão no guia "Como saber se um e-mail existe?": pesquisa na web, leitura do bounce, recuperação de senha e uma mensagem para um endereço propositalmente errado.',
   },
   {
     q: 'Como validar um e-mail?',
-    a: 'Passando pelos quatro passos: sintaxe, registros MX, verificação SMTP da caixa e resolução catch-all. Conferir só o formato não é validar; um endereço bem escrito pode apontar para uma caixa que não existe. O validador desta página faz os quatro de uma vez.',
+    a: 'Passando pelos passos essenciais: registros MX, checagem da caixa de e-mail e resolução catch-all. Conferir só o formato não é validar; um endereço bem escrito pode apontar para uma caixa que não existe. O validador desta página faz tudo de uma vez.',
   },
   {
     q: 'Como verificar um e-mail grátis?',
@@ -99,8 +99,8 @@ export default function VerificacaoDeEmailPage() {
           </span>
         </h1>
         <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium">
-          Confira se um e-mail existe e se é válido antes de enviar: sintaxe, servidores de e-mail, caixa
-          SMTP e domínios catch-all em segundos. Nenhuma mensagem é enviada ao endereço.
+          Confira se um e-mail existe e se é válido antes de enviar: servidores de e-mail, existência da
+          caixa e domínios catch-all em segundos. Nenhuma mensagem é enviada ao endereço.
         </p>
       </section>
 
@@ -115,7 +115,7 @@ export default function VerificacaoDeEmailPage() {
           strings={consoleStrings}
         />
         <p className="text-center text-[13px] text-slate-500 font-medium mt-4">
-          Grátis, sem cadastro, sem cartão. Um endereço por verificação, verificação SMTP completa.
+          Grátis, sem cadastro, sem cartão. Um endereço por verificação, verificação completa de existência.
         </p>
       </section>
 
@@ -146,8 +146,8 @@ export default function VerificacaoDeEmailPage() {
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Como saber se um e-mail existe?</h2>
         <p className={proseP}>
-          Um e-mail existe se o servidor do seu domínio aceita aquela caixa quando ela é proposta em uma
-          conversa SMTP. Dá para perguntar sem enviar nada: verificar se o e-mail existe é o que a
+          Um e-mail existe se a caixa de e-mail foi criada e está ativa.
+          Dá para perguntar sem enviar nada: verificar se o e-mail existe é o que a
           ferramenta acima faz. Antes de
           responder a um contato anotado à mão, quando um formulário devolve bounce ou para testar um
           endereço de uma lista comprada, a pergunta é a mesma. Os quatro métodos que funcionam, com seus
@@ -172,7 +172,7 @@ export default function VerificacaoDeEmailPage() {
         </p>
         <ol className="list-decimal pl-6 space-y-3 text-slate-600 text-sm md:text-base font-medium leading-relaxed">
           <li>
-            <strong className="text-slate-900">Sintaxe.</strong> O endereço está bem escrito: uma única
+            <strong className="text-slate-900">Formato.</strong> O endereço está bem escrito: uma única
             arroba, uma parte local válida, um domínio com extensão. Este passo encontra erros de
             digitação e nada mais.
           </li>
@@ -182,9 +182,9 @@ export default function VerificacaoDeEmailPage() {
             qualquer envio.
           </li>
           <li>
-            <strong className="text-slate-900">Verificação SMTP da caixa.</strong> Abrimos uma conversa
-            com o servidor de destino, informamos o destinatário e lemos a resposta. Um código 250
-            significa que a caixa é aceita; um 550, que ela não existe.
+            <strong className="text-slate-900">Verificação da caixa de e-mail.</strong> Verificamos
+            se o e-mail existe, sem enviar nenhuma mensagem. O resultado indica se
+            a caixa existe ou não.
           </li>
           <li>
             <strong className="text-slate-900">Resolução catch-all.</strong> Se o servidor disse sim
@@ -205,7 +205,7 @@ export default function VerificacaoDeEmailPage() {
         <p className={proseP}>
           No Brasil se diz consultar, checar ou conferir um e-mail; é a mesma verificação. A consulta mostra se o endereço é válido, qual provedor responde por ele, se o domínio é catch-all
           e se a caixa é descartável, de função ou de um provedor gratuito. O que a consulta não mostra é
-          quem usa o endereço: nenhuma verificação SMTP devolve nome, empresa ou perfil, e uma ferramenta
+          quem usa o endereço: a verificação de existência não devolve nome, empresa ou perfil, e uma ferramenta
           que promete isso está buscando em outras fontes, não no servidor de e-mail. Para saber se vale a
           pena enviar, a resposta do servidor é o que importa, e é o que esta página entrega.
         </p>
@@ -218,9 +218,9 @@ export default function VerificacaoDeEmailPage() {
           Um validador de e-mail gratuito como este é mais do que um corretor de formato. Muitos validadores conferem só o formato
           (arroba, domínio, extensão) e chamam isso de validação; um endereço com formato perfeito em um
           domínio sem servidores de e-mail continua inválido, e um endereço bem formado em um domínio
-          real pode apontar para uma caixa que não existe. Validar e-mail, aqui, é passar pelos quatro
-          passos acima: sintaxe, MX, SMTP e resolução catch-all. Só o último confirma que a caixa existe
-          de verdade, e é ele que separa um validador de e-mail de um corretor ortográfico. O mesmo
+          real pode apontar para uma caixa que não existe. Validar e-mail, aqui, é passar pelos passos
+          essenciais: MX, confirmação de que o e-mail existe e resolução catch-all. Só a verificação confirma que a caixa existe
+          de verdade, e é ela que separa um validador de e-mail de um corretor ortográfico. O mesmo
           teste serve para verificar um endereço por vez aqui e para validar listas inteiras depois do
           cadastro.
         </p>

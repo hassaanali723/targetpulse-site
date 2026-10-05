@@ -23,7 +23,7 @@ export const nav = {
 
 export const footer = {
   blurb:
-    'Verificación SMTP de alto rendimiento para que tus campañas lleguen a buzones reales, incluidos los dominios catch-all y accept-all que otras herramientas se saltan.',
+    'Verificación de correo que comprueba si cada buzón existe para que tus campañas lleguen a bandejas de entrada reales, incluidos los dominios catch-all y accept-all que otras herramientas se saltan.',
   solutions: {
     heading: 'Soluciones',
     links: [
@@ -89,9 +89,9 @@ export const cta = {
 
 export const consoleStrings = {
   header: 'Prueba en tiempo real',
-  live: 'Sonda activa',
+  live: 'Comprobación en vivo',
   actionLabel: 'Acción',
-  actionTitle: 'Handshake con el destinatario',
+  actionTitle: 'Verificación del buzón',
   placeholder: 'Escribe un correo electrónico para validarlo...',
   ariaInput: 'Correo electrónico a validar',
   button: 'Validar',
@@ -101,10 +101,10 @@ export const consoleStrings = {
     basic: 'Comprobaciones básicas',
     dns: 'Búsqueda de servidores de correo',
     catchall: 'Verificación catch-all',
-    mailbox: 'Existencia del buzón',
+    mailbox: 'Comprobación del buzón',
   },
   idleTitle: 'Listo para validar',
-  idleText: 'Escribe una dirección de empresa o personal para lanzar una sonda DNS y SMTP en vivo.',
+  idleText: 'Escribe una dirección de empresa o personal para comprobar si el buzón existe.',
   spawning: 'INICIANDO COMPROBACIONES...',
   initLog: '[INIT] Abriendo el socket seguro de verificación...',
   limitTitle: 'Límite de invitado alcanzado',
@@ -116,7 +116,7 @@ export const consoleStrings = {
   invalidSyntax: 'Esto no es una dirección de correo válida.',
   isCatchAll: 'es un dominio catch-all',
   notCatchAll: 'no es un dominio catch-all',
-  catchAllText: 'Acepta correo para cualquier dirección, así que una comprobación SMTP estándar no puede decir si este buzón existe.',
+  catchAllText: 'Acepta correo para cualquier dirección, así que una comprobación básica no puede decir si este buzón existe.',
   notCatchAllText: 'Aquí una comprobación estándar es fiable.',
   resultLabel: 'Resultado',
   verdictTitle: {

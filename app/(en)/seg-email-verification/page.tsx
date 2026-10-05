@@ -52,7 +52,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'Why do other verifiers return Unknown on these addresses?',
-    a: 'Most verifiers ask the mail server directly over SMTP. Behind a gateway, that question gets intercepted and answered by the gateway instead, which is built to not tell you anything useful. Without an answer, the verifier has nothing to report.',
+    a: 'Most verifiers connect to the mail server directly to ask if the mailbox exists. Behind a gateway, that question gets intercepted and answered by the gateway instead, which is built to not tell you anything useful. Without an answer, the verifier has nothing to report.',
   },
   {
     q: 'Which gateways does Giggal.ai handle?',
@@ -131,7 +131,7 @@ export default function SegEmailVerificationPage() {
           </p>
           <p>
             Because the gateway stands in front of the mail server, it also answers on the mail
-            server&apos;s behalf. Anything that tries to ask the mail server a question, including an
+            server&apos;s behalf. Anything that tries to check whether a mailbox exists, including an
             email verifier, ends up talking to the gateway instead of the system that actually knows
             which mailboxes exist.
           </p>
@@ -143,16 +143,14 @@ export default function SegEmailVerificationPage() {
         <h2 className={sectionTitle}>Why gateways break email verification</h2>
         <div className="space-y-5 text-slate-600 leading-relaxed text-sm md:text-base font-medium">
           <p>
-            Standard email verification works by opening an SMTP conversation with the mail server
-            and asking, in effect, whether a given mailbox exists. On a normal domain the server
-            answers, and the verifier records a valid or invalid result.
+            Standard email verification checks whether a given mailbox exists. On a normal domain
+            the server answers, and the verifier records a valid or invalid result.
           </p>
           <p>
-            Behind a gateway that conversation never reaches the mail server. The gateway intercepts
-            it and answers on the server&apos;s behalf. Gateways are built to prevent exactly this
-            kind of probing, since the same technique is used by attackers mapping a
-            company&apos;s users. So the gateway gives a deliberately vague answer, accepts
-            every address whether it exists or not, or refuses the connection outright.
+            Behind a gateway that question never reaches the mail server. The gateway intercepts
+            it and answers on the server&apos;s behalf. Gateways are built to prevent third parties
+            from mapping a company&apos;s users. So the gateway gives a deliberately vague answer,
+            accepts every address whether it exists or not, or refuses the connection outright.
           </p>
           <p>
             The verifier is left with nothing it can turn into an email verification result. It
@@ -164,10 +162,10 @@ export default function SegEmailVerificationPage() {
         <div className="pt-2 space-y-4">
           <h3 className="text-lg font-black text-slate-900">The IP reputation problem</h3>
           <p className="text-slate-600 leading-relaxed text-sm md:text-base font-medium">
-            Retrying makes it worse. Probing an SMTP endpoint that refuses the check, over and over,
-            gets the sending IP flagged. Once that happens, results degrade across every domain that
-            verifier touches, not just the gateway domains. This is why Giggal.ai skips SMTP entirely
-            on gateways that behave this way rather than retrying into a block.
+            Retrying makes it worse. Repeatedly querying an endpoint that refuses the check gets the
+            sending IP flagged. Once that happens, results degrade across every domain that verifier
+            touches, not just the gateway domains. This is why Giggal.ai uses alternate verification
+            methods on gateways that behave this way rather than retrying into a block.
           </p>
         </div>
       </section>
@@ -177,15 +175,14 @@ export default function SegEmailVerificationPage() {
         <h2 className={sectionTitle}>How Giggal.ai verifies behind a gateway</h2>
         <div className="space-y-5 text-slate-600 leading-relaxed text-sm md:text-base font-medium">
           <p>
-            Giggal.ai reads the domain&apos;s MX records first, before any probing, to work out what
-            is actually in front of the mailbox. That tells us whether the domain answers directly or
-            sits behind a gateway.
+            Giggal.ai reads the domain&apos;s MX records first to work out what is actually in front
+            of the mailbox. That tells us whether the domain answers directly or sits behind a gateway.
           </p>
           <p>
             Domains behind a gateway are routed down a different verification path than domains that
-            answer directly. Where a gateway refuses SMTP probing, the email verification result does
-            not depend on that SMTP answer at all. We verify the address through a different signal, so
-            it still comes back valid or invalid when a plain SMTP check would return nothing.
+            answer directly. Where a gateway blocks standard mailbox checks, the email verification
+            result does not depend on that answer at all. We verify the address through a different
+            signal, so it still comes back valid or invalid when a standard check would return nothing.
           </p>
           <p>
             Gateways also return responses designed to hide whether a mailbox exists, deliberately
@@ -222,8 +219,8 @@ export default function SegEmailVerificationPage() {
         <p className="text-slate-600 leading-relaxed text-sm md:text-base font-medium">
           Proofpoint is one of the most widely deployed secure email gateways on enterprise domains.
           If you sell into large companies, a meaningful part of your list sits behind it. Proofpoint
-          fronts the real mail server and filters inbound mail for threats, which is also why a plain
-          SMTP check against a Proofpoint domain tends to come back without a usable answer.
+          fronts the real mail server and filters inbound mail for threats, which is also why a standard
+          check against a Proofpoint domain tends to come back without a usable answer.
           Giggal.ai identifies Proofpoint from the domain&apos;s MX records and routes the address
           down the gateway path, so instead of an Unknown you get a real deliverable or undeliverable
           result on the mailbox behind it.
@@ -235,10 +232,10 @@ export default function SegEmailVerificationPage() {
         <h2 className={sectionTitle}>Mimecast</h2>
         <p className="text-slate-600 leading-relaxed text-sm md:text-base font-medium">
           Mimecast is built to stop anyone working out which mailboxes exist on a domain, and it
-          answers probes with a deliberately vague response rather than confirming or denying
-          the address. Giggal.ai recognises that behaviour and skips SMTP against Mimecast entirely,
-          rather than triggering the response and taking a reputation hit. It verifies the address
-          another way, so it comes back with a real email verification result instead of an Unknown.
+          answers queries with a deliberately vague response rather than confirming or denying
+          the address. Giggal.ai recognises that behaviour and avoids triggering that response,
+          protecting sender reputation. It checks whether the mailbox exists another way, so it comes
+          back with a real email verification result instead of an Unknown.
         </p>
         {MIMECAST_PAGE_LIVE && (
           <p className="text-sm font-medium">
@@ -255,8 +252,8 @@ export default function SegEmailVerificationPage() {
         <h2 className={sectionTitle}>Barracuda</h2>
         <p className="text-slate-600 leading-relaxed text-sm md:text-base font-medium">
           Barracuda is common on mid-market domains and, like other gateways, sits in front of the
-          real mail server and filters inbound mail. A standard verifier probing a Barracuda domain
-          over SMTP usually cannot get a clear answer about the mailbox, because the gateway is the
+          real mail server and filters inbound mail. A standard verifier checking a Barracuda domain
+          usually cannot get a clear answer about the mailbox, because the gateway is the
           thing responding. Giggal.ai detects Barracuda from the domain&apos;s MX records and sends
           the address down the gateway verification path. You get a deliverable or undeliverable
           result on the mailbox itself, not a Risky or Unknown label that leaves you guessing about

@@ -53,20 +53,22 @@ export function termMetadata(locale: Locale, slug: string): Metadata {
   const term = getTermBySlug(slug, locale)
   if (!term) return {}
   const path = `${GLOSSARY_HUB[locale]}/${term.slug}`
+  const defaultTitle = locale === 'en' ? `${term.title}: Meaning and How It Works` : term.title
+  const pageTitle = term.seoTitle || defaultTitle
   return {
-    title: term.title,
+    title: pageTitle,
     description: term.description,
     alternates: { canonical: path, languages: liveAlternates(term.en) },
     openGraph: {
       siteName: 'Giggal.ai',
       ...(locale !== 'en' ? { locale: getStrings(locale).ogLocale } : {}),
-      title: term.title,
+      title: pageTitle,
       description: term.description,
       url: `${SITE}${path}`,
       type: 'article',
       images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai' }],
     },
-    twitter: { card: 'summary_large_image', title: term.title, description: term.description },
+    twitter: { card: 'summary_large_image', title: pageTitle, description: term.description },
   }
 }
 

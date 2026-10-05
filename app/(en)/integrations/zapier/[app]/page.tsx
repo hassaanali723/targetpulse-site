@@ -94,7 +94,7 @@ function buildFaq(app: ZapierApp, copy: CategoryCopy): FaqItem[] {
   return [
     {
       q: `How do I verify ${app.name} emails automatically?`,
-      a: `Connect ${app.name} and Giggal.ai in a Zap. When ${app.triggerExample}, Zapier sends the address to Giggal.ai, which runs a deep mailbox existence check and returns the result to the next step. Setup takes about five minutes and needs no code.`,
+      a: `Connect ${app.name} and Giggal.ai in a Zap. When ${app.triggerExample}, Zapier sends the address to Giggal.ai, which checks whether the mailbox exists and returns the result to the next step. Setup takes about five minutes and needs no code.`,
     },
     {
       q: `Can it verify catch-all emails coming from ${app.name}?`,
@@ -284,7 +284,7 @@ export default function ZapierAppPage({ params }: { params: { app: string } }) {
                 Powered by a catch-all email verifier, not a standard checker
               </h3>
               <p className="text-[14px] text-slate-700 font-medium leading-relaxed">
-                Most verifiers stop at a basic SMTP ping. SEG-protected addresses come back
+                Most verifiers stop at a basic check. SEG-protected addresses come back
                 as unknown, and catch-all domains come back as risky. Giggal.ai verifies
                 both. It{' '}
                 <Link

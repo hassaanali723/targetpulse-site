@@ -183,7 +183,7 @@ const RELATED_LINKS = [
   {
     title: 'Free email checker',
     href: '/email-checker',
-    desc: 'Verify a single email address: syntax, MX records and a live SMTP mailbox check.',
+    desc: 'Verify a single email address: MX records and a mailbox check.',
   },
   {
     title: 'Disposable email checker',
@@ -203,7 +203,7 @@ const RELATED_LINKS = [
   {
     title: 'Why cold emails bounce',
     href: '/blog/why-cold-emails-bounce',
-    desc: 'The common causes of hard vs soft bounces and how to read SMTP response codes.',
+    desc: 'The common causes of hard vs soft bounces and how to read server response codes.',
   },
   {
     title: 'How to reduce email bounce rate',
@@ -321,7 +321,7 @@ export default function EmailListCleaningPage() {
             </div>
             <h3 className="text-lg font-bold text-slate-900">We check every address</h3>
             <p className="text-sm text-slate-600 leading-relaxed">
-              Syntax, the domain&apos;s mail servers (MX) and the mailbox itself over SMTP, plus disposable, role-based, duplicate and catch-all checks. No email is sent to your contacts.
+              The domain&apos;s mail servers (MX) and whether the mailbox itself exists, plus disposable, role-based, duplicate and catch-all checks. No email is sent to your contacts.
             </p>
           </div>
 

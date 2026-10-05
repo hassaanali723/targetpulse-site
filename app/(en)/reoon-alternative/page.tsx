@@ -139,8 +139,8 @@ export default function ReoonAlternativePage() {
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Secure email gateways</h2>
         <p className={proseP}>
-          A gateway sits in front of the mail server and answers on its behalf, which breaks a plain
-          SMTP check the same way a catch-all does. Reoon does not advertise SEG support. We detect
+          A gateway sits in front of the mail server and answers on its behalf, which breaks a
+          standard check the same way a catch-all does. Reoon does not advertise SEG support. We detect
           15 gateways from a domain’s MX records, including Proofpoint, Mimecast and Barracuda, and
           return a real result on{' '}
           <Link

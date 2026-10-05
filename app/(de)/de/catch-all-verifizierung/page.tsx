@@ -47,9 +47,9 @@ const content: CatchAllContent = {
   whatKicker: 'Der Hintergrund',
   whatTitle: 'Was ist eine Catch-all-Domain',
   whatParas: [
-    'Eine Catch-all-Domain nimmt jede E-Mail an, die sie erreicht, auch an Adressen, die es nicht gibt. Der Server antwortet auf jede Adresse mit einer pauschalen Annahme, deshalb kann eine normale SMTP-Prüfung nicht sagen, ob dahinter ein echtes Postfach steckt.',
+    'Eine Catch-all-Domain nimmt jede E-Mail an, die sie erreicht, auch an Adressen, die es nicht gibt. Der Server antwortet auf jede Adresse mit einer pauschalen Annahme, deshalb kann eine normale Prüfung nicht sagen, ob dahinter ein echtes Postfach steckt.',
     'In einer typischen B2B-Liste liegen etwa 30 % der Kontakte auf Catch-all-Domains. Die meisten Tools erkennen das Muster, geben auf und markieren alles als riskant oder unbekannt. Übrig bleibt eine lange Liste von Kontakten, die Sie nicht sicher anschreiben können.',
-    'Es bleiben zwei Möglichkeiten, beide schlecht: senden und Bounces, Spam-Traps und einen Reputationsschaden riskieren, oder löschen und echte Kunden verlieren. Die Catch-all-Verifizierung löst das Problem, indem sie die tatsächliche Existenz des Postfachs prüft, statt zu raten.',
+    'Es bleiben zwei Möglichkeiten, beide schlecht: senden und Bounces, Spam-Traps und einen Reputationsschaden riskieren, oder löschen und echte Kunden verlieren. Die Catch-all-Verifizierung löst das Problem, indem sie prüft, ob die E-Mail-Adresse wirklich existiert, statt zu raten.',
   ],
   sameH3: 'Catch-all und Accept-all sind dasselbe',
   sameParas: [
@@ -59,7 +59,7 @@ const content: CatchAllContent = {
   howTitle: 'Wie Giggal.ai Catch-all-E-Mails verifiziert',
   howText: 'Jede Catch-all-Adresse durchläuft mehrere Prüfebenen, die sich zu einem klaren Ergebnis verbinden. Sie sehen gültig oder ungültig, keinen technischen Bericht.',
   signals: [
-    { title: 'Tiefenprüfung des Postfachs', body: 'Wir bestätigen die tatsächliche Existenz jedes Postfachs, nicht nur, dass die Domain alles annimmt. Wo eine normale SMTP-Prüfung eine pauschale Annahme sieht und aufhört, machen wir bis zu einer echten Antwort weiter.' },
+    { title: 'Postfachprüfung', body: 'Wir bestätigen, dass das Postfach wirklich existiert, nicht nur, dass die Domain alles annimmt. Wo eine normale Prüfung eine pauschale Annahme sieht und aufhört, machen wir bis zu einer echten Antwort weiter.' },
     { title: 'Vertrauenssignale der Domain', body: 'Wir analysieren die Konfiguration jeder Domain: SPF-, DKIM- und DMARC-Einträge, SSL-Zertifikate und Hosting-Reputation. Gut konfigurierte Domains beherbergen deutlich häufiger echte Postfächer.' },
     { title: 'Sicherheits-Gateways', body: 'Adressen hinter Gateways wie Mimecast, Proofpoint und Barracuda werden direkt geprüft. Das Gateway verbirgt nicht mehr, ob hinter der Adresse ein echtes Postfach steht.' },
   ],
@@ -82,9 +82,9 @@ const content: CatchAllContent = {
   ],
   faqTitle: 'Häufige Fragen',
   faq: [
-    { q: 'Was ist eine Catch-all-Domain?', a: 'Eine Domain, die jede gesendete E-Mail annimmt, auch an Adressen, die es nicht gibt. Der Server antwortet auf jede Adresse mit "ja, existiert", deshalb können klassische SMTP-Prüfungen nicht sagen, ob ein bestimmtes Postfach echt ist.' },
+    { q: 'Was ist eine Catch-all-Domain?', a: 'Eine Domain, die jede gesendete E-Mail annimmt, auch an Adressen, die es nicht gibt. Der Server antwortet auf jede Adresse mit "ja, existiert", deshalb können klassische Prüfungen nicht sagen, ob ein bestimmtes Postfach echt ist.' },
     { q: 'Kostet die Catch-all-Verifizierung zusätzliche Credits?', a: 'Nein. Sie kostet 1 Credit pro E-Mail, genau wie eine normale Prüfung.' },
-    { q: 'Wie genau ist die Catch-all-Verifizierung?', a: 'Etwa 98,5 % auf Firmenlisten. Statt nur aus SMTP-Antworten zu raten, prüfen wir die tatsächliche Existenz des Postfachs, sodass das Ergebnis auch beim Versand hält.' },
+    { q: 'Wie genau ist die Catch-all-Verifizierung?', a: 'Etwa 98,5 % auf Firmenlisten. Statt nur aus oberflächlichen Antworten zu raten, prüfen wir, ob die Adresse wirklich existiert, sodass das Ergebnis auch beim Versand hält.' },
     { q: 'Verlangsamt sie die Prüfung der restlichen Liste?', a: 'Nein. Die Catch-all-Prüfungen laufen parallel zur normalen Prüfung, nicht danach. Die ganze Liste ist in derselben Zeit fertig.' },
     { q: 'Kann ich nur die Catch-all-Adressen einer anderswo bereinigten Liste prüfen?', a: 'Ja. Öffnen Sie im Dashboard Catch-All Detection, fügen Sie nur die gewünschten Adressen ein oder laden Sie sie hoch und prüfen Sie diese. Der Preis ist derselbe: 1 Credit pro E-Mail.' },
     { q: 'Was passiert, wenn eine Catch-all-Prüfung "unbekannt" liefert?', a: 'Das ist selten, aber wenn wir zu keinem Ergebnis kommen, wird der Credit automatisch erstattet. Sie zahlen nur abgeschlossene Prüfungen.' },

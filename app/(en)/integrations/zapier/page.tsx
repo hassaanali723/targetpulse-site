@@ -42,7 +42,7 @@ export const metadata: Metadata = {
 const FAQ: FaqItem[] = [
   {
     q: 'How does the Giggal.ai Zapier integration work?',
-    a: 'Add a Giggal.ai verification step to any Zap. When your trigger fires, like a new CRM contact, form response or spreadsheet row, Zapier sends the email address to Giggal.ai. We run a deep mailbox existence check, and the result (deliverable, undeliverable, or catch-all result with score) flows into the next step of your Zap. No code is required.',
+    a: 'Add a Giggal.ai verification step to any Zap. When your trigger fires, like a new CRM contact, form response or spreadsheet row, Zapier sends the email address to Giggal.ai. We check whether the mailbox exists, and the result (deliverable, undeliverable, or catch-all result with score) flows into the next step of your Zap. No code is required.',
   },
   {
     q: 'Can it verify catch-all email addresses in Zapier?',
@@ -139,7 +139,7 @@ export default function ZapierIntegrationPage() {
         </h1>
         <p className="text-[16px] text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium mb-8">
           Connect Giggal.ai to 8,000+ apps and verify every email the moment it enters your
-          stack. Real-time mailbox existence checks, automatic catch-all verification, and
+          stack. Real-time mailbox checks, automatic catch-all verification, and
           clean lists everywhere, without writing a line of code.
         </p>
 

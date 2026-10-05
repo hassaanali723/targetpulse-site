@@ -11,7 +11,7 @@ cta: Resolva as linhas catch-all e SEG que os outros só marcam
 
 ## A versão curta
 
-Este é um teste de seis ferramentas de verificação de e-mail com os endereços que derrubam a maioria dos verificadores. O ranking completo de 28 ferramentas por tratamento de catch-all, suporte a SEG e preço está no [guia das melhores ferramentas de verificação de e-mail](/alternatives) (em inglês).
+Este é um teste de seis ferramentas de verificação de e-mail com os endereços que derrubam a maioria dos verificadores. O ranking completo de 28 ferramentas por tratamento de catch-all, suporte a SEG e preço está na [comparação de 28 verificadores](/alternatives) (em inglês).
 
 A parte mais difícil de escolher uma ferramenta de verificação de e-mail em 2026 são os endereços catch-all e os protegidos por SEG. Cerca de 30% de uma lista B2B fica em domínios catch-all (também chamados de accept-all) ou protegidos por SEG, os dois casos em que o servidor de e-mail não conta ao verificador se uma caixa existe de verdade. Em domínios catch-all o servidor aceita qualquer endereço, então os verificadores devolvem Arriscado. Em domínios protegidos por SEG um gateway de segurança esconde o servidor real, então devolvem Desconhecido. Este guia explica do zero a verificação de catch-all e SEG e depois compara os seis melhores verificadores de 2026 pelo que importa: se eles realmente resolvem esses endereços ou só os marcam. Ele responde à pergunta real: existe uma forma verdadeira de verificar e-mails catch-all e protegidos por SEG e, se existe, por que nem toda ferramenta faz isso? As respostas vão ajudar você a escolher o verificador que combina com a sua lista.
 

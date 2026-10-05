@@ -38,8 +38,8 @@ export const metadata: Metadata = {
 
 const steps = [
   {
-    name: 'Verificação SMTP sem enviar e-mail',
-    text: 'Um verificador abre uma conversa com o servidor de e-mail do domínio, informa o destinatário e lê o código de resposta: 250 se a caixa é aceita, 550 se não existe. Nenhuma mensagem é entregue.',
+    name: 'Verificar se o e-mail existe sem enviar mensagem',
+    text: 'Um verificador confere se o e-mail existe, sem enviar nenhuma mensagem.',
   },
   {
     name: 'Consultar os registros MX do domínio',
@@ -59,15 +59,15 @@ const steps = [
 const faqs: FaqItem[] = [
   {
     q: 'Como saber se o e-mail é válido?',
-    a: 'Um e-mail é válido quando está bem escrito, o domínio tem servidores de e-mail e o servidor aceita a caixa em uma verificação SMTP. Só o último passo confirma que ele existe; o formato sozinho não diz nada. O verificador desta página faz os três em segundos.',
+    a: 'Um e-mail é válido quando o domínio tem servidores de e-mail e o servidor confirma que a caixa existe. Só a verificação de existência confirma que ele existe de verdade; o formato sozinho não diz nada. O verificador desta página faz a checagem em segundos.',
   },
   {
     q: 'Como verificar se um e-mail existe sem enviar nada?',
-    a: 'Com a verificação SMTP: pergunta-se ao servidor de e-mail se a caixa existe e lê-se a resposta sem entregar nenhuma mensagem. É o método que a ferramenta desta página usa.',
+    a: 'Verificando se o e-mail existe, sem enviar nenhuma mensagem. É o método que a ferramenta desta página usa.',
   },
   {
     q: 'Esse e-mail existe? Como testar um endereço do Gmail?',
-    a: 'Igual a qualquer outro: o Gmail responde à verificação SMTP e confirma ou rejeita a caixa. Digite o endereço no verificador acima; em alguns segundos você vê válido ou inválido.',
+    a: 'Igual a qualquer outro: no Gmail, a verificação confirma se a caixa existe ou não. Digite o endereço no verificador acima; em alguns segundos você vê válido ou inválido.',
   },
   {
     q: 'Como saber se um endereço de e-mail existe quando o resultado é "desconhecido"?',
@@ -108,8 +108,8 @@ export default function ComoSaberSeUmEmailExistePage() {
           Como saber se um e-mail existe: quatro métodos e um verificador
         </h1>
         <p className="text-base md:text-lg text-slate-600 leading-relaxed font-medium">
-          Um e-mail existe se o servidor de e-mail do seu domínio aceita aquela caixa quando ela é
-          proposta em uma conversa SMTP. Dá para perguntar sem enviar nenhuma mensagem: é o que a
+          Um e-mail existe se o servidor de e-mail do seu domínio confirma que a caixa existe.
+          Dá para perguntar sem enviar nenhuma mensagem: é o que a
           ferramenta abaixo faz em alguns segundos. Nos domínios catch-all, que aceitam tudo, são
           necessárias verificações adicionais, e ela também as executa.
         </p>
@@ -152,11 +152,11 @@ export default function ComoSaberSeUmEmailExistePage() {
       ))}
 
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-12 border-t border-slate-200 space-y-4">
-        <h2 className={sectionTitle}>O que a verificação SMTP faz que os métodos manuais não fazem</h2>
+        <h2 className={sectionTitle}>O que a verificação de existência faz que os métodos manuais não fazem</h2>
         <p className={proseP}>
           Os métodos manuais checam sinais em volta do endereço: um padrão de nomes, a presença de um
-          servidor, a ausência de um bounce. A verificação SMTP pergunta ao próprio servidor pela caixa
-          específica e lê a resposta dele. É a única pergunta que o servidor responde diretamente, e é por
+          servidor, a ausência de um bounce. A verificação de existência confere se a caixa de e-mail
+          existe. É a única pergunta que o servidor responde diretamente, e é por
           isso que uma lista &quot;verificada&quot; só com formato e MX continua dando bounce. Em um domínio
           catch-all o servidor aceita todos os destinatários, então a mensagem não volta mesmo que a
           caixa não exista. A{' '}

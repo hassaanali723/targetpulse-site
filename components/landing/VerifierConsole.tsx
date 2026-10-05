@@ -99,7 +99,7 @@ const CHECK_LABELS: Record<CheckKey, string> = {
   basic: 'Basic validation checks',
   dns: 'Locating mail servers',
   catchall: 'Validating catch-all',
-  mailbox: 'Mailbox existence check',
+  mailbox: 'Mailbox check',
 }
 
 // The disposable tool reports two checks only. Its API route returns steps
@@ -176,17 +176,17 @@ function initialChecks(order: readonly string[]): Record<string, CheckStatus> {
 // renders exactly what the page rendered before the prop existed.
 export const EN_CONSOLE_STRINGS: ConsoleStrings = {
   header: 'Real Time Tester',
-  live: 'Live Probe',
+  live: 'Live Test',
   actionLabel: 'Verifier Action',
-  actionTitle: 'Recipient Handshake',
+  actionTitle: 'Mailbox Verification',
   placeholder: 'Email address to verify...',
   ariaInput: 'Email address to verify',
-  button: 'Analyze Handshake',
+  button: 'Verify Address',
   buttonRunning: 'Analyzing',
   diagnostics: 'Diagnostics Status',
   checks: CHECK_LABELS,
-  idleTitle: 'Ready to trace handshakes',
-  idleText: 'Enter a corporate or consumer address in the console input to run a live DNS + SMTP probe.',
+  idleTitle: 'Ready to verify mailbox',
+  idleText: 'Enter a corporate or consumer address in the console input to check whether the mailbox exists.',
   spawning: 'SPAWNING DIAGNOSTIC THREADS...',
   initLog: '[INIT] Opening secure verification socket...',
   limitTitle: 'Guest limit reached',
@@ -198,7 +198,7 @@ export const EN_CONSOLE_STRINGS: ConsoleStrings = {
   invalidSyntax: 'That is not a valid email address.',
   isCatchAll: 'a catch-all domain',
   notCatchAll: 'not a catch-all domain',
-  catchAllText: 'It accepts mail for any address, so a standard SMTP check cannot tell you whether this mailbox exists.',
+  catchAllText: 'It accepts mail for any address, so a basic check cannot tell you whether this mailbox exists.',
   notCatchAllText: 'A standard check is reliable here.',
   resultLabel: 'Result',
   // Empty title means "use the title the API sent" (the English pages).

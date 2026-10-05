@@ -7,7 +7,7 @@ import Footer from '@/components/Footer'
 import AltCtaBand from '@/components/alternatives/AltCtaBand'
 import JsonLd from '@/components/JsonLd'
 import { articleLd, breadcrumbTrailLd } from '@/lib/schema'
-import { getPostBySlug, getPostSlugs } from '@/lib/blog'
+import { getImageDimensions, getPostBySlug, getPostSlugs } from '@/lib/blog'
 import { CLUSTERS, hreflangAlternates, type ClusterId } from '@/lib/i18n/clusters'
 import TableOfContents from '@/components/blog/TableOfContents'
 import { Home, ChevronRight } from 'lucide-react'
@@ -53,9 +53,10 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   if (!post) return {}
   const url = `https://giggal.ai/blog/${post.slug}`
   const cluster = clusterFor(post.slug)
-  // Posts without a cover image fall back to the site card rather than shipping
-  // with no og:image at all.
-  const ogImage = post.image ? `https://giggal.ai${post.image}` : 'https://giggal.ai/og-card.png'
+  const ogImagePath = post.image || '/og-card.png'
+  const ogImageUrl = post.image ? `https://giggal.ai${post.image}` : 'https://giggal.ai/og-card.png'
+  const { width: imgWidth, height: imgHeight } = getImageDimensions(ogImagePath)
+  const imgAlt = post.image ? (post.imageAlt || post.title) : 'Giggal.ai email verification'
   return {
     title: post.seoTitle || post.title,
     description: post.description,
@@ -69,13 +70,25 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
       description: post.description,
       url,
       type: 'article',
-      ...(ogImage ? { images: [{ url: ogImage }] } : {}),
+      images: [
+        {
+          url: ogImageUrl,
+          width: imgWidth,
+          height: imgHeight,
+          alt: imgAlt,
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
       title: post.title,
       description: post.description,
-      ...(ogImage ? { images: [ogImage] } : {}),
+      images: [
+        {
+          url: ogImageUrl,
+          alt: imgAlt,
+        },
+      ],
     },
   }
 }

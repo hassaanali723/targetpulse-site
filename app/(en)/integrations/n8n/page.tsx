@@ -311,7 +311,7 @@ export default function N8nIntegrationPage() {
             Powered by a catch-all email verifier, not a standard checker
           </h3>
           <p className="text-[14px] text-slate-700 font-medium leading-relaxed">
-            Most verifiers stop at a basic SMTP ping. SEG-protected addresses come back as
+            Most verifiers stop at a basic check. SEG-protected addresses come back as
             unknown, and catch-all domains come back as risky. Giggal.ai verifies both. It{' '}
             <Link href="/seg-email-verification" className="font-black text-indigo-600 hover:text-indigo-700">
               bypasses secure email gateways

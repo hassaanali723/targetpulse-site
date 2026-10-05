@@ -239,7 +239,7 @@ export default function McpPage() {
             >
               email verification API
             </Link>
-            , giving your agent direct access to full SMTP checks and deep catch-all resolution.
+            , giving your agent direct access to mailbox checks and deep catch-all resolution.
           </p>
         </div>
       </section>

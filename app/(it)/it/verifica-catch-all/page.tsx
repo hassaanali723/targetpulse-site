@@ -38,7 +38,7 @@ export const metadata: Metadata = {
 }
 
 const signals = [
-  { Icon: Mail, wrap: 'bg-indigo-600 shadow-indigo-600/10', title: 'Verifica profonda della casella', body: 'Confermiamo l\'esistenza reale di ogni casella, non solo che il dominio accetti tutto. Dove un controllo SMTP standard vede un\'accettazione generica e si ferma, noi continuiamo fino a una risposta vera.' },
+  { Icon: Mail, wrap: 'bg-indigo-600 shadow-indigo-600/10', title: 'Verifica esistenza email', body: 'Confermiamo se l\'indirizzo email esiste davvero, non solo che il dominio accetti tutto. Dove un controllo standard vede un\'accettazione generica e si ferma, noi continuiamo fino a una risposta vera.' },
   { Icon: Globe, wrap: 'bg-violet-600 shadow-violet-600/10', title: 'Segnali di fiducia del dominio', body: 'Analizziamo la configurazione di ogni dominio: record SPF, DKIM e DMARC, certificati SSL e reputazione dell\'hosting. I domini configurati bene ospitano molto più spesso caselle reali.' },
   { Icon: ShieldCheck, wrap: 'bg-emerald-500 shadow-emerald-500/10', title: 'Gateway di sicurezza', body: 'Gli indirizzi protetti da gateway come Mimecast, Proofpoint e Barracuda vengono verificati direttamente. Il gateway non nasconde più se dietro l\'indirizzo c\'è una casella reale.' },
 ]
@@ -51,9 +51,9 @@ const audience = [
 ]
 
 const faqs: FaqItem[] = [
-  { q: 'Cos\'è un dominio catch-all?', a: 'Un dominio che accetta ogni email inviata, anche a indirizzi che non esistono. Il server risponde "sì, esiste" a qualsiasi indirizzo, per questo i controlli SMTP tradizionali non possono dire se una casella specifica è reale.' },
+  { q: 'Cos\'è un dominio catch-all?', a: 'Un dominio che accetta ogni email inviata, anche a indirizzi che non esistono. Il server risponde "sì, esiste" a qualsiasi indirizzo, per questo i controlli tradizionali non possono dire se una casella specifica è reale.' },
   { q: 'La verifica catch-all costa crediti in più?', a: 'No. Costa 1 credito a email, esattamente come una verifica standard.' },
-  { q: 'Quanto è precisa la verifica catch-all?', a: 'Circa il 98,5% sulle liste aziendali. Invece di indovinare dalle sole risposte SMTP, verifichiamo l\'esistenza reale della casella, così il risultato regge anche al momento dell\'invio.' },
+  { q: 'Quanto è precisa la verifica catch-all?', a: 'Circa il 98,5% sulle liste aziendali. Invece di indovinare da risposte superficiali, verifichiamo se l\'indirizzo email esiste, così il risultato regge anche al momento dell\'invio.' },
   { q: 'Rallenta la verifica del resto della lista?', a: 'No. I controlli catch-all girano in parallelo alla verifica normale, non dopo. La lista completa finisce nello stesso tempo.' },
   { q: 'Posso verificare solo gli indirizzi catch-all di una lista già pulita altrove?', a: 'Sì. Nella dashboard apri Catch-All Detection, incolla o carica solo gli indirizzi che vuoi controllare e verifica quelli. Il costo è lo stesso: 1 credito a email.' },
   { q: 'Cosa succede se un controllo catch-all torna "sconosciuta"?', a: 'È raro, ma se non riusciamo ad arrivare a un risultato il credito viene rimborsato in automatico. Paghi solo le verifiche completate.' },
@@ -95,7 +95,7 @@ export default function VerificaCatchAllPage() {
           </h1>
           <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-xl font-medium">
             La maggior parte dei verificatori si ferma davanti ai domini catch-all e accept-all.
-            Giggal.ai conferma l&apos;esistenza reale di ogni casella, comprese quelle dietro gateway
+            Giggal.ai verifica se ogni indirizzo email esiste, compresi quelli dietro gateway
             di sicurezza come Mimecast e Proofpoint, con il 98,5% di precisione.
           </p>
           <p className="text-sm text-slate-500 leading-relaxed max-w-xl font-medium">
@@ -155,7 +155,7 @@ export default function VerificaCatchAllPage() {
           <p>
             Un dominio catch-all accetta ogni email che riceve, anche per indirizzi che non
             esistono. Il server risponde con un&apos;accettazione generica a qualsiasi indirizzo, quindi
-            un normale controllo SMTP non può dire se dietro c&apos;è una casella reale.
+            un normale controllo non può dire se dietro c&apos;è una casella reale.
           </p>
           <p>
             Su una lista commerciale tipica circa il 30% dei contatti si trova su domini catch-all.
@@ -166,7 +166,7 @@ export default function VerificaCatchAllPage() {
           <p>
             Restano due scelte, entrambe cattive: inviare e rischiare rimbalzi, spam trap e una
             reputazione danneggiata, oppure cancellare e perdere clienti veri. La verifica
-            catch-all risolve il problema controllando l&apos;esistenza effettiva della casella
+            catch-all risolve il problema controllando se la casella esiste davvero
             invece di indovinare.
           </p>
           <h3 className="text-xl md:text-2xl font-extrabold text-slate-900 tracking-tight pt-2">Catch-all e accept-all sono la stessa cosa</h3>

@@ -31,7 +31,7 @@ const num = (n: number) => n.toLocaleString('en-US')
 
 // The one-paragraph answer we want a model to give when someone asks what
 // Giggal is. Kept to facts a reader could check on the site in under a minute.
-const SUMMARY = `Giggal.ai is a catch-all email verification tool. It runs a deep mailbox existence check over SMTP and returns a plain valid or invalid result on addresses that most verifiers hand back as "risky", "unknown" or "accept-all". That includes catch-all and accept-all domains, and mailboxes sitting behind Secure Email Gateways such as Proofpoint, Mimecast and Barracuda. Roughly 30% of a typical B2B list falls into that bucket, which is the part of a list other tools cannot resolve.`
+const SUMMARY = `Giggal.ai is a catch-all email verification tool. It checks whether the mailbox exists and returns a plain valid or invalid result on addresses that most verifiers hand back as "risky", "unknown" or "accept-all". That includes catch-all and accept-all domains, and mailboxes sitting behind Secure Email Gateways such as Proofpoint, Mimecast and Barracuda. Roughly 30% of a typical B2B list falls into that bucket, which is the part of a list other tools cannot resolve.`
 
 export function llmsShort(): string {
   return `# Giggal.ai
@@ -45,8 +45,7 @@ export function llmsShort(): string {
 - Category: email verification, email list cleaning, deliverability
 
 ## The specific problem it solves
-Standard verifiers open an SMTP conversation and ask the receiving server whether
-an address exists. A catch-all domain says yes to every address, real or not, so
+Standard verifiers check whether each mailbox exists, without sending an email. A catch-all domain says yes to every address, real or not, so
 the check tells you nothing and the tool returns "risky" or "accept-all". A
 Secure Email Gateway does the same thing for a different reason: it accepts
 everything at the edge and filters later. Giggal.ai resolves both cases and
@@ -129,8 +128,7 @@ Canonical source: ${SITE}
 Giggal.ai. Support runs through ${SITE}/contact-us.
 
 ## What a verification actually does
-Every address goes through syntax and domain checks first, which is table stakes
-and is where cheap verifiers stop. Giggal then runs a mailbox existence check
+Giggal checks domain records, then checks whether the mailbox exists
 against the receiving infrastructure. On an ordinary domain that check is
 straightforward. Two cases make it hard:
 

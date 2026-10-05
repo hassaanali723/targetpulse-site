@@ -17,7 +17,7 @@ import { consoleStrings, SIGNUP_URL } from '@/lib/i18n/de'
 
 const PATH = '/de/email-adresse-pruefen/gibt-es-diese-email-adresse'
 const DESC =
-  'Gibt es diese E-Mail-Adresse? So prüfen Sie, ob sie existiert, ohne eine Mail zu senden: SMTP-Prüfung, MX-Eintrag und manuelle Suche, mit ihren Grenzen.'
+  'Gibt es diese E-Mail-Adresse? So prüfen Sie, ob sie existiert, ohne eine Mail zu senden: Postfachprüfung, MX-Eintrag und manuelle Suche, mit ihren Grenzen.'
 
 export const metadata: Metadata = {
   title: { absolute: 'Gibt es diese E-Mail-Adresse? Existenz prüfen | Giggal.ai' },
@@ -36,8 +36,8 @@ export const metadata: Metadata = {
 
 const steps = [
   {
-    name: 'SMTP-Prüfung ohne E-Mail-Versand',
-    text: 'Ein Prüf-Tool öffnet ein Gespräch mit dem Mailserver der Domain, nennt den Empfänger und liest den Antwortcode: 250, wenn das Postfach angenommen wird, 550, wenn es nicht existiert. Es wird keine Nachricht zugestellt.',
+    name: 'Postfachprüfung ohne E-Mail-Versand',
+    text: 'Ein Prüf-Tool stellt fest, ob die E-Mail-Adresse wirklich existiert, ohne eine Mail zu senden.',
   },
   {
     name: 'MX-Eintrag der Domain nachschlagen',
@@ -52,7 +52,7 @@ const steps = [
 const faqs: FaqItem[] = [
   {
     q: 'Gibt es diese E-Mail-Adresse, ohne dass ich eine Mail schicken muss?',
-    a: 'Ja. Die SMTP-Prüfung fragt den Mailserver, ob das Postfach existiert, und liest die Antwort, ohne eine Nachricht zuzustellen. Genau das macht das Tool auf dieser Seite.',
+    a: 'Ja. Die Postfachprüfung stellt fest, ob die E-Mail-Adresse wirklich existiert, ohne eine Mail zu senden. Genau das macht das Tool auf dieser Seite.',
   },
   {
     q: 'Existiert die E-Mail-Adresse, wenn meine Mail nicht zurückkommt?',
@@ -60,7 +60,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'Wem gehört diese E-Mail-Adresse?',
-    a: 'Das kann keine Prüfung beantworten. Eine SMTP-Prüfung sagt, ob das Postfach existiert, und die Domain verrät das Unternehmen oder den Anbieter; den Namen des Inhabers gibt kein Mailserver preis. Wer den Inhaber sucht, vergleicht das Adressformat mit öffentlichen Profilen.',
+    a: 'Das kann keine Prüfung beantworten. Eine Postfachprüfung sagt, ob das Postfach existiert, und die Domain verrät das Unternehmen oder den Anbieter; den Namen des Inhabers gibt kein Mailserver preis. Wer den Inhaber sucht, vergleicht das Adressformat mit öffentlichen Profilen.',
   },
   {
     q: 'Warum steht im Ergebnis "unbekannt"?',
@@ -68,7 +68,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'Lassen sich GMX-, Web.de- und T-Online-Adressen prüfen?',
-    a: 'Ja. Die großen deutschen Anbieter antworten auf SMTP-Anfragen; GMX und Web.de setzen bei unbekannten Absendern manchmal Greylisting ein, dann hilft ein zweiter Versuch nach einigen Minuten.',
+    a: 'Ja. Die großen deutschen Anbieter antworten auf Überprüfungsanfragen; GMX und Web.de setzen bei unbekannten Absendern manchmal Greylisting ein, dann hilft ein zweiter Versuch nach einigen Minuten.',
   },
   {
     q: 'Was mache ich mit einer Adresse, die es nicht gibt?',
@@ -109,8 +109,8 @@ export default function GibtEsDieseEmailAdressePage() {
           Gibt es diese E-Mail-Adresse? So prüfen Sie, ob sie existiert
         </h1>
         <p className="text-base md:text-lg text-slate-600 leading-relaxed font-medium">
-          Eine E-Mail-Adresse existiert, wenn der Mailserver ihrer Domain das Postfach annimmt,
-          sobald man es ihm in einem SMTP-Gespräch nennt. Das lässt sich fragen, ohne eine Nachricht
+          Eine E-Mail-Adresse existiert, wenn das zugehörige Postfach angelegt und aktiv ist.
+          Das lässt sich prüfen, ohne eine Nachricht
           zu senden: Genau das tut das Tool unten in wenigen Sekunden. Gibt es die E-Mail-Adresse,
           oder gibt es sie nicht: die Antwort kommt vom Server selbst. Auf Catch-all-Domains, die
           alles annehmen, braucht es zusätzliche Prüfungen, und auch die führt es aus.

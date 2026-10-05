@@ -36,9 +36,9 @@ const content: PricingContent = {
   includedTitle: 'Tout est compris dans chaque pack',
   includedText: 'Toutes les fonctions, dans tous les packs. Pas de paliers, pas de blocages.',
   features: [
-    'Contrôle de la syntaxe',
+    'Vérification de la boîte mail',
     'Vérification du domaine et des enregistrements MX',
-    'Vérification SMTP de la boîte',
+    'Détection des passerelles SEG',
     'Détection des adresses jetables',
     'Détection des adresses génériques',
     'Vérification catch-all',

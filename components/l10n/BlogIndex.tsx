@@ -78,17 +78,43 @@ export default function BlogIndexL10n({ locale, page = 1 }: { locale: L10nLocale
   )
 }
 
+const PAGE_WORD: Record<L10nLocale, string> = {
+  it: 'pagina',
+  de: 'Seite',
+  es: 'página',
+  'pt-br': 'página',
+  fr: 'page',
+}
+
 // Metadata for pages 2..n of a localized hub. Page 1 keeps the hub URL and its
 // hreflang cluster; later pages are self-canonical and noindex, reachable
 // through the pagination links.
 export function blogIndexPagedMetadata(locale: L10nLocale, page: number): Metadata {
   const b = BLOG_STRINGS[locale]
   const path = CLUSTERS.blog[locale]
+  const pageWord = PAGE_WORD[locale]
+  const title = `Blog, ${pageWord} ${page} | Giggal.ai`
+  const description = `${b.hubDesc} ${pageWord.charAt(0).toUpperCase() + pageWord.slice(1)} ${page}.`
+  const url = `https://giggal.ai${path}/page/${page}`
   return {
-    title: { absolute: `${b.hubOgTitle} (${page}) | Giggal.ai` },
-    description: b.hubDesc,
+    title: { absolute: title },
+    description,
     alternates: { canonical: `${path}/page/${page}` },
     robots: { index: false, follow: true, googleBot: { index: false, follow: true } },
+    openGraph: {
+      siteName: 'Giggal.ai',
+      locale: getStrings(locale).ogLocale,
+      title,
+      description,
+      url,
+      type: 'website',
+      images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai' }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+    },
   }
 }
 

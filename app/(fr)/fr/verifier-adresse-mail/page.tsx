@@ -22,7 +22,7 @@ import { consoleStrings, SIGNUP_URL } from '@/lib/i18n/fr'
 
 const PATH = '/fr/verifier-adresse-mail'
 const DESC =
-  'Vérifiez si une adresse mail existe et est valide, sans envoyer de message : syntaxe, MX, SMTP, catch-all et adresses jetables. Gratuit, sans inscription.'
+  'Vérifiez si une adresse mail existe et est valide, sans envoyer de message : MX, existence de la boîte mail, catch-all et adresses jetables. Gratuit, sans inscription.'
 
 export const metadata: Metadata = {
   title: { absolute: "Vérifier une Adresse Mail : Testeur d'Email Gratuit | Giggal.ai" },
@@ -55,11 +55,11 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'Vérifier, tester, valider une adresse mail : quelle différence ?',
-    a: 'Aucune dans les faits. Valider une adresse, c’est souvent contrôler son format ; tester ou vérifier une adresse, c’est interroger le serveur pour savoir si la boîte existe. Cette page fait les deux, plus la résolution des domaines catch-all.',
+    a: 'Aucune dans les faits. Valider une adresse, c’est souvent contrôler son format ; tester ou vérifier une adresse, c’est vérifier si la boîte mail existe. Cette page fait les deux, plus la résolution des domaines catch-all.',
   },
   {
     q: 'Envoyez-vous un message à l’adresse ?',
-    a: 'Non. La vérification passe par une conversation SMTP : l’outil ouvre la connexion avec le serveur, annonce le destinataire et lit le code de réponse (250 si la boîte est acceptée, 550 si elle n’existe pas). Le destinataire ne reçoit rien.',
+    a: 'Non. L’outil vérifie si la boîte mail existe, sans envoyer de message. Le destinataire ne reçoit rien.',
   },
   {
     q: 'Que veut dire « risqué » ?',
@@ -67,7 +67,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'Comment savoir si une adresse mail est valide ou existe ?',
-    a: 'Avec la vérification SMTP de cette page, en quelques secondes. Les autres méthodes, avec leurs limites, sont dans le guide « Comment savoir si une adresse mail est valide » : recherche sur le web, lecture du rebond, récupération de mot de passe et message à une adresse volontairement fausse.',
+    a: 'Avec le testeur de cette page qui vérifie si la boîte existe, en quelques secondes. Les autres méthodes, avec leurs limites, sont dans le guide « Comment savoir si une adresse mail est valide » : recherche sur le web, lecture du rebond, récupération de mot de passe et message à une adresse volontairement fausse.',
   },
 ]
 
@@ -109,7 +109,7 @@ export default function VerifierAdresseMailPage() {
           strings={consoleStrings}
         />
         <p className="text-center text-[13px] text-slate-500 font-medium mt-4">
-          Gratuit, sans inscription, sans carte. Une adresse par vérification, contrôle SMTP complet.
+          Gratuit, sans inscription, sans carte. Une adresse par vérification, avec un contrôle complet de la boîte mail.
         </p>
       </section>
 
@@ -141,11 +141,11 @@ export default function VerifierAdresseMailPage() {
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Comment savoir si une adresse mail existe ou est valide&nbsp;?</h2>
         <p className={proseP}>
-          Une adresse existe si le serveur de son domaine accepte cette boîte quand on la lui propose dans
-          une conversation SMTP. On peut poser la question sans rien envoyer&nbsp;: c&apos;est ce que fait
-          l&apos;outil ci-dessus. Avant de répondre à un contact noté à la main, quand un formulaire renvoie
-          un rebond ou pour tester une adresse d&apos;une liste achetée, la question est la même. Les quatre
-          méthodes qui fonctionnent, avec leurs limites, sont dans le guide{' '}
+          Une adresse mail existe si sa boîte est créée et active.
+          On peut vérifier cela sans rien envoyer&nbsp;: c&apos;est ce que fait l&apos;outil ci-dessus.
+          Avant de répondre à un contact noté à la main, quand un formulaire renvoie un rebond ou pour
+          tester une adresse d&apos;une liste achetée, la question est la même. Les quatre méthodes qui
+          fonctionnent, avec leurs limites, sont dans le guide{' '}
           <Link href="/fr/verifier-adresse-mail/comment-savoir-si-une-adresse-mail-est-valide" className="text-indigo-600 font-bold hover:underline">
             Comment savoir si une adresse mail est valide&nbsp;?
           </Link>
@@ -162,7 +162,7 @@ export default function VerifierAdresseMailPage() {
         </p>
         <ol className="list-decimal pl-6 space-y-3 text-slate-600 text-sm md:text-base font-medium leading-relaxed">
           <li>
-            <strong className="text-slate-900">Syntaxe.</strong> L&apos;adresse est bien formée&nbsp;: une seule
+            <strong className="text-slate-900">Format.</strong> L&apos;adresse est bien formée&nbsp;: une seule
             arobase, une partie locale valide, un domaine avec extension. Cette étape trouve les fautes de
             frappe et rien d&apos;autre.
           </li>
@@ -172,9 +172,9 @@ export default function VerifierAdresseMailPage() {
             morte avant tout envoi.
           </li>
           <li>
-            <strong className="text-slate-900">Vérification SMTP de la boîte.</strong> Nous ouvrons une
-            conversation avec le serveur destinataire, annonçons le destinataire et lisons la réponse. Un
-            code 250 signifie que la boîte est acceptée&nbsp;; un 550, qu&apos;elle n&apos;existe pas.
+            <strong className="text-slate-900">Vérification de la boîte mail.</strong> Nous
+            vérifions si l’adresse mail existe, sans envoyer de message. Le
+            résultat indique si la boîte existe ou non.
           </li>
           <li>
             <strong className="text-slate-900">Résolution catch-all.</strong> Si le serveur a dit oui aussi à

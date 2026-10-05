@@ -9,9 +9,9 @@ import JsonLd from '@/components/JsonLd'
 import { faqPageLd, breadcrumbLd } from '@/lib/schema'
 
 const features = [
-  'Email Syntax Validation',
+  'Mailbox Check',
   'Domain & MX Record Verification',
-  'SMTP Mailbox Verification',
+  'Secure Email Gateway Detection',
   'Disposable Email Detection',
   'Role-Based Email Detection',
   'Catch-All Validation',

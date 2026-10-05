@@ -316,3 +316,40 @@ export function getAllPosts(locale: BlogLocale = 'en'): PostMeta[] {
     .filter((p): p is PostMeta => p !== null)
     .sort((a, b) => (a.date < b.date ? 1 : -1))
 }
+
+/** Reads the width and height of an image file in public/ synchronously from its header. */
+export function getImageDimensions(urlPath: string): { width: number; height: number } {
+  try {
+    const clean = urlPath.replace(/^\//, '')
+    const full = path.join(process.cwd(), 'public', clean)
+    if (fs.existsSync(full)) {
+      const buf = fs.readFileSync(full)
+      if (buf.length >= 24 && buf.readUInt32BE(0) === 0x89504e47) {
+        return { width: buf.readUInt32BE(16), height: buf.readUInt32BE(20) }
+      }
+      if (buf.length >= 30 && buf.toString('ascii', 0, 4) === 'RIFF' && buf.toString('ascii', 8, 12) === 'WEBP') {
+        const type = buf.toString('ascii', 12, 16)
+        if (type === 'VP8X' && buf.length >= 30) {
+          const width = 1 + buf.readUIntLE(24, 3)
+          const height = 1 + buf.readUIntLE(27, 3)
+          return { width, height }
+        }
+        if (type === 'VP8 ' && buf.length >= 30) {
+          const width = buf.readUInt16LE(26) & 0x3fff
+          const height = buf.readUInt16LE(28) & 0x3fff
+          return { width, height }
+        }
+        if (type === 'VP8L' && buf.length >= 25) {
+          const b1 = buf[21]
+          const b2 = buf[22]
+          const b3 = buf[23]
+          const b4 = buf[24]
+          const width = 1 + (((b2 & 0x3f) << 8) | b1)
+          const height = 1 + (((b4 & 0xf) << 10) | (b3 << 2) | ((b2 & 0xc0) >> 6))
+          return { width, height }
+        }
+      }
+    }
+  } catch {}
+  return urlPath.includes('og-card') ? { width: 1200, height: 630 } : { width: 1600, height: 840 }
+}

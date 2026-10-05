@@ -39,8 +39,8 @@ export const metadata: Metadata = {
 
 const steps = [
   {
-    name: 'Vérification SMTP sans envoyer d’email',
-    text: 'Un vérificateur ouvre une conversation avec le serveur de messagerie du domaine, annonce le destinataire et lit le code de réponse : 250 si la boîte est acceptée, 550 si elle n’existe pas. Aucun message n’est remis.',
+    name: 'Vérifier si l’adresse mail existe sans envoyer d’email',
+    text: 'Un outil de vérification contrôle si l’adresse mail existe, sans envoyer de message.',
   },
   {
     name: 'Consulter les enregistrements MX du domaine',
@@ -59,15 +59,15 @@ const steps = [
 const faqs: FaqItem[] = [
   {
     q: 'Comment savoir si une adresse mail existe ?',
-    a: 'Avec la vérification SMTP : on demande au serveur de messagerie si la boîte existe et on lit la réponse sans remettre de message. C’est la méthode qu’utilise l’outil de cette page.',
+    a: 'En vérifiant si l’adresse mail existe, sans envoyer de message. C’est la méthode qu’utilise l’outil de cette page.',
   },
   {
     q: 'Vérifier si une adresse mail existe sans envoyer de message, c’est possible ?',
-    a: 'Oui, c’est même la seule méthode fiable. Le serveur répond à la question « cette boîte existe-t-elle ? » pendant la conversation SMTP, avant tout envoi. Saisissez l’adresse dans le vérificateur ci-dessus ; en quelques secondes vous voyez valide ou invalide.',
+    a: 'Oui, c’est même la seule méthode fiable. Le serveur répond à la question « cette boîte existe-t-elle ? » lors de la vérification, avant tout envoi. Saisissez l’adresse dans le vérificateur ci-dessus ; en quelques secondes vous voyez valide ou invalide.',
   },
   {
     q: 'Une adresse mail valide existe-t-elle forcément ?',
-    a: 'Non. « Valide » au sens du format signifie seulement bien écrite : une arobase, un domaine, une extension. Une adresse au format parfait sur un domaine sans serveur de messagerie, ou vers une boîte jamais créée, n’existe pas. Seule la vérification SMTP tranche.',
+    a: 'Non. « Valide » au sens du format signifie seulement bien écrite : une arobase, un domaine, une extension. Une adresse au format parfait sur un domaine sans serveur de messagerie, ou vers une boîte jamais créée, n’existe pas. Seul un test qui vérifie si l’adresse mail existe tranche.',
   },
   {
     q: 'Pourquoi le résultat dit-il « inconnu » ?',
@@ -108,11 +108,10 @@ export default function CommentSavoirSiUneAdresseMailEstValidePage() {
           Comment savoir si une adresse mail est valide ou existe&nbsp;: quatre méthodes
         </h1>
         <p className="text-base md:text-lg text-slate-600 leading-relaxed font-medium">
-          Une adresse mail existe si le serveur de messagerie de son domaine accepte cette boîte quand on
-          la lui propose dans une conversation SMTP. On peut poser la question sans envoyer le moindre
-          message&nbsp;: c&apos;est ce que fait l&apos;outil ci-dessous en quelques secondes. Sur les domaines
-          catch-all, qui acceptent tout, des contrôles supplémentaires sont nécessaires, et il les exécute
-          aussi.
+          Une adresse mail existe si sa boîte est créée et active.
+          On peut vérifier cela sans envoyer le moindre message&nbsp;: c&apos;est ce que fait
+          l&apos;outil ci-dessous en quelques secondes. Sur les domaines catch-all, qui acceptent tout, des
+          contrôles supplémentaires sont nécessaires, et il les exécute aussi.
         </p>
       </section>
 
@@ -153,11 +152,11 @@ export default function CommentSavoirSiUneAdresseMailEstValidePage() {
       ))}
 
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-12 border-t border-slate-200 space-y-4">
-        <h2 className={sectionTitle}>Ce que la vérification SMTP fait que les méthodes manuelles ne font pas</h2>
+        <h2 className={sectionTitle}>Ce que la vérification de la boîte fait que les méthodes manuelles ne font pas</h2>
         <p className={proseP}>
           Les méthodes manuelles contrôlent des signes autour de l&apos;adresse&nbsp;: un format de noms, la
-          présence d&apos;un serveur, l&apos;absence d&apos;un rebond. La vérification SMTP demande au serveur
-          lui-même la boîte précise et lit sa réponse. C&apos;est la seule question à laquelle le serveur
+          présence d&apos;un serveur, l&apos;absence d&apos;un rebond. La vérification contrôle si la boîte mail
+          existe. C&apos;est la seule question à laquelle le serveur
           répond directement, et c&apos;est pourquoi une liste «&nbsp;vérifiée&nbsp;» seulement par le format et
           les MX continue de rebondir. Sur un domaine catch-all, le serveur accepte tous les destinataires,
           donc le message ne revient pas même si la boîte n&apos;existe pas. La{' '}

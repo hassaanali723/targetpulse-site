@@ -19,14 +19,32 @@ export function generateStaticParams() {
   return Array.from({ length: Math.max(0, total - 1) }, (_, i) => ({ page: String(i + 2) }))
 }
 
+const DESC =
+  'Guides on catch-all addresses, secure email gateways, bounce rates and email verification. Plain explanations for people cleaning real lists.'
+
 export function generateMetadata({ params }: { params: { page: string } }): Metadata {
   const page = Number(params.page)
+  const title = `Blog, page ${page} | Giggal.ai`
+  const description = `${DESC} Page ${page}.`
+  const url = `https://giggal.ai/blog/page/${page}`
   return {
-    title: { absolute: `Email Verification & Deliverability Blog, page ${page} | Giggal.ai` },
-    description:
-      'Guides on catch-all addresses, secure email gateways, bounce rates and email verification.',
+    title: { absolute: title },
+    description,
     alternates: { canonical: `/blog/page/${page}` },
     robots: { index: false, follow: true, googleBot: { index: false, follow: true } },
+    openGraph: {
+      siteName: 'Giggal.ai',
+      title,
+      description,
+      url,
+      type: 'website',
+      images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai' }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+    },
   }
 }
 

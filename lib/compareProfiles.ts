@@ -217,7 +217,7 @@ export const COMPARE_PROFILES: Record<string, CompareProfile> = {
     category: 'Catch-all specialist',
     oneLiner: 'A catch-all verifier with sender reputation and inbox placement tooling attached.',
     catchAllApproach:
-      'Resolves catch-all addresses to valid or invalid through a signal-based process rather than SMTP probing, and names Mimecast and Proofpoint.',
+      'Resolves catch-all addresses to valid or invalid through a signal-based process, and names Mimecast and Proofpoint.',
     limitations: [
       'Sold as a monthly seat and allowance plan rather than per verification',
       'Add-on credits are billed separately once the plan allowance runs out',

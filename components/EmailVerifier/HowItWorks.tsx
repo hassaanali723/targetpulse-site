@@ -15,7 +15,7 @@ export default function EmailVerifierHowItWorks() {
     {
       icon: <Search className="w-10 h-10" />,
       title: 'Automatic Verification',
-      description: 'Our advanced algorithm validates each email for syntax, domain, SMTP, and deliverability in real-time.',
+      description: 'Our system checks domain records, whether the mailbox exists, and deliverability signals in real time.',
       color: 'from-accent-500 to-accent-600',
       number: '02'
     },

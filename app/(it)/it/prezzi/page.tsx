@@ -31,9 +31,9 @@ export const metadata: Metadata = {
 }
 
 const features = [
-  'Controllo della sintassi',
+  'Verifica esistenza email',
   'Verifica del dominio e dei record MX',
-  'Verifica SMTP della casella',
+  'Rilevamento gateway SEG',
   'Rilevamento email usa e getta',
   'Rilevamento account di ruolo',
   'Verifica catch-all',

@@ -21,7 +21,7 @@ import { consoleStrings, SIGNUP_URL } from '@/lib/i18n/es'
 
 const PATH = '/es/validar-correo'
 const DESC =
-  'Valida y verifica cualquier correo electrónico sin enviar un mensaje: sintaxis, MX, SMTP, catch-all y correos desechables en segundos. Gratis y sin registro.'
+  'Valida y verifica cualquier correo electrónico sin enviar un mensaje: MX, existencia del buzón, catch-all y correos desechables en segundos. Gratis y sin registro.'
 
 export const metadata: Metadata = {
   title: { absolute: 'Validar Correo: Verificador de Email Gratis | Giggal.ai' },
@@ -46,11 +46,11 @@ export const metadata: Metadata = {
 const faqs: FaqItem[] = [
   {
     q: '¿Cómo saber si un correo existe?',
-    a: 'Escríbelo arriba y pulsa Validar. El verificador consulta al servidor de correo del dominio si ese buzón existe y lee la respuesta, sin enviar ningún mensaje. En unos segundos tienes el resultado: válido, no válido o desconocido. La guía "¿Cómo saber si un correo existe?" explica los otros métodos y sus límites.',
+    a: 'Escríbelo arriba y pulsa Validar. El verificador comprueba si el buzón existe, sin enviar ningún mensaje. En unos segundos tienes el resultado: válido, no válido o desconocido. La guía "¿Cómo saber si un correo existe?" explica los otros métodos y sus límites.',
   },
   {
     q: '¿Cómo verificar un correo electrónico sin enviar un mensaje?',
-    a: 'Con una comprobación SMTP: el verificador abre una conversación con el servidor de correo, indica el destinatario y lee el código de respuesta (250 si el buzón se acepta, 550 si no existe). El destinatario no recibe nada.',
+    a: 'El verificador comprueba si el buzón existe, sin enviar ningún mensaje. El destinatario no recibe nada.',
   },
   {
     q: '¿Cómo validar un correo electrónico de una lista entera?',
@@ -58,11 +58,11 @@ const faqs: FaqItem[] = [
   },
   {
     q: '¿Qué es el verificador de email y qué comprueba?',
-    a: 'Es la herramienta de esta página. Comprueba la sintaxis, los registros MX del dominio, el buzón por SMTP y si el dominio es catch-all; además detecta correos desechables, cuentas de rol y proveedores gratuitos.',
+    a: 'Es la herramienta de esta página. Comprueba los registros MX del dominio, si el buzón existe y si el dominio es catch-all; además detecta correos desechables, cuentas de rol y proveedores gratuitos.',
   },
   {
     q: '¿Cómo saber si un correo está activo?',
-    a: 'Un buzón activo responde 250 a la comprobación SMTP. Si el servidor responde tarde o aplica greylisting, el resultado es "desconocido": no significa que esté inactivo, vuelve a probar más tarde.',
+    a: 'Si el buzón está activo, la comprobación lo confirma. Si el servidor responde tarde o aplica greylisting, el resultado es "desconocido": no significa que esté inactivo, vuelve a probar más tarde.',
   },
   {
     q: '¿Qué significa "catch-all"?',
@@ -100,8 +100,8 @@ export default function ValidarCorreoPage() {
           </span>
         </h1>
         <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium">
-          Comprueba si una dirección de correo existe y es válida: sintaxis, servidores de correo,
-          buzón SMTP y dominios catch-all en segundos. No enviamos ningún mensaje a la dirección.
+          Comprueba si una dirección de correo existe y es válida: servidores de correo,
+          existencia del buzón y dominios catch-all en segundos. No enviamos ningún mensaje a la dirección.
         </p>
       </section>
 
@@ -116,7 +116,7 @@ export default function ValidarCorreoPage() {
           strings={consoleStrings}
         />
         <p className="text-center text-[13px] text-slate-500 font-medium mt-4">
-          Gratis, sin registro, sin tarjeta. Una dirección por comprobación, verificación SMTP completa.
+          Gratis, sin registro, sin tarjeta. Una dirección por consulta, con comprobación completa del buzón.
         </p>
       </section>
 
@@ -146,11 +146,10 @@ export default function ValidarCorreoPage() {
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>¿Cómo saber si un correo existe?</h2>
         <p className={proseP}>
-          Un correo existe si el servidor de su dominio acepta ese buzón cuando se le propone en una
-          conversación SMTP. Se puede preguntar sin enviar nada: es lo que hace la herramienta de arriba.
-          Antes de responder a un contacto escrito a mano, cuando un formulario rebota o para probar una
-          dirección de una lista comprada, la pregunta es la misma. Los cuatro métodos que funcionan, con
-          sus límites, están en la guía{' '}
+          Un correo existe si su buzón está creado y activo. Se puede
+          preguntar sin enviar nada: es lo que hace la herramienta de arriba. Antes de responder a un
+          contacto escrito a mano, cuando un formulario rebota o para probar una dirección de una lista
+          comprada, la pregunta es la misma. Los cuatro métodos que funcionan, con sus límites, están en la guía{' '}
           <Link href="/es/validar-correo/como-saber-si-un-correo-existe" className="text-indigo-600 font-bold hover:underline">
             ¿Cómo saber si un correo existe?
           </Link>
@@ -168,7 +167,7 @@ export default function ValidarCorreoPage() {
         </p>
         <ol className="list-decimal pl-6 space-y-3 text-slate-600 text-sm md:text-base font-medium leading-relaxed">
           <li>
-            <strong className="text-slate-900">Sintaxis.</strong> La dirección está bien escrita: una sola
+            <strong className="text-slate-900">Formato.</strong> La dirección está bien escrita: una sola
             arroba, una parte local válida, un dominio con extensión. Este paso encuentra errores de
             escritura y nada más.
           </li>
@@ -178,9 +177,9 @@ export default function ValidarCorreoPage() {
             enviar nada.
           </li>
           <li>
-            <strong className="text-slate-900">Verificación SMTP del buzón.</strong> Abrimos una
-            conversación con el servidor receptor, indicamos el destinatario y leemos la respuesta. Un
-            código 250 significa que el buzón se acepta; un 550, que no existe.
+            <strong className="text-slate-900">Comprobación del buzón.</strong> Comprobamos
+            si el correo existe, sin enviar ningún mensaje. El resultado indica si el
+            buzón existe o no.
           </li>
           <li>
             <strong className="text-slate-900">Resolución catch-all.</strong> Si el servidor dijo que sí
@@ -202,7 +201,7 @@ export default function ValidarCorreoPage() {
         <p className={proseP}>
           En España se suele decir comprobar el correo; en México, Perú y Colombia, validar el correo.
           Es la misma comprobación: el verificador de email de esta página
-          consulta el servidor del dominio, resuelve los dominios catch-all y funciona igual con
+          comprueba si el buzón existe, resuelve los dominios catch-all y funciona igual con
           direcciones de empresas españolas, de Gmail o de Outlook. No hay versiones por país: una sola
           herramienta para todo el español.
         </p>

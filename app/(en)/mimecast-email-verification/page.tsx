@@ -11,7 +11,7 @@ import { CheckCircle2, AlertCircle, AlertTriangle, HelpCircle, ArrowRight, Check
 
 const APP_URL = 'https://emailverifier.giggal.ai/sign-up'
 const DESC =
-  'Mimecast hides whether a mailbox exists, so most verifiers return Unknown. Giggal.ai skips SMTP against Mimecast and returns a real result instead.'
+  'Mimecast hides whether a mailbox exists, so most verifiers return Unknown. Giggal.ai routes around Mimecast and returns a real verification result instead.'
 
 export const metadata: Metadata = {
   title: { absolute: 'Mimecast Email Verification | Giggal.ai' },
@@ -46,11 +46,11 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'Why do most verifiers return Unknown on Mimecast domains?',
-    a: 'They ask the mail server over SMTP whether a mailbox exists. Mimecast intercepts that and answers with something deliberately vague, so the verifier has nothing to work with.',
+    a: 'They connect to the mail server to ask whether a mailbox exists. Mimecast intercepts that and answers with something deliberately vague, so the verifier has nothing to work with.',
   },
   {
-    q: 'Does Giggal.ai probe Mimecast over SMTP?',
-    a: 'No. We skip SMTP entirely on Mimecast domains. It gets refused, and repeated attempts damage sender IP reputation, which would degrade results on every other domain in the list.',
+    q: 'How does Giggal.ai verify Mimecast domains?',
+    a: 'We use alternate verification signals for Mimecast domains. Direct mailbox queries get refused, and repeated attempts damage sender IP reputation, which would degrade results on every other domain in the list.',
   },
   {
     q: 'Do I need to separate Mimecast addresses before uploading?',
@@ -126,11 +126,11 @@ export default function MimecastEmailVerificationPage() {
           </p>
           <p>
             Blocking that kind of mailbox lookup is a deliberate feature, not a side effect. Mimecast
-            is supposed to prevent exactly the kind of probing a verifier does, because the same
-            technique is how an attacker would map out a company&apos;s users. Stopping it is the point.
+            is supposed to prevent directory harvesting and mailbox enumeration, because that is how
+            an attacker maps out a company&apos;s users. Stopping it is the point.
           </p>
           <p>
-            When probed, Mimecast returns a deliberately vague response rather than confirming
+            When queried, Mimecast returns a deliberately vague response rather than confirming
             or denying the mailbox. A verifier that takes that response at face value has two options,
             and both are bad. It can guess, which puts wrong results into your list, or it can give
             up and mark the address Unknown, which leaves a real contact unresolved.
@@ -146,8 +146,8 @@ export default function MimecastEmailVerificationPage() {
             People who hit this usually see one of two things: a verification result stuck on Unknown,
             or a bounce message from their own sending tool. The wording varies, but it commonly
             mentions an internal resource being temporarily unavailable, or a recipient not being
-            allowed. These are messages Mimecast sends when something asks about a mailbox it is set
-            up to protect.
+            allowed. These are messages Mimecast sends when something checks whether one of the mailboxes
+            it protects exists.
           </p>
           <p>
             The one behaviour our engine relies on here is specific: it recognises the
@@ -174,18 +174,18 @@ export default function MimecastEmailVerificationPage() {
         <h2 className={sectionTitle}>How Giggal.ai handles Mimecast</h2>
         <div className="space-y-5 text-slate-600 leading-relaxed text-sm md:text-base font-medium">
           <p>
-            The domain&apos;s MX records identify Mimecast before any probing happens, so the address
+            The domain&apos;s MX records identify Mimecast before verification begins, so the address
             is on the Mimecast path from the start rather than after a failed attempt.
           </p>
           <p>
-            SMTP probing is skipped entirely. Not retried, not throttled, skipped. There are two
-            reasons. Mimecast refuses the check, so there is nothing to gain. And repeated attempts
-            flag the sending IP, which would degrade results across every other domain being verified
-            in the same run.
+            Direct mail server queries are skipped entirely for Mimecast. Not retried, not throttled,
+            skipped. There are two reasons. Mimecast refuses the check, so there is nothing to gain.
+            And repeated attempts flag the sending IP, which would degrade results across every other
+            domain being verified in the same run.
           </p>
           <p>
             The email verification result comes from a different signal instead, one that does not
-            rely on Mimecast answering a probe. When that vague response does show up, it is recognised
+            rely on Mimecast answering a direct query. When that vague response does show up, it is recognised
             and never recorded as a real answer. The address comes back as a real deliverable or
             undeliverable result, or as Unknown with the credit refunded, but not as a guess dressed
             up as an answer.

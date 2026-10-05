@@ -58,7 +58,7 @@ export default function TermsOfServicePage() {
 
           <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight mt-10 mb-4 scroll-mt-28">2. Description of Service</h2>
           <p className="text-slate-600 leading-relaxed mb-4">
-            Giggal.ai Email Verifier is a cloud-based tool that helps teams clean and validate email lists. Users upload CSV files or individual emails, and we check deliverability, syntax, and mailbox status to reduce invalid addresses and improve list quality. The product is sold as a pay-as-you-go credit system, so customers only pay for the emails they actually validate.
+            Giggal.ai Email Verifier is a cloud-based tool that helps teams clean and validate email lists. Users upload CSV files or individual emails, and we check deliverability, domain records, and whether each mailbox exists to reduce invalid addresses and improve list quality. The product is sold as a pay-as-you-go credit system, so customers only pay for the emails they actually validate.
           </p>
           <p className="text-slate-600 leading-relaxed mb-4">
             The Service is provided to you subject to these Terms of Service and any additional terms and conditions that may apply.
@@ -69,13 +69,13 @@ export default function TermsOfServicePage() {
             Our primary service is email verification and validation, which includes:
           </p>
           <ul className="list-disc pl-6 mb-4 space-y-1.5 text-slate-600 leading-relaxed marker:text-indigo-400">
-            <li><strong>Email Syntax Validation:</strong> Verification of proper email format and structure</li>
+            <li><strong>Gateway Detection:</strong> Identifying Secure Email Gateways and defensive perimeter filters</li>
             <li><strong>Domain Validation:</strong> Checking if the email domain exists and has valid MX records</li>
             <li><strong>Mailbox Verification:</strong> Verifying if the specific email address exists and can receive emails</li>
             <li><strong>Disposable Email Detection:</strong> Identifying temporary or disposable email addresses</li>
             <li><strong>Role-Based Email Detection:</strong> Detecting generic email addresses (e.g., info@, support@)</li>
             <li><strong>Catch-All Detection:</strong> Identifying domains that accept all email addresses</li>
-            <li><strong>SMTP Validation:</strong> Real-time verification through SMTP protocol</li>
+            <li><strong>Real-Time Verification:</strong> Checks whether the recipient&apos;s mailbox exists</li>
             <li><strong>Bulk Verification:</strong> Processing thousands of email addresses simultaneously</li>
           </ul>
 

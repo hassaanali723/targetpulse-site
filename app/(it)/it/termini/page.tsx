@@ -16,17 +16,17 @@ const sections: LegalSection[] = [
     'Questi Termini di servizio regolano l\'uso del servizio Giggal.ai Email Verifier gestito da TargetPulse Ltd, che opera con il nome commerciale Giggal.ai.',
   ]},
   { heading: '2. Descrizione del servizio', paragraphs: [
-    'Giggal.ai Email Verifier è uno strumento in cloud che aiuta i team a pulire e convalidare liste di email. Gli utenti caricano file CSV o singoli indirizzi e noi controlliamo consegnabilità, sintassi e stato della casella per ridurre gli indirizzi non validi e migliorare la consegna.',
+    'Giggal.ai Email Verifier è uno strumento in cloud che aiuta i team a pulire e convalidare liste di email. Gli utenti caricano file CSV o singoli indirizzi e noi controlliamo consegnabilità, record di dominio ed esistenza della casella per ridurre gli indirizzi non validi e migliorare la consegna.',
     'Il Servizio è fornito nel rispetto di questi Termini e di eventuali condizioni aggiuntive applicabili.',
   ]},
   { heading: '2.1 Servizio di verifica email', level: 3, paragraphs: ['Il nostro servizio principale è la verifica e la convalida delle email, che comprende:'], list: [
-    'Convalida della sintassi: verifica del formato e della struttura dell\'indirizzo',
+    'Rilevamento gateway: identificazione dei gateway di sicurezza (SEG)',
     'Convalida del dominio: controllo che il dominio esista e abbia record MX validi',
     'Verifica della casella: controllo che l\'indirizzo specifico esista e possa ricevere posta',
     'Rilevamento email usa e getta: identificazione degli indirizzi temporanei',
     'Rilevamento account di ruolo: identificazione degli indirizzi generici (es. info@, supporto@)',
     'Rilevamento catch-all: identificazione dei domini che accettano qualsiasi indirizzo',
-    'Convalida SMTP: verifica in tempo reale tramite protocollo SMTP',
+    'Verifica in tempo reale: verifica dell\'esistenza della casella del destinatario',
     'Verifica in blocco: elaborazione di migliaia di indirizzi contemporaneamente',
   ]},
   { heading: '2.2 Sistema a crediti', level: 3, paragraphs: ['Il servizio funziona a crediti:'], list: [

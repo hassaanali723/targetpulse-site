@@ -2,8 +2,9 @@ import { CheckCircle2, ShieldCheck, Mail, AlertTriangle, HelpCircle } from 'luci
 
 const checks = [
   {
-    title: 'Syntax check',
-    description: 'Validates email format to prevent hard bounces and invalid addresses.',
+    title: 'Secure email gateway detection',
+    description:
+      'Spots gateways like Proofpoint, Mimecast and Barracuda and still returns a clear result for the mailbox behind them.',
   },
   {
     title: 'MX / domain check',
@@ -22,8 +23,8 @@ const checks = [
     description: 'Checks domain and IPs against reputation lists to flag known bad senders.',
   },
   {
-    title: 'SMTP mailbox verification',
-    description: 'Connects to the mail server and verifies whether the mailbox exists and accepts mail.',
+    title: 'Mailbox check',
+    description: 'Checks whether the mailbox exists and accepts mail.',
   },
   {
     title: 'Catch-all detection',

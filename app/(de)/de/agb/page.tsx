@@ -16,17 +16,17 @@ const sections: LegalSection[] = [
     'Diese Nutzungsbedingungen regeln die Nutzung des Dienstes Giggal.ai Email Verifier, betrieben von TargetPulse Ltd unter dem Handelsnamen Giggal.ai.',
   ]},
   { heading: '2. Beschreibung des Dienstes', paragraphs: [
-    'Giggal.ai Email Verifier ist ein Cloud-Tool, mit dem Teams E-Mail-Listen bereinigen und validieren. Nutzer laden CSV-Dateien oder einzelne Adressen hoch, und wir prüfen Zustellbarkeit, Syntax und Postfachstatus, um ungültige Adressen zu reduzieren und die Zustellung zu verbessern.',
+    'Giggal.ai Email Verifier ist ein Cloud-Tool, mit dem Teams E-Mail-Listen bereinigen und validieren. Nutzer laden CSV-Dateien oder einzelne Adressen hoch, und wir prüfen Zustellbarkeit, Domain-Einträge und ob das Postfach existiert, um ungültige Adressen zu reduzieren und die Zustellung zu verbessern.',
     'Der Dienst wird nach Maßgabe dieser Bedingungen und etwaiger zusätzlicher Bedingungen bereitgestellt.',
   ]},
   { heading: '2.1 E-Mail-Verifizierungsdienst', level: 3, paragraphs: ['Unser Kerndienst ist die Verifizierung und Validierung von E-Mail-Adressen, darunter:'], list: [
-    'Syntaxprüfung: Format und Aufbau der Adresse',
+    'Gateway-Erkennung: Identifikation von E-Mail-Sicherheitsgateways (SEG)',
     'Domainprüfung: Existenz der Domain und gültige MX-Einträge',
     'Postfachprüfung: Existenz der konkreten Adresse und Empfangsfähigkeit',
     'Erkennung von Wegwerfadressen: Identifikation temporärer Adressen',
     'Erkennung von Rollen-Adressen: Identifikation generischer Adressen (z. B. info@, support@)',
     'Catch-all-Erkennung: Identifikation von Domains, die jede Adresse annehmen',
-    'SMTP-Validierung: Prüfung in Echtzeit über das SMTP-Protokoll',
+    'Echtzeit-Prüfung: Prüfung, ob das Postfach des Empfängers existiert',
     'Massenprüfung: Verarbeitung Tausender Adressen gleichzeitig',
   ]},
   { heading: '2.2 Credit-System', level: 3, paragraphs: ['Der Dienst arbeitet mit Credits:'], list: [

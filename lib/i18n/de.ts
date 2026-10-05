@@ -23,7 +23,7 @@ export const nav = {
 
 export const footer = {
   blurb:
-    'Schnelle SMTP-Verifizierung, damit Ihre Kampagnen echte Postfächer erreichen, auch auf Catch-all- und Accept-all-Domains, die andere Tools überspringen.',
+    'E-Mail-Verifizierung, die prüft, ob jedes Postfach existiert, damit Ihre Kampagnen echte Posteingänge erreichen, auch auf Catch-all- und Accept-all-Domains, die andere Tools überspringen.',
   solutions: {
     heading: 'Lösungen',
     links: [
@@ -92,7 +92,7 @@ export const consoleStrings = {
   header: 'Live-Test',
   live: 'Prüfung aktiv',
   actionLabel: 'Aktion',
-  actionTitle: 'Handshake mit dem Empfänger',
+  actionTitle: 'Postfachprüfung',
   placeholder: 'E-Mail-Adresse zum Prüfen...',
   ariaInput: 'E-Mail-Adresse zum Prüfen',
   button: 'Jetzt prüfen',
@@ -102,10 +102,10 @@ export const consoleStrings = {
     basic: 'Basisprüfungen',
     dns: 'Mailserver ermitteln',
     catchall: 'Catch-all-Prüfung',
-    mailbox: 'Existenz des Postfachs',
+    mailbox: 'Postfachprüfung',
   },
   idleTitle: 'Bereit zur Prüfung',
-  idleText: 'Geben Sie eine geschäftliche oder private Adresse ein, um eine DNS- und SMTP-Prüfung zu starten.',
+  idleText: 'Geben Sie eine geschäftliche oder private Adresse ein, um zu prüfen, ob das Postfach existiert.',
   spawning: 'PRÜFUNGEN WERDEN GESTARTET...',
   initLog: '[INIT] Sicheren Prüf-Socket öffnen...',
   limitTitle: 'Gastlimit erreicht',
@@ -117,7 +117,7 @@ export const consoleStrings = {
   invalidSyntax: 'Das ist keine gültige E-Mail-Adresse.',
   isCatchAll: 'ist eine Catch-all-Domain',
   notCatchAll: 'ist keine Catch-all-Domain',
-  catchAllText: 'Sie nimmt Post an jede Adresse an, daher kann eine normale SMTP-Prüfung nicht sagen, ob dieses Postfach existiert.',
+  catchAllText: 'Sie nimmt Post an jede Adresse an, daher kann eine einfache Prüfung nicht sagen, ob dieses Postfach existiert.',
   notCatchAllText: 'Hier ist eine normale Prüfung zuverlässig.',
   resultLabel: 'Ergebnis',
   verdictTitle: {

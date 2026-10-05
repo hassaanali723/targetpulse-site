@@ -42,7 +42,7 @@ export function breadcrumbTrailLd(crumbs: { name: string; path: string }[]): Rec
 }
 
 // Article (blog post). Publisher is the shared Organization node from the layout
-// graph (referenced by @id, not duplicated). No author byline is emitted.
+// graph (referenced by @id, not duplicated).
 export function articleLd(a: {
   title: string
   description: string
@@ -66,6 +66,11 @@ export function articleLd(a: {
     ...(image ? { image: [image] } : {}),
     datePublished: a.datePublished,
     dateModified: a.dateModified || a.datePublished,
+    author: {
+      '@type': 'Organization',
+      name: 'Giggal.ai',
+      url: SITE,
+    },
     publisher: { '@id': ORG_ID },
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
   }
@@ -95,7 +100,7 @@ export function softwareApplicationLd(): Record<string, unknown> {
     featureList: [
       'Catch-all and accept-all email verification with a valid or invalid result',
       'SEG-protected mailbox verification behind Proofpoint, Mimecast and Barracuda',
-      'Deep mailbox existence check over SMTP',
+      'Deep check of whether the mailbox exists',
       'Bulk list verification from CSV or TXT',
       'Disposable and role-based address detection',
       'REST API and remote MCP server for Claude, ChatGPT, Cursor and VS Code',

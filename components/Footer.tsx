@@ -77,8 +77,7 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-[13.5px] text-slate-400 max-w-sm leading-relaxed font-medium">
-              High-performance SMTP verification that keeps your campaigns landing in real inboxes,
-              including catch-all and accept-all domains other tools skip.
+              Email verification that checks whether each mailbox exists, so your campaigns reach real inboxes, including on catch-all and accept-all domains other tools skip.
             </p>
 
             {/* Other languages. Plain links so the crawl path to every

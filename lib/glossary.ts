@@ -12,6 +12,7 @@ const DIR = path.join(process.cwd(), 'content', 'glossary')
 
 export interface TermMeta {
   title: string
+  seoTitle?: string
   description: string
   slug: string
   // The English slug, the key into GLOSSARY_TERMS. Same as slug in English.
@@ -56,6 +57,7 @@ export function getTermBySlug(slug: string, locale: BlogLocale = 'en'): Term | n
   const { html, toc } = renderMarkdown(body, locale)
   return {
     title: data.title || slug,
+    seoTitle: data.seoTitle || '',
     description: data.description || '',
     slug,
     en,
