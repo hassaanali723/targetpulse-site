@@ -9,8 +9,26 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-jakarta)', 'Plus Jakarta Sans', 'sans-serif'],
-        mono: ['var(--font-jetbrains-mono)', 'JetBrains Mono', 'monospace'],
+        // The font variables live in a separate small stylesheet from
+        // next/font. If that file is late or missing (e.g. Safari restoring a
+        // tab cached before a deploy), a bare var() makes the whole
+        // font-family invalid and iOS falls back to Times New Roman. The
+        // fallback inside var() and the system fonts after it keep the page
+        // in a clean sans-serif in that case.
+        sans: [
+          'var(--font-jakarta, system-ui)',
+          'Plus Jakarta Sans',
+          'ui-sans-serif',
+          'system-ui',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'Segoe UI',
+          'Roboto',
+          'Helvetica Neue',
+          'Arial',
+          'sans-serif',
+        ],
+        mono: ['var(--font-jetbrains-mono, ui-monospace)', 'JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Consolas', 'monospace'],
       },
       colors: {
         // Giggal.ai brand — Steel Indigo primary

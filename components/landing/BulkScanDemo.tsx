@@ -23,8 +23,9 @@ const ROWS: Row[] = [
 export default function BulkScanDemo({ total = '4,820' }: { total?: string }) {
   return (
     <div data-inview aria-hidden="true" className="scan-demo relative">
-      {/* Soft colour behind the window. */}
-      <div className="absolute -inset-6 rounded-[2rem] bg-gradient-to-br from-indigo-200/50 via-transparent to-emerald-200/50 blur-2xl" />
+      {/* Soft colour behind the window: two gradients that fade to nothing
+          before the edges (no blur filter, which is slow on iPhones). */}
+      <div className="absolute -inset-10 bg-[radial-gradient(closest-side_at_30%_35%,rgba(199,210,254,0.6),transparent),radial-gradient(closest-side_at_70%_70%,rgba(167,243,208,0.5),transparent)]" />
       <div className="relative rounded-2xl border border-slate-200 bg-white shadow-[0_30px_70px_-30px_rgba(30,27,75,0.35)] overflow-clip">
         <div className="flex items-center gap-2 px-4 h-10 border-b border-slate-100 bg-slate-50/80">
           <span className="w-2.5 h-2.5 rounded-full bg-rose-300" />
@@ -64,11 +65,19 @@ export default function BulkScanDemo({ total = '4,820' }: { total?: string }) {
                 </span>
                 <span className="flex-1 min-w-0">
                   <span className="block text-[13px] font-semibold text-slate-800 truncate">{r.email}</span>
-                  <span className="mt-1 block h-1 w-24 rounded-full bg-slate-100 overflow-clip">
-                    <span
-                      className={`scan-score block h-full rounded-full ${r.ok ? 'bg-gradient-to-r from-indigo-500 to-emerald-400' : 'bg-rose-400'}`}
-                      style={{ width: `${r.score}%` }}
-                    />
+                  <span className="mt-1 flex items-center gap-2">
+                    <span className="block h-1 w-16 sm:w-24 rounded-full bg-slate-100 overflow-clip">
+                      <span
+                        className={`scan-score block h-full rounded-full ${r.ok ? 'bg-gradient-to-r from-indigo-500 to-emerald-400' : 'bg-rose-400'}`}
+                        style={{ width: `${r.score}%` }}
+                      />
+                    </span>
+                    {/* Phones: the tag sits under the address, where there is room. */}
+                    {r.catchAll && (
+                      <span className="sm:hidden rounded bg-amber-50 px-1 py-px text-[9px] font-bold leading-none text-amber-700 ring-1 ring-inset ring-amber-200">
+                        catch-all
+                      </span>
+                    )}
                   </span>
                 </span>
                 {r.catchAll && (

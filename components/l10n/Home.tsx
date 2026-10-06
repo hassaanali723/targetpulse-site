@@ -214,7 +214,7 @@ export default async function HomeL10n({ locale, content: c }: { locale: L10nLoc
   return (
     <main className="has-ann relative min-h-screen bg-slate-50 grid-lines overflow-x-clip text-slate-800 antialiased">
       <JsonLd data={faqPageLd(c.faq.items)} />
-      <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-indigo-500/10 blur-[120px] -z-10 pointer-events-none" />
+      <div className="absolute top-0 left-1/4 w-[840px] h-[840px] -translate-x-[120px] -translate-y-[120px] rounded-full bg-[radial-gradient(circle,rgba(99,102,241,0.10),transparent_60%)] -z-10 pointer-events-none" />
 
       <MotionRuntime />
       <AnnouncementBar strings={announcement} />
@@ -247,23 +247,23 @@ export default async function HomeL10n({ locale, content: c }: { locale: L10nLoc
           <p className="mt-7 text-xl md:text-2xl leading-relaxed text-slate-300 max-w-2xl mx-auto [text-wrap:balance]">{c.heroSub}</p>
 
           <div className="mt-8 md:mt-10 flex items-center justify-center gap-4 md:gap-5">
-            <span aria-hidden="true" className="h-px w-10 sm:w-16 md:w-24 bg-gradient-to-r from-transparent to-slate-500" />
+            <span aria-hidden="true" className="hidden sm:block h-px w-16 md:w-24 bg-gradient-to-r from-transparent to-slate-500" />
             <a
               href="https://sourceforge.net/software/product/Giggal.ai/"
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2.5 text-sm md:text-base text-slate-400"
+              className="group inline-flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1 text-sm md:text-base text-slate-400"
             >
               <span className="flex items-center gap-0.5 text-amber-400" aria-hidden="true">
                 {[0, 1, 2, 3, 4].map((i) => <Star key={i} className="w-4 h-4 fill-current" />)}
               </span>
-              <span>
+              <span className="whitespace-nowrap">
                 <strong className="text-white">{c.reviewBadges.rating(sourceforge.rating)}</strong> {c.rating.on}{' '}
                 <span className="group-hover:text-slate-300 group-hover:underline underline-offset-4">SourceForge</span>{' '}
                 {c.rating.reviews(sourceforge.count)}
               </span>
             </a>
-            <span aria-hidden="true" className="h-px w-10 sm:w-16 md:w-24 bg-gradient-to-l from-transparent to-slate-500" />
+            <span aria-hidden="true" className="hidden sm:block h-px w-16 md:w-24 bg-gradient-to-l from-transparent to-slate-500" />
           </div>
 
           {/* One free check: opens the locale's checker, which fills in and runs it. */}

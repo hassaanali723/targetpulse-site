@@ -1122,3 +1122,13 @@ a.orbit-tile:hover {
   .award-strip-track { animation: none; }
   .award-strip-viewport { overflow-x: auto; }
 }
+
+/* ── Phones ─────────────────────────────────────────────────────────────
+   Lighter motion on small screens, where iOS Safari has the least room:
+   no light beams, still colour orbs, and no shadow filter on the badge strip
+   (on a moving strip the filtered shadows drew a grey band under it). */
+@media (max-width: 639px) {
+  .hero-beams { display: none; }
+  .hero-orbs span { animation: none; }
+  .award-strip-viewport .award { filter: none; }
+}

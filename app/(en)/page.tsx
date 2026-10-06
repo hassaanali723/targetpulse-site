@@ -331,8 +331,8 @@ export default async function Home() {
       <JsonLd data={softwareApplicationLd()} />
 
       {/* Ambient light effects */}
-      <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-indigo-500/10 blur-[120px] -z-10 pointer-events-none" />
-      <div className="absolute top-[600px] right-1/4 w-[500px] h-[500px] rounded-full bg-emerald-500/[0.06] blur-[100px] -z-10 pointer-events-none" />
+      <div className="absolute top-0 left-1/4 w-[840px] h-[840px] -translate-x-[120px] -translate-y-[120px] rounded-full bg-[radial-gradient(circle,rgba(99,102,241,0.10),transparent_60%)] -z-10 pointer-events-none" />
+      <div className="absolute top-[500px] right-1/4 w-[700px] h-[700px] translate-x-[100px] rounded-full bg-[radial-gradient(circle,rgba(16,185,129,0.06),transparent_60%)] -z-10 pointer-events-none" />
 
       <MotionRuntime />
       <AnnouncementBar />
@@ -381,12 +381,12 @@ export default async function Home() {
               cached for a day (lib/reviewStats.ts). Visual only, no rating
               markup (C10). */}
           <div className="mt-8 md:mt-10 flex items-center justify-center gap-4 md:gap-5">
-            <span aria-hidden="true" className="h-px w-10 sm:w-16 md:w-24 bg-gradient-to-r from-transparent to-slate-500" />
+            <span aria-hidden="true" className="hidden sm:block h-px w-16 md:w-24 bg-gradient-to-r from-transparent to-slate-500" />
             <a
               href="https://sourceforge.net/software/product/Giggal.ai/"
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2.5 text-sm md:text-base text-slate-400"
+              className="group inline-flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1 text-sm md:text-base text-slate-400"
             >
               <span className="flex items-center gap-0.5 text-amber-400" aria-hidden="true">
                 <Star className="w-4 h-4 fill-current" />
@@ -395,13 +395,13 @@ export default async function Home() {
                 <Star className="w-4 h-4 fill-current" />
                 <Star className="w-4 h-4 fill-current" />
               </span>
-              <span>
+              <span className="whitespace-nowrap">
                 <strong className="text-white">{sourceforge.rating.toFixed(1)}</strong> on{' '}
                 <span className="group-hover:text-slate-300 group-hover:underline underline-offset-4">SourceForge</span>{' '}
                 ({sourceforge.count} reviews)
               </span>
             </a>
-            <span aria-hidden="true" className="h-px w-10 sm:w-16 md:w-24 bg-gradient-to-l from-transparent to-slate-500" />
+            <span aria-hidden="true" className="hidden sm:block h-px w-16 md:w-24 bg-gradient-to-l from-transparent to-slate-500" />
           </div>
 
           {/* One free check: a plain GET form, so it works without JavaScript.
