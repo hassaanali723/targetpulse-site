@@ -46,7 +46,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'Is there a free email checker that actually works?',
-    a: 'A full verifier checks whether the mailbox exists, and detects catch-all domains. On catch-all domains it goes one step further and resolves the address to valid or invalid.',
+    a: 'Yes, this one. It checks whether the mailbox exists and, on catch-all domains, goes a step further and resolves the address to valid or invalid. You get a few free checks with no signup.',
   },
   {
     q: 'What does "valid" mean on a catch-all domain?',
@@ -111,7 +111,7 @@ export default function CatchAllEmailCheckerPage() {
           </span>
         </h1>
         <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium">
-          Verify an email address in seconds: MX records and a live check on whether the mailbox
+          Verify an email address in seconds: MX records and a check of whether the mailbox
           exists. On catch-all domains, where most free checkers stop at a label, this one keeps
           going and returns valid or invalid.
         </p>
@@ -266,7 +266,7 @@ export default function CatchAllEmailCheckerPage() {
         </p>
         <p className={proseP}>
           If you are unsure whether an address in your contacts is valid, paste it into the checker
-          above to test the mail server directly.
+          above to see whether the mailbox exists.
         </p>
       </section>
 
@@ -289,11 +289,11 @@ export default function CatchAllEmailCheckerPage() {
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Why most free email checkers stop at &quot;catch-all&quot;</h2>
         <p className={proseP}>
-          Detecting a catch-all domain is cheap. A tool looks up the domain&apos;s mail servers, opens
-          one connection, and offers a random address that almost certainly does not exist. If the
-          server accepts it, the domain accepts everything, and the tool has its answer in a single
-          round trip. That is why nearly every free checker will readily tell you a domain is
-          catch-all. Working out which mailboxes are real behind that domain is a different job. It
+          Detecting a catch-all domain is cheap. A tool only has to test one made-up address on
+          the domain. If that address comes back as existing, the domain accepts everything, and
+          the tool has its answer in seconds. That is why nearly every free checker will readily
+          tell you a domain is catch-all. Working out which mailboxes are real behind that domain is
+          a different job. It
           takes deeper analysis, more signals, and infrastructure that holds a clean sending reputation
           while it works, so most free tools stop at the label and hand the rest back to you. This
           checker runs the full verification instead, which is why it is limited to a handful of

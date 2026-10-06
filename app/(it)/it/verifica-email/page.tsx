@@ -41,7 +41,7 @@ export const metadata: Metadata = {
 const faqs: FaqItem[] = [
   {
     q: "Lo strumento invia un'email all'indirizzo?",
-    a: 'No. Chiediamo al server di posta del dominio se la casella esiste e leggiamo la risposta, senza consegnare nessun messaggio. Il destinatario non riceve nulla.',
+    a: 'No. Controlliamo se l\'indirizzo email esiste, senza consegnare nessun messaggio. Il destinatario non riceve nulla.',
   },
   {
     q: 'Cosa significa "catch-all"?',
@@ -181,12 +181,12 @@ export default function VerificaEmailPage() {
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Controllo email su domini catch-all</h2>
         <p className={proseP}>
-          Individuare un dominio catch-all costa poco: lo strumento cerca i server di posta, apre
-          una connessione e propone un indirizzo casuale che quasi certamente non esiste. Se il
-          server lo accetta, il dominio accetta tutto, e la risposta arriva in un solo scambio. Per
-          questo quasi ogni controllo email gratuito ti dirà volentieri che un dominio è catch-all.
-          Su questi domini controllare solo l&apos;indirizzo non basta. Capire quali caselle sono reali dietro quel dominio è un altro lavoro: servono più sonde,
-          più segnali e un&apos;infrastruttura con una reputazione di invio pulita. Su una lista B2B
+          Individuare un dominio catch-all costa poco: lo strumento deve solo provare un indirizzo
+          inventato sul dominio. Se risulta esistente, il dominio accetta tutto, e la risposta arriva
+          in pochi secondi. Per questo quasi ogni controllo email gratuito ti dirà volentieri che un
+          dominio è catch-all. Su questi domini controllare solo l&apos;indirizzo non basta. Capire
+          quali caselle sono reali dietro quel dominio è un altro lavoro: servono più analisi, più
+          segnali e un&apos;infrastruttura con una reputazione di invio pulita. Su una lista B2B
           gli indirizzi catch-all sono spesso un terzo dei contatti, e cancellarli in blocco butta
           via clienti veri. Giggal li risolve uno per uno e ti dice quali tenere. Per i dettagli sul
           metodo, leggi come funziona la{' '}

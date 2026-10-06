@@ -216,12 +216,12 @@ export default function VerifierAdresseMailPage() {
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Qu&apos;est-ce qu&apos;un domaine catch-all et pourquoi d&apos;autres outils disent «&nbsp;risqué&nbsp;»&nbsp;?</h2>
         <p className={proseP}>
-          Détecter un domaine catch-all coûte peu&nbsp;: l&apos;outil cherche les serveurs de messagerie, ouvre une
-          connexion et propose une adresse au hasard qui n&apos;existe presque certainement pas. Si le serveur
-          l&apos;accepte, le domaine accepte tout, et la réponse arrive en un seul échange. C&apos;est pourquoi
-          presque tous les vérificateurs gratuits vous diront volontiers qu&apos;un domaine est catch-all. Savoir
-          quelles boîtes sont réelles derrière ce domaine est un autre travail&nbsp;: il faut plus de sondes,
-          plus de signaux et une infrastructure à la réputation d&apos;envoi propre. Dans une liste B2B, les
+          Détecter un domaine catch-all coûte peu&nbsp;: l&apos;outil doit seulement tester une adresse
+          inventée sur le domaine. Si elle apparaît comme existante, le domaine accepte tout, et la
+          réponse arrive en quelques secondes. C&apos;est pourquoi presque tous les vérificateurs
+          gratuits vous diront volontiers qu&apos;un domaine est catch-all. Savoir quelles boîtes sont
+          réelles derrière ce domaine est un autre travail&nbsp;: il faut plus d&apos;analyse, plus de
+          signaux et une infrastructure à la réputation d&apos;envoi propre. Dans une liste B2B, les
           adresses catch-all représentent souvent un tiers des contacts, et les supprimer en bloc jette de
           vrais clients. Giggal les résout une par une et vous dit lesquelles garder. La méthode est
           expliquée dans{' '}

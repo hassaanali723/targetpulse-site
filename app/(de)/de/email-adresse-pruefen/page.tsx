@@ -208,12 +208,12 @@ export default function EmailAdressePruefenPage() {
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Was ist eine Catch-all-Domain und warum sagen andere Checker &quot;riskant&quot;?</h2>
         <p className={proseP}>
-          Eine Catch-all-Domain zu erkennen ist billig: Das Tool sucht die Mailserver, öffnet eine
-          Verbindung und nennt eine zufällige Adresse, die es fast sicher nicht gibt. Nimmt der Server
-          sie an, nimmt die Domain alles an, und die Antwort steht nach einem Austausch fest. Deshalb
-          sagt Ihnen fast jeder kostenlose E-Mail-Check gern, dass eine Domain Catch-all ist. Welche
-          Postfächer hinter der Domain echt sind, ist eine andere Arbeit: mehr Sonden, mehr Signale
-          und eine Infrastruktur mit sauberer Absenderreputation. In einer B2B-Liste ist oft ein
+          Eine Catch-all-Domain zu erkennen ist billig: Das Tool muss nur eine erfundene Adresse auf
+          der Domain testen. Gilt sie als existierend, nimmt die Domain alles an, und die Antwort
+          steht in Sekunden fest. Deshalb sagt Ihnen fast jeder kostenlose E-Mail-Check gern, dass eine
+          Domain Catch-all ist. Welche Postfächer hinter der Domain echt sind, ist eine andere Arbeit:
+          mehr Analyse, mehr Signale und eine Infrastruktur mit sauberer Absenderreputation. In einer
+          B2B-Liste ist oft ein
           Drittel der Adressen Catch-all, und wer sie pauschal löscht, wirft echte Kunden weg. Giggal
           löst sie einzeln auf und sagt Ihnen, welche Sie behalten. Wie das funktioniert, steht unter{' '}
           <Link href="/de/catch-all-verifizierung" className="text-indigo-600 font-bold hover:underline">

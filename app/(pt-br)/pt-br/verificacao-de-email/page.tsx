@@ -230,12 +230,11 @@ export default function VerificacaoDeEmailPage() {
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>O que é um e-mail catch-all e por que outros verificadores dizem &quot;arriscado&quot;?</h2>
         <p className={proseP}>
-          Detectar um domínio catch-all custa pouco: a ferramenta busca os servidores de e-mail, abre uma
-          conexão e propõe um endereço aleatório que quase certamente não existe. Se o servidor aceita, o
-          domínio aceita tudo, e a resposta chega em uma única troca. Por isso quase todo verificador
-          grátis vai dizer com gosto que um domínio é catch-all. Saber quais caixas são reais atrás desse
-          domínio é outro trabalho: exige mais sondas, mais sinais e uma infraestrutura com reputação de
-          envio limpa. Em uma lista B2B os endereços catch-all costumam ser um terço dos contatos, e
+          Detectar um domínio catch-all custa pouco: a ferramenta só precisa testar um endereço
+          inventado no domínio. Se ele constar como existente, o domínio aceita tudo, e a resposta
+          chega em segundos. Por isso quase todo verificador grátis vai dizer com gosto que um domínio
+          é catch-all. Saber quais caixas são reais atrás desse domínio é outro trabalho: exige mais
+          análise, mais sinais e uma infraestrutura com reputação de envio limpa. Em uma lista B2B os endereços catch-all costumam ser um terço dos contatos, e
           apagá-los em bloco joga fora clientes reais. A Giggal resolve um por um e diz quais manter. O
           método está explicado em{' '}
           <Link href="/pt-br/verificacao-catch-all" className="text-indigo-600 font-bold hover:underline">
