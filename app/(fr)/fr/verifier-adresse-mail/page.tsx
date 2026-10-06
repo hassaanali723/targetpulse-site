@@ -47,7 +47,7 @@ export const metadata: Metadata = {
 const faqs: FaqItem[] = [
   {
     q: 'Comment vérifier une adresse mail ?',
-    a: 'Saisissez-la ci-dessus et cliquez sur Vérifier. Le vérificateur demande au serveur de messagerie du domaine si cette boîte existe et lit la réponse, sans envoyer de message. En quelques secondes vous avez le résultat : valide, invalide ou inconnu.',
+    a: 'Saisissez-la ci-dessus et cliquez sur Vérifier. L’outil contrôle si la boîte mail existe, sans envoyer de message. En quelques secondes vous avez le résultat : valide, invalide ou inconnu.',
   },
   {
     q: 'Comment savoir si un mail est frauduleux ?',

@@ -115,7 +115,7 @@ export default function VerificacaoDeEmailPage() {
           strings={consoleStrings}
         />
         <p className="text-center text-[13px] text-slate-500 font-medium mt-4">
-          Grátis, sem cadastro, sem cartão. Um endereço por verificação, verificação completa de existência.
+          Grátis, sem cadastro, sem cartão. Um endereço por vez, com verificação completa da caixa de e-mail.
         </p>
       </section>
 
@@ -207,7 +207,7 @@ export default function VerificacaoDeEmailPage() {
           e se a caixa é descartável, de função ou de um provedor gratuito. O que a consulta não mostra é
           quem usa o endereço: a verificação de existência não devolve nome, empresa ou perfil, e uma ferramenta
           que promete isso está buscando em outras fontes, não no servidor de e-mail. Para saber se vale a
-          pena enviar, a resposta do servidor é o que importa, e é o que esta página entrega.
+          pena enviar, o que importa é se a caixa existe, e é isso que esta página mostra.
         </p>
       </section>
 

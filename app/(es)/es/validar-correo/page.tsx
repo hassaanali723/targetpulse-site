@@ -214,7 +214,7 @@ export default function ValidarCorreoPage() {
           Detectar un dominio catch-all cuesta poco: la herramienta solo tiene que probar una dirección
           inventada en el dominio. Si resulta existente, el dominio acepta todo, y la respuesta llega
           en segundos. Por eso casi cualquier verificador gratis te dirá con gusto que un dominio es
-          catch-all. Saber qué buzones son reales detrás de ese dominio es otro trabajo: hace falta más
+          catch-all. Saber qué buzones son reales detrás de ese dominio es otro trabajo: hacen falta más
           análisis, más señales y una infraestructura con reputación de envío limpia. En una lista B2B
           las direcciones catch-all suelen ser un tercio de
           los contactos, y borrarlas en bloque tira clientes reales. Giggal las resuelve una por una y te
