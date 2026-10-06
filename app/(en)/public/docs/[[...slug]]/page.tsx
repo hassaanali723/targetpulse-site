@@ -60,8 +60,7 @@ const singleEmailResponse = `{
     "details": {
       "general": {
         "domain": "giggal.ai",
-        "reason": "Mailbox confirmed deliverable",
-        "validation_method": "smtp"
+        "reason": "Mailbox confirmed deliverable"
       },
       "attributes": {
         "free_email": false,
@@ -190,8 +189,7 @@ const jobResultsSample = `{
         "details": {
           "general": {
             "domain": "giggal.ai",
-            "reason": "All validations passed",
-            "validation_method": "smtp"
+            "reason": "All validations passed"
           },
           "attributes": {
             "free_email": false,
@@ -222,7 +220,7 @@ const jobResultsSample = `{
         "is_valid": true,
         "risk_level": "low",
         "deliverability_score": 100,
-        "details": { "general": { "domain": "giggal.ai", "reason": "2.1.5 OK", "validation_method": "smtp" }, "...": "..." }
+        "details": { "general": { "domain": "giggal.ai", "reason": "2.1.5 OK" }, "...": "..." }
       }
     ],
     "pagination": {

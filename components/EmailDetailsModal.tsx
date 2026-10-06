@@ -16,7 +16,6 @@ export type PublicEmailValidationResult = {
     general: {
       domain: string
       reason: string
-      validation_method: string
     }
     attributes: {
       free_email: boolean

@@ -211,8 +211,7 @@ export default function EmailVerificationApiPage() {
     "details": {
       "general": {
         "domain": "example.com",
-        "reason": "Mailbox confirmed deliverable",
-        "validation_method": "smtp"
+        "reason": "Mailbox confirmed deliverable"
       },
       "attributes": {
         "free_email": false,
