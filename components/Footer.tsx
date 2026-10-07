@@ -24,7 +24,7 @@ const solutionsLinks = [
 const productLinks = [
   { name: 'Email Verifier', href: '/' },
   { name: 'Email list cleaning', href: '/email-list-cleaning' },
-  { name: 'Free email checker', href: '/email-checker' },
+  { name: 'Email checker', href: '/email-checker' },
   { name: 'Disposable email checker', href: '/disposable-email-checker' },
   { name: 'Integrations', href: '/integrations' },
   { name: 'Email verification API', href: '/email-verification-api' },

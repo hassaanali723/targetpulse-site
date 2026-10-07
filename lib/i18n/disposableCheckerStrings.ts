@@ -65,7 +65,7 @@ const en: CheckerStrings = {
   heroIntro:
     'Enter an email address to see whether it uses a disposable or temporary mail service. The domain is matched against 100,000+ disposable domains, updated every six hours.',
   toolNote:
-    'Five free checks an hour, no signup. This tool tells you whether the domain is disposable. To find out whether the mailbox exists, use the [free email checker](/email-checker).',
+    'Five free checks an hour, no signup. This tool tells you whether the domain is disposable. To find out whether the mailbox exists, use the [email checker](/email-checker).',
   howTitle: 'How the disposable email check works',
   howIntro:
     'Disposable services register new domains all the time. A list that is not updated misses them. This is why the check runs on the Giggal verification service and not on a file inside this website.',
@@ -161,7 +161,7 @@ const en: CheckerStrings = {
   ctaBand: 'Block disposable emails and clean your list',
   related: [
     { href: '/email-validation-api', label: 'email validation API: block disposable signups in real time' },
-    { href: '/email-checker', label: 'free email checker: does this mailbox exist?' },
+    { href: '/email-checker', label: 'email checker: does this mailbox exist?' },
     { href: '/catch-all-verification', label: 'verify catch-all and risky emails' },
     { href: '/seg-email-verification', label: 'verify emails behind secure email gateways' },
     { href: '/pricing', label: 'pricing, credits and plans' },

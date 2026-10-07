@@ -9,7 +9,7 @@
 // Product Hunt has no keyless feed (its API needs a token, and its own review
 // badge shows no numbers), so its count is a rounded floor that stays true as
 // reviews come in. Capterra has no public feed either, so its score is typed
-// in by hand. G2 has no public feed and shows no number at all.
+// in by hand. G2 has no public feed; its score is typed in by hand too.
 
 export interface ReviewStats {
   rating: number
@@ -47,3 +47,7 @@ export const PRODUCT_HUNT_REVIEWS = '50+'
 // product page (capterra.com/p/10053924/Giggal-ai/) on 2026-10-04. The count
 // is not shown, so it cannot go stale; check the score when reviews come in.
 export const CAPTERRA_RATING = 5
+
+// G2: 4.9, given by the team on 2026-10-07. Used on /email-checker. The count
+// is not shown; check the score when reviews come in.
+export const G2_RATING = 4.9

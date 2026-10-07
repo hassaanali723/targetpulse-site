@@ -124,7 +124,7 @@ const en: ProvidersStrings = {
   gmailTitle: 'Is Gmail, Outlook or Hotmail a disposable email domain?',
   gmailParas: [
     'No. Gmail, Outlook, Hotmail, Yahoo and iCloud are permanent mailbox providers. People keep these accounts for years, so they are not on any disposable list, and you should not block them.',
-    'A Gmail or Outlook address can still be wrong. The mailbox may not exist, or the address may be a typo. That is a separate check: whether the mailbox is real, not whether the domain is disposable. The [free email checker](/email-checker) answers that one.',
+    'A Gmail or Outlook address can still be wrong. The mailbox may not exist, or the address may be a typo. That is a separate check: whether the mailbox is real, not whether the domain is disposable. The [email checker](/email-checker) answers that one.',
   ],
   blockTitle: 'How to block disposable email addresses',
   blockIntro:
@@ -165,7 +165,7 @@ const en: ProvidersStrings = {
   related: [
     { href: '/disposable-email-checker', label: 'Disposable email checker', desc: 'Check if one address is disposable.' },
     { href: '/email-validation-api', label: 'Email validation API', desc: 'Block disposable signups in real time.' },
-    { href: '/email-checker', label: 'Free email checker', desc: 'Check if a mailbox exists.' },
+    { href: '/email-checker', label: 'Email checker', desc: 'Check if a mailbox exists.' },
     { href: '/email-list-cleaning', label: 'Email list cleaning', desc: 'Clean a whole list at once.' },
   ],
   itemListName: 'Disposable email providers',
