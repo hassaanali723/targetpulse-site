@@ -45,6 +45,21 @@ copy many times; treat this as strict.
   phrase like "keeps your real catch-all leads").
 - Facts only. If a number or claim is not sourced, do not state it.
 
+## Locked page: /email-checker
+
+Do not edit `app/(en)/email-checker/page.tsx` without the owner's (Hassaan's)
+explicit approval. This includes the title, meta description, H1, headings, body
+text, FAQ, keywords and layout. The page was tuned on 2026-10-07 against the US
+top 10 for "email checker". Its wording and keyword counts are deliberate.
+
+- This applies to every developer and every AI assistant working in this repo.
+- If a change elsewhere seems to need an edit here, ask first. Do not "fix" or
+  "clean up" this page as a side effect of other work.
+- Components used on this page (`components/landing/AwardRow.tsx`,
+  `components/landing/BulkScanDemo.tsx`, `components/landing/MotionRuntime.tsx`,
+  `lib/reviewStats.ts`) are shared. Before changing them, check that
+  /email-checker still looks and reads the same.
+
 ## Guardrails
 
 - **Never `git push` without explicit per-push approval.** The `giggal-revamp` branch

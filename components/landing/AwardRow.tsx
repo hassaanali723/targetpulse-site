@@ -38,7 +38,17 @@ const LOOP = [...BADGES, ...BADGES, ...BADGES]
 const STEP_MS = 2600
 const EASE = '700ms cubic-bezier(0.22, 0.61, 0.36, 1)'
 
-export default function AwardRow() {
+// Text defaults to English; the localized checker pages pass their own.
+// showLabel is the carousel dot label, with {badge} where the badge name goes.
+export default function AwardRow({
+  headingLead = 'Giggal.ai is rated a',
+  headingRest = 'Leader on SourceForge and Slashdot',
+  showLabel = 'Show {badge}',
+}: {
+  headingLead?: string
+  headingRest?: string
+  showLabel?: string
+}) {
   // Index into LOOP of the centred badge. Starts on the first badge of the
   // middle copy, so the server and client render the same thing.
   const [i, setI] = useState(N)
@@ -93,9 +103,9 @@ export default function AwardRow() {
   return (
     <section className="max-w-6xl mx-auto px-6 pt-10 pb-16">
       <h2 className="text-center text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
-        Giggal.ai is rated a{' '}
+        {headingLead}{' '}
         <span className="bg-gradient-to-r from-indigo-600 to-emerald-500 bg-clip-text text-transparent">
-          Leader on SourceForge and Slashdot
+          {headingRest}
         </span>
       </h2>
 
@@ -156,7 +166,7 @@ export default function AwardRow() {
           <button
             key={b.file}
             type="button"
-            aria-label={`Show ${b.alt}`}
+            aria-label={showLabel.replace('{badge}', b.alt)}
             aria-current={k === active ? true : undefined}
             onClick={() => setI(N + k)}
             className={`h-2 rounded-full transition-all duration-300 ${

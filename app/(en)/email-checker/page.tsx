@@ -102,6 +102,10 @@ const faqs: FaqItem[] = [
     a: 'An email checker tells you whether an email address is valid by checking its format, its mail server and the mailbox itself. It is also called an email verifier or email validator. It works without sending an email to the address.',
   },
   {
+    q: 'Is an email checker the same as an email verifier?',
+    a: 'Yes. Email checker, email verifier and email validator are three names for the same kind of tool. All of them verify an email address by checking its format, its mail server and the mailbox. They differ on catch-all domains. Many stop there with "risky". This one returns valid or invalid.',
+  },
+  {
     q: 'How does an email checker work?',
     a: 'It runs four checks in order. First the format of the address. Then the domain\'s mail server records. Then it asks the mail server whether the mailbox exists. On catch-all domains, where the server says yes to every address, Giggal.ai runs extra signals to tell a real mailbox from a fake one.',
   },
@@ -172,7 +176,7 @@ export default async function EmailCheckerPage() {
           </span>
         </h1>
         <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium">
-          Check any email address online for free. Paste it in to test the format, the mail server and the
+          Check or verify any email address online for free. Paste it in to test the format, the mail server and the
           mailbox itself. On catch-all domains, this email checker keeps going and returns valid
           or invalid.
         </p>
@@ -262,7 +266,8 @@ export default async function EmailCheckerPage() {
         <div className="text-center max-w-2xl mx-auto">
           <h2 className={sectionTitle}>How to check if an email address is valid</h2>
           <p className={`${proseP} mt-4`}>
-            A full email check has four stages. Checkers that only do the first one are the reason
+            A full email check, also called email verification, has four stages. Checkers that only
+            do the first one are the reason
             so many &quot;checked&quot; lists still bounce.
           </p>
         </div>
@@ -372,8 +377,8 @@ export default async function EmailCheckerPage() {
             <h2 className={sectionTitle}>How to check if an email address exists</h2>
             <p className={proseP}>
               An email address exists when its mailbox is set up on the receiving mail server and
-              accepts mail. The email checker finds this out by asking that server directly, without
-              sending a message. It proves the mailbox is there. It does not prove who owns it or how
+              accepts mail. To verify the email address, the email checker asks that server directly,
+              without sending a message. It proves the mailbox is there. It does not prove who owns it or how
               often they read it.
             </p>
             <p className={proseP}>
@@ -409,12 +414,12 @@ export default async function EmailCheckerPage() {
       <section className="cv-section max-w-6xl mx-auto px-6 pt-16 pb-16 border-t border-slate-200">
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-14 items-start">
           <div className="space-y-5 lg:sticky lg:top-32">
-            <h2 className={sectionTitle}>Why check an email address before you send</h2>
+            <h2 className={sectionTitle}>Why verify an email address before you send</h2>
             <p className={proseP}>
               Mail sent to an address that does not exist comes back as a hard bounce. Gmail, Outlook
               and other mailbox providers count your bounces. When too many of your emails bounce,
               they trust your sending domain less, and more of your mail goes to spam or is blocked,
-              even mail sent to real people.
+              even mail sent to real people. Email verification finds those addresses before you send.
             </p>
             <p className={proseP}>
               Read{' '}
@@ -497,8 +502,8 @@ export default async function EmailCheckerPage() {
           <p className={proseP}>
             Spotting a catch-all domain is easy: test one made-up address and see if it is accepted.
             That is why almost every email checker can tell you a domain is catch-all. Finding out
-            which mailboxes behind it are real takes far more work, so most checkers stop at the
-            label and leave the decision to you. On B2B lists, catch-all addresses are often a large
+            which mailboxes behind it are real takes far more work, so most email verifiers stop at
+            the label and leave the decision to you. On B2B lists, catch-all addresses are often a large
             share of the contacts, and many of them are real people.
           </p>
           <p className={proseP}>
@@ -525,8 +530,8 @@ export default async function EmailCheckerPage() {
               <FileSpreadsheet className="h-5 w-5" />
             </span>
             <p className={`${proseP} mt-4`}>
-              The email checker on this page handles one address at a time. For a list, create an
-              account, upload a CSV or Excel file of up to 50,000 addresses, and{' '}
+              The email checker on this page handles one address at a time. For bulk email
+              verification of a list, create an account, upload a CSV or Excel file of up to 50,000 addresses, and{' '}
               <Link href="/email-list-cleaning" className="text-indigo-600 font-bold hover:underline">
                 clean your email list
               </Link>{' '}
