@@ -54,7 +54,7 @@ export default function AnnouncementBar({ strings = EN }: { strings?: Announceme
             <a
               href="https://puremail.ai/?utm_source=giggal"
               target="_blank"
-              rel="nofollow noopener noreferrer"
+              rel="noopener"
               className="font-black text-white underline decoration-white/40 underline-offset-2 hover:decoration-white transition-colors"
             >
               {strings.brand}
