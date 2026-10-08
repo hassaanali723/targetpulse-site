@@ -71,6 +71,10 @@ returns valid or invalid instead of a shrug.
 - [Email extractor](${SITE}/email-extractor): extract and deduplicate emails from text, files and spreadsheets in the browser
 - [DKIM generator](${SITE}/dkim-generator): create 2048-bit RSA DKIM key pairs and formatted DNS TXT records
 - [DMARC generator](${SITE}/dmarc-generator): generate and clean RFC 9989 compliant DMARC records with testing and consent helpers
+- [Email permutator](${SITE}/email-permutator): generate every likely work email format for a name and company domain in the browser
+- [BIMI generator](${SITE}/bimi-generator): build BIMI DNS records and check SVG logos against Tiny PS requirements in the browser
+- [Spam word checker](${SITE}/spam-word-checker): find spam trigger words, formatting issues and broken merge tags in email copy
+- [Email signature generator](${SITE}/email-signature-generator): create and export clean email signatures for Gmail, Outlook and Apple Mail
 - [Pricing](${SITE}/pricing): pay as you go, credits never expire
 - [MCP server](${SITE}/mcp): verify emails from Claude, ChatGPT, Cursor and VS Code
 - [API docs](${SITE}/public/docs)

@@ -163,7 +163,6 @@ TTL: 3600 (or DNS default)
           <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
           <span>Runs entirely in your browser. No DNS queries or domains leave your computer.</span>
         </div>
-        <span className="hidden sm:inline text-slate-400 text-xs">Zero network transmission</span>
       </div>
 
       {/* Tabs */}
@@ -228,7 +227,7 @@ TTL: 3600 (or DNS default)
                   }`}
                 >
                   <div className="text-xs font-bold text-slate-900">2. Quarantine</div>
-                  <div className="text-[11px] text-slate-600 mt-0.5">p=quarantine (Spam folder)</div>
+                  <div className="text-[11px] text-slate-600 mt-0.5">p=quarantine (failing mail to spam)</div>
                 </button>
 
                 <button
@@ -241,7 +240,7 @@ TTL: 3600 (or DNS default)
                   }`}
                 >
                   <div className="text-xs font-bold text-slate-900">3. Reject</div>
-                  <div className="text-[11px] text-slate-600 mt-0.5">p=reject (Block spoofing)</div>
+                  <div className="text-[11px] text-slate-600 mt-0.5">p=reject (refuse failing mail)</div>
                 </button>
 
                 <button
@@ -291,9 +290,9 @@ TTL: 3600 (or DNS default)
                   onChange={(e) => setPolicy(e.target.value as DmarcPolicy)}
                   className="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 font-semibold text-slate-800"
                 >
-                  <option value="none">none (Collect reports only, do not block)</option>
-                  <option value="quarantine">quarantine (Route unauthenticated mail to spam)</option>
-                  <option value="reject">reject (Drop unauthenticated mail completely)</option>
+                  <option value="none">none (monitor only, mail is delivered as normal)</option>
+                  <option value="quarantine">quarantine (ask receivers to send failing mail to spam)</option>
+                  <option value="reject">reject (ask receivers to refuse failing mail)</option>
                 </select>
               </div>
             </div>
@@ -330,7 +329,7 @@ TTL: 3600 (or DNS default)
                   className="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 font-mono"
                 />
                 <p className="text-[11px] text-slate-500 mt-1">
-                  Individual failure reports (most providers omit for recipient privacy)
+                  Individual failure reports (many providers don&apos;t send these, for privacy)
                 </p>
               </div>
             </div>

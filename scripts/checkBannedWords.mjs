@@ -46,9 +46,17 @@ const files = [
   'app/(en)/email-extractor/page.tsx',
   'app/(en)/dkim-generator/page.tsx',
   'app/(en)/dmarc-generator/page.tsx',
+  'app/(en)/email-permutator/page.tsx',
+  'app/(en)/bimi-generator/page.tsx',
+  'app/(en)/spam-word-checker/page.tsx',
+  'app/(en)/email-signature-generator/page.tsx',
   'components/tools/EmailExtractor/EmailExtractorTool.tsx',
   'components/tools/DkimGenerator/DkimGeneratorTool.tsx',
   'components/tools/DmarcGenerator/DmarcGeneratorTool.tsx',
+  'components/tools/EmailPermutator/EmailPermutatorTool.tsx',
+  'components/tools/BimiGenerator/BimiGeneratorTool.tsx',
+  'components/tools/SpamWordChecker/SpamWordCheckerTool.tsx',
+  'components/tools/EmailSignature/EmailSignatureTool.tsx',
 ]
 
 let foundCount = 0

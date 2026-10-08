@@ -304,7 +304,6 @@ export default function EmailExtractorTool() {
           <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
           <span>Runs entirely in your browser. No text or files leave your computer.</span>
         </div>
-        <span className="hidden sm:inline text-slate-400 text-xs">Zero server transmission</span>
       </div>
 
       <div className="p-5 md:p-8 space-y-6">

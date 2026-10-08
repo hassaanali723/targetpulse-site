@@ -93,7 +93,7 @@ export default function DmarcGeneratorPage() {
       <section className="max-w-4xl mx-auto px-6 pt-28 md:pt-32 pb-8 text-center space-y-5">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-200/80 text-indigo-700 text-xs font-semibold">
           <ShieldCheck className="w-3.5 h-3.5 text-indigo-600" />
-          <span>RFC 9989 compliant, 2026 DMARC standard</span>
+          <span>Free · updated for RFC 9989</span>
         </div>
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.08] text-slate-900">
           DMARC Record Generator
@@ -195,8 +195,8 @@ export default function DmarcGeneratorPage() {
 
       {/* CTA */}
       <AltCtaBand
-        headline="Ready to monitor and protect your domain?"
-        supporting="Clean your contact lists and verify mailbox existence with Giggal. 1,000 free credits."
+        headline="DMARC done? Check your list next."
+        supporting="Authentication proves the mail is yours. Verifying your list stops bounces from addresses that no longer exist. 1,000 free credits."
         buttonText="Get 1,000 free credits"
       />
 

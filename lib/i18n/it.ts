@@ -54,6 +54,10 @@ export const footer = {
       { name: 'Estrattore email (in inglese)', href: '/email-extractor' },
       { name: 'Generatore DKIM (in inglese)', href: '/dkim-generator' },
       { name: 'Generatore DMARC (in inglese)', href: '/dmarc-generator' },
+      { name: 'Permutatore email (in inglese)', href: '/email-permutator' },
+      { name: 'Generatore BIMI (in inglese)', href: '/bimi-generator' },
+      { name: 'Controllo parole spam (in inglese)', href: '/spam-word-checker' },
+      { name: 'Generatore firma email (in inglese)', href: '/email-signature-generator' },
     ],
   },
   product: {

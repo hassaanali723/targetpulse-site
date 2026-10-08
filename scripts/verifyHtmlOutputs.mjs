@@ -5,6 +5,10 @@ const pages = [
   { slug: 'email-extractor', h1Snippet: 'Free Email Extractor' },
   { slug: 'dkim-generator', h1Snippet: 'DKIM Generator' },
   { slug: 'dmarc-generator', h1Snippet: 'DMARC Record Generator' },
+  { slug: 'email-permutator', h1Snippet: 'Email Permutator' },
+  { slug: 'bimi-generator', h1Snippet: 'BIMI Record Generator' },
+  { slug: 'spam-word-checker', h1Snippet: 'Spam Word Checker' },
+  { slug: 'email-signature-generator', h1Snippet: 'Free Email Signature Generator' },
 ]
 
 for (const p of pages) {

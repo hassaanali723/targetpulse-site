@@ -155,7 +155,6 @@ IMPORTANT DEPLOYMENT NOTES:
           <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
           <span>Generated client-side via Web Crypto API. Your private key never touches any server.</span>
         </div>
-        <span className="hidden sm:inline text-slate-400 text-xs">Zero network transmission</span>
       </div>
 
       <div className="p-5 md:p-8 space-y-6">
@@ -208,15 +207,15 @@ IMPORTANT DEPLOYMENT NOTES:
                 className="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 font-semibold text-slate-700"
               >
                 <option value={2048}>2048 bits (Recommended)</option>
-                <option value={1024}>1024 bits (Legacy compatibility)</option>
-                <option value={4096}>4096 bits (High security)</option>
+                <option value={1024}>1024 bits (minimum Gmail accepts)</option>
+                <option value={4096}>4096 bits (long record, check your DNS host)</option>
               </select>
               <p className="text-[11px] text-slate-500 mt-1">
                 {keySize === 1024
                   ? 'Legacy length, weak against modern cryptanalysis'
                   : keySize === 4096
                   ? 'Exceeds standard 512-byte UDP DNS packet limits'
-                  : 'Industry standard for modern mailbox providers'}
+                  : 'Recommended by Gmail and RFC 8301'}
               </p>
             </div>
           </div>

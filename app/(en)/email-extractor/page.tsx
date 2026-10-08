@@ -93,7 +93,7 @@ export default function EmailExtractorPage() {
       <section className="max-w-4xl mx-auto px-6 pt-28 md:pt-32 pb-8 text-center space-y-5">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-200/80 text-indigo-700 text-xs font-semibold">
           <ShieldCheck className="w-3.5 h-3.5 text-indigo-600" />
-          <span>Client-side tool, zero server uploads</span>
+          <span>Free · runs in your browser</span>
         </div>
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.08] text-slate-900">
           Free Email Extractor

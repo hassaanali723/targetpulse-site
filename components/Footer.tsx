@@ -28,6 +28,10 @@ const freeToolsLinks = [
   { name: 'Email extractor', href: '/email-extractor' },
   { name: 'DKIM generator', href: '/dkim-generator' },
   { name: 'DMARC generator', href: '/dmarc-generator' },
+  { name: 'Email permutator', href: '/email-permutator' },
+  { name: 'BIMI generator', href: '/bimi-generator' },
+  { name: 'Spam word checker', href: '/spam-word-checker' },
+  { name: 'Email signature generator', href: '/email-signature-generator' },
 ]
 
 const productLinks = [

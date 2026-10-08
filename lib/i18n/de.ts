@@ -54,6 +54,10 @@ export const footer = {
       { name: 'E-Mail-Extraktor (Englisch)', href: '/email-extractor' },
       { name: 'DKIM-Generator (Englisch)', href: '/dkim-generator' },
       { name: 'DMARC-Generator (Englisch)', href: '/dmarc-generator' },
+      { name: 'E-Mail-Permutator (Englisch)', href: '/email-permutator' },
+      { name: 'BIMI-Generator (Englisch)', href: '/bimi-generator' },
+      { name: 'Spam-Wörter-Prüfer (Englisch)', href: '/spam-word-checker' },
+      { name: 'E-Mail-Signatur-Generator (Englisch)', href: '/email-signature-generator' },
     ],
   },
   product: {

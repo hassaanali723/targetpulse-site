@@ -365,11 +365,379 @@ function getDmarcSvg(w = 1600, h = 900) {
 </svg>`
 }
 
+function getPermutatorSvg(w = 1600, h = 900) {
+  return `<svg width="${w}" height="${h}" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="permBg" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#312e81" stop-opacity="0.5"/>
+      <stop offset="60%" stop-color="#0f172a" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#090d16" stop-opacity="1"/>
+    </radialGradient>
+    <linearGradient id="permCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0.98"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#permBg)"/>
+
+  <!-- Grid -->
+  <g opacity="0.12" stroke="#6366f1" stroke-width="1">
+    ${Array.from({ length: 17 }).map((_, i) => `<line x1="${i * 100}" y1="0" x2="${i * 100}" y2="900"/>`).join('\n')}
+    ${Array.from({ length: 10 }).map((_, i) => `<line x1="0" y1="${i * 100}" x2="1600" y2="${i * 100}"/>`).join('\n')}
+  </g>
+
+  <!-- Left: Input Card (Jane Doe, example.com) -->
+  <g transform="translate(180, 200)">
+    <rect width="480" height="500" rx="20" fill="url(#permCard)" stroke="#4f46e5" stroke-width="2"/>
+    <rect width="480" height="56" rx="20" fill="#1e293b"/>
+    <rect y="36" width="480" height="20" fill="#1e293b"/>
+    <text x="36" y="36" fill="#c7d2fe" font-family="Arial, sans-serif" font-size="16" font-weight="700" letter-spacing="1">NAME &amp; DOMAIN</text>
+
+    <g transform="translate(36, 85)">
+      <!-- Name field -->
+      <rect width="408" height="84" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+      <text x="20" y="30" fill="#94a3b8" font-family="Arial, sans-serif" font-size="12" font-weight="700">PERSON</text>
+      <text x="20" y="60" fill="#f8fafc" font-family="Courier New, monospace" font-size="18" font-weight="700">Jane Doe</text>
+
+      <!-- Domain field -->
+      <g transform="translate(0, 110)">
+        <rect width="408" height="84" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+        <text x="20" y="30" fill="#94a3b8" font-family="Arial, sans-serif" font-size="12" font-weight="700">DOMAIN</text>
+        <text x="20" y="60" fill="#38bdf8" font-family="Courier New, monospace" font-size="18" font-weight="700">example.com</text>
+      </g>
+
+      <!-- Generate indicator -->
+      <g transform="translate(0, 230)">
+        <rect width="408" height="56" rx="12" fill="#4f46e5"/>
+        <text x="204" y="34" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="15" font-weight="700">GENERATE</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Branching Lines in Center -->
+  <g transform="translate(660, 220)">
+    <path d="M 0 230 C 120 230, 100 60, 220 60" stroke="#6366f1" stroke-width="3" fill="none"/>
+    <path d="M 0 230 C 120 230, 100 145, 220 145" stroke="#818cf8" stroke-width="3" fill="none"/>
+    <path d="M 0 230 C 120 230, 100 230, 220 230" stroke="#10b981" stroke-width="3.5" fill="none"/>
+    <path d="M 0 230 C 120 230, 100 315, 220 315" stroke="#34d399" stroke-width="3" fill="none"/>
+    <path d="M 0 230 C 120 230, 100 400, 220 400" stroke="#6ee7b7" stroke-width="3" fill="none"/>
+  </g>
+
+  <!-- Right: Formats Tree Card -->
+  <g transform="translate(880, 170)">
+    <rect width="540" height="560" rx="20" fill="url(#permCard)" stroke="#10b981" stroke-width="2"/>
+    <rect width="540" height="56" rx="20" fill="#1e293b"/>
+    <rect y="36" width="540" height="20" fill="#1e293b"/>
+    <text x="36" y="36" fill="#6ee7b7" font-family="Arial, sans-serif" font-size="16" font-weight="700" letter-spacing="1">EMAIL FORMATS</text>
+
+    <g transform="translate(32, 80)">
+      <!-- Row 1: first.last -->
+      <g transform="translate(0, 0)">
+        <rect width="476" height="68" rx="12" fill="#0f172a" stroke="#10b981" stroke-width="1.5"/>
+        <text x="24" y="40" fill="#34d399" font-family="Courier New, monospace" font-size="17" font-weight="700">jane.doe@example.com</text>
+        <rect x="360" y="20" width="94" height="26" rx="6" fill="#065f46"/>
+        <text x="407" y="37" text-anchor="middle" fill="#a7f3d0" font-family="Courier New, monospace" font-size="12" font-weight="700">first.last</text>
+      </g>
+
+      <!-- Row 2: flast -->
+      <g transform="translate(0, 80)">
+        <rect width="476" height="68" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+        <text x="24" y="40" fill="#f8fafc" font-family="Courier New, monospace" font-size="17" font-weight="600">jdoe@example.com</text>
+        <rect x="390" y="20" width="64" height="26" rx="6" fill="#1e293b"/>
+        <text x="422" y="37" text-anchor="middle" fill="#94a3b8" font-family="Courier New, monospace" font-size="12" font-weight="700">flast</text>
+      </g>
+
+      <!-- Row 3: first -->
+      <g transform="translate(0, 160)">
+        <rect width="476" height="68" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+        <text x="24" y="40" fill="#f8fafc" font-family="Courier New, monospace" font-size="17" font-weight="600">jane@example.com</text>
+        <rect x="390" y="20" width="64" height="26" rx="6" fill="#1e293b"/>
+        <text x="422" y="37" text-anchor="middle" fill="#94a3b8" font-family="Courier New, monospace" font-size="12" font-weight="700">first</text>
+      </g>
+
+      <!-- Row 4: firstlast -->
+      <g transform="translate(0, 240)">
+        <rect width="476" height="68" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+        <text x="24" y="40" fill="#f8fafc" font-family="Courier New, monospace" font-size="17" font-weight="600">janedoe@example.com</text>
+        <rect x="360" y="20" width="94" height="26" rx="6" fill="#1e293b"/>
+        <text x="407" y="37" text-anchor="middle" fill="#94a3b8" font-family="Courier New, monospace" font-size="12" font-weight="700">firstlast</text>
+      </g>
+
+      <!-- Row 5: f.last -->
+      <g transform="translate(0, 320)">
+        <rect width="476" height="68" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+        <text x="24" y="40" fill="#f8fafc" font-family="Courier New, monospace" font-size="17" font-weight="600">j.doe@example.com</text>
+        <rect x="380" y="20" width="74" height="26" rx="6" fill="#1e293b"/>
+        <text x="417" y="37" text-anchor="middle" fill="#94a3b8" font-family="Courier New, monospace" font-size="12" font-weight="700">f.last</text>
+      </g>
+    </g>
+  </g>
+</svg>`
+}
+
+function getBimiSvg(w = 1600, h = 900) {
+  return `<svg width="${w}" height="${h}" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bimiBg" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#312e81" stop-opacity="0.5"/>
+      <stop offset="60%" stop-color="#0f172a" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#090d16" stop-opacity="1"/>
+    </radialGradient>
+    <linearGradient id="bimiCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0.98"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bimiBg)"/>
+
+  <!-- Grid -->
+  <g opacity="0.12" stroke="#6366f1" stroke-width="1">
+    ${Array.from({ length: 17 }).map((_, i) => `<line x1="${i * 100}" y1="0" x2="${i * 100}" y2="900"/>`).join('\n')}
+    ${Array.from({ length: 10 }).map((_, i) => `<line x1="0" y1="${i * 100}" x2="1600" y2="${i * 100}"/>`).join('\n')}
+  </g>
+
+  <!-- TOP CARD: INBOX MESSAGE (Brand logo next to it) -->
+  <g transform="translate(240, 160)">
+    <rect width="1120" height="240" rx="20" fill="url(#bimiCard)" stroke="#4f46e5" stroke-width="2"/>
+    <rect width="1120" height="52" rx="20" fill="#1e293b"/>
+    <rect y="32" width="1120" height="20" fill="#1e293b"/>
+    <text x="36" y="34" fill="#c7d2fe" font-family="Arial, sans-serif" font-size="15" font-weight="700" letter-spacing="1">INBOX MESSAGE</text>
+
+    <!-- Message item row -->
+    <g transform="translate(36, 80)">
+      <!-- Brand logo square (Tiny PS SVG symbol) -->
+      <rect width="90" height="90" rx="16" fill="#312e81" stroke="#818cf8" stroke-width="2"/>
+      <circle cx="45" cy="45" r="26" fill="#6366f1"/>
+      <rect x="35" y="35" width="20" height="20" rx="4" fill="#ffffff"/>
+
+      <!-- Sender Info -->
+      <g transform="translate(120, 16)">
+        <text x="0" y="24" fill="#f8fafc" font-family="Arial, sans-serif" font-size="20" font-weight="700">Acme Corporation</text>
+        <!-- Blue verification mark -->
+        <circle cx="215" cy="18" r="11" fill="#38bdf8"/>
+        <path d="M210 18L213 21L220 14" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        
+        <text x="0" y="54" fill="#94a3b8" font-family="Arial, sans-serif" font-size="15">Monthly Security Summary</text>
+      </g>
+
+      <!-- Time badge -->
+      <text x="1020" y="40" text-anchor="end" fill="#64748b" font-family="Arial, sans-serif" font-size="14">10:42 AM</text>
+    </g>
+  </g>
+
+  <!-- Flow Connector -->
+  <g transform="translate(800, 420)">
+    <line x1="0" y1="0" x2="0" y2="40" stroke="#10b981" stroke-width="3" stroke-dasharray="4 4"/>
+    <circle cx="0" cy="40" r="6" fill="#10b981"/>
+  </g>
+
+  <!-- BOTTOM CARD: DNS TXT RECORD -->
+  <g transform="translate(240, 480)">
+    <rect width="1120" height="260" rx="20" fill="url(#bimiCard)" stroke="#10b981" stroke-width="2"/>
+    <rect width="1120" height="52" rx="20" fill="#1e293b"/>
+    <rect y="32" width="1120" height="20" fill="#1e293b"/>
+    <text x="36" y="34" fill="#6ee7b7" font-family="Arial, sans-serif" font-size="15" font-weight="700" letter-spacing="1">DNS RECORD</text>
+
+    <g transform="translate(36, 80)">
+      <!-- Host -->
+      <rect width="1048" height="56" rx="10" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+      <text x="24" y="34" fill="#94a3b8" font-family="Courier New, monospace" font-size="15" font-weight="700">HOST:</text>
+      <text x="80" y="34" fill="#38bdf8" font-family="Courier New, monospace" font-size="15" font-weight="700">default._bimi.example.com</text>
+
+      <!-- Value -->
+      <g transform="translate(0, 72)">
+        <rect width="1048" height="72" rx="10" fill="#0f172a" stroke="#10b981" stroke-width="1.5"/>
+        <text x="24" y="42" fill="#94a3b8" font-family="Courier New, monospace" font-size="14" font-weight="700">VALUE:</text>
+        <text x="90" y="42" fill="#34d399" font-family="Courier New, monospace" font-size="15" font-weight="700">v=BIMI1; l=https://example.com/logo.svg; a=https://example.com/cert.pem</text>
+      </g>
+    </g>
+  </g>
+</svg>`
+}
+
+function getSpamCheckerSvg(w = 1600, h = 900) {
+  return `<svg width="${w}" height="${h}" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="spamBg" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#312e81" stop-opacity="0.5"/>
+      <stop offset="60%" stop-color="#0f172a" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#090d16" stop-opacity="1"/>
+    </radialGradient>
+    <linearGradient id="spamCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0.98"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#spamBg)"/>
+
+  <!-- Grid -->
+  <g opacity="0.12" stroke="#6366f1" stroke-width="1">
+    ${Array.from({ length: 17 }).map((_, i) => `<line x1="${i * 100}" y1="0" x2="${i * 100}" y2="900"/>`).join('\n')}
+    ${Array.from({ length: 10 }).map((_, i) => `<line x1="0" y1="${i * 100}" x2="1600" y2="${i * 100}"/>`).join('\n')}
+  </g>
+
+  <!-- Left: Email Draft Card -->
+  <g transform="translate(180, 180)">
+    <rect width="640" height="540" rx="20" fill="url(#spamCard)" stroke="#4f46e5" stroke-width="2"/>
+    <rect width="640" height="56" rx="20" fill="#1e293b"/>
+    <rect y="36" width="640" height="20" fill="#1e293b"/>
+    <text x="36" y="36" fill="#c7d2fe" font-family="Arial, sans-serif" font-size="16" font-weight="700" letter-spacing="1">EMAIL DRAFT</text>
+
+    <g transform="translate(36, 85)">
+      <!-- Subject row with highlighted trigger -->
+      <rect width="568" height="64" rx="10" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+      <text x="20" y="38" fill="#94a3b8" font-family="Courier New, monospace" font-size="14">Subject: Quick update on our </text>
+      <!-- Highlighted word -->
+      <rect x="290" y="18" width="130" height="28" rx="6" fill="#b45309" fill-opacity="0.4" stroke="#f59e0b" stroke-width="1.5"/>
+      <text x="355" y="37" text-anchor="middle" fill="#fde68a" font-family="Courier New, monospace" font-size="14" font-weight="700">special deal</text>
+
+      <!-- Body text lines with highlights -->
+      <g transform="translate(0, 90)">
+        <rect width="568" height="310" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+        
+        <text x="24" y="44" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="15">Hi Alex,</text>
+        <text x="24" y="80" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="15">Here are the details regarding our upcoming launch.</text>
+
+        <!-- Highlighted word in body: act now -->
+        <text x="24" y="130" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="15">Please </text>
+        <rect x="76" y="112" width="94" height="26" rx="5" fill="#dc2626" fill-opacity="0.35" stroke="#ef4444" stroke-width="1.5"/>
+        <text x="123" y="129" text-anchor="middle" fill="#fca5a5" font-family="Arial, sans-serif" font-size="14" font-weight="700">act now</text>
+        <text x="180" y="130" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="15"> to secure your reservation.</text>
+
+        <!-- Highlighted word: guaranteed -->
+        <text x="24" y="180" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="15">All results are </text>
+        <rect x="135" y="162" width="124" height="26" rx="5" fill="#b45309" fill-opacity="0.35" stroke="#f59e0b" stroke-width="1.5"/>
+        <text x="197" y="179" text-anchor="middle" fill="#fde68a" font-family="Arial, sans-serif" font-size="14" font-weight="700">guaranteed</text>
+        <text x="268" y="180" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="15"> under our terms.</text>
+
+        <text x="24" y="240" fill="#94a3b8" font-family="Arial, sans-serif" font-size="14">Best regards,</text>
+        <text x="24" y="265" fill="#f8fafc" font-family="Arial, sans-serif" font-size="15" font-weight="600">Sarah Jenkins</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Right: Findings Card -->
+  <g transform="translate(860, 180)">
+    <rect width="560" height="540" rx="20" fill="url(#spamCard)" stroke="#10b981" stroke-width="2"/>
+    <rect width="560" height="56" rx="20" fill="#1e293b"/>
+    <rect y="36" width="560" height="20" fill="#1e293b"/>
+    <text x="36" y="36" fill="#6ee7b7" font-family="Arial, sans-serif" font-size="16" font-weight="700" letter-spacing="1">ANALYSIS</text>
+
+    <g transform="translate(36, 85)">
+      <!-- Finding 1 -->
+      <rect width="488" height="90" rx="12" fill="#0f172a" stroke="#f59e0b" stroke-width="1.5"/>
+      <circle cx="28" cy="45" r="10" fill="#b45309"/>
+      <text x="28" y="49" text-anchor="middle" fill="#fde68a" font-family="Arial, sans-serif" font-size="12" font-weight="700">!</text>
+      <text x="52" y="36" fill="#fde68a" font-family="Arial, sans-serif" font-size="15" font-weight="700">Urgency Phrase: act now</text>
+      <text x="52" y="62" fill="#94a3b8" font-family="Arial, sans-serif" font-size="13">Suggestion: when you're ready</text>
+
+      <!-- Finding 2 -->
+      <g transform="translate(0, 110)">
+        <rect width="488" height="90" rx="12" fill="#0f172a" stroke="#f59e0b" stroke-width="1.5"/>
+        <circle cx="28" cy="45" r="10" fill="#b45309"/>
+        <text x="28" y="49" text-anchor="middle" fill="#fde68a" font-family="Arial, sans-serif" font-size="12" font-weight="700">!</text>
+        <text x="52" y="36" fill="#fde68a" font-family="Arial, sans-serif" font-size="15" font-weight="700">Overpromising: guaranteed</text>
+        <text x="52" y="62" fill="#94a3b8" font-family="Arial, sans-serif" font-size="13">Suggestion: backed by our terms</text>
+      </g>
+
+      <!-- Check Passed: Merge Tags -->
+      <g transform="translate(0, 220)">
+        <rect width="488" height="74" rx="12" fill="#0f172a" stroke="#10b981" stroke-width="1.5"/>
+        <circle cx="28" cy="37" r="12" fill="#065f46"/>
+        <path d="M23 37L27 41L34 33" stroke="#34d399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="52" y="42" fill="#6ee7b7" font-family="Arial, sans-serif" font-size="15" font-weight="700">Merge tags verified</text>
+      </g>
+    </g>
+  </g>
+</svg>`
+}
+
+function getSignatureSvg(w = 1600, h = 900) {
+  return `<svg width="${w}" height="${h}" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="sigBg" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#312e81" stop-opacity="0.5"/>
+      <stop offset="60%" stop-color="#0f172a" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#090d16" stop-opacity="1"/>
+    </radialGradient>
+    <linearGradient id="sigCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0.98"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#sigBg)"/>
+
+  <!-- Grid -->
+  <g opacity="0.12" stroke="#6366f1" stroke-width="1">
+    ${Array.from({ length: 17 }).map((_, i) => `<line x1="${i * 100}" y1="0" x2="${i * 100}" y2="900"/>`).join('\n')}
+    ${Array.from({ length: 10 }).map((_, i) => `<line x1="0" y1="${i * 100}" x2="1600" y2="${i * 100}"/>`).join('\n')}
+  </g>
+
+  <!-- Signature Card -->
+  <g transform="translate(350, 220)">
+    <rect width="900" height="460" rx="20" fill="url(#sigCard)" stroke="#4f46e5" stroke-width="2"/>
+    <rect width="900" height="56" rx="20" fill="#1e293b"/>
+    <rect y="36" width="900" height="20" fill="#1e293b"/>
+    <text x="36" y="36" fill="#c7d2fe" font-family="Arial, sans-serif" font-size="16" font-weight="700" letter-spacing="1">SIGNATURE CARD</text>
+
+    <!-- Layout Container -->
+    <g transform="translate(60, 110)">
+      <!-- Left Photo / Logo placeholder -->
+      <g transform="translate(0, 10)">
+        <rect width="120" height="120" rx="60" fill="#312e81" stroke="#818cf8" stroke-width="2"/>
+        <circle cx="60" cy="50" r="24" fill="#6366f1"/>
+        <path d="M30 102 C30 78, 90 78, 90 102" fill="#6366f1"/>
+      </g>
+
+      <!-- Vertical Divider Line -->
+      <line x1="160" y1="0" x2="160" y2="280" stroke="#4f46e5" stroke-width="3"/>
+
+      <!-- Right Details Column -->
+      <g transform="translate(190, 10)">
+        <text x="0" y="28" fill="#f8fafc" font-family="Arial, sans-serif" font-size="24" font-weight="800">Jane Doe</text>
+        <text x="0" y="58" fill="#818cf8" font-family="Arial, sans-serif" font-size="16" font-weight="600">Account Manager · Example Ltd</text>
+
+        <!-- Contact Details -->
+        <g transform="translate(0, 95)">
+          <text x="0" y="18" fill="#94a3b8" font-family="Arial, sans-serif" font-size="14">Phone: +44 20 7946 0000</text>
+          <text x="0" y="46" fill="#94a3b8" font-family="Arial, sans-serif" font-size="14">Email: jane.doe@example.com</text>
+          <text x="0" y="74" fill="#94a3b8" font-family="Arial, sans-serif" font-size="14">Web: example.com</text>
+        </g>
+
+        <!-- Social Icons / CTA -->
+        <g transform="translate(0, 210)">
+          <rect width="32" height="32" rx="8" fill="#1e293b"/>
+          <circle cx="16" cy="16" r="6" fill="#38bdf8"/>
+
+          <rect x="42" y="0" width="32" height="32" rx="8" fill="#1e293b"/>
+          <circle cx="58" cy="16" r="6" fill="#818cf8"/>
+
+          <rect x="84" y="0" width="32" height="32" rx="8" fill="#1e293b"/>
+          <circle cx="100" cy="16" r="6" fill="#34d399"/>
+
+          <!-- CTA Pill -->
+          <rect x="150" y="2" width="160" height="28" rx="6" fill="#4f46e5"/>
+          <text x="230" y="21" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="12" font-weight="700">Book a 15-min call</text>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>`
+}
+
 async function render() {
   const configs = [
     { slug: 'email-extractor', svgFn: getExtractorSvg },
     { slug: 'dkim-generator', svgFn: getDkimSvg },
     { slug: 'dmarc-generator', svgFn: getDmarcSvg },
+    { slug: 'email-permutator', svgFn: getPermutatorSvg },
+    { slug: 'bimi-generator', svgFn: getBimiSvg },
+    { slug: 'spam-word-checker', svgFn: getSpamCheckerSvg },
+    { slug: 'email-signature-generator', svgFn: getSignatureSvg },
   ]
 
   for (const { slug, svgFn } of configs) {
