@@ -45,10 +45,20 @@ export const footer = {
       { name: 'API-Dokumentation (Englisch)', href: '/public/docs' },
     ],
   },
+  freeTools: {
+    heading: 'Kostenlose Tools',
+    links: [
+      { name: 'E-Mail-Adresse prüfen', href: '/de/email-adresse-pruefen' },
+      { name: 'Wegwerf-E-Mail prüfen', href: '/de/wegwerf-e-mail-pruefen' },
+      { name: 'Wegwerf-E-Mail-Anbieter', href: '/de/wegwerf-e-mail-anbieter' },
+      { name: 'E-Mail-Extraktor (Englisch)', href: '/email-extractor' },
+      { name: 'DKIM-Generator (Englisch)', href: '/dkim-generator' },
+      { name: 'DMARC-Generator (Englisch)', href: '/dmarc-generator' },
+    ],
+  },
   product: {
     heading: 'Produkt',
     links: [
-      { name: 'E-Mail-Adresse kostenlos prüfen', href: '/de/email-adresse-pruefen' },
       { name: 'Gibt es diese E-Mail-Adresse?', href: '/de/email-adresse-pruefen/gibt-es-diese-email-adresse' },
       { name: 'Integrationen', href: '/de/integrationen' },
       { name: 'Preise', href: '/de/preise' },

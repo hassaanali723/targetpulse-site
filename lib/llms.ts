@@ -68,6 +68,9 @@ returns valid or invalid instead of a shrug.
 - [SEG verification](${SITE}/seg-email-verification): Proofpoint, Mimecast and Barracuda
 - [Email checker](${SITE}/email-checker): one address at a time, catch-all resolved, no account
 - [Disposable email checker](${SITE}/disposable-email-checker): detect temporary, burner and throwaway inboxes, no account
+- [Email extractor](${SITE}/email-extractor): extract and deduplicate emails from text, files and spreadsheets in the browser
+- [DKIM generator](${SITE}/dkim-generator): create 2048-bit RSA DKIM key pairs and formatted DNS TXT records
+- [DMARC generator](${SITE}/dmarc-generator): generate and clean RFC 9989 compliant DMARC records with testing and consent helpers
 - [Pricing](${SITE}/pricing): pay as you go, credits never expire
 - [MCP server](${SITE}/mcp): verify emails from Claude, ChatGPT, Cursor and VS Code
 - [API docs](${SITE}/public/docs)

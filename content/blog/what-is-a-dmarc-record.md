@@ -57,7 +57,7 @@ The May 2026 standard defines eleven tags for policy configuration and reporting
 
 The percentage tag (`pct`), report format tag (`rf`), and reporting interval tag (`ri`) are retired in the 2026 standard. A leftover `pct=100` is harmless, but `pct` below 100 was a rollout trick, and `t` now does that job.
 
-Most domains only need `v`, `p` and `rua`. Add `sp` or `np` when subdomains need different treatment. Leave `psd` alone unless you run a large organization that delegates parts of its DNS (`psd=n`), or a public suffix (`psd=y`). Nearly all domain owners find relaxed alignment (`adkim=r` and `aspf=r`) sufficient, so you don't need alignment tags unless strict compliance rules prohibit subdomain signing.
+Most domains only need `v`, `p` and `rua`. Add `sp` or `np` when subdomains need different treatment. Leave `psd` alone unless you run a large organization that delegates parts of its DNS (`psd=n`), or a public suffix (`psd=y`). Nearly all domain owners find relaxed alignment (`adkim=r` and `aspf=r`) sufficient, so you don't need alignment tags unless strict compliance rules prohibit subdomain signing. You can assemble a record with these tags or clean an existing one using our [DMARC generator](/dmarc-generator).
 
 ## What p=none, quarantine and reject actually do
 

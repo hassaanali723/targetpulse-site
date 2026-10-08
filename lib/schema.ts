@@ -249,3 +249,31 @@ export function apiSoftwareApplicationLd(opts: {
   }
 }
 
+// WebApplication schema for client-side browser tools (/email-extractor, /dkim-generator, /dmarc-generator)
+export function toolWebApplicationLd(opts: {
+  name: string
+  url: string
+  description: string
+  featureList?: string[]
+}): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    '@id': `${opts.url}#webapp`,
+    name: opts.name,
+    url: opts.url,
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Any',
+    browserRequirements: 'Requires JavaScript. Requires HTML5.',
+    description: opts.description,
+    isAccessibleForFree: true,
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+    },
+    publisher: { '@id': ORG_ID },
+    ...(opts.featureList ? { featureList: opts.featureList } : {}),
+  }
+}
+

@@ -66,7 +66,7 @@ A DKIM public key record in DNS takes this form:
 v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA...
 ```
 
-The `v=DKIM1` tag specifies the protocol version, `k=rsa` identifies the key algorithm, and `p=` holds the base64-encoded public key.
+The `v=DKIM1` tag specifies the protocol version, `k=rsa` identifies the key algorithm, and `p=` holds the base64-encoded public key. If you run your own mail server, you can create a key pair with our [DKIM generator](/dkim-generator).
 
 A frequent trap happens when senders rely on default platform signatures. Many email platforms sign outgoing mail using their own shared domain by default (`d=shared-esp.example`). While the signature passes, the signing domain doesn't match your visible From domain, causing DMARC alignment to fail. You need to set up custom DKIM in your platform settings so the signature uses your domain in the `d=` tag.
 
@@ -94,7 +94,7 @@ The rua tag tells receivers where to send aggregate reports, usually daily XML f
 _dmarc.example.com TXT "v=DMARC1; p=none; rua=mailto:dmarc@example.com"
 ```
 
-In May 2026, the Internet Engineering Task Force published RFC 9989 on the Standards Track, alongside RFC 9990 for aggregate reporting and RFC 9991 for failure reporting. These new standards officially obsolete RFC 7489 and RFC 9091. Existing records starting with `v=DMARC1` continue to work, but the updated specification adjusts several operational tags. The percentage tag (`pct`) and report format tag (`rf`) are retired and no longer part of the standard, while the reporting interval tag (`ri`) is classified as historic. Senders testing policy rollouts now use the new `t` tag for test mode, and administrators can define policies for non-existent subdomains using the `np` tag. If your current DNS record contains a percentage tag, plan to remove it.
+In May 2026, the Internet Engineering Task Force published RFC 9989 on the Standards Track, alongside RFC 9990 for aggregate reporting and RFC 9991 for failure reporting. These new standards officially obsolete RFC 7489 and RFC 9091. Existing records starting with `v=DMARC1` continue to work, but the updated specification adjusts several operational tags. The percentage tag (`pct`) and report format tag (`rf`) are retired and no longer part of the standard, while the reporting interval tag (`ri`) is classified as historic. Senders testing policy rollouts now use the new `t` tag for test mode, and administrators can define policies for non-existent subdomains using the `np` tag. If your current DNS record contains a percentage tag, plan to remove it. You can build an updated record or clean legacy tags using our [DMARC generator](/dmarc-generator).
 
 ## How a receiving server checks a message
 

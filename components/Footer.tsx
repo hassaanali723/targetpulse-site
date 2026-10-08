@@ -21,11 +21,18 @@ const solutionsLinks = [
   { name: 'MCP Server', href: '/mcp' },
 ]
 
+const freeToolsLinks = [
+  { name: 'Email checker', href: '/email-checker' },
+  { name: 'Disposable email checker', href: '/disposable-email-checker' },
+  { name: 'Disposable email providers', href: '/disposable-email-providers' },
+  { name: 'Email extractor', href: '/email-extractor' },
+  { name: 'DKIM generator', href: '/dkim-generator' },
+  { name: 'DMARC generator', href: '/dmarc-generator' },
+]
+
 const productLinks = [
   { name: 'Email Verifier', href: '/' },
   { name: 'Email list cleaning', href: '/email-list-cleaning' },
-  { name: 'Email checker', href: '/email-checker' },
-  { name: 'Disposable email checker', href: '/disposable-email-checker' },
   { name: 'Integrations', href: '/integrations' },
   { name: 'Email verification API', href: '/email-verification-api' },
   { name: 'Email validation API', href: '/email-validation-api' },
@@ -112,45 +119,17 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Solutions column */}
+          {/* Free tools column */}
           <div className="md:col-span-2">
-            <p className={headingClass}>Solutions</p>
+            <p className={headingClass}>Free tools</p>
             <ul className="space-y-2.5">
-              {solutionsLinks.map((link) => (
+              {freeToolsLinks.map((link) => (
                 <li key={link.name}>
                   <Link href={link.href} className={linkClass}>
                     {link.name}
                   </Link>
                 </li>
               ))}
-            </ul>
-          </div>
-
-          {/* Resources column */}
-          <div className="md:col-span-2">
-            <p className={headingClass}>Resources</p>
-            <ul className="space-y-2.5">
-              <li>
-                <Link href="/blog" className={linkClass}>
-                  Blog
-                </Link>
-              </li>
-              <li>
-                <Link href="/glossary" className={linkClass}>
-                  Glossary
-                </Link>
-              </li>
-              {/* /alternatives is the ranked guide we wrote. The generated
-                  /compare grid left the footer (plans/11 item 8): a 125-word
-                  hub was the second most linked page on the site. The
-                  alternative pages and the pairs themselves still link it.
-                  The top nav does not link /alternatives; this footer link,
-                  the AltCtaBand and the home block carry it. */}
-              <li>
-                <Link href="/alternatives" className={linkClass}>
-                  Verifier comparison
-                </Link>
-              </li>
             </ul>
           </div>
 
@@ -167,6 +146,42 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
+          </div>
+
+          {/* Solutions & Resources column */}
+          <div className="md:col-span-2 space-y-6">
+            <div>
+              <p className={headingClass}>Solutions</p>
+              <ul className="space-y-2.5">
+                {solutionsLinks.map((link) => (
+                  <li key={link.name}>
+                    <Link href={link.href} className={linkClass}>
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <p className={headingClass}>Resources</p>
+              <ul className="space-y-2.5">
+                <li>
+                  <Link href="/blog" className={linkClass}>
+                    Blog
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/glossary" className={linkClass}>
+                    Glossary
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/alternatives" className={linkClass}>
+                    Verifier comparison
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
 
           {/* Company + Legal column */}

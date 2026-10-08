@@ -45,10 +45,20 @@ export const footer = {
       { name: 'Documentazione API (in inglese)', href: '/public/docs' },
     ],
   },
+  freeTools: {
+    heading: 'Strumenti gratuiti',
+    links: [
+      { name: 'Verifica email gratis', href: '/it/verifica-email' },
+      { name: 'Verifica email temporanea', href: '/it/verifica-email-temporanea' },
+      { name: 'Servizi di email temporanea', href: '/it/servizi-email-temporanea' },
+      { name: 'Estrattore email (in inglese)', href: '/email-extractor' },
+      { name: 'Generatore DKIM (in inglese)', href: '/dkim-generator' },
+      { name: 'Generatore DMARC (in inglese)', href: '/dmarc-generator' },
+    ],
+  },
   product: {
     heading: 'Prodotto',
     links: [
-      { name: 'Verifica email gratis', href: '/it/verifica-email' },
       { name: 'Email esistente', href: '/it/verifica-email/email-esistente' },
       { name: 'Integrazioni', href: '/it/integrazioni' },
       { name: 'Prezzi', href: '/it/prezzi' },

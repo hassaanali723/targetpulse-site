@@ -1,7 +1,34 @@
 'use client'
 
 import React, { useId, useState } from 'react'
+import Link from 'next/link'
 import { ChevronDown } from 'lucide-react'
+
+function renderAnswer(text: string) {
+  if (!text.includes('[') || !text.includes('](')) return text
+  const parts: React.ReactNode[] = []
+  const regex = /\[([^\]]+)\]\(([^)]+)\)/g
+  let lastIndex = 0
+  let match: RegExpExecArray | null
+
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push(text.slice(lastIndex, match.index))
+    }
+    const label = match[1]
+    const href = match[2]
+    parts.push(
+      <Link key={match.index} href={href} className="text-indigo-600 font-semibold hover:underline">
+        {label}
+      </Link>
+    )
+    lastIndex = regex.lastIndex
+  }
+  if (lastIndex < text.length) {
+    parts.push(text.slice(lastIndex))
+  }
+  return <>{parts}</>
+}
 
 export interface FaqItem { q: string; a: string }
 
@@ -50,7 +77,7 @@ export default function FaqAccordion({ items }: { items: FaqItem[] }) {
             >
               <div className="overflow-hidden">
                 <div className="p-6 pt-0 text-sm text-slate-600 leading-relaxed border-t-2 border-slate-100">
-                  <p className="pt-4">{item.a}</p>
+                  <p className="pt-4">{renderAnswer(item.a)}</p>
                 </div>
               </div>
             </div>

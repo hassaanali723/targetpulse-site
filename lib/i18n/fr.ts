@@ -45,10 +45,20 @@ export const footer = {
       { name: 'Documentation de l’API (en anglais)', href: '/public/docs' },
     ],
   },
+  freeTools: {
+    heading: 'Outils gratuits',
+    links: [
+      { name: 'Vérifier adresse mail', href: '/fr/verifier-adresse-mail' },
+      { name: 'Vérifier mail jetable', href: '/fr/verifier-adresse-mail-jetable' },
+      { name: 'Fournisseurs d’adresse mail jetable', href: '/fr/fournisseurs-adresse-mail-jetable' },
+      { name: 'Extracteur d’emails (en anglais)', href: '/email-extractor' },
+      { name: 'Générateur DKIM (en anglais)', href: '/dkim-generator' },
+      { name: 'Générateur DMARC (en anglais)', href: '/dmarc-generator' },
+    ],
+  },
   product: {
     heading: 'Produit',
     links: [
-      { name: 'Vérifier une adresse mail gratuitement', href: '/fr/verifier-adresse-mail' },
       { name: 'Comment savoir si une adresse mail est valide ?', href: '/fr/verifier-adresse-mail/comment-savoir-si-une-adresse-mail-est-valide' },
       { name: 'Intégrations', href: '/fr/integrations' },
       { name: 'Tarifs', href: '/fr/tarifs' },

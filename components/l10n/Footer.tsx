@@ -82,13 +82,18 @@ export default function FooterL10n({ locale }: { locale: L10nLocale }) {
           </div>
 
           <div className="md:col-span-2">
-            <Column heading={footer.solutions.heading} links={footer.solutions.links} prefix={home} />
-          </div>
-          <div className="md:col-span-2">
-            <Column heading={footer.resources.heading} links={footer.resources.links} prefix={home} />
+            <Column heading={footer.freeTools.heading} links={footer.freeTools.links} prefix={home} />
           </div>
           <div className="md:col-span-2">
             <Column heading={footer.product.heading} links={footer.product.links} prefix={home} />
+          </div>
+          <div className="md:col-span-2 space-y-6">
+            <div>
+              <Column heading={footer.solutions.heading} links={footer.solutions.links} prefix={home} />
+            </div>
+            <div>
+              <Column heading={footer.resources.heading} links={footer.resources.links} prefix={home} />
+            </div>
           </div>
           <div className="md:col-span-3 grid grid-cols-2 md:grid-cols-1 gap-8 md:gap-6">
             <div>

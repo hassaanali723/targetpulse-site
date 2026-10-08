@@ -44,10 +44,20 @@ export const footer = {
       { name: 'Documentação da API (em inglês)', href: '/public/docs' },
     ],
   },
+  freeTools: {
+    heading: 'Ferramentas gratuitas',
+    links: [
+      { name: 'Verificação de e-mail grátis', href: '/pt-br/verificacao-de-email' },
+      { name: 'Verificador de e-mail descartável', href: '/pt-br/verificador-de-e-mail-descartavel' },
+      { name: 'Provedores de e-mail descartável', href: '/pt-br/provedores-de-e-mail-descartavel' },
+      { name: 'Extrator de e-mails (em inglês)', href: '/email-extractor' },
+      { name: 'Gerador DKIM (em inglês)', href: '/dkim-generator' },
+      { name: 'Gerador DMARC (em inglês)', href: '/dmarc-generator' },
+    ],
+  },
   product: {
     heading: 'Produto',
     links: [
-      { name: 'Verificar e-mail grátis', href: '/pt-br/verificacao-de-email' },
       { name: 'Como saber se um e-mail existe?', href: '/pt-br/verificacao-de-email/como-saber-se-um-email-existe' },
       { name: 'Integrações', href: '/pt-br/integracoes' },
       { name: 'Preços', href: '/pt-br/precos' },
