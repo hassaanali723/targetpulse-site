@@ -69,7 +69,7 @@ const otherLanguages = [
 
 // Dark footer, the same slate as the home page hero.
 const linkClass =
-  'inline-flex items-center gap-1 text-[14px] font-medium text-slate-400 hover:text-white transition-colors duration-200'
+  'inline-flex items-center gap-1 whitespace-nowrap text-[14px] font-medium text-slate-400 hover:text-white transition-colors duration-200'
 const headingClass = 'text-[11px] font-bold uppercase tracking-[0.16em] text-white mb-4'
 
 export default function Footer() {
@@ -79,9 +79,13 @@ export default function Footer() {
     <footer className="relative bg-slate-900 text-slate-400">
       <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-indigo-400/60 to-transparent" />
       <div className="max-w-6xl mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 mb-12">
+        {/* Each link column is as wide as its longest link and links never wrap
+            (whitespace-nowrap in linkClass). When a row runs out of room, a
+            whole column moves down instead of its text breaking. The brand
+            column takes its own row below xl. */}
+        <div className="flex flex-wrap justify-between gap-x-10 gap-y-10 mb-12">
           {/* Brand column */}
-          <div className="md:col-span-3 space-y-4">
+          <div className="w-full xl:w-auto xl:max-w-[280px] space-y-4">
             <Link href="/" className="inline-flex items-center" aria-label="Giggal.ai home">
               <span className="text-2xl font-black tracking-tight leading-none text-white">
                 Gig<span className="brand-wordmark-accent-light">gal.ai</span>
@@ -124,7 +128,7 @@ export default function Footer() {
           </div>
 
           {/* Free tools column */}
-          <div className="md:col-span-2">
+          <div className="shrink-0">
             <p className={headingClass}>Free tools</p>
             <ul className="space-y-2.5">
               {freeToolsLinks.map((link) => (
@@ -138,7 +142,7 @@ export default function Footer() {
           </div>
 
           {/* Product column */}
-          <div className="md:col-span-2">
+          <div className="shrink-0">
             <p className={headingClass}>Product</p>
             <ul className="space-y-2.5">
               {productLinks.map((link) => (
@@ -153,7 +157,7 @@ export default function Footer() {
           </div>
 
           {/* Solutions & Resources column */}
-          <div className="md:col-span-2 space-y-6">
+          <div className="shrink-0 space-y-6">
             <div>
               <p className={headingClass}>Solutions</p>
               <ul className="space-y-2.5">
@@ -189,7 +193,7 @@ export default function Footer() {
           </div>
 
           {/* Company + Legal column */}
-          <div className="md:col-span-3 grid grid-cols-2 md:grid-cols-1 gap-8 md:gap-6">
+          <div className="shrink-0 space-y-6">
             <div>
               <p className={headingClass}>Company</p>
               <ul className="space-y-2.5">

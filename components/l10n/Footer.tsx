@@ -14,7 +14,7 @@ const socials = [
 
 // Dark footer, the same slate as the home heroes and the English footer.
 const linkClass =
-  'inline-flex items-center gap-1 text-[14px] font-medium text-slate-400 hover:text-white transition-colors duration-200'
+  'inline-flex items-center gap-1 whitespace-nowrap text-[14px] font-medium text-slate-400 hover:text-white transition-colors duration-200'
 const headingClass = 'text-[11px] font-bold uppercase tracking-[0.16em] text-white mb-4'
 
 function Column({ heading, links, prefix }: { heading: string; links: { name: string; href: string }[]; prefix: string }) {
@@ -45,8 +45,13 @@ export default function FooterL10n({ locale }: { locale: L10nLocale }) {
     <footer className="relative bg-slate-900 text-slate-400">
       <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-indigo-400/60 to-transparent" />
       <div className="max-w-6xl mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 mb-12">
-          <div className="md:col-span-3 space-y-4">
+        {/* Each link column is as wide as its longest link and links never wrap
+            (whitespace-nowrap in linkClass). When a row runs out of room, a
+            whole column moves down instead of its text breaking. Translated
+            labels are longer than the English ones, so the brand column always
+            takes its own row here, leaving the full width to the link columns. */}
+        <div className="flex flex-wrap justify-between gap-x-6 gap-y-10 mb-12">
+          <div className="basis-full space-y-4">
             <Link href={home} className="inline-flex items-center" aria-label={s.nav.homeAria}>
               <span className="text-2xl font-black tracking-tight leading-none text-white">
                 Gig<span className="brand-wordmark-accent-light">gal.ai</span>
@@ -67,7 +72,7 @@ export default function FooterL10n({ locale }: { locale: L10nLocale }) {
                 </a>
               ))}
             </div>
-            <p className="text-[12.5px] font-medium text-slate-400 leading-relaxed pt-2">
+            <p className="max-w-md text-[12.5px] font-medium text-slate-400 leading-relaxed pt-2">
               {footer.language}:{' '}
               <span className="font-bold text-white">{s.nativeName}</span>
               {' · '}
@@ -81,13 +86,13 @@ export default function FooterL10n({ locale }: { locale: L10nLocale }) {
             </p>
           </div>
 
-          <div className="md:col-span-2">
+          <div className="shrink-0">
             <Column heading={footer.freeTools.heading} links={footer.freeTools.links} prefix={home} />
           </div>
-          <div className="md:col-span-2">
+          <div className="shrink-0">
             <Column heading={footer.product.heading} links={footer.product.links} prefix={home} />
           </div>
-          <div className="md:col-span-2 space-y-6">
+          <div className="shrink-0 space-y-6">
             <div>
               <Column heading={footer.solutions.heading} links={footer.solutions.links} prefix={home} />
             </div>
@@ -95,7 +100,7 @@ export default function FooterL10n({ locale }: { locale: L10nLocale }) {
               <Column heading={footer.resources.heading} links={footer.resources.links} prefix={home} />
             </div>
           </div>
-          <div className="md:col-span-3 grid grid-cols-2 md:grid-cols-1 gap-8 md:gap-6">
+          <div className="shrink-0 space-y-6">
             <div>
               <Column heading={footer.company.heading} links={footer.company.links} prefix={home} />
             </div>
