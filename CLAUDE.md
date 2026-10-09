@@ -6,7 +6,9 @@ TargetPulse Ltd. Next.js 14 App Router, Tailwind. Language route groups:
 
 ## Page layout: section widths must align with the navbar
 
-The navbar sits in a `max-w-6xl mx-auto px-6` container. Every marketing page must
+The navbar sits in a `max-w-6xl mx-auto px-6` container. On this site `max-w-6xl`
+is 1280px, not Tailwind's default 1152px. It is set once in `tailwind.config.ts`
+(`theme.extend.maxWidth`), so changing that one value resizes the whole site. Every marketing page must
 line its content up with that container, so box edges match the logo on the left and
 the Sign up button on the right. Getting this wrong is the most common layout bug.
 

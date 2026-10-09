@@ -84,12 +84,13 @@ export default function EmailPermutatorPage() {
         })}
       />
 
-      <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-indigo-500/10 blur-[120px] -z-10 pointer-events-none" />
+      {/* Soft light behind the hero: a gradient, not a blur filter (blur is slow in iOS Safari). */}
+      <div className="absolute top-0 left-1/4 w-[840px] h-[840px] -translate-x-[120px] -translate-y-[120px] rounded-full bg-[radial-gradient(circle,rgba(99,102,241,0.10),transparent_60%)] -z-10 pointer-events-none" />
 
       <Navbar />
 
       {/* HERO */}
-      <section className="max-w-4xl mx-auto px-6 pt-28 md:pt-32 pb-8 text-center space-y-4">
+      <section className="max-w-6xl mx-auto px-6 pt-28 md:pt-32 pb-8 text-center space-y-4">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.08] text-slate-900">
           Email Permutator
         </h1>
@@ -107,7 +108,7 @@ export default function EmailPermutatorPage() {
       </section>
 
       {/* COPY BELOW THE TOOL */}
-      <section className="cv-section max-w-4xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-12">
+      <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-12">
         <div className="space-y-4">
           <h2 className={sectionTitle}>How to use the email permutator</h2>
           <ol className="list-decimal pl-5 space-y-2 text-slate-600 text-sm md:text-base font-medium">
@@ -226,7 +227,7 @@ export default function EmailPermutatorPage() {
       </section>
 
       {/* FAQ */}
-      <section className="cv-section max-w-4xl mx-auto px-6 py-16 border-t border-slate-200">
+      <section className="cv-section max-w-3xl mx-auto px-6 py-16 border-t border-slate-200">
         <div className="text-center max-w-2xl mx-auto mb-10 space-y-3">
           <h2 className={sectionTitle}>Frequently asked questions</h2>
         </div>

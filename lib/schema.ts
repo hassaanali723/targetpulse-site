@@ -5,7 +5,10 @@ const SITE = 'https://giggal.ai'
 export const ORG_ID = `${SITE}/#organization`
 
 // FAQPage — built from the same FAQ array a page renders, so the structured data
-// text always matches the visible copy exactly.
+// text always matches the visible copy exactly. Answers may hold [label](/path)
+// links (FaqAccordion renders them); the schema gets the label text only.
+const stripLinks = (text: string) => text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '$1')
+
 export function faqPageLd(items: FaqItem[]): Record<string, unknown> {
   return {
     '@context': 'https://schema.org',
@@ -13,7 +16,7 @@ export function faqPageLd(items: FaqItem[]): Record<string, unknown> {
     mainEntity: items.map((i) => ({
       '@type': 'Question',
       name: i.q,
-      acceptedAnswer: { '@type': 'Answer', text: i.a },
+      acceptedAnswer: { '@type': 'Answer', text: stripLinks(i.a) },
     })),
   }
 }

@@ -60,6 +60,13 @@ const config: Config = {
           950: '#022c22',
         },
       },
+      // The site width. The navbar, the footer and every section that lines up
+      // with them use max-w-6xl (see CLAUDE.md), so this one value sets the
+      // width of the whole site. Tailwind's default is 72rem (1152px); 80rem
+      // is 1280px.
+      maxWidth: {
+        '6xl': '80rem',
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
