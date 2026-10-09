@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   alternates: { canonical: CANONICAL },
   openGraph: {
     siteName: 'Giggal.ai',
-    images: [{ url: '/tools/email-permutator-og.webp', width: 1200, height: 630, alt: 'A name and a domain branching into several email address formats' }],
+    images: [{ url: '/tools/email-permutator-og-v2.webp', width: 1200, height: 630, alt: 'Free Email Permutator' }],
     title: 'Free Email Permutator: Generate Every Email Format',
     description: DESC,
     url: `https://giggal.ai${CANONICAL}`,
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Free Email Permutator: Generate Every Email Format',
     description: DESC,
-    images: ['/tools/email-permutator-og.webp'],
+    images: ['/tools/email-permutator-og-v2.webp'],
   },
 }
 
@@ -123,10 +123,10 @@ export default function EmailPermutatorPage() {
         </div>
 
         {/* Visual illustration in first content section */}
-        <div className="rounded-2xl border border-slate-200/90 overflow-hidden shadow-lg bg-slate-900">
+        <div className="rounded-2xl border border-slate-200/90 overflow-hidden shadow-lg bg-slate-50">
           <Image
-            src="/tools/email-permutator.webp"
-            alt="A name and a domain branching into several email address formats"
+            src="/tools/email-permutator-v2.webp"
+            alt="Illustration of one name branching into several email address formats with check mark."
             width={1600}
             height={900}
             className="w-full h-auto"

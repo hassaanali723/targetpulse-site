@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   alternates: { canonical: CANONICAL },
   openGraph: {
     siteName: 'Giggal.ai',
-    images: [{ url: '/tools/dkim-generator-og.webp', width: 1200, height: 630, alt: 'Free DKIM Generator' }],
+    images: [{ url: '/tools/dkim-generator-og-v2.webp', width: 1200, height: 630, alt: 'Free DKIM Generator' }],
     title: 'Free DKIM Generator: Create a DKIM Key and Record',
     description: DESC,
     url: `https://giggal.ai${CANONICAL}`,
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Free DKIM Generator: Create a DKIM Key and Record',
     description: DESC,
-    images: ['/tools/dkim-generator-og.webp'],
+    images: ['/tools/dkim-generator-og-v2.webp'],
   },
 }
 
@@ -133,10 +133,10 @@ export default function DkimGeneratorPage() {
         </div>
 
         {/* Visual setup illustration */}
-        <div className="rounded-2xl border border-slate-200/90 overflow-hidden shadow-lg bg-slate-900">
+        <div className="rounded-2xl border border-slate-200/90 overflow-hidden shadow-lg bg-slate-50">
           <Image
-            src="/tools/dkim-generator.webp"
-            alt="DKIM key generation and DNS TXT record architecture"
+            src="/tools/dkim-generator-v2.webp"
+            alt="Illustration of public and private keys securing an email message with cryptographic signature."
             width={1600}
             height={900}
             className="w-full h-auto"

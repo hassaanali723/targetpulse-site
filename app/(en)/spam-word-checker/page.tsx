@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   alternates: { canonical: CANONICAL },
   openGraph: {
     siteName: 'Giggal.ai',
-    images: [{ url: '/tools/spam-word-checker-og.webp', width: 1200, height: 630, alt: 'An email draft with a few risky words highlighted' }],
+    images: [{ url: '/tools/spam-word-checker-og-v2.webp', width: 1200, height: 630, alt: 'Free Spam Word Checker' }],
     title: 'Free Spam Word Checker: Find Risky Words in Your Email',
     description: DESC,
     url: `https://giggal.ai${CANONICAL}`,
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Free Spam Word Checker: Find Risky Words in Your Email',
     description: DESC,
-    images: ['/tools/spam-word-checker-og.webp'],
+    images: ['/tools/spam-word-checker-og-v2.webp'],
   },
 }
 
@@ -120,10 +120,10 @@ export default function SpamWordCheckerPage() {
         </div>
 
         {/* Visual illustration in first content section */}
-        <div className="rounded-2xl border border-slate-200/90 overflow-hidden shadow-lg bg-slate-900">
+        <div className="rounded-2xl border border-slate-200/90 overflow-hidden shadow-lg bg-slate-50">
           <Image
-            src="/tools/spam-word-checker.webp"
-            alt="An email draft with a few risky words highlighted"
+            src="/tools/spam-word-checker-v2.webp"
+            alt="Illustration of an email draft with highlighted words inspected by a magnifying glass."
             width={1600}
             height={900}
             className="w-full h-auto"

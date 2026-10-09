@@ -186,18 +186,37 @@ function renderMadeWithGiggal(data: SignatureData, fontStack: string): string {
 }
 
 /**
+ * Format phone or mobile number as a clean tel: URI
+ * Strips all spaces and formatting characters, keeping a leading '+'.
+ * Example: "+44 20 7946 0000" -> "tel:+442079460000"
+ * Example: "(555) 010-4477"   -> "tel:5550104477"
+ */
+export function formatTelLink(phone: string): string {
+  if (!phone) return ''
+  let raw = phone.trim()
+  if (raw.toLowerCase().startsWith('tel:')) {
+    raw = raw.slice(4).trim()
+  }
+  const hasPlus = raw.startsWith('+')
+  const digits = raw.replace(/\D/g, '')
+  return `tel:${hasPlus ? '+' : ''}${digits}`
+}
+
+/**
  * Collect contact lines (phone, mobile, email, website, address)
  */
 function collectContactItems(data: SignatureData, fontStack: string): string[] {
   const items: string[] = []
   if (data.phone?.trim()) {
+    const telHref = formatTelLink(data.phone)
     items.push(
-      `<span style="color:#64748b;">Phone:</span> <a href="tel:${escapeHtml(data.phone.trim())}" style="color:#334155; text-decoration:none; font-family:${fontStack};">${escapeHtml(data.phone.trim())}</a>`
+      `<span style="color:#64748b;">Phone:</span> <a href="${escapeHtml(telHref)}" style="color:#334155; text-decoration:none; font-family:${fontStack};">${escapeHtml(data.phone.trim())}</a>`
     )
   }
   if (data.mobile?.trim()) {
+    const telHref = formatTelLink(data.mobile)
     items.push(
-      `<span style="color:#64748b;">Mobile:</span> <a href="tel:${escapeHtml(data.mobile.trim())}" style="color:#334155; text-decoration:none; font-family:${fontStack};">${escapeHtml(data.mobile.trim())}</a>`
+      `<span style="color:#64748b;">Mobile:</span> <a href="${escapeHtml(telHref)}" style="color:#334155; text-decoration:none; font-family:${fontStack};">${escapeHtml(data.mobile.trim())}</a>`
     )
   }
   if (data.email?.trim()) {

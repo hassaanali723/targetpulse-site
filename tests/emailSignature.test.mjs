@@ -4,6 +4,7 @@ import {
   generateSignatureHtml,
   generatePlainTextSignature,
   validateImageUrl,
+  formatTelLink,
 } from '../lib/tools/emailSignatureCore.ts'
 
 const TEMPLATES = ['simple-text', 'logo-left', 'photo-divider', 'compact']
@@ -97,3 +98,40 @@ test('Email Signature Generator - Image URL Validation', () => {
   assert.equal(validateImageUrl('http://example.com/logo.png').valid, false)
   assert.equal(validateImageUrl('').valid, true)
 })
+
+test('Email Signature Generator - formatTelLink builds clean tel: links', () => {
+  assert.equal(formatTelLink('+44 20 7946 0000'), 'tel:+442079460000')
+  assert.equal(formatTelLink('(555) 010-4477'), 'tel:5550104477')
+  assert.equal(formatTelLink('+1 (555) 010-4477'), 'tel:+15550104477')
+  assert.equal(formatTelLink('tel:+44 20 7946 0000'), 'tel:+442079460000')
+  assert.equal(formatTelLink(''), '')
+})
+
+test('Email Signature Generator - Every Template Builds tel: Links and Preserves Visible Text', () => {
+  for (const t of TEMPLATES) {
+    const data = {
+      ...FULL_DATA,
+      template: t,
+      phone: '+44 20 7946 0000',
+      mobile: '+44 7700 900077',
+    }
+    const html = generateSignatureHtml(data)
+    assert.ok(html.includes('href="tel:+442079460000"'), `${t} must have phone tel link with no spaces`)
+    assert.ok(html.includes('>+44 20 7946 0000</a>'), `${t} must preserve visible phone text`)
+    assert.ok(html.includes('href="tel:+447700900077"'), `${t} must have mobile tel link with no spaces`)
+    assert.ok(html.includes('>+44 7700 900077</a>'), `${t} must preserve visible mobile text`)
+
+    const dataUs = {
+      ...FULL_DATA,
+      template: t,
+      phone: '(555) 010-4477',
+      mobile: '(555) 010-8899',
+    }
+    const htmlUs = generateSignatureHtml(dataUs)
+    assert.ok(htmlUs.includes('href="tel:5550104477"'), `${t} must format US phone to tel:5550104477`)
+    assert.ok(htmlUs.includes('>(555) 010-4477</a>'), `${t} must preserve visible US phone text`)
+    assert.ok(htmlUs.includes('href="tel:5550108899"'), `${t} must format US mobile to tel:5550108899`)
+    assert.ok(htmlUs.includes('>(555) 010-8899</a>'), `${t} must preserve visible US mobile text`)
+  }
+})
+

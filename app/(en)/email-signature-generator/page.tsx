@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   alternates: { canonical: CANONICAL },
   openGraph: {
     siteName: 'Giggal.ai',
-    images: [{ url: '/tools/email-signature-generator-og.webp', width: 1200, height: 630, alt: 'An email signature card with a name, job title and contact details' }],
+    images: [{ url: '/tools/email-signature-generator-og-v2.webp', width: 1200, height: 630, alt: 'Free Email Signature Generator' }],
     title: 'Free Email Signature Generator for Gmail and Outlook',
     description: DESC,
     url: `https://giggal.ai${CANONICAL}`,
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Free Email Signature Generator for Gmail and Outlook',
     description: DESC,
-    images: ['/tools/email-signature-generator-og.webp'],
+    images: ['/tools/email-signature-generator-og-v2.webp'],
   },
 }
 
@@ -123,10 +123,10 @@ export default function EmailSignatureGeneratorPage() {
         </div>
 
         {/* Visual illustration in first content section */}
-        <div className="rounded-2xl border border-slate-200/90 overflow-hidden shadow-lg bg-slate-900">
+        <div className="rounded-2xl border border-slate-200/90 overflow-hidden shadow-lg bg-slate-50">
           <Image
-            src="/tools/email-signature-generator.webp"
-            alt="An email signature card with a name, job title and contact details"
+            src="/tools/email-signature-generator-v2.webp"
+            alt="Illustration of a professional email signature layout with avatar, details, and social icons."
             width={1600}
             height={900}
             className="w-full h-auto"

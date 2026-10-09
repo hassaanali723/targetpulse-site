@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   alternates: { canonical: CANONICAL },
   openGraph: {
     siteName: 'Giggal.ai',
-    images: [{ url: '/tools/dmarc-generator-og.webp', width: 1200, height: 630, alt: 'Free DMARC Record Generator' }],
+    images: [{ url: '/tools/dmarc-generator-og-v2.webp', width: 1200, height: 630, alt: 'Free DMARC Record Generator' }],
     title: 'Free DMARC Generator: Build a DMARC Record (2026)',
     description: DESC,
     url: `https://giggal.ai${CANONICAL}`,
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Free DMARC Generator: Build a DMARC Record (2026)',
     description: DESC,
-    images: ['/tools/dmarc-generator-og.webp'],
+    images: ['/tools/dmarc-generator-og-v2.webp'],
   },
 }
 
@@ -122,10 +122,10 @@ export default function DmarcGeneratorPage() {
         </div>
 
         {/* Visual setup illustration */}
-        <div className="rounded-2xl border border-slate-200/90 overflow-hidden shadow-lg bg-slate-900">
+        <div className="rounded-2xl border border-slate-200/90 overflow-hidden shadow-lg bg-slate-50">
           <Image
-            src="/tools/dmarc-generator.webp"
-            alt="DMARC record generation and RFC 9989 policy flowchart"
+            src="/tools/dmarc-generator-v2.webp"
+            alt="Illustration of a DMARC policy record with three enforcement steps and protective shield."
             width={1600}
             height={900}
             className="w-full h-auto"

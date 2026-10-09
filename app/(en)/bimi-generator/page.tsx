@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   alternates: { canonical: CANONICAL },
   openGraph: {
     siteName: 'Giggal.ai',
-    images: [{ url: '/tools/bimi-generator-og.webp', width: 1200, height: 630, alt: 'An inbox message with a brand logo next to it and a DNS record below' }],
+    images: [{ url: '/tools/bimi-generator-og-v2.webp', width: 1200, height: 630, alt: 'Free BIMI Record Generator' }],
     title: 'Free BIMI Record Generator and SVG Logo Checker',
     description: DESC,
     url: `https://giggal.ai${CANONICAL}`,
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Free BIMI Record Generator and SVG Logo Checker',
     description: DESC,
-    images: ['/tools/bimi-generator-og.webp'],
+    images: ['/tools/bimi-generator-og-v2.webp'],
   },
 }
 
@@ -127,10 +127,10 @@ export default function BimiGeneratorPage() {
         </div>
 
         {/* Visual illustration in first content section */}
-        <div className="rounded-2xl border border-slate-200/90 overflow-hidden shadow-lg bg-slate-900">
+        <div className="rounded-2xl border border-slate-200/90 overflow-hidden shadow-lg bg-slate-50">
           <Image
-            src="/tools/bimi-generator.webp"
-            alt="An inbox message with a brand logo next to it and a DNS record below"
+            src="/tools/bimi-generator-v2.webp"
+            alt="Illustration of verified email avatar alongside a square SVG brand logo grid."
             width={1600}
             height={900}
             className="w-full h-auto"

@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   alternates: { canonical: CANONICAL },
   openGraph: {
     siteName: 'Giggal.ai',
-    images: [{ url: '/tools/email-extractor-og.webp', width: 1200, height: 630, alt: 'Free Email Extractor' }],
+    images: [{ url: '/tools/email-extractor-og-v2.webp', width: 1200, height: 630, alt: 'Free Email Extractor' }],
     title: 'Free Email Extractor: Extract Emails From Text and Files',
     description: DESC,
     url: `https://giggal.ai${CANONICAL}`,
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Free Email Extractor: Extract Emails From Text and Files',
     description: DESC,
-    images: ['/tools/email-extractor-og.webp'],
+    images: ['/tools/email-extractor-og-v2.webp'],
   },
 }
 
@@ -125,10 +125,10 @@ export default function EmailExtractorPage() {
         </div>
 
         {/* Visual setup illustration */}
-        <div className="rounded-2xl border border-slate-200/90 overflow-hidden shadow-lg bg-slate-900">
+        <div className="rounded-2xl border border-slate-200/90 overflow-hidden shadow-lg bg-slate-50">
           <Image
-            src="/tools/email-extractor.webp"
-            alt="Free Email Extractor processing text to clean list"
+            src="/tools/email-extractor-v2.webp"
+            alt="Illustration of email addresses extracted from documents and deduplicated into a tidy list."
             width={1600}
             height={900}
             className="w-full h-auto"
