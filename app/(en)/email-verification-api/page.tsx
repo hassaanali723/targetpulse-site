@@ -21,6 +21,8 @@ import JsonLd from '@/components/JsonLd'
 import PricingTable from '@/components/landing/PricingTable'
 import FaqAccordion, { type FaqItem } from '@/components/landing/FaqAccordion'
 import AltCtaBand from '@/components/alternatives/AltCtaBand'
+import RatingChips from '@/components/landing/RatingChips'
+import AwardRow from '@/components/landing/AwardRow'
 import EmailOff from '@/components/EmailOff'
 import { breadcrumbLd, faqPageLd, apiSoftwareApplicationLd } from '@/lib/schema'
 
@@ -178,6 +180,12 @@ export default function EmailVerificationApiPage() {
           1,000 free credits, no card needed. Credits never expire.
         </p>
       </section>
+
+      {/* Review-site ratings and award badges, as on /email-checker and /bulk-email-verifier. */}
+      <div className="max-w-6xl mx-auto px-6">
+        <RatingChips />
+      </div>
+      <AwardRow />
 
       {/* ── 2. WHAT ONE API CALL RETURNS ──────────────────────── */}
       <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8">

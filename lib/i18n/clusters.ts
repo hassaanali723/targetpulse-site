@@ -38,6 +38,11 @@ export const CLUSTERS = {
   // on 2026-09-18; both old URLs 301 there, see next.config.js).
   tool: { en: '/email-checker', it: '/it/verifica-email', de: '/de/email-adresse-pruefen', es: '/es/validar-correo', 'pt-br': '/pt-br/verificacao-de-email', fr: '/fr/verifier-adresse-mail' },
   home: { en: '/', it: '/it', de: '/de', es: '/es', 'pt-br': '/pt-br', fr: '/fr' },
+  // The bulk email verifier. Each slug uses the bulk wording of that language's
+  // home title (in blocco, Massenprüfung, masiva, em massa, en masse); the
+  // Spanish and Portuguese slugs follow the Ahrefs data ("validador de correos
+  // masivos", "validador de email em massa").
+  bulkVerifier: { en: '/bulk-email-verifier', it: '/it/verifica-email-in-blocco', de: '/de/e-mail-massenpruefung', es: '/es/validador-de-correos-masivos', 'pt-br': '/pt-br/validador-de-email-em-massa', fr: '/fr/verification-email-en-masse' },
   pricing: { en: '/pricing', it: '/it/prezzi', de: '/de/preise', es: '/es/precios', 'pt-br': '/pt-br/precos', fr: '/fr/tarifs' },
   catchall: { en: '/catch-all-verification', it: '/it/verifica-catch-all', de: '/de/catch-all-verifizierung', es: '/es/verificacion-catch-all', 'pt-br': '/pt-br/verificacao-catch-all', fr: '/fr/verification-catch-all' },
   seg: { en: '/seg-email-verification', it: '/it/verifica-seg' },

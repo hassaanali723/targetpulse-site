@@ -1,6 +1,6 @@
 // Server component. No interactivity, so it ships zero client JS.
 import React from 'react'
-import { Linkedin, Youtube, Facebook, Instagram, ArrowUpRight } from 'lucide-react'
+import { Linkedin, Youtube, Facebook, Instagram } from 'lucide-react'
 import Link from 'next/link'
 
 // Only profiles that carry the Giggal name. A social href is still text on the
@@ -34,15 +34,18 @@ const freeToolsLinks = [
   { name: 'Email signature generator', href: '/email-signature-generator' },
 ]
 
+// The paid product only. The home page is the verification service, so its
+// link says "Email verification" (an "Email verifier" anchor would compete
+// with /email-checker for that word). /email-validation-api is left out: it
+// covers the same API, and the verification API page and the docs link it.
+// The sign-up button is in the navbar on every page.
 const productLinks = [
-  { name: 'Email Verifier', href: '/' },
+  { name: 'Email verification', href: '/' },
+  { name: 'Bulk email verifier', href: '/bulk-email-verifier' },
   { name: 'Email list cleaning', href: '/email-list-cleaning' },
   { name: 'Integrations', href: '/integrations' },
   { name: 'Email verification API', href: '/email-verification-api' },
-  { name: 'Email validation API', href: '/email-validation-api' },
-  { name: 'API Reference', href: '/public/docs' },
   { name: 'Pricing', href: '/pricing' },
-  { name: 'Sign up free', href: '/sign-up', external: true },
 ]
 
 const companyLinks = [
@@ -149,7 +152,6 @@ export default function Footer() {
                 <li key={link.name}>
                   <Link href={link.href} className={linkClass}>
                     {link.name}
-                    {link.external && <ArrowUpRight className="w-3 h-3 opacity-60" />}
                   </Link>
                 </li>
               ))}
@@ -186,6 +188,11 @@ export default function Footer() {
                 <li>
                   <Link href="/alternatives" className={linkClass}>
                     Verifier comparison
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/public/docs" className={linkClass}>
+                    API docs
                   </Link>
                 </li>
               </ul>

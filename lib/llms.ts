@@ -66,6 +66,7 @@ returns valid or invalid instead of a shrug.
 - [Homepage](${SITE}/): catch-all, risky and SEG-protected email verification
 - [Catch-all verification](${SITE}/catch-all-verification): how accept-all domains are resolved
 - [SEG verification](${SITE}/seg-email-verification): Proofpoint, Mimecast and Barracuda
+- [Bulk email verifier](${SITE}/bulk-email-verifier): verify a CSV or Excel list of up to 50,000 addresses, a result on every row, catch-all resolved
 - [Email checker](${SITE}/email-checker): one address at a time, catch-all resolved, no account
 - [Disposable email checker](${SITE}/disposable-email-checker): detect temporary, burner and throwaway inboxes, no account
 - [Email extractor](${SITE}/email-extractor): extract and deduplicate emails from text, files and spreadsheets in the browser

@@ -20,7 +20,21 @@ const ROWS: Row[] = [
   { email: 'info@activarmor.com', ok: true, score: 94, catchAll: true },
 ]
 
-export default function BulkScanDemo({ total = '4,820' }: { total?: string }) {
+export type ScanSummaryItem = { tone: 'valid' | 'invalid' | 'unknown'; label: string; value: string }
+
+// Shares of the 4,820 sample rows, used for the summary bar widths. Sample
+// numbers for the illustration: 4,145 valid, 579 invalid, 96 unknown (2%).
+const SUMMARY_SHARE = { valid: 86, invalid: 12, unknown: 2 }
+const SUMMARY_TONE = {
+  valid: { dot: 'bg-emerald-500', bar: 'bg-emerald-500' },
+  invalid: { dot: 'bg-rose-500', bar: 'bg-rose-500' },
+  unknown: { dot: 'bg-slate-400', bar: 'bg-slate-300' },
+}
+
+// `summary` (optional) adds a valid / invalid / unknown count row above the
+// list, with a split bar. Only the bulk verifier pages pass it; the home page
+// and the email checker pages show the window without it.
+export default function BulkScanDemo({ total = '4,820', summary }: { total?: string; summary?: ScanSummaryItem[] }) {
   return (
     <div data-inview aria-hidden="true" className="scan-demo relative">
       {/* Soft colour behind the window: two gradients that fade to nothing
@@ -49,6 +63,29 @@ export default function BulkScanDemo({ total = '4,820' }: { total?: string }) {
             </span>
           </span>
         </div>
+
+        {summary && (
+          <div className="mx-4 mb-3 rounded-xl border border-slate-100 bg-slate-50/80 px-3 py-2.5">
+            <div className="grid grid-cols-3 gap-2">
+              {summary.map((m) => (
+                <div key={m.tone} className="min-w-0">
+                  <p className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-400 truncate">
+                    <span className={`w-1.5 h-1.5 shrink-0 rounded-full ${SUMMARY_TONE[m.tone].dot}`} />
+                    {m.label}
+                  </p>
+                  <p className="mt-0.5 whitespace-nowrap tabular-nums">
+                    <span data-count className="text-[15px] font-black text-slate-900">{m.value}</span>
+                  </p>
+                </div>
+              ))}
+            </div>
+            <div className="mt-2.5 flex h-1.5 gap-0.5 overflow-clip rounded-full">
+              {summary.map((m) => (
+                <span key={m.tone} className={`h-full rounded-full ${SUMMARY_TONE[m.tone].bar}`} style={{ width: `${SUMMARY_SHARE[m.tone]}%` }} />
+              ))}
+            </div>
+          </div>
+        )}
 
         <div className="relative px-3 pb-4">
           {/* The scan line that runs down the rows. */}

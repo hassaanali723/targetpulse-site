@@ -35,6 +35,7 @@ export const footer = {
     heading: 'Recursos',
     links: [
       { name: 'Blog', href: '/es/blog' },
+      { name: '¿Cómo saber si un correo existe?', href: '/es/validar-correo/como-saber-si-un-correo-existe' },
       { name: 'Glosario', href: '/es/glosario' },
       { name: 'Comparativa de verificadores (en inglés)', href: '/alternatives' },
       { name: 'Alternativa a ZeroBounce', href: '/es/alternativa-a-zerobounce' },
@@ -61,11 +62,14 @@ export const footer = {
   },
   product: {
     heading: 'Producto',
+    // Same order as the English footer: the paid product only.
     links: [
-      { name: '¿Cómo saber si un correo existe?', href: '/es/validar-correo/como-saber-si-un-correo-existe' },
+      { name: 'Servicio de verificación de correo', href: '/es' },
+      { name: 'Validador de correos masivos', href: '/es/validador-de-correos-masivos' },
+      { name: 'Limpieza de listas de correo (en inglés)', href: '/email-list-cleaning' },
       { name: 'Integraciones', href: '/es/integraciones' },
+      { name: 'API de verificación de correo (en inglés)', href: '/email-verification-api' },
       { name: 'Precios', href: '/es/precios' },
-      { name: 'Regístrate gratis', href: '/es/registro' },
     ],
   },
   company: {

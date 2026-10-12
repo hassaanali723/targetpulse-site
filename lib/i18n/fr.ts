@@ -35,6 +35,7 @@ export const footer = {
     heading: 'Ressources',
     links: [
       { name: 'Blog', href: '/fr/blog' },
+      { name: 'Comment savoir si une adresse mail est valide ?', href: '/fr/verifier-adresse-mail/comment-savoir-si-une-adresse-mail-est-valide' },
       { name: 'Glossaire', href: '/fr/glossaire' },
       { name: 'Comparatif des vérificateurs (en anglais)', href: '/alternatives' },
       { name: 'Alternative à ZeroBounce', href: '/fr/alternative-a-zerobounce' },
@@ -62,11 +63,14 @@ export const footer = {
   },
   product: {
     heading: 'Produit',
+    // Same order as the English footer: the paid product only.
     links: [
-      { name: 'Comment savoir si une adresse mail est valide ?', href: '/fr/verifier-adresse-mail/comment-savoir-si-une-adresse-mail-est-valide' },
+      { name: 'Service de vérification d’email', href: '/fr' },
+      { name: 'Vérification d’email en masse', href: '/fr/verification-email-en-masse' },
+      { name: 'Nettoyage de liste email (en anglais)', href: '/email-list-cleaning' },
       { name: 'Intégrations', href: '/fr/integrations' },
+      { name: 'API de vérification d’email (en anglais)', href: '/email-verification-api' },
       { name: 'Tarifs', href: '/fr/tarifs' },
-      { name: 'Inscription gratuite', href: '/fr/inscription' },
     ],
   },
   company: {

@@ -55,6 +55,7 @@ export function coreEntries(): SitemapEntry[] {
     { path: '/bimi-generator', lastModified: '2026-10-08' },
     { path: '/spam-word-checker', lastModified: '2026-10-08' },
     { path: '/email-signature-generator', lastModified: '2026-10-08' },
+    { path: '/bulk-email-verifier', lastModified: '2026-10-12' },
     { path: '/email-list-cleaning', lastModified: '2026-10-01' },
     { path: '/email-verification-api', lastModified: '2026-10-01' },
     { path: '/email-validation-api', lastModified: '2026-10-01' },
@@ -199,6 +200,10 @@ const disposableProvidersUrls = new Set<string>([
   ...Object.values(CLUSTERS.disposableProviders),
 ])
 
+// The translated bulk email verifier pages shipped on this date.
+const BULK_VERIFIER_SHIPPED = '2026-10-12'
+const bulkVerifierUrls = new Set<string>(Object.values(CLUSTERS.bulkVerifier))
+
 function localeEntries(locale: 'it' | 'de' | 'es' | 'pt-br' | 'fr', launch: string): SitemapEntry[] {
   const posts = getAllPosts(locale)
   const hub = `/${locale}/blog`
@@ -228,7 +233,9 @@ function localeEntries(locale: 'it' | 'de' | 'es' | 'pt-br' | 'fr', launch: stri
               ? COMPETITOR_PAGES_SHIPPED
               : disposableProvidersUrls.has(path)
                 ? DISPOSABLE_PROVIDERS_SHIPPED
-                : launch),
+                : bulkVerifierUrls.has(path)
+                  ? BULK_VERIFIER_SHIPPED
+                  : launch),
     }))
 }
 export function itEntries(): SitemapEntry[] {

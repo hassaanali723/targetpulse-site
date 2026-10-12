@@ -8,6 +8,8 @@ import JsonLd from '@/components/JsonLd'
 import PricingTable from '@/components/landing/PricingTable'
 import FaqAccordion, { type FaqItem } from '@/components/landing/FaqAccordion'
 import AltCtaBand from '@/components/alternatives/AltCtaBand'
+import RatingChips from '@/components/landing/RatingChips'
+import AwardRow from '@/components/landing/AwardRow'
 import { breadcrumbLd, faqPageLd, emailListCleaningServiceLd } from '@/lib/schema'
 
 const SIGNUP_URL = 'https://emailverifier.giggal.ai/sign-up'
@@ -297,6 +299,12 @@ export default function EmailListCleaningPage() {
           </ul>
         </div>
       </section>
+
+      {/* Review-site ratings and award badges, as on /email-checker and /bulk-email-verifier. */}
+      <div className="max-w-6xl mx-auto px-6">
+        <RatingChips />
+      </div>
+      <AwardRow />
 
       {/* ── 2. THREE STEPS ───────────────────────────────────────── */}
       <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-8">

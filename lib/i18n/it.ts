@@ -38,6 +38,7 @@ export const footer = {
     heading: 'Risorse',
     links: [
       { name: 'Blog', href: '/it/blog' },
+      { name: 'Email esistente', href: '/it/verifica-email/email-esistente' },
       { name: 'Confronto verificatori (in inglese)', href: '/alternatives' },
       { name: 'Alternativa a ZeroBounce', href: '/it/alternativa-a-zerobounce' },
       { name: 'Alternativa a NeverBounce', href: '/it/alternativa-a-neverbounce' },
@@ -62,11 +63,14 @@ export const footer = {
   },
   product: {
     heading: 'Prodotto',
+    // Same order as the English footer: the paid product only.
     links: [
-      { name: 'Email esistente', href: '/it/verifica-email/email-esistente' },
+      { name: 'Servizio di verifica email', href: '/it' },
+      { name: 'Verifica email in blocco', href: '/it/verifica-email-in-blocco' },
+      { name: 'Pulizia liste email (in inglese)', href: '/email-list-cleaning' },
       { name: 'Integrazioni', href: '/it/integrazioni' },
+      { name: 'API di verifica email (in inglese)', href: '/email-verification-api' },
       { name: 'Prezzi', href: '/it/prezzi' },
-      { name: 'Registrati gratis', href: '/it/registrati' },
     ],
   },
   company: {

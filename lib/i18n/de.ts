@@ -35,6 +35,7 @@ export const footer = {
     heading: 'Ressourcen',
     links: [
       { name: 'Blog', href: '/de/blog' },
+      { name: 'Gibt es diese E-Mail-Adresse?', href: '/de/email-adresse-pruefen/gibt-es-diese-email-adresse' },
       { name: 'Glossar', href: '/de/glossar' },
       { name: 'Verifizierer im Vergleich (Englisch)', href: '/alternatives' },
       { name: 'ZeroBounce Alternative', href: '/de/zerobounce-alternative' },
@@ -62,11 +63,14 @@ export const footer = {
   },
   product: {
     heading: 'Produkt',
+    // Same order as the English footer: the paid product only.
     links: [
-      { name: 'Gibt es diese E-Mail-Adresse?', href: '/de/email-adresse-pruefen/gibt-es-diese-email-adresse' },
+      { name: 'E-Mail-Verifizierungsdienst', href: '/de' },
+      { name: 'E-Mail-Massenprüfung', href: '/de/e-mail-massenpruefung' },
+      { name: 'E-Mail-Listen bereinigen (Englisch)', href: '/email-list-cleaning' },
       { name: 'Integrationen', href: '/de/integrationen' },
+      { name: 'E-Mail-Verifizierungs-API (Englisch)', href: '/email-verification-api' },
       { name: 'Preise', href: '/de/preise' },
-      { name: 'Kostenlos registrieren', href: '/de/registrieren' },
     ],
   },
   company: {
