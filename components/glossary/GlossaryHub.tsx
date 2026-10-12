@@ -13,6 +13,7 @@ import { GLOSSARY_CATEGORIES, GLOSSARY_HUB } from '@/lib/i18n/glossary'
 import { GLOSSARY_STRINGS } from '@/lib/i18n/glossaryStrings'
 import { getStrings, type L10nLocale } from '@/lib/i18n/strings'
 import { getAllTerms } from '@/lib/glossary'
+import GlossaryFilter from '@/components/glossary/GlossaryFilter'
 
 const SITE = 'https://giggal.ai'
 
@@ -72,29 +73,17 @@ export default function GlossaryHub({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-6 pb-24 space-y-14">
-        {GLOSSARY_CATEGORIES.map((cat) => {
-          const items = terms.filter((t) => t.category === cat)
-          if (items.length === 0) return null
-          return (
-            <div key={cat}>
-              <h2 className="text-2xl font-black tracking-tight text-slate-900">{g.categories[cat]}</h2>
-              <ul className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {items.map((t) => (
-                  <li key={t.slug}>
-                    <Link
-                      href={`${hub}/${t.slug}`}
-                      className="block h-full rounded-2xl border border-slate-200 bg-white p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-lg hover:shadow-indigo-900/5"
-                    >
-                      <span className="block text-base font-black tracking-tight text-slate-900">{t.title}</span>
-                      <span className="mt-2 block text-sm font-medium leading-relaxed text-slate-600 line-clamp-3">{t.short}</span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )
-        })}
+      <section className="max-w-6xl mx-auto px-6 pb-24">
+        <GlossaryFilter
+          allLabel={g.filterAll}
+          groups={GLOSSARY_CATEGORIES.map((cat) => ({
+            id: cat,
+            label: g.categories[cat],
+            items: terms
+              .filter((t) => t.category === cat)
+              .map((t) => ({ href: `${hub}/${t.slug}`, title: t.title, short: t.short })),
+          })).filter((grp) => grp.items.length > 0)}
+        />
       </section>
 
       {locale === 'en' ? <Footer /> : <FooterL10n locale={locale as L10nLocale} />}
