@@ -97,9 +97,6 @@ export default function EmailPermutatorPage() {
         <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium">
           Enter a name and a company domain to get every likely email address format, most common first.
         </p>
-        <p className="text-xs text-slate-500 font-medium">
-          Runs in your browser. Nothing you type is sent anywhere.
-        </p>
       </section>
 
       {/* THE TOOL */}

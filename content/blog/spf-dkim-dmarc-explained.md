@@ -131,7 +131,7 @@ Leaving DMARC set to `p=none` permanently leaves your domain vulnerable to imper
 Work through these in order:
 
 1. List every internal service, marketing platform, support desk, and transactional tool that sends email using your domain.
-2. Publish a single unified [SPF record](/glossary/spf) covering authorized sending servers, keeping total lookups under 10.
+2. Publish a single unified [SPF record](/glossary/spf) covering authorized sending servers, keeping total lookups under 10. The [SPF checker](/spf-checker) counts them for you.
 3. Turn on custom DKIM signing using your own domain for every sending platform and publish the matching selector records in DNS.
 4. Ensure your sending IP addresses have valid forward DNS and a matching [PTR record](/glossary/ptr-record) configured in reverse DNS.
 5. Publish an initial [DMARC record](/blog/what-is-a-dmarc-record) at `_dmarc` with `p=none` and an active `rua` mailbox to start receiving aggregate XML reports.

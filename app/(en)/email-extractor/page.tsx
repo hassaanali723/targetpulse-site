@@ -8,7 +8,6 @@ import AltCtaBand from '@/components/alternatives/AltCtaBand'
 import JsonLd from '@/components/JsonLd'
 import { faqPageLd, breadcrumbLd, toolWebApplicationLd } from '@/lib/schema'
 import EmailExtractorTool from '@/components/tools/EmailExtractor/EmailExtractorTool'
-import { ShieldCheck } from 'lucide-react'
 
 const CANONICAL = '/email-extractor'
 const TITLE = 'Free Email Extractor: Extract Emails From Text and Files | Giggal.ai'
@@ -91,16 +90,12 @@ export default function EmailExtractorPage() {
       <Navbar />
 
       {/* HERO */}
-      <section className="max-w-6xl mx-auto px-6 pt-28 md:pt-32 pb-8 text-center space-y-5">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-200/80 text-indigo-700 text-xs font-semibold">
-          <ShieldCheck className="w-3.5 h-3.5 text-indigo-600" />
-          <span>Free · runs in your browser</span>
-        </div>
+      <section className="max-w-6xl mx-auto px-6 pt-28 md:pt-32 pb-8 text-center space-y-4">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.08] text-slate-900">
           Free Email Extractor
         </h1>
         <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium">
-          Paste text or drop in files and get a clean, deduplicated list of email addresses. Everything runs in your browser.
+          Paste text or drop in files and get a clean, deduplicated list of email addresses.
         </p>
       </section>
 

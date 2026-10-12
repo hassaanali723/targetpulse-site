@@ -3,7 +3,6 @@
 import React, { useState } from 'react'
 import {
   KeyRound,
-  ShieldCheck,
   Copy,
   Check,
   Download,
@@ -149,13 +148,6 @@ IMPORTANT DEPLOYMENT NOTES:
 
   return (
     <div className="w-full bg-white rounded-2xl border border-slate-200/90 shadow-xl shadow-slate-200/50 overflow-hidden">
-      {/* Privacy guarantee banner */}
-      <div className="bg-slate-900 text-slate-300 px-5 py-2.5 text-xs md:text-sm font-medium flex items-center justify-between border-b border-slate-800">
-        <div className="flex items-center gap-2">
-          <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
-          <span>Generated client-side via Web Crypto API. Your private key never touches any server.</span>
-        </div>
-      </div>
 
       <div className="p-5 md:p-8 space-y-6">
         {/* Form Inputs */}

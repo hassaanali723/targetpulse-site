@@ -60,7 +60,7 @@ If you send less than that, the records still matter. Without them, your email i
 
 RFC 7208 limits an SPF check to ten DNS lookups. A lookup is one question the receiving server asks DNS. Every `include:`, `a`, `mx` and `redirect` in your record counts as one lookup. Lookups inside the records you include also count. If the total is more than ten, the check returns a permanent error. Most receiving servers treat this error as a fail.
 
-This is the most common way an SPF record breaks. A company adds one email tool after another to the record. When the eleventh lookup is added, the whole record stops working.
+This is the most common way an SPF record breaks. A company adds one email tool after another to the record. When the eleventh lookup is added, the whole record stops working. The [SPF checker](/spf-checker) counts the lookups in your record, including the ones inside each include.
 
 **Example:** a company's SPF record includes its office email, its newsletter tool, its help desk tool and its invoice tool. Some of those include other records inside them. Together they need 11 lookups. From that day, the SPF check fails for the company's email, even for email sent from its own office.
 

@@ -97,9 +97,6 @@ export default function BimiGeneratorPage() {
         <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium">
           Build the BIMI record for your domain and check that your logo file meets the rules, before you buy a certificate or publish anything.
         </p>
-        <p className="text-xs text-slate-500 font-medium">
-          Runs in your browser. Your logo file isn&apos;t uploaded anywhere.
-        </p>
       </section>
 
       {/* THE TOOL */}

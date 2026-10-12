@@ -350,6 +350,16 @@
   border-radius: 0;
   white-space: pre;
 }
+/* Email templates (```email): body font, wrapped lines, no sideways scroll. */
+.blog-prose pre.blog-pre-wrap {
+  font-family: inherit;
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+.blog-prose pre.blog-pre-wrap code {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
 @media (prefers-color-scheme: dark) {
   .blog-prose pre.blog-pre {
     background: #0f172a;

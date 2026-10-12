@@ -10,7 +10,6 @@ import {
   Download,
   Trash2,
   Filter,
-  ShieldCheck,
   ChevronLeft,
   ChevronRight,
   ArrowRight,
@@ -19,10 +18,6 @@ import {
 } from 'lucide-react'
 import {
   extractEmails,
-  cleanCandidate,
-  preprocessText,
-  COMMON_ROLE_PREFIXES,
-  IMAGE_AND_MEDIA_EXTENSIONS,
   type ExtractorOptions,
   type ExtractionResult,
 } from '@/lib/tools/emailExtractorCore'
@@ -55,6 +50,8 @@ export default function EmailExtractorTool() {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const workerRef = useRef<Worker | null>(null)
   const reqIdRef = useRef(0)
+  // The latest request, so a worker failure can rerun it on the main thread.
+  const lastReqRef = useRef<{ text: string; opts: ExtractorOptions } | null>(null)
 
   const [extractionResult, setExtractionResult] = useState<ExtractionResult>({
     items: [],
@@ -65,50 +62,42 @@ export default function EmailExtractorTool() {
 
   // Set up Web Worker for non-blocking extraction
   useEffect(() => {
-    if (typeof window === 'undefined') return
-
+    let worker: Worker
     try {
-      const workerBlob = new Blob(
-        [
-          `
-          ${cleanCandidate.toString()}
-          ${preprocessText.toString()}
-          const COMMON_ROLE_PREFIXES = new Set(${JSON.stringify(Array.from(COMMON_ROLE_PREFIXES))});
-          const IMAGE_AND_MEDIA_EXTENSIONS = new Set(${JSON.stringify(Array.from(IMAGE_AND_MEDIA_EXTENSIONS))});
-          ${extractEmails.toString()}
-
-          self.onmessage = function(e) {
-            const { id, rawText, options } = e.data;
-            try {
-              const res = extractEmails(rawText, options);
-              self.postMessage({ id, success: true, result: res });
-            } catch (err) {
-              self.postMessage({ id, success: false, error: String(err) });
-            }
-          };
-          `,
-        ],
-        { type: 'application/javascript' }
-      )
-      const workerUrl = URL.createObjectURL(workerBlob)
-      const worker = new Worker(workerUrl)
-
-      worker.onmessage = (e) => {
-        const { id, success, result } = e.data
-        if (id === reqIdRef.current && success && result) {
-          setExtractionResult(result)
-          setIsWorkerBusy(false)
-        }
-      }
-
-      workerRef.current = worker
-
-      return () => {
-        worker.terminate()
-        URL.revokeObjectURL(workerUrl)
-      }
+      // Keep this exact `new Worker(new URL(..., import.meta.url))` form.
+      // Webpack only bundles the worker file when it sees this pattern.
+      worker = new Worker(new URL('./extractor.worker.ts', import.meta.url))
     } catch {
       workerRef.current = null
+      return
+    }
+
+    // If the worker fails, stop using it and finish the latest request on
+    // the main thread, so the loading overlay can never stay up.
+    const fallBackToMainThread = () => {
+      worker.terminate()
+      workerRef.current = null
+      const last = lastReqRef.current
+      if (last) setExtractionResult(extractEmails(last.text, last.opts))
+      setIsWorkerBusy(false)
+    }
+
+    worker.onmessage = (e) => {
+      const { id, success, result } = e.data
+      if (id !== reqIdRef.current) return
+      if (success && result) {
+        setExtractionResult(result)
+        setIsWorkerBusy(false)
+      } else {
+        fallBackToMainThread()
+      }
+    }
+    worker.onerror = fallBackToMainThread
+
+    workerRef.current = worker
+
+    return () => {
+      worker.terminate()
     }
   }, [])
 
@@ -150,6 +139,7 @@ export default function EmailExtractorTool() {
       }
 
       const currentId = ++reqIdRef.current
+      lastReqRef.current = { text, opts }
       if (workerRef.current) {
         setIsWorkerBusy(true)
         workerRef.current.postMessage({ id: currentId, rawText: text, options: opts })
@@ -298,13 +288,6 @@ export default function EmailExtractorTool() {
 
   return (
     <div className="w-full bg-white rounded-2xl border border-slate-200/90 shadow-xl shadow-slate-200/50 overflow-hidden">
-      {/* Privacy guarantee banner */}
-      <div className="bg-slate-900 text-slate-300 px-5 py-2.5 text-xs md:text-sm font-medium flex items-center justify-between border-b border-slate-800">
-        <div className="flex items-center gap-2">
-          <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
-          <span>Runs entirely in your browser. No text or files leave your computer.</span>
-        </div>
-      </div>
 
       <div className="p-5 md:p-8 space-y-6">
         {/* Input section: Drag & Drop + Textarea */}

@@ -8,7 +8,6 @@ import AltCtaBand from '@/components/alternatives/AltCtaBand'
 import JsonLd from '@/components/JsonLd'
 import { faqPageLd, breadcrumbLd, toolWebApplicationLd } from '@/lib/schema'
 import DkimGeneratorTool from '@/components/tools/DkimGenerator/DkimGeneratorTool'
-import { ShieldCheck } from 'lucide-react'
 
 const CANONICAL = '/dkim-generator'
 const TITLE = 'Free DKIM Generator: Create a DKIM Key and Record | Giggal.ai'
@@ -95,16 +94,12 @@ export default function DkimGeneratorPage() {
       <Navbar />
 
       {/* HERO */}
-      <section className="max-w-6xl mx-auto px-6 pt-28 md:pt-32 pb-8 text-center space-y-5">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-200/80 text-indigo-700 text-xs font-semibold">
-          <ShieldCheck className="w-3.5 h-3.5 text-indigo-600" />
-          <span>Free · key generated in your browser</span>
-        </div>
+      <section className="max-w-6xl mx-auto px-6 pt-28 md:pt-32 pb-8 text-center space-y-4">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.08] text-slate-900">
           DKIM Generator
         </h1>
         <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium">
-          Create a DKIM key pair and the exact TXT record to publish. The key is generated in your browser and never sent anywhere.
+          Create a DKIM key pair and the exact TXT record to publish.
         </p>
       </section>
 

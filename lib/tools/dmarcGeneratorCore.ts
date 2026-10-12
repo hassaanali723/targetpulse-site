@@ -3,6 +3,10 @@
  * Runs 100% in-browser with zero external dependencies.
  */
 
+// Shared with the other domain tools; re-exported so existing imports keep working.
+import { normalizeDomainInput } from './domainInput'
+export { normalizeDomainInput }
+
 export type DmarcPolicy = 'none' | 'quarantine' | 'reject'
 export type DmarcAlignment = 'r' | 's'
 export type DmarcFailureOption = '0' | '1' | 'd' | 's'
@@ -89,7 +93,7 @@ export function validateMailtoList(
         valid: false,
         normalized: '',
         domains: [],
-        error: `Invalid reporting address format: "${part}"`,
+        error: `"${part}" is not a valid email address, so it was left out of the record.`,
       }
     }
 
@@ -110,14 +114,21 @@ export function validateMailtoList(
  * Default tags (adkim=r, aspf=r, fo=0, t=n, psd=u) are omitted unless showDefaultTags is true.
  */
 export function generateDmarcRecord(config: DmarcTagConfig): DmarcGenerationResult {
-  const domain = config.domain.trim().toLowerCase().replace(/\.$/, '')
+  const domain = normalizeDomainInput(config.domain)
   const showDefaults = config.showDefaultTags ?? false
   const warnings: string[] = []
   const tags: string[] = ['v=DMARC1', `p=${config.policy}`]
 
   // Policy warnings
-  if (config.policy === 'reject' && !config.aggregateReports) {
-    warnings.push('Setting p=reject without an aggregate report (rua) risks dropping legitimate mail without your knowledge.')
+  if (config.policy === 'reject') {
+    if (!config.aggregateReports?.trim()) {
+      warnings.push('This record blocks failing email (p=reject) but has no report address. You won’t know if real email is being refused.')
+    }
+    warnings.push('Use p=reject only when all your email is DKIM-signed. Forwarded email often fails SPF, so SPF alone is not enough.')
+  }
+
+  if (config.dkimAlignment === 's' || config.spfAlignment === 's') {
+    warnings.push('Strict alignment needs an exact domain match. If a service signs or sends your email from a subdomain, such as mail.example.com, that email will fail.')
   }
 
   // Subdomain policy (sp)
@@ -169,13 +180,16 @@ export function generateDmarcRecord(config: DmarcTagConfig): DmarcGenerationResu
     tags.push('psd=u')
   }
 
-  // Aggregate reporting (rua)
+  // Aggregate reporting (rua). A bad address is left out and reported first,
+  // because it is the one warning the user can fix by retyping.
   const reportingDomains: string[] = []
   if (config.aggregateReports && config.aggregateReports.trim()) {
     const val = validateMailtoList(config.aggregateReports)
     if (val.valid && val.normalized) {
       tags.push(`rua=${val.normalized}`)
       reportingDomains.push(...val.domains)
+    } else if (val.error) {
+      warnings.unshift(val.error)
     }
   }
 
@@ -185,7 +199,9 @@ export function generateDmarcRecord(config: DmarcTagConfig): DmarcGenerationResu
     if (val.valid && val.normalized) {
       tags.push(`ruf=${val.normalized}`)
       reportingDomains.push(...val.domains)
-      warnings.push('Failure reports (ruf) contain message headers and may be restricted by privacy regulations or ignored by major mailbox providers.')
+      warnings.push('Many mail providers don’t send failure reports, for privacy reasons. Don’t rely on them.')
+    } else if (val.error) {
+      warnings.unshift(val.error)
     }
   }
 
@@ -204,7 +220,7 @@ export function generateDmarcRecord(config: DmarcTagConfig): DmarcGenerationResu
         host: `${domain}._report._dmarc.${repDom}.`,
         type: 'TXT',
         value: '"v=DMARC1"',
-        reason: `Because reports go to ${repDom}, RFC 7489 / RFC 9989 requires ${repDom} to publish this DNS record verifying they consent to receive your reports.`,
+        reason: `Reports go to ${repDom}, a different domain. ${repDom} must publish this record before mail providers send reports there.`,
       })
     }
   }
@@ -242,10 +258,28 @@ export function cleanDmarcRecord(rawInput: string, domainContext = ''): CleanedD
     }
   }
 
+  const pVal = parsedTags.p?.toLowerCase()
+  const validPolicy = pVal === 'none' || pVal === 'quarantine' || pVal === 'reject'
   const newConfig: DmarcTagConfig = {
     domain: domainContext || '',
-    policy: (parsedTags.p as DmarcPolicy) || 'none',
+    policy: validPolicy ? (pVal as DmarcPolicy) : 'none',
     showDefaultTags: false,
+  }
+
+  // 0. Basic shape: v=DMARC1 first, and a real policy
+  if (rawTags[0]?.replace(/\s/g, '').toLowerCase() !== 'v=dmarc1') {
+    changes.push({
+      tag: 'v',
+      action: 'normalized',
+      explanation: 'A DMARC record must start with v=DMARC1. Mail servers ignore it otherwise. The cleaned record starts with it.',
+    })
+  }
+  if (!validPolicy) {
+    changes.push({
+      tag: 'p',
+      action: 'normalized',
+      explanation: `The record had no valid policy${parsedTags.p ? ` ("p=${parsedTags.p}")` : ''}. It was set to p=none, which only monitors.`,
+    })
   }
 
   // 1. Check retired tags
@@ -254,13 +288,13 @@ export function cleanDmarcRecord(rawInput: string, domainContext = ''): CleanedD
     changes.push({
       tag: 'pct',
       action: 'removed',
-      explanation: `Tag "pct=${parsedTags.pct}" was retired in RFC 9989 (2026). Modern mailbox providers enforce policy strictly; partial rollout percentages created inconsistent delivery.`,
+      explanation: `pct=${parsedTags.pct} is no longer part of the DMARC standard (RFC 9989), so it was removed.`,
     })
     if (pctVal < 100) {
       changes.push({
         tag: 't',
         action: 'modernized',
-        explanation: 'Suggested: use "t=y" (RFC 9989 test mode) instead of partial pct if you want receivers to apply quarantine instead of reject, or to test policy rollout safely.',
+        explanation: 'Your record applied the policy to only part of your email. To soften the policy while you test, turn on test mode (t=y) in Advanced settings instead.',
       })
     }
   }
@@ -269,7 +303,7 @@ export function cleanDmarcRecord(rawInput: string, domainContext = ''): CleanedD
     changes.push({
       tag: 'rf',
       action: 'removed',
-      explanation: `Tag "rf=${parsedTags.rf}" was retired in RFC 9989. The report format is standardized to AFRF, making this tag obsolete.`,
+      explanation: `rf=${parsedTags.rf} is no longer part of the DMARC standard (RFC 9989), so it was removed.`,
     })
   }
 
@@ -277,7 +311,7 @@ export function cleanDmarcRecord(rawInput: string, domainContext = ''): CleanedD
     changes.push({
       tag: 'ri',
       action: 'removed',
-      explanation: `Tag "ri=${parsedTags.ri}" was retired in RFC 9989. Mailbox providers deliver aggregate reports on their standard daily cycle, ignoring custom intervals.`,
+      explanation: `ri=${parsedTags.ri} is no longer part of the DMARC standard (RFC 9989), so it was removed.`,
     })
   }
 
@@ -288,7 +322,7 @@ export function cleanDmarcRecord(rawInput: string, domainContext = ''): CleanedD
       changes.push({
         tag: 'sp',
         action: 'normalized',
-        explanation: `Tag "sp=${parsedTags.sp}" matched the main policy "p=${parsedTags.p}". RFC 9989 recommends omitting redundant tags to save DNS bandwidth.`,
+        explanation: `sp=${parsedTags.sp} matched your main policy, so it wasn’t needed.`,
       })
     } else {
       newConfig.subdomainPolicy = spVal
@@ -307,7 +341,7 @@ export function cleanDmarcRecord(rawInput: string, domainContext = ''): CleanedD
       changes.push({
         tag: 'adkim',
         action: 'normalized',
-        explanation: 'Omitted default "adkim=r" (relaxed DKIM alignment). Relaxed is the RFC standard default.',
+        explanation: 'adkim=r is already the default, so it wasn’t needed.',
       })
     } else {
       newConfig.dkimAlignment = adkim
@@ -320,7 +354,7 @@ export function cleanDmarcRecord(rawInput: string, domainContext = ''): CleanedD
       changes.push({
         tag: 'aspf',
         action: 'normalized',
-        explanation: 'Omitted default "aspf=r" (relaxed SPF alignment). Relaxed is the RFC standard default.',
+        explanation: 'aspf=r is already the default, so it wasn’t needed.',
       })
     } else {
       newConfig.spfAlignment = aspf
@@ -345,7 +379,7 @@ export function cleanDmarcRecord(rawInput: string, domainContext = ''): CleanedD
     changes.push({
       tag: 'fo',
       action: 'normalized',
-      explanation: 'Omitted default "fo=0" (generate failure report only if all underlying mechanisms fail).',
+      explanation: 'fo=0 is already the default, so it wasn’t needed.',
     })
   }
 

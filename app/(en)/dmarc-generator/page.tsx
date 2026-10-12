@@ -8,7 +8,6 @@ import AltCtaBand from '@/components/alternatives/AltCtaBand'
 import JsonLd from '@/components/JsonLd'
 import { faqPageLd, breadcrumbLd, toolWebApplicationLd } from '@/lib/schema'
 import DmarcGeneratorTool from '@/components/tools/DmarcGenerator/DmarcGeneratorTool'
-import { ShieldCheck } from 'lucide-react'
 
 const CANONICAL = '/dmarc-generator'
 const TITLE = 'Free DMARC Generator: Build a DMARC Record (2026) | Giggal.ai'
@@ -38,7 +37,7 @@ export const metadata: Metadata = {
 const faqs: FaqItem[] = [
   {
     q: 'What should my first DMARC record be?',
-    a: 'v=DMARC1; p=none; rua=mailto:dmarc-reports@yourdomain.com. It doesn’t change how your mail is handled, and it starts the reports. The Monitor preset builds it for you.',
+    a: 'v=DMARC1; p=none; rua=mailto:dmarc-reports@yourdomain.com. It doesn’t change how your mail is handled, and it starts the reports. Choose Monitor only in the tool to build it.',
   },
   {
     q: 'Is pct still supported?',
@@ -91,16 +90,13 @@ export default function DmarcGeneratorPage() {
       <Navbar />
 
       {/* HERO */}
-      <section className="max-w-6xl mx-auto px-6 pt-28 md:pt-32 pb-8 text-center space-y-5">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-200/80 text-indigo-700 text-xs font-semibold">
-          <ShieldCheck className="w-3.5 h-3.5 text-indigo-600" />
-          <span>Free · updated for RFC 9989</span>
-        </div>
+      <section className="max-w-6xl mx-auto px-6 pt-28 md:pt-32 pb-8 text-center space-y-4">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.08] text-slate-900">
           DMARC Record Generator
         </h1>
         <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium">
-          Build a valid DMARC record for the current standard, or paste your old one to clean it up.
+          A DMARC record tells mail providers what to do with email that fakes your domain. Answer three questions to
+          build yours.
         </p>
       </section>
 
@@ -114,10 +110,10 @@ export default function DmarcGeneratorPage() {
         <div className="space-y-4">
           <h2 className={sectionTitle}>How to publish your DMARC record</h2>
           <ol className="list-decimal pl-5 space-y-2 text-slate-600 text-sm md:text-base font-medium">
-            <li>Build the record above, or paste your current one into Import to clean it up.</li>
+            <li>Fill in the three steps above. If you already have a record, paste it under &ldquo;Already have a DMARC record?&rdquo; to clean it up.</li>
             <li>At your DNS host, create a TXT record with the host name _dmarc. Some providers want the full name, _dmarc.yourdomain.com.</li>
             <li>Paste the value and save. Make sure it&apos;s the only DMARC record on the domain; receivers that find two ignore both.</li>
-            <li>Wait for DNS to update, then watch your rua mailbox. Providers that send aggregate reports should send them at least once every 24 hours.</li>
+            <li>Wait for DNS to update, then watch your report inbox (the rua address). Providers that send aggregate reports should send them at least once every 24 hours.</li>
           </ol>
         </div>
 
@@ -136,7 +132,7 @@ export default function DmarcGeneratorPage() {
         <div className="space-y-4">
           <h2 className={sectionTitle}>What changed for DMARC records in 2026</h2>
           <p className={proseP}>
-            In May 2026, RFC 9989 replaced RFC 7489 and put DMARC on the Standards Track. Records still start with v=DMARC1, so existing records keep working. Three tags are retired: pct, rf and ri. Two are new: t, a test mode, and np, a policy for subdomains that don&apos;t exist. This DMARC record generator never writes the retired tags, and the import option strips them from older records. The full tag list is in{' '}
+            In May 2026, RFC 9989 replaced RFC 7489 and put DMARC on the Standards Track. Records still start with v=DMARC1, so existing records keep working. Three tags are retired: pct, rf and ri. Two are new: t, a test mode, and np, a policy for subdomains that don&apos;t exist. This DMARC record generator never writes the retired tags, and the check for existing records strips them out. The full tag list is in{' '}
             <Link href="/blog/what-is-a-dmarc-record" className="text-indigo-600 font-bold hover:underline">
               what is a DMARC record
             </Link>
@@ -174,7 +170,7 @@ export default function DmarcGeneratorPage() {
         <div className="space-y-4">
           <h2 className={sectionTitle}>Mistakes this DMARC generator prevents</h2>
           <p className={proseP}>
-            The generator always puts v=DMARC1 first, because receivers ignore a record that starts with anything else. It adds the mailto: prefix that rua and ruf addresses need, and flags addresses that look wrong. It never writes pct, and when you import an old record with pct below 100 it suggests t=y instead. It warns you when you choose reject, since that&apos;s only safe once all your mail is DKIM-signed, and when strict alignment would make mail from your subdomains fail.
+            The generator always puts v=DMARC1 first, because receivers ignore a record that starts with anything else. It adds the mailto: prefix that rua and ruf addresses need, and flags addresses that look wrong. It never writes pct, and when you check an old record with pct below 100, it suggests t=y instead. It warns you when you choose reject, since that&apos;s only safe once all your mail is DKIM-signed, and when strict alignment would make mail from your subdomains fail.
           </p>
           <p className={proseP}>
             The one thing it can&apos;t check is your DNS. Publish the result as the only DMARC record on the domain. For how DMARC works with SPF and DKIM, see{' '}

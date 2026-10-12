@@ -46,6 +46,8 @@ const CTA_HEADLINE: Record<string, string> = {
   'what-is-a-secure-email-gateway': 'Verify addresses behind email gateways',
   'what-does-risky-mean-in-email-verification': 'Turn Risky rows into real answers',
   'best-email-verification-tools': 'Resolve the catch-all and SEG rows others flag',
+  'cold-email-templates': 'Verify your list before the first send',
+  'email-address-examples': 'Check that an email address really exists',
 }
 
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {

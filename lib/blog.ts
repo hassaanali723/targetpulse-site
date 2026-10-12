@@ -9,7 +9,8 @@ import { GLOSSARY_TERMS } from '@/lib/i18n/glossary'
 //
 // The renderer supports exactly the subset these posts use: H2/H3, paragraphs,
 // links, bold (used only in table cells), one table, bullet lists,
-// ordered lists (<ol><li>), fenced code blocks (<pre class="blog-pre"><code>),
+// ordered lists (<ol><li>), fenced code blocks (<pre class="blog-pre"><code>;
+// a ```email fence adds blog-pre-wrap so templates wrap on small screens),
 // and figures (a standalone image line, with an optional caption line below it).
 // It is deliberately small rather than a full CommonMark implementation.
 
@@ -236,7 +237,9 @@ export function renderMarkdown(body: string, locale: BlogLocale): { html: string
     const lines = block.split('\n')
     if (lines[0].trim().startsWith('```')) {
       const codeLines = lines.slice(1, lines[lines.length - 1].trim().startsWith('```') ? -1 : undefined)
-      html.push(`<pre class="blog-pre"><code>${escapeHtml(codeLines.join('\n'))}</code></pre>`)
+      // ```email marks prose (email templates): it wraps instead of scrolling sideways.
+      const cls = lines[0].trim().slice(3).trim() === 'email' ? 'blog-pre blog-pre-wrap' : 'blog-pre'
+      html.push(`<pre class="${cls}"><code>${escapeHtml(codeLines.join('\n'))}</code></pre>`)
     } else if (block.startsWith('### ')) {
       const raw = block.slice(4).trim()
       html.push(`<h3 id="${uniqueId(raw)}">${inline(raw, locale)}</h3>`)

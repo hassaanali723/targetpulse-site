@@ -100,9 +100,6 @@ export default function EmailSignatureGeneratorPage() {
         <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium">
           Fill in your details, pick a layout and copy a signature that works in Gmail, Outlook and Apple Mail.
         </p>
-        <p className="text-xs text-slate-500 font-medium">
-          Runs in your browser. Your details aren&apos;t saved on our servers.
-        </p>
       </section>
 
       {/* THE TOOL */}

@@ -44,7 +44,7 @@ It is worth being straight about the limits. This is inference from observed beh
 
 You do not need a tool to check whether gateways are your problem. You need the MX records for the domains on your list.
 
-Take the domain part of every address, deduplicate it, and look up the MX records for each one. A domain behind Proofpoint points at hostnames containing pphosted or ppe-hosted. Mimecast domains point at mimecast.com hosts, usually with a region code. Barracuda shows up as barracudanetworks.com. Cisco appears as iphmx.com. Microsoft 365 and Google Workspace domains point at outlook.com and google.com hosts respectively, and those are not gateways, though they can still be configured as catch-alls.
+Take the domain part of every address, deduplicate it, and [look up the MX records](/mx-lookup) for each one. A domain behind Proofpoint points at hostnames containing pphosted or ppe-hosted. Mimecast domains point at mimecast.com hosts, usually with a region code. Barracuda shows up as barracudanetworks.com. Cisco appears as iphmx.com. Microsoft 365 and Google Workspace domains point at outlook.com and google.com hosts respectively, and those are not gateways, though they can still be configured as catch-alls.
 
 Cross-reference that list against the addresses your verifier gave up on. If the overlap is large, the gateway is the story and no amount of re-running the same tool will change the result.
 

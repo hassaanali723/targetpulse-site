@@ -97,9 +97,6 @@ export default function SpamWordCheckerPage() {
         <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium">
           Paste your subject line and email copy to see the words and habits that make filters and readers suspicious.
         </p>
-        <p className="text-xs text-slate-500 font-medium">
-          Runs in your browser. Your email copy isn&apos;t sent anywhere.
-        </p>
       </section>
 
       {/* THE TOOL */}

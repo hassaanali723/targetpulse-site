@@ -69,9 +69,12 @@ returns valid or invalid instead of a shrug.
 - [Bulk email verifier](${SITE}/bulk-email-verifier): verify a CSV or Excel list of up to 50,000 addresses, a result on every row, catch-all resolved
 - [Email checker](${SITE}/email-checker): one address at a time, catch-all resolved, no account
 - [Disposable email checker](${SITE}/disposable-email-checker): detect temporary, burner and throwaway inboxes, no account
+- [Free email providers](${SITE}/free-email-providers): list of free email providers and 417 free email domains with working MX records, a checker and CSV download
 - [Email extractor](${SITE}/email-extractor): extract and deduplicate emails from text, files and spreadsheets in the browser
 - [DKIM generator](${SITE}/dkim-generator): create 2048-bit RSA DKIM key pairs and formatted DNS TXT records
 - [DMARC generator](${SITE}/dmarc-generator): generate and clean RFC 9989 compliant DMARC records with testing and consent helpers
+- [MX lookup](${SITE}/mx-lookup): look up the MX records and mail servers for any domain, with priority, IP addresses and common problems flagged
+- [SPF checker](${SITE}/spf-checker): check and create SPF records, with each part explained, DNS lookups counted against the limit of 10, and errors flagged
 - [Email permutator](${SITE}/email-permutator): generate every likely work email format for a name and company domain in the browser
 - [BIMI generator](${SITE}/bimi-generator): build BIMI DNS records and check SVG logos against Tiny PS requirements in the browser
 - [Spam word checker](${SITE}/spam-word-checker): find spam trigger words, formatting issues and broken merge tags in email copy
