@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
+import Link from 'next/link'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import FaqAccordion, { type FaqItem } from '@/components/landing/FaqAccordion'
@@ -157,6 +158,13 @@ export default function EmailSignatureGeneratorPage() {
           </p>
           <p className={proseP}>
             Expect plain text on phones. The Gmail mobile app only supports plain-text signatures, so use the plain-text copy there.
+          </p>
+          <p className={proseP}>
+            The signature sits under your sign-off. For which sign-off to use, and the closing line above it, see{' '}
+            <Link href="/blog/how-to-end-an-email" className="text-indigo-600 font-bold hover:underline">
+              how to end an email
+            </Link>
+            .
           </p>
         </div>
       </section>

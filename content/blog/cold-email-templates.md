@@ -24,7 +24,7 @@ Most cold emails that get answers share the same cold email structure, with five
 2. **A first line about them**, not about you. A real reason you're writing to this person.
 3. **One or two lines on what you do**, tied to that reason.
 4. **One small ask.** A question they can answer in a few words.
-5. **A short sign-off.** This is how to end a cold email: your name, and a simple way to say no.
+5. **A short sign-off.** This is how to end a cold email: your name, and a simple way to say no. For other situations, see [how to end an email](/blog/how-to-end-an-email).
 
 The ask matters more than people think. Gong looked at 304,174 emails sent by its customers. For cold email, asking whether someone was interested worked better than asking for a meeting at a set time ([Gong Labs](https://www.gong.io/blog/this-surprising-cold-email-cta-will-help-you-book-a-lot-more-meetings)). A meeting is a big ask from a stranger. "Is this on your list this quarter?" is easy to answer.
 

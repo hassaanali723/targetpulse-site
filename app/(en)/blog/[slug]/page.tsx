@@ -48,6 +48,7 @@ const CTA_HEADLINE: Record<string, string> = {
   'best-email-verification-tools': 'Resolve the catch-all and SEG rows others flag',
   'cold-email-templates': 'Verify your list before the first send',
   'email-address-examples': 'Check that an email address really exists',
+  'how-to-end-an-email': 'Make sure your email reaches a real inbox',
 }
 
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {

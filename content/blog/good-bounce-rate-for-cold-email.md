@@ -47,7 +47,7 @@ It helps to separate two numbers people often blur together. A bounce is a messa
 
 ## How to find your own bounce rate
 
-Whatever you send with reports this number. In most sending and cold-outreach tools it appears on the campaign summary as a bounce percentage, calculated as bounced messages divided by messages sent. If your tool separates hard and soft bounces, look at the hard bounce figure first, because that is the one tied to list quality. If it only shows a combined number, treat a sudden jump as a reason to stop and look before your next send.
+Whatever you send with reports this number. In most sending and cold-outreach tools it appears on the campaign summary as a bounce percentage, calculated as bounced messages divided by messages sent. The [bounce rate calculator](/bounce-rate-calculator) does the sum for you and splits hard from soft bounces. If your tool separates hard and soft bounces, look at the hard bounce figure first, because that is the one tied to list quality. If it only shows a combined number, treat a sudden jump as a reason to stop and look before your next send.
 
 Check the first send of a new list separately from your running average. A fresh, unverified list shows its true bounce rate on that first campaign, before the dead addresses have been pulled out, and that is the number that tells you whether the list was any good. Your ongoing average across warmed, cleaned lists always looks better and can hide a bad import until it does damage.
 

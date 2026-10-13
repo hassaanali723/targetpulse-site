@@ -15,7 +15,7 @@ So this is ordered by how much each step is actually worth, not by how satisfyin
 
 ## What is email bounce rate?
 
-Email bounce rate is the share of messages in a send that were returned undelivered: bounced messages divided by messages sent, as a percentage. Send 10,000, get 250 back, and the bounce rate is 2.5 percent. Most tools report it per campaign and split it into hard bounces (the address or domain does not exist) and soft bounces (full mailbox, busy server, temporary block). Mailbox providers watch the hard-bounce share most closely, because it is the clearest sign of a list that was never verified.
+Email bounce rate is the share of messages in a send that were returned undelivered: bounced messages divided by messages sent, as a percentage. Send 10,000, get 250 back, and the bounce rate is 2.5 percent. The [bounce rate calculator](/bounce-rate-calculator) works it out from your own numbers. Most tools report it per campaign and split it into hard bounces (the address or domain does not exist) and soft bounces (full mailbox, busy server, temporary block). Mailbox providers watch the hard-bounce share most closely, because it is the clearest sign of a list that was never verified.
 
 ## Bounce rate benchmarks
 

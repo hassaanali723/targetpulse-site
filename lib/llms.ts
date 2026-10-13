@@ -75,6 +75,8 @@ returns valid or invalid instead of a shrug.
 - [DMARC generator](${SITE}/dmarc-generator): generate and clean RFC 9989 compliant DMARC records with testing and consent helpers
 - [MX lookup](${SITE}/mx-lookup): look up the MX records and mail servers for any domain, with priority, IP addresses and common problems flagged
 - [SPF checker](${SITE}/spf-checker): check and create SPF records, with each part explained, DNS lookups counted against the limit of 10, and errors flagged
+- [Gmail plus addressing](${SITE}/gmail-plus-addressing): create plus addresses, see which providers support them, and find plus and dot duplicates in an email list
+- [Bounce rate calculator](${SITE}/bounce-rate-calculator): email bounce rate with hard and soft rates and provider limits, plus website bounce rate from GA4 sessions
 - [Email permutator](${SITE}/email-permutator): generate every likely work email format for a name and company domain in the browser
 - [BIMI generator](${SITE}/bimi-generator): build BIMI DNS records and check SVG logos against Tiny PS requirements in the browser
 - [Spam word checker](${SITE}/spam-word-checker): find spam trigger words, formatting issues and broken merge tags in email copy

@@ -31,6 +31,8 @@ const freeToolsLinks = [
   { name: 'DMARC generator', href: '/dmarc-generator' },
   { name: 'MX lookup', href: '/mx-lookup' },
   { name: 'SPF checker', href: '/spf-checker' },
+  { name: 'Gmail plus addressing', href: '/gmail-plus-addressing' },
+  { name: 'Bounce rate calculator', href: '/bounce-rate-calculator' },
   { name: 'Email permutator', href: '/email-permutator' },
   { name: 'BIMI generator', href: '/bimi-generator' },
   { name: 'Spam word checker', href: '/spam-word-checker' },

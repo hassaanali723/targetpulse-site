@@ -58,6 +58,8 @@ export const footer = {
       { name: 'Generatore DMARC (in inglese)', href: '/dmarc-generator' },
       { name: 'Ricerca record MX (in inglese)', href: '/mx-lookup' },
       { name: 'Verifica record SPF (in inglese)', href: '/spf-checker' },
+      { name: 'Indirizzi Gmail con + (in inglese)', href: '/gmail-plus-addressing' },
+      { name: 'Calcolatore del bounce rate (in inglese)', href: '/bounce-rate-calculator' },
       { name: 'Permutatore email (in inglese)', href: '/email-permutator' },
       { name: 'Generatore BIMI (in inglese)', href: '/bimi-generator' },
       { name: 'Controllo parole spam (in inglese)', href: '/spam-word-checker' },
