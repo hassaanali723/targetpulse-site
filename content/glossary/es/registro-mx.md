@@ -69,7 +69,7 @@ Hay tres casos posibles:
 
 ## Por qué importa para los remitentes
 
-Cualquiera puede leer el registro MX de un dominio con una consulta DNS. Es información pública.
+Cualquiera puede leer el registro MX de un dominio con una consulta DNS. Es información pública. Nuestra herramienta gratuita de [consulta de registros MX](/mx-lookup) (en inglés) muestra los registros MX de cualquier dominio.
 
 Cuando una empresa cambia de proveedor de correo o cierra, su registro MX cambia o desaparece. Las direcciones de esa empresa dejan de funcionar. Nadie te avisa.
 

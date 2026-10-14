@@ -64,7 +64,7 @@ There are three possible results of the MX record lookup:
 
 ## Why it matters for senders
 
-Anyone can read the MX record of a domain with a DNS lookup. When a company changes email providers or shuts down, its MX records change or disappear. The addresses stop working. Nobody tells you. This is a common cause of [hard bounces](/glossary/hard-bounce) on old lists. A hard bounce is an email that is refused for good.
+Anyone can read the MX record of a domain with a DNS lookup. Our free [MX lookup](/mx-lookup) tool shows the MX records of any domain. When a company changes email providers or shuts down, its MX records change or disappear. The addresses stop working. Nobody tells you. This is a common cause of [hard bounces](/glossary/hard-bounce) on old lists. A hard bounce is an email that is refused for good.
 
 **Example:** you met 40 people from old-firm.example at a trade show in 2021. The firm closes in 2024, and its domain no longer has an MX record. Every email you send to those 40 contacts now bounces.
 

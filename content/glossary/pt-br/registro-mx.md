@@ -73,7 +73,7 @@ Em domínios com gateway, a verificação da caixa de entrada se comporta de out
 
 ## Por que isso importa para remetentes
 
-Qualquer pessoa pode ler o registro MX de um domínio com uma consulta DNS. Quando uma empresa troca de provedor de e-mail ou fecha, os seus registros MX mudam ou desaparecem. Os endereços param de funcionar. Ninguém avisa você.
+Qualquer pessoa pode ler o registro MX de um domínio com uma consulta DNS. A nossa ferramenta gratuita de [consulta de registro MX](/mx-lookup) (em inglês) mostra os registros MX de qualquer domínio. Quando uma empresa troca de provedor de e-mail ou fecha, os seus registros MX mudam ou desaparecem. Os endereços param de funcionar. Ninguém avisa você.
 
 **Exemplo:** uma empresa fecha. O domínio dela expira e o registro MX some. Você ainda tem 40 contatos dessa empresa na lista. No próximo envio, os 40 e-mails voltam como hard bounce. Esta é uma causa comum de hard bounces em listas antigas.
 

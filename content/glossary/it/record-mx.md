@@ -64,7 +64,7 @@ Il record MX è il primo controllo vero nella verifica di un indirizzo email. Pr
 
 ## Perché conta per chi invia
 
-Chiunque può leggere il record MX di un dominio con una ricerca DNS. Le aziende però cambiano. Quando un'azienda cambia provider di posta o chiude, i suoi record MX cambiano o spariscono.
+Chiunque può leggere il record MX di un dominio con una ricerca DNS. Il nostro strumento gratuito di [ricerca record MX](/mx-lookup) (in inglese) mostra i record MX di qualsiasi dominio. Le aziende però cambiano. Quando un'azienda cambia provider di posta o chiude, i suoi record MX cambiano o spariscono.
 
 **Esempio:** una piccola ditta chiude nel 2024. Nessuno rinnova il dominio. Il record MX sparisce. Tutti gli indirizzi dei dipendenti smettono di funzionare. Nessuno ti avvisa.
 

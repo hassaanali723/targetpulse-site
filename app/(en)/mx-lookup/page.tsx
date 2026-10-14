@@ -215,7 +215,11 @@ export default function MxLookupPage() {
         <div className="space-y-4">
           <h2 className={sectionTitle}>What an MX record is</h2>
           <p className={proseP}>
-            An MX record (mail exchanger record) is the DNS entry that tells other mail servers where to deliver email for a domain. When someone writes to anna@example.com, their mail server looks up the MX records for example.com and connects to the server named there. Reading those records is what an MX lookup, or mail server lookup, does.
+            An MX record (mail exchanger record) is the DNS entry that tells other mail servers where to deliver email for a domain. When someone writes to anna@example.com, their mail server looks up the MX records for example.com and connects to the server named there. Reading those records is what an MX lookup, or mail server lookup, does. For a plain explanation with a step-by-step example, see the{' '}
+            <Link href="/glossary/mx-record" className="text-indigo-600 font-bold hover:underline">
+              MX record
+            </Link>{' '}
+            entry in our glossary.
           </p>
           <p className={proseP}>
             Each record has two parts: a priority number and the name of a mail server. Google Workspace&apos;s setup guide asks for a single record like this one:

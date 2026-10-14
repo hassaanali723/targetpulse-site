@@ -67,7 +67,7 @@ L'enregistrement MX est le premier vrai contrôle de la vérification d'e-mail. 
 
 ## Pourquoi cela compte pour les expéditeurs
 
-N'importe qui peut lire l'enregistrement MX d'un domaine avec une requête DNS. Une requête DNS est une simple question posée à l'annuaire. Quand une entreprise change de fournisseur de messagerie ou ferme, son enregistrement MX change ou disparaît. Les adresses cessent de fonctionner. Personne ne vous prévient.
+N'importe qui peut lire l'enregistrement MX d'un domaine avec une requête DNS. Une requête DNS est une simple question posée à l'annuaire. Notre outil gratuit de [recherche d'enregistrement MX](/mx-lookup) (en anglais) affiche les enregistrements MX de n'importe quel domaine. Quand une entreprise change de fournisseur de messagerie ou ferme, son enregistrement MX change ou disparaît. Les adresses cessent de fonctionner. Personne ne vous prévient.
 
 **Exemple :** une petite agence ferme en 2023. Son domaine expire et son enregistrement MX disparaît. Vos cinq contacts dans cette agence sont toujours dans votre liste. À l'envoi suivant, les cinq e-mails rebondissent.
 
