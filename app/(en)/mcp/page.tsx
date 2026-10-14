@@ -51,7 +51,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'How does it handle catch-all addresses?',
-    a: 'The same way the rest of Giggal.ai does. Around 30% of a B2B list sits on catch-all or accept-all domains that accept mail for every possible address, and most verifiers return those labelled risky or unknown. Giggal.ai resolves them to valid or invalid, along with mailboxes behind 15 named secure email gateways such as Proofpoint, Mimecast and Barracuda, so what comes back to the agent is an answer rather than a shrug.',
+    a: 'The same way the rest of Giggal.ai does. Around 30% of a B2B list sits on catch-all or accept-all domains that accept mail for every possible address, and most verifiers return those labelled risky. Giggal.ai resolves them to valid or invalid, along with mailboxes behind 15 named secure email gateways such as Proofpoint, Mimecast and Barracuda, so what comes back to the agent is an answer rather than a shrug.',
   },
   {
     q: 'Where do I find my API key?',
@@ -214,7 +214,7 @@ export default function McpPage() {
           <p>
             Around 30% of a B2B list sits on catch-all or accept-all domains, which accept mail for
             every possible address whether or not a mailbox was ever created. Most verifiers hand
-            those back labelled risky, unknown or accept-all, meaning they could not tell.
+            those back labelled risky or accept-all, meaning they could not tell.
           </p>
           <p>
             That label is awkward in a dashboard. It is worse in a conversation, because the agent
