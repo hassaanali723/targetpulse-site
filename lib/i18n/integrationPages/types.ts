@@ -204,6 +204,8 @@ export interface McpContent {
   h1Accent: string
   intro: Rich
   urlLabel: string
+  /** Button that opens the Giggal.ai listing in Claude's connector directory. */
+  directoryLabel: string
   points: string[]
   /** Heading and line above the per-client setup panel. */
   setupTitle: string

@@ -570,6 +570,7 @@ export const DE: IntegrationPagesContent = {
     intro:
       'Giggal.ai betreibt einen Remote-MCP-Server. Verbinden Sie ihn mit Claude, ChatGPT, Cursor oder VS Code, und Ihr KI-Assistent arbeitet als [E-Mail-Checker](/de/email-adresse-pruefen). Bitten Sie ihn, eine Adresse oder eine Liste zu prüfen. Er antwortet direkt im Chat.',
     urlLabel: 'MCP-URL',
+    directoryLabel: 'Giggal.ai zu Claude hinzufügen',
     points: [
       'Claude und ChatGPT melden sich per OAuth an',
       'Code-Editoren nutzen Ihren API-Schlüssel',

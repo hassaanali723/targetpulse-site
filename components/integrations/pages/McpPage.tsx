@@ -8,6 +8,8 @@ import type { CommonStrings, McpContent } from '@/lib/i18n/integrationPages/type
 import { BreadcrumbLd, FaqSection, Rich, Shell } from './parts'
 
 const MCP_URL = 'https://mcp.giggal.ai/mcp'
+// Giggal.ai's listing in Claude's connector directory (published 2026-10-16).
+const DIRECTORY_URL = 'https://claude.ai/directory/connectors/giggal-ai'
 
 const TOOL_STYLE = [
   { Icon: MailCheck, wrap: 'bg-indigo-600 shadow-indigo-600/10' },
@@ -41,7 +43,16 @@ export default function McpPage({ common, c, path }: { common: CommonStrings; c:
         <p className="text-base md:text-lg text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed">
           <Rich text={c.intro} />
         </p>
-        <div className="flex justify-center pt-2">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+          <a
+            href={DIRECTORY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl bg-slate-900 text-white font-black text-[14px] hover:bg-slate-800 transition-colors"
+          >
+            {c.directoryLabel}
+            <ArrowRight className="w-4 h-4" />
+          </a>
           <div className="inline-flex items-center gap-3 bg-white border-2 border-slate-200 rounded-2xl px-5 py-3 card-vivid-shadow">
             <span className="text-[10px] font-black uppercase tracking-wider text-slate-400 shrink-0">{c.urlLabel}</span>
             <code className="font-mono text-xs sm:text-sm font-bold text-slate-800 break-all">{MCP_URL}</code>

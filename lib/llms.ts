@@ -190,6 +190,8 @@ dashboard. Three tools are exposed:
 Claude and ChatGPT connect with OAuth (you sign in to Giggal.ai). Code
 editors such as Claude Code, Cursor and VS Code use the same API key as the REST
 API, found in the Developer API tab of the app. Setup instructions: ${SITE}/mcp
+Giggal.ai is listed in Claude's connector directory, where Claude users can add it
+in one click: https://claude.ai/directory/connectors/giggal-ai
 
 ## API
 REST API documented at ${SITE}/public/docs. Bulk upload accepts CSV and TXT.
