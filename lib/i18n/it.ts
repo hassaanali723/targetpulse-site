@@ -31,7 +31,7 @@ export const footer = {
     links: [
       { name: 'Verifica catch-all', href: '/it/verifica-catch-all' },
       { name: 'Verifica dietro SEG', href: '/it/verifica-seg' },
-      { name: 'Server MCP (in inglese)', href: '/mcp' },
+      { name: 'Server MCP', href: '/it/mcp' },
     ],
   },
   resources: {
@@ -43,7 +43,7 @@ export const footer = {
       { name: 'Alternativa a ZeroBounce', href: '/it/alternativa-a-zerobounce' },
       { name: 'Alternativa a NeverBounce', href: '/it/alternativa-a-neverbounce' },
       { name: 'Alternativa a Snov.io', href: '/it/alternativa-a-snovio' },
-      { name: 'Documentazione API (in inglese)', href: '/public/docs' },
+      { name: 'Documentazione API', href: '/it/documentazione-api' },
     ],
   },
   freeTools: {

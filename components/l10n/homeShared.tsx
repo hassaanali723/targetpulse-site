@@ -148,7 +148,7 @@ export const MCP: Record<L10nLocale, McpStrings> = {
     restart: 'Riavvia il client dopo aver aggiunto il server, poi chiedi:',
     askBefore: '“',
     askAfter: ' è consegnabile?”',
-    guide: 'Guida completa (in inglese)',
+    guide: 'Guida completa',
     tools: {
       claude: {
         subtitle: 'Aggiungi Giggal.ai come connettore personalizzato in Claude. Nessun file di configurazione, nessuna chiave API da incollare.',
@@ -192,7 +192,7 @@ export const MCP: Record<L10nLocale, McpStrings> = {
     restart: 'Starten Sie den Client nach dem Hinzufügen neu und fragen Sie dann:',
     askBefore: '„Ist ',
     askAfter: ' zustellbar?“',
-    guide: 'Vollständige Anleitung (auf Englisch)',
+    guide: 'Vollständige Anleitung',
     tools: {
       claude: {
         subtitle: 'Fügen Sie Giggal.ai in Claude als benutzerdefinierten Connector hinzu. Keine Konfigurationsdateien, kein API-Schlüssel nötig.',
@@ -236,7 +236,7 @@ export const MCP: Record<L10nLocale, McpStrings> = {
     restart: 'Reinicia el cliente después de añadirlo y pregunta:',
     askBefore: '“¿',
     askAfter: ' es entregable?”',
-    guide: 'Guía completa (en inglés)',
+    guide: 'Guía completa',
     tools: {
       claude: {
         subtitle: 'Añade Giggal.ai como conector personalizado en Claude. Sin archivos de configuración ni clave de API que pegar.',
@@ -280,7 +280,7 @@ export const MCP: Record<L10nLocale, McpStrings> = {
     restart: 'Reinicie o cliente depois de adicionar o servidor e pergunte:',
     askBefore: '“O e-mail ',
     askAfter: ' é entregável?”',
-    guide: 'Guia completo (em inglês)',
+    guide: 'Guia completo',
     tools: {
       claude: {
         subtitle: 'Adicione a Giggal.ai como conector personalizado no Claude. Sem arquivos de configuração, sem chave de API para colar.',
@@ -324,7 +324,7 @@ export const MCP: Record<L10nLocale, McpStrings> = {
     restart: 'Redémarrez le client après l’ajout, puis demandez :',
     askBefore: '« ',
     askAfter: ' est-elle délivrable ? »',
-    guide: 'Guide complet (en anglais)',
+    guide: 'Guide complet',
     tools: {
       claude: {
         subtitle: 'Ajoutez Giggal.ai comme connecteur personnalisé dans Claude. Aucun fichier de configuration, aucune clé API à coller.',

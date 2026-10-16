@@ -373,9 +373,12 @@ interface McpSectionProps {
   divider?: boolean
   /** Localized text; English when left out. */
   strings?: McpStrings
+  /** Heading and line override (the /mcp pages use their own). */
+  title?: string
+  subtitle?: string
 }
 
-export default function McpSection({ showImages = false, detailsHref, divider = true, strings = MCP_STRINGS_EN }: McpSectionProps) {
+export default function McpSection({ showImages = false, detailsHref, divider = true, strings = MCP_STRINGS_EN, title, subtitle }: McpSectionProps) {
   const s = strings
   const tools = React.useMemo(() => localizeTools(s), [s])
   const [selected, setSelected] = useState('claude')
@@ -417,8 +420,8 @@ export default function McpSection({ showImages = false, detailsHref, divider = 
     <section id="mcp" className={`cv-section max-w-6xl mx-auto px-6 py-20 md:py-24 ${divider ? 'border-t border-slate-200' : ''}`}>
       {/* Header */}
       <div className="text-center max-w-2xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">{s.title}</h2>
-        <p className="mt-4 text-base md:text-lg text-slate-600">{s.subtitle}</p>
+        <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">{title ?? s.title}</h2>
+        <p className="mt-4 text-base md:text-lg text-slate-600">{subtitle ?? s.subtitle}</p>
       </div>
 
       {/* One dark app-style window: tool list on the left, setup on the right */}

@@ -187,16 +187,19 @@ dashboard. Three tools are exposed:
 - get_verification_details: pull the full per-address breakdown for a job
 - get_credit_balance: check remaining credits before a large run
 
-It authenticates with the same API key as the REST API. The key lives in the
-Developer API tab of the app, not in Settings. Setup instructions: ${SITE}/mcp
+Claude and ChatGPT connect with OAuth (you sign in to Giggal.ai). Code
+editors such as Claude Code, Cursor and VS Code use the same API key as the REST
+API, found in the Developer API tab of the app. Setup instructions: ${SITE}/mcp
 
 ## API
 REST API documented at ${SITE}/public/docs. Bulk upload accepts CSV and TXT.
 Results export as CSV, Excel or JSON.
 
 ## Integrations
-Zapier (${SITE}/integrations/zapier) and n8n (${SITE}/integrations/n8n) are the
-two native ones. The n8n path uses the n8n-nodes-giggal community node and works
+HubSpot (${SITE}/integrations/hubspot) is a direct integration: verify contacts
+and lists in the CRM and read the result from five Giggal contact properties.
+Zapier (${SITE}/integrations/zapier) and n8n (${SITE}/integrations/n8n) cover
+automation. The n8n path uses the n8n-nodes-giggal community node and works
 on n8n Cloud. Through Zapier, Giggal connects to ${ZAPIER_APPS.length} apps including HubSpot,
 Klaviyo, Mailchimp, Brevo, Google Sheets, Intercom, Keap and Customer.io. Full
 list: ${SITE}/integrations

@@ -134,7 +134,7 @@ export const copy: BulkVerifierCopy = {
         text: 'Verifique contatos novos automaticamente com Zapier ou n8n.',
       },
       {
-        title: 'Servidor MCP (em inglês)',
+        title: 'Servidor MCP',
         text: 'Verifique e-mails no Claude, no ChatGPT, no Cursor e no VS Code.',
       },
     ],

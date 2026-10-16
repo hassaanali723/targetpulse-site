@@ -64,7 +64,7 @@ export function coreEntries(): SitemapEntry[] {
     { path: '/email-list-cleaning', lastModified: '2026-10-01' },
     { path: '/email-verification-api', lastModified: '2026-10-01' },
     { path: '/email-validation-api', lastModified: '2026-10-01' },
-    { path: '/mcp', lastModified: '2026-09-13' },
+    { path: '/mcp', lastModified: '2026-10-16' },
     // API reference. Kept in the sitemap — the URL set is unchanged from the
     // previous single sitemap, only regrouped.
     { path: '/public/docs', lastModified: '2026-09-13' },
@@ -141,9 +141,10 @@ export function compareEntries(): SitemapEntry[] {
 // ── integrations ────────────────────────────────────────────────────────
 export function integrationsEntries(): SitemapEntry[] {
   return [
-    { path: '/integrations', lastModified: '2026-08-12' },
-    { path: '/integrations/zapier', lastModified: '2026-08-14' },
-    { path: '/integrations/n8n', lastModified: '2026-08-16' },
+    { path: '/integrations', lastModified: '2026-10-16' },
+    { path: '/integrations/zapier', lastModified: '2026-10-16' },
+    { path: '/integrations/n8n', lastModified: '2026-10-16' },
+    { path: '/integrations/hubspot', lastModified: '2026-10-16' },
     ...ZAPIER_APPS.filter((a) => !pastSitemapGrace() || isZapierIndexed(a.slug)).map((a) => ({
       path: `/integrations/zapier/${a.slug}`,
       lastModified: '2026-08-14',

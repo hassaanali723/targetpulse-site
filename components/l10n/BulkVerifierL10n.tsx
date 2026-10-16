@@ -167,7 +167,7 @@ export default function BulkVerifierL10n({
   const software = [
     { Icon: Code2, href: '/email-verification-api' },
     { Icon: Workflow, href: CLUSTERS.integrations[locale] },
-    { Icon: Bot, href: '/mcp' },
+    { Icon: Bot, href: CLUSTERS.mcp[locale] },
   ]
 
   return (

@@ -145,7 +145,7 @@ export default async function HomeL10n({ locale, content: c }: { locale: L10nLoc
   const featureHref = [
     'SIGNUP',
     CLUSTERS.catchall[locale],
-    '/public/docs',
+    CLUSTERS.apiDocs[locale],
     integrationsHref,
     `#${c.pricing.id}`,
     CLUSTERS.contact[locale],
@@ -569,7 +569,7 @@ export default async function HomeL10n({ locale, content: c }: { locale: L10nLoc
       </section>
 
       {/* MCP: the setup guide itself is in English on /mcp */}
-      <McpSection detailsHref="/mcp" divider={false} strings={c.mcp} />
+      <McpSection detailsHref={CLUSTERS.mcp[locale]} divider={false} strings={c.mcp} />
 
       <SectionRule />
 

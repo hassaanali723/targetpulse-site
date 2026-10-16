@@ -47,6 +47,13 @@ export const CLUSTERS = {
   catchall: { en: '/catch-all-verification', it: '/it/verifica-catch-all', de: '/de/catch-all-verifizierung', es: '/es/verificacion-catch-all', 'pt-br': '/pt-br/verificacao-catch-all', fr: '/fr/verification-catch-all' },
   seg: { en: '/seg-email-verification', it: '/it/verifica-seg' },
   integrations: { en: '/integrations', it: '/it/integrazioni', de: '/de/integrationen', es: '/es/integraciones', 'pt-br': '/pt-br/integracoes', fr: '/fr/integrations' },
+  // Integration spokes nest under each language's hub path; the 73 per-app
+  // Zapier guides stay English only.
+  integZapier: { en: '/integrations/zapier', it: '/it/integrazioni/zapier', de: '/de/integrationen/zapier', es: '/es/integraciones/zapier', 'pt-br': '/pt-br/integracoes/zapier', fr: '/fr/integrations/zapier' },
+  integN8n: { en: '/integrations/n8n', it: '/it/integrazioni/n8n', de: '/de/integrationen/n8n', es: '/es/integraciones/n8n', 'pt-br': '/pt-br/integracoes/n8n', fr: '/fr/integrations/n8n' },
+  integHubspot: { en: '/integrations/hubspot', it: '/it/integrazioni/hubspot', de: '/de/integrationen/hubspot', es: '/es/integraciones/hubspot', 'pt-br': '/pt-br/integracoes/hubspot', fr: '/fr/integrations/hubspot' },
+  mcp: { en: '/mcp', it: '/it/mcp', de: '/de/mcp', es: '/es/mcp', 'pt-br': '/pt-br/mcp', fr: '/fr/mcp' },
+  apiDocs: { en: '/public/docs', it: '/it/documentazione-api', de: '/de/api-dokumentation', es: '/es/documentacion-api', 'pt-br': '/pt-br/documentacao-api', fr: '/fr/documentation-api' },
   contact: { en: '/contact-us', it: '/it/contatti', de: '/de/kontakt', es: '/es/contacto', 'pt-br': '/pt-br/contato', fr: '/fr/contact' },
   signup: { en: '/sign-up', it: '/it/registrati', de: '/de/registrieren', es: '/es/registro', 'pt-br': '/pt-br/cadastro', fr: '/fr/inscription' },
   blog: { en: '/blog', it: '/it/blog', de: '/de/blog', es: '/es/blog', 'pt-br': '/pt-br/blog', fr: '/fr/blog' },

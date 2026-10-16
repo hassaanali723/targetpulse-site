@@ -14,19 +14,16 @@ import { isZapierIndexed } from '@/lib/indexPolicy'
 // Derived from ZAPIER_APPS, the same source behind the routes and the sitemap,
 // so a new app appears here with no edit to this file.
 
-export default function ZapierAppList() {
+export default function ZapierAppList({ title, intro }: { title: string; /** {count} is replaced. */ intro: string }) {
   const apps = [...ZAPIER_APPS].sort((a, b) => a.name.localeCompare(b.name))
 
   return (
     <section className="max-w-6xl mx-auto px-6 pb-20">
       <div className="border-t border-slate-200 pt-10 space-y-5">
         <div className="space-y-2">
-          <h2 className="text-lg font-black text-slate-900 tracking-tight">
-            Every Zapier app we support
-          </h2>
+          <h2 className="text-lg font-black text-slate-900 tracking-tight">{title}</h2>
           <p className="text-[13px] text-slate-500 font-medium max-w-2xl">
-            {apps.length} apps connect to Giggal.ai through Zapier. Each has its own setup
-            guide.
+            {intro.replace('{count}', String(apps.length))}
           </p>
         </div>
 

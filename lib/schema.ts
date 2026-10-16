@@ -130,15 +130,24 @@ export function softwareApplicationLd(): Record<string, unknown> {
 // TechArticle for the API reference. Answer engines treat developer docs as a
 // strong signal that a product is real and callable, but only if the page
 // declares itself as documentation rather than another marketing page.
-export function apiDocsLd(): Record<string, unknown> {
-  const url = `${SITE}/public/docs`
+// Defaults are the English page. Translated docs pass their own headline,
+// description, path (e.g. /it/documentazione-api) and inLanguage.
+export function apiDocsLd(opts: {
+  headline?: string
+  description?: string
+  path?: string
+  inLanguage?: string
+} = {}): Record<string, unknown> {
+  const url = `${SITE}${opts.path ?? '/public/docs'}`
   return {
     '@context': 'https://schema.org',
     '@type': 'TechArticle',
     '@id': `${url}#techarticle`,
-    headline: 'Giggal.ai API Reference',
+    headline: opts.headline ?? 'Giggal.ai API Reference',
     description:
+      opts.description ??
       'REST API for verifying single emails, running bulk batches, and deep-checking catch-all and SEG-protected addresses. JSON endpoints, API key auth, billed per successful verification.',
+    ...(opts.inLanguage ? { inLanguage: opts.inLanguage } : {}),
     url,
     proficiencyLevel: 'Beginner',
     about: { '@id': `${SITE}/#software` },

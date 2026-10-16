@@ -1,10 +1,11 @@
 import type { Metadata } from 'next'
+import { hreflangAlternates } from '@/lib/i18n/clusters'
 
 export const metadata: Metadata = {
   title: { absolute: 'Email Verification API Reference (REST, JSON) | Giggal.ai' },
   description:
     'Email verification API reference: REST endpoints for single and bulk verification, catch-all resolution, credits and results, with JSON examples. API key auth.',
-  alternates: { canonical: '/public/docs' },
+  alternates: { canonical: '/public/docs', languages: hreflangAlternates('apiDocs') },
   openGraph: {
     siteName: 'Giggal.ai',
     images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai email verification' }],

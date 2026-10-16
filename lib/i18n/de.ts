@@ -28,7 +28,7 @@ export const footer = {
     heading: 'Lösungen',
     links: [
       { name: 'Catch-all-Verifizierung', href: '/de/catch-all-verifizierung' },
-      { name: 'MCP-Server (Englisch)', href: '/mcp' },
+      { name: 'MCP-Server', href: '/de/mcp' },
     ],
   },
   resources: {
@@ -43,7 +43,7 @@ export const footer = {
       { name: 'Hunter Alternative', href: '/de/hunter-alternative' },
       { name: 'Snov.io Alternative', href: '/de/snovio-alternative' },
       { name: 'Instantly Alternative', href: '/de/instantly-alternative' },
-      { name: 'API-Dokumentation (Englisch)', href: '/public/docs' },
+      { name: 'API-Dokumentation', href: '/de/api-dokumentation' },
     ],
   },
   freeTools: {
