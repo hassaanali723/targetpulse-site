@@ -55,6 +55,10 @@ const jsonLd = {
         'https://sourceforge.net/software/product/Giggal.ai/',
         'https://www.producthunt.com/products/giggal-ai',
         'https://www.linkedin.com/company/giggal-ai/',
+        'https://www.capterra.com/p/10053924/Giggal-ai/',
+        'https://claude.ai/directory/connectors/giggal-ai',
+        'https://zapier.com/apps/giggalai/integrations',
+        'https://github.com/giggal-ai/giggal-mcp',
       ],
     },
     {
