@@ -309,10 +309,10 @@ export const INTEGRATIONS: Integration[] = [
     icon: '/integrations/giggal-catch-all-email-verification-hubspot.png',
     name: 'HubSpot',
     description:
-      'Verify new HubSpot contacts on creation so invalid and risky emails never reach your CRM.',
+      'Verify the contacts and lists already in your CRM, then filter on the result without leaving HubSpot.',
     category: 'CRM',
-    connection: 'zapier',
-    href: '/integrations/zapier/hubspot',
+    connection: 'direct',
+    href: '/integrations/hubspot',
     iconSlug: 'hubspot',
     brandColor: '#FF7A59',
   },
