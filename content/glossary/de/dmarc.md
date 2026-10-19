@@ -79,7 +79,7 @@ Die Sammelberichte sind Dateien im XML-Format. Ein Bericht deckt meist einen Tag
 4. Stellen Sie auf `p=quarantine` um und lesen Sie die Berichte weiter.
 5. Stellen Sie zum Schluss auf `p=reject` um.
 
-Unser [DMARC-Generator](/dmarc-generator) (auf Englisch) baut den Eintrag für Sie. Alle weiteren Tags und die Berichte erklärt der Leitfaden [What is a DMARC record?](/blog/what-is-a-dmarc-record) (auf Englisch).
+Unser [DMARC-Generator](/dmarc-generator) (auf Englisch) baut den Eintrag für Sie. Alle weiteren Tags und die Berichte erklärt der Leitfaden [Was ist ein DMARC-Eintrag?](/blog/what-is-a-dmarc-record).
 
 ## Wer DMARC verlangt
 

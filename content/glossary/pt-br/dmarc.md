@@ -69,7 +69,7 @@ v=DMARC1; p=none; rua=mailto:relatorios@example.com
 - `p=none` diz para não mudar nada na entrega por enquanto.
 - `rua=mailto:relatorios@example.com` diz para onde enviar os relatórios diários. Eles mostram quais servidores enviaram e-mail com o seu domínio e se passaram nas checagens.
 
-Um domínio só pode ter um registro DMARC. Se o servidor de destino encontrar dois, ele ignora os dois. O guia [What is a DMARC record](/blog/what-is-a-dmarc-record) (em inglês) explica cada tag do registro e como ler os relatórios.
+Um domínio só pode ter um registro DMARC. Se o servidor de destino encontrar dois, ele ignora os dois. O guia [o que é um registro DMARC](/blog/what-is-a-dmarc-record) explica cada tag do registro e como ler os relatórios.
 
 ## Como começar com DMARC
 

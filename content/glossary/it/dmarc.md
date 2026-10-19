@@ -70,7 +70,7 @@ Pubblica un solo record DMARC per dominio. Se un server ne trova due, li ignora 
 4. Passa a `p=quarantine`.
 5. Quando i report non mostrano più email vere che falliscono, passa a `p=reject`.
 
-Il nostro [generatore DMARC](/dmarc-generator) (in inglese) crea il record per te. La guida [cos'è un record DMARC](/blog/what-is-a-dmarc-record) (in inglese) spiega ogni tag e come leggere i report.
+Il nostro [generatore DMARC](/dmarc-generator) (in inglese) crea il record per te. La guida [cos'è un record DMARC](/blog/what-is-a-dmarc-record) spiega ogni tag e come leggere i report.
 
 ## Chi richiede DMARC
 

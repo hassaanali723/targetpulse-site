@@ -72,7 +72,7 @@ Avancez par étapes, pour ne bloquer aucun de vos vrais e-mails.
 4. Passez à `p=quarantine` quand tous vos envois passent.
 5. Passez à `p=reject` quand la livraison reste stable.
 
-Notre [générateur DMARC](/dmarc-generator) (en anglais) crée l’enregistrement pour chaque étape. Le guide [What is a DMARC record](/blog/what-is-a-dmarc-record) (en anglais) explique chaque partie de l’enregistrement et les rapports.
+Notre [générateur DMARC](/dmarc-generator) (en anglais) crée l’enregistrement pour chaque étape. Le guide [qu’est-ce qu’un enregistrement DMARC](/blog/what-is-a-dmarc-record) explique chaque partie de l’enregistrement et les rapports.
 
 ## Qui exige DMARC
 

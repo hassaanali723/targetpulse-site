@@ -80,7 +80,7 @@ La mayoría de los dominios siguen tres pasos:
 2. Encuentra todos los servicios que envían correo con tu dominio, como tu herramienta de boletines o tu sistema de soporte. Configura SPF y DKIM en cada uno hasta que pasen.
 3. Cambia a `p=quarantine`. Si todo va bien, cambia a `p=reject`.
 
-El [generador de DMARC](/dmarc-generator) (en inglés) crea el registro por ti. Cada parte del registro y cómo leer los informes están en la guía [qué es un registro DMARC](/blog/what-is-a-dmarc-record) (en inglés).
+El [generador de DMARC](/dmarc-generator) (en inglés) crea el registro por ti. Cada parte del registro y cómo leer los informes están en la guía [qué es un registro DMARC](/blog/what-is-a-dmarc-record).
 
 ## Quién exige DMARC
 

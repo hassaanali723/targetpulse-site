@@ -54,7 +54,7 @@ No puedes impedir que alguien escriba tu dirección en un correo. Sí puedes ped
 3. Publica un registro DMARC con `p=none` y lee los informes.
 4. Cuando todos tus correos reales pasen, cambia a `p=quarantine` y después a `p=reject`.
 
-Con `p=reject`, Gmail, Outlook y los demás servidores que siguen DMARC bloquean el correo falso con tu dominio. La guía [qué es un registro DMARC](/blog/what-is-a-dmarc-record) (en inglés) explica cada paso.
+Con `p=reject`, Gmail, Outlook y los demás servidores que siguen DMARC bloquean el correo falso con tu dominio. La guía [qué es un registro DMARC](/blog/what-is-a-dmarc-record) explica cada paso.
 
 ## Spoofing, phishing y dominios parecidos
 
