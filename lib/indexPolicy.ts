@@ -9,6 +9,7 @@
 // a domain with little crawl history, then leaves the sitemap.
 
 import { versusSlug } from '@/lib/compare'
+import { PAIR_CONTENT } from '@/lib/comparePairs'
 
 export const NOINDEX_DEPLOYED = '2026-09-17'
 const SITEMAP_GRACE_DAYS = 30
@@ -55,9 +56,12 @@ const COMPARE_PROTECTED: [string, string][] = [
   ['bounceban', 'hunter'],        // 63, 6.0
 ]
 
-export const COMPARE_INDEXED: ReadonlySet<string> = new Set(
-  [...COMPARE_PAIRS, ...COMPARE_PROTECTED].map(([a, b]) => versusSlug(a, b)),
-)
+// 2026-10-22: 20 big-brand pairs taken out of noindex, each with hand-written
+// content in lib/comparePairs (owner decision: brand demand, not impressions).
+export const COMPARE_INDEXED: ReadonlySet<string> = new Set([
+  ...[...COMPARE_PAIRS, ...COMPARE_PROTECTED].map(([a, b]) => versusSlug(a, b)),
+  ...Object.keys(PAIR_CONTENT),
+])
 
 export function isCompareIndexed(versus: string): boolean {
   return COMPARE_INDEXED.has(versus)

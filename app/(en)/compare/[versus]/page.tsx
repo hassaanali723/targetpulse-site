@@ -50,6 +50,21 @@ export function generateMetadata({ params }: { params: { versus: string } }): Me
 }
 
 const sectionTitle = 'text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight'
+
+// Hand-written pair copy may carry internal links as [anchor](/path).
+function withLinks(text: string) {
+  return text.split(/(\[[^\]]+\]\(\/[^)]*\))/g).map((part, i) => {
+    const m = /^\[([^\]]+)\]\((\/[^)]*)\)$/.exec(part)
+    return m ? (
+      <Link key={i} href={m[2]} className="text-indigo-600 font-bold hover:underline">
+        {m[1]}
+      </Link>
+    ) : (
+      part
+    )
+  })
+}
+
 const proseP = 'text-slate-600 leading-relaxed text-sm md:text-base font-medium'
 
 export default function ComparePage({ params }: { params: { versus: string } }) {
@@ -61,10 +76,13 @@ export default function ComparePage({ params }: { params: { versus: string } }) 
   const B = c.b.name
 
   // Related comparisons: pair each side with a few other competitors.
+  // Indexed pairs first, so indexed pages link to each other; order is otherwise stable.
   const others = ALL_COMPETITOR_SLUGS.filter((s) => s !== pair.a && s !== pair.b)
+  const byIndexed = (a: string) => (s: string) => (isCompareIndexed(versusSlug(a, s)) ? 0 : 1)
+  const othersFor = (a: string) => [...others].sort((x, y) => byIndexed(a)(x) - byIndexed(a)(y)).slice(0, 4)
   const related = [
-    ...others.slice(0, 4).map((s) => ({ a: pair.a, s })),
-    ...others.slice(0, 4).map((s) => ({ a: pair.b, s })),
+    ...othersFor(pair.a).map((s) => ({ a: pair.a, s })),
+    ...othersFor(pair.b).map((s) => ({ a: pair.b, s })),
   ].map(({ a, s }) => ({
     slug: versusSlug(a, s),
     label: `${getCompetitor(a).name} vs ${getCompetitor(s).name}`,
@@ -128,13 +146,23 @@ export default function ComparePage({ params }: { params: { versus: string } }) 
           className="cv-section max-w-3xl mx-auto px-6 pt-10 pb-16 border-t border-slate-200 space-y-5"
         >
           <h2 className={sectionTitle}>{s.heading}</h2>
-          <p className={proseP}>{s.prose}</p>
-          <div className="rounded-xl border border-indigo-100 bg-indigo-50/50 px-4 py-3">
-            <p className="text-[13px] md:text-sm font-semibold text-slate-700">
-              <span className="text-indigo-700 font-black">{s.giggalEdgeLabel}</span>{' '}
-              {s.giggalEdge}
-            </p>
-          </div>
+          {s.paragraphs ? (
+            s.paragraphs.map((p) => (
+              <p key={p} className={proseP}>
+                {withLinks(p)}
+              </p>
+            ))
+          ) : (
+            <p className={proseP}>{s.prose}</p>
+          )}
+          {s.giggalEdge && (
+            <div className="rounded-xl border border-indigo-100 bg-indigo-50/50 px-4 py-3">
+              <p className="text-[13px] md:text-sm font-semibold text-slate-700">
+                <span className="text-indigo-700 font-black">{s.giggalEdgeLabel}</span>{' '}
+                {s.giggalEdge}
+              </p>
+            </div>
+          )}
         </section>
       ))}
 
@@ -145,7 +173,7 @@ export default function ComparePage({ params }: { params: { versus: string } }) 
             Why teams pick Giggal.ai over both
           </h2>
           <p className={`${proseP} max-w-2xl mx-auto`}>
-            {A} and {B} each leave a pile of catch-all and gateway-protected addresses unconfirmed.
+            {A} and {B} each leave many catch-all and gateway-protected addresses unconfirmed.
             Giggal.ai returns a real result on those at a flat 1 credit, verifies behind 15 secure email
             gateways, and publishes a flat $9.90 per 10,000 with credits that never expire.
           </p>

@@ -20,6 +20,7 @@ import {
 } from './competitorPricing'
 import { getProfile, type CompareProfile } from './compareProfiles'
 import type { FaqItem } from '@/components/landing/FaqAccordion'
+import { getPairContent } from './comparePairs'
 
 const ORDER = ALL_COMPETITOR_SLUGS as readonly string[]
 
@@ -97,6 +98,7 @@ export interface CmpRow {
 export interface CompareSection {
   heading: string
   prose: string
+  paragraphs?: string[] // hand-written pairs: several paragraphs in place of `prose`
   giggalEdge: string
   giggalEdgeLabel: string // section-specific lead-in for the Giggal callout
 }
@@ -218,6 +220,31 @@ export function buildComparison(aSlug: string, bSlug: string): Comparison {
       a: `Yes. Giggal.ai gives 1,000 free credits with no card, usable on a bulk upload, so you can run the same list you would test in ${A} or ${B} and compare the catch-all rows.`,
     },
   ]
+
+  // Hand-written pairs (lib/comparePairs) replace the templated copy; the fact
+  // table above stays generated from competitorPricing.ts.
+  const custom = getPairContent(versusSlug(aSlug, bSlug))
+  if (custom) {
+    return {
+      a,
+      b: b_,
+      pa,
+      pb,
+      rows,
+      intro: custom.intro,
+      sections: custom.sections.map((s) => ({
+        heading: s.heading,
+        prose: '',
+        paragraphs: s.paragraphs,
+        giggalEdge: s.giggalEdge ?? '',
+        giggalEdgeLabel: s.giggalEdgeLabel ?? '',
+      })),
+      faqs: custom.faqs,
+      metaTitle: custom.metaTitle,
+      ogTitle: custom.ogTitle,
+      metaDescription: custom.metaDescription,
+    }
+  }
 
   return {
     a,
