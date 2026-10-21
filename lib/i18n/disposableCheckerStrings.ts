@@ -843,4 +843,264 @@ const fr: CheckerStrings = {
   enSuffix: ' (en anglais)',
 }
 
-export const CHECKER_STRINGS: Record<Locale, CheckerStrings> = { en, it, de, es, 'pt-br': ptBr, fr }
+const nl: CheckerStrings = {
+  metaTitle: 'Wegwerp e-mailadres controleren: tijdelijke mail herkennen',
+  ogTitle: 'Wegwerp e-mailadres controleren: nepadressen en tijdelijke mailboxen herkennen',
+  description: 'Gratis checker voor wegwerp e-mailadressen. Herken tijdelijke adressen en nepadressen. Meer dan 100.000 wegwerpdomeinen, elke zes uur bijgewerkt.',
+  ogLocale: 'nl_NL',
+  ogAlt: 'Giggal.ai checker voor wegwerp e-mailadressen',
+  crumb: 'Wegwerp e-mailadres controleren',
+  h1: 'Wegwerp e-mailadres controleren',
+  h1Accent: 'en tijdelijke e-mailadressen herkennen',
+  heroIntro: 'Voer een e-mailadres in om te zien of het een wegwerpdienst of een tijdelijk e-mailadres gebruikt. Het domein wordt vergeleken met meer dan 100.000 wegwerpdomeinen, die elke zes uur worden bijgewerkt.',
+  toolNote: 'Vijf gratis controles per uur, zonder registratie. Deze tool vertelt je of het domein een wegwerpdomein is. Wil je weten of de mailbox bestaat, gebruik dan de [email checker](/email-checker).',
+  howTitle: 'Hoe de controle op wegwerp e-mailadressen werkt',
+  howIntro: 'Wegwerpdiensten registreren steeds nieuwe domeinen. Een lijst die niet wordt bijgewerkt, mist ze. Daarom draait de controle op de verificatiedienst van Giggal en niet op een bestand in deze website.',
+  how: [
+    {
+      title: 'Controle van het formaat',
+      text: 'De tool controleert of het adres een geldig formaat heeft: een lokaal deel, één @-teken en een domein. Dit gebeurt voordat er iets naar de server gaat.',
+    },
+    {
+      title: 'Domein vergeleken met meer dan 100.000 wegwerpdomeinen',
+      text: 'Het domein wordt vergeleken met de lijst van wegwerpdomeinen van de verificatiedienst van Giggal. Subdomeinen van een domein op de lijst tellen ook als wegwerp. De lijst wordt elke zes uur opnieuw opgebouwd en ons team voegt handmatige correcties toe.',
+    },
+    {
+      title: 'Resultaat',
+      text: 'De tool meldt "wegwerp" of "geen wegwerp". Geen wegwerp betekent dat het domein geen bekende tijdelijke maildienst is. Het betekent niet dat de mailbox bestaat.',
+    },
+    {
+      title: 'Bezorgbaarheid is een aparte controle',
+      text: 'Wil je weten of de mailbox bestaat en mail accepteert, gebruik dan de gratis email checker. Die controleert of de mailbox bestaat. Deze pagina beantwoordt alleen de vraag of het een wegwerpadres is.',
+    },
+  ],
+  servicesTitle: 'Bekende diensten voor wegwerp e-mailadressen',
+  servicesIntro: 'Dit zijn een paar van de diensten op de lijst. De lijst bevat ook de vele kleinere domeinen die deze diensten registreren en afwisselend gebruiken.',
+  services: [
+    { name: 'Temp-Mail', desc: 'Geeft een willekeurige tijdelijke mailbox, zonder registratie.' },
+    { name: 'Mailinator', desc: 'Openbare mailboxen. Iedereen kan de mail lezen zonder wachtwoord.' },
+    { name: '10MinuteMail', desc: 'Mailbox die tien minuten na het aanmaken verloopt.' },
+    { name: 'Guerrilla Mail', desc: 'Verwijdert elk bericht een uur nadat het is binnengekomen.' },
+    { name: 'ThrowawayMail', desc: 'Tijdelijke mailbox voor eenmalige aanmeldingen.' },
+    { name: 'Yopmail', desc: 'Openbare mailboxen zonder wachtwoord. Berichten blijven een paar dagen bewaard.' },
+    { name: 'SharkLasers', desc: 'Een van de domeinen die Guerrilla Mail gebruikt.' },
+    { name: 'TrashMail', desc: 'Tijdelijke doorstuuradressen die na een vaste tijd niet meer werken.' },
+  ],
+  viewAll: 'Bekijk alle diensten voor tijdelijke e-mailadressen',
+  whyTitle: 'Waarom je wegwerp e-mailadressen blokkeert',
+  whyIntro: 'Een wegwerpadres is geen contact. De persoon ziet na de eerste paar minuten niets meer van wat je stuurt. Dat geeft drie problemen:',
+  why: [
+    {
+      title: 'E-mails die niemand leest',
+      text: 'Welkomstmails, betaalbewijzen en onboardingreeksen gaan naar een mailbox die weg is of nooit wordt geopend. Sommige diensten weigeren mail nadat de mailbox is verlopen. Dat zie je als een bounce in je rapporten.',
+    },
+    {
+      title: 'Misbruik van gratis proefperiodes',
+      text: 'Eén persoon kan veel proefaccounts aanmaken, elke keer met een nieuw wegwerpadres. Als je deze adressen bij de aanmelding blokkeert, stop je het meeste daarvan. Je kunt dat op aanmeldformulieren automatiseren met onze [API voor e-mailvalidatie](/email-validation-api).',
+    },
+    {
+      title: 'Verkeerde cijfers in je CRM',
+      text: 'Aanmeldingen met een wegwerpadres tellen als leads, maar ze antwoorden nooit, openen niets en kopen niets. Ze laten je aantal aanmeldingen beter lijken en je conversiepercentage slechter dan ze zijn.',
+    },
+  ],
+  bulkTitle: 'Eén adres of een hele lijst controleren',
+  bulkParas: [
+    'De tool hierboven controleert één adres tegelijk. Dat is handig voor een verdachte aanmelding of één lead. Voor een hele lijst is één adres tegelijk te langzaam.',
+    'In het dashboard van Giggal kun je een CSV- of TXT-bestand uploaden naar onze [dienst om e-maillijsten op te schonen](/email-list-cleaning) en de hele lijst in één keer controleren. Bij elk adres controleren we op wegwerpdomeinen en rol-adressen zoals info@ of sales@, en of de mailbox bestaat. Op [catch-all-domeinen](/catch-all-verification), waar een standaardcontrole een mailbox niet kan bevestigen, doet Giggal een grondigere controle. Een gratis account krijgt 1.000 credits.',
+  ],
+  faqTitle: 'Vragen over het controleren van wegwerp e-mailadressen',
+  faqs: [
+    {
+      q: 'Wat is een wegwerp e-mailadres?',
+      a: 'Een wegwerp e-mailadres is een tijdelijke mailbox van een dienst zoals Mailinator, Temp-Mail of 10MinuteMail. Iedereen kan er in een paar seconden een aanmaken, zonder wachtwoord. Mensen gebruiken het om een aanmeldformulier of een afgeschermde download te gebruiken zonder hun echte adres te geven. De mailbox wordt na een vaste tijd verwijderd, of de persoon opent hem nooit meer.',
+    },
+    {
+      q: 'Hoe werkt deze checker voor wegwerp e-mailadressen?',
+      a: 'De tool stuurt het adres naar de verificatiedienst van Giggal. Die dienst heeft een lijst van meer dan 100.000 domeinen van wegwerp- en tijdelijke maildiensten. De lijst wordt elke zes uur opnieuw opgebouwd uit openbare bronnen, en ons team voegt handmatige correcties toe. Staat het domein, of een bovenliggend domein, op de lijst, dan meldt de tool het als wegwerp. Zo niet, dan meldt de tool het als geen wegwerp.',
+    },
+    {
+      q: 'Betekent "geen wegwerp" dat het adres geldig is?',
+      a: 'Nee. Het betekent dat het domein geen bekende wegwerpdienst is. De mailbox kan nog steeds niet bestaan. Om dat te controleren, gebruik je de gratis email checker. Die controleert de mailbox live en vertelt je of het adres mail kan ontvangen.',
+    },
+    {
+      q: 'Bouncet een e-mail naar een wegwerpadres?',
+      a: 'Soms. Sommige diensten accepteren elk bericht en verwijderen het na een vaste tijd. Andere sluiten de mailbox na een paar minuten en weigeren daarna mail. In beide gevallen leest de persoon je e-mail later niet. Zie het adres in beide gevallen als onbruikbaar.',
+    },
+    {
+      q: 'Is deze checker voor wegwerp e-mailadressen gratis?',
+      a: 'Ja. Je krijgt 5 gratis controles per uur, zonder registratie. Wil je een hele lijst controleren, maak dan een gratis account aan. Daarbij krijg je 1.000 verificatiecredits.',
+    },
+    {
+      q: 'Hoe blokkeer ik wegwerpadressen op aanmeldformulieren?',
+      a: 'Koppel Giggal aan je formulier of app via de API of de Zapier-integratie. Elk adres wordt gecontroleerd zodra het wordt verstuurd. Is het een wegwerpadres, dan kun je de persoon om een ander adres vragen voordat het account wordt aangemaakt.',
+    },
+    {
+      q: 'Wat is het verschil tussen een wegwerp e-mailadres en een gratis e-mailprovider?',
+      a: 'Een gratis provider zoals Gmail, Yahoo of Outlook geeft mensen een vaste mailbox met een wachtwoord. Een wegwerpdienst geeft mensen een tijdelijke mailbox die bedoeld is om weg te gooien. Giggal markeert wegwerpadressen en laat gewone gratis mailboxen met rust.',
+    },
+    {
+      q: 'Kan ik wegwerp e-mailadressen in bulk controleren?',
+      a: 'Ja. Upload een CSV- of TXT-bestand in het dashboard van Giggal. Bij elk adres controleren we op wegwerpdomeinen, rol-adressen en catch-all-domeinen, en of de mailbox bestaat.',
+    },
+  ],
+  ctaBand: 'Blokkeer wegwerpadressen en schoon je lijst op',
+  related: [
+    { href: '/email-validation-api', label: 'API voor e-mailvalidatie: blokkeer aanmeldingen met een wegwerpadres in realtime' },
+    { href: '/email-checker', label: 'email checker: bestaat deze mailbox?' },
+    { href: '/catch-all-verification', label: 'catch-all- en riskante e-mailadressen controleren' },
+    { href: '/seg-email-verification', label: 'e-mailadressen achter een beveiligingsgateway controleren' },
+    { href: '/pricing', label: 'prijzen, credits en abonnementen' },
+  ],
+  console: {
+    checks: { basic: 'Basiscontroles', disposable: 'Controle op wegwerpdomein' },
+    isDisposable: 'is een wegwerpdomein',
+    notDisposable: 'is geen wegwerpdomein',
+    disposableText: 'Dit domein is een wegwerpdienst of een dienst voor tijdelijke e-mail. Voeg dit adres niet toe aan je lijst.',
+    notDisposableText: 'Dit domein staat niet op de lijst van wegwerpdiensten en diensten voor tijdelijke e-mail. Het zegt niet of de mailbox bestaat.',
+    deliverPrompt: 'Wil je weten of deze mailbox bestaat en mail accepteert? Controleer het adres dan met de email checker.',
+    deliverButton: 'Controleren of dit adres geldig is',
+    verifierPath: '/nl/mailadres-controleren',
+    logs: {
+      basicStart: '[BASIC] Formaat van {email} wordt gecontroleerd...',
+      basicOk: '[SUCCESS] Het formaat van het adres is geldig.',
+      basicFail: '[FAILED] Het adres heeft geen geldig e-mailformaat.',
+      registry: '[DISPOSABLE] {domain} wordt opgezocht in het register van wegwerpdomeinen...',
+      isDisposable: '[RESULT] {domain} is een wegwerpdienst of een dienst voor tijdelijke e-mail.',
+      notDisposable: '[RESULT] {domain} is geen bekende wegwerpdienst.',
+    },
+  },
+  enSuffix: ' (in het Engels)',
+}
+
+const PLNB = ' '
+
+const pl: CheckerStrings = {
+  metaTitle: `Sprawdź jednorazowy email: wykrywanie tymczasowych adresów`,
+  ogTitle: `Sprawdź jednorazowy email: wykrywanie fałszywych i tymczasowych adresów`,
+  description: `Darmowe narzędzie, które sprawdza, czy email jest jednorazowy lub tymczasowy. Ponad 100${PLNB}000 domen jednorazowych, lista aktualizowana co sześć godzin.`,
+  ogLocale: 'pl_PL',
+  ogAlt: `Giggal.ai: sprawdź jednorazowy email`,
+  crumb: `Sprawdź jednorazowy email`,
+  h1: `Sprawdź jednorazowy email za darmo i`,
+  h1Accent: `wykryj fałszywe oraz tymczasowe adresy`,
+  heroIntro: `Wpisz adres e-mail, aby sprawdzić, czy pochodzi z usługi jednorazowej lub tymczasowej poczty. Domena jest porównywana z listą ponad 100${PLNB}000 domen jednorazowych, aktualizowaną co sześć godzin.`,
+  toolNote: `Pięć darmowych sprawdzeń na godzinę, bez rejestracji. To narzędzie mówi, czy domena jest jednorazowa. Aby sprawdzić, czy skrzynka istnieje, użyj [weryfikatora email](/email-checker).`,
+  howTitle: `Jak działa sprawdzanie jednorazowego adresu email`,
+  howIntro: `Usługi jednorazowej poczty cały czas rejestrują nowe domeny. Lista, której nikt nie aktualizuje, ich nie wykryje. Dlatego sprawdzanie działa w usłudze weryfikacji Giggal, a nie na pliku zapisanym na tej stronie.`,
+  how: [
+    {
+      title: `Sprawdzenie formatu adresu`,
+      text: `Narzędzie sprawdza, czy adres ma prawidłowy format: nazwę użytkownika, jeden znak @ i domenę. Dzieje się to, zanim cokolwiek trafi na serwer.`,
+    },
+    {
+      title: `Sprawdzenie domeny na liście ponad 100${PLNB}000 domen jednorazowych`,
+      text: `Domena jest porównywana z listą domen jednorazowych w usłudze weryfikacji Giggal. Subdomeny domeny z listy też są uznawane za jednorazowe. Lista jest budowana od nowa co sześć godzin, a nasz zespół dodaje ręczne poprawki.`,
+    },
+    {
+      title: `Wynik`,
+      text: `Narzędzie zwraca wynik „jednorazowy” albo „nie jednorazowy”. Nie jednorazowy oznacza, że domena nie jest znaną usługą tymczasowej poczty. Nie oznacza, że skrzynka istnieje.`,
+    },
+    {
+      title: `Dostarczalność to osobny test`,
+      text: `Aby sprawdzić, czy skrzynka istnieje i przyjmuje pocztę, użyj darmowego weryfikatora email. Sprawdza on, czy skrzynka istnieje. Ta strona odpowiada tylko na pytanie, czy adres jest jednorazowy.`,
+    },
+  ],
+  servicesTitle: `Popularne usługi jednorazowej poczty`,
+  servicesIntro: `To kilka usług z naszej listy. Lista obejmuje też wiele mniejszych domen, które te usługi rejestrują i zmieniają.`,
+  services: [
+    { name: 'Temp-Mail', desc: `Daje losową tymczasową skrzynkę bez rejestracji.` },
+    { name: 'Mailinator', desc: `Publiczne skrzynki. Każdy może czytać wiadomości bez hasła.` },
+    { name: '10MinuteMail', desc: `Skrzynka, która wygasa dziesięć minut po utworzeniu.` },
+    { name: 'Guerrilla Mail', desc: `Usuwa każdą wiadomość godzinę po jej dotarciu.` },
+    { name: 'ThrowawayMail', desc: `Tymczasowa skrzynka do jednorazowych rejestracji.` },
+    { name: 'Yopmail', desc: `Publiczne skrzynki bez hasła. Wiadomości są przechowywane przez kilka dni.` },
+    { name: 'SharkLasers', desc: `Jedna z domen używanych przez Guerrilla Mail.` },
+    { name: 'TrashMail', desc: `Tymczasowe adresy przekierowujące, które przestają działać po ustalonym czasie.` },
+  ],
+  viewAll: `Zobacz wszystkie usługi tymczasowej poczty`,
+  whyTitle: `Dlaczego warto blokować jednorazowe adresy e-mail`,
+  whyIntro: `Jednorazowy adres to nie jest kontakt. Po kilku pierwszych minutach ta osoba nie zobaczy niczego, co wyślesz. Wynikają z tego trzy problemy:`,
+  why: [
+    {
+      title: `E-maile, których nikt nie czyta`,
+      text: `Wiadomości powitalne, potwierdzenia zakupu i sekwencje wdrożeniowe trafiają do skrzynki, której już nie ma albo której nikt nie otwiera. Niektóre usługi odrzucają pocztę po wygaśnięciu skrzynki. W twoich raportach widać to jako odbicie.`,
+    },
+    {
+      title: `Nadużywanie darmowych okresów próbnych`,
+      text: `Jedna osoba może założyć wiele kont próbnych, za każdym razem z nowym jednorazowym adresem. Blokowanie takich adresów przy rejestracji zatrzymuje większość tych prób. Możesz to zautomatyzować w formularzach rejestracji za pomocą naszego [API do walidacji e-mail](/email-validation-api).`,
+    },
+    {
+      title: `Błędne liczby w CRM`,
+      text: `Rejestracje z jednorazowych adresów liczą się jako leady, ale nigdy nie odpowiadają, nie otwierają wiadomości i nie kupują. Liczba rejestracji wygląda przez nie lepiej, a współczynnik konwersji gorzej, niż jest naprawdę.`,
+    },
+  ],
+  bulkTitle: `Pojedyncze sprawdzenie czy masowa weryfikacja`,
+  bulkParas: [
+    `Narzędzie powyżej sprawdza jeden adres naraz. Przydaje się przy podejrzanej rejestracji albo pojedynczym leadzie. Dla całej listy sprawdzanie adresów po kolei trwa za długo.`,
+    `W panelu Giggal możesz wgrać plik CSV lub TXT do naszej [usługi czyszczenia listy mailingowej](/email-list-cleaning) i sprawdzić całą listę za jednym razem. Każdy adres jest sprawdzany pod kątem domen jednorazowych, adresów funkcyjnych, takich jak info@ lub sales@, oraz tego, czy skrzynka istnieje. Na [domenach catch-all](/catch-all-verification), gdzie standardowy test nie potwierdzi skrzynki, Giggal wykonuje dokładniejsze sprawdzenie. Darmowe konto ma 1000 kredytów.`,
+  ],
+  faqTitle: `Pytania o sprawdzanie jednorazowych adresów e-mail`,
+  faqs: [
+    {
+      q: `Co to jest jednorazowy adres e-mail?`,
+      a: `Jednorazowy adres e-mail to tymczasowa skrzynka z usługi takiej jak Mailinator, Temp-Mail albo 10MinuteMail. Każdy może ją założyć w kilka sekund, bez hasła. Ludzie używają takich adresów, aby przejść przez formularz rejestracji albo pobrać plik bez podawania prawdziwego adresu. Skrzynka jest usuwana po ustalonym czasie albo ta osoba już nigdy jej nie otwiera.`,
+    },
+    {
+      q: `Jak działa to narzędzie do sprawdzania jednorazowych adresów?`,
+      a: `Wysyła adres do usługi weryfikacji Giggal. Usługa ma listę ponad 100${PLNB}000 domen jednorazowej i tymczasowej poczty. Lista jest budowana od nowa z publicznych źródeł co sześć godzin, a nasz zespół dodaje ręczne poprawki. Jeśli domena albo jej domena nadrzędna jest na liście, narzędzie oznacza adres jako jednorazowy. Jeśli nie, oznacza go jako nie jednorazowy.`,
+    },
+    {
+      q: `Czy wynik „nie jednorazowy” oznacza, że adres jest prawidłowy?`,
+      a: `Nie. Oznacza, że domena nie jest znaną usługą jednorazowej poczty. Skrzynka może mimo to nie istnieć. Aby to sprawdzić, użyj darmowego weryfikatora email. Sprawdza on skrzynkę na żywo i mówi, czy adres może odbierać pocztę.`,
+    },
+    {
+      q: `Czy wysyłka na jednorazowy adres da odbicie?`,
+      a: `Czasami. Niektóre usługi przyjmują każdą wiadomość i usuwają ją po ustalonym czasie. Inne zamykają skrzynkę po kilku minutach i potem odrzucają pocztę. W obu przypadkach ta osoba nie przeczyta później twojego e-maila. Traktuj taki adres jako nieprzydatny w każdym przypadku.`,
+    },
+    {
+      q: `Czy to narzędzie jest darmowe?`,
+      a: `Tak. Masz 5 darmowych sprawdzeń na godzinę, bez rejestracji. Aby sprawdzić całą listę, załóż darmowe konto. Dostajesz z nim 1000 kredytów na weryfikację.`,
+    },
+    {
+      q: `Jak blokować jednorazowe adresy w formularzach rejestracji?`,
+      a: `Połącz Giggal ze swoim formularzem lub aplikacją przez API albo integrację z Zapier. Każdy adres jest sprawdzany w chwili wysłania formularza. Jeśli jest jednorazowy, możesz poprosić o inny adres, zanim powstanie konto.`,
+    },
+    {
+      q: `Czym różni się jednorazowy adres od darmowej poczty?`,
+      a: `Darmowy dostawca poczty, taki jak Gmail, Yahoo albo Outlook, daje stałą skrzynkę z hasłem. Usługa jednorazowej poczty daje tymczasową skrzynkę, którą się porzuca. Giggal oznacza adresy jednorazowe, a zwykłe darmowe skrzynki zostawia bez zmian.`,
+    },
+    {
+      q: `Czy mogę sprawdzić jednorazowe adresy masowo?`,
+      a: `Tak. Wgraj plik CSV lub TXT w panelu Giggal. Każdy adres jest sprawdzany pod kątem domen jednorazowych, adresów funkcyjnych, domen catch-all oraz tego, czy skrzynka istnieje.`,
+    },
+  ],
+  ctaBand: `Blokuj jednorazowe adresy e-mail i wyczyść swoją listę`,
+  related: [
+    { href: '/email-validation-api', label: `API do walidacji e-mail: blokowanie jednorazowych rejestracji w czasie rzeczywistym` },
+    { href: '/email-checker', label: `weryfikator email: czy ta skrzynka istnieje?` },
+    { href: '/catch-all-verification', label: `weryfikacja adresów catch-all i ryzykownych` },
+    { href: '/seg-email-verification', label: `weryfikacja adresów za bramką bezpieczeństwa poczty` },
+    { href: '/pricing', label: `cennik, kredyty i plany` },
+  ],
+  console: {
+    checks: { basic: `Testy podstawowe`, disposable: `Sprawdzenie domeny jednorazowej` },
+    isDisposable: `to domena jednorazowej poczty`,
+    notDisposable: `to nie jest domena jednorazowej poczty`,
+    disposableText: `Ta domena to usługa jednorazowej lub tymczasowej poczty. Nie dodawaj tego adresu do swojej listy.`,
+    notDisposableText: `Tej domeny nie ma na liście usług jednorazowej i tymczasowej poczty. To nie mówi, czy skrzynka istnieje.`,
+    deliverPrompt: `Aby sprawdzić, czy ta skrzynka istnieje i przyjmuje pocztę, sprawdź ją w weryfikatorze email.`,
+    deliverButton: `Sprawdź, czy ten adres jest prawidłowy`,
+    verifierPath: '/pl/weryfikator-email',
+    logs: {
+      basicStart: `[BASIC] Sprawdzanie formatu adresu {email}...`,
+      basicOk: `[SUCCESS] Format adresu jest prawidłowy.`,
+      basicFail: `[FAILED] Adres nie ma prawidłowego formatu e-mail.`,
+      registry: `[DISPOSABLE] Sprawdzanie domeny {domain} w rejestrze domen jednorazowych...`,
+      isDisposable: `[RESULT] {domain} to usługa jednorazowej lub tymczasowej poczty.`,
+      notDisposable: `[RESULT] {domain} nie jest znaną usługą jednorazowej poczty.`,
+    },
+  },
+  enSuffix: ' (po angielsku)',
+}
+
+export const CHECKER_STRINGS: Record<Locale, CheckerStrings> = { en, it, de, es, 'pt-br': ptBr, fr, nl, pl }

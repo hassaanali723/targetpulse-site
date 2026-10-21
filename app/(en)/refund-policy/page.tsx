@@ -37,7 +37,7 @@ export default function RefundPolicyPage() {
           <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">Policy</span>
         </h1>
         <p className="text-sm md:text-base text-slate-500 font-semibold">
-          Last Updated: February 4, 2026
+          Last Updated: October 22, 2026
         </p>
       </section>
 
@@ -59,8 +59,8 @@ export default function RefundPolicyPage() {
           </p>
           <ul className="list-disc pl-6 mb-4 space-y-1.5 text-slate-600 leading-relaxed marker:text-indigo-400">
             <li><strong>1 Credit = 1 Email Validation:</strong> Each email address verification consumes 1 credit from your account</li>
-            <li><strong>Pay-As-You-Go:</strong> Purchase credits in bulk at any time (packages from 10,000 to 1,000,000 credits)</li>
-            <li><strong>Recurring Credits:</strong> Subscribe to monthly recurring credit packages with a 5% discount</li>
+            <li><strong>Pay-As-You-Go:</strong> Purchase credits in bulk at any time (packages from 3,000 to 1,000,000 credits)</li>
+            <li><strong>Recurring Credits:</strong> Subscribe to monthly recurring credit packages with a 10% discount</li>
             <li><strong>No Expiration:</strong> Credits never expire and remain in your account until used</li>
           </ul>
 

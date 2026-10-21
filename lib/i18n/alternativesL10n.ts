@@ -75,6 +75,8 @@ const LM_DATE: Record<L10nLocale, string> = {
   es: '25 de febrero de 2026',
   'pt-br': '25 de fevereiro de 2026',
   fr: '25 février 2026',
+  nl: '25 februari 2026',
+  pl: '25 lutego 2026',
 }
 
 export const ALT_UI: Record<L10nLocale, AltUi> = {
@@ -343,6 +345,114 @@ export const ALT_UI: Record<L10nLocale, AltUi> = {
     featureHeading: (n) => `${n} vs Giggal.ai`,
     toolLead: 'Pour une seule adresse, vous pouvez ',
   },
+  nl: {
+    enSuffix: ' (in het Engels)',
+    bottomLine: 'In het kort',
+    volume: 'Volume',
+    perMonth: '/maand',
+    est: 'schatting',
+    estimateNote: (n) => `Schatting op basis van bronnen van derden, niet bevestigd op de prijspagina van ${n}.`,
+    checked: (n, d) => [`Prijzen van ${n} gecontroleerd op ${d}. De prijzen kunnen zijn veranderd, zie de `, `prijspagina van ${n}`, '.'],
+    yes: 'Ja',
+    no: 'Nee',
+    partial: 'Gedeeltelijk',
+    rows: {
+      price10k: 'Prijs voor 10.000 credits',
+      catchAll: 'Catch-all-verificatie',
+      catchAllPricing: 'Kosten van catch-all',
+      seg: 'Verificatie achter een SEG',
+      expiry: 'Geldigheid van credits',
+      free: 'Gratis plan',
+      chargesUnknown: 'Rekent onbekende resultaten af',
+      accuracy: 'Cijfer voor nauwkeurigheid',
+    },
+    gateways: (n) => `${n} gateways`,
+    verdictHead: ['Resultaat', 'Betekenis'],
+    verdicts: [
+      ['Bezorgbaar', 'De mailbox bestaat en accepteert mail'],
+      ['Niet bezorgbaar', 'De mailbox bestaat niet'],
+      ['Riskant', 'Het adres bestaat, maar er is een risico bij de bezorging'],
+      ['Onbekend', 'We konden het adres niet controleren, en de credit wordt terugbetaald'],
+    ],
+    bench: {
+      resolved: 'van de catch-all-adressen opgelost',
+      accuracy: 'gemeten totale nauwkeurigheid',
+      source: (n) => `De cijfers van ${n} komen uit een onafhankelijke test van ${LEADMAGIC_BENCHMARK.publisher}, gepubliceerd op ${LM_DATE.nl}, met 10.000 echte B2B-e-mailadressen, waarvan 28% op catch-all-domeinen.`,
+      caveat: 'Deze test is gepubliceerd door LeadMagic, dat zelf een concurrerende tool voor e-mailverificatie verkoopt en in de eigen resultaten als eerste eindigde. Lees het als een test van een leverancier, niet als een neutraal onderzoek. Giggal.ai zat niet bij de gemeten tools.',
+    },
+    heroCta: 'Gratis beginnen met 1.000 credits',
+    compareAll: 'Alle verificatietools vergelijken (in het Engels)',
+    tryHeading: 'Probeer het op je eigen lijst',
+    faqHeading: 'Veelgestelde vragen',
+    keepReading: 'Lees ook',
+    related: [
+      { href: '/email-checker', anchor: 'mailadres controleren' },
+      { href: '/alternatives', anchor: 'alle verificatietools vergelijken' },
+      { href: '/catch-all-verification', anchor: 'catch-all- en riskante e-mailadressen controleren' },
+      { href: '/seg-email-verification', anchor: 'e-mailadressen achter een SEG-gateway' },
+      { href: '/pricing', anchor: 'prijzen en credits' },
+    ],
+    h2hHeading: (n) => `${n}: de directe vergelijkingen`,
+    h2hProse: (n) => [`Bekijk hoe ${n} het doet tegenover de verificatietools die we het meest volgen, met Giggal.ai op elke pagina als derde optie. Het volledige overzicht staat op de `, 'pagina met vergelijkingen', ' (in het Engels).'],
+    breadcrumbAlternatives: 'Alternatieven',
+    featureHeading: (n) => `${n} vs Giggal.ai`,
+    toolLead: 'Voor één adres kun je gratis een ',
+  },
+  pl: {
+    enSuffix: ' (po angielsku)',
+    bottomLine: 'W skrócie',
+    volume: 'Wolumen',
+    perMonth: '/mies.',
+    est: 'szac.',
+    estimateNote: (n) => `Szacunek z zewnętrznych źródeł, niepotwierdzony w cenniku ${n}.`,
+    checked: (n, d) => [`Ceny ${n} sprawdzone ${d}. Ceny mogły się zmienić, zobacz `, `cennik ${n}`, '.'],
+    yes: 'Tak',
+    no: 'Nie',
+    partial: 'Częściowo',
+    rows: {
+      price10k: 'Cena za 10 000 kredytów',
+      catchAll: 'Weryfikacja catch-all',
+      catchAllPricing: 'Koszt catch-all',
+      seg: 'Weryfikacja za SEG',
+      expiry: 'Ważność kredytów',
+      free: 'Darmowy pakiet',
+      chargesUnknown: 'Opłata za wyniki nieznane',
+      accuracy: 'Deklarowana dokładność',
+    },
+    // 1 bramka, 2-4 bramki (not 12-14), 5+ bramek. Giggal's count is 15.
+    gateways: (n) => `${n} ${n === 1 ? 'bramka' : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 'bramki' : 'bramek'}`,
+    verdictHead: ['Wynik', 'Znaczenie'],
+    verdicts: [
+      ['Dostarczalny', 'Skrzynka istnieje i przyjmie pocztę'],
+      ['Niedostarczalny', 'Skrzynka nie istnieje'],
+      ['Ryzykowny', 'Adres istnieje, ale wiąże się z ryzykiem niedostarczenia'],
+      ['Nieznany', 'Nie udało się sprawdzić adresu, a kredyt wraca na konto'],
+    ],
+    bench: {
+      resolved: 'rozstrzygniętych adresów catch-all',
+      accuracy: 'zmierzona dokładność ogólna',
+      source: (n) => `Dane ${n} pochodzą z niezależnego testu przeprowadzonego przez ${LEADMAGIC_BENCHMARK.publisher}, opublikowanego ${LM_DATE.pl}, na próbie 10 000 prawdziwych adresów e-mail B2B, z których 28% było w domenach catch-all.`,
+      caveat: 'Ten test opublikował LeadMagic, który sprzedaje konkurencyjny weryfikator e-mail i zajął pierwsze miejsce we własnych wynikach. Traktuj go jako test dostawcy, a nie neutralne badanie. Giggal.ai nie był wśród testowanych narzędzi.',
+    },
+    heroCta: 'Zacznij za darmo z 1000 kredytów',
+    compareAll: 'Porównaj wszystkie weryfikatory (po angielsku)',
+    tryHeading: 'Sprawdź na własnej liście',
+    faqHeading: 'Najczęstsze pytania',
+    keepReading: 'Czytaj dalej',
+    related: [
+      { href: '/email-checker', anchor: 'darmowy weryfikator email' },
+      { href: '/alternatives', anchor: 'porównaj wszystkie weryfikatory' },
+      { href: '/catch-all-verification', anchor: 'weryfikacja adresów catch-all i ryzykownych' },
+      { href: '/seg-email-verification', anchor: 'adresy chronione przez bramki SEG' },
+      { href: '/pricing', anchor: 'cennik i kredyty' },
+    ],
+    h2hHeading: (n) => `${n}: porównania bezpośrednie`,
+    h2hProse: (n) => [`Zobacz, jak ${n} wypada na tle weryfikatorów, które śledzimy najdokładniej. Giggal.ai jest na każdej stronie trzecią opcją. Pełna tabela jest na `, 'stronie porównań', ' (po angielsku).'],
+    breadcrumbAlternatives: 'Alternatywy',
+    featureHeading: (n) => `${n} vs Giggal.ai`,
+    // Rendered as: toolLead + <link>related[0].anchor</link> + "."
+    toolLead: 'Pojedynczy adres sprawdzisz tutaj: ',
+  },
 }
 
 // ── Translated competitor facts ──────────────────────────────────────────────
@@ -356,6 +466,8 @@ const GIGGAL_FACTS: Record<L10nLocale, { freeTier: string; creditsExpire: string
   es: { freeTier: '1.000 créditos, sin tarjeta, válidos en carga masiva', creditsExpire: 'Los créditos no caducan nunca, sin condiciones.', catchAllCreditCost: '1 crédito, igual que cualquier otra verificación', claimedAccuracy: 'Declara 98,5%', category: 'Verificador catch-all y SEG' },
   'pt-br': { freeTier: '1.000 créditos, sem cartão, válidos em envio em massa', creditsExpire: 'Os créditos nunca expiram, sem condições.', catchAllCreditCost: '1 crédito, como qualquer outra verificação', claimedAccuracy: 'Declara 98,5%', category: 'Verificador catch-all e SEG' },
   fr: { freeTier: '1 000 crédits, sans carte, utilisables en masse', creditsExpire: "Les crédits n'expirent jamais, sans condition.", catchAllCreditCost: '1 crédit, comme toute autre vérification', claimedAccuracy: `Annonce 98,5${NB}%`, category: 'Vérificateur catch-all et SEG' },
+  nl: { freeTier: '1.000 credits, zonder creditcard, ook voor bulkcontroles', creditsExpire: 'Credits verlopen nooit, zonder voorwaarden.', catchAllCreditCost: '1 credit, net als elke andere controle', claimedAccuracy: 'Claimt 98,5%', category: 'Verificatietool voor catch-all en SEG' },
+  pl: { freeTier: '1000 kredytów, bez karty, także do masowego importu', creditsExpire: 'Kredyty nigdy nie wygasają, bez żadnych warunków.', catchAllCreditCost: '1 kredyt, tak jak każde inne sprawdzenie', claimedAccuracy: 'Deklaruje 98,5%', category: 'Weryfikator catch-all i SEG' },
 }
 export function giggalFacts(locale: L10nLocale) {
   return { ...GIGGAL, ...GIGGAL_FACTS[locale] }
@@ -368,6 +480,8 @@ const FACTS: Record<string, Partial<Record<L10nLocale, Facts>>> = {
     es: { freeTier: '100 créditos al mes', creditsExpire: 'Los créditos no caducan', catchAllCreditCost: 'Puntuación IA de 1 a 10, sin resultado válido o no válido', claimedAccuracy: 'Declara 99,6%' },
     'pt-br': { freeTier: '100 créditos por mês', creditsExpire: 'Os créditos não expiram', catchAllCreditCost: 'Pontuação de IA de 1 a 10, sem resultado válido ou inválido', claimedAccuracy: 'Declara 99,6%' },
     fr: { freeTier: '100 crédits par mois', creditsExpire: "Les crédits n'expirent pas", catchAllCreditCost: 'Score IA de 1 à 10, pas de résultat valide ou invalide', claimedAccuracy: `Annonce 99,6${NB}%` },
+    nl: { freeTier: '100 credits per maand', creditsExpire: 'Credits verlopen niet', catchAllCreditCost: 'AI-score van 1 tot 10, geen geldig of ongeldig', claimedAccuracy: 'Claimt 99,6%' },
+    pl: { freeTier: '100 kredytów miesięcznie', creditsExpire: 'Kredyty nie wygasają', catchAllCreditCost: 'Ocena AI od 1 do 10, bez wyniku prawidłowy lub nieprawidłowy', claimedAccuracy: 'Deklaruje 99,6%' },
   },
   neverbounce: {
     it: { freeTier: '10 crediti alla registrazione', creditsExpire: "I crediti scadono 12 mesi dopo l'acquisto", catchAllCreditCost: 'Segnati Accept-All, ne risolve pochi' },
@@ -375,6 +489,8 @@ const FACTS: Record<string, Partial<Record<L10nLocale, Facts>>> = {
     es: { freeTier: '10 créditos al registrarse', creditsExpire: 'Los créditos caducan 12 meses después de la compra', catchAllCreditCost: 'Marcados Accept-All, resuelve pocos' },
     'pt-br': { freeTier: '10 créditos no cadastro', creditsExpire: 'Os créditos expiram 12 meses após a compra', catchAllCreditCost: 'Marcados como Accept-All, resolve poucos' },
     fr: { freeTier: "10 crédits à l'inscription", creditsExpire: "Les crédits expirent 12 mois après l'achat", catchAllCreditCost: 'Marqués Accept-All, en résout peu' },
+    nl: { freeTier: '10 credits bij registratie', creditsExpire: 'Credits verlopen 12 maanden na aankoop', catchAllCreditCost: 'Gemarkeerd als Accept-All, lost er weinig op' },
+    pl: { freeTier: '10 kredytów przy rejestracji', creditsExpire: 'Kredyty wygasają 12 miesięcy po zakupie', catchAllCreditCost: 'Oznaczane jako Accept-All, rozstrzyga niewiele' },
   },
   hunter: {
     de: {
@@ -423,6 +539,16 @@ const FACTS: Record<string, Partial<Record<L10nLocale, Facts>>> = {
       freeTier: "50 crédits pendant l'essai gratuit", creditsExpire: "Les crédits du forfait sont reportés tant que l'abonnement est actif", catchAllCreditCost: 'Signalé, non résolu',
       pricingBasisNote: `Snov.io est vendu en abonnement mensuel avec des crédits mutualisés (1 crédit par vérification). Les chiffres sont le plus petit forfait mensuel qui couvre ces vérifications (facturé au mois ; environ 25${NB}% de moins en annuel). Un million par mois relève d'un forfait sur mesure. Les chiffres de Giggal.ai sont des prix ponctuels, sans abonnement.`,
       notes: { Custom: 'Sur mesure' },
+    },
+    nl: {
+      freeTier: '50 credits in de gratis proefperiode', creditsExpire: 'Credits van het abonnement schuiven door zolang het abonnement loopt', catchAllCreditCost: 'Gemarkeerd, niet opgelost',
+      pricingBasisNote: 'Snov.io wordt verkocht als maandabonnement met gedeelde credits (1 credit per controle). De cijfers zijn het kleinste maandplan dat die controles dekt (maandelijks gefactureerd; bij jaarbetaling ongeveer 25% goedkoper). Een miljoen per maand valt onder een plan op maat. De cijfers van Giggal.ai zijn eenmalige prijzen voor betalen per gebruik.',
+      notes: { Custom: 'Op maat' },
+    },
+    pl: {
+      freeTier: '50 kredytów w darmowym okresie próbnym', creditsExpire: 'Kredyty z planu przechodzą na kolejny okres, dopóki subskrypcja jest aktywna', catchAllCreditCost: 'Oznaczany, nierozstrzygnięty',
+      pricingBasisNote: 'Snov.io jest sprzedawany jako subskrypcja miesięczna ze wspólną pulą kredytów (1 kredyt na weryfikację). Wartości to najmniejszy plan miesięczny, który obejmuje tyle weryfikacji (płatność miesięczna; przy płatności rocznej około 25% taniej). Milion miesięcznie to plan indywidualny. Wartości Giggal.ai to ceny jednorazowe, płatne za użycie.',
+      notes: { Custom: 'Indywidualny' },
     },
   },
   apollo: {

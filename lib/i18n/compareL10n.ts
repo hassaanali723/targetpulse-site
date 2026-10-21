@@ -16,6 +16,8 @@ export const COMPARE_SEGMENT: Record<L10nLocale, string> = {
   es: 'comparativa',
   'pt-br': 'comparativo',
   fr: 'comparatif',
+  nl: 'vergelijking',
+  pl: 'porownanie',
 }
 
 const PAIRS: { versus: string; cluster: ClusterId }[] = [
@@ -40,6 +42,8 @@ const TITLES: Record<string, Partial<Record<L10nLocale, string>>> = {
     es: 'ZeroBounce vs NeverBounce: precios y precisión | Giggal.ai',
     'pt-br': 'ZeroBounce vs NeverBounce: preços e precisão | Giggal.ai',
     fr: 'ZeroBounce vs NeverBounce : prix et précision | Giggal.ai',
+    nl: 'ZeroBounce vs NeverBounce: prijzen en nauwkeurigheid | Giggal.ai',
+  pl: 'ZeroBounce vs NeverBounce: ceny i dokładność | Giggal.ai',
   },
   'zerobounce-vs-hunter': {
     de: 'ZeroBounce vs Hunter: Preise und Genauigkeit | Giggal.ai',
@@ -69,6 +73,8 @@ const PROFILES: Record<string, Partial<Record<L10nLocale, Profile>>> = {
     es: { category: 'Verificador puro', oneLiner: 'un verificador veterano integrado en una amplia suite de entregabilidad.', catchAllApproach: 'puntúa las direcciones catch-all de 1 a 10 con IA en lugar de confirmar el buzón.', bestFor: 'equipos que quieren la verificación junto con inbox placement y monitorización de DMARC y listas negras.' },
     'pt-br': { category: 'Verificador puro', oneLiner: 'um verificador tradicional dentro de uma ampla suíte de entregabilidade.', catchAllApproach: 'dá aos endereços catch-all uma nota de 1 a 10 com IA em vez de confirmar a caixa.', bestFor: 'equipes que querem verificação junto com inbox placement e monitoramento de DMARC e blacklists.' },
     fr: { category: 'Vérificateur pur', oneLiner: 'un vérificateur installé de longue date au sein d’une large suite de délivrabilité.', catchAllApproach: 'note les adresses catch-all de 1 à 10 par IA au lieu de confirmer la boîte.', bestFor: 'aux équipes qui veulent la vérification avec le test de placement en boîte, le suivi DMARC et des listes noires.' },
+    nl: { category: 'Pure verificatietool', oneLiner: 'een verificatietool die al lang bestaat, binnen een breed pakket voor bezorgbaarheid.', catchAllApproach: 'geeft catch-all-adressen met AI een score van 1 tot 10 in plaats van de mailbox te bevestigen.', bestFor: 'teams die verificatie willen samen met inbox placement en monitoring van DMARC en blacklists.' },
+    pl: { category: 'Wyspecjalizowany weryfikator', oneLiner: 'działający od lat weryfikator, który jest częścią szerokiego pakietu narzędzi do dostarczalności.', catchAllApproach: 'ocenia adresy catch-all za pomocą AI w skali od 1 do 10, zamiast potwierdzić skrzynkę.', bestFor: 'zespołów, które chcą mieć weryfikację razem z testami umieszczenia w skrzynce odbiorczej (inbox placement) oraz monitoringiem DMARC i czarnych list.' },
   },
   neverbounce: {
     it: { category: 'Verificatore puro', oneLiner: 'un verificatore noto per le integrazioni CRM profonde e la pulizia delle liste dentro i tuoi strumenti.', catchAllApproach: 'segna gli indirizzi accept-all e ne risolve solo una piccola parte.', bestFor: 'ai team che puliscono le liste direttamente dentro Salesforce, HubSpot o Marketo.' },
@@ -76,6 +82,8 @@ const PROFILES: Record<string, Partial<Record<L10nLocale, Profile>>> = {
     es: { category: 'Verificador puro', oneLiner: 'un verificador conocido por sus integraciones profundas con CRM y por limpiar listas dentro de tus herramientas.', catchAllApproach: 'marca las direcciones accept-all y solo resuelve una pequeña parte.', bestFor: 'equipos que limpian listas directamente dentro de Salesforce, HubSpot o Marketo.' },
     'pt-br': { category: 'Verificador puro', oneLiner: 'um verificador conhecido pelas integrações profundas com CRM e por limpar listas dentro das suas ferramentas.', catchAllApproach: 'marca os endereços accept-all e resolve só uma pequena parte deles.', bestFor: 'equipes que limpam listas direto no Salesforce, HubSpot ou Marketo.' },
     fr: { category: 'Vérificateur pur', oneLiner: 'un vérificateur connu pour ses intégrations CRM poussées et le nettoyage des listes dans vos outils.', catchAllApproach: "marque les adresses accept-all et n'en résout qu'une petite partie.", bestFor: 'aux équipes qui nettoient leurs listes directement dans Salesforce, HubSpot ou Marketo.' },
+    nl: { category: 'Pure verificatietool', oneLiner: 'een verificatietool die bekendstaat om zijn CRM-integraties en het opschonen van lijsten in je eigen tools.', catchAllApproach: 'markeert accept-all-adressen en lost maar een klein deel daarvan op.', bestFor: 'teams die lijsten direct in Salesforce, HubSpot of Marketo opschonen.' },
+    pl: { category: 'Wyspecjalizowany weryfikator', oneLiner: 'weryfikator znany z rozbudowanych integracji z CRM i z czyszczenia list bezpośrednio w twoich narzędziach.', catchAllApproach: 'oznacza adresy accept-all i rozstrzyga tylko niewielką ich część.', bestFor: 'zespołów, które czyszczą listy bezpośrednio w Salesforce, HubSpot lub Marketo.' },
   },
   hunter: {
     de: { category: 'Such- und Outreach-Plattform', oneLiner: 'eine Plattform, die zuerst E-Mails findet und die Prüfung in Monatspläne packt.', catchAllApproach: 'versucht bei einigen großen Anbietern, Accept-all zu bestätigen, und markiert es sonst nur.', bestFor: 'Teams, die Interessenten in einem Abo finden und prüfen wollen.' },
@@ -357,6 +365,102 @@ const LANG: Record<L10nLocale, Lang> = {
       altLabel: (n) => `alternative à ${n}`,
       compareEvery: 'comparez tous les vérificateurs (en anglais)',
       allComparisons: 'Tous les comparatifs (en anglais)',
+    },
+  },
+  nl: {
+    rows: ['Categorie', 'Lost catch-all op', 'Kosten van catch-all', 'Secure email gateways', 'Prijs bij 10.000', 'Prijs bij 100.000', 'Prijs bij 1.000.000', 'Geldigheid van credits', 'Gratis plan', 'Rekent onbekende resultaten af', 'Cijfer voor nauwkeurigheid'],
+    priceSentence: (c, p) => c.pricingModel === 'subscription'
+      ? `${c.name} wordt verkocht als maandabonnement, vanaf ${p(10000)} voor 10.000 controles per maand`
+      : `${c.name} kost ${p(10000)} bij 10.000, ${p(100000)} bij 100.000 en ${p(1000000)} bij een miljoen`,
+    expiry: (c) => `${c.name}: ${lc(c.creditsExpire)}`,
+    free: (c) => `biedt ${lc(c.freeTier)} om mee te beginnen`,
+    intro: (A, B, pa, pb) => `De keuze tussen ${A} en ${B} hangt vooral af van hoe elk van beide omgaat met de adressen die in je lijst echt problemen geven. ${A} is ${pa.oneLiner} ${B} is ${pb.oneLiner} Hieronder zie je wat ze rekenen, wat ze doen met catch-all-adressen en hoe nauwkeurig ze zeggen te zijn. We laten ook zien waar Giggal.ai staat op dezelfde lijst, zodat je een derde cijfer hebt om te vergelijken.`,
+    sections: (A, B, a, b, pa, pb, ps) => [
+      { heading: `Hoe ${A} en ${B} omgaan met catch-all`, prose: `${A} ${pa.catchAllApproach} ${B} ${pb.catchAllApproach} Catch-all-domeinen accepteren mail voor elke naam. Een normale controle kan daar een echte mailbox niet onderscheiden van een dode. Daar verliest een lijst vaak goede contacten zonder dat je het merkt.`, label: 'Hoe Giggal.ai met catch-all omgaat.' },
+      { heading: `Prijzen van ${A} en ${B} vergeleken`, prose: `${ps[0]}. ${ps[1]}. Beide cijfers komen rechtstreeks uit de gepubliceerde prijzen van elke leverancier. Vergelijk ze met het aantal e-mails dat je per maand verstuurt.`, label: 'Wat Giggal.ai rekent.' },
+      { heading: 'Ondersteuning voor secure email gateways', prose: `Op domeinen van grote bedrijven staat vaak een gateway zoals Mimecast, Proofpoint of Barracuda voor de mailbox. Die blokkeert de gewone controle. ${A} ${a.advertisesSegSupport ? 'zegt achter deze gateways te controleren' : 'dekt deze gateways niet'}, en ${B} ${segB(a, b, ['ook', 'wel', 'niet', 'ook niet'])}.`, label: 'Hoe Giggal.ai met gateways omgaat.' },
+      { heading: 'Credits, gratis plannen en geldigheid', prose: `${LANG.nl.expiry(a)}. ${A} ${LANG.nl.free(a)}. ${LANG.nl.expiry(b)}. ${B} ${LANG.nl.free(b)}.`, label: 'Hoe Giggal.ai met credits omgaat.' },
+    ],
+    edges: [
+      'Giggal.ai maakt van catch-all-adressen een echt resultaat, bezorgbaar of niet bezorgbaar, voor vast 1 credit per e-mailadres.',
+      'Giggal.ai publiceert een vaste prijs per gebruik: US$ 9,90 bij 10.000, US$ 76 bij 100.000 en US$ 680 bij een miljoen, met credits die nooit verlopen.',
+      'Giggal.ai herkent 15 secure email gateways, waaronder Mimecast, Proofpoint en Barracuda, en geeft een echt resultaat voor de adressen erachter.',
+      'Credits van Giggal.ai verlopen nooit, onbekende resultaten worden niet afgerekend en elke lijst begint met 1.000 gratis credits, zonder creditcard.',
+    ],
+    faqs: (A, B, a, b, pa, pb, ps) => [
+      { q: `Welke kies ik, ${A} of ${B}?`, a: `Dat hangt af van je lijst. ${A} past bij ${pa.bestFor} ${B} past bij ${pb.bestFor} Zijn catch-all-adressen en secure email gateways voor jou het belangrijkst, dan doet Giggal.ai allebei voor US$ 9,90 per 10.000.` },
+      { q: `Hoe verhouden de prijzen van ${A} en ${B} zich?`, a: `${ps[0]}. ${ps[1]}. Giggal.ai kost US$ 9,90 bij 10.000, US$ 76 bij 100.000 en US$ 680 bij een miljoen, met credits die nooit verlopen.` },
+      { q: `Lossen ${A} of ${B} catch-all-adressen op?`, a: `${LANG.nl.caResolve(a)}. ${LANG.nl.caResolve(b)}. Giggal.ai maakt van catch-all een echt resultaat, bezorgbaar of niet bezorgbaar, voor vast 1 credit per e-mailadres. Het controleert ook achter 15 secure email gateways.` },
+      { q: `Is er een betere optie dan ${A} of ${B}?`, a: `Giggal.ai is gebouwd voor de lastige adressen die beide vaak niet oplossen. Het maakt van catch-all een echt resultaat voor vast 1 credit per e-mailadres, controleert achter 15 secure email gateways en publiceert een vaste prijs van US$ 9,90 per 10.000, met credits die nooit verlopen. Je kunt een lijst testen met 1.000 gratis credits, zonder creditcard.` },
+      { q: 'Kan ik Giggal.ai testen voordat ik kies?', a: `Ja. Giggal.ai geeft 1.000 gratis credits zonder creditcard, te gebruiken bij een bulkupload. Controleer dezelfde lijst die je met ${A} of ${B} zou testen en vergelijk de catch-all-regels.` },
+    ],
+    caResolve: (c) =>
+      c.resolvesCatchAll === 'partial'
+        ? `${c.name} geeft voor een deel van de catch-all-adressen een resultaat`
+        : c.resolvesCatchAll
+        ? `${c.name} geeft een resultaat voor catch-all-adressen`
+        : `${c.name} markeert catch-all zonder de mailbox te bevestigen`,
+    desc: (A, B) => `Twijfel je tussen ${A} en ${B}? Zo verhouden beide verificatietools zich op prijs, catch-all en nauwkeurigheid. Je ziet ook waar Giggal.ai staat.`,
+    og: (A, B) => `${A} vs ${B}, en waar Giggal.ai staat`,
+    ui: {
+      tableHeading: (A, B) => `${A}, ${B} en Giggal.ai vergeleken`,
+      tableNote: 'Elke prijs en elke voorwaarde hier komt uit de gepubliceerde prijzen van de leverancier. Verkoopt een tool niet per volume, dan staat in de cel "Op aanvraag", "Per gebruiker" of de prijs van het maandplan.',
+      promoHeading: 'Waarom teams Giggal.ai kiezen in plaats van een van beide',
+      promo: (A, B) => `${A} en ${B} laten allebei veel catch-all-adressen en adressen achter een gateway onbevestigd. Giggal.ai geeft voor deze adressen een echt resultaat voor vast 1 credit, controleert achter 15 secure email gateways en publiceert een vaste prijs van US$ 9,90 per 10.000, met credits die nooit verlopen.`,
+      promoCta: 'Controleer gratis 1.000 e-mailadressen',
+      related: 'Verwante vergelijkingen',
+      altSentence: ['Wil je een directe vergelijking met Giggal.ai? Bekijk de pagina’s ', '', ' en ', '', ', of '],
+      altLabel: (n) => `${n}-alternatief`,
+      compareEvery: 'vergelijk alle verificatietools (in het Engels)',
+      allComparisons: 'Alle vergelijkingen (in het Engels)',
+    },
+  },
+  pl: {
+    rows: ['Kategoria', 'Rozstrzyga catch-all', 'Koszt catch-all', 'Secure email gateway', 'Cena przy 10 000', 'Cena przy 100 000', 'Cena przy 1 000 000', 'Ważność kredytów', 'Darmowy pakiet', 'Opłata za wyniki nieznane', 'Deklarowana dokładność'],
+    priceSentence: (c, p) => c.pricingModel === 'subscription'
+      ? `${c.name} jest sprzedawany w planach miesięcznych, od ${p(10000)} za 10 000 weryfikacji miesięcznie`
+      : `${c.name} kosztuje ${p(10000)} przy 10 000, ${p(100000)} przy 100 000 i ${p(1000000)} przy milionie`,
+    expiry: (c) => `W ${c.name} ${lc(c.creditsExpire)}`,
+    free: (c) => `oferuje na start ${lc(c.freeTier)}`,
+    intro: (A, B, pa, pb) => `Wybór między ${A} a ${B} zależy zwykle od tego, jak każde z tych narzędzi traktuje adresy, które sprawiają twojej liście najwięcej problemów. ${A} to ${pa.oneLiner} ${B} to ${pb.oneLiner} Poniżej pokazujemy, jak oba narzędzia naliczają opłaty, co robią z adresami catch-all i jaką dokładność deklarują. Pokazujemy też, jak na tej samej liście wypada Giggal.ai. To daje ci trzecią liczbę do porównania.`,
+    sections: (A, B, a, b, pa, pb, ps) => [
+      { heading: `Jak ${A} i ${B} obsługują adresy catch-all`, prose: `${A} ${pa.catchAllApproach} ${B} ${pb.catchAllApproach} Domeny catch-all przyjmują pocztę na każdą nazwę. Zwykły test nie odróżni więc prawdziwej skrzynki od martwej. W tym miejscu lista zwykle traci dobre kontakty i nikt tego nie zauważa.`, label: 'Jak Giggal.ai obsługuje catch-all.' },
+      { heading: `Ceny ${A} i ${B}`, prose: `${ps[0]}. ${ps[1]}. Obie wartości pochodzą bezpośrednio z cenników dostawców, więc porównaj je ze swoim miesięcznym wolumenem wysyłki.`, label: 'Jak rozlicza się Giggal.ai.' },
+      { heading: 'Obsługa secure email gateway', prose: `W domenach dużych firm przed skrzynką często stoi bramka, taka jak Mimecast, Proofpoint albo Barracuda, i blokuje zwykły test. ${A} ${a.advertisesSegSupport ? 'deklaruje weryfikację za takimi bramkami' : 'nie obsługuje takich bramek'}, a ${B} ${segB(a, b, ['także', 'tak', 'nie', 'również nie'])}.`, label: 'Jak Giggal.ai obsługuje bramki.' },
+      { heading: 'Kredyty, darmowe pakiety i ważność', prose: `${LANG.pl.expiry(a)}. ${A} ${LANG.pl.free(a)}. ${LANG.pl.expiry(b)}. ${B} ${LANG.pl.free(b)}.`, label: 'Jak Giggal.ai traktuje kredyty.' },
+    ],
+    edges: [
+      'Giggal.ai rozstrzyga adresy catch-all i zwraca prawdziwy wynik, dostarczalny albo niedostarczalny, za stały 1 kredyt za adres.',
+      'Giggal.ai publikuje stałą cenę za użycie: 9,90 USD przy 10 000, 76 USD przy 100 000 i 680 USD przy milionie, z kredytami, które nigdy nie wygasają.',
+      'Giggal.ai rozpoznaje 15 konkretnych bramek bezpieczeństwa poczty (secure email gateway), w tym Mimecast, Proofpoint i Barracuda, i zwraca prawdziwy wynik dla adresów za nimi.',
+      'Kredyty Giggal.ai nigdy nie wygasają, za wyniki nieznane nie płacisz, a każda lista startuje z 1000 darmowych kredytów bez karty.',
+    ],
+    faqs: (A, B, a, b, pa, pb, ps) => [
+      { q: `Co wybrać: ${A} czy ${B}?`, a: `To zależy od twojej listy. ${A} jest dobrym wyborem dla ${pa.bestFor} ${B} jest dobrym wyborem dla ${pb.bestFor} Jeśli najważniejsze są rozstrzyganie adresów catch-all i obsługa secure email gateway, Giggal.ai robi jedno i drugie za 9,90 USD za 10 000.` },
+      { q: `Jak ${A} i ${B} wypadają pod względem ceny?`, a: `${ps[0]}. ${ps[1]}. Giggal.ai kosztuje 9,90 USD przy 10 000, 76 USD przy 100 000 i 680 USD przy milionie, z kredytami, które nigdy nie wygasają.` },
+      { q: `Czy ${A} albo ${B} rozstrzygają adresy catch-all?`, a: `${LANG.pl.caResolve(a)}. ${LANG.pl.caResolve(b)}. Giggal.ai rozstrzyga catch-all i zwraca prawdziwy wynik, dostarczalny albo niedostarczalny, za stały 1 kredyt za adres. Weryfikuje też adresy za 15 bramkami secure email gateway.` },
+      { q: `Czy jest lepsza opcja niż ${A} albo ${B}?`, a: 'Giggal.ai jest zbudowany do trudnych adresów, które oba narzędzia często pomijają. Rozstrzyga catch-all i zwraca prawdziwy wynik za stały 1 kredyt za adres. Weryfikuje adresy za 15 bramkami secure email gateway. Publikuje stałą cenę 9,90 USD za 10 000, z kredytami, które nigdy nie wygasają. Możesz sprawdzić listę za pomocą 1000 darmowych kredytów, bez karty.' },
+      { q: 'Czy mogę przetestować Giggal.ai przed decyzją?', a: `Tak. Giggal.ai daje 1000 darmowych kredytów bez karty, także do masowego importu. Sprawdzisz tę samą listę, którą chcesz przetestować w ${A} lub ${B}, i porównasz wiersze catch-all.` },
+    ],
+    caResolve: (c) =>
+      c.resolvesCatchAll === 'partial'
+        ? `${c.name} zwraca wynik dla części adresów catch-all`
+        : c.resolvesCatchAll
+        ? `${c.name} zwraca wynik dla adresów catch-all`
+        : `${c.name} oznacza catch-all bez potwierdzenia skrzynki`,
+    desc: (A, B) => `Porównujesz ${A} i ${B}? Zobacz, jak oba weryfikatory wypadają pod względem ceny, catch-all i dokładności oraz gdzie plasuje się Giggal.ai.`,
+    og: (A, B) => `${A} vs ${B} i miejsce Giggal.ai`,
+    ui: {
+      tableHeading: (A, B) => `${A}, ${B} i Giggal.ai: porównanie`,
+      tableNote: 'Każda cena i każdy warunek w tabeli pochodzą z cenników dostawców. Gdy narzędzie nie sprzedaje pakietów według wolumenu, komórka pokazuje „Na zapytanie”, „Za użytkownika” albo cenę planu miesięcznego.',
+      promoHeading: 'Dlaczego zespoły wybierają Giggal.ai zamiast obu narzędzi',
+      promo: (A, B) => `${A} i ${B} zostawiają bez potwierdzenia sporą część adresów catch-all i adresów chronionych przez bramki. Giggal.ai zwraca dla nich prawdziwy wynik za stały 1 kredyt, weryfikuje adresy za 15 bramkami secure email gateway i publikuje stałą cenę 9,90 USD za 10 000, z kredytami, które nigdy nie wygasają.`,
+      promoCta: 'Sprawdź 1000 adresów za darmo',
+      related: 'Powiązane porównania',
+      altSentence: ['Chcesz porównać jedno z nich bezpośrednio z Giggal.ai? Zobacz strony ', '', ' i ', '', ' albo '],
+      altLabel: (n) => `alternatywa dla ${n}`,
+      compareEvery: 'porównaj wszystkie weryfikatory (po angielsku)',
+      allComparisons: 'Wszystkie porównania (po angielsku)',
     },
   },
 }

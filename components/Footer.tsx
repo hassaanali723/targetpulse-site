@@ -73,6 +73,8 @@ const otherLanguages = [
   { href: '/es', lang: 'es', name: 'Español' },
   { href: '/pt-br', lang: 'pt-BR', name: 'Português (Brasil)' },
   { href: '/fr', lang: 'fr', name: 'Français' },
+  { href: '/nl', lang: 'nl', name: 'Nederlands' },
+  { href: '/pl', lang: 'pl', name: 'Polski' },
 ]
 
 // Dark footer, the same slate as the home page hero.

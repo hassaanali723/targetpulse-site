@@ -84,6 +84,8 @@ const PAGE_WORD: Record<L10nLocale, string> = {
   es: 'página',
   'pt-br': 'página',
   fr: 'page',
+  nl: 'pagina',
+  pl: 'strona',
 }
 
 // Metadata for pages 2..n of a localized hub. Page 1 keeps the hub URL and its

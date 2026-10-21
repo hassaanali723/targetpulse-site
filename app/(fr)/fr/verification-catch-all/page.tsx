@@ -76,7 +76,7 @@ const content: CatchAllContent = {
   whoTitle: 'Qui utilise la vérification catch-all',
   audience: [
     { title: 'Équipes de prospection', body: 'Vous n’envoyez qu’à des contacts vérifiés. Moins de rebonds, plus de réponses, des domaines d’envoi en meilleure santé.' },
-    { title: 'Agencias', body: 'Nettoyez les listes de chaque client avec le même vérificateur, pour que les rapports et la délivrabilité restent prévisibles.' },
+    { title: 'Agences', body: 'Nettoyez les listes de chaque client avec le même vérificateur, pour que les rapports et la délivrabilité restent prévisibles.' },
     { title: 'Sales operations', body: 'Ne gardez dans le CRM que les contacts qui reçoivent réellement vos séquences et vos mises à jour.' },
     { title: 'Newsletters', body: 'Protégez ouvertures et clics en supprimant les adresses qui ont l’air réelles mais ne sont jamais délivrées.' },
   ],

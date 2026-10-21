@@ -7,6 +7,8 @@ import * as de from '@/lib/i18n/de'
 import * as es from '@/lib/i18n/es'
 import * as ptBr from '@/lib/i18n/pt-br'
 import * as fr from '@/lib/i18n/fr'
+import * as nl from '@/lib/i18n/nl'
+import * as pl from '@/lib/i18n/pl'
 
 export type L10nLocale = Exclude<Locale, 'en'>
 
@@ -61,6 +63,16 @@ export const STRINGS: Record<L10nLocale, LocaleStrings> = {
     nav: fr.nav, footer: fr.footer, announcement: fr.announcement, cta: fr.cta, consoleStrings: fr.consoleStrings,
     pricing: fr.pricing, notFound: fr.notFound, legal: fr.legal, home: '/fr', nativeName: 'Français', ogLocale: 'fr_FR',
     legalHeading: fr.footer.legalHeading, formatDate: fr.formatDateFr, number: fr.frNumber, usd: fr.frUsd,
+  },
+  nl: {
+    nav: nl.nav, footer: nl.footer, announcement: nl.announcement, cta: nl.cta, consoleStrings: nl.consoleStrings,
+    pricing: nl.pricing, notFound: nl.notFound, legal: nl.legal, home: '/nl', nativeName: 'Nederlands', ogLocale: 'nl_NL',
+    legalHeading: nl.footer.legalHeading, formatDate: nl.formatDateNl, number: nl.nlNumber, usd: nl.nlUsd,
+  },
+  pl: {
+    nav: pl.nav, footer: pl.footer, announcement: pl.announcement, cta: pl.cta, consoleStrings: pl.consoleStrings,
+    pricing: pl.pricing, notFound: pl.notFound, legal: pl.legal, home: '/pl', nativeName: 'Polski', ogLocale: 'pl_PL',
+    legalHeading: pl.footer.legalHeading, formatDate: pl.formatDatePl, number: pl.plNumber, usd: pl.plUsd,
   },
 }
 

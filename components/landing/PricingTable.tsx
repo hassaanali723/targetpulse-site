@@ -49,6 +49,9 @@ export interface PricingStrings {
   numberLocale: string
   currencySuffix: boolean
   currencyPrefix?: string
+  // Text written after the number when currencySuffix is true, in place of
+  // " $". Polish uses " USD" (9,90 USD).
+  currencySuffixText?: string
 }
 
 // English, unchanged from the inline strings this component used to carry.
@@ -80,7 +83,7 @@ export const EN_PRICING_STRINGS: PricingStrings = {
 function money(t: PricingStrings, n: number, digits: number): string {
   const num = n.toLocaleString(t.numberLocale, { minimumFractionDigits: digits, maximumFractionDigits: digits })
   if (t.currencyPrefix) return `${t.currencyPrefix}${num}`
-  return t.currencySuffix ? `${num} $` : `$${num}`
+  return t.currencySuffix ? `${num}${t.currencySuffixText ?? ' $'}` : `$${num}`
 }
 
 export default function PricingTable({ strings = EN_PRICING_STRINGS }: { strings?: PricingStrings } = {}) {

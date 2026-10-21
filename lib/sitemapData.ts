@@ -73,8 +73,8 @@ export function coreEntries(): SitemapEntry[] {
     { path: '/affiliates', lastModified: '2026-09-13', priority: '0.9' },
     { path: '/contact-us', lastModified: '2026-07-21', priority: '0.6' },
     { path: '/privacy-policy', lastModified: '2026-02-04' },
-    { path: '/terms-of-service', lastModified: '2026-02-04' },
-    { path: '/refund-policy', lastModified: '2026-02-04' },
+    { path: '/terms-of-service', lastModified: '2026-10-22' },
+    { path: '/refund-policy', lastModified: '2026-10-22' },
   ]
 }
 
@@ -210,7 +210,10 @@ const disposableProvidersUrls = new Set<string>([
 const BULK_VERIFIER_SHIPPED = '2026-10-12'
 const bulkVerifierUrls = new Set<string>(Object.values(CLUSTERS.bulkVerifier))
 
-function localeEntries(locale: 'it' | 'de' | 'es' | 'pt-br' | 'fr', launch: string): SitemapEntry[] {
+// `floorToLaunch`: for locales that launched after the shared ship dates below
+// (nl, pl), no page can be older than the launch, so every lastmod is at least
+// the launch date. The first five locales keep their historical dates.
+function localeEntries(locale: 'it' | 'de' | 'es' | 'pt-br' | 'fr' | 'nl' | 'pl', launch: string, floorToLaunch = false): SitemapEntry[] {
   const posts = getAllPosts(locale)
   const hub = `/${locale}/blog`
   const postDate = new Map(posts.map((p) => [`${hub}/${p.slug}`, p.updated || p.date]))
@@ -221,7 +224,7 @@ function localeEntries(locale: 'it' | 'de' | 'es' | 'pt-br' | 'fr', launch: stri
   const terms = getAllTerms(locale)
   const termDate = new Map(terms.map((t) => [`${ghub}/${t.slug}`, t.updated || t.date]))
   const newestTerm = terms.map((t) => t.updated || t.date).sort().pop()
-  return localeUrls(locale)
+  const entries = localeUrls(locale)
     .filter((u) => u === hub || postDate.has(u) || !u.startsWith(`${hub}/`))
     .filter((u) => u === ghub || termDate.has(u) || !u.startsWith(`${ghub}/`))
     .map((path) => ({
@@ -243,6 +246,8 @@ function localeEntries(locale: 'it' | 'de' | 'es' | 'pt-br' | 'fr', launch: stri
                   ? BULK_VERIFIER_SHIPPED
                   : launch),
     }))
+  if (!floorToLaunch) return entries
+  return entries.map((e) => ({ ...e, lastModified: e.lastModified && e.lastModified > launch ? e.lastModified : launch }))
 }
 export function itEntries(): SitemapEntry[] {
   return localeEntries('it', IT_LAUNCH)
@@ -268,6 +273,17 @@ export function ptBrEntries(): SitemapEntry[] {
 }
 export function frEntries(): SitemapEntry[] {
   return localeEntries('fr', FR_LAUNCH)
+}
+
+// Dutch and Polish (batch 1 of the 18-language plan, SEO-Plan/i18n-expansion-plan.md).
+// Set both dates to the real ship day when the batch goes live.
+const NL_LAUNCH = '2026-10-22'
+const PL_LAUNCH = '2026-10-22'
+export function nlEntries(): SitemapEntry[] {
+  return localeEntries('nl', NL_LAUNCH, true)
+}
+export function plEntries(): SitemapEntry[] {
+  return localeEntries('pl', PL_LAUNCH, true)
 }
 
 // ── XML rendering ───────────────────────────────────────────────────────

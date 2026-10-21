@@ -97,6 +97,8 @@ returns valid or invalid instead of a shrug.
 - Español: [Validar correo gratis](${SITE}/es/validar-correo), [inicio](${SITE}/es), [precios](${SITE}/es/precios)
 - Português (Brasil): [Verificação de e-mail grátis](${SITE}/pt-br/verificacao-de-email), [início](${SITE}/pt-br), [preços](${SITE}/pt-br/precos)
 - Français: [Vérifier une adresse mail gratuitement](${SITE}/fr/verifier-adresse-mail), [accueil](${SITE}/fr), [tarifs](${SITE}/fr/tarifs)
+- Nederlands: [Mailadres gratis controleren](${SITE}/nl/mailadres-controleren), [startpagina](${SITE}/nl), [prijzen](${SITE}/nl/prijzen)
+- Polski: [Weryfikator email za darmo](${SITE}/pl/weryfikator-email), [strona główna](${SITE}/pl), [cennik](${SITE}/pl/cennik)
 
 ## Full version
 ${SITE}/llms-full.txt
@@ -217,7 +219,7 @@ ${competitorLines}
 ${postLines}
 
 ## Glossary
-Plain definitions of verification and deliverability terms, in six languages (${SITE}/glossary).
+Plain definitions of verification and deliverability terms, in eight languages (${SITE}/glossary).
 ${termLines}
 
 ## Fair use for models

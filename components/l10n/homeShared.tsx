@@ -96,6 +96,43 @@ export const REVIEW_BADGES: Record<L10nLocale, ReviewBadgeStrings> = {
       { title: 'Aucun frais pour les résultats inconnus', text: 'Vous ne payez que pour un résultat clair.' },
     ],
   },
+  nl: {
+    heading: 'Beoordeeld door echte teams',
+    readOn: (p) => `Lees de reviews van Giggal.ai op ${p}`,
+    rating: decimalComma,
+    reviews: (n) => `${n} reviews`,
+    verified: 'Reviews van geverifieerde gebruikers',
+    read: 'Reviews lezen',
+    used: 'Gebruik je Giggal.ai?',
+    leave: 'Schrijf een review op Trustpilot',
+    points: [
+      { title: '1.000 gratis credits', text: 'Je hebt geen creditcard nodig om te beginnen.' },
+      { title: 'Credits verlopen nooit', text: 'Je koopt ze één keer en gebruikt ze wanneer je ze nodig hebt.' },
+      { title: 'Echte antwoorden bij catch-all', text: 'Geldig of ongeldig, niet "riskant".' },
+      { title: 'Geen kosten voor onbekende resultaten', text: 'Je betaalt alleen voor een duidelijk resultaat.' },
+    ],
+  },
+  pl: {
+    heading: 'Oceny od prawdziwych zespołów',
+    readOn: (p) => `Przeczytaj opinie o Giggal.ai w serwisie ${p}`,
+    rating: decimalComma,
+    // 1 opinia, 2-4 opinie (not 12-14), 5+ opinii.
+    reviews: (n) => {
+      const k = parseInt(n.replace(/\D/g, ''), 10)
+      const word = k === 1 ? 'opinia' : k % 10 >= 2 && k % 10 <= 4 && (k % 100 < 12 || k % 100 > 14) ? 'opinie' : 'opinii'
+      return `${n} ${word}`
+    },
+    verified: 'Opinie zweryfikowanych użytkowników',
+    read: 'Przeczytaj opinie',
+    used: 'Korzystasz z Giggal.ai?',
+    leave: 'Zostaw opinię w serwisie Trustpilot',
+    points: [
+      { title: '1000 darmowych kredytów', text: 'Na start nie potrzebujesz karty.' },
+      { title: 'Kredyty nigdy nie wygasają', text: 'Kupujesz je raz i używasz, kiedy potrzebujesz.' },
+      { title: 'Prawdziwe wyniki dla adresów catch-all', text: 'Prawidłowy albo nieprawidłowy, a nie „ryzykowny”.' },
+      { title: 'Bez opłat za wyniki nieznane', text: 'Płacisz tylko za jasny wynik.' },
+    ],
+  },
 }
 
 // The reviews themselves stay in English as written (plans/08 D4), so the
@@ -130,6 +167,18 @@ export const REVIEW_WALL: Record<L10nLocale, ReviewWallStrings> = {
     sub: 'Avis originaux en anglais, issus de G2, Product Hunt et SourceForge.',
     showAll: 'Voir les {n} autres avis',
     showFewer: 'Voir moins d’avis',
+  },
+  nl: {
+    title: 'Wat klanten zeggen over Giggal.ai',
+    sub: 'Originele reviews in het Engels, van G2, Product Hunt en SourceForge.',
+    showAll: 'Toon de {n} andere reviews',
+    showFewer: 'Toon minder reviews',
+  },
+  pl: {
+    title: 'Co klienci mówią o Giggal.ai',
+    sub: 'Oryginalne opinie po angielsku z G2, Product Hunt i SourceForge.',
+    showAll: 'Pokaż pozostałe opinie ({n})',
+    showFewer: 'Pokaż mniej opinii',
   },
 }
 
@@ -352,6 +401,94 @@ export const MCP: Record<L10nLocale, McpStrings> = {
       vscode: { note: <>Remplacez <M>YOUR_API_KEY</M> par la clé de votre tableau de bord Giggal.ai. VS Code utilise <M>&quot;servers&quot;</M> au lieu de <M>&quot;mcpServers&quot;</M>.</> },
       cline: { note: <>Remplacez <M>YOUR_API_KEY</M> par la clé de votre tableau de bord Giggal.ai. Le chemin indiqué est celui de macOS&nbsp;: adaptez-le à votre système.</> },
       zed: { note: <>Remplacez <M>YOUR_API_KEY</M> par la clé de votre tableau de bord Giggal.ai.</> },
+    },
+  },
+  nl: {
+    title: 'Koppel je favoriete AI.',
+    subtitle: 'Voeg Giggal.ai via MCP toe aan je AI-agent en controleer e-mailadressen, ook catch-all, direct in Claude, Cursor, VS Code en andere tools.',
+    toolsAria: 'AI-tools',
+    groups: ['Chat-apps', 'Code-editors'],
+    pasteInto: 'Plakken in',
+    or: ' of ',
+    serverUrl: 'URL van de MCP-server',
+    copy: 'Kopiëren',
+    copied: 'Gekopieerd',
+    copyAria: 'Naar het klembord kopiëren',
+    restart: 'Start de client opnieuw nadat je de server hebt toegevoegd, en vraag dan:',
+    askBefore: '“Is ',
+    askAfter: ' bezorgbaar?”',
+    guide: 'Volledige handleiding',
+    tools: {
+      claude: {
+        subtitle: 'Voeg Giggal.ai toe als eigen connector in Claude. Geen configuratiebestanden en geen API-sleutel om te plakken.',
+        steps: [
+          <>Open in Claude (web of desktop) <B>Settings → Connectors</B>.</>,
+          <>Klik op <B>Add</B> → <B>Add custom connector</B>.</>,
+          <>Geef hem de naam <M>Giggal.ai</M>, plak de MCP-URL hieronder en klik op <B>Add</B>.</>,
+          <>Open de connector <B>Giggal.ai</B> en klik op <B>Connect</B>.</>,
+          <>Klik op <B>Allow</B> om <M>verify:read</M> toe te staan. Daarmee kan de assistent adressen controleren, je credits bekijken en eerdere controles opzoeken.</>,
+        ],
+      },
+      chatgpt: {
+        subtitle: 'Voeg Giggal.ai toe als eigen plugin in ChatGPT, gekoppeld via OAuth, zonder API-sleutel om te plakken.',
+        steps: [
+          <>Open in ChatGPT <B>Plugins</B> in de zijbalk en klik rechtsboven op <B>+</B>.</>,
+          <>Geef hem de naam <M>Giggal.ai</M>, vul bij <B>Server URL</B> de MCP-URL hieronder in, kies <B>Authentication → OAuth</B>, vink de bevestiging aan en klik op <B>Create</B>.</>,
+          <>Open de plugin <B>Giggal.ai</B>, klik op <B>Connect</B> en daarna op <B>Sign in with Giggal.ai</B>.</>,
+          <>Klik op <B>Allow</B> om <M>verify:read</M> toe te staan. Daarmee kan de assistent adressen controleren, je credits bekijken en eerdere controles opzoeken.</>,
+        ],
+      },
+      'claude-code': { note: <>Vervang <M>YOUR_API_KEY</M> door de sleutel uit je Giggal.ai-dashboard. Heb je al een <M>giggal</M>-server? Voer dan eerst <M>claude mcp remove giggal --scope user</M> uit en voeg hem daarna opnieuw toe.</> },
+      codex: { note: <>Codex leest het token uit een omgevingsvariabele. Stel die in, laad je shell opnieuw, sluit Codex en open het opnieuw. Voer daarna <M>/mcp</M> uit om het te controleren:<EnvBlock /></> },
+      cursor: { note: <>Vervang <M>YOUR_API_KEY</M> door de sleutel uit je Giggal.ai-dashboard.</> },
+      windsurf: { note: <>Vervang <M>YOUR_API_KEY</M> door de sleutel uit je Giggal.ai-dashboard.</> },
+      vscode: { note: <>Vervang <M>YOUR_API_KEY</M> door de sleutel uit je Giggal.ai-dashboard. VS Code gebruikt <M>&quot;servers&quot;</M> in plaats van <M>&quot;mcpServers&quot;</M>.</> },
+      cline: { note: <>Vervang <M>YOUR_API_KEY</M> door de sleutel uit je Giggal.ai-dashboard. Het pad hier is dat van macOS. Pas het aan voor je eigen systeem.</> },
+      zed: { note: <>Vervang <M>YOUR_API_KEY</M> door de sleutel uit je Giggal.ai-dashboard.</> },
+    },
+  },
+  pl: {
+    title: 'Połącz swoje ulubione AI.',
+    subtitle: 'Podłącz Giggal.ai do swojego agenta AI przez MCP i sprawdzaj adresy e-mail, także catch-all, bezpośrednio w Claude, Cursor, VS Code i innych narzędziach.',
+    toolsAria: 'Narzędzia AI',
+    groups: ['Aplikacje czatowe', 'Edytory kodu'],
+    pasteInto: 'Wklej do',
+    or: ' albo ',
+    serverUrl: 'URL serwera MCP',
+    copy: 'Kopiuj',
+    copied: 'Skopiowano',
+    copyAria: 'Kopiuj do schowka',
+    restart: 'Po dodaniu serwera uruchom klienta ponownie i zapytaj:',
+    askBefore: '„Czy ',
+    askAfter: ' jest dostarczalny?”',
+    guide: 'Pełny przewodnik',
+    tools: {
+      claude: {
+        subtitle: 'Dodaj Giggal.ai jako niestandardowy konektor w Claude. Bez pliku konfiguracyjnego i bez wklejania klucza API.',
+        steps: [
+          <>W Claude (w przeglądarce lub aplikacji desktopowej) otwórz <B>Settings → Connectors</B>.</>,
+          <>Kliknij <B>Add</B> → <B>Add custom connector</B>.</>,
+          <>Nazwij go <M>Giggal.ai</M>, wklej poniższy URL MCP i kliknij <B>Add</B>.</>,
+          <>Otwórz konektor <B>Giggal.ai</B> i kliknij <B>Connect</B>.</>,
+          <>Kliknij <B>Allow</B>, aby nadać uprawnienie <M>verify:read</M>. Obejmuje ono sprawdzanie adresów, podgląd kredytów i historię weryfikacji.</>,
+        ],
+      },
+      chatgpt: {
+        subtitle: 'Dodaj Giggal.ai jako niestandardową wtyczkę w ChatGPT, połączoną przez OAuth, bez wklejania klucza API.',
+        steps: [
+          <>W ChatGPT otwórz <B>Plugins</B> na pasku bocznym i kliknij <B>+</B> w prawym górnym rogu.</>,
+          <>Nazwij ją <M>Giggal.ai</M>, w polu <B>Server URL</B> wpisz poniższy URL MCP, wybierz <B>Authentication → OAuth</B>, zaznacz potwierdzenie i kliknij <B>Create</B>.</>,
+          <>Otwórz wtyczkę <B>Giggal.ai</B>, kliknij <B>Connect</B>, a potem <B>Sign in with Giggal.ai</B>.</>,
+          <>Kliknij <B>Allow</B>, aby nadać uprawnienie <M>verify:read</M>. Obejmuje ono sprawdzanie adresów, podgląd kredytów i historię weryfikacji.</>,
+        ],
+      },
+      'claude-code': { note: <>Zastąp <M>YOUR_API_KEY</M> kluczem z panelu Giggal.ai. Masz już serwer <M>giggal</M>? Najpierw uruchom <M>claude mcp remove giggal --scope user</M>, a potem dodaj go ponownie.</> },
+      codex: { note: <>Codex odczytuje token ze zmiennej środowiskowej. Ustaw ją, przeładuj powłokę, zamknij i ponownie otwórz Codex, a potem uruchom <M>/mcp</M>, aby to sprawdzić:<EnvBlock /></> },
+      cursor: { note: <>Zastąp <M>YOUR_API_KEY</M> kluczem z panelu Giggal.ai.</> },
+      windsurf: { note: <>Zastąp <M>YOUR_API_KEY</M> kluczem z panelu Giggal.ai.</> },
+      vscode: { note: <>Zastąp <M>YOUR_API_KEY</M> kluczem z panelu Giggal.ai. VS Code używa <M>&quot;servers&quot;</M> zamiast <M>&quot;mcpServers&quot;</M>.</> },
+      cline: { note: <>Zastąp <M>YOUR_API_KEY</M> kluczem z panelu Giggal.ai. Podana ścieżka dotyczy macOS. Dostosuj ją do swojego systemu.</> },
+      zed: { note: <>Zastąp <M>YOUR_API_KEY</M> kluczem z panelu Giggal.ai.</> },
     },
   },
 }

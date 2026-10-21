@@ -37,7 +37,7 @@ export default function TermsOfServicePage() {
           <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">Service</span>
         </h1>
         <p className="text-sm md:text-base text-slate-500 font-semibold">
-          Last Updated: October 1, 2026
+          Last Updated: October 22, 2026
         </p>
       </section>
 
@@ -85,8 +85,8 @@ export default function TermsOfServicePage() {
           </p>
           <ul className="list-disc pl-6 mb-4 space-y-1.5 text-slate-600 leading-relaxed marker:text-indigo-400">
             <li><strong>1 Credit = 1 Email Verification:</strong> Each email address verification consumes exactly 1 credit from your account balance</li>
-            <li><strong>Pay-As-You-Go:</strong> Purchase credits in packages ranging from 10,000 to 1,000,000 credits at any time</li>
-            <li><strong>Recurring Subscriptions:</strong> Subscribe to monthly recurring credit packages with a 5% discount on the regular price</li>
+            <li><strong>Pay-As-You-Go:</strong> Purchase credits in packages ranging from 3,000 to 1,000,000 credits at any time</li>
+            <li><strong>Recurring Subscriptions:</strong> Subscribe to monthly recurring credit packages with a 10% discount on the regular price</li>
             <li><strong>No Expiration:</strong> Credits never expire and remain available in your account until used</li>
             <li><strong>Free Trial:</strong> New accounts receive 1,000 complimentary credits to test the service</li>
           </ul>
@@ -134,7 +134,7 @@ export default function TermsOfServicePage() {
           </p>
           <ul className="list-disc pl-6 mb-4 space-y-1.5 text-slate-600 leading-relaxed marker:text-indigo-400">
             <li><strong>One-Time Purchase (Pay-As-You-Go):</strong> Buy credit packages as needed with immediate account addition</li>
-            <li><strong>Monthly Recurring Subscription:</strong> Receive credits automatically each month with a 5% discount</li>
+            <li><strong>Monthly Recurring Subscription:</strong> Receive credits automatically each month with a 10% discount</li>
           </ul>
 
           <h3 className="text-lg md:text-xl font-bold text-slate-900 mt-6 mb-3">4.2 Pricing and Billing</h3>
@@ -163,7 +163,7 @@ export default function TermsOfServicePage() {
             <li>You can cancel your subscription at any time before the next billing date</li>
             <li>Cancellations take effect at the end of the current billing period</li>
             <li>Credits already added to your account remain available after cancellation</li>
-            <li>Recurring subscribers receive a 5% discount compared to pay-as-you-go pricing</li>
+            <li>Recurring subscribers receive a 10% discount compared to pay-as-you-go pricing</li>
           </ul>
 
           <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight mt-10 mb-4 scroll-mt-28">6. Credit Usage and Management</h2>

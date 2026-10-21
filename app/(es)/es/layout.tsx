@@ -67,7 +67,7 @@ const jsonLd = {
       url: baseUrl,
       name: 'Giggal.ai',
       alternateName: 'Giggal',
-      inLanguage: ['en', 'it', 'de', 'es', 'pt-BR', 'fr'],
+      inLanguage: ['en', 'it', 'de', 'es', 'pt-BR', 'fr', 'nl', 'pl'],
       publisher: { '@id': `${baseUrl}/#organization` },
     },
   ],

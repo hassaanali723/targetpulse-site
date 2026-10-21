@@ -3,62 +3,98 @@ import LegalPageL10n, { type LegalSection } from '@/components/l10n/LegalPage'
 import { hreflangAlternates } from '@/lib/i18n/clusters'
 
 export const metadata: Metadata = {
-  title: 'Política de reembolsos de créditos',
-  description: 'Cuándo reembolsa créditos Giggal.ai: créditos de prueba, compras únicas, suscripciones, casos excepcionales y plazos. Versión de cortesía, prevalece el inglés.',
+  title: 'Política de reembolsos de créditos y suscripciones',
+  description: 'Reembolsos de Giggal.ai: créditos de pago por uso, suscripciones, créditos de prueba, problemas del servicio, contracargos y cómo pedir un reembolso.',
   alternates: { canonical: '/es/reembolsos', languages: hreflangAlternates('refund') },
   openGraph: { siteName: 'Giggal.ai', locale: 'es_LA', title: 'Política de reembolsos', url: 'https://giggal.ai/es/reembolsos', type: 'website', images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai' }] },
 }
 
 const sections: LegalSection[] = [
   { heading: '1. Resumen', paragraphs: [
-    'Esta política describe las circunstancias en las que pueden concederse reembolsos en nuestro servicio basado en créditos.',
-    'Prestamos exclusivamente servicios digitales de verificación de correo y no vendemos ni enviamos bienes físicos.',
+    'En Giggal.ai nos esforzamos por ofrecer servicios de verificación de correo excepcionales. Esta Política de reembolsos describe las circunstancias en las que pueden emitirse reembolsos en nuestro servicio basado en créditos.',
+    'Prestamos únicamente servicios digitales de verificación de correo y no vendemos ni enviamos bienes físicos.',
   ]},
-  { heading: '2. Cómo funciona el sistema de créditos', list: [
-    '1 crédito = 1 verificación: cada verificación consume 1 crédito de tu cuenta', 'Pago por uso: compras créditos en bloque cuando quieres',
-    'Créditos recurrentes: paquetes mensuales en suscripción con descuento', 'Sin caducidad: los créditos permanecen en la cuenta hasta que los usas',
+  { heading: '2. Cómo funciona nuestro sistema de créditos', paragraphs: ['Giggal.ai funciona con un sistema de créditos para la verificación de correo:'], list: [
+    '1 crédito = 1 validación de correo: cada verificación de una dirección de correo consume 1 crédito de tu cuenta',
+    'Pago por uso: compra créditos en bloque en cualquier momento (paquetes de 3.000 a 1.000.000 de créditos)',
+    'Créditos recurrentes: suscríbete a paquetes mensuales recurrentes de créditos con un 10 % de descuento',
+    'Sin caducidad: los créditos nunca caducan y permanecen en tu cuenta hasta que se usan',
   ]},
-  { heading: '3. Créditos de prueba gratis', paragraphs: ['Los usuarios nuevos reciben 1.000 créditos de prueba. Ten en cuenta que:'], list: [
-    'Son gratuitos y no requieren pago', 'No son reembolsables por ser un regalo', 'Siguen las mismas reglas que los créditos de pago', 'Permiten verificar 1.000 direcciones',
+  { heading: '3. Créditos de prueba gratuitos', paragraphs: ['Los usuarios nuevos reciben 1.000 créditos de prueba gratuitos para probar nuestro servicio de verificación de correo. Ten en cuenta que:'], list: [
+    'Los créditos de prueba se ofrecen sin cargo y no requieren ningún pago',
+    'Los créditos de prueba no son reembolsables, ya que son de cortesía',
+    'Los créditos de prueba siguen las mismas reglas de validación que los créditos de pago',
+    'Los créditos de prueba permiten verificar 1.000 direcciones de correo',
   ]},
-  { heading: '4. Reembolso de créditos comprados' },
-  { heading: '4.1 Créditos por uso (compra única)', level: 3, paragraphs: ['Los créditos comprados por uso normalmente no son reembolsables una vez completada la compra, porque:'], list: [
-    'Se añaden a la cuenta al instante y están disponibles de inmediato', 'No caducan y mantienen su valor', 'Puedes usarlos en cualquier momento',
+  { heading: '4. Política de reembolso de compras de créditos' },
+  { heading: '4.1 Créditos de pago por uso (compra única)', level: 3, paragraphs: ['Los créditos comprados mediante paquetes de pago por uso, por lo general, no son reembolsables una vez completada la compra, porque:'], list: [
+    'Los créditos se añaden a tu cuenta al instante y están disponibles para usarlos de inmediato',
+    'Los créditos no caducan y conservan su valor indefinidamente',
+    'Tienes la flexibilidad de usarlos en cualquier momento',
   ]},
-  { heading: '4.2 Suscripciones de créditos recurrentes', level: 3, list: [
-    'Los créditos se cobran y añaden cada mes', 'Puedes cancelar en cualquier momento antes del siguiente ciclo', 'Los créditos ya añadidos no son reembolsables',
-    'La cancelación surte efecto al final del periodo en curso', 'Los créditos no usados de meses anteriores permanecen en la cuenta tras la cancelación',
+  { heading: '4.2 Suscripciones de créditos recurrentes', level: 3, paragraphs: ['En las suscripciones mensuales recurrentes de créditos:'], list: [
+    'Los créditos se cobran y se añaden a tu cuenta cada mes',
+    'Puedes cancelar tu suscripción en cualquier momento antes del siguiente ciclo de facturación',
+    'Los créditos ya añadidos a tu cuenta no son reembolsables',
+    'La cancelación surte efecto al final de tu periodo de facturación en curso',
+    'Los créditos no usados de meses anteriores permanecen en tu cuenta después de la cancelación',
   ]},
-  { heading: '5. Circunstancias excepcionales y soporte', paragraphs: ['La regla general es que los créditos no son reembolsables, pero sabemos que pueden darse situaciones inusuales. En caso de:'], list: [
-    'Errores técnicos que causen cobros de créditos incorrectos', 'Fallos del servicio que impidan la verificación', 'Cobros duplicados o errores de facturación',
-    'Actividad anómala en la cuenta o sospecha de fraude', 'Otras circunstancias excepcionales',
-  ], after: ['Contacta de inmediato con el soporte en info@giggal.ai. Revisaremos el caso y podremos conceder reembolsos o correcciones de créditos, evaluando caso por caso a nuestro criterio.']},
-  { heading: '6. Problemas de calidad del servicio', paragraphs: ['Si problemas técnicos o interrupciones impiden la verificación:'], list: [
-    'Los créditos no se descuentan por verificaciones fallidas por errores de nuestro sistema', 'Comunica al soporte de inmediato cualquier problema de verificación',
-    'Podemos añadir créditos compensatorios por las interrupciones', 'Las interrupciones prolongadas pueden dar derecho a reembolsos parciales a nuestro criterio',
+  { heading: '5. Circunstancias excepcionales y soporte', paragraphs: ['Aunque nuestra política general es que los créditos no son reembolsables, entendemos que pueden darse situaciones inusuales. En casos de:'], list: [
+    'Errores técnicos que causen un descuento incorrecto de créditos',
+    'Fallas del servicio que impidan la validación de correos',
+    'Cargos duplicados o errores de facturación',
+    'Actividad inusual en la cuenta o sospecha de fraude',
+    'Cualquier otra circunstancia excepcional',
+  ], after: ['Contacta de inmediato a nuestro equipo de soporte en info@giggal.ai. Revisaremos tu caso a fondo y podremos emitir reembolsos o ajustes de créditos caso por caso, a nuestra discreción.']},
+  { heading: '6. Problemas de calidad del servicio', paragraphs: ['Si tienes problemas técnicos o interrupciones del servicio que impiden la verificación de correo:'], list: [
+    'No se descontarán créditos por validaciones fallidas debidas a errores de nuestro sistema',
+    'Informa de inmediato a nuestro equipo de soporte sobre cualquier problema de validación',
+    'Podemos añadir créditos compensatorios a tu cuenta por las interrupciones del servicio',
+    'Las interrupciones prolongadas pueden dar lugar a reembolsos parciales, a nuestra discreción',
   ]},
-  { heading: '7. Cierre de cuenta e infracciones', paragraphs: ['Si la cuenta se cierra por incumplimiento de los Términos del servicio o de la política de uso aceptable:'], list: [
-    'No se reembolsa ningún crédito no usado', 'El acceso a la cuenta y a los créditos restantes se revoca de forma permanente', 'Las suscripciones se cancelan de inmediato',
+  { heading: '7. Terminación de la cuenta e infracciones', paragraphs: ['Si tu cuenta se termina por el incumplimiento de nuestros Términos del servicio o de nuestra Política de uso aceptable:'], list: [
+    'No se emitirán reembolsos por los créditos no usados',
+    'El acceso a tu cuenta y a los créditos restantes se revocará de forma permanente',
+    'Las suscripciones recurrentes se cancelarán de inmediato',
   ]},
-  { heading: '8. Cómo solicitar un reembolso o comunicar un problema', paragraphs: ['Escribe al soporte: correo info@giggal.ai, asunto "Refund Request / Issue Report". Incluye:'], list: [
-    'El correo de tu cuenta', 'El ID de la transacción o del pedido', 'Una descripción detallada del problema', 'Fecha y hora del incidente (si procede)',
-    'Capturas de pantalla o pruebas (si procede)', 'El número de créditos afectados',
+  { heading: '8. Cómo solicitar un reembolso o informar de un problema', paragraphs: [
+    'Para solicitar un reembolso o informar de actividad inusual, contacta a nuestro equipo de soporte:',
+    'Correo electrónico: info@giggal.ai',
+    'Asunto: Refund Request / Issue Report',
+    'Incluye la siguiente información en tu solicitud:',
+  ], list: [
+    'La dirección de correo electrónico de tu cuenta',
+    'El ID de la transacción o el número de pedido',
+    'Una descripción detallada del problema o de la actividad inusual',
+    'La fecha y la hora del incidente (si corresponde)',
+    'Capturas de pantalla o pruebas que respalden tu reclamación (si corresponde)',
+    'El número de créditos afectados',
   ]},
-  { heading: '9. Plazos de tramitación del reembolso', paragraphs: ['Si la solicitud se aprueba:'], list: [
-    'Revisamos el caso en 2 o 3 días laborables', 'Recibes la decisión por correo', 'Los reembolsos aprobados se tramitan en 5 a 10 días laborables',
-    'El reembolso se emite al método de pago original a través de nuestro procesador', 'Pueden pasar otros 5 a 7 días laborables hasta que aparezca en tu cuenta',
+  { heading: '9. Plazos de procesamiento de reembolsos', paragraphs: ['Si se aprueba tu solicitud de reembolso:'], list: [
+    'Revisaremos tu caso en un plazo de 2 a 3 días hábiles',
+    'Recibirás una respuesta por correo electrónico con la decisión',
+    'Los reembolsos aprobados se procesarán en un plazo de 5 a 10 días hábiles',
+    'Los reembolsos se emitirán al método de pago original a través de nuestro procesador de pagos',
+    'Según tu proveedor de pago, el reembolso puede tardar otros 5 a 7 días hábiles en aparecer en tu cuenta',
   ]},
-  { heading: '10. Disputas de cargo (contracargos)', paragraphs: ['Si abres una disputa con tu banco o tu proveedor de pago sin contactarnos antes:'], list: [
-    'Nos reservamos el derecho de cerrar tu cuenta de forma permanente', 'No podrás volver a usar nuestros servicios', 'Se pierden todos los créditos restantes',
-    'Aportaremos al procesador de pagos las pruebas en defensa del cargo',
-  ], after: ['Te pedimos que contactes primero con el soporte: resolvemos los problemas de forma justa y rápida.']},
-  { heading: '11. Transferencia de créditos y cuentas compartidas', paragraphs: ['Los créditos no son transferibles entre cuentas. No se reembolsan:'], list: [
-    'Créditos comprados en la cuenta equivocada', 'Solicitudes de transferencia a otra cuenta', 'Infracciones por compartir la cuenta',
+  { heading: '10. Contracargos', paragraphs: ['Si presentas un contracargo o una disputa de pago ante tu banco o tu proveedor de pago sin contactarnos antes para resolver el problema:'], list: [
+    'Nos reservamos el derecho de terminar tu cuenta de forma permanente',
+    'Se te prohibirá usar nuestros servicios en el futuro',
+    'Perderás todos los créditos restantes',
+    'Aportaremos pruebas al procesador de pagos en defensa del cargo',
+  ], after: ['Te recomendamos firmemente que contactes primero a nuestro equipo de soporte. Nos comprometemos a resolver los problemas de forma justa y rápida.']},
+  { heading: '11. Transferencia de créditos y cuentas compartidas', paragraphs: ['Los créditos no son transferibles entre cuentas. No se emitirán reembolsos por:'], list: [
+    'Créditos comprados en la cuenta equivocada',
+    'Solicitudes de transferencia de créditos a otra cuenta',
+    'Infracciones por compartir la cuenta',
   ]},
-  { heading: '12. Cambios en esta política', paragraphs: ['Nos reservamos el derecho de modificar esta política en cualquier momento. Los cambios surten efecto desde su publicación en el sitio. Al seguir usando los servicios aceptas la nueva versión.']},
-  { heading: '13. Contacto', paragraphs: [
-    'Para dudas o soporte: correo info@giggal.ai, web https://giggal.ai. Respondemos normalmente en 24 a 48 horas.',
-    'Esta política forma parte de los Términos del servicio. Al usar los servicios de Giggal.ai declaras haberla leído y comprendido.',
+  { heading: '12. Cambios en esta política', paragraphs: ['Nos reservamos el derecho de modificar esta Política de reembolsos en cualquier momento. Los cambios surtirán efecto de inmediato desde su publicación en nuestro sitio web. Si sigues usando nuestros servicios después de cualquier cambio, aceptas la nueva política.']},
+  { heading: '13. Información de contacto', paragraphs: [
+    'Si tienes preguntas sobre esta Política de reembolsos o necesitas ayuda, contáctanos:',
+    'Correo electrónico: info@giggal.ai',
+    'Sitio web: https://giggal.ai',
+    'Nuestro equipo de soporte se compromete a atender tus inquietudes y a encontrar soluciones justas. Normalmente respondemos a todas las consultas en un plazo de 24 a 48 horas.',
+    'Esta Política de reembolsos forma parte de nuestros Términos del servicio. Al usar los servicios de Giggal.ai, reconoces que has leído y comprendido esta política.',
   ]},
 ]
 
@@ -69,7 +105,7 @@ export default function ReembolsosPage() {
       path="/es/reembolsos"
       title="Política de"
       accent="reembolsos"
-      updated="4 de febrero de 2026"
+      updated="22 de octubre de 2026"
       englishHref="/refund-policy"
       sections={sections}
     />

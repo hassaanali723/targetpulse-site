@@ -2,7 +2,7 @@
 
 Giggal.ai is the brand and product (email verification SaaS). The legal entity is
 TargetPulse Ltd. Next.js 14 App Router, Tailwind. Language route groups:
-`(en) (it) (de) (es) (pt-br) (fr)`.
+`(en) (it) (de) (es) (pt-br) (fr) (nl) (pl)`.
 
 ## Page layout: section widths must align with the navbar
 
@@ -72,5 +72,5 @@ top 10 for "email checker". Its wording and keyword counts are deliberate.
 - Disposable detection and rate limiting live in the backend, not in this repo. The
   site calls the backend public validator through `lib/publicVerify.ts`. See
   `docs/DISPOSABLE_CHECK_GUIDE.md`.
-- Translations exist for it, de, es, pt-br, fr. New marketing pages are English first;
+- Translations exist for it, de, es, pt-br, fr, nl, pl. New marketing pages are English first;
   translate only when asked.
