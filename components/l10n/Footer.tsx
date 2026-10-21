@@ -22,8 +22,10 @@ function Column({ heading, links, prefix }: { heading: string; links: { name: st
     <>
       <p className={headingClass}>{heading}</p>
       <ul className="space-y-2.5">
-        {links.map((link) => (
-          <li key={link.href + link.name}>
+        {links.map((link, i) => (
+          // The key must not start with "/": Next.js ships keys in the page's
+          // script data and Googlebot crawls path-like strings found there.
+          <li key={`${i}:${link.name}`}>
             <Link href={link.href} className={linkClass}>
               {link.name}
               {!link.href.startsWith(prefix) && <ArrowUpRight className="w-3 h-3 opacity-60" />}
