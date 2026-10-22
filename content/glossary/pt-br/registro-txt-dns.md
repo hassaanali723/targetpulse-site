@@ -55,7 +55,7 @@ A maioria dos problemas com registros TXT vem de alguns erros simples.
 
 Você pode ler os registros TXT de qualquer domínio. Em um computador Mac ou Linux, abra o terminal e digite `dig TXT example.com`. No Windows, digite `nslookup -type=TXT example.com`.
 
-Você também pode usar o nosso [SPF checker](/spf-checker) (em inglês). Ele lê o registro SPF de um domínio e explica o que ele permite.
+Você também pode usar o nosso [SPF checker](/spf-checker). Ele lê o registro SPF de um domínio e explica o que ele permite.
 
 ## Como os registros TXT se relacionam com a verificação
 

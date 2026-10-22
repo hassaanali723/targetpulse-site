@@ -55,7 +55,7 @@ La maggior parte dei problemi con i record TXT nasce da pochi errori semplici.
 
 Puoi leggere i record TXT di qualsiasi dominio. Su un computer Mac o Linux, apri il terminale e scrivi `dig TXT example.com`. Su Windows, scrivi `nslookup -type=TXT example.com`.
 
-Puoi anche usare la nostra [verifica record SPF](/spf-checker) (in inglese). Legge il record SPF di un dominio e spiega cosa consente.
+Puoi anche usare la nostra [verifica record SPF](/spf-checker). Legge il record SPF di un dominio e spiega cosa consente.
 
 ## Che rapporto c'è tra record TXT e verifica
 

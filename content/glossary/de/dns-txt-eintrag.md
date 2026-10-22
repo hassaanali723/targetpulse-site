@@ -55,7 +55,7 @@ Die meisten Probleme mit TXT-Einträgen kommen von ein paar einfachen Fehlern.
 
 Sie können die TXT-Einträge jeder Domain lesen. Auf einem Mac oder Linux-Computer öffnen Sie das Terminal und tippen `dig TXT example.com`. Unter Windows tippen Sie `nslookup -type=TXT example.com`.
 
-Sie können auch unseren [SPF-Checker](/spf-checker) (auf Englisch) nutzen. Er liest den SPF-Eintrag einer Domain und erklärt, was er erlaubt.
+Sie können auch unseren [SPF-Checker](/spf-checker) nutzen. Er liest den SPF-Eintrag einer Domain und erklärt, was er erlaubt.
 
 ## Was TXT-Einträge mit Verifizierung zu tun haben
 
