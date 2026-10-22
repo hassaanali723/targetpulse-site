@@ -92,17 +92,47 @@ export const ACCENT_COLOR_PRESETS = [
   '#334155', // Slate
 ]
 
-export function validateImageUrl(url?: string): { valid: boolean; warning?: string } {
+/**
+ * Words the generator writes into the signature itself. English is the default;
+ * a localized page passes its own (lib/i18n/tools/signatureToolStrings.ts).
+ * Labels include their punctuation, so a language can write "Téléphone :".
+ */
+export interface SignatureLabels {
+  phone: string
+  mobile: string
+  email: string
+  web: string
+  address: string
+  /** alt text of the logo image when no company name is filled in. */
+  logoAlt: string
+  /** The optional credit line at the bottom. */
+  madeWith: string
+}
+
+export const SIGNATURE_LABELS_EN: SignatureLabels = {
+  phone: 'Phone:',
+  mobile: 'Mobile:',
+  email: 'Email:',
+  web: 'Web:',
+  address: 'Address:',
+  logoAlt: 'Logo',
+  madeWith: 'Created with Giggal.ai',
+}
+
+/** Why an image URL is not accepted. `warning` keeps the English text; a localized page maps the code. */
+export type ImageUrlWarningCode = 'not-https' | 'invalid'
+
+export function validateImageUrl(url?: string): { valid: boolean; warning?: string; code?: ImageUrlWarningCode } {
   if (!url || !url.trim()) return { valid: true }
   const trimmed = url.trim()
   if (!trimmed.startsWith('https://')) {
-    return { valid: false, warning: 'Image URL must start with https://' }
+    return { valid: false, warning: 'Image URL must start with https://', code: 'not-https' }
   }
   try {
     new URL(trimmed)
     return { valid: true }
   } catch {
-    return { valid: false, warning: 'Invalid image URL' }
+    return { valid: false, warning: 'Invalid image URL', code: 'invalid' }
   }
 }
 
@@ -180,9 +210,9 @@ function renderDisclaimer(data: SignatureData, fontStack: string): string {
 /**
  * Helper for "Made with Giggal" subtle tag
  */
-function renderMadeWithGiggal(data: SignatureData, fontStack: string): string {
+function renderMadeWithGiggal(data: SignatureData, fontStack: string, labels: SignatureLabels): string {
   if (!data.showMadeWithGiggal) return ''
-  return `<tr><td colspan="2" style="padding-top:6px; font-family:${fontStack}; font-size:10px; color:#94a3b8;"><a href="https://giggal.ai" target="_blank" rel="noopener noreferrer" style="color:#94a3b8; text-decoration:none;">Created with Giggal.ai</a></td></tr>`
+  return `<tr><td colspan="2" style="padding-top:6px; font-family:${fontStack}; font-size:10px; color:#94a3b8;"><a href="https://giggal.ai" target="_blank" rel="noopener noreferrer" style="color:#94a3b8; text-decoration:none;">${escapeHtml(labels.madeWith)}</a></td></tr>`
 }
 
 /**
@@ -205,23 +235,23 @@ export function formatTelLink(phone: string): string {
 /**
  * Collect contact lines (phone, mobile, email, website, address)
  */
-function collectContactItems(data: SignatureData, fontStack: string): string[] {
+function collectContactItems(data: SignatureData, fontStack: string, labels: SignatureLabels): string[] {
   const items: string[] = []
   if (data.phone?.trim()) {
     const telHref = formatTelLink(data.phone)
     items.push(
-      `<span style="color:#64748b;">Phone:</span> <a href="${escapeHtml(telHref)}" style="color:#334155; text-decoration:none; font-family:${fontStack};">${escapeHtml(data.phone.trim())}</a>`
+      `<span style="color:#64748b;">${escapeHtml(labels.phone)}</span> <a href="${escapeHtml(telHref)}" style="color:#334155; text-decoration:none; font-family:${fontStack};">${escapeHtml(data.phone.trim())}</a>`
     )
   }
   if (data.mobile?.trim()) {
     const telHref = formatTelLink(data.mobile)
     items.push(
-      `<span style="color:#64748b;">Mobile:</span> <a href="${escapeHtml(telHref)}" style="color:#334155; text-decoration:none; font-family:${fontStack};">${escapeHtml(data.mobile.trim())}</a>`
+      `<span style="color:#64748b;">${escapeHtml(labels.mobile)}</span> <a href="${escapeHtml(telHref)}" style="color:#334155; text-decoration:none; font-family:${fontStack};">${escapeHtml(data.mobile.trim())}</a>`
     )
   }
   if (data.email?.trim()) {
     items.push(
-      `<span style="color:#64748b;">Email:</span> <a href="mailto:${escapeHtml(data.email.trim())}" style="color:#334155; text-decoration:none; font-family:${fontStack};">${escapeHtml(data.email.trim())}</a>`
+      `<span style="color:#64748b;">${escapeHtml(labels.email)}</span> <a href="mailto:${escapeHtml(data.email.trim())}" style="color:#334155; text-decoration:none; font-family:${fontStack};">${escapeHtml(data.email.trim())}</a>`
     )
   }
   if (data.website?.trim()) {
@@ -229,11 +259,11 @@ function collectContactItems(data: SignatureData, fontStack: string): string[] {
     const clean = cleanUrl(rawUrl)
     const display = rawUrl.replace(/^https?:\/\//i, '').replace(/\/$/, '')
     items.push(
-      `<span style="color:#64748b;">Web:</span> <a href="${escapeHtml(clean)}" target="_blank" rel="noopener noreferrer" style="color:#334155; text-decoration:none; font-family:${fontStack};">${escapeHtml(display)}</a>`
+      `<span style="color:#64748b;">${escapeHtml(labels.web)}</span> <a href="${escapeHtml(clean)}" target="_blank" rel="noopener noreferrer" style="color:#334155; text-decoration:none; font-family:${fontStack};">${escapeHtml(display)}</a>`
     )
   }
   if (data.address?.trim()) {
-    items.push(`<span style="color:#64748b;">Address:</span> <span style="color:#334155;">${escapeHtml(data.address.trim())}</span>`)
+    items.push(`<span style="color:#64748b;">${escapeHtml(labels.address)}</span> <span style="color:#334155;">${escapeHtml(data.address.trim())}</span>`)
   }
   return items
 }
@@ -241,14 +271,14 @@ function collectContactItems(data: SignatureData, fontStack: string): string[] {
 /**
  * Generate Table-Based HTML with inline CSS (max 600px width)
  */
-export function generateSignatureHtml(data: SignatureData): string {
+export function generateSignatureHtml(data: SignatureData, labels: SignatureLabels = SIGNATURE_LABELS_EN): string {
   const fontObj = SIGNATURE_FONTS.find((f) => f.name === data.font) || SIGNATURE_FONTS[0]
   const fontStack = fontObj.stack
-  const contactItems = collectContactItems(data, fontStack)
+  const contactItems = collectContactItems(data, fontStack, labels)
   const socialHtml = renderSocialRow(data, fontStack)
   const ctaHtml = renderCta(data, fontStack)
   const disclaimerHtml = renderDisclaimer(data, fontStack)
-  const madeWithHtml = renderMadeWithGiggal(data, fontStack)
+  const madeWithHtml = renderMadeWithGiggal(data, fontStack, labels)
 
   const titleCompanyParts = [data.jobTitle?.trim(), data.department?.trim(), data.company?.trim()].filter(Boolean)
   const titleCompany = titleCompanyParts.join(' · ')
@@ -280,7 +310,7 @@ export function generateSignatureHtml(data: SignatureData): string {
     const hasLogo = !!data.logoUrl?.trim()
     const logoCol = hasLogo
       ? `<td valign="top" style="padding-right:16px; width:100px; text-align:center;">
-      <img src="${escapeHtml(data.logoUrl?.trim())}" alt="${escapeHtml(data.company || 'Logo')}" width="90" style="display:block; max-width:90px; height:auto; border:0;" />
+      <img src="${escapeHtml(data.logoUrl?.trim())}" alt="${escapeHtml(data.company || labels.logoAlt)}" width="90" style="display:block; max-width:90px; height:auto; border:0;" />
     </td>`
       : ''
 
@@ -345,7 +375,7 @@ export function generateSignatureHtml(data: SignatureData): string {
 /**
  * Generate Plain-Text signature representation for mobile apps
  */
-export function generatePlainTextSignature(data: SignatureData): string {
+export function generatePlainTextSignature(data: SignatureData, labels: SignatureLabels = SIGNATURE_LABELS_EN): string {
   const lines: string[] = []
 
   // Name & Pronouns
@@ -361,11 +391,11 @@ export function generatePlainTextSignature(data: SignatureData): string {
   lines.push('---')
 
   // Contact items
-  if (data.phone?.trim()) lines.push(`Phone: ${data.phone.trim()}`)
-  if (data.mobile?.trim()) lines.push(`Mobile: ${data.mobile.trim()}`)
-  if (data.email?.trim()) lines.push(`Email: ${data.email.trim()}`)
-  if (data.website?.trim()) lines.push(`Web: ${data.website.trim()}`)
-  if (data.address?.trim()) lines.push(`Address: ${data.address.trim()}`)
+  if (data.phone?.trim()) lines.push(`${labels.phone} ${data.phone.trim()}`)
+  if (data.mobile?.trim()) lines.push(`${labels.mobile} ${data.mobile.trim()}`)
+  if (data.email?.trim()) lines.push(`${labels.email} ${data.email.trim()}`)
+  if (data.website?.trim()) lines.push(`${labels.web} ${data.website.trim()}`)
+  if (data.address?.trim()) lines.push(`${labels.address} ${data.address.trim()}`)
 
   // CTA
   if (data.ctaText?.trim()) {
@@ -390,7 +420,7 @@ export function generatePlainTextSignature(data: SignatureData): string {
 
   if (data.showMadeWithGiggal) {
     lines.push('')
-    lines.push('Created with Giggal.ai')
+    lines.push(labels.madeWith)
   }
 
   return lines.join('\n')

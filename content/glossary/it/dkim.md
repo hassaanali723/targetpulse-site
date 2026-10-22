@@ -73,7 +73,7 @@ Se usi un servizio di posta o una piattaforma di invio, il servizio crea le chia
 3. Crea il record presso il tuo provider DNS, con il tipo che indica il servizio. Di solito il provider DNS è l'azienda dove hai comprato il dominio.
 4. Torna nel servizio e attiva la firma.
 
-Se hai un tuo server di posta, puoi creare la coppia di chiavi con il nostro [generatore DKIM](/dkim-generator) (in inglese). La chiave viene creata nel tuo browser e non viene inviata da nessuna parte.
+Se hai un tuo server di posta, puoi creare la coppia di chiavi con il nostro [generatore DKIM](/dkim-generator). La chiave viene creata nel tuo browser e non viene inviata da nessuna parte.
 
 Fai attenzione a un errore frequente. Molte piattaforme firmano di default con il proprio dominio, non con il tuo. La firma passa, ma non è allineata con il dominio nel campo Da. Per DMARC devi attivare la firma DKIM con il tuo dominio.
 

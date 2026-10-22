@@ -51,7 +51,7 @@ export const footer = {
       { name: 'Validar correo gratis', href: '/es/validar-correo' },
       { name: 'Verificar correo desechable', href: '/es/verificar-correo-desechable' },
       { name: 'Proveedores de correo desechable', href: '/es/proveedores-de-correo-desechable' },
-      { name: 'Proveedores de correo gratuito (en inglés)', href: '/free-email-providers' },
+      { name: 'Proveedores de correo gratuitos', href: '/es/proveedores-de-correo-electronico-gratuitos' },
       { name: 'Extractor de correos (en inglés)', href: '/email-extractor' },
       { name: 'Generador DKIM (en inglés)', href: '/dkim-generator' },
       { name: 'Generador DMARC (en inglés)', href: '/dmarc-generator' },

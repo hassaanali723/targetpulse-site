@@ -67,7 +67,7 @@ Ein DKIM-Eintrag mit dem öffentlichen Schlüssel sieht im DNS so aus:
 v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA...
 ```
 
-Das Tag `v=DKIM1` nennt die Protokollversion, `k=rsa` den Schlüsselalgorithmus, und `p=` enthält den öffentlichen Schlüssel in Base64. Betreiben Sie Ihren eigenen Mailserver, können Sie mit unserem [DKIM-Generator](/dkim-generator) (auf Englisch) ein Schlüsselpaar erstellen.
+Das Tag `v=DKIM1` nennt die Protokollversion, `k=rsa` den Schlüsselalgorithmus, und `p=` enthält den öffentlichen Schlüssel in Base64. Betreiben Sie Ihren eigenen Mailserver, können Sie mit unserem [DKIM-Generator](/dkim-generator) ein Schlüsselpaar erstellen.
 
 Eine häufige Falle entsteht, wenn sich Absender auf die Standardsignatur der Plattform verlassen. Viele E-Mail-Plattformen signieren ausgehende E-Mails standardmäßig mit ihrer eigenen gemeinsamen Domain (`d=shared-esp.example`). Die Signatur besteht zwar, aber die signierende Domain passt nicht zu Ihrer sichtbaren From-Domain. Dadurch schlägt das DMARC-Alignment fehl. Richten Sie in den Einstellungen Ihrer Plattform ein eigenes DKIM ein, damit die Signatur Ihre Domain im Tag `d=` nutzt.
 
@@ -95,7 +95,7 @@ Das Tag rua sagt Empfängern, wohin sie Sammelberichte senden sollen. Das sind m
 _dmarc.example.com TXT "v=DMARC1; p=none; rua=mailto:dmarc@example.com"
 ```
 
-Im Mai 2026 hat die Internet Engineering Task Force RFC 9989 auf dem Standards Track veröffentlicht, zusammen mit RFC 9990 für Sammelberichte und RFC 9991 für Fehlerberichte. Diese neuen Standards ersetzen offiziell RFC 7489 und RFC 9091. Bestehende Einträge, die mit `v=DMARC1` beginnen, funktionieren weiter. Die neue Spezifikation ändert aber mehrere Tags. Das Prozent-Tag (`pct`) und das Tag für das Berichtsformat (`rf`) sind entfallen und nicht mehr Teil des Standards. Das Tag für das Berichtsintervall (`ri`) gilt als historisch. Absender, die eine neue Richtlinie testen, nutzen jetzt das neue Tag `t` für den Testmodus. Administratoren können mit dem Tag `np` Richtlinien für nicht existierende Subdomains festlegen. Enthält Ihr aktueller DNS-Eintrag ein Prozent-Tag, planen Sie, es zu entfernen. Mit unserem [DMARC-Generator](/dmarc-generator) (auf Englisch) können Sie einen neuen Eintrag erstellen oder alte Tags entfernen.
+Im Mai 2026 hat die Internet Engineering Task Force RFC 9989 auf dem Standards Track veröffentlicht, zusammen mit RFC 9990 für Sammelberichte und RFC 9991 für Fehlerberichte. Diese neuen Standards ersetzen offiziell RFC 7489 und RFC 9091. Bestehende Einträge, die mit `v=DMARC1` beginnen, funktionieren weiter. Die neue Spezifikation ändert aber mehrere Tags. Das Prozent-Tag (`pct`) und das Tag für das Berichtsformat (`rf`) sind entfallen und nicht mehr Teil des Standards. Das Tag für das Berichtsintervall (`ri`) gilt als historisch. Absender, die eine neue Richtlinie testen, nutzen jetzt das neue Tag `t` für den Testmodus. Administratoren können mit dem Tag `np` Richtlinien für nicht existierende Subdomains festlegen. Enthält Ihr aktueller DNS-Eintrag ein Prozent-Tag, planen Sie, es zu entfernen. Mit unserem [DMARC-Generator](/dmarc-generator) können Sie einen neuen Eintrag erstellen oder alte Tags entfernen.
 
 ## So prüft ein empfangender Server eine Nachricht
 
@@ -132,7 +132,7 @@ Bleibt DMARC dauerhaft auf `p=none`, ist Ihre Domain anfällig für Fälschungen
 Gehen Sie diese Punkte der Reihe nach durch:
 
 1. Listen Sie jeden internen Dienst, jede Marketing-Plattform, jeden Support-Desk und jedes Tool für Transaktions-E-Mails auf, das mit Ihrer Domain E-Mails sendet.
-2. Veröffentlichen Sie einen einzigen gemeinsamen [SPF-Eintrag](/glossary/spf) für alle berechtigten sendenden Server und bleiben Sie unter 10 Abfragen. Der [SPF-Checker](/spf-checker) (auf Englisch) zählt sie für Sie.
+2. Veröffentlichen Sie einen einzigen gemeinsamen [SPF-Eintrag](/glossary/spf) für alle berechtigten sendenden Server und bleiben Sie unter 10 Abfragen. Der [SPF-Checker](/spf-checker) zählt sie für Sie.
 3. Schalten Sie für jede Versandplattform eigene DKIM-Signaturen mit Ihrer Domain ein und veröffentlichen Sie die passenden Selektor-Einträge im DNS.
 4. Sorgen Sie dafür, dass Ihre sendenden IP-Adressen gültiges Forward-DNS und einen passenden [PTR-Eintrag](/glossary/ptr-record) im Reverse-DNS haben.
 5. Veröffentlichen Sie unter `_dmarc` einen ersten [DMARC-Eintrag](/blog/what-is-a-dmarc-record) mit `p=none` und einem aktiven Postfach für `rua`, damit Sie XML-Sammelberichte erhalten.

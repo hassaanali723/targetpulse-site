@@ -150,7 +150,7 @@ Per sistemare un indirizzo che un modulo non accetta:
 - Controlla come è scritto, soprattutto il dominio. L'elenco di Google degli errori comuni include refusi come gmal.con, spazi di troppo e un punto alla fine ([Google](https://support.google.com/mail/answer/6596)).
 - Togli gli spazi o le virgolette che hai copiato per sbaglio.
 - Se hai usato un indirizzo con il segno più e il modulo lo rifiuta, usa il tuo indirizzo semplice.
-- Se l'indirizzo sembra corretto, esegui una [ricerca record MX](/mx-lookup) (in inglese) sul dominio per vedere se può ricevere posta.
+- Se l'indirizzo sembra corretto, esegui una [ricerca record MX](/mx-lookup) sul dominio per vedere se può ricevere posta.
 - Per sapere se la casella esiste davvero, usa la [verifica email](/email-checker). Controlla l'indirizzo senza inviare un'email.
 
 ## Come ottenere un indirizzo email professionale
@@ -159,7 +159,7 @@ Hai due possibilità.
 
 La più rapida è un account gratuito con un provider come Gmail, Outlook.com o Proton Mail. Non costa niente e funziona ovunque. La nostra [lista di provider email gratuiti](/free-email-providers) (in inglese) confronta cosa offre ciascuno.
 
-L'altra è un indirizzo sul tuo dominio, come jane@yourbusiness.com. Ti servono tre cose. Primo, un dominio registrato. Secondo, un servizio di posta come Google Workspace o Microsoft 365. Terzo, record MX che puntano il tuo dominio a quel servizio. Il servizio ti indica i record esatti da aggiungere ([Google](https://knowledge.workspace.google.com/admin/domains/set-up-mx-records-for-google-workspace)). Una volta configurato, puoi controllare i record con la [ricerca record MX](/mx-lookup) (in inglese).
+L'altra è un indirizzo sul tuo dominio, come jane@yourbusiness.com. Ti servono tre cose. Primo, un dominio registrato. Secondo, un servizio di posta come Google Workspace o Microsoft 365. Terzo, record MX che puntano il tuo dominio a quel servizio. Il servizio ti indica i record esatti da aggiungere ([Google](https://knowledge.workspace.google.com/admin/domains/set-up-mx-records-for-google-workspace)). Una volta configurato, puoi controllare i record con la [ricerca record MX](/mx-lookup).
 
 Scegli con attenzione, perché alcuni indirizzi sono difficili da cambiare dopo. Gmail ti permette di passare a un nuovo indirizzo gmail.com fino a tre volte, una volta ogni 12 mesi ([Google](https://support.google.com/accounts/answer/19870)). Yahoo non ti permette affatto di cambiare indirizzo ([Yahoo](https://help.yahoo.com/kb/yahoo-email-address-sln2059.html)).
 

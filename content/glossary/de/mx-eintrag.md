@@ -64,7 +64,7 @@ Der MX-Eintrag ist die erste echte Prüfung in der E-Mail-Verifizierung. Die Syn
 
 ## Warum es für Absender wichtig ist
 
-Jeder kann den MX-Eintrag einer Domain per DNS-Abfrage lesen. Unser kostenloser [MX-Lookup](/mx-lookup) (auf Englisch) zeigt die MX-Einträge jeder Domain. Wechselt ein Unternehmen den E-Mail-Anbieter oder schließt es, ändert sich sein MX-Eintrag oder verschwindet. Die Adressen funktionieren dann nicht mehr. Niemand sagt es Ihnen.
+Jeder kann den MX-Eintrag einer Domain per DNS-Abfrage lesen. Unser kostenloser [MX-Lookup](/mx-lookup) zeigt die MX-Einträge jeder Domain. Wechselt ein Unternehmen den E-Mail-Anbieter oder schließt es, ändert sich sein MX-Eintrag oder verschwindet. Die Adressen funktionieren dann nicht mehr. Niemand sagt es Ihnen.
 
 **Beispiel:** Die Firma Holzbau Meier schließt. Ihre Domain holzbau-meier.example läuft aus, und der MX-Eintrag verschwindet. Auf Ihrer Liste stehen noch drei Adressen dieser Firma. Beim nächsten Newsletter kommen alle drei als Hard Bounce zurück. Ein Hard Bounce ist eine E-Mail, die dauerhaft abgelehnt wird.
 

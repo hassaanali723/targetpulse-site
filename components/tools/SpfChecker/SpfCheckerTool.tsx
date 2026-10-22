@@ -26,16 +26,26 @@ import {
   recordToBuildOptions,
   subtreeLookups,
   SpfInputError,
+  SpfNoAnswerError,
   LOOKUP_LIMIT,
   VOID_LIMIT,
   type SpfCheckResult,
   type SpfIssue,
   type SpfNode,
   type SpfTerm,
-  type SpfQualifier,
 } from '@/lib/tools/spfCheckerCore'
 import { DnsLookupError } from '@/lib/tools/dnsOverHttps'
-import { SPF_SENDERS, SPF_NOT_NEEDED, senderName, unneededInclude } from '@/lib/tools/spfSenders'
+import { SPF_SENDERS, SPF_NOT_NEEDED, unneededInclude } from '@/lib/tools/spfSenders'
+import {
+  spfToolStrings,
+  spfIssueText,
+  spfFailureText,
+  spfSenderName,
+  spfSenderNote,
+  spfNotNeededReason,
+  type SpfToolStrings,
+} from '@/lib/i18n/tools/spfToolStrings'
+import type { Locale } from '@/lib/i18n/clusters'
 
 const EXAMPLES = ['google.com', 'microsoft.com', 'github.com']
 
@@ -57,8 +67,6 @@ const PERMERROR = new Set([
   'mx-over-10',
 ])
 
-const ALL_LABEL: Record<SpfQualifier, string> = { '-': 'Fail', '~': 'Soft fail', '?': 'Neutral', '+': 'Pass (unsafe)' }
-
 type Tone = 'ok' | 'warn' | 'bad' | 'info'
 
 const TONE = {
@@ -68,96 +76,68 @@ const TONE = {
   info: { box: 'bg-slate-50 border-slate-200', title: 'text-slate-900', text: 'text-slate-700', Icon: MinusCircle, icon: 'text-slate-500' },
 }
 
-function allSentence(q: SpfQualifier | null): string {
-  if (q === '-') return 'Mail from servers it doesn’t list fails SPF.'
-  if (q === '~') return 'Mail from servers it doesn’t list gets a soft fail.'
-  return ''
+/** Fills the {slot} markers of a strings-file template with text or elements. */
+function fill(template: string, slots: Record<string, React.ReactNode>): React.ReactNode[] {
+  return template.split(/(\{\w+\})/).map((part, i) => {
+    const m = /^\{(\w+)\}$/.exec(part)
+    return m && m[1] in slots ? <React.Fragment key={i}>{slots[m[1]]}</React.Fragment> : part
+  })
+}
+
+function inputErrorText(t: SpfToolStrings, err: SpfInputError): string {
+  if (err.kind === 'empty') return t.inputEmpty
+  if (err.kind === 'invalid') return t.inputInvalid
+  return err.message
 }
 
 // One summary per outcome, written for someone who has never read an SPF record.
-function summary(r: SpfCheckResult): { tone: Tone; title: string; text: string } {
-  const d = r.domain
-  const lookups = `It uses ${r.totalLookups} of the ${LOOKUP_LIMIT} allowed DNS lookups.`
+// The wording lives in lib/i18n/tools/spfToolStrings.ts.
+function summary(r: SpfCheckResult, t: SpfToolStrings): { tone: Tone; title: string; text: string } {
+  const p = { domain: r.domain, lookups: r.totalLookups, limit: LOOKUP_LIMIT, allQualifier: r.allQualifier }
   switch (r.outcome) {
     case 'valid':
-      return { tone: 'ok', title: `${d} has a valid SPF record`, text: `${lookups} ${allSentence(r.allQualifier)}`.trim() }
+      return { tone: 'ok', ...t.summary.valid(p) }
     case 'warnings':
-      return {
-        tone: 'warn',
-        title: `${d} has a working SPF record with warnings`,
-        text: `Receivers can use it, but the warnings below weaken it or could break it later. ${lookups}`,
-      }
+      return { tone: 'warn', ...t.summary.warnings(p) }
     case 'invalid':
-      return r.issues.some((i) => PERMERROR.has(i.code))
-        ? {
-            tone: 'bad',
-            title: `${d}’s SPF record is broken`,
-            text: 'Receivers treat a record like this as an error (permerror), so SPF fails for all mail from this domain. The fixes are listed below.',
-          }
-        : {
-            tone: 'bad',
-            title: `${d}’s SPF record doesn’t protect the domain`,
-            text: `It lets any server on the internet pass SPF, so anyone can send mail that passes as ${d}.`,
-          }
+      return r.issues.some((i) => PERMERROR.has(i.code)) ? { tone: 'bad', ...t.summary.broken(p) } : { tone: 'bad', ...t.summary.unprotected(p) }
     case 'none':
-      return {
-        tone: 'bad',
-        title: `${d} has no SPF record`,
-        text: 'Receivers can’t tell which servers may send email for it. Gmail has required SPF or DKIM from every sender since February 2024.',
-      }
+      return { tone: 'bad', ...t.summary.none(p) }
     case 'nxdomain':
-      return { tone: 'bad', title: `${d} doesn’t exist`, text: 'DNS has no record of this domain. Check the spelling.' }
+      return { tone: 'bad', ...t.summary.nxdomain(p) }
   }
-}
-
-function ip4Count(cidr: string): string {
-  const n = 2 ** (32 - Number(cidr))
-  return n.toLocaleString('en-US')
 }
 
 // Plain-English meaning of one part of a record.
-function describe(t: SpfTerm, domain: string): string {
-  const target = t.value || domain
-  if (t.type === 'modifier') {
-    if (t.name === 'redirect') return `If nothing above matches, use the SPF record of ${t.value} instead.`
-    if (t.name === 'exp') return 'Names a TXT record with a message receivers can show when SPF fails.'
-    return 'A setting SPF doesn’t define. Receivers ignore it.'
+function describe(t: SpfToolStrings, term: SpfTerm, domain: string): string {
+  const d = t.describe
+  const target = term.value || domain
+  if (term.type === 'modifier') {
+    if (term.name === 'redirect') return d.redirect(term.value)
+    if (term.name === 'exp') return d.exp
+    return d.unknownModifier
   }
-  if (t.name === 'all') {
-    if (t.qualifier === '-') return 'Mail from every other server fails SPF.'
-    if (t.qualifier === '~') return 'Mail from every other server gets a soft fail. Receivers usually accept it but treat it with more suspicion.'
-    if (t.qualifier === '?') return 'Says nothing about other servers. Their mail gets a neutral result, which counts the same as having no SPF record.'
-    return 'Every server on the internet passes SPF. This cancels out the rest of the record.'
-  }
+  if (term.name === 'all') return d.all[term.qualifier]
   let subject = ''
   let single = false
-  if (t.name === 'ip4') {
-    single = !t.cidr || t.cidr === '32'
-    subject = single ? `The server at ${t.value}` : `Servers in the range ${t.value}/${t.cidr} (${ip4Count(t.cidr)} addresses)`
-  } else if (t.name === 'ip6') {
-    single = !t.cidr || t.cidr === '128'
-    subject = single ? `The server at ${t.value}` : `Servers in the IPv6 range ${t.value}/${t.cidr}`
-  } else if (t.name === 'a') {
-    subject = `Servers at the IP addresses of ${target}${t.cidr ? ` (widened by ${t.cidr})` : ''}`
-  } else if (t.name === 'mx') {
-    subject = `The mail servers that receive email for ${target}`
-  } else if (t.name === 'include') {
-    const who = senderName(t.value)
-    subject = `Servers allowed by the SPF record of ${t.value}${who ? ` (${who})` : ''}`
-  } else if (t.name === 'ptr') {
-    subject = `Servers whose IP address points back to a name under ${target}`
-  } else if (t.name === 'exists') {
-    return t.value.includes('%')
-      ? 'Matches when a DNS lookup built from details of the sending server finds an address. Large senders use this for big server lists.'
-      : `Matches when ${t.value} has an IP address.`
+  if (term.name === 'ip4') {
+    single = !term.cidr || term.cidr === '32'
+    subject = single ? d.server(term.value) : d.ip4Range(term.value, term.cidr, 2 ** (32 - Number(term.cidr)))
+  } else if (term.name === 'ip6') {
+    single = !term.cidr || term.cidr === '128'
+    subject = single ? d.server(term.value) : d.ip6Range(term.value, term.cidr)
+  } else if (term.name === 'a') {
+    subject = d.a(target, term.cidr)
+  } else if (term.name === 'mx') {
+    subject = d.mx(target)
+  } else if (term.name === 'include') {
+    subject = d.include(term.value, spfSenderName(t, term.value))
+  } else if (term.name === 'ptr') {
+    subject = d.ptr(target)
+  } else if (term.name === 'exists') {
+    return term.value.includes('%') ? d.existsMacro : d.exists(term.value)
   }
-  const verb = {
-    '+': 'may send',
-    '-': single ? 'fails SPF' : 'fail SPF',
-    '~': single ? 'gets a soft fail' : 'get a soft fail',
-    '?': single ? 'gets a neutral result' : 'get a neutral result',
-  }[t.qualifier]
-  return `${subject} ${verb}.`
+  return d.sentence(subject, term.qualifier, single)
 }
 
 function lookupCost(t: SpfTerm, node: SpfNode): number {
@@ -169,47 +149,46 @@ function lookupCost(t: SpfTerm, node: SpfNode): number {
 }
 
 // Includes in the domain's own record for services that no longer ask for one.
-function unneededNotes(r: SpfCheckResult): SpfIssue[] {
+function unneededNotes(r: SpfCheckResult, t: SpfToolStrings): SpfIssue[] {
   if (!r.root) return []
   const root = r.root
-  return root.terms.flatMap((t) => {
-    if (t.name !== 'include') return []
-    const u = unneededInclude(t.value)
+  return root.terms.flatMap((term) => {
+    if (term.name !== 'include') return []
+    const u = unneededInclude(term.value)
     if (!u) return []
-    const cost = lookupCost(t, root)
-    const where = u.subdomainOnly ? ' on a main domain' : ''
+    const cost = lookupCost(term, root)
     return [
       {
         level: 'info' as const,
         code: 'unneeded-include',
-        message: `include:${t.value} (${u.name}) is usually not needed${where}. ${u.reason} Removing it would free ${cost} lookup${cost === 1 ? '' : 's'}.`,
+        message: t.unneeded({ include: term.value, name: u.name, subdomainOnly: !!u.subdomainOnly, reason: spfNotNeededReason(t, u), cost }),
         domain: r.domain,
       },
     ]
   })
 }
 
-function NodeTerms({ node, depth }: { node: SpfNode; depth: number }) {
+function NodeTerms({ node, depth, t }: { node: SpfNode; depth: number; t: SpfToolStrings }) {
   const [open, setOpen] = useState<Record<number, boolean>>({})
   // A redirect is ignored when the record has "all", so it costs nothing then.
-  const hasAll = node.terms.some((t) => t.name === 'all')
+  const hasAll = node.terms.some((term) => term.name === 'all')
   return (
     <div className="divide-y divide-slate-100">
       {depth === 0 && (
-        <TermRow raw="v=spf1" meaning="Marks this TXT record as an SPF record. Every SPF record starts with it." cost={0} />
+        <TermRow raw="v=spf1" meaning={t.vSpf1} cost={0} t={t} />
       )}
-      {node.terms.map((t, i) => {
+      {node.terms.map((term, i) => {
         const child =
-          t.name === 'include' || t.name === 'redirect'
-            ? node.children.find((c) => c.domain === t.value.toLowerCase().replace(/\.$/, ''))
+          term.name === 'include' || term.name === 'redirect'
+            ? node.children.find((c) => c.domain === term.value.toLowerCase().replace(/\.$/, ''))
             : undefined
-        const cost = t.name === 'redirect' && hasAll ? 0 : lookupCost(t, node)
+        const cost = term.name === 'redirect' && hasAll ? 0 : lookupCost(term, node)
         return (
-          <div key={`${t.raw}-${i}`}>
-            <TermRow raw={t.raw} meaning={describe(t, node.domain)} cost={cost}>
+          <div key={`${term.raw}-${i}`}>
+            <TermRow raw={term.raw} meaning={describe(t, term, node.domain)} cost={cost} t={t}>
               {child?.failure && (
                 <p className="mt-1 text-xs font-semibold text-rose-700">
-                  {child.domain}: {child.failure}
+                  {child.domain}: {spfFailureText(t, child)}
                 </p>
               )}
               {child && !child.failure && child.terms.length > 0 && (
@@ -220,14 +199,14 @@ function NodeTerms({ node, depth }: { node: SpfNode; depth: number }) {
                   className="mt-1.5 flex items-start gap-1 text-left text-xs font-bold text-indigo-600 hover:text-indigo-700"
                 >
                   <ChevronDown className={`w-3.5 h-3.5 mt-px shrink-0 transition-transform ${open[i] ? 'rotate-180' : ''}`} />
-                  {open[i] ? 'Hide' : 'Show'} what {child.domain} contains
+                  {open[i] ? t.hideContents(child.domain) : t.showContents(child.domain)}
                 </button>
               )}
             </TermRow>
             {child && open[i] && (
               <div className="ml-3 sm:ml-6 mb-3 pl-3 sm:pl-4 border-l-2 border-indigo-100">
                 <p className="pt-2 font-mono text-[11px] text-slate-500 break-all">{child.record}</p>
-                <NodeTerms node={child} depth={depth + 1} />
+                <NodeTerms node={child} depth={depth + 1} t={t} />
               </div>
             )}
           </div>
@@ -237,12 +216,12 @@ function NodeTerms({ node, depth }: { node: SpfNode; depth: number }) {
   )
 }
 
-function TermRow({ raw, meaning, cost, children }: { raw: string; meaning: string; cost: number; children?: React.ReactNode }) {
+function TermRow({ raw, meaning, cost, t, children }: { raw: string; meaning: string; cost: number; t: SpfToolStrings; children?: React.ReactNode }) {
   return (
-    <div className="py-3 grid grid-cols-[minmax(0,1fr)_auto] sm:grid-cols-[minmax(0,14rem)_minmax(0,1fr)_4.5rem] gap-x-4 gap-y-1">
+    <div className={`py-3 grid grid-cols-[minmax(0,1fr)_auto] ${t.wideCostColumn ? 'sm:grid-cols-[minmax(0,14rem)_minmax(0,1fr)_6rem]' : 'sm:grid-cols-[minmax(0,14rem)_minmax(0,1fr)_4.5rem]'} gap-x-4 gap-y-1`}>
       <code className="font-mono text-xs sm:text-sm font-semibold text-slate-900 break-all">{raw}</code>
       <span className="sm:order-last text-right font-mono text-xs text-slate-500 whitespace-nowrap">
-        {cost > 0 ? `${cost} lookup${cost === 1 ? '' : 's'}` : ''}
+        {cost > 0 ? t.lookups(cost) : ''}
       </span>
       <div className="col-span-2 sm:col-span-1 min-w-0">
         <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">{meaning}</p>
@@ -252,7 +231,7 @@ function TermRow({ raw, meaning, cost, children }: { raw: string; meaning: strin
   )
 }
 
-function Meter({ label, used, limit, note }: { label: string; used: number; limit: number; note: string }) {
+function Meter({ label, used, limit, note, t }: { label: string; used: number; limit: number; note: string; t: SpfToolStrings }) {
   const over = used > limit
   const near = !over && used >= limit - 1 && limit > 2
   const color = over ? 'bg-rose-500' : near ? 'bg-amber-500' : 'bg-emerald-500'
@@ -260,7 +239,7 @@ function Meter({ label, used, limit, note }: { label: string; used: number; limi
     <div className="p-3 sm:p-4 rounded-xl border border-slate-200 bg-white">
       <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500">{label}</div>
       <div className={`mt-1 text-xl sm:text-2xl font-black ${over ? 'text-rose-600' : 'text-slate-900'}`}>
-        {used} <span className="text-sm font-bold text-slate-400">of {limit}</span>
+        {used} <span className="text-sm font-bold text-slate-400">{t.meterOf(limit)}</span>
       </div>
       <div className="mt-2 h-1.5 rounded-full bg-slate-100 overflow-hidden">
         <div className={`h-full ${color}`} style={{ width: `${Math.min(100, (used / limit) * 100)}%` }} />
@@ -270,7 +249,7 @@ function Meter({ label, used, limit, note }: { label: string; used: number; limi
   )
 }
 
-function IssueList({ issues, domain }: { issues: SpfIssue[]; domain: string }) {
+function IssueList({ issues, domain, t }: { issues: SpfIssue[]; domain: string; t: SpfToolStrings }) {
   if (issues.length === 0) return null
   const style = {
     error: { box: 'bg-rose-50 border-rose-200 text-rose-900', Icon: XCircle, icon: 'text-rose-600' },
@@ -285,9 +264,9 @@ function IssueList({ issues, domain }: { issues: SpfIssue[]; domain: string }) {
           <li key={`${issue.code}-${i}`} className={`p-3 rounded-xl border text-sm font-medium flex items-start gap-2 ${s.box}`}>
             <s.Icon className={`w-4 h-4 shrink-0 mt-0.5 ${s.icon}`} />
             <span className="min-w-0 break-words">
-              {issue.message}
+              {spfIssueText(t, issue)}
               {issue.domain && issue.domain !== domain && issue.domain !== 'example.com' && (
-                <span className="block text-xs opacity-75 mt-0.5 font-mono break-all">in {issue.domain}</span>
+                <span className="block text-xs opacity-75 mt-0.5 font-mono break-all">{t.inDomain(issue.domain)}</span>
               )}
             </span>
           </li>
@@ -310,7 +289,7 @@ async function copyText(text: string) {
   }
 }
 
-function CopyButton({ text, dark = false }: { text: string; dark?: boolean }) {
+function CopyButton({ text, t, dark = false }: { text: string; t: SpfToolStrings; dark?: boolean }) {
   const [copied, setCopied] = useState(false)
   return (
     <button
@@ -325,7 +304,7 @@ function CopyButton({ text, dark = false }: { text: string; dark?: boolean }) {
       }`}
     >
       {copied ? <Check className={`w-3.5 h-3.5 ${dark ? 'text-emerald-400' : 'text-emerald-600'}`} /> : <Copy className="w-3.5 h-3.5" />}
-      {copied ? 'Copied' : 'Copy'}
+      {copied ? t.copied : t.copy}
     </button>
   )
 }
@@ -335,7 +314,8 @@ const inputClass =
 
 type Mode = 'check' | 'create'
 
-export default function SpfCheckerTool() {
+export default function SpfCheckerTool({ locale = 'en' }: { locale?: Locale }) {
+  const t = spfToolStrings(locale)
   const [mode, setMode] = useState<Mode>('check')
 
   // Check
@@ -376,14 +356,14 @@ export default function SpfCheckerTool() {
     } catch (err) {
       if (id !== runId.current) return
       setResult(null)
-      if (err instanceof SpfInputError) setInputError(err.message)
+      if (err instanceof SpfInputError) setInputError(inputErrorText(t, err))
       else if (err instanceof DnsLookupError && err.message.includes('didn\'t answer'))
-        setLookupError(`${err.message} Receivers get the same temporary error (temperror) right now. Try again in a few minutes.`)
-      else setLookupError('We couldn’t reach the DNS services. Check your connection and try again.')
+        setLookupError(t.noAnswer({ domain: err instanceof SpfNoAnswerError ? err.domain : '', message: err.message }))
+      else setLookupError(t.lookupError)
     } finally {
       if (id === runId.current) setLoading(false)
     }
-  }, [])
+  }, [t])
 
   // Run the check from a shared link.
   useEffect(() => {
@@ -423,7 +403,7 @@ export default function SpfCheckerTool() {
     if (mode !== 'create') return
     let cancelled = false
     setDraftChecking(true)
-    const t = setTimeout(async () => {
+    const timer = setTimeout(async () => {
       try {
         const r = await checkSpfDraft(bDomain, record)
         if (!cancelled) {
@@ -433,7 +413,7 @@ export default function SpfCheckerTool() {
       } catch (err) {
         if (!cancelled) {
           setDraft(null)
-          setDraftError(err instanceof SpfInputError ? '' : 'We couldn’t reach the DNS services to count the lookups. Check your connection.')
+          setDraftError(err instanceof SpfInputError ? '' : t.draftError)
         }
       } finally {
         if (!cancelled) setDraftChecking(false)
@@ -441,9 +421,9 @@ export default function SpfCheckerTool() {
     }, 600)
     return () => {
       cancelled = true
-      clearTimeout(t)
+      clearTimeout(timer)
     }
-  }, [mode, record, bDomain])
+  }, [mode, record, bDomain, t])
 
   const toggleInclude = (inc: string) =>
     setIncludes((list) => (list.includes(inc) ? list.filter((x) => x !== inc) : [...list, inc]))
@@ -466,15 +446,15 @@ export default function SpfCheckerTool() {
       const f = await fetchSpfRecord(value)
       setBDomain(f.domain)
       if (f.status === 'nxdomain') {
-        setLoadNote({ tone: 'bad', text: `${f.domain} doesn’t exist in DNS. Check the spelling.` })
+        setLoadNote({ tone: 'bad', text: t.load.nxdomain(f.domain) })
       } else if (f.status === 'none' || !f.record) {
-        setLoadNote({ tone: 'info', text: `${f.domain} has no SPF record yet. Pick your senders below to create one.` })
+        setLoadNote({ tone: 'info', text: t.load.none(f.domain) })
       } else {
         const o = recordToBuildOptions(f.record)
         if (!o) {
           setLoadNote({
             tone: 'warn',
-            text: `${f.domain} uses a redirect in its SPF record (${f.record}). The form can’t edit that safely, so change it by hand.`,
+            text: t.load.redirect(f.domain, f.record),
           })
         } else {
           setIncludes(o.includes)
@@ -484,18 +464,16 @@ export default function SpfCheckerTool() {
           setExtra(o.extra)
           setAllQ(o.all)
           if (o.ip4.length + o.ip6.length > 0 || o.a || o.mx) setShowMore(true)
-          const multiple = f.status === 'multiple' ? ' It has more than one SPF record, so we loaded the first. Delete the others after you publish this one.' : ''
-          const changed = o.changedAll ? ' Its ending was not ~all or -all, so we changed it to ~all.' : ''
           setLoadNote({
             tone: f.status === 'multiple' || o.changedAll ? 'warn' : 'ok',
-            text: `We loaded the current record for ${f.domain}. Add or remove senders, then replace the old record with the new one.${multiple}${changed}`,
+            text: t.load.loaded({ domain: f.domain, multiple: f.status === 'multiple', changedAll: o.changedAll }),
           })
         }
       }
     } catch (err) {
       setLoadNote({
         tone: 'bad',
-        text: err instanceof SpfInputError ? err.message : 'We couldn’t reach the DNS services. Check your connection and try again.',
+        text: err instanceof SpfInputError ? inputErrorText(t, err) : t.lookupError,
       })
     } finally {
       setLoadingRecord(false)
@@ -517,9 +495,9 @@ export default function SpfCheckerTool() {
     }
   }
 
-  const s = result ? summary(result) : null
+  const s = result ? summary(result, t) : null
   const tone = s ? TONE[s.tone] : null
-  const notes = result ? unneededNotes(result) : []
+  const notes = result ? unneededNotes(result, t) : []
   // The builder always ends with "all", so the no-all warning can't apply there.
   const draftIssues = (draft?.issues ?? []).filter((i) => i.code !== 'no-all')
   const draftLookups = draft?.totalLookups ?? 0
@@ -532,12 +510,12 @@ export default function SpfCheckerTool() {
     <div className="w-full bg-white rounded-2xl border border-slate-200/90 shadow-xl shadow-slate-200/50 overflow-hidden">
 
       <div className="p-5 md:p-8 space-y-6">
-        <div role="tablist" aria-label="SPF tool mode" className="inline-flex w-full sm:w-auto p-1 rounded-xl bg-slate-100 gap-1">
+        <div role="tablist" aria-label={t.tabsLabel} className="inline-flex w-full sm:w-auto p-1 rounded-xl bg-slate-100 gap-1">
           <button type="button" role="tab" aria-selected={mode === 'check'} onClick={() => setMode('check')} className={tabClass('check')}>
-            Check<span className="hidden sm:inline"> SPF record</span>
+            {t.tabCheck}<span className="hidden sm:inline">{t.tabCheckMore}</span>
           </button>
           <button type="button" role="tab" aria-selected={mode === 'create'} onClick={() => setMode('create')} className={tabClass('create')}>
-            Create<span className="hidden sm:inline"> SPF record</span>
+            {t.tabCreate}<span className="hidden sm:inline">{t.tabCreateMore}</span>
           </button>
         </div>
 
@@ -551,7 +529,7 @@ export default function SpfCheckerTool() {
               className="space-y-2"
             >
               <label htmlFor="spf-domain" className="block text-sm font-bold text-slate-900">
-                Domain or email address
+                {t.label}
               </label>
               <div className="flex flex-col sm:flex-row gap-3">
                 <input
@@ -560,7 +538,7 @@ export default function SpfCheckerTool() {
                   inputMode="url"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  placeholder="example.com"
+                  placeholder={t.placeholder}
                   autoComplete="off"
                   autoCapitalize="none"
                   spellCheck={false}
@@ -572,14 +550,14 @@ export default function SpfCheckerTool() {
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm transition-colors shadow-sm disabled:opacity-60"
                 >
                   {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Search className="w-4 h-4" />}
-                  Check SPF record
+                  {t.button}
                 </button>
               </div>
               {inputError ? (
                 <p className="text-sm text-rose-600 font-semibold">{inputError}</p>
               ) : (
                 <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500">
-                  <span>Try:</span>
+                  <span>{t.tryLabel}</span>
                   {EXAMPLES.map((ex) => (
                     <button
                       key={ex}
@@ -618,8 +596,8 @@ export default function SpfCheckerTool() {
                   {result.record && (
                     <div className="bg-slate-900 rounded-xl p-4 md:p-5">
                       <div className="flex items-center justify-between gap-3 mb-2">
-                        <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">SPF record for {result.domain}</span>
-                        <CopyButton text={result.record} dark />
+                        <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">{t.recordFor(result.domain)}</span>
+                        <CopyButton text={result.record} t={t} dark />
                       </div>
                       <code className="block font-mono text-sm text-emerald-300 font-semibold break-all">{result.record}</code>
                     </div>
@@ -628,26 +606,28 @@ export default function SpfCheckerTool() {
                   {result.root && (
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
                       <Meter
-                        label="DNS lookups"
+                        label={t.lookupsMeter}
                         used={result.totalLookups}
                         limit={LOOKUP_LIMIT}
-                        note="include, a, mx, ptr, exists and redirect each cost one, including inside includes."
+                        note={t.lookupsMeterNote}
+                        t={t}
                       />
                       <Meter
-                        label="Void lookups"
+                        label={t.voidMeter}
                         used={result.voidLookups}
                         limit={VOID_LIMIT}
-                        note="Lookups that found nothing. More than 2 can make receivers fail SPF."
+                        note={t.voidMeterNote}
+                        t={t}
                       />
                       <div className="col-span-2 sm:col-span-1 p-3 sm:p-4 rounded-xl border border-slate-200 bg-white">
-                        <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500">Servers not listed</div>
+                        <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500">{t.unlisted}</div>
                         <div className="mt-1 text-xl sm:text-2xl font-black text-slate-900">
-                          {result.allQualifier ? ALL_LABEL[result.allQualifier] : 'Not set'}
+                          {result.allQualifier ? t.allLabel[result.allQualifier] : t.allNotSet}
                         </div>
                         <p className="mt-2 text-xs text-slate-500 leading-relaxed">
                           {result.allQualifier
-                            ? `Set by ${result.allQualifier}all at the end of the record.`
-                            : 'The record has no all at the end, so other servers get a neutral result.'}
+                            ? t.allSetBy(result.allQualifier)
+                            : t.allMissing}
                         </p>
                       </div>
                     </div>
@@ -656,24 +636,24 @@ export default function SpfCheckerTool() {
                   {result.issues.length + notes.length > 0 && (
                     <div className="space-y-2">
                       <h3 className="text-sm font-bold text-slate-900">
-                        {result.issues.some((i) => i.level !== 'info') ? 'What to fix' : 'Notes'}
+                        {result.issues.some((i) => i.level !== 'info') ? t.fixTitle : t.notesTitle}
                       </h3>
-                      <IssueList issues={[...result.issues, ...notes]} domain={result.domain} />
+                      <IssueList issues={[...result.issues, ...notes]} domain={result.domain} t={t} />
                     </div>
                   )}
 
                   {result.root && (
                     <div className="border border-slate-200 rounded-xl overflow-hidden">
-                      <div className="bg-slate-100 border-b border-slate-200 px-4 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700 hidden sm:grid grid-cols-[minmax(0,14rem)_minmax(0,1fr)_4.5rem] gap-x-4">
-                        <span>Part</span>
-                        <span>What it means</span>
-                        <span className="text-right">Cost</span>
+                      <div className={`bg-slate-100 border-b border-slate-200 px-4 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700 hidden sm:grid ${t.wideCostColumn ? 'grid-cols-[minmax(0,14rem)_minmax(0,1fr)_6rem]' : 'grid-cols-[minmax(0,14rem)_minmax(0,1fr)_4.5rem]'} gap-x-4`}>
+                        <span>{t.thPart}</span>
+                        <span>{t.thMeaning}</span>
+                        <span className="text-right">{t.thCost}</span>
                       </div>
                       <div className="sm:hidden bg-slate-100 border-b border-slate-200 px-4 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700">
-                        What each part means
+                        {t.partsTitle}
                       </div>
                       <div className="px-4">
-                        <NodeTerms node={result.root} depth={0} />
+                        <NodeTerms node={result.root} depth={0} t={t} />
                       </div>
                     </div>
                   )}
@@ -683,25 +663,26 @@ export default function SpfCheckerTool() {
                       {result.nearMisses.length > 0 && (
                         <div className="p-4 rounded-xl bg-amber-50 border border-amber-200 space-y-2">
                           <p className="text-sm font-bold text-amber-900">
-                            We found a TXT record that looks like a broken SPF record:
+                            {t.nearMissTitle}
                           </p>
-                          {result.nearMisses.map((t) => (
-                            <code key={t} className="block font-mono text-xs text-amber-900 bg-white/70 border border-amber-200 rounded-lg p-2 break-all">
-                              {t}
+                          {result.nearMisses.map((txt) => (
+                            <code key={txt} className="block font-mono text-xs text-amber-900 bg-white/70 border border-amber-200 rounded-lg p-2 break-all">
+                              {txt}
                             </code>
                           ))}
                           <p className="text-sm text-amber-900 leading-relaxed">
-                            {result.nearMisses.some((t) => /^v=spf2/i.test(t))
-                              ? 'A record starting with v=spf2.0 belongs to Sender ID, an old system receivers no longer check. An SPF record must start with exactly v=spf1.'
-                              : 'Receivers ignore it, because an SPF record must start with exactly v=spf1 followed by a space.'}
+                            {result.nearMisses.some((txt) => /^v=spf2/i.test(txt))
+                              ? t.nearMissSpf2
+                              : t.nearMissOther}
                           </p>
                         </div>
                       )}
                       {!result.hasMx && (
                         <p className="text-sm text-slate-600 leading-relaxed">
-                          {result.domain} has no MX records either, so it may not be used for email at all. A domain that never sends
-                          email can publish <code className="font-mono font-semibold text-slate-900">v=spf1 -all</code>. That tells
-                          receivers no server may send for it, which makes it harder to fake.
+                          {fill(t.noMx, {
+                            domain: result.domain,
+                            record: <code className="font-mono font-semibold text-slate-900">v=spf1 -all</code>,
+                          })}
                         </p>
                       )}
                       <button
@@ -710,7 +691,7 @@ export default function SpfCheckerTool() {
                         className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm"
                       >
                         <Plus className="w-4 h-4" />
-                        Create an SPF record for {result.domain}
+                        {t.createFor(result.domain)}
                       </button>
                     </div>
                   )}
@@ -721,29 +702,29 @@ export default function SpfCheckerTool() {
                       onClick={() => startCreate(result.domain)}
                       className="inline-flex items-center gap-1.5 text-sm font-bold text-indigo-600 hover:text-indigo-700"
                     >
-                      Load this record into the SPF creator to fix it
+                      {t.fixInCreator}
                       <ArrowRight className="w-4 h-4" />
                     </button>
                   )}
 
                   <p className="text-xs text-slate-500 flex items-center gap-1.5">
                     <Server className="w-3.5 h-3.5" />
-                    Answered by {result.resolver || 'public DNS'}
+                    {t.answeredBy} {result.resolver || t.publicDns}
                   </p>
 
                   {result.root && (
                     <div className="rounded-xl bg-gradient-to-br from-indigo-900 via-slate-900 to-indigo-950 text-white p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                       <div className="space-y-1">
-                        <h3 className="text-base font-bold">SPF doesn’t stop bounces</h3>
+                        <h3 className="text-base font-bold">{t.ctaTitle}</h3>
                         <p className="text-sm text-slate-300">
-                          SPF shows that your mail comes from your servers. Mail sent to addresses that don’t exist still bounces, and a high bounce rate hurts delivery.
+                          {t.ctaText}
                         </p>
                       </div>
                       <Link
-                        href="/bulk-email-verifier"
+                        href={t.ctaHref}
                         className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-sm whitespace-nowrap"
                       >
-                        Verify an email list
+                        {t.ctaButton}
                         <ArrowRight className="w-4 h-4" />
                       </Link>
                     </div>
@@ -760,7 +741,7 @@ export default function SpfCheckerTool() {
             <div className="space-y-2">
               <label htmlFor="spf-build-domain" className="flex items-center gap-2 text-sm font-bold text-slate-900">
                 <StepNumber n={1} />
-                Your domain
+                {t.domainStep}
               </label>
               <form
                 onSubmit={(e) => {
@@ -775,7 +756,7 @@ export default function SpfCheckerTool() {
                   inputMode="url"
                   value={bDomain}
                   onChange={(e) => setBDomain(e.target.value)}
-                  placeholder="example.com"
+                  placeholder={t.placeholder}
                   autoComplete="off"
                   autoCapitalize="none"
                   spellCheck={false}
@@ -787,14 +768,14 @@ export default function SpfCheckerTool() {
                   className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-white border border-slate-300 hover:border-indigo-400 text-slate-800 font-bold text-sm disabled:opacity-50"
                 >
                   {loadingRecord ? <Loader2 className="w-4 h-4 animate-spin" /> : <Search className="w-4 h-4" />}
-                  Load current record
+                  {t.loadButton}
                 </button>
               </form>
               {loadNote ? (
                 <p className={`text-sm leading-relaxed font-medium ${TONE[loadNote.tone].text}`}>{loadNote.text}</p>
               ) : (
                 <p className="text-xs text-slate-500 leading-relaxed">
-                  If your domain already has an SPF record, load it and add the new sender to it. You can also skip this step.
+                  {t.loadHelp}
                 </p>
               )}
             </div>
@@ -803,19 +784,20 @@ export default function SpfCheckerTool() {
             <fieldset className="min-w-0 space-y-3">
               <legend className="flex items-center gap-2 text-sm font-bold text-slate-900">
                 <StepNumber n={2} />
-                Which services send email from your domain?
+                {t.sendersStep}
               </legend>
               <p className="text-xs text-slate-500 leading-relaxed">
-                Tick every service that sends mail with your domain in the address. The number is how many of the 10 allowed DNS lookups each one uses.
+                {t.sendersHelp}
               </p>
               {(['mailbox', 'service'] as const).map((group) => (
                 <div key={group} className="space-y-2">
                   <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500">
-                    {group === 'mailbox' ? 'Email providers' : 'Sending, marketing and support tools'}
+                    {group === 'mailbox' ? t.groupMailbox : t.groupService}
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
                     {SPF_SENDERS.filter((x) => x.group === group).map((x) => {
                       const on = includes.includes(x.include)
+                      const note = spfSenderNote(t, x)
                       return (
                         <label
                           key={x.include}
@@ -833,11 +815,11 @@ export default function SpfCheckerTool() {
                             <span className="flex items-center justify-between gap-2">
                               <span className="text-sm font-bold text-slate-900">{x.name}</span>
                               <span className="text-[11px] font-semibold text-slate-500 whitespace-nowrap">
-                                {x.lookups} lookup{x.lookups === 1 ? '' : 's'}
+                                {t.lookups(x.lookups)}
                               </span>
                             </span>
                             <span className="block font-mono text-[11px] text-slate-500 break-all">include:{x.include}</span>
-                            {x.note && <span className="block text-[11px] text-slate-500 mt-1 leading-relaxed">{x.note}</span>}
+                            {note && <span className="block text-[11px] text-slate-500 mt-1 leading-relaxed">{note}</span>}
                           </span>
                         </label>
                       )
@@ -854,8 +836,8 @@ export default function SpfCheckerTool() {
                     .map((inc) => (
                       <span key={inc} className="inline-flex items-center gap-1.5 pl-2.5 pr-1.5 py-1 rounded-lg bg-indigo-50 border border-indigo-200 text-xs">
                         <span className="font-mono font-semibold text-indigo-800 break-all">include:{inc}</span>
-                        {senderName(inc) && <span className="text-indigo-600">({senderName(inc)})</span>}
-                        <button type="button" onClick={() => toggleInclude(inc)} aria-label={`Remove include:${inc}`} className="p-0.5 rounded hover:bg-indigo-100">
+                        {spfSenderName(t, inc) && <span className="text-indigo-600">({spfSenderName(t, inc)})</span>}
+                        <button type="button" onClick={() => toggleInclude(inc)} aria-label={t.remove(`include:${inc}`)} className="p-0.5 rounded hover:bg-indigo-100">
                           <X className="w-3.5 h-3.5 text-indigo-700" />
                         </button>
                       </span>
@@ -867,26 +849,29 @@ export default function SpfCheckerTool() {
                 .filter((x) => x.u)
                 .map(({ inc, u }) => (
                   <p key={inc} className="text-xs text-amber-900 bg-amber-50 border border-amber-200 rounded-lg p-2.5 leading-relaxed">
-                    <span className="font-mono font-semibold">include:{inc}</span> ({u!.name}) is usually not needed
-                    {u!.subdomainOnly ? ' on a main domain' : ''}. {u!.reason}
+                    {fill(t.unneededInline(!!u!.subdomainOnly), {
+                      include: <span className="font-mono font-semibold">include:{inc}</span>,
+                      name: u!.name,
+                      reason: spfNotNeededReason(t, u!),
+                    })}
                   </p>
                 ))}
               <details className="group rounded-xl border border-slate-200 bg-slate-50/70">
                 <summary className="cursor-pointer list-none px-3.5 py-2.5 text-xs font-bold text-slate-700 flex items-center gap-1.5">
                   <ChevronDown className="w-3.5 h-3.5 shrink-0 transition-transform group-open:rotate-180" />
-                  Using Mailchimp, SendGrid, Brevo or similar? They may not need an include.
+                  {t.unneededSummary}
                 </summary>
                 <ul className="px-3.5 pb-3 space-y-1.5 text-xs text-slate-600 leading-relaxed">
                   {SPF_NOT_NEEDED.map((u) => (
                     <li key={u.name}>
-                      <span className="font-bold text-slate-800">{u.name}:</span> {u.reason}
+                      <span className="font-bold text-slate-800">{u.name}:</span> {spfNotNeededReason(t, u)}
                     </li>
                   ))}
                 </ul>
               </details>
               <div className="space-y-1.5">
                 <label htmlFor="spf-other-include" className="block text-xs font-bold text-slate-700">
-                  Another service not listed here
+                  {t.otherLabel}
                 </label>
                 <div className="flex gap-2">
                   <input
@@ -900,7 +885,7 @@ export default function SpfCheckerTool() {
                         addOtherInclude()
                       }
                     }}
-                    placeholder="spf.example-service.com"
+                    placeholder={t.otherPlaceholder}
                     autoComplete="off"
                     autoCapitalize="none"
                     spellCheck={false}
@@ -912,10 +897,10 @@ export default function SpfCheckerTool() {
                     className="inline-flex items-center gap-1.5 px-4 rounded-xl bg-white border border-slate-300 hover:border-indigo-400 text-slate-800 font-bold text-sm"
                   >
                     <Plus className="w-4 h-4" />
-                    Add
+                    {t.addButton}
                   </button>
                 </div>
-                <p className="text-xs text-slate-500">Copy the include value from the service’s setup guide.</p>
+                <p className="text-xs text-slate-500">{t.otherHelp}</p>
               </div>
 
               {/* Own servers */}
@@ -927,24 +912,24 @@ export default function SpfCheckerTool() {
                   className="flex items-center gap-1.5 text-sm font-bold text-indigo-600 hover:text-indigo-700 text-left"
                 >
                   <ChevronDown className={`w-4 h-4 shrink-0 transition-transform ${showMore ? 'rotate-180' : ''}`} />
-                  Do you also send from your own server?
+                  {t.ownServer}
                 </button>
                 {showMore && (
                   <div className="mt-3 p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-4">
                     <div className="space-y-1.5">
                       <label htmlFor="spf-ips" className="block text-xs font-bold text-slate-700">
-                        IP addresses of servers that send your mail
+                        {t.ipsLabel}
                       </label>
                       <textarea
                         id="spf-ips"
                         rows={3}
                         value={ipText}
                         onChange={(e) => setIpText(e.target.value)}
-                        placeholder={'192.0.2.10\n198.51.100.0/24\n2001:db8::/32'}
+                        placeholder={t.ipsPlaceholder}
                         spellCheck={false}
                         className="w-full text-base sm:text-sm px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 font-mono"
                       />
-                      <p className="text-xs text-slate-500">One per line. IPv4 and IPv6 both work, and so do ranges like /24.</p>
+                      <p className="text-xs text-slate-500">{t.ipsHelp}</p>
                     </div>
                     <label className="flex items-start gap-2.5 text-sm cursor-pointer">
                       <input
@@ -954,9 +939,9 @@ export default function SpfCheckerTool() {
                         className="w-4 h-4 mt-0.5 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500"
                       />
                       <span>
-                        <span className="font-bold text-slate-800">The server my domain points to sends mail</span>{' '}
+                        <span className="font-bold text-slate-800">{t.aLabel}</span>{' '}
                         <span className="font-mono text-[11px] text-slate-400">a</span>
-                        <span className="block text-xs text-slate-500 mt-0.5">Adds the IP address of your domain itself. Uses 1 lookup.</span>
+                        <span className="block text-xs text-slate-500 mt-0.5">{t.aHelp}</span>
                       </span>
                     </label>
                     <label className="flex items-start gap-2.5 text-sm cursor-pointer">
@@ -967,10 +952,10 @@ export default function SpfCheckerTool() {
                         className="w-4 h-4 mt-0.5 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500"
                       />
                       <span>
-                        <span className="font-bold text-slate-800">My incoming mail servers also send mail</span>{' '}
+                        <span className="font-bold text-slate-800">{t.mxLabel}</span>{' '}
                         <span className="font-mono text-[11px] text-slate-400">mx</span>
                         <span className="block text-xs text-slate-500 mt-0.5">
-                          Adds the servers in your MX records. Uses 1 lookup. Not needed for Google Workspace or Microsoft 365, whose includes already cover sending.
+                          {t.mxHelp}
                         </span>
                       </span>
                     </label>
@@ -980,12 +965,12 @@ export default function SpfCheckerTool() {
 
               {extra.length > 0 && (
                 <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
-                  <p className="text-xs font-bold text-slate-700">Kept from your current record</p>
+                  <p className="text-xs font-bold text-slate-700">{t.keptTitle}</p>
                   <div className="flex flex-wrap gap-2">
-                    {extra.map((t) => (
-                      <span key={t} className="inline-flex items-center gap-1.5 pl-2.5 pr-1.5 py-1 rounded-lg bg-white border border-slate-300 text-xs">
-                        <span className="font-mono font-semibold text-slate-800 break-all">{t}</span>
-                        <button type="button" onClick={() => setExtra((list) => list.filter((x) => x !== t))} aria-label={`Remove ${t}`} className="p-0.5 rounded hover:bg-slate-100">
+                    {extra.map((term) => (
+                      <span key={term} className="inline-flex items-center gap-1.5 pl-2.5 pr-1.5 py-1 rounded-lg bg-white border border-slate-300 text-xs">
+                        <span className="font-mono font-semibold text-slate-800 break-all">{term}</span>
+                        <button type="button" onClick={() => setExtra((list) => list.filter((x) => x !== term))} aria-label={t.remove(term)} className="p-0.5 rounded hover:bg-slate-100">
                           <X className="w-3.5 h-3.5 text-slate-600" />
                         </button>
                       </span>
@@ -999,22 +984,22 @@ export default function SpfCheckerTool() {
             <fieldset className="min-w-0 space-y-3">
               <legend className="flex items-center gap-2 text-sm font-bold text-slate-900">
                 <StepNumber n={3} />
-                What should happen to mail from servers you didn’t list?
+                {t.allStep}
               </legend>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {(
                   [
                     {
                       q: '~',
-                      title: 'Soft fail',
+                      title: t.softFail.title,
                       tag: '~all',
-                      text: 'Receivers accept the mail but treat it with more suspicion. Google and M3AAWG recommend this ending.',
+                      text: t.softFail.text,
                     },
                     {
                       q: '-',
-                      title: 'Fail',
+                      title: t.fail.title,
                       tag: '-all',
-                      text: 'Tells receivers the mail is not authorized. Microsoft recommends it once DKIM and DMARC are set up. Some receivers then reject mail before DMARC runs, so it never appears in DMARC reports.',
+                      text: t.fail.text,
                     },
                   ] as const
                 ).map((opt) => {
@@ -1044,39 +1029,39 @@ export default function SpfCheckerTool() {
             {/* The record */}
             <div className="bg-slate-900 text-white rounded-xl p-5 md:p-6 space-y-4 shadow-md">
               <div>
-                <h3 className="text-base md:text-lg font-bold text-white">Your SPF record</h3>
-                <p className="text-xs md:text-sm text-slate-400 mt-0.5">Add it to your domain’s DNS as a TXT record.</p>
+                <h3 className="text-base md:text-lg font-bold text-white">{t.recordTitle}</h3>
+                <p className="text-xs md:text-sm text-slate-400 mt-0.5">{t.recordHelp}</p>
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-[110px_1fr_1fr] gap-3">
                 <div className="p-3 bg-slate-950/80 rounded-lg border border-slate-800">
-                  <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500">Type</div>
+                  <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500">{t.typeLabel}</div>
                   <div className="font-mono text-sm text-slate-100">TXT</div>
                 </div>
                 <div className="p-3 bg-slate-950/80 rounded-lg border border-slate-800">
-                  <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500">Name / Host</div>
+                  <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500">{t.nameLabel}</div>
                   <div className="font-mono text-sm text-slate-100">@</div>
                 </div>
                 <div className="col-span-2 sm:col-span-1 p-3 bg-slate-950/80 rounded-lg border border-slate-800">
                   <div className="text-xs text-slate-400 leading-relaxed">
-                    Some DNS hosts want the domain itself instead of @, or an empty name field.
+                    {t.nameHelp}
                   </div>
                 </div>
                 <div className="col-span-2 sm:col-span-3 flex items-start justify-between gap-3 p-3 bg-slate-950/80 rounded-lg border border-slate-800">
                   <div className="min-w-0">
-                    <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500">Value</div>
+                    <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500">{t.valueLabel}</div>
                     <div className="font-mono text-sm text-emerald-300 font-semibold break-all select-all">{record}</div>
                   </div>
-                  <CopyButton text={record} dark />
+                  <CopyButton text={record} t={t} dark />
                 </div>
               </div>
               <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">
                 <span className={`font-bold ${draftLookups > LOOKUP_LIMIT ? 'text-rose-300' : draftLookups >= LOOKUP_LIMIT - 1 ? 'text-amber-300' : 'text-emerald-300'}`}>
-                  {draftLookups} of {LOOKUP_LIMIT} DNS lookups
+                  {t.draftLookups(draftLookups, LOOKUP_LIMIT)}
                 </span>
                 {draftChecking && (
                   <span className="inline-flex items-center gap-1.5 text-xs text-slate-400">
                     <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                    Counting against live DNS
+                    {t.counting}
                   </span>
                 )}
               </div>
@@ -1086,43 +1071,43 @@ export default function SpfCheckerTool() {
               <p className="text-sm text-slate-600 leading-relaxed flex items-start gap-2">
                 <Info className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
                 <span>
-                  No senders picked yet. A record with no senders says that no server may send for the domain. That is right only
-                  for a domain that never sends email, and then it should end in <span className="font-mono font-semibold">-all</span>.{' '}
+                  {fill(t.noSenders, { ending: <span className="font-mono font-semibold">-all</span> })}{' '}
                   {allQ !== '-' && (
                     <button type="button" onClick={() => setAllQ('-')} className="text-indigo-600 font-semibold hover:underline">
-                      This domain never sends email
+                      {t.neverSends}
                     </button>
                   )}
                 </span>
               </p>
             )}
             {draftError && <p className="text-sm text-rose-700 font-medium">{draftError}</p>}
-            <IssueList issues={draftIssues} domain={draft?.domain ?? ''} />
+            <IssueList issues={draftIssues} domain={draft?.domain ?? ''} t={t} />
 
             {/* What to do next */}
             <div className="rounded-xl border border-slate-200 bg-slate-50 p-5 md:p-6 space-y-3">
-              <h3 className="text-base font-bold text-slate-900">How to add it</h3>
+              <h3 className="text-base font-bold text-slate-900">{t.howTitle}</h3>
               <ol className="list-decimal pl-5 space-y-2 text-sm text-slate-700 leading-relaxed">
-                <li>Sign in where you manage your domain’s DNS. This is usually the company you bought the domain from.</li>
+                {t.howSteps.map((step, i) => (
+                  <li key={i}>{step}</li>
+                ))}
                 <li>
-                  Look for a TXT record that starts with v=spf1. If there is one, replace its value with the record above. Don’t add a
-                  second SPF record, because two records break SPF for all your mail.
-                </li>
-                <li>If there isn’t one, add a new TXT record with the name and value above, then save.</li>
-                <li>
-                  Wait a few minutes, then{' '}
-                  <button type="button" onClick={checkPublished} className="text-indigo-600 font-semibold hover:underline">
-                    check the published record
-                  </button>
-                  . Set up DKIM and DMARC too, with the{' '}
-                  <Link href="/dkim-generator" className="text-indigo-600 font-semibold hover:underline">
-                    DKIM generator
-                  </Link>{' '}
-                  and the{' '}
-                  <Link href="/dmarc-generator" className="text-indigo-600 font-semibold hover:underline">
-                    DMARC generator
-                  </Link>
-                  .
+                  {fill(t.howLast, {
+                    check: (
+                      <button type="button" onClick={checkPublished} className="text-indigo-600 font-semibold hover:underline">
+                        {t.checkPublished}
+                      </button>
+                    ),
+                    dkim: (
+                      <Link href={t.dkimHref} className="text-indigo-600 font-semibold hover:underline">
+                        {t.dkimLabel}
+                      </Link>
+                    ),
+                    dmarc: (
+                      <Link href={t.dmarcHref} className="text-indigo-600 font-semibold hover:underline">
+                        {t.dmarcLabel}
+                      </Link>
+                    ),
+                  })}
                 </li>
               </ol>
             </div>

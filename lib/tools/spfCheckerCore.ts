@@ -12,12 +12,46 @@ import { normalizeDomainInput, looksLikeDomain } from './domainInput'
 export type SpfQualifier = '+' | '-' | '~' | '?'
 export type IssueLevel = 'error' | 'warning' | 'info'
 
+/**
+ * Which message of a code an issue carries, when a code has more than one.
+ * A localized page looks its text up by `${code}-${variant}`, or by `code` alone.
+ */
+export type SpfIssueVariant = 'percent' | 'term' | 'included' | 'exists' | 'one-left'
+
+/** The values inside an issue's message, so a localized page can rebuild the sentence. */
+export interface SpfIssueParams {
+  /** The term as written in the record. */
+  raw?: string
+  /** The domain or name the message is about. */
+  target?: string
+  /** A modifier or mechanism name. */
+  name?: string
+  /** What follows the = sign (equals-not-colon). */
+  value?: string
+  family?: 'IPv4' | 'IPv6'
+  /** Largest allowed prefix length (bad-cidr). */
+  max?: number
+  /** Number of SPF records (multiple) or MX records (mx-over-10). */
+  count?: number
+  /** Record length in characters (long-record). */
+  length?: number
+  lookups?: number
+  voids?: number
+  limit?: number
+  /** The include chain, outermost first (loop). */
+  chain?: string[]
+  /** include-no-spf / redirect-no-spf: the target domain doesn't exist at all. */
+  missing?: boolean
+}
+
 export interface SpfIssue {
   level: IssueLevel
   code: string
   message: string
   /** The record the issue was found in. */
   domain: string
+  variant?: SpfIssueVariant
+  params?: SpfIssueParams
 }
 
 export interface SpfTerm {
@@ -42,7 +76,11 @@ export interface SpfNode {
   children: SpfNode[]
   /** Set when the record couldn't be fetched or parsed. */
   failure: string | null
+  /** The reason behind `failure`, for localized pages. */
+  failureKind?: SpfFailureKind
 }
+
+export type SpfFailureKind = 'no-answer' | 'nxdomain' | 'no-spf' | 'multiple'
 
 export type SpfOutcome = 'valid' | 'warnings' | 'invalid' | 'none' | 'nxdomain'
 
@@ -63,7 +101,24 @@ export interface SpfCheckResult {
   resolver: string
 }
 
-export class SpfInputError extends Error {}
+/** `kind` lets a localized page show its own wording for the input errors. */
+export class SpfInputError extends Error {
+  constructor(message: string, public kind: 'empty' | 'invalid' | 'not-spf') {
+    super(message)
+  }
+}
+
+/** A name's DNS servers didn't answer. `domain` lets a localized page rebuild the message. */
+export class SpfNoAnswerError extends DnsLookupError {
+  constructor(public domain: string) {
+    super(`The DNS servers for ${domain} didn't answer.`)
+  }
+}
+
+const withExtras = (variant?: SpfIssueVariant, params?: SpfIssueParams) => ({
+  ...(variant ? { variant } : {}),
+  ...(params ? { params } : {}),
+})
 
 export const LOOKUP_LIMIT = 10
 export const VOID_LIMIT = 2
@@ -128,32 +183,33 @@ function validIp6(ip: string): boolean {
 /** Splits a record into terms. Syntax problems are returned as issues. */
 export function parseSpfRecord(record: string, domain: string): { terms: SpfTerm[]; issues: SpfIssue[] } {
   const issues: SpfIssue[] = []
-  const add = (level: IssueLevel, code: string, message: string) => issues.push({ level, code, message, domain })
+  const add = (level: IssueLevel, code: string, message: string, params?: SpfIssueParams, variant?: SpfIssueVariant) =>
+    issues.push({ level, code, message, domain, ...withExtras(variant, params) })
   const tokens = record.trim().split(/\s+/).slice(1)
   const terms: SpfTerm[] = []
   for (const raw of tokens) {
     if (/%(?![{%_-])/.test(raw)) {
-      add('error', 'bad-syntax', `"${raw}" has a % sign that isn't a valid SPF macro, so receivers treat the record as broken (permerror).`)
+      add('error', 'bad-syntax', `"${raw}" has a % sign that isn't a valid SPF macro, so receivers treat the record as broken (permerror).`, { raw }, 'percent')
       continue
     }
     const mod = raw.match(/^([a-z][a-z0-9_.-]*)=(.*)$/i)
     if (mod) {
       const name = mod[1].toLowerCase()
       if ((name === 'redirect' || name === 'exp') && terms.some((t) => t.name === name)) {
-        add('error', 'duplicate-modifier', `The record has more than one ${name}=. Only one is allowed, so receivers treat the record as broken (permerror).`)
+        add('error', 'duplicate-modifier', `The record has more than one ${name}=. Only one is allowed, so receivers treat the record as broken (permerror).`, { name })
         continue
       }
       terms.push({ raw, type: 'modifier', name, qualifier: '+', value: mod[2], cidr: '', countsLookup: name === 'redirect' })
-      if ((name === 'redirect' || name === 'exp') && !mod[2]) add('error', 'empty-modifier', `"${raw}" has no domain after the = sign.`)
+      if ((name === 'redirect' || name === 'exp') && !mod[2]) add('error', 'empty-modifier', `"${raw}" has no domain after the = sign.`, { raw })
       if (MECHANISMS.has(name)) {
-        add('warning', 'equals-not-colon', `"${raw}" uses = where SPF expects a colon. Receivers read it as an unknown setting and skip it. Write ${name}:${mod[2]} instead.`)
+        add('warning', 'equals-not-colon', `"${raw}" uses = where SPF expects a colon. Receivers read it as an unknown setting and skip it. Write ${name}:${mod[2]} instead.`, { raw, name, value: mod[2] })
       }
       continue
     }
     const m = raw.match(/^([+\-~?]?)([a-z0-9]+)(.*)$/i)
     const name = m ? m[2].toLowerCase() : ''
     if (!m || !MECHANISMS.has(name)) {
-      add('error', 'unknown-term', `"${raw}" isn't a valid SPF mechanism. Receivers treat the whole record as broken (permerror).`)
+      add('error', 'unknown-term', `"${raw}" isn't a valid SPF mechanism. Receivers treat the whole record as broken (permerror).`, { raw })
       continue
     }
     const qualifier = (m[1] || '+') as SpfQualifier
@@ -171,9 +227,10 @@ export function parseSpfRecord(record: string, domain: string): { terms: SpfTerm
         cidr = p[2] ?? ''
         const max = name === 'ip4' ? 32 : 128
         if (!(name === 'ip4' ? validIp4(value) : validIp6(value))) {
-          add('error', 'bad-ip', `"${raw}" doesn't contain a valid ${name === 'ip4' ? 'IPv4' : 'IPv6'} address.`)
+          const family = name === 'ip4' ? 'IPv4' : 'IPv6'
+          add('error', 'bad-ip', `"${raw}" doesn't contain a valid ${family} address.`, { raw, family })
         } else if (cidr && Number(cidr) > max) {
-          add('error', 'bad-cidr', `"${raw}" has a prefix length over /${max}.`)
+          add('error', 'bad-cidr', `"${raw}" has a prefix length over /${max}.`, { raw, max })
         }
       }
     } else if (name === 'include' || name === 'exists') {
@@ -190,7 +247,7 @@ export function parseSpfRecord(record: string, domain: string): { terms: SpfTerm
       }
     }
     if (!ok) {
-      add('error', 'bad-syntax', `"${raw}" is written incorrectly, so receivers treat the record as broken (permerror).`)
+      add('error', 'bad-syntax', `"${raw}" is written incorrectly, so receivers treat the record as broken (permerror).`, { raw })
       continue
     }
     terms.push({ raw, type: 'mechanism', name, qualifier, value, cidr, countsLookup: LOOKUP_TERMS.has(name) })
@@ -227,7 +284,7 @@ async function fetchSpf(
 ): Promise<{ status: 'ok' | 'none' | 'nxdomain' | 'multiple'; record: string | null; count: number; nearMisses: string[]; empty: boolean }> {
   const r = await query(ctx, name, 'TXT')
   if (r.status === 3) return { status: 'nxdomain', record: null, count: 0, nearMisses: [], empty: true }
-  if (r.status !== 0) throw new DnsLookupError(`The DNS servers for ${name} didn't answer.`)
+  if (r.status !== 0) throw new SpfNoAnswerError(name)
   const txt = answersOfType(r, 'TXT').map((a) => parseTxtData(a.data))
   const spf = txt.filter(isSpfRecord)
   if (spf.length === 0) return { status: 'none', record: null, count: 0, nearMisses: txt.filter((t) => /spf/i.test(t)), empty: txt.length === 0 }
@@ -236,7 +293,8 @@ async function fetchSpf(
 }
 
 async function analyze(ctx: Ctx, domain: string, record: string, via: SpfNode['via'], chain: string[]): Promise<SpfNode> {
-  const add = (level: IssueLevel, code: string, message: string) => ctx.issues.push({ level, code, message, domain })
+  const add = (level: IssueLevel, code: string, message: string, params?: SpfIssueParams, variant?: SpfIssueVariant) =>
+    ctx.issues.push({ level, code, message, domain, ...withExtras(variant, params) })
   const { terms, issues } = parseSpfRecord(record, domain)
   ctx.issues.push(...issues)
   const node: SpfNode = { domain, via, record, terms, ownLookups: 0, children: [], failure: null }
@@ -251,21 +309,21 @@ async function analyze(ctx: Ctx, domain: string, record: string, via: SpfNode['v
   }
   // Only the domain owner's own record: they can't shorten a provider's record.
   if ((via === 'root' || via === 'draft') && record.length > 450) {
-    add('warning', 'long-record', `The record is ${record.length} characters long. RFC 7208 says the DNS answer should stay small (under about 450 bytes) so it fits in one UDP packet. Some receivers may fail to read a larger answer.`)
+    add('warning', 'long-record', `The record is ${record.length} characters long. RFC 7208 says the DNS answer should stay small (under about 450 bytes) so it fits in one UDP packet. Some receivers may fail to read a larger answer.`, { length: record.length })
   }
 
   const recurse = async (target: string, kind: 'include' | 'redirect') => {
     const t = stripDot(target)
     if (hasMacro(t)) {
-      add('info', 'macro', `"${target}" uses SPF macros, which depend on the sending server. The checker can't follow it.`)
+      add('info', 'macro', `"${target}" uses SPF macros, which depend on the sending server. The checker can't follow it.`, { target })
       return
     }
     if (chain.includes(t)) {
-      add('error', 'loop', `${t} includes itself through ${chain.join(' > ')}. Receivers treat this as broken.`)
+      add('error', 'loop', `${t} includes itself through ${chain.join(' > ')}. Receivers treat this as broken.`, { target: t, chain: [...chain] })
       return
     }
     if (chain.length >= MAX_DEPTH) {
-      add('error', 'too-deep', `The include chain goes deeper than ${MAX_DEPTH} levels, so the checker stopped.`)
+      add('error', 'too-deep', `The include chain goes deeper than ${MAX_DEPTH} levels, so the checker stopped.`, { limit: MAX_DEPTH })
       return
     }
     let f: Awaited<ReturnType<typeof fetchSpf>>
@@ -273,21 +331,23 @@ async function analyze(ctx: Ctx, domain: string, record: string, via: SpfNode['v
       f = await fetchSpf(ctx, t)
     } catch (err) {
       if (ctx.queries > MAX_QUERIES) throw err
-      node.children.push({ domain: t, via: kind, record: null, terms: [], ownLookups: 0, children: [], failure: 'DNS didn’t answer' })
-      add('warning', 'temperror', `The DNS servers for ${t} didn't answer. Receivers would get a temporary error (temperror) and may retry later. Check again in a few minutes.`)
+      node.children.push({ domain: t, via: kind, record: null, terms: [], ownLookups: 0, children: [], failure: 'DNS didn’t answer', failureKind: 'no-answer' })
+      add('warning', 'temperror', `The DNS servers for ${t} didn't answer. Receivers would get a temporary error (temperror) and may retry later. Check again in a few minutes.`, { target: t })
       return
     }
     const child: SpfNode = { domain: t, via: kind, record: f.record, terms: [], ownLookups: 0, children: [], failure: null }
     if (f.status === 'nxdomain' || f.status === 'none') {
       ctx.voids += f.empty ? 1 : 0
       child.failure = f.status === 'nxdomain' ? 'domain does not exist' : 'no SPF record'
-      add('error', `${kind}-no-spf`, `${kind === 'include' ? 'include' : 'redirect'}:${t} points to ${f.status === 'nxdomain' ? 'a domain that doesn’t exist' : 'a domain with no SPF record'}. Receivers treat the whole record as broken (permerror).`)
+      child.failureKind = f.status === 'nxdomain' ? 'nxdomain' : 'no-spf'
+      add('error', `${kind}-no-spf`, `${kind === 'include' ? 'include:' : 'redirect='}${t} points to ${f.status === 'nxdomain' ? 'a domain that doesn’t exist' : 'a domain with no SPF record'}. Receivers treat the whole record as broken (permerror).`, { target: t, missing: f.status === 'nxdomain' })
       node.children.push(child)
       return
     }
     if (f.status === 'multiple') {
       child.failure = 'more than one SPF record'
-      ctx.issues.push({ level: 'error', code: 'multiple', message: `${t} publishes ${f.count} SPF records. There must be exactly one.`, domain: t })
+      child.failureKind = 'multiple'
+      ctx.issues.push({ level: 'error', code: 'multiple', message: `${t} publishes ${f.count} SPF records. There must be exactly one.`, domain: t, variant: 'included', params: { target: t, count: f.count } })
       node.children.push(child)
       return
     }
@@ -308,28 +368,28 @@ async function analyze(ctx: Ctx, domain: string, record: string, via: SpfNode['v
       if (term.name === 'a') {
         const [a4, a6] = await Promise.all([query(ctx, target, 'A'), query(ctx, target, 'AAAA')])
         if (a4.status === 2 || a6.status === 2) {
-          add('warning', 'temperror', `The DNS servers for ${target} didn't answer, so "${term.raw}" couldn't be checked. Receivers would get a temporary error (temperror).`)
+          add('warning', 'temperror', `The DNS servers for ${target} didn't answer, so "${term.raw}" couldn't be checked. Receivers would get a temporary error (temperror).`, { raw: term.raw, target }, 'term')
         } else if (answersOfType(a4, 'A').length + answersOfType(a6, 'AAAA').length === 0) {
           ctx.voids++
-          add('warning', 'void-a', `"${term.raw}" finds no IP address for ${target}, so it matches nothing and counts as a void lookup.`)
+          add('warning', 'void-a', `"${term.raw}" finds no IP address for ${target}, so it matches nothing and counts as a void lookup.`, { raw: term.raw, target })
         }
       } else {
         const mx = await query(ctx, target, 'MX')
         const hosts = answersOfType(mx, 'MX').filter((x) => !/^\d+\s+\.$/.test(x.data.trim()))
         if (mx.status === 2) {
-          add('warning', 'temperror', `The DNS servers for ${target} didn't answer, so "${term.raw}" couldn't be checked. Receivers would get a temporary error (temperror).`)
+          add('warning', 'temperror', `The DNS servers for ${target} didn't answer, so "${term.raw}" couldn't be checked. Receivers would get a temporary error (temperror).`, { raw: term.raw, target }, 'term')
         } else if (hosts.length === 0) {
           ctx.voids++
-          add('warning', 'void-mx', `"${term.raw}" finds no mail servers for ${target}, so it matches nothing and counts as a void lookup.`)
+          add('warning', 'void-mx', `"${term.raw}" finds no mail servers for ${target}, so it matches nothing and counts as a void lookup.`, { raw: term.raw, target })
         } else if (hosts.length > 10) {
-          add('error', 'mx-over-10', `${target} has ${hosts.length} MX records. RFC 7208 allows at most 10 for the mx mechanism.`)
+          add('error', 'mx-over-10', `${target} has ${hosts.length} MX records. RFC 7208 allows at most 10 for the mx mechanism.`, { target, count: hosts.length })
         }
       }
     } else if (term.name === 'ptr') {
-      add('warning', 'ptr', `"${term.raw}" uses ptr, which RFC 7208 says should not be used. It's slow, costs a lookup, and is less reliable than ip4 or ip6.`)
+      add('warning', 'ptr', `"${term.raw}" uses ptr, which RFC 7208 says should not be used. It's slow, costs a lookup, and is less reliable than ip4 or ip6.`, { raw: term.raw })
     } else if (term.name === 'exists') {
-      if (!hasMacro(term.value)) add('info', 'exists', `"${term.raw}" checks whether ${term.value} exists. It's normally used with macros.`)
-      else if (via === 'root' || via === 'draft') add('info', 'macro', `"${term.raw}" uses SPF macros, which are filled in from each sending server. It counts as 1 lookup, but a checker can't list the servers it allows.`)
+      if (!hasMacro(term.value)) add('info', 'exists', `"${term.raw}" checks whether ${term.value} exists. It's normally used with macros.`, { raw: term.raw, target: term.value })
+      else if (via === 'root' || via === 'draft') add('info', 'macro', `"${term.raw}" uses SPF macros, which are filled in from each sending server. It counts as 1 lookup, but a checker can't list the servers it allows.`, { raw: term.raw }, 'exists')
     } else if (term.name === 'ip4') {
       ctx.ip4.add(term.value + (term.cidr ? `/${term.cidr}` : ''))
     } else if (term.name === 'ip6') {
@@ -365,19 +425,20 @@ function finalAll(node: SpfNode): SpfQualifier | null {
 
 function summarize(ctx: Ctx, domain: string, root: SpfNode, hasMx: boolean): SpfCheckResult {
   const allQ = finalAll(root)
-  const add = (level: IssueLevel, code: string, message: string) => ctx.issues.push({ level, code, message, domain })
+  const add = (level: IssueLevel, code: string, message: string, params?: SpfIssueParams, variant?: SpfIssueVariant) =>
+    ctx.issues.push({ level, code, message, domain, ...withExtras(variant, params) })
   if (allQ === '+') add('error', 'plus-all', '"+all" lets every server on the internet send as your domain. Change it to "~all" or "-all".')
   else if (allQ === '?') add('warning', 'neutral-all', '"?all" is neutral: it tells receivers nothing about servers you didn\'t list, so it gives no protection.')
   else if (allQ === null) add('warning', 'no-all', 'The record doesn\'t end with "all", so receivers treat unlisted servers as neutral. Add "~all" or "-all" at the end.')
   if (ctx.lookups > LOOKUP_LIMIT) {
-    add('error', 'too-many-lookups', `The record needs ${ctx.lookups} DNS lookups. The limit is ${LOOKUP_LIMIT}, so receivers stop and treat SPF as broken (permerror).`)
+    add('error', 'too-many-lookups', `The record needs ${ctx.lookups} DNS lookups. The limit is ${LOOKUP_LIMIT}, so receivers stop and treat SPF as broken (permerror).`, { lookups: ctx.lookups, limit: LOOKUP_LIMIT })
   } else if (ctx.lookups === LOOKUP_LIMIT) {
-    add('warning', 'near-limit', `The record uses all ${LOOKUP_LIMIT} allowed DNS lookups. One more include would break SPF for all your mail.`)
+    add('warning', 'near-limit', `The record uses all ${LOOKUP_LIMIT} allowed DNS lookups. One more include would break SPF for all your mail.`, { lookups: ctx.lookups, limit: LOOKUP_LIMIT })
   } else if (ctx.lookups === LOOKUP_LIMIT - 1) {
-    add('warning', 'near-limit', `The record uses 9 of the ${LOOKUP_LIMIT} allowed DNS lookups. There's room for one more lookup, and most includes cost more than one.`)
+    add('warning', 'near-limit', `The record uses 9 of the ${LOOKUP_LIMIT} allowed DNS lookups. There's room for one more lookup, and most includes cost more than one.`, { lookups: ctx.lookups, limit: LOOKUP_LIMIT }, 'one-left')
   }
   if (ctx.voids > VOID_LIMIT) {
-    add('error', 'too-many-voids', `${ctx.voids} lookups returned nothing. RFC 7208 lets receivers fail SPF after ${VOID_LIMIT} of these "void" lookups.`)
+    add('error', 'too-many-voids', `${ctx.voids} lookups returned nothing. RFC 7208 lets receivers fail SPF after ${VOID_LIMIT} of these "void" lookups.`, { voids: ctx.voids, limit: VOID_LIMIT })
   }
   const order: Record<IssueLevel, number> = { error: 0, warning: 1, info: 2 }
   const issues = [...ctx.issues].sort((a, b) => order[a.level] - order[b.level])
@@ -403,8 +464,8 @@ const newCtx = (skipHosts = false): Ctx => ({ lookups: 0, voids: 0, queries: 0, 
 
 function cleanDomain(rawInput: string): string {
   const domain = normalizeDomainInput(rawInput)
-  if (!domain) throw new SpfInputError('Enter a domain, such as example.com.')
-  if (!looksLikeDomain(domain)) throw new SpfInputError('That doesn’t look like a domain. Enter something like example.com.')
+  if (!domain) throw new SpfInputError('Enter a domain, such as example.com.', 'empty')
+  if (!looksLikeDomain(domain)) throw new SpfInputError('That doesn’t look like a domain. Enter something like example.com.', 'invalid')
   try {
     return new URL(`http://${domain}`).hostname
   } catch {
@@ -423,7 +484,7 @@ export async function checkSpf(rawInput: string): Promise<SpfCheckResult> {
   // Near misses like "v=spf 1 ..." or "spf1 ..." are shown so the owner can fix them.
   if (f.status === 'none') return { ...empty, outcome: 'none', issues: [], nearMisses: f.nearMisses }
   if (f.status === 'multiple') {
-    ctx.issues.push({ level: 'error', code: 'multiple', message: `${domain} publishes ${f.count} SPF records. RFC 7208 allows exactly one, so receivers treat SPF as broken (permerror). Merge them into one record.`, domain })
+    ctx.issues.push({ level: 'error', code: 'multiple', message: `${domain} publishes ${f.count} SPF records. RFC 7208 allows exactly one, so receivers treat SPF as broken (permerror). Merge them into one record.`, domain, params: { target: domain, count: f.count } })
   }
   const root = await analyze(ctx, domain, f.record!, 'root', [domain])
   return summarize(ctx, domain, root, hasMx)
@@ -440,7 +501,7 @@ export async function fetchSpfRecord(rawInput: string): Promise<{ domain: string
 export async function checkSpfDraft(rawDomain: string, record: string): Promise<SpfCheckResult> {
   const domain = rawDomain.trim() ? cleanDomain(rawDomain) : 'example.com'
   const ctx = newCtx(!rawDomain.trim())
-  if (!isSpfRecord(record)) throw new SpfInputError('An SPF record has to start with v=spf1.')
+  if (!isSpfRecord(record)) throw new SpfInputError('An SPF record has to start with v=spf1.', 'not-spf')
   const root = await analyze(ctx, domain, record.trim(), 'draft', [domain])
   return summarize(ctx, domain, root, true)
 }

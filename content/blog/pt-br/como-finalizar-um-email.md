@@ -32,7 +32,7 @@ O final de um e-mail tem três partes separadas, e cada uma tem uma função dif
 2. **A despedida** é a saudação curta antes do seu nome, como "Obrigado," ou "Atenciosamente,".
 3. **O seu nome e a assinatura** vêm por último. Em um primeiro e-mail, acrescente o seu cargo e a empresa. Em uma resposta rápida, o primeiro nome basta.
 
-Mantenha a assinatura curta. O antigo guia de etiqueta da internet, a [RFC 1855](https://www.rfc-editor.org/rfc/rfc1855), sugeria no máximo 4 linhas, e isso ainda funciona. Se você quer uma assinatura limpa e padronizada, o [gerador de assinatura de e-mail](/email-signature-generator) (em inglês) cria uma para Gmail, Outlook e Apple Mail.
+Mantenha a assinatura curta. O antigo guia de etiqueta da internet, a [RFC 1855](https://www.rfc-editor.org/rfc/rfc1855), sugeria no máximo 4 linhas, e isso ainda funciona. Se você quer uma assinatura limpa e padronizada, o [gerador de assinatura de e-mail](/email-signature-generator) cria uma para Gmail, Outlook e Apple Mail.
 
 ## Despedidas para e-mails de trabalho: as mais comuns
 

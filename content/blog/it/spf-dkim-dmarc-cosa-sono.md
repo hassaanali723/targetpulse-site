@@ -67,7 +67,7 @@ Un record DNS con la chiave pubblica DKIM ha questa forma:
 v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA...
 ```
 
-Il tag `v=DKIM1` indica la versione del protocollo, `k=rsa` identifica l'algoritmo della chiave e `p=` contiene la chiave pubblica codificata in base64. Se gestisci un tuo server di posta, puoi creare una coppia di chiavi con il nostro [generatore DKIM](/dkim-generator) (in inglese).
+Il tag `v=DKIM1` indica la versione del protocollo, `k=rsa` identifica l'algoritmo della chiave e `p=` contiene la chiave pubblica codificata in base64. Se gestisci un tuo server di posta, puoi creare una coppia di chiavi con il nostro [generatore DKIM](/dkim-generator).
 
 Un errore frequente nasce quando i mittenti si affidano alle firme predefinite della piattaforma. Molte piattaforme email firmano la posta in uscita con un proprio dominio condiviso (`d=shared-esp.example`). La firma passa, ma il dominio di firma non corrisponde al tuo dominio From visibile, e l'allineamento DMARC fallisce. Devi configurare un DKIM personalizzato nelle impostazioni della piattaforma, così la firma usa il tuo dominio nel tag `d=`.
 
@@ -132,7 +132,7 @@ Lasciare DMARC su `p=none` per sempre lascia il tuo dominio esposto alla falsifi
 Segui questi passi in ordine:
 
 1. Elenca ogni servizio interno, piattaforma di marketing, helpdesk e strumento transazionale che invia email con il tuo dominio.
-2. Pubblica un unico [record SPF](/glossary/spf) che copra i server di invio autorizzati, con meno di 10 ricerche in totale. La [verifica record SPF](/spf-checker) (in inglese) le conta per te.
+2. Pubblica un unico [record SPF](/glossary/spf) che copra i server di invio autorizzati, con meno di 10 ricerche in totale. La [verifica record SPF](/spf-checker) le conta per te.
 3. Attiva la firma DKIM personalizzata con il tuo dominio su ogni piattaforma di invio e pubblica nel DNS i record del selettore corrispondenti.
 4. Assicurati che i tuoi indirizzi IP di invio abbiano un DNS diretto valido e un [record PTR](/glossary/ptr-record) corrispondente nel DNS inverso.
 5. Pubblica un primo [record DMARC](/blog/what-is-a-dmarc-record) su `_dmarc` con `p=none` e una casella `rua` attiva, per iniziare a ricevere i report aggregati XML.

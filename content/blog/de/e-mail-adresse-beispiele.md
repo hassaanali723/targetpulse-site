@@ -150,7 +150,7 @@ So beheben Sie eine Adresse, die ein Formular nicht annimmt:
 - Prüfen Sie die Schreibweise, vor allem die Domain. Die eigene Liste häufiger Fehler von Google nennt Tippfehler wie gmal.con, versehentliche Leerzeichen und einen Punkt am Ende ([Google](https://support.google.com/mail/answer/6596)).
 - Entfernen Sie Leerzeichen oder Anführungszeichen, die Sie versehentlich mitkopiert haben.
 - Wenn Sie eine Plus-Adresse genutzt haben und das Formular sie ablehnt, nutzen Sie stattdessen Ihre einfache Adresse.
-- Sieht die Adresse richtig aus, führen Sie einen [MX-Lookup](/mx-lookup) (auf Englisch) für die Domain durch. So sehen Sie, ob sie überhaupt E-Mails empfangen kann.
+- Sieht die Adresse richtig aus, führen Sie einen [MX-Lookup](/mx-lookup) für die Domain durch. So sehen Sie, ob sie überhaupt E-Mails empfangen kann.
 - Um zu wissen, ob das Postfach selbst existiert, nutzen Sie den [E-Mail-Checker](/email-checker). Er prüft die Adresse, ohne eine E-Mail zu senden.
 
 ## So bekommen Sie eine professionelle E-Mail-Adresse
@@ -159,7 +159,7 @@ Sie haben zwei Möglichkeiten.
 
 Die schnelle ist ein kostenloses Konto bei einem Anbieter wie Gmail, Outlook.com oder Proton Mail. Es kostet nichts und funktioniert überall. Unsere [Liste kostenloser E-Mail-Anbieter](/free-email-providers) (auf Englisch) vergleicht, was jeder davon bietet.
 
-Die andere ist eine Adresse auf Ihrer eigenen Domain, etwa jane@yourbusiness.com. Dafür brauchen Sie drei Dinge. Erstens eine registrierte Domain. Zweitens einen E-Mail-Host wie Google Workspace oder Microsoft 365. Drittens MX-Einträge, die Ihre Domain auf diesen Host zeigen lassen. Ihr Host nennt Ihnen die genauen Einträge, die Sie anlegen müssen ([Google](https://knowledge.workspace.google.com/admin/domains/set-up-mx-records-for-google-workspace)). Ist alles eingerichtet, können Sie die Einträge mit dem [MX-Lookup](/mx-lookup) (auf Englisch) prüfen.
+Die andere ist eine Adresse auf Ihrer eigenen Domain, etwa jane@yourbusiness.com. Dafür brauchen Sie drei Dinge. Erstens eine registrierte Domain. Zweitens einen E-Mail-Host wie Google Workspace oder Microsoft 365. Drittens MX-Einträge, die Ihre Domain auf diesen Host zeigen lassen. Ihr Host nennt Ihnen die genauen Einträge, die Sie anlegen müssen ([Google](https://knowledge.workspace.google.com/admin/domains/set-up-mx-records-for-google-workspace)). Ist alles eingerichtet, können Sie die Einträge mit dem [MX-Lookup](/mx-lookup) prüfen.
 
 Wählen Sie sorgfältig, denn manche Adressen lassen sich später schwer ändern. Gmail erlaubt bis zu dreimal einen Wechsel zu einer neuen gmail.com-Adresse, einmal alle 12 Monate ([Google](https://support.google.com/accounts/answer/19870)). Yahoo erlaubt gar keine Änderung der Adresse ([Yahoo](https://help.yahoo.com/kb/yahoo-email-address-sln2059.html)).
 

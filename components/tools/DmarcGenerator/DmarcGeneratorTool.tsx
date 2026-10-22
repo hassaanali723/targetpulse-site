@@ -13,28 +13,24 @@ import {
   type DmarcFailureOption,
   type CleanedDmarcResult,
 } from '@/lib/tools/dmarcGeneratorCore'
+import { dmarcToolStrings, dmarcWarningText, dmarcChangeText, type DmarcToolStrings } from '@/lib/i18n/tools/dmarcToolStrings'
+import type { Locale } from '@/lib/i18n/clusters'
 
 // The three policy levels, in the order a domain should move through them.
-// Written for someone who has never set up DMARC before.
-const POLICY_OPTIONS: { value: DmarcPolicy; title: string; text: string }[] = [
-  {
-    value: 'none',
-    title: 'Monitor only',
-    text: 'Nothing changes for your email yet. You get reports that show who sends email as your domain.',
-  },
-  {
-    value: 'quarantine',
-    title: 'Send to spam',
-    text: 'Failing email is quarantined in the spam folder. Choose this after the reports show your real email passes.',
-  },
-  {
-    value: 'reject',
-    title: 'Block',
-    text: 'Failing email is rejected and never arrives. Choose this last, when you are sure all your email passes.',
-  },
-]
+// Their names and descriptions live in lib/i18n/tools/dmarcToolStrings.ts.
+const POLICIES: DmarcPolicy[] = ['none', 'quarantine', 'reject']
+const FAILURE_OPTIONS: DmarcFailureOption[] = ['0', '1', 'd', 's']
 
-const CHANGE_LABEL = { removed: 'Removed', normalized: 'Changed', modernized: 'Suggestion' } as const
+// Record syntax, so it stays the same in every language.
+const IMPORT_PLACEHOLDER = 'v=DMARC1; p=quarantine; pct=50; rua=mailto:dmarc@example.com'
+
+/** Fills the {slot} markers of a strings-file template with text or elements. */
+function fill(template: string, slots: Record<string, React.ReactNode>): React.ReactNode[] {
+  return template.split(/(\{\w+\})/).map((part, i) => {
+    const m = /^\{(\w+)\}$/.exec(part)
+    return m && m[1] in slots ? <React.Fragment key={i}>{slots[m[1]]}</React.Fragment> : part
+  })
+}
 
 const inputClass =
   'w-full text-sm px-3.5 py-2.5 bg-slate-50 border rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 font-mono'
@@ -58,11 +54,13 @@ function CopyButton({
   id,
   copiedField,
   onCopy,
+  t,
 }: {
   text: string
   id: string
   copiedField: string | null
   onCopy: (text: string, id: string) => void
+  t: DmarcToolStrings
 }) {
   const copied = copiedField === id
   return (
@@ -72,7 +70,7 @@ function CopyButton({
       className="shrink-0 text-xs text-indigo-300 hover:text-white flex items-center gap-1 font-semibold"
     >
       {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-      <span className={copied ? 'text-emerald-400' : ''}>{copied ? 'Copied' : 'Copy'}</span>
+      <span className={copied ? 'text-emerald-400' : ''}>{copied ? t.copied : t.copy}</span>
     </button>
   )
 }
@@ -92,20 +90,21 @@ function Warnings({ items }: { items: string[] }) {
 }
 
 // The last "what to do next" step changes with the level the user picked.
-function nextLevelText(policy: DmarcPolicy, hasReports: boolean): string {
+function nextLevelText(policy: DmarcPolicy, hasReports: boolean, t: DmarcToolStrings): string {
   if (!hasReports) {
-    return 'Add a report address in step 2. Without reports, you can’t tell whether your real email passes.'
+    return t.nextLevel.noReports
   }
   if (policy === 'none') {
-    return 'Read the reports for a few weeks. When your real email passes, come back and choose Send to spam.'
+    return t.nextLevel.none
   }
   if (policy === 'quarantine') {
-    return 'Keep reading the reports. When none of your real email goes to spam, come back and choose Block.'
+    return t.nextLevel.quarantine
   }
-  return 'Keep reading the reports. They show any new service that starts sending email as your domain.'
+  return t.nextLevel.reject
 }
 
-export default function DmarcGeneratorTool() {
+export default function DmarcGeneratorTool({ locale = 'en' }: { locale?: Locale }) {
+  const t = dmarcToolStrings(locale)
   // The three steps
   const [domain, setDomain] = useState('')
   const [aggregateReports, setAggregateReports] = useState('')
@@ -194,31 +193,29 @@ export default function DmarcGeneratorTool() {
           <div className="space-y-2">
             <label htmlFor="dmarc-domain" className="flex items-center gap-2 text-sm font-bold text-slate-900">
               <StepNumber n={1} />
-              Your domain
+              {t.domainLabel}
             </label>
             <input
               id="dmarc-domain"
               type="text"
               value={domain}
               onChange={(e) => setDomain(e.target.value)}
-              placeholder="example.com"
+              placeholder={t.domainPlaceholder}
               autoComplete="off"
               spellCheck={false}
               className={`${inputClass} ${domainLooksWrong ? 'border-rose-400' : 'border-slate-300'}`}
             />
             <p className={`text-xs leading-relaxed ${domainLooksWrong ? 'text-rose-600 font-semibold' : 'text-slate-500'}`}>
-              {domainLooksWrong
-                ? 'This doesn’t look like a domain. Enter something like example.com.'
-                : 'The part after the @ in your email address. For anna@example.com, enter example.com.'}
+              {domainLooksWrong ? t.domainInvalid : t.domainHelp}
             </p>
           </div>
 
           <div className="space-y-2">
             <label htmlFor="dmarc-rua" className="flex items-center gap-2 text-sm font-bold text-slate-900">
               <StepNumber n={2} />
-              Where should reports go?
+              {t.ruaLabel}
               <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 border border-emerald-200 px-1.5 py-0.5 rounded">
-                Recommended
+                {t.recommended}
               </span>
             </label>
             <input
@@ -226,15 +223,13 @@ export default function DmarcGeneratorTool() {
               type="email"
               value={aggregateReports}
               onChange={(e) => setAggregateReports(e.target.value)}
-              placeholder={cleanDomain && !domainLooksWrong ? `dmarc@${cleanDomain}` : 'dmarc@example.com'}
+              placeholder={cleanDomain && !domainLooksWrong ? `dmarc@${cleanDomain}` : t.ruaPlaceholder}
               autoComplete="off"
               spellCheck={false}
               className={`${inputClass} ${ruaInvalid ? 'border-rose-400' : 'border-slate-300'}`}
             />
             <p className={`text-xs leading-relaxed ${ruaInvalid ? 'text-rose-600 font-semibold' : 'text-slate-500'}`}>
-              {ruaInvalid
-                ? 'This doesn’t look like an email address. It is left out of the record until you fix it.'
-                : 'Mail providers send summaries here, called aggregate reports (rua). They show who sends email as your domain.'}
+              {ruaInvalid ? t.ruaInvalid : t.ruaHelp}
             </p>
           </div>
         </div>
@@ -243,14 +238,12 @@ export default function DmarcGeneratorTool() {
         <fieldset className="space-y-3">
           <legend className="flex items-center gap-2 text-sm font-bold text-slate-900">
             <StepNumber n={3} />
-            How strict should it be?
+            {t.policyLegend}
           </legend>
-          <p className="text-xs text-slate-500 leading-relaxed">
-            Mail providers check that email using your domain really comes from you. Your DMARC policy decides what
-            happens to email that fails, such as fake email sent in your name.
-          </p>
+          <p className="text-xs text-slate-500 leading-relaxed">{t.policyIntro}</p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            {POLICY_OPTIONS.map((opt) => {
+            {POLICIES.map((value) => {
+              const opt = { value, ...t.policies[value] }
               const selected = policy === opt.value
               return (
                 <label
@@ -282,7 +275,7 @@ export default function DmarcGeneratorTool() {
                     </span>
                     {opt.value === 'none' && (
                       <span className="text-[10px] font-bold uppercase tracking-wider text-indigo-700 bg-indigo-100 px-1.5 py-0.5 rounded">
-                        Start here
+                        {t.startHere}
                       </span>
                     )}
                   </div>
@@ -307,10 +300,8 @@ export default function DmarcGeneratorTool() {
           >
             <ChevronDown className={`w-4 h-4 mt-0.5 shrink-0 transition-transform ${showAdvanced ? 'rotate-180' : ''}`} />
             <span>
-              Advanced settings
-              <span className="block font-medium text-slate-500 text-xs mt-0.5">
-                Subdomains, alignment, failure reports (forensic) and test mode. Most people can skip these.
-              </span>
+              {t.advancedTitle}
+              <span className="block font-medium text-slate-500 text-xs mt-0.5">{t.advancedHint}</span>
             </span>
           </button>
 
@@ -331,11 +322,9 @@ export default function DmarcGeneratorTool() {
                     className="w-4 h-4 mt-0.5 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500"
                   />
                   <span>
-                    <span className="font-bold text-slate-800">Test mode</span> <Tag>t=y</Tag>
+                    <span className="font-bold text-slate-800">{t.testMode}</span> <Tag>t=y</Tag>
                     <span className="block text-xs text-slate-500 mt-0.5 leading-relaxed">
-                      {policy === 'none'
-                        ? 'Choose Send to spam or Block first. Test mode does nothing with Monitor only.'
-                        : 'Asks mail providers to go one step softer while you test. Block acts like Send to spam, and Send to spam acts like Monitor only.'}
+                      {policy === 'none' ? t.testModeDisabled : t.testModeHelp}
                     </span>
                   </span>
                 </label>
@@ -343,7 +332,7 @@ export default function DmarcGeneratorTool() {
 
               <div>
                 <label htmlFor="dmarc-sp" className={advLabelClass}>
-                  Policy for subdomains <Tag>sp=</Tag>
+                  {t.spLabel} <Tag>sp=</Tag>
                 </label>
                 <select
                   id="dmarc-sp"
@@ -351,17 +340,19 @@ export default function DmarcGeneratorTool() {
                   onChange={(e) => setSubdomainPolicy(e.target.value as DmarcPolicy | 'inherit')}
                   className={selectClass}
                 >
-                  <option value="inherit">Same as your main choice</option>
-                  <option value="none">Monitor only</option>
-                  <option value="quarantine">Send to spam</option>
-                  <option value="reject">Block</option>
+                  <option value="inherit">{t.spInherit}</option>
+                  {POLICIES.map((value) => (
+                    <option key={value} value={value}>
+                      {t.policies[value].title}
+                    </option>
+                  ))}
                 </select>
-                <p className="text-xs text-slate-500 mt-1">For addresses like news.example.com.</p>
+                <p className="text-xs text-slate-500 mt-1">{t.spHelp}</p>
               </div>
 
               <div>
                 <label htmlFor="dmarc-np" className={advLabelClass}>
-                  Policy for subdomains that don&apos;t exist <Tag>np=</Tag>
+                  {t.npLabel} <Tag>np=</Tag>
                 </label>
                 <select
                   id="dmarc-np"
@@ -369,17 +360,19 @@ export default function DmarcGeneratorTool() {
                   onChange={(e) => setNonExistentSubdomainPolicy(e.target.value as DmarcPolicy | 'none_specified')}
                   className={selectClass}
                 >
-                  <option value="none_specified">Same as the subdomain policy</option>
-                  <option value="none">Monitor only</option>
-                  <option value="quarantine">Send to spam</option>
-                  <option value="reject">Block</option>
+                  <option value="none_specified">{t.npInherit}</option>
+                  {POLICIES.map((value) => (
+                    <option key={value} value={value}>
+                      {t.policies[value].title}
+                    </option>
+                  ))}
                 </select>
-                <p className="text-xs text-slate-500 mt-1">For made-up names that scammers use, like invoices.example.com.</p>
+                <p className="text-xs text-slate-500 mt-1">{t.npHelp}</p>
               </div>
 
               <div>
                 <label htmlFor="dmarc-adkim" className={advLabelClass}>
-                  DKIM alignment <Tag>adkim=</Tag>
+                  {t.adkimLabel} <Tag>adkim=</Tag>
                 </label>
                 <select
                   id="dmarc-adkim"
@@ -387,14 +380,14 @@ export default function DmarcGeneratorTool() {
                   onChange={(e) => setDkimAlignment(e.target.value as DmarcAlignment)}
                   className={selectClass}
                 >
-                  <option value="r">Relaxed (default, recommended)</option>
-                  <option value="s">Strict (exact domain match)</option>
+                  <option value="r">{t.alignRelaxed}</option>
+                  <option value="s">{t.alignStrict}</option>
                 </select>
               </div>
 
               <div>
                 <label htmlFor="dmarc-aspf" className={advLabelClass}>
-                  SPF alignment <Tag>aspf=</Tag>
+                  {t.aspfLabel} <Tag>aspf=</Tag>
                 </label>
                 <select
                   id="dmarc-aspf"
@@ -402,31 +395,31 @@ export default function DmarcGeneratorTool() {
                   onChange={(e) => setSpfAlignment(e.target.value as DmarcAlignment)}
                   className={selectClass}
                 >
-                  <option value="r">Relaxed (default, recommended)</option>
-                  <option value="s">Strict (exact domain match)</option>
+                  <option value="r">{t.alignRelaxed}</option>
+                  <option value="s">{t.alignStrict}</option>
                 </select>
               </div>
 
               <div>
                 <label htmlFor="dmarc-ruf" className={advLabelClass}>
-                  Failure report email <Tag>ruf=</Tag>
+                  {t.rufLabel} <Tag>ruf=</Tag>
                 </label>
                 <input
                   id="dmarc-ruf"
                   type="email"
                   value={failureReports}
                   onChange={(e) => setFailureReports(e.target.value)}
-                  placeholder="Optional"
+                  placeholder={t.rufPlaceholder}
                   autoComplete="off"
                   spellCheck={false}
                   className={`${selectClass} font-mono ${rufInvalid ? 'border-rose-400' : ''}`}
                 />
-                <p className="text-xs text-slate-500 mt-1">Reports on single failed emails. Many providers don&apos;t send these.</p>
+                <p className="text-xs text-slate-500 mt-1">{t.rufHelp}</p>
               </div>
 
               <div>
                 <label htmlFor="dmarc-fo" className={advLabelClass}>
-                  When to send failure reports <Tag>fo=</Tag>
+                  {t.foLabel} <Tag>fo=</Tag>
                 </label>
                 <select
                   id="dmarc-fo"
@@ -435,13 +428,14 @@ export default function DmarcGeneratorTool() {
                   disabled={!failureReports.trim()}
                   className={`${selectClass} disabled:opacity-60 disabled:cursor-not-allowed`}
                 >
-                  <option value="0">When SPF and DKIM both fail (default)</option>
-                  <option value="1">When SPF or DKIM fails</option>
-                  <option value="d">When DKIM fails</option>
-                  <option value="s">When SPF fails</option>
+                  {FAILURE_OPTIONS.map((value) => (
+                    <option key={value} value={value}>
+                      {t.foOptions[value]}
+                    </option>
+                  ))}
                 </select>
                 {!failureReports.trim() && (
-                  <p className="text-xs text-slate-500 mt-1">Add a failure report email first.</p>
+                  <p className="text-xs text-slate-500 mt-1">{t.foNeedsRuf}</p>
                 )}
               </div>
             </div>
@@ -451,67 +445,62 @@ export default function DmarcGeneratorTool() {
         {/* The record */}
         <div className="bg-slate-900 text-white rounded-xl p-5 md:p-6 space-y-4 shadow-md">
           <div>
-            <h3 className="text-base md:text-lg font-bold text-white">Your DMARC record</h3>
-            <p className="text-xs md:text-sm text-slate-400 mt-0.5">
-              Add this to your domain&apos;s DNS settings as a new TXT record.
-            </p>
+            <h3 className="text-base md:text-lg font-bold text-white">{t.recordTitle}</h3>
+            <p className="text-xs md:text-sm text-slate-400 mt-0.5">{t.recordIntro}</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-[110px_1fr] gap-3">
             <div className="p-3 bg-slate-950/80 rounded-lg border border-slate-800">
-              <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500">Type</div>
+              <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500">{t.typeLabel}</div>
               <div className="font-mono text-sm text-slate-100">TXT</div>
             </div>
 
             <div className="flex items-start justify-between gap-3 p-3 bg-slate-950/80 rounded-lg border border-slate-800">
               <div className="min-w-0">
-                <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500">Name / Host</div>
+                <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500">{t.hostLabel}</div>
                 <div className="font-mono text-sm text-slate-100 select-all">{result.host}</div>
                 <div className="text-xs text-slate-500 mt-1">
-                  Some providers want the full name:{' '}
+                  {t.fullName}{' '}
                   <span className="font-mono text-slate-400">
-                    _dmarc.{cleanDomain && !domainLooksWrong ? cleanDomain : 'yourdomain.com'}
+                    _dmarc.{cleanDomain && !domainLooksWrong ? cleanDomain : t.yourDomain}
                   </span>
                 </div>
               </div>
-              <CopyButton text={result.host} id="host" copiedField={copiedField} onCopy={handleCopy} />
+              <CopyButton text={result.host} id="host" copiedField={copiedField} onCopy={handleCopy} t={t} />
             </div>
 
             <div className="sm:col-span-2 flex items-start justify-between gap-3 p-3 bg-slate-950/80 rounded-lg border border-slate-800">
               <div className="min-w-0">
-                <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500">Value</div>
+                <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500">{t.valueLabel}</div>
                 <div className="font-mono text-sm text-emerald-300 font-semibold break-all select-all">{result.record}</div>
               </div>
-              <CopyButton text={result.record} id="record" copiedField={copiedField} onCopy={handleCopy} />
+              <CopyButton text={result.record} id="record" copiedField={copiedField} onCopy={handleCopy} t={t} />
             </div>
           </div>
         </div>
 
-        <Warnings items={result.warnings} />
+        <Warnings items={result.warningItems.map((w) => dmarcWarningText(t, w))} />
 
         {/* A report address on another domain needs that domain's consent. */}
         {result.externalConsentRecords.length > 0 && (
           <div className="bg-amber-50/70 border border-amber-200 rounded-xl p-4 md:p-5 space-y-3">
             <div className="flex items-center gap-2 text-amber-900 font-bold text-sm">
               <Info className="w-4 h-4 text-amber-600 shrink-0" />
-              <span>One more record is needed on the report domain</span>
+              <span>{t.consentTitle}</span>
             </div>
-            <p className="text-xs md:text-sm text-amber-900 leading-relaxed font-medium">
-              Your report address is on a different domain. Mail providers only send reports there if that domain publishes
-              the record below. Send it to whoever manages that domain.
-            </p>
+            <p className="text-xs md:text-sm text-amber-900 leading-relaxed font-medium">{t.consentText}</p>
             {result.externalConsentRecords.map((cr) => (
               <div key={cr.destinationDomain} className="p-3 bg-white border border-amber-200 rounded-lg space-y-2 text-xs">
                 <div className="font-semibold text-slate-800">
-                  Add to the DNS of <span className="font-mono text-indigo-600">{cr.destinationDomain}</span>, type TXT:
+                  {fill(t.consentAddTo, { domain: <span className="font-mono text-indigo-600">{cr.destinationDomain}</span> })}
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2 font-mono">
                   <div className="p-2 bg-slate-50 border border-slate-200 rounded break-all">
-                    <span className="text-slate-500">Name: </span>
+                    <span className="text-slate-500">{t.consentName}</span>
                     <span className="text-slate-800 select-all font-semibold">{cr.host}</span>
                   </div>
                   <div className="p-2 bg-slate-50 border border-slate-200 rounded break-all">
-                    <span className="text-slate-500">Value: </span>
+                    <span className="text-slate-500">{t.consentValue}</span>
                     <span className="text-emerald-700 select-all font-semibold">{cr.value}</span>
                   </div>
                 </div>
@@ -522,28 +511,25 @@ export default function DmarcGeneratorTool() {
 
         {/* What to do next */}
         <div className="rounded-xl border border-slate-200 bg-slate-50 p-5 md:p-6 space-y-3">
-          <h3 className="text-base font-bold text-slate-900">What to do next</h3>
+          <h3 className="text-base font-bold text-slate-900">{t.nextTitle}</h3>
           <ol className="list-decimal pl-5 space-y-2 text-sm text-slate-700 leading-relaxed">
             <li>
-              Check that SPF and DKIM are set up for your domain. DMARC relies on them, so without them even your real
-              email fails. Your email service, such as Google Workspace or Microsoft 365, explains how to turn them on. The{' '}
-              <Link href="/spf-checker" className="text-indigo-600 font-semibold hover:underline">
-                SPF checker
-              </Link>{' '}
-              shows whether your SPF record works.{' '}
-              <Link href="/blog/spf-dkim-dmarc-explained" className="text-indigo-600 font-semibold hover:underline">
-                How SPF, DKIM and DMARC work together
-              </Link>
-              .
+              {fill(t.nextCheck, {
+                spf: (
+                  <Link href={t.spfHref} className="text-indigo-600 font-semibold hover:underline">
+                    {t.spfLabel}
+                  </Link>
+                ),
+                guide: (
+                  <Link href={t.guideHref} className="text-indigo-600 font-semibold hover:underline">
+                    {t.guideLabel}
+                  </Link>
+                ),
+              })}
             </li>
-            <li>
-              Sign in where you manage your domain&apos;s DNS. This is usually the company you bought the domain from.
-            </li>
-            <li>
-              Add a new TXT record with the name and value above, then save. Keep only one DMARC record on the domain,
-              because mail servers ignore both if they find two.
-            </li>
-            <li>{nextLevelText(policy, hasReports)}</li>
+            <li>{t.nextSignIn}</li>
+            <li>{t.nextAdd}</li>
+            <li>{nextLevelText(policy, hasReports, t)}</li>
           </ol>
         </div>
       </div>
@@ -557,20 +543,20 @@ export default function DmarcGeneratorTool() {
           className="flex items-center gap-1.5 text-sm font-bold text-indigo-600 hover:text-indigo-700 text-left"
         >
           <ChevronDown className={`w-4 h-4 shrink-0 transition-transform ${showCleaner ? 'rotate-180' : ''}`} />
-          Already have a DMARC record? Check it for settings retired in RFC 9989.
+          {t.cleanerToggle}
         </button>
 
         {showCleaner && (
           <div className="mt-4 space-y-4">
             <div className="space-y-2">
               <label htmlFor="dmarc-import" className="block text-sm font-bold text-slate-800">
-                Paste your current DMARC record
+                {t.importLabel}
               </label>
               <textarea
                 id="dmarc-import"
                 value={importText}
                 onChange={(e) => setImportText(e.target.value)}
-                placeholder="v=DMARC1; p=quarantine; pct=50; rua=mailto:dmarc@example.com"
+                placeholder={IMPORT_PLACEHOLDER}
                 rows={3}
                 spellCheck={false}
                 className="w-full text-sm font-mono p-3 bg-white border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -581,7 +567,7 @@ export default function DmarcGeneratorTool() {
                 disabled={!importText.trim()}
                 className="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm transition-colors shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Check and clean record
+                {t.cleanButton}
               </button>
             </div>
 
@@ -591,13 +577,14 @@ export default function DmarcGeneratorTool() {
                   <div className="flex items-center justify-between gap-3">
                     <span className="text-sm font-bold text-emerald-400 flex items-center gap-1.5">
                       <FileCheck className="w-4 h-4" />
-                      Cleaned record
+                      {t.cleanedTitle}
                     </span>
                     <CopyButton
                       text={cleanerResult.cleanedRecord}
                       id="cleanedRecord"
                       copiedField={copiedField}
                       onCopy={handleCopy}
+                      t={t}
                     />
                   </div>
                   <div className="p-3 bg-slate-950 font-mono text-sm text-emerald-300 rounded-lg break-all select-all">
@@ -607,9 +594,7 @@ export default function DmarcGeneratorTool() {
 
                 <div className="space-y-2">
                   <div className="text-sm font-bold text-slate-800">
-                    {cleanerResult.changes.length === 0
-                      ? 'Your record is already clean. Nothing needed to change.'
-                      : `What changed (${cleanerResult.changes.length})`}
+                    {cleanerResult.changes.length === 0 ? t.alreadyClean : t.whatChanged(cleanerResult.changes.length)}
                   </div>
                   {cleanerResult.changes.map((c) => (
                     <div
@@ -625,14 +610,14 @@ export default function DmarcGeneratorTool() {
                             : 'bg-slate-200 text-slate-700'
                         }`}
                       >
-                        {CHANGE_LABEL[c.action]}
+                        {t.changeLabel[c.action]}
                       </span>
-                      <p className="text-slate-700 leading-relaxed">{c.explanation}</p>
+                      <p className="text-slate-700 leading-relaxed">{dmarcChangeText(t, c)}</p>
                     </div>
                   ))}
                 </div>
 
-                <Warnings items={cleanerResult.warnings} />
+                <Warnings items={cleanerResult.warningItems.map((w) => dmarcWarningText(t, w))} />
               </div>
             )}
           </div>

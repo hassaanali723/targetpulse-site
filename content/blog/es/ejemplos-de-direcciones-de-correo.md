@@ -157,7 +157,7 @@ Para arreglar una dirección que un formulario no acepta:
 
 Tienes dos opciones.
 
-La rápida es una cuenta gratis con un proveedor como Gmail, Outlook.com o Proton Mail. No cuesta nada y funciona en todas partes. Nuestra [lista de proveedores de correo gratis](/free-email-providers) (en inglés) compara lo que ofrece cada uno.
+La rápida es una cuenta gratis con un proveedor como Gmail, Outlook.com o Proton Mail. No cuesta nada y funciona en todas partes. Nuestra [lista de proveedores de correo gratis](/free-email-providers) compara lo que ofrece cada uno.
 
 La otra es una dirección en tu propio dominio, como jane@yourbusiness.com. Necesitas tres cosas. Primero, un dominio registrado. Segundo, un servicio de correo como Google Workspace o Microsoft 365. Tercero, registros MX que apunten tu dominio a ese servicio. Tu proveedor te da los registros exactos que debes añadir ([Google](https://knowledge.workspace.google.com/admin/domains/set-up-mx-records-for-google-workspace)). Cuando esté configurado, puedes comprobar los registros con la [consulta MX](/mx-lookup) (en inglés).
 

@@ -71,7 +71,7 @@ Der private Schlüssel gehört nie ins DNS. Er bleibt auf dem sendenden Server. 
 Wie Sie DKIM einrichten, hängt davon ab, wer Ihre E-Mails sendet.
 
 - **Sie nutzen einen Dienst wie Google Workspace, Microsoft 365, Mailchimp oder Brevo.** Der Dienst erzeugt den Schlüssel selbst. Er zeigt Ihnen einen oder mehrere DNS-Einträge, die Sie bei Ihrem DNS-Anbieter anlegen. Das ist meist die Firma, bei der Sie Ihre Domain gekauft haben. Danach schalten Sie DKIM im Dienst ein.
-- **Sie betreiben einen eigenen Mailserver.** Dann erzeugen Sie das Schlüsselpaar selbst. Unser [DKIM-Generator](/dkim-generator) (auf Englisch) erstellt das Schlüsselpaar und den fertigen TXT-Eintrag in Ihrem Browser. Den privaten Schlüssel tragen Sie in die DKIM-Einstellungen Ihres Servers ein, mit demselben Selector wie im DNS.
+- **Sie betreiben einen eigenen Mailserver.** Dann erzeugen Sie das Schlüsselpaar selbst. Unser [DKIM-Generator](/dkim-generator) erstellt das Schlüsselpaar und den fertigen TXT-Eintrag in Ihrem Browser. Den privaten Schlüssel tragen Sie in die DKIM-Einstellungen Ihres Servers ein, mit demselben Selector wie im DNS.
 
 ## So prüfen Sie, ob DKIM funktioniert
 

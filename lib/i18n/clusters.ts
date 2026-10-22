@@ -47,7 +47,7 @@ export const CLUSTERS = {
   bulkVerifier: { en: '/bulk-email-verifier', it: '/it/verifica-email-in-blocco', de: '/de/e-mail-massenpruefung', es: '/es/validador-de-correos-masivos', 'pt-br': '/pt-br/validador-de-email-em-massa', fr: '/fr/verification-email-en-masse', nl: '/nl/bulk-e-mailverificatie', pl: '/pl/masowa-weryfikacja-email' },
   pricing: { en: '/pricing', it: '/it/prezzi', de: '/de/preise', es: '/es/precios', 'pt-br': '/pt-br/precos', fr: '/fr/tarifs', nl: '/nl/prijzen', pl: '/pl/cennik' },
   catchall: { en: '/catch-all-verification', it: '/it/verifica-catch-all', de: '/de/catch-all-verifizierung', es: '/es/verificacion-catch-all', 'pt-br': '/pt-br/verificacao-catch-all', fr: '/fr/verification-catch-all', nl: '/nl/catch-all-verificatie', pl: '/pl/weryfikacja-catch-all' },
-  seg: { en: '/seg-email-verification', it: '/it/verifica-seg' },
+  seg: { en: '/seg-email-verification', it: '/it/verifica-seg', de: '/de/secure-email-gateway' },
   integrations: { en: '/integrations', it: '/it/integrazioni', de: '/de/integrationen', es: '/es/integraciones', 'pt-br': '/pt-br/integracoes', fr: '/fr/integrations', nl: '/nl/integraties', pl: '/pl/integracje' },
   // Integration spokes nest under each language's hub path; the 73 per-app
   // Zapier guides stay English only.
@@ -102,6 +102,16 @@ export const CLUSTERS = {
   // Slugs follow each language's checker slug (verifica-email, email-adresse-
   // pruefen, verificacao-de-email, verifier-adresse-mail) plus the glossary term.
   disposableChecker: { en: '/disposable-email-checker', it: '/it/verifica-email-temporanea', de: '/de/wegwerf-e-mail-pruefen', es: '/es/verificar-correo-desechable', 'pt-br': '/pt-br/verificador-de-e-mail-descartavel', fr: '/fr/verifier-adresse-mail-jetable', nl: '/nl/wegwerp-e-mailadres-controleren', pl: '/pl/sprawdz-jednorazowy-email' },
+  // Free tools localized under plan 30 (components/tools/<Tool>/<Tool>Page.tsx).
+  // A language is added here only when its page is live.
+  mxLookup: { en: '/mx-lookup', it: '/it/mx-lookup', de: '/de/mx-lookup' },
+  spfChecker: { en: '/spf-checker', it: '/it/record-spf', de: '/de/spf-generator', 'pt-br': '/pt-br/registro-spf' },
+  dkimGenerator: { en: '/dkim-generator', it: '/it/record-dkim', de: '/de/dkim-generator' },
+  dmarcGenerator: { en: '/dmarc-generator', de: '/de/dmarc-generator' },
+  bimiGenerator: { en: '/bimi-generator', de: '/de/bimi-record' },
+  emailSignature: { en: '/email-signature-generator', 'pt-br': '/pt-br/assinatura-de-email', de: '/de/e-mail-signatur-erstellen' },
+  emailExtractor: { en: '/email-extractor', de: '/de/email-extractor', 'pt-br': '/pt-br/extrator-de-email' },
+  freeEmailProviders: { en: '/free-email-providers', es: '/es/proveedores-de-correo-electronico-gratuitos' },
   disposableProviders: { en: '/disposable-email-providers', it: '/it/servizi-email-temporanea', de: '/de/wegwerf-e-mail-anbieter', es: '/es/proveedores-de-correo-desechable', 'pt-br': '/pt-br/provedores-de-e-mail-descartavel', fr: '/fr/fournisseurs-adresse-mail-jetable', nl: '/nl/tijdelijk-e-mailadres-diensten', pl: '/pl/tymczasowy-adres-email' },
   // The glossary hub and its 60 terms live in lib/i18n/glossary.ts (generated
   // from the term list) and are spread in here so every consumer of CLUSTERS

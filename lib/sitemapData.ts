@@ -210,6 +210,25 @@ const disposableProvidersUrls = new Set<string>([
 const BULK_VERIFIER_SHIPPED = '2026-10-12'
 const bulkVerifierUrls = new Set<string>(Object.values(CLUSTERS.bulkVerifier))
 
+// The free tools localized under plan 30 (one cluster per tool) carry their
+// own ship date. The English members are not in the locale sitemaps.
+const FREE_TOOLS_L10N_SHIPPED = '2026-10-22'
+const FREE_TOOL_CLUSTERS = [
+  'mxLookup',
+  'spfChecker',
+  'dkimGenerator',
+  'dmarcGenerator',
+  'bimiGenerator',
+  'emailSignature',
+  'emailExtractor',
+  'freeEmailProviders',
+]
+const freeToolL10nUrls = new Set<string>([
+  ...FREE_TOOL_CLUSTERS.flatMap((id) => Object.values((CLUSTERS as Record<string, Cluster>)[id] ?? {})),
+  // The German SEG page shipped with these; the Italian one is older and keeps its own date.
+  '/de/secure-email-gateway',
+])
+
 // `floorToLaunch`: for locales that launched after the shared ship dates below
 // (nl, pl), no page can be older than the launch, so every lastmod is at least
 // the launch date. The first five locales keep their historical dates.
@@ -244,7 +263,9 @@ function localeEntries(locale: 'it' | 'de' | 'es' | 'pt-br' | 'fr' | 'nl' | 'pl'
                 ? DISPOSABLE_PROVIDERS_SHIPPED
                 : bulkVerifierUrls.has(path)
                   ? BULK_VERIFIER_SHIPPED
-                  : launch),
+                  : freeToolL10nUrls.has(path)
+                    ? FREE_TOOLS_L10N_SHIPPED
+                    : launch),
     }))
   if (!floorToLaunch) return entries
   return entries.map((e) => ({ ...e, lastModified: e.lastModified && e.lastModified > launch ? e.lastModified : launch }))

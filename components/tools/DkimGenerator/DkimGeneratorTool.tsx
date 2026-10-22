@@ -17,11 +17,18 @@ import {
   generateDkimKeys,
   validateSelector,
   validateDomain,
+  DkimError,
   type DkimKeySize,
   type DkimGeneratedKeys,
 } from '@/lib/tools/dkimGeneratorCore'
+import { dkimToolStrings, dkimErrorText } from '@/lib/i18n/tools/dkimToolStrings'
+import type { Locale } from '@/lib/i18n/clusters'
 
-export default function DkimGeneratorTool() {
+// The order of the key size options. Their labels live in lib/i18n/tools/dkimToolStrings.ts.
+const KEY_SIZES: DkimKeySize[] = [2048, 1024, 4096]
+
+export default function DkimGeneratorTool({ locale = 'en' }: { locale?: Locale }) {
+  const t = dkimToolStrings(locale)
   const [domain, setDomain] = useState('')
   const [selector, setSelector] = useState('')
   const [keySize, setKeySize] = useState<DkimKeySize>(2048)
@@ -61,13 +68,13 @@ export default function DkimGeneratorTool() {
 
     const selVal = validateSelector(selector)
     if (!selVal.valid) {
-      setErrorMsg(selVal.error || 'Invalid selector')
+      setErrorMsg(dkimErrorText(t, { ...selVal, message: selVal.error }, t.invalidSelector))
       return
     }
 
     const domVal = validateDomain(domain)
     if (!domVal.valid) {
-      setErrorMsg(domVal.error || 'Invalid domain')
+      setErrorMsg(dkimErrorText(t, { ...domVal, message: domVal.error }, t.invalidDomain))
       return
     }
 
@@ -77,7 +84,7 @@ export default function DkimGeneratorTool() {
       setKeys(result)
     } catch (err: any) {
       console.error('DKIM generation failed:', err)
-      setErrorMsg(err.message || 'Key generation failed')
+      setErrorMsg(dkimErrorText(t, err instanceof DkimError ? err : { message: err?.message }, t.generationFailed))
     } finally {
       setIsGenerating(false)
     }
@@ -102,44 +109,12 @@ export default function DkimGeneratorTool() {
   // Download complete setup instructions bundle
   const downloadBundle = () => {
     if (!keys) return
-    const bundleText = `DKIM SETUP INSTRUCTIONS FOR ${keys.domain.toUpperCase()}
-Generated via Giggal.ai client-side DKIM generator
-
-==================================================
-1. DNS TXT RECORD
-==================================================
-Host / Name:
-${keys.dnsRecordName}
-(or Fully Qualified Domain Name: ${keys.dnsRecordFqdn})
-
-TXT Record Value (Single String):
-${keys.dnsRecordValue}
-
-TXT Record Value (255-character Split / Quoted):
-${keys.dnsRecordChunked}
-
-BIND Zone Format:
-${keys.bindRecord}
-
-==================================================
-2. PRIVATE KEY (Install in mail server or MTA)
-==================================================
-Format: PKCS#1 (Traditional RSA)
-${keys.privateKeyPkcs1Pem}
-
-Format: PKCS#8 (Standard)
-${keys.privateKeyPkcs8Pem}
-
-==================================================
-IMPORTANT DEPLOYMENT NOTES:
-- Add the DNS TXT record and verify its propagation BEFORE enabling DKIM signing in your mail server.
-- Keep the private key confidential. Never share it or publish it in DNS.
-`
+    const bundleText = t.bundleText(keys)
     const blob = new Blob([bundleText], { type: 'text/plain;charset=utf-8' })
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = `${keys.domain}-${keys.selector}-dkim-instructions.txt`
+    a.download = t.bundleFileName(keys.domain, keys.selector)
     document.body.appendChild(a)
     a.click()
     document.body.removeChild(a)
@@ -156,41 +131,41 @@ IMPORTANT DEPLOYMENT NOTES:
             {/* Domain */}
             <div>
               <label htmlFor="dkim-domain" className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                Domain Name
+                {t.domainLabel}
               </label>
               <input
                 id="dkim-domain"
                 type="text"
                 value={domain}
                 onChange={(e) => setDomain(e.target.value)}
-                placeholder="example.com"
+                placeholder={t.domainPlaceholder}
                 className="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 font-mono"
                 required
               />
-              <p className="text-[11px] text-slate-500 mt-1">The sending domain for your outgoing mail</p>
+              <p className="text-[11px] text-slate-500 mt-1">{t.domainHelp}</p>
             </div>
 
             {/* Selector */}
             <div>
               <label htmlFor="dkim-selector" className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                DKIM Selector
+                {t.selectorLabel}
               </label>
               <input
                 id="dkim-selector"
                 type="text"
                 value={selector}
                 onChange={(e) => setSelector(e.target.value)}
-                placeholder="s2026a"
+                placeholder={t.selectorPlaceholder}
                 className="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 font-mono"
                 required
               />
-              <p className="text-[11px] text-slate-500 mt-1">Identifies this key pair in DNS (e.g. s2026a)</p>
+              <p className="text-[11px] text-slate-500 mt-1">{t.selectorHelp}</p>
             </div>
 
             {/* Key Size */}
             <div>
               <label htmlFor="dkim-keysize" className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                Key Size
+                {t.keySizeLabel}
               </label>
               <select
                 id="dkim-keysize"
@@ -198,17 +173,13 @@ IMPORTANT DEPLOYMENT NOTES:
                 onChange={(e) => setKeySize(Number(e.target.value) as DkimKeySize)}
                 className="w-full text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 font-semibold text-slate-700"
               >
-                <option value={2048}>2048 bits (Recommended)</option>
-                <option value={1024}>1024 bits (minimum Gmail accepts)</option>
-                <option value={4096}>4096 bits (long record, check your DNS host)</option>
+                {KEY_SIZES.map((size) => (
+                  <option key={size} value={size}>
+                    {t.keySizeOptions[size]}
+                  </option>
+                ))}
               </select>
-              <p className="text-[11px] text-slate-500 mt-1">
-                {keySize === 1024
-                  ? 'Legacy length, weak against modern cryptanalysis'
-                  : keySize === 4096
-                  ? 'Exceeds standard 512-byte UDP DNS packet limits'
-                  : 'Recommended by Gmail and RFC 8301'}
-              </p>
+              <p className="text-[11px] text-slate-500 mt-1">{t.keySizeHelp[keySize]}</p>
             </div>
           </div>
 
@@ -228,12 +199,12 @@ IMPORTANT DEPLOYMENT NOTES:
               {isGenerating ? (
                 <>
                   <RefreshCw className="w-4 h-4 animate-spin" />
-                  <span>Generating RSA key pair in browser...</span>
+                  <span>{t.generating}</span>
                 </>
               ) : (
                 <>
                   <KeyRound className="w-4 h-4" />
-                  <span>Generate DKIM keys</span>
+                  <span>{t.generate}</span>
                 </>
               )}
             </button>
@@ -248,14 +219,14 @@ IMPORTANT DEPLOYMENT NOTES:
               <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-3">
                 <div className="flex items-center gap-2">
                   <span className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
-                  <h3 className="text-base font-bold text-white">DNS TXT Record</h3>
+                  <h3 className="text-base font-bold text-white">{t.dnsTitle}</h3>
                   <span className="text-xs bg-slate-800 text-slate-300 px-2 py-0.5 rounded-md font-mono">
-                    {keys.keySize} bits ({keys.recordCharCount} chars)
+                    {t.keyInfo(keys.keySize, keys.recordCharCount)}
                   </span>
                 </div>
 
                 <div className="flex items-center gap-2 text-xs">
-                  <span className="text-slate-400 hidden sm:inline">Format:</span>
+                  <span className="text-slate-400 hidden sm:inline">{t.formatLabel}</span>
                   <div className="flex bg-slate-800 p-0.5 rounded-lg border border-slate-700">
                     <button
                       type="button"
@@ -264,7 +235,7 @@ IMPORTANT DEPLOYMENT NOTES:
                         dnsFormat === 'single' ? 'bg-indigo-600 text-white' : 'text-slate-300 hover:text-white'
                       }`}
                     >
-                      Single string
+                      {t.formatSingle}
                     </button>
                     <button
                       type="button"
@@ -273,7 +244,7 @@ IMPORTANT DEPLOYMENT NOTES:
                         dnsFormat === 'chunked' ? 'bg-indigo-600 text-white' : 'text-slate-300 hover:text-white'
                       }`}
                     >
-                      255-char split
+                      {t.formatChunked}
                     </button>
                     <button
                       type="button"
@@ -282,7 +253,7 @@ IMPORTANT DEPLOYMENT NOTES:
                         dnsFormat === 'bind' ? 'bg-indigo-600 text-white' : 'text-slate-300 hover:text-white'
                       }`}
                     >
-                      BIND zone
+                      {t.formatBind}
                     </button>
                   </div>
                 </div>
@@ -292,7 +263,7 @@ IMPORTANT DEPLOYMENT NOTES:
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between">
                   <label className="text-xs font-bold uppercase tracking-wider text-slate-400">
-                    Record Name / Host:
+                    {t.hostLabel}
                   </label>
                   <button
                     type="button"
@@ -302,12 +273,12 @@ IMPORTANT DEPLOYMENT NOTES:
                     {copiedField === 'host' ? (
                       <>
                         <Check className="w-3.5 h-3.5 text-emerald-400" />
-                        <span className="text-emerald-400">Copied</span>
+                        <span className="text-emerald-400">{t.copied}</span>
                       </>
                     ) : (
                       <>
                         <Copy className="w-3.5 h-3.5" />
-                        <span>Copy host</span>
+                        <span>{t.copyHost}</span>
                       </>
                     )}
                   </button>
@@ -315,7 +286,7 @@ IMPORTANT DEPLOYMENT NOTES:
                 <div className="p-3 bg-slate-950/80 rounded-lg border border-slate-800 font-mono text-xs sm:text-sm text-slate-100 flex items-center justify-between overflow-x-auto">
                   <span className="select-all">{keys.dnsRecordName}</span>
                   <span className="text-slate-500 text-xs hidden md:inline ml-4 shrink-0">
-                    (or {keys.dnsRecordFqdn})
+                    {t.orFqdn(keys.dnsRecordFqdn)}
                   </span>
                 </div>
               </div>
@@ -324,7 +295,7 @@ IMPORTANT DEPLOYMENT NOTES:
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between">
                   <label className="text-xs font-bold uppercase tracking-wider text-slate-400">
-                    Record Value (TXT):
+                    {t.valueLabel}
                   </label>
                   <button
                     type="button"
@@ -342,12 +313,12 @@ IMPORTANT DEPLOYMENT NOTES:
                     {copiedField === 'dnsValue' ? (
                       <>
                         <Check className="w-3.5 h-3.5 text-emerald-400" />
-                        <span className="text-emerald-400">Copied</span>
+                        <span className="text-emerald-400">{t.copied}</span>
                       </>
                     ) : (
                       <>
                         <Copy className="w-3.5 h-3.5" />
-                        <span>Copy value</span>
+                        <span>{t.copyValue}</span>
                       </>
                     )}
                   </button>
@@ -359,7 +330,7 @@ IMPORTANT DEPLOYMENT NOTES:
                 </div>
                 {dnsFormat === 'chunked' && (
                   <p className="text-[11px] text-slate-400">
-                    Use this chunked format if your DNS provider (e.g. GoDaddy, Namecheap) limits single TXT strings to 255 characters.
+                    {t.chunkedNote}
                   </p>
                 )}
               </div>
@@ -370,7 +341,7 @@ IMPORTANT DEPLOYMENT NOTES:
               <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-3">
                 <div className="flex items-center gap-2">
                   <KeyRound className="w-4 h-4 text-indigo-600" />
-                  <h3 className="text-base font-bold text-slate-900">Private Key</h3>
+                  <h3 className="text-base font-bold text-slate-900">{t.privateKeyTitle}</h3>
                 </div>
 
                 <div className="flex items-center gap-2">
@@ -383,7 +354,7 @@ IMPORTANT DEPLOYMENT NOTES:
                         privateKeyFormat === 'pkcs1' ? 'bg-white shadow-sm text-indigo-600' : 'text-slate-600'
                       }`}
                     >
-                      PKCS#1 (RSA)
+                      {t.pkcs1Label}
                     </button>
                     <button
                       type="button"
@@ -392,7 +363,7 @@ IMPORTANT DEPLOYMENT NOTES:
                         privateKeyFormat === 'pkcs8' ? 'bg-white shadow-sm text-indigo-600' : 'text-slate-600'
                       }`}
                     >
-                      PKCS#8
+                      {t.pkcs8Label}
                     </button>
                   </div>
 
@@ -404,12 +375,12 @@ IMPORTANT DEPLOYMENT NOTES:
                     {showPrivateKey ? (
                       <>
                         <EyeOff className="w-3.5 h-3.5" />
-                        <span>Hide</span>
+                        <span>{t.hide}</span>
                       </>
                     ) : (
                       <>
                         <Eye className="w-3.5 h-3.5" />
-                        <span>Show</span>
+                        <span>{t.show}</span>
                       </>
                     )}
                   </button>
@@ -433,7 +404,7 @@ IMPORTANT DEPLOYMENT NOTES:
                       className="px-4 py-2 bg-slate-900/90 text-white text-xs font-bold rounded-lg border border-slate-700 shadow-md hover:bg-slate-800 transition-colors flex items-center gap-1.5"
                     >
                       <Eye className="w-3.5 h-3.5 text-indigo-400" />
-                      <span>Click to reveal private key</span>
+                      <span>{t.reveal}</span>
                     </button>
                   </div>
                 )}
@@ -456,12 +427,12 @@ IMPORTANT DEPLOYMENT NOTES:
                     {copiedField === 'privateKey' ? (
                       <>
                         <Check className="w-3.5 h-3.5 text-emerald-600" />
-                        <span className="text-emerald-600">Copied key</span>
+                        <span className="text-emerald-600">{t.copiedKey}</span>
                       </>
                     ) : (
                       <>
                         <Copy className="w-3.5 h-3.5" />
-                        <span>Copy private key</span>
+                        <span>{t.copyPrivateKey}</span>
                       </>
                     )}
                   </button>
@@ -472,7 +443,7 @@ IMPORTANT DEPLOYMENT NOTES:
                     className="px-3 py-1.5 bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 text-xs font-semibold rounded-lg flex items-center gap-1.5 transition-colors"
                   >
                     <Download className="w-3.5 h-3.5" />
-                    <span>Download key file</span>
+                    <span>{t.downloadKey}</span>
                   </button>
                 </div>
 
@@ -482,7 +453,7 @@ IMPORTANT DEPLOYMENT NOTES:
                   className="px-4 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold rounded-lg flex items-center gap-1.5 transition-colors shadow-sm"
                 >
                   <Download className="w-3.5 h-3.5" />
-                  <span>Download setup bundle (.txt)</span>
+                  <span>{t.downloadBundle}</span>
                 </button>
               </div>
 
@@ -490,12 +461,12 @@ IMPORTANT DEPLOYMENT NOTES:
               <div className="p-3 bg-amber-50 border border-amber-200/80 rounded-lg text-xs text-amber-800 space-y-1">
                 <div className="font-bold flex items-center gap-1">
                   <AlertTriangle className="w-3.5 h-3.5 text-amber-600 shrink-0" />
-                  <span>Important deployment rules:</span>
+                  <span>{t.rulesTitle}</span>
                 </div>
                 <ul className="list-disc pl-5 space-y-0.5 text-amber-900/90 font-medium">
-                  <li>Keep this private key confidential. Only configure it inside your mail transfer agent (MTA) or email delivery platform.</li>
-                  <li>Publish the DNS TXT record first. Sending signed emails before DNS propagates will cause authentication failures and bounces.</li>
-                  <li>Most mail software (Postfix, OpenDKIM, cPanel, Exim) expects the traditional PKCS#1 RSA format.</li>
+                  {t.rules.map((rule) => (
+                    <li key={rule}>{rule}</li>
+                  ))}
                 </ul>
               </div>
             </div>

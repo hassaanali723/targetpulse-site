@@ -14,6 +14,8 @@ export type MxIssueCode = 'ip-literal' | 'cname' | 'no-address' | 'lookup-failed
 export interface MxIssue {
   code: MxIssueCode
   message: string
+  /** For 'no-address': the server name itself doesn't exist (NXDOMAIN), not just its address. */
+  missing?: boolean
 }
 
 export interface MxHost {
@@ -48,7 +50,12 @@ export interface MxLookupResult {
   resolver: string
 }
 
-export class MxInputError extends Error {}
+/** `kind` lets a localized page show its own wording for the two input errors. */
+export class MxInputError extends Error {
+  constructor(message: string, public kind: 'empty' | 'invalid') {
+    super(message)
+  }
+}
 
 // Host name patterns of common mail providers, matched against each MX target.
 // Ordered from most to least specific; the first match wins.
@@ -137,6 +144,7 @@ async function resolveHost(host: MxHost): Promise<void> {
     const missing = aRes?.status === 3 || aaaaRes?.status === 3
     host.issues.push({
       code: 'no-address',
+      missing,
       message: missing
         ? 'This server name doesn’t exist in DNS, so mail sent to it can’t be delivered.'
         : 'This server name has no IP address, so mail sent to it can’t be delivered.',
@@ -151,8 +159,8 @@ async function resolveHost(host: MxHost): Promise<void> {
  */
 export async function lookupMx(rawInput: string): Promise<MxLookupResult> {
   const domain = normalizeDomainInput(rawInput)
-  if (!domain) throw new MxInputError('Enter a domain, such as example.com.')
-  if (!looksLikeDomain(domain)) throw new MxInputError('That doesn’t look like a domain. Enter something like example.com.')
+  if (!domain) throw new MxInputError('Enter a domain, such as example.com.', 'empty')
+  if (!looksLikeDomain(domain)) throw new MxInputError('That doesn’t look like a domain. Enter something like example.com.', 'invalid')
 
   const queryName = toAsciiDomain(domain)
   const mx = await resolveDns(queryName, 'MX')

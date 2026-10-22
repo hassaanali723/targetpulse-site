@@ -33,11 +33,48 @@ export interface ExternalConsentRecord {
   reason: string
 }
 
+/** Stable codes for the warnings, so a localized page can show its own wording. */
+export type DmarcWarningCode =
+  /** A report address isn't a valid email address; `address` holds it as typed. */
+  | 'bad-address'
+  | 'reject-no-reports'
+  | 'reject-dkim'
+  | 'strict-alignment'
+  | 'ruf-unreliable'
+
+export interface DmarcWarning {
+  code: DmarcWarningCode
+  /** The English text, the same as the matching entry of `warnings`. */
+  message: string
+  /** bad-address: the address as the user typed it. */
+  address?: string
+}
+
+/**
+ * Stable codes for the cleaner's change notes. With `tag` and `value` they let a
+ * localized page rebuild the explanation.
+ */
+export type DmarcChangeCode =
+  /** The record didn't start with v=DMARC1. */
+  | 'missing-version'
+  /** No valid p= tag; `value` is what p= held, or empty. */
+  | 'bad-policy'
+  /** pct, rf or ri (in `tag`) was removed; `value` is its old value. */
+  | 'retired'
+  /** pct was below 100; suggests t=y instead. */
+  | 'pct-partial'
+  /** sp= matched p=; `value` is the sp value as written. */
+  | 'sp-matches'
+  /** adkim=r, aspf=r or fo=0 (tag and value) is already the default. */
+  | 'default'
+
 export interface DmarcGenerationResult {
   record: string
   host: string
   fqdn: string
   warnings: string[]
+  /** The same warnings, in the same order, with codes for localized pages. */
+  warningItems: DmarcWarning[]
   externalConsentRecords: ExternalConsentRecord[]
 }
 
@@ -49,8 +86,13 @@ export interface CleanedDmarcResult {
     tag: string
     action: 'removed' | 'normalized' | 'modernized'
     explanation: string
+    code: DmarcChangeCode
+    /** The value the explanation quotes, or empty. */
+    value: string
   }[]
   warnings: string[]
+  /** The same warnings, in the same order, with codes for localized pages. */
+  warningItems: DmarcWarning[]
   externalConsentRecords: ExternalConsentRecord[]
 }
 
@@ -71,7 +113,7 @@ export function extractDomainFromEmailOrHost(input: string): string {
  */
 export function validateMailtoList(
   input: string
-): { valid: boolean; normalized: string; domains: string[]; error?: string } {
+): { valid: boolean; normalized: string; domains: string[]; error?: string; invalid?: string } {
   if (!input.trim()) return { valid: true, normalized: '', domains: [] }
 
   const parts = input
@@ -94,6 +136,7 @@ export function validateMailtoList(
         normalized: '',
         domains: [],
         error: `"${part}" is not a valid email address, so it was left out of the record.`,
+        invalid: part,
       }
     }
 
@@ -116,19 +159,28 @@ export function validateMailtoList(
 export function generateDmarcRecord(config: DmarcTagConfig): DmarcGenerationResult {
   const domain = normalizeDomainInput(config.domain)
   const showDefaults = config.showDefaultTags ?? false
-  const warnings: string[] = []
+  const warningItems: DmarcWarning[] = []
   const tags: string[] = ['v=DMARC1', `p=${config.policy}`]
 
   // Policy warnings
   if (config.policy === 'reject') {
     if (!config.aggregateReports?.trim()) {
-      warnings.push('This record blocks failing email (p=reject) but has no report address. You won’t know if real email is being refused.')
+      warningItems.push({
+        code: 'reject-no-reports',
+        message: 'This record blocks failing email (p=reject) but has no report address. You won’t know if real email is being refused.',
+      })
     }
-    warnings.push('Use p=reject only when all your email is DKIM-signed. Forwarded email often fails SPF, so SPF alone is not enough.')
+    warningItems.push({
+      code: 'reject-dkim',
+      message: 'Use p=reject only when all your email is DKIM-signed. Forwarded email often fails SPF, so SPF alone is not enough.',
+    })
   }
 
   if (config.dkimAlignment === 's' || config.spfAlignment === 's') {
-    warnings.push('Strict alignment needs an exact domain match. If a service signs or sends your email from a subdomain, such as mail.example.com, that email will fail.')
+    warningItems.push({
+      code: 'strict-alignment',
+      message: 'Strict alignment needs an exact domain match. If a service signs or sends your email from a subdomain, such as mail.example.com, that email will fail.',
+    })
   }
 
   // Subdomain policy (sp)
@@ -189,7 +241,7 @@ export function generateDmarcRecord(config: DmarcTagConfig): DmarcGenerationResu
       tags.push(`rua=${val.normalized}`)
       reportingDomains.push(...val.domains)
     } else if (val.error) {
-      warnings.unshift(val.error)
+      warningItems.unshift({ code: 'bad-address', message: val.error, address: val.invalid })
     }
   }
 
@@ -199,9 +251,12 @@ export function generateDmarcRecord(config: DmarcTagConfig): DmarcGenerationResu
     if (val.valid && val.normalized) {
       tags.push(`ruf=${val.normalized}`)
       reportingDomains.push(...val.domains)
-      warnings.push('Many mail providers don’t send failure reports, for privacy reasons. Don’t rely on them.')
+      warningItems.push({
+        code: 'ruf-unreliable',
+        message: 'Many mail providers don’t send failure reports, for privacy reasons. Don’t rely on them.',
+      })
     } else if (val.error) {
-      warnings.unshift(val.error)
+      warningItems.unshift({ code: 'bad-address', message: val.error, address: val.invalid })
     }
   }
 
@@ -229,7 +284,8 @@ export function generateDmarcRecord(config: DmarcTagConfig): DmarcGenerationResu
     record,
     host,
     fqdn,
-    warnings,
+    warnings: warningItems.map((w) => w.message),
+    warningItems,
     externalConsentRecords,
   }
 }
@@ -272,6 +328,8 @@ export function cleanDmarcRecord(rawInput: string, domainContext = ''): CleanedD
       tag: 'v',
       action: 'normalized',
       explanation: 'A DMARC record must start with v=DMARC1. Mail servers ignore it otherwise. The cleaned record starts with it.',
+      code: 'missing-version',
+      value: '',
     })
   }
   if (!validPolicy) {
@@ -279,6 +337,8 @@ export function cleanDmarcRecord(rawInput: string, domainContext = ''): CleanedD
       tag: 'p',
       action: 'normalized',
       explanation: `The record had no valid policy${parsedTags.p ? ` ("p=${parsedTags.p}")` : ''}. It was set to p=none, which only monitors.`,
+      code: 'bad-policy',
+      value: parsedTags.p || '',
     })
   }
 
@@ -289,12 +349,16 @@ export function cleanDmarcRecord(rawInput: string, domainContext = ''): CleanedD
       tag: 'pct',
       action: 'removed',
       explanation: `pct=${parsedTags.pct} is no longer part of the DMARC standard (RFC 9989), so it was removed.`,
+      code: 'retired',
+      value: parsedTags.pct,
     })
     if (pctVal < 100) {
       changes.push({
         tag: 't',
         action: 'modernized',
         explanation: 'Your record applied the policy to only part of your email. To soften the policy while you test, turn on test mode (t=y) in Advanced settings instead.',
+        code: 'pct-partial',
+        value: '',
       })
     }
   }
@@ -304,6 +368,8 @@ export function cleanDmarcRecord(rawInput: string, domainContext = ''): CleanedD
       tag: 'rf',
       action: 'removed',
       explanation: `rf=${parsedTags.rf} is no longer part of the DMARC standard (RFC 9989), so it was removed.`,
+      code: 'retired',
+      value: parsedTags.rf,
     })
   }
 
@@ -312,6 +378,8 @@ export function cleanDmarcRecord(rawInput: string, domainContext = ''): CleanedD
       tag: 'ri',
       action: 'removed',
       explanation: `ri=${parsedTags.ri} is no longer part of the DMARC standard (RFC 9989), so it was removed.`,
+      code: 'retired',
+      value: parsedTags.ri,
     })
   }
 
@@ -323,6 +391,8 @@ export function cleanDmarcRecord(rawInput: string, domainContext = ''): CleanedD
         tag: 'sp',
         action: 'normalized',
         explanation: `sp=${parsedTags.sp} matched your main policy, so it wasn’t needed.`,
+        code: 'sp-matches',
+        value: parsedTags.sp,
       })
     } else {
       newConfig.subdomainPolicy = spVal
@@ -342,6 +412,8 @@ export function cleanDmarcRecord(rawInput: string, domainContext = ''): CleanedD
         tag: 'adkim',
         action: 'normalized',
         explanation: 'adkim=r is already the default, so it wasn’t needed.',
+        code: 'default',
+        value: 'r',
       })
     } else {
       newConfig.dkimAlignment = adkim
@@ -355,6 +427,8 @@ export function cleanDmarcRecord(rawInput: string, domainContext = ''): CleanedD
         tag: 'aspf',
         action: 'normalized',
         explanation: 'aspf=r is already the default, so it wasn’t needed.',
+        code: 'default',
+        value: 'r',
       })
     } else {
       newConfig.spfAlignment = aspf
@@ -380,6 +454,8 @@ export function cleanDmarcRecord(rawInput: string, domainContext = ''): CleanedD
       tag: 'fo',
       action: 'normalized',
       explanation: 'fo=0 is already the default, so it wasn’t needed.',
+      code: 'default',
+      value: '0',
     })
   }
 
@@ -391,6 +467,7 @@ export function cleanDmarcRecord(rawInput: string, domainContext = ''): CleanedD
     parsedTags,
     changes,
     warnings: [...warnings, ...generated.warnings],
+    warningItems: generated.warningItems,
     externalConsentRecords: generated.externalConsentRecords,
   }
 }

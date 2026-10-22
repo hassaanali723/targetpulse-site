@@ -21,8 +21,16 @@ import {
   type ExtractorOptions,
   type ExtractionResult,
 } from '@/lib/tools/emailExtractorCore'
+import { extractorToolStrings } from '@/lib/i18n/tools/extractorToolStrings'
+import type { Locale } from '@/lib/i18n/clusters'
+import type { ExtractorWorkerRequest, ExtractorWorkerResponse } from './extractor.worker'
 
-export default function EmailExtractorTool() {
+// The external sign-up page; the same for every language.
+const SIGNUP_URL = 'https://emailverifier.giggal.ai/sign-up'
+
+export default function EmailExtractorTool({ locale = 'en' }: { locale?: Locale }) {
+  // The wording lives in lib/i18n/tools/extractorToolStrings.ts.
+  const t = extractorToolStrings(locale)
   const [inputText, setInputText] = useState('')
   const [fileNameList, setFileNameList] = useState<string[]>([])
   const [isDragging, setIsDragging] = useState(false)
@@ -82,11 +90,13 @@ export default function EmailExtractorTool() {
       setIsWorkerBusy(false)
     }
 
-    worker.onmessage = (e) => {
-      const { id, success, result } = e.data
-      if (id !== reqIdRef.current) return
-      if (success && result) {
-        setExtractionResult(result)
+    // The worker sends no text. A failure carries a code (reply.code), and the
+    // tool answers it by finishing on the main thread, with no message to show.
+    worker.onmessage = (e: MessageEvent<ExtractorWorkerResponse>) => {
+      const reply = e.data
+      if (reply.id !== reqIdRef.current) return
+      if (reply.success && reply.result) {
+        setExtractionResult(reply.result)
         setIsWorkerBusy(false)
       } else {
         fallBackToMainThread()
@@ -142,7 +152,8 @@ export default function EmailExtractorTool() {
       lastReqRef.current = { text, opts }
       if (workerRef.current) {
         setIsWorkerBusy(true)
-        workerRef.current.postMessage({ id: currentId, rawText: text, options: opts })
+        const request: ExtractorWorkerRequest = { id: currentId, rawText: text, options: opts }
+        workerRef.current.postMessage(request)
       } else {
         const res = extractEmails(text, opts)
         setExtractionResult(res)
@@ -166,7 +177,7 @@ export default function EmailExtractorTool() {
     if (!files || files.length === 0) return
 
     setIsReadingFile(true)
-    setProgressMsg('Reading files...')
+    setProgressMsg(t.readingFiles)
     const names: string[] = []
     let combinedText = inputText ? inputText + '\n' : ''
 
@@ -174,7 +185,7 @@ export default function EmailExtractorTool() {
       for (let i = 0; i < files.length; i++) {
         const file = files[i]
         names.push(file.name)
-        setProgressMsg(`Reading ${file.name} (${i + 1}/${files.length})...`)
+        setProgressMsg(t.readingFile(file.name, i + 1, files.length))
 
         const ext = file.name.split('.').pop()?.toLowerCase() || ''
 
@@ -198,7 +209,7 @@ export default function EmailExtractorTool() {
       setPage(1)
     } catch (err) {
       console.error('File parsing error:', err)
-      alert('Could not read one of the uploaded files. Please check the file format.')
+      alert(t.fileError)
     } finally {
       setIsReadingFile(false)
       setProgressMsg('')
@@ -254,7 +265,7 @@ export default function EmailExtractorTool() {
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = 'extracted-emails.txt'
+    a.download = t.fileTxt
     document.body.appendChild(a)
     a.click()
     document.body.removeChild(a)
@@ -263,16 +274,18 @@ export default function EmailExtractorTool() {
 
   // Export CSV
   const downloadCsv = () => {
-    const rows = ['Email,Domain,Top-Level Domain']
+    const rows = [t.csvHeader]
     for (const item of extractionResult.items) {
       rows.push(`"${item.email}","${item.domain}","${item.tld}"`)
     }
-    const content = rows.join('\r\n')
+    // Localized headers carry accents (Domínio); the byte order mark makes Excel read the file as UTF-8.
+    // English keeps its original bytes.
+    const content = (locale === 'en' ? '' : '﻿') + rows.join('\r\n')
     const blob = new Blob([content], { type: 'text/csv;charset=utf-8' })
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = 'extracted-emails.csv'
+    a.download = t.fileCsv
     document.body.appendChild(a)
     a.click()
     document.body.removeChild(a)
@@ -295,7 +308,7 @@ export default function EmailExtractorTool() {
           <div className="flex items-center justify-between">
             <label htmlFor="extractor-input" className="text-sm font-bold text-slate-800 flex items-center gap-2">
               <FileText className="w-4 h-4 text-indigo-600" />
-              Paste text or drop files
+              {t.inputLabel}
             </label>
             {inputText && (
               <button
@@ -304,7 +317,7 @@ export default function EmailExtractorTool() {
                 className="text-xs font-semibold text-rose-600 hover:text-rose-700 flex items-center gap-1 transition-colors"
               >
                 <Trash2 className="w-3.5 h-3.5" />
-                Clear all
+                {t.clearAll}
               </button>
             )}
           </div>
@@ -335,10 +348,12 @@ export default function EmailExtractorTool() {
                 <Upload className="w-5 h-5" />
               </div>
               <p className="text-sm font-semibold text-slate-700">
-                Drop files here, or <span className="text-indigo-600 underline">browse</span>
+                {t.dropBefore}
+                <span className="text-indigo-600 underline">{t.dropLink}</span>
+                {t.dropAfter || null}
               </p>
               <p className="text-xs text-slate-500">
-                Supports TXT, CSV, TSV, XLSX, XLS, HTML, JSON, EML, VCF, and log files
+                {t.supports}
               </p>
             </div>
           </div>
@@ -371,14 +386,14 @@ export default function EmailExtractorTool() {
                 setInputText(e.target.value)
                 setPage(1)
               }}
-              placeholder="Paste raw text, HTML source code, document content, or contact lists with addresses like anna@example.com..."
+              placeholder={t.placeholder}
               rows={6}
               className="w-full px-4 py-3 text-sm text-slate-800 bg-slate-50 border border-slate-300 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all font-mono"
             />
             {(isReadingFile || isWorkerBusy) && (
               <div className="absolute inset-0 bg-white/80 backdrop-blur-sm rounded-xl flex items-center justify-center gap-3 text-indigo-600 font-semibold text-sm">
                 <Loader2 className="w-5 h-5 animate-spin" />
-                <span>{progressMsg || 'Processing in background worker...'}</span>
+                <span>{progressMsg || t.processing}</span>
               </div>
             )}
           </div>
@@ -398,7 +413,7 @@ export default function EmailExtractorTool() {
                   }}
                   className="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500"
                 />
-                <span>Remove duplicates</span>
+                <span>{t.optDeduplicate}</span>
               </label>
 
               <label className="flex items-center gap-2 cursor-pointer select-none">
@@ -411,7 +426,7 @@ export default function EmailExtractorTool() {
                   }}
                   className="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500"
                 />
-                <span>Lowercase whole address</span>
+                <span>{t.optLowercase}</span>
               </label>
 
               <label className="flex items-center gap-2 cursor-pointer select-none">
@@ -424,7 +439,7 @@ export default function EmailExtractorTool() {
                   }}
                   className="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500"
                 />
-                <span>Convert written-out ([at], [dot])</span>
+                <span>{t.optWrittenOut}</span>
               </label>
 
               <label className="flex items-center gap-2 cursor-pointer select-none">
@@ -437,13 +452,13 @@ export default function EmailExtractorTool() {
                   }}
                   className="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500"
                 />
-                <span>Hide role addresses (info@, support@)</span>
+                <span>{t.optHideRole}</span>
               </label>
             </div>
 
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-1.5 text-xs font-semibold text-slate-600">
-                <span>Sort:</span>
+                <span>{t.sortLabel}</span>
                 <select
                   value={sortBy}
                   onChange={(e) => {
@@ -452,9 +467,9 @@ export default function EmailExtractorTool() {
                   }}
                   className="text-xs bg-white border border-slate-300 rounded-lg px-2.5 py-1 text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 >
-                  <option value="none">Appearance order</option>
-                  <option value="alpha">Alphabetical (A-Z)</option>
-                  <option value="domain">By Domain</option>
+                  <option value="none">{t.sortNone}</option>
+                  <option value="alpha">{t.sortAlpha}</option>
+                  <option value="domain">{t.sortDomain}</option>
                 </select>
               </div>
 
@@ -468,7 +483,7 @@ export default function EmailExtractorTool() {
                 }`}
               >
                 <Filter className="w-3.5 h-3.5" />
-                Domain filters
+                {t.domainFilters}
               </button>
             </div>
           </div>
@@ -477,9 +492,7 @@ export default function EmailExtractorTool() {
           {showFilters && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-3 border-t border-slate-200">
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
-                  Include only these domains (comma-separated):
-                </label>
+                <label className="block text-xs font-bold text-slate-700 mb-1">{t.includeLabel}</label>
                 <input
                   type="text"
                   value={includeDomainsInput}
@@ -487,14 +500,12 @@ export default function EmailExtractorTool() {
                     setIncludeDomainsInput(e.target.value)
                     setPage(1)
                   }}
-                  placeholder="e.g. example.com, company.com"
+                  placeholder={t.includePlaceholder}
                   className="w-full text-xs px-3 py-1.5 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
               </div>
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
-                  Exclude these domains (comma-separated):
-                </label>
+                <label className="block text-xs font-bold text-slate-700 mb-1">{t.excludeLabel}</label>
                 <input
                   type="text"
                   value={excludeDomainsInput}
@@ -502,7 +513,7 @@ export default function EmailExtractorTool() {
                     setExcludeDomainsInput(e.target.value)
                     setPage(1)
                   }}
-                  placeholder="e.g. mailinator.com, tempmail.com"
+                  placeholder={t.excludePlaceholder}
                   className="w-full text-xs px-3 py-1.5 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
               </div>
@@ -521,7 +532,7 @@ export default function EmailExtractorTool() {
                     {extractionResult.items.length.toLocaleString()}
                   </div>
                   <div className="text-xs font-medium text-slate-300">
-                    {deduplicate ? 'Unique addresses' : 'Addresses listed'}
+                    {deduplicate ? t.uniqueAddresses : t.addressesListed}
                   </div>
                 </div>
                 {deduplicate && extractionResult.totalFound > extractionResult.items.length && (
@@ -529,7 +540,7 @@ export default function EmailExtractorTool() {
                     <div className="text-2xl font-black text-slate-400">
                       {extractionResult.totalFound.toLocaleString()}
                     </div>
-                    <div className="text-xs font-medium text-slate-400">Total detected</div>
+                    <div className="text-xs font-medium text-slate-400">{t.totalDetected}</div>
                   </div>
                 )}
               </div>
@@ -544,12 +555,12 @@ export default function EmailExtractorTool() {
                   {copiedType === 'newline' ? (
                     <>
                       <Check className="w-3.5 h-3.5 text-emerald-400" />
-                      <span className="text-emerald-400">Copied</span>
+                      <span className="text-emerald-400">{t.copied}</span>
                     </>
                   ) : (
                     <>
                       <Copy className="w-3.5 h-3.5" />
-                      <span>Copy list</span>
+                      <span>{t.copyList}</span>
                     </>
                   )}
                 </button>
@@ -562,12 +573,12 @@ export default function EmailExtractorTool() {
                   {copiedType === 'comma' ? (
                     <>
                       <Check className="w-3.5 h-3.5 text-emerald-400" />
-                      <span className="text-emerald-400">Copied</span>
+                      <span className="text-emerald-400">{t.copied}</span>
                     </>
                   ) : (
                     <>
                       <Copy className="w-3.5 h-3.5" />
-                      <span>Copy comma-separated</span>
+                      <span>{t.copyComma}</span>
                     </>
                   )}
                 </button>
@@ -578,7 +589,7 @@ export default function EmailExtractorTool() {
                   className="px-3.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-white flex items-center gap-1.5 transition-colors border border-slate-700"
                 >
                   <Download className="w-3.5 h-3.5" />
-                  <span>Download TXT</span>
+                  <span>{t.downloadTxt}</span>
                 </button>
 
                 <button
@@ -587,7 +598,7 @@ export default function EmailExtractorTool() {
                   className="px-3.5 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-xs font-semibold text-white flex items-center gap-1.5 transition-colors shadow-sm"
                 >
                   <Download className="w-3.5 h-3.5" />
-                  <span>Download CSV</span>
+                  <span>{t.downloadCsv}</span>
                 </button>
               </div>
             </div>
@@ -595,9 +606,7 @@ export default function EmailExtractorTool() {
             {/* Top Domains Chips */}
             {extractionResult.topDomains.length > 0 && (
               <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
-                <span className="text-xs font-bold uppercase tracking-wider text-slate-600">
-                  Top domains detected:
-                </span>
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-600">{t.topDomains}</span>
                 <div className="flex flex-wrap gap-2 pt-1">
                   {extractionResult.topDomains.slice(0, 10).map((td) => (
                     <span
@@ -612,7 +621,7 @@ export default function EmailExtractorTool() {
                   ))}
                   {extractionResult.topDomains.length > 10 && (
                     <span className="text-xs text-slate-500 self-center">
-                      +{extractionResult.topDomains.length - 10} more domains
+                      {t.moreDomains(extractionResult.topDomains.length - 10)}
                     </span>
                   )}
                 </div>
@@ -625,10 +634,10 @@ export default function EmailExtractorTool() {
                 <table className="w-full text-left text-xs sm:text-sm">
                   <thead className="bg-slate-100 border-b border-slate-200 text-slate-700 uppercase tracking-wider text-[11px] font-bold sticky top-0">
                     <tr>
-                      <th className="py-2.5 px-4 w-12 text-slate-400">#</th>
-                      <th className="py-2.5 px-4">Email Address</th>
-                      <th className="py-2.5 px-4">Domain</th>
-                      <th className="py-2.5 px-4 hidden md:table-cell">TLD</th>
+                      <th className="py-2.5 px-4 w-12 text-slate-400">{t.thIndex}</th>
+                      <th className="py-2.5 px-4">{t.thEmail}</th>
+                      <th className="py-2.5 px-4">{t.thDomain}</th>
+                      <th className="py-2.5 px-4 hidden md:table-cell">{t.thTld}</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100 bg-white font-mono text-xs">
@@ -657,9 +666,11 @@ export default function EmailExtractorTool() {
               {totalPages > 1 && (
                 <div className="bg-slate-50 px-4 py-2.5 border-t border-slate-200 flex items-center justify-between text-xs text-slate-600">
                   <span>
-                    Showing {(page - 1) * pageSize + 1} to{' '}
-                    {Math.min(page * pageSize, extractionResult.items.length)} of{' '}
-                    {extractionResult.items.length}
+                    {t.showing(
+                      (page - 1) * pageSize + 1,
+                      Math.min(page * pageSize, extractionResult.items.length),
+                      extractionResult.items.length
+                    )}
                   </span>
                   <div className="flex items-center gap-1">
                     <button
@@ -690,28 +701,24 @@ export default function EmailExtractorTool() {
             <div className="bg-gradient-to-br from-indigo-900 via-slate-900 to-indigo-950 text-white rounded-xl p-5 md:p-6 border border-indigo-800/60 shadow-md">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div className="space-y-1">
-                  <h3 className="text-base md:text-lg font-bold text-white flex items-center gap-2">
-                    Next step: verify these addresses before sending
-                  </h3>
-                  <p className="text-xs md:text-sm text-slate-300 max-w-xl">
-                    Finding an address doesn&apos;t tell you whether the mailbox exists. Check whether they are valid or clean a full list with 1,000 free credits.
-                  </p>
+                  <h3 className="text-base md:text-lg font-bold text-white flex items-center gap-2">{t.nextTitle}</h3>
+                  <p className="text-xs md:text-sm text-slate-300 max-w-xl">{t.nextText}</p>
                 </div>
                 <div className="flex flex-wrap items-center gap-2 shrink-0">
                   <a
-                    href="https://emailverifier.giggal.ai/sign-up"
+                    href={SIGNUP_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs md:text-sm transition-colors whitespace-nowrap"
                   >
-                    <span>Verify these addresses</span>
+                    <span>{t.verifyButton}</span>
                     <ArrowRight className="w-4 h-4" />
                   </a>
                   <Link
-                    href="/email-checker"
+                    href={t.checkOneHref}
                     className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs md:text-sm transition-colors whitespace-nowrap border border-slate-700"
                   >
-                    <span>Check one address</span>
+                    <span>{t.checkOneButton}</span>
                   </Link>
                 </div>
               </div>
@@ -720,7 +727,7 @@ export default function EmailExtractorTool() {
         ) : (
           inputText.trim() && (
             <div className="text-center py-8 bg-slate-50 rounded-xl border border-slate-200 text-slate-500 text-sm">
-              No valid email addresses were found with the current filter settings.
+              {t.noResults}
             </div>
           )
         )}

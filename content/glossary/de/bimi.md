@@ -77,13 +77,13 @@ Wenn das Logo fehlt, liegt es meist an einem dieser Punkte:
 
 ## So richten Sie BIMI ein
 
-1. Bringen Sie Ihre DMARC-Richtlinie auf `quarantine` oder `reject`. Der [DMARC-Generator](/dmarc-generator) (auf Englisch) baut den Eintrag.
+1. Bringen Sie Ihre DMARC-Richtlinie auf `quarantine` oder `reject`. Der [DMARC-Generator](/dmarc-generator) baut den Eintrag.
 2. Bereiten Sie das Logo als SVG Tiny PS vor und prüfen Sie die Datei.
 3. Entscheiden Sie sich für ein Zertifikat, VMC oder CMC.
 4. Legen Sie Logo und Zertifikat unter HTTPS-Adressen ab.
 5. Veröffentlichen Sie den TXT-Eintrag unter `default._bimi` Ihrer Domain.
 
-Unser [BIMI-Generator](/bimi-generator) (auf Englisch) erstellt den BIMI-Record und prüft Ihr Logo gegen die Regeln von SVG Tiny PS. Die Prüfung läuft in Ihrem Browser. Ihr Logo wird nirgendwo hochgeladen.
+Unser [BIMI-Generator](/bimi-generator) erstellt den BIMI-Record und prüft Ihr Logo gegen die Regeln von SVG Tiny PS. Die Prüfung läuft in Ihrem Browser. Ihr Logo wird nirgendwo hochgeladen.
 
 ## BIMI und E-Mail-Verifizierung
 

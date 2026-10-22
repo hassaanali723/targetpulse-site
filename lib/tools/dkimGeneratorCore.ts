@@ -21,20 +21,60 @@ export interface DkimGeneratedKeys {
 }
 
 /**
+ * Stable codes for the messages below, so a localized page can show its own
+ * wording. The English `error` / `message` text is unchanged.
+ */
+export type DkimErrorCode =
+  | 'selector-empty'
+  | 'selector-too-long'
+  | 'selector-chars'
+  | 'domain-empty'
+  | 'domain-too-long'
+  | 'domain-no-tld'
+  | 'domain-label-length'
+  /** `label` holds the offending label. */
+  | 'domain-label'
+  | 'no-web-crypto'
+
+export interface DkimValidation {
+  valid: boolean
+  error?: string
+  code?: DkimErrorCode
+  /** domain-label: the label that failed. */
+  label?: string
+}
+
+/**
+ * Thrown by generateDkimKeys for the coded cases; `message` is the English text.
+ * Plain fields, not constructor parameter properties, so the file still runs
+ * under Node's type stripping (tests/dkimGenerator.test.mjs).
+ */
+export class DkimError extends Error {
+  code: DkimErrorCode
+  label?: string
+  constructor(message: string, code: DkimErrorCode, label?: string) {
+    super(message)
+    this.code = code
+    this.label = label
+  }
+}
+
+/**
  * Validates DKIM selector according to RFC 6376 (letters, digits, hyphens).
  */
-export function validateSelector(selector: string): { valid: boolean; error?: string } {
+export function validateSelector(selector: string): DkimValidation {
   const trimmed = selector.trim()
   if (!trimmed) {
-    return { valid: false, error: 'Selector cannot be empty' }
+    return { valid: false, error: 'Selector cannot be empty', code: 'selector-empty' }
   }
   if (trimmed.length > 63) {
-    return { valid: false, error: 'Selector must be 63 characters or fewer' }
+    return { valid: false, error: 'Selector must be 63 characters or fewer', code: 'selector-too-long' }
   }
   if (!/^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?$/.test(trimmed)) {
     return {
       valid: false,
       error: 'Selector must contain only letters, numbers, and hyphens, and cannot start or end with a hyphen',
+      code: 'selector-chars',
     }
   }
   return { valid: true }
@@ -43,25 +83,25 @@ export function validateSelector(selector: string): { valid: boolean; error?: st
 /**
  * Validates domain name.
  */
-export function validateDomain(domain: string): { valid: boolean; error?: string } {
+export function validateDomain(domain: string): DkimValidation {
   const trimmed = domain.trim().toLowerCase().replace(/\.$/, '')
   if (!trimmed) {
-    return { valid: false, error: 'Domain cannot be empty' }
+    return { valid: false, error: 'Domain cannot be empty', code: 'domain-empty' }
   }
   if (trimmed.length > 253) {
-    return { valid: false, error: 'Domain is too long' }
+    return { valid: false, error: 'Domain is too long', code: 'domain-too-long' }
   }
   // Standard hostname check
   const labels = trimmed.split('.')
   if (labels.length < 2) {
-    return { valid: false, error: 'Domain must include a top-level domain (e.g., example.com)' }
+    return { valid: false, error: 'Domain must include a top-level domain (e.g., example.com)', code: 'domain-no-tld' }
   }
   for (const label of labels) {
     if (!label || label.length > 63) {
-      return { valid: false, error: 'Invalid domain label length' }
+      return { valid: false, error: 'Invalid domain label length', code: 'domain-label-length' }
     }
     if (!/^[a-z0-9]([a-z0-9-]*[a-z0-9])?$/.test(label)) {
-      return { valid: false, error: `Invalid label "${label}" in domain name` }
+      return { valid: false, error: `Invalid label "${label}" in domain name`, code: 'domain-label', label }
     }
   }
   return { valid: true }
@@ -166,15 +206,15 @@ export async function generateDkimKeys(
   const selector = rawSelector.trim()
 
   const selVal = validateSelector(selector)
-  if (!selVal.valid) throw new Error(selVal.error)
+  if (!selVal.valid) throw new DkimError(selVal.error!, selVal.code!)
 
   const domVal = validateDomain(domain)
-  if (!domVal.valid) throw new Error(domVal.error)
+  if (!domVal.valid) throw new DkimError(domVal.error!, domVal.code!, domVal.label)
 
   // Web Crypto SubtleCrypto
   const cryptoObj = typeof globalThis !== 'undefined' ? globalThis.crypto?.subtle : undefined
   if (!cryptoObj) {
-    throw new Error('Web Crypto API (crypto.subtle) is not available in this environment')
+    throw new DkimError('Web Crypto API (crypto.subtle) is not available in this environment', 'no-web-crypto')
   }
 
   const keyPair = await cryptoObj.generateKey(

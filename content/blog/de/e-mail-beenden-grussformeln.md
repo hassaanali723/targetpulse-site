@@ -32,7 +32,7 @@ Ein E-Mail-Ende hat drei getrennte Teile, und jeder hat eine andere Aufgabe.
 2. **Die Grußformel** ist der kurze Abschied vor Ihrem Namen, etwa "Vielen Dank" oder "Freundliche Grüße".
 3. **Ihr Name und Ihre Signatur** kommen zuletzt. In einer ersten E-Mail nennen Sie Ihre Rolle und Ihr Unternehmen. In einer kurzen Antwort reicht Ihr Vorname.
 
-Halten Sie die Signatur kurz. Der alte Leitfaden zur Netiquette, [RFC 1855](https://www.rfc-editor.org/rfc/rfc1855), empfahl höchstens 4 Zeilen, und das funktioniert noch immer. Wenn Sie eine saubere, einheitliche Signatur möchten, erstellt der [Generator für E-Mail-Signaturen](/email-signature-generator) (auf Englisch) eine für Gmail, Outlook und Apple Mail.
+Halten Sie die Signatur kurz. Der alte Leitfaden zur Netiquette, [RFC 1855](https://www.rfc-editor.org/rfc/rfc1855), empfahl höchstens 4 Zeilen, und das funktioniert noch immer. Wenn Sie eine saubere, einheitliche Signatur möchten, erstellt der [Generator für E-Mail-Signaturen](/email-signature-generator) eine für Gmail, Outlook und Apple Mail.
 
 ## Grußformeln für berufliche E-Mails
 

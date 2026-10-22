@@ -21,22 +21,28 @@ export interface BimiRecordResult {
   selectorWarning?: string
 }
 
-export function validateBimiUrl(url: string, extension: 'svg' | 'pem'): { valid: boolean; error?: string } {
-  if (!url) return { valid: false, error: 'URL is required' }
+/** Why a URL failed validateBimiUrl. `error` keeps the English text; a localized page maps the code. */
+export type BimiUrlErrorCode = 'required' | 'not-https' | 'extension' | 'invalid'
+
+export function validateBimiUrl(
+  url: string,
+  extension: 'svg' | 'pem',
+): { valid: boolean; error?: string; code?: BimiUrlErrorCode } {
+  if (!url) return { valid: false, error: 'URL is required', code: 'required' }
   const trimmed = url.trim()
   if (!trimmed.startsWith('https://')) {
-    return { valid: false, error: 'URL must start with https://' }
+    return { valid: false, error: 'URL must start with https://', code: 'not-https' }
   }
   // Check extension before query or fragment
   const urlWithoutParams = trimmed.split('?')[0].split('#')[0].toLowerCase()
   if (!urlWithoutParams.endsWith(`.${extension}`)) {
-    return { valid: false, error: `URL must end with .${extension}` }
+    return { valid: false, error: `URL must end with .${extension}`, code: 'extension' }
   }
   try {
     new URL(trimmed)
     return { valid: true }
   } catch {
-    return { valid: false, error: 'Invalid URL format' }
+    return { valid: false, error: 'Invalid URL format', code: 'invalid' }
   }
 }
 
@@ -77,8 +83,23 @@ export function generateBimiRecord(input: BimiRecordInput): BimiRecordResult {
   }
 }
 
+/** Stable ids of the logo checks, in the order checkBimiSvg runs them. A localized page maps its text by id. */
+export type BimiSvgCheckId =
+  | 'baseProfile'
+  | 'version'
+  | 'viewBox'
+  | 'no-root-xy'
+  | 'title'
+  | 'filesize'
+  | 'no-script'
+  | 'no-image'
+  | 'no-foreignObject'
+  | 'no-animation'
+  | 'no-external-ref'
+  | 'text-elements'
+
 export interface SvgCheckItem {
-  id: string
+  id: BimiSvgCheckId
   title: string
   passed: boolean
   isWarning?: boolean

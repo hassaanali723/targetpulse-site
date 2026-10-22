@@ -21,8 +21,22 @@ import {
   checkBimiSvg,
   type SvgCheckResult,
 } from '@/lib/tools/bimiGeneratorCore'
+import { bimiToolStrings, bimiUrlErrorText, bimiCheckText, type BimiCertLevel } from '@/lib/i18n/tools/bimiToolStrings'
+import type { Locale } from '@/lib/i18n/clusters'
 
-export default function BimiGeneratorTool() {
+/** Fills the {slot} markers of a strings-file template with text or elements. */
+function fill(template: string, slots: Record<string, React.ReactNode>): React.ReactNode[] {
+  return template.split(/(\{\w+\})/).map((part, i) => {
+    const m = /^\{(\w+)\}$/.exec(part)
+    return m && m[1] in slots ? <React.Fragment key={i}>{slots[m[1]]}</React.Fragment> : part
+  })
+}
+
+const CERT_LEVELS: BimiCertLevel[] = ['none', 'CMC', 'VMC']
+
+// The wording lives in lib/i18n/tools/bimiToolStrings.ts.
+export default function BimiGeneratorTool({ locale = 'en' }: { locale?: Locale }) {
+  const t = bimiToolStrings(locale)
   const [activeTab, setActiveTab] = useState<'record' | 'checker' | 'readiness'>('record')
 
   // Record Builder State
@@ -43,7 +57,7 @@ export default function BimiGeneratorTool() {
   const [dmarcEnforced, setDmarcEnforced] = useState(false)
   const [spfDkimAligned, setSpfDkimAligned] = useState(false)
   const [logoChecked, setLogoChecked] = useState(false)
-  const [certType, setCertType] = useState<'none' | 'CMC' | 'VMC'>('none')
+  const [certType, setCertType] = useState<BimiCertLevel>('none')
 
   // Copy helper
   const handleCopy = async (text: string, fieldId: string) => {
@@ -155,7 +169,7 @@ export default function BimiGeneratorTool() {
           }`}
         >
           <FileCode className="w-4 h-4" />
-          <span>Record Builder</span>
+          <span>{t.tabRecord}</span>
         </button>
         <button
           type="button"
@@ -167,7 +181,7 @@ export default function BimiGeneratorTool() {
           }`}
         >
           <ImageIcon className="w-4 h-4" />
-          <span>SVG Logo Checker</span>
+          <span>{t.tabChecker}</span>
         </button>
         <button
           type="button"
@@ -179,7 +193,7 @@ export default function BimiGeneratorTool() {
           }`}
         >
           <ShieldCheck className="w-4 h-4" />
-          <span>Readiness Checklist</span>
+          <span>{t.tabReadiness}</span>
         </button>
       </div>
 
@@ -189,14 +203,14 @@ export default function BimiGeneratorTool() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label htmlFor="bimi-domain" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-                Domain <span className="text-red-500">*</span>
+                {t.domainLabel} <span className="text-red-500">*</span>
               </label>
               <input
                 id="bimi-domain"
                 type="text"
                 value={domain}
                 onChange={(e) => setDomain(e.target.value)}
-                placeholder="example.com"
+                placeholder={t.domainPlaceholder}
                 required
                 className="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition"
               />
@@ -204,7 +218,7 @@ export default function BimiGeneratorTool() {
 
             <div>
               <label htmlFor="bimi-selector" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-                Selector <span className="text-slate-400 font-normal lowercase">(default: default)</span>
+                {t.selectorLabel} <span className="text-slate-400 font-normal lowercase">{t.selectorHint}</span>
               </label>
               <input
                 id="bimi-selector"
@@ -217,7 +231,7 @@ export default function BimiGeneratorTool() {
               {selector && selector !== 'default' && (
                 <p className="text-xs text-amber-600 mt-1 flex items-center gap-1">
                   <Info className="w-3.5 h-3.5" />
-                  Mail needs a BIMI-Selector header for a non-default selector.
+                  {t.selectorWarning}
                 </p>
               )}
             </div>
@@ -225,40 +239,40 @@ export default function BimiGeneratorTool() {
 
           <div>
             <label htmlFor="bimi-logo" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-              Logo URL <span className="text-slate-400 font-normal lowercase">(must start with https:// and end in .svg)</span>
+              {t.logoLabel} <span className="text-slate-400 font-normal lowercase">{t.logoHint}</span>
             </label>
             <input
               id="bimi-logo"
               type="url"
               value={logoUrl}
               onChange={(e) => setLogoUrl(e.target.value)}
-              placeholder="https://example.com/bimi/logo.svg"
+              placeholder={t.logoPlaceholder}
               className="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition"
             />
             {logoUrl && !logoUrlValidation.valid && (
               <p className="text-xs text-red-500 mt-1 flex items-center gap-1">
                 <AlertTriangle className="w-3.5 h-3.5" />
-                {logoUrlValidation.error}
+                {bimiUrlErrorText(t, logoUrlValidation, 'svg')}
               </p>
             )}
           </div>
 
           <div>
             <label htmlFor="bimi-cert" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-              Certificate URL <span className="text-slate-400 font-normal lowercase">(optional; must start with https:// and end in .pem)</span>
+              {t.certLabel} <span className="text-slate-400 font-normal lowercase">{t.certHint}</span>
             </label>
             <input
               id="bimi-cert"
               type="url"
               value={certificateUrl}
               onChange={(e) => setCertificateUrl(e.target.value)}
-              placeholder="https://example.com/bimi/cert.pem"
+              placeholder={t.certPlaceholder}
               className="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition"
             />
             {certificateUrl && !certUrlValidation.valid && (
               <p className="text-xs text-red-500 mt-1 flex items-center gap-1">
                 <AlertTriangle className="w-3.5 h-3.5" />
-                {certUrlValidation.error}
+                {bimiUrlErrorText(t, certUrlValidation, 'pem')}
               </p>
             )}
           </div>
@@ -273,60 +287,60 @@ export default function BimiGeneratorTool() {
                   onChange={(e) => setLeaveLogoEmpty(e.target.checked)}
                   className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
                 />
-                <span>Leave l= empty (the logo is inside the certificate)</span>
+                <span>{t.leaveLogoEmpty}</span>
               </label>
-              <p className="text-[11px] text-slate-500 pl-6">
-                Google&apos;s examples show both forms: some certificates embed the logo within the PEM payload.
-              </p>
+              <p className="text-[11px] text-slate-500 pl-6">{t.leaveLogoEmptyHelp}</p>
             </div>
           )}
 
           {/* OUTPUT BOX */}
           {bimiRecord && (
             <div className="pt-6 border-t border-slate-200 space-y-4">
-              <h3 className="text-sm font-bold text-slate-900">Publish this DNS TXT Record</h3>
+              <h3 className="text-sm font-bold text-slate-900">{t.outputTitle}</h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Host */}
                 <div className="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
                   <div className="flex items-center justify-between">
-                    <span className="text-[11px] font-bold uppercase text-slate-500">Host / Name</span>
+                    <span className="text-[11px] font-bold uppercase text-slate-500">{t.hostLabel}</span>
                     <button
                       type="button"
                       onClick={() => handleCopy(bimiRecord.hostFull, 'host')}
                       className="text-xs text-indigo-600 hover:text-indigo-800 font-semibold inline-flex items-center gap-1"
                     >
                       {copiedField === 'host' ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
-                      <span>{copiedField === 'host' ? 'Copied' : 'Copy'}</span>
+                      <span>{copiedField === 'host' ? t.copied : t.copy}</span>
                     </button>
                   </div>
                   <p className="font-mono text-xs font-semibold text-slate-900 break-all select-all">
                     {bimiRecord.hostFull}
                   </p>
                   <p className="text-[11px] text-slate-500">
-                    Short form for panels that append domain: <code className="bg-slate-200/70 px-1 py-0.5 rounded">{bimiRecord.hostShort}</code>
+                    {fill(t.hostShort, {
+                      host: <code className="bg-slate-200/70 px-1 py-0.5 rounded">{bimiRecord.hostShort}</code>,
+                    })}
                   </p>
                 </div>
 
                 {/* Record Type */}
                 <div className="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
-                  <span className="text-[11px] font-bold uppercase text-slate-500">Record Type</span>
+                  <span className="text-[11px] font-bold uppercase text-slate-500">{t.typeLabel}</span>
                   <p className="font-mono text-xs font-bold text-slate-900">TXT</p>
-                  <p className="text-[11px] text-slate-500">TTL: 3600 (1 hour recommended)</p>
+                  <p className="text-[11px] text-slate-500">{t.ttlNote}</p>
                 </div>
               </div>
 
               {/* TXT Value */}
               <div className="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="text-[11px] font-bold uppercase text-slate-500">TXT Record Value</span>
+                  <span className="text-[11px] font-bold uppercase text-slate-500">{t.valueLabel}</span>
                   <button
                     type="button"
                     onClick={() => handleCopy(bimiRecord.recordValue, 'val')}
                     className="text-xs text-indigo-600 hover:text-indigo-800 font-semibold inline-flex items-center gap-1"
                   >
                     {copiedField === 'val' ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
-                    <span>{copiedField === 'val' ? 'Copied' : 'Copy'}</span>
+                    <span>{copiedField === 'val' ? t.copied : t.copy}</span>
                   </button>
                 </div>
                 <div className="p-3 bg-white border border-slate-200 rounded-lg font-mono text-xs font-semibold text-indigo-950 break-all select-all">
@@ -337,14 +351,14 @@ export default function BimiGeneratorTool() {
               {/* Zone file line */}
               <div className="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="text-[11px] font-bold uppercase text-slate-500">Zone-File Format</span>
+                  <span className="text-[11px] font-bold uppercase text-slate-500">{t.zoneLabel}</span>
                   <button
                     type="button"
                     onClick={() => handleCopy(bimiRecord.zoneFileLine, 'zone')}
                     className="text-xs text-indigo-600 hover:text-indigo-800 font-semibold inline-flex items-center gap-1"
                   >
                     {copiedField === 'zone' ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
-                    <span>{copiedField === 'zone' ? 'Copied' : 'Copy'}</span>
+                    <span>{copiedField === 'zone' ? t.copied : t.copy}</span>
                   </button>
                 </div>
                 <div className="p-3 bg-slate-900 border border-slate-800 rounded-lg font-mono text-xs text-emerald-400 break-all select-all">
@@ -361,9 +375,7 @@ export default function BimiGeneratorTool() {
         <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 md:p-8 space-y-6">
           <div className="space-y-4">
             <div>
-              <p className="text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-                Upload SVG Logo File or Paste SVG Code
-              </p>
+              <p className="text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">{t.checkerTitle}</p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <input
                   ref={svgFileInputRef}
@@ -378,14 +390,14 @@ export default function BimiGeneratorTool() {
                   className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-800 text-xs font-bold transition shadow-sm"
                 >
                   <Upload className="w-4 h-4 text-slate-500" />
-                  <span>Upload SVG File</span>
+                  <span>{t.uploadButton}</span>
                 </button>
               </div>
             </div>
 
             <div>
               <label htmlFor="bimi-svg-paste" className="block text-xs font-semibold text-slate-600 mb-1">
-                Or paste SVG markup:
+                {t.pasteLabel}
               </label>
               <textarea
                 id="bimi-svg-paste"
@@ -411,7 +423,7 @@ export default function BimiGeneratorTool() {
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={svgPreviewUrl}
-                      alt="SVG Preview"
+                      alt={t.previewAlt}
                       className="max-w-full max-h-full object-contain"
                     />
                   </div>
@@ -429,50 +441,47 @@ export default function BimiGeneratorTool() {
                       {svgFileResult.passedAll ? (
                         <>
                           <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                          <span>Passes All Tiny PS Rules</span>
+                          <span>{t.passBadge}</span>
                         </>
                       ) : (
                         <>
                           <AlertTriangle className="w-4 h-4 text-amber-600" />
-                          <span>Does Not Meet Tiny PS Rules</span>
+                          <span>{t.failBadge}</span>
                         </>
                       )}
                     </span>
-                    <span className="text-xs text-slate-500">
-                      File size: {(svgFileResult.byteSize / 1024).toFixed(1)} KB
-                    </span>
+                    <span className="text-xs text-slate-500">{t.fileSize(svgFileResult.byteSize)}</span>
                   </div>
-                  <p className="text-xs text-slate-600">
-                    {svgFileResult.passedAll
-                      ? 'Your SVG logo meets the specifications for mailbox providers and certificate authorities.'
-                      : 'Review the failing items below to make your logo compliant before publishing.'}
-                  </p>
+                  <p className="text-xs text-slate-600">{svgFileResult.passedAll ? t.passText : t.failText}</p>
                 </div>
               </div>
 
               {/* 11 Checks List */}
               <div className="border border-slate-200 rounded-xl divide-y divide-slate-100 bg-white overflow-hidden">
-                {svgFileResult.checks.map((c) => (
-                  <div key={c.id} className="p-3.5 flex items-start gap-3 text-xs">
-                    {c.isWarning ? (
-                      <AlertTriangle className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
-                    ) : c.passed ? (
-                      <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                    ) : (
-                      <XCircle className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
-                    )}
-                    <div className="space-y-0.5">
-                      <p
-                        className={`font-semibold ${
-                          c.isWarning ? 'text-amber-800' : c.passed ? 'text-slate-800' : 'text-red-700'
-                        }`}
-                      >
-                        {c.title}
-                      </p>
-                      <p className="text-slate-500 text-[11px] leading-relaxed">{c.message}</p>
+                {svgFileResult.checks.map((c) => {
+                  const text = bimiCheckText(t, c, svgFileResult.byteSize)
+                  return (
+                    <div key={c.id} className="p-3.5 flex items-start gap-3 text-xs">
+                      {c.isWarning ? (
+                        <AlertTriangle className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
+                      ) : c.passed ? (
+                        <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                      ) : (
+                        <XCircle className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
+                      )}
+                      <div className="space-y-0.5">
+                        <p
+                          className={`font-semibold ${
+                            c.isWarning ? 'text-amber-800' : c.passed ? 'text-slate-800' : 'text-red-700'
+                          }`}
+                        >
+                          {text.title}
+                        </p>
+                        <p className="text-slate-500 text-[11px] leading-relaxed">{text.message}</p>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  )
+                })}
               </div>
             </div>
           )}
@@ -483,10 +492,8 @@ export default function BimiGeneratorTool() {
       {activeTab === 'readiness' && (
         <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 md:p-8 space-y-6">
           <div>
-            <h3 className="text-base font-bold text-slate-900 mb-1">BIMI Deployment Readiness</h3>
-            <p className="text-xs text-slate-500">
-              Check off your prerequisites to determine where your brand logo will appear.
-            </p>
+            <h3 className="text-base font-bold text-slate-900 mb-1">{t.readinessTitle}</h3>
+            <p className="text-xs text-slate-500">{t.readinessIntro}</p>
           </div>
 
           <div className="space-y-3">
@@ -498,15 +505,15 @@ export default function BimiGeneratorTool() {
                 className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 mt-0.5"
               />
               <div className="text-xs space-y-0.5">
-                <span className="font-semibold text-slate-800">
-                  DMARC at quarantine or reject
-                </span>
+                <span className="font-semibold text-slate-800">{t.dmarcItem}</span>
                 <p className="text-slate-500">
-                  BIMI requires policy enforcement. Need a record? Use our{' '}
-                  <Link href="/dmarc-generator" className="text-indigo-600 font-semibold hover:underline">
-                    DMARC generator
-                  </Link>
-                  .
+                  {fill(t.dmarcItemText, {
+                    link: (
+                      <Link href={t.dmarcHref} className="text-indigo-600 font-semibold hover:underline">
+                        {t.dmarcLabel}
+                      </Link>
+                    ),
+                  })}
                 </p>
               </div>
             </label>
@@ -519,12 +526,8 @@ export default function BimiGeneratorTool() {
                 className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 mt-0.5"
               />
               <div className="text-xs space-y-0.5">
-                <span className="font-semibold text-slate-800">
-                  SPF and DKIM pass and align
-                </span>
-                <p className="text-slate-500">
-                  Mail headers must authenticate cleanly with the domain in the From address.
-                </p>
+                <span className="font-semibold text-slate-800">{t.alignItem}</span>
+                <p className="text-slate-500">{t.alignItemText}</p>
               </div>
             </label>
 
@@ -536,31 +539,21 @@ export default function BimiGeneratorTool() {
                 className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 mt-0.5"
               />
               <div className="text-xs space-y-0.5">
-                <span className="font-semibold text-slate-800">
-                  Logo passes the checker
-                </span>
-                <p className="text-slate-500">
-                  SVG Tiny PS compliant, square viewBox, no script or raster elements.
-                </p>
+                <span className="font-semibold text-slate-800">{t.logoItem}</span>
+                <p className="text-slate-500">{t.logoItemText}</p>
               </div>
             </label>
           </div>
 
           {/* Certificate Selection */}
           <div className="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-3">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-700">
-              Certificate Level
-            </span>
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-700">{t.certTitle}</span>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              {[
-                { id: 'none', label: 'None (Self-hosted SVG only)' },
-                { id: 'CMC', label: 'CMC (Common Mark Certificate)' },
-                { id: 'VMC', label: 'VMC (Verified Mark Certificate)' },
-              ].map((item) => (
+              {CERT_LEVELS.map((id) => (
                 <label
-                  key={item.id}
+                  key={id}
                   className={`p-3 rounded-lg border text-xs font-semibold cursor-pointer transition flex items-center gap-2 ${
-                    certType === item.id
+                    certType === id
                       ? 'border-indigo-600 bg-indigo-50/50 text-indigo-900'
                       : 'border-slate-200 bg-white text-slate-700 hover:bg-slate-50'
                   }`}
@@ -568,12 +561,12 @@ export default function BimiGeneratorTool() {
                   <input
                     type="radio"
                     name="certLevel"
-                    value={item.id}
-                    checked={certType === item.id}
-                    onChange={() => setCertType(item.id as 'none' | 'CMC' | 'VMC')}
+                    value={id}
+                    checked={certType === id}
+                    onChange={() => setCertType(id)}
                     className="text-indigo-600 focus:ring-indigo-500"
                   />
-                  <span>{item.label}</span>
+                  <span>{t.certOptions[id]}</span>
                 </label>
               ))}
             </div>
@@ -583,32 +576,24 @@ export default function BimiGeneratorTool() {
           <div className="p-5 rounded-xl border border-slate-200 bg-slate-900 text-white space-y-3">
             <div className="flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-emerald-400" />
-              <h4 className="text-sm font-bold text-white">Where your logo can appear:</h4>
+              <h4 className="text-sm font-bold text-white">{t.whereTitle}</h4>
             </div>
 
             <div className="text-xs text-slate-300 space-y-2">
               {certType === 'VMC' && (
-                <p className="font-semibold text-emerald-400">
-                  With VMC: Gmail with checkmark, Apple Mail, and providers that support BIMI
-                </p>
+                <p className="font-semibold text-emerald-400">{t.where.VMC}</p>
               )}
 
               {certType === 'CMC' && (
-                <p className="font-semibold text-sky-400">
-                  With CMC: Gmail without checkmark, not Apple Mail
-                </p>
+                <p className="font-semibold text-sky-400">{t.where.CMC}</p>
               )}
 
               {certType === 'none' && (
-                <p className="font-semibold text-slate-300">
-                  With none: only providers that accept records without a certificate, such as Yahoo and Fastmail
-                </p>
+                <p className="font-semibold text-slate-300">{t.where.none}</p>
               )}
 
               {(!dmarcEnforced || !spfDkimAligned || !logoChecked) && (
-                <p className="text-amber-400 text-[11px] pt-1">
-                  Note: Prerequisites must be met first. If DMARC is not at quarantine or reject, no provider will display your logo.
-                </p>
+                <p className="text-amber-400 text-[11px] pt-1">{t.prerequisitesNote}</p>
               )}
             </div>
           </div>

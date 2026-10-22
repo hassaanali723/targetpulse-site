@@ -157,7 +157,7 @@ Drei ältere Tags wurden im Standard von 2026 abgeschafft. Das sind das Prozent-
 - Lassen Sie `psd` weg. Sie brauchen es nur, wenn Sie eine große Organisation betreiben, die Teile ihres DNS vergibt (`psd=n`), oder einen Public Suffix wie `co.uk` (`psd=y`).
 - Relaxed Alignment (`adkim=r` und `aspf=r`) ist der Standard und funktioniert für fast jede Domain. Die Alignment-Tags brauchen Sie nur, wenn strenge Compliance-Regeln das Signieren mit einer Subdomain verbieten.
 
-Mit unserem [DMARC-Generator](/dmarc-generator) (auf Englisch) können Sie einen Eintrag mit diesen Tags erstellen oder einen alten bereinigen.
+Mit unserem [DMARC-Generator](/dmarc-generator) können Sie einen Eintrag mit diesen Tags erstellen oder einen alten bereinigen.
 
 ## Was p=none, quarantine und reject wirklich tun
 

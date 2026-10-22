@@ -59,9 +59,37 @@ const files = [
   'components/tools/EmailSignature/EmailSignatureTool.tsx',
 ]
 
+// Since plan 30 the English copy of these tools lives in strings modules next to
+// the other languages. Only the English object (`const en`) is scanned there.
+const englishBlocks = [
+  'lib/i18n/tools/emailExtractorStrings.ts',
+  'lib/i18n/tools/extractorToolStrings.ts',
+  'lib/i18n/tools/dkimGeneratorStrings.ts',
+  'lib/i18n/tools/dkimToolStrings.ts',
+  'lib/i18n/tools/dmarcGeneratorStrings.ts',
+  'lib/i18n/tools/dmarcToolStrings.ts',
+  'lib/i18n/tools/bimiGeneratorStrings.ts',
+  'lib/i18n/tools/bimiToolStrings.ts',
+  'lib/i18n/tools/emailSignatureStrings.ts',
+  'lib/i18n/tools/signatureToolStrings.ts',
+]
+
+/** The text of `const en ... = {` up to the next top-level const or export. */
+function englishBlock(text) {
+  const start = text.search(/^const en/m)
+  if (start < 0) return ''
+  const rest = text.slice(start + 1)
+  const end = rest.search(/^(const |export )/m)
+  return end < 0 ? rest : rest.slice(0, end)
+}
+
 let foundCount = 0
-for (const f of files) {
-  const content = fs.readFileSync(f, 'utf8').toLowerCase()
+const sources = [
+  ...files.map((f) => [f, fs.readFileSync(f, 'utf8')]),
+  ...englishBlocks.filter((f) => fs.existsSync(f)).map((f) => [`${f} (English)`, englishBlock(fs.readFileSync(f, 'utf8'))]),
+]
+for (const [f, text] of sources) {
+  const content = text.toLowerCase()
   for (const b of banned) {
     if (content.includes(b)) {
       console.error(`Banned word "${b}" found in ${f}`)

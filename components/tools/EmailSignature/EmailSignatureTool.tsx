@@ -24,20 +24,28 @@ import {
   type SignatureFont,
   type SignatureData,
 } from '@/lib/tools/emailSignatureCore'
+import { signatureToolStrings, signatureImageWarning } from '@/lib/i18n/tools/signatureToolStrings'
+import type { Locale } from '@/lib/i18n/clusters'
 
-export default function EmailSignatureTool() {
+const TEMPLATES: SignatureTemplateId[] = ['simple-text', 'logo-left', 'photo-divider', 'compact']
+
+// The wording, and the sample details the form starts with, live in
+// lib/i18n/tools/signatureToolStrings.ts.
+export default function EmailSignatureTool({ locale = 'en' }: { locale?: Locale }) {
+  const t = signatureToolStrings(locale)
+
   // Personal Details
-  const [fullName, setFullName] = useState('Jane Doe')
-  const [jobTitle, setJobTitle] = useState('Account Manager')
-  const [company, setCompany] = useState('Example Ltd')
+  const [fullName, setFullName] = useState(t.defaults.fullName)
+  const [jobTitle, setJobTitle] = useState(t.defaults.jobTitle)
+  const [company, setCompany] = useState(t.defaults.company)
   const [department, setDepartment] = useState('')
   const [pronouns, setPronouns] = useState('')
 
   // Contact Details
-  const [phone, setPhone] = useState('+44 20 7946 0000')
+  const [phone, setPhone] = useState(t.defaults.phone)
   const [mobile, setMobile] = useState('')
-  const [email, setEmail] = useState('jane@example.com')
-  const [website, setWebsite] = useState('example.com')
+  const [email, setEmail] = useState(t.defaults.email)
+  const [website, setWebsite] = useState(t.defaults.website)
   const [address, setAddress] = useState('')
 
   // Image URLs
@@ -133,8 +141,8 @@ export default function EmailSignatureTool() {
   ])
 
   // HTML and Plain Text outputs
-  const renderedHtml = useMemo(() => generateSignatureHtml(signatureData), [signatureData])
-  const plainText = useMemo(() => generatePlainTextSignature(signatureData), [signatureData])
+  const renderedHtml = useMemo(() => generateSignatureHtml(signatureData, t.signature), [signatureData, t])
+  const plainText = useMemo(() => generatePlainTextSignature(signatureData, t.signature), [signatureData, t])
   const htmlLength = renderedHtml.length
   const isOverGmailLimit = htmlLength > 10000
 
@@ -211,7 +219,7 @@ export default function EmailSignatureTool() {
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = 'signature.html'
+    a.download = t.downloadName
     a.click()
     URL.revokeObjectURL(url)
   }
@@ -222,27 +230,20 @@ export default function EmailSignatureTool() {
       <div className="lg:col-span-7 bg-white rounded-2xl border border-slate-200 shadow-sm p-6 md:p-8 space-y-6">
         {/* Template Selector */}
         <div>
-          <span className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
-            1. Select Layout Template
-          </span>
+          <span className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">{t.templateStep}</span>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-            {[
-              { id: 'simple-text', label: 'Simple text' },
-              { id: 'logo-left', label: 'Logo left' },
-              { id: 'photo-divider', label: 'Photo divider' },
-              { id: 'compact', label: 'Compact' },
-            ].map((t) => (
+            {TEMPLATES.map((id) => (
               <button
-                key={t.id}
+                key={id}
                 type="button"
-                onClick={() => setTemplate(t.id as SignatureTemplateId)}
+                onClick={() => setTemplate(id)}
                 className={`py-2 px-3 rounded-xl border text-xs font-bold transition text-center ${
-                  template === t.id
+                  template === id
                     ? 'border-indigo-600 bg-indigo-50/70 text-indigo-900 shadow-sm'
                     : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
                 }`}
               >
-                {t.label}
+                {t.templates[id]}
               </button>
             ))}
           </div>
@@ -252,7 +253,7 @@ export default function EmailSignatureTool() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-slate-100">
           <div>
             <label htmlFor="sig-font" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-              Font Family
+              {t.fontLabel}
             </label>
             <select
               id="sig-font"
@@ -269,9 +270,7 @@ export default function EmailSignatureTool() {
           </div>
 
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-              Accent Color
-            </label>
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">{t.colorLabel}</label>
             <div className="flex items-center gap-2">
               <input
                 type="color"
@@ -286,7 +285,7 @@ export default function EmailSignatureTool() {
                     type="button"
                     onClick={() => setAccentColor(c)}
                     style={{ backgroundColor: c }}
-                    aria-label={`Color ${c}`}
+                    aria-label={t.colorAria(c)}
                     className={`w-5 h-5 rounded-full transition ${accentColor === c ? 'ring-2 ring-offset-1 ring-slate-900 scale-110' : ''}`}
                   />
                 ))}
@@ -297,20 +296,18 @@ export default function EmailSignatureTool() {
 
         {/* Personal Info */}
         <div className="space-y-3 pt-2 border-t border-slate-100">
-          <span className="block text-xs font-bold uppercase tracking-wider text-slate-700">
-            2. Personal &amp; Company Details
-          </span>
+          <span className="block text-xs font-bold uppercase tracking-wider text-slate-700">{t.personalStep}</span>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label htmlFor="sig-fullName" className="block text-[11px] font-semibold text-slate-600 mb-1">
-                Full Name *
+                {t.fields.fullName.label}
               </label>
               <input
                 id="sig-fullName"
                 type="text"
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
-                placeholder="Jane Doe"
+                placeholder={t.fields.fullName.placeholder}
                 required
                 className="w-full px-3 py-2 rounded-lg border border-slate-300 text-xs text-slate-900"
               />
@@ -318,56 +315,56 @@ export default function EmailSignatureTool() {
 
             <div>
               <label htmlFor="sig-jobTitle" className="block text-[11px] font-semibold text-slate-600 mb-1">
-                Job Title
+                {t.fields.jobTitle.label}
               </label>
               <input
                 id="sig-jobTitle"
                 type="text"
                 value={jobTitle}
                 onChange={(e) => setJobTitle(e.target.value)}
-                placeholder="Account Manager"
+                placeholder={t.fields.jobTitle.placeholder}
                 className="w-full px-3 py-2 rounded-lg border border-slate-300 text-xs text-slate-900"
               />
             </div>
 
             <div>
               <label htmlFor="sig-company" className="block text-[11px] font-semibold text-slate-600 mb-1">
-                Company
+                {t.fields.company.label}
               </label>
               <input
                 id="sig-company"
                 type="text"
                 value={company}
                 onChange={(e) => setCompany(e.target.value)}
-                placeholder="Example Ltd"
+                placeholder={t.fields.company.placeholder}
                 className="w-full px-3 py-2 rounded-lg border border-slate-300 text-xs text-slate-900"
               />
             </div>
 
             <div>
               <label htmlFor="sig-dept" className="block text-[11px] font-semibold text-slate-600 mb-1">
-                Department (optional)
+                {t.fields.department.label}
               </label>
               <input
                 id="sig-dept"
                 type="text"
                 value={department}
                 onChange={(e) => setDepartment(e.target.value)}
-                placeholder="Client Success"
+                placeholder={t.fields.department.placeholder}
                 className="w-full px-3 py-2 rounded-lg border border-slate-300 text-xs text-slate-900"
               />
             </div>
 
             <div>
               <label htmlFor="sig-pronouns" className="block text-[11px] font-semibold text-slate-600 mb-1">
-                Pronouns (optional)
+                {t.fields.pronouns.label}
               </label>
               <input
                 id="sig-pronouns"
                 type="text"
                 value={pronouns}
                 onChange={(e) => setPronouns(e.target.value)}
-                placeholder="she/her"
+                placeholder={t.fields.pronouns.placeholder}
                 className="w-full px-3 py-2 rounded-lg border border-slate-300 text-xs text-slate-900"
               />
             </div>
@@ -376,76 +373,74 @@ export default function EmailSignatureTool() {
 
         {/* Contact Info */}
         <div className="space-y-3 pt-2 border-t border-slate-100">
-          <span className="block text-xs font-bold uppercase tracking-wider text-slate-700">
-            3. Contact Information
-          </span>
+          <span className="block text-xs font-bold uppercase tracking-wider text-slate-700">{t.contactStep}</span>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label htmlFor="sig-phone" className="block text-[11px] font-semibold text-slate-600 mb-1">
-                Phone
+                {t.fields.phone.label}
               </label>
               <input
                 id="sig-phone"
                 type="text"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                placeholder="+44 20 7946 0000"
+                placeholder={t.fields.phone.placeholder}
                 className="w-full px-3 py-2 rounded-lg border border-slate-300 text-xs text-slate-900"
               />
             </div>
 
             <div>
               <label htmlFor="sig-mobile" className="block text-[11px] font-semibold text-slate-600 mb-1">
-                Mobile (optional)
+                {t.fields.mobile.label}
               </label>
               <input
                 id="sig-mobile"
                 type="text"
                 value={mobile}
                 onChange={(e) => setMobile(e.target.value)}
-                placeholder="+44 7700 900077"
+                placeholder={t.fields.mobile.placeholder}
                 className="w-full px-3 py-2 rounded-lg border border-slate-300 text-xs text-slate-900"
               />
             </div>
 
             <div>
               <label htmlFor="sig-email" className="block text-[11px] font-semibold text-slate-600 mb-1">
-                Email
+                {t.fields.email.label}
               </label>
               <input
                 id="sig-email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="jane@example.com"
+                placeholder={t.fields.email.placeholder}
                 className="w-full px-3 py-2 rounded-lg border border-slate-300 text-xs text-slate-900"
               />
             </div>
 
             <div>
               <label htmlFor="sig-website" className="block text-[11px] font-semibold text-slate-600 mb-1">
-                Website
+                {t.fields.website.label}
               </label>
               <input
                 id="sig-website"
                 type="text"
                 value={website}
                 onChange={(e) => setWebsite(e.target.value)}
-                placeholder="example.com"
+                placeholder={t.fields.website.placeholder}
                 className="w-full px-3 py-2 rounded-lg border border-slate-300 text-xs text-slate-900"
               />
             </div>
 
             <div className="sm:col-span-2">
               <label htmlFor="sig-address" className="block text-[11px] font-semibold text-slate-600 mb-1">
-                Office Address (optional)
+                {t.fields.address.label}
               </label>
               <input
                 id="sig-address"
                 type="text"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
-                placeholder="100 Business Way, London"
+                placeholder={t.fields.address.placeholder}
                 className="w-full px-3 py-2 rounded-lg border border-slate-300 text-xs text-slate-900"
               />
             </div>
@@ -455,51 +450,47 @@ export default function EmailSignatureTool() {
         {/* Images: Logo & Photo URLs */}
         <div className="space-y-3 pt-2 border-t border-slate-100">
           <div>
-            <span className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-0.5">
-              4. Logo &amp; Photo Links
-            </span>
-            <p className="text-[11px] text-slate-500">
-              Paste an image link. Must be a public HTTPS URL (no direct file uploads).
-            </p>
+            <span className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-0.5">{t.imagesStep}</span>
+            <p className="text-[11px] text-slate-500">{t.imagesHelp}</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label htmlFor="sig-logoUrl" className="block text-[11px] font-semibold text-slate-600 mb-1">
-                Company Logo URL
+                {t.fields.logoUrl.label}
               </label>
               <input
                 id="sig-logoUrl"
                 type="url"
                 value={logoUrl}
                 onChange={(e) => setLogoUrl(e.target.value)}
-                placeholder="https://example.com/logo.png"
+                placeholder={t.fields.logoUrl.placeholder}
                 className="w-full px-3 py-2 rounded-lg border border-slate-300 text-xs text-slate-900"
               />
               {logoUrl && !logoValidation.valid && (
                 <p className="text-[11px] text-red-500 mt-1 flex items-center gap-1">
                   <AlertTriangle className="w-3 h-3" />
-                  {logoValidation.warning}
+                  {signatureImageWarning(t, logoValidation)}
                 </p>
               )}
             </div>
 
             <div>
               <label htmlFor="sig-photoUrl" className="block text-[11px] font-semibold text-slate-600 mb-1">
-                Profile Photo URL
+                {t.fields.photoUrl.label}
               </label>
               <input
                 id="sig-photoUrl"
                 type="url"
                 value={photoUrl}
                 onChange={(e) => setPhotoUrl(e.target.value)}
-                placeholder="https://example.com/photo.jpg"
+                placeholder={t.fields.photoUrl.placeholder}
                 className="w-full px-3 py-2 rounded-lg border border-slate-300 text-xs text-slate-900"
               />
               {photoUrl && !photoValidation.valid && (
                 <p className="text-[11px] text-red-500 mt-1 flex items-center gap-1">
                   <AlertTriangle className="w-3 h-3" />
-                  {photoValidation.warning}
+                  {signatureImageWarning(t, photoValidation)}
                 </p>
               )}
             </div>
@@ -509,9 +500,7 @@ export default function EmailSignatureTool() {
         {/* Social Links */}
         <div className="space-y-3 pt-2 border-t border-slate-100">
           <div className="flex items-center justify-between">
-            <span className="block text-xs font-bold uppercase tracking-wider text-slate-700">
-              5. Social Links (Optional)
-            </span>
+            <span className="block text-xs font-bold uppercase tracking-wider text-slate-700">{t.socialStep}</span>
             <label className="flex items-center gap-2 text-xs font-medium text-slate-600 cursor-pointer">
               <input
                 type="checkbox"
@@ -520,77 +509,77 @@ export default function EmailSignatureTool() {
                 className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
               />
               {/* Social icons sourced from Simple Icons under CC0-1.0 Universal */}
-              <span>Use small icons instead of text</span>
+              <span>{t.socialIcons}</span>
             </label>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label htmlFor="sig-linkedin" className="block text-[11px] font-semibold text-slate-600 mb-1">
-                LinkedIn Profile URL
+                {t.fields.linkedin.label}
               </label>
               <input
                 id="sig-linkedin"
                 type="url"
                 value={linkedin}
                 onChange={(e) => setLinkedin(e.target.value)}
-                placeholder="https://linkedin.com/in/..."
+                placeholder={t.fields.linkedin.placeholder}
                 className="w-full px-3 py-2 rounded-lg border border-slate-300 text-xs text-slate-900"
               />
             </div>
 
             <div>
               <label htmlFor="sig-x" className="block text-[11px] font-semibold text-slate-600 mb-1">
-                X / Twitter URL
+                {t.fields.x.label}
               </label>
               <input
                 id="sig-x"
                 type="url"
                 value={xSocial}
                 onChange={(e) => setXSocial(e.target.value)}
-                placeholder="https://x.com/..."
+                placeholder={t.fields.x.placeholder}
                 className="w-full px-3 py-2 rounded-lg border border-slate-300 text-xs text-slate-900"
               />
             </div>
 
             <div>
               <label htmlFor="sig-facebook" className="block text-[11px] font-semibold text-slate-600 mb-1">
-                Facebook URL
+                {t.fields.facebook.label}
               </label>
               <input
                 id="sig-facebook"
                 type="url"
                 value={facebook}
                 onChange={(e) => setFacebook(e.target.value)}
-                placeholder="https://facebook.com/..."
+                placeholder={t.fields.facebook.placeholder}
                 className="w-full px-3 py-2 rounded-lg border border-slate-300 text-xs text-slate-900"
               />
             </div>
 
             <div>
               <label htmlFor="sig-instagram" className="block text-[11px] font-semibold text-slate-600 mb-1">
-                Instagram URL
+                {t.fields.instagram.label}
               </label>
               <input
                 id="sig-instagram"
                 type="url"
                 value={instagram}
                 onChange={(e) => setInstagram(e.target.value)}
-                placeholder="https://instagram.com/..."
+                placeholder={t.fields.instagram.placeholder}
                 className="w-full px-3 py-2 rounded-lg border border-slate-300 text-xs text-slate-900"
               />
             </div>
 
             <div className="sm:col-span-2">
               <label htmlFor="sig-youtube" className="block text-[11px] font-semibold text-slate-600 mb-1">
-                YouTube Channel URL
+                {t.fields.youtube.label}
               </label>
               <input
                 id="sig-youtube"
                 type="url"
                 value={youtube}
                 onChange={(e) => setYoutube(e.target.value)}
-                placeholder="https://youtube.com/@..."
+                placeholder={t.fields.youtube.placeholder}
                 className="w-full px-3 py-2 rounded-lg border border-slate-300 text-xs text-slate-900"
               />
             </div>
@@ -599,49 +588,47 @@ export default function EmailSignatureTool() {
 
         {/* CTA & Legal */}
         <div className="space-y-3 pt-2 border-t border-slate-100">
-          <span className="block text-xs font-bold uppercase tracking-wider text-slate-700">
-            6. Call-to-Action &amp; Legal
-          </span>
+          <span className="block text-xs font-bold uppercase tracking-wider text-slate-700">{t.ctaStep}</span>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label htmlFor="sig-ctaText" className="block text-[11px] font-semibold text-slate-600 mb-1">
-                Button Text (optional)
+                {t.fields.ctaText.label}
               </label>
               <input
                 id="sig-ctaText"
                 type="text"
                 value={ctaText}
                 onChange={(e) => setCtaText(e.target.value)}
-                placeholder="Book a 15-minute call"
+                placeholder={t.fields.ctaText.placeholder}
                 className="w-full px-3 py-2 rounded-lg border border-slate-300 text-xs text-slate-900"
               />
             </div>
 
             <div>
               <label htmlFor="sig-ctaUrl" className="block text-[11px] font-semibold text-slate-600 mb-1">
-                Button URL
+                {t.fields.ctaUrl.label}
               </label>
               <input
                 id="sig-ctaUrl"
                 type="url"
                 value={ctaUrl}
                 onChange={(e) => setCtaUrl(e.target.value)}
-                placeholder="https://cal.com/..."
+                placeholder={t.fields.ctaUrl.placeholder}
                 className="w-full px-3 py-2 rounded-lg border border-slate-300 text-xs text-slate-900"
               />
             </div>
 
             <div className="sm:col-span-2">
               <label htmlFor="sig-disclaimer" className="block text-[11px] font-semibold text-slate-600 mb-1">
-                Legal Disclaimer (optional)
+                {t.fields.disclaimer.label}
               </label>
               <textarea
                 id="sig-disclaimer"
                 rows={2}
                 value={disclaimer}
                 onChange={(e) => setDisclaimer(e.target.value)}
-                placeholder="The content of this email is confidential..."
+                placeholder={t.fields.disclaimer.placeholder}
                 className="w-full px-3 py-2 rounded-lg border border-slate-300 text-xs text-slate-900"
               />
             </div>
@@ -655,7 +642,7 @@ export default function EmailSignatureTool() {
                   onChange={(e) => setShowMadeWithGiggal(e.target.checked)}
                   className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
                 />
-                <span>Show &ldquo;Made with Giggal&rdquo; link (off by default)</span>
+                <span>{t.madeWith}</span>
               </label>
             </div>
           </div>
@@ -678,7 +665,7 @@ export default function EmailSignatureTool() {
                 }`}
               >
                 <Eye className="w-3.5 h-3.5" />
-                <span>Preview</span>
+                <span>{t.tabPreview}</span>
               </button>
               <button
                 type="button"
@@ -690,7 +677,7 @@ export default function EmailSignatureTool() {
                 }`}
               >
                 <Code className="w-3.5 h-3.5" />
-                <span>HTML Code</span>
+                <span>{t.tabHtml}</span>
               </button>
               <button
                 type="button"
@@ -702,14 +689,14 @@ export default function EmailSignatureTool() {
                 }`}
               >
                 <Smartphone className="w-3.5 h-3.5" />
-                <span>Plain Text</span>
+                <span>{t.tabPlain}</span>
               </button>
             </div>
 
             {/* Character counter */}
             <div className="text-[11px] font-mono">
               <span className={isOverGmailLimit ? 'text-red-600 font-bold' : 'text-slate-500 font-medium'}>
-                {htmlLength.toLocaleString()}/10,000 chars
+                {t.chars(htmlLength)}
               </span>
             </div>
           </div>
@@ -717,7 +704,7 @@ export default function EmailSignatureTool() {
           {isOverGmailLimit && (
             <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-xs text-red-800 flex items-center gap-2">
               <AlertTriangle className="w-4 h-4 text-red-600 shrink-0" />
-              <span>Exceeds Gmail&apos;s 10,000 character signature limit. Shorten text or URLs.</span>
+              <span>{t.overLimit}</span>
             </div>
           )}
 
@@ -752,9 +739,7 @@ export default function EmailSignatureTool() {
                 value={plainText}
                 className="w-full p-3 font-mono text-xs bg-slate-50 text-slate-800 rounded-xl border border-slate-200 select-all"
               />
-              <p className="text-[11px] text-slate-500">
-                Recommended for mobile email apps such as Gmail on iOS/Android.
-              </p>
+              <p className="text-[11px] text-slate-500">{t.plainHelp}</p>
             </div>
           )}
 
@@ -766,7 +751,7 @@ export default function EmailSignatureTool() {
               className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs shadow-md transition"
             >
               {copiedType === 'rich' ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
-              <span>{copiedType === 'rich' ? 'Signature Copied! Paste into Email Client' : 'Copy signature'}</span>
+              <span>{copiedType === 'rich' ? t.copiedSignature : t.copySignature}</span>
             </button>
 
             <div className="grid grid-cols-2 gap-2">
@@ -776,7 +761,7 @@ export default function EmailSignatureTool() {
                 className="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold text-xs transition"
               >
                 {copiedType === 'html' ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-slate-400" />}
-                <span>Copy HTML code</span>
+                <span>{t.copyHtml}</span>
               </button>
 
               <button
@@ -785,7 +770,7 @@ export default function EmailSignatureTool() {
                 className="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold text-xs transition"
               >
                 <Download className="w-3.5 h-3.5 text-slate-400" />
-                <span>Download .html</span>
+                <span>{t.download}</span>
               </button>
             </div>
 
@@ -795,7 +780,7 @@ export default function EmailSignatureTool() {
               className="w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold text-xs transition"
             >
               {copiedType === 'plain' ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Smartphone className="w-3.5 h-3.5 text-slate-400" />}
-              <span>Copy plain-text version</span>
+              <span>{t.copyPlain}</span>
             </button>
           </div>
         </div>

@@ -132,7 +132,7 @@ Deixar o DMARC em `p=none` para sempre deixa o seu domínio vulnerável à falsi
 Siga estes passos em ordem:
 
 1. Liste todos os serviços internos, plataformas de marketing, ferramentas de suporte e ferramentas transacionais que enviam e-mails usando o seu domínio.
-2. Publique um único [registro SPF](/glossary/spf) unificado que cubra os servidores de envio autorizados, com menos de 10 consultas no total. O [SPF checker](/spf-checker) (em inglês) conta as consultas para você.
+2. Publique um único [registro SPF](/glossary/spf) unificado que cubra os servidores de envio autorizados, com menos de 10 consultas no total. O [SPF checker](/spf-checker) conta as consultas para você.
 3. Ative a assinatura DKIM personalizada com o seu próprio domínio em todas as plataformas de envio e publique no DNS os registros de seletor correspondentes.
 4. Garanta que os seus endereços IP de envio tenham DNS direto válido e um [registro PTR](/glossary/ptr-record) correspondente configurado no DNS reverso.
 5. Publique um [registro DMARC](/blog/what-is-a-dmarc-record) inicial em `_dmarc` com `p=none` e uma caixa `rua` ativa, para começar a receber relatórios agregados em XML.
