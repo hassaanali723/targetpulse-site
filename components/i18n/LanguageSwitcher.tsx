@@ -5,7 +5,8 @@ import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import { CLUSTERS, HREFLANG_CODE, LOCALES, type Cluster, type Locale } from '@/lib/i18n/clusters'
 
-// Language menu: a globe button that opens a list of every locale in LOCALES.
+// Language menu: a globe button that opens every locale in LOCALES as a
+// two-column grid (one long list got too tall as languages were added).
 // Each entry links to the same page in that language, or to that language's
 // home when the page has no counterpart. No auto-redirect by browser
 // language: crawlers must reach both versions; hreflang tags do the targeting.
@@ -204,7 +205,7 @@ export default function LanguageSwitcher({
         <div
           role="menu"
           aria-label={LABEL[current]}
-          className={`absolute right-0 mt-2 w-52 rounded-xl border p-1.5 shadow-lg z-50 ${
+          className={`absolute right-0 mt-2 w-[28rem] grid grid-cols-2 gap-1 rounded-xl border p-1.5 shadow-lg z-50 ${
             tone === 'dark' ? 'border-slate-700 bg-slate-800 shadow-black/30' : 'border-slate-200 bg-white shadow-slate-900/10'
           }`}
         >
@@ -226,9 +227,9 @@ export default function LanguageSwitcher({
                     : active ? 'text-indigo-700 bg-indigo-50' : 'text-slate-700 hover:bg-slate-50 hover:text-indigo-700'
                 }`}
               >
-                <span className="flex items-center gap-2.5">
+                <span className="flex items-center gap-2.5 min-w-0">
                   <Flag locale={loc} className="w-5 h-3.5" />
-                  {LOCALE_META[loc].native}
+                  <span className="truncate">{LOCALE_META[loc].native}</span>
                 </span>
                 {active ? <CheckIcon /> : <span className={`text-xs font-bold ${tone === 'dark' ? 'text-slate-500' : 'text-slate-400'}`}>{LOCALE_META[loc].short}</span>}
               </Link>
