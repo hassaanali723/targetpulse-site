@@ -69,8 +69,11 @@ const nextConfig = {
       { source: '/m%C3%AAs', destination: '/pt-br/precos', permanent: true },
       { source: '/v1/verify', destination: '/public/docs/verify-single', permanent: true },
       // Footer React keys (href + label) that Googlebot read from page script data
-      // and crawled as URLs. The key bug is fixed in components/l10n/Footer.tsx;
-      // these forward the URLs Google already recorded to the real pages.
+      // and crawled as URLs (Search Console 404 reports of 2026-10-22 and 10-23).
+      // The key bug is fixed in components/l10n/Footer.tsx; these forward the URLs
+      // Google already recorded. Listed one by one on purpose: Next.js matches
+      // redirect sources without regard to case, so a pattern cannot tell
+      // /fr/tarifsTarifs apart from /fr/tarifs.
       { source: '/deE-Mail-Verifizierungsdienst', destination: '/de', permanent: true },
       { source: '/de/wegwerf-e-mail-anbieterWegwerf-E-Mail-Anbieter', destination: '/de/wegwerf-e-mail-anbieter', permanent: true },
       { source: '/fr/glossaireGlossaire', destination: '/fr/glossaire', permanent: true },
@@ -93,6 +96,25 @@ const nextConfig = {
       { source: '/pt-br/reembolsosReembolsos', destination: '/pt-br/reembolsos', permanent: true },
       { source: '/fr/confidentialiteConfidentialit%C3%A9', destination: '/fr/confidentialite', permanent: true },
       { source: '/fr/remboursementsRemboursements', destination: '/fr/remboursements', permanent: true },
+      { source: '/de/agbAGB', destination: '/de/agb', permanent: true },
+      { source: '/de/api-dokumentationAPI-Dokumentation', destination: '/de/api-dokumentation', permanent: true },
+      { source: '/de/catch-all-verifizierungCatch-all-Verifizierung', destination: '/de/catch-all-verifizierung', permanent: true },
+      { source: '/de/datenschutzDatenschutz', destination: '/de/datenschutz', permanent: true },
+      { source: '/de/integrationenIntegrationen', destination: '/de/integrationen', permanent: true },
+      { source: '/de/kontaktKontakt', destination: '/de/kontakt', permanent: true },
+      { source: '/de/mcpMCP-Server', destination: '/de/mcp', permanent: true },
+      { source: '/de/rueckerstattungR%C3%BCckerstattung', destination: '/de/rueckerstattung', permanent: true },
+      { source: '/es/contactoContacto', destination: '/es/contacto', permanent: true },
+      { source: '/es/integracionesIntegraciones', destination: '/es/integraciones', permanent: true },
+      { source: '/es/privacidadPrivacidad', destination: '/es/privacidad', permanent: true },
+      { source: '/es/reembolsosReembolsos', destination: '/es/reembolsos', permanent: true },
+      { source: '/it/contattiContatti', destination: '/it/contatti', permanent: true },
+      { source: '/it/integrazioniIntegrazioni', destination: '/it/integrazioni', permanent: true },
+      { source: '/it/privacyPrivacy', destination: '/it/privacy', permanent: true },
+      { source: '/it/rimborsiRimborsi', destination: '/it/rimborsi', permanent: true },
+      // "/mes" (es) and "/mese" (it): the same "per month" price label as /mo.
+      { source: '/mes', destination: '/es/precios', permanent: true },
+      { source: '/mese', destination: '/it/prezzi', permanent: true },
     ]
   },
 }
