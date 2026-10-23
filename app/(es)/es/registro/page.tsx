@@ -26,7 +26,7 @@ const content: SignupContent = {
   crumb: 'Registro',
   h1Lead: 'Regístrate gratis',
   h1Accent: 'y empieza con 1.000 créditos',
-  intro: 'Crea tu cuenta de Giggal.ai en menos de 30 segundos. Las primeras 1.000 verificaciones corren por nuestra cuenta, incluidos los dominios catch-all y accept-all que otras herramientas marcan como "desconocido". El panel de usuario está por ahora en inglés.',
+  intro: 'Crea tu cuenta de Giggal.ai en menos de 30 segundos. Las primeras 1.000 verificaciones corren por nuestra cuenta, incluidos los dominios catch-all y accept-all que otras herramientas marcan como "arriesgado". El panel de usuario está por ahora en inglés.',
   ctaPrimary: 'Crear mi cuenta gratis',
   pricingLabel: 'Ver precios',
   pricingHref: '/es/precios',

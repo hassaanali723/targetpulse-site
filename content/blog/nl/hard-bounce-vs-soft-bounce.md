@@ -187,9 +187,9 @@ Een [email address checker](/email-checker) voert drie controles uit, in deze vo
 - **Domein.** Vangt typefouten zoals `gmial.com` op, en domeinen die verlopen zijn.
 - **Mailbox.** Maakt verbinding met de ontvangende server en vraagt of die mail accepteert voor precies dat adres. Is het antwoord `5.1.1`, dan is dat dezelfde bounce die je van de campagne had gekregen. Maar het kost je geen reputatie, omdat er geen e-mail is verstuurd.
 
-Standaardverificatie werkt op één plek niet meer. Op een catch-all-domein zegt de server ja tegen elk adres. De controle komt dus terug als "onbekend" of "riskant", en jij moet gokken. Giggal.ai is gebouwd om dat deel van de lijst om te zetten in een echt geldig of ongeldig antwoord. De pagina over [catch-all-verificatie](/catch-all-verification) legt uit hoe.
+Standaardverificatie werkt op één plek niet meer. Op een catch-all-domein zegt de server ja tegen elk adres. De controle komt dus terug als "riskant" of "accept-all", en jij moet gokken. Giggal.ai is gebouwd om dat deel van de lijst om te zetten in een echt geldig of ongeldig antwoord. De pagina over [catch-all-verificatie](/catch-all-verification) legt uit hoe.
 
-Gateways veroorzaken hetzelfde probleem. Een gateway accepteert de vraag van de verificatietool voor elk adres, dus ook daar komt een standaardcontrole terug als "onbekend". Giggal.ai controleert deze adressen op een andere manier. Het artikel over [e-mails verifiëren achter secure email gateways](/blog/how-to-verify-emails-behind-secure-email-gateways) legt uit wat de gateway doet en hoe de controle erlangs komt.
+Gateways veroorzaken hetzelfde probleem. Een gateway accepteert de vraag van de verificatietool voor elk adres, dus daar komt een standaardcontrole terug als "onbekend". Giggal.ai controleert deze adressen op een andere manier. Het artikel over [e-mails verifiëren achter secure email gateways](/blog/how-to-verify-emails-behind-secure-email-gateways) legt uit wat de gateway doet en hoe de controle erlangs komt.
 
 Voeg bij aanmeldformulieren een aanroep voor [realtime verificatie](/public/docs) toe op het moment dat het formulier wordt verstuurd. Een verkeerd getypt adres wordt dan opgemerkt terwijl de persoon nog op de pagina is. Dit is de enige stap die bounces vermindert op lijsten die je nog niet hebt opgebouwd.
 

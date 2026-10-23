@@ -26,7 +26,7 @@ const content: SignupContent = {
   crumb: 'Rejestracja',
   h1Lead: 'Załóż konto',
   h1Accent: 'i zacznij z 1000 kredytów',
-  intro: 'Załóż konto Giggal.ai w mniej niż 30 sekund. Pierwsze 1000 weryfikacji jest na nasz koszt, także na domenach catch-all i accept-all, które inne narzędzia oznaczają jako „nieznany”. Panel jest na razie po angielsku.',
+  intro: 'Załóż konto Giggal.ai w mniej niż 30 sekund. Pierwsze 1000 weryfikacji jest na nasz koszt, także na domenach catch-all i accept-all, które inne narzędzia oznaczają jako „ryzykowny”. Panel jest na razie po angielsku.',
   ctaPrimary: 'Załóż darmowe konto',
   pricingLabel: 'Zobacz cennik',
   pricingHref: '/pl/cennik',

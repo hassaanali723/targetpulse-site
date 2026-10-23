@@ -26,7 +26,7 @@ const content: SignupContent = {
   crumb: 'Registreren',
   h1Lead: 'Maak je account aan',
   h1Accent: 'en start met 1.000 credits',
-  intro: 'Maak je Giggal.ai-account aan in minder dan 30 seconden. De eerste 1.000 controles zijn gratis. Dat geldt ook voor catch-all- en accept-all-domeinen die andere tools als "onbekend" markeren. Het dashboard is voorlopig in het Engels.',
+  intro: 'Maak je Giggal.ai-account aan in minder dan 30 seconden. De eerste 1.000 controles zijn gratis. Dat geldt ook voor catch-all- en accept-all-domeinen die andere tools als "riskant" markeren. Het dashboard is voorlopig in het Engels.',
   ctaPrimary: 'Gratis account aanmaken',
   pricingLabel: 'Bekijk de prijzen',
   pricingHref: '/nl/prijzen',

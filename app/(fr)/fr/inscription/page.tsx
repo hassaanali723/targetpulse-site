@@ -26,7 +26,7 @@ const content: SignupContent = {
   crumb: 'Inscription',
   h1Lead: 'Créez votre compte',
   h1Accent: 'et commencez avec 1 000 crédits',
-  intro: 'Créez votre compte Giggal.ai en moins de 30 secondes. Les 1 000 premières vérifications sont pour nous, y compris sur les domaines catch-all et accept-all que les autres outils marquent « inconnu ». Le tableau de bord est pour l’instant en anglais.',
+  intro: 'Créez votre compte Giggal.ai en moins de 30 secondes. Les 1 000 premières vérifications sont pour nous, y compris sur les domaines catch-all et accept-all que les autres outils marquent « risqué ». Le tableau de bord est pour l’instant en anglais.',
   ctaPrimary: 'Créer mon compte gratuitement',
   pricingLabel: 'Voir les tarifs',
   pricingHref: '/fr/tarifs',

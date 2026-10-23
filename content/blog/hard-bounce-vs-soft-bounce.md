@@ -186,9 +186,9 @@ An [email address checker](/email-checker) runs three checks in order:
 - **Domain.** Catches typos like `gmial.com` and domains that have expired.
 - **Mailbox.** Opens a connection to the receiving server and asks if it will accept mail for that exact address. If the answer is `5.1.1`, that is the same bounce you would have got from the campaign. But it costs you no reputation, because no email was sent.
 
-Standard verification stops working in one place. On a catch-all domain, the server says yes to every address. So the check comes back as "unknown" or "risky", and you have to guess. Giggal.ai was built to turn that part of the list into a real valid or invalid answer. The [catch-all verification](/catch-all-verification) page explains how.
+Standard verification stops working in one place. On a catch-all domain, the server says yes to every address. So the check comes back as "risky" or "accept-all", and you have to guess. Giggal.ai was built to turn that part of the list into a real valid or invalid answer. The [catch-all verification](/catch-all-verification) page explains how.
 
-Gateways cause the same problem. A gateway accepts the verifier's question for every address, so a standard check comes back "unknown" there too. Giggal.ai checks these addresses a different way. The post on [verifying emails behind secure email gateways](/blog/how-to-verify-emails-behind-secure-email-gateways) explains what the gateway does and how the check gets past it.
+Gateways cause the same problem. A gateway accepts the verifier's question for every address, so a standard check comes back "unknown" there. Giggal.ai checks these addresses a different way. The post on [verifying emails behind secure email gateways](/blog/how-to-verify-emails-behind-secure-email-gateways) explains what the gateway does and how the check gets past it.
 
 For signup forms, add a [real-time verification](/public/docs) call when the form is submitted. A mistyped address gets caught while the person is still on the page. This is the only step that reduces bounces on lists you have not built yet.
 

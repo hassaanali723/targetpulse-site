@@ -64,7 +64,7 @@ export default function SignUpPage() {
 
         <p className="text-base md:text-lg text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed">
           Create your free Giggal.ai account in under 30 seconds. Verify your first 1,000 emails on us,
-          including catch-all and accept-all domains other tools mark as "unknown."
+          including catch-all and accept-all domains other tools mark as "risky."
         </p>
 
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 pt-2">

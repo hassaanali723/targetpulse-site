@@ -206,7 +206,7 @@ Verificación masiva rápida y barata con un 99 % de precisión declarada. Detec
 
 ### NeverBounce
 
-Un verificador estándar fiable con API en tiempo real y una garantía que reembolsa el crédito si una dirección verificada rebota. Resuelve solo una pequeña parte de las direcciones catch-all (un 8 % en la prueba de LeadMagic) y marca el resto, y no verifica detrás de un SEG. No tiene MCP. El precio por correo empieza en unos $0,008 y baja a unos $0,003 en grandes volúmenes.
+Un verificador estándar fiable con API en tiempo real y una garantía que reembolsa el crédito si una dirección verificada rebota. Resuelve solo una pequeña parte de las direcciones catch-all (un 8 % en la prueba de LeadMagic, una empresa que vende un verificador de la competencia) y marca el resto, y no verifica detrás de un SEG. No tiene MCP. El precio por correo empieza en unos $0,008 y baja a unos $0,003 en grandes volúmenes.
 
 **[Integraciones](https://www.neverbounce.com/integrations):** Mailchimp, HubSpot, Marketo, Salesforce Marketing Cloud, Drip, Campaign Monitor, iContact y MailerLite, además de Zapier.
 

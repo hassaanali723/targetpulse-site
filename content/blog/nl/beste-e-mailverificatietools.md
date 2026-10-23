@@ -208,7 +208,7 @@ Snelle, goedkope bulkverificatie met 99% geclaimde nauwkeurigheid. Reoon herkent
 
 ### NeverBounce
 
-Een betrouwbare standaardverificatietool met een realtime API en een bouncegarantie die de credit terugbetaalt als een geverifieerd adres bouncet. Het lost maar een klein deel van de catch-all-adressen op (8% in de test van LeadMagic) en markeert de rest. Het verifieert niet achter een SEG. Er is geen MCP. De prijs per e-mail begint rond US$ 0,008 en daalt tot ongeveer US$ 0,003 bij grote volumes.
+Een betrouwbare standaardverificatietool met een realtime API en een bouncegarantie die de credit terugbetaalt als een geverifieerd adres bouncet. Het lost maar een klein deel van de catch-all-adressen op (8% in de test van LeadMagic, een bedrijf dat zelf een concurrerende verificatietool verkoopt) en markeert de rest. Het verifieert niet achter een SEG. Er is geen MCP. De prijs per e-mail begint rond US$ 0,008 en daalt tot ongeveer US$ 0,003 bij grote volumes.
 
 **[Koppelingen](https://www.neverbounce.com/integrations):** Mailchimp, HubSpot, Marketo, Salesforce Marketing Cloud, Drip, Campaign Monitor, iContact en MailerLite, plus Zapier.
 

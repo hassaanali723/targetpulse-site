@@ -187,9 +187,9 @@ Un [verificatore di indirizzi email](/email-checker) esegue tre controlli in ord
 - **Dominio.** Intercetta errori di battitura come `gmial.com` e domini scaduti.
 - **Casella.** Apre una connessione con il server di destinazione e chiede se accetta posta per quell'indirizzo esatto. Se la risposta è `5.1.1`, è lo stesso bounce che avresti ricevuto dalla campagna. Ma non ti costa reputazione, perché nessuna email è stata inviata.
 
-La verifica standard si ferma in un punto. Su un dominio catch-all, il server dice sì a ogni indirizzo. Quindi il controllo torna come "sconosciuto" o "rischioso", e devi tirare a indovinare. Giggal.ai è nato per trasformare quella parte della lista in una risposta reale, valido o non valido. La pagina sulla [verifica catch-all](/catch-all-verification) spiega come.
+La verifica standard si ferma in un punto. Su un dominio catch-all, il server dice sì a ogni indirizzo. Quindi il controllo torna come "rischioso" o "accept-all", e devi tirare a indovinare. Giggal.ai è nato per trasformare quella parte della lista in una risposta reale, valido o non valido. La pagina sulla [verifica catch-all](/catch-all-verification) spiega come.
 
-I gateway causano lo stesso problema. Un gateway accetta la domanda del verificatore per qualsiasi indirizzo, quindi anche lì un controllo standard torna "sconosciuto". Giggal.ai controlla questi indirizzi in un altro modo. L'articolo su come [verificare le email dietro i secure email gateway](/blog/how-to-verify-emails-behind-secure-email-gateways) spiega cosa fa il gateway e come il controllo lo supera.
+I gateway causano lo stesso problema. Un gateway accetta la domanda del verificatore per qualsiasi indirizzo, quindi lì un controllo standard torna "sconosciuto". Giggal.ai controlla questi indirizzi in un altro modo. L'articolo su come [verificare le email dietro i secure email gateway](/blog/how-to-verify-emails-behind-secure-email-gateways) spiega cosa fa il gateway e come il controllo lo supera.
 
 Per i moduli di iscrizione, aggiungi una chiamata di [verifica in tempo reale](/public/docs) al momento dell'invio del modulo. Un indirizzo scritto male viene intercettato mentre la persona è ancora sulla pagina. È l'unico passaggio che riduce i bounce sulle liste che non hai ancora costruito.
 

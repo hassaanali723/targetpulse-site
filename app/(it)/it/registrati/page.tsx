@@ -61,7 +61,7 @@ export default function RegistratiPage() {
         <p className="text-base md:text-lg text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed">
           Crea il tuo account Giggal.ai in meno di 30 secondi. Le prime 1.000 verifiche le offriamo
           noi, compresi i domini catch-all e accept-all che gli altri strumenti segnano come
-          &quot;sconosciuti&quot;. L&apos;area riservata è al momento in inglese.
+          &quot;rischiosi&quot;. L&apos;area riservata è al momento in inglese.
         </p>
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 pt-2">
           <a

@@ -187,9 +187,9 @@ Un [verificador de direcciones de correo](/email-checker) hace tres comprobacion
 - **Dominio.** Detecta erratas como `gmial.com` y dominios caducados.
 - **Buzón.** Abre una conexión con el servidor de destino y pregunta si acepta correo para esa dirección exacta. Si la respuesta es `5.1.1`, es el mismo rebote que habrías recibido en la campaña. Pero no te cuesta reputación, porque no se envió ningún correo.
 
-La verificación estándar deja de funcionar en un punto. En un dominio catch-all, el servidor dice sí a todas las direcciones. Así que la comprobación vuelve como "desconocido" o "arriesgado", y tienes que adivinar. Giggal.ai se construyó para convertir esa parte de la lista en una respuesta real: válido o no válido. La página de [verificación catch-all](/catch-all-verification) explica cómo.
+La verificación estándar deja de funcionar en un punto. En un dominio catch-all, el servidor dice sí a todas las direcciones. Así que la comprobación vuelve como "arriesgado" o "accept-all", y tienes que adivinar. Giggal.ai se construyó para convertir esa parte de la lista en una respuesta real: válido o no válido. La página de [verificación catch-all](/catch-all-verification) explica cómo.
 
-Los gateways provocan el mismo problema. Un gateway acepta la pregunta del verificador para cualquier dirección, así que una comprobación estándar también vuelve ahí como "desconocido". Giggal.ai comprueba estas direcciones de otra forma. El artículo sobre [verificar correos detrás de secure email gateways](/blog/how-to-verify-emails-behind-secure-email-gateways) explica qué hace el gateway y cómo la comprobación lo supera.
+Los gateways provocan el mismo problema. Un gateway acepta la pregunta del verificador para cualquier dirección, así que una comprobación estándar vuelve ahí como "desconocido". Giggal.ai comprueba estas direcciones de otra forma. El artículo sobre [verificar correos detrás de secure email gateways](/blog/how-to-verify-emails-behind-secure-email-gateways) explica qué hace el gateway y cómo la comprobación lo supera.
 
 Para los formularios de registro, añade una llamada de [verificación en tiempo real](/public/docs) al enviar el formulario. Una dirección mal escrita se detecta mientras la persona sigue en la página. Es el único paso que reduce los rebotes en listas que todavía no has construido.
 

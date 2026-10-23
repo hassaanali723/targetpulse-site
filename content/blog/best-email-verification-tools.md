@@ -204,7 +204,7 @@ Fast, low-cost bulk verification with 99% claimed accuracy. It detects catch-all
 
 ### NeverBounce
 
-A dependable standard verifier with a real-time API and a bounce-back guarantee that refunds the credit if a verified address bounces. It resolves only a small share of catch-all addresses (8% in LeadMagic's test) and flags the rest, and it does not verify behind a SEG. There is no MCP. Per-email pricing starts around $0.008 and drops to roughly $0.003 at high volume.
+A dependable standard verifier with a real-time API and a bounce-back guarantee that refunds the credit if a verified address bounces. It resolves only a small share of catch-all addresses (8% in LeadMagic's test, run by a vendor that sells a competing verifier) and flags the rest, and it does not verify behind a SEG. There is no MCP. Per-email pricing starts around $0.008 and drops to roughly $0.003 at high volume.
 
 **[Integrations](https://www.neverbounce.com/integrations):** Mailchimp, HubSpot, Marketo, Salesforce Marketing Cloud, Drip, Campaign Monitor, iContact, and MailerLite, plus Zapier.
 

@@ -206,7 +206,7 @@ Verifica in blocco veloce ed economica con il 99% di precisione dichiarata. Rile
 
 ### NeverBounce
 
-Un verificatore standard affidabile con API in tempo reale e una garanzia che rimborsa il credito se un indirizzo verificato rimbalza. Risolve solo una piccola quota di indirizzi catch-all (l'8% nel test di LeadMagic) e segnala il resto, e non verifica dietro un SEG. Non c'è MCP. Il prezzo per email parte da circa $0,008 e scende a circa $0,003 ad alti volumi.
+Un verificatore standard affidabile con API in tempo reale e una garanzia che rimborsa il credito se un indirizzo verificato rimbalza. Risolve solo una piccola quota di indirizzi catch-all (l'8% nel test di LeadMagic, un'azienda che vende un verificatore concorrente) e segnala il resto, e non verifica dietro un SEG. Non c'è MCP. Il prezzo per email parte da circa $0,008 e scende a circa $0,003 ad alti volumi.
 
 **[Integrazioni](https://www.neverbounce.com/integrations):** Mailchimp, HubSpot, Marketo, Salesforce Marketing Cloud, Drip, Campaign Monitor, iContact e MailerLite, più Zapier.
 

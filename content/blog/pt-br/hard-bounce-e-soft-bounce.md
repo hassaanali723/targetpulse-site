@@ -187,9 +187,9 @@ Um [verificador de endereços de e-mail](/email-checker) faz três checagens em 
 - **Domínio.** Pega erros de digitação como `gmial.com` e domínios expirados.
 - **Caixa.** Abre uma conexão com o servidor de destino e pergunta se ele aceita e-mail para aquele endereço exato. Se a resposta for `5.1.1`, é o mesmo bounce que você teria recebido na campanha. Mas não custa reputação, porque nenhum e-mail foi enviado.
 
-A verificação padrão para de funcionar em um ponto. Em um domínio catch-all, o servidor diz sim para qualquer endereço. Então a checagem volta como "desconhecido" ou "arriscado", e você tem que adivinhar. O Giggal.ai foi construído para transformar essa parte da lista em uma resposta real: válido ou inválido. A página de [verificação catch-all](/catch-all-verification) explica como.
+A verificação padrão para de funcionar em um ponto. Em um domínio catch-all, o servidor diz sim para qualquer endereço. Então a checagem volta como "arriscado" ou "accept-all", e você tem que adivinhar. O Giggal.ai foi construído para transformar essa parte da lista em uma resposta real: válido ou inválido. A página de [verificação catch-all](/catch-all-verification) explica como.
 
-Gateways causam o mesmo problema. Um gateway aceita a pergunta do verificador para qualquer endereço, então uma checagem padrão volta como "desconhecido" ali também. O Giggal.ai confere esses endereços de outro jeito. O artigo sobre [verificar e-mails atrás de secure email gateways](/blog/how-to-verify-emails-behind-secure-email-gateways) explica o que o gateway faz e como a checagem passa por ele.
+Gateways causam o mesmo problema. Um gateway aceita a pergunta do verificador para qualquer endereço, então uma checagem padrão volta como "desconhecido" ali. O Giggal.ai confere esses endereços de outro jeito. O artigo sobre [verificar e-mails atrás de secure email gateways](/blog/how-to-verify-emails-behind-secure-email-gateways) explica o que o gateway faz e como a checagem passa por ele.
 
 Para formulários de cadastro, adicione uma chamada de [verificação em tempo real](/public/docs) no envio do formulário. Um endereço digitado errado é pego enquanto a pessoa ainda está na página. É o único passo que reduz bounces em listas que você ainda nem montou.
 

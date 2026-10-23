@@ -206,7 +206,7 @@ Une vérification en masse rapide et bon marché avec 99 % de précision annonc�
 
 ### NeverBounce
 
-Un vérificateur standard fiable, avec une API en temps réel et une garantie qui rembourse le crédit si une adresse vérifiée rebondit. Il ne résout qu'une petite part des adresses catch-all (8 % lors du test de LeadMagic) et signale le reste, et il ne vérifie pas derrière une SEG. Il n'y a pas de MCP. Le prix par email commence autour de $0,008 et descend à environ $0,003 à fort volume.
+Un vérificateur standard fiable, avec une API en temps réel et une garantie qui rembourse le crédit si une adresse vérifiée rebondit. Il ne résout qu'une petite part des adresses catch-all (8 % lors du test de LeadMagic, qui vend lui-même un vérificateur concurrent) et signale le reste, et il ne vérifie pas derrière une SEG. Il n'y a pas de MCP. Le prix par email commence autour de $0,008 et descend à environ $0,003 à fort volume.
 
 **[Intégrations](https://www.neverbounce.com/integrations) :** Mailchimp, HubSpot, Marketo, Salesforce Marketing Cloud, Drip, Campaign Monitor, iContact et MailerLite, plus Zapier.
 

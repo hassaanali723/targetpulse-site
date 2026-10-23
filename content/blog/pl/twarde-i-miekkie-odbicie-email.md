@@ -187,9 +187,9 @@ Prawie każdego `5.1.1` w raporcie kampanii dało się uniknąć. Skrzynki już 
 - **Domena.** Wychwytuje literówki takie jak `gmial.com` i domeny, które wygasły.
 - **Skrzynka.** Łączy się z serwerem odbiorcy i pyta, czy przyjmie pocztę dla tego konkretnego adresu. Jeśli odpowiedź to `5.1.1`, to jest to samo odbicie, które przyszłoby z kampanii. Ale nie kosztuje cię ono reputacji, bo żadna wiadomość nie została wysłana.
 
-Standardowa weryfikacja przestaje działać w jednym miejscu. W domenie catch-all serwer odpowiada „tak” na każdy adres. Sprawdzenie zwraca więc wynik „nieznany” albo „ryzykowny” i musisz zgadywać. Giggal.ai zbudowano po to, by tę część listy zamienić w prawdziwą odpowiedź: prawidłowy albo nieprawidłowy. Strona o [weryfikacji catch-all](/catch-all-verification) wyjaśnia, jak to działa.
+Standardowa weryfikacja przestaje działać w jednym miejscu. W domenie catch-all serwer odpowiada „tak” na każdy adres. Sprawdzenie zwraca więc wynik „ryzykowny” albo „accept-all” i musisz zgadywać. Giggal.ai zbudowano po to, by tę część listy zamienić w prawdziwą odpowiedź: prawidłowy albo nieprawidłowy. Strona o [weryfikacji catch-all](/catch-all-verification) wyjaśnia, jak to działa.
 
-Bramki powodują ten sam problem. Bramka przyjmuje pytanie weryfikatora dla każdego adresu, więc standardowe sprawdzenie także tam zwraca wynik „nieznany”. Giggal.ai sprawdza te adresy inaczej. Artykuł o [weryfikacji adresów za secure email gateways](/blog/how-to-verify-emails-behind-secure-email-gateways) wyjaśnia, co robi bramka i jak sprawdzenie przez nią przechodzi.
+Bramki powodują ten sam problem. Bramka przyjmuje pytanie weryfikatora dla każdego adresu, więc standardowe sprawdzenie zwraca tam wynik „nieznany”. Giggal.ai sprawdza te adresy inaczej. Artykuł o [weryfikacji adresów za secure email gateways](/blog/how-to-verify-emails-behind-secure-email-gateways) wyjaśnia, co robi bramka i jak sprawdzenie przez nią przechodzi.
 
 W formularzach rejestracji dodaj wywołanie [weryfikacji w czasie rzeczywistym](/public/docs) w chwili wysłania formularza. Literówka w adresie zostanie wychwycona, gdy osoba jest jeszcze na stronie. To jedyny krok, który zmniejsza odbicia na listach, które dopiero powstają.
 

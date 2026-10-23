@@ -114,7 +114,7 @@ If you buy lists, verify them the day they arrive rather than the day you send. 
 
 This used to be filed under things that do not reduce bounces, and that advice has aged badly. SPF, DKIM and DMARC control whether receiving servers trust that you are who you claim to be, and two of the largest providers now refuse mail outright when they are missing.
 
-Microsoft began rejecting unauthenticated bulk mail to Outlook.com, Hotmail and Live addresses on 5 May 2025. Senders above 5,000 messages a day without all three records get `550 5.7.15 Access denied, sending domain does not meet the required authentication level`. That is a 5xx code, so your sending tool records it as a hard bounce, against a mailbox that exists and would have accepted the message. Gmail tightened in the same direction in November 2025, moving from filing suspect mail in spam to rejecting it at the SMTP level.
+Microsoft began rejecting unauthenticated bulk mail to Outlook.com, Hotmail and Live addresses on 5 May 2025. Senders above 5,000 messages a day without all three records get `550 5.7.515 Access denied, sending domain does not meet the required authentication level`. That is a 5xx code, so your sending tool records it as a hard bounce, against a mailbox that exists and would have accepted the message. Gmail tightened in the same direction in November 2025, moving from filing suspect mail in spam to rejecting it at the SMTP level.
 
 The practical effect is that an authentication gap now shows up in your bounce report rather than quietly in your open rate. If a large share of your bounces carry 5.7.x codes and your recipients are concentrated at Outlook or Gmail, the list is not your problem and verifying it again will not help.
 
