@@ -9,6 +9,7 @@ import * as ptBr from '@/lib/i18n/pt-br'
 import * as fr from '@/lib/i18n/fr'
 import * as nl from '@/lib/i18n/nl'
 import * as pl from '@/lib/i18n/pl'
+import * as idL from '@/lib/i18n/id'
 
 export type L10nLocale = Exclude<Locale, 'en'>
 
@@ -73,6 +74,11 @@ export const STRINGS: Record<L10nLocale, LocaleStrings> = {
     nav: pl.nav, footer: pl.footer, announcement: pl.announcement, cta: pl.cta, consoleStrings: pl.consoleStrings,
     pricing: pl.pricing, notFound: pl.notFound, legal: pl.legal, home: '/pl', nativeName: 'Polski', ogLocale: 'pl_PL',
     legalHeading: pl.footer.legalHeading, formatDate: pl.formatDatePl, number: pl.plNumber, usd: pl.plUsd,
+  },
+  id: {
+    nav: idL.nav, footer: idL.footer, announcement: idL.announcement, cta: idL.cta, consoleStrings: idL.consoleStrings,
+    pricing: idL.pricing, notFound: idL.notFound, legal: idL.legal, home: '/id', nativeName: 'Bahasa Indonesia', ogLocale: 'id_ID',
+    legalHeading: idL.footer.legalHeading, formatDate: idL.formatDateId, number: idL.idNumber, usd: idL.idUsd,
   },
 }
 

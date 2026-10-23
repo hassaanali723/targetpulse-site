@@ -232,7 +232,7 @@ const freeToolL10nUrls = new Set<string>([
 // `floorToLaunch`: for locales that launched after the shared ship dates below
 // (nl, pl), no page can be older than the launch, so every lastmod is at least
 // the launch date. The first five locales keep their historical dates.
-function localeEntries(locale: 'it' | 'de' | 'es' | 'pt-br' | 'fr' | 'nl' | 'pl', launch: string, floorToLaunch = false): SitemapEntry[] {
+function localeEntries(locale: 'it' | 'de' | 'es' | 'pt-br' | 'fr' | 'nl' | 'pl' | 'id', launch: string, floorToLaunch = false): SitemapEntry[] {
   const posts = getAllPosts(locale)
   const hub = `/${locale}/blog`
   const postDate = new Map(posts.map((p) => [`${hub}/${p.slug}`, p.updated || p.date]))
@@ -305,6 +305,12 @@ export function nlEntries(): SitemapEntry[] {
 }
 export function plEntries(): SitemapEntry[] {
   return localeEntries('pl', PL_LAUNCH, true)
+}
+
+// Indonesian (batch 2, one language per batch). Set to the real ship day.
+const ID_LAUNCH = '2026-10-23'
+export function idEntries(): SitemapEntry[] {
+  return localeEntries('id', ID_LAUNCH, true)
 }
 
 // ── XML rendering ───────────────────────────────────────────────────────

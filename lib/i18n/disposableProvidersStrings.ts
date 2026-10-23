@@ -997,4 +997,127 @@ const pl: ProvidersStrings = {
   enSuffix: ' (po angielsku)',
 }
 
-export const PROVIDERS_STRINGS: Record<Locale, ProvidersStrings> = { en, it, de, es, 'pt-br': ptBr, fr, nl, pl }
+// Indonesian. Keyword plan (SEO-Plan/i18n-batch2-id-keyword-plan.md): the page
+// is a list of temporary email services for the "email sementara" intent
+// (16.000/mo), like the Polish page. Must appear: email sementara, email
+// temporary, email sementara gratis, email palsu, buat email sementara.
+// "email sekali pakai" is the standard term for disposable email.
+const id: ProvidersStrings = {
+  metaTitle: 'Email Sementara Gratis: daftar layanan email temporary',
+  ogTitle: 'Email sementara: daftar layanan email temporary dan domainnya',
+  description: 'Daftar layanan email sementara gratis dan domain yang mereka pakai, dari email temporary sampai email palsu. Plus cek gratis terhadap lebih dari 100.000 domain.',
+  ogLocale: 'id_ID',
+  ogAlt: 'Giggal.ai: email sementara, daftar layanan dan domain',
+  crumb: 'Email sementara',
+  h1: 'Email sementara:',
+  h1Accent: 'daftar layanan dan domainnya',
+  heroIntro: 'Daftar layanan untuk buat email sementara, yaitu kotak masuk untuk waktu singkat atau untuk sekali pakai. Orang juga menyebutnya email temporary atau email palsu. Layanan dikelompokkan menurut cara kerjanya. Daftar lengkap domain email sekali pakai berisi lebih dari 100.000 domain dan berubah setiap hari.',
+  ctaCheck: 'Cek sebuah alamat',
+  ctaBlock: 'Blokir saat pendaftaran',
+  kindsTitle: 'Empat jenis layanan email sementara',
+  kindsIntro: 'Tidak semua email sementara bekerja dengan cara yang sama. Jenis layanannya menunjukkan apa yang terjadi pada pesan yang Anda kirim ke alamat seperti itu.',
+  categories: {
+    timed: { label: 'Kotak masuk berbatas waktu', badge: 'Berbatas waktu', desc: 'Kotak masuk atau pesannya dihapus setelah waktu tertentu.' },
+    public: { label: 'Kotak masuk publik', badge: 'Publik', desc: 'Siapa pun yang tahu alamatnya bisa membaca kotak masuk itu. Tanpa kata sandi.' },
+    alias: { label: 'Alias atau penerusan', badge: 'Alias / penerusan', desc: 'Membuat alias yang meneruskan email ke kotak masuk asli. Alias itu bisa dimatikan nanti.' },
+    api: { label: 'API atau developer', badge: 'API / developer', desc: 'Dibuat untuk skrip dan pengujian, dengan API untuk membaca pesan.' },
+  },
+  listTitle: 'Daftar layanan email sementara',
+  listIntro: 'Layanan yang paling dikenal, beserta domain yang dipakai setiap layanan untuk mengirim email. Banyak layanan bergantian memakai lebih banyak domain daripada yang tercantum di sini.',
+  blurbs: {
+    'Temp-Mail': 'Memberi kotak masuk sementara secara acak, tanpa daftar.',
+    'Mailinator': 'Kotak masuk publik tanpa kata sandi. Siapa pun bisa membaca alamat mana pun.',
+    '10MinuteMail': 'Email sementara 10 menit: alamatnya kedaluwarsa sepuluh menit setelah dibuat.',
+    'Guerrilla Mail': 'Menghapus setiap pesan satu jam setelah pesan itu masuk. Memakai beberapa domain.',
+    'YOPmail': 'Kotak masuk publik tanpa kata sandi. Pesan disimpan selama beberapa hari.',
+    'Maildrop': 'Kotak masuk publik untuk pendaftaran sekali pakai. Tidak perlu akun.',
+    'Mohmal': 'Layanan kotak masuk sementara, tanpa daftar.',
+    'EmailOnDeck': 'Layanan kotak masuk sementara, tanpa membuat akun.',
+    'Dropmail': 'Email sementara dengan API. Bergantian memakai banyak domain.',
+    'ThrowawayMail': 'Kotak masuk sementara untuk sekali pakai.',
+    'TrashMail': 'Alamat penerusan yang berhenti setelah waktu tertentu atau setelah sejumlah pesan.',
+    'Temp Mail Plus': 'Email sementara dengan beberapa domain yang bisa dipilih.',
+    'Tempmailo': 'Kotak masuk sementara untuk sekali pakai.',
+    'Tempail': 'Kotak masuk sekali pakai tanpa daftar.',
+    'Mint Email': 'Kotak masuk sekali pakai untuk pemakaian singkat.',
+    'Mailnesia': 'Kotak masuk sekali pakai yang publik, tanpa kata sandi.',
+    'MailCatch': 'Kotak masuk sementara yang publik, tanpa daftar.',
+    'Spamgourmet': 'Alamat penerusan yang berhenti setelah sejumlah pesan.',
+    'Dispostable': 'Kotak masuk sekali pakai yang publik untuk pendaftaran cepat.',
+    'Fake Mail Generator': 'Membuat alamat sekali pakai di beberapa domain.',
+    'GetAirMail': 'Kotak masuk sementara tanpa daftar.',
+    'Inbox Kitten': 'Kotak masuk sekali pakai yang publik, dengan kode sumber terbuka.',
+    'Burner Mail': 'Membuat alias terpisah untuk setiap situs web, yang meneruskan email ke kotak masuk asli Anda.',
+    'addy.io': 'Layanan alias dengan penerusan, dulu bernama AnonAddy.',
+    '33Mail': 'Alias dengan penerusan di subdomain pribadi.',
+    'Moakt': 'Kotak masuk sementara tanpa daftar.',
+    'Minute Inbox': 'Kotak masuk sementara untuk pemakaian singkat.',
+    'Harakirimail': 'Kotak masuk sekali pakai yang publik.',
+    'Mailsac': 'Kotak masuk sekali pakai dengan API, dipakai untuk pengujian.',
+    'Email Fake': 'Membuat alamat sementara di banyak domain.',
+    'Tmailor': 'Kotak masuk sementara tanpa daftar.',
+    'Mail.tm': 'Email sementara dengan API publik gratis.',
+    'DiscardMail': 'Kotak masuk sekali pakai yang publik, tanpa daftar.',
+    'Spambog': 'Kotak masuk sementara yang publik dengan beberapa domain.',
+    'Fakeinbox': 'Kotak masuk sementara untuk sekali pakai.',
+  },
+  moreTitle: 'Domain email sementara lainnya',
+  moreIntro: (n) =>
+    `${n} domain email sekali pakai dan email sementara lainnya, di luar domain pada kartu layanan di atas. Banyak di antaranya milik layanan yang sama, yang mendaftarkan domain tambahan agar lolos dari daftar blokir. Ini hanya sebagian kecil dari daftar lengkap domain email sekali pakai. Layanan verifikasi mengecek alamat terhadap lebih dari 100.000 domain dan menambahkan domain baru setiap enam jam.`,
+  staleNote: 'Daftar statis cepat usang. Lebih baik cek alamat terhadap daftar yang terbaru.',
+  gmailTitle: 'Apakah Gmail, Outlook, dan Hotmail termasuk domain email sementara?',
+  gmailParas: [
+    'Tidak. Gmail, Outlook, Hotmail, Yahoo, dan iCloud adalah penyedia kotak masuk tetap. Orang memakai akun ini selama bertahun-tahun. Karena itu domain ini tidak ada di daftar domain email sekali pakai mana pun, dan Anda sebaiknya tidak memblokirnya.',
+    'Alamat Gmail atau Outlook tetap bisa salah. Kotak masuknya mungkin tidak ada, atau ada salah ketik di alamatnya. Itu pemeriksaan yang berbeda: apakah kotak masuknya nyata, bukan apakah domainnya sekali pakai. [Email checker](/email-checker) menjawab pertanyaan itu.',
+  ],
+  blockTitle: 'Cara memblokir email sementara',
+  blockIntro: 'Anda tidak bisa menyimpan daftar semua domain email sekali pakai secara manual. Jumlahnya terlalu banyak dan berubah setiap hari. Cara yang bisa diandalkan adalah mengecek setiap alamat saat diisi, lalu bertindak sesuai hasilnya.',
+  blockItems: [
+    '**Saat pendaftaran:** cek alamatnya dengan [API validasi email](/email-validation-api) dan minta alamat lain jika alamat itu sekali pakai.',
+    '**Pada daftar yang sudah Anda punya:** jalankan daftar itu lewat [layanan pembersihan daftar email](/email-list-cleaning) untuk menghapus alamat sekali pakai, alamat tidak valid, dan alamat berbasis peran sekaligus.',
+    '**Satu alamat sekali jalan:** pakai alat [cek email sementara](/disposable-email-checker) kami yang gratis.',
+  ],
+  faqTitle: 'Pertanyaan tentang email sementara dan layanannya',
+  faqs: [
+    {
+      q: 'Apa itu layanan email sementara?',
+      a: 'Layanan email sementara membuat kotak masuk sementara dalam beberapa detik, tanpa kata sandi dan tanpa daftar. Orang memakai kotak masuk seperti itu untuk mengisi formulir atau mengunduh file tanpa memberikan alamat asli mereka. Temp-Mail, Mailinator, dan 10MinuteMail adalah contoh yang dikenal.',
+    },
+    {
+      q: 'Bagaimana cara buat email sementara?',
+      a: 'Pilih layanan dari daftar di halaman ini. Banyak di antaranya adalah layanan email sementara gratis. Temp-Mail langsung memberi Anda kotak masuk sementara, tanpa daftar. Di 10MinuteMail, alamatnya kedaluwarsa sepuluh menit setelah dibuat. Di kotak masuk publik seperti Mailinator, siapa pun yang tahu alamatnya bisa membaca pesan Anda.',
+    },
+    {
+      q: 'Ada berapa domain email sementara?',
+      a: 'Jauh lebih banyak daripada yang ada di halaman ini. Satu layanan bisa bergantian memakai ratusan domain, dan domain baru muncul setiap hari. Layanan verifikasi Giggal mengecek alamat terhadap daftar lebih dari 100.000 domain email sekali pakai yang disusun ulang setiap enam jam.',
+    },
+    {
+      q: 'Apakah Gmail, Outlook, dan Hotmail termasuk domain email sementara?',
+      a: 'Tidak. Gmail, Outlook, Hotmail, Yahoo, dan iCloud adalah penyedia kotak masuk tetap, bukan layanan sekali pakai. Domain ini tidak ada di daftar domain email sekali pakai mana pun. Alamat di salah satu domain ini tetap bisa tidak valid jika kotak masuknya tidak ada. Itu pemeriksaan yang berbeda.',
+    },
+    {
+      q: 'Bagaimana cara memblokir domain email sementara?',
+      a: 'Cek setiap alamat saat pendaftaran. Jika domainnya sekali pakai, minta alamat lain sebelum akun dibuat. Anda bisa mengotomatiskannya di formulir dengan API validasi email, yang menjawab secara real-time.',
+    },
+    {
+      q: 'Bisakah saya mengunduh daftar lengkap domain email sekali pakai?',
+      a: 'Halaman ini menampilkan domain yang paling dikenal. Daftar lengkapnya ada di layanan verifikasi dan terus diperbarui. Jadi cara yang bisa diandalkan adalah mengecek alamat lewat API, bukan menyalin file statis yang cepat usang.',
+    },
+    {
+      q: 'Apa bedanya layanan email sementara dan layanan alias?',
+      a: 'Layanan email sementara memberi Anda kotak masuk yang memang dibuat untuk ditinggalkan. Layanan alias seperti addy.io atau 33Mail meneruskan email ke kotak masuk asli Anda, dan Anda bisa mematikan alias itu nanti. Sebagian domain alias ada di daftar domain email sekali pakai, karena orangnya bisa berhenti menerima email Anda kapan saja. Sebagian lain tidak, karena meneruskan email ke kotak masuk asli yang dibaca seseorang.',
+    },
+  ],
+  ctaBand: 'Blokir email sementara sebelum masuk ke daftar Anda',
+  related: [
+    { href: '/disposable-email-checker', label: 'Cek email sementara', desc: 'Cek apakah satu alamat adalah email sekali pakai.' },
+    { href: '/email-validation-api', label: 'API validasi email', desc: 'Blokir pendaftaran dengan alamat sekali pakai secara real-time.' },
+    { href: '/email-checker', label: 'Email checker', desc: 'Cek apakah sebuah kotak masuk ada.' },
+    { href: '/email-list-cleaning', label: 'Membersihkan daftar email', desc: 'Bersihkan seluruh daftar sekaligus.' },
+  ],
+  itemListName: 'Layanan email sementara',
+  itemListDesc: 'Layanan utama untuk email sementara dan email sekali pakai, beserta domain yang mereka pakai.',
+  enSuffix: ' (dalam bahasa Inggris)',
+}
+
+export const PROVIDERS_STRINGS: Record<Locale, ProvidersStrings> = { en, it, de, es, 'pt-br': ptBr, fr, nl, pl, id }

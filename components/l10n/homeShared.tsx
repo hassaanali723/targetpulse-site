@@ -133,6 +133,22 @@ export const REVIEW_BADGES: Record<L10nLocale, ReviewBadgeStrings> = {
       { title: 'Bez opłat za wyniki nieznane', text: 'Płacisz tylko za jasny wynik.' },
     ],
   },
+  id: {
+    heading: 'Dinilai oleh tim sungguhan',
+    readOn: (p) => `Baca ulasan Giggal.ai di ${p}`,
+    rating: decimalComma,
+    reviews: (n) => `${n} ulasan`,
+    verified: 'Ulasan dari pengguna terverifikasi',
+    read: 'Baca ulasan',
+    used: 'Anda memakai Giggal.ai?',
+    leave: 'Tulis ulasan di Trustpilot',
+    points: [
+      { title: '1.000 kredit gratis', text: 'Anda tidak butuh kartu kredit untuk mulai.' },
+      { title: 'Kredit tidak pernah kedaluwarsa', text: 'Anda membelinya sekali dan memakainya saat dibutuhkan.' },
+      { title: 'Jawaban yang jelas untuk catch-all', text: 'Valid atau tidak valid, bukan "berisiko".' },
+      { title: 'Tanpa biaya untuk hasil tidak diketahui', text: 'Anda hanya membayar untuk hasil yang jelas.' },
+    ],
+  },
 }
 
 // The reviews themselves stay in English as written (plans/08 D4), so the
@@ -179,6 +195,12 @@ export const REVIEW_WALL: Record<L10nLocale, ReviewWallStrings> = {
     sub: 'Oryginalne opinie po angielsku z G2, Product Hunt i SourceForge.',
     showAll: 'Pokaż pozostałe opinie ({n})',
     showFewer: 'Pokaż mniej opinii',
+  },
+  id: {
+    title: 'Apa kata pelanggan tentang Giggal.ai',
+    sub: 'Ulasan asli dalam bahasa Inggris, dari G2, Product Hunt, dan SourceForge.',
+    showAll: 'Tampilkan {n} ulasan lainnya',
+    showFewer: 'Tampilkan lebih sedikit ulasan',
   },
 }
 
@@ -489,6 +511,50 @@ export const MCP: Record<L10nLocale, McpStrings> = {
       vscode: { note: <>Zastąp <M>YOUR_API_KEY</M> kluczem z panelu Giggal.ai. VS Code używa <M>&quot;servers&quot;</M> zamiast <M>&quot;mcpServers&quot;</M>.</> },
       cline: { note: <>Zastąp <M>YOUR_API_KEY</M> kluczem z panelu Giggal.ai. Podana ścieżka dotyczy macOS. Dostosuj ją do swojego systemu.</> },
       zed: { note: <>Zastąp <M>YOUR_API_KEY</M> kluczem z panelu Giggal.ai.</> },
+    },
+  },
+  id: {
+    title: 'Hubungkan AI favorit Anda.',
+    subtitle: 'Tambahkan Giggal.ai ke agen AI Anda lewat MCP dan cek alamat email, termasuk catch-all, langsung di Claude, Cursor, VS Code, dan alat lainnya.',
+    toolsAria: 'Alat AI',
+    groups: ['Aplikasi chat', 'Editor kode'],
+    pasteInto: 'Tempel di',
+    or: ' atau ',
+    serverUrl: 'URL server MCP',
+    copy: 'Salin',
+    copied: 'Tersalin',
+    copyAria: 'Salin ke clipboard',
+    restart: 'Mulai ulang klien setelah Anda menambahkan server, lalu tanyakan:',
+    askBefore: '“Apakah ',
+    askAfter: ' dapat dikirimi email?”',
+    guide: 'Panduan lengkap',
+    tools: {
+      claude: {
+        subtitle: 'Tambahkan Giggal.ai sebagai custom connector di Claude. Tanpa file konfigurasi dan tanpa API key yang perlu ditempel.',
+        steps: [
+          <>Di Claude (web atau desktop), buka <B>Settings → Connectors</B>.</>,
+          <>Klik <B>Add</B> → <B>Add custom connector</B>.</>,
+          <>Beri nama <M>Giggal.ai</M>, tempel URL MCP di bawah, lalu klik <B>Add</B>.</>,
+          <>Buka connector <B>Giggal.ai</B> lalu klik <B>Connect</B>.</>,
+          <>Klik <B>Allow</B> untuk mengizinkan <M>verify:read</M>. Dengan izin ini, asisten bisa mengecek alamat, melihat kredit Anda, dan mencari pemeriksaan sebelumnya.</>,
+        ],
+      },
+      chatgpt: {
+        subtitle: 'Tambahkan Giggal.ai sebagai plugin khusus di ChatGPT, terhubung lewat OAuth, tanpa API key yang perlu ditempel.',
+        steps: [
+          <>Di ChatGPT, buka <B>Plugins</B> di sidebar lalu klik <B>+</B> di kanan atas.</>,
+          <>Beri nama <M>Giggal.ai</M>, isi <B>Server URL</B> dengan URL MCP di bawah, pilih <B>Authentication → OAuth</B>, centang konfirmasinya, lalu klik <B>Create</B>.</>,
+          <>Buka plugin <B>Giggal.ai</B>, klik <B>Connect</B>, lalu klik <B>Sign in with Giggal.ai</B>.</>,
+          <>Klik <B>Allow</B> untuk mengizinkan <M>verify:read</M>. Dengan izin ini, asisten bisa mengecek alamat, melihat kredit Anda, dan mencari pemeriksaan sebelumnya.</>,
+        ],
+      },
+      'claude-code': { note: <>Ganti <M>YOUR_API_KEY</M> dengan key dari dashboard Giggal.ai Anda. Sudah punya server <M>giggal</M>? Jalankan dulu <M>claude mcp remove giggal --scope user</M>, lalu tambahkan lagi.</> },
+      codex: { note: <>Codex membaca token dari environment variable. Atur variabel itu, muat ulang shell Anda, tutup Codex lalu buka lagi. Setelah itu jalankan <M>/mcp</M> untuk mengeceknya:<EnvBlock /></> },
+      cursor: { note: <>Ganti <M>YOUR_API_KEY</M> dengan key dari dashboard Giggal.ai Anda.</> },
+      windsurf: { note: <>Ganti <M>YOUR_API_KEY</M> dengan key dari dashboard Giggal.ai Anda.</> },
+      vscode: { note: <>Ganti <M>YOUR_API_KEY</M> dengan key dari dashboard Giggal.ai Anda. VS Code memakai <M>&quot;servers&quot;</M>, bukan <M>&quot;mcpServers&quot;</M>.</> },
+      cline: { note: <>Ganti <M>YOUR_API_KEY</M> dengan key dari dashboard Giggal.ai Anda. Path di sini adalah path macOS. Sesuaikan dengan sistem Anda sendiri.</> },
+      zed: { note: <>Ganti <M>YOUR_API_KEY</M> dengan key dari dashboard Giggal.ai Anda.</> },
     },
   },
 }

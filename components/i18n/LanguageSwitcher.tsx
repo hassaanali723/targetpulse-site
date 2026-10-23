@@ -23,6 +23,7 @@ const LOCALE_META: Record<Locale, { native: string; short: string }> = {
   fr: { native: 'Français', short: 'FR' },
   nl: { native: 'Nederlands', short: 'NL' },
   pl: { native: 'Polski', short: 'PL' },
+  id: { native: 'Bahasa Indonesia', short: 'ID' },
 }
 
 function alternateOf(pathname: string, from: Locale, target: Locale): string {
@@ -109,6 +110,12 @@ const FLAG_PATHS: Record<Locale, React.ReactNode> = {
       <rect y="7" width="20" height="7" fill="#dc143c" />
     </>
   ),
+  id: (
+    <>
+      <rect width="20" height="7" fill="#ce1126" />
+      <rect y="7" width="20" height="7" fill="#fff" />
+    </>
+  ),
 }
 
 function Flag({ locale, className = '' }: { locale: Locale; className?: string }) {
@@ -149,7 +156,7 @@ function CheckIcon() {
   )
 }
 
-const LABEL: Record<Locale, string> = { en: 'Language', it: 'Lingua', de: 'Sprache', es: 'Idioma', 'pt-br': 'Idioma', fr: 'Langue', nl: 'Taal', pl: 'Język' }
+const LABEL: Record<Locale, string> = { en: 'Language', it: 'Lingua', de: 'Sprache', es: 'Idioma', 'pt-br': 'Idioma', fr: 'Langue', nl: 'Taal', pl: 'Język', id: 'Bahasa' }
 
 /** Desktop: globe + current code, opens a dropdown listing all languages. */
 export default function LanguageSwitcher({

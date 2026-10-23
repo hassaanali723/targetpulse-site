@@ -20,6 +20,7 @@ import { consoleStrings as ptConsole, SIGNUP_URL as ptSignup } from '@/lib/i18n/
 import { consoleStrings as frConsole, SIGNUP_URL as frSignup } from '@/lib/i18n/fr'
 import { consoleStrings as nlConsole, SIGNUP_URL as nlSignup } from '@/lib/i18n/nl'
 import { consoleStrings as plConsole, SIGNUP_URL as plSignup } from '@/lib/i18n/pl'
+import { consoleStrings as idConsole, SIGNUP_URL as idSignup } from '@/lib/i18n/id'
 import { LocalLink, Rich } from '@/components/disposable/LocalText'
 import { ShieldAlert, MailX, XCircle, ArrowRight, Users } from 'lucide-react'
 
@@ -39,6 +40,7 @@ const LOCALE_CONSOLE = {
   fr: { strings: frConsole, signupUrl: frSignup },
   nl: { strings: nlConsole, signupUrl: nlSignup },
   pl: { strings: plConsole, signupUrl: plSignup },
+  id: { strings: idConsole, signupUrl: idSignup },
 } as const
 
 export function checkerMetadata(locale: Locale): Metadata {

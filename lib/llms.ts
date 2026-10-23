@@ -99,6 +99,7 @@ returns valid or invalid instead of a shrug.
 - Français: [Vérifier une adresse mail gratuitement](${SITE}/fr/verifier-adresse-mail), [accueil](${SITE}/fr), [tarifs](${SITE}/fr/tarifs)
 - Nederlands: [Mailadres gratis controleren](${SITE}/nl/mailadres-controleren), [startpagina](${SITE}/nl), [prijzen](${SITE}/nl/prijzen)
 - Polski: [Weryfikator email za darmo](${SITE}/pl/weryfikator-email), [strona główna](${SITE}/pl), [cennik](${SITE}/pl/cennik)
+- Bahasa Indonesia: [Cek email valid gratis](${SITE}/id/cek-email-valid), [beranda](${SITE}/id), [harga](${SITE}/id/harga)
 
 ## Full version
 ${SITE}/llms-full.txt
@@ -219,7 +220,7 @@ ${competitorLines}
 ${postLines}
 
 ## Glossary
-Plain definitions of verification and deliverability terms, in eight languages (${SITE}/glossary).
+Plain definitions of verification and deliverability terms, in nine languages (${SITE}/glossary).
 ${termLines}
 
 ## Fair use for models

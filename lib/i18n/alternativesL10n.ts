@@ -77,6 +77,7 @@ const LM_DATE: Record<L10nLocale, string> = {
   fr: '25 février 2026',
   nl: '25 februari 2026',
   pl: '25 lutego 2026',
+  id: '25 Februari 2026',
 }
 
 export const ALT_UI: Record<L10nLocale, AltUi> = {
@@ -453,6 +454,60 @@ export const ALT_UI: Record<L10nLocale, AltUi> = {
     // Rendered as: toolLead + <link>related[0].anchor</link> + "."
     toolLead: 'Pojedynczy adres sprawdzisz tutaj: ',
   },
+  id: {
+    enSuffix: ' (dalam bahasa Inggris)',
+    bottomLine: 'Ringkasnya',
+    volume: 'Volume',
+    perMonth: '/bulan',
+    est: 'perkiraan',
+    estimateNote: (n) => `Perkiraan dari sumber pihak ketiga, tidak dikonfirmasi di halaman harga ${n}.`,
+    checked: (n, d) => [`Harga ${n} dicek pada ${d}. Harga bisa saja sudah berubah, lihat `, `halaman harga ${n}`, '.'],
+    yes: 'Ya',
+    no: 'Tidak',
+    partial: 'Sebagian',
+    rows: {
+      price10k: 'Harga untuk 10.000 kredit',
+      catchAll: 'Verifikasi catch-all',
+      catchAllPricing: 'Biaya catch-all',
+      seg: 'Verifikasi di balik SEG',
+      expiry: 'Masa berlaku kredit',
+      free: 'Paket gratis',
+      chargesUnknown: 'Menagih hasil tidak diketahui',
+      accuracy: 'Klaim akurasi',
+    },
+    gateways: (n) => `${n} gateway`,
+    verdictHead: ['Hasil', 'Arti'],
+    verdicts: [
+      ['Dapat dikirim', 'Kotak masuknya ada dan menerima email'],
+      ['Tidak dapat dikirim', 'Kotak masuknya tidak ada'],
+      ['Berisiko', 'Alamatnya ada, tetapi ada risiko saat pengiriman'],
+      ['Tidak diketahui', 'Kami tidak bisa mengecek alamatnya, dan kreditnya dikembalikan'],
+    ],
+    bench: {
+      resolved: 'alamat catch-all terselesaikan',
+      accuracy: 'akurasi keseluruhan yang diukur',
+      source: (n) => `Angka ${n} berasal dari uji independen oleh ${LEADMAGIC_BENCHMARK.publisher}, yang dipublikasikan pada ${LM_DATE.id}, dengan 10.000 alamat email B2B asli, 28% di antaranya berada di domain catch-all.`,
+      caveat: 'Uji ini dipublikasikan oleh LeadMagic, yang juga menjual alat verifikasi email pesaing dan menempati posisi pertama dalam hasilnya sendiri. Baca uji ini sebagai uji dari vendor, bukan sebagai studi yang netral. Giggal.ai tidak termasuk alat yang diuji.',
+    },
+    heroCta: 'Mulai gratis dengan 1.000 kredit',
+    compareAll: 'Bandingkan semua alat verifikasi (dalam bahasa Inggris)',
+    tryHeading: 'Coba pada daftar Anda sendiri',
+    faqHeading: 'Pertanyaan umum',
+    keepReading: 'Baca juga',
+    related: [
+      { href: '/email-checker', anchor: 'cek email valid secara gratis' },
+      { href: '/alternatives', anchor: 'bandingkan semua alat verifikasi' },
+      { href: '/catch-all-verification', anchor: 'cek alamat email catch-all dan berisiko' },
+      { href: '/seg-email-verification', anchor: 'alamat email di balik gateway SEG' },
+      { href: '/pricing', anchor: 'harga dan kredit' },
+    ],
+    h2hHeading: (n) => `${n}: perbandingan langsung`,
+    h2hProse: (n) => [`Lihat bagaimana ${n} dibandingkan dengan alat verifikasi yang paling sering kami pantau, dengan Giggal.ai sebagai pilihan ketiga di setiap halaman. Ringkasan lengkapnya ada di `, 'halaman perbandingan', ' (dalam bahasa Inggris).'],
+    breadcrumbAlternatives: 'Alternatif',
+    featureHeading: (n) => `${n} vs Giggal.ai`,
+    // Rendered as: toolLead + <link>related[0].anchor</link> + "."
+    toolLead: 'Untuk satu alamat, Anda bisa ',
+  },
 }
 
 // ── Translated competitor facts ──────────────────────────────────────────────
@@ -468,6 +523,7 @@ const GIGGAL_FACTS: Record<L10nLocale, { freeTier: string; creditsExpire: string
   fr: { freeTier: '1 000 crédits, sans carte, utilisables en masse', creditsExpire: "Les crédits n'expirent jamais, sans condition.", catchAllCreditCost: '1 crédit, comme toute autre vérification', claimedAccuracy: `Annonce 98,5${NB}%`, category: 'Vérificateur catch-all et SEG' },
   nl: { freeTier: '1.000 credits, zonder creditcard, ook voor bulkcontroles', creditsExpire: 'Credits verlopen nooit, zonder voorwaarden.', catchAllCreditCost: '1 credit, net als elke andere controle', claimedAccuracy: 'Claimt 98,5%', category: 'Verificatietool voor catch-all en SEG' },
   pl: { freeTier: '1000 kredytów, bez karty, także do masowego importu', creditsExpire: 'Kredyty nigdy nie wygasają, bez żadnych warunków.', catchAllCreditCost: '1 kredyt, tak jak każde inne sprawdzenie', claimedAccuracy: 'Deklaruje 98,5%', category: 'Weryfikator catch-all i SEG' },
+  id: { freeTier: '1.000 kredit, tanpa kartu kredit, juga untuk pemeriksaan massal', creditsExpire: 'Kredit tidak pernah kedaluwarsa, tanpa syarat.', catchAllCreditCost: '1 kredit, sama seperti pemeriksaan lain', claimedAccuracy: 'Mengklaim 98,5%', category: 'Alat verifikasi untuk catch-all dan SEG' },
 }
 export function giggalFacts(locale: L10nLocale) {
   return { ...GIGGAL, ...GIGGAL_FACTS[locale] }
@@ -482,6 +538,7 @@ const FACTS: Record<string, Partial<Record<L10nLocale, Facts>>> = {
     fr: { freeTier: '100 crédits par mois', creditsExpire: "Les crédits n'expirent pas", catchAllCreditCost: 'Score IA de 1 à 10, pas de résultat valide ou invalide', claimedAccuracy: `Annonce 99,6${NB}%` },
     nl: { freeTier: '100 credits per maand', creditsExpire: 'Credits verlopen niet', catchAllCreditCost: 'AI-score van 1 tot 10, geen geldig of ongeldig', claimedAccuracy: 'Claimt 99,6%' },
     pl: { freeTier: '100 kredytów miesięcznie', creditsExpire: 'Kredyty nie wygasają', catchAllCreditCost: 'Ocena AI od 1 do 10, bez wyniku prawidłowy lub nieprawidłowy', claimedAccuracy: 'Deklaruje 99,6%' },
+    id: { freeTier: '100 kredit per bulan', creditsExpire: 'Kredit tidak kedaluwarsa', catchAllCreditCost: 'Skor AI 1 sampai 10, bukan valid atau tidak valid', claimedAccuracy: 'Mengklaim 99,6%' },
   },
   neverbounce: {
     it: { freeTier: '10 crediti alla registrazione', creditsExpire: "I crediti scadono 12 mesi dopo l'acquisto", catchAllCreditCost: 'Segnati Accept-All, ne risolve pochi' },
@@ -491,6 +548,7 @@ const FACTS: Record<string, Partial<Record<L10nLocale, Facts>>> = {
     fr: { freeTier: "10 crédits à l'inscription", creditsExpire: "Les crédits expirent 12 mois après l'achat", catchAllCreditCost: 'Marqués Accept-All, en résout peu' },
     nl: { freeTier: '10 credits bij registratie', creditsExpire: 'Credits verlopen 12 maanden na aankoop', catchAllCreditCost: 'Gemarkeerd als Accept-All, lost er weinig op' },
     pl: { freeTier: '10 kredytów przy rejestracji', creditsExpire: 'Kredyty wygasają 12 miesięcy po zakupie', catchAllCreditCost: 'Oznaczane jako Accept-All, rozstrzyga niewiele' },
+    id: { freeTier: '10 kredit saat mendaftar', creditsExpire: 'Kredit kedaluwarsa 12 bulan setelah pembelian', catchAllCreditCost: 'Ditandai Accept-All, hanya sedikit yang diselesaikan' },
   },
   hunter: {
     de: {
@@ -549,6 +607,11 @@ const FACTS: Record<string, Partial<Record<L10nLocale, Facts>>> = {
       freeTier: '50 kredytów w darmowym okresie próbnym', creditsExpire: 'Kredyty z planu przechodzą na kolejny okres, dopóki subskrypcja jest aktywna', catchAllCreditCost: 'Oznaczany, nierozstrzygnięty',
       pricingBasisNote: 'Snov.io jest sprzedawany jako subskrypcja miesięczna ze wspólną pulą kredytów (1 kredyt na weryfikację). Wartości to najmniejszy plan miesięczny, który obejmuje tyle weryfikacji (płatność miesięczna; przy płatności rocznej około 25% taniej). Milion miesięcznie to plan indywidualny. Wartości Giggal.ai to ceny jednorazowe, płatne za użycie.',
       notes: { Custom: 'Indywidualny' },
+    },
+    id: {
+      freeTier: '50 kredit dalam uji coba gratis', creditsExpire: 'Kredit paket terbawa ke periode berikutnya selama langganan aktif', catchAllCreditCost: 'Ditandai, tidak diselesaikan',
+      pricingBasisNote: 'Snov.io dijual sebagai langganan bulanan dengan kredit bersama (1 kredit per pemeriksaan). Angkanya adalah paket bulanan terkecil yang mencakup jumlah pemeriksaan itu (ditagih bulanan; dengan pembayaran tahunan sekitar 25% lebih murah). Satu juta per bulan masuk paket khusus. Angka Giggal.ai adalah harga sekali bayar sesuai pemakaian.',
+      notes: { Custom: 'Khusus' },
     },
   },
   apollo: {

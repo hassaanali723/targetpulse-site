@@ -1103,4 +1103,137 @@ const pl: CheckerStrings = {
   enSuffix: ' (po angielsku)',
 }
 
-export const CHECKER_STRINGS: Record<Locale, CheckerStrings> = { en, it, de, es, 'pt-br': ptBr, fr, nl, pl }
+// Indonesian. Keyword plan (SEO-Plan/i18n-batch2-id-keyword-plan.md): head
+// term "cek email sementara", with "email palsu" and "email disposable" in
+// copy. "email sementara" is the searched word for a temporary or disposable
+// inbox; "email sekali pakai" is the standard term from the terminology sheet.
+const id: CheckerStrings = {
+  metaTitle: 'Cek Email Sementara dan Email Palsu Gratis | Giggal.ai',
+  ogTitle: 'Cek email sementara: kenali alamat email palsu dan kotak masuk sekali pakai',
+  description: 'Cek email sementara dan email palsu secara gratis. Alat ini mengenali alamat sekali pakai dari lebih dari 100.000 domain, yang diperbarui setiap enam jam.',
+  ogLocale: 'id_ID',
+  ogAlt: 'Giggal.ai: cek email sementara',
+  crumb: 'Cek email sementara',
+  h1: 'Cek email sementara',
+  h1Accent: 'dan kenali alamat email palsu',
+  heroIntro: 'Masukkan alamat email untuk melihat apakah alamat itu berasal dari layanan email sementara atau email sekali pakai. Domainnya dibandingkan dengan lebih dari 100.000 domain email sekali pakai, yang diperbarui setiap enam jam.',
+  toolNote: 'Lima pemeriksaan gratis per jam, tanpa daftar. Alat ini memberi tahu apakah domainnya adalah domain email sekali pakai. Untuk tahu apakah kotak masuknya ada, pakai [email checker](/email-checker).',
+  howTitle: 'Cara kerja cek email sementara',
+  howIntro: 'Layanan email sementara terus mendaftarkan domain baru. Daftar yang tidak diperbarui akan melewatkan domain itu. Karena itu pemeriksaan berjalan di layanan verifikasi Giggal, bukan pada file di situs web ini.',
+  how: [
+    {
+      title: 'Pemeriksaan format',
+      text: 'Alat ini mengecek apakah alamatnya punya format yang valid: bagian lokal, satu tanda @, dan domain. Ini dilakukan sebelum apa pun dikirim ke server.',
+    },
+    {
+      title: 'Domain dibandingkan dengan lebih dari 100.000 domain sekali pakai',
+      text: 'Domainnya dibandingkan dengan daftar domain email sekali pakai di layanan verifikasi Giggal. Subdomain dari domain yang ada di daftar juga dihitung sebagai sekali pakai. Daftar ini disusun ulang setiap enam jam dan tim kami menambahkan koreksi manual.',
+    },
+    {
+      title: 'Hasil',
+      text: 'Alat ini melaporkan "sekali pakai" atau "bukan sekali pakai". Bukan sekali pakai berarti domainnya bukan layanan email sementara yang dikenal. Ini tidak berarti kotak masuknya ada.',
+    },
+    {
+      title: 'Deliverability adalah pemeriksaan terpisah',
+      text: 'Untuk tahu apakah kotak masuknya ada dan menerima email, pakai email checker gratis. Alat itu mengecek apakah kotak masuknya ada. Halaman ini hanya menjawab apakah alamatnya email sekali pakai.',
+    },
+  ],
+  servicesTitle: 'Layanan email sementara yang dikenal',
+  servicesIntro: 'Berikut beberapa layanan yang ada di daftar. Daftar ini juga berisi banyak domain kecil yang didaftarkan dan dipakai bergantian oleh layanan tersebut.',
+  services: [
+    { name: 'Temp-Mail', desc: 'Memberi kotak masuk sementara secara acak, tanpa daftar.' },
+    { name: 'Mailinator', desc: 'Kotak masuk publik. Siapa pun bisa membaca emailnya tanpa kata sandi.' },
+    { name: '10MinuteMail', desc: 'Kotak masuk yang kedaluwarsa sepuluh menit setelah dibuat.' },
+    { name: 'Guerrilla Mail', desc: 'Menghapus setiap pesan satu jam setelah pesan itu masuk.' },
+    { name: 'ThrowawayMail', desc: 'Kotak masuk sementara untuk pendaftaran sekali pakai.' },
+    { name: 'Yopmail', desc: 'Kotak masuk publik tanpa kata sandi. Pesan disimpan selama beberapa hari.' },
+    { name: 'SharkLasers', desc: 'Salah satu domain yang dipakai Guerrilla Mail.' },
+    { name: 'TrashMail', desc: 'Alamat penerusan sementara yang berhenti berfungsi setelah waktu tertentu.' },
+  ],
+  viewAll: 'Lihat semua layanan email sementara',
+  whyTitle: 'Kenapa Anda perlu memblokir email sementara',
+  whyIntro: 'Alamat email sekali pakai bukan kontak. Orangnya tidak melihat apa pun yang Anda kirim setelah beberapa menit pertama. Ini menimbulkan tiga masalah:',
+  why: [
+    {
+      title: 'Email yang tidak dibaca siapa pun',
+      text: 'Email sambutan, bukti pembayaran, dan rangkaian onboarding masuk ke kotak masuk yang sudah hilang atau tidak pernah dibuka. Sebagian layanan menolak email setelah kotak masuknya kedaluwarsa. Anda melihatnya sebagai bounce di laporan Anda.',
+    },
+    {
+      title: 'Penyalahgunaan masa uji coba gratis',
+      text: 'Satu orang bisa membuat banyak akun uji coba, setiap kali dengan alamat sekali pakai yang baru. Jika Anda memblokir alamat ini saat pendaftaran, sebagian besar penyalahgunaan itu berhenti. Anda bisa mengotomatiskannya di formulir pendaftaran dengan [API validasi email](/email-validation-api) kami.',
+    },
+    {
+      title: 'Angka yang salah di CRM Anda',
+      text: 'Pendaftaran dengan alamat sekali pakai dihitung sebagai lead, tetapi mereka tidak pernah membalas, membuka, atau membeli apa pun. Jumlah pendaftaran Anda jadi tampak lebih baik dan tingkat konversi Anda tampak lebih buruk dari yang sebenarnya.',
+    },
+  ],
+  bulkTitle: 'Cek satu alamat atau seluruh daftar',
+  bulkParas: [
+    'Alat di atas mengecek satu alamat sekali jalan. Ini berguna untuk satu pendaftaran yang mencurigakan atau satu lead. Untuk seluruh daftar, satu alamat sekali jalan terlalu lambat.',
+    'Di dashboard Giggal, Anda bisa mengunggah file CSV atau TXT ke [layanan pembersihan daftar email](/email-list-cleaning) kami dan mengecek seluruh daftar sekaligus. Untuk setiap alamat, kami mengecek domain sekali pakai, alamat berbasis peran seperti info@ atau sales@, dan apakah kotak masuknya ada. Pada [domain catch-all](/catch-all-verification), tempat pemeriksaan standar tidak bisa memastikan kotak masuk, Giggal menjalankan pemeriksaan yang lebih mendalam. Akun gratis mendapat 1.000 kredit.',
+  ],
+  faqTitle: 'Pertanyaan tentang cek email sementara',
+  faqs: [
+    {
+      q: 'Apa itu email sementara?',
+      a: 'Email sementara, atau email sekali pakai, adalah kotak masuk sementara dari layanan seperti Mailinator, Temp-Mail, atau 10MinuteMail. Siapa pun bisa membuatnya dalam beberapa detik, tanpa kata sandi. Orang memakainya untuk mengisi formulir pendaftaran atau mengunduh file tanpa memberikan alamat asli mereka. Kotak masuknya dihapus setelah waktu tertentu, atau orangnya tidak pernah membukanya lagi.',
+    },
+    {
+      q: 'Bagaimana cara kerja alat cek email sementara ini?',
+      a: 'Alat ini mengirim alamatnya ke layanan verifikasi Giggal. Layanan itu punya daftar lebih dari 100.000 domain dari layanan email sekali pakai dan email sementara. Daftar ini disusun ulang setiap enam jam dari sumber publik, dan tim kami menambahkan koreksi manual. Jika domainnya, atau domain induknya, ada di daftar, alat ini melaporkannya sebagai sekali pakai. Jika tidak, alat ini melaporkannya sebagai bukan sekali pakai.',
+    },
+    {
+      q: 'Apakah "bukan sekali pakai" berarti alamatnya valid?',
+      a: 'Tidak. Artinya domainnya bukan layanan email sekali pakai yang dikenal. Kotak masuknya tetap bisa saja tidak ada. Untuk mengeceknya, pakai email checker gratis. Alat itu mengecek kotak masuk secara langsung dan memberi tahu apakah alamatnya bisa menerima email.',
+    },
+    {
+      q: 'Apakah email ke alamat sekali pakai akan bounce?',
+      a: 'Kadang-kadang. Sebagian layanan menerima setiap pesan dan menghapusnya setelah waktu tertentu. Layanan lain menutup kotak masuk setelah beberapa menit lalu menolak email. Dalam kedua kasus, orangnya tidak akan membaca email Anda nanti. Anggap alamat itu tidak bisa dipakai.',
+    },
+    {
+      q: 'Apakah alat cek email palsu ini gratis?',
+      a: 'Ya. Anda mendapat 5 pemeriksaan gratis per jam, tanpa daftar. Untuk mengecek seluruh daftar, buat akun gratis. Anda akan mendapat 1.000 kredit verifikasi.',
+    },
+    {
+      q: 'Bagaimana cara memblokir email disposable di formulir pendaftaran?',
+      a: 'Hubungkan Giggal ke formulir atau aplikasi Anda lewat API atau integrasi Zapier. Setiap alamat dicek begitu dikirim. Jika alamatnya email sekali pakai, Anda bisa meminta alamat lain sebelum akun dibuat.',
+    },
+    {
+      q: 'Apa bedanya email sementara dan penyedia email gratis?',
+      a: 'Penyedia gratis seperti Gmail, Yahoo, atau Outlook memberi orang kotak masuk tetap dengan kata sandi. Layanan email sementara memberi kotak masuk sementara yang memang dibuat untuk dibuang. Giggal menandai alamat sekali pakai dan tidak menandai kotak masuk gratis biasa.',
+    },
+    {
+      q: 'Bisakah saya mengecek email sementara secara massal?',
+      a: 'Bisa. Unggah file CSV atau TXT di dashboard Giggal. Untuk setiap alamat, kami mengecek domain sekali pakai, alamat berbasis peran, dan domain catch-all, serta apakah kotak masuknya ada.',
+    },
+  ],
+  ctaBand: 'Blokir email sementara dan bersihkan daftar Anda',
+  related: [
+    { href: '/email-validation-api', label: 'API validasi email: blokir pendaftaran dengan alamat sekali pakai secara real-time' },
+    { href: '/email-checker', label: 'email checker: apakah kotak masuk ini ada?' },
+    { href: '/catch-all-verification', label: 'cek alamat email catch-all dan berisiko' },
+    { href: '/seg-email-verification', label: 'cek alamat email di balik gateway keamanan' },
+    { href: '/pricing', label: 'harga, kredit, dan langganan' },
+  ],
+  console: {
+    checks: { basic: 'Pemeriksaan dasar', disposable: 'Pemeriksaan domain sekali pakai' },
+    isDisposable: 'adalah domain sekali pakai',
+    notDisposable: 'bukan domain sekali pakai',
+    disposableText: 'Domain ini adalah layanan email sekali pakai atau email sementara. Jangan tambahkan alamat ini ke daftar Anda.',
+    notDisposableText: 'Domain ini tidak ada di daftar layanan email sekali pakai dan email sementara. Ini tidak menunjukkan apakah kotak masuknya ada.',
+    deliverPrompt: 'Ingin tahu apakah kotak masuk ini ada dan menerima email? Cek alamatnya dengan email checker.',
+    deliverButton: 'Cek apakah alamat ini valid',
+    verifierPath: '/id/cek-email-valid',
+    logs: {
+      basicStart: '[BASIC] Mengecek format {email}...',
+      basicOk: '[SUCCESS] Format alamatnya valid.',
+      basicFail: '[FAILED] Alamat ini tidak punya format email yang valid.',
+      registry: '[DISPOSABLE] Mencari {domain} di daftar domain sekali pakai...',
+      isDisposable: '[RESULT] {domain} adalah layanan email sekali pakai atau email sementara.',
+      notDisposable: '[RESULT] {domain} bukan layanan email sekali pakai yang dikenal.',
+    },
+  },
+  enSuffix: ' (dalam bahasa Inggris)',
+}
+
+export const CHECKER_STRINGS: Record<Locale, CheckerStrings> = { en, it, de, es, 'pt-br': ptBr, fr, nl, pl, id }

@@ -238,7 +238,7 @@ export default function BulkVerifierL10n({
           ))}
         </dl>
 
-        <RatingChips className="mt-10" reviews={checker.ratings.reviews} ratedAria={checker.ratings.ratedAria} />
+        <RatingChips className="mt-10" reviews={checker.ratings.reviews} ratedAria={checker.ratings.ratedAria} decimalComma />
       </section>
 
       <AwardRow headingLead={checker.awards.headingLead} headingRest={checker.awards.headingRest} showLabel={checker.awards.showLabel} />

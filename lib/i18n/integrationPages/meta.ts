@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { hreflangAlternates, type ClusterId } from '@/lib/i18n/clusters'
 import type { PageMeta } from './types'
 
-const OG_LOCALE: Record<string, string> = { it: 'it_IT', de: 'de_DE', es: 'es_LA', 'pt-br': 'pt_BR', fr: 'fr_FR', nl: 'nl_NL', pl: 'pl_PL' }
+const OG_LOCALE: Record<string, string> = { it: 'it_IT', de: 'de_DE', es: 'es_LA', 'pt-br': 'pt_BR', fr: 'fr_FR', nl: 'nl_NL', pl: 'pl_PL', id: 'id_ID' }
 
 /** Next metadata for an integration page in any language. */
 export function integrationMetadata(meta: PageMeta, path: string, cluster: ClusterId, locale: string): Metadata {
