@@ -56,7 +56,7 @@ Two of these deserve a word. A birth year in your address tells employers your a
 
 Don't overthink it, though. Alison Green, who writes the Ask a Manager advice column, put it simply: "Names, fine. Letters and numbers, fine." ([Ask a Manager](https://www.askamanager.org/2021/07/how-professional-sounding-do-resume-email-addresses-need-to-be.html)). What matters is that the address is easy to read and type, and doesn't say anything you wouldn't put on your CV.
 
-If you searched for professional email examples and wanted example messages rather than addresses, our [cold email templates](/blog/cold-email-templates) have 14 of those.
+If you searched for professional email examples and wanted example messages rather than addresses, our [cold email templates](/blog/cold-email-templates) have 14 of those. For the last line of any message, see [how to end an email](/blog/how-to-end-an-email).
 
 ## Business email address examples
 

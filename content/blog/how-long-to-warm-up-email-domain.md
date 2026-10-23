@@ -87,7 +87,7 @@ A domain is ready when its numbers stay healthy while volume goes up. Check thes
 - **Spam complaint rate under 0.08%.** That is Customer.io's warm-up target. Google's hard limit for Gmail is 0.3%, so staying far below it gives you room for mistakes.
 - **No rate-limit errors.** If Gmail returns the code 421 4.7.28, it has "detected an unusual rate of email" from you. Slow down. Google's advice is to reduce volume until errors stop, "then, increase slowly again."
 - **Authentication passes.** Send a test to a Gmail account, open "Show original" and check that SPF, DKIM and DMARC say PASS. Our [SPF, DKIM and DMARC guide](/blog/spf-dkim-dmarc-explained) covers each record.
-- **Real replies are coming in.** Replies from real people are a better sign than any score in a dashboard.
+- **Real replies are coming in.** Replies from real people are a better sign than any score in a dashboard. Even the closing line plays a part: in a Boomerang study, emails that [ended with a form of thanks](/blog/how-to-end-an-email) got replies 62% of the time, against 46% for the others.
 
 Google Postmaster Tools can help, with one limit. Its Compliance status dashboard is open to all senders. But Google says data may be missing "on days when outgoing email volume is low," which is exactly the situation during warm-up. Do not wait for Postmaster Tools to fill in before you trust your own bounce and complaint numbers.
 
