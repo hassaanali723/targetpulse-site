@@ -1069,4 +1069,1219 @@ const ptBr: SpfPageStrings = {
   ctaHeadline: 'Verifique os endereços antes de enviar',
 }
 
-export const SPF_PAGE_STRINGS: Partial<Record<Locale, SpfPageStrings>> & { en: SpfPageStrings } = { en, de, it, 'pt-br': ptBr }
+const fr: SpfPageStrings = {
+  metaTitle: 'Vérificateur SPF : Vérifier et Générer un Enregistrement SPF | Giggal.ai',
+  ogTitle: 'Vérificateur SPF : Vérifier et Générer un Enregistrement SPF',
+  description:
+    'Vérifiez gratuitement l\'enregistrement SPF de n\'importe quel domaine. Analysez chaque mécanisme, comptez les requêtes DNS par rapport à la limite de 10, détectez les erreurs ou générez un nouvel enregistrement.',
+  ogImage: '/og-image.png',
+  ogAlt: 'Vérificateur et générateur d\'enregistrement SPF',
+  crumb: 'Vérificateur SPF',
+  appName: 'Vérificateur SPF',
+  featureList: [
+    'Sans inscription ni carte bancaire',
+    'Comptage en direct des requêtes DNS',
+    'Analyse syntaxique stricte RFC 7208',
+    'Recommandations de correction immédiates',
+  ],
+  h1: 'Vérificateur et générateur d\'enregistrement SPF',
+  heroIntro:
+    'Analysez l\'enregistrement SPF d\'un domaine dans le DNS public. L\'outil détaille chaque mécanisme, compte les requêtes DNS consommées par rapport à la limite de 10 de la RFC 7208 et met en évidence les erreurs de configuration.',
+  howTitle: 'Comment vérifier un enregistrement SPF',
+  howSteps: [
+    'Saisissez un nom de domaine dans le champ ci-dessus. Une adresse e-mail complète fonctionne aussi : l\'outil extrait automatiquement le domaine.',
+    'Cliquez sur Vérifier l\'enregistrement SPF. L\'outil interroge les serveurs DNS publics faisant autorité, exactement comme le ferait un serveur de messagerie récepteur.',
+    'Consultez d\'abord le résumé global : il indique si l\'enregistrement est valide, s\'il comporte des avertissements ou s\'il est rompu.',
+    'Examinez ensuite la liste des alertes et avertissements éventuels. Chaque point explique précisément quelle modification apporter.',
+    'En dessous, chaque terme de l\'enregistrement est expliqué avec son coût en requêtes DNS. Dépliez les directives include pour voir ce que chaque service délègue.',
+  ],
+  howNote:
+    'L\'URL de la page conserve votre recherche. Vous pouvez partager ce lien direct avec un collègue ou le support de votre hébergeur. Notez une limite : un serveur récepteur évalue le SPF en fonction de l\'adresse IP du serveur expéditeur. Cet outil n\'ayant pas de message sous la main, il valide la syntaxe et la conformité DNS de l\'enregistrement. Il ne peut pas exécuter les macros dynamiques dépendant de l\'IP du client.',
+  imageAlt: 'Illustration d\'un enregistrement SPF décomposé en mécanismes avec jauge de requêtes DNS sur 10.',
+  whatTitle: 'Qu\'est-ce qu\'un enregistrement SPF ?',
+  whatIntro:
+    'Un enregistrement SPF est un enregistrement TXT publié dans la zone DNS d\'un domaine. Il spécifie quels serveurs de messagerie sont autorisés à envoyer des e-mails au nom de ce domaine. SPF signifie Sender Policy Framework et ses spécifications sont régies par la [RFC 7208](https://www.rfc-editor.org/rfc/rfc7208). Un domaine utilisant Google Workspace dispose généralement d\'un enregistrement comme celui-ci :',
+  whatAfter: [
+    '`v=spf1` identifie le début de l\'enregistrement SPF. `include:_spf.google.com` autorise l\'ensemble des serveurs gérés par Google. `~all` indique aux serveurs récepteurs de marquer comme suspect tout e-mail provenant d\'un serveur non listé.',
+    'Lorsqu\'un message arrive, le serveur récepteur extrait le domaine de l\'adresse de retour technique (le Return-Path ou enveloppe). Il consulte l\'enregistrement SPF de ce domaine et vérifie si l\'adresse IP émettrice y figure. Le SPF ne vérifie pas l\'adresse d\'expéditeur visible (From) affichée dans le client de messagerie. C\'est pourquoi le SPF travaille conjointement avec DKIM et DMARC. Pour comprendre leur fonctionnement combiné, consultez [SPF, DKIM et DMARC expliqués](/blog/spf-dkim-dmarc-explained).',
+    'Depuis février 2024, [Gmail exige SPF ou DKIM](https://support.google.com/a/answer/81126) pour tous les expéditeurs, et les deux pour les expéditeurs en masse. Yahoo applique des exigences identiques.',
+  ],
+  partsTitle: 'Que signifie chaque terme d\'un enregistrement SPF',
+  partsIntro:
+    'Un enregistrement SPF est une séquence de mécanismes et de modificateurs séparés par des espaces. Les serveurs récepteurs lisent de gauche à droite et s\'arrêtent au premier terme correspondant à l\'IP d\'envoi.',
+  thPart: 'Terme',
+  thDoes: 'Rôle',
+  thLookup: 'Requête DNS',
+  lookupLabel: 'Requête DNS : ',
+  parts: [
+    { part: 'v=spf1', does: 'Identifie l\'enregistrement TXT comme SPF. Doit être le premier élément, écrit exactement ainsi.', lookup: 'Non' },
+    { part: 'ip4:192.0.2.10', does: 'Autorise une adresse IPv4 unique ou une plage CIDR comme 192.0.2.0/24.', lookup: 'Non' },
+    { part: 'ip6:2001:db8::/32', does: 'Autorise une adresse ou une plage CIDR IPv6.', lookup: 'Non' },
+    { part: 'a', does: 'Autorise les adresses IP résolues pour le domaine lui-même, ou pour le domaine indiqué après deux-points.', lookup: 'Oui' },
+    { part: 'mx', does: 'Autorise les adresses IP des serveurs de réception MX du domaine.', lookup: 'Oui' },
+    { part: 'include:_spf.google.com', does: 'Autorise tous les serveurs couverts par l\'enregistrement SPF d\'un autre domaine. C\'est le moyen standard d\'intégrer un service tiers.', lookup: 'Oui, + imbriquées' },
+    { part: 'exists:%{i}.example.com', does: 'Correspond si une requête DNS renvoie une adresse A. Utilisé par certains grands expéditeurs avec des macros.', lookup: 'Oui' },
+    { part: 'ptr', does: 'Vérifie par résolution DNS inverse (PTR). La RFC 7208 déconseille formellement son usage en raison de sa lenteur et de son manque de fiabilité.', lookup: 'Oui' },
+    { part: '~all ou -all', does: 'Définit le traitement appliqué à tous les serveurs non explicitement autorisés. Doit toujours figurer en fin d\'enregistrement.', lookup: 'Non' },
+    { part: 'redirect=example.net', does: 'Délègue la politique SPF à celle d\'un autre domaine. Est ignoré si le terme all est présent.', lookup: 'Oui' },
+  ],
+  partsAfter: [
+    'Tout mécanisme peut être précédé d\'un qualificateur qui détermine le résultat de l\'évaluation en cas de correspondance. `+` signifie Pass (réussite) et constitue la valeur par défaut implicite. `-` signifie Fail (échec strict), `~` signifie Softfail (échec partiel) et `?` signifie Neutral (neutre). Ainsi, le mot `all` peut conclure un enregistrement sous la forme `-all`, `~all` ou `?all`.',
+    'Les mécanismes sont insensibles à la casse : `Include:` fonctionne de la même manière que `include:`. La RFC 7208 recommande de clore tout enregistrement par un mécanisme all ou un modificateur redirect. Sans conclusion explicite, les serveurs non listés reçoivent un résultat Neutral.',
+  ],
+  limitTitle: 'La limite stricte des 10 requêtes DNS',
+  limitParas: [
+    'Chaque terme include, a, mx, ptr, exists et redirect force le serveur récepteur à effectuer une requête de résolution DNS. La RFC 7208 plafonne ce total à 10 requêtes par évaluation. Les requêtes effectuées à l\'intérieur des include comptent également, de sorte qu\'un seul include peut engendrer plusieurs requêtes. ip4, ip6 et all ne consomment aucune requête. Si un enregistrement dépasse 10 requêtes, les serveurs récepteurs arrêtent l\'évaluation et renvoient un Permerror : le contrôle SPF échoue.',
+    'Atteindre cette limite arrive vite. Nous avons mesuré dans le DNS public le coût des includes courants : Google Workspace consomme 1 requête, Microsoft 365 consomme 1 requête, Salesforce en consomme 2, Mailgun en consomme 5 et Freshdesk 7. Une entreprise sur Google Workspace qui associe Mailgun et Freshdesk atteint déjà 13 requêtes. Une [étude de 2024 sur les enregistrements SPF](https://www.usenix.org/conference/usenixsecurity24/presentation/ashiq) couvrant .com, .net, .org et .se a révélé que 6,5 % des domaines dépassaient les 10 requêtes, et les enregistrements de seulement deux hébergeurs étaient responsables de 83,7 % de ces dépassements.',
+    'Ces coûts évoluent également dans le temps. L\'include de Google coûtait 4 requêtes jusqu\'en décembre 2025, date à laquelle [Google a remplacé ses includes imbriqués par une liste plate](https://www.uriports.com/blog/google-simplifies-its-spf-record/). De nombreux tutoriels et générateurs SPF indiquent encore l\'ancien chiffre de 4. L\'outil ci-dessus interroge le DNS en temps réel pour mesurer le coût exact.',
+    'Dépasser la limite ne fait pas nécessairement échouer tous les messages de façon uniforme. Comme [l\'explique Microsoft](https://learn.microsoft.com/en-us/defender-office-365/email-authentication-spf-configure), les serveurs récepteurs évaluent les termes de gauche à droite et s\'arrêtent dès la première correspondance. Les e-mails envoyés par un service listé en premier peuvent réussir, tandis que ceux d\'un service listé plus loin échouent. Cette disparité rend les pannes difficiles à diagnostiquer si l\'on ne compte pas l\'intégralité des requêtes de l\'arbre SPF.',
+    'Il existe une seconde limite : les requêtes infructueuses (void lookups), par exemple un include pointant vers un domaine supprimé ou introuvable. La RFC 7208 stipule que les serveurs doivent abandonner l\'évaluation après 2 requêtes vides successives.',
+  ],
+  underTitle: 'Comment rester sous la limite des 10 requêtes DNS',
+  underSteps: [
+    'Supprimez les includes des services et outils marketing que vous n\'utilisez plus.',
+    'Supprimez les includes que vos prestataires n\'exigent plus. Mailchimp, Postmark, Brevo et Klaviyo ne requièrent plus d\'include sur votre domaine racine. SendGrid et Amazon SES délèguent leur envoi via un sous-domaine dédié. Consultez la liste détaillée ci-dessous.',
+    'Déclarez vos propres serveurs de messagerie avec ip4 et ip6 au lieu de a ou mx. La RFC 7208 préconise cet ordre, et les adresses IP brutes ne consomment aucune requête DNS.',
+    'Envoyez vos e-mails transactionnels ou marketing depuis un sous-domaine dédié, comme newsletter.exemple.fr. Chaque sous-domaine possède son propre enregistrement et dispose de son propre quota de 10 requêtes.',
+  ],
+  underNote:
+    'Certains prestataires proposent le « SPF flattening », qui remplace les includes par la liste des adresses IP directes. Cela réduit les requêtes DNS, mais lorsque les fournisseurs modifient leurs plages IP, votre enregistrement statique devient obsolète. Microsoft déconseille le flattening pour les services dont les adresses changent fréquemment et demande une révision trimestrielle minimale si vous y recourez.',
+  servicesTitle: 'Includes SPF pour Google Workspace, Microsoft 365 et autres services',
+  servicesIntro:
+    'Voici les valeurs include recommandées dans la documentation officielle de chaque service, avec leur coût en requêtes DNS mesuré sur le DNS public le 12 octobre 2026. Vérifiez toujours la documentation de votre compte, car certains services attribuent des sous-domaines régionaux spécifiques.',
+  thService: 'Service',
+  thInclude: 'Valeur include',
+  thLookups: 'Requêtes DNS',
+  lookupCount: (n) => `${n} ${n === 1 ? 'requête' : 'requêtes'}`,
+  servicesNote:
+    'HubSpot génère un include unique par portail client sous la forme [id].hubspotemail.net. Récupérez votre valeur exacte dans les paramètres de votre compte HubSpot. Il consomme 1 requête DNS.',
+  notNeededTitle: 'Services ne nécessitant généralement aucun include SPF',
+  notNeededIntro:
+    'Le contrôle SPF s\'effectue sur le domaine de l\'adresse de retour d\'enveloppe (Return-Path), et non sur l\'en-tête From visible. La plupart des plateformes d\'envoi actuelles utilisent leur propre domaine de retour ou un sous-domaine CNAME dédié. Ajouter un include sur votre domaine apex ne fait que consommer inutilement vos requêtes DNS.',
+  notNeededAfter: 'L\'outil ci-dessus met en évidence ces includes superflus s\'il en détecte dans votre enregistrement.',
+  createTitle: 'Comment créer un enregistrement SPF',
+  createIntro:
+    'Basculez sur l\'onglet Créer ci-dessus pour utiliser le générateur SPF interactif. Cochez les services qui envoient des e-mails pour votre domaine, et l\'outil compose automatiquement la syntaxe tout en surveillant le compteur de requêtes DNS. Si votre domaine possède déjà un enregistrement, chargez-le d\'abord pour l\'ajuster sans écraser vos réglages. Voici les étapes recommandées :',
+  createSteps: [
+    'Recensez tous les services habilités à émettre des e-mails pour votre domaine : serveurs internes, suite bureautique, CRM, plateforme d\'assistance, outil de facturation et formulaires de contact. Vos rapports DMARC permettent d\'identifier les flux d\'envoi oubliés.',
+    'Récupérez la valeur include de chaque prestataire dans sa documentation ou sélectionnez-le directement dans notre outil. Pour vos serveurs dédiés, privilégiez leurs adresses IP.',
+    'Sélectionnez la terminaison appropriée : ~all ou -all. La section suivante détaille leurs implications respectives.',
+    'Publiez l\'entrée comme un enregistrement TXT unique sur le nom d\'hôte racine de votre zone DNS (souvent représenté par @). Si un enregistrement commençant par v=spf1 existe déjà, modifiez-le sans créer de seconde entrée.',
+    'Patientez quelques minutes pour la propagation DNS, puis lancez une vérification avec cet outil pour confirmer la validité du résultat.',
+  ],
+  createParas: [
+    'Chaque sous-domaine émetteur requiert son propre enregistrement, car les sous-domaines n\'héritent pas du SPF de leur domaine parent. Un domaine ou sous-domaine qui n\'envoie jamais de courrier électronique doit impérativement être protégé avec : `v=spf1 -all`. La RFC 7208 qualifie cela de bonne pratique reconnue pour empêcher toute usurpation d\'identité. Le [NCSC britannique](https://www.ncsc.gov.uk/blog-post/protecting-parked-domains) recommande d\'y adjoindre une politique DMARC p=reject et un enregistrement MX nul (Null MX).',
+    'Un enregistrement dépassant 255 caractères doit être découpé en plusieurs chaînes entre guillemets au sein du même enregistrement TXT. Les serveurs récepteurs concatènent ces chaînes sans ajouter d\'espace : assurez-vous d\'inclure les espaces de séparation à l\'intérieur des segments. Vérifiez les directives de votre hébergeur DNS pour les chaînes longues.',
+  ],
+  endingTitle: '~all ou -all : quelle terminaison choisir',
+  endingIntro: 'Les principaux fournisseurs de messagerie et comités d\'experts ont des recommandations différentes :',
+  endingList: [
+    '[Google](https://knowledge.workspace.google.com/admin/security/set-up-spf) recommande ~all (Softfail).',
+    'Le [M3AAWG](https://www.m3aawg.org/sites/default/files/m3aawg-email-authentication-recommended-best-practices-09-2020.pdf), consortium regroupant les grands acteurs du courrier électronique, préconise la terminaison en ~all afin d\'éviter le rejet brutal des messages avant le traitement de la politique DMARC.',
+    '[Microsoft](https://learn.microsoft.com/en-us/defender-office-365/email-authentication-spf-configure) recommande -all (Fail strict), à condition que DKIM et DMARC soient intégralement configurés.',
+  ],
+  endingParas: [
+    'Le principal inconvénient de -all réside dans le fait que certains serveurs récepteurs rejettent immédiatement le message lors de la connexion SMTP initiale, avant même d\'avoir évalué la politique DMARC. La [RFC 9989](https://www.rfc-editor.org/rfc/rfc9989), norme DMARC de 2026, souligne que ces messages rejetés prématurément ne génèrent aucun rapport DMARC, ce qui complique grandement le dépannage de vos envois légitimes.',
+    'En pratique, ~all s\'avère le choix le plus sûr pour les domaines actifs, en particulier pendant la phase de recensement de vos flux d\'envoi. Si votre domaine est protégé par une règle DMARC quarantine ou reject, c\'est DMARC qui déterminera le sort du message. Réservez -all aux domaines purement défensifs qui n\'émettent jamais d\'e-mails. N\'utilisez jamais +all (qui autorise tout le web) et évitez ?all (équivalent à une absence totale de politique).',
+  ],
+  resultsTitle: 'Signification des diagnostics du vérificateur SPF',
+  thResult: 'Diagnostic',
+  thMeaning: 'Signification',
+  thAction: 'Mesure à prendre',
+  results: [
+    {
+      result: 'Enregistrement SPF valide',
+      meaning: 'Un enregistrement unique, correctement formaté, respectant la limite de 10 requêtes et conclu par ~all ou -all.',
+      action: 'Aucune action requise. Vérifiez à nouveau lors de l’ajout d’un nouvel outil d’envoi.',
+    },
+    {
+      result: 'Enregistrement fonctionnel avec avertissements',
+      meaning: 'L’enregistrement est utilisable par les récepteurs, mais présente des faiblesses : 9 ou 10 requêtes DNS utilisées, absence de modificateur all ou présence de ptr.',
+      action: 'Corrigez les avertissements signalés. Ils se transforment souvent en erreurs bloquantes lors du prochain ajout de service.',
+    },
+    {
+      result: 'Enregistrement SPF rompu',
+      meaning: 'L’enregistrement génère un Permerror DNS, provoquant l’échec du contrôle SPF pour tous les e-mails de votre domaine.',
+      action: 'Résolvez sans attendre les erreurs signalées. Les causes les plus fréquentes sont la présence de doublons TXT et le dépassement des 10 requêtes.',
+    },
+    {
+      result: 'L’enregistrement SPF ne protège pas le domaine',
+      meaning: 'L’enregistrement se termine par +all ou inclut un enregistrement qui le fait, autorisant n’importe quel serveur sur Internet à émettre en votre nom.',
+      action: 'Remplacez +all par ~all ou -all.',
+    },
+    {
+      result: 'Aucun enregistrement SPF',
+      meaning: 'Le domaine ne publie aucun enregistrement TXT débutant par v=spf1.',
+      action: 'Créez-en un via l’onglet Créer. Un domaine inactif doit publier v=spf1 -all.',
+    },
+    {
+      result: 'Le domaine n’existe pas',
+      meaning: 'Aucun enregistrement DNS n’a été trouvé pour ce nom de domaine (NXDOMAIN).',
+      action: 'Vérifiez l’orthographe saisie et assurez-vous que le domaine est convenablement enregistré et actif.',
+    },
+  ],
+  receiverIntro:
+    'Les serveurs de messagerie récepteurs appliquent une terminologie normalisée pour qualifier le résultat d\'un contrôle SPF. Ces résultats figurent dans les en-têtes Authentication-Results et dans les rapports DMARC agrégés :',
+  spfResults: [
+    { result: 'pass', meaning: 'Le serveur expéditeur est explicitement autorisé par l’enregistrement SPF.' },
+    { result: 'fail', meaning: 'Le serveur expéditeur n’est pas autorisé (-all). Le serveur récepteur peut rejeter le message.' },
+    { result: 'softfail', meaning: 'Le serveur n’est probablement pas autorisé (~all). La RFC 7208 stipule que ce statut ne doit pas justifier à lui seul le rejet du message.' },
+    { result: 'neutral', meaning: 'L’enregistrement n’émet aucun avis sur ce serveur (?all). Équivaut fonctionnellement à une absence de politique.' },
+    { result: 'none', meaning: 'Le domaine ne publie aucun enregistrement SPF.' },
+    { result: 'temperror', meaning: 'Une erreur DNS temporaire est survenue lors de la résolution. L’expéditeur peut retenter la transmission ultérieurement.' },
+    { result: 'permerror', meaning: 'L’enregistrement SPF est mal formé ou enfreint les limites (ex. >10 requêtes). Seule une modification DNS peut corriger ce statut.' },
+  ],
+  errorsTitle: 'Erreurs courantes sur les enregistrements SPF et solutions',
+  errorsIntro:
+    'Une [analyse de 12 millions de domaines populaires réalisée en 2023](https://arxiv.org/abs/2502.08240) a constaté que 56,5 % publiaient un enregistrement SPF, et que 2,9 % d\'entre eux contenaient des erreurs bloquantes. L\'anomalie la plus répandue était un include ou redirect pointant vers un domaine dépourvu de SPF, suivi de près par le dépassement du quota de requêtes DNS.',
+  errors: [
+    {
+      title: 'Deux enregistrements SPF sur le même domaine',
+      text: 'Cette erreur survient généralement lorsqu’un nouveau service demande d’ajouter un enregistrement TXT et qu’une seconde ligne est créée au lieu de modifier la première. Publier plusieurs entrées SPF entraîne automatiquement un Permerror. Fusionnez l’ensemble des mécanismes dans une seule entrée commençant par v=spf1 et finissant par un unique all.',
+    },
+    {
+      title: 'Include pointant vers un domaine invalide ou vide',
+      text: 'Si une directive include cible un domaine ne publiant aucun enregistrement SPF valide, l’ensemble de votre politique SPF échoue avec une erreur Permerror. Cela provient généralement d’une faute de frappe ou d’un service résilié. Supprimez l’include obsolète ou rectifiez sa valeur.',
+    },
+    {
+      title: '+all, ?all ou omission de la conclusion all',
+      text: '`+all` autorise l’intégralité des serveurs d’Internet et détruit toute sécurité. `?all` ou l’absence de clause finale renvoie un statut Neutral traité comme une absence de protection. Terminez toujours votre politique par ~all ou -all.',
+    },
+    {
+      title: 'Présence du mécanisme ptr',
+      text: 'La RFC 7208 déconseille formellement le mécanisme ptr. Lourd en ressources, il consomme une requête DNS et souffre de défaillances fréquentes lors de résolutions DNS lentes. Remplacez-le par des directives ip4 et ip6 explicites.',
+    },
+    {
+      title: 'Erreurs de syntaxe et de ponctuation',
+      text: 'Un espace inséré après les deux-points, un bloc IPv4 incomplet ou un terme inconnu déclenchent un Permerror immédiat. Une erreur plus insidieuse, `include=example.com` (avec un signe égal au lieu de deux-points), est ignorée comme modificateur inconnu : le service visé n’est alors jamais autorisé. Notre vérificateur détecte chacune de ces anomalies.',
+    },
+  ],
+  mythsTitle: 'Trois idées reçues fréquentes sur le SPF',
+  myths: [
+    '« Un enregistrement SPF ne doit jamais comporter de majuscules. » La RFC 7208 précise expressément que les noms et mécanismes sont insensibles à la casse.',
+    '« Un enregistrement SPF ne peut pas dépasser 255 caractères. » La limite de 255 caractères s’applique à chaque chaîne individuelle dans l’enregistrement DNS TXT. Un enregistrement plus long est simplement fragmenté en plusieurs chaînes concaténées.',
+    '« On peut déclarer jusqu’à 10 directives include. » La limite s’applique au nombre total de requêtes DNS récursives, et non au nombre littéral de termes include déclarés.',
+  ],
+  authTitle: 'Le SPF au sein de la chaîne d\'authentification des e-mails',
+  authParas: [
+    'Un statut SPF pass ne garantit pas à lui seul une sécurité totale. Selon l\'étude de 2023 précitée, 34,7 % des domaines autorisent indirectement plus de 100 000 adresses IP distinctes. De plus, le SPF échoue presque systématiquement lors du transfert automatique d\'e-mails, l\'IP du serveur relais n\'étant pas répertoriée dans votre enregistrement.',
+    'DKIM résout cette limite en apposant une signature cryptographique sur le contenu du message, préservée lors des transferts. DMARC fait la synthèse en vérifiant la conformité du domaine visible (From) avec SPF ou DKIM, et ordonne aux serveurs destinataires la conduite à tenir en cas d\'échec. Configurez ces défenses complémentaires grâce à notre [générateur de DKIM](/dkim-generator) et notre [générateur de DMARC](/dmarc-generator). Utilisez notre [recherche MX](/mx-lookup) pour identifier vos serveurs de réception.',
+    'Aucun protocole d\'authentification ne protège toutefois contre les adresses destinataires invalides ou inexistantes. Celles-ci génèrent des rebonds qui dégradent votre réputation d\'expéditeur. Nettoyez vos adresses avec notre [vérificateur d\'e-mail](/email-checker) ou traitez vos listes complètes via notre [vérificateur d\'e-mails en masse](/bulk-email-verifier). Pour partager une synthèse claire avec vos équipes, consultez la [définition de l\'enregistrement SPF dans le glossaire](/glossary/spf).',
+  ],
+  faqTitle: 'Foire aux questions',
+  faqs: [
+    {
+      q: 'Qu\'est-ce qu\'un enregistrement SPF ?',
+      a: 'Il s\'agit d\'un enregistrement TXT configuré dans la zone DNS de votre domaine listant l\'ensemble des serveurs autorisés à envoyer des messages en son nom. Les serveurs récepteurs le consultent pour valider la légitimité des e-mails entrants. SPF signifie Sender Policy Framework et est encadré par la RFC 7208.',
+    },
+    {
+      q: 'Comment vérifier mon enregistrement SPF ?',
+      a: 'Saisissez votre nom de domaine dans le champ de vérification situé en haut de cette page. Dans une invite de commande, vous pouvez exécuter nslookup -type=txt exemple.fr sous Windows ou dig txt exemple.fr sous Linux/macOS. Recherchez la ligne TXT commençant par v=spf1.',
+    },
+    {
+      q: 'Un domaine peut-il comporter deux enregistrements SPF ?',
+      a: 'Non. La RFC 7208 interdit formellement d\'avoir plus d\'un enregistrement SPF par nom de domaine. La présence de multiples entrées entraîne un Permerror immédiat et fait échouer la validation de tous vos e-mails. Vous devez regrouper tous vos mécanismes dans un seul et même enregistrement.',
+    },
+    {
+      q: 'Que signifie un Permerror SPF ?',
+      a: 'Le statut Permerror (Permanent Error) indique que le serveur destinataire n\'a pas pu interpréter votre politique SPF. Les déclencheurs habituels sont la présence de doublons TXT, le dépassement du plafond de 10 requêtes DNS, ou une directive include pointant vers un domaine inexistant ou erroné.',
+    },
+    {
+      q: 'Quelle est la différence entre ~all et -all ?',
+      a: 'Avec ~all (Softfail), les serveurs non listés génèrent un avertissement sans rejet immédiat. Avec -all (Fail strict), le message non autorisé est explicitement rejeté par les serveurs stricts. Google recommande ~all, tandis que Microsoft préconise -all dès lors que DKIM et DMARC sont opérationnels.',
+    },
+    {
+      q: 'Les sous-domaines ont-ils besoin d\'un enregistrement SPF distinct ?',
+      a: 'Oui, dès lors qu\'ils émettent des e-mails. Un sous-domaine n\'hérite pas automatiquement de la politique SPF de son domaine principal. Si mail.exemple.fr émet des messages, il doit disposer de sa propre entrée. S\'il n\'envoie rien, appliquez-lui v=spf1 -all.',
+    },
+    {
+      q: 'Quel est le délai de propagation d\'une modification SPF ?',
+      a: 'Le délai dépend directement de la durée de vie (TTL) configurée sur l\'enregistrement DNS existant. Si le TTL est de 3600 secondes, la mise à jour prendra au maximum une heure. Bien que certains hébergeurs évoquent un délai théorique de 24 à 48 heures, les changements sont effectifs sur la plupart des résolveurs en quelques minutes.',
+    },
+    {
+      q: 'Le SPF reste-t-il nécessaire si DKIM est déjà configuré ?',
+      a: 'Absolument. Gmail et Yahoo imposent désormais SPF et DKIM pour tous les expéditeurs réguliers et volumineux. De plus, DMARC valide l\'authentification si au moins l\'un des deux protocoles est aligné, ce qui garantit une délivrabilité optimale même si l\'un d\'eux rencontre une anomalie.',
+    },
+    {
+      q: 'Le SPF empêche-t-il totalement l\'usurpation d\'identité par e-mail ?',
+      a: 'Pas à lui seul. Le protocole SPF valide uniquement l\'adresse technique de retour d\'enveloppe (Return-Path), et non l\'adresse d\'expéditeur visible (From) affichée dans la boîte de réception. C\'est l\'alignement DMARC qui vient combler cette lacune en exigeant la concordance entre les deux adresses.',
+    },
+  ],
+  ctaHeadline: 'Validez vos adresses avant chaque envoi',
+}
+
+const es: SpfPageStrings = {
+  metaTitle: 'Verificador SPF: Comprobar y Generar Registro SPF Gratis | Giggal.ai',
+  ogTitle: 'Verificador SPF: Comprobar y Generar Registro SPF Gratis',
+  description:
+    'Comprueba gratis el registro SPF de cualquier dominio. Consulta el significado de cada parte, cuenta las consultas DNS frente al límite de 10, detecta errores o genera un nuevo registro.',
+  ogImage: '/og-image.png',
+  ogAlt: 'Verificador y generador de registro SPF',
+  crumb: 'Verificador SPF',
+  appName: 'Verificador SPF',
+  featureList: [
+    'Sin registro ni tarjeta requerida',
+    'Recuento en directo de consultas DNS',
+    'Análisis riguroso según RFC 7208',
+    'Instrucciones de corrección claras',
+  ],
+  h1: 'Verificador y generador de registro SPF',
+  heroIntro:
+    'Comprueba el registro SPF de un dominio en el DNS público. La herramienta desglosa cada término, calcula las consultas DNS frente al límite de 10 de la RFC 7208 y detecta errores de configuración.',
+  howTitle: 'Cómo comprobar un registro SPF',
+  howSteps: [
+    'Escribe un dominio en el campo superior. También puedes pegar una dirección de correo completa: la herramienta extraerá el dominio automáticamente.',
+    'Haz clic en Comprobar registro SPF. La consulta se realiza en servidores DNS públicos autorizados, de la misma forma que lo hace un servidor de correo receptor.',
+    'Revisa primero el resumen: indica si el registro es válido, si presenta advertencias o si está roto.',
+    'A continuación, consulta la lista de problemas detectados. Cada punto explica con exactitud qué corregir.',
+    'Debajo encontrarás la explicación de cada término del registro y las consultas DNS que consume. Puedes desplegar cada include para ver qué autoriza.',
+  ],
+  howNote:
+    'El enlace en la barra de direcciones guarda esta misma comprobación SPF para que puedas compartirlo con un compañero o tu proveedor de DNS. Ten en cuenta una limitación: los servidores receptores evalúan el SPF según la IP del servidor que entrega el mensaje. Al no tener un mensaje real que analizar, esta herramienta valida el registro y su árbol DNS público. No puede evaluar macros SPF dinámicas que dependen de la IP del remitente.',
+  imageAlt: 'Ilustración de un registro SPF dividido en partes con contador de consultas DNS sobre un total de 10.',
+  whatTitle: '¿Qué es un registro SPF?',
+  whatIntro:
+    'Un registro SPF es un registro TXT en el DNS de un dominio que enumera los servidores autorizados para enviar correos en su nombre. SPF significa Sender Policy Framework y sus reglas están recogidas en la [RFC 7208](https://www.rfc-editor.org/rfc/rfc7208). Un dominio configurado con Google Workspace suele tener un registro como este:',
+  whatAfter: [
+    '`v=spf1` identifica el inicio del registro SPF. `include:_spf.google.com` autoriza a todos los servidores de la lista oficial de Google. `~all` indica a los servidores de destino que traten con sospecha los correos procedentes de cualquier otro servidor.',
+    'Al recibir un correo, el servidor de destino toma el dominio de la dirección de rebote (Return-Path o Envelope From), consulta su registro SPF y comprueba si la IP del servidor emisor está autorizada. SPF no comprueba la dirección From visible en la bandeja de entrada. Por este motivo se combina con DKIM y DMARC. Para entender cómo se integran, consulta [SPF, DKIM y DMARC explicados](/blog/spf-dkim-dmarc-explained).',
+    'Desde febrero de 2024, [Gmail exige SPF o DKIM](https://support.google.com/a/answer/81126) a todos los remitentes, y ambos a quienes realizan envíos masivos. Yahoo aplica los mismos requisitos.',
+  ],
+  partsTitle: 'Qué significa cada parte del registro SPF',
+  partsIntro:
+    'Un registro SPF se compone de términos separados por espacios. Los servidores de destino leen de izquierda a derecha y se detienen en el primer término que coincide con el servidor de envío.',
+  thPart: 'Término',
+  thDoes: 'Qué hace',
+  thLookup: 'Consulta DNS',
+  lookupLabel: 'Consulta DNS: ',
+  parts: [
+    { part: 'v=spf1', does: 'Identifica el registro TXT como SPF. Debe figurar al principio y escribirse exactamente así.', lookup: 'No' },
+    { part: 'ip4:192.0.2.10', does: 'Autoriza una dirección IPv4 concreta o un rango CIDR como 192.0.2.0/24.', lookup: 'No' },
+    { part: 'ip6:2001:db8::/32', does: 'Autoriza una dirección o un rango IPv6.', lookup: 'No' },
+    { part: 'a', does: 'Autoriza las direcciones IP del propio dominio o del dominio indicado tras los dos puntos.', lookup: 'Sí' },
+    { part: 'mx', does: 'Autoriza los servidores definidos en los registros MX receptores del dominio.', lookup: 'Sí' },
+    { part: 'include:_spf.google.com', does: 'Autoriza todos los servidores que autoriza el registro SPF de otro dominio. Es la forma estándar de integrar servicios externos.', lookup: 'Sí, más anidadas' },
+    { part: 'exists:%{i}.example.com', does: 'Coincide si la consulta DNS devuelve una dirección A. Utilizado por remitentes complejos mediante macros.', lookup: 'Sí' },
+    { part: 'ptr', does: 'Comprueba el nombre mediante resolución inversa (PTR). La RFC 7208 desaconseja su uso por lentitud e inestabilidad.', lookup: 'Sí' },
+    { part: '~all o -all', does: 'Determina qué ocurre con los servidores no autorizados explícitamente. Se coloca al final.', lookup: 'No' },
+    { part: 'redirect=example.net', does: 'Aplica el registro SPF de otro dominio en lugar de este. Se ignora si el registro contiene all.', lookup: 'Sí' },
+  ],
+  partsAfter: [
+    'Cualquier mecanismo puede llevar un calificador inicial que define el resultado en caso de coincidencia. `+` significa Pass (aprobado) y es el valor por defecto si se omite. `-` significa Fail (rechazo estricto), `~` significa Softfail (falso suave) y `?` significa Neutral (neutro). Por eso la palabra all suele cerrar los registros como `-all`, `~all` o `?all`.',
+    'Los nombres no distinguen entre mayúsculas y minúsculas: `Include:` funciona igual que `include:`. La RFC 7208 aconseja cerrar todo registro con all o con un modificador redirect. Sin una regla de cierre explícita, los servidores no listados obtienen un resultado neutral.',
+  ],
+  limitTitle: 'El límite estricto de 10 consultas DNS',
+  limitParas: [
+    'Cada include, a, mx, ptr, exists y redirect obliga al servidor de destino a realizar una consulta de resolución DNS. La RFC 7208 establece un límite máximo de 10 consultas por validación. Las consultas realizadas dentro de los include anidados también cuentan, por lo que un solo include puede sumar varias consultas. ip4, ip6 y all no generan ninguna consulta. Si un registro supera las 10 consultas, los servidores receptores abortan el análisis con un error permanente (Permerror) y el SPF falla.',
+    'Llegar a este límite es muy fácil. Hemos medido el coste de includes comunes en DNS público: Google Workspace consume 1 consulta, Microsoft 365 consume 1 consulta, Salesforce consume 2, Mailgun consume 5 y Freshdesk 7. Una empresa en Google Workspace que sume Mailgun y Freshdesk ya alcanza 13 consultas. Un [estudio de 2024 sobre registros SPF](https://www.usenix.org/conference/usenixsecurity24/presentation/ashiq) en dominios .com, .net, .org y .se reveló que el 6,5 % superaba las 10 consultas, y que los includes de solo dos proveedores de hosting causaban el 83,7 % de estos casos.',
+    'Los costes también cambian con el tiempo. El include de Google costaba 4 consultas hasta diciembre de 2025, cuando [Google sustituyó sus includes anidados por una lista plana](https://www.uriports.com/blog/google-simplifies-its-spf-record/). Muchos manuales y generadores antiguos todavía mencionan el valor de 4. Nuestra herramienta analiza el árbol DNS en tiempo real para contar el número exacto.',
+    'Superar el límite no siempre hace fallar todos los mensajes de forma predecible. Como [explica Microsoft](https://learn.microsoft.com/en-us/defender-office-365/email-authentication-spf-configure), los servidores evalúan los mecanismos de izquierda a derecha y se detienen en la primera coincidencia. Los correos de un proveedor listado al inicio pueden pasar, mientras que los de un servicio al final fallan. Por eso es indispensable contar las consultas del registro al completo.',
+    'Existe además un segundo límite: las consultas vacías (void lookups), que ocurren al consultar dominios inexistentes o sin registros. La RFC 7208 obliga a los servidores a detener la evaluación tras 2 consultas vacías consecutivas.',
+  ],
+  underTitle: 'Cómo mantenerse por debajo de las 10 consultas DNS',
+  underSteps: [
+    'Elimina includes de herramientas y servicios que ya no utilices.',
+    'Elimina includes que los proveedores ya no solicitan. Plataformas como Mailchimp, Postmark, Brevo y Klaviyo ya no precisan un include en tu dominio principal. SendGrid y Amazon SES gestionan sus envíos en subdominios dedicados. Consulta la lista inferior.',
+    'Define tus propios servidores de correo con ip4 e ip6 en lugar de mecanismos a o mx. La RFC 7208 recomienda este orden y las direcciones IP directas no consumen consultas DNS.',
+    'Envía correos masivos o transaccionales a través de un subdominio dedicado, como noticias.ejemplo.es. Cada subdominio tiene su propio registro y dispone de su propio cupo de 10 consultas.',
+  ],
+  underNote:
+    'Algunos servicios ofrecen aplanamiento de SPF (SPF flattening), reemplazando los includes por sus direcciones IP resultantes. Aunque reduce consultas DNS, los proveedores actualizan sus rangos de IP periódicamente y un registro aplanado queda desactualizado. Microsoft desaconseja aplanar registros salvo en servicios con rangos fijos y exige revisiones trimestrales.',
+  servicesTitle: 'Includes SPF para Google Workspace, Microsoft 365 y otros proveedores',
+  servicesIntro:
+    'Estos son los valores include recomendados en la documentación oficial de cada servicio, con las consultas DNS medidas en DNS público a 12 de octubre de 2026. Comprueba siempre la documentación de tu proveedor por si tu cuenta requiere una variante regional.',
+  thService: 'Servicio',
+  thInclude: 'Include',
+  thLookups: 'Consultas DNS',
+  lookupCount: (n) => `${n} ${n === 1 ? 'consulta' : 'consultas'}`,
+  servicesNote:
+    'HubSpot asigna a cada cuenta un include exclusivo que termina en hubspotemail.net. Debes copiarlo desde los ajustes de correo de HubSpot. Consume 1 consulta.',
+  notNeededTitle: 'Servicios que generalmente no necesitan un include SPF',
+  notNeededIntro:
+    'El control SPF se valida contra la dirección de rebote técnica (Return-Path), no contra el campo From visible. La mayoría de proveedores de email marketing actuales gestionan sus propios rebotes en sus servidores o mediante subdominios CNAME. Añadir su include a tu dominio principal solo consume consultas DNS sin aportar protección.',
+  notNeededAfter: 'Nuestro verificador resalta estos includes redundantes si los detecta en tu registro.',
+  createTitle: 'Cómo crear un registro SPF',
+  createIntro:
+    'Pasa a la pestaña Crear para utilizar el generador interactivo de SPF. Marca los servicios que envían correos en tu nombre y la herramienta generará la sintaxis adecuada mientras supervisa el consumo de consultas DNS. Si tu dominio ya tiene un registro, cárgalo primero para complementarlo en lugar de sobreescribirlo. Estos son los pasos recomendados :',
+  createSteps: [
+    'Haz un inventario de todos los servicios que envían correos desde tu dominio: correo corporativo, boletines, CRM, help desk, facturación y formularios web. Los informes DMARC ayudan a identificar remitentes olvidados.',
+    'Localiza el include de cada servicio o selecciónalo en nuestra herramienta. Para servidores propios, añade sus direcciones IP.',
+    'Elige la regla de cierre: ~all o -all. La siguiente sección detalla las implicaciones de cada una.',
+    'Publica la regla como un único registro TXT en el nodo raíz de tu dominio (habitualmente indicado con @ en tu panel DNS). Si ya existe un registro que empiece por v=spf1, edítalo en lugar de añadir uno nuevo.',
+    'Espera unos minutos a la propagación DNS y vuelve a verificar el dominio con este analizador para confirmar que todo funciona.',
+  ],
+  createParas: [
+    'Cada subdominio emisor necesita su propio registro, ya que no heredan la configuración del dominio principal. Un dominio o subdominio que nunca envíe correos debe protegerse expresamente con: `v=spf1 -all`. La RFC 7208 define esto como una práctica recomendada esencial para evitar la suplantación. El [NCSC del Reino Unido](https://www.ncsc.gov.uk/blog-post/protecting-parked-domains) recomienda añadir también una regla DMARC con p=reject y un registro MX nulo a los dominios inactivos.',
+    'Los registros que superen los 255 caracteres deben dividirse en varias cadenas entrecomilladas dentro del mismo registro TXT. Los servidores receptores unen estas cadenas sin insertar espacios, por lo que el espacio debe figurar dentro de las comillas. Revisa la documentación de tu proveedor DNS sobre cadenas largas.',
+  ],
+  endingTitle: '~all o -all: qué cierre utilizar',
+  endingIntro: 'Los principales proveedores y organizaciones de la industria no coinciden plenamente:',
+  endingList: [
+    '[Google](https://knowledge.workspace.google.com/admin/security/set-up-spf) recomienda usar ~all (Softfail).',
+    'El [M3AAWG](https://www.m3aawg.org/sites/default/files/m3aawg-email-authentication-recommended-best-practices-09-2020.pdf), consorcio internacional de operadores de correo, recomienda que los registros terminen en ~all y solicita a los receptores no rechazar mensajes por SPF antes de evaluar la alineación DMARC.',
+    '[Microsoft](https://learn.microsoft.com/en-us/defender-office-365/email-authentication-spf-configure) recomienda -all (Fail estricto), siempre que DKIM y DMARC estén plenamente operativos.',
+  ],
+  endingParas: [
+    'El inconveniente de -all es que algunos servidores receptores descartan los mensajes durante la negociación SMTP inicial, antes de verificar la política DMARC. La norma [RFC 9989](https://www.rfc-editor.org/rfc/rfc9989), estándar DMARC de 2026, destaca que esos mensajes descartados nunca se reflejan en los informes DMARC agregados, lo que dificulta diagnosticar entregas legítimas perdidas.',
+    'En la práctica, ~all es la alternativa más prudente para dominios activos, especialmente mientras terminas de mapear todos tus canales de envío. Si dispones de una política DMARC en quarantine o reject, DMARC determinará el destino final del correo. Reserva -all para dominios inactivos o puramente defensivos. Nunca uses +all (autoriza a todo Internet) y evita ?all (equivalente a no tener protección).',
+  ],
+  resultsTitle: 'Qué significan los resultados de la comprobación SPF',
+  thResult: 'Resultado',
+  thMeaning: 'Significado',
+  thAction: 'Qué hacer',
+  results: [
+    {
+      result: 'Registro SPF válido',
+      meaning: 'Registro único, sintaxis correcta, dentro del límite de 10 consultas y finalizado en ~all o -all.',
+      action: 'Ninguna acción necesaria. Comprueba de nuevo al añadir un nuevo servicio emisor.',
+    },
+    {
+      result: 'Registro SPF funcional con advertencias',
+      meaning: 'Los servidores pueden interpretarlo, pero contiene debilidades como 9 o 10 consultas, ausencia de regla all o uso de ptr.',
+      action: 'Corrige las advertencias indicadas antes de que se conviertan en errores al sumar otro proveedor.',
+    },
+    {
+      result: 'Registro SPF roto',
+      meaning: 'El registro genera un Permerror en destino, provocando el fallo del SPF en todos los envíos del dominio.',
+      action: 'Soluciona los errores señalados. Las causas más comunes son registros duplicados y superar las 10 consultas.',
+    },
+    {
+      result: 'El registro SPF no protege el dominio',
+      meaning: 'El registro finaliza en +all o incluye un término que lo hace, autorizando a cualquier servidor de Internet a enviar en tu nombre.',
+      action: 'Cambia +all por ~all o -all.',
+    },
+    {
+      result: 'Sin registro SPF',
+      meaning: 'El dominio no tiene ningún registro TXT que empiece por v=spf1.',
+      action: 'Crea uno en la pestaña Crear. Un dominio que no envíe correo debe tener v=spf1 -all.',
+    },
+    {
+      result: 'El dominio no existe',
+      meaning: 'El DNS no devuelve ningún registro para este dominio (NXDOMAIN).',
+      action: 'Comprueba que el nombre esté bien escrito y que el dominio esté activo y registrado.',
+    },
+  ],
+  receiverIntro:
+    'Los servidores receptores emplean términos estandarizados para clasificar el resultado del análisis SPF en los encabezados Authentication-Results y en los informes DMARC:',
+  spfResults: [
+    { result: 'pass', meaning: 'El servidor emisor está expresamente autorizado por la política SPF.' },
+    { result: 'fail', meaning: 'El servidor no está autorizado (-all). El receptor puede descartar el mensaje.' },
+    { result: 'softfail', meaning: 'El servidor probablemente no esté autorizado (~all). La RFC 7208 indica que este estado no debe provocar el rechazo por sí solo.' },
+    { result: 'neutral', meaning: 'El registro no define una regla para este servidor (?all). Equivale a no tener SPF.' },
+    { result: 'none', meaning: 'El dominio no publica ningún registro SPF.' },
+    { result: 'temperror', meaning: 'Fallo temporal en la resolución DNS. El emisor puede reintentar el envío más tarde.' },
+    { result: 'permerror', meaning: 'El registro contiene errores sintácticos o supera límites técnicos. Requiere una corrección en el DNS.' },
+  ],
+  errorsTitle: 'Errores frecuentes en registros SPF y cómo corregirlos',
+  errorsIntro:
+    'Un [estudio de 2023 sobre 12 millones de dominios populares](https://arxiv.org/abs/2502.08240) halló SPF en el 56,5 % de ellos y errores graves en el 2,9 % de los registros configurados. El fallo más común fue incluir dominios que carecen de registro SPF propio, seguido inmediatamente por exceder el límite de consultas DNS.',
+  errors: [
+    {
+      title: 'Dos registros SPF en el mismo dominio',
+      text: 'Suele ocurrir al dar de alta una herramienta nueva cuando su guía indica “añade este registro TXT” y se crea una entrada adicional en vez de editar la existente. Tener dos registros SPF genera un Permerror automático. Combina todos los mecanismos en una sola entrada que comience por v=spf1 y termine con un único all.',
+    },
+    {
+      title: 'Include que apunta a un dominio sin SPF o inexistente',
+      text: 'Si un include referencia un dominio sin registro SPF válido, toda la comprobación SPF falla con un Permerror. Suele deberse a erratas tipográficas o a proveedores dados de baja. Elimina o corrige el include afectado.',
+    },
+    {
+      title: '+all, ?all o falta de regla all final',
+      text: '`+all` autoriza a todos los servidores del mundo y desactiva la protección. `?all` o la omisión del cierre devuelven un estado neutral inútil. Concluye siempre tu registro con ~all o -all.',
+    },
+    {
+      title: 'Uso del mecanismo ptr',
+      text: 'La RFC 7208 desaconseja el uso de ptr por su excesiva lentitud y consumo de consultas DNS. Sustitúyelo por entradas ip4 e ip6 directas para los servidores correspondientes.',
+    },
+    {
+      title: 'Errores tipográficos en la sintaxis',
+      text: 'Un espacio tras los dos puntos, una dirección IPv4 incompleta o palabras no reconocidas causan un Permerror. Un fallo sutil es escribir `include=example.com` con signo igual en lugar de dos puntos: el DNS lo ignora como modificador desconocido y el servicio nunca queda autorizado. Nuestra herramienta detecta estos fallos al instante.',
+    },
+  ],
+  mythsTitle: 'Tres mitos habituales sobre el registro SPF',
+  myths: [
+    '«Un registro SPF no puede tener letras mayúsculas.» La RFC 7208 define los términos como totalmente insensibles a mayúsculas y minúsculas.',
+    '«Un registro SPF tiene un tope máximo de 255 caracteres.» El límite de 255 caracteres aplica a cada subcadena dentro del registro DNS TXT. Los registros largos se dividen en varias cadenas que el servidor receptor une automáticamente.',
+    '«Se pueden incluir hasta 10 términos include.» La limitación aplica al total de consultas DNS recursivas que genera el árbol SPF, no al número de directivas include escritas.',
+  ],
+  authTitle: 'El SPF dentro de la autenticación del correo electrónico',
+  authParas: [
+    'Un resultado pass en SPF tiene limitaciones. En el estudio de 2023, el 34,7 % de los dominios analizados autorizaban indirectamente más de 100.000 direcciones IP. Además, el SPF falla habitualmente ante el reenvío automático de correos, ya que la IP del servidor que reenvía no figura en el registro original.',
+    'DKIM complementa esta carencia firmando criptográficamente el mensaje, resistiendo a los reenvíos. DMARC coordina ambos protocolos comprobando que el dominio del campo From coincida con el validado por SPF o DKIM, e indica a los servidores de destino cómo actuar si ninguno supera la prueba. Configura los registros complementarios con nuestro [generador DKIM](/dkim-generator) y nuestro [generador DMARC](/dmarc-generator). Emplea nuestra [consulta MX](/mx-lookup) para revisar la recepción de tu dominio.',
+    'La autenticación tampoco solventa los envíos a buzones inexistentes. Los correos que rebotan perjudican la reputación de tu dominio. Limpia direcciones individuales con el [verificador de email](/email-checker) o valida listas completas con nuestro [verificador masivo de emails](/bulk-email-verifier). Si necesitas una referencia técnica rápida para tu equipo, consulta la entrada sobre [registro SPF en el glosario](/glossary/spf).',
+  ],
+  faqTitle: 'Preguntas frecuentes',
+  faqs: [
+    {
+      q: '¿Qué es un registro SPF?',
+      a: 'Es un registro TXT configurado en el DNS de tu dominio que detalla los servidores autorizados para enviar correos en su nombre. Los servidores destinatarios lo leen para verificar la autenticidad del remitente. Las siglas corresponden a Sender Policy Framework y se rigen por la RFC 7208.',
+    },
+    {
+      q: '¿Cómo puedo verificar mi registro SPF?',
+      a: 'Escribe tu dominio en el verificador situado en la parte superior de esta página. También puedes ejecutar nslookup -type=txt ejemplo.es en la consola de Windows o dig txt ejemplo.es en macOS y Linux. Localiza la línea TXT que empieza por v=spf1.',
+    },
+    {
+      q: '¿Puede un dominio tener dos registros SPF?',
+      a: 'No. La RFC 7208 prohíbe explícitamente tener más de un registro SPF por nombre de dominio. Si existen dos o más, los servidores receptores devuelven un error permanente y el SPF fallará en todos tus envíos. Debes unificar todos los mecanismos en una única entrada TXT.',
+    },
+    {
+      q: '¿Qué significa un Permerror en SPF?',
+      a: 'Indica un fallo permanente que impide al servidor receptor interpretar el registro SPF. Suele originarse por registros duplicados, superar las 10 consultas DNS o apuntar un include hacia un dominio sin registro SPF válido.',
+    },
+    {
+      q: '¿Cuál es la diferencia entre ~all y -all?',
+      a: 'Con ~all (Softfail), los correos no autorizados se catalogan con sospecha pero no suelen rechazarse de inmediato. Con -all (Fail estricto), se indica el rechazo directo del correo no autorizado. Google sugiere ~all y Microsoft recomienda -all cuando DKIM y DMARC ya están en marcha.',
+    },
+    {
+      q: '¿Necesitan los subdominios su propio registro SPF?',
+      a: 'Sí, siempre que emitan correos electrónicos. Los subdominios no heredan la regla SPF del dominio principal. Si boletin.ejemplo.es envía mensajes, debe publicar su propio registro. Si nunca envía correos, debe configurarse con v=spf1 -all.',
+    },
+    {
+      q: '¿Cuánto tarda en propagarse un cambio en el registro SPF?',
+      a: 'El tiempo máximo viene fijado por el TTL del registro DNS anterior. Si el TTL es de 3600 segundos, la propagación tardará hasta una hora. Aunque algunos proveedores mencionan hasta 48 horas como margen máximo de seguridad, la mayoría de resolutores actualizan la información en pocos minutos.',
+    },
+    {
+      q: '¿Es necesario SPF si ya cuento con DKIM?',
+      a: 'Sí, es la mejor práctica recomendada. Proveedores como Gmail y Yahoo exigen ambos mecanismos para remitentes habituales. Además, DMARC valida el correo si al menos uno de los dos métodos se alinea correctamente, asegurando la máxima entregabilidad.',
+    },
+    {
+      q: '¿Evita el registro SPF la suplantación de identidad por correo?',
+      a: 'No por sí solo. El SPF valida únicamente la dirección técnica de rebote (Return-Path), no el remitente visible (From). Los spammers pueden superar el SPF con su propio dominio y falsear el campo From. DMARC resuelve esta brecha al exigir que ambos dominios coincidan.',
+    },
+  ],
+  ctaHeadline: 'Verifica tus listas de correo antes de enviar',
+}
+
+const nl: SpfPageStrings = {
+  metaTitle: 'SPF Checker: Gratis SPF Record Check en Generator | Giggal.ai',
+  ogTitle: 'SPF Checker: Gratis SPF Record Check en Generator',
+  description:
+    'Controleer gratis het SPF-record van elk domein. Bekijk wat elk onderdeel betekent, tel DNS-lookups tegen de limiet van 10, vind configuratiefouten of maak een nieuw SPF-record aan.',
+  ogImage: '/og-image.png',
+  ogAlt: 'SPF Record Checker en Generator',
+  crumb: 'SPF Checker',
+  appName: 'SPF Checker',
+  featureList: [
+    'Geen registratie of creditcard vereist',
+    'Live teller voor DNS-lookups',
+    'Strikte controle volgens RFC 7208',
+    'Directe suggesties voor probleemoplossing',
+  ],
+  h1: 'SPF Record Checker en Generator',
+  heroIntro:
+    'Controleer het SPF-record van een domein in openbare DNS. De tool ontleedt elk onderdeel, telt het aantal DNS-lookups tegen de RFC 7208-limiet van 10 en spoort configuratiefouten direct op.',
+  howTitle: 'Hoe controleer je een SPF-record',
+  howSteps: [
+    'Vul hierboven een domeinnaam in. Een compleet e-mailadres mag ook; de tool gebruikt alleen het domeingedeelte.',
+    'Klik op SPF-record controleren. De check leest het huidige record uit in openbare DNS, precies zoals een ontvangende mailserver dat doet.',
+    'Lees eerst het overzicht. Dat toont direct of het record geldig is, waarschuwingen bevat of defect is.',
+    'Bekijk vervolgens de lijst met eventuele problemen. Elk punt legt uit wat er aangepast moet worden.',
+    'Daaronder wordt elk onderdeel van het record uitgelegd met de bijbehorende DNS-lookups. Vouw een include open om te zien wat de service erachter autoriseert.',
+  ],
+  howNote:
+    'De link in de adresbalk herhaalt deze controle. Je kunt deze URL delen met een collega of je hostingprovider. Let op een beperking: een ontvangende server toetst SPF aan het IP-adres van de verzendende server. Deze tool heeft geen e-mailbericht om te analyseren en valideert het record zelf in DNS. Dynamische SPF-macro’s die afhangen van het verzendende IP kunnen niet live worden geëvalueerd.',
+  imageAlt: 'Illustratie van een opgesplitst SPF-record met een teller van het aantal gebruikte DNS-lookups op een maximum van 10.',
+  whatTitle: 'Wat is een SPF-record?',
+  whatIntro:
+    'Een SPF-record is een TXT-record in de DNS van een domein. Het vermeldt welke mailservers namens dat domein e-mail mogen versturen. SPF staat voor Sender Policy Framework en de officiële specificaties zijn vastgelegd in [RFC 7208](https://www.rfc-editor.org/rfc/rfc7208). Een domein dat Google Workspace gebruikt heeft doorgaans een record zoals dit:',
+  whatAfter: [
+    '`v=spf1` geeft aan dat het om een SPF-record gaat. `include:_spf.google.com` autoriseert alle verzendende servers uit de lijst van Google zelf. `~all` verzoekt ontvangende servers om e-mail van niet-vermelde servers als verdacht te behandelen.',
+    'Wanneer een e-mail binnenkomt, leest de ontvangende server het domein uit het Return-Path (de envelope sender). De server haalt het SPF-record van dat domein op en controleert of het IP-adres van de afzender daarin voorkomt. SPF controleert niet het zichtbare Van-adres (From header). Daarom werkt SPF nauw samen met DKIM en DMARC. Lees [SPF, DKIM en DMARC uitgelegd](/blog/spf-dkim-dmarc-explained) om te zien hoe deze drie standaarden elkaar aanvullen.',
+    'Sinds februari 2024 stelt [Gmail strenge eisen aan SPF of DKIM](https://support.google.com/a/answer/81126) voor alle verzenders, en beide voor bulkverzenders. Yahoo hanteert vergelijkbare regels.',
+  ],
+  partsTitle: 'Wat elk onderdeel van het SPF-record betekent',
+  partsIntro:
+    'Een SPF-record bestaat uit termen gescheiden door spaties. Ontvangende servers lezen van links naar rechts en stoppen bij de eerste term die overeenkomt met de verzendende server.',
+  thPart: 'Onderdeel',
+  thDoes: 'Functie',
+  thLookup: 'DNS-lookup',
+  lookupLabel: 'DNS-lookup: ',
+  parts: [
+    { part: 'v=spf1', does: 'Markeert het TXT-record als SPF. Moet vooraan staan en exact zo geschreven zijn.', lookup: 'Nee' },
+    { part: 'ip4:192.0.2.10', does: 'Autoriseert een specifiek IPv4-adres of een IP-reeks zoals 192.0.2.0/24.', lookup: 'Nee' },
+    { part: 'ip6:2001:db8::/32', does: 'Autoriseert een IPv6-adres of -reeks.', lookup: 'Nee' },
+    { part: 'a', does: 'Autoriseert de IP-adressen van het domein zelf, of van het domein dat na de dubbele punt volgt.', lookup: 'Ja' },
+    { part: 'mx', does: 'Autoriseert de ontvangende mailservers uit de MX-records van het domein.', lookup: 'Ja' },
+    { part: 'include:_spf.google.com', does: 'Autoriseert alle servers die in het SPF-record van een ander domein staan. Zo voeg je externe diensten toe.', lookup: 'Ja, plus genest' },
+    { part: 'exists:%{i}.example.com', does: 'Geldt als een DNS-zoekopdracht een A-record oplevert. Grote verzenders gebruiken dit met macro’s.', lookup: 'Ja' },
+    { part: 'ptr', does: 'Controleert op basis van reverse DNS. RFC 7208 raadt dit sterk af wegens traagheid en onbetrouwbaarheid.', lookup: 'Ja' },
+    { part: '~all of -all', does: 'Bepaalt wat er gebeurt met servers die niet in het record staan. Komt altijd aan het einde.', lookup: 'Nee' },
+    { part: 'redirect=example.net', does: 'Past het SPF-record van een ander domein toe in plaats van dit record. Wordt genegeerd als all aanwezig is.', lookup: 'Ja' },
+  ],
+  partsAfter: [
+    'Elk mechanisme kan beginnen met een kwalificatie (qualifier) die het resultaat bepaalt bij een match. `+` staat voor Pass en is de standaardwaarde (wordt meestal weggelaten). `-` staat voor Fail, `~` voor Softfail en `?` voor Neutral. Daarom kan de term all eindigen als `-all`, `~all` of `?all`.',
+    'De mechanismen zijn hoofdletterongevoelig: `Include:` werkt exact hetzelfde als `include:`. RFC 7208 adviseert elk record af te sluiten met all of redirect. Zonder afsluitende term krijgen niet-vermelde servers een neutraal resultaat.',
+  ],
+  limitTitle: 'De strikte limiet van 10 DNS-lookups',
+  limitParas: [
+    'Elke include, a, mx, ptr, exists en redirect dwingt de ontvangende mailserver om een DNS-opdracht uit te voeren. RFC 7208 staat maximaal 10 van deze lookups toe. Lookups binnen geneste include-records tellen mee, waardoor één enkele include al meerdere lookups kan verbruiken. ip4, ip6 en all kosten geen lookups. Als een record meer dan 10 lookups vereist, stopt de ontvangende server met een Permerror en faalt de SPF-controle.',
+    'De limiet van 10 is sneller bereikt dan gedacht. We hebben in openbare DNS de kosten van veelgebruikte diensten gemeten: Google Workspace kost 1 lookup, Microsoft 365 kost 1 lookup, Salesforce 2, Mailgun 5 en Freshdesk 7. Een organisatie op Google Workspace die Mailgun en Freshdesk toevoegt, zit al op 13 lookups. Een [onderzoek uit 2024 naar SPF-records](https://www.usenix.org/conference/usenixsecurity24/presentation/ashiq) op .com, .net, .org en .se toonde aan dat 6,5% meer dan 10 lookups nodig had. De records van slechts twee hostingproviders veroorzaakten 83,7% van deze overschrijdingen.',
+    'Bovendien veranderen deze kosten doorlopend. De include van Google kostte tot december 2025 4 lookups, totdat [Google de geneste includes verving door een platte lijst](https://www.uriports.com/blog/google-simplifies-its-spf-record/). Veel handleidingen en generators tonen nog het oude getal 4. Onze tool telt bij elke controle de actuele actieve lookups in DNS.',
+    'Het overschrijden van de limiet laat e-mail niet altijd direct overal falen. Zoals [Microsoft toelicht](https://learn.microsoft.com/en-us/defender-office-365/email-authentication-spf-configure), evalueren servers van links naar rechts en stoppen ze bij de eerste match. E-mail van een provider die vooraan staat kan slagen, terwijl een latere provider faalt. Dit zorgt voor willekeurige bezorgproblemen, tenzij je het hele record doorlicht.',
+    'Er geldt nog een tweede limiet: lookups die niets opleveren (void lookups), zoals een include die verwijst naar een opgeheven domein. RFC 7208 schrijft voor dat ontvangende servers moeten stoppen na 2 opeenvolgende void lookups.',
+  ],
+  underTitle: 'Onder de 10 DNS-lookups blijven',
+  underSteps: [
+    'Verwijder includes van verouderde marketingtools en diensten die je niet meer gebruikt.',
+    'Verwijder includes die leveranciers niet langer vereisen. Mailchimp, Postmark, Brevo en Klaviyo hebben geen include meer nodig op je hoofddomein. SendGrid en Amazon SES routeren via een subdomein. Bekijk de lijst hieronder.',
+    'Gebruik ip4 en ip6 voor je eigen mailservers in plaats van a of mx. RFC 7208 beveelt deze volgorde aan en IP-adressen kosten 0 DNS-lookups.',
+    'Verstuur bulk- of marketingmail via een subdomein zoals nieuwsbrief.voorbeeld.nl. Elk subdomein heeft een eigen SPF-record en een eigen quotum van 10 lookups.',
+  ],
+  underNote:
+    'Sommige diensten bieden SPF-flattening aan, waarbij includes worden omgezet in directe IP-adressen. Dit bespaart lookups, maar externe providers wijzigen hun IP-reeksen regelmatig. Een platgeslagen record wordt dan snel ongeldig. Microsoft ontraadt flattening voor dynamische clouddiensten en adviseert minimaal elk kwartaal een handmatige audit.',
+  servicesTitle: 'SPF-includes voor Google Workspace, Microsoft 365 en andere diensten',
+  servicesIntro:
+    'Dit zijn de officiële include-waarden uit de documentatie van veelgebruikte diensten, inclusief het aantal DNS-lookups zoals gemeten op 12 oktober 2026. Controleer altijd de documentatie van je eigen account voor regionale afwijkingen.',
+  thService: 'Dienst',
+  thInclude: 'Include',
+  thLookups: 'DNS-lookups',
+  lookupCount: (n) => `${n} ${n === 1 ? 'lookup' : 'lookups'}`,
+  servicesNote:
+    'HubSpot geeft elk account een unieke include eindigend op hubspotemail.net. Kopieer deze uit je HubSpot-instellingen. Deze kost 1 lookup.',
+  notNeededTitle: 'Diensten die meestal geen SPF-include nodig hebben',
+  notNeededIntro:
+    'SPF wordt gecontroleerd op het Return-Path-adres en niet op het zichtbare Van-adres. Veel moderne verzendplatforms gebruiken hun eigen domein voor bounces of een CNAME-subdomein. Een include op je hoofddomein kost alleen onnodige DNS-lookups.',
+  notNeededAfter: 'Onze checker markeert deze overbodige includes direct als ze in je record staan.',
+  createTitle: 'Hoe maak je een SPF-record aan',
+  createIntro:
+    'Gebruik het tabblad Aanmaken hierboven als interactieve SPF-generator. Vink de diensten aan die namens jouw domein mail versturen; de tool stelt het record samen en bewaakt het aantal DNS-lookups. Laad een bestaand record eerst in om het aan te vullen zonder instellingen te overschrijven. Volg deze stappen:',
+  createSteps: [
+    'Breng alle verzendende bronnen in kaart: e-mailsuite, nieuwsbrieven, CRM, helpdesk, facturatie en websiteformulieren. DMARC-rapporten tonen verzenders die je over het hoofd hebt gezien.',
+    'Zoek de officiële include-waarde van elke dienst op of vink de dienst aan in de tool. Gebruik voor eigen servers directe IP-adressen.',
+    'Kies de afsluiting: ~all of -all. Het volgende gedeelte legt het verschil uit.',
+    'Publiceer het als één enkel TXT-record op het hoofddomein (@ in je DNS-paneel). Als er al een record staat dat begint met v=spf1, pas dat dan aan in plaats van een tweede toe te voegen.',
+    'Wacht enkele minuten op DNS-synchronisatie en controleer het domein opnieuw met deze SPF-checker.',
+  ],
+  createParas: [
+    'Elk verzendend subdomein heeft een eigen SPF-record nodig, omdat subdomeinen het record van het hoofddomein niet overnemen. Een domein dat nooit mail verstuurt moet beschermd worden met: `v=spf1 -all`. RFC 7208 noemt dit een bewezen best practice tegen spoofing. Het [Britse NCSC](https://www.ncsc.gov.uk/blog-post/protecting-parked-domains) adviseert om bij inactieve domeinen ook DMARC met p=reject en een Null MX-record in te stellen.',
+    'Een record van meer dan 255 tekens moet binnen hetzelfde TXT-record worden opgesplitst in meerdere strings tussen aanhalingstekens. Ontvangende servers voegen deze strings zonder spaties samen; plaats spaties dus binnen de aanhalingstekens. Raadpleeg je DNS-provider voor de exacte invoer bij lange waarden.',
+  ],
+  endingTitle: '~all of -all: welke afsluiting moet je kiezen',
+  endingIntro: 'Grote e-mailproviders hebben hier verschillende visies op:',
+  endingList: [
+    '[Google](https://knowledge.workspace.google.com/admin/security/set-up-spf) adviseert ~all (Softfail).',
+    'Het [M3AAWG](https://www.m3aawg.org/sites/default/files/m3aawg-email-authentication-recommended-best-practices-09-2020.pdf), een mondiaal samenwerkingsverband van e-mailproviders, raadt ~all aan zodat ontvangende servers mail niet weigeren vóórdat DMARC is geëvalueerd.',
+    '[Microsoft](https://learn.microsoft.com/en-us/defender-office-365/email-authentication-spf-configure) adviseert -all (Fail), mits DKIM en DMARC volledig zijn ingericht.',
+  ],
+  endingParas: [
+    'Het gevaar van -all is dat sommige ontvangende servers berichten tijdens de SMTP-verbinding direct weigeren, nog vóór DMARC wordt getoetst. De officiële standaard [RFC 9989](https://www.rfc-editor.org/rfc/rfc9989) (DMARC 2026) benadrukt dat deze geweigerde berichten niet in DMARC-rapporten verschijnen, waardoor afleverproblemen onzichtbaar blijven.',
+    'In de praktijk is ~all de veiligste keuze voor actieve domeinen, zeker zolang je nog niet alle verzendbronnen in kaart hebt. Met een actief DMARC-beleid op quarantine of reject bepaalt DMARC de afhandeling. Gebruik -all voor domeinen die nooit e-mail verzenden. Gebruik nooit +all (laat iedereen toe) en vermijd ?all (neutral, gelijk aan geen beveiliging).',
+  ],
+  resultsTitle: 'Wat betekenen de resultaten van de SPF-check',
+  thResult: 'Resultaat',
+  thMeaning: 'Betekenis',
+  thAction: 'Actie',
+  results: [
+    {
+      result: 'Geldig SPF-record',
+      meaning: 'Eén enkel, leesbaar record binnen de limiet van 10 lookups en afgesloten met ~all of -all.',
+      action: 'Geen actie vereist. Controleer opnieuw zodra je een nieuwe verzenddienst toevoegt.',
+    },
+    {
+      result: 'Werkend SPF-record met waarschuwingen',
+      meaning: 'Ontvangende servers kunnen het verwerken, maar er zijn risico’s zoals 9 of 10 lookups, ontbrekende all of een ptr-term.',
+      action: 'Los de waarschuwingen op. Ze worden vaak fatale fouten zodra je nog een tool aansluit.',
+    },
+    {
+      result: 'Defect SPF-record',
+      meaning: 'Het record veroorzaakt een Permerror, waardoor SPF voor alle uitgaande e-mail faalt.',
+      action: 'Herstel de fouten direct. De meest voorkomende oorzaken zijn dubbele TXT-records en meer dan 10 lookups.',
+    },
+    {
+      result: 'SPF-record beschermt het domein niet',
+      meaning: 'Het record eindigt op +all of bevat een include die dat doet, waardoor elke mailserver ter wereld namens jou mag zenden.',
+      action: 'Vervang +all door ~all of -all.',
+    },
+    {
+      result: 'Geen SPF-record aanwezig',
+      meaning: 'Het domein publiceert geen enkel TXT-record dat begint met v=spf1.',
+      action: 'Maak een record aan via het tabblad Aanmaken. Een inactief domein hoort v=spf1 -all te hebben.',
+    },
+    {
+      result: 'Domeinnaam bestaat niet',
+      meaning: 'DNS kan geen enkel record voor dit domein vinden (NXDOMAIN).',
+      action: 'Controleer op typefouten en verifieer of het domein actief geregistreerd staat.',
+    },
+  ],
+  receiverIntro:
+    'Ontvangende mailservers hanteren gestandaardiseerde statussen voor SPF-uitkomsten in de Authentication-Results headers en DMARC-rapporten :',
+  spfResults: [
+    { result: 'pass', meaning: 'De verzendende server is geautoriseerd door het SPF-record.' },
+    { result: 'fail', meaning: 'De server is niet geautoriseerd (-all). De ontvanger kan het bericht weigeren.' },
+    { result: 'softfail', meaning: 'De server is waarschijnlijk niet geautoriseerd (~all). RFC 7208 stelt dat dit alleen niet tot weigering mag leiden.' },
+    { result: 'neutral', meaning: 'Het record doet geen uitspraak over deze server (?all). Functioneel gelijk aan geen record.' },
+    { result: 'none', meaning: 'Het domein heeft geen SPF-record.' },
+    { result: 'temperror', meaning: 'Tijdelijke DNS-fout tijdens de controle. De verzender kan het later opnieuw proberen.' },
+    { result: 'permerror', meaning: 'Het record bevat een syntaxisfout of overschrijdt technische limieten. Alleen een DNS-correctie lost dit op.' },
+  ],
+  errorsTitle: 'Veelvoorkomende SPF-fouten en oplossingen',
+  errorsIntro:
+    'Een [onderzoek uit 2023 naar 12 miljoen populaire domeinen](https://arxiv.org/abs/2502.08240) wees uit dat 56,5% een SPF-record had en dat 2,9% van die records ernstige fouten bevatte. De meest voorkomende fout was een include of redirect naar een domein zonder SPF, op de voet gevolgd door het overschrijden van de lookup-limiet.',
+  errors: [
+    {
+      title: 'Twee SPF-records op hetzelfde domein',
+      text: 'Dit ontstaat vaak wanneer een handleiding aangeeft “voeg dit TXT-record toe” en er een tweede record wordt aangemaakt naast het bestaande. Twee records leveren direct een Permerror op. Voeg alle termen samen in één enkel TXT-record dat begint met v=spf1 en eindigt met één all.',
+    },
+    {
+      title: 'Een include die nergens naar verwijst',
+      text: 'Als een include verwijst naar een domein zonder geldig SPF-record, faalt de hele controle met een Permerror. Dit ontstaat door typefouten of opgeheven leveranciers. Verwijder de include of werk de waarde bij.',
+    },
+    {
+      title: '+all, ?all of geen afsluitend all-mechanisme',
+      text: '`+all` autoriseert het hele internet en schakelt bescherming uit. `?all` of het weglaten van all geeft een neutraal resultaat. Sluit je record altijd af met ~all of -all.',
+    },
+    {
+      title: 'ptr-mechanisme in het record',
+      text: 'RFC 7208 raadt ptr met klem af. Het is traag, kost een lookup en is storingsgevoelig bij DNS-problemen. Vervang ptr door directe ip4- en ip6-vermeldingen.',
+    },
+    {
+      title: 'Typefouten en verkeerde leestekens',
+      text: 'Een spatie na een dubbele punt, een onvolledig IPv4-adres of een onbekend trefwoord veroorzaken een Permerror. Een subtielere fout is `include=example.com` met een gelijkheidsteken: dit wordt genegeerd als onbekende modifier waardoor de dienst nooit geautoriseerd raakt. Onze checker spoort dit direct op.',
+    },
+  ],
+  mythsTitle: 'Drie hardnekkige fabels over SPF',
+  myths: [
+    '“Een SPF-record mag geen hoofdletters bevatten.” RFC 7208 specificeert dat mechanismen volledig hoofdletterongevoelig zijn.',
+    '“Een SPF-record mag maximaal 255 tekens lang zijn.” De limiet van 255 tekens geldt per afzonderlijke string. Langere records worden opgedeeld in meerdere aaneengesloten strings binnen hetzelfde DNS TXT-record.',
+    '“Je mag maximaal 10 include-mechanismen gebruiken.” De limiet van 10 geldt voor het totale aantal gegenereerde DNS-lookups, niet voor het aantal geschreven include-termen.',
+  ],
+  authTitle: 'SPF als onderdeel van e-mailauthenticatie',
+  authParas: [
+    'Een SPF-pass heeft grenzen. In de studie uit 2023 autoriseerde 34,7% van de domeinen indirect meer dan 100.000 IP-adressen. Bovendien faalt SPF bij automatische e-mail forwarding, omdat de doorsturende server niet in jouw SPF-record staat.',
+    'DKIM vangt dit op met een cryptografische handtekening op het bericht zelf, die bij doorsturen intact blijft. DMARC controleert of het domein in het Van-adres overeenkomt met het domein dat door SPF of DKIM is goedgekeurd, en vertelt ontvangende servers wat ze bij falen moeten doen. Configureer de overige protocollen met de [DKIM generator](/dkim-generator) en de [DMARC generator](/dmarc-generator). Gebruik de [MX lookup](/mx-lookup) om je inkomende servers te controleren.',
+    'Authenticatie helpt niet tegen verzending naar niet-bestaande adressen. Die leiden tot bounces die je reputatie beschadigen. Controleer losse adressen met de [e-mail checker](/email-checker) of valideer complete lijsten met de [bulk e-mail verifier](/bulk-email-verifier). Zoek je een beknopte definitie voor je team, bekijk dan het [SPF-record overzicht in de begrippenlijst](/glossary/spf).',
+  ],
+  faqTitle: 'Veelgestelde vragen',
+  faqs: [
+    {
+      q: 'Wat is een SPF-record?',
+      a: 'Het is een TXT-record in de DNS van je domein dat aangeeft welke mailservers namens dat domein e-mail mogen verzenden. Ontvangende servers controleren dit om spoofing tegen te gaan. SPF staat voor Sender Policy Framework en is vastgelegd in RFC 7208.',
+    },
+    {
+      q: 'Hoe controleer ik mijn SPF-record?',
+      a: 'Vul je domeinnaam in bij de checker bovenaan deze pagina. In de terminal kun je nslookup -type=txt voorbeeld.nl uitvoeren op Windows, of dig txt voorbeeld.nl op macOS en Linux. Zoek naar de regel die begint met v=spf1.',
+    },
+    {
+      q: 'Mag een domein twee SPF-records hebben?',
+      a: 'Nee. RFC 7208 verbiedt meer dan één SPF-record per domeinnaam. Twee records leiden direct tot een Permerror waardoor alle e-mail faalt op SPF. Voeg alle gegevens samen in één enkel record.',
+    },
+    {
+      q: 'Wat betekent een Permerror bij SPF?',
+      a: 'Een Permerror (permanente fout) betekent dat de ontvangende server het record niet kon interpreteren. Veelvoorkomende oorzaken zijn dubbele SPF-records, meer dan 10 DNS-lookups of een ongeldige include.',
+    },
+    {
+      q: 'Wat is het verschil tussen ~all en -all?',
+      a: 'Met ~all (Softfail) worden niet-geautoriseerde servers als verdacht gemarkeerd maar meestal niet geweigerd. Met -all (Fail) wordt directe weigering gevraagd. Google adviseert ~all; Microsoft adviseert -all zodra DKIM en DMARC werken.',
+    },
+    {
+      q: 'Hebben subdomeinen een eigen SPF-record nodig?',
+      a: 'Ja, als ze zelfstandig e-mail versturen. Een subdomein erft het SPF-record van het hoofddomein niet automatisch. Als nieuws.voorbeeld.nl mail verstuurt, heeft het een eigen record nodig. Zo niet, bescherm het dan met v=spf1 -all.',
+    },
+    {
+      q: 'Hoe lang duurt het voordat een SPF-wijziging actief is?',
+      a: 'Dat hangt af van de TTL (Time to Live) van het oude record. Bij een TTL van 3600 seconden duurt dit maximaal een uur. Hoewel providers een marge van 24 tot 48 uur noemen, is de wijziging bij de meeste resolvers binnen enkele minuten zichtbaar.',
+    },
+    {
+      q: 'Is SPF nodig als ik al DKIM gebruik?',
+      a: 'Ja, beide zijn nodig. Gmail en Yahoo eisen zowel SPF als DKIM voor regelmatige verzenders. Bovendien slaagt DMARC als een van beide correct aansluit, wat zorgt voor een betrouwbaardere aflevering.',
+    },
+    {
+      q: 'Voorkomt SPF e-mailspoofing volledig?',
+      a: 'Niet op zichzelf. SPF controleert alleen het technische Return-Path-adres en niet het zichtbare Van-adres. Spammers kunnen SPF laten slagen op een eigen domein en toch jouw naam tonen. DMARC lost dit op door afstemming tussen beide adressen af te dwingen.',
+    },
+  ],
+  ctaHeadline: 'Controleer adressen vóórdat je verstuurt',
+}
+
+const pl: SpfPageStrings = {
+  metaTitle: 'SPF Checker: Sprawdź i Wygeneruj Rekord SPF za Darmo | Giggal.ai',
+  ogTitle: 'SPF Checker: Sprawdź i Wygeneruj Rekord SPF za Darmo',
+  description:
+    'Sprawdź bezpłatnie rekord SPF dowolnej domeny. Zobacz znaczenie każdego mechanizmu, zlicz zapytania DNS względem limitu 10, wykryj błędy lub wygeneruj nowy rekord SPF.',
+  ogImage: '/og-image.png',
+  ogAlt: 'Narzędzie do sprawdzania i generowania rekordu SPF',
+  crumb: 'SPF Checker',
+  appName: 'SPF Checker',
+  featureList: [
+    'Bez rejestracji i karty płatniczej',
+    'Licznik zapytań DNS w czasie rzeczywistym',
+    'Rygorystyczna analiza według RFC 7208',
+    'Praktyczne wskazówki naprawcze',
+  ],
+  h1: 'Narzędzie do sprawdzania i generowania rekordu SPF',
+  heroIntro:
+    'Sprawdź rekord SPF domeny w publicznym DNS. Narzędzie szczegółowo analizuje każdy mechanizm, zlicza zapytania DNS względem limitu 10 według RFC 7208 i natychmiast wskazuje błędy konfiguracji.',
+  howTitle: 'Jak sprawdzić rekord SPF',
+  howSteps: [
+    'Wpisz nazwę domeny w polu powyżej. Pełny adres e-mail również zadziała – narzędzie automatycznie wyodrębni samą domenę.',
+    'Kliknij Sprawdź rekord SPF. Narzędzie odpytuje publiczne serwery DNS w taki sam sposób, w jaki robi to serwer pocztowy odbiorcy.',
+    'Najpierw sprawdź podsumowanie. Informuje ono, czy rekord jest prawidłowy, zawiera ostrzeżenia czy jest uszkodzony.',
+    'Następnie zapoznaj się z listą wykrytych problemów. Każdy punkt precyzyjnie wyjaśnia, co należy zmienić.',
+    'Poniżej znajdziesz objaśnienie każdego elementu rekordu wraz z liczbą zużywanych zapytań DNS. Rozwiń include, aby zobaczyć, co autoryzuje dana usługa.',
+  ],
+  howNote:
+    'Link w pasku adresu zapisuje parametry tego testu, więc możesz łatwo przesłać go współpracownikowi lub administratorowi hostingu. Pamiętaj o ograniczeniu: serwer odbiorcy weryfikuje SPF na podstawie adresu IP serwera faktycznie przesyłającego wiadomość. To narzędzie analizuje samą konfigurację rekordu w DNS. Nie jest w stanie przetworzyć dynamicznych makr SPF zależnych od IP nadawcy.',
+  imageAlt: 'Ilustracja rekordu SPF podzielonego na części ze wskaźnikiem zapytań DNS względem limitu 10.',
+  whatTitle: 'Czym jest rekord SPF?',
+  whatIntro:
+    'Rekord SPF to rekord TXT w strefie DNS domeny, który określa listę serwerów uprawnionych do wysyłania poczty w jej imieniu. Skrót SPF oznacza Sender Policy Framework, a jego zasady definiuje standard [RFC 7208](https://www.rfc-editor.org/rfc/rfc7208). Domena korzystająca z Google Workspace zazwyczaj posiada rekord w takiej postaci:',
+  whatAfter: [
+    '`v=spf1` identyfikuje początek rekordu SPF. `include:_spf.google.com` autoryzuje wszystkie serwery pocztowe z oficjalnej listy Google. `~all` instruuje serwery odbiorcze, aby traktowały pocztę z wszelkich innych serwerów jako podejrzaną.',
+    'Gdy wiadomość trafia do odbiorcy, serwer pobiera domenę z technicznego adresu zwrotnego (Return-Path lub koperta). Następnie sprawdza rekord SPF tej domeny i weryfikuje, czy IP nadawcy znajduje się na liście. SPF nie sprawdza widocznego adresu nadawcy (From). Z tego względu SPF działa w ścisłym połączeniu z DKIM i DMARC. Aby poznać zasady ich współpracy, przeczytaj [SPF, DKIM i DMARC w przystępnym przewodniku](/blog/spf-dkim-dmarc-explained).',
+    'Od lutego 2024 r. [Gmail wymaga SPF lub DKIM](https://support.google.com/a/answer/81126) od każdego nadawcy, a obu zabezpieczeń od nadawców masowych. Yahoo stosuje identyczne wymogi.',
+  ],
+  partsTitle: 'Co oznacza każdy element rekordu SPF',
+  partsIntro:
+    'Rekord SPF to ciąg mechanizmów i modyfikatorów oddzielonych spacjami. Serwery odbiorcze czytają go od lewej do prawej i zatrzymują się na pierwszej regule pasującej do serwera wysyłającego.',
+  thPart: 'Element',
+  thDoes: 'Działanie',
+  thLookup: 'Zapytanie DNS',
+  lookupLabel: 'Zapytanie DNS : ',
+  parts: [
+    { part: 'v=spf1', does: 'Oznacza rekord TXT jako SPF. Musi być na samym początku, dokładnie w tej formie.', lookup: 'Nie' },
+    { part: 'ip4:192.0.2.10', does: 'Autoryzuje konkretny adres IPv4 lub zakres CIDR, np. 192.0.2.0/24.', lookup: 'Nie' },
+    { part: 'ip6:2001:db8::/32', does: 'Autoryzuje adres lub zakres IPv6.', lookup: 'Nie' },
+    { part: 'a', does: 'Autoryzuje adresy IP przypisane do domeny lub domeny podanej po dwukropku.', lookup: 'Tak' },
+    { part: 'mx', does: 'Autoryzuje serwery odbiorcze zdefiniowane w rekordach MX domeny.', lookup: 'Tak' },
+    { part: 'include:_spf.google.com', does: 'Autoryzuje wszystkie serwery, które autoryzuje rekord SPF innej domeny. Służy do integracji usług zewnętrznych.', lookup: 'Tak, plus zagnieżdżone' },
+    { part: 'exists:%{i}.example.com', does: 'Dopasowuje, jeśli zapytanie DNS zwraca adres A. Stosowane przez zaawansowanych nadawców z makrami.', lookup: 'Tak' },
+    { part: 'ptr', does: 'Dopasowuje po odwrotnym DNS (PTR). RFC 7208 odradza stosowanie ze względu na powolność i niestabilność.', lookup: 'Tak' },
+    { part: '~all lub -all', does: 'Określa traktowanie wszystkich serwerów nieuwzględnionych na liście. Zawsze na końcu.', lookup: 'Nie' },
+    { part: 'redirect=example.net', does: 'Stosuje rekord SPF innej domeny zamiast bieżącego. Jest ignorowany, gdy w rekordzie występuje all.', lookup: 'Tak' },
+  ],
+  partsAfter: [
+    'Każdy mechanizm może zaczynać się od kwalifikatora określającego wynik testu w przypadku dopasowania. `+` oznacza Pass (zaliczone) i jest domyślny. `-` oznacza Fail (odrzucenie), `~` to Softfail (łagodne odrzucenie), a `?` oznacza Neutral. Dlatego rekordy kończą się regułą `-all`, `~all` lub `?all`.',
+    'Wielkość liter nie ma znaczenia: `Include:` działa tak samo jak `include:`. Standard RFC 7208 zaleca kończenie każdego rekordu regułą all lub modyfikatorem redirect. Bez tego nieujęte serwery otrzymują wynik neutralny.',
+  ],
+  limitTitle: 'Rygorystyczny limit 10 zapytań DNS',
+  limitParas: [
+    'Każdy mechanizm include, a, mx, ptr, exists oraz redirect zmusza serwer odbiorczy do wykonania zapytania DNS. Standard RFC 7208 dopuszcza maksymalnie 10 zapytań DNS podczas jednej weryfikacji. Zapytania wewnątrz zagnieżdżonych rekordów include również się wliczają, więc pojedynczy include może kosztować kilka zapytań. Mechanizmy ip4, ip6 oraz all nie generują zapytań. Gdy rekord wymaga więcej niż 10 zapytań, serwer odbiorcy przerywa sprawdzanie błędem Permerror i test SPF kończy się porażką.',
+    'Przekroczenie tego limitu jest bardzo łatwe. Zmierzyliśmy w publicznym DNS koszt popularnych usług: Google Workspace zużywa 1 zapytanie, Microsoft 365 zużywa 1 zapytanie, Salesforce 2, Mailgun 5, a Freshdesk 7. Firma na Google Workspace, która doda Mailguna i Freshdeska, potrzebuje już 13 zapytań. [Badanie z 2024 r. nad rekordami SPF](https://www.usenix.org/conference/usenixsecurity24/presentation/ashiq) w domenach .com, .net, .org i .se wykazało, że 6,5% z nich przekraczało limit 10 zapytań, a rekordy zaledwie dwóch dostawców hostingu odpowiadały za 83,7% tych przypadków.',
+    'Koszty te ulegają również zmianom. Include Google zużywał 4 zapytania aż do grudnia 2025 r., kiedy to [Google uprościło swoje zagnieżdżone include do płaskiej listy](https://www.uriports.com/blog/google-simplifies-its-spf-record/). Wiele poradników i generatorów wciąż podaje starą wartość 4. Nasze narzędzie sprawdza bieżącą liczbę zapytań w czasie rzeczywistym.',
+    'Przekroczenie limitu nie zawsze powoduje natychmiastowe odrzucenie każdego maila. Jak [wyjaśnia Microsoft](https://learn.microsoft.com/en-us/defender-office-365/email-authentication-spf-configure), serwery sprawdzają mechanizmy od lewej do prawej i zatrzymują się na pierwszym dopasowaniu. Wiadomość z usługi umieszczonej na początku rekordu może przejść pomyślnie, podczas gdy usługa z końca rekordu zawiedzie. Powoduje to pozorne wrażenie losowości błędów dostarczalności.',
+    'Obowiązuje również drugi limit: zapytania puste (void lookups), np. include wskazujący na domenę, która już nie istnieje. Standard RFC 7208 nakazuje przerwanie weryfikacji po napotkaniu 2 takich zapytań.',
+  ],
+  underTitle: 'Jak utrzymać się poniżej limitu 10 zapytań DNS',
+  underSteps: [
+    'Usuń reguły include dla usług i narzędzi marketingowych, z których już nie korzystasz.',
+    'Usuń wpisy include, których dostawcy już nie wymagają. Mailchimp, Postmark, Brevo i Klaviyo nie potrzebują include w domenie głównej. SendGrid i Amazon SES realizują wysyłkę z dedykowanych subdomen. Zobacz zestawienie poniżej.',
+    'Wpisuj własne serwery pocztowe za pomocą mechanizmów ip4 i ip6 zamiast a lub mx. RFC 7208 zaleca tę kolejność, a adresy IP nie zużywają zapytań DNS.',
+    'Wysyłaj mailingi i powiadomienia z dedykowanej subdomeny, np. newsletter.twojadomena.pl. Każda subdomena ma własny rekord SPF i własną pulę 10 zapytań.',
+  ],
+  underNote:
+    'Niektóre serwisy oferują tzw. SPF flattening, czyli zastąpienie include bezpośrednimi adresami IP. Oszczędza to zapytania, lecz dostawcy regularnie modyfikują swoje zakresy IP. Statyczny rekord szybko staje się nieaktualny. Microsoft odradza spłaszczanie dla usług o dynamicznych adresach i zaleca regularny audyt co najmniej raz na kwartał.',
+  servicesTitle: 'Wpisy include dla Google Workspace, Microsoft 365 i innych usług',
+  servicesIntro:
+    'Poniżej zebrano oficjalne wartości include z dokumentacji popularnych dostawców wraz z liczbą zapytań DNS zmierzoną w publicznym DNS 12 października 2026 r. Zawsze weryfikuj dokumentację własnego konta pod kątem specyfikacji regionalnych.',
+  thService: 'Usługa',
+  thInclude: 'Wartość include',
+  thLookups: 'Zapytania DNS',
+  lookupCount: (n) => `${n} ${n === 1 ? 'zapytanie' : n >= 2 && n <= 4 ? 'zapytania' : 'zapytań'}`,
+  servicesNote:
+    'HubSpot przydziela każdemu kontu unikalny include kończący się na hubspotemail.net. Należy go skopiować z ustawień e-mail w HubSpot. Zużywa 1 zapytanie.',
+  notNeededTitle: 'Usługi, które zwykle nie wymagają wpisu SPF include',
+  notNeededIntro:
+    'Weryfikacja SPF odbywa się na adresie Return-Path, a nie na widocznym adresie From. Większość nowoczesnych platform mailingowych stosuje własną domenę zwrotną lub dedykowaną subdomenę CNAME. Dodawanie ich include do domeny głównej niepotrzebnie marnuje zapytania DNS.',
+  notNeededAfter: 'Nasz weryfikator oznacza zbędne wpisy include, gdy wykryje je w Twoim rekordzie.',
+  createTitle: 'Jak utworzyć rekord SPF',
+  createIntro:
+    'Przejdź do zakładki Generator powyżej. Zaznacz usługi wysyłające pocztę w Twoim imieniu, a narzędzie przygotuje poprawny rekord i na bieżąco zliczy zapytania DNS. Jeśli Twoja domena posiada już rekord, załaduj go najpierw, aby go uzupełnić zamiast nadpisywać. Oto zalecane kroki:',
+  createSteps: [
+    'Sporządź listę wszystkich systemów wysyłających pocztę z Twojej domeny: poczta firmowa, newslettery, CRM, helpdesk, fakturowanie i formularze kontaktowe. Raporty DMARC pomagają namierzyć pominięte źródła.',
+    'Znajdź oficjalny include każdego dostawcy lub zaznacz go w naszym narzędziu. Dla serwerów własnych przygotuj ich adresy IP.',
+    'Wybierz zakończenie: ~all lub -all. W kolejnej sekcji wyjaśniamy konsekwencje obu wariantów.',
+    'Opublikuj regułę jako pojedynczy rekord TXT w domenie głównej (często oznaczanej jako @ w panelu DNS). Jeśli istnieje już rekord zaczynający się od v=spf1, zmodyfikuj go zamiast dodawać kolejny.',
+    'Odczekaj kilka minut na propagację DNS i sprawdź domenę ponownie za pomocą tego weryfikatora SPF.',
+  ],
+  createParas: [
+    'Każda subdomena wysyłająca pocztę musi posiadać własny rekord SPF, ponieważ nie dziedziczy konfiguracji z domeny głównej. Domena lub subdomena, która nigdy nie wysyła maili, powinna zostać zabezpieczona rekordem: `v=spf1 -all`. Standard RFC 7208 uznaje to za kluczową dobrą praktykę chroniącą przed podszywaniem się. [Brytyjskie NCSC](https://www.ncsc.gov.uk/blog-post/protecting-parked-domains) rekomenduje dodanie do nieaktywnych domen również polityki DMARC p=reject oraz pustego rekordu MX (Null MX).',
+    'Rekord o długości przekraczającej 255 znaków musi zostać podzielony na kilka ciągów w cudzysłowach wewnątrz tego samego rekordu TXT. Serwery odbiorcze łączą te ciągi bez dodawania spacji, dlatego spacje rozdzielające muszą znajdować się wewnątrz ciągów. Sprawdź wytyczne swojego panelu DNS dotyczące długich wpisów.',
+  ],
+  endingTitle: '~all czy -all: które zakończenie wybrać',
+  endingIntro: 'Najwięksi dostawcy poczty prezentują odmienne rekomendacje:',
+  endingList: [
+    '[Google](https://knowledge.workspace.google.com/admin/security/set-up-spf) zaleca stosowanie ~all (Softfail).',
+    '[M3AAWG](https://www.m3aawg.org/sites/default/files/m3aawg-email-authentication-recommended-best-practices-09-2020.pdf), międzynarodowa organizacja zrzeszająca operatorów poczty, rekomenduje ~all, aby serwery nie odrzucały wiadomości przed weryfikacją DMARC.',
+    '[Microsoft](https://learn.microsoft.com/en-us/defender-office-365/email-authentication-spf-configure) rekomenduje -all (Fail), pod warunkiem pełnego wdrożenia DKIM i DMARC.',
+  ],
+  endingParas: [
+    'Ryzyko związane z -all polega na tym, że część serwerów odbiorczych odrzuca wiadomość już na etapie wstępnej sesji SMTP, zanim sprawdzi zasady DMARC. Standard [RFC 9989](https://www.rfc-editor.org/rfc/rfc9989) (DMARC 2026) zauważa, że odrzucone w ten sposób wiadomości nie trafiają do raportów DMARC, co uniemożliwia diagnozę problemów z legalną pocztą.',
+    'W praktyce ~all jest bezpieczniejszym wyborem dla domen aktywnych, zwłaszcza w trakcie mapowania wszystkich źródeł wysyłki. Przy aktywnej polityce DMARC na poziomie quarantine lub reject to DMARC decyduje o losie wiadomości. Regułę -all rezerwuj dla domen obronnych, które nie wysyłają żadnych wiadomości. Nigdy nie używaj +all (dopuszcza cały internet) i unikaj ?all (brak ochrony).',
+  ],
+  resultsTitle: 'Co oznaczają wyniki testu rekordu SPF',
+  thResult: 'Wynik',
+  thMeaning: 'Znaczenie',
+  thAction: 'Działanie',
+  results: [
+    {
+      result: 'Prawidłowy rekord SPF',
+      meaning: 'Pojedynczy rekord, poprawny składniowo, mieszczący się w limicie 10 zapytań i zakończony ~all lub -all.',
+      action: 'Brak działań. Sprawdź ponownie po dodaniu nowego narzędzia wysyłkowego.',
+    },
+    {
+      result: 'Działający rekord SPF z ostrzeżeniami',
+      meaning: 'Serwery mogą go przetworzyć, lecz zawiera wady: 9 lub 10 zapytań DNS, brak reguły all lub mechanizm ptr.',
+      action: 'Popraw wskazane ostrzeżenia, zanim przekształcą się w błędy po podłączeniu kolejnej usługi.',
+    },
+    {
+      result: 'Uszkodzony rekord SPF',
+      meaning: 'Rekord wywołuje błąd Permerror, co powoduje odrzucenie testu SPF dla wszystkich wychodzących maili.',
+      action: 'Niezwłocznie napraw błędy. Najczęstsze przyczyny to zduplikowane rekordy TXT i ponad 10 zapytań.',
+    },
+    {
+      result: 'Rekord SPF nie chroni domeny',
+      meaning: 'Rekord kończy się na +all lub zawiera regułę, która to robi, pozwalając każdemu serwerowi na świecie podszywać się pod Twoją domenę.',
+      action: 'Zmień +all na ~all lub -all.',
+    },
+    {
+      result: 'Brak rekordu SPF',
+      meaning: 'Domena nie publikuje żadnego rekordu TXT zaczynającego się od v=spf1.',
+      action: 'Utwórz rekord w zakładce Generator. Domena nieaktywna powinna mieć wpis v=spf1 -all.',
+    },
+    {
+      result: 'Domena nie istnieje',
+      meaning: 'Serwery DNS nie zwracają żadnych wpisów dla podanej nazwy domeny (NXDOMAIN).',
+      action: 'Upewnij się, że nazwa została wpisana poprawnie i domena jest zarejestrowana.',
+    },
+  ],
+  receiverIntro:
+    'Serwery odbiorcze stosują znormalizowane statusy wyników weryfikacji SPF w nagłówkach Authentication-Results oraz w raportach DMARC :',
+  spfResults: [
+    { result: 'pass', meaning: 'Serwer wysyłający jest autoryzowany przez rekord SPF.' },
+    { result: 'fail', meaning: 'Serwer nie jest autoryzowany (-all). Odbiorca może odrzucić wiadomość.' },
+    { result: 'softfail', meaning: 'Serwer prawdopodobnie nie jest autoryzowany (~all). RFC 7208 wskazuje, że nie powinno to samodzielnie powodować odrzucenia.' },
+    { result: 'neutral', meaning: 'Rekord nie określa reguły dla tego serwera (?all). Równoważne brakowi rekordu.' },
+    { result: 'none', meaning: 'Domena nie posiada rekordu SPF.' },
+    { result: 'temperror', meaning: 'Chwilowy błąd DNS podczas sprawdzania. Nadawca może ponowić próbę później.' },
+    { result: 'permerror', meaning: 'Rekord jest błędnie sformatowany lub przekracza limity techniczne. Wymaga poprawki w DNS.' },
+  ],
+  errorsTitle: 'Typowe błędy w rekordach SPF i sposoby naprawy',
+  errorsIntro:
+    'Analiza [12 milionów popularnych domen z 2023 r.](https://arxiv.org/abs/2502.08240) wykazała obecność SPF w 56,5% z nich, a 2,9% rekordów zawierało krytyczne błędy. Najczęstszą usterką było odwoływanie się do domeny bez rekordu SPF, a zaraz za nią uplasowało się przekroczenie limitu zapytań DNS.',
+  errors: [
+    {
+      title: 'Dwa rekordy SPF w tej samej domenie',
+      text: 'Problem pojawia się zwykle podczas wdrażania nowej usługi, gdy instrukcja nakazuje „dodać rekord TXT” i tworzony jest kolejny wpis zamiast edycji starego. Dwa rekordy SPF skutkują natychmiastowym Permerror. Połącz wszystkie mechanizmy w jeden wpis TXT rozpoczynający się od v=spf1 i kończący się pojedynczym all.',
+    },
+    {
+      title: 'Wpis include wskazujący na nieistniejącą regułę',
+      text: 'Jeśli include wskazuje na domenę bez poprawnego SPF, cała weryfikacja kończy się błędem Permerror. Przyczyną bywają literówki lub wycofane usługi dostawców. Usuń lub zaktualizuj niepoprawny include.',
+    },
+    {
+      title: '+all, ?all lub brak zakończenia all',
+      text: '`+all` autoryzuje wszystkie komputery w sieci i usuwa jakąkolwiek ochronę. `?all` lub brak reguły zamykającej daje bezużyteczny status neutralny. Zawsze kończ rekord regułą ~all lub -all.',
+    },
+    {
+      title: 'Obecność mechanizmu ptr',
+      text: 'RFC 7208 stanowczo odradza mechanizm ptr. Jest powolny, zużywa cenne zapytanie DNS i często zawodzi przy problemach z DNS. Zastąp go bezpośrednimi wpisami ip4 oraz ip6.',
+    },
+    {
+      title: 'Błędy składniowe i literówki',
+      text: 'Spacja po dwukropku, niekompletny adres IPv4 czy nieznane słowo wywołują natychmiastowy Permerror. Bardziej podstępny błąd to `include=example.com` ze znakiem równości: serwery ignorują go jako nieznany modyfikator, przez co usługa nigdy nie zostaje autoryzowana. Nasz weryfikator natychmiast wychwytuje takie usterki.',
+    },
+  ],
+  mythsTitle: 'Trzy częste mity na temat rekordu SPF',
+  myths: [
+    '„Rekord SPF nie może zawierać wielkich liter.” RFC 7208 precyzuje, że mechanizmy i nazwy są całkowicie niewrażliwe na wielkość liter.',
+    '„Rekord SPF może mieć maksymalnie 255 znaków.” Limit 255 znaków dotyczy pojedynczego ciągu w rekordzie DNS TXT. Dłuższy rekord dzieli się na wiele ciągów, które serwer odbiorcy automatycznie łączy.',
+    '„Można zdefiniować maksymalnie 10 mechanizmów include.” Limit dotyczy łącznej liczby zapytań DNS generowanych rekurencyjnie przez całe drzewo SPF, a nie liczby użytych słów include.',
+  ],
+  authTitle: 'SPF jako element kompleksowej ochrony poczty',
+  authParas: [
+    'Pozytywny wynik SPF ma swoje ograniczenia. W badaniu z 2023 r. aż 34,7% domen autoryzowało pośrednio ponad 100 000 adresów IP. Ponadto SPF niemal zawsze zawodzi przy automatycznym przekazywaniu wiadomości, ponieważ serwer pośredniczący nie widnieje w rekordzie nadawcy.',
+    'Problem ten rozwiązuje DKIM za pomocą podpisu kryptograficznego wiadomości, który pozostaje nienaruszony przy przekazywaniu. Z kolei DMARC sprawdza zgodność domeny widocznej w nagłówku From z domeną uwierzytelnioną przez SPF lub DKIM i instruuje odbiorców, jak traktować podejrzaną pocztę. Skonfiguruj pozostałe filary za pomocą naszego [generatora DKIM](/dkim-generator) oraz [generatora DMARC](/dmarc-generator). Użyj narzędzia [MX lookup](/mx-lookup), aby sprawdzić konfigurację serwerów odbiorczych.',
+    'Uwierzytelnianie nie zapobiega jednak wysyłce na nieistniejące skrzynki pocztowe, co generuje twarde odbicia i niszczy reputację nadawcy. Weryfikuj pojedyncze adresy za pomocą [testera e-mail](/email-checker) lub sprawdzaj całe bazy przez [masowy weryfikator adresów e-mail](/bulk-email-verifier). Zwięzłe podsumowanie dla zespołu znajdziesz w [haśle rekord SPF w słowniku pojęć](/glossary/spf).',
+  ],
+  faqTitle: 'Często zadawane pytania',
+  faqs: [
+    {
+      q: 'Czym jest rekord SPF?',
+      a: 'To rekord TXT w konfiguracji DNS domeny, który wskazuje serwery uprawnione do wysyłania e-maili w jej imieniu. Serwery odbiorcze sprawdzają go, aby zweryfikować autentyczność wiadomości. SPF to skrót od Sender Policy Framework i opiera się na standardzie RFC 7208.',
+    },
+    {
+      q: 'Jak mogę sprawdzić swój rekord SPF?',
+      a: 'Wpisz domenę w weryfikatorze u góry tej strony. W wierszu poleceń możesz wykonać polecenie nslookup -type=txt twojadomena.pl w systemie Windows lub dig txt twojadomena.pl w systemach macOS i Linux. Znajdź wpis TXT rozpoczynający się od v=spf1.',
+    },
+    {
+      q: 'Czy domena może posiadać dwa rekordy SPF?',
+      a: 'Nie. Standard RFC 7208 bezwzględnie zabrania posiadania więcej niż jednego rekordu SPF dla pojedynczej nazwy domeny. Obecność dwóch wpisów wywołuje Permerror i unieważnia SPF dla całej korespondencji. Należy połączyć wszystkie mechanizmy w jeden rekord.',
+    },
+    {
+      q: 'Co oznacza Permerror w SPF?',
+      a: 'Permerror (Permanent Error) oznacza błąd uniemożliwiający serwerowi odczytanie Twojej polityki SPF. Typowe powody to zduplikowane rekordy SPF, przekroczenie 10 zapytań DNS lub błędny wpis include.',
+    },
+    {
+      q: 'Jaka jest różnica między ~all a -all?',
+      a: 'Przy ~all (Softfail) wiadomości z nieautoryzowanych serwerów są oznaczane jako podejrzane, lecz zwykle nie są od razu odrzucane. Przy -all (Fail) serwer odbiorczy otrzymuje jasną dyspozycję odrzucenia. Google rekomenduje ~all, a Microsoft preferuje -all po wdrożeniu DKIM i DMARC.',
+    },
+    {
+      q: 'Czy subdomeny potrzebują własnego rekordu SPF?',
+      a: 'Tak, jeśli wysyłają wiadomości e-mail. Subdomena nie dziedziczy automatycznie rekordu SPF z domeny nadrzędnej. Jeśli mailing.twojadomena.pl wysyła pocztę, musi posiadać własny wpis. Jeśli nie wysyła niczego, zabezpiecz ją regułą v=spf1 -all.',
+    },
+    {
+      q: 'Jak długo trwa propagacja zmian w rekordzie SPF?',
+      a: 'Zależy to od wartości TTL (Time to Live) poprzedniego rekordu. Przy TTL równym 3600 sekund aktualizacja zajmuje do jednej godziny. Choć firmy hostingowe wspominają o marginesie 24-48 godzin, większość serwerów DNS widzi zmiany w ciągu kilkunastu minut.',
+    },
+    {
+      q: 'Czy potrzebuję SPF, jeśli mam już skonfigurowany DKIM?',
+      a: 'Tak, wdrożenie obu standardów to współczesny wymóg. Gmail oraz Yahoo wymagają zarówno SPF, jak i DKIM dla regularnych nadawców. Ponadto DMARC zalicza test, jeśli chociaż jeden z mechanizmów jest poprawnie dopasowany, co zabezpiecza dostarczalność.',
+    },
+    {
+      q: 'Czy SPF całkowicie eliminuje podszywanie się pod nadawcę?',
+      a: 'Samodzielnie nie. SPF weryfikuje wyłącznie techniczny adres zwrotny koperty (Return-Path), a nie widoczny w programie pocztowym adres From. Spamer może zaliczyć SPF na własnej domenie i wyświetlić Twoją nazwę w nagłówku From. Dopiero DMARC eliminuje tę lukę, wymuszając zgodność obu adresów.',
+    },
+  ],
+  ctaHeadline: 'Sprawdź poprawność adresów przed wysyłką',
+}
+
+const id: SpfPageStrings = {
+  metaTitle: 'SPF Checker: Cek dan Buat SPF Record Gratis | Giggal.ai',
+  ogTitle: 'SPF Checker: Cek dan Buat SPF Record Gratis',
+  description:
+    'Cek SPF record domain mana pun secara gratis. Pahami arti setiap bagian, hitung DNS lookup terhadap batas 10, temukan error konfigurasi, atau buat SPF record baru.',
+  ogImage: '/og-image.png',
+  ogAlt: 'Pemeriksa dan Generator SPF Record',
+  crumb: 'SPF Checker',
+  appName: 'SPF Checker',
+  featureList: [
+    'Tanpa perlu daftar akun',
+    'Penghitung live DNS lookup',
+    'Validasi ketat RFC 7208',
+    'Panduan perbaikan langsung',
+  ],
+  h1: 'Pemeriksa dan Generator SPF Record',
+  heroIntro:
+    'Periksa SPF record domain di DNS publik. Alat ini menguraikan setiap mekanisme, menghitung DNS lookup terhadap batas 10 RFC 7208, dan menunjukkan error konfigurasi secara instan.',
+  howTitle: 'Cara memeriksa SPF record',
+  howSteps: [
+    'Ketik nama domain pada kolom di atas. Alamat email lengkap juga bisa digunakan; alat ini otomatis mengambil bagian domainnya saja.',
+    'Klik Periksa SPF record. Pemeriksaan membaca record aktif di DNS publik persis seperti yang dilakukan server email penerima.',
+    'Baca ringkasannya terlebih dahulu. Ringkasan menunjukkan apakah record valid, memiliki peringatan, atau rusak.',
+    'Tinjau daftar masalah yang ditemukan jika ada. Setiap item menjelaskan perubahan yang perlu dilakukan.',
+    'Di bagian bawah, setiap komponen record diuraikan beserta jumlah DNS lookup yang digunakannya. Buka include untuk melihat layanan apa yang diizinkan.',
+  ],
+  howNote:
+    'Tautan di bilah alamat browser menyimpan hasil pemeriksaan ini sehingga Anda dapat membagikannya kepada rekan tim atau penyedia hosting DNS Anda. Harap perhatikan batasannya: server penerima memverifikasi SPF berdasarkan alamat IP server pengirim pesan. Alat ini tidak memiliki pesan email nyata untuk dianalisis, sehingga memeriksa integritas record itu sendiri di DNS. Alat ini tidak dapat mengevaluasi makro dinamis yang berubah sesuai IP pengirim.',
+  imageAlt: 'Ilustrasi SPF record yang dibagi menjadi beberapa komponen dengan indikator DNS lookup terhadap batas 10.',
+  whatTitle: 'Apa itu SPF record?',
+  whatIntro:
+    'SPF record adalah TXT record pada DNS suatu domain yang memuat daftar server yang diizinkan mengirim email atas nama domain tersebut. SPF merupakan singkatan dari Sender Policy Framework, dengan ketentuan standar yang diatur dalam [RFC 7208](https://www.rfc-editor.org/rfc/rfc7208). Domain yang menggunakan Google Workspace umumnya memiliki record seperti ini :',
+  whatAfter: [
+    '`v=spf1` menandai bahwa ini adalah SPF record. `include:_spf.google.com` mengesahkan seluruh server dari daftar resmi Google. `~all` menginstruksikan server penerima untuk menandai email dari server lain sebagai mencurigakan.',
+    'Saat email masuk, server penerima mengambil nama domain dari alamat bounce teknis (disebut Return-Path atau envelope sender). Server membaca SPF record domain tersebut dan memastikan apakah IP pengirim terdaftar. SPF tidak memeriksa alamat From yang tampak di kotak masuk. Karena itu SPF bekerja berdampingan dengan DKIM dan DMARC. Untuk memahami perpaduan ketiganya, baca [panduan lengkap SPF, DKIM, dan DMARC](/blog/spf-dkim-dmarc-explained).',
+    'Sejak Februari 2024, [Gmail mewajibkan SPF atau DKIM](https://support.google.com/a/answer/81126) bagi semua pengirim, serta keduanya bagi pengirim email massal. Yahoo menerapkan aturan serupa.',
+  ],
+  partsTitle: 'Arti setiap bagian dalam SPF record',
+  partsIntro:
+    'SPF record terdiri dari serangkaian istilah yang dipisahkan oleh spasi. Server penerima membaca dari kiri ke kanan dan berhenti pada istilah pertama yang cocok dengan server pengirim.',
+  thPart: 'Komponen',
+  thDoes: 'Fungsi',
+  thLookup: 'DNS Lookup',
+  lookupLabel: 'DNS Lookup: ',
+  parts: [
+    { part: 'v=spf1', does: 'Menandai TXT record sebagai SPF. Wajib berada di awal dan ditulis persis seperti ini.', lookup: 'Tidak' },
+    { part: 'ip4:192.0.2.10', does: 'Mengizinkan alamat IPv4 tertentu atau rentang CIDR seperti 192.0.2.0/24.', lookup: 'Tidak' },
+    { part: 'ip6:2001:db8::/32', does: 'Mengizinkan alamat atau rentang IPv6.', lookup: 'Tidak' },
+    { part: 'a', does: 'Mengizinkan alamat IP dari domain itu sendiri, atau domain yang ditulis setelah tanda titik dua.', lookup: 'Ya' },
+    { part: 'mx', does: 'Mengizinkan server penerima email dari MX record domain tersebut.', lookup: 'Ya' },
+    { part: 'include:_spf.google.com', does: 'Mengizinkan semua server yang disahkan oleh SPF record domain lain. Ini cara standar menambahkan layanan pihak ketiga.', lookup: 'Ya, plus bersarang' },
+    { part: 'exists:%{i}.example.com', does: 'Cocok jika kueri DNS menghasilkan alamat A. Digunakan oleh pengirim berskala besar menggunakan makro.', lookup: 'Ya' },
+    { part: 'ptr', does: 'Mencocokkan melalui reverse DNS. RFC 7208 sangat tidak menyarankan penggunaannya karena lambat dan tidak stabil.', lookup: 'Ya' },
+    { part: '~all atau -all', does: 'Menentukan tindakan untuk semua server yang tidak terdaftar. Wajib diletakkan di akhir.', lookup: 'Tidak' },
+    { part: 'redirect=example.net', does: 'Menerapkan SPF record domain lain sebagai pengganti. Diabaikan jika record memiliki istilah all.', lookup: 'Ya' },
+  ],
+  partsAfter: [
+    'Setiap mekanisme dapat diawali kualifikator yang menentukan status saat ada kecocokan. `+` berarti Pass (lolos) dan merupakan bawaan jika tidak ditulis. `-` berarti Fail (gagal mutlak), `~` berarti Softfail (gagal ringan), dan `?` berarti Neutral (netral). Oleh karena itu all biasanya ditulis sebagai `-all`, `~all`, atau `?all`.',
+    'Penulisan tidak membedakan huruf besar dan kecil: `Include:` berfungsi sama persis dengan `include:`. RFC 7208 merekomendasikan mengakhiri setiap record dengan all atau redirect. Tanpa penutup ini, server yang tidak terdaftar akan berstatus netral.',
+  ],
+  limitTitle: 'Batas ketat 10 DNS lookup',
+  limitParas: [
+    'Setiap istilah include, a, mx, ptr, exists, dan redirect mewajibkan server penerima melakukan kueri resolusi DNS. RFC 7208 membatasi jumlah ini maksimal 10 lookup per evaluasi. Lookup di dalam include bersarang turut dihitung, sehingga satu include bisa menghabiskan beberapa lookup. ip4, ip6, dan all tidak menggunakan lookup. Jika sebuah record membutuhkan lebih dari 10 lookup, server penerima akan berhenti dan menghasilkan Permerror sehingga pemeriksaan SPF gagal.',
+    'Batas ini sangat mudah terlampaui. Kami mengukur biaya lookup layanan populer di DNS publik: Google Workspace memerlukan 1 lookup, Microsoft 365 memerlukan 1 lookup, Salesforce 2, Mailgun 5, dan Freshdesk 7. Perusahaan pengguna Google Workspace yang menambahkan Mailgun dan Freshdesk sudah mencapai 13 lookup. [Riset tahun 2024 tentang SPF record](https://www.usenix.org/conference/usenixsecurity24/presentation/ashiq) pada domain .com, .net, .org, dan .se menunjukkan 6,5% domain melebihi batas 10 lookup, di mana include dari hanya dua penyedia hosting menyumbang 83,7% kasus tersebut.',
+    'Biaya lookup juga dapat berubah sewaktu-waktu. Include Google sebelumnya membutuhkan 4 lookup hingga Desember 2025, saat [Google menyederhanakan include bersarang menjadi daftar tunggal](https://www.uriports.com/blog/google-simplifies-its-spf-record/). Banyak panduan dan generator lama masih menyebut angka 4. Pemeriksa kami menghitung jumlah lookup aktif sebenarnya secara langsung di DNS.',
+    'Melebihi batas tidak selalu membuat seluruh email gagal secara merata. Seperti yang [dijelaskan Microsoft](https://learn.microsoft.com/en-us/defender-office-365/email-authentication-spf-configure), server penerima mengevaluasi mekanisme dari kiri ke kanan dan berhenti pada kecocokan pertama. Email dari layanan yang ditulis di awal mungkin lolos, sedangkan layanan di bagian akhir akan gagal. Ini membuat masalah pengiriman terkesan acak jika Anda tidak menghitung lookup seluruh record.',
+    'Terdapat pula batasan kedua: kueri kosong (void lookups), misalnya include yang mengarah ke domain yang sudah kedaluwarsa. RFC 7208 mewajibkan server penerima berhenti setelah menemukan 2 void lookup berturut-turut.',
+  ],
+  underTitle: 'Cara menjaga agar tetap di bawah 10 DNS lookup',
+  underSteps: [
+    'Hapus include dari layanan email marketing atau pihak ketiga yang sudah tidak Anda gunakan.',
+    'Hapus include yang sudah tidak diwajibkan oleh penyedia layanan. Mailchimp, Postmark, Brevo, dan Klaviyo tidak lagi memerlukan include di domain utama Anda. SendGrid dan Amazon SES mengirim melalui subdomain terpisah. Lihat daftarnya di bawah.',
+    'Gunakan mekanisme ip4 dan ip6 untuk server email Anda sendiri alih-alih mekanisme a atau mx. RFC 7208 merekomendasikan urutan ini dan alamat IP tidak memakai DNS lookup.',
+    'Kirim email promosi atau transaksional menggunakan subdomain khusus, misalnya info.domainanda.com. Setiap subdomain memiliki SPF record sendiri dengan jatah 10 lookup masing-masing.',
+  ],
+  underNote:
+    'Beberapa penyedia menawarkan fitur SPF flattening, yang mengganti include dengan daftar alamat IP langsung. Ini menghemat lookup, namun rentang IP penyedia rutin berubah sehingga record statis bisa usang. Microsoft melarang flattening untuk layanan cloud dinamis dan menyarankan audit berkala setiap kuartal jika Anda menggunakannya.',
+  servicesTitle: 'Include SPF untuk Google Workspace, Microsoft 365, dan layanan lainnya',
+  servicesIntro:
+    'Berikut nilai include resmi dari dokumentasi setiap penyedia layanan beserta jumlah DNS lookup yang diukur di DNS publik per 12 Oktober 2026. Selalu pastikan dengan dokumentasi akun Anda karena beberapa layanan menggunakan subdomain regional tertentu.',
+  thService: 'Layanan',
+  thInclude: 'Nilai Include',
+  thLookups: 'DNS Lookup',
+  lookupCount: (n) => `${n} lookup`,
+  servicesNote:
+    'HubSpot memberikan include unik untuk setiap akun dengan akhiran hubspotemail.net. Salin nilai tersebut dari pengaturan email HubSpot Anda. Nilai ini menggunakan 1 lookup.',
+  notNeededTitle: 'Layanan yang umumnya tidak memerlukan SPF include',
+  notNeededIntro:
+    'Verifikasi SPF diperiksa pada alamat Return-Path teknis dan bukan pada alamat From yang tampil di inbox. Sebagian besar platform pengiriman email saat ini menggunakan domain bounce mereka sendiri atau subdomain CNAME khusus. Menambahkan include mereka ke domain utama hanya membuang kuota DNS lookup tanpa memberi proteksi tambahan.',
+  notNeededAfter: 'Pemeriksa kami akan menyoroti include yang tidak diperlukan ini jika ditemukan di dalam record Anda.',
+  createTitle: 'Cara membuat SPF record baru',
+  createIntro:
+    'Gunakan tab Buat di atas sebagai generator SPF interaktif. Centang layanan yang mengirimkan email atas nama domain Anda, dan alat ini akan menyusun sintaks yang tepat sembari memantau jumlah DNS lookup. Jika domain Anda sudah memiliki record, muat terlebih dahulu agar Anda dapat melengkapinya tanpa menimpa konfigurasi yang sudah ada. Berikut langkah-langkahnya :',
+  createSteps: [
+    'Daftar semua layanan yang mengirim email dari domain Anda: paket email kantor, buletin berita, CRM, help desk, penagihan, dan formulir website. Laporan DMARC sangat membantu menemukan pengirim yang terlewat.',
+    'Dapatkan nilai include dari panduan masing-masing layanan atau centang di alat ini. Untuk server mandiri, cantumkan alamat IP mereka.',
+    'Pilih aturan penutup: ~all atau -all. Bagian berikutnya menjelaskan perbedaan dampaknya.',
+    'Publikasikan sebagai satu TXT record pada root domain Anda (biasanya dilambangkan dengan @ pada panel DNS). Jika sudah ada record yang diawali v=spf1, perbarui record tersebut alih-alih membuat yang baru.',
+    'Tunggu beberapa menit hingga DNS menyebar dan periksa kembali domain tersebut dengan SPF checker ini.',
+  ],
+  createParas: [
+    'Setiap subdomain yang mengirim email membutuhkan SPF record sendiri karena subdomain tidak otomatis mewarisi record domain utama. Domain atau subdomain yang tidak pernah mengirim email harus dilindungi dengan: `v=spf1 -all`. RFC 7208 menyebut ini sebagai praktik terbaik untuk mencegah spoofing. [NCSC Inggris](https://www.ncsc.gov.uk/blog-post/protecting-parked-domains) juga merekomendasikan penambahan kebijakan DMARC p=reject dan Null MX record pada domain yang tidak aktif.',
+    'Record yang melebihi 255 karakter harus dibagi menjadi beberapa string bertanda kutip di dalam TXT record yang sama. Server penerima akan menggabungkan string tersebut tanpa spasi, sehingga spasi pemisah harus disertakan di dalam tanda kutip. Periksa panduan DNS hosting Anda mengenai penulisan string panjang.',
+  ],
+  endingTitle: '~all atau -all: akhiran mana yang sebaiknya dipilih',
+  endingIntro: 'Penyedia email terkemuka memiliki rekomendasi yang berbeda :',
+  endingList: [
+    '[Google](https://knowledge.workspace.google.com/admin/security/set-up-spf) merekomendasikan ~all (Softfail).',
+    '[M3AAWG](https://www.m3aawg.org/sites/default/files/m3aawg-email-authentication-recommended-best-practices-09-2020.pdf), asosiasi penyedia email global, menyarankan ~all agar server penerima tidak menolak pesan sebelum evaluasi DMARC selesai.',
+    '[Microsoft](https://learn.microsoft.com/en-us/defender-office-365/email-authentication-spf-configure) merekomendasikan -all (Fail), asalkan DKIM dan DMARC sudah dikonfigurasi dengan benar.',
+  ],
+  endingParas: [
+    'Kelemahan dari -all adalah beberapa server penerima langsung menolak pesan di sesi awal SMTP sebelum memeriksa DMARC. Standar [RFC 9989](https://www.rfc-editor.org/rfc/rfc9989) (standar DMARC 2026) mencatat bahwa pesan yang ditolak lebih awal ini tidak pernah masuk dalam laporan agregat DMARC, sehingga mempersulit pelacakan kendala pengiriman email yang sah.',
+    'Dalam praktiknya, ~all adalah pilihan paling aman untuk domain aktif, terutama saat Anda masih menginventarisasi semua pengirim email Anda. Jika DMARC Anda disetel ke quarantine atau reject, DMARC yang akan menentukan tindakan akhir. Gunakan -all pada domain cadangan yang tidak pernah mengirim email. Jangan pernah memakai +all (mengizinkan seluruh internet) dan hindari ?all (setara dengan tidak ada proteksi).',
+  ],
+  resultsTitle: 'Arti hasil pemeriksaan SPF record',
+  thResult: 'Hasil',
+  thMeaning: 'Arti',
+  thAction: 'Tindakan',
+  results: [
+    {
+      result: 'SPF record valid',
+      meaning: 'Record tunggal, format benar, dalam batas 10 lookup, dan diakhiri dengan ~all atau -all.',
+      action: 'Tidak ada tindakan yang diperlukan. Cek ulang jika Anda menghubungkan layanan pengiriman baru.',
+    },
+    {
+      result: 'SPF record berfungsi dengan peringatan',
+      meaning: 'Server penerima dapat memprosesnya, tetapi terdapat kelemahan seperti 9 atau 10 lookup, tanpa aturan all, atau memakai ptr.',
+      action: 'Perbaiki peringatan yang muncul sebelum bertambah menjadi error saat menambah layanan baru.',
+    },
+    {
+      result: 'SPF record rusak',
+      meaning: 'Record menghasilkan Permerror sehingga verifikasi SPF gagal untuk seluruh email dari domain ini.',
+      action: 'Segera perbaiki error yang tercantum. Penyebab paling sering adalah record ganda dan lebih dari 10 lookup.',
+    },
+    {
+      result: 'SPF record tidak melindungi domain',
+      meaning: 'Record diakhiri +all atau menyertakan include yang berakhiran demikian, sehingga semua server di internet diizinkan.',
+      action: 'Ganti +all dengan ~all atau -all.',
+    },
+    {
+      result: 'Tidak ada SPF record',
+      meaning: 'Domain tidak memublikasikan TXT record yang diawali dengan v=spf1.',
+      action: 'Buat record baru di tab Buat. Domain yang tidak aktif harus diatur ke v=spf1 -all.',
+    },
+    {
+      result: 'Domain tidak ditemukan',
+      meaning: 'DNS tidak menemukan record apa pun untuk domain ini (NXDOMAIN).',
+      action: 'Periksa kembali ejaan domain dan pastikan nama domain terdaftar serta aktif.',
+    },
+  ],
+  receiverIntro:
+    'Server email penerima menggunakan terminologi standar untuk mengklasifikasikan hasil pemeriksaan SPF pada header Authentication-Results dan laporan DMARC :',
+  spfResults: [
+    { result: 'pass', meaning: 'Server pengirim secara eksplisit diizinkan oleh SPF record.' },
+    { result: 'fail', meaning: 'Server pengirim tidak diizinkan (-all). Penerima dapat menolak pesan.' },
+    { result: 'softfail', meaning: 'Server pengirim kemungkinan tidak diizinkan (~all). RFC 7208 menyatakan status ini sebaiknya tidak langsung ditolak.' },
+    { result: 'neutral', meaning: 'Record tidak menentukan aturan untuk server ini (?all). Sama dengan tidak memiliki record.' },
+    { result: 'none', meaning: 'Domain tidak memiliki SPF record.' },
+    { result: 'temperror', meaning: 'Terjadi gangguan DNS sementara saat pemeriksaan. Pengirim dapat mencoba mengirim ulang nanti.' },
+    { result: 'permerror', meaning: 'Format record salah atau melanggar batasan teknis. Hanya perbaikan DNS yang dapat mengatasinya.' },
+  ],
+  errorsTitle: 'Error umum pada SPF record dan solusinya',
+  errorsIntro:
+    'Sebuah [analisis pada 12 juta domain populer tahun 2023](https://arxiv.org/abs/2502.08240) menemukan SPF pada 56,5% domain dan 2,9% di antaranya memiliki error fatal. Kesalahan paling umum adalah include yang mengarah ke domain tanpa SPF, disusul oleh terlampauinya batas 10 DNS lookup.',
+  errors: [
+    {
+      title: 'Dua SPF record pada domain yang sama',
+      text: 'Kerap terjadi saat menambahkan layanan baru dan panduan menyebutkan “tambahkan TXT record ini”, lalu dibuat record baru alih-alih mengedit yang sudah ada. Dua SPF record otomatis menghasilkan Permerror. Gabungkan semua mekanisme ke dalam satu TXT record yang dimulai dengan v=spf1 dan diakhiri satu aturan all.',
+    },
+    {
+      title: 'Include mengarah ke domain tanpa SPF',
+      text: 'Jika include mengarah ke domain yang tidak memiliki SPF record valid, seluruh pengujian gagal dengan Permerror. Ini sering dipicu salah ketik atau layanan yang sudah tutup. Hapus atau perbarui nilai include tersebut.',
+    },
+    {
+      title: '+all, ?all, atau tanpa aturan all di akhir',
+      text: '`+all` mengizinkan seluruh server di internet dan menghilangkan fungsi keamanan. `?all` atau lupa menulis aturan all menghasilkan status netral. Selalu akhiri record dengan ~all atau -all.',
+    },
+    {
+      title: 'Penggunaan mekanisme ptr',
+      text: 'RFC 7208 secara tegas melarang mekanisme ptr. Mekanisme ini lambat, menghabiskan jatah lookup, dan rentan gagal saat DNS bermasalah. Ganti dengan mekanisme ip4 dan ip6 langsung.',
+    },
+    {
+      title: 'Kesalahan ketik dan tanda baca',
+      text: 'Spasi setelah titik dua, penulisan IPv4 yang tidak lengkap, atau istilah yang tidak dikenal akan menimbulkan Permerror. Kesalahan tersembunyi seperti `include=example.com` dengan tanda sama dengan akan diabaikan sebagai modifier asing sehingga layanan tersebut tidak pernah diotorisasi. Pemeriksa kami langsung mendeteksi masalah ini.',
+    },
+  ],
+  mythsTitle: 'Tiga mitos umum seputar SPF record',
+  myths: [
+    '“SPF record tidak boleh menggunakan huruf besar.” RFC 7208 menyatakan bahwa mekanisme dan nama domain tidak membedakan huruf besar dan kecil.',
+    '“SPF record maksimal hanya boleh 255 karakter.” Batas 255 karakter berlaku untuk tiap string dalam DNS TXT record. Record yang lebih panjang dipecah menjadi beberapa string bersambung.',
+    '“Maksimal hanya boleh ada 10 include.” Batas 10 berlaku untuk total resolusi DNS lookup yang dihasilkan secara rekursif, bukan jumlah kata include yang tertulis.',
+  ],
+  authTitle: 'Peran SPF dalam ekosistem autentikasi email',
+  authParas: [
+    'Status lulus pada SPF memiliki keterbatasan. Dalam penelitian 2023, 34,7% domain secara tidak langsung mengizinkan lebih dari 100.000 alamat IP. Selain itu, SPF kerap gagal saat email diteruskan (forwarding) secara otomatis karena IP server penerus tidak tercantum di record Anda.',
+    'DKIM mengatasi celah ini dengan menyematkan tanda tangan kriptografi pada isi pesan yang tetap utuh saat diteruskan. DMARC menyatukan keduanya dengan memastikan domain From cocok dengan domain yang divalidasi oleh SPF atau DKIM, serta memberi instruksi kepada penerima jika email gagal divalidasi. Konfigurasikan perlindungan lainnya dengan [generator DKIM](/dkim-generator) dan [generator DMARC](/dmarc-generator). Gunakan [pencarian MX](/mx-lookup) untuk memverifikasi server penerima Anda.',
+    'Autentikasi juga tidak mencegah pengiriman email ke alamat yang tidak aktif atau salah ketik yang berujung bounce. Bersihkan alamat individual dengan [pemeriksa email](/email-checker) atau bersihkan seluruh basis data kontak Anda dengan [validasi email massal](/bulk-email-verifier). Untuk ringkasan praktis bagi tim Anda, baca penjelasan lengkap mengenai [SPF record di glosarium](/glossary/spf).',
+  ],
+  faqTitle: 'Pertanyaan umum seputar SPF record',
+  faqs: [
+    {
+      q: 'Apa itu SPF record?',
+      a: 'SPF record adalah TXT record di DNS domain Anda yang mencantumkan server mana saja yang berhak mengirim email atas nama domain tersebut. Server penerima membacanya untuk memverifikasi keaslian pengirim. SPF singkatan dari Sender Policy Framework yang distandardisasi dalam RFC 7208.',
+    },
+    {
+      q: 'Bagaimana cara memeriksa SPF record saya?',
+      a: 'Masukkan domain Anda pada kolom pemeriksa di bagian atas halaman ini. Di terminal atau command prompt, Anda dapat menjalankan nslookup -type=txt domainanda.com di Windows, atau dig txt domainanda.com di macOS dan Linux. Cari baris TXT yang diawali dengan v=spf1.',
+    },
+    {
+      q: 'Bolehkah satu domain memiliki dua SPF record?',
+      a: 'Tidak boleh. RFC 7208 secara tegas melarang lebih dari satu SPF record pada satu nama domain. Jika ada dua, server penerima akan mengembalikan Permerror dan verifikasi SPF gagal untuk seluruh email Anda. Gabungkan seluruh aturan ke dalam satu TXT record.',
+    },
+    {
+      q: 'Apa arti Permerror pada SPF?',
+      a: 'Permerror (Permanent Error) menandakan server penerima tidak dapat membaca atau memproses SPF record Anda. Penyebab utamanya meliputi record ganda, melebihi 10 DNS lookup, atau include yang mengarah ke domain tanpa SPF valid.',
+    },
+    {
+      q: 'Apa perbedaan antara ~all dan -all?',
+      a: 'Dengan ~all (Softfail), email dari server yang tidak terdaftar akan ditandai mencurigakan namun umumnya tetap diterima. Dengan -all (Fail), server diminta menolaknya secara tegas. Google menyarankan ~all, sedangkan Microsoft merekomendasikan -all jika DKIM dan DMARC telah aktif.',
+    },
+    {
+      q: 'Apakah subdomain membutuhkan SPF record sendiri?',
+      a: 'Ya, jika subdomain tersebut digunakan untuk mengirim email. Subdomain tidak otomatis mewarisi SPF record dari domain utama. Jika info.domainanda.com mengirim email, ia wajib memiliki record sendiri. Jika tidak pernah mengirim email, amankan dengan v=spf1 -all.',
+    },
+    {
+      q: 'Berapa lama propagasi perubahan SPF record?',
+      a: 'Tergantung pada nilai TTL (Time to Live) dari record sebelumnya. Jika TTL disetel 3600 detik, pembaruan memakan waktu maksimal satu jam. Meskipun penyedia domain sering menyebut rentang 24 hingga 48 jam, sebagian besar DNS resolver memperbaruinya dalam hitungan menit.',
+    },
+    {
+      q: 'Apakah SPF tetap diperlukan jika sudah menggunakan DKIM?',
+      a: 'Ya, keduanya sangat disarankan. Gmail dan Yahoo mewajibkan SPF dan DKIM untuk pengirim email rutin. Selain itu, DMARC akan lolos jika salah satu metode berhasil selaras, memberikan redundansi keamanan yang lebih baik.',
+    },
+    {
+      q: 'Apakah SPF menghentikan pemalsuan email (spoofing) secara total?',
+      a: 'Tidak sendirian. SPF hanya memvalidasi alamat Return-Path teknis, bukan alamat From yang terlihat oleh penerima di inbox. Pengirim spam bisa meloloskan SPF menggunakan domain mereka sendiri lalu memalsukan nama Anda di alamat From. DMARC menutup celah ini dengan mewajibkan keselarasan antara kedua domain.',
+    },
+  ],
+  ctaHeadline: 'Verifikasi alamat email sebelum Anda mengirim',
+}
+
+export const SPF_PAGE_STRINGS: Partial<Record<Locale, SpfPageStrings>> & { en: SpfPageStrings } = {
+  en,
+  de,
+  it,
+  'pt-br': ptBr,
+  fr,
+  es,
+  nl,
+  pl,
+  id,
+}

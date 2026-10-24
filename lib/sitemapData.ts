@@ -219,6 +219,7 @@ const FREE_TOOL_CLUSTERS = [
   'dkimGenerator',
   'dmarcGenerator',
   'bimiGenerator',
+  'bounceRate',
   'emailSignature',
   'emailExtractor',
   'freeEmailProviders',
