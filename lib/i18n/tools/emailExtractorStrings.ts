@@ -271,4 +271,449 @@ const ptBr: ExtractorPageStrings = {
   ctaHeadline: 'Verifique os contatos extraídos antes de enviar',
 }
 
-export const EXTRACTOR_PAGE_STRINGS: Partial<Record<Locale, ExtractorPageStrings>> & { en: ExtractorPageStrings } = { en, de, 'pt-br': ptBr }
+
+const fr: ExtractorPageStrings = {
+  metaTitle: 'Extracteur d’e-mails gratuit : extraire des e-mails d’un texte ou fichier | Giggal.ai',
+  ogTitle: 'Extracteur d’e-mails gratuit : extraire des e-mails d’un texte ou fichier',
+  description:
+    'Extrayez des adresses e-mail depuis du texte, CSV, Excel ou HTML dans votre navigateur. Dédupliquez, filtrez par domaine et exportez votre liste gratuitement.',
+  ogLocale: 'fr_FR',
+  ogImage: '/og-card.png',
+  ogAlt: 'Extracteur d’e-mails gratuit par Giggal.ai',
+  crumb: 'Extracteur d’e-mails',
+  appName: 'Extracteur d’e-mails gratuit',
+  featureList: [
+    'Extraction d’adresses e-mail depuis du texte brut, CSV, Excel ou HTML',
+    'Suppression automatique des doublons et filtrage par nom de domaine',
+    'Conversion des adresses masquées écrites en toutes lettres ([at], [dot])',
+    'Exportation en format TXT ou CSV avec colonne de domaine dédiée',
+    'Exécution 100% dans le navigateur grâce à un Web Worker dédié',
+  ],
+  h1: 'Extracteur d’e-mails gratuit',
+  heroIntro: 'Collez votre texte ou déposez vos fichiers pour obtenir instantanément une liste d’e-mails propre et dédupliquée.',
+  howTitle: 'Comment extraire des e-mails d’un texte',
+  howSteps: [
+    'Collez votre texte dans la zone de saisie ou déposez un ou plusieurs fichiers.',
+    'Sélectionnez vos options : déduplication, tri alphabétique, filtre par domaine ou masquage des adresses de rôle (info@, contact@).',
+    'Consultez les résultats en temps réel : liste détaillée, statistiques et principaux domaines d’e-mails.',
+    'Copiez la liste ou téléchargez-la au format TXT ou CSV avec colonne de domaine.',
+  ],
+  howNote:
+    'Aucune donnée ne quitte votre navigateur. Vous pouvez traiter vos fichiers clients et documents confidentiels en toute sécurité.',
+  imageAlt: 'Illustration d’un extracteur d’e-mails générant une liste propre et dédupliquée à partir de fichiers.',
+  findsTitle: 'Ce que l’extracteur détecte et ignore',
+  findsParas: [
+    'L’outil détecte toute chaîne au format nom@domaine.tld et nettoie la ponctuation adjacente (liens mailto:, parenthèses ou virgules en fin d’adresse). Il ignore automatiquement les noms de fichiers web (ex. logo@2x.png, icon@3x.svg).',
+    'Pour contourner les robots, certaines adresses sont rédigées sous la forme nom [at] domaine [dot] fr. Activez l’option de conversion pour transformer [at], (at), {at} et les variantes de point en adresses e-mail valides.',
+    'Les variantes de casse telles que Jean@Exemple.fr et jean@exemple.fr sont regroupées sous une seule adresse. Consultez notre article sur [la sensibilité à la casse des adresses e-mail](/blog/are-email-addresses-case-sensitive).',
+    'L’outil analyse exclusivement le contenu textuel fourni. Il n’explore pas le web externe et ne devine aucune adresse manquante.',
+  ],
+  filesTitle: 'Formats de fichiers pris en charge',
+  filesPara:
+    'Les formats texte sont pris en charge nativement : .txt, .csv, .tsv, .log, .md, .json, .xml, .html, .eml et .vcf. Les classeurs Excel (.xlsx et .xls) sont analysés cellule par cellule. Vous pouvez déposer plusieurs fichiers simultanément. Pour les fichiers PDF ou Word, copiez simplement le texte et collez-le dans le champ.',
+  beforeTitle: 'Avant d’envoyer vos e-mails',
+  beforeParas: [
+    'Trouver une adresse dans un document ne garantit pas que la boîte aux lettres existe encore. Les listes anciennes comportent des adresses abandonnées qui provoquent des [hard bounces](/blog/hard-bounce-vs-soft-bounce), nuisibles à votre délivrabilité. Effectuez un [nettoyage de liste d’e-mails](/email-list-cleaning) avant tout envoi. Pour tester une adresse individuelle, utilisez notre [vérificateur d’e-mail gratuit](/email-checker).',
+    'Veillez à respecter les réglementations sur la protection des données (RGPD) et le consentement de vos destinataires avant de lancer vos campagnes.',
+  ],
+  faqTitle: 'Foire aux questions',
+  faqs: [
+    {
+      q: 'Cet extracteur d’e-mails est-il gratuit ?',
+      a: 'Oui, totalement gratuit, sans inscription requise et sans limite de volume.',
+    },
+    {
+      q: 'Mes fichiers et textes sont-ils transmis à vos serveurs ?',
+      a: 'Non. Le traitement s’effectue à 100% en local dans votre navigateur via un Web Worker. Rien n’est transmis ni enregistré.',
+    },
+    {
+      q: 'Puis-je extraire des e-mails directement depuis une URL de site ?',
+      a: 'Pas directement via l’URL. Ouvrez la page web, copiez son texte ou son code source HTML, puis collez-le dans l’extracteur.',
+    },
+    {
+      q: 'L’extracteur vérifie-t-il la validité des adresses e-mail ?',
+      a: 'Non. Il extrait uniquement les adresses présentes. Pour vérifier l’existence réelle des boîtes, utilisez notre [vérificateur d’e-mail](/email-checker) ou notre [service de nettoyage de liste](/email-list-cleaning).',
+    },
+    {
+      q: 'Quelle quantité de texte puis-je traiter ?',
+      a: 'Vous pouvez traiter des fichiers volumineux de plusieurs dizaines de mégaoctets sans ralentir votre navigateur grâce au traitement en arrière-plan.',
+    },
+    {
+      q: 'Puis-je importer des fichiers Excel ou CSV ?',
+      a: 'Oui. Déposez vos fichiers .xlsx, .xls ou .csv. Toutes les cellules sont scannées automatiquement.',
+    },
+  ],
+  ctaHeadline: 'Vérifiez la validité de vos adresses extraites avant d’envoyer.',
+}
+
+const es: ExtractorPageStrings = {
+  metaTitle: 'Extractor de correos gratis: extraer emails de texto y archivos | Giggal.ai',
+  ogTitle: 'Extractor de correos gratis: extraer emails de texto y archivos',
+  description:
+    'Extraiga direcciones de email de texto, CSV, Excel o HTML en su navegador. Elimine duplicados, filtre por dominio y exporte su lista gratis y sin registro.',
+  ogLocale: 'es_ES',
+  ogImage: '/og-card.png',
+  ogAlt: 'Extractor de correos electrónicos gratuito de Giggal.ai',
+  crumb: 'Extractor de correos',
+  appName: 'Extractor de correos gratuito',
+  featureList: [
+    'Extracción de emails desde texto, archivos CSV, Excel o código HTML',
+    'Eliminación de duplicados y filtros avanzados por dominio',
+    'Conversión de direcciones ofuscadas por escrito ([at], [dot])',
+    'Exportación rápida a formato TXT o CSV con columna de dominio',
+    'Ejecución 100% en el navegador mediante Web Worker local',
+  ],
+  h1: 'Extractor de correos electrónicos gratuito',
+  heroIntro: 'Pegue texto o arrastre archivos para extraer una lista limpia de correos, sin duplicados y lista para usar.',
+  howTitle: 'Cómo extraer correos de un texto',
+  howSteps: [
+    'Pegue su texto en el campo o arrastre uno o varios archivos compatibles.',
+    'Configure sus filtros: eliminar duplicados, ordenar, filtrar por dominio u ocultar cuentas genéricas (info@, ventas@).',
+    'Revise los resultados generados en tiempo real: recuento total, lista filtrada y principales dominios.',
+    'Copie la lista o descárguela en formato TXT o CSV estructurado.',
+  ],
+  howNote:
+    'Ningún dato sale de su navegador. Puede extraer correos de bases de clientes y documentos internos con total privacidad.',
+  imageAlt: 'Ilustración del extractor de emails generando una lista organizada y deduplicada a partir de documentos.',
+  findsTitle: 'Qué correos detecta el extractor y cuáles descarta',
+  findsParas: [
+    'El sistema identifica patrones con formato nombre@dominio.tld y limpia caracteres sobrantes como enlaces mailto:, comas o paréntesis finales. Descarta automáticamente nombres de archivos gráficos como logo@2x.png o icon@3x.svg.',
+    'Para evitar robots, muchas webs publican correos como nombre [at] dominio [dot] com. Active la opción correspondiente para convertir [at], (at), {at} y formatos dot en direcciones válidas.',
+    'Direcciones que solo difieren en mayúsculas (como Ana@Ejemplo.es y ana@ejemplo.es) se unifican, ya que los servidores de correo las tratan como la misma bandeja. Vea nuestro artículo sobre [mayúsculas y minúsculas en emails](/blog/are-email-addresses-case-sensitive).',
+    'La herramienta analiza únicamente el contenido ingresado; no rastrea la web externa ni genera direcciones ficticias.',
+  ],
+  filesTitle: 'Formatos de archivo compatibles',
+  filesPara:
+    'Admite archivos de texto plano: .txt, .csv, .tsv, .log, .md, .json, .xml, .html, .eml y .vcf. Los documentos de Excel (.xlsx y .xls) se leen celda por celda. Puede arrastrar múltiples archivos simultáneamente. En documentos PDF o Word, copie el texto y péguelo directamente.',
+  beforeTitle: 'Antes de realizar envíos a la lista',
+  beforeParas: [
+    'Extraer un correo no asegura que la cuenta siga activa. Documentos antiguos suelen incluir direcciones obsoletas que generan [hard bounces](/blog/hard-bounce-vs-soft-bounce) dañinos para su reputación. Realice una [limpieza de lista de correos](/email-list-cleaning) antes de enviar. Para verificar una dirección individual, use nuestro [validador de correos gratuito](/email-checker).',
+    'Asegúrese de contar con consentimiento y cumplir con regulaciones como el RGPD o CAN-SPAM al gestionar listas de contacto.',
+  ],
+  faqTitle: 'Preguntas frecuentes',
+  faqs: [
+    {
+      q: '¿Es completamente gratis este extractor de correos?',
+      a: 'Sí, es 100% gratuito, sin necesidad de registro ni restricciones de volumen.',
+    },
+    {
+      q: '¿Se cargan mis datos o archivos a algún servidor?',
+      a: 'No. El proceso se ejecuta íntegramente en su navegador a través de un Web Worker local. Ningún dato se envía ni se almacena.',
+    },
+    {
+      q: '¿Puedo extraer emails introduciendo la URL de una web?',
+      a: 'No de forma automática. Abra la página, seleccione el texto o el código fuente HTML, cópielo y péguelo en la herramienta.',
+    },
+    {
+      q: '¿Verifica la herramienta si los correos existen?',
+      a: 'No, únicamente extrae los correos presentes en el texto. Para comprobar si una bandeja existe, use la [limpieza de listas](/email-list-cleaning) o el [validador de correo](/email-checker).',
+    },
+    {
+      q: '¿Existe algún límite de tamaño de texto?',
+      a: 'Puede procesar textos extensos y archivos de más de 20 MB sin bloquear su navegador, gracias al procesamiento en segundo plano.',
+    },
+    {
+      q: '¿Funciona con hojas de cálculo de Excel o CSV?',
+      a: 'Sí. Arrastre archivos .xlsx, .xls o .csv. Todas las celdas se examinan automáticamente.',
+    },
+  ],
+  ctaHeadline: 'Compruebe sus correos extraídos antes de iniciar el envío.',
+}
+
+const it: ExtractorPageStrings = {
+  metaTitle: 'Estrattore email gratis: estrarre email da testo e file | Giggal.ai',
+  ogTitle: 'Estrattore email gratis: estrarre indirizzi email da testo e file',
+  description:
+    'Estrai indirizzi email da testo, CSV, Excel o HTML nel tuo browser. Rimuovi duplicati, filtra per dominio ed esporta la lista pulita gratis e senza registrazione.',
+  ogLocale: 'it_IT',
+  ogImage: '/og-card.png',
+  ogAlt: 'Estrattore email gratuito di Giggal.ai',
+  crumb: 'Estrattore email',
+  appName: 'Estrattore email gratuito',
+  featureList: [
+    'Estrazione di indirizzi email da testo, file CSV, fogli Excel o codice HTML',
+    'Rimozione automatica dei duplicati e filtri per dominio personalizzati',
+    'Conversione di indirizzi email offuscati per esteso ([at], [dot])',
+    'Esportazione rapida in formato TXT o CSV con colonna dominio',
+    'Elaborazione 100% in locale nel browser tramite Web Worker',
+  ],
+  h1: 'Estrattore email gratuito',
+  heroIntro: 'Incolla il testo o trascina i tuoi file per ottenere un elenco pulito di indirizzi email, senza duplicati.',
+  howTitle: 'Come estrarre email da un testo',
+  howSteps: [
+    'Incolla il testo nel riquadro o trascina uno o più file supportati.',
+    'Seleziona le opzioni desiderate: deduplica, ordinamento, filtro dominio o esclusione indirizzi di ruolo (info@, support@).',
+    'Visualizza i risultati in tempo reale: conteggio totale, elenco filtrato e domini più frequenti.',
+    'Copia l’elenco o scaricalo in formato TXT o CSV con colonne ordinate.',
+  ],
+  howNote:
+    'Nessun dato esce dal tuo browser. Puoi estrarre email da documenti interni e file riservati con la massima sicurezza.',
+  imageAlt: 'Illustrazione dell’estrattore email che trasforma file e testi in liste ordinate e prive di duplicati.',
+  findsTitle: 'Cosa individua l’estrattore e cosa ignora',
+  findsParas: [
+    'L’algoritmo cerca stringhe conformi allo standard nome@dominio.tld e rimuove elementi superflui (prefissi mailto:, virgole o parentesi adiacenti). Vengono scartati in automatico i nomi di file grafici come logo@2x.png o icon@3x.svg.',
+    'Per eludere lo spam, alcuni siti pubblicano email come nome [at] dominio [dot] it. Attivando l’opzione di conversione, i formati [at], (at), {at} e dot vengono ripristinati come email standard.',
+    'Indirizzi che differiscono solo per le maiuscole (es. Mario@Esempio.it e mario@esempio.it) vengono unificati, poiché i provider li gestiscono come la stessa casella. Maggiori dettagli nel nostro articolo su [maiuscole e minuscole nelle email](/blog/are-email-addresses-case-sensitive).',
+    'La ricerca si limita al testo inserito; non vengono effettuate ricerche web esterne né generati indirizzi ipotetici.',
+  ],
+  filesTitle: 'Formati di file supportati',
+  filesPara:
+    'Supporta file di testo semplice: .txt, .csv, .tsv, .log, .md, .json, .xml, .html, .eml e .vcf. I file Excel (.xlsx e .xls) vengono esaminati cella per cella. È possibile trascinare più file contemporaneamente. Per documenti Word o PDF, seleziona il testo e incollalo direttamente nel riquadro.',
+  beforeTitle: 'Prima di inviare email all’elenco',
+  beforeParas: [
+    'Trovare un’email in un testo non garantisce che la casella sia attiva. Documenti datati possono contenere indirizzi inesistenti che causano [hard bounce](/blog/hard-bounce-vs-soft-bounce), danneggiando la tua reputazione di mittente. Esegui la [pulizia della lista email](/email-list-cleaning) prima di inviare. Per testare un singolo indirizzo, prova il nostro [verificatore email gratuito](/email-checker).',
+    'Assicurati sempre di rispettare la normativa sulla privacy (GDPR) e di avere il consenso dei destinatari prima di procedere.',
+  ],
+  faqTitle: 'Domande frequenti',
+  faqs: [
+    {
+      q: 'Questo estrattore email è gratuito?',
+      a: 'Sì, è completamente gratuito, senza registrazione e senza limiti di utilizzo.',
+    },
+    {
+      q: 'I miei file vengono inviati ai vostri server?',
+      a: 'No. L’estrazione opera interamente in locale nel tuo browser tramite un Web Worker. Nessun dato viene trasmesso.',
+    },
+    {
+      q: 'È possibile estrarre email da un URL web?',
+      a: 'Non inserendo solo l’URL. È necessario aprire la pagina, copiare il testo o il sorgente HTML e incollarlo nello strumento.',
+    },
+    {
+      q: 'L’estrattore verifica l’esistenza delle caselle email?',
+      a: 'No, estrae solo gli indirizzi presenti. Per verificare l’effettiva esistenza, usa la [pulizia liste email](/email-list-cleaning) o il [verificatore email](/email-checker).',
+    },
+    {
+      q: 'Qual è il limite di testo che posso incollare?',
+      a: 'Puoi elaborare testi molto grandi e file di oltre 20 MB senza bloccare la pagina, grazie all’elaborazione in background.',
+    },
+    {
+      q: 'Posso estrarre email da fogli Excel o file CSV?',
+      a: 'Certamente. Trascina i tuoi file .xlsx, .xls o .csv. Tutte le celle verranno esaminate.',
+    },
+  ],
+  ctaHeadline: 'Verifica la qualità degli indirizzi estratti prima di inviare.',
+}
+
+const nl: ExtractorPageStrings = {
+  metaTitle: 'Gratis e-mail extractor: e-mailadressen uit tekst en bestanden halen | Giggal.ai',
+  ogTitle: 'Gratis e-mail extractor: e-mailadressen uit tekst en bestanden halen',
+  description:
+    'Haal e-mailadressen uit tekst, CSV, Excel of HTML in uw browser. Verwijder duplicaten, filter op domein en exporteer een schone lijst. Gratis en zonder registratie.',
+  ogLocale: 'nl_NL',
+  ogImage: '/og-card.png',
+  ogAlt: 'Gratis e-mail extractor van Giggal.ai',
+  crumb: 'E-mail extractor',
+  appName: 'Gratis e-mail extractor',
+  featureList: [
+    'E-mailadressen extraheren uit tekst, CSV, Excel-spreadsheets of HTML',
+    'Automatisch duplicaten verwijderen en filteren op domeinnaam',
+    'Vermomde uitgeschreven adressen converteren ([at], [dot])',
+    'Exporteren naar TXT of CSV met een aparte domeinkolom',
+    'Draait 100% lokaal in uw browser met een Web Worker',
+  ],
+  h1: 'Gratis e-mail extractor',
+  heroIntro: 'Plak tekst of sleep bestanden naar het veld voor een opgeschoonde, ontdubbelde lijst van e-mailadressen.',
+  howTitle: 'Hoe e-mailadressen uit tekst te halen',
+  howSteps: [
+    'Plak uw tekst in het veld of sleep een of meerdere bestanden naar het vak.',
+    'Kies uw filters: duplicaten verwijderen, alfabetisch sorteren, filteren op domein of rol-adressen uitsluiten (zoals info@).',
+    'Bekijk de live resultaten: totaal aantal adressen, de lijst en de meest voorkomende domeinen.',
+    'Kopieer de lijst of download deze als TXT-bestand of gestructureerd CSV-bestand.',
+  ],
+  howNote:
+    'Niets van wat u invoert verlaat uw browser. U kunt vertrouwelijke klantlijsten en interne documenten veilig verwerken.',
+  imageAlt: 'Illustratie van de e-mail extractor die documenten omzet in een schone, ontdubbelde lijst adressen.',
+  findsTitle: 'Wat de extractor herkent en wat wordt genegeerd',
+  findsParas: [
+    'De tool scant op het patroon naam@domein.tld en schoont aangrenzende leestekens op (zoals mailto:-links, komma’s of haakjes). Bestandsnamen van webafbeeldingen zoals logo@2x.png of icon@3x.svg worden automatisch overgeslagen.',
+    'Om spam te voorkomen schrijven sommige websites adressen als naam [at] domein [dot] nl. Schakel de optie voor uitgeschreven adressen in om vormen zoals [at], (at), {at} en dot om te zetten naar standaard e-mailadressen.',
+    'Adressen die alleen verschillen in hoofdletters (bijv. Anna@Voorbeeld.nl en anna@voorbeeld.nl) worden samengevoegd, omdat mailservers ze identiek behandelen. Lees meer in ons artikel over [hoofdlettergevoeligheid van e-mailadressen](/blog/are-email-addresses-case-sensitive).',
+    'De tool analyseert uitsluitend de ingevoerde tekst; er worden geen externe websites gescand of ontbrekende adressen gegokt.',
+  ],
+  filesTitle: 'Ondersteunde bestandsformaten',
+  filesPara:
+    'Tekstformaten werken direct: .txt, .csv, .tsv, .log, .md, .json, .xml, .html, .eml en .vcf. Excel-bestanden (.xlsx en .xls) worden cel voor cel uitgelezen. U kunt meerdere bestanden tegelijk toevoegen. Voor PDF- of Word-documenten kopieert u eenvoudig de tekst naar het veld.',
+  beforeTitle: 'Voordat u e-mails naar de lijst verstuurt',
+  beforeParas: [
+    'Een gevonden e-mailadres bewijst niet dat de mailbox nog bestaat. Verouderde documenten bevatten vaak verlopen adressen die leiden tot [hard bounces](/blog/hard-bounce-vs-soft-bounce), wat uw afzenderreputatie schaadt. Voer eerst een [e-maillijst opschoning](/email-list-cleaning) uit. Voor een enkel adres gebruikt u onze [gratis e-mail checker](/email-checker).',
+    'Zorg dat u voldoet aan de privacywetgeving (AVG) en toestemming heeft van ontvangers voordat u mailings verzendt.',
+  ],
+  faqTitle: 'Veelgestelde vragen',
+  faqs: [
+    {
+      q: 'Is deze e-mail extractor gratis?',
+      a: 'Ja, volledig gratis, zonder verplichte registratie en zonder limiet op het aantal adressen.',
+    },
+    {
+      q: 'Wordt mijn tekst geüpload naar jullie servers?',
+      a: 'Nee. De extractie gebeurt 100% lokaal in uw eigen browser via een Web Worker. Geen enkele data wordt verstuurd.',
+    },
+    {
+      q: 'Kan ik e-mails extraheren via een website-URL?',
+      a: 'Niet rechtstreeks via de URL. Open de gewenste pagina, kopieer de tekst of de HTML-broncode en plak deze in het veld.',
+    },
+    {
+      q: 'Controleert de tool of de e-mailadressen echt bestaan?',
+      a: 'Nee, de tool haalt alleen de adressen uit de tekst. Gebruik onze [e-maillijst opschoning](/email-list-cleaning) of [e-mail checker](/email-checker) om te verifiëren.',
+    },
+    {
+      q: 'Hoeveel tekst kan ik tegelijk verwerken?',
+      a: 'Dankzij verwerking op de achtergrond kunt u probleemloos grote bestanden van 20 MB of meer verwerken.',
+    },
+    {
+      q: 'Kan ik Excel- of CSV-bestanden gebruiken?',
+      a: 'Ja. Sleep .xlsx, .xls of .csv bestanden direct in het vak. Alle cellen worden automatisch doorzocht.',
+    },
+  ],
+  ctaHeadline: 'Controleer uw geëxtraheerde adressen voor verzending.',
+}
+
+const pl: ExtractorPageStrings = {
+  metaTitle: 'Darmowy ekstraktor email: wyciągaj adresy email z tekstu i plików | Giggal.ai',
+  ogTitle: 'Darmowy ekstraktor email: wyciągaj adresy email z tekstu i plików',
+  description:
+    'Wyodrębniaj adresy email z tekstu, plików CSV, Excel lub kodu HTML w przeglądarce. Usuwaj duplikaty, filtruj według domen i eksportuj listę za darmo bez rejestracji.',
+  ogLocale: 'pl_PL',
+  ogImage: '/og-card.png',
+  ogAlt: 'Darmowy ekstraktor adresów email od Giggal.ai',
+  crumb: 'Ekstraktor email',
+  appName: 'Darmowy ekstraktor email',
+  featureList: [
+    'Wyodrębnianie adresów email z tekstu, plików CSV, arkuszy Excel lub HTML',
+    'Automatyczne usuwanie duplikatów i zaawansowane filtrowanie domen',
+    'Konwersja ukrytych adresów zapisanych słownie ([at], [dot])',
+    'Eksport listy do formatu TXT lub CSV z kolumną domen',
+    'Przetwarzanie w 100% lokalne w przeglądarce za pomocą Web Workera',
+  ],
+  h1: 'Darmowy ekstraktor adresów email',
+  heroIntro: 'Wklej tekst lub przeciągnij pliki, aby natychmiast uzyskać czystą listę adresów email bez powtórzeń.',
+  howTitle: 'Jak wyodrębnić adresy email z tekstu',
+  howSteps: [
+    'Wklej tekst w pole robocze lub przeciągnij jeden bądź kilka plików.',
+    'Wybierz opcje: usuwanie duplikatów, sortowanie, filtr domen lub ukrywanie adresów funkcyjnych (np. info@, kontakt@).',
+    'Sprawdź wyniki na żywo: całkowitą liczbę wykrytych adresów, listę i zestawienie domen.',
+    'Skopiuj listę lub pobierz ją w formacie TXT bądź w arkuszu CSV.',
+  ],
+  howNote:
+    'Żadne dane nie opuszczają Twojej przeglądarki. Możesz bezpiecznie analizować poufne dokumenty i bazy klientów.',
+  imageAlt: 'Ilustracja ekstraktora adresów email tworzącego uporządkowaną listę bez duplikatów z różnych plików.',
+  findsTitle: 'Co wykrywa ekstraktor, a co odrzuca',
+  findsParas: [
+    'Narzędzie wyszukuje ciągi znaków o strukturze nazwa@domena.tld i czyści przylegające znaki interpunkcyjne (odnośniki mailto:, przecinki, nawiasy). Automatycznie ignoruje nazwy plików graficznych, takie jak logo@2x.png czy icon@3x.svg.',
+    'Aby uniknąć spamu, adresy bywają zapisywane w formie nazwa [at] domena [dot] pl. Opcja konwersji zamienia zapisy [at], (at), {at} oraz dot na standardowe adresy email.',
+    'Adresy różniące się jedynie wielkością liter (np. Jan@Przyklad.pl i jan@przyklad.pl) są traktowane jako jeden adres. Szczegóły znajdziesz w artykule o [wielkości liter w adresach email](/blog/are-email-addresses-case-sensitive).',
+    'Narzędzie bada wyłącznie wprowadzony tekst; nie przeszukuje zewnętrznych stron internetowych ani nie generuje adresów.',
+  ],
+  filesTitle: 'Obsługiwane formaty plików',
+  filesPara:
+    'Obsługuje formaty tekstowe: .txt, .csv, .tsv, .log, .md, .json, .xml, .html, .eml oraz .vcf. Arkusze Excela (.xlsx i .xls) są skanowane komórka po komórce. Możesz upuścić wiele plików naraz. W przypadku plików PDF lub Word wystarczy zaznaczyć tekst i wkleić go w pole narzędzia.',
+  beforeTitle: 'Zanim wyślesz wiadomość do listy',
+  beforeParas: [
+    'Obecność adresu w dokumencie nie oznacza, że skrzynka wciąż istnieje. Starsze listy zawierają nieaktywne adresy generujące [twarde odbicia (hard bounces)](/blog/hard-bounce-vs-soft-bounce), które niszczą reputację nadawcy. Wykonaj [czyszczenie listy mailingowej](/email-list-cleaning) przed wysyłką. Do sprawdzenia pojedynczego adresu użyj [darmowego weryfikatora email](/email-checker).',
+    'Pamiętaj o zgodności z przepisami o ochronie danych osobowych (RODO) i wymaganej zgodzie odbiorców.',
+  ],
+  faqTitle: 'Często zadawane pytania',
+  faqs: [
+    {
+      q: 'Czy ten ekstraktor email jest darmowy?',
+      a: 'Tak, w 100% darmowy, bez konieczności rejestracji i bez limitu przetwarzanych danych.',
+    },
+    {
+      q: 'Czy moje pliki lub teksty są przesyłane na serwer?',
+      a: 'Nie. Całe przetwarzanie odbywa się lokalnie w Twojej przeglądarce dzięki technologii Web Worker.',
+    },
+    {
+      q: 'Czy mogę wyciągnąć adresy email bezpośrednio z linku do strony?',
+      a: 'Nie bezpośrednio z adresu URL. Należy otworzyć stronę, skopiować jej treść lub kod źródłowy HTML i wkleić do pola.',
+    },
+    {
+      q: 'Czy narzędzie sprawdza poprawność i istnienie adresów?',
+      a: 'Nie, jedynie wyodrębnia adresy z tekstu. Do sprawdzenia istnienia skrzynek służy [czyszczenie listy email](/email-list-cleaning) oraz [weryfikator email](/email-checker).',
+    },
+    {
+      q: 'Ile tekstu mogę wkleić jednocześnie?',
+      a: 'Narzędzie radzi sobie z plikami o wielkości kilkudziesięciu megabajtów bez zawieszania przeglądarki.',
+    },
+    {
+      q: 'Czy mogę importować pliki Excel lub CSV?',
+      a: 'Tak. Przeciągnij pliki .xlsx, .xls lub .csv – wszystkie komórki zostaną przeskanowane.',
+    },
+  ],
+  ctaHeadline: 'Zweryfikuj wyodrębnione kontakty przed rozpoczęciem wysyłki.',
+}
+
+const id: ExtractorPageStrings = {
+  metaTitle: 'Ekstraktor Email Gratis: Ekstrak Alamat Email dari Teks dan File | Giggal.ai',
+  ogTitle: 'Ekstraktor Email Gratis: Ekstrak Alamat Email dari Teks dan File',
+  description:
+    'Ekstrak alamat email dari teks, CSV, Excel, atau HTML langsung di browser Anda. Hapus duplikat, filter domain, dan unduh daftar bersih gratis tanpa daftar.',
+  ogLocale: 'id_ID',
+  ogImage: '/og-card.png',
+  ogAlt: 'Ekstraktor email gratis dari Giggal.ai',
+  crumb: 'Ekstraktor Email',
+  appName: 'Ekstraktor Email Gratis',
+  featureList: [
+    'Ekstrak alamat email dari teks biasa, CSV, spreadsheet Excel, atau kode HTML',
+    'Hapus duplikat secara otomatis dan terapkan filter domain kustom',
+    'Konversi alamat email terselubung format tulisan ([at], [dot])',
+    'Ekspor hasil ke format TXT atau CSV dengan kolom domain terpisah',
+    'Berjalan 100% di browser lokal menggunakan Web Worker',
+  ],
+  h1: 'Ekstraktor Email Gratis',
+  heroIntro: 'Tempel teks atau seret file Anda untuk mendapatkan daftar alamat email yang bersih dan bebas duplikat.',
+  howTitle: 'Cara mengekstrak email dari teks',
+  howSteps: [
+    'Tempel teks ke dalam kotak input atau seret satu atau beberapa file.',
+    'Pilih opsi filter: hapus duplikat, urutkan abjad, filter domain, atau sembunyikan alamat peran umum (info@, admin@).',
+    'Lihat hasil ekstraksi langsung: jumlah total, daftar email, dan daftar domain terbanyak.',
+    'Salin daftar email atau unduh sebagai file TXT maupun spreadsheet CSV.',
+  ],
+  howNote:
+    'Tidak ada data yang keluar dari browser Anda. Data pelanggan dan dokumen rahasia Anda tetap aman.',
+  imageAlt: 'Ilustrasi ekstraktor email yang mengorganisir dokumen menjadi daftar kontak bersih bebas duplikat.',
+  findsTitle: 'Apa yang diekstrak dan apa yang diabaikan',
+  findsParas: [
+    'Alat ini mendeteksi pola nama@domain.tld dan membersihkan tanda baca di sekitarnya (seperti tautan mailto:, koma, atau tanda kurung). Nama file gambar web seperti logo@2x.png atau icon@3x.svg akan diabaikan secara otomatis.',
+    'Untuk menghindari bot spam, beberapa situs menuliskan alamat seperti nama [at] domain [dot] com. Aktifkan opsi konversi agar format [at], (at), {at}, dan dot diubah kembali menjadi alamat email standar.',
+    'Alamat yang hanya berbeda huruf besar dan kecil (misal Budi@Contoh.id dan budi@contoh.id) disatukan karena penyedia email memperlakukannya sama. Baca artikel kami tentang [sensitivitas huruf pada alamat email](/blog/are-email-addresses-case-sensitive).',
+    'Alat hanya mengekstrak teks yang Anda masukkan; tidak melakukan scraping web luar atau membuat alamat acak.',
+  ],
+  filesTitle: 'Format file yang didukung',
+  filesPara:
+    'Mendukung format teks langsung: .txt, .csv, .tsv, .log, .md, .json, .xml, .html, .eml, dan .vcf. File Excel (.xlsx dan .xls) dibaca sel demi sel. Anda dapat menyeret banyak file sekaligus. Untuk file PDF atau Word, salin teksnya lalu tempelkan ke dalam alat.',
+  beforeTitle: 'Sebelum mengirim email ke daftar kontak',
+  beforeParas: [
+    'Menemukan email dalam dokumen tidak menjamin akun tersebut masih aktif. Dokumen lama sering berisi alamat kedaluwarsa yang memicu [hard bounce](/blog/hard-bounce-vs-soft-bounce) dan merusak reputasi domain Anda. Lakukan [pembersihan daftar email](/email-list-cleaning) terlebih dahulu. Untuk menguji satu alamat, gunakan [pemeriksa email gratis](/email-checker).',
+    'Pastikan Anda mematuhi regulasi privasi data dan mengantongi izin dari penerima sebelum mengirimkan email massal.',
+  ],
+  faqTitle: 'Pertanyaan Umum',
+  faqs: [
+    {
+      q: 'Apakah ekstraktor email ini gratis digunakan?',
+      a: 'Ya, 100% gratis tanpa perlu registrasi akun dan tanpa batasan jumlah email.',
+    },
+    {
+      q: 'Apakah teks atau file saya dikirim ke server?',
+      a: 'Tidak. Seluruh pemrosesan berjalan secara lokal di browser Anda dengan Web Worker. Data Anda tidak pernah diunggah.',
+    },
+    {
+      q: 'Bisakah mengekstrak email langsung dari URL tautan web?',
+      a: 'Tidak secara otomatis dari URL. Buka halaman yang diinginkan, salin teks atau kode HTML halamannya, lalu tempelkan ke kotak input.',
+    },
+    {
+      q: 'Apakah alat ini memeriksa apakah email tersebut aktif?',
+      a: 'Tidak, alat hanya mengekstrak teks. Untuk memverifikasi keaktifan akun, gunakan layanan [pembersih email massal](/email-list-cleaning) atau [pemeriksa email](/email-checker).',
+    },
+    {
+      q: 'Berapa banyak teks yang bisa diproses sekaligus?',
+      a: 'Anda dapat memproses file berukuran lebih dari 20 MB tanpa hambatan berkat pemrosesan di latar belakang.',
+    },
+    {
+      q: 'Apakah mendukung file Excel atau CSV?',
+      a: 'Ya. Seret file .xlsx, .xls, atau .csv ke dalam alat. Semua sel akan dipindai secara otomatis.',
+    },
+  ],
+  ctaHeadline: 'Verifikasi daftar email hasil ekstraksi sebelum mengirim kampanye.',
+}
+
+export const EXTRACTOR_PAGE_STRINGS: Record<Locale, ExtractorPageStrings> = { en, de, fr, es, it, 'pt-br': ptBr, nl, pl, id }
