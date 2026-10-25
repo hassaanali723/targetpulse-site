@@ -375,7 +375,638 @@ WICHTIGE HINWEISE ZUR EINRICHTUNG:
   },
 }
 
-export const DKIM_TOOL_STRINGS: Partial<Record<Locale, DkimToolStrings>> & { en: DkimToolStrings } = { en, it: itTool, de: deTool }
+
+const frTool: DkimToolStrings = {
+  domainLabel: 'Nom de domaine',
+  domainPlaceholder: 'exemple.fr',
+  domainHelp: "Le domaine d'expédition de vos e-mails sortants",
+  selectorLabel: 'Sélecteur DKIM',
+  selectorPlaceholder: 's2026a',
+  selectorHelp: 'Identifie cette paire de clés dans le DNS (ex. s2026a)',
+  keySizeLabel: 'Taille de clé',
+  keySizeOptions: {
+    2048: '2048 bits (Recommandé)',
+    1024: '1024 bits (minimum accepté par Gmail)',
+    4096: '4096 bits (enregistrement long, vérifiez votre DNS)',
+  },
+  keySizeHelp: {
+    2048: 'Recommandé par Gmail et la RFC 8301',
+    1024: 'Longueur historique, vulnérable aux attaques modernes',
+    4096: 'Dépasse la limite standard de 512 octets des paquets DNS UDP',
+  },
+  invalidSelector: 'Sélecteur non valide',
+  invalidDomain: 'Domaine non valide',
+  generationFailed: 'Échec de la génération des clés',
+  generating: 'Génération de la paire de clés RSA dans le navigateur...',
+  generate: 'Générer les clés DKIM',
+
+  dnsTitle: 'Enregistrement DNS TXT',
+  keyInfo: (bits, chars) => `${bits} bits (${chars} ${chars === 1 ? 'caractère' : 'caractères'})`,
+  formatLabel: 'Format :',
+  formatSingle: 'Chaîne unique',
+  formatChunked: 'Découpage 255 caractères',
+  formatBind: 'Zone BIND',
+  hostLabel: "Nom de l'enregistrement / Hôte :",
+  copied: 'Copié',
+  copyHost: "Copier l'hôte",
+  orFqdn: (fqdn) => `(ou ${fqdn})`,
+  valueLabel: "Valeur de l'enregistrement (TXT) :",
+  copyValue: 'Copier la valeur',
+  chunkedNote:
+    'Utilisez ce format découpé si votre hébergeur DNS limite les chaînes TXT uniques à 255 caractères.',
+
+  privateKeyTitle: 'Clé privée',
+  pkcs1Label: 'PKCS#1 (RSA)',
+  pkcs8Label: 'PKCS#8',
+  hide: 'Masquer',
+  show: 'Afficher',
+  reveal: 'Cliquer pour afficher la clé privée',
+  copiedKey: 'Clé copiée',
+  copyPrivateKey: 'Copier la clé privée',
+  downloadKey: 'Télécharger le fichier de clé',
+  downloadBundle: 'Télécharger le guide de configuration (.txt)',
+  rulesTitle: 'Règles importantes de déploiement :',
+  rules: [
+    'Gardez cette clé privée strictement confidentielle. Configurez-la uniquement sur votre serveur de messagerie ou MTA.',
+    "Publiez d'abord l'enregistrement DNS TXT. Envoyer des e-mails signés avant la propagation causera des rejets.",
+    'La plupart des serveurs (Postfix, OpenDKIM, cPanel, Exim) attendent le format traditionnel PKCS#1 RSA.',
+  ],
+
+  bundleFileName: (domain, selector) => `${domain}-${selector}-instructions-dkim.txt`,
+  bundleText: (keys) => `INSTRUCTIONS DE CONFIGURATION DKIM POUR ${keys.domain.toUpperCase()}
+Généré via le générateur DKIM côté client Giggal.ai
+
+==================================================
+1. ENREGISTREMENT DNS TXT
+==================================================
+Hôte / Nom :
+${keys.dnsRecordName}
+(ou Nom de domaine complet FQDN : ${keys.dnsRecordFqdn})
+
+Valeur TXT (Chaîne unique) :
+${keys.dnsRecordValue}
+
+Valeur TXT (Découpée en chaînes de 255 caractères) :
+${keys.dnsRecordChunked}
+
+Format de zone BIND :
+${keys.bindRecord}
+
+==================================================
+2. CLÉ PRIVÉE (À installer sur votre serveur de messagerie ou MTA)
+==================================================
+Format : PKCS#1 (RSA Traditionnel)
+${keys.privateKeyPkcs1Pem}
+
+Format : PKCS#8 (Standard)
+${keys.privateKeyPkcs8Pem}
+
+==================================================
+CONSIGNES DE DÉPLOIEMENT IMPORTANTES :
+- Publiez l'enregistrement DNS TXT et vérifiez sa propagation AVANT d'activer la signature DKIM.
+- Conservez la clé privée confidentielle. Ne la publiez jamais dans le DNS.
+`,
+
+  errors: {
+    'selector-empty': 'Le sélecteur ne peut pas être vide',
+    'selector-too-long': 'Le sélecteur ne peut pas dépasser 63 caractères',
+    'selector-chars':
+      'Le sélecteur ne peut contenir que des lettres, des chiffres et des tirets, sans commencer ni finir par un tiret',
+    'domain-empty': 'Le nom de domaine ne peut pas être vide',
+    'domain-too-long': 'Le nom de domaine est trop long',
+    'domain-no-tld': 'Le domaine doit comporter une extension TLD (ex. exemple.fr)',
+    'domain-label-length': "Une partie du domaine a une longueur non valide",
+    'domain-label': (label) => `Le domaine contient un élément non valide : "${label}"`,
+    'no-web-crypto': "L'API Web Crypto (crypto.subtle) n'est pas disponible dans ce navigateur",
+  },
+}
+
+const esTool: DkimToolStrings = {
+  domainLabel: 'Nombre de dominio',
+  domainPlaceholder: 'ejemplo.es',
+  domainHelp: 'El dominio de envío para tus correos salientes',
+  selectorLabel: 'Selector DKIM',
+  selectorPlaceholder: 's2026a',
+  selectorHelp: 'Identifica este par de claves en DNS (ej. s2026a)',
+  keySizeLabel: 'Tamaño de clave',
+  keySizeOptions: {
+    2048: '2048 bits (Recomendado)',
+    1024: '1024 bits (mínimo aceptado por Gmail)',
+    4096: '4096 bits (registro largo, revisa tu proveedor DNS)',
+  },
+  keySizeHelp: {
+    2048: 'Recomendado por Gmail y RFC 8301',
+    1024: 'Longitud heredada, vulnerable al criptoanálisis moderno',
+    4096: 'Supera el límite estándar de 512 bytes de paquetes DNS UDP',
+  },
+  invalidSelector: 'Selector no válido',
+  invalidDomain: 'Dominio no válido',
+  generationFailed: 'Fallo al generar las claves',
+  generating: 'Generando par de claves RSA en el navegador...',
+  generate: 'Generar claves DKIM',
+
+  dnsTitle: 'Registro DNS TXT',
+  keyInfo: (bits, chars) => `${bits} bits (${chars} ${chars === 1 ? 'carácter' : 'caracteres'})`,
+  formatLabel: 'Formato:',
+  formatSingle: 'Cadena única',
+  formatChunked: 'División en 255 caracteres',
+  formatBind: 'Zona BIND',
+  hostLabel: 'Nombre de registro / Host:',
+  copied: 'Copiado',
+  copyHost: 'Copiar host',
+  orFqdn: (fqdn) => `(o ${fqdn})`,
+  valueLabel: 'Valor del registro (TXT):',
+  copyValue: 'Copiar valor',
+  chunkedNote:
+    'Usa este formato dividido si tu proveedor DNS limita las cadenas TXT individuales a 255 caracteres.',
+
+  privateKeyTitle: 'Clave privada',
+  pkcs1Label: 'PKCS#1 (RSA)',
+  pkcs8Label: 'PKCS#8',
+  hide: 'Ocultar',
+  show: 'Mostrar',
+  reveal: 'Clic para mostrar la clave privada',
+  copiedKey: 'Clave copiada',
+  copyPrivateKey: 'Copiar clave privada',
+  downloadKey: 'Descargar archivo de clave',
+  downloadBundle: 'Descargar instrucciones (.txt)',
+  rulesTitle: 'Normas importantes de despliegue:',
+  rules: [
+    'Mantén esta clave privada confidencial. Configúrala solo en tu servidor de correo o MTA.',
+    'Publica primero el registro DNS TXT. Enviar correos firmados antes de que propague causará rebotes.',
+    'La mayoría de servidores (Postfix, OpenDKIM, cPanel, Exim) requieren el formato tradicional PKCS#1 RSA.',
+  ],
+
+  bundleFileName: (domain, selector) => `${domain}-${selector}-instrucciones-dkim.txt`,
+  bundleText: (keys) => `INSTRUCCIONES DE CONFIGURACIÓN DKIM PARA ${keys.domain.toUpperCase()}
+Generado mediante el generador DKIM en navegador de Giggal.ai
+
+==================================================
+1. REGISTRO DNS TXT
+==================================================
+Host / Nombre:
+${keys.dnsRecordName}
+(o Nombre FQDN Completo: ${keys.dnsRecordFqdn})
+
+Valor del registro TXT (Cadena única):
+${keys.dnsRecordValue}
+
+Valor del registro TXT (Dividido en fragmentos de 255 caracteres):
+${keys.dnsRecordChunked}
+
+Formato Zona BIND:
+${keys.bindRecord}
+
+==================================================
+2. CLAVE PRIVADA (Instalar en tu servidor de correo o MTA)
+==================================================
+Formato: PKCS#1 (RSA Tradicional)
+${keys.privateKeyPkcs1Pem}
+
+Formato: PKCS#8 (Estándar)
+${keys.privateKeyPkcs8Pem}
+
+==================================================
+NOTAS DE DESPLIEGUE IMPORTANTES:
+- Publica el registro DNS TXT y confirma su propagación ANTES de activar la firma DKIM.
+- Mantén la clave privada confidencial. Nunca la publiques en DNS.
+`,
+
+  errors: {
+    'selector-empty': 'El selector no puede estar vacío',
+    'selector-too-long': 'El selector no puede exceder 63 caracteres',
+    'selector-chars':
+      'El selector solo puede contener letras, dígitos y guiones, sin comenzar ni terminar con guion',
+    'domain-empty': 'El dominio no puede estar vacío',
+    'domain-too-long': 'El dominio es demasiado largo',
+    'domain-no-tld': 'El dominio debe incluir una extensión TLD (ej. ejemplo.es)',
+    'domain-label-length': 'Una sección del dominio tiene una longitud no válida',
+    'domain-label': (label) => `El dominio contiene una sección no válida: "${label}"`,
+    'no-web-crypto': 'La API Web Crypto (crypto.subtle) no está disponible en este navegador',
+  },
+}
+
+const ptBrTool: DkimToolStrings = {
+  domainLabel: 'Nome de domínio',
+  domainPlaceholder: 'exemplo.com.br',
+  domainHelp: 'O domínio remetente para suas mensagens enviadas',
+  selectorLabel: 'Seletor DKIM',
+  selectorPlaceholder: 's2026a',
+  selectorHelp: 'Identifica este par de chaves no DNS (ex: s2026a)',
+  keySizeLabel: 'Tamanho da chave',
+  keySizeOptions: {
+    2048: '2048 bits (Recomendado)',
+    1024: '1024 bits (mínimo aceito pelo Gmail)',
+    4096: '4096 bits (registro longo, verifique seu DNS)',
+  },
+  keySizeHelp: {
+    2048: 'Recomendado pelo Gmail e pelo RFC 8301',
+    1024: 'Tamanho legado, vulnerável a criptoanálise moderna',
+    4096: 'Ultrapassa o limite padrão de 512 bytes de pacotes DNS UDP',
+  },
+  invalidSelector: 'Seletor inválido',
+  invalidDomain: 'Domínio inválido',
+  generationFailed: 'Falha na geração das chaves',
+  generating: 'Gerando par de chaves RSA no navegador...',
+  generate: 'Gerar chaves DKIM',
+
+  dnsTitle: 'Registro DNS TXT',
+  keyInfo: (bits, chars) => `${bits} bits (${chars} ${chars === 1 ? 'caractere' : 'caracteres'})`,
+  formatLabel: 'Formato:',
+  formatSingle: 'String única',
+  formatChunked: 'Divisão em 255 caracteres',
+  formatBind: 'Zona BIND',
+  hostLabel: 'Nome do registro / Host:',
+  copied: 'Copiado',
+  copyHost: 'Copiar host',
+  orFqdn: (fqdn) => `(ou ${fqdn})`,
+  valueLabel: 'Valor do registro (TXT):',
+  copyValue: 'Copiar valor',
+  chunkedNote:
+    'Use este formato dividido se seu provedor DNS limitar strings TXT individuais a 255 caracteres.',
+
+  privateKeyTitle: 'Chave privada',
+  pkcs1Label: 'PKCS#1 (RSA)',
+  pkcs8Label: 'PKCS#8',
+  hide: 'Ocultar',
+  show: 'Mostrar',
+  reveal: 'Clique para exibir a chave privada',
+  copiedKey: 'Chave copiada',
+  copyPrivateKey: 'Copiar chave privada',
+  downloadKey: 'Baixar arquivo da chave',
+  downloadBundle: 'Baixar instruções (.txt)',
+  rulesTitle: 'Regras importantes para publicação:',
+  rules: [
+    'Mantenha esta chave privada confidencial. Configure-a apenas no seu servidor de e-mail ou MTA.',
+    'Publique primeiro o registro DNS TXT. Enviar mensagens assinadas antes da propagação gerará rejeições.',
+    'A maioria dos servidores (Postfix, OpenDKIM, cPanel, Exim) requer o formato clássico PKCS#1 RSA.',
+  ],
+
+  bundleFileName: (domain, selector) => `${domain}-${selector}-instrucoes-dkim.txt`,
+  bundleText: (keys) => `INSTRUÇÕES DE CONFIGURAÇÃO DKIM PARA ${keys.domain.toUpperCase()}
+Gerado via gerador DKIM do cliente Giggal.ai
+
+==================================================
+1. REGISTRO DNS TXT
+==================================================
+Host / Nome:
+${keys.dnsRecordName}
+(ou Nome FQDN Completo: ${keys.dnsRecordFqdn})
+
+Valor do Registro TXT (String única):
+${keys.dnsRecordValue}
+
+Valor do Registro TXT (Dividido em strings de 255 caracteres):
+${keys.dnsRecordChunked}
+
+Formato Zona BIND:
+${keys.bindRecord}
+
+==================================================
+2. CHAVE PRIVADA (Instalar no servidor de e-mail ou MTA)
+==================================================
+Formato: PKCS#1 (RSA Tradicional)
+${keys.privateKeyPkcs1Pem}
+
+Formato: PKCS#8 (Padrão)
+${keys.privateKeyPkcs8Pem}
+
+==================================================
+NOTAS IMPORTANTES DE IMPLANTAÇÃO:
+- Publique o registro DNS TXT e confirme sua propagação ANTES de ativar a assinatura DKIM.
+- Mantenha a chave privada estritamente confidencial. Nunca a publique no DNS.
+`,
+
+  errors: {
+    'selector-empty': 'O seletor não pode estar vazio',
+    'selector-too-long': 'O seletor não pode ultrapassar 63 caracteres',
+    'selector-chars':
+      'O seletor só pode conter letras, dígitos e hifens, sem iniciar ou terminar com hífen',
+    'domain-empty': 'O domínio não pode estar vazio',
+    'domain-too-long': 'O domínio é muito longo',
+    'domain-no-tld': 'O domínio deve conter uma extensão TLD (ex: exemplo.com.br)',
+    'domain-label-length': 'Uma seção do domínio possui tamanho inválido',
+    'domain-label': (label) => `O domínio contém uma parte inválida: "${label}"`,
+    'no-web-crypto': 'A API Web Crypto (crypto.subtle) não está disponível neste navegador',
+  },
+}
+
+const nlTool: DkimToolStrings = {
+  domainLabel: 'Domeinnaam',
+  domainPlaceholder: 'voorbeeld.nl',
+  domainHelp: 'Het verzendende domein voor uw uitgaande e-mail',
+  selectorLabel: 'DKIM Selector',
+  selectorPlaceholder: 's2026a',
+  selectorHelp: 'Identificeert dit sleutelpaar in DNS (bijv. s2026a)',
+  keySizeLabel: 'Sleutellengte',
+  keySizeOptions: {
+    2048: '2048 bits (Aanbevolen)',
+    1024: '1024 bits (minimum voor Gmail)',
+    4096: '4096 bits (lang record, controleer uw DNS-host)',
+  },
+  keySizeHelp: {
+    2048: 'Aanbevolen door Gmail en RFC 8301',
+    1024: 'Verouderde lengte, kwetsbaar voor moderne cryptanalyse',
+    4096: 'Overschrijdt de standaard 512-byte UDP DNS-pakketlimiet',
+  },
+  invalidSelector: 'Ongeldige selector',
+  invalidDomain: 'Ongeldig domein',
+  generationFailed: 'Sleutelgeneratie mislukt',
+  generating: 'RSA-sleutelpaar genereren in de browser...',
+  generate: 'DKIM-sleutels genereren',
+
+  dnsTitle: 'DNS TXT-record',
+  keyInfo: (bits, chars) => `${bits} bits (${chars} ${chars === 1 ? 'teken' : 'tekens'})`,
+  formatLabel: 'Formaat:',
+  formatSingle: 'Enkele regel',
+  formatChunked: 'Gesplitst (255 tekens)',
+  formatBind: 'BIND-zone',
+  hostLabel: 'Recordnaam / Host:',
+  copied: 'Gekopieerd',
+  copyHost: 'Kopieer host',
+  orFqdn: (fqdn) => `(of ${fqdn})`,
+  valueLabel: 'Recordwaarde (TXT):',
+  copyValue: 'Kopieer waarde',
+  chunkedNote:
+    'Gebruik dit gesplitste formaat als uw DNS-host TXT-invoer beperkt tot 255 tekens per string.',
+
+  privateKeyTitle: 'Privésleutel',
+  pkcs1Label: 'PKCS#1 (RSA)',
+  pkcs8Label: 'PKCS#8',
+  hide: 'Verbergen',
+  show: 'Tonen',
+  reveal: 'Klik om privésleutel te tonen',
+  copiedKey: 'Sleutel gekopieerd',
+  copyPrivateKey: 'Kopieer privésleutel',
+  downloadKey: 'Download sleutelbestand',
+  downloadBundle: 'Download configuratie-instructies (.txt)',
+  rulesTitle: 'Belangrijke implementatieregels:',
+  rules: [
+    'Houd deze privésleutel strikt vertrouwelijk. Configureer deze uitsluitend in uw mailserver of MTA.',
+    'Publiceer eerst het DNS TXT-record. E-mails ondertekenen vóór DNS-propagatie leidt tot afleverproblemen.',
+    'De meeste mailservers (Postfix, OpenDKIM, cPanel, Exim) verwachten het traditionele PKCS#1 RSA-formaat.',
+  ],
+
+  bundleFileName: (domain, selector) => `${domain}-${selector}-dkim-instructies.txt`,
+  bundleText: (keys) => `DKIM CONFIGURATIE-INSTRUCTIES VOOR ${keys.domain.toUpperCase()}
+Gegenereerd via de browser-gebaseerde DKIM-generator van Giggal.ai
+
+==================================================
+1. DNS TXT-RECORD
+==================================================
+Host / Naam:
+${keys.dnsRecordName}
+(of Volledige Domeinnaam FQDN: ${keys.dnsRecordFqdn})
+
+TXT-recordwaarde (Enkele regel):
+${keys.dnsRecordValue}
+
+TXT-recordwaarde (Gesplitst in 255 tekens):
+${keys.dnsRecordChunked}
+
+BIND-zoneformaat:
+${keys.bindRecord}
+
+==================================================
+2. PRIVÉSLEUTEL (Installeren in mailserver of MTA)
+==================================================
+Formaat: PKCS#1 (Klassiek RSA)
+${keys.privateKeyPkcs1Pem}
+
+Formaat: PKCS#8 (Standaard)
+${keys.privateKeyPkcs8Pem}
+
+==================================================
+BELANGRIJKE IMPLEMENTATIE-INSTRUCTIES:
+- Voeg het DNS TXT-record toe en controleer de zichtbaarheid VOORDAT u DKIM inschakelt.
+- Houd de privésleutel vertrouwelijk. Publiceer deze nooit in DNS.
+`,
+
+  errors: {
+    'selector-empty': 'De selector mag niet leeg zijn',
+    'selector-too-long': 'De selector mag maximaal 63 tekens lang zijn',
+    'selector-chars':
+      'De selector mag alleen letters, cijfers en koppeltekens bevatten, en mag niet beginnen of eindigen met een koppelteken',
+    'domain-empty': 'De domeinnaam mag niet leeg zijn',
+    'domain-too-long': 'De domeinnaam is te lang',
+    'domain-no-tld': 'Het domein moet een geldige extensie hebben (bijv. voorbeeld.nl)',
+    'domain-label-length': 'Een onderdeel van het domein heeft een ongeldige lengte',
+    'domain-label': (label) => `Het domein bevat een ongeldig onderdeel: "${label}"`,
+    'no-web-crypto': 'De Web Crypto API (crypto.subtle) is niet beschikbaar in deze browser',
+  },
+}
+
+const plTool: DkimToolStrings = {
+  domainLabel: 'Nazwa domeny',
+  domainPlaceholder: 'przyklad.pl',
+  domainHelp: 'Domena nadawcy dla Twojej poczty wychodzącej',
+  selectorLabel: 'Selektor DKIM',
+  selectorPlaceholder: 's2026a',
+  selectorHelp: 'Identyfikuje parę kluczy w DNS (np. s2026a)',
+  keySizeLabel: 'Długość klucza',
+  keySizeOptions: {
+    2048: '2048 bitów (Zalecane)',
+    1024: '1024 bity (minimum akceptowane przez Gmail)',
+    4096: '4096 bitów (długi rekord, sprawdź swój hosting DNS)',
+  },
+  keySizeHelp: {
+    2048: 'Rekomendowane przez Gmail oraz RFC 8301',
+    1024: 'Standard przestarzały, podatny na współczesną kryptoanalizę',
+    4096: 'Przekracza standardowy limit 512 bajtów pakietów DNS UDP',
+  },
+  invalidSelector: 'Nieprawidłowy selektor',
+  invalidDomain: 'Nieprawidłowa domena',
+  generationFailed: 'Generowanie kluczy nie powiodło się',
+  generating: 'Generowanie pary kluczy RSA w przeglądarce...',
+  generate: 'Generuj klucze DKIM',
+
+  dnsTitle: 'Rekord DNS TXT',
+  keyInfo: (bits, chars) => `${bits} bitów (${chars} ${chars === 1 ? 'znak' : chars < 5 ? 'znaki' : 'znaków'})`,
+  formatLabel: 'Format:',
+  formatSingle: 'Pojedynczy ciąg',
+  formatChunked: 'Podział na 255 znaków',
+  formatBind: 'Strefa BIND',
+  hostLabel: 'Nazwa rekordu / Host:',
+  copied: 'Skopiowano',
+  copyHost: 'Kopiuj host',
+  orFqdn: (fqdn) => `(lub ${fqdn})`,
+  valueLabel: 'Wartość rekordu (TXT):',
+  copyValue: 'Kopiuj wartość',
+  chunkedNote:
+    'Użyj tego formatu, jeśli Twój panel DNS ogranicza pojedynczy ciąg TXT do 255 znaków.',
+
+  privateKeyTitle: 'Klucz prywatny',
+  pkcs1Label: 'PKCS#1 (RSA)',
+  pkcs8Label: 'PKCS#8',
+  hide: 'Ukryj',
+  show: 'Pokaż',
+  reveal: 'Kliknij, aby odsłonić klucz prywatny',
+  copiedKey: 'Klucz skopiowany',
+  copyPrivateKey: 'Kopiuj klucz prywatny',
+  downloadKey: 'Pobierz plik klucza',
+  downloadBundle: 'Pobierz instrukcję wdrożenia (.txt)',
+  rulesTitle: 'Ważne zasady wdrożenia:',
+  rules: [
+    'Zachowaj klucz prywatny w ścisłej tajemnicy. Skonfiguruj go wyłącznie na swoim serwerze pocztowym lub MTA.',
+    'Najpierw opublikuj rekord DNS TXT. Wysyłanie podpisanych maili przed rozpropagowaniem DNS spowoduje błędy.',
+    'Większość serwerów (Postfix, OpenDKIM, cPanel, Exim) oczekuje tradycyjnego formatu PKCS#1 RSA.',
+  ],
+
+  bundleFileName: (domain, selector) => `${domain}-${selector}-instrukcja-dkim.txt`,
+  bundleText: (keys) => `INSTRUKCJA WDROŻENIA DKIM DLA ${keys.domain.toUpperCase()}
+Wygenerowano za pomocą generatora DKIM w przeglądarce na Giggal.ai
+
+==================================================
+1. REKORD DNS TXT
+==================================================
+Host / Nazwa:
+${keys.dnsRecordName}
+(lub Pełna Nazwa Domenowa FQDN: ${keys.dnsRecordFqdn})
+
+Wartość rekordu TXT (Pojedynczy ciąg):
+${keys.dnsRecordValue}
+
+Wartość rekordu TXT (Podział na 255 znaków w cudzysłowach):
+${keys.dnsRecordChunked}
+
+Format strefy BIND:
+${keys.bindRecord}
+
+==================================================
+2. KLUCZ PRYWATNY (Do zainstalowania na serwerze pocztowym lub MTA)
+==================================================
+Format: PKCS#1 (Tradycyjne RSA)
+${keys.privateKeyPkcs1Pem}
+
+Format: PKCS#8 (Standardowy)
+${keys.privateKeyPkcs8Pem}
+
+==================================================
+WAŻNE WSKAZÓWKI DOTYCZĄCE WDROŻENIA:
+- Dodaj rekord DNS TXT i sprawdź jego dostępność ZANIM włączysz podpisywanie DKIM.
+- Nie udostępniaj nikomu klucza prywatnego ani nie publikuj go w DNS.
+`,
+
+  errors: {
+    'selector-empty': 'Selektor nie może być pusty',
+    'selector-too-long': 'Selektor może mieć maksymalnie 63 znaki',
+    'selector-chars':
+      'Selektor może zawierać tylko litery, cyfry i myślniki, i nie może zaczynać się ani kończyć myślnikiem',
+    'domain-empty': 'Nazwa domeny nie może być pusta',
+    'domain-too-long': 'Nazwa domeny jest zbyt długa',
+    'domain-no-tld': 'Domena musi posiadać prawidłowe rozszerzenie TLD (np. przyklad.pl)',
+    'domain-label-length': 'Część nazwy domeny ma nieprawidłową długość',
+    'domain-label': (label) => `Domena zawiera nieprawidłowy człon: "${label}"`,
+    'no-web-crypto': 'API Web Crypto (crypto.subtle) nie jest dostępne w tej przeglądarce',
+  },
+}
+
+const idTool: DkimToolStrings = {
+  domainLabel: 'Nama Domain',
+  domainPlaceholder: 'contoh.id',
+  domainHelp: 'Domain pengirim untuk email keluar Anda',
+  selectorLabel: 'Selektor DKIM',
+  selectorPlaceholder: 's2026a',
+  selectorHelp: 'Mengidentifikasi pasangan kunci ini di DNS (mis. s2026a)',
+  keySizeLabel: 'Ukuran Kunci',
+  keySizeOptions: {
+    2048: '2048 bit (Direkomendasikan)',
+    1024: '1024 bit (batas minimum Gmail)',
+    4096: '4096 bit (catatan panjang, periksa penyedia DNS Anda)',
+  },
+  keySizeHelp: {
+    2048: 'Direkomendasikan oleh Gmail dan RFC 8301',
+    1024: 'Panjang usang, rentan terhadap kriptanalisis modern',
+    4096: 'Melebihi batas standar paket UDP DNS 512 byte',
+  },
+  invalidSelector: 'Selektor tidak valid',
+  invalidDomain: 'Domain tidak valid',
+  generationFailed: 'Gagal membuat kunci',
+  generating: 'Membuat pasangan kunci RSA di browser...',
+  generate: 'Buat kunci DKIM',
+
+  dnsTitle: 'Catatan DNS TXT',
+  keyInfo: (bits, chars) => `${bits} bit (${chars} karakter)`,
+  formatLabel: 'Format:',
+  formatSingle: 'String tunggal',
+  formatChunked: 'Pemisahan 255 karakter',
+  formatBind: 'Zona BIND',
+  hostLabel: 'Nama Catatan / Host:',
+  copied: 'Tersalin',
+  copyHost: 'Salin host',
+  orFqdn: (fqdn) => `(atau ${fqdn})`,
+  valueLabel: 'Nilai Catatan (TXT):',
+  copyValue: 'Salin nilai',
+  chunkedNote:
+    'Gunakan format terpisah ini jika penyedia DNS Anda membatasi teks TXT hingga 255 karakter per string.',
+
+  privateKeyTitle: 'Kunci Privat',
+  pkcs1Label: 'PKCS#1 (RSA)',
+  pkcs8Label: 'PKCS#8',
+  hide: 'Sembunyikan',
+  show: 'Tampilkan',
+  reveal: 'Klik untuk melihat kunci privat',
+  copiedKey: 'Kunci tersalin',
+  copyPrivateKey: 'Salin kunci privat',
+  downloadKey: 'Unduh file kunci',
+  downloadBundle: 'Unduh petunjuk pengaturan (.txt)',
+  rulesTitle: 'Aturan penting pemasangan:',
+  rules: [
+    'Jaga kerahasiaan kunci privat ini. Hanya pasang di mail transfer agent (MTA) atau mail server Anda.',
+    'Publikasikan catatan DNS TXT terlebih dahulu. Mengirim email sebelum propagasi DNS akan menyebabkan kegagalan autentikasi.',
+    'Sebagian besar mail server (Postfix, OpenDKIM, cPanel, Exim) membutuhkan format tradisional PKCS#1 RSA.',
+  ],
+
+  bundleFileName: (domain, selector) => `${domain}-${selector}-petunjuk-dkim.txt`,
+  bundleText: (keys) => `PETUNJUK PENYIAPAN DKIM UNTUK ${keys.domain.toUpperCase()}
+Dibuat menggunakan generator DKIM sisi klien Giggal.ai
+
+==================================================
+1. CATATAN DNS TXT
+==================================================
+Host / Nama:
+${keys.dnsRecordName}
+(atau Nama Domain Lengkap FQDN: ${keys.dnsRecordFqdn})
+
+Nilai Catatan TXT (String Tunggal):
+${keys.dnsRecordValue}
+
+Nilai Catatan TXT (Pemisahan 255 Karakter dalam Tanda Kutip):
+${keys.dnsRecordChunked}
+
+Format Zona BIND:
+${keys.bindRecord}
+
+==================================================
+2. KUNCI PRIVAT (Pasang di mail server atau MTA Anda)
+==================================================
+Format: PKCS#1 (RSA Tradisional)
+${keys.privateKeyPkcs1Pem}
+
+Format: PKCS#8 (Standar)
+${keys.privateKeyPkcs8Pem}
+
+==================================================
+CATATAN PENTING IMPLEMENTASI:
+- Tambahkan catatan DNS TXT dan pastikan propagasinya SEBELUM mengaktifkan penandatanganan DKIM.
+- Jangan pernah membagikan kunci privat atau mempublikasikannya di DNS.
+`,
+
+  errors: {
+    'selector-empty': 'Selektor tidak boleh kosong',
+    'selector-too-long': 'Selektor tidak boleh melebihi 63 karakter',
+    'selector-chars':
+      'Selektor hanya boleh memuat huruf, angka, dan tanda hubung, serta tidak boleh diawali atau diakhiri tanda hubung',
+    'domain-empty': 'Nama domain tidak boleh kosong',
+    'domain-too-long': 'Nama domain terlalu panjang',
+    'domain-no-tld': 'Domain harus memiliki ekstensi TLD yang valid (mis. contoh.id)',
+    'domain-label-length': 'Bagian nama domain memiliki panjang tidak valid',
+    'domain-label': (label) => `Domain memuat bagian yang tidak valid: "${label}"`,
+    'no-web-crypto': 'Web Crypto API (crypto.subtle) tidak tersedia pada browser ini',
+  },
+}
+
+export const DKIM_TOOL_STRINGS: Record<Locale, DkimToolStrings> = { en, it: itTool, de: deTool, fr: frTool, es: esTool, 'pt-br': ptBrTool, nl: nlTool, pl: plTool, id: idTool }
 
 export function dkimToolStrings(locale: Locale): DkimToolStrings {
   return DKIM_TOOL_STRINGS[locale] ?? en

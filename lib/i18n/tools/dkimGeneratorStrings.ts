@@ -307,4 +307,515 @@ const de: DkimPageStrings = {
   ctaHeadline: 'DKIM eingerichtet? Prüfen Sie als Nächstes Ihre E-Mail-Liste',
 }
 
-export const DKIM_PAGE_STRINGS: Partial<Record<Locale, DkimPageStrings>> & { en: DkimPageStrings } = { en, it, de }
+
+const fr: DkimPageStrings = {
+  metaTitle: 'Générateur DKIM Gratuit : Créer une Clé et un Enregistrement DKIM | Giggal.ai',
+  ogTitle: 'Générateur DKIM Gratuit : Créer une Clé et un Enregistrement DKIM',
+  description:
+    'Générez directement dans votre navigateur une paire de clés DKIM de 2048 bits et l\'enregistrement DNS TXT à publier. Clé privée jamais transmise. Gratuit, sans inscription.',
+  ogLocale: 'fr_FR',
+  ogImage: '/og-card.png',
+  ogAlt: 'Générateur DKIM Gratuit',
+  crumb: 'Générateur DKIM',
+  appName: 'Générateur DKIM Gratuit',
+  featureList: [
+    'Génération de clés DKIM RSA 2048 bits dans le navigateur',
+    'Enregistrement DNS TXT préformaté pour publication immédiate',
+    'Clés privées aux formats PKCS#1 et PKCS#8',
+    'Découpage automatique en chaînes de 255 caractères (conformité DNS)',
+    'Sécurité totale : aucune clé privée transmise au serveur',
+  ],
+  h1: 'Générateur DKIM',
+  heroIntro: 'Créez une paire de clés DKIM et l\'enregistrement TXT exact à publier dans votre DNS.',
+  howTitle: 'Comment configurer DKIM avec la clé générée',
+  howSteps: [
+    'Entrez votre nom de domaine et un sélecteur, choisissez la taille de clé et cliquez sur Générer.',
+    'Chez votre hébergeur DNS, créez un enregistrement TXT. Utilisez le nom affiché (selecteur._domainkey ou nom FQDN complet) et collez la valeur TXT.',
+    'Installez la clé privée dans les paramètres de signature DKIM de votre serveur de messagerie avec les mêmes domaine et sélecteur.',
+    'Envoyez un message de test vers une adresse Gmail personnelle et ouvrez "Afficher l\'original". La ligne DKIM doit afficher PASS.',
+  ],
+  howNote:
+    'Si le test échoue, vérifiez la propagation DNS et assurez-vous que le sélecteur sur le serveur correspond exactement à celui du DNS. Pour comprendre l\'articulation entre SPF, DKIM et DMARC, consultez notre [guide explicatif SPF, DKIM et DMARC](/blog/spf-dkim-dmarc-explained).',
+  imageAlt: 'Illustration des clés publique et privée sécurisant un e-mail avec une signature cryptographique.',
+  selectorTitle: 'Choisir un sélecteur et une taille de clé',
+  selectorParas: [
+    'Le sélecteur est simplement une étiquette textuelle : choisissez-en une facile à reconnaître plus tard. Un préfixe temporel comme s2026a indique clairement quelle clé est active lors des rotations. Il peut contenir des lettres, des chiffres et des tirets.',
+    'Pour la taille de la clé, 2048 bits est le standard recommandé. Gmail exige au moins 1024 bits et préconise 2048 bits. La RFC 8301 stipule que les expéditeurs doivent utiliser au moins 1024 bits et devraient adopter 2048 bits. Bien que la RFC permette aux destinataires de gérer jusqu\'à 4096 bits, de nombreuses consoles DNS gèrent mal les chaînes très longues ; privilégiez 2048 bits.',
+  ],
+  recordTitle: 'Composition d\'un enregistrement DKIM',
+  thTag: 'Balise',
+  thMeaning: 'Signification',
+  thExample: 'Exemple',
+  tags: [
+    { tag: 'v', meaning: 'Version du protocole. Optionnel, mais si présent doit figurer en premier', example: 'v=DKIM1' },
+    { tag: 'k', meaning: 'Type d\'algorithme de clé. rsa est la valeur par défaut', example: 'k=rsa' },
+    { tag: 'p', meaning: 'Clé publique encodée en base64. Une valeur vide (p=) révoque la clé', example: 'p=MIIBIjAN...' },
+    { tag: 't', meaning: 'Indicateurs (flags). y pour le mode test, s pour restreindre au domaine principal', example: 't=y' },
+  ],
+  recordNote: 'Trois balises supplémentaires existent (h pour les algorithmes de hachage, n pour les notes, s pour le type de service), mais elles sont rarement nécessaires.',
+  splitTitle: 'Pourquoi les longs enregistrements DKIM sont scindés',
+  splitText:
+    'Une clé publique de 2048 bits mesure environ 390 caractères une fois encodée en base64. Le protocole DNS stocke les données TXT sous forme de chaînes d\'au plus 255 caractères (RFC 1035). Une clé de 2048 bits doit donc être publiée sous forme de deux ou plusieurs chaînes concaténées que les serveurs récepteurs regroupent avant validation. La plupart des consoles DNS effectuent ce découpage automatiquement si vous collez la chaîne unique. Le format BIND est conçu pour l\'édition directe de fichiers de zone.',
+  rotateTitle: 'Rotation des clés DKIM',
+  rotateText:
+    'Pour renouveler vos clés en toute sécurité, générez une nouvelle paire avec un nouveau sélecteur et publiez son enregistrement DNS à côté de l\'ancien. Configurez ensuite votre serveur pour signer avec le nouveau sélecteur, puis supprimez l\'ancien enregistrement une fois tous les e-mails en transit livrés.',
+  faqTitle: 'Foire aux questions',
+  faqs: [
+    {
+      q: 'Ce générateur DKIM est-il sécurisé ?',
+      a: 'La paire de clés est créée directement par l\'API Web Crypto intégrée à votre navigateur. La clé privée n\'est jamais transmise à nos serveurs ni à aucun tiers. Nous ne pouvons pas la récupérer, veillez donc à la télécharger avant de quitter la page.',
+    },
+    {
+      q: 'Où doit être installée la clé privée ?',
+      a: 'Uniquement sur votre serveur de messagerie, dans ses paramètres de signature DKIM. Ne la publiez jamais dans le DNS et ne l\'envoyez jamais par e-mail. Seule la clé publique, dans la valeur TXT, est rendue publique.',
+    },
+    {
+      q: 'Vaut-il mieux utiliser 1024 ou 2048 bits ?',
+      a: 'Utilisez 2048 bits, à moins que votre hébergeur DNS ne supporte pas les enregistrements longs. Gmail accepte 1024 bits au minimum mais recommande 2048 bits, et la RFC 8301 préconise l\'adoption de 2048 bits.',
+    },
+    {
+      q: 'Pourquoi mon enregistrement DKIM est-il divisé en plusieurs chaînes ?',
+      a: 'Chaque chaîne d\'un enregistrement TXT DNS ne peut dépasser 255 caractères, et une clé 2048 bits est plus longue. Les serveurs de réception rassemblent ces fragments en une seule valeur lors de la vérification.',
+    },
+    {
+      q: 'Quel format de clé privée dois-je choisir ?',
+      a: 'La plupart des outils de messagerie acceptent le format standard PKCS#8 (BEGIN PRIVATE KEY). Si votre logiciel requiert BEGIN RSA PRIVATE KEY, téléchargez la version PKCS#1 ; c\'est la même clé dans un format plus traditionnel.',
+    },
+    {
+      q: 'Comment vérifier que DKIM fonctionne correctement ?',
+      a: 'Envoyez un e-mail depuis votre serveur vers un compte Gmail personnel, ouvrez le message et sélectionnez "Afficher l\'original". Gmail affiche le statut DKIM en haut : vous devez voir PASS pour votre domaine.',
+    },
+    {
+      q: 'Puis-je utiliser cette clé avec Google Workspace ou Microsoft 365 ?',
+      a: 'Non. Google Workspace et Microsoft 365 génèrent automatiquement leurs propres clés DKIM depuis leurs consoles d\'administration. Cet outil est destiné aux serveurs où vous gérez vous-même les clés de signature.',
+    },
+  ],
+  ctaHeadline: 'DKIM configuré ? Vérifiez maintenant votre liste d\'e-mails.',
+}
+
+const es: DkimPageStrings = {
+  metaTitle: 'Generador DKIM Gratis: Crear Claves y Registro DKIM | Giggal.ai',
+  ogTitle: 'Generador DKIM Gratis: Crear Claves y Registro DKIM',
+  description:
+    'Genera en tu navegador un par de claves DKIM de 2048 bits y el registro DNS TXT para publicar. Tu clave privada nunca se envía a ningún servidor. Gratis y sin registro.',
+  ogLocale: 'es_ES',
+  ogImage: '/og-card.png',
+  ogAlt: 'Generador DKIM Gratuito',
+  crumb: 'Generador DKIM',
+  appName: 'Generador DKIM Gratis',
+  featureList: [
+    'Genera un par de claves DKIM RSA de 2048 bits en el navegador',
+    'Registro DNS TXT formateado para publicación inmediata',
+    'Claves privadas en formatos estándar PKCS#1 y PKCS#8',
+    'División automática en fragmentos de 255 caracteres para DNS',
+    'Máxima privacidad: la clave privada nunca sale de tu equipo',
+  ],
+  h1: 'Generador DKIM',
+  heroIntro: 'Crea un par de claves DKIM y el registro TXT exacto para publicar en tu DNS.',
+  howTitle: 'Cómo configurar DKIM con la clave generada',
+  howSteps: [
+    'Ingresa tu dominio y un selector, elige el tamaño de clave y haz clic en Generar claves DKIM.',
+    'En tu proveedor DNS, crea un registro TXT. Usa el nombre mostrado arriba (selector._domainkey o nombre FQDN completo) y pega el valor TXT.',
+    'Instala la clave privada en los ajustes de firma DKIM de tu servidor de correo, usando el mismo selector y dominio.',
+    'Envía un mensaje de prueba a una cuenta personal de Gmail y abre "Mostrar original". Junto a DKIM debe indicar PASS.',
+  ],
+  howNote:
+    'Si no pasa, comprueba que el registro DNS se haya propagado y que el selector en el servidor coincida exactamente con el de DNS. Para entender cómo DKIM se complementa con SPF y DMARC, lee nuestra [guía de SPF, DKIM y DMARC](/blog/spf-dkim-dmarc-explained).',
+  imageAlt: 'Ilustración de claves pública y privada protegiendo un correo electrónico con firma criptográfica.',
+  selectorTitle: 'Cómo elegir selector y tamaño de clave',
+  selectorParas: [
+    'El selector es simplemente una etiqueta identificadora: elige una que reconozcas fácilmente más adelante. Un nombre con fecha como s2026a permite identificar de inmediato qué clave está activa al realizar rotaciones. Puede contener letras, dígitos y guiones.',
+    'Para el tamaño de la clave, 2048 bits es la opción recomendada y segura. Gmail requiere claves DKIM de al menos 1024 bits y recomienda 2048. El estándar RFC 8301 establece que los remitentes deben usar al menos 1024 bits y deberían usar 2048. Aunque el RFC exige a los receptores admitir claves de hasta 4096 bits, algunos paneles DNS presentan problemas con registros tan extensos; utiliza 2048 bits como estándar.',
+  ],
+  recordTitle: 'Qué contiene un registro DKIM',
+  thTag: 'Etiqueta',
+  thMeaning: 'Significado',
+  thExample: 'Ejemplo',
+  tags: [
+    { tag: 'v', meaning: 'Versión del protocolo. Opcional, pero si existe debe ser la primera etiqueta', example: 'v=DKIM1' },
+    { tag: 'k', meaning: 'Tipo de clave criptográfica. rsa es el valor por defecto', example: 'k=rsa' },
+    { tag: 'p', meaning: 'Clave pública codificada en base64. Un valor vacío (p=) indica revocación', example: 'p=MIIBIjAN...' },
+    { tag: 't', meaning: 'Indicadores (flags). y indica modo de prueba, s prohíbe subdominios', example: 't=y' },
+  ],
+  recordNote: 'Existen tres etiquetas adicionales (h para algoritmos hash, n para notas y s para tipo de servicio), pero rara vez se requieren.',
+  splitTitle: 'Por qué se dividen los registros DKIM largos',
+  splitText:
+    'Una clave pública de 2048 bits tiene aproximadamente 390 caracteres tras su codificación en base64. El protocolo DNS almacena cadenas TXT en bloques de hasta 255 caracteres (RFC 1035). Por ello, una clave de 2048 bits debe publicarse en dos o más fragmentos entrecomillados que el servidor receptor une antes de comprobar la firma. La mayoría de paneles DNS dividen la clave automáticamente al pegar la versión de una sola línea. El formato de zona BIND permite estructurar registros en múltiples líneas entre paréntesis.',
+  rotateTitle: 'Rotación periódica de claves DKIM',
+  rotateText:
+    'Para renovar claves sin interrumpir el flujo de correo, genera un nuevo par con un selector distinto y publica su registro DNS en paralelo con el anterior. Configura el servidor de correo para firmar con el nuevo selector y retira el registro antiguo solo cuando todos los correos enviados previamente hayan sido entregados.',
+  faqTitle: 'Preguntas frecuentes',
+  faqs: [
+    {
+      q: '¿Este generador DKIM es seguro?',
+      a: 'El par de claves se genera directamente mediante la Web Crypto API integrada en tu navegador. La clave privada nunca se transmite a nuestros servidores ni a terceros. Por tanto, no podemos recuperarla: descárgala antes de salir de la página.',
+    },
+    {
+      q: '¿Dónde se instala la clave privada?',
+      a: 'Únicamente en tu servidor de correo, dentro de sus ajustes de firma DKIM. Jamás la publiques en el DNS ni la envíes por correo electrónico. Solo la clave pública, dentro del valor TXT, se hace pública.',
+    },
+    {
+      q: '¿Es preferible una clave de 1024 o de 2048 bits?',
+      a: 'Usa 2048 bits salvo que tu proveedor DNS no soporte registros extensos. Gmail acepta 1024 bits como mínimo pero recomienda 2048, y la RFC 8301 recomienda que los remitentes empleen al menos 2048 bits.',
+    },
+    {
+      q: '¿Por qué mi registro DKIM aparece dividido en varias cadenas?',
+      a: 'Cada cadena en un registro DNS TXT admite un máximo de 255 caracteres, y una clave de 2048 bits supera ese límite. Los servidores receptores unen automáticamente los fragmentos, por lo que la división no altera el registro.',
+    },
+    {
+      q: '¿Qué formato de clave privada debo descargar?',
+      a: 'Muchas plataformas admiten el formato estándar PKCS#8 (BEGIN PRIVATE KEY). Si tu software requiere BEGIN RSA PRIVATE KEY, descarga la versión PKCS#1; se trata de la misma clave en un formato tradicional.',
+    },
+    {
+      q: '¿Cómo compruebo que DKIM está funcionando?',
+      a: 'Envía un correo desde tu servidor a una cuenta personal de Gmail, abre el mensaje y selecciona "Mostrar original". En la cabecera verás el resultado de DKIM: debe indicar PASS para tu dominio.',
+    },
+    {
+      q: '¿Puedo usar esta clave con Google Workspace o Microsoft 365?',
+      a: 'No. Tanto Google Workspace como Microsoft 365 generan sus propias claves DKIM en sus respectivas consolas de administración. Esta herramienta está pensada para servidores propios o MTAs donde gestionas directamente las claves.',
+    },
+  ],
+  ctaHeadline: '¿DKIM configurado? Verifica ahora tu lista de correo.',
+}
+
+const ptBr: DkimPageStrings = {
+  metaTitle: 'Gerador DKIM Grátis: Criar Chaves e Registro DKIM | Giggal.ai',
+  ogTitle: 'Gerador DKIM Grátis: Criar Chaves e Registro DKIM',
+  description:
+    'Gere no seu navegador um par de chaves DKIM de 2048 bits e o registro DNS TXT para publicar. Sua chave privada nunca é enviada ao servidor. Gratuito, sem cadastro.',
+  ogLocale: 'pt_BR',
+  ogImage: '/og-card.png',
+  ogAlt: 'Gerador DKIM Gratuito',
+  crumb: 'Gerador DKIM',
+  appName: 'Gerador DKIM Gratuito',
+  featureList: [
+    'Geração de par de chaves DKIM RSA de 2048 bits direto no navegador',
+    'Registro DNS TXT formatado para publicação imediata',
+    'Chaves privadas nos formatos PKCS#1 e PKCS#8',
+    'Divisão automática em strings de 255 caracteres para compatibilidade DNS',
+    'Segurança total: a chave privada nunca é transmitida a servidores',
+  ],
+  h1: 'Gerador DKIM',
+  heroIntro: 'Crie um par de chaves DKIM e o registro TXT exato para publicar no seu DNS.',
+  howTitle: 'Como configurar o DKIM com a chave gerada',
+  howSteps: [
+    'Insira seu domínio e um seletor, escolha o tamanho da chave e clique em Gerar chaves DKIM.',
+    'No seu provedor DNS, crie um registro TXT. Use o nome exibido acima (seletor._domainkey ou o nome FQDN completo) e cole o valor TXT.',
+    'Instale a chave privada nas configurações de assinatura DKIM do seu servidor de e-mail, utilizando o mesmo seletor e domínio.',
+    'Envie uma mensagem de teste para um Gmail pessoal e abra "Mostrar original". Ao lado de DKIM deve constar PASS.',
+  ],
+  howNote:
+    'Se o teste falhar, verifique a propagação do DNS e confirme se o seletor no servidor coincide exatamente com o publicado no DNS. Para entender como o DKIM trabalha com SPF e DMARC, confira nosso [guia explicativo de SPF, DKIM e DMARC](/blog/spf-dkim-dmarc-explained).',
+  imageAlt: 'Ilustração de chaves pública e privada protegendo mensagens de e-mail com assinatura criptográfica.',
+  selectorTitle: 'Escolhendo o seletor e o tamanho da chave',
+  selectorParas: [
+    'O seletor é apenas um identificador: escolha um nome que você reconheça facilmente mais tarde. Um prefixo com data como s2026a torna evidente qual chave está ativa durante rotatividades periódicas. Pode conter letras, números e hifens.',
+    'Para o tamanho da chave, 2048 bits é o padrão seguro e recomendado. O Gmail exige chaves DKIM de pelo menos 1024 bits e recomenda 2048. O RFC 8301 estipula que remetentes devem usar no mínimo 1024 bits e deveriam adotar 2048. Embora receptores devam suportar até 4096 bits, registros de 4096 bits são extensos e causam problemas em alguns painéis DNS; utilize 2048 bits.',
+  ],
+  recordTitle: 'O que contém um registro DKIM',
+  thTag: 'Tag',
+  thMeaning: 'Significado',
+  thExample: 'Exemplo',
+  tags: [
+    { tag: 'v', meaning: 'Versão do protocolo. Opcional, mas se presente deve ser a primeira tag', example: 'v=DKIM1' },
+    { tag: 'k', meaning: 'Tipo de algoritmo de chave. rsa é o padrão', example: 'k=rsa' },
+    { tag: 'p', meaning: 'Chave pública codificada em base64. Um p= vazio indica revogação da chave', example: 'p=MIIBIjAN...' },
+    { tag: 't', meaning: 'Flags. y para modo de teste, s proíbe uso em subdomínios', example: 't=y' },
+  ],
+  recordNote: 'Existem outras três tags (h para algoritmos de hash, n para notas e s para tipo de serviço), mas raramente são necessárias.',
+  splitTitle: 'Por que registros DKIM longos são divididos',
+  splitText:
+    'Uma chave pública de 2048 bits possui cerca de 390 caracteres após a codificação base64. O DNS armazena registros TXT em cadeias de até 255 caracteres (RFC 1035). Por isso, uma chave desse tamanho precisa ser publicada em duas ou mais strings entre aspas, que o servidor destinatário junta antes de validar a assinatura. A maioria dos painéis DNS divide automaticamente o texto ao colar a versão de linha única. O formato de zona BIND é indicado para quem edita diretamente arquivos de configuração de servidores DNS.',
+  rotateTitle: 'Rotação de chaves DKIM',
+  rotateText:
+    'Para substituir chaves com segurança, gere um novo par com um novo seletor e publique o novo registro no DNS mantendo o antigo ativo. Configure seu servidor para assinar com o novo seletor e remova o registro anterior apenas quando todas as mensagens enviadas tiverem sido entregues.',
+  faqTitle: 'Perguntas frequentes',
+  faqs: [
+    {
+      q: 'Este gerador DKIM é seguro?',
+      a: 'O par de chaves é gerado no próprio navegador usando a Web Crypto API. A chave privada nunca é enviada aos nossos servidores nem a terceiros. Como não temos acesso a ela, faça o download antes de fechar a página.',
+    },
+    {
+      q: 'Onde deve ser salva a chave privada?',
+      a: 'Apenas no seu servidor de e-mail ou MTA, nas configurações de assinatura DKIM. Nunca a publique no DNS nem a compartilhe por e-mail. Apenas a chave pública, dentro do valor TXT, é divulgada.',
+    },
+    {
+      q: 'Devo escolher 1024 ou 2048 bits?',
+      a: 'Escolha 2048 bits, a menos que seu host DNS não consiga salvar registros longos. O Gmail aceita 1024 como mínimo mas recomenda 2048, e o RFC 8301 define 2048 bits como o padrão ideal.',
+    },
+    {
+      q: 'Por que meu registro DKIM foi dividido em várias partes?',
+      a: 'Cada cadeia em um registro TXT no DNS suporta até 255 caracteres, e uma chave de 2048 bits ultrapassa esse limite. Os servidores de destino reconstroem o texto original ao verificar a assinatura.',
+    },
+    {
+      q: 'Qual formato de chave privada devo usar?',
+      a: 'Muitos softwares utilizam o formato moderno PKCS#8 (BEGIN PRIVATE KEY). Se sua ferramenta exigir BEGIN RSA PRIVATE KEY, baixe a versão PKCS#1; trata-se da mesma chave em formato clássico.',
+    },
+    {
+      q: 'Como testar se o DKIM está funcionando?',
+      a: 'Envie um e-mail do seu servidor para uma conta do Gmail, abra o e-mail e clique em "Mostrar original". No relatório de autenticação, o campo DKIM deve indicar PASS para o seu domínio.',
+    },
+    {
+      q: 'Posso usar essa chave com Google Workspace ou Microsoft 365?',
+      a: 'Não. O Google Workspace e o Microsoft 365 criam suas próprias chaves DKIM em seus painéis de administração. Este gerador é destinado a servidores próprios nos quais você gerencia diretamente as chaves.',
+    },
+  ],
+  ctaHeadline: 'DKIM configurado? Valide sua lista de e-mails agora.',
+}
+
+const nl: DkimPageStrings = {
+  metaTitle: 'Gratis DKIM Generator: Maak DKIM Sleutels en TXT Record | Giggal.ai',
+  ogTitle: 'Gratis DKIM Generator: Maak DKIM Sleutels en TXT Record',
+  description:
+    'Genereer direct in uw browser een 2048-bits DKIM-sleutelpaar en het DNS TXT-record om te publiceren. Uw privésleutel verlaat nooit uw apparaat. Gratis, zonder registratie.',
+  ogLocale: 'nl_NL',
+  ogImage: '/og-card.png',
+  ogAlt: 'Gratis DKIM Generator',
+  crumb: 'DKIM Generator',
+  appName: 'Gratis DKIM Generator',
+  featureList: [
+    'Genereer een 2048-bits DKIM RSA-sleutelpaar direct in de browser',
+    'Geformatteerd DNS TXT-record voor directe publicatie',
+    'Privésleutels in standaard PKCS#1 en PKCS#8 formaten',
+    'Automatische 255-tekens splitsing voor DNS-compatibiliteit',
+    'Maximale beveiliging: privésleutels worden nooit naar een server verzonden',
+  ],
+  h1: 'DKIM Generator',
+  heroIntro: 'Maak een DKIM-sleutelpaar en het exacte TXT-record om te publiceren in uw DNS.',
+  howTitle: 'Hoe u DKIM instelt met de gegenereerde sleutel',
+  howSteps: [
+    'Voer uw domeinnaam en een selector in, kies een sleutellengte en klik op "DKIM-sleutels genereren".',
+    'Maak bij uw DNS-provider een TXT-record aan. Gebruik de bovenstaande recordnaam (selector._domainkey of de volledige FQDN) en plak de TXT-waarde.',
+    'Installeer de privésleutel in de DKIM-ondertekeningsinstellingen van uw mailserver, met dezelfde selector en hetzelfde domein.',
+    'Stuur een testbericht naar een persoonlijk Gmail-account en open "Origineel weergeven". Naast DKIM moet PASS staan.',
+  ],
+  howNote:
+    'Slaagt de verificatie niet? Controleer of het DNS-record volledig is gepubliceerd en of de selector op de server exact overeenkomt met die in DNS. Lees voor het samenspel tussen SPF, DKIM en DMARC onze [uitleg over SPF, DKIM en DMARC](/blog/spf-dkim-dmarc-explained).',
+  imageAlt: 'Illustratie van openbare en privésleutels die e-mails beveiligen met cryptografische handtekeningen.',
+  selectorTitle: 'Een selector en sleutellengte kiezen',
+  selectorParas: [
+    'De selector is slechts een label: kies een herkenbare naam. Een selector met datum zoals s2026a maakt bij sleutelrotatie direct duidelijk welke sleutel actief is. Toegestaan zijn letters, cijfers en koppeltekens.',
+    'Voor de sleutellengte is 2048 bits de veilige standaard. Gmail vereist minimaal 1024 bits en adviseert 2048 bits. RFC 8301 schrijft voor dat verzenders minimaal 1024 bits moeten gebruiken en 2048 bits zouden moeten toepassen. Hoewel ontvangers sleutels tot 4096 bits moeten ondersteunen, leveren 4096-bits records in sommige DNS-beheerpanelen problemen op; kies daarom voor 2048 bits.',
+  ],
+  recordTitle: 'Wat staat er in een DKIM-record',
+  thTag: 'Tag',
+  thMeaning: 'Betekenis',
+  thExample: 'Voorbeeld',
+  tags: [
+    { tag: 'v', meaning: 'Versie van het protocol. Optioneel, maar indien aanwezig moet deze vooraan staan', example: 'v=DKIM1' },
+    { tag: 'k', meaning: 'Sleuteltype. rsa is de standaardwaarde', example: 'k=rsa' },
+    { tag: 'p', meaning: 'De openbare sleutel in base64-codering. Een lege p= betekent dat de sleutel is ingetrokken', example: 'p=MIIBIjAN...' },
+    { tag: 't', meaning: 'Vlaggen (flags). y betekent testmodus, s verbiedt gebruik voor subdomeinen', example: 't=y' },
+  ],
+  recordNote: 'Er bestaan nog drie aanvullende tags (h voor hash-algoritmen, n voor notities en s voor servicetype), maar deze zijn zelden nodig.',
+  splitTitle: 'Waarom lange DKIM-records gesplitst worden',
+  splitText:
+    'Een 2048-bits openbare sleutel telt na base64-codering ongeveer 390 tekens. DNS slaat TXT-gegevens op in tekenreeksen van maximaal 255 tekens (RFC 1035). Een sleutel van deze lengte moet daarom worden gepubliceerd in twee of meer afzonderlijke strings tussen aanhalingstekens, die ontvangende servers samenvoegen voordat ze de handtekening controleren. De meeste DNS-panelen splitsen de invoer automatisch bij het plakken van één lange regel. Het BIND-zoneformaat is bedoeld voor directe bewerking van zonebestanden.',
+  rotateTitle: 'DKIM-sleutels roteren',
+  rotateText:
+    'Om sleutels veilig te vernieuwen zonder verzendproblemen, genereert u een nieuw sleutelpaar met een nieuwe selector en publiceert u het DNS-record naast het oude record. Configureer uw mailserver om met de nieuwe selector te ondertekenen en verwijder het oude record pas wanneer alle eerder verzonden e-mails zijn afgeleverd.',
+  faqTitle: 'Veelgestelde vragen',
+  faqs: [
+    {
+      q: 'Is deze DKIM generator veilig in gebruik?',
+      a: 'Het sleutelpaar wordt rechtstreeks gegenereerd via de ingebouwde Web Crypto API van uw browser. De privésleutel wordt nooit naar onze servers of derden verzonden. Wij kunnen deze niet herstellen, download het sleutelbestand dus voordat u de pagina verlaat.',
+    },
+    {
+      q: 'Waar moet de privésleutel worden bewaard?',
+      a: 'Uitsluitend op uw eigen mailserver in de DKIM-configuratie. Publiceer de privésleutel nooit in DNS en deel deze nooit per e-mail. Alleen de openbare sleutel in de TXT-waarde wordt gepubliceerd.',
+    },
+    {
+      q: 'Moet ik kiezen voor 1024 of 2048 bits?',
+      a: 'Kies voor 2048 bits, tenzij uw DNS-provider lange records niet ondersteunt. Gmail accepteert 1024 bits als minimum maar raadt 2048 bits aan, en RFC 8301 adviseert verzenders minimaal 2048 bits te gebruiken.',
+    },
+    {
+      q: 'Waarom is mijn DKIM-record gesplitst in meerdere regels?',
+      a: 'Elke string in een DNS TXT-record mag maximaal 255 tekens bevatten, en een 2048-bits sleutel is langer. Ontvangende servers voegen de strings automatisch weer samen tijdens de handtekeningcontrole.',
+    },
+    {
+      q: 'Welk bestandsformaat voor de privésleutel moet ik downloaden?',
+      a: 'Veel moderne mailservers accepteren het standaard PKCS#8 formaat (BEGIN PRIVATE KEY). Vraagt uw software om BEGIN RSA PRIVATE KEY, kies dan het PKCS#1 formaat; dit is dezelfde sleutel in klassieke notatie.',
+    },
+    {
+      q: 'Hoe controleer ik of DKIM correct functioneert?',
+      a: 'Stuur een e-mail vanaf uw server naar een Gmail-adres, open het bericht en kies "Origineel weergeven". In de verificatieregels moet bij DKIM de status PASS staan voor uw domein.',
+    },
+    {
+      q: 'Kan ik deze sleutels gebruiken voor Google Workspace of Microsoft 365?',
+      a: 'Nee. Zowel Google Workspace als Microsoft 365 maken hun eigen DKIM-sleutels aan binnen hun beheerconsole. Deze generator is bedoeld voor eigen servers waarop u zelf de ondertekeningssleutels beheert.',
+    },
+  ],
+  ctaHeadline: 'DKIM geregeld? Controleer nu uw e-maillijst.',
+}
+
+const pl: DkimPageStrings = {
+  metaTitle: 'Darmowy Generator DKIM: Wygeneruj Klucz i Rekord DKIM | Giggal.ai',
+  ogTitle: 'Darmowy Generator DKIM: Wygeneruj Klucz i Rekord DKIM',
+  description:
+    'Wygeneruj w przeglądarce parę kluczy DKIM 2048-bit oraz gotowy rekord DNS TXT do publikacji. Klucz prywatny nigdy nie opuszcza Twojego urządzenia. Darmowy, bez rejestracji.',
+  ogLocale: 'pl_PL',
+  ogImage: '/og-card.png',
+  ogAlt: 'Darmowy Generator Rekordów DKIM',
+  crumb: 'Generator DKIM',
+  appName: 'Darmowy Generator DKIM',
+  featureList: [
+    'Generowanie 2048-bitowej pary kluczy RSA DKIM bezpośrednio w przeglądarce',
+    'Sformatowany rekord DNS TXT gotowy do wdrożenia',
+    'Klucze prywatne w formatach PKCS#1 oraz PKCS#8',
+    'Automatyczny podział na ciągi 255 znaków dla pełnej zgodności z DNS',
+    'Pełna prywatność: klucz prywatny nigdy nie jest przesyłany na serwer',
+  ],
+  h1: 'Generator DKIM',
+  heroIntro: 'Wygeneruj parę kluczy DKIM oraz dokładny rekord TXT do opublikowania w DNS.',
+  howTitle: 'Jak skonfigurować DKIM za pomocą wygenerowanego klucza',
+  howSteps: [
+    'Wpisz nazwę domeny i selektor, wybierz długość klucza i kliknij "Generuj klucze DKIM".',
+    'W panelu DNS swojego hostingu dodaj rekord TXT. Użyj nazwy rekordu (selektor._domainkey lub pełnej nazwy FQDN) i wklej wartość rekordu TXT.',
+    'Wprowadź klucz prywatny w ustawieniach podpisywania DKIM na swoim serwerze pocztowym, używając tego samego selektora i domeny.',
+    'Wyślij wiadomość testową na prywatne konto Gmail i wybierz "Pokaż oryginał". Przy nagłówku DKIM powinien widnieć status PASS.',
+  ],
+  howNote:
+    'Jeśli test nie wykaże statusu PASS, upewnij się, że rekord w DNS został w pełni rozpropagowany oraz że selektor na serwerze odpowiada selektorowi w DNS. Aby zrozumieć, jak DKIM współpracuje z SPF i DMARC, przeczytaj nasz [przewodnik po SPF, DKIM i DMARC](/blog/spf-dkim-dmarc-explained).',
+  imageAlt: 'Ilustracja przedstawiająca klucze publiczny i prywatny zabezpieczające pocztę elektroniczną podpisem kryptograficznym.',
+  selectorTitle: 'Wybór selektora i długości klucza',
+  selectorParas: [
+    'Selektor to po prostu etykieta identyfikująca: wybierz nazwę, którą łatwo rozpoznasz w przyszłości. Nazwa zawierająca datę (np. s2026a) ułatwia późniejszą rotację kluczy. Może zawierać litery, cyfry i myślniki.',
+    'Zalecanym i bezpiecznym standardem długości klucza jest 2048 bitów. Gmail wymaga kluczy o długości minimum 1024 bitów i rekomenduje 2048 bitów. Zgodnie z RFC 8301 nadawcy muszą używać co najmniej 1024 bitów i powinni stosować 2048 bitów. Choć serwery odbiorcze powinny obsługiwać do 4096 bitów, rekordy 4096-bitowe bywają problematyczne w niektórych panelach DNS; wybierz 2048 bitów.',
+  ],
+  recordTitle: 'Co zawiera rekord DKIM',
+  thTag: 'Tag',
+  thMeaning: 'Znaczenie',
+  thExample: 'Przykład',
+  tags: [
+    { tag: 'v', meaning: 'Wersja protokołu. Opcjonalna, ale jeśli występuje, musi być pierwszym tagiem', example: 'v=DKIM1' },
+    { tag: 'k', meaning: 'Typ algorytmu klucza. Domyślną wartością jest rsa', example: 'k=rsa' },
+    { tag: 'p', meaning: 'Klucz publiczny zakodowany w base64. Pusta wartość (p=) oznacza odwołanie klucza', example: 'p=MIIBIjAN...' },
+    { tag: 't', meaning: 'Flagi konfiguracyjne. y oznacza tryb testowy, s blokuje użycie dla subdomen', example: 't=y' },
+  ],
+  recordNote: 'Istnieją jeszcze trzy rzadziej stosowane tagi: h (algorytmy skrótu), n (notatki) oraz s (typ usługi).',
+  splitTitle: 'Dlaczego długie rekordy DKIM są dzielone',
+  splitText:
+    'Klucz publiczny 2048-bitowy po zakodowaniu w base64 liczy około 390 znaków. Zgodnie ze specyfikacją DNS (RFC 1035) pojedynczy ciąg tekstowy w rekordzie TXT może zawierać maksymalnie 255 znaków. Dlatego tak długi klucz publikuje się w postaci dwóch lub więcej ciągów w cudzysłowach, które serwery odbiorcze łączą przed weryfikacją podpisu. Większość paneli DNS dzieli tekst automatycznie po wklejeniu całego ciągu. Format strefy BIND pozwala na podział w nawiasach w wielu wierszach.',
+  rotateTitle: 'Rotacja kluczy DKIM',
+  rotateText:
+    'Aby bezpiecznie zmienić klucze bez przerw w dostarczaniu poczty, wygeneruj nową parę pod nowym selektorem i opublikuj nowy rekord obok starego. Skonfiguruj serwer pocztowy do podpisywania nowym selektorem, a stary rekord usuń dopiero po doręczeniu wszystkich wiadomości wysłanych wcześniej.',
+  faqTitle: 'Często zadawane pytania',
+  faqs: [
+    {
+      q: 'Czy ten generator DKIM jest w pełni bezpieczny?',
+      a: 'Klucze są generowane w przeglądarce przy użyciu Web Crypto API. Klucz prywatny nigdy nie trafia na nasze serwery ani do osób trzecich. Ponieważ nie mamy do niego dostępu, pobierz plik klucza przed opuszczeniem witryny.',
+    },
+    {
+      q: 'Gdzie należy zapisać klucz prywatny?',
+      a: 'Tylko na Twoim serwerze pocztowym w konfiguracji podpisywania DKIM. Nigdy nie publikuj klucza prywatnego w DNS ani nie przesyłaj go mailem. Publiczny staje się jedynie klucz zawarty w rekordzie TXT.',
+    },
+    {
+      q: 'Lepiej wybrać 1024 czy 2048 bitów?',
+      a: 'Wybierz 2048 bitów, chyba że Twój rejestrator DNS nie radzi sobie z dłuższymi rekordami. Gmail wymaga minimum 1024 bitów i zaleca 2048 bitów, a RFC 8301 wskazuje 2048 bitów jako rekomendowane minimum.',
+    },
+    {
+      q: 'Dlaczego rekord DKIM został podzielony na kilka ciągów?',
+      a: 'Pojedynczy ciąg w rekordzie DNS TXT ma limit 255 znaków, a klucz 2048 bitów jest dłuższy. Serwery pocztowe automatycznie scalają te fragmenty podczas sprawdzania podpisu.',
+    },
+    {
+      q: 'Który format klucza prywatnego wybrać?',
+      a: 'Większość serwerów pocztowych obsługuje format PKCS#8 (BEGIN PRIVATE KEY). Jeśli Twoje oprogramowanie wymaga formatu BEGIN RSA PRIVATE KEY, wybierz PKCS#1; to ten sam klucz zapisany w tradycyjnym standardzie.',
+    },
+    {
+      q: 'Jak sprawdzić, czy podpis DKIM działa?',
+      a: 'Wyślij wiadomość z własnego serwera na konto Gmail, otwórz ją i kliknij "Pokaż oryginał". W sekcji uwierzytelniania wiersz DKIM powinien mieć oznaczenie PASS dla Twojej domeny.',
+    },
+    {
+      q: 'Czy mogę użyć tego klucza w Google Workspace lub Microsoft 365?',
+      a: 'Nie. Obie te usługi generują własne klucze DKIM w swoich panelach administracyjnych. Ten generator przeznaczony jest dla serwerów, na których samodzielnie kontrolujesz klucze kryptograficzne.',
+    },
+  ],
+  ctaHeadline: 'DKIM skonfigurowany? Sprawdź teraz swoją listę odbiorców.',
+}
+
+const id: DkimPageStrings = {
+  metaTitle: 'DKIM Generator Gratis: Buat Kunci dan Catatan DKIM | Giggal.ai',
+  ogTitle: 'DKIM Generator Gratis: Buat Kunci dan Catatan DKIM',
+  description:
+    'Hasilkan pasangan kunci DKIM 2048-bit dan catatan DNS TXT langsung di browser Anda. Kunci privat tidak pernah dikirim ke server. Gratis, tanpa daftar.',
+  ogLocale: 'id_ID',
+  ogImage: '/og-card.png',
+  ogAlt: 'DKIM Generator Gratis',
+  crumb: 'DKIM Generator',
+  appName: 'DKIM Generator Gratis',
+  featureList: [
+    'Hasilkan pasangan kunci DKIM RSA 2048-bit langsung di browser',
+    'Format catatan DNS TXT siap publikasi instan',
+    'Kunci privat dalam format standar PKCS#1 dan PKCS#8',
+    'Pemisahan otomatis 255 karakter untuk kompatibilitas DNS',
+    'Privasi penuh: kunci privat tidak pernah keluar dari perangkat Anda',
+  ],
+  h1: 'DKIM Generator',
+  heroIntro: 'Buat pasangan kunci DKIM dan catatan TXT yang tepat untuk dipublikasikan di DNS Anda.',
+  howTitle: 'Cara menyiapkan DKIM dengan kunci yang dihasilkan',
+  howSteps: [
+    'Masukkan nama domain dan selektor, pilih ukuran kunci, lalu klik "Buat kunci DKIM".',
+    'Di panel DNS penyedia hosting Anda, buat catatan TXT. Gunakan nama yang ditampilkan di atas (selektor._domainkey atau nama FQDN lengkap) lalu tempelkan nilai TXT.',
+    'Pasang kunci privat pada pengaturan penandatanganan DKIM di mail server Anda, dengan selektor dan domain yang sama persis.',
+    'Kirim email uji coba ke akun Gmail pribadi dan buka "Lihat versi asli". Di samping baris DKIM harus tertera PASS.',
+  ],
+  howNote:
+    'Jika verifikasi gagal, pastikan catatan DNS telah terpropagasi dan selektor pada mail server cocok dengan yang ada di DNS. Untuk memahami integrasi antara SPF, DKIM, dan DMARC, baca [panduan penjelasan SPF, DKIM, dan DMARC](/blog/spf-dkim-dmarc-explained).',
+  imageAlt: 'Ilustrasi kunci publik dan privat yang mengamankan pesan email dengan tanda tangan kriptografi.',
+  selectorTitle: 'Memilih selektor dan ukuran kunci',
+  selectorParas: [
+    'Selektor hanyalah sebuah label pengenal: pilihlah nama yang mudah Anda kenali di masa mendatang. Format berbasis tanggal seperti s2026a memudahkan identifikasi kunci mana yang aktif saat melakukan rotasi berkala. Selektor dapat memuat huruf, angka, dan tanda hubung.',
+    'Untuk ukuran kunci, 2048 bit adalah standar default yang aman. Gmail mensyaratkan kunci DKIM minimal 1024 bit dan merekomendasikan 2048 bit. Berdasarkan RFC 8301, pengirim email wajib menggunakan minimal 1024 bit dan sangat disarankan 2048 bit. Meskipun server penerima mendukung hingga 4096 bit, beberapa panel DNS kesulitan memproses catatan sepanjang itu; gunakan 2048 bit.',
+  ],
+  recordTitle: 'Apa saja isi catatan DKIM',
+  thTag: 'Tag',
+  thMeaning: 'Arti',
+  thExample: 'Contoh',
+  tags: [
+    { tag: 'v', meaning: 'Versi protokol. Bersifat opsional, namun jika ada wajib diletakkan di awal', example: 'v=DKIM1' },
+    { tag: 'k', meaning: 'Jenis algoritma kunci. Default-nya adalah rsa', example: 'k=rsa' },
+    { tag: 'p', meaning: 'Kunci publik yang dienkode dalam base64. Nilai p= kosong menandakan kunci telah dicabut', example: 'p=MIIBIjAN...' },
+    { tag: 't', meaning: 'Flag penanda. y berarti mode uji coba, s membatasi agar tidak berlaku untuk subdomain', example: 't=y' },
+  ],
+  recordNote: 'Terdapat tiga tag tambahan lain (h untuk algoritma hash, n untuk catatan, dan s untuk tipe layanan), namun tag tersebut sangat jarang dibutuhkan.',
+  splitTitle: 'Mengapa catatan DKIM yang panjang dipecah',
+  splitText:
+    'Kunci publik 2048 bit memiliki panjang sekitar 390 karakter setelah dienkode ke base64. Protokol DNS menyimpan data TXT dalam batas maksimal 255 karakter per string (RFC 1035). Karena itu, kunci sepanjang ini harus dipublikasikan dalam dua string atau lebih di dalam tanda kutip, yang nantinya digabungkan kembali oleh server penerima sebelum memvalidasi tanda tangan. Sebagian besar panel DNS memecah string ini secara otomatis saat Anda menempelkan versi satu baris. Format zona BIND digunakan saat mengedit file zona server DNS secara manual.',
+  rotateTitle: 'Rotasi kunci DKIM secara berkala',
+  rotateText:
+    'Untuk mengganti kunci dengan aman tanpa mengganggu pengiriman email, buat pasangan kunci baru dengan selektor baru dan publikasikan catatan DNS-nya berdampingan dengan catatan lama. Alihkan mail server Anda untuk menandatangani email dengan selektor baru, lalu hapus catatan lama setelah semua email yang ditandatangani kunci lama selesai terkirim.',
+  faqTitle: 'Pertanyaan umum',
+  faqs: [
+    {
+      q: 'Apakah generator DKIM ini aman digunakan?',
+      a: 'Pasangan kunci dibuat langsung oleh Web Crypto API bawaan browser Anda. Kunci privat tidak pernah dikirim ke server kami ataupun pihak ketiga. Kami tidak dapat memulihkannya, jadi pastikan Anda mengunduhnya sebelum menutup halaman.',
+    },
+    {
+      q: 'Di mana kunci privat harus dipasang?',
+      a: 'Hanya di mail server atau MTA Anda, tepatnya pada pengaturan tanda tangan DKIM. Jangan pernah memasukkannya ke DNS atau mengirimkannya via email. Hanya kunci publik dalam nilai TXT yang dipublikasikan ke publik.',
+    },
+    {
+      q: 'Sebaiknya memilih 1024 atau 2048 bit?',
+      a: 'Gunakan 2048 bit kecuali jika penyedia DNS Anda tidak mendukung catatan panjang. Gmail menetapkan 1024 bit sebagai batas minimum dan menyarankan 2048 bit, sementara RFC 8301 mewajibkan standar 2048 bit.',
+    },
+    {
+      q: 'Mengapa catatan DKIM saya dipecah menjadi beberapa baris string?',
+      a: 'Setiap string dalam catatan DNS TXT memiliki batas maksimal 255 karakter, dan kunci 2048 bit melebihi batas tersebut. Server penerima akan menggabungkan pecahan string tersebut saat memverifikasi tanda tangan.',
+    },
+    {
+      q: 'Format kunci privat mana yang sebaiknya saya unduh?',
+      a: 'Sebagian besar mail server modern menerima format standar PKCS#8 (BEGIN PRIVATE KEY). Jika software mail server Anda memerlukan BEGIN RSA PRIVATE KEY, gunakan versi PKCS#1; keduanya merupakan kunci yang sama dalam format berbeda.',
+    },
+    {
+      q: 'Bagaimana cara memastikan DKIM berfungsi dengan benar?',
+      a: 'Kirim email dari server Anda ke akun Gmail pribadi, buka pesan tersebut, lalu pilih "Lihat versi asli". Pada bagian header autentikasi, status DKIM harus menunjukkan PASS untuk domain Anda.',
+    },
+    {
+      q: 'Bisakah kunci ini dipakai untuk Google Workspace atau Microsoft 365?',
+      a: 'Tidak. Google Workspace dan Microsoft 365 membuat kunci DKIM mereka sendiri di dalam panel konsol admin masing-masing. Generator ini khusus untuk mail server mandiri di mana Anda mengelola kunci penandatanganan sendiri.',
+    },
+  ],
+  ctaHeadline: 'DKIM sudah terpasang? Sekarang saatnya verifikasi daftar email Anda.',
+}
+
+export const DKIM_PAGE_STRINGS: Record<Locale, DkimPageStrings> = { en, it, de, fr, es, 'pt-br': ptBr, nl, pl, id }
