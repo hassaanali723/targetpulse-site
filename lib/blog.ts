@@ -237,9 +237,19 @@ export function renderMarkdown(body: string, locale: BlogLocale): { html: string
     const lines = block.split('\n')
     if (lines[0].trim().startsWith('```')) {
       const codeLines = lines.slice(1, lines[lines.length - 1].trim().startsWith('```') ? -1 : undefined)
-      // ```email marks prose (email templates): it wraps instead of scrolling sideways.
-      const cls = lines[0].trim().slice(3).trim() === 'email' ? 'blog-pre blog-pre-wrap' : 'blog-pre'
-      html.push(`<pre class="${cls}"><code>${escapeHtml(codeLines.join('\n'))}</code></pre>`)
+      const lang = lines[0].trim().slice(3).trim()
+      if (lang === 'youtube') {
+        const videoId = codeLines[0]?.trim() || ''
+        const caption = codeLines.slice(1).join(' ').trim()
+        const capHtml = caption ? `<div class="blog-video-caption">${inline(caption, locale)}</div>` : ''
+        html.push(
+          `<div class="blog-video-wrap"><div class="blog-video-frame"><iframe src="https://www.youtube-nocookie.com/embed/${escapeHtml(videoId)}" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>${capHtml}</div>`
+        )
+      } else {
+        // ```email marks prose (email templates): it wraps instead of scrolling sideways.
+        const cls = lang === 'email' ? 'blog-pre blog-pre-wrap' : 'blog-pre'
+        html.push(`<pre class="${cls}"><code>${escapeHtml(codeLines.join('\n'))}</code></pre>`)
+      }
     } else if (block.startsWith('### ')) {
       const raw = block.slice(4).trim()
       html.push(`<h3 id="${uniqueId(raw)}">${inline(raw, locale)}</h3>`)
