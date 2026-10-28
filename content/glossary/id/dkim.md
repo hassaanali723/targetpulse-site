@@ -73,7 +73,7 @@ DKIM juga wajib untuk pengirim massal. Panduan pengirim dari Google mewajibkan S
 Cara memasang DKIM tergantung pada siapa yang mengirim email Anda.
 
 - **Anda memakai layanan email** seperti Google Workspace, Microsoft 365, Mailchimp, atau SendGrid. Layanan itu membuat kunci untuk Anda. Layanan itu menampilkan DKIM record yang perlu Anda tambahkan di penyedia DNS Anda. Penyedia DNS biasanya adalah perusahaan tempat Anda membeli domain.
-- **Anda mengelola server email sendiri.** Anda membuat pasangan kunci sendiri. [DKIM generator](/dkim-generator) (dalam bahasa Inggris) kami membuat pasangan kunci 2048 bit dan TXT record di browser Anda. Anda memasang private key di server dan menerbitkan record di DNS.
+- **Anda mengelola server email sendiri.** Anda membuat pasangan kunci sendiri. [DKIM generator](/dkim-generator) kami membuat pasangan kunci 2048 bit dan TXT record di browser Anda. Anda memasang private key di server dan menerbitkan record di DNS.
 
 Periksa satu masalah yang umum. Banyak layanan email secara bawaan menandatangani dengan domain bersama milik mereka sendiri. Tanda tangannya lolos, tetapi domain di `d=` bukan milik Anda, jadi DMARC alignment gagal. Aktifkan DKIM kustom di pengaturan layanan, agar `d=` menampilkan domain Anda. Halaman [DMARC alignment](/glossary/dmarc-alignment) menjelaskan kenapa ini penting.
 

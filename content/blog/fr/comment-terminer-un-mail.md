@@ -32,7 +32,7 @@ Une fin d'email a trois parties distinctes, et chacune a un rôle différent.
 2. **La formule de politesse** est le court salut final avant votre nom, par exemple « Merci, » ou « Cordialement, ».
 3. **Votre nom et votre signature** viennent en dernier. Dans un premier email, ajoutez votre fonction et votre entreprise. Dans une réponse rapide, votre prénom suffit.
 
-Gardez la signature courte. L'ancien guide des bonnes manières sur internet, la [RFC 1855](https://www.rfc-editor.org/rfc/rfc1855), conseillait 4 lignes au maximum, et cela fonctionne toujours. Si vous voulez une signature nette et cohérente, le [générateur de signature email](/email-signature-generator) (en anglais) la crée pour Gmail, Outlook et Apple Mail.
+Gardez la signature courte. L'ancien guide des bonnes manières sur internet, la [RFC 1855](https://www.rfc-editor.org/rfc/rfc1855), conseillait 4 lignes au maximum, et cela fonctionne toujours. Si vous voulez une signature nette et cohérente, le [générateur de signature email](/email-signature-generator) la crée pour Gmail, Outlook et Apple Mail.
 
 ## Fins d'email professionnelles : les formules courantes
 

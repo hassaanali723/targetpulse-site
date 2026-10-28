@@ -157,7 +157,7 @@ Trois anciennes balises ont été retirées dans la norme de 2026. Ce sont la ba
 - Ne touchez pas à `psd`. Vous n'en avez besoin que si vous gérez une grande organisation qui délègue des parties de son DNS (`psd=n`), ou un suffixe public comme `co.uk` (`psd=y`).
 - La correspondance souple (`adkim=r` et `aspf=r`) est le réglage par défaut et convient à presque tous les domaines. Vous n'avez besoin des balises d'alignement que si des règles de conformité strictes interdisent de signer avec un sous-domaine.
 
-Vous pouvez créer un enregistrement avec ces balises, ou nettoyer un ancien enregistrement, avec notre [générateur DMARC](/dmarc-generator) (en anglais).
+Vous pouvez créer un enregistrement avec ces balises, ou nettoyer un ancien enregistrement, avec notre [générateur DMARC](/dmarc-generator).
 
 ## Ce que font vraiment p=none, quarantine et reject
 

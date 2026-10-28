@@ -45,7 +45,7 @@ Batasannya juga perlu disampaikan dengan jujur. Ini adalah kesimpulan dari peril
 
 Anda tidak perlu alat khusus untuk memeriksa apakah gateway adalah masalah Anda. Anda hanya perlu MX record dari domain di daftar Anda.
 
-Ambil bagian domain dari setiap alamat, hapus domain yang dobel, lalu [cari MX record](/mx-lookup) (dalam bahasa Inggris) untuk setiap domain. Domain di balik Proofpoint mengarah ke hostname yang berisi pphosted atau ppe-hosted. Domain Mimecast mengarah ke host mimecast.com, biasanya dengan kode wilayah. Barracuda terlihat sebagai barracudanetworks.com. Cisco muncul sebagai iphmx.com. Domain Microsoft 365 dan Google Workspace masing-masing mengarah ke host outlook.com dan google.com. Itu bukan gateway, meskipun tetap bisa disetel sebagai catch-all.
+Ambil bagian domain dari setiap alamat, hapus domain yang dobel, lalu [cari MX record](/mx-lookup) untuk setiap domain. Domain di balik Proofpoint mengarah ke hostname yang berisi pphosted atau ppe-hosted. Domain Mimecast mengarah ke host mimecast.com, biasanya dengan kode wilayah. Barracuda terlihat sebagai barracudanetworks.com. Cisco muncul sebagai iphmx.com. Domain Microsoft 365 dan Google Workspace masing-masing mengarah ke host outlook.com dan google.com. Itu bukan gateway, meskipun tetap bisa disetel sebagai catch-all.
 
 Cocokkan daftar itu dengan alamat yang tidak bisa dipastikan oleh alat verifikasi Anda. Jika banyak yang tumpang tindih, gateway-lah penyebabnya. Menjalankan ulang alat yang sama berapa kali pun tidak akan mengubah hasilnya.
 

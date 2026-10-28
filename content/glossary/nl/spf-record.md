@@ -60,7 +60,7 @@ Verstuur je minder, dan zijn de records nog steeds belangrijk. Zonder deze recor
 
 RFC 7208 beperkt een SPF-controle tot tien DNS-opzoekingen. Een opzoeking is één vraag die de ontvangende server aan DNS stelt. Elke `include:`, `a`, `mx` en `redirect` in je record telt als één opzoeking. Opzoekingen in de records die je insluit, tellen ook mee. Als het totaal boven de tien komt, geeft de controle een permanente fout. De meeste ontvangende servers behandelen deze fout als een fail.
 
-Dit is de meest voorkomende manier waarop een SPF-record kapotgaat. Een bedrijf voegt de ene e-mailtool na de andere aan het record toe. Bij de elfde opzoeking werkt het hele record niet meer. De [SPF checker](/spf-checker) (in het Engels) telt de opzoekingen in je record, ook die binnen elke include.
+Dit is de meest voorkomende manier waarop een SPF-record kapotgaat. Een bedrijf voegt de ene e-mailtool na de andere aan het record toe. Bij de elfde opzoeking werkt het hele record niet meer. De [SPF checker](/spf-checker) telt de opzoekingen in je record, ook die binnen elke include.
 
 **Voorbeeld:** het SPF-record van een bedrijf bevat de kantoormail, de nieuwsbrieftool, de helpdesktool en de factuurtool. Sommige daarvan sluiten zelf weer andere records in. Samen hebben ze 11 opzoekingen nodig. Vanaf die dag mislukt de SPF-controle voor de e-mail van het bedrijf, zelfs voor e-mail vanaf het eigen kantoor.
 

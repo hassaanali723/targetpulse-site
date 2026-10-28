@@ -32,7 +32,7 @@ De afsluiting van een e-mail heeft drie aparte delen, en elk deel heeft een ande
 2. **De groet** is het korte afscheid voor je naam, zoals "Bedankt," of "Met vriendelijke groet,".
 3. **Je naam en handtekening** komen als laatste. Zet in een eerste e-mail je functie en bedrijf erbij. In een kort antwoord is je voornaam genoeg.
 
-Houd je handtekening kort. De oude gids voor netiquette, [RFC 1855](https://www.rfc-editor.org/rfc/rfc1855), raadde niet meer dan 4 regels aan, en dat werkt nog steeds. Wil je een nette, consistente handtekening? De [generator voor e-mailhandtekeningen](/email-signature-generator) (in het Engels) maakt er een voor Gmail, Outlook en Apple Mail.
+Houd je handtekening kort. De oude gids voor netiquette, [RFC 1855](https://www.rfc-editor.org/rfc/rfc1855), raadde niet meer dan 4 regels aan, en dat werkt nog steeds. Wil je een nette, consistente handtekening? De [generator voor e-mailhandtekeningen](/email-signature-generator) maakt er een voor Gmail, Outlook en Apple Mail.
 
 ## Afsluitingen voor werkmails: de gangbare groeten
 

@@ -45,7 +45,7 @@ Warto uczciwie powiedzieć o ograniczeniach. To wnioskowanie z obserwowanego zac
 
 Nie potrzebujesz narzędzia, żeby sprawdzić, czy twoim problemem są bramki. Potrzebujesz rekordów MX dla domen z twojej listy.
 
-Weź część domenową każdego adresu, usuń duplikaty i [sprawdź rekordy MX](/mx-lookup) (po angielsku) dla każdej domeny. Domena za Proofpoint wskazuje na nazwy hostów zawierające pphosted albo ppe-hosted. Domeny Mimecast wskazują na hosty mimecast.com, zwykle z kodem regionu. Barracuda pojawia się jako barracudanetworks.com. Cisco pojawia się jako iphmx.com. Domeny Microsoft 365 i Google Workspace wskazują odpowiednio na hosty outlook.com i google.com. To nie są bramki, choć takie domeny nadal mogą być ustawione jako catch-all.
+Weź część domenową każdego adresu, usuń duplikaty i [sprawdź rekordy MX](/mx-lookup) dla każdej domeny. Domena za Proofpoint wskazuje na nazwy hostów zawierające pphosted albo ppe-hosted. Domeny Mimecast wskazują na hosty mimecast.com, zwykle z kodem regionu. Barracuda pojawia się jako barracudanetworks.com. Cisco pojawia się jako iphmx.com. Domeny Microsoft 365 i Google Workspace wskazują odpowiednio na hosty outlook.com i google.com. To nie są bramki, choć takie domeny nadal mogą być ustawione jako catch-all.
 
 Porównaj tę listę z adresami, przy których twój weryfikator się poddał. Jeśli część wspólna jest duża, przyczyną są bramki. Ponowne uruchamianie tego samego narzędzia nie zmieni wyniku.
 

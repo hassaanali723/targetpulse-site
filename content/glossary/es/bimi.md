@@ -79,13 +79,13 @@ Los proveedores pueden tardar un tiempo en leer un registro nuevo.
 
 ## Cómo configurar BIMI
 
-1. Lleva tu política DMARC a `quarantine` o `reject`. El [generador de DMARC](/dmarc-generator) (en inglés) te ayuda con el registro.
+1. Lleva tu política DMARC a `quarantine` o `reject`. El [generador de DMARC](/dmarc-generator) te ayuda con el registro.
 2. Prepara el logo en SVG Tiny PS y compruébalo.
 3. Decide qué certificado necesitas y solicítalo a una autoridad de certificación aceptada.
 4. Sube el SVG y el certificado a direcciones web con https.
 5. Publica el registro TXT en `default._bimi.tudominio`.
 
-El [generador de BIMI](/bimi-generator) (en inglés) crea el registro y revisa tu SVG contra las reglas de Tiny PS en tu navegador. El archivo no se sube a ningún sitio.
+El [generador de BIMI](/bimi-generator) crea el registro y revisa tu SVG contra las reglas de Tiny PS en tu navegador. El archivo no se sube a ningún sitio.
 
 ## BIMI y verificación de correo
 

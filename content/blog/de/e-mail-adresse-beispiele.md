@@ -157,7 +157,7 @@ So beheben Sie eine Adresse, die ein Formular nicht annimmt:
 
 Sie haben zwei Möglichkeiten.
 
-Die schnelle ist ein kostenloses Konto bei einem Anbieter wie Gmail, Outlook.com oder Proton Mail. Es kostet nichts und funktioniert überall. Unsere [Liste kostenloser E-Mail-Anbieter](/free-email-providers) (auf Englisch) vergleicht, was jeder davon bietet.
+Die schnelle ist ein kostenloses Konto bei einem Anbieter wie Gmail, Outlook.com oder Proton Mail. Es kostet nichts und funktioniert überall. Unsere [Liste kostenloser E-Mail-Anbieter](/free-email-providers) vergleicht, was jeder davon bietet.
 
 Die andere ist eine Adresse auf Ihrer eigenen Domain, etwa jane@yourbusiness.com. Dafür brauchen Sie drei Dinge. Erstens eine registrierte Domain. Zweitens einen E-Mail-Host wie Google Workspace oder Microsoft 365. Drittens MX-Einträge, die Ihre Domain auf diesen Host zeigen lassen. Ihr Host nennt Ihnen die genauen Einträge, die Sie anlegen müssen ([Google](https://knowledge.workspace.google.com/admin/domains/set-up-mx-records-for-google-workspace)). Ist alles eingerichtet, können Sie die Einträge mit dem [MX-Lookup](/mx-lookup) prüfen.
 

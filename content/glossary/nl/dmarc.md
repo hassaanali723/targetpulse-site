@@ -70,7 +70,7 @@ De meeste domeinen gaan in drie stappen omhoog.
 2. Lees de rapporten. Ze tonen elke server die e-mail verstuurt als jouw domein. Zorg dat elke echte dienst slaagt voor SPF of DKIM voor jouw domein. Je nieuwsbrieftool en je helpdesk zijn twee voorbeelden.
 3. Ga naar `p=quarantine`. Als er geen echte e-mail meer in spam belandt, ga dan naar `p=reject`.
 
-De standaard zegt dat het vele maanden kan duren voordat elke echte afzender slaagt. Diensten die weinig versturen, zoals factuurtools, zie je makkelijk over het hoofd. Onze [DMARC-generator](/dmarc-generator) (in het Engels) maakt het record voor elke stap.
+De standaard zegt dat het vele maanden kan duren voordat elke echte afzender slaagt. Diensten die weinig versturen, zoals factuurtools, zie je makkelijk over het hoofd. Onze [DMARC-generator](/dmarc-generator) maakt het record voor elke stap.
 
 Zorg dat al je e-mail met DKIM is ondertekend voordat je `p=reject` gebruikt. Doorsturen breekt SPF. Een reject-beleid dat alleen op SPF steunt, kan echte doorgestuurde e-mail blokkeren.
 

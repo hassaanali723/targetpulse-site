@@ -64,7 +64,7 @@ Het opzoeken van het MX-record heeft drie mogelijke uitkomsten:
 
 ## Waarom het belangrijk is voor afzenders
 
-Iedereen kan het MX-record van een domein lezen met een DNS-opzoeking. Onze gratis tool [MX lookup](/mx-lookup) (in het Engels) toont de MX-records van elk domein. Als een bedrijf overstapt naar een andere e-mailprovider of stopt, veranderen de MX-records of verdwijnen ze. De adressen werken dan niet meer. Niemand laat je dat weten. Dit is een veelvoorkomende oorzaak van [hard bounces](/glossary/hard-bounce) op oude lijsten. Een hard bounce is een e-mail die definitief wordt geweigerd.
+Iedereen kan het MX-record van een domein lezen met een DNS-opzoeking. Onze gratis tool [MX lookup](/mx-lookup) toont de MX-records van elk domein. Als een bedrijf overstapt naar een andere e-mailprovider of stopt, veranderen de MX-records of verdwijnen ze. De adressen werken dan niet meer. Niemand laat je dat weten. Dit is een veelvoorkomende oorzaak van [hard bounces](/glossary/hard-bounce) op oude lijsten. Een hard bounce is een e-mail die definitief wordt geweigerd.
 
 **Voorbeeld:** je hebt in 2021 op een beurs 40 mensen van old-firm.example ontmoet. Het bedrijf sluit in 2024, en het domein heeft geen MX-record meer. Elke e-mail die je naar die 40 contacten stuurt, bouncet nu.
 

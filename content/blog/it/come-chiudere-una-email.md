@@ -32,7 +32,7 @@ La chiusura di una email ha tre parti separate, e ognuna ha un compito diverso.
 2. **La formula di saluto** è il breve congedo prima del nome, per esempio "Grazie," o "Cordiali saluti,".
 3. **Il tuo nome e la firma** vengono per ultimi. In una prima email, aggiungi il tuo ruolo e l'azienda. In una risposta veloce basta il nome.
 
-Tieni la firma breve. La vecchia guida al galateo di Internet, la [RFC 1855](https://www.rfc-editor.org/rfc/rfc1855), suggeriva non più di 4 righe, e funziona ancora. Se vuoi una firma pulita e coerente, il [generatore di firma email](/email-signature-generator) (in inglese) la crea per Gmail, Outlook e Apple Mail.
+Tieni la firma breve. La vecchia guida al galateo di Internet, la [RFC 1855](https://www.rfc-editor.org/rfc/rfc1855), suggeriva non più di 4 righe, e funziona ancora. Se vuoi una firma pulita e coerente, il [generatore di firma email](/email-signature-generator) la crea per Gmail, Outlook e Apple Mail.
 
 ## Chiusure per le email di lavoro: le formule di saluto più comuni
 

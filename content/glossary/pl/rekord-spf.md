@@ -60,7 +60,7 @@ Jeśli wysyłasz mniej, te rekordy nadal mają znaczenie. Bez nich twoje e-maile
 
 RFC 7208 ogranicza sprawdzenie SPF do dziesięciu zapytań DNS. Zapytanie to jedno pytanie, które serwer odbiorcy zadaje DNS. Każde `include:`, `a`, `mx` i `redirect` w twoim rekordzie liczy się jako jedno zapytanie. Liczą się też zapytania w rekordach, które dołączasz. Jeśli suma przekracza dziesięć, sprawdzenie zwraca trwały błąd. Większość serwerów odbiorców traktuje ten błąd jak fail.
 
-To najczęstszy sposób, w jaki psuje się rekord SPF. Firma dodaje do rekordu kolejne narzędzia do e-maili. Gdy zostaje dodane jedenaste zapytanie, cały rekord przestaje działać. Narzędzie [SPF checker](/spf-checker) (po angielsku) liczy zapytania w twoim rekordzie, w tym te w każdym include.
+To najczęstszy sposób, w jaki psuje się rekord SPF. Firma dodaje do rekordu kolejne narzędzia do e-maili. Gdy zostaje dodane jedenaste zapytanie, cały rekord przestaje działać. Narzędzie [SPF checker](/spf-checker) liczy zapytania w twoim rekordzie, w tym te w każdym include.
 
 **Przykład:** rekord SPF firmy dołącza jej pocztę biurową, narzędzie do newslettera, narzędzie do obsługi klienta (help desk) i narzędzie do faktur. Niektóre z nich dołączają w środku kolejne rekordy. Razem potrzebują 11 zapytań. Od tego dnia sprawdzenie SPF dla e-maili firmy kończy się błędem, nawet dla e-maili wysyłanych z jej własnego biura.
 

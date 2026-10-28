@@ -32,7 +32,7 @@ Penutup email punya tiga bagian yang terpisah, dan setiap bagian punya fungsi ya
 2. **Salam penutup** adalah salam singkat sebelum nama Anda, misalnya "Terima kasih," atau "Salam hormat,".
 3. **Nama dan tanda tangan Anda** berada paling akhir. Di email pertama, tambahkan jabatan dan nama perusahaan Anda. Di balasan singkat, nama depan Anda sudah cukup.
 
-Buat tanda tangan Anda tetap singkat. Panduan etika internet yang lama, [RFC 1855](https://www.rfc-editor.org/rfc/rfc1855), menyarankan tidak lebih dari 4 baris, dan saran itu masih berlaku. Jika Anda ingin tanda tangan yang rapi dan konsisten, [email signature generator](/email-signature-generator) (dalam bahasa Inggris) membuatkannya untuk Gmail, Outlook, dan Apple Mail.
+Buat tanda tangan Anda tetap singkat. Panduan etika internet yang lama, [RFC 1855](https://www.rfc-editor.org/rfc/rfc1855), menyarankan tidak lebih dari 4 baris, dan saran itu masih berlaku. Jika Anda ingin tanda tangan yang rapi dan konsisten, [email signature generator](/email-signature-generator) membuatkannya untuk Gmail, Outlook, dan Apple Mail.
 
 ## Salam penutup email kerja yang umum
 

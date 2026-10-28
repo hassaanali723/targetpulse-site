@@ -150,16 +150,16 @@ Para corrigir um endereço que um formulário não aceita:
 - Confira a grafia, principalmente do domínio. A própria lista de erros comuns do Google inclui erros como gmal.con, espaços sobrando e um ponto no fim ([Google](https://support.google.com/mail/answer/6596)).
 - Remova espaços ou aspas que você copiou sem querer.
 - Se você usou um endereço com sinal de mais e o formulário recusou, use o seu endereço simples.
-- Se o endereço parece certo, faça um [MX lookup](/mx-lookup) (em inglês) no domínio para ver se ele consegue receber e-mails.
+- Se o endereço parece certo, faça um [MX lookup](/mx-lookup) no domínio para ver se ele consegue receber e-mails.
 - Para saber se a própria caixa existe, use a [verificação de e-mail](/email-checker). Ela confere o endereço sem enviar nenhum e-mail.
 
 ## Como ter um endereço de e-mail profissional
 
 Você tem duas opções.
 
-A rápida é uma conta gratuita em um provedor como Gmail, Outlook.com ou Proton Mail. Não custa nada e funciona em todo lugar. A nossa [lista de provedores de e-mail gratuitos](/free-email-providers) (em inglês) compara o que cada um oferece.
+A rápida é uma conta gratuita em um provedor como Gmail, Outlook.com ou Proton Mail. Não custa nada e funciona em todo lugar. A nossa [lista de provedores de e-mail gratuitos](/free-email-providers) compara o que cada um oferece.
 
-A outra é um endereço no seu próprio domínio, como jane@yourbusiness.com. Você precisa de três coisas. Primeiro, um domínio registrado. Segundo, uma hospedagem de e-mail como Google Workspace ou Microsoft 365. Terceiro, registros MX que apontam o seu domínio para essa hospedagem. A hospedagem informa os registros exatos que você deve adicionar ([Google](https://knowledge.workspace.google.com/admin/domains/set-up-mx-records-for-google-workspace)). Depois de configurar, você pode conferir os registros com o [MX lookup](/mx-lookup) (em inglês).
+A outra é um endereço no seu próprio domínio, como jane@yourbusiness.com. Você precisa de três coisas. Primeiro, um domínio registrado. Segundo, uma hospedagem de e-mail como Google Workspace ou Microsoft 365. Terceiro, registros MX que apontam o seu domínio para essa hospedagem. A hospedagem informa os registros exatos que você deve adicionar ([Google](https://knowledge.workspace.google.com/admin/domains/set-up-mx-records-for-google-workspace)). Depois de configurar, você pode conferir os registros com o [MX lookup](/mx-lookup).
 
 Escolha com cuidado, porque alguns endereços são difíceis de mudar depois. O Gmail permite trocar para um novo endereço gmail.com até três vezes, uma vez a cada 12 meses ([Google](https://support.google.com/accounts/answer/19870)). O Yahoo não permite trocar o endereço ([Yahoo](https://help.yahoo.com/kb/yahoo-email-address-sln2059.html)).
 

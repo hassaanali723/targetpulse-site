@@ -67,7 +67,7 @@ Een DKIM-record met de publieke sleutel ziet er in DNS zo uit:
 v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA...
 ```
 
-De tag `v=DKIM1` geeft de versie van het protocol aan, `k=rsa` noemt het algoritme van de sleutel, en `p=` bevat de publieke sleutel in base64. Draai je je eigen mailserver, dan kun je een sleutelpaar maken met onze [DKIM-generator](/dkim-generator) (in het Engels).
+De tag `v=DKIM1` geeft de versie van het protocol aan, `k=rsa` noemt het algoritme van de sleutel, en `p=` bevat de publieke sleutel in base64. Draai je je eigen mailserver, dan kun je een sleutelpaar maken met onze [DKIM-generator](/dkim-generator).
 
 Een veelvoorkomende valkuil ontstaat als afzenders vertrouwen op de standaardhandtekening van een platform. Veel e-mailplatforms ondertekenen uitgaande mail standaard met hun eigen gedeelde domein (`d=shared-esp.example`). De handtekening slaagt dan wel, maar het ondertekenende domein komt niet overeen met je zichtbare From-domein. Daardoor faalt de DMARC-alignment. Stel in de instellingen van je platform een eigen DKIM in, zodat de handtekening jouw domein gebruikt in de tag `d=`.
 
@@ -95,7 +95,7 @@ De tag rua vertelt ontvangers waar ze geaggregeerde rapporten naartoe sturen. Da
 _dmarc.example.com TXT "v=DMARC1; p=none; rua=mailto:dmarc@example.com"
 ```
 
-In mei 2026 publiceerde de Internet Engineering Task Force RFC 9989 op de Standards Track, samen met RFC 9990 voor geaggregeerde rapporten en RFC 9991 voor foutrapporten. Deze nieuwe standaarden vervangen officieel RFC 7489 en RFC 9091. Bestaande records die beginnen met `v=DMARC1` blijven werken, maar de bijgewerkte specificatie past een aantal tags aan. De percentagetag (`pct`) en de tag voor het rapportformaat (`rf`) zijn geschrapt en horen niet meer bij de standaard. De tag voor het rapportinterval (`ri`) heeft de status historisch gekregen. Afzenders die een beleid testen, gebruiken nu de nieuwe tag `t` voor de testmodus. Beheerders kunnen met de tag `np` een beleid instellen voor subdomeinen die niet bestaan. Bevat je huidige DNS-record een percentagetag, plan dan om die te verwijderen. Je kunt een bijgewerkt record maken of oude tags opruimen met onze [DMARC-generator](/dmarc-generator) (in het Engels).
+In mei 2026 publiceerde de Internet Engineering Task Force RFC 9989 op de Standards Track, samen met RFC 9990 voor geaggregeerde rapporten en RFC 9991 voor foutrapporten. Deze nieuwe standaarden vervangen officieel RFC 7489 en RFC 9091. Bestaande records die beginnen met `v=DMARC1` blijven werken, maar de bijgewerkte specificatie past een aantal tags aan. De percentagetag (`pct`) en de tag voor het rapportformaat (`rf`) zijn geschrapt en horen niet meer bij de standaard. De tag voor het rapportinterval (`ri`) heeft de status historisch gekregen. Afzenders die een beleid testen, gebruiken nu de nieuwe tag `t` voor de testmodus. Beheerders kunnen met de tag `np` een beleid instellen voor subdomeinen die niet bestaan. Bevat je huidige DNS-record een percentagetag, plan dan om die te verwijderen. Je kunt een bijgewerkt record maken of oude tags opruimen met onze [DMARC-generator](/dmarc-generator).
 
 ## Hoe een ontvangende server een bericht controleert
 
@@ -132,7 +132,7 @@ DMARC voor altijd op `p=none` laten staan, laat je domein kwetsbaar voor naboots
 Werk deze stappen op volgorde af:
 
 1. Maak een lijst van elke interne dienst, elk marketingplatform, elke supportdesk en elke transactionele tool die e-mail met je domein verstuurt.
-2. Publiceer één samengevoegd [SPF-record](/glossary/spf) met de toegestane verzendservers, en houd het totaal aantal lookups onder 10. De [SPF-checker](/spf-checker) (in het Engels) telt ze voor je.
+2. Publiceer één samengevoegd [SPF-record](/glossary/spf) met de toegestane verzendservers, en houd het totaal aantal lookups onder 10. De [SPF-checker](/spf-checker) telt ze voor je.
 3. Zet eigen DKIM-ondertekening met je eigen domein aan voor elk verzendplatform en publiceer de bijbehorende selectorrecords in DNS.
 4. Zorg dat je verzendende IP-adressen een geldige forward DNS hebben en een overeenkomend [PTR-record](/glossary/ptr-record) in reverse DNS.
 5. Publiceer een eerste [DMARC-record](/blog/what-is-a-dmarc-record) op `_dmarc` met `p=none` en een actieve `rua`-mailbox, zodat je geaggregeerde XML-rapporten gaat ontvangen.

@@ -150,16 +150,16 @@ Untuk memperbaiki alamat yang ditolak formulir:
 - Periksa ejaannya, terutama domain. Daftar kesalahan umum milik Google sendiri mencakup salah ketik seperti gmal.con, spasi yang tidak sengaja, dan titik di bagian akhir ([Google](https://support.google.com/mail/answer/6596)).
 - Hapus spasi atau tanda kutip yang tidak sengaja ikut tersalin.
 - Jika Anda memakai alamat plus dan formulir menolaknya, pakai alamat biasa Anda.
-- Jika alamatnya terlihat benar, jalankan [MX lookup](/mx-lookup) (dalam bahasa Inggris) pada domainnya untuk melihat apakah domain itu bisa menerima email.
+- Jika alamatnya terlihat benar, jalankan [MX lookup](/mx-lookup) pada domainnya untuk melihat apakah domain itu bisa menerima email.
 - Untuk mengetahui apakah mailbox-nya sendiri ada, pakai [email checker](/email-checker). Alat ini mengecek alamat tanpa mengirim email.
 
 ## Cara mendapatkan alamat email profesional
 
 Anda punya dua pilihan.
 
-Pilihan yang cepat adalah akun gratis di penyedia seperti Gmail, Outlook.com, atau Proton Mail. Gratis dan bisa dipakai di mana saja. [Daftar penyedia email gratis](/free-email-providers) (dalam bahasa Inggris) kami membandingkan apa yang diberikan setiap penyedia.
+Pilihan yang cepat adalah akun gratis di penyedia seperti Gmail, Outlook.com, atau Proton Mail. Gratis dan bisa dipakai di mana saja. [Daftar penyedia email gratis](/free-email-providers) kami membandingkan apa yang diberikan setiap penyedia.
 
-Pilihan lainnya adalah alamat di domain Anda sendiri, seperti jane@yourbusiness.com. Anda membutuhkan tiga hal. Pertama, domain yang terdaftar. Kedua, layanan hosting email seperti Google Workspace atau Microsoft 365. Ketiga, MX record yang mengarahkan domain Anda ke layanan hosting itu. Penyedia hosting Anda akan memberikan record persis yang perlu ditambahkan ([Google](https://knowledge.workspace.google.com/admin/domains/set-up-mx-records-for-google-workspace)). Setelah semuanya diatur, Anda bisa memeriksa record itu dengan [MX lookup](/mx-lookup) (dalam bahasa Inggris).
+Pilihan lainnya adalah alamat di domain Anda sendiri, seperti jane@yourbusiness.com. Anda membutuhkan tiga hal. Pertama, domain yang terdaftar. Kedua, layanan hosting email seperti Google Workspace atau Microsoft 365. Ketiga, MX record yang mengarahkan domain Anda ke layanan hosting itu. Penyedia hosting Anda akan memberikan record persis yang perlu ditambahkan ([Google](https://knowledge.workspace.google.com/admin/domains/set-up-mx-records-for-google-workspace)). Setelah semuanya diatur, Anda bisa memeriksa record itu dengan [MX lookup](/mx-lookup).
 
 Pilih dengan hati-hati, karena sebagian alamat sulit diubah nanti. Gmail mengizinkan Anda pindah ke alamat gmail.com baru sampai tiga kali, sekali setiap 12 bulan ([Google](https://support.google.com/accounts/answer/19870)). Yahoo sama sekali tidak mengizinkan Anda mengubah alamat ([Yahoo](https://help.yahoo.com/kb/yahoo-email-address-sln2059.html)).
 

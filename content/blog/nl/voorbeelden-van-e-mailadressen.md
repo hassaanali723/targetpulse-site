@@ -150,16 +150,16 @@ Wat je doet als een formulier een adres niet accepteert:
 - Controleer de spelling, vooral van het domein. De eigen lijst van Google met veelgemaakte fouten noemt typfouten als gmal.con, losse spaties en een punt aan het eind ([Google](https://support.google.com/mail/answer/6596)).
 - Verwijder spaties of aanhalingstekens die je per ongeluk hebt meegekopieerd.
 - Gebruikte je een plusadres en weigert het formulier het, gebruik dan je gewone adres.
-- Ziet het adres er goed uit, doe dan een [MX-lookup](/mx-lookup) (in het Engels) op het domein om te zien of het überhaupt mail kan ontvangen.
+- Ziet het adres er goed uit, doe dan een [MX-lookup](/mx-lookup) op het domein om te zien of het überhaupt mail kan ontvangen.
 - Wil je weten of de mailbox zelf bestaat, gebruik dan de [email checker](/email-checker). Die controleert het adres zonder een e-mail te versturen.
 
 ## Zo kom je aan een zakelijk e-mailadres
 
 Je hebt twee opties.
 
-De snelle optie is een gratis account bij een provider zoals Gmail, Outlook.com of Proton Mail. Het kost niets en werkt overal. Onze [lijst met gratis e-mailproviders](/free-email-providers) (in het Engels) vergelijkt wat elke provider je biedt.
+De snelle optie is een gratis account bij een provider zoals Gmail, Outlook.com of Proton Mail. Het kost niets en werkt overal. Onze [lijst met gratis e-mailproviders](/free-email-providers) vergelijkt wat elke provider je biedt.
 
-De andere optie is een adres op je eigen domein, zoals jane@yourbusiness.com. Daarvoor heb je drie dingen nodig. Ten eerste een geregistreerd domein. Ten tweede een e-mailhost zoals Google Workspace of Microsoft 365. Ten derde MX-records die je domein naar die host laten wijzen. Je host geeft je de exacte records die je moet toevoegen ([Google](https://knowledge.workspace.google.com/admin/domains/set-up-mx-records-for-google-workspace)). Is alles ingesteld, dan kun je de records controleren met de [MX-lookup](/mx-lookup) (in het Engels).
+De andere optie is een adres op je eigen domein, zoals jane@yourbusiness.com. Daarvoor heb je drie dingen nodig. Ten eerste een geregistreerd domein. Ten tweede een e-mailhost zoals Google Workspace of Microsoft 365. Ten derde MX-records die je domein naar die host laten wijzen. Je host geeft je de exacte records die je moet toevoegen ([Google](https://knowledge.workspace.google.com/admin/domains/set-up-mx-records-for-google-workspace)). Is alles ingesteld, dan kun je de records controleren met de [MX-lookup](/mx-lookup).
 
 Kies zorgvuldig, want sommige adressen zijn later lastig te wijzigen. Gmail laat je tot drie keer overstappen naar een nieuw gmail.com-adres, één keer per 12 maanden ([Google](https://support.google.com/accounts/answer/19870)). Yahoo laat je je adres helemaal niet wijzigen ([Yahoo](https://help.yahoo.com/kb/yahoo-email-address-sln2059.html)).
 

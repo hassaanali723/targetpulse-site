@@ -48,7 +48,7 @@ Warto rozdzielić dwie liczby, które często się myli. Odbicie to wiadomość,
 
 ## Jak sprawdzić własny współczynnik odbić
 
-Każde narzędzie do wysyłki pokazuje tę liczbę. W większości narzędzi do wysyłki i cold outreachu znajdziesz ją w podsumowaniu kampanii jako procent odbić. Liczy się go jako liczbę odbitych wiadomości podzieloną przez liczbę wysłanych. [Kalkulator współczynnika odbić](/bounce-rate-calculator) (po angielsku) policzy to za ciebie i oddzieli twarde odbicia od miękkich. Jeśli twoje narzędzie rozdziela twarde i miękkie odbicia, najpierw spójrz na twarde, bo to one zależą od jakości listy. Jeśli pokazuje tylko jedną łączną liczbę, potraktuj nagły skok jako powód, by się zatrzymać i sprawdzić listę przed kolejną wysyłką.
+Każde narzędzie do wysyłki pokazuje tę liczbę. W większości narzędzi do wysyłki i cold outreachu znajdziesz ją w podsumowaniu kampanii jako procent odbić. Liczy się go jako liczbę odbitych wiadomości podzieloną przez liczbę wysłanych. [Kalkulator współczynnika odbić](/bounce-rate-calculator) policzy to za ciebie i oddzieli twarde odbicia od miękkich. Jeśli twoje narzędzie rozdziela twarde i miękkie odbicia, najpierw spójrz na twarde, bo to one zależą od jakości listy. Jeśli pokazuje tylko jedną łączną liczbę, potraktuj nagły skok jako powód, by się zatrzymać i sprawdzić listę przed kolejną wysyłką.
 
 Pierwszą wysyłkę nowej listy sprawdzaj osobno od bieżącej średniej. Świeża, niezweryfikowana lista pokazuje swój prawdziwy współczynnik odbić w pierwszej kampanii, zanim martwe adresy zostaną usunięte. To ta liczba mówi ci, czy lista była coś warta. Twoja bieżąca średnia z rozgrzanych, wyczyszczonych list zawsze wygląda lepiej. Może ukryć zły import, dopóki ten nie narobi szkód.
 

@@ -157,7 +157,7 @@ Per sistemare un indirizzo che un modulo non accetta:
 
 Hai due possibilità.
 
-La più rapida è un account gratuito con un provider come Gmail, Outlook.com o Proton Mail. Non costa niente e funziona ovunque. La nostra [lista di provider email gratuiti](/free-email-providers) (in inglese) confronta cosa offre ciascuno.
+La più rapida è un account gratuito con un provider come Gmail, Outlook.com o Proton Mail. Non costa niente e funziona ovunque. La nostra [lista di provider email gratuiti](/free-email-providers) confronta cosa offre ciascuno.
 
 L'altra è un indirizzo sul tuo dominio, come jane@yourbusiness.com. Ti servono tre cose. Primo, un dominio registrato. Secondo, un servizio di posta come Google Workspace o Microsoft 365. Terzo, record MX che puntano il tuo dominio a quel servizio. Il servizio ti indica i record esatti da aggiungere ([Google](https://knowledge.workspace.google.com/admin/domains/set-up-mx-records-for-google-workspace)). Una volta configurato, puoi controllare i record con la [ricerca record MX](/mx-lookup).
 

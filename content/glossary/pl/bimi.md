@@ -70,10 +70,10 @@ Skrzynki, które nie obsługują BIMI, nie pokazują niczego innego niż zwykle.
 ## Jak skonfigurować BIMI
 
 1. Skonfiguruj SPF i DKIM dla każdej usługi, która wysyła twoje e-maile.
-2. Zmień politykę DMARC na quarantine lub reject. Nasz [generator DMARC](/dmarc-generator) (po angielsku) tworzy rekord.
+2. Zmień politykę DMARC na quarantine lub reject. Nasz [generator DMARC](/dmarc-generator) tworzy rekord.
 3. Zapisz logo jako plik SVG Tiny PS.
 4. Kup certyfikat VMC lub CMC, jeśli chcesz, żeby logo pojawiało się w Gmailu.
-5. Utwórz rekord BIMI w naszym [generatorze BIMI](/bimi-generator) (po angielsku). Sprawdza on też twój plik SVG w przeglądarce.
+5. Utwórz rekord BIMI w naszym [generatorze BIMI](/bimi-generator). Sprawdza on też twój plik SVG w przeglądarce.
 6. Opublikuj rekord pod `default._bimi` w swoim DNS.
 7. Wyślij testowy e-mail na konto Gmail i sprawdź, czy logo się pojawia.
 

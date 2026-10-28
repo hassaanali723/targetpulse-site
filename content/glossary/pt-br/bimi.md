@@ -87,7 +87,7 @@ Um provedor pode levar algum tempo para começar a mostrar um registro novo.
 4. Hospede o SVG e o certificado em endereços HTTPS.
 5. Publique o registro TXT em `default._bimi.seudominio`.
 
-O nosso [gerador de BIMI](/bimi-generator) (em inglês) monta o registro e confere o seu SVG com as regras do Tiny PS, no seu navegador.
+O nosso [gerador de BIMI](/bimi-generator) monta o registro e confere o seu SVG com as regras do Tiny PS, no seu navegador.
 
 O BIMI não melhora a entrega diretamente. Ele só mostra um logo em e-mails que já passam no DMARC. O trabalho de configurar SPF, DKIM e DMARC corretamente é o que ajuda o seu e-mail a chegar.
 

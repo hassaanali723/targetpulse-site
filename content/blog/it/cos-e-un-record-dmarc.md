@@ -157,7 +157,7 @@ Lo standard del 2026 ha ritirato tre tag più vecchi. Sono il tag della percentu
 - Lascia stare `psd`. Ti serve solo se gestisci una grande organizzazione che assegna parti del suo DNS (`psd=n`), o un suffisso pubblico come `co.uk` (`psd=y`).
 - La corrispondenza rilassata (`adkim=r` e `aspf=r`) è quella predefinita e funziona per quasi tutti i domini. Ti servono i tag di allineamento solo se regole di conformità rigide vietano di firmare con un sottodominio.
 
-Puoi creare un record con questi tag, o sistemarne uno vecchio, con il nostro [generatore DMARC](/dmarc-generator) (in inglese).
+Puoi creare un record con questi tag, o sistemarne uno vecchio, con il nostro [generatore DMARC](/dmarc-generator).
 
 ## Cosa fanno davvero p=none, quarantine e reject
 

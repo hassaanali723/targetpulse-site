@@ -16,7 +16,7 @@ Karena itu, langkah di sini diurutkan menurut manfaat nyatanya, bukan menurut se
 
 ## Apa itu bounce rate email?
 
-Bounce rate email (tingkat bounce) adalah bagian pesan dalam satu pengiriman yang kembali tanpa terkirim. Bounce berarti email ditolak dan dikembalikan ke pengirim. Anda membagi jumlah pesan yang bounce dengan jumlah pesan yang dikirim, lalu menyatakannya dalam persen. Jika Anda mengirim 10.000 dan 250 kembali, bounce rate Anda 2,5 persen. [Bounce rate calculator](/bounce-rate-calculator) (dalam bahasa Inggris) menghitungnya dari angka Anda sendiri. Sebagian besar alat menampilkannya per kampanye dan membaginya menjadi hard bounce (alamat atau domain tidak ada) dan soft bounce (kotak masuk penuh, server sibuk, blokir sementara). Penyedia layanan email paling memperhatikan porsi hard bounce. Itu tanda paling jelas dari daftar yang tidak pernah diverifikasi.
+Bounce rate email (tingkat bounce) adalah bagian pesan dalam satu pengiriman yang kembali tanpa terkirim. Bounce berarti email ditolak dan dikembalikan ke pengirim. Anda membagi jumlah pesan yang bounce dengan jumlah pesan yang dikirim, lalu menyatakannya dalam persen. Jika Anda mengirim 10.000 dan 250 kembali, bounce rate Anda 2,5 persen. [Bounce rate calculator](/bounce-rate-calculator) menghitungnya dari angka Anda sendiri. Sebagian besar alat menampilkannya per kampanye dan membaginya menjadi hard bounce (alamat atau domain tidak ada) dan soft bounce (kotak masuk penuh, server sibuk, blokir sementara). Penyedia layanan email paling memperhatikan porsi hard bounce. Itu tanda paling jelas dari daftar yang tidak pernah diverifikasi.
 
 ## Patokan bounce rate
 

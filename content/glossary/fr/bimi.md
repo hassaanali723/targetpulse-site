@@ -71,7 +71,7 @@ Si votre logo ne s’affiche pas, les causes les plus fréquentes sont connues. 
 4. Mettez le logo et le certificat en ligne à des adresses HTTPS.
 5. Publiez l’enregistrement TXT à `default._bimi` sur votre domaine.
 
-Notre [générateur BIMI](/bimi-generator) (en anglais) crée l’enregistrement. Il vérifie aussi votre logo SVG dans votre navigateur, avant que vous achetiez un certificat.
+Notre [générateur BIMI](/bimi-generator) crée l’enregistrement. Il vérifie aussi votre logo SVG dans votre navigateur, avant que vous achetiez un certificat.
 
 ## BIMI et vérification d’email
 

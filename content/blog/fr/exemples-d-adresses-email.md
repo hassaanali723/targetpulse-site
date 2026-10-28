@@ -150,16 +150,16 @@ Pour corriger une adresse qu'un formulaire refuse :
 - Vérifiez l'orthographe, surtout celle du domaine. La liste d'erreurs courantes de Google comprend des fautes comme gmal.con, des espaces en trop et un point à la fin ([Google](https://support.google.com/mail/answer/6596)).
 - Retirez les espaces ou les guillemets copiés par erreur.
 - Si vous avez utilisé une adresse avec un plus et que le formulaire la refuse, utilisez votre adresse simple.
-- Si l'adresse semble correcte, faites une [recherche MX](/mx-lookup) (en anglais) sur le domaine pour voir s'il peut recevoir du courrier.
+- Si l'adresse semble correcte, faites une [recherche MX](/mx-lookup) sur le domaine pour voir s'il peut recevoir du courrier.
 - Pour savoir si la boîte elle-même existe, utilisez le [vérificateur d'adresse mail](/email-checker). Il vérifie l'adresse sans envoyer d'email.
 
 ## Comment obtenir une adresse email professionnelle
 
 Vous avez deux options.
 
-La plus rapide est un compte gratuit chez un fournisseur comme Gmail, Outlook.com ou Proton Mail. Il ne coûte rien et fonctionne partout. Notre [liste des fournisseurs d'email gratuits](/free-email-providers) (en anglais) compare ce que chacun propose.
+La plus rapide est un compte gratuit chez un fournisseur comme Gmail, Outlook.com ou Proton Mail. Il ne coûte rien et fonctionne partout. Notre [liste des fournisseurs d'email gratuits](/free-email-providers) compare ce que chacun propose.
 
-L'autre option est une adresse sur votre propre domaine, comme jane@votreentreprise.com. Il vous faut trois choses. D'abord, un domaine enregistré. Ensuite, un hébergeur de messagerie comme Google Workspace ou Microsoft 365. Enfin, des enregistrements MX qui font pointer votre domaine vers cet hébergeur. Votre hébergeur vous donne les enregistrements exacts à ajouter ([Google](https://knowledge.workspace.google.com/admin/domains/set-up-mx-records-for-google-workspace)). Une fois la configuration faite, vous pouvez contrôler les enregistrements avec la [recherche MX](/mx-lookup) (en anglais).
+L'autre option est une adresse sur votre propre domaine, comme jane@votreentreprise.com. Il vous faut trois choses. D'abord, un domaine enregistré. Ensuite, un hébergeur de messagerie comme Google Workspace ou Microsoft 365. Enfin, des enregistrements MX qui font pointer votre domaine vers cet hébergeur. Votre hébergeur vous donne les enregistrements exacts à ajouter ([Google](https://knowledge.workspace.google.com/admin/domains/set-up-mx-records-for-google-workspace)). Une fois la configuration faite, vous pouvez contrôler les enregistrements avec la [recherche MX](/mx-lookup).
 
 Choisissez avec soin, parce que certaines adresses sont difficiles à changer ensuite. Gmail vous permet de passer à une nouvelle adresse gmail.com jusqu'à trois fois, une fois tous les 12 mois ([Google](https://support.google.com/accounts/answer/19870)). Yahoo ne vous permet pas du tout de changer d'adresse ([Yahoo](https://help.yahoo.com/kb/yahoo-email-address-sln2059.html)).
 

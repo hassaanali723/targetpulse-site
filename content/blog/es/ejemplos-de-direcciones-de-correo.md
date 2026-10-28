@@ -150,7 +150,7 @@ Para arreglar una dirección que un formulario no acepta:
 - Revisa la ortografía, sobre todo la del dominio. La propia lista de errores comunes de Google incluye erratas como gmal.con, espacios sueltos y un punto al final ([Google](https://support.google.com/mail/answer/6596)).
 - Quita los espacios o las comillas que copiaste sin querer.
 - Si usaste una dirección con signo más y el formulario la rechaza, usa tu dirección simple.
-- Si la dirección parece correcta, haz una [consulta MX](/mx-lookup) (en inglés) del dominio para ver si puede recibir correo.
+- Si la dirección parece correcta, haz una [consulta MX](/mx-lookup) del dominio para ver si puede recibir correo.
 - Para saber si el buzón existe, usa el [validador de correo](/email-checker). Comprueba la dirección sin enviar ningún correo.
 
 ## Cómo conseguir una dirección de correo profesional
@@ -159,7 +159,7 @@ Tienes dos opciones.
 
 La rápida es una cuenta gratis con un proveedor como Gmail, Outlook.com o Proton Mail. No cuesta nada y funciona en todas partes. Nuestra [lista de proveedores de correo gratis](/free-email-providers) compara lo que ofrece cada uno.
 
-La otra es una dirección en tu propio dominio, como jane@yourbusiness.com. Necesitas tres cosas. Primero, un dominio registrado. Segundo, un servicio de correo como Google Workspace o Microsoft 365. Tercero, registros MX que apunten tu dominio a ese servicio. Tu proveedor te da los registros exactos que debes añadir ([Google](https://knowledge.workspace.google.com/admin/domains/set-up-mx-records-for-google-workspace)). Cuando esté configurado, puedes comprobar los registros con la [consulta MX](/mx-lookup) (en inglés).
+La otra es una dirección en tu propio dominio, como jane@yourbusiness.com. Necesitas tres cosas. Primero, un dominio registrado. Segundo, un servicio de correo como Google Workspace o Microsoft 365. Tercero, registros MX que apunten tu dominio a ese servicio. Tu proveedor te da los registros exactos que debes añadir ([Google](https://knowledge.workspace.google.com/admin/domains/set-up-mx-records-for-google-workspace)). Cuando esté configurado, puedes comprobar los registros con la [consulta MX](/mx-lookup).
 
 Elige con cuidado, porque algunas direcciones son difíciles de cambiar después. Gmail te deja cambiar a una nueva dirección gmail.com hasta tres veces, una vez cada 12 meses ([Google](https://support.google.com/accounts/answer/19870)). Yahoo no te deja cambiar tu dirección ([Yahoo](https://help.yahoo.com/kb/yahoo-email-address-sln2059.html)).
 

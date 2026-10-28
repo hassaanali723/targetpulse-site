@@ -67,7 +67,7 @@ Un registro de clave pública DKIM en el DNS tiene esta forma:
 v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA...
 ```
 
-La etiqueta `v=DKIM1` indica la versión del protocolo, `k=rsa` identifica el algoritmo de la clave y `p=` contiene la clave pública codificada en base64. Si gestionas tu propio servidor de correo, puedes crear un par de claves con nuestro [generador de DKIM](/dkim-generator) (en inglés).
+La etiqueta `v=DKIM1` indica la versión del protocolo, `k=rsa` identifica el algoritmo de la clave y `p=` contiene la clave pública codificada en base64. Si gestionas tu propio servidor de correo, puedes crear un par de claves con nuestro [generador de DKIM](/dkim-generator).
 
 Un error frecuente ocurre cuando los remitentes confían en la firma por defecto de la plataforma. Muchas plataformas de correo firman el correo saliente con su propio dominio compartido por defecto (`d=shared-esp.example`). La firma pasa, pero el dominio que firma no coincide con tu dominio From visible, y la alineación DMARC falla. Tienes que configurar un DKIM personalizado en los ajustes de tu plataforma, para que la firma use tu dominio en la etiqueta `d=`.
 
@@ -95,7 +95,7 @@ La etiqueta rua indica a los receptores a dónde enviar los informes agregados. 
 _dmarc.example.com TXT "v=DMARC1; p=none; rua=mailto:dmarc@example.com"
 ```
 
-En mayo de 2026, la Internet Engineering Task Force publicó la RFC 9989 en el Standards Track, junto con la RFC 9990 para los informes agregados y la RFC 9991 para los informes de fallos. Estos nuevos estándares dejan obsoletas de forma oficial la RFC 7489 y la RFC 9091. Los registros que ya empiezan por `v=DMARC1` siguen funcionando, pero la especificación actualizada cambia varias etiquetas. La etiqueta de porcentaje (`pct`) y la etiqueta de formato de informe (`rf`) se retiran y ya no forman parte del estándar. La etiqueta de intervalo de informes (`ri`) pasa a ser histórica. Los remitentes que prueban la implantación de una política ahora usan la nueva etiqueta `t` para el modo de prueba. Y los administradores pueden definir políticas para subdominios que no existen con la etiqueta `np`. Si tu registro DNS actual tiene una etiqueta de porcentaje, prevé quitarla. Puedes crear un registro actualizado o limpiar las etiquetas antiguas con nuestro [generador de DMARC](/dmarc-generator) (en inglés).
+En mayo de 2026, la Internet Engineering Task Force publicó la RFC 9989 en el Standards Track, junto con la RFC 9990 para los informes agregados y la RFC 9991 para los informes de fallos. Estos nuevos estándares dejan obsoletas de forma oficial la RFC 7489 y la RFC 9091. Los registros que ya empiezan por `v=DMARC1` siguen funcionando, pero la especificación actualizada cambia varias etiquetas. La etiqueta de porcentaje (`pct`) y la etiqueta de formato de informe (`rf`) se retiran y ya no forman parte del estándar. La etiqueta de intervalo de informes (`ri`) pasa a ser histórica. Los remitentes que prueban la implantación de una política ahora usan la nueva etiqueta `t` para el modo de prueba. Y los administradores pueden definir políticas para subdominios que no existen con la etiqueta `np`. Si tu registro DNS actual tiene una etiqueta de porcentaje, prevé quitarla. Puedes crear un registro actualizado o limpiar las etiquetas antiguas con nuestro [generador de DMARC](/dmarc-generator).
 
 ## Cómo comprueba un mensaje el servidor de destino
 
@@ -132,7 +132,7 @@ Dejar DMARC en `p=none` para siempre deja tu dominio expuesto a la suplantación
 Sigue estos pasos en orden:
 
 1. Haz una lista de todos los servicios internos, plataformas de marketing, servicios de soporte y herramientas transaccionales que envían correo con tu dominio.
-2. Publica un único [registro SPF](/glossary/spf) que incluya los servidores de envío autorizados, con menos de 10 consultas en total. El [comprobador de SPF](/spf-checker) (en inglés) las cuenta por ti.
+2. Publica un único [registro SPF](/glossary/spf) que incluya los servidores de envío autorizados, con menos de 10 consultas en total. El [comprobador de SPF](/spf-checker) las cuenta por ti.
 3. Activa la firma DKIM personalizada con tu propio dominio en cada plataforma de envío y publica en el DNS los registros del selector que correspondan.
 4. Asegúrate de que tus direcciones IP de envío tienen un DNS directo válido y un [registro PTR](/glossary/ptr-record) que coincida en el DNS inverso.
 5. Publica un primer [registro DMARC](/blog/what-is-a-dmarc-record) en `_dmarc` con `p=none` y un buzón `rua` activo para empezar a recibir informes XML agregados.
