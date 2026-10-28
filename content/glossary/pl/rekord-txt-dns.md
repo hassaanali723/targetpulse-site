@@ -55,7 +55,7 @@ Większość problemów z rekordami TXT wynika z kilku prostych błędów.
 
 Możesz odczytać rekordy TXT każdej domeny. Na komputerze z systemem macOS lub Linux otwórz terminal i wpisz `dig TXT example.com`. W systemie Windows wpisz `nslookup -type=TXT example.com`.
 
-Możesz też użyć naszego narzędzia [SPF checker](/spf-checker) (po angielsku). Odczytuje rekord SPF domeny i wyjaśnia, na co pozwala.
+Możesz też użyć naszego narzędzia [SPF checker](/spf-checker). Odczytuje rekord SPF domeny i wyjaśnia, na co pozwala.
 
 ## Rekordy TXT a weryfikacja
 

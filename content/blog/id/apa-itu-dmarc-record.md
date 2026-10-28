@@ -157,7 +157,7 @@ Tiga tag lama dihapus dalam standar 2026. Ketiganya adalah tag persentase (`pct`
 - Biarkan `psd`. Anda hanya membutuhkannya jika menjalankan organisasi besar yang membagikan sebagian DNS-nya (`psd=n`), atau public suffix seperti `co.uk` (`psd=y`).
 - Kecocokan relaxed (`adkim=r` dan `aspf=r`) adalah default dan berfungsi untuk hampir semua domain. Anda hanya butuh tag alignment jika aturan kepatuhan yang ketat melarang penandatanganan dengan subdomain.
 
-Anda bisa membuat record dengan tag-tag ini, atau merapikan record lama, dengan [DMARC generator](/dmarc-generator) (dalam bahasa Inggris) kami.
+Anda bisa membuat record dengan tag-tag ini, atau merapikan record lama, dengan [DMARC generator](/dmarc-generator) kami.
 
 ## Apa yang sebenarnya dilakukan p=none, quarantine dan reject
 

@@ -67,7 +67,7 @@ Rekord klucza publicznego DKIM w DNS ma taką postać:
 v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA...
 ```
 
-Tag `v=DKIM1` określa wersję protokołu, `k=rsa` wskazuje algorytm klucza, a `p=` zawiera klucz publiczny zakodowany w base64. Jeśli prowadzisz własny serwer pocztowy, możesz utworzyć parę kluczy w naszym [generatorze DKIM](/dkim-generator) (po angielsku).
+Tag `v=DKIM1` określa wersję protokołu, `k=rsa` wskazuje algorytm klucza, a `p=` zawiera klucz publiczny zakodowany w base64. Jeśli prowadzisz własny serwer pocztowy, możesz utworzyć parę kluczy w naszym [generatorze DKIM](/dkim-generator).
 
 Częsta pułapka pojawia się, gdy nadawcy polegają na domyślnym podpisie platformy. Wiele platform mailingowych domyślnie podpisuje pocztę własną, wspólną domeną (`d=shared-esp.example`). Podpis przechodzi, ale domena podpisująca nie pasuje do twojej widocznej domeny From, więc wyrównanie DMARC nie przechodzi. W ustawieniach platformy trzeba skonfigurować własny DKIM, żeby podpis zawierał twoją domenę w tagu `d=`.
 
@@ -95,7 +95,7 @@ Tag rua mówi odbiorcom, dokąd wysyłać raporty zbiorcze. Są to zwykle codzie
 _dmarc.example.com TXT "v=DMARC1; p=none; rua=mailto:dmarc@example.com"
 ```
 
-W maju 2026 roku Internet Engineering Task Force opublikowała RFC 9989 na ścieżce standardów (Standards Track), razem z RFC 9990 o raportach zbiorczych i RFC 9991 o raportach o błędach. Nowe standardy oficjalnie zastępują RFC 7489 i RFC 9091. Istniejące rekordy zaczynające się od `v=DMARC1` nadal działają, ale zaktualizowana specyfikacja zmienia kilka tagów. Tag procentowy (`pct`) i tag formatu raportu (`rf`) zostały wycofane i nie są już częścią standardu, a tag interwału raportów (`ri`) ma status historyczny. Nadawcy, którzy testują wdrożenie polityki, używają teraz nowego tagu `t` dla trybu testowego. Administratorzy mogą też określić politykę dla nieistniejących subdomen tagiem `np`. Jeśli twój obecny rekord DNS zawiera tag procentowy, zaplanuj jego usunięcie. Nowy rekord zbudujesz albo stare tagi usuniesz w naszym [generatorze DMARC](/dmarc-generator) (po angielsku).
+W maju 2026 roku Internet Engineering Task Force opublikowała RFC 9989 na ścieżce standardów (Standards Track), razem z RFC 9990 o raportach zbiorczych i RFC 9991 o raportach o błędach. Nowe standardy oficjalnie zastępują RFC 7489 i RFC 9091. Istniejące rekordy zaczynające się od `v=DMARC1` nadal działają, ale zaktualizowana specyfikacja zmienia kilka tagów. Tag procentowy (`pct`) i tag formatu raportu (`rf`) zostały wycofane i nie są już częścią standardu, a tag interwału raportów (`ri`) ma status historyczny. Nadawcy, którzy testują wdrożenie polityki, używają teraz nowego tagu `t` dla trybu testowego. Administratorzy mogą też określić politykę dla nieistniejących subdomen tagiem `np`. Jeśli twój obecny rekord DNS zawiera tag procentowy, zaplanuj jego usunięcie. Nowy rekord zbudujesz albo stare tagi usuniesz w naszym [generatorze DMARC](/dmarc-generator).
 
 ## Jak serwer odbiorczy sprawdza wiadomość
 
@@ -132,7 +132,7 @@ Zostawienie DMARC na stałe z `p=none` naraża twoją domenę na podszywanie si�
 Przejdź przez te kroki po kolei:
 
 1. Wypisz każdą wewnętrzną usługę, platformę marketingową, system obsługi klienta i narzędzie transakcyjne, które wysyła pocztę z użyciem twojej domeny.
-2. Opublikuj jeden wspólny [rekord SPF](/glossary/spf) obejmujący dopuszczone serwery wysyłkowe i utrzymaj łączną liczbę zapytań poniżej 10. [Narzędzie do sprawdzania SPF](/spf-checker) (po angielsku) policzy je za ciebie.
+2. Opublikuj jeden wspólny [rekord SPF](/glossary/spf) obejmujący dopuszczone serwery wysyłkowe i utrzymaj łączną liczbę zapytań poniżej 10. [Narzędzie do sprawdzania SPF](/spf-checker) policzy je za ciebie.
 3. Włącz na każdej platformie wysyłkowej podpisywanie DKIM własną domeną i opublikuj w DNS odpowiednie rekordy selektora.
 4. Upewnij się, że adresy IP wysyłki mają prawidłowy DNS prosty i pasujący [rekord PTR](/glossary/ptr-record) w odwrotnym DNS.
 5. Opublikuj pierwszy [rekord DMARC](/blog/what-is-a-dmarc-record) pod `_dmarc` z `p=none` i działającą skrzynką `rua`, żeby zacząć dostawać zbiorcze raporty XML.

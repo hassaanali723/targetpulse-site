@@ -157,7 +157,7 @@ Três tags antigas foram aposentadas no padrão de 2026. São a tag de porcentag
 - Não mexa em `psd`. Você só precisa dela se administra uma grande organização que delega partes do seu DNS (`psd=n`), ou um sufixo público como `co.uk` (`psd=y`).
 - A correspondência relaxada (`adkim=r` e `aspf=r`) é o padrão e funciona para quase todos os domínios. Você só precisa das tags de alinhamento se regras rígidas de conformidade proibirem assinar com um subdomínio.
 
-Você pode montar um registro com essas tags, ou limpar um registro antigo, com o nosso [gerador de DMARC](/dmarc-generator) (em inglês).
+Você pode montar um registro com essas tags, ou limpar um registro antigo, com o nosso [gerador de DMARC](/dmarc-generator).
 
 ## O que p=none, quarantine e reject fazem de fato
 

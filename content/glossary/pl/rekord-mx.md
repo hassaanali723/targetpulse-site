@@ -64,7 +64,7 @@ Wyszukanie rekordu MX może dać trzy wyniki:
 
 ## Dlaczego to ma znaczenie dla nadawców
 
-Każdy może odczytać rekord MX domeny przez zapytanie DNS. Nasze bezpłatne narzędzie [MX lookup](/mx-lookup) (po angielsku) pokazuje rekordy MX dowolnej domeny. Gdy firma zmienia dostawcę poczty lub kończy działalność, jej rekordy MX się zmieniają albo znikają. Adresy przestają działać. Nikt ci o tym nie mówi. To częsta przyczyna [twardych odbić (hard bounce)](/glossary/hard-bounce) na starych listach. Twarde odbicie to e-mail odrzucony na stałe.
+Każdy może odczytać rekord MX domeny przez zapytanie DNS. Nasze bezpłatne narzędzie [MX lookup](/mx-lookup) pokazuje rekordy MX dowolnej domeny. Gdy firma zmienia dostawcę poczty lub kończy działalność, jej rekordy MX się zmieniają albo znikają. Adresy przestają działać. Nikt ci o tym nie mówi. To częsta przyczyna [twardych odbić (hard bounce)](/glossary/hard-bounce) na starych listach. Twarde odbicie to e-mail odrzucony na stałe.
 
 **Przykład:** masz 40 kontaktów z old-firm.example, zebranych na targach w 2021 roku. Firma zostaje zamknięta w 2024 roku, a jej domena nie ma już rekordu MX. Każdy e-mail, który wysyłasz do tych 40 kontaktów, zostaje teraz odbity.
 

@@ -70,7 +70,7 @@ Sebagian besar domain menaikkan kebijakannya dalam tiga langkah.
 2. Baca laporannya. Laporan mencantumkan setiap server yang mengirim email atas nama domain Anda. Pastikan setiap layanan asli lolos SPF atau DKIM untuk domain Anda. Alat newsletter dan help desk Anda adalah dua contohnya.
 3. Ubah ke `p=quarantine`. Saat tidak ada email asli yang masuk ke spam, ubah ke `p=reject`.
 
-Standar DMARC menyatakan bahwa membuat semua pengirim asli lolos bisa memakan waktu berbulan-bulan. Layanan yang jarang mengirim, seperti alat penagihan, mudah terlewat. [DMARC generator](/dmarc-generator) (dalam bahasa Inggris) kami membuat record untuk setiap langkah.
+Standar DMARC menyatakan bahwa membuat semua pengirim asli lolos bisa memakan waktu berbulan-bulan. Layanan yang jarang mengirim, seperti alat penagihan, mudah terlewat. [DMARC generator](/dmarc-generator) kami membuat record untuk setiap langkah.
 
 Sebelum memakai `p=reject`, pastikan semua email Anda ditandatangani dengan DKIM. Penerusan email merusak SPF. Kebijakan reject yang hanya bergantung pada SPF bisa memblokir email asli yang diteruskan.
 

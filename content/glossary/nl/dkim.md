@@ -73,7 +73,7 @@ DKIM is ook verplicht voor bulkafzenders. De afzenderrichtlijnen van Google eise
 Hoe je DKIM instelt, hangt af van wie je e-mail verstuurt.
 
 - **Je gebruikt een e-maildienst** zoals Google Workspace, Microsoft 365, Mailchimp of SendGrid. De dienst maakt de sleutel voor je. De dienst toont je het DKIM-record dat je bij je DNS-host toevoegt. Je DNS-host is meestal het bedrijf waar je het domein hebt gekocht.
-- **Je beheert je eigen mailserver.** Je maakt het sleutelpaar zelf. Onze [DKIM-generator](/dkim-generator) (in het Engels) maakt in je browser een sleutelpaar van 2048 bits en het TXT-record. Je installeert de privésleutel op je server en publiceert het record in DNS.
+- **Je beheert je eigen mailserver.** Je maakt het sleutelpaar zelf. Onze [DKIM-generator](/dkim-generator) maakt in je browser een sleutelpaar van 2048 bits en het TXT-record. Je installeert de privésleutel op je server en publiceert het record in DNS.
 
 Controleer één veelvoorkomend probleem. Veel e-maildiensten ondertekenen standaard met hun eigen gedeelde domein. De handtekening slaagt, maar het domein in `d=` is niet van jou, dus DMARC-alignment mislukt. Zet custom DKIM aan in de instellingen van de dienst, zodat `d=` jouw domein toont. De pagina over [DMARC-alignment](/glossary/dmarc-alignment) legt uit waarom dit belangrijk is.
 

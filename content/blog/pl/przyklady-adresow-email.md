@@ -150,16 +150,16 @@ Jak poprawić adres, którego formularz nie przyjmuje:
 - Sprawdź pisownię, zwłaszcza domeny. Lista typowych błędów od Google obejmuje literówki takie jak gmal.con, przypadkowe spacje i kropkę na końcu ([Google](https://support.google.com/mail/answer/6596)).
 - Usuń spacje lub cudzysłowy, które przypadkiem skopiowały się razem z adresem.
 - Jeśli formularz odrzuca adres z plusem, wpisz zwykły adres.
-- Jeśli adres wygląda poprawnie, sprawdź domenę w [narzędziu MX lookup](/mx-lookup) (po angielsku), aby zobaczyć, czy w ogóle może odbierać pocztę.
+- Jeśli adres wygląda poprawnie, sprawdź domenę w [narzędziu MX lookup](/mx-lookup), aby zobaczyć, czy w ogóle może odbierać pocztę.
 - Aby sprawdzić, czy sama skrzynka istnieje, użyj [weryfikatora e-mail](/email-checker). Sprawdza on adres bez wysyłania wiadomości.
 
 ## Jak założyć profesjonalny adres e-mail
 
 Masz dwie możliwości.
 
-Szybsza to darmowe konto u dostawcy takiego jak Gmail, Outlook.com czy Proton Mail. Nic nie kosztuje i działa wszędzie. Nasza [lista darmowych dostawców poczty](/free-email-providers) (po angielsku) porównuje, co daje każdy z nich.
+Szybsza to darmowe konto u dostawcy takiego jak Gmail, Outlook.com czy Proton Mail. Nic nie kosztuje i działa wszędzie. Nasza [lista darmowych dostawców poczty](/free-email-providers) porównuje, co daje każdy z nich.
 
-Druga możliwość to adres we własnej domenie, na przykład jane@yourbusiness.com. Potrzebujesz do tego trzech rzeczy. Po pierwsze, zarejestrowanej domeny. Po drugie, usługi hostingu poczty, takiej jak Google Workspace lub Microsoft 365. Po trzecie, rekordów MX, które kierują twoją domenę do tej usługi. Dostawca poda ci dokładne rekordy do dodania ([Google](https://knowledge.workspace.google.com/admin/domains/set-up-mx-records-for-google-workspace)). Po konfiguracji możesz sprawdzić rekordy w [narzędziu MX lookup](/mx-lookup) (po angielsku).
+Druga możliwość to adres we własnej domenie, na przykład jane@yourbusiness.com. Potrzebujesz do tego trzech rzeczy. Po pierwsze, zarejestrowanej domeny. Po drugie, usługi hostingu poczty, takiej jak Google Workspace lub Microsoft 365. Po trzecie, rekordów MX, które kierują twoją domenę do tej usługi. Dostawca poda ci dokładne rekordy do dodania ([Google](https://knowledge.workspace.google.com/admin/domains/set-up-mx-records-for-google-workspace)). Po konfiguracji możesz sprawdzić rekordy w [narzędziu MX lookup](/mx-lookup).
 
 Wybieraj uważnie, bo niektóre adresy trudno później zmienić. Gmail pozwala zmienić adres na nowy adres gmail.com najwyżej trzy razy, raz na 12 miesięcy ([Google](https://support.google.com/accounts/answer/19870)). Yahoo w ogóle nie pozwala zmienić adresu ([Yahoo](https://help.yahoo.com/kb/yahoo-email-address-sln2059.html)).
 

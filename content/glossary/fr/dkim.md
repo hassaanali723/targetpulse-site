@@ -71,7 +71,7 @@ Il y a deux cas.
 
 **Vous utilisez un service d’e-mail.** Google Workspace, Microsoft 365, Mailchimp ou Brevo créent eux-mêmes la clé. Leur console vous donne le nom et la valeur de l’enregistrement. Vous les copiez dans le DNS de votre domaine, puis vous activez la signature dans le service.
 
-**Vous gérez votre propre serveur d’envoi.** Vous devez créer la paire de clés. Notre [générateur DKIM](/dkim-generator) (en anglais) crée une clé de 2048 bits dans votre navigateur. Il vous donne aussi l’enregistrement TXT à publier. Vous installez ensuite la clé privée dans les réglages de signature de votre serveur, avec le même sélecteur.
+**Vous gérez votre propre serveur d’envoi.** Vous devez créer la paire de clés. Notre [générateur DKIM](/dkim-generator) crée une clé de 2048 bits dans votre navigateur. Il vous donne aussi l’enregistrement TXT à publier. Vous installez ensuite la clé privée dans les réglages de signature de votre serveur, avec le même sélecteur.
 
 ## Comment vérifier que DKIM fonctionne
 

@@ -67,7 +67,7 @@ Record public key DKIM di DNS berbentuk seperti ini:
 v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA...
 ```
 
-Tag `v=DKIM1` menunjukkan versi protokol, `k=rsa` menyebut algoritma key, dan `p=` berisi public key dalam format base64. Jika Anda menjalankan server email sendiri, Anda bisa membuat pasangan key dengan [DKIM generator](/dkim-generator) (dalam bahasa Inggris) kami.
+Tag `v=DKIM1` menunjukkan versi protokol, `k=rsa` menyebut algoritma key, dan `p=` berisi public key dalam format base64. Jika Anda menjalankan server email sendiri, Anda bisa membuat pasangan key dengan [DKIM generator](/dkim-generator) kami.
 
 Jebakan yang sering terjadi adalah mengandalkan tanda tangan bawaan platform. Banyak platform email secara default menandatangani email keluar dengan domain bersama milik mereka sendiri (`d=shared-esp.example`). Tanda tangannya lolos, tetapi domain penanda tangan tidak cocok dengan domain From yang terlihat, sehingga kecocokan DMARC gagal. Anda perlu menyiapkan custom DKIM di pengaturan platform agar tanda tangannya memakai domain Anda di tag `d=`.
 
@@ -95,7 +95,7 @@ Tag rua memberi tahu penerima ke mana laporan agregat dikirim. Biasanya laporan 
 _dmarc.example.com TXT "v=DMARC1; p=none; rua=mailto:dmarc@example.com"
 ```
 
-Pada Mei 2026, Internet Engineering Task Force memublikasikan RFC 9989 di Standards Track, bersama RFC 9990 untuk laporan agregat dan RFC 9991 untuk laporan kegagalan. Standar baru ini secara resmi menggantikan RFC 7489 dan RFC 9091. Record lama yang dimulai dengan `v=DMARC1` tetap berfungsi, tetapi spesifikasi baru mengubah beberapa tag operasional. Tag persentase (`pct`) dan tag format laporan (`rf`) dihapus dan tidak lagi menjadi bagian dari standar. Tag interval laporan (`ri`) diberi status historis. Pengirim yang menguji penerapan kebijakan kini memakai tag baru `t` untuk mode uji. Administrator bisa menetapkan kebijakan untuk subdomain yang tidak ada dengan tag `np`. Jika DNS record Anda saat ini berisi tag persentase, rencanakan untuk menghapusnya. Anda bisa membuat record yang baru atau membersihkan tag lama dengan [DMARC generator](/dmarc-generator) (dalam bahasa Inggris) kami.
+Pada Mei 2026, Internet Engineering Task Force memublikasikan RFC 9989 di Standards Track, bersama RFC 9990 untuk laporan agregat dan RFC 9991 untuk laporan kegagalan. Standar baru ini secara resmi menggantikan RFC 7489 dan RFC 9091. Record lama yang dimulai dengan `v=DMARC1` tetap berfungsi, tetapi spesifikasi baru mengubah beberapa tag operasional. Tag persentase (`pct`) dan tag format laporan (`rf`) dihapus dan tidak lagi menjadi bagian dari standar. Tag interval laporan (`ri`) diberi status historis. Pengirim yang menguji penerapan kebijakan kini memakai tag baru `t` untuk mode uji. Administrator bisa menetapkan kebijakan untuk subdomain yang tidak ada dengan tag `np`. Jika DNS record Anda saat ini berisi tag persentase, rencanakan untuk menghapusnya. Anda bisa membuat record yang baru atau membersihkan tag lama dengan [DMARC generator](/dmarc-generator) kami.
 
 ## Cara server penerima memeriksa pesan
 
@@ -132,7 +132,7 @@ Membiarkan DMARC tetap di `p=none` untuk selamanya membuat domain Anda rentan di
 Kerjakan langkah-langkah ini secara berurutan:
 
 1. Catat setiap layanan internal, platform marketing, helpdesk dan alat transaksional yang mengirim email dengan domain Anda.
-2. Publikasikan satu [SPF record](/glossary/spf) gabungan yang mencakup server pengirim yang diizinkan, dengan total lookup di bawah 10. [SPF checker](/spf-checker) (dalam bahasa Inggris) menghitungnya untuk Anda.
+2. Publikasikan satu [SPF record](/glossary/spf) gabungan yang mencakup server pengirim yang diizinkan, dengan total lookup di bawah 10. [SPF checker](/spf-checker) menghitungnya untuk Anda.
 3. Aktifkan custom DKIM dengan domain Anda sendiri untuk setiap platform pengiriman dan publikasikan record selector yang sesuai di DNS.
 4. Pastikan alamat IP pengirim Anda punya DNS forward yang valid dan [PTR record](/glossary/ptr-record) yang cocok di reverse DNS.
 5. Publikasikan [DMARC record](/blog/what-is-a-dmarc-record) awal di `_dmarc` dengan `p=none` dan kotak masuk `rua` yang aktif untuk mulai menerima laporan agregat XML.

@@ -32,7 +32,7 @@ El final de un correo tiene tres partes separadas, y cada una tiene una función
 2. **La despedida** es la fórmula corta antes de tu nombre, como "Gracias," o "Saludos cordiales,".
 3. **Tu nombre y tu firma** van al final. En un primer correo, añade tu cargo y tu empresa. En una respuesta rápida, basta con tu nombre de pila.
 
-Mantén la firma corta. La antigua guía de normas de cortesía de internet, la [RFC 1855](https://www.rfc-editor.org/rfc/rfc1855), recomendaba no más de 4 líneas, y eso sigue funcionando. Si quieres una firma limpia y uniforme, el [generador de firmas de correo](/email-signature-generator) (en inglés) la crea para Gmail, Outlook y Apple Mail.
+Mantén la firma corta. La antigua guía de normas de cortesía de internet, la [RFC 1855](https://www.rfc-editor.org/rfc/rfc1855), recomendaba no más de 4 líneas, y eso sigue funcionando. Si quieres una firma limpia y uniforme, el [generador de firmas de correo](/email-signature-generator) la crea para Gmail, Outlook y Apple Mail.
 
 ## Despedidas para correos de trabajo: las más comunes
 

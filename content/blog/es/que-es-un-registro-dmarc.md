@@ -157,7 +157,7 @@ El estándar de 2026 retiró tres etiquetas antiguas. Son la etiqueta de porcent
 - No toques `psd`. Solo la necesitas si gestionas una organización grande que reparte partes de su DNS (`psd=n`), o un sufijo público como `co.uk` (`psd=y`).
 - La coincidencia relajada (`adkim=r` y `aspf=r`) es la opción por defecto y funciona para casi todos los dominios. Solo necesitas las etiquetas de alineación si unas normas de cumplimiento estrictas prohíben firmar con un subdominio.
 
-Puedes crear un registro con estas etiquetas, o limpiar uno antiguo, con nuestro [generador de DMARC](/dmarc-generator) (en inglés).
+Puedes crear un registro con estas etiquetas, o limpiar uno antiguo, con nuestro [generador de DMARC](/dmarc-generator).
 
 ## Qué hacen de verdad p=none, quarantine y reject
 

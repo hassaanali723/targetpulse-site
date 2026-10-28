@@ -16,7 +16,7 @@ Ten artykuł układa kroki według tego, ile każdy z nich jest naprawdę wart, 
 
 ## Czym jest współczynnik odbić email?
 
-Współczynnik odbić email to odsetek wiadomości z wysyłki, które wróciły niedoręczone: liczba odbitych wiadomości podzielona przez liczbę wysłanych, wyrażona w procentach. Wysyłasz 10 000 wiadomości, 250 wraca, więc współczynnik odbić wynosi 2,5 procent. [Kalkulator współczynnika odbić](/bounce-rate-calculator) (po angielsku) policzy go z twoich liczb. Większość narzędzi podaje go dla każdej kampanii i dzieli na twarde odbicia (adres albo domena nie istnieje) i miękkie odbicia (pełna skrzynka, zajęty serwer, tymczasowa blokada). Dostawcy skrzynek najuważniej patrzą na udział twardych odbić, bo to najwyraźniejszy znak listy, której nigdy nie zweryfikowano.
+Współczynnik odbić email to odsetek wiadomości z wysyłki, które wróciły niedoręczone: liczba odbitych wiadomości podzielona przez liczbę wysłanych, wyrażona w procentach. Wysyłasz 10 000 wiadomości, 250 wraca, więc współczynnik odbić wynosi 2,5 procent. [Kalkulator współczynnika odbić](/bounce-rate-calculator) policzy go z twoich liczb. Większość narzędzi podaje go dla każdej kampanii i dzieli na twarde odbicia (adres albo domena nie istnieje) i miękkie odbicia (pełna skrzynka, zajęty serwer, tymczasowa blokada). Dostawcy skrzynek najuważniej patrzą na udział twardych odbić, bo to najwyraźniejszy znak listy, której nigdy nie zweryfikowano.
 
 ## Wartości referencyjne współczynnika odbić
 

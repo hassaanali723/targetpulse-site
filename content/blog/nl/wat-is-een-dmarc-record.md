@@ -157,7 +157,7 @@ Drie oudere tags zijn in de standaard van 2026 geschrapt. Dat zijn de percentage
 - Laat `psd` met rust. Die heb je alleen nodig als je een grote organisatie hebt die delen van haar DNS uitgeeft (`psd=n`), of een public suffix zoals `co.uk` (`psd=y`).
 - Relaxed overeenkomst (`adkim=r` en `aspf=r`) is de standaard en werkt voor bijna elk domein. Je hebt de alignmenttags alleen nodig als strenge compliance-regels ondertekenen met een subdomein verbieden.
 
-Je kunt een record met deze tags maken, of een oud record opschonen, met onze [DMARC-generator](/dmarc-generator) (in het Engels).
+Je kunt een record met deze tags maken, of een oud record opschonen, met onze [DMARC-generator](/dmarc-generator).
 
 ## Wat p=none, quarantine en reject echt doen
 

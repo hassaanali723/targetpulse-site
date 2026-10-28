@@ -73,7 +73,7 @@ Depende de quién envía tu correo.
 
 **Si usas un servicio de correo**, como Google Workspace, Microsoft 365, Mailchimp o SendGrid, el servicio crea las claves por ti. En su panel de configuración te da el registro DKIM. Tú lo copias en el DNS de tu dominio. Activa la firma con tu propio dominio. Muchos servicios firman por defecto con su dominio, y eso no sirve para la alineación DMARC.
 
-**Si tienes tu propio servidor de correo**, creas tú el par de claves. El [generador de DKIM](/dkim-generator) (en inglés) crea una clave de 2048 bits y el registro TXT en tu navegador. La clave privada no se envía a ningún sitio. Después sigues estos pasos:
+**Si tienes tu propio servidor de correo**, creas tú el par de claves. El [generador de DKIM](/dkim-generator) crea una clave de 2048 bits y el registro TXT en tu navegador. La clave privada no se envía a ningún sitio. Después sigues estos pasos:
 
 1. Publica el registro TXT en el DNS con el nombre `selector._domainkey`.
 2. Instala la clave privada en la configuración DKIM de tu servidor, con el mismo selector.

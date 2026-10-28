@@ -16,7 +16,7 @@ Daarom staan de stappen hier in volgorde van wat ze echt opleveren, niet van hoe
 
 ## Wat is het bouncepercentage van e-mail?
 
-Het bouncepercentage is het deel van de berichten in een verzending dat onbezorgd terugkwam. Je deelt het aantal gebouncete berichten door het aantal verstuurde berichten, als percentage. Verstuur je er 10.000 en krijg je er 250 terug, dan is het bouncepercentage 2,5 procent. De [bounce rate calculator](/bounce-rate-calculator) (in het Engels) rekent het uit met je eigen getallen. De meeste tools tonen het per campagne en splitsen het in hard bounces (het adres of domein bestaat niet) en soft bounces (volle mailbox, drukke server, tijdelijke blokkade). Mailboxproviders letten het meest op het aandeel hard bounces. Dat is het duidelijkste teken van een lijst die nooit is geverifieerd.
+Het bouncepercentage is het deel van de berichten in een verzending dat onbezorgd terugkwam. Je deelt het aantal gebouncete berichten door het aantal verstuurde berichten, als percentage. Verstuur je er 10.000 en krijg je er 250 terug, dan is het bouncepercentage 2,5 procent. De [bounce rate calculator](/bounce-rate-calculator) rekent het uit met je eigen getallen. De meeste tools tonen het per campagne en splitsen het in hard bounces (het adres of domein bestaat niet) en soft bounces (volle mailbox, drukke server, tijdelijke blokkade). Mailboxproviders letten het meest op het aandeel hard bounces. Dat is het duidelijkste teken van een lijst die nooit is geverifieerd.
 
 ## Richtwaarden voor het bouncepercentage
 

@@ -64,7 +64,7 @@ Ada tiga kemungkinan hasil dari pencarian MX record:
 
 ## Kenapa ini penting bagi pengirim
 
-Siapa pun bisa membaca MX record sebuah domain dengan pencarian DNS. Alat gratis [MX lookup](/mx-lookup) (dalam bahasa Inggris) kami menampilkan MX record dari domain mana pun. Saat sebuah perusahaan berganti penyedia email atau tutup, MX record-nya berubah atau hilang. Alamat-alamatnya berhenti berfungsi. Tidak ada yang memberi tahu Anda. Ini penyebab umum [hard bounce](/glossary/hard-bounce) pada daftar lama. Hard bounce adalah email yang ditolak secara permanen.
+Siapa pun bisa membaca MX record sebuah domain dengan pencarian DNS. Alat gratis [MX lookup](/mx-lookup) kami menampilkan MX record dari domain mana pun. Saat sebuah perusahaan berganti penyedia email atau tutup, MX record-nya berubah atau hilang. Alamat-alamatnya berhenti berfungsi. Tidak ada yang memberi tahu Anda. Ini penyebab umum [hard bounce](/glossary/hard-bounce) pada daftar lama. Hard bounce adalah email yang ditolak secara permanen.
 
 **Contoh:** Anda bertemu 40 orang dari old-firm.example di sebuah pameran dagang pada 2021. Perusahaan itu tutup pada 2024, dan domainnya tidak lagi punya MX record. Setiap email yang Anda kirim ke 40 kontak itu sekarang bounce.
 

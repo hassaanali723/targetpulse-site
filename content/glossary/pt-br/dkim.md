@@ -76,7 +76,7 @@ As diretrizes para remetentes do Google exigem SPF, DKIM e DMARC de quem envia 5
 O caminho depende de quem envia o seu e-mail.
 
 - **Você usa um serviço de e-mail**, como Google Workspace, Microsoft 365, Mailchimp ou SendGrid. O serviço cria a chave para você. Ele mostra o nome e o valor do registro. Você copia esses dados para o painel de DNS do seu domínio e ativa o DKIM no serviço.
-- **Você tem o seu próprio servidor de e-mail.** Você precisa criar o par de chaves. O nosso [gerador de DKIM](/dkim-generator) (em inglês) cria a chave e o registro no seu navegador. Depois você instala a chave privada no servidor e publica o registro no DNS.
+- **Você tem o seu próprio servidor de e-mail.** Você precisa criar o par de chaves. O nosso [gerador de DKIM](/dkim-generator) cria a chave e o registro no seu navegador. Depois você instala a chave privada no servidor e publica o registro no DNS.
 
 ## Como conferir se o DKIM passa
 

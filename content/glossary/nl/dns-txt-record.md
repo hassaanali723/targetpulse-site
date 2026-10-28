@@ -55,7 +55,7 @@ De meeste problemen met TXT-records komen door een paar eenvoudige fouten.
 
 Je kunt de TXT-records van elk domein lezen. Open op een Mac of Linux-computer de terminal en typ `dig TXT example.com`. Typ op Windows `nslookup -type=TXT example.com`.
 
-Je kunt ook onze [SPF checker](/spf-checker) (in het Engels) gebruiken. Die leest het SPF-record van een domein en legt uit wat het toestaat.
+Je kunt ook onze [SPF checker](/spf-checker) gebruiken. Die leest het SPF-record van een domein en legt uit wat het toestaat.
 
 ## Hoe TXT-records zich verhouden tot verificatie
 

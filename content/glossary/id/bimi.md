@@ -70,10 +70,10 @@ Kotak masuk yang tidak mendukung BIMI tidak menampilkan perbedaan apa pun. Penye
 ## Cara memasang BIMI
 
 1. Pasang SPF dan DKIM untuk setiap layanan yang mengirim email Anda.
-2. Ubah kebijakan DMARC Anda ke quarantine atau reject. [DMARC generator](/dmarc-generator) (dalam bahasa Inggris) kami membuat record-nya.
+2. Ubah kebijakan DMARC Anda ke quarantine atau reject. [DMARC generator](/dmarc-generator) kami membuat record-nya.
 3. Ubah logo Anda menjadi file SVG Tiny PS.
 4. Beli VMC atau CMC jika Anda ingin logo muncul di Gmail.
-5. Buat BIMI record dengan [BIMI generator](/bimi-generator) (dalam bahasa Inggris) kami. Alat ini juga memeriksa file SVG Anda di browser.
+5. Buat BIMI record dengan [BIMI generator](/bimi-generator) kami. Alat ini juga memeriksa file SVG Anda di browser.
 6. Terbitkan record di `default._bimi` pada DNS Anda.
 7. Kirim email uji ke akun Gmail dan periksa apakah logo muncul.
 

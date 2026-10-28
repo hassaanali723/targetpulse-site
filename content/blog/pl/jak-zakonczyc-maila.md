@@ -32,7 +32,7 @@ Zakończenie maila ma trzy osobne części, a każda pełni inną funkcję.
 2. **Zwrot pożegnalny** to krótka formuła przed twoim imieniem, na przykład „Dziękuję” albo „Pozdrawiam”.
 3. **Imię i podpis** są na samym końcu. W pierwszym mailu dodaj stanowisko i nazwę firmy. W krótkiej odpowiedzi wystarczy imię.
 
-Podpis powinien być krótki. Dawny poradnik netykiety, [RFC 1855](https://www.rfc-editor.org/rfc/rfc1855), zalecał najwyżej 4 linie i ta zasada nadal działa. Jeśli chcesz mieć schludny i spójny podpis, [generator podpisu e-mail](/email-signature-generator) (po angielsku) utworzy go dla Gmaila, Outlooka i Apple Mail.
+Podpis powinien być krótki. Dawny poradnik netykiety, [RFC 1855](https://www.rfc-editor.org/rfc/rfc1855), zalecał najwyżej 4 linie i ta zasada nadal działa. Jeśli chcesz mieć schludny i spójny podpis, [generator podpisu e-mail](/email-signature-generator) utworzy go dla Gmaila, Outlooka i Apple Mail.
 
 ## Zakończenia maili służbowych: najczęstsze zwroty
 

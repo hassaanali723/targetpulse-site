@@ -70,7 +70,7 @@ Większość domen przechodzi na wyższy poziom w trzech krokach.
 2. Czytaj raporty. Wymieniają każdy serwer, który wysyła e-maile jako twoja domena. Upewnij się, że każda prawdziwa usługa przechodzi SPF lub DKIM dla twojej domeny. Dwa przykłady to twoje narzędzie do newslettera i twój system obsługi klienta (help desk).
 3. Przejdź na `p=quarantine`. Gdy żaden prawdziwy e-mail nie trafia do spamu, przejdź na `p=reject`.
 
-Standard podaje, że doprowadzenie do tego, by każdy prawdziwy nadawca przechodził, może zająć wiele miesięcy. Łatwo przeoczyć usługi, które wysyłają rzadko, na przykład narzędzia do fakturowania. Nasz [generator DMARC](/dmarc-generator) (po angielsku) tworzy rekord dla każdego kroku.
+Standard podaje, że doprowadzenie do tego, by każdy prawdziwy nadawca przechodził, może zająć wiele miesięcy. Łatwo przeoczyć usługi, które wysyłają rzadko, na przykład narzędzia do fakturowania. Nasz [generator DMARC](/dmarc-generator) tworzy rekord dla każdego kroku.
 
 Zanim użyjesz `p=reject`, upewnij się, że wszystkie twoje e-maile są podpisane DKIM. Przekazanie wiadomości psuje SPF. Polityka reject, która opiera się tylko na SPF, może blokować prawdziwe przekazane e-maile.
 

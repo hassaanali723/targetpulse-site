@@ -81,7 +81,7 @@ A maioria dos domínios segue estes passos:
 4. Mude para `p=quarantine` e continue lendo os relatórios.
 5. Mude para `p=reject` quando nada real estiver falhando.
 
-O nosso [gerador de DMARC](/dmarc-generator) (em inglês) monta o registro para cada passo.
+O nosso [gerador de DMARC](/dmarc-generator) monta o registro para cada passo.
 
 ## Quem exige DMARC
 

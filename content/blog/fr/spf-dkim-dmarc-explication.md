@@ -67,7 +67,7 @@ Un enregistrement de clé publique DKIM dans le DNS a cette forme :
 v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA...
 ```
 
-La balise `v=DKIM1` indique la version du protocole, `k=rsa` identifie l'algorithme de la clé et `p=` contient la clé publique encodée en base64. Si vous gérez votre propre serveur de messagerie, vous pouvez créer une paire de clés avec notre [générateur DKIM](/dkim-generator) (en anglais).
+La balise `v=DKIM1` indique la version du protocole, `k=rsa` identifie l'algorithme de la clé et `p=` contient la clé publique encodée en base64. Si vous gérez votre propre serveur de messagerie, vous pouvez créer une paire de clés avec notre [générateur DKIM](/dkim-generator).
 
 Un piège fréquent apparaît quand les expéditeurs se fient aux signatures par défaut de leur plateforme. Beaucoup de plateformes d'email signent le courrier sortant avec leur propre domaine partagé par défaut (`d=shared-esp.example`). La signature est valide, mais le domaine signataire ne correspond pas à votre domaine From visible, et l'alignement DMARC échoue. Vous devez configurer un DKIM personnalisé dans les réglages de votre plateforme, pour que la signature utilise votre domaine dans la balise `d=`.
 
@@ -95,7 +95,7 @@ La balise rua indique aux destinataires où envoyer les rapports agrégés, en g
 _dmarc.example.com TXT "v=DMARC1; p=none; rua=mailto:dmarc@example.com"
 ```
 
-En mai 2026, l'Internet Engineering Task Force a publié la RFC 9989 sur le Standards Track, avec la RFC 9990 pour les rapports agrégés et la RFC 9991 pour les rapports d'échec. Ces nouvelles normes rendent officiellement obsolètes la RFC 7489 et la RFC 9091. Les enregistrements existants qui commencent par `v=DMARC1` continuent de fonctionner, mais la spécification mise à jour modifie plusieurs balises. La balise de pourcentage (`pct`) et la balise de format de rapport (`rf`) sont retirées et ne font plus partie de la norme, tandis que la balise d'intervalle de rapport (`ri`) est classée comme historique. Les expéditeurs qui testent le déploiement d'une politique utilisent désormais la nouvelle balise `t` pour le mode test, et les administrateurs peuvent définir des politiques pour les sous-domaines inexistants avec la balise `np`. Si votre enregistrement DNS actuel contient une balise de pourcentage, prévoyez de la retirer. Vous pouvez créer un enregistrement à jour ou retirer les anciennes balises avec notre [générateur DMARC](/dmarc-generator) (en anglais).
+En mai 2026, l'Internet Engineering Task Force a publié la RFC 9989 sur le Standards Track, avec la RFC 9990 pour les rapports agrégés et la RFC 9991 pour les rapports d'échec. Ces nouvelles normes rendent officiellement obsolètes la RFC 7489 et la RFC 9091. Les enregistrements existants qui commencent par `v=DMARC1` continuent de fonctionner, mais la spécification mise à jour modifie plusieurs balises. La balise de pourcentage (`pct`) et la balise de format de rapport (`rf`) sont retirées et ne font plus partie de la norme, tandis que la balise d'intervalle de rapport (`ri`) est classée comme historique. Les expéditeurs qui testent le déploiement d'une politique utilisent désormais la nouvelle balise `t` pour le mode test, et les administrateurs peuvent définir des politiques pour les sous-domaines inexistants avec la balise `np`. Si votre enregistrement DNS actuel contient une balise de pourcentage, prévoyez de la retirer. Vous pouvez créer un enregistrement à jour ou retirer les anciennes balises avec notre [générateur DMARC](/dmarc-generator).
 
 ## Comment un serveur de réception contrôle un message
 
@@ -132,7 +132,7 @@ Laisser DMARC en `p=none` de façon permanente rend votre domaine vulnérable à
 Suivez ces étapes dans l'ordre :
 
 1. Listez chaque service interne, plateforme marketing, outil de support et outil transactionnel qui envoie des emails avec votre domaine.
-2. Publiez un seul [enregistrement SPF](/glossary/spf) unifié qui couvre les serveurs d'envoi autorisés, en gardant le total des requêtes sous 10. Le [vérificateur SPF](/spf-checker) (en anglais) les compte pour vous.
+2. Publiez un seul [enregistrement SPF](/glossary/spf) unifié qui couvre les serveurs d'envoi autorisés, en gardant le total des requêtes sous 10. Le [vérificateur SPF](/spf-checker) les compte pour vous.
 3. Activez la signature DKIM personnalisée avec votre propre domaine sur chaque plateforme d'envoi et publiez les enregistrements de sélecteur correspondants dans le DNS.
 4. Assurez-vous que vos adresses IP d'envoi ont un DNS direct valide et un [enregistrement PTR](/glossary/ptr-record) correspondant configuré dans le DNS inverse.
 5. Publiez un premier [enregistrement DMARC](/blog/what-is-a-dmarc-record) à `_dmarc` avec `p=none` et une boîte `rua` active, pour commencer à recevoir les rapports XML agrégés.

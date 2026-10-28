@@ -73,7 +73,7 @@ DKIM jest też wymagany od nadawców masowych. Wytyczne Google dla nadawców wym
 Sposób konfiguracji DKIM zależy od tego, kto wysyła twoje e-maile.
 
 - **Korzystasz z usługi e-mail**, takiej jak Google Workspace, Microsoft 365, Mailchimp lub SendGrid. Usługa tworzy klucz za ciebie. Pokazuje ci rekord DKIM, który dodajesz u swojego dostawcy DNS. Dostawca DNS to zwykle firma, w której została kupiona domena.
-- **Masz własny serwer pocztowy.** Parę kluczy tworzysz samodzielnie. Nasz [generator DKIM](/dkim-generator) (po angielsku) tworzy w przeglądarce parę kluczy 2048-bitowych i rekord TXT. Klucz prywatny instalujesz na serwerze, a rekord publikujesz w DNS.
+- **Masz własny serwer pocztowy.** Parę kluczy tworzysz samodzielnie. Nasz [generator DKIM](/dkim-generator) tworzy w przeglądarce parę kluczy 2048-bitowych i rekord TXT. Klucz prywatny instalujesz na serwerze, a rekord publikujesz w DNS.
 
 Sprawdź jeden częsty problem. Wiele usług e-mail domyślnie podpisuje wiadomości własną, wspólną domeną. Podpis przechodzi, ale domena w `d=` nie jest twoja, więc wyrównanie DMARC kończy się błędem. Włącz własny DKIM w ustawieniach usługi, żeby `d=` pokazywało twoją domenę. Strona [wyrównanie DMARC](/glossary/dmarc-alignment) wyjaśnia, dlaczego to ważne.
 

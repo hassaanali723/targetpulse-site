@@ -70,10 +70,10 @@ Inboxen die BIMI niet ondersteunen, tonen niets anders dan normaal. Providers ku
 ## Zo stel je BIMI in
 
 1. Stel SPF en DKIM in voor elke dienst die je e-mail verstuurt.
-2. Zet je DMARC-beleid op quarantine of reject. Onze [DMARC-generator](/dmarc-generator) (in het Engels) maakt het record.
+2. Zet je DMARC-beleid op quarantine of reject. Onze [DMARC-generator](/dmarc-generator) maakt het record.
 3. Zet je logo om naar een SVG Tiny PS-bestand.
 4. Koop een VMC of een CMC als je het logo in Gmail wilt tonen.
-5. Maak het BIMI-record met onze [BIMI-generator](/bimi-generator) (in het Engels). Die controleert ook je SVG-bestand in je browser.
+5. Maak het BIMI-record met onze [BIMI-generator](/bimi-generator). Die controleert ook je SVG-bestand in je browser.
 6. Publiceer het record op `default._bimi` in je DNS.
 7. Stuur een testmail naar een Gmail-account en kijk of het logo verschijnt.
 

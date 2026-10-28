@@ -45,7 +45,7 @@ Het is goed om eerlijk te zijn over de grenzen. Dit is een afleiding uit waargen
 
 Je hebt geen tool nodig om te zien of gateways je probleem zijn. Je hebt de MX-records nodig van de domeinen op je lijst.
 
-Neem het domeindeel van elk adres, haal dubbele domeinen weg en [zoek de MX-records op](/mx-lookup) (in het Engels) voor elk domein. Een domein achter Proofpoint wijst naar hostnamen met pphosted of ppe-hosted erin. Domeinen van Mimecast wijzen naar hosts van mimecast.com, meestal met een regiocode. Barracuda zie je als barracudanetworks.com. Cisco verschijnt als iphmx.com. Domeinen van Microsoft 365 en Google Workspace wijzen naar hosts van outlook.com en google.com. Dat zijn geen gateways, al kunnen ze wel als catch-all zijn ingesteld.
+Neem het domeindeel van elk adres, haal dubbele domeinen weg en [zoek de MX-records op](/mx-lookup) voor elk domein. Een domein achter Proofpoint wijst naar hostnamen met pphosted of ppe-hosted erin. Domeinen van Mimecast wijzen naar hosts van mimecast.com, meestal met een regiocode. Barracuda zie je als barracudanetworks.com. Cisco verschijnt als iphmx.com. Domeinen van Microsoft 365 en Google Workspace wijzen naar hosts van outlook.com en google.com. Dat zijn geen gateways, al kunnen ze wel als catch-all zijn ingesteld.
 
 Vergelijk die lijst met de adressen waar je verificatietool mee stopte. Is de overlap groot, dan ligt het aan de gateway. Dan verandert het resultaat niet, hoe vaak je dezelfde tool ook opnieuw laat lopen.
 

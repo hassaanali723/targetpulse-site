@@ -60,7 +60,7 @@ Jika Anda mengirim lebih sedikit dari itu, record ini tetap penting. Tanpa recor
 
 RFC 7208 membatasi pemeriksaan SPF hingga sepuluh pencarian DNS (DNS lookup). Pencarian adalah satu pertanyaan yang diajukan server penerima ke DNS. Setiap `include:`, `a`, `mx`, dan `redirect` di record Anda dihitung sebagai satu pencarian. Pencarian di dalam record yang Anda sertakan juga dihitung. Jika totalnya lebih dari sepuluh, pemeriksaan menghasilkan error permanen. Sebagian besar server penerima memperlakukan error ini sebagai fail.
 
-Ini adalah penyebab paling umum SPF record rusak. Sebuah perusahaan menambahkan alat email ke record satu per satu. Saat pencarian kesebelas ditambahkan, seluruh record berhenti bekerja. [SPF checker](/spf-checker) (dalam bahasa Inggris) menghitung pencarian di record Anda, termasuk pencarian di dalam setiap include.
+Ini adalah penyebab paling umum SPF record rusak. Sebuah perusahaan menambahkan alat email ke record satu per satu. Saat pencarian kesebelas ditambahkan, seluruh record berhenti bekerja. [SPF checker](/spf-checker) menghitung pencarian di record Anda, termasuk pencarian di dalam setiap include.
 
 **Contoh:** SPF record sebuah perusahaan menyertakan email kantornya, alat newsletter, alat help desk, dan alat invoice. Sebagian dari record itu menyertakan record lain di dalamnya. Bersama-sama, semuanya memerlukan 11 pencarian. Sejak hari itu, pemeriksaan SPF gagal untuk email perusahaan, bahkan untuk email yang dikirim dari kantornya sendiri.
 

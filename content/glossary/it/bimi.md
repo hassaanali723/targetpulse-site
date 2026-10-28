@@ -62,13 +62,13 @@ Le caselle che non supportano BIMI ignorano il record. L'email arriva normalment
 
 ## Come configurare BIMI
 
-1. Porta DMARC a `p=quarantine` o `p=reject`. Il [generatore DMARC](/dmarc-generator) (in inglese) crea il record.
+1. Porta DMARC a `p=quarantine` o `p=reject`. Il [generatore DMARC](/dmarc-generator) crea il record.
 2. Prepara il logo come file SVG Tiny PS e controlla che rispetti le regole.
 3. Scegli il certificato. Per Gmail serve un VMC o un CMC. Per Apple Mail serve un VMC.
 4. Pubblica il logo e il file del certificato a indirizzi HTTPS.
 5. Pubblica il record BIMI come record TXT a `default._bimi.example.com`.
 
-Il nostro [generatore di record BIMI](/bimi-generator) (in inglese) crea il record e controlla il logo SVG nel tuo browser. Così trovi gli errori prima di comprare un certificato.
+Il nostro [generatore di record BIMI](/bimi-generator) crea il record e controlla il logo SVG nel tuo browser. Così trovi gli errori prima di comprare un certificato.
 
 BIMI non migliora direttamente la consegna delle email. Mostra un logo solo sulle email che superano già DMARC. Il lavoro per arrivarci, cioè configurare bene SPF, DKIM e DMARC, è quello che aiuta le email ad arrivare.
 

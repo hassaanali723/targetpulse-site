@@ -157,7 +157,7 @@ Standard z 2026 roku wycofał trzy starsze tagi. To tag procentowy (`pct`), tag 
 - Nie ruszaj `psd`. Potrzebujesz go tylko, jeśli prowadzisz dużą organizację, która przekazuje części swojego DNS (`psd=n`), albo sufiks publiczny, na przykład `co.uk` (`psd=y`).
 - Łagodne dopasowanie (`adkim=r` i `aspf=r`) to ustawienie domyślne, które działa w prawie każdej domenie. Tagi wyrównania są potrzebne tylko wtedy, gdy surowe wymagania zgodności zabraniają podpisywania subdomeną.
 
-Rekord z tymi tagami zbudujesz albo stary rekord uporządkujesz w naszym [generatorze DMARC](/dmarc-generator) (po angielsku).
+Rekord z tymi tagami zbudujesz albo stary rekord uporządkujesz w naszym [generatorze DMARC](/dmarc-generator).
 
 ## Co naprawdę robią p=none, quarantine i reject
 

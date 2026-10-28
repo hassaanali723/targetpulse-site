@@ -67,7 +67,7 @@ Um registro de chave pública DKIM no DNS tem esta forma:
 v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA...
 ```
 
-A tag `v=DKIM1` indica a versão do protocolo, `k=rsa` identifica o algoritmo da chave e `p=` contém a chave pública codificada em base64. Se você administra o seu próprio servidor de e-mail, pode criar um par de chaves com o nosso [gerador de DKIM](/dkim-generator) (em inglês).
+A tag `v=DKIM1` indica a versão do protocolo, `k=rsa` identifica o algoritmo da chave e `p=` contém a chave pública codificada em base64. Se você administra o seu próprio servidor de e-mail, pode criar um par de chaves com o nosso [gerador de DKIM](/dkim-generator).
 
 Uma armadilha frequente acontece quando os remetentes dependem das assinaturas padrão da plataforma. Muitas plataformas de e-mail assinam os e-mails enviados com o próprio domínio compartilhado por padrão (`d=shared-esp.example`). A assinatura passa, mas o domínio que assina não bate com o domínio From visível, e o alinhamento DMARC falha. Você precisa configurar um DKIM personalizado nas configurações da plataforma, para que a assinatura use o seu domínio na tag `d=`.
 
@@ -95,7 +95,7 @@ A tag rua diz aos servidores de destino para onde enviar os relatórios agregado
 _dmarc.example.com TXT "v=DMARC1; p=none; rua=mailto:dmarc@example.com"
 ```
 
-Em maio de 2026, a Internet Engineering Task Force publicou a RFC 9989 no Standards Track, junto com a RFC 9990 para relatórios agregados e a RFC 9991 para relatórios de falha. Esses novos padrões tornam oficialmente obsoletas a RFC 7489 e a RFC 9091. Registros existentes que começam com `v=DMARC1` continuam funcionando, mas a especificação atualizada ajusta várias tags operacionais. A tag de porcentagem (`pct`) e a tag de formato de relatório (`rf`) foram aposentadas e não fazem mais parte do padrão, enquanto a tag de intervalo de relatório (`ri`) passou a ser classificada como histórica. Quem testa a implantação de uma política agora usa a nova tag `t` para o modo de teste, e os administradores podem definir políticas para subdomínios que não existem usando a tag `np`. Se o seu registro DNS atual tem uma tag de porcentagem, planeje removê-la. Você pode montar um registro atualizado ou limpar tags antigas com o nosso [gerador de DMARC](/dmarc-generator) (em inglês).
+Em maio de 2026, a Internet Engineering Task Force publicou a RFC 9989 no Standards Track, junto com a RFC 9990 para relatórios agregados e a RFC 9991 para relatórios de falha. Esses novos padrões tornam oficialmente obsoletas a RFC 7489 e a RFC 9091. Registros existentes que começam com `v=DMARC1` continuam funcionando, mas a especificação atualizada ajusta várias tags operacionais. A tag de porcentagem (`pct`) e a tag de formato de relatório (`rf`) foram aposentadas e não fazem mais parte do padrão, enquanto a tag de intervalo de relatório (`ri`) passou a ser classificada como histórica. Quem testa a implantação de uma política agora usa a nova tag `t` para o modo de teste, e os administradores podem definir políticas para subdomínios que não existem usando a tag `np`. Se o seu registro DNS atual tem uma tag de porcentagem, planeje removê-la. Você pode montar um registro atualizado ou limpar tags antigas com o nosso [gerador de DMARC](/dmarc-generator).
 
 ## Como um servidor de destino verifica uma mensagem
 

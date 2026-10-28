@@ -55,7 +55,7 @@ La plupart des problèmes avec les enregistrements TXT viennent de quelques erre
 
 Vous pouvez lire les enregistrements TXT de n’importe quel domaine. Sur un Mac ou un ordinateur Linux, ouvrez le terminal et tapez `dig TXT example.com`. Sous Windows, tapez `nslookup -type=TXT example.com`.
 
-Vous pouvez aussi utiliser notre [vérificateur SPF](/spf-checker) (en anglais). Il lit l’enregistrement SPF d’un domaine et explique ce qu’il autorise.
+Vous pouvez aussi utiliser notre [vérificateur SPF](/spf-checker). Il lit l’enregistrement SPF d’un domaine et explique ce qu’il autorise.
 
 ## Le lien entre les enregistrements TXT et la vérification
 

@@ -55,7 +55,7 @@ Sebagian besar masalah TXT record berasal dari beberapa kesalahan sederhana.
 
 Anda bisa membaca TXT record dari domain mana pun. Di komputer Mac atau Linux, buka terminal dan ketik `dig TXT example.com`. Di Windows, ketik `nslookup -type=TXT example.com`.
 
-Anda juga bisa memakai [SPF checker](/spf-checker) (dalam bahasa Inggris) kami. Alat ini membaca SPF record sebuah domain dan menjelaskan apa yang diizinkannya.
+Anda juga bisa memakai [SPF checker](/spf-checker) kami. Alat ini membaca SPF record sebuah domain dan menjelaskan apa yang diizinkannya.
 
 ## Hubungan TXT record dengan verifikasi
 
