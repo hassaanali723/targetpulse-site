@@ -4,6 +4,7 @@ import FooterL10n from '@/components/l10n/Footer'
 import JsonLd from '@/components/JsonLd'
 import { breadcrumbL10n } from '@/lib/i18n/schema'
 import { getStrings, type L10nLocale } from '@/lib/i18n/strings'
+import { gapAfter, colonAfter } from '@/lib/i18n/cjk'
 
 // Shared shell for the localized legal pages. The text is a courtesy
 // translation; the notice at the top says the English version is the binding
@@ -45,15 +46,15 @@ export default function LegalPageL10n({
 
       <section className="max-w-4xl mx-auto px-6 pt-28 md:pt-32 pb-12 text-center space-y-6">
         <h1 className="text-4xl md:text-5xl font-black tracking-tight leading-[1.05] text-slate-900">
-          {title}{' '}
+          {title}{locale === 'ja' ? null : ' '}
           <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">{accent}</span>
         </h1>
-        <p className="text-sm md:text-base text-slate-500 font-semibold">{legal.updated}: {updated}</p>
+        <p className="text-sm md:text-base text-slate-500 font-semibold">{legal.updated}{colonAfter(legal.updated)}{updated}</p>
       </section>
 
       <section className="max-w-4xl mx-auto px-6 pb-24">
         <div className="mb-6 rounded-2xl border-2 border-amber-200 bg-amber-50 px-5 py-4 text-sm text-amber-900 font-medium leading-relaxed">
-          {legal.notice}{' '}
+          {legal.notice}{gapAfter(legal.notice)}
           <Link href={englishHref} hrefLang="en" className="font-bold underline underline-offset-2">
             {legal.noticeLink}
           </Link>

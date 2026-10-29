@@ -1267,7 +1267,143 @@ const idTool: BimiToolStrings = {
   },
 }
 
-export const BIMI_TOOL_STRINGS: Record<Locale, BimiToolStrings> = { en, de: deTool, fr: frTool, es: esTool, it: itTool, 'pt-br': ptBrTool, nl: nlTool, pl: plTool, id: idTool }
+const jaKb = (byteSize: number) => (byteSize / 1024).toFixed(1)
+
+const jaTool: BimiToolStrings = {
+  tabRecord: 'レコード生成',
+  tabChecker: 'SVGロゴチェック',
+  tabReadiness: '準備チェックリスト',
+
+  domainLabel: 'ドメイン',
+  domainPlaceholder: 'example.com',
+  selectorLabel: 'セレクター',
+  selectorHint: '（初期値：default）',
+  selectorWarning: 'default以外のセレクターを使う場合、メールにBIMI-Selectorヘッダーが必要です。',
+  logoLabel: 'ロゴのURL',
+  logoHint: '（https://で始まり、.svgで終わる必要があります）',
+  logoPlaceholder: 'https://example.com/bimi/logo.svg',
+  certLabel: '証明書のURL',
+  certHint: '（任意。https://で始まり、.pemで終わる必要があります）',
+  certPlaceholder: 'https://example.com/bimi/cert.pem',
+  leaveLogoEmpty: 'l=を空にする（ロゴは証明書に含まれています）',
+  leaveLogoEmptyHelp: 'Googleの例では両方の形式が示されています。証明書によっては、PEMのデータ内にロゴが埋め込まれています。',
+  outputTitle: 'このDNS TXTレコードを公開してください',
+  hostLabel: 'ホスト / 名前',
+  copy: 'コピー',
+  copied: 'コピーしました',
+  hostShort: 'ドメインを自動で付け足す管理画面向けの短い形式：{host}',
+  typeLabel: 'レコードの種類',
+  ttlNote: 'TTL：3600（1時間を推奨）',
+  valueLabel: 'TXTレコードの値',
+  zoneLabel: 'ゾーンファイル形式',
+
+  checkerTitle: 'SVGロゴファイルをアップロードするか、SVGコードを貼り付けてください',
+  uploadButton: 'SVGファイルをアップロード',
+  pasteLabel: 'またはSVGのマークアップを貼り付け：',
+  previewAlt: 'SVGのプレビュー',
+  passBadge: 'Tiny PSのルールをすべて満たしています',
+  failBadge: 'Tiny PSのルールを満たしていません',
+  fileSize: (byteSize) => `ファイルサイズ：${jaKb(byteSize)} KB`,
+  passText: 'このSVGロゴは、メールプロバイダーと認証局の仕様を満たしています。',
+  failText: '公開する前に、下の不合格の項目を確認してロゴを修正してください。',
+
+  readinessTitle: 'BIMI導入の準備状況',
+  readinessIntro: '満たしている前提条件にチェックを入れると、ブランドロゴが表示される場所がわかります。',
+  dmarcItem: 'DMARCがquarantineまたはreject',
+  dmarcItemText: 'BIMIには強制ポリシーのDMARCが必要です。レコードがない場合は、{link}をご利用ください。',
+  dmarcLabel: 'DMARCレコード生成ツール',
+  dmarcHref: '/ja/dmarc-generator',
+  alignItem: 'SPFとDKIMが合格し、アライメントが取れている',
+  alignItemText: 'メールヘッダーが、Fromアドレスのドメインで正しく認証される必要があります。',
+  logoItem: 'ロゴがチェックに合格している',
+  logoItemText: 'SVG Tiny PSに準拠し、viewBoxが正方形で、scriptやラスター要素を含まないこと。',
+  certTitle: '証明書のレベル',
+  certOptions: {
+    none: 'なし（自社でホストするSVGのみ）',
+    CMC: 'CMC（Common Mark Certificate）',
+    VMC: 'VMC（Verified Mark Certificate）',
+  },
+  whereTitle: 'ロゴが表示される場所：',
+  where: {
+    VMC: 'VMCの場合：Gmail（チェックマーク付き）、Apple Mail、BIMIに対応するメールプロバイダー',
+    CMC: 'CMCの場合：Gmail（チェックマークなし）。Apple Mailには表示されません',
+    none: '証明書なしの場合：YahooやFastmailなど、証明書のないレコードを受け入れるメールプロバイダーのみ',
+  },
+  prerequisitesNote:
+    '注意：まず前提条件を満たす必要があります。DMARCがquarantineまたはrejectでない場合、どのメールプロバイダーもロゴを表示しません。',
+
+  urlErrors: {
+    required: 'URLを入力してください',
+    'not-https': 'URLはhttps://で始まる必要があります',
+    extension: (extension) => `URLは.${extension}で終わる必要があります`,
+    invalid: 'URLの形式が正しくありません',
+  },
+  checks: {
+    baseProfile: {
+      title: 'ルート要素がbaseProfile tiny-psのsvgである',
+      pass: () => 'ルート要素はbaseProfile="tiny-ps"の<svg>です。',
+      fail: () => 'ルートの<svg>要素でbaseProfile="tiny-ps"を宣言する必要があります。',
+    },
+    version: {
+      title: 'バージョン1.2',
+      pass: () => 'SVGのversion属性は1.2に設定されています。',
+      fail: () => 'ルートの<svg>要素でversion="1.2"を宣言する必要があります。',
+    },
+    viewBox: {
+      title: 'viewBoxが正方形である',
+      pass: () => 'viewBoxの幅と高さは同じです。',
+      fail: () => 'SVGのviewBoxは幅と高さを同じにする必要があります（縦横比1:1）。',
+    },
+    'no-root-xy': {
+      title: 'ルートのsvgにx属性とy属性がない',
+      pass: () => 'ルートの<svg>要素にx属性とy属性はありません。',
+      fail: () => 'ルートの<svg>タグにx座標やy座標の属性を含めることはできません。',
+    },
+    title: {
+      title: 'title要素がある',
+      pass: () => 'ブランド名を含む空でない<title>要素があります。',
+      fail: () => '会社名またはブランド名を記載した<title>要素が必要です。',
+    },
+    filesize: {
+      title: 'ファイルサイズが32 KB以下',
+      pass: ({ byteSize }) => `ファイルサイズは${jaKb(byteSize)} KBです（上限の32 KB未満）。`,
+      fail: ({ byteSize }) => `ファイルサイズは${jaKb(byteSize)} KBで、上限の32 KBを超えています。`,
+    },
+    'no-script': {
+      title: 'script要素がない',
+      pass: () => '実行可能な<script>要素は見つかりませんでした。',
+      fail: () => 'メールボックスの安全のため、Tiny PSではスクリプトを使用できません。',
+    },
+    'no-image': {
+      title: '埋め込みのラスター画像（image要素）がない',
+      pass: () => '埋め込みのラスター<image>要素は見つかりませんでした。',
+      fail: () => 'Tiny PSではベクター形式の画像のみ使用できます。ラスターの<image>タグは使用できません。',
+    },
+    'no-foreignObject': {
+      title: 'foreignObjectがない',
+      pass: () => '<foreignObject>要素は見つかりませんでした。',
+      fail: () => 'Tiny PSでは<foreignObject>要素を使用できません。',
+    },
+    'no-animation': {
+      title: 'アニメーション要素がない',
+      pass: () => 'SVGのアニメーション要素は見つかりませんでした。',
+      fail: () => 'アニメーションのSVG要素（<animate>、<set>など）は使用できません。',
+    },
+    'no-external-ref': {
+      title: '外部ファイルへの参照がない',
+      pass: () => '外部のURLやファイルへの参照はありません。',
+      fail: () => '外部ファイルへの参照や外部へのリンクは使用できません。',
+    },
+    'text-elements': {
+      title: 'テキスト要素',
+      pass: () => '<text>要素は見つかりませんでした。',
+      fail: () =>
+        'ロゴ内のテキストは、環境によって表示が変わる場合があります。デザインツールでテキストをアウトライン化してください。',
+    },
+  },
+}
+
+export const BIMI_TOOL_STRINGS: Record<Locale, BimiToolStrings> = { en, de: deTool, fr: frTool, es: esTool, it: itTool, 'pt-br': ptBrTool, nl: nlTool, pl: plTool, id: idTool, ja: jaTool }
 
 export function bimiToolStrings(locale: Locale): BimiToolStrings {
   return BIMI_TOOL_STRINGS[locale] ?? en

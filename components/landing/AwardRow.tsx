@@ -16,6 +16,7 @@
 // the vendor embed script is not used).
 
 import { useEffect, useRef, useState } from 'react'
+import { gapAfter } from '@/lib/i18n/cjk'
 
 const SF = 'https://sourceforge.net/software/product/Giggal.ai/?pk_campaign=badge&pk_source=vendor'
 const SD = 'https://slashdot.org/software/p/Giggal.ai/?pk_campaign=badge&pk_source=vendor'
@@ -103,7 +104,7 @@ export default function AwardRow({
   return (
     <section className="max-w-6xl mx-auto px-6 pt-10 pb-16">
       <h2 className="text-center text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
-        {headingLead}{' '}
+        {headingLead}{gapAfter(headingLead)}
         <span className="bg-gradient-to-r from-indigo-600 to-emerald-500 bg-clip-text text-transparent">
           {headingRest}
         </span>

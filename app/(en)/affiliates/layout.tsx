@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { hreflangAlternates } from '@/lib/i18n/clusters'
 
 export const metadata: Metadata = {
   title: { absolute: 'Affiliate Program: 20% Recurring on Verification | Giggal.ai' },
@@ -6,6 +7,7 @@ export const metadata: Metadata = {
     'Join the Giggal.ai affiliate program: 20% recurring commission on every payment your referrals make, 3-month attribution, monthly payouts, no earnings cap.',
   alternates: {
     canonical: '/affiliates',
+    languages: hreflangAlternates('affiliates'),
   },
   openGraph: {
     siteName: 'Giggal.ai',

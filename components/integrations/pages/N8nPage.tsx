@@ -19,7 +19,7 @@ export default function N8nPage({ common, c, path }: { common: CommonStrings; c:
         <Crumbs common={common} current={c.crumb} />
         <LogoPair src="/integrations/giggal-catch-all-email-verification-n8n.png" alt={`${c.h1Lead} ${c.h1Accent}`} />
         <h1 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 mb-5 text-balance">
-          {c.h1Lead} <span className="gradient-text">{c.h1Accent}</span>
+          {c.h1Lead}{common.locale === 'ja' ? null : ' '}<span className="gradient-text">{c.h1Accent}</span>
         </h1>
         <p className="text-[16px] text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium mb-8">
           <Rich text={c.intro} />

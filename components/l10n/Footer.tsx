@@ -4,6 +4,7 @@ import { Linkedin, Youtube, Facebook, Instagram, ArrowUpRight } from 'lucide-rea
 import Link from 'next/link'
 import { HREFLANG_CODE } from '@/lib/i18n/clusters'
 import { getStrings, STRINGS, type L10nLocale } from '@/lib/i18n/strings'
+import { gapAfter, colonAfter } from '@/lib/i18n/cjk'
 
 const socials = [
   { icon: Linkedin, href: 'https://www.linkedin.com/company/giggal-ai/', label: 'LinkedIn' },
@@ -75,7 +76,7 @@ export default function FooterL10n({ locale }: { locale: L10nLocale }) {
               ))}
             </div>
             <p className="max-w-md text-[12.5px] font-medium text-slate-400 leading-relaxed pt-2">
-              {footer.language}:{' '}
+              {footer.language}{colonAfter(footer.language)}
               <span className="font-bold text-white">{s.nativeName}</span>
               {' · '}
               <Link href="/" hrefLang="en" lang="en" className="hover:text-white">English</Link>
@@ -121,7 +122,7 @@ export default function FooterL10n({ locale }: { locale: L10nLocale }) {
             . {footer.rights}
           </p>
           <p className="mt-2 text-[12px] text-slate-500">
-            {footer.operatedBy} {footer.abuseReports}{' '}
+            {footer.operatedBy}{gapAfter(footer.operatedBy)}{footer.abuseReports}{gapAfter(footer.abuseReports)}
             <a href="mailto:abuse@giggal.ai" className="text-slate-400 hover:text-white transition-colors">abuse@giggal.ai</a>
           </p>
         </div>

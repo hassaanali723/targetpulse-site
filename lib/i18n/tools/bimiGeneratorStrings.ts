@@ -738,4 +738,80 @@ const id: BimiPageStrings = {
   ctaHeadline: 'Logo siap? Periksa dan bersihkan juga daftar email Anda.',
 }
 
-export const BIMI_PAGE_STRINGS: Record<Locale, BimiPageStrings> = { en, de, fr, es, it, 'pt-br': ptBr, nl, pl, id }
+const ja: BimiPageStrings = {
+  metaTitle: 'BIMIレコード生成ツールとSVGロゴチェック（無料） | Giggal.ai',
+  ogTitle: 'BIMIレコード生成ツールとSVGロゴチェック（無料）',
+  description:
+    'BIMIレコードを生成し、SVGロゴがTiny PSのルールに合っているかをブラウザ上で確認できます。Gmail、Apple Mailなどでロゴを表示するための条件もわかります。無料です。',
+  ogLocale: 'ja_JP',
+  ogImage: '/og-card.png',
+  ogAlt: 'Giggal.aiの無料BIMIレコード生成ツール',
+  crumb: 'BIMIレコード生成',
+  appName: 'BIMIレコード生成ツールとSVGロゴチェック',
+  featureList: [
+    'セレクター、ロゴURL、証明書URLを指定してBIMIのTXTレコードを生成',
+    'SVGロゴをSVG Tiny PSの11項目の厳格な仕様で検証',
+    'GmailとApple Mailに対応するためのBIMI準備チェックリスト',
+    'ゾーンファイル形式の行の生成とコピー機能',
+    '処理は100%ブラウザ内で完結し、アップロードやトラッキングはありません',
+  ],
+  h1: 'BIMIレコード生成ツール',
+  heroIntro:
+    '証明書の購入やDNSへの公開の前に、ドメインのBIMIレコードを生成し、ロゴファイルがルールを満たしているかを確認できます。',
+  howTitle: 'BIMIの設定手順',
+  howSteps: [
+    'DMARCを強制ポリシーにします。BIMIはp=noneでは機能しません。ポリシーはquarantineまたはrejectにする必要があります。このレコードは[DMARCレコード生成ツール](/dmarc-generator)で作成できます。',
+    'ロゴをSVG Tiny PS形式のファイルとして用意し、上のロゴチェックで確認します。',
+    '証明書を決めます。GmailはVMCまたはCMCがある場合にのみBIMIロゴを表示し、Apple MailはVMCがある場合にのみ表示します。',
+    'SVGファイルと、証明書がある場合はそのPEMファイルを、HTTPSのアドレスで公開します。',
+    'この生成ツールで作成したレコードを、default._bimi.yourdomain にTXTレコードとして公開します。',
+  ],
+  imageAlt: '認証済みのメールアバターと、正方形のSVGブランドロゴが並ぶイラスト。',
+  recordTitle: 'BIMIレコードに含まれる内容',
+  thTag: 'タグ',
+  thDoes: '役割',
+  thExample: '例',
+  tagMeanings: [
+    'バージョン。常にBIMI1です',
+    'SVGロゴのHTTPSアドレス',
+    'VMCまたはCMC証明書（PEMファイル）のHTTPSアドレス',
+  ],
+  recordNote:
+    'Google自身の例では2つの形式が示されています。l=だけを含むレコードと、ロゴがPEMファイルに埋め込まれているためl=を空にしてa=で証明書を指定するレコードです。証明書がある場合は、証明書の発行元が推奨する形式に従ってください。この生成ツールはどちらの形式も作成できます。新しい任意のavp=タグは、ロゴがブランドのものか個人のアバターかをメールプロバイダーに伝えるものですが、多くの送信者は指定していません。',
+  logoTitle: 'ロゴチェックで確認するルール',
+  logoPara:
+    'BIMIロゴにはSVG Tiny PSを使います。これは受信トレイで安全に表示するために機能を絞ったSVGです。ルート要素ではbaseProfileをtiny-ps、versionを1.2にする必要があります。画像は正方形で、ブランド名を入れたtitle要素も必要です。スクリプト、埋め込みのラスター画像、アニメーション、外部ファイルへのリンクは使えません。ファイルサイズは32 KB未満にしてください。デザインツールから書き出した通常のSVGは、たいていこのうち1つ以上のルールに違反します。そのため、証明書を申請する前に確認しておく価値があります。',
+  certTitle: 'VMCとCMC：必要な証明書の選び方',
+  certPara:
+    'Gmailは、レコードが証明書を指している場合にのみBIMIロゴを表示します。VMC（Verified Mark Certificate）には登録商標が必要で、Gmailの青いチェックマークも表示されます。CMC（Common Mark Certificate）は商標登録されていないロゴ向けです。Gmailにロゴは表示されますが、チェックマークは付きません。Apple MailはVMCのみに対応しています。YahooやFastmailなど一部のメールプロバイダーは、証明書のないレコードでもロゴを表示できます。証明書は限られた認証局から発行され、Googleは受け入れる認証局を公開しています。',
+  faqTitle: 'よくある質問',
+  faqs: [
+    {
+      q: 'DMARCがp=noneでもBIMIは機能しますか？',
+      a: 'いいえ。Googleは、BIMIはDMARCポリシーnoneに対応していないと明記しています。ポリシーはquarantineまたはrejectにする必要があります。',
+    },
+    {
+      q: 'GmailにはVMCが必要ですか？',
+      a: 'VMCかCMCのどちらかが必要です。VMCには登録商標が必要で、青いチェックマークが表示されます。CMCは商標が不要で、チェックマークなしでロゴが表示されます。',
+    },
+    {
+      q: 'BIMIロゴが表示されないのはなぜですか？',
+      a: 'よくある原因は、DMARCがまだp=noneのままである、メールがDMARCに合格していない、SVGが有効なTiny PSではない、証明書がないか期限切れである、受信側のメールサービスがBIMIに対応していない、のいずれかです。また、メールプロバイダーが新しいレコードを読み込むまで時間がかかることもあります。',
+    },
+    {
+      q: 'BIMIでメールの到達率は上がりますか？',
+      a: '直接は上がりません。BIMIは、強制ポリシーのDMARCにすでに合格しているメールにロゴを表示するだけです。そこに至るまでの作業、つまりSPF、DKIM、DMARCを正しく設定することが、メールの到達に役立ちます。詳しくは[SPF・DKIM・DMARCの解説](/ja/blog/spf-dkim-dmarc-explained)をご覧ください。',
+    },
+    {
+      q: 'default._bimiとは何ですか？',
+      a: 'メールプロバイダーがBIMIレコードを探すDNS名です。defaultはセレクターです。メールの種類ごとに異なるロゴを使いたい場合にのみ、別のセレクターと、メールのBIMI-Selectorヘッダーが必要になります。',
+    },
+    {
+      q: 'ロゴはどこかにアップロードされますか？',
+      a: 'いいえ。ロゴチェックはブラウザ内でファイルを読み込みます。',
+    },
+  ],
+  ctaHeadline: 'ロゴの準備ができたら、メールリストも確認しましょう。',
+}
+
+export const BIMI_PAGE_STRINGS: Record<Locale, BimiPageStrings> = { en, de, fr, es, it, 'pt-br': ptBr, nl, pl, id, ja }

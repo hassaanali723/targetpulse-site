@@ -230,10 +230,14 @@ const freeToolL10nUrls = new Set<string>([
   '/de/secure-email-gateway',
 ])
 
+// The translated affiliate pages shipped on this date.
+const AFFILIATES_SHIPPED = '2026-10-29'
+const affiliatesUrls = new Set<string>(Object.values(CLUSTERS.affiliates))
+
 // `floorToLaunch`: for locales that launched after the shared ship dates below
 // (nl, pl), no page can be older than the launch, so every lastmod is at least
 // the launch date. The first five locales keep their historical dates.
-function localeEntries(locale: 'it' | 'de' | 'es' | 'pt-br' | 'fr' | 'nl' | 'pl' | 'id', launch: string, floorToLaunch = false): SitemapEntry[] {
+function localeEntries(locale: 'it' | 'de' | 'es' | 'pt-br' | 'fr' | 'nl' | 'pl' | 'id' | 'ja', launch: string, floorToLaunch = false): SitemapEntry[] {
   const posts = getAllPosts(locale)
   const hub = `/${locale}/blog`
   const postDate = new Map(posts.map((p) => [`${hub}/${p.slug}`, p.updated || p.date]))
@@ -266,7 +270,9 @@ function localeEntries(locale: 'it' | 'de' | 'es' | 'pt-br' | 'fr' | 'nl' | 'pl'
                   ? BULK_VERIFIER_SHIPPED
                   : freeToolL10nUrls.has(path)
                     ? FREE_TOOLS_L10N_SHIPPED
-                    : launch),
+                    : affiliatesUrls.has(path)
+                      ? AFFILIATES_SHIPPED
+                      : launch),
     }))
   if (!floorToLaunch) return entries
   return entries.map((e) => ({ ...e, lastModified: e.lastModified && e.lastModified > launch ? e.lastModified : launch }))
@@ -312,6 +318,13 @@ export function plEntries(): SitemapEntry[] {
 const ID_LAUNCH = '2026-10-23'
 export function idEntries(): SitemapEntry[] {
   return localeEntries('id', ID_LAUNCH, true)
+}
+
+// Japanese (batch 3; Malay was skipped for lack of Malay-language demand).
+// Set to the real ship day.
+const JA_LAUNCH = '2026-10-28'
+export function jaEntries(): SitemapEntry[] {
+  return localeEntries('ja', JA_LAUNCH, true)
 }
 
 // ── XML rendering ───────────────────────────────────────────────────────

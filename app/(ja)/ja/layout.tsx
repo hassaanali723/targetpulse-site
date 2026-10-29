@@ -1,0 +1,92 @@
+import type { Metadata } from 'next'
+import '../../globals.css'
+import DeferredAnalytics from '@/components/DeferredAnalytics'
+import { EmailOffRoot } from '@/components/EmailOff'
+import { jakarta, jetbrainsMono } from '@/lib/fonts'
+
+// Root layout for the Japanese site, so that <html lang="ja">
+// is set on the server for every /ja/ page (the English layout in app/(en)
+// hard-codes lang="en", and a nested layout cannot change it). Fonts, the
+// analytics loader and the head hints are the same as the English layout.
+
+const baseUrl = 'https://giggal.ai'
+
+export const metadata: Metadata = {
+  metadataBase: new URL(baseUrl),
+  title: {
+    default: 'Giggal.ai：無料のメールアドレス検証（キャッチオールドメイン対応）',
+    template: '%s | Giggal.ai',
+  },
+  description:
+    'キャッチオールドメインとアクセプトオール（accept-all）のドメインにも対応した無料のメールアドレス検証です。精度は98.5%です。メールリストをクリーニングしてバウンスを減らし、送信者レピュテーションを守ります。',
+  authors: [{ name: 'Giggal.ai', url: baseUrl }],
+  creator: 'Giggal.ai',
+  publisher: 'Giggal.ai',
+  openGraph: {
+    siteName: 'Giggal.ai',
+    locale: 'ja_JP',
+    type: 'website',
+    images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai メールアドレス検証' }],
+  },
+  twitter: { card: 'summary_large_image' },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, 'max-video-preview': -1, 'max-image-preview': 'large', 'max-snippet': -1 },
+  },
+}
+
+// Organization and WebSite nodes for the localized pages. Same @id as the
+// English layout so search engines merge them into one entity; only the
+// language-dependent fields differ.
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${baseUrl}/#organization`,
+      name: 'Giggal.ai',
+      url: baseUrl,
+      logo: { '@type': 'ImageObject', url: `${baseUrl}/giggal-logo.png` },
+      alternateName: ['Giggal', 'Giggal AI'],
+      sameAs: [
+        'https://www.g2.com/products/giggal/reviews',
+        'https://www.trustpilot.com/review/giggal.ai',
+        'https://sourceforge.net/software/product/Giggal.ai/',
+        'https://www.producthunt.com/products/giggal-ai',
+        'https://www.linkedin.com/company/giggal-ai/',
+        'https://www.capterra.com/p/10053924/Giggal-ai/',
+        'https://claude.ai/directory/connectors/giggal-ai',
+        'https://zapier.com/apps/giggalai/integrations',
+        'https://github.com/giggal-ai/giggal-mcp',
+      ],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${baseUrl}/#website`,
+      url: baseUrl,
+      name: 'Giggal.ai',
+      alternateName: 'Giggal',
+      inLanguage: ['en', 'it', 'de', 'es', 'pt-BR', 'fr', 'nl', 'pl', 'id', 'ja'],
+      publisher: { '@id': `${baseUrl}/#organization` },
+    },
+  ],
+}
+
+export default function JapaneseRootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="ja" className={`scroll-smooth ${jakarta.variable} ${jetbrainsMono.variable}`}>
+      <head>
+        <meta name="theme-color" content="#4f46e5" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.clarity.ms" />
+        <link rel="dns-prefetch" href="https://scripts.clarity.ms" />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        <DeferredAnalytics />
+      </head>
+      <body className="font-sans" suppressHydrationWarning>
+        <EmailOffRoot>{children}</EmailOffRoot>
+      </body>
+    </html>
+  )
+}

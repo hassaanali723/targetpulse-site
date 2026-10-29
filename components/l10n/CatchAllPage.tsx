@@ -88,7 +88,7 @@ export default function CatchAllPageL10n({ locale, content: c }: { locale: L10nL
       <section className="max-w-6xl mx-auto px-6 pt-28 md:pt-32 pb-24 grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-12 lg:gap-16 items-center">
         <div className="min-w-0 space-y-6">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900">
-            <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">{c.h1Accent}</span>{' '}
+            <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">{c.h1Accent}</span>{locale === 'ja' ? null : ' '}
             {c.h1Tail}
           </h1>
           <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-xl font-medium">{c.intro}</p>

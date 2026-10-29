@@ -80,6 +80,8 @@ export default function ComparePageL10n({ locale, versus }: { locale: L10nLocale
   const A = c.a.name
   const B = c.b.name
   const ui = c.ui
+  // Sentence-final period after a link: Japanese uses 。
+  const end = locale === 'ja' ? '。' : '.'
   const [aSlug, bSlug] = versus.split('-vs-')
 
   const others = ALL_COMPETITOR_SLUGS.filter((s) => s !== aSlug && s !== bSlug)
@@ -211,11 +213,13 @@ export default function ComparePageL10n({ locale, versus }: { locale: L10nLocale
           {ui.altSentence[2]}
           {altLink(bSlug, B)}
           {ui.altSentence[4]}
-          <Link href="/alternatives" hrefLang="en" className={link}>{ui.compareEvery}</Link>.
+          <Link href="/alternatives" hrefLang="en" className={link}>{ui.compareEvery}</Link>
+          {end}
         </p>
         <p className="text-sm text-slate-500 font-medium">
           {ALT_UI[locale].toolLead}
-          <L10nLink href="/email-checker" locale={locale} className={link}>{ALT_UI[locale].related[0].anchor}</L10nLink>.
+          <L10nLink href="/email-checker" locale={locale} className={link}>{ALT_UI[locale].related[0].anchor}</L10nLink>
+          {end}
         </p>
       </section>
 

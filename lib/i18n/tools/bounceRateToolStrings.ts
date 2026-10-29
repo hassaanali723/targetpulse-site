@@ -454,6 +454,51 @@ const id: BounceRateToolStrings = {
   },
 }
 
+const ja: BounceRateToolStrings = {
+  tabAria: '計算する項目',
+  tabEmail: 'メールのバウンス率',
+  tabWebsite: 'Webサイトの直帰率（GA4）',
+  fieldSent: { label: '送信数', hint: 'メール配信ツールのレポートにある送信の合計です。', placeholder: '10,000' },
+  fieldHard: { label: 'ハードバウンス数', hint: '恒久的なエラーです。メールアドレスが存在しません。', placeholder: '150' },
+  fieldSoft: { label: 'ソフトバウンス数', hint: '一時的なエラーです。ツールにバウンス数が1つしかない場合は空欄にします。', placeholder: '100' },
+  fieldSessions: { label: 'セッション数', hint: 'Google アナリティクス 4のレポートから入力します。', placeholder: '2,000' },
+  fieldEngaged: { label: 'エンゲージのあったセッション数', hint: '同じレポート、同じ期間の数値を入力します。', placeholder: '1,250' },
+  tryExamplePrompt: '数値を入力するか、',
+  tryExampleLink: '例を試してください',
+  errorWhole: '小数や文字を含まない整数で入力してください。',
+  errorCheck: '数値を確認してください。',
+  emailResults: {
+    heading: 'メールのバウンス率',
+    bouncedOfSent: (bounced, sent) => `${sent}通中${bounced}通がバウンスしました。Mailchimp、Klaviyo、Mailgunはこの方法で計算しています。`,
+    statHard: { label: 'ハードバウンス率', note: '多くの配信サービスの上限は、これだけを数えます。' },
+    statSoft: { label: 'ソフトバウンス率', note: 'メールボックスの容量超過などの一時的なエラーです。' },
+    statDelivered: { label: '配信率', note: (delivered) => `${delivered}通が受信サーバーに受け付けられました。` },
+    deliveredComparison: (pct) => `ツールが送信数ではなく配信数で割る場合、同じ数値で${pct}になります。比較する前に、ツールの計算方法を確認してください。`,
+    allUnderLimits: (hardRate) => `ハードバウンス率は${hardRate}で、下記のすべての配信サービスの上限を下回っています。`,
+    overLimits: (hardRate, providers) => `ハードバウンス率は${hardRate}で、${providers}の上限に達しているか、上回っています。次の送信の前にリストをクリーニングしてください。`,
+    limitsHeader: '配信サービスの上限との比較',
+    countsHard: 'ハードバウンスのみ',
+    countsAll: 'すべてのバウンス',
+    atLimit: '上限ちょうど',
+    overLimit: '上限超過',
+    underLimit: '上限未満',
+    tooMany: (n) => `${n}件超過しています`,
+    leftRoom: (n, counts) => `${counts === 'hard' ? 'ハードバウンス' : 'バウンス'}はあと${n}件まで`,
+    providerNote: 'Gmail、Yahoo、Microsoftはバウンス率の上限を公開していません。0.3%のルールは迷惑メールの報告率に関するもので、バウンスとは関係ありません。Mailchimpも数値を公開していません。',
+    ctaBox: {
+      title: 'ハードバウンスの多くは、存在しないメールアドレスが原因です',
+      desc: '送信前にリストを確認すれば、こうしたアドレスを取り除けます。バウンスとして数えられることもありません。',
+      button: 'メールリストを検証する',
+    },
+  },
+  websiteResults: {
+    heading: 'Webサイトの直帰率（GA4）',
+    sessionsNotEngaged: (unengaged, sessions) => `${sessions}セッション中${unengaged}セッションにエンゲージメントがありませんでした。`,
+    statEngagement: { label: 'エンゲージメント率', note: 'エンゲージのあったセッション数 ÷ セッション数です。直帰率は100%からこの値を引いたものです。' },
+    statEngaged: { label: 'エンゲージのあったセッション数', note: '10秒を超える、キーイベントがある、または2ページ以上の表示があったセッションです。' },
+  },
+}
+
 export const BOUNCE_RATE_TOOL_STRINGS: Record<Locale, BounceRateToolStrings> = {
   en,
   fr,
@@ -464,6 +509,7 @@ export const BOUNCE_RATE_TOOL_STRINGS: Record<Locale, BounceRateToolStrings> = {
   nl,
   pl,
   id,
+  ja,
 }
 
 export function bounceRateToolStrings(locale: Locale): BounceRateToolStrings {

@@ -9,12 +9,13 @@ export const SIGNUP_URL = 'https://emailverifier.giggal.ai/sign-up'
 export const SIGNIN_URL = 'https://emailverifier.giggal.ai/sign-in'
 
 export const nav = {
-  primary: { name: 'Cek email valid', href: '/id/cek-email-valid' },
+  // Same links, in the same order, as the English navbar (components/Navbar.tsx).
   links: [
-    { name: 'Catch-all', href: '/id/verifikasi-catch-all' },
+    { name: 'Verifikasi catch-all', href: '/id/verifikasi-catch-all' },
     { name: 'Integrasi', href: '/id/integrasi' },
+    { name: 'MCP', href: '/id/mcp' },
     { name: 'Harga', href: '/id/harga' },
-    { name: 'Kontak', href: '/id/kontak' },
+    { name: 'Program afiliasi', href: '/id/program-afiliasi' },
   ],
   login: 'Masuk',
   signup: 'Daftar gratis',
@@ -80,7 +81,7 @@ export const footer = {
     heading: 'Perusahaan',
     links: [
       { name: 'Kontak', href: '/id/kontak' },
-      { name: 'Program afiliasi (dalam bahasa Inggris)', href: '/affiliates' },
+      { name: 'Program afiliasi', href: '/id/program-afiliasi' },
     ],
   },
   legal: [

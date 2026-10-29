@@ -9,12 +9,13 @@ export const SIGNUP_URL = 'https://emailverifier.giggal.ai/sign-up'
 export const SIGNIN_URL = 'https://emailverifier.giggal.ai/sign-in'
 
 export const nav = {
-  primary: { name: 'Mailadres controleren', href: '/nl/mailadres-controleren' },
+  // Same links, in the same order, as the English navbar (components/Navbar.tsx).
   links: [
-    { name: 'Catch-all', href: '/nl/catch-all-verificatie' },
+    { name: 'Catch-all-verificatie', href: '/nl/catch-all-verificatie' },
     { name: 'Integraties', href: '/nl/integraties' },
+    { name: 'MCP', href: '/nl/mcp' },
     { name: 'Prijzen', href: '/nl/prijzen' },
-    { name: 'Contact', href: '/nl/contact' },
+    { name: 'Verdien met ons', href: '/nl/partnerprogramma' },
   ],
   login: 'Inloggen',
   signup: 'Gratis registreren',
@@ -80,7 +81,7 @@ export const footer = {
     heading: 'Bedrijf',
     links: [
       { name: 'Contact', href: '/nl/contact' },
-      { name: 'Partnerprogramma (in het Engels)', href: '/affiliates' },
+      { name: 'Partnerprogramma', href: '/nl/partnerprogramma' },
     ],
   },
   legal: [

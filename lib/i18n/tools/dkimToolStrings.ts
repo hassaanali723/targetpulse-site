@@ -1006,7 +1006,112 @@ CATATAN PENTING IMPLEMENTASI:
   },
 }
 
-export const DKIM_TOOL_STRINGS: Record<Locale, DkimToolStrings> = { en, it: itTool, de: deTool, fr: frTool, es: esTool, 'pt-br': ptBrTool, nl: nlTool, pl: plTool, id: idTool }
+const jaTool: DkimToolStrings = {
+  domainLabel: 'ドメイン名',
+  domainPlaceholder: 'example.com',
+  domainHelp: 'メールを送信するドメインです',
+  selectorLabel: 'DKIMセレクター',
+  selectorPlaceholder: 's2026a',
+  selectorHelp: 'DNS上でこの鍵ペアを識別する名前です（例：s2026a）',
+  keySizeLabel: '鍵の長さ',
+  keySizeOptions: {
+    2048: '2048ビット（推奨）',
+    1024: '1024ビット（Gmailが受け付ける最小値）',
+    4096: '4096ビット（レコードが長いため、DNSサービスの対応を確認してください）',
+  },
+  keySizeHelp: {
+    2048: 'GmailとRFC 8301が推奨する長さです',
+    1024: '古い長さです。現在の暗号解読技術に対しては強度が不足しています',
+    4096: 'DNSのUDPパケットの標準上限である512バイトを超えます',
+  },
+  invalidSelector: 'セレクターが正しくありません',
+  invalidDomain: 'ドメインが正しくありません',
+  generationFailed: '鍵の生成に失敗しました',
+  generating: 'ブラウザ内でRSA鍵ペアを生成しています...',
+  generate: 'DKIM鍵を生成',
+
+  dnsTitle: 'DNS TXTレコード',
+  keyInfo: (bits, chars) => `${bits}ビット（${chars}文字）`,
+  formatLabel: '形式：',
+  formatSingle: '1つの文字列',
+  formatChunked: '255文字ごとに分割',
+  formatBind: 'BINDゾーン',
+  hostLabel: 'レコード名 / ホスト：',
+  copied: 'コピーしました',
+  copyHost: 'ホストをコピー',
+  orFqdn: (fqdn) => `（または ${fqdn}）`,
+  valueLabel: 'レコードの値（TXT）：',
+  copyValue: '値をコピー',
+  chunkedNote:
+    'DNSサービス（GoDaddy、Namecheapなど）がTXTの1つの文字列を255文字までに制限している場合は、この分割形式を使ってください。',
+
+  privateKeyTitle: '秘密鍵',
+  pkcs1Label: 'PKCS#1 (RSA)',
+  pkcs8Label: 'PKCS#8',
+  hide: '隠す',
+  show: '表示',
+  reveal: 'クリックして秘密鍵を表示',
+  copiedKey: '鍵をコピーしました',
+  copyPrivateKey: '秘密鍵をコピー',
+  downloadKey: '鍵ファイルをダウンロード',
+  downloadBundle: '設定手順をダウンロード（.txt）',
+  rulesTitle: '導入時の重要なルール：',
+  rules: [
+    'この秘密鍵は外部に公開しないでください。設定するのはメール転送エージェント（MTA）またはメール配信プラットフォームの中だけです。',
+    '先にDNS TXTレコードを公開してください。DNSへの反映前に署名付きメールを送ると、認証に失敗し、バウンスの原因になります。',
+    '多くのメールソフトウェア（Postfix、OpenDKIM、cPanel、Exim）は、従来のPKCS#1 RSA形式を前提としています。',
+  ],
+
+  bundleFileName: (domain, selector) => `${domain}-${selector}-dkim-instructions.txt`,
+  bundleText: (keys) => `${keys.domain.toUpperCase()} のDKIM設定手順
+Giggal.aiのDKIM生成ツール（ブラウザ内で生成）で作成
+
+==================================================
+1. DNS TXTレコード
+==================================================
+ホスト / 名前：
+${keys.dnsRecordName}
+（または完全修飾ドメイン名（FQDN）：${keys.dnsRecordFqdn}）
+
+TXTレコードの値（1つの文字列）：
+${keys.dnsRecordValue}
+
+TXTレコードの値（255文字ごとに分割、引用符付き）：
+${keys.dnsRecordChunked}
+
+BINDゾーン形式：
+${keys.bindRecord}
+
+==================================================
+2. 秘密鍵（メールサーバーまたはMTAに設定）
+==================================================
+形式：PKCS#1（従来のRSA）
+${keys.privateKeyPkcs1Pem}
+
+形式：PKCS#8（標準）
+${keys.privateKeyPkcs8Pem}
+
+==================================================
+導入時の重要な注意事項：
+- メールサーバーでDKIM署名を有効にする前に、DNS TXTレコードを追加し、反映されたことを確認してください。
+- 秘密鍵は外部に公開しないでください。他人と共有したり、DNSに公開したりしないでください。
+`,
+
+  errors: {
+    'selector-empty': 'セレクターを入力してください',
+    'selector-too-long': 'セレクターは63文字以内で入力してください',
+    'selector-chars':
+      'セレクターに使えるのは英字、数字、ハイフンだけです。ハイフンで始めたり終えたりすることはできません',
+    'domain-empty': 'ドメインを入力してください',
+    'domain-too-long': 'ドメインが長すぎます',
+    'domain-no-tld': 'ドメインにはトップレベルドメインが必要です（例：example.com）',
+    'domain-label-length': 'ドメインのラベルの長さが正しくありません',
+    'domain-label': (label) => `ドメイン名に正しくないラベル「${label}」が含まれています`,
+    'no-web-crypto': 'このブラウザではWeb Crypto API（crypto.subtle）を使用できません',
+  },
+}
+
+export const DKIM_TOOL_STRINGS: Record<Locale, DkimToolStrings> = { en, it: itTool, de: deTool, fr: frTool, es: esTool, 'pt-br': ptBrTool, nl: nlTool, pl: plTool, id: idTool, ja: jaTool }
 
 export function dkimToolStrings(locale: Locale): DkimToolStrings {
   return DKIM_TOOL_STRINGS[locale] ?? en

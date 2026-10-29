@@ -552,7 +552,60 @@ const idTool: ExtractorToolStrings = {
   csvHeader: 'Email,Domain,TLD',
 }
 
-export const EXTRACTOR_TOOL_STRINGS: Record<Locale, ExtractorToolStrings> = { en, de: deTool, fr: frTool, es: esTool, it: itTool, 'pt-br': ptBrTool, nl: nlTool, pl: plTool, id: idTool }
+const jaTool: ExtractorToolStrings = {
+  inputLabel: 'テキストを貼り付けるか、ファイルをドロップ',
+  clearAll: 'すべてクリア',
+  dropBefore: 'ここにファイルをドロップするか、',
+  dropLink: 'ファイルを選択',
+  dropAfter: 'してください',
+  supports: 'TXT、CSV、TSV、XLSX、XLS、HTML、JSON、EML、VCF、ログファイルに対応',
+  placeholder: 'テキスト、HTMLのソースコード、文書の内容、または anna@example.com のようなアドレスを含む連絡先リストを貼り付けてください...',
+  processing: 'バックグラウンドで処理しています...',
+  readingFiles: 'ファイルを読み込んでいます...',
+  readingFile: (name, index, total) => `${name} を読み込んでいます（${index}/${total}）...`,
+  fileError: 'アップロードしたファイルのうち1つを読み込めませんでした。ファイル形式を確認してください。',
+  optDeduplicate: '重複を削除',
+  optLowercase: 'アドレス全体を小文字にする',
+  optWrittenOut: '文字で書かれたアドレスを変換（[at]、[dot]）',
+  optHideRole: '役割アドレスを非表示（info@、support@）',
+  sortLabel: '並べ替え：',
+  sortNone: '出現順',
+  sortAlpha: 'アルファベット順（A-Z）',
+  sortDomain: 'ドメイン順',
+  domainFilters: 'ドメインの絞り込み',
+  includeLabel: '次のドメインだけを含める（カンマ区切り）：',
+  includePlaceholder: '例：example.com, company.com',
+  excludeLabel: '次のドメインを除外する（カンマ区切り）：',
+  excludePlaceholder: '例：mailinator.com, tempmail.com',
+  uniqueAddresses: '重複なしのアドレス',
+  addressesListed: '表示中のアドレス',
+  totalDetected: '検出した総数',
+  copied: 'コピーしました',
+  copyList: 'リストをコピー',
+  copyComma: 'カンマ区切りでコピー',
+  downloadTxt: 'TXTをダウンロード',
+  downloadCsv: 'CSVをダウンロード',
+  topDomains: '検出数の多いドメイン：',
+  moreDomains: (n) => `ほか${n.toLocaleString('ja-JP')}件のドメイン`,
+  thIndex: '#',
+  thEmail: 'メールアドレス',
+  thDomain: 'ドメイン',
+  thTld: 'TLD',
+  showing: (from, to, total) =>
+    `${total.toLocaleString('ja-JP')}件中${from.toLocaleString('ja-JP')}〜${to.toLocaleString('ja-JP')}件を表示`,
+  nextTitle: '次のステップ：送信前にこれらのアドレスを検証する',
+  nextText:
+    'アドレスが見つかっても、メールボックスが存在するかどうかはわかりません。1,000回分の無料クレジットで、アドレスが有効かを確認したり、リスト全体をクリーニングしたりできます。',
+  verifyButton: 'これらのアドレスを検証',
+  checkOneButton: '1件だけ確認する',
+  checkOneHref: '/ja/email-checker',
+  noResults: '現在の絞り込み条件では、有効なメールアドレスが見つかりませんでした。',
+  fileTxt: 'extracted-emails.txt',
+  fileCsv: 'extracted-emails.csv',
+  csvHeader: 'Email,Domain,Top-Level Domain',
+}
+
+export const EXTRACTOR_TOOL_STRINGS: Record<Locale, ExtractorToolStrings> = { en, de: deTool, fr: frTool, es: esTool, it: itTool, 'pt-br': ptBrTool, nl: nlTool, pl: plTool, id: idTool, ja: jaTool }
 
 export function extractorToolStrings(locale: Locale): ExtractorToolStrings {
   return EXTRACTOR_TOOL_STRINGS[locale] ?? en

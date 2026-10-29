@@ -147,7 +147,8 @@ export default function FreeEmailProvidersTool({ locale = 'en' }: { locale?: Loc
                 <div className="text-sm text-indigo-900">
                   <p className="font-bold break-all">{t.isFree(checked.domain)}</p>
                   <p className="mt-0.5">
-                    {t.belongsTo(match.name, match.company !== match.name ? freeProviderCompany(t, match) : null)}{' '}
+                    {t.belongsTo(match.name, match.company !== match.name ? freeProviderCompany(t, match) : null)}
+                    {locale === 'ja' ? null : ' '}
                     {t.kindNotes[match.kind]}
                   </p>
                 </div>

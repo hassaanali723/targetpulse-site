@@ -149,6 +149,22 @@ export const REVIEW_BADGES: Record<L10nLocale, ReviewBadgeStrings> = {
       { title: 'Tanpa biaya untuk hasil tidak diketahui', text: 'Anda hanya membayar untuk hasil yang jelas.' },
     ],
   },
+  ja: {
+    heading: '実際のチームによる評価',
+    readOn: (p) => `${p}でGiggal.aiのレビューを読む`,
+    rating: (n) => n.toFixed(1),
+    reviews: (n) => `${n}件のレビュー`,
+    verified: '認証済みユーザーのレビュー',
+    read: 'レビューを読む',
+    used: 'Giggal.aiをお使いですか？',
+    leave: 'Trustpilotでレビューを書く',
+    points: [
+      { title: '無料クレジット1,000件', text: '始めるのにクレジットカードは不要です。' },
+      { title: 'クレジットに有効期限はありません', text: '一度購入すれば、必要なときに使えます。' },
+      { title: 'キャッチオールドメインにもはっきりした結果', text: '「リスクあり」ではなく、有効か無効かを返します。' },
+      { title: '不明の結果には料金がかかりません', text: '料金がかかるのは、はっきりした結果だけです。' },
+    ],
+  },
 }
 
 // The reviews themselves stay in English as written (plans/08 D4), so the
@@ -201,6 +217,12 @@ export const REVIEW_WALL: Record<L10nLocale, ReviewWallStrings> = {
     sub: 'Ulasan asli dalam bahasa Inggris, dari G2, Product Hunt, dan SourceForge.',
     showAll: 'Tampilkan {n} ulasan lainnya',
     showFewer: 'Tampilkan lebih sedikit ulasan',
+  },
+  ja: {
+    title: 'Giggal.aiについてのお客様の声',
+    sub: 'G2、Product Hunt、SourceForgeに英語で投稿されたレビューの原文です。',
+    showAll: '残りの{n}件のレビューを表示',
+    showFewer: 'レビューの表示を減らす',
   },
 }
 
@@ -555,6 +577,50 @@ export const MCP: Record<L10nLocale, McpStrings> = {
       vscode: { note: <>Ganti <M>YOUR_API_KEY</M> dengan key dari dashboard Giggal.ai Anda. VS Code memakai <M>&quot;servers&quot;</M>, bukan <M>&quot;mcpServers&quot;</M>.</> },
       cline: { note: <>Ganti <M>YOUR_API_KEY</M> dengan key dari dashboard Giggal.ai Anda. Path di sini adalah path macOS. Sesuaikan dengan sistem Anda sendiri.</> },
       zed: { note: <>Ganti <M>YOUR_API_KEY</M> dengan key dari dashboard Giggal.ai Anda.</> },
+    },
+  },
+  ja: {
+    title: 'お使いのAIとつなぎましょう。',
+    subtitle: 'MCPでGiggal.aiをAIエージェントに追加すると、Claude、Cursor、VS Codeなどの中で、キャッチオールドメインも含めてメールアドレスをチェックできます。',
+    toolsAria: 'AIツール',
+    groups: ['チャットアプリ', 'コードエディタ'],
+    pasteInto: '貼り付け先：',
+    or: ' または ',
+    serverUrl: 'MCPサーバーのURL',
+    copy: 'コピー',
+    copied: 'コピーしました',
+    copyAria: 'クリップボードにコピー',
+    restart: 'サーバーを追加したらクライアントを再起動し、次のように聞いてください。',
+    askBefore: '「',
+    askAfter: 'にメールを届けられますか？」',
+    guide: '詳しいガイド',
+    tools: {
+      claude: {
+        subtitle: 'Giggal.aiをClaudeのカスタムコネクタとして追加します。設定ファイルも、APIキーの貼り付けも不要です。',
+        steps: [
+          <>Claude（Webまたはデスクトップ）で、<B>Settings → Connectors</B>を開きます。</>,
+          <><B>Add</B> → <B>Add custom connector</B>をクリックします。</>,
+          <>名前を<M>Giggal.ai</M>にし、下のMCPのURLを貼り付けて<B>Add</B>をクリックします。</>,
+          <><B>Giggal.ai</B>のコネクタを開き、<B>Connect</B>をクリックします。</>,
+          <><B>Allow</B>をクリックして<M>verify:read</M>を許可します。この許可で、アシスタントはアドレスのチェック、クレジットの確認、過去のチェックの検索を行えます。</>,
+        ],
+      },
+      chatgpt: {
+        subtitle: 'Giggal.aiをChatGPTのカスタムプラグインとして追加し、OAuthで接続します。APIキーの貼り付けは不要です。',
+        steps: [
+          <>ChatGPTで、サイドバーの<B>Plugins</B>を開き、右上の<B>+</B>をクリックします。</>,
+          <>名前を<M>Giggal.ai</M>にし、<B>Server URL</B>に下のMCPのURLを入力します。<B>Authentication → OAuth</B>を選び、確認のチェックを入れて<B>Create</B>をクリックします。</>,
+          <><B>Giggal.ai</B>のプラグインを開き、<B>Connect</B>をクリックしてから<B>Sign in with Giggal.ai</B>をクリックします。</>,
+          <><B>Allow</B>をクリックして<M>verify:read</M>を許可します。この許可で、アシスタントはアドレスのチェック、クレジットの確認、過去のチェックの検索を行えます。</>,
+        ],
+      },
+      'claude-code': { note: <><M>YOUR_API_KEY</M>を、Giggal.aiのダッシュボードで作成したキーに置き換えてください。すでに<M>giggal</M>サーバーがある場合は、先に<M>claude mcp remove giggal --scope user</M>を実行してから、もう一度追加してください。</> },
+      codex: { note: <>Codexはトークンを環境変数から読み込みます。環境変数を設定し、シェルを再読み込みして、Codexを閉じてから開き直してください。その後、<M>/mcp</M>を実行して確認します。<EnvBlock /></> },
+      cursor: { note: <><M>YOUR_API_KEY</M>を、Giggal.aiのダッシュボードで作成したキーに置き換えてください。</> },
+      windsurf: { note: <><M>YOUR_API_KEY</M>を、Giggal.aiのダッシュボードで作成したキーに置き換えてください。</> },
+      vscode: { note: <><M>YOUR_API_KEY</M>を、Giggal.aiのダッシュボードで作成したキーに置き換えてください。VS Codeでは<M>&quot;mcpServers&quot;</M>ではなく<M>&quot;servers&quot;</M>を使います。</> },
+      cline: { note: <><M>YOUR_API_KEY</M>を、Giggal.aiのダッシュボードで作成したキーに置き換えてください。ここのパスはmacOSのものです。お使いのシステムに合わせて変更してください。</> },
+      zed: { note: <><M>YOUR_API_KEY</M>を、Giggal.aiのダッシュボードで作成したキーに置き換えてください。</> },
     },
   },
 }

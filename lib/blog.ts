@@ -124,15 +124,29 @@ function renderTable(lines: string[], locale: BlogLocale): string {
   return `<div class="blog-table-wrap"><table class="blog-table">${thead}${tbody}</table></div>`
 }
 
+// Lines of one paragraph are joined with a space, except in Japanese, where a
+// space between two Japanese characters shows as a gap (e.g. a bold FAQ
+// question line followed by its answer line).
+const CJK_RE = /[\u3000-\u30ff\u4e00-\u9fff\uff00-\uffef]/
+function joinLines(lines: string[], locale: BlogLocale): string {
+  if (locale !== 'ja') return lines.join(' ')
+  return lines.reduce((acc, line) => {
+    if (!acc) return line
+    const last = acc.replace(/\*+$/, '').slice(-1)
+    const first = line.replace(/^\*+/, '').charAt(0)
+    return acc + (CJK_RE.test(last) || CJK_RE.test(first) ? '' : ' ') + line
+  }, '')
+}
+
 // A standalone image line, optionally followed by a caption line.
 const IMAGE_RE = /^!\[([^\]]*)\]\(([^)]+)\)\s*$/
 
 function renderFigure(lines: string[], locale: BlogLocale): string {
   const m = IMAGE_RE.exec(lines[0].trim())
-  if (!m) return `<p>${inline(lines.join(' '), locale)}</p>`
+  if (!m) return `<p>${inline(joinLines(lines, locale), locale)}</p>`
   const alt = escapeHtml(m[1]).replace(/"/g, '&quot;')
   const src = m[2].trim()
-  const caption = lines.slice(1).join(' ').trim()
+  const caption = joinLines(lines.slice(1), locale).trim()
   const cap = caption ? `<figcaption>${inline(caption, locale)}</figcaption>` : ''
   return `<figure class="blog-figure"><img src="${src}" alt="${alt}" loading="lazy" />${cap}</figure>`
 }
@@ -271,7 +285,7 @@ export function renderMarkdown(body: string, locale: BlogLocale): { html: string
         .join('')
       html.push(`<ol>${items}</ol>`)
     } else {
-      html.push(`<p>${inline(lines.join(' '), locale)}</p>`)
+      html.push(`<p>${inline(joinLines(lines, locale), locale)}</p>`)
     }
   }
   return { html: html.join('\n'), toc }
