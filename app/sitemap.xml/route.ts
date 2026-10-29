@@ -21,6 +21,7 @@ export function GET() {
       'sitemap-nl.xml',
       'sitemap-pl.xml',
       'sitemap-id.xml',
+      'sitemap-ja.xml',
     ]),
     { headers: XML_HEADERS }
   )

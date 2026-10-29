@@ -6,9 +6,9 @@ import Link from 'next/link'
 import LanguageSwitcher, { LanguageSwitcherInline } from '@/components/i18n/LanguageSwitcher'
 import { getStrings, SIGNUP_URL, SIGNIN_URL, type L10nLocale } from '@/lib/i18n/strings'
 
-// Localized navbar. Same layout and breakpoints as components/Navbar.tsx (the
-// hamburger stays until lg so tablets do not wrap); labels and links come from
-// the locale's string module.
+// Localized navbar. Same layout, breakpoints and links as components/Navbar.tsx
+// (the hamburger stays until lg so tablets do not wrap); labels and links come
+// from the locale's string module.
 
 // tone="dark" is used by the localized homes only, where the navbar sits on
 // the slate hero (the English home does the same). Other pages stay light.
@@ -57,14 +57,16 @@ export default function NavbarL10n({ locale, tone = 'light' }: { locale: L10nLoc
               )}
             </Link>
 
-            <nav className={`hidden lg:flex items-center space-x-5 xl:space-x-8 text-sm font-bold whitespace-nowrap ${dark ? 'text-slate-300' : 'text-slate-600'}`}>
-              <Link href={nav.primary.href} className={itemClass}>{nav.primary.name}</Link>
+            {/* The translated labels are longer than the English ones, so between lg
+                and xl the items sit closer and slightly smaller to keep the sign-up
+                button on screen at 1024px. */}
+            <nav className={`hidden lg:flex items-center space-x-3 xl:space-x-8 text-[13px] xl:text-sm font-bold whitespace-nowrap ${dark ? 'text-slate-300' : 'text-slate-600'}`}>
               {nav.links.map((link) => (
                 <Link key={link.href} href={link.href} className={itemClass}>{link.name}</Link>
               ))}
             </nav>
 
-            <div className="hidden lg:flex items-center gap-4 xl:gap-6 whitespace-nowrap">
+            <div className="hidden lg:flex items-center gap-3 xl:gap-6 whitespace-nowrap">
               <LanguageSwitcher current={locale} tone={tone} />
               <a href={SIGNIN_URL} target="_blank" rel="noopener noreferrer" className={`text-sm font-bold transition-colors ${dark ? 'text-slate-300 hover:text-white' : 'text-slate-600 hover:text-indigo-600'}`}>
                 {nav.login}
@@ -73,7 +75,7 @@ export default function NavbarL10n({ locale, tone = 'light' }: { locale: L10nLoc
                 href={SIGNUP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-sm font-bold rounded-xl text-white shadow-md shadow-indigo-600/20 hover:-translate-y-0.5 transition-all"
+                className="px-4 xl:px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-sm font-bold rounded-xl text-white shadow-md shadow-indigo-600/20 hover:-translate-y-0.5 transition-all"
               >
                 {nav.signup}
               </a>
@@ -100,11 +102,6 @@ export default function NavbarL10n({ locale, tone = 'light' }: { locale: L10nLoc
           isMobileMenuOpen ? 'translate-y-0' : '-translate-y-2'
         }`}>
           <div className="px-6 py-4 space-y-1">
-            <Link href={nav.primary.href} onClick={() => setIsMobileMenuOpen(false)} className={mobileItem}>
-              <span>{nav.primary.name}</span>
-              <span className="text-slate-300 text-lg">›</span>
-            </Link>
-            <div className="my-1 border-t border-slate-100" />
             {nav.links.map((link) => (
               <Link key={link.href} href={link.href} onClick={() => setIsMobileMenuOpen(false)} className={mobileItem}>
                 <span>{link.name}</span>

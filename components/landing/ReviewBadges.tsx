@@ -1,5 +1,6 @@
 import { Check } from 'lucide-react'
 import { CAPTERRA_RATING, PRODUCT_HUNT_RATING, PRODUCT_HUNT_REVIEWS, type ReviewStats } from '@/lib/reviewStats'
+import { gapAfter } from '@/lib/i18n/cjk'
 
 // Review section: one card in the brand gradient (indigo to emerald). Left: the heading and a laurel per
 // review platform (score, stars, logo, review count). Right: four short
@@ -191,7 +192,7 @@ export default function ReviewBadges({
             </div>
 
             <p className="mt-8 text-sm text-slate-500">
-              {s.used}{' '}
+              {s.used}{gapAfter(s.used)}
               <a
                 href={TRUSTPILOT_URL}
                 target="_blank"

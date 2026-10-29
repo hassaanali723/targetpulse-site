@@ -144,7 +144,7 @@ export default async function EmailCheckerL10n({
       {/* ── HERO ─────────────────────────────────────────────── */}
       <section className="max-w-3xl mx-auto px-6 pt-28 md:pt-32 pb-10 text-center space-y-6">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900">
-          {t.hero.h1Lead}{' '}
+          {t.hero.h1Lead}{locale === 'ja' ? null : ' '}
           <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">
             {t.hero.h1Rest}
           </span>
@@ -191,7 +191,7 @@ export default async function EmailCheckerL10n({
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={r.logo} alt="" aria-hidden="true" width={20} height={20} loading="lazy" decoding="async" className="w-5 h-5 object-contain" />
               <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" aria-hidden="true" />
-              <span className="text-[13px] font-extrabold text-slate-900 tabular-nums">{r.rating.toFixed(1).replace('.', ',')}</span>
+              <span className="text-[13px] font-extrabold text-slate-900 tabular-nums">{locale === 'ja' ? r.rating.toFixed(1) : r.rating.toFixed(1).replace('.', ',')}</span>
               <span className="text-[12.5px] font-medium text-slate-500 group-hover:text-slate-700">{r.note}</span>
             </a>
           ))}

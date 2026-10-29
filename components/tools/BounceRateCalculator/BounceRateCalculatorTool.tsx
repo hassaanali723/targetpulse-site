@@ -29,6 +29,8 @@ const fmtLocale = (n: number, locale: Locale) => {
 const andJoiner = (names: string[], loc: Locale): string => {
   if (names.length === 0) return ''
   if (names.length === 1) return names[0]
+  // Japanese lists use the ideographic comma, with no word for "and".
+  if (loc === 'ja') return names.join('、')
   const conjunction = {
     en: ' and ',
     fr: ' et ',
@@ -39,6 +41,7 @@ const andJoiner = (names: string[], loc: Locale): string => {
     nl: ' en ',
     pl: ' i ',
     id: ' dan ',
+    ja: '、',
   }[loc] ?? ' and '
   return names.slice(0, -1).join(', ') + conjunction + names[names.length - 1]
 }

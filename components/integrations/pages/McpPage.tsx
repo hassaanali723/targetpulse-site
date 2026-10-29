@@ -37,7 +37,7 @@ export default function McpPage({ common, c, path }: { common: CommonStrings; c:
       {/* Hero */}
       <section className="max-w-6xl mx-auto px-6 pt-28 md:pt-32 pb-16 text-center space-y-6">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900 text-balance">
-          {c.h1Lead}{' '}
+          {c.h1Lead}{common.locale === 'ja' ? null : ' '}
           <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">{c.h1Accent}</span>
         </h1>
         <p className="text-base md:text-lg text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed">

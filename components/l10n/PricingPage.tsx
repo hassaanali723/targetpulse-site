@@ -8,6 +8,7 @@ import JsonLd from '@/components/JsonLd'
 import { faqPageLd } from '@/lib/schema'
 import { breadcrumbL10n } from '@/lib/i18n/schema'
 import { getStrings, type L10nLocale } from '@/lib/i18n/strings'
+import { gapBefore } from '@/lib/i18n/cjk'
 
 // Localized pricing page, the same sections as app/(it)/it/prezzi/page.tsx
 // with the copy passed in. USD prices are shared through PricingTable.
@@ -53,7 +54,7 @@ export default function PricingPageL10n({ locale, content: c }: { locale: L10nLo
 
       <section className="max-w-6xl mx-auto px-6 pt-28 md:pt-32 pb-16 text-center space-y-6">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900">
-          {c.h1Lead}{' '}
+          {c.h1Lead}{locale === 'ja' ? null : ' '}
           <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">{c.h1Accent}</span>
         </h1>
         <p className="text-base md:text-lg text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed">{c.intro}</p>
@@ -64,7 +65,7 @@ export default function PricingPageL10n({ locale, content: c }: { locale: L10nLo
           <div className="inline-flex items-center gap-2.5 bg-slate-50 border border-slate-200 rounded-2xl px-5 py-2.5 text-center sm:text-left">
             <MailCheck className="w-4 h-4 text-indigo-600 shrink-0" />
             <p className="text-xs font-bold text-slate-700">
-              {pricing.formula}{' '}
+              {pricing.formula}{gapBefore(pricing.formulaNote)}
               <span className="font-semibold text-slate-500">{pricing.formulaNote}</span>{' '}
               = <strong className="text-indigo-700 font-extrabold">{pricing.formulaCredit}</strong>
             </p>

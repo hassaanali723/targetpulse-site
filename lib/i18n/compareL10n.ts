@@ -19,6 +19,7 @@ export const COMPARE_SEGMENT: Record<L10nLocale, string> = {
   nl: 'vergelijking',
   pl: 'porownanie',
   id: 'perbandingan',
+  ja: 'compare',
 }
 
 const PAIRS: { versus: string; cluster: ClusterId }[] = [
@@ -46,6 +47,7 @@ const TITLES: Record<string, Partial<Record<L10nLocale, string>>> = {
     nl: 'ZeroBounce vs NeverBounce: prijzen en nauwkeurigheid | Giggal.ai',
   pl: 'ZeroBounce vs NeverBounce: ceny i dokładność | Giggal.ai',
     id: 'ZeroBounce vs NeverBounce: harga dan akurasi | Giggal.ai',
+    ja: 'ZeroBounce vs NeverBounce：料金と正確性の比較 | Giggal.ai',
   },
   'zerobounce-vs-hunter': {
     de: 'ZeroBounce vs Hunter: Preise und Genauigkeit | Giggal.ai',
@@ -78,6 +80,7 @@ const PROFILES: Record<string, Partial<Record<L10nLocale, Profile>>> = {
     nl: { category: 'Pure verificatietool', oneLiner: 'een verificatietool die al lang bestaat, binnen een breed pakket voor bezorgbaarheid.', catchAllApproach: 'geeft catch-all-adressen met AI een score van 1 tot 10 in plaats van de mailbox te bevestigen.', bestFor: 'teams die verificatie willen samen met inbox placement en monitoring van DMARC en blacklists.' },
     pl: { category: 'Wyspecjalizowany weryfikator', oneLiner: 'działający od lat weryfikator, który jest częścią szerokiego pakietu narzędzi do dostarczalności.', catchAllApproach: 'ocenia adresy catch-all za pomocą AI w skali od 1 do 10, zamiast potwierdzić skrzynkę.', bestFor: 'zespołów, które chcą mieć weryfikację razem z testami umieszczenia w skrzynce odbiorczej (inbox placement) oraz monitoringiem DMARC i czarnych list.' },
     id: { category: 'Alat verifikasi murni', oneLiner: 'alat verifikasi yang sudah lama ada dan menjadi bagian dari paket deliverability yang luas.', catchAllApproach: 'memberi alamat catch-all skor 1 sampai 10 dengan AI, bukan memastikan kotak masuknya.', bestFor: 'tim yang ingin verifikasi sekaligus inbox placement serta pemantauan DMARC dan blacklist.' },
+    ja: { category: 'メールアドレス検証専用のツール', oneLiner: '幅広い到達率ツール群の一部として、長く提供されている検証ツールです。', catchAllApproach: 'キャッチオールドメインのアドレスに、メールボックスを確認する代わりに、AIで1〜10のスコアを付けます。', bestFor: '検証に加えて、受信トレイへの到達テスト（インボックスプレースメント）、DMARCとブラックリストの監視も使いたいチーム' },
   },
   neverbounce: {
     it: { category: 'Verificatore puro', oneLiner: 'un verificatore noto per le integrazioni CRM profonde e la pulizia delle liste dentro i tuoi strumenti.', catchAllApproach: 'segna gli indirizzi accept-all e ne risolve solo una piccola parte.', bestFor: 'ai team che puliscono le liste direttamente dentro Salesforce, HubSpot o Marketo.' },
@@ -88,6 +91,7 @@ const PROFILES: Record<string, Partial<Record<L10nLocale, Profile>>> = {
     nl: { category: 'Pure verificatietool', oneLiner: 'een verificatietool die bekendstaat om zijn CRM-integraties en het opschonen van lijsten in je eigen tools.', catchAllApproach: 'markeert accept-all-adressen en lost maar een klein deel daarvan op.', bestFor: 'teams die lijsten direct in Salesforce, HubSpot of Marketo opschonen.' },
     pl: { category: 'Wyspecjalizowany weryfikator', oneLiner: 'weryfikator znany z rozbudowanych integracji z CRM i z czyszczenia list bezpośrednio w twoich narzędziach.', catchAllApproach: 'oznacza adresy accept-all i rozstrzyga tylko niewielką ich część.', bestFor: 'zespołów, które czyszczą listy bezpośrednio w Salesforce, HubSpot lub Marketo.' },
     id: { category: 'Alat verifikasi murni', oneLiner: 'alat verifikasi yang dikenal karena integrasi CRM-nya dan pembersihan daftar langsung di alat Anda.', catchAllApproach: 'menandai alamat accept-all dan hanya menyelesaikan sebagian kecil darinya.', bestFor: 'tim yang membersihkan daftar langsung di Salesforce, HubSpot, atau Marketo.' },
+    ja: { category: 'メールアドレス検証専用のツール', oneLiner: 'CRMとの連携と、お使いのツールの中でのリストのクリーニングで知られる検証ツールです。', catchAllApproach: 'アクセプトオール（accept-all）のアドレスにラベルを付け、結果を出せるのはその一部だけです。', bestFor: 'Salesforce、HubSpot、Marketoの中で直接リストをクリーニングするチーム' },
   },
   hunter: {
     de: { category: 'Such- und Outreach-Plattform', oneLiner: 'eine Plattform, die zuerst E-Mails findet und die Prüfung in Monatspläne packt.', catchAllApproach: 'versucht bei einigen großen Anbietern, Accept-all zu bestätigen, und markiert es sonst nur.', bestFor: 'Teams, die Interessenten in einem Abo finden und prüfen wollen.' },
@@ -513,6 +517,57 @@ const LANG: Record<L10nLocale, Lang> = {
       altLabel: (n) => `Alternatif ${n}`,
       compareEvery: 'bandingkan semua alat verifikasi (dalam bahasa Inggris)',
       allComparisons: 'Semua perbandingan (dalam bahasa Inggris)',
+    },
+  },
+  // Japanese word order: the brand comes first with は, and each profile
+  // phrase is a full clause. oneLiner and catchAllApproach end in 。;
+  // bestFor is a noun phrase that the template closes with に向いています。
+  ja: {
+    rows: ['カテゴリ', 'キャッチオールドメインの結果', 'キャッチオールドメインの料金', 'セキュアメールゲートウェイ', '10,000件の料金', '100,000件の料金', '1,000,000件の料金', 'クレジットの有効期限', '無料枠', '不明の結果への課金', '正確性の主張'],
+    priceSentence: (c, p) => c.pricingModel === 'subscription'
+      ? `${c.name}は月額プランで販売されており、月10,000件のチェックで${p(10000)}からです`
+      : `${c.name}の料金は、10,000件で${p(10000)}、100,000件で${p(100000)}、100万件で${p(1000000)}です`,
+    expiry: (c) => `${c.name}の場合、${c.creditsExpire}`,
+    free: (c) => `${c.name}の無料枠は${c.freeTier}です`,
+    intro: (A, B, pa, pb) => `${A}と${B}のどちらを選ぶかは、主に、リストで実際に問題になるアドレスをそれぞれがどう扱うかで決まります。${A}は、${pa.oneLiner}${B}は、${pb.oneLiner}以下では、両者の料金、キャッチオールドメインのアドレスへの対応、主張している正確性を比べます。同じリストでのGiggal.aiの位置づけも示すので、3つ目の数値として比べられます。`,
+    sections: (A, B, a, b, pa, pb, ps) => [
+      { heading: `${A}と${B}のキャッチオールドメインへの対応`, prose: `${A}は、${pa.catchAllApproach}${B}は、${pb.catchAllApproach}キャッチオールドメインは、どの名前宛てのメールも受け付けます。そのため通常のチェックでは、実在するメールボックスと使われていないメールボックスを区別できません。ここで、リストから良い連絡先が気づかれないまま失われることがよくあります。`, label: 'Giggal.aiのキャッチオールドメインへの対応：' },
+      { heading: `${A}と${B}の料金比較`, prose: `${ps[0]}。${ps[1]}。どちらの数値も、各ベンダーが公開している料金からそのまま取っています。毎月の送信件数と比べてください。`, label: 'Giggal.aiの料金：' },
+      { heading: 'セキュアメールゲートウェイ（SEG）への対応', prose: `大企業のドメインでは、Mimecast、Proofpoint、Barracudaなどのゲートウェイが、メールボックスの前に置かれていることがよくあります。こうしたゲートウェイは通常のチェックをブロックします。${A}は${a.advertisesSegSupport ? 'こうしたゲートウェイの背後でも検証できると主張しています' : 'こうしたゲートウェイに対応していません'}。${B}${segB(a, b, ['も同様に対応を主張しています', 'は対応を主張しています', 'は対応していません', 'も対応していません'])}。`, label: 'Giggal.aiのゲートウェイへの対応：' },
+      { heading: 'クレジット、無料枠、有効期限', prose: `${LANG.ja.expiry(a)}。${LANG.ja.free(a)}。${LANG.ja.expiry(b)}。${LANG.ja.free(b)}。`, label: 'Giggal.aiのクレジットの扱い：' },
+    ],
+    edges: [
+      'Giggal.aiは、キャッチオールドメインのアドレスに配信可能か配信不可かのはっきりした結果を返します。料金はメールアドレス1件あたり1クレジットで一定です。',
+      'Giggal.aiは、従量課金の固定料金を公開しています。10,000件でUS$9.90、100,000件でUS$76、100万件でUS$680で、クレジットに有効期限はありません。',
+      'Giggal.aiは、Mimecast、Proofpoint、Barracudaを含む15のセキュアメールゲートウェイを識別し、その背後のアドレスにはっきりした結果を返します。',
+      'Giggal.aiのクレジットに有効期限はなく、不明の結果には課金しません。どのリストも、無料クレジット1,000件で始められます。クレジットカードは不要です。',
+    ],
+    faqs: (A, B, a, b, pa, pb, ps) => [
+      { q: `${A}と${B}のどちらを選ぶべきですか？`, a: `リストによって違います。${A}は、${pa.bestFor}に向いています。${B}は、${pb.bestFor}に向いています。キャッチオールドメインのアドレスの判定と、セキュアメールゲートウェイへの対応がもっとも重要なら、Giggal.aiは10,000件US$9.90で両方に対応します。` },
+      { q: `${A}と${B}の料金はどのくらい違いますか？`, a: `${ps[0]}。${ps[1]}。Giggal.aiは10,000件でUS$9.90、100,000件でUS$76、100万件でUS$680で、クレジットに有効期限はありません。` },
+      { q: `${A}や${B}は、キャッチオールドメインのアドレスに結果を出せますか？`, a: `${LANG.ja.caResolve(a)}。${LANG.ja.caResolve(b)}。Giggal.aiは、キャッチオールドメインのアドレスに配信可能か配信不可かのはっきりした結果を返します。料金はメールアドレス1件あたり1クレジットで一定です。15のセキュアメールゲートウェイの背後のアドレスも検証します。` },
+      { q: `${A}や${B}より良い選択肢はありますか？`, a: 'Giggal.aiは、両者が結果を出せないことの多い難しいアドレスのために作られています。キャッチオールドメインのアドレスにメールアドレス1件あたり1クレジットの一定料金ではっきりした結果を返し、15のセキュアメールゲートウェイの背後のアドレスも検証します。10,000件US$9.90の固定料金を公開しており、クレジットに有効期限はありません。無料クレジット1,000件でリストを試せます。クレジットカードは不要です。' },
+      { q: '選ぶ前にGiggal.aiを試せますか？', a: `はい。Giggal.aiでは、一括アップロードにも使える無料クレジット1,000件を、クレジットカードなしで受け取れます。${A}や${B}で試すのと同じリストをチェックし、キャッチオールドメインの行を比べてください。` },
+    ],
+    caResolve: (c) =>
+      c.resolvesCatchAll === 'partial'
+        ? `${c.name}は、キャッチオールドメインのアドレスの一部に結果を返します`
+        : c.resolvesCatchAll
+        ? `${c.name}は、キャッチオールドメインのアドレスに結果を返します`
+        : `${c.name}は、キャッチオールドメインのアドレスにラベルを付けるだけで、メールボックスを確認しません`,
+    desc: (A, B) => `${A}と${B}で迷っていますか？　料金、キャッチオールドメインへの対応、正確性で2つの検証ツールを比べ、Giggal.aiの位置づけも示します。`,
+    og: (A, B) => `${A} vs ${B}とGiggal.aiの位置づけ`,
+    ui: {
+      tableHeading: (A, B) => `${A}、${B}、Giggal.aiの比較`,
+      tableNote: 'ここにある料金と条件は、すべてベンダーが公開している料金によるものです。件数ごとに販売していないツールでは、ベンダーの記載か月額プランの料金を表示しています。',
+      promoHeading: 'チームが両者ではなくGiggal.aiを選ぶ理由',
+      promo: (A, B) => `${A}も${B}も、キャッチオールドメインのアドレスとゲートウェイの背後のアドレスの多くを、確認できないまま残します。Giggal.aiは、こうしたアドレスに1クレジットの一定料金ではっきりした結果を返し、15のセキュアメールゲートウェイの背後のアドレスも検証します。10,000件US$9.90の固定料金を公開しており、クレジットに有効期限はありません。`,
+      promoCta: 'メールアドレス1,000件を無料でチェック',
+      related: '関連する比較',
+      altSentence: ['関連ページ：', '', '、', '', '、'],
+      altLabel: (n) => `${n}の代替ツール`,
+      compareEvery: 'すべての検証ツールの比較（英語）',
+      allComparisons: 'すべての比較（英語）',
     },
   },
 }

@@ -14,7 +14,7 @@ export default function HubPage({ common, c }: { common: CommonStrings; c: HubCo
       {/* Hero */}
       <section className="max-w-6xl mx-auto px-6 pt-32 md:pt-36 pb-12 text-center">
         <h1 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 mb-5 text-balance">
-          {c.h1Lead} <span className="gradient-text">{c.h1Accent}</span>
+          {c.h1Lead}{common.locale === 'ja' ? null : ' '}<span className="gradient-text">{c.h1Accent}</span>
         </h1>
         <p className="text-[16px] text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium">
           <Rich text={c.intro} />

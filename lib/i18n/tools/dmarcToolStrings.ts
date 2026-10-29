@@ -1289,7 +1289,141 @@ const idTool: DmarcToolStrings = {
   },
 }
 
-export const DMARC_TOOL_STRINGS: Record<Locale, DmarcToolStrings> = { en, de: deTool, fr: frTool, es: esTool, it: itTool, 'pt-br': ptBrTool, nl: nlTool, pl: plTool, id: idTool }
+const jaTool: DmarcToolStrings = {
+  copy: 'コピー',
+  copied: 'コピーしました',
+
+  // Step 1
+  domainLabel: 'ドメイン',
+  domainPlaceholder: 'example.com',
+  domainHelp: 'メールアドレスの@より後ろの部分です。anna@example.comの場合は、example.comと入力します。',
+  domainInvalid: 'ドメインの形式ではないようです。example.comのように入力してください。',
+
+  // Step 2
+  ruaLabel: 'レポートの送信先',
+  recommended: '推奨',
+  ruaPlaceholder: 'dmarc@example.com',
+  ruaHelp: 'メールプロバイダーは、集計レポート（rua）と呼ばれる概要をこのアドレスに送ります。レポートには、そのドメインの名義でメールを送っている送信元が表示されます。',
+  ruaInvalid: 'メールアドレスの形式ではないようです。修正するまで、このアドレスはレコードに含まれません。',
+
+  // Step 3
+  policyLegend: 'ポリシーの厳しさ',
+  policyIntro:
+    'メールプロバイダーは、そのドメインを使うメールが本当にドメインの所有者から送られたものかを確認します。DMARCポリシーは、その確認に失敗したメール（なりすましで送られた偽のメールなど）の扱いを決めます。',
+  policies: {
+    none: {
+      title: '監視のみ',
+      text: 'メールの扱いはまだ変わりません。そのドメインの名義でメールを送っている送信元を示すレポートが届きます。',
+    },
+    quarantine: {
+      title: '迷惑メールフォルダへ送る',
+      text: '確認に失敗したメールは迷惑メールフォルダに隔離されます。正規のメールが合格していることをレポートで確認してから選んでください。',
+    },
+    reject: {
+      title: 'ブロック',
+      text: '確認に失敗したメールは拒否され、届きません。すべてのメールが合格していると確信できたら、最後に選んでください。',
+    },
+  },
+  startHere: 'ここから開始',
+
+  // Advanced settings
+  advancedTitle: '詳細設定',
+  advancedHint: 'サブドメイン、アライメント、失敗レポート（フォレンジック）、テストモードの設定です。多くの場合、設定は不要です。',
+  testMode: 'テストモード',
+  testModeHelp:
+    'テスト中は、メールプロバイダーに1段階ゆるい扱いを求めます。「ブロック」は「迷惑メールフォルダへ送る」として、「迷惑メールフォルダへ送る」は「監視のみ」として扱われます。',
+  testModeDisabled: '先に「迷惑メールフォルダへ送る」か「ブロック」を選んでください。「監視のみ」ではテストモードは機能しません。',
+  spLabel: 'サブドメインのポリシー',
+  spInherit: 'メインの選択と同じ',
+  spHelp: 'news.example.comのようなアドレスが対象です。',
+  npLabel: '存在しないサブドメインのポリシー',
+  npInherit: 'サブドメインのポリシーと同じ',
+  npHelp: '詐欺に使われる架空の名前（invoices.example.comなど）が対象です。',
+  adkimLabel: 'DKIMアライメント',
+  aspfLabel: 'SPFアライメント',
+  alignRelaxed: '緩和（初期値、推奨）',
+  alignStrict: '厳格（ドメインの完全一致）',
+  rufLabel: '失敗レポートの送信先メールアドレス',
+  rufPlaceholder: '任意',
+  rufHelp: '認証に失敗した個々のメールについてのレポートです。多くのメールプロバイダーはこのレポートを送りません。',
+  foLabel: '失敗レポートを送る条件',
+  foOptions: {
+    '0': 'SPFとDKIMの両方が失敗したとき（初期値）',
+    '1': 'SPFかDKIMのどちらかが失敗したとき',
+    d: 'DKIMが失敗したとき',
+    s: 'SPFが失敗したとき',
+  },
+  foNeedsRuf: '先に失敗レポートの送信先メールアドレスを入力してください。',
+
+  // The record
+  recordTitle: 'DMARCレコード',
+  recordIntro: 'ドメインのDNS設定に、新しいTXTレコードとして追加してください。',
+  typeLabel: '種類',
+  hostLabel: '名前 / ホスト',
+  fullName: '完全な名前が必要なプロバイダーもあります：',
+  yourDomain: 'yourdomain.com',
+  valueLabel: '値',
+
+  // External report domain
+  consentTitle: 'レポート用ドメインにもう1つレコードが必要です',
+  consentText:
+    'レポートの送信先アドレスが別のドメインにあります。メールプロバイダーは、そのドメインが下のレコードを公開している場合にのみレポートを送ります。そのドメインの管理者にこのレコードを渡してください。',
+  consentAddTo: '{domain}のDNSに、種類TXTで追加します：',
+  consentName: '名前：',
+  consentValue: '値：',
+
+  // What to do next
+  nextTitle: '次にすること',
+  nextCheck:
+    'ドメインにSPFとDKIMが設定されているか確認してください。DMARCはこの2つに依存しているため、設定がないと正規のメールも失敗します。設定方法は、Google WorkspaceやMicrosoft 365など、ご利用のメールサービスの案内に記載されています。{spf}を使うと、SPFレコードが機能しているかを確認できます。{guide}もご覧ください。',
+  spfLabel: 'SPFレコードチェックツール',
+  spfHref: '/ja/spf-checker',
+  guideLabel: 'SPF、DKIM、DMARCの連携の仕組み',
+  guideHref: '/ja/blog/spf-dkim-dmarc-explained',
+  nextSignIn: 'ドメインのDNSを管理している画面にログインします。通常は、ドメインを購入した会社の管理画面です。',
+  nextAdd:
+    '上の名前と値で新しいTXTレコードを追加し、保存します。メールサーバーはDMARCレコードが2つあると両方を無視するため、ドメインに置くDMARCレコードは1つだけにしてください。',
+  nextLevel: {
+    noReports: '手順2でレポートの送信先アドレスを追加してください。レポートがないと、正規のメールが合格しているかを判断できません。',
+    none: '数週間レポートを確認してください。正規のメールが合格するようになったら、ここに戻って「迷惑メールフォルダへ送る」を選んでください。',
+    quarantine: '引き続きレポートを確認してください。正規のメールが迷惑メールフォルダに入らなくなったら、ここに戻って「ブロック」を選んでください。',
+    reject: '引き続きレポートを確認してください。そのドメインの名義でメールを送り始めた新しいサービスがあれば、レポートに表示されます。',
+  },
+
+  cleanerToggle: 'DMARCレコードをすでにお持ちですか？RFC 9989で廃止された設定がないか確認できます。',
+  importLabel: '現在のDMARCレコードを貼り付けてください',
+  cleanButton: 'レコードを確認して整理',
+  cleanedTitle: '整理後のレコード',
+  alreadyClean: 'このレコードはすでに整理されています。変更の必要はありません。',
+  whatChanged: (n) => `変更点（${n}件）`,
+  changeLabel: { removed: '削除', normalized: '変更', modernized: '提案' },
+
+  warnings: {
+    'bad-address': (address) =>
+      `「${address}」は有効なメールアドレスではないため、レコードから除外しました。`,
+    'reject-no-reports':
+      'このレコードは確認に失敗したメールをブロックします（p=reject）が、レポートの送信先アドレスがありません。正規のメールが拒否されていても気づけません。',
+    'reject-dkim':
+      'p=rejectは、すべてのメールにDKIM署名がある場合にのみ使ってください。転送されたメールはSPFに失敗することが多いため、SPFだけでは不十分です。',
+    'strict-alignment':
+      '厳格なアライメントでは、ドメインの完全一致が必要です。mail.example.comのようなサブドメインからメールに署名または送信するサービスがある場合、そのメールは失敗します。',
+    'ruf-unreliable': '多くのメールプロバイダーは、プライバシー上の理由で失敗レポートを送りません。失敗レポートには頼らないでください。',
+  },
+  changes: {
+    'missing-version': () =>
+      'DMARCレコードはv=DMARC1で始まる必要があります。そうでない場合、メールサーバーはレコードを無視します。整理後のレコードはv=DMARC1で始まります。',
+    'bad-policy': ({ value }) =>
+      `レコードに有効なポリシーがありませんでした${value ? `（「p=${value}」）` : ''}。監視のみを行うp=noneに設定しました。`,
+    retired: ({ tag, value }) =>
+      `${tag}=${value}はDMARCの標準（RFC 9989）から外れたため、削除しました。`,
+    'pct-partial': () =>
+      '以前のレコードは、メールの一部にだけポリシーを適用していました。テスト中にポリシーをゆるくしたい場合は、代わりに詳細設定でテストモード（t=y）をオンにしてください。',
+    'sp-matches': ({ value }) => `sp=${value}はメインのポリシーと同じだったため、不要です。`,
+    default: ({ tag, value }) => `${tag}=${value}はすでに初期値のため、不要です。`,
+  },
+}
+
+export const DMARC_TOOL_STRINGS: Record<Locale, DmarcToolStrings> = { en, de: deTool, fr: frTool, es: esTool, it: itTool, 'pt-br': ptBrTool, nl: nlTool, pl: plTool, id: idTool, ja: jaTool }
 
 export function dmarcToolStrings(locale: Locale): DmarcToolStrings {
   return DMARC_TOOL_STRINGS[locale] ?? en

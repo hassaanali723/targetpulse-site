@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { Check, Copy, ArrowRight } from 'lucide-react'
 import ObfuscatedEmail from '@/components/ObfuscatedEmail'
+import { gapAfter } from '@/lib/i18n/cjk'
 
 const MCP_URL = 'https://mcp.giggal.ai/mcp'
 
@@ -479,7 +480,7 @@ export default function McpSection({ showImages = false, detailsHref, divider = 
           </div>
 
           <p className="mt-6 pt-5 border-t border-white/10 text-sm text-slate-400">
-            {s.restart}{' '}
+            {s.restart}{gapAfter(s.restart)}
             <span className="font-semibold text-white">{s.askBefore}<ObfuscatedEmail user="info" domain="giggal.ai" />{s.askAfter}</span>
           </p>
         </div>

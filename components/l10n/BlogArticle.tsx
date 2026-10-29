@@ -83,7 +83,7 @@ export default function BlogArticleL10n({ locale, slug }: { locale: L10nLocale; 
 
   return (
     <main className="relative min-h-screen bg-slate-50 grid-lines overflow-x-clip text-slate-800 antialiased">
-      <JsonLd data={breadcrumbL10n(locale, [{ name: 'Blog', path: hub }, { name: post.title, path }])} />
+      <JsonLd data={breadcrumbL10n(locale, [{ name: locale === 'ja' ? 'ブログ' : 'Blog', path: hub }, { name: post.title, path }])} />
       <JsonLd
         data={{
           '@context': 'https://schema.org',
@@ -115,7 +115,7 @@ export default function BlogArticleL10n({ locale, slug }: { locale: L10nLocale; 
             {b.home}
           </Link>
           <ChevronRight aria-hidden="true" className="sep" />
-          <Link href={hub}>Blog</Link>
+          <Link href={hub}>{locale === 'ja' ? 'ブログ' : 'Blog'}</Link>
           <ChevronRight aria-hidden="true" className="sep" />
           <span className="current" aria-current="page">{post.title}</span>
         </nav>

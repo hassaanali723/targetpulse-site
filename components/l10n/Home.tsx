@@ -20,6 +20,7 @@ import { faqPageLd } from '@/lib/schema'
 import { CLUSTERS } from '@/lib/i18n/clusters'
 import { PRICE_CLAIM, PRICE_10K } from '@/lib/priceClaim'
 import { getStrings, SIGNUP_URL, type L10nLocale } from '@/lib/i18n/strings'
+import { gapAfter, gapBefore } from '@/lib/i18n/cjk'
 
 // Localized home: the same sections, order and styling as the English home
 // (app/(en)/page.tsx), with the copy passed in. Each locale keeps its planned
@@ -258,8 +259,8 @@ export default async function HomeL10n({ locale, content: c }: { locale: L10nLoc
                 {[0, 1, 2, 3, 4].map((i) => <Star key={i} className="w-4 h-4 fill-current" />)}
               </span>
               <span className="whitespace-nowrap">
-                <strong className="text-white">{c.reviewBadges.rating(sourceforge.rating)}</strong> {c.rating.on}{' '}
-                <span className="group-hover:text-slate-300 group-hover:underline underline-offset-4">SourceForge</span>{' '}
+                <strong className="text-white">{c.reviewBadges.rating(sourceforge.rating)}</strong>{c.rating.on ? ` ${c.rating.on} ` : ' '}
+                <span className="group-hover:text-slate-300 group-hover:underline underline-offset-4">SourceForge</span>{gapBefore(c.rating.reviews(sourceforge.count))}
                 {c.rating.reviews(sourceforge.count)}
               </span>
             </a>
@@ -485,7 +486,7 @@ export default async function HomeL10n({ locale, content: c }: { locale: L10nLoc
             {c.pricing.priceLine(usd(PRICE_10K, 2))}
             {PRICE_CLAIM && (
               <>
-                {' '}{c.pricing.claim.before}
+                {gapAfter(c.pricing.priceLine(usd(PRICE_10K, 2)))}{c.pricing.claim.before}
                 <a href={`#${c.switcher.id}`} className="text-indigo-600 font-semibold hover:underline">{c.pricing.claim.link}</a>
                 {c.pricing.claim.after}
               </>
@@ -498,7 +499,7 @@ export default async function HomeL10n({ locale, content: c }: { locale: L10nLoc
           <div className="inline-flex items-center gap-2.5 bg-slate-50 border border-slate-200 rounded-2xl px-5 py-2.5 text-center sm:text-left">
             <MailCheck className="w-4 h-4 text-indigo-600 shrink-0" />
             <p className="text-xs font-bold text-slate-700">
-              {pricing.formula}{' '}
+              {pricing.formula}{gapBefore(pricing.formulaNote)}
               <span className="font-semibold text-slate-500">{pricing.formulaNote}</span>{' '}
               = <strong className="text-indigo-700 font-extrabold">{pricing.formulaCredit}</strong>
             </p>
@@ -581,7 +582,7 @@ export default async function HomeL10n({ locale, content: c }: { locale: L10nLoc
         </div>
         <FaqAccordion items={c.faq.items} />
         <p className="text-center text-sm text-slate-500 font-medium">
-          {c.faq.more}{' '}
+          {c.faq.more}{gapAfter(c.faq.more)}
           <Link href={CLUSTERS.contact[locale]} className={`${link} inline-flex items-center gap-1`}>
             {c.faq.moreLink} <ArrowRight className="w-3.5 h-3.5" />
           </Link>

@@ -49,7 +49,7 @@ export default function SignupPageL10n({ locale, content: c }: { locale: L10nLoc
           <Wordmark className="text-xl" />
         </div>
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900">
-          {c.h1Lead}{' '}
+          {c.h1Lead}{locale === 'ja' ? null : ' '}
           <span className="block bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent pb-2">
             {c.h1Accent}
           </span>

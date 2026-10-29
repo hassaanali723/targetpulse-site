@@ -98,7 +98,7 @@ export default function ProvidersPage({ locale }: { locale: Locale }) {
       {/* HERO */}
       <section className="max-w-6xl mx-auto px-6 pt-28 md:pt-32 pb-10 text-center space-y-6">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900">
-          {s.h1}{' '}
+          {s.h1}{locale === 'ja' ? null : ' '}
           <span className="bg-gradient-to-r from-rose-600 via-indigo-600 to-indigo-500 bg-clip-text text-transparent">
             {s.h1Accent}
           </span>

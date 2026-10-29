@@ -622,6 +622,68 @@ const idTool: MxToolStrings = {
   },
 }
 
+const jaServers = (n: number) => `メールサーバーが${n}台見つかりました`
+const jaProvider = (name: string) => `。メールの受信先は${name}です`
+const jaHead = (p: MxSummaryParts) => `${jaServers(p.servers)}${p.provider ? jaProvider(p.provider) : ''}`
+
+const jaTool: MxToolStrings = {
+  label: 'ドメインまたはメールアドレス',
+  placeholder: 'example.com',
+  button: 'MXレコードを確認',
+  tryLabel: '例：',
+  thPriority: '優先度',
+  thServer: 'メールサーバー',
+  thIps: 'IPアドレス',
+  thTtl: 'TTL',
+  none: 'なし',
+  nullMx: '. (Null MX)',
+  legend: '送信側は数値が最も小さいサーバーから順に試します。同じ数値のサーバーは負荷を分け合います。',
+  copy: 'レコードをコピー',
+  copied: 'コピーしました',
+  answeredBy: '応答元',
+  dnssec: ' · DNSSEC検証済み',
+  ctaTitle: 'MXレコードで確認できるのはドメインまでで、メールボックスは確認できません',
+  ctaText: 'ドメインがメールを受信できても、送信先のメールアドレスが存在するとは限りません。送信する前に、メールアドレスそのものを確認してください。',
+  ctaButton: 'メールアドレスを確認する',
+  ctaHref: '/ja/email-checker',
+  lookupError: 'DNSサービスに接続できませんでした。通信環境を確認して、もう一度お試しください。',
+  inputEmpty: 'example.com のようにドメインを入力してください。',
+  inputInvalid: 'ドメインの形式ではないようです。example.com のような形式で入力してください。',
+  issues: {
+    'ip-literal': 'このレコードはIPアドレスを指しています。MXレコードにはホスト名を指定する必要があり、一部のメールサーバー（初期設定のEximなど）はこの宛先への配信を拒否します。',
+    'lookup-failed': 'このサーバーのアドレスを取得できませんでした。しばらくしてから、もう一度お試しください。',
+    cname: 'このサーバー名はエイリアス（CNAME）です。MXの規則では、実際のホスト名を指定する必要があります。多くの送信側はエイリアスをたどりますが、規格上その義務はありません。',
+    'no-address': 'このサーバー名にはIPアドレスがありません。そのため、このサーバー宛てのメールは配信できません。',
+    'no-address-missing': 'このサーバー名はDNSに存在しません。そのため、このサーバー宛てのメールは配信できません。',
+    'null-mx-mixed': 'このドメインは、通常のMXレコードと一緒にNull MX（0 .）を公開しています。Null MXは唯一のMXレコードである必要があるため、どちらか一方を削除してください。',
+  },
+  summary: {
+    servers: jaServers,
+    provider: jaProvider,
+    ok: (p) => ({ title: `${p.domain} はメールを受信できます`, text: `${jaHead(p)}。` }),
+    okWithIssues: (p) => ({
+      title: `${p.domain} にはMXレコードがありますが、修正が必要な点があります`,
+      text: `${jaHead(p)}。問題点は下に表示しています。`,
+    }),
+    implicit: (p) => ({
+      title: `${p.domain} にはMXレコードがありません`,
+      text: `送信側は、ドメイン自体のアドレス（${p.fallback}）に配信を試みます。これは、そのアドレスでメールサーバーが動いている場合にのみ機能します。このドメインでメールを受信する場合は、MXレコードを追加してください。`,
+    }),
+    none: (p) => ({
+      title: `${p.domain} はメールを受信できません`,
+      text: 'MXレコードがなく、送信側が代わりに使えるアドレスもありません。このドメイン宛てのメールはバウンスします。',
+    }),
+    nullMx: (p) => ({
+      title: `${p.domain} はメールを一切受け付けません`,
+      text: 'このドメインはNull MXレコード（0 .）を公開しており、送信側に配信を試みないよう伝えています。メールに使っていないドメインであれば通常の設定です。メールの送信に使うドメインでは設定しないでください。返信やバウンス通知が戻ってこなくなります。',
+    }),
+    nxdomain: (p) => ({
+      title: `${p.domain} は存在しません`,
+      text: 'このドメインのレコードはDNSにありません。つづりを確認してください。',
+    }),
+  },
+}
+
 export const MX_TOOL_STRINGS: Partial<Record<Locale, MxToolStrings>> & { en: MxToolStrings } = {
   en,
   de: deTool,
@@ -632,6 +694,7 @@ export const MX_TOOL_STRINGS: Partial<Record<Locale, MxToolStrings>> & { en: MxT
   nl: nlTool,
   pl: plTool,
   id: idTool,
+  ja: jaTool,
 }
 
 export function mxToolStrings(locale: Locale): MxToolStrings {

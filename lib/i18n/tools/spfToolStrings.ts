@@ -2433,6 +2433,244 @@ const idTool: SpfToolStrings = {
   },
 }
 
+const jaLookups = (p: SpfSummaryParts) => `許可されている${p.limit}回のDNSルックアップのうち、${p.lookups}回を使っています。`
+const jaAll = (q: SpfQualifier | null) => {
+  if (q === '-') return '一覧にないサーバーからのメールはSPFで失敗（fail）します。'
+  if (q === '~') return '一覧にないサーバーからのメールはソフトフェイル（softfail）になります。'
+  return ''
+}
+
+const jaTool: SpfToolStrings = {
+  tabsLabel: 'SPFツールのモード',
+  tabCheck: 'チェック',
+  tabCheckMore: '（SPFレコード）',
+  tabCreate: '作成',
+  tabCreateMore: '（SPFレコード）',
+
+  label: 'ドメインまたはメールアドレス',
+  placeholder: 'example.com',
+  button: 'SPFレコードをチェック',
+  tryLabel: '例：',
+  inputEmpty: 'example.comのようにドメインを入力してください。',
+  inputInvalid: 'ドメインの形式ではないようです。example.comのように入力してください。',
+  lookupError: 'DNSサービスに接続できませんでした。接続を確認して、もう一度お試しください。',
+  noAnswer: ({ domain }) =>
+    `${domain ? `${domain}のDNSサーバーが応答しませんでした。` : 'DNSサーバーが応答しませんでした。'}現在、受信サーバーにも同じ一時的なエラー（temperror）が返ります。数分後にもう一度お試しください。`,
+
+  summary: {
+    valid: (p) => ({ title: `${p.domain}のSPFレコードは有効です`, text: `${jaLookups(p)}${jaAll(p.allQualifier)}` }),
+    warnings: (p) => ({
+      title: `${p.domain}のSPFレコードは動作しますが、警告があります`,
+      text: `受信サーバーは使えますが、下の警告はレコードを弱めたり、将来レコードを壊したりする可能性があります。${jaLookups(p)}`,
+    }),
+    broken: (p) => ({
+      title: `${p.domain}のSPFレコードは壊れています`,
+      text: '受信サーバーはこのようなレコードをエラー（permerror）として扱うため、このドメインからのすべてのメールでSPFが失敗します。修正方法は下に表示しています。',
+    }),
+    unprotected: (p) => ({
+      title: `${p.domain}のSPFレコードはドメインを保護していません`,
+      text: `インターネット上のどのサーバーもSPFに合格するため、誰でも${p.domain}として合格するメールを送れます。`,
+    }),
+    none: (p) => ({
+      title: `${p.domain}にはSPFレコードがありません`,
+      text: '受信サーバーは、このドメインのメールを送ってよいサーバーを判断できません。Gmailは2024年2月から、すべての送信者にSPFまたはDKIMを求めています。',
+    }),
+    nxdomain: (p) => ({ title: `${p.domain}は存在しません`, text: 'DNSにこのドメインの記録がありません。つづりを確認してください。' }),
+  },
+  recordFor: (domain) => `${domain}のSPFレコード`,
+  copy: 'コピー',
+  copied: 'コピーしました',
+  lookupsMeter: 'DNSルックアップ',
+  lookupsMeterNote: 'include、a、mx、ptr、exists、redirectはそれぞれ1回と数えます。include先の分も含みます。',
+  voidMeter: '空のルックアップ',
+  voidMeterNote: '何も見つからなかったルックアップです。2回を超えると、受信サーバーがSPFを失敗にすることがあります。',
+  meterOf: (limit) => `/ ${limit}`,
+  unlisted: '一覧にないサーバー',
+  allLabel: { '-': '失敗（fail）', '~': 'ソフトフェイル', '?': '中立（neutral）', '+': '合格（安全ではありません）' },
+  allNotSet: '未設定',
+  allSetBy: (q) => `レコード末尾の${q}allで設定されています。`,
+  allMissing: 'レコードの末尾にallがないため、ほかのサーバーの結果はneutral（中立）になります。',
+  fixTitle: '修正が必要な点',
+  notesTitle: '補足',
+  inDomain: (domain) => `${domain}のレコード内`,
+  thPart: '部分',
+  thMeaning: '意味',
+  thCost: 'ルックアップ',
+  partsTitle: '各部分の意味',
+  lookups: (n) => `${n}回`,
+  vSpf1: 'このTXTレコードがSPFレコードであることを示します。すべてのSPFレコードはこれで始まります。',
+  showContents: (domain) => `${domain}の内容を表示`,
+  hideContents: (domain) => `${domain}の内容を隠す`,
+  describe: {
+    redirect: (domain) => `上のどれにも一致しない場合は、代わりに${domain}のSPFレコードを使います。`,
+    exp: 'SPFが失敗したときに受信サーバーが表示できるメッセージを持つTXTレコードを指定します。',
+    unknownModifier: 'SPFで定義されていない設定です。受信サーバーは無視します。',
+    all: {
+      '-': 'ほかのすべてのサーバーからのメールはSPFで失敗します。',
+      '~': 'ほかのすべてのサーバーからのメールはソフトフェイルになります。受信サーバーは通常受け入れますが、より疑わしいものとして扱います。',
+      '?': 'ほかのサーバーについて何も示しません。そのメールはneutral（中立）の結果になり、SPFレコードがないのと同じ扱いです。',
+      '+': 'インターネット上のすべてのサーバーがSPFに合格します。レコードのほかの部分が意味を持たなくなります。',
+    },
+    server: (address) => `${address}のサーバー`,
+    ip4Range: (address, cidr, count) => `${address}/${cidr}の範囲にあるサーバー（${count.toLocaleString('en-US')}個のアドレス）`,
+    ip6Range: (address, cidr) => `IPv6の範囲${address}/${cidr}にあるサーバー`,
+    a: (domain, cidr) => `${domain}のIPアドレスにあるサーバー${cidr ? `（${cidr}に範囲を拡大）` : ''}`,
+    mx: (domain) => `${domain}のメールを受信するメールサーバー`,
+    include: (domain, service) => `${domain}のSPFレコードが許可するサーバー${service ? `（${service}）` : ''}`,
+    ptr: (domain) => `IPアドレスの逆引き結果が${domain}配下の名前になるサーバー`,
+    existsMacro: '送信サーバーの情報から組み立てたDNSルックアップでアドレスが見つかったときに一致します。大規模な送信者が、多数のサーバーをまとめて指定するために使います。',
+    exists: (domain) => `${domain}にIPアドレスがあるときに一致します。`,
+    sentence: (subject, q) => {
+      if (q === '+') return `${subject}はメールを送信できます。`
+      if (q === '-') return `${subject}からのメールはSPFで失敗します。`
+      if (q === '~') return `${subject}からのメールはソフトフェイルになります。`
+      return `${subject}からのメールはneutral（中立）の結果になります。`
+    },
+  },
+  nearMissTitle: '壊れたSPFレコードと思われるTXTレコードが見つかりました。',
+  nearMissSpf2: 'v=spf2.0で始まるレコードは、受信サーバーがもう確認しない古い仕組みSender IDのものです。SPFレコードは正確にv=spf1で始める必要があります。',
+  nearMissOther: 'SPFレコードは正確に「v=spf1」とその後のスペースで始める必要があるため、受信サーバーはこのレコードを無視します。',
+  noMx: '{domain}にはMXレコードもないため、メールに使われていない可能性があります。メールを一切送らないドメインは{record}を公開できます。どのサーバーも送信してはいけないと受信サーバーに伝えるため、なりすましが難しくなります。',
+  createFor: (domain) => `${domain}のSPFレコードを作成`,
+  fixInCreator: 'このレコードをSPF作成ツールに読み込んで修正する',
+  answeredBy: '応答元',
+  publicDns: '公開DNS',
+  ctaTitle: 'SPFではバウンスを防げません',
+  ctaText: 'SPFは、メールが自社のサーバーから送られたことを示します。それでも、存在しないアドレスに送ったメールはバウンスします。バウンス率が高いと到達率が下がります。',
+  ctaButton: 'メールリストを検証する',
+  ctaHref: '/ja/bulk-email-verifier',
+
+  domainStep: 'ドメイン',
+  loadButton: '現在のレコードを読み込む',
+  loadHelp: 'ドメインにすでにSPFレコードがある場合は、読み込んでから新しい送信元を追加してください。この手順は省略しても構いません。',
+  load: {
+    nxdomain: (domain) => `${domain}はDNSに存在しません。つづりを確認してください。`,
+    none: (domain) => `${domain}にはまだSPFレコードがありません。下で送信元を選んで作成してください。`,
+    redirect: (domain, record) => `${domain}のSPFレコードはredirectを使っています（${record}）。フォームでは安全に編集できないため、手動で変更してください。`,
+    loaded: ({ domain, multiple, changedAll }) =>
+      `${domain}の現在のレコードを読み込みました。送信元を追加または削除してから、古いレコードを新しいレコードに置き換えてください。${
+        multiple ? 'SPFレコードが複数あったため、最初のレコードを読み込みました。このレコードを公開した後、ほかのレコードを削除してください。' : ''
+      }${changedAll ? '末尾が ~all でも -all でもなかったため、~all に変更しました。' : ''}`,
+  },
+  sendersStep: 'ドメインのアドレスでメールを送るサービスはどれですか？',
+  sendersHelp: 'ドメインのアドレスでメールを送るサービスすべてにチェックを入れてください。数字は、上限10回のDNSルックアップのうち各サービスが使う回数です。',
+  groupMailbox: 'メールサービス',
+  groupService: '配信、マーケティング、サポートのツール',
+  unneededInline: (subdomainOnly) => `{include}（{name}）は通常${subdomainOnly ? 'メインドメインには' : ''}不要です。{reason}`,
+  unneeded: ({ include, name, subdomainOnly, reason, cost }) =>
+    `include:${include}（${name}）は通常${subdomainOnly ? 'メインドメインには' : ''}不要です。${reason}削除すると、ルックアップを${cost}回分減らせます。`,
+  unneededSummary: 'Mailchimp、SendGrid、Brevoなどを使っていますか？includeが不要な場合があります。',
+  otherLabel: 'ここにないほかのサービス',
+  otherPlaceholder: 'spf.example-service.com',
+  addButton: '追加',
+  otherHelp: 'サービスの設定ガイドからincludeの値をコピーしてください。',
+  ownServer: '自社のサーバーからも送信していますか？',
+  ipsLabel: 'メールを送るサーバーのIPアドレス',
+  ipsPlaceholder: '192.0.2.10\n198.51.100.0/24\n2001:db8::/32',
+  ipsHelp: '1行に1つずつ入力します。IPv4とIPv6のどちらも使え、/24のような範囲も入力できます。',
+  aLabel: 'ドメインが指すサーバーがメールを送る',
+  aHelp: 'ドメイン自体のIPアドレスを追加します。ルックアップを1回使います。',
+  mxLabel: '受信用のメールサーバーもメールを送る',
+  mxHelp: 'MXレコードにあるサーバーを追加します。ルックアップを1回使います。Google WorkspaceとMicrosoft 365では不要です。それぞれのincludeが送信もカバーしています。',
+  keptTitle: '現在のレコードから引き継いだ項目',
+  remove: (term) => `${term}を削除`,
+  allStep: '一覧にないサーバーからのメールをどう扱いますか？',
+  softFail: {
+    title: 'ソフトフェイル',
+    text: '受信サーバーはメールを受け入れますが、より疑わしいものとして扱います。GoogleとM3AAWGが推奨する末尾です。',
+  },
+  fail: {
+    title: '失敗（fail）',
+    text: 'メールが許可されていないことを受信サーバーに伝えます。Microsoftは、DKIMとDMARCを設定した後にこれを推奨しています。一部の受信サーバーはDMARCの確認前にメールを拒否するため、そのメールはDMARCレポートに表れません。',
+  },
+  recordTitle: '作成したSPFレコード',
+  recordHelp: 'ドメインのDNSにTXTレコードとして追加してください。',
+  typeLabel: 'タイプ',
+  nameLabel: '名前 / ホスト',
+  nameHelp: 'DNS管理会社によっては、@の代わりにドメイン名そのものを入力するか、名前欄を空にする必要があります。',
+  valueLabel: '値',
+  draftLookups: (n, limit) => `DNSルックアップ ${n} / ${limit}回`,
+  counting: '公開DNSで数えています',
+  noSenders:
+    'まだ送信元が選ばれていません。送信元のないレコードは、どのサーバーもこのドメインのメールを送ってはいけないという意味になります。これが正しいのはメールを一切送らないドメインだけで、その場合は末尾を{ending}にしてください。',
+  neverSends: 'このドメインはメールを一切送らない',
+  draftError: 'ルックアップを数えるためのDNSサービスに接続できませんでした。接続を確認してください。',
+  howTitle: '追加する方法',
+  howSteps: [
+    'ドメインのDNSを管理しているサービスにログインします。通常は、ドメインを購入した会社です。',
+    'v=spf1で始まるTXTレコードを探します。ある場合は、その値を上のレコードに置き換えます。SPFレコードが2つあるとすべてのメールでSPFが壊れるため、2つ目は追加しないでください。',
+    'ない場合は、上の名前と値で新しいTXTレコードを追加して保存します。',
+  ],
+  howLast: '数分待ってから、{check}。{dkim}と{dmarc}で、DKIMとDMARCも設定してください。',
+  checkPublished: '公開したレコードをチェックしてください',
+  dkimLabel: 'DKIM生成ツール',
+  dkimHref: '/ja/dkim-generator',
+  dmarcLabel: 'DMARC生成ツール',
+  dmarcHref: '/ja/dmarc-generator',
+  issues: {
+    'bad-syntax': (p) => `「${p.raw}」の書き方が正しくないため、受信サーバーはレコードを壊れたもの（permerror）として扱います。`,
+    'bad-syntax-percent': (p) => `「${p.raw}」に有効なSPFマクロではない%記号があるため、受信サーバーはレコードを壊れたもの（permerror）として扱います。`,
+    'duplicate-modifier': (p) => `レコードに${p.name}=が複数あります。1つしか認められないため、受信サーバーはレコードを壊れたもの（permerror）として扱います。`,
+    'empty-modifier': (p) => `「${p.raw}」の=記号の後にドメインがありません。`,
+    'equals-not-colon': (p) => `「${p.raw}」は、SPFがコロンを求める場所で=を使っています。受信サーバーは不明な設定として読み飛ばします。代わりに${p.name}:${p.value}と書いてください。`,
+    'unknown-term': (p) => `「${p.raw}」は有効なSPFメカニズムではありません。受信サーバーはレコード全体を壊れたもの（permerror）として扱います。`,
+    'bad-ip': (p) => `「${p.raw}」に有効な${p.family}アドレスが含まれていません。`,
+    'bad-cidr': (p) => `「${p.raw}」のプレフィックス長が/${p.max}を超えています。`,
+    'after-all': () => '「all」の後にメカニズムがあります。受信サーバーは「all」で止まるため、その後の部分は使われません。',
+    'include-plus-all': () => 'このinclude先のレコードは「+all」で終わっているため、このincludeはインターネット上のすべてのサーバーに一致します。',
+    'long-record': (p) => `レコードの長さは${p.length}文字です。RFC 7208は、1つのUDPパケットに収まるよう、DNSの応答を小さく（約450バイト未満に）保つべきだとしています。これより大きい応答を読み取れない受信サーバーもあります。`,
+    macro: (p) => `「${p.target}」は、送信サーバーによって変わるSPFマクロを使っています。チェッカーはこの先をたどれません。`,
+    'macro-exists': (p) => `「${p.raw}」は、送信サーバーごとに値が入るSPFマクロを使っています。ルックアップは1回と数えますが、許可されるサーバーをチェッカーで一覧にすることはできません。`,
+    loop: (p) => `${p.target}は${p.chain.join(' > ')}を経由して自分自身をincludeしています。受信サーバーはこれを壊れたものとして扱います。`,
+    'too-deep': (p) => `includeの連鎖が${p.limit}階層を超えたため、チェッカーは処理を止めました。`,
+    temperror: (p) => `${p.target}のDNSサーバーが応答しませんでした。受信サーバーには一時的なエラー（temperror）が返り、後で再試行されることがあります。数分後にもう一度チェックしてください。`,
+    'temperror-term': (p) => `${p.target}のDNSサーバーが応答しなかったため、「${p.raw}」をチェックできませんでした。受信サーバーには一時的なエラー（temperror）が返ります。`,
+    'include-no-spf': (p) =>
+      `include:${p.target}は${p.missing ? '存在しないドメイン' : 'SPFレコードのないドメイン'}を指しています。受信サーバーはレコード全体を壊れたもの（permerror）として扱います。`,
+    'redirect-no-spf': (p) =>
+      `redirect=${p.target}は${p.missing ? '存在しないドメイン' : 'SPFレコードのないドメイン'}を指しています。受信サーバーはレコード全体を壊れたもの（permerror）として扱います。`,
+    multiple: (p) => `${p.target}はSPFレコードを${p.count}個公開しています。RFC 7208が認めるのは1つだけのため、受信サーバーはSPFを壊れたもの（permerror）として扱います。1つのレコードにまとめてください。`,
+    'multiple-included': (p) => `${p.target}はSPFレコードを${p.count}個公開しています。レコードは1つだけでなければなりません。`,
+    'void-a': (p) => `「${p.raw}」は${p.target}のIPアドレスを見つけられません。何にも一致せず、空のルックアップとして数えられます。`,
+    'void-mx': (p) => `「${p.raw}」は${p.target}のメールサーバーを見つけられません。何にも一致せず、空のルックアップとして数えられます。`,
+    'mx-over-10': (p) => `${p.target}にはMXレコードが${p.count}個あります。RFC 7208がmxメカニズムに認めるのは最大10個です。`,
+    ptr: (p) => `「${p.raw}」はptrを使っています。RFC 7208は、ptrを使うべきではないとしています。遅く、ルックアップを1回使い、ip4やip6より信頼性が低いためです。`,
+    exists: (p) => `「${p.raw}」は${p.target}が存在するかを確認します。通常はマクロと組み合わせて使います。`,
+    'redirect-ignored': () => 'レコードに「all」とredirectの両方があります。「all」がある場合、受信サーバーはredirectを無視します。',
+    'plus-all': () => '「+all」は、インターネット上のすべてのサーバーにドメインのアドレスでの送信を許可します。「~all」か「-all」に変更してください。',
+    'neutral-all': () => '「?all」は中立（neutral）です。一覧にないサーバーについて受信サーバーに何も伝えないため、保護になりません。',
+    'no-all': () => 'レコードの末尾が「all」ではないため、受信サーバーは一覧にないサーバーを中立（neutral）として扱います。末尾に「~all」か「-all」を追加してください。',
+    'too-many-lookups': (p) => `このレコードには${p.lookups}回のDNSルックアップが必要です。上限は${p.limit}回のため、受信サーバーは処理を止め、SPFを壊れたもの（permerror）として扱います。`,
+    'near-limit': (p) => `許可されている${p.limit}回のDNSルックアップをすべて使っています。includeをもう1つ追加すると、すべてのメールでSPFが壊れます。`,
+    'near-limit-one-left': (p) => `許可されている${p.limit}回のDNSルックアップのうち、${p.lookups}回を使っています。残りは1回ですが、ほとんどのincludeは2回以上を使います。`,
+    'too-many-voids': (p) => `${p.voids}回のルックアップで何も見つかりませんでした。RFC 7208では、この「空の」ルックアップが${p.limit}回を超えると、受信サーバーはSPFを失敗にできます。`,
+  },
+  failures: {
+    'no-answer': 'DNSが応答しませんでした',
+    nxdomain: 'ドメインが存在しません',
+    'no-spf': 'SPFレコードがありません',
+    multiple: 'SPFレコードが複数あります',
+  },
+  senderNames: {
+    'zoho.com': 'Zoho Mail（旧include）',
+    'zohomail.eu': 'Zoho Mail（EU）',
+    'zoho.eu': 'Zoho Mail（EU、旧include）',
+    'eu.mailgun.org': 'Mailgun（EU）',
+  },
+  senderNotes: {
+    'Zoho Mail': 'ほかの地域のアカウントは、zohomail.euのように独自の末尾を使います。',
+    Mailgun: 'mg.yourdomain.comのようなサブドメインから送信する場合は、代わりにそのサブドメインのレコードに追加してください。',
+  },
+  notNeededReasons: {
+    Mailchimp: 'Mailchimpのドメイン設定で求められるのは、現在はDKIMとDMARCのレコードだけで、SPFは求められません。',
+    Postmark: 'Postmarkは、SPFはもう必要ないとしています。Postmark自身のバウンスアドレス、またはPostmarkを指すReturn-Pathレコードを使って送信します。',
+    Brevo: 'Brevoは、専用IPアドレスから送信する場合を除き、SPFは必要ないとしています。',
+    Klaviyo: 'Klaviyoは、通常SPFレコードを追加する必要はないとしています。',
+    SendGrid: 'SendGridのドメイン認証では、em1234.yourdomain.comのように自動で作成されるサブドメインにSPFが設定されます。',
+    'Amazon SES': 'SESで必要なのは、bounce.yourdomain.comのようなカスタムMAIL FROMサブドメインを使う場合だけです。既定ではSES自身のバウンスアドレスを使います。',
+  },
+}
+
 export const SPF_TOOL_STRINGS: Partial<Record<Locale, SpfToolStrings>> & { en: SpfToolStrings } = {
   en,
   de: deTool,
@@ -2443,6 +2681,7 @@ export const SPF_TOOL_STRINGS: Partial<Record<Locale, SpfToolStrings>> & { en: S
   nl: nlTool,
   pl: plTool,
   id: idTool,
+  ja: jaTool,
 }
 
 export function spfToolStrings(locale: Locale): SpfToolStrings {

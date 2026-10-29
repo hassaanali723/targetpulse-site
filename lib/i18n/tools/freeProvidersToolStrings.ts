@@ -535,6 +535,56 @@ const idTool: FreeProvidersToolStrings = {
   companyNames: { 'Globo / Vivo': 'Berbagai perusahaan' },
 }
 
+const jaTool: FreeProvidersToolStrings = {
+  banner: (p) =>
+    `${p.providers.toLocaleString('ja-JP')}サービス、${p.domains.toLocaleString('ja-JP')}件のドメインです。${p.date}の確認時点で、すべてのドメインのMXレコードが機能していました。`,
+  dateLocale: 'ja-JP',
+  checkLabel: 'フリーメールのドメインかどうかを確認',
+  checkPlaceholder: 'ドメインまたはメールアドレスを入力',
+  checkButton: 'ドメインを確認',
+  inputEmpty: 'ドメインまたはメールアドレスを入力してください。',
+  inputInvalid: 'ドメインの形式ではないようです。gmail.com のような形式で入力してください。',
+  isFree: (domain) => `${domain} はフリーメールのドメインです。`,
+  belongsTo: (name, company) => `${name}のドメインです${company ? `（運営：${company}）` : ''}。`,
+  kindNotes: {
+    webmail: '誰でも登録できる無料のWebメールサービスです。',
+    privacy: 'プライバシーを重視した、暗号化対応のメールサービスです。',
+    isp: '家庭用インターネット契約に付いてくるもので、これも個人のメールアドレスです。',
+  },
+  notListed: (domain) => `${domain} はこの一覧にありません。`,
+  notListedText:
+    '企業、学校、個人のドメインである可能性が高いです。この一覧で扱っていない小規模なフリーメールや、使い捨てメールアドレスのサービスである可能性もあります。{mx}か、{disposable}ことができます。',
+  mxLink: 'メールサーバーを確認する',
+  mxHref: '/ja/mx-lookup',
+  disposableLink: '使い捨てメールアドレスかどうかを確認する',
+  disposableHref: '/ja/disposable-email-checker',
+  browseLabel: '一覧を見る',
+  browsePlaceholder: 'ドメインまたはサービス名で絞り込み（例：hotmail、gmx）',
+  filters: {
+    all: 'すべて',
+    webmail: '無料Webメール',
+    privacy: 'プライバシー・暗号化',
+    isp: 'インターネットプロバイダー',
+  },
+  kindLabels: {
+    webmail: '無料Webメール',
+    privacy: 'プライバシー・暗号化',
+    isp: 'インターネットプロバイダー',
+  },
+  showing: (domains, providers) =>
+    `${providers.toLocaleString('ja-JP')}サービス、${domains.toLocaleString('ja-JP')}件のドメインを表示中`,
+  copy: 'ドメインをコピー',
+  copied: 'コピーしました',
+  thProvider: 'サービス',
+  thDomains: 'ドメイン',
+  empty: 'このフィルターに一致するドメインはありません。',
+  fileTxt: 'free-email-domains.txt',
+  fileCsv: 'free-email-domains.csv',
+  fileJson: 'free-email-domains.json',
+  csvHeader: 'ドメイン,サービス,運営会社,国,種類',
+  companyNames: { 'Globo / Vivo': '複数の会社' },
+}
+
 
 export const FREE_PROVIDERS_TOOL_STRINGS: Record<Locale, FreeProvidersToolStrings> = {
   en,
@@ -546,6 +596,7 @@ export const FREE_PROVIDERS_TOOL_STRINGS: Record<Locale, FreeProvidersToolString
   nl: nlTool,
   pl: plTool,
   id: idTool,
+  ja: jaTool,
 }
 
 export function freeProvidersToolStrings(locale: Locale): FreeProvidersToolStrings {

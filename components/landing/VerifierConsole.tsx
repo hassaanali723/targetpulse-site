@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import {
   Mail, Play, Loader2, CircleDashed, CheckCircle2, XCircle, AlertTriangle, HelpCircle, Terminal, ArrowRight,
 } from 'lucide-react'
+import { gapBefore, colonAfter } from '@/lib/i18n/cjk'
 
 type CheckStatus = 'idle' | 'running' | 'ok' | 'warn' | 'error' | 'skip'
 type VerdictType = 'deliverable' | 'catchall' | 'risky' | 'undeliverable' | 'unknown' | 'error'
@@ -654,7 +655,7 @@ function CatchAllResultCard({ result, signupUrl, t }: { result: ResultState; sig
         <div className="flex items-center gap-2">
           <AlertTriangle className={`w-4 h-4 shrink-0 ${result.catchAll ? 'text-amber-400' : 'text-slate-500'}`} />
           <span className="text-sm font-black text-slate-100 break-all">
-            {domain} {t === EN_CONSOLE_STRINGS ? 'is' : ''} {result.catchAll ? t.isCatchAll : t.notCatchAll}
+            {domain}{t === EN_CONSOLE_STRINGS ? ' is ' : gapBefore(result.catchAll ? t.isCatchAll : t.notCatchAll)}{result.catchAll ? t.isCatchAll : t.notCatchAll}
           </span>
         </div>
         <p className="text-xs text-slate-400 font-semibold leading-relaxed mt-1.5 pl-6">
@@ -666,7 +667,7 @@ function CatchAllResultCard({ result, signupUrl, t }: { result: ResultState; sig
       <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-4">
         <div className="flex items-center gap-2">
           <VerdictIcon className={`w-4 h-4 shrink-0 ${verdictColor}`} />
-          <span className={`text-sm font-black ${verdictColor}`}>{t.resultLabel}: {t.verdictTitle[v] || result.title}</span>
+          <span className={`text-sm font-black ${verdictColor}`}>{t.resultLabel}{colonAfter(t.resultLabel)}{t.verdictTitle[v] || result.title}</span>
         </div>
         <p className="text-xs text-slate-400 font-semibold leading-relaxed mt-1.5 pl-6">
           {t.verdictLine[v]}

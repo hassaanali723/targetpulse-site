@@ -806,6 +806,86 @@ const idTool: SignatureToolStrings = {
   },
 }
 
+const jaTool: SignatureToolStrings = {
+  defaults: {
+    fullName: '山田 花子',
+    jobTitle: 'アカウントマネージャー',
+    company: '株式会社サンプル',
+    phone: '03-0000-1234',
+    email: 'hanako@example.com',
+    website: 'example.com',
+  },
+  fields: {
+    fullName: { label: '氏名 *', placeholder: '山田 花子' },
+    jobTitle: { label: '役職', placeholder: 'アカウントマネージャー' },
+    company: { label: '会社名', placeholder: '株式会社サンプル' },
+    department: { label: '部署（任意）', placeholder: 'カスタマーサクセス部' },
+    pronouns: { label: '代名詞（任意）', placeholder: 'she/her' },
+    phone: { label: '電話番号', placeholder: '03-0000-1234' },
+    mobile: { label: '携帯電話（任意）', placeholder: '090-0000-0077' },
+    email: { label: 'メールアドレス', placeholder: 'hanako@example.com' },
+    website: { label: 'ウェブサイト', placeholder: 'example.com' },
+    address: { label: '会社の住所（任意）', placeholder: '東京都千代田区サンプル町1-2-3' },
+    logoUrl: { label: '会社ロゴのURL', placeholder: 'https://example.com/logo.png' },
+    photoUrl: { label: 'プロフィール写真のURL', placeholder: 'https://example.com/photo.jpg' },
+    linkedin: { label: 'LinkedInプロフィールのURL', placeholder: 'https://linkedin.com/in/...' },
+    x: { label: 'X / TwitterのURL', placeholder: 'https://x.com/...' },
+    facebook: { label: 'FacebookのURL', placeholder: 'https://facebook.com/...' },
+    instagram: { label: 'InstagramのURL', placeholder: 'https://instagram.com/...' },
+    youtube: { label: 'YouTubeチャンネルのURL', placeholder: 'https://youtube.com/@...' },
+    ctaText: { label: 'ボタンのテキスト（任意）', placeholder: '15分の打ち合わせを予約する' },
+    ctaUrl: { label: 'ボタンのURL', placeholder: 'https://cal.com/...' },
+    disclaimer: { label: '免責事項（任意）', placeholder: 'このメールの内容は機密情報です...' },
+  },
+
+  templateStep: '1. レイアウトのテンプレートを選ぶ',
+  templates: {
+    'simple-text': 'シンプルなテキスト',
+    'logo-left': 'ロゴを左に配置',
+    'photo-divider': '写真と区切り線',
+    compact: 'コンパクト',
+  },
+  fontLabel: 'フォント',
+  colorLabel: 'アクセントカラー',
+  colorAria: (hex) => `カラー ${hex}`,
+  personalStep: '2. 個人情報と会社情報',
+  contactStep: '3. 連絡先',
+  imagesStep: '4. ロゴと写真のリンク',
+  imagesHelp: '画像のリンクを貼り付けてください。公開されたHTTPSのURLが必要です（ファイルの直接アップロードには対応していません）。',
+  socialStep: '5. SNSのリンク（任意）',
+  socialIcons: 'テキストの代わりに小さなアイコンを使う',
+  ctaStep: '6. 行動を促すボタンと免責事項',
+  madeWith: '「Giggal.aiで作成」のリンクを表示する（初期設定ではオフ）',
+
+  tabPreview: 'プレビュー',
+  tabHtml: 'HTMLコード',
+  tabPlain: 'テキスト形式',
+  chars: (n) => `${n.toLocaleString('ja-JP')}/10,000文字`,
+  overLimit: 'Gmailの署名の上限である10,000文字を超えています。テキストやURLを短くしてください。',
+  plainHelp: 'iOSやAndroidのGmailなど、スマートフォンのメールアプリにおすすめです。',
+  copySignature: '署名をコピー',
+  copiedSignature: '署名をコピーしました。メールアプリに貼り付けてください',
+  copyHtml: 'HTMLコードをコピー',
+  download: '.htmlをダウンロード',
+  downloadName: 'signature.html',
+  copyPlain: 'テキスト版をコピー',
+
+  signature: {
+    phone: 'TEL:',
+    mobile: '携帯:',
+    email: 'Email:',
+    web: 'Web:',
+    address: '住所:',
+    logoAlt: 'ロゴ',
+    madeWith: 'Giggal.aiで作成',
+  },
+
+  imageWarnings: {
+    'not-https': '画像のURLは https:// で始まる必要があります',
+    invalid: '画像のURLが正しくありません',
+  },
+}
+
 export const SIGNATURE_TOOL_STRINGS: Partial<Record<Locale, SignatureToolStrings>> & { en: SignatureToolStrings } = {
   en,
   'pt-br': ptBrTool,
@@ -816,6 +896,7 @@ export const SIGNATURE_TOOL_STRINGS: Partial<Record<Locale, SignatureToolStrings
   nl: nlTool,
   pl: plTool,
   id: idTool,
+  ja: jaTool,
 }
 
 export function signatureToolStrings(locale: Locale): SignatureToolStrings {

@@ -186,7 +186,7 @@ export default function BulkVerifierL10n({
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-14 items-center">
           <div className="space-y-6 text-center lg:text-left">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900">
-              {t.hero.h1Lead}{' '}
+              {t.hero.h1Lead}{locale === 'ja' ? null : ' '}
               <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">
                 {t.hero.h1Rest}
               </span>
@@ -238,7 +238,7 @@ export default function BulkVerifierL10n({
           ))}
         </dl>
 
-        <RatingChips className="mt-10" reviews={checker.ratings.reviews} ratedAria={checker.ratings.ratedAria} decimalComma />
+        <RatingChips className="mt-10" reviews={checker.ratings.reviews} ratedAria={checker.ratings.ratedAria} decimalComma={locale !== 'ja'} />
       </section>
 
       <AwardRow headingLead={checker.awards.headingLead} headingRest={checker.awards.headingRest} showLabel={checker.awards.showLabel} />

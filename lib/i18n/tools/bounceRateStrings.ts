@@ -1432,6 +1432,158 @@ const id: BounceRatePageStrings = {
   ctaHeadline: 'Turunkan bounce rate sebelum pengiriman berikutnya',
 }
 
+const ja: BounceRatePageStrings = {
+  metaTitle: 'バウンス率・直帰率の計算ツール：メールとWebサイト（GA4） | Giggal.ai',
+  ogTitle: 'バウンス率・直帰率の計算ツール：メールとWebサイト（GA4）',
+  description:
+    'メールのバウンス率とWebサイトの直帰率を無料で計算できます。計算式、ハードバウンス率とソフトバウンス率、配信サービスの上限、GA4での計算方法も解説します。',
+  ogLocale: 'ja_JP',
+  ogImage: '/tools/bounce-rate-calculator-og-v2.webp',
+  ogAlt: '無料のバウンス率計算ツール',
+  crumb: 'バウンス率計算ツール',
+  appName: '無料のバウンス率計算ツール',
+  featureList: [
+    '送信数とバウンス数からメールのバウンス率を計算',
+    'ハードバウンス率、ソフトバウンス率、配信率を個別に表示',
+    '配信サービスの上限と自分の数値を比較',
+    'Google アナリティクス 4のセッション数からWebサイトの直帰率を計算',
+    '自分の数値を入れた計算式を表示',
+  ],
+  h1: 'バウンス率計算ツール',
+  heroIntro:
+    'メール配信のバウンス率やWebサイトの直帰率を計算します。メール配信ツールまたはGoogle アナリティクス 4の数値を入力すると、その率と意味が分かります。',
+  howTitle: 'バウンス率計算ツールの使い方',
+  howSteps: [
+    'メール配信の場合は「メールのバウンス率」タブのまま使います。キャンペーンレポートにある送信数、ハードバウンス数、ソフトバウンス数を入力します。',
+    'ツールにバウンス数が1つしかない場合は、その数を「ハードバウンス数」に入力し、「ソフトバウンス数」は空欄にします。',
+    '結果を確認します。全体のバウンス率、ハードバウンス率、ソフトバウンス率、配信率が表示されます。',
+    '結果の下にある配信サービスの一覧を確認します。Amazon SES、HubSpot、Postmarkなどの上限にどれだけ近いかが分かります。',
+    'Webサイトの場合は「Webサイトの直帰率（GA4）」タブに切り替え、Google アナリティクス 4のセッション数とエンゲージのあったセッション数を入力します。',
+  ],
+  howFooter:
+    '結果は入力に合わせてすぐに更新されます。各結果の下には自分の数値を入れた計算式が表示されるので、計算を確認したり、レポートにコピーしたりできます。',
+  imageAlt:
+    'メールのバウンス率の計算を示すイラスト。バウンスしたメールの数を送信数で割り、配信サービスの上限と比べています。',
+  formulaTitle: 'バウンス率の計算式',
+  formulaIntro:
+    '「バウンス率」には2つの意味があります。メールでは、配信できなかったメールの割合を指します。Webサイトでは、訪問者が操作をしなかった訪問の割合を指し、日本語では一般に「直帰率」と呼ばれます。そのため「バウンス率はどう計算するのか」の答えは、どちらを指すかによって変わります。',
+  emailFormulaTitle: 'メールのバウンス率の計算式',
+  emailFormulaCode: 'バウンス率 = バウンスしたメールの数 ÷ 送信数 × 100',
+  emailFormulaText:
+    '10,000通を送信して250通がバウンスした場合、バウンス率は250 ÷ 10,000 × 100 = 2.5%です。バウンスしたメールには、ハードバウンス（メールアドレスが存在しない）とソフトバウンス（メールボックスの容量超過などの一時的な問題）の両方が含まれます。',
+  websiteFormulaTitle: 'GA4でのWebサイトの直帰率の計算式',
+  websiteFormulaCode: '直帰率 = (セッション数 − エンゲージのあったセッション数) ÷ セッション数 × 100',
+  websiteFormulaText:
+    'これは[Google アナリティクス 4](https://support.google.com/analytics/answer/12195621)の定義で、エンゲージメントがなかったセッションの割合です。直帰率は常に、100%からエンゲージメント率を引いた値と同じになります。セッション数が2,000、エンゲージのあったセッション数が1,250の場合、直帰率は37.5%です。',
+  websiteOldText:
+    '古い解説記事では、1ページだけのセッション数 ÷ 全セッション数という別の計算式が使われています。これは[ユニバーサル アナリティクスの定義](https://support.google.com/analytics/answer/1009409)です。標準のユニバーサル アナリティクスは2023年7月1日にデータの処理を終了しました。現在のレポートにはGA4の計算式を使ってください。',
+  calcEmailTitle: 'メールのバウンス率の計算方法',
+  calcEmailSteps: [
+    'メール配信ツールで、1つのキャンペーンまたは1つの期間のレポートを開きます。',
+    '送信数を確認し、次にハードバウンス数とソフトバウンス数を確認します。',
+    '2つのバウンス数を足します。',
+    '送信数で割り、100を掛けます。',
+  ],
+  calcEmailIntro:
+    '多くのツールは送信数で割りますが、説明の仕方はツールごとに異なります。自分の数値を他の数値と比べる前に、それぞれのツールが何を数えているかを確認してください。',
+  definitionsHead: ['ツール', 'バウンス率の計算方法'],
+  definitionsRows: [
+    { a: 'Mailchimp', b: 'ハードバウンス数とソフトバウンス数の合計 ÷ 総送信数', href: 'https://mailchimp.com/help/custom-report-metrics/' },
+    { a: 'Klaviyo', b: 'バウンスしたメールの数 ÷ 総送信数', href: 'https://help.klaviyo.com/hc/en-us/articles/360057036052' },
+    { a: 'Mailgun', b: '配信されなかった数 ÷ 総送信数。レポートにはハードバウンス率も別に表示されます', href: 'https://documentation.mailgun.com/docs/mailgun/user-manual/reporting/rate-definitions' },
+    { a: 'Campaign Monitor', b: 'バウンスしたメールの数 ÷ 「キャンペーンが配信された受信者の総数」', href: 'https://help.campaignmonitor.com/s/article/bounced-emails-report' },
+    { a: 'Brevo', b: 'バウンス数 ÷ 受信者数。トランザクションメールのレポートではハードとソフトの率が別に表示されます', href: 'https://help.brevo.com/hc/en-us/articles/4863866741266-Brevo-Glossary' },
+    { a: 'Amazon SES', b: 'ハードバウンスだけを、代表的な量のメールで測定します', href: 'https://docs.aws.amazon.com/ses/latest/dg/faqs-enforcement.html' },
+  ],
+  calcEmailDiff:
+    'この違いは、率が高いときに大きくなります。10,000通のうち500通がバウンスした場合、送信数に対しては5%ですが、配信された9,500通に対しては5.26%です。この計算ツールは両方を表示します。',
+  calcEmailHardNote:
+    'ハードバウンス率も単独で計算してください。ソフトバウンスは次の再送で解消することが多いため、配信サービスの上限の多くはハードバウンスだけを数えます。',
+  limitsTitle: '配信サービスごとのメールのバウンス率の上限',
+  limitsIntro:
+    'メール配信サービスはバウンス率の上限を公開しており、上限を超えたアカウントを審査したり停止したりします。公開されている数値は次のとおりです。',
+  limitsHead: ['配信サービス', '上限', '公開されている内容'],
+  limitsRows: [
+    { name: 'Amazon SES', limit: 5, what: 'ハードバウンス率が5%でアカウントが審査対象になり、10%で送信が停止されます。目標は2%未満です。', source: 'https://docs.aws.amazon.com/ses/latest/dg/faqs-enforcement.html' },
+    { name: 'Postmark', limit: 10, what: '代表的な量のメールでハードバウンス率が10%になると、アカウントが停止されます。', source: 'https://postmarkapp.com/support/article/1118-why-is-my-account-pending-approval' },
+    { name: 'Brevo', limit: 2, what: 'ハードバウンス率が2%、またはソフトバウンス率が5%を超えると、キャンペーンの送信が停止されます。', source: 'https://help.brevo.com/hc/en-us/articles/209435165' },
+    { name: 'HubSpot', limit: 5, what: 'アカウントの最近の送信でバウンス率が5%になると、マーケティングメールの送信が停止されます。', source: 'https://knowledge.hubspot.com/marketing-email/why-is-my-email-suspended' },
+    { name: 'SendGrid', limit: 5, what: 'バウンス率が5%を超えるアカウントには警告が送られ、停止されることがあります。', source: 'https://sendgrid.com/en-us/blog/email-bounce-management' },
+  ],
+  limitsMailchimpNote:
+    '[Mailchimp](https://mailchimp.com/help/about-bounce-warnings/)は数値を公開していません。上限は場合によって異なり、アカウントを停止する前に警告を出すとしています。',
+  limitsMailboxNote:
+    'メールボックスプロバイダーは、バウンスの上限をまったく設けていません。[Gmailの送信者ガイドライン](https://support.google.com/a/answer/81126)と[Yahooのガイドライン](https://senders.yahooinc.com/best-practices/)には0.3%という上限がありますが、これは迷惑メールの報告率に対するものです。バウンスについては、Gmailは繰り返しバウンスする宛先の登録を解除するよう、Yahooは無効な受信者をすぐに削除するよう送信者に求めています。',
+  benchmarksTitle: 'メールのバウンス率のベンチマーク',
+  benchmarksParas: [
+    '公開されている平均値は大きく異なります。主な理由は、レポートごとにバウンスの数え方が違うことです。2022年のデータに基づく[Twilio SendGridの2023年のレポート](https://www.twilio.com/en-us/resource-center/2023-email-marketing-benchmark-report)では、平均バウンス率は1.06%、中央値は0.21%でした。このレポートは一時的なブロックを別に数えています。[GetResponseの2024年のレポート](https://www.getresponse.com/resources/reports/email-marketing-benchmarks)では全体の率は2.33%で、業種によって1.19%〜4.86%の幅がありました。このレポートはハードバウンスとソフトバウンスを分けていません。',
+    'ベンチマークよりも、自分の数値の推移と配信サービスの上限の方が役に立ちます。コールドメール（営業メール）でどの程度が良い数値かは、[コールドメールの適切なバウンス率](/blog/good-bounce-rate-for-cold-email)をご覧ください。平均値の詳しい解説は、[メールのバウンス率のベンチマークと下げ方](/blog/how-to-reduce-email-bounce-rate)をご覧ください。',
+  ],
+  hardSoftTitle: 'ハードバウンスとソフトバウンス',
+  hardSoftParas: [
+    'ハードバウンスは恒久的なエラーです。受信サーバーは5で始まるコードを返します。たとえば存在しないメールアドレスには5.1.1が返されます。[RFC 5321](https://www.rfc-editor.org/rfc/rfc5321)は、送信者が同じ要求を繰り返すべきではないとしています。ソフトバウンスは一時的なエラーで、コードは4で始まります。送信者は後で再送できます。',
+    'その境界は、ツールによって異なることがあります。[RFC 3463](https://datatracker.ietf.org/doc/html/rfc3463)はメールボックスの容量超過を一時的なエラーとしていますが、ハードバウンスに分類するツールもあります。また多くのツールは、ソフトバウンスが繰り返されるとハードバウンスとして扱います。',
+  ],
+  softRulesHead: ['ツール', 'ソフトバウンスがハードバウンスになる条件'],
+  softRulesRows: [
+    { a: 'Mailchimp', b: '活動履歴のないアドレスでは7回、過去に活動履歴のあるアドレスでは15回のソフトバウンスの後', href: 'https://mailchimp.com/help/soft-vs-hard-bounces/' },
+    { a: 'Klaviyo', b: '過去2年間で、ソフトバウンスが7回を超えて連続した後', href: 'https://help.klaviyo.com/hc/en-us/articles/115005250408' },
+    { a: 'Brevo', b: '36時間再送し、キャンペーンで5回連続ソフトバウンスしたアドレスをブロック', href: 'https://help.brevo.com/hc/en-us/articles/209435165' },
+    { a: 'HubSpot', b: '保留中のバウンスを72時間再送し、その後ソフトバウンスとして数える', href: 'https://knowledge.hubspot.com/marketing-email/what-is-the-difference-between-a-hard-bounce-and-a-soft-bounce' },
+  ],
+  hardSoftLink:
+    'それぞれの種類のエラーコードについては、[ハードバウンスとソフトバウンスの違い](/blog/hard-bounce-vs-soft-bounce)をご覧ください。',
+  ga4Title: 'Google アナリティクス 4で直帰率を計算する方法',
+  ga4Paras: [
+    'GA4では、10秒を超えて続いたセッション、またはキーイベントがあったセッションを「エンゲージのあったセッション」と呼びます。ページまたは画面の表示が2回以上あったセッションも含まれます。それ以外のセッションは、すべて直帰率に数えられます。10秒のタイマーは、サイトの管理者がデータストリームのタグ設定で変更できます。',
+    'GA4の多くのレポートでは、直帰率は初期状態で表示されません。追加するには、詳細レポートを開いて「レポートをカスタマイズ」を選び、「指標」で「直帰率」を追加します。編集者または管理者の役割が必要です。レポートを編集したくない場合は、レポートからセッション数とエンゲージのあったセッション数を確認し、上の「Webサイトの直帰率（GA4）」タブを使ってください。',
+    'ユニバーサル アナリティクスからの移行で、多くの数値が変わりました。1ページを30秒読んで離脱した訪問者は、以前は直帰として数えられました。GA4では訪問が10秒を超えて続いたため、直帰になりません。',
+    'ネット上で見かける「26%〜40%なら非常に良い」といったWebサイトの直帰率の目安には注意してください。これらはユニバーサル アナリティクスの時代のもので、出典が示されていることはほとんどありません。GA4には独自の[ベンチマーク機能](https://support.google.com/analytics/answer/16388466)があり、設定を有効にすると、自分のプロパティを同業のグループと比較できます。',
+  ],
+  lowerTitle: 'メールのバウンス率を下げる方法',
+  lowerParas: [
+    'ハードバウンスの原因は存在しないメールアドレスです。そのため、送信前にそうしたアドレスを取り除くことが対策になります。新しい登録は届いた時点で確認してください。古いリストはキャンペーンの前に確認してください。人は転職したり、アカウントを閉じたりするからです。',
+    'ハードバウンスしたアドレスはすべて削除してください。Yahooは無効な受信者をすぐに削除するよう、Gmailは繰り返しバウンスする宛先の登録を解除するよう送信者に求めています。[Microsoft](https://techcommunity.microsoft.com/blog/microsoftdefenderforoffice365blog/strengthening-email-ecosystem-outlook%e2%80%99s-new-requirements-for-high%e2%80%90volume-senders/4399730)は、無効なアドレスを毎月または四半期ごとに削除するよう勧めています。',
+    '1件のアドレスなら[メールアドレスチェッカー](/email-checker)、リスト全体なら[メールアドレスの一括検証ツール](/bulk-email-verifier)を使ってください。どちらも、キャッチオールドメインのアドレスを含め、どのアドレスがバウンスするかが分かります。',
+  ],
+  faqTitle: 'よくある質問',
+  faqs: [
+    {
+      q: 'バウンス率の計算式は何ですか？',
+      a: 'メールの場合、バウンス率 = バウンスしたメールの数 ÷ 送信数 × 100 です。Google アナリティクス 4のWebサイトの場合、直帰率 = (セッション数 − エンゲージのあったセッション数) ÷ セッション数 × 100 です。これは100%からエンゲージメント率を引いた値と同じです。',
+    },
+    {
+      q: 'メールのバウンス率はどう計算しますか？',
+      a: 'キャンペーンレポートのハードバウンス数とソフトバウンス数を足し、送信数で割って100を掛けます。10,000通の送信で250通がバウンスした場合、バウンス率は2.5%です。',
+    },
+    {
+      q: 'メールのバウンス率は送信数と配信数のどちらで計算しますか？',
+      a: '多くのツールは送信数で割ります。Mailchimp、Klaviyo、Mailgunはいずれもその方法を説明しています。受信者数に対する割合として説明しているツールもあるため、2つの数値を比べる前にツールのヘルプページを確認してください。',
+    },
+    {
+      q: '良いメールのバウンス率はどのくらいですか？',
+      a: '2%未満が安全な目標です。Amazon SESは送信者に2%未満を保つよう求めており、Brevoはハードバウンス率が2%を超えるアカウントを停止することがあります。Twilio SendGridの2023年のレポートでは、バウンス率の中央値は0.21%でした。',
+    },
+    {
+      q: 'メールのバウンス率5%は悪い数値ですか？',
+      a: 'はい。ハードバウンス率が5%になると、Amazon SESはアカウントを審査対象にし、HubSpotはアカウントを停止することがあります。次に送信する前にリストをクリーニングしてください。',
+    },
+    {
+      q: 'Gmailにはバウンス率の上限がありますか？',
+      a: 'ありません。Gmailの送信者ガイドラインが定めているのは0.3%という迷惑メール率の上限で、バウンスの上限ではありません。ただし、繰り返しバウンスするアドレスの登録を解除するよう送信者に求めています。YahooとMicrosoftもバウンスの数値を公開していません。',
+    },
+    {
+      q: 'GA4で直帰率はどう計算しますか？',
+      a: 'セッション数からエンゲージのあったセッション数を引き、セッション数で割ります。GA4では、10秒を超えて続いたセッション、またはキーイベントがあったセッションをエンゲージのあったセッションとして数えます。ページまたは画面の表示が2回以上あったセッションも含まれます。それ以外はすべて直帰です。',
+    },
+    {
+      q: 'GA4の直帰率が以前のユニバーサル アナリティクスの数値と違うのはなぜですか？',
+      a: 'ユニバーサル アナリティクスは、1ページだけのセッションをすべて直帰として数えていました。GA4は、エンゲージメントがなかったセッションを数えます。1ページを30秒見た訪問は、ユニバーサル アナリティクスでは直帰でしたが、GA4では直帰になりません。',
+    },
+  ],
+  ctaHeadline: '送信する前にバウンス率を下げましょう',
+}
+
 export const BOUNCE_RATE_PAGE_STRINGS: Record<Locale, BounceRatePageStrings> = {
   en,
   fr,
@@ -1442,6 +1594,7 @@ export const BOUNCE_RATE_PAGE_STRINGS: Record<Locale, BounceRatePageStrings> = {
   nl,
   pl,
   id,
+  ja,
 }
 
 export function bounceRatePageStrings(locale: Locale): BounceRatePageStrings {
