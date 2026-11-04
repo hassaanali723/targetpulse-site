@@ -1423,7 +1423,141 @@ const jaTool: DmarcToolStrings = {
   },
 }
 
-export const DMARC_TOOL_STRINGS: Record<Locale, DmarcToolStrings> = { en, de: deTool, fr: frTool, es: esTool, it: itTool, 'pt-br': ptBrTool, nl: nlTool, pl: plTool, id: idTool, ja: jaTool }
+const koTool: DmarcToolStrings = {
+  copy: '복사',
+  copied: '복사됨',
+
+  // Step 1
+  domainLabel: '도메인',
+  domainPlaceholder: 'example.com',
+  domainHelp: '이메일 주소에서 @ 뒤에 오는 부분입니다. anna@example.com이라면 example.com을 입력합니다.',
+  domainInvalid: '도메인 형식이 아닌 것 같습니다. example.com처럼 입력하십시오.',
+
+  // Step 2
+  ruaLabel: '보고서를 받을 주소',
+  recommended: '권장',
+  ruaPlaceholder: 'dmarc@example.com',
+  ruaHelp: '메일 서비스 제공업체는 집계 보고서(rua)라는 요약을 이 주소로 보냅니다. 보고서에는 이 도메인 이름으로 이메일을 보내는 발신자가 나옵니다.',
+  ruaInvalid: '이메일 주소 형식이 아닌 것 같습니다. 수정하기 전까지 이 주소는 레코드에 들어가지 않습니다.',
+
+  // Step 3
+  policyLegend: '정책 수준 선택',
+  policyIntro:
+    '메일 서비스 제공업체는 이 도메인을 쓰는 이메일이 실제로 도메인 소유자가 보낸 것인지 확인합니다. DMARC 정책은 이 확인에 실패한 이메일(도메인 이름을 사칭해 보낸 가짜 이메일 등)을 어떻게 처리할지 정합니다.',
+  policies: {
+    none: {
+      title: '모니터링만',
+      text: '이메일 처리는 아직 바뀌지 않습니다. 이 도메인 이름으로 이메일을 보내는 발신자를 보여 주는 보고서를 받습니다.',
+    },
+    quarantine: {
+      title: '스팸함으로 보내기',
+      text: '확인에 실패한 이메일은 스팸함에 격리됩니다. 보고서에서 정상 이메일이 통과하는 것을 확인한 뒤 선택하십시오.',
+    },
+    reject: {
+      title: '차단',
+      text: '확인에 실패한 이메일은 거부되어 도착하지 않습니다. 모든 이메일이 통과한다고 확신할 때 마지막으로 선택하십시오.',
+    },
+  },
+  startHere: '여기서 시작',
+
+  // Advanced settings
+  advancedTitle: '고급 설정',
+  advancedHint: '하위 도메인, 정렬(alignment), 실패 보고서(포렌식), 테스트 모드 설정입니다. 대부분은 건너뛰어도 됩니다.',
+  testMode: '테스트 모드',
+  testModeHelp:
+    '테스트하는 동안 메일 서비스 제공업체에 한 단계 약하게 처리해 달라고 요청합니다. “차단”은 “스팸함으로 보내기”처럼, “스팸함으로 보내기”는 “모니터링만”처럼 처리됩니다.',
+  testModeDisabled: '먼저 “스팸함으로 보내기” 또는 “차단”을 선택하십시오. “모니터링만”에서는 테스트 모드가 아무 효과도 없습니다.',
+  spLabel: '하위 도메인 정책',
+  spInherit: '기본 선택과 같음',
+  spHelp: 'news.example.com 같은 주소에 적용됩니다.',
+  npLabel: '존재하지 않는 하위 도메인용 정책',
+  npInherit: '하위 도메인 정책과 같음',
+  npHelp: '사기범이 쓰는 가짜 이름(예: invoices.example.com)에 적용됩니다.',
+  adkimLabel: 'DKIM 정렬',
+  aspfLabel: 'SPF 정렬',
+  alignRelaxed: '완화(기본값, 권장)',
+  alignStrict: '엄격(도메인 정확히 일치)',
+  rufLabel: '실패 보고서를 받을 이메일',
+  rufPlaceholder: '선택 사항',
+  rufHelp: '실패한 개별 이메일에 대한 보고서입니다. 많은 메일 서비스 제공업체가 이 보고서를 보내지 않습니다.',
+  foLabel: '실패 보고서를 보내는 조건',
+  foOptions: {
+    '0': 'SPF와 DKIM이 모두 실패할 때(기본값)',
+    '1': 'SPF 또는 DKIM이 실패할 때',
+    d: 'DKIM이 실패할 때',
+    s: 'SPF가 실패할 때',
+  },
+  foNeedsRuf: '먼저 실패 보고서를 받을 이메일을 입력하십시오.',
+
+  // The record
+  recordTitle: 'DMARC 레코드',
+  recordIntro: '도메인의 DNS 설정에 새 TXT 레코드로 추가하십시오.',
+  typeLabel: '유형',
+  hostLabel: '이름 / 호스트',
+  fullName: '전체 이름을 요구하는 DNS 서비스도 있습니다:',
+  yourDomain: 'yourdomain.com',
+  valueLabel: '값',
+
+  // External report domain
+  consentTitle: '보고서 도메인에 레코드가 하나 더 필요합니다',
+  consentText:
+    '보고서를 받을 주소가 다른 도메인에 있습니다. 메일 서비스 제공업체는 그 도메인이 아래 레코드를 게시한 경우에만 보고서를 보냅니다. 그 도메인을 관리하는 담당자에게 이 레코드를 전달하십시오.',
+  consentAddTo: '{domain}의 DNS에 TXT 유형으로 추가:',
+  consentName: '이름: ',
+  consentValue: '값: ',
+
+  // What to do next
+  nextTitle: '다음 단계',
+  nextCheck:
+    '도메인에 SPF와 DKIM이 설정되어 있는지 확인하십시오. DMARC는 이 두 가지를 바탕으로 작동하므로, 설정이 없으면 정상 이메일도 실패합니다. 설정 방법은 Google Workspace나 Microsoft 365 같은 사용 중인 이메일 서비스의 안내에 나와 있습니다. {spf}에서 SPF 레코드가 제대로 작동하는지 확인할 수 있습니다. {guide}도 참고하십시오.',
+  spfLabel: 'SPF 레코드 검사기',
+  spfHref: '/ko/spf-checker',
+  guideLabel: 'SPF, DKIM, DMARC가 함께 작동하는 방식',
+  guideHref: '/ko/blog/spf-dkim-dmarc-explained',
+  nextSignIn: '도메인 DNS를 관리하는 곳에 로그인합니다. 보통 도메인을 구매한 회사입니다.',
+  nextAdd:
+    '위의 이름과 값으로 새 TXT 레코드를 추가하고 저장합니다. 메일 서버는 DMARC 레코드가 2개 있으면 둘 다 무시하므로, 도메인에는 DMARC 레코드를 하나만 두십시오.',
+  nextLevel: {
+    noReports: '2단계에서 보고서를 받을 주소를 추가하십시오. 보고서가 없으면 정상 이메일이 통과하는지 알 수 없습니다.',
+    none: '몇 주 동안 보고서를 확인하십시오. 정상 이메일이 통과하면 이 페이지로 돌아와 “스팸함으로 보내기”를 선택하십시오.',
+    quarantine: '계속 보고서를 확인하십시오. 정상 이메일이 스팸함으로 가지 않게 되면 이 페이지로 돌아와 “차단”을 선택하십시오.',
+    reject: '계속 보고서를 확인하십시오. 이 도메인 이름으로 이메일을 보내기 시작한 새 서비스가 있으면 보고서에 나옵니다.',
+  },
+
+  cleanerToggle: '이미 DMARC 레코드가 있습니까? RFC 9989에서 폐지된 설정이 있는지 확인하십시오.',
+  importLabel: '현재 DMARC 레코드를 붙여 넣으십시오',
+  cleanButton: '레코드 확인 및 정리',
+  cleanedTitle: '정리된 레코드',
+  alreadyClean: '이 레코드는 이미 정리되어 있습니다. 바꿀 부분이 없습니다.',
+  whatChanged: (n) => `변경 사항(${n}건)`,
+  changeLabel: { removed: '삭제', normalized: '변경', modernized: '제안' },
+
+  warnings: {
+    'bad-address': (address) =>
+      `유효한 이메일 주소가 아니므로 레코드에서 제외했습니다: “${address}”`,
+    'reject-no-reports':
+      '이 레코드는 확인에 실패한 이메일을 차단하지만(p=reject) 보고서를 받을 주소가 없습니다. 정상 이메일이 거부되어도 알 수 없습니다.',
+    'reject-dkim':
+      'p=reject는 모든 이메일에 DKIM 서명이 있을 때만 사용하십시오. 전달된 이메일은 SPF에 실패하는 경우가 많으므로 SPF만으로는 부족합니다.',
+    'strict-alignment':
+      '엄격한 정렬에서는 도메인이 정확히 일치해야 합니다. 어떤 서비스가 mail.example.com 같은 하위 도메인에서 이메일에 서명하거나 이메일을 보내면, 그 이메일은 실패합니다.',
+    'ruf-unreliable': '많은 메일 서비스 제공업체가 개인정보 보호를 이유로 실패 보고서를 보내지 않습니다. 실패 보고서에 의존하지 마십시오.',
+  },
+  changes: {
+    'missing-version': () =>
+      'DMARC 레코드는 v=DMARC1 값으로 시작해야 합니다. 그렇지 않으면 메일 서버가 레코드를 무시합니다. 정리된 레코드는 v=DMARC1 값으로 시작합니다.',
+    'bad-policy': ({ value }) =>
+      `레코드에 유효한 정책이 없었습니다${value ? `(“p=${value}”)` : ''}. 모니터링만 하는 p=none으로 설정했습니다.`,
+    retired: ({ tag, value }) =>
+      `${tag}=${value} 태그는 더 이상 DMARC 표준(RFC 9989)에 포함되지 않으므로 삭제했습니다.`,
+    'pct-partial': () =>
+      '기존 레코드는 이메일의 일부에만 정책을 적용했습니다. 테스트하는 동안 정책을 약하게 하려면 대신 고급 설정에서 테스트 모드(t=y)를 켜십시오.',
+    'sp-matches': ({ value }) => `sp=${value} 태그는 기본 정책과 같아서 필요하지 않았습니다.`,
+    default: ({ tag, value }) => `${tag}=${value} 태그는 이미 기본값이라 필요하지 않았습니다.`,
+  },
+}
+
+export const DMARC_TOOL_STRINGS: Record<Locale, DmarcToolStrings> = { en, de: deTool, fr: frTool, es: esTool, it: itTool, 'pt-br': ptBrTool, nl: nlTool, pl: plTool, id: idTool, ja: jaTool, ko: koTool }
 
 export function dmarcToolStrings(locale: Locale): DmarcToolStrings {
   return DMARC_TOOL_STRINGS[locale] ?? en

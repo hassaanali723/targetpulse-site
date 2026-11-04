@@ -886,6 +886,86 @@ const jaTool: SignatureToolStrings = {
   },
 }
 
+const koTool: SignatureToolStrings = {
+  defaults: {
+    fullName: '김민준',
+    jobTitle: '어카운트 매니저',
+    company: '(주)예시컴퍼니',
+    phone: '+82 2-0000-1234',
+    email: 'minjun@example.com',
+    website: 'example.com',
+  },
+  fields: {
+    fullName: { label: '이름 *', placeholder: '김민준' },
+    jobTitle: { label: '직함', placeholder: '어카운트 매니저' },
+    company: { label: '회사명', placeholder: '(주)예시컴퍼니' },
+    department: { label: '부서(선택)', placeholder: '고객성공팀' },
+    pronouns: { label: '인칭 대명사(선택)', placeholder: 'she/her' },
+    phone: { label: '전화번호', placeholder: '+82 2-0000-1234' },
+    mobile: { label: '휴대폰 번호(선택)', placeholder: '+82 10-0000-0077' },
+    email: { label: '이메일 주소', placeholder: 'minjun@example.com' },
+    website: { label: '웹사이트', placeholder: 'example.com' },
+    address: { label: '회사 주소(선택)', placeholder: '서울특별시 중구 예시로 100' },
+    logoUrl: { label: '회사 로고 URL', placeholder: 'https://example.com/logo.png' },
+    photoUrl: { label: '프로필 사진 URL', placeholder: 'https://example.com/photo.jpg' },
+    linkedin: { label: 'LinkedIn 프로필 URL', placeholder: 'https://linkedin.com/in/...' },
+    x: { label: 'X / Twitter URL', placeholder: 'https://x.com/...' },
+    facebook: { label: 'Facebook URL', placeholder: 'https://facebook.com/...' },
+    instagram: { label: 'Instagram URL', placeholder: 'https://instagram.com/...' },
+    youtube: { label: 'YouTube 채널 URL', placeholder: 'https://youtube.com/@...' },
+    ctaText: { label: '버튼 문구(선택)', placeholder: '15분 상담 예약하기' },
+    ctaUrl: { label: '버튼 URL', placeholder: 'https://cal.com/...' },
+    disclaimer: { label: '법적 고지(선택)', placeholder: '이 이메일의 내용은 기밀입니다...' },
+  },
+
+  templateStep: '1. 레이아웃 템플릿 선택',
+  templates: {
+    'simple-text': '심플 텍스트',
+    'logo-left': '왼쪽 로고',
+    'photo-divider': '사진과 구분선',
+    compact: '컴팩트',
+  },
+  fontLabel: '글꼴',
+  colorLabel: '강조 색상',
+  colorAria: (hex) => `색상 ${hex}`,
+  personalStep: '2. 개인 정보와 회사 정보',
+  contactStep: '3. 연락처',
+  imagesStep: '4. 로고와 사진 링크',
+  imagesHelp: '이미지 링크를 붙여 넣으십시오. 공개된 HTTPS URL이어야 합니다(파일 직접 업로드는 지원하지 않습니다).',
+  socialStep: '5. SNS 링크(선택)',
+  socialIcons: '텍스트 대신 작은 아이콘 사용',
+  ctaStep: '6. 행동 유도 버튼과 법적 고지',
+  madeWith: '“Giggal.ai로 제작” 링크 표시(기본값: 끔)',
+
+  tabPreview: '미리보기',
+  tabHtml: 'HTML 코드',
+  tabPlain: '일반 텍스트',
+  chars: (n) => `${n.toLocaleString('ko-KR')}/10,000자`,
+  overLimit: 'Gmail의 서명 길이 한도인 10,000자를 넘었습니다. 텍스트나 URL을 줄이십시오.',
+  plainHelp: 'iOS나 Android용 Gmail 같은 모바일 메일 앱에 권장합니다.',
+  copySignature: '서명 복사',
+  copiedSignature: '서명이 복사되었습니다. 메일 프로그램에 붙여 넣으십시오',
+  copyHtml: 'HTML 코드 복사',
+  download: '.html 다운로드',
+  downloadName: 'signature.html',
+  copyPlain: '일반 텍스트 버전 복사',
+
+  signature: {
+    phone: '전화:',
+    mobile: '휴대폰:',
+    email: '이메일:',
+    web: '웹사이트:',
+    address: '주소:',
+    logoAlt: '로고',
+    madeWith: 'Giggal.ai로 제작',
+  },
+
+  imageWarnings: {
+    'not-https': '이미지 URL은 https://로 시작해야 합니다',
+    invalid: '이미지 URL이 올바르지 않습니다',
+  },
+}
+
 export const SIGNATURE_TOOL_STRINGS: Partial<Record<Locale, SignatureToolStrings>> & { en: SignatureToolStrings } = {
   en,
   'pt-br': ptBrTool,
@@ -897,6 +977,7 @@ export const SIGNATURE_TOOL_STRINGS: Partial<Record<Locale, SignatureToolStrings
   pl: plTool,
   id: idTool,
   ja: jaTool,
+  ko: koTool,
 }
 
 export function signatureToolStrings(locale: Locale): SignatureToolStrings {

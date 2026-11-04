@@ -165,6 +165,23 @@ export const REVIEW_BADGES: Record<L10nLocale, ReviewBadgeStrings> = {
       { title: '不明の結果には料金がかかりません', text: '料金がかかるのは、はっきりした結果だけです。' },
     ],
   },
+  ko: {
+    heading: '실제 팀이 남긴 평가',
+    readOn: (p) => `${p}에서 Giggal.ai 리뷰 읽기`,
+    rating: (n) => n.toFixed(1),
+    // Product Hunt passes "50+": Korean writes that as "리뷰 50개 이상".
+    reviews: (n) => (n.endsWith('+') ? `리뷰 ${n.slice(0, -1)}개 이상` : `리뷰 ${n}개`),
+    verified: '인증된 사용자의 리뷰',
+    read: '리뷰 읽기',
+    used: 'Giggal.ai를 쓰고 계십니까?',
+    leave: 'Trustpilot에 리뷰 남기기',
+    points: [
+      { title: '무료 크레딧 1,000개', text: '시작할 때 신용카드는 필요 없습니다.' },
+      { title: '크레딧 유효기간 없음', text: '한 번 구매하고 필요할 때 쓰면 됩니다.' },
+      { title: '캐치올 도메인에도 실제 결과', text: '“위험”이 아니라 유효 또는 무효 결과를 돌려줍니다.' },
+      { title: '알 수 없음 결과는 무료', text: '분명한 결과에만 비용을 냅니다.' },
+    ],
+  },
 }
 
 // The reviews themselves stay in English as written (plans/08 D4), so the
@@ -223,6 +240,12 @@ export const REVIEW_WALL: Record<L10nLocale, ReviewWallStrings> = {
     sub: 'G2、Product Hunt、SourceForgeに英語で投稿されたレビューの原文です。',
     showAll: '残りの{n}件のレビューを表示',
     showFewer: 'レビューの表示を減らす',
+  },
+  ko: {
+    title: '고객이 말하는 Giggal.ai',
+    sub: 'G2, Product Hunt, SourceForge에 영어로 작성된 리뷰 원문입니다.',
+    showAll: '나머지 리뷰 {n}개 보기',
+    showFewer: '리뷰 접기',
   },
 }
 
@@ -621,6 +644,50 @@ export const MCP: Record<L10nLocale, McpStrings> = {
       vscode: { note: <><M>YOUR_API_KEY</M>を、Giggal.aiのダッシュボードで作成したキーに置き換えてください。VS Codeでは<M>&quot;mcpServers&quot;</M>ではなく<M>&quot;servers&quot;</M>を使います。</> },
       cline: { note: <><M>YOUR_API_KEY</M>を、Giggal.aiのダッシュボードで作成したキーに置き換えてください。ここのパスはmacOSのものです。お使いのシステムに合わせて変更してください。</> },
       zed: { note: <><M>YOUR_API_KEY</M>を、Giggal.aiのダッシュボードで作成したキーに置き換えてください。</> },
+    },
+  },
+  ko: {
+    title: '자주 쓰는 AI와 연결하십시오.',
+    subtitle: 'MCP로 Giggal.ai를 AI 에이전트에 추가하면 Claude, Cursor, VS Code 등에서 바로 이메일을 검증할 수 있습니다. 캐치올 도메인 주소도 포함됩니다.',
+    toolsAria: 'AI 도구',
+    groups: ['채팅 앱', '코드 편집기'],
+    pasteInto: '붙여 넣을 위치:',
+    or: ' 또는 ',
+    serverUrl: 'MCP 서버 URL',
+    copy: '복사',
+    copied: '복사됨',
+    copyAria: '클립보드에 복사',
+    restart: '서버를 추가한 뒤 클라이언트를 다시 시작하고, 이렇게 물어보십시오.',
+    askBefore: '“',
+    askAfter: '는 전송 가능한 주소입니까?”',
+    guide: '전체 가이드',
+    tools: {
+      claude: {
+        subtitle: 'Giggal.ai를 Claude의 맞춤 커넥터로 추가합니다. 설정 파일도, 붙여 넣을 API 키도 필요 없습니다.',
+        steps: [
+          <>Claude(웹 또는 데스크톱)에서 <B>Settings → Connectors</B>를 엽니다.</>,
+          <><B>Add</B> → <B>Add custom connector</B>를 클릭합니다.</>,
+          <>이름을 <M>Giggal.ai</M>로 정하고, 아래의 MCP URL을 붙여 넣은 뒤 <B>Add</B>를 클릭합니다.</>,
+          <><B>Giggal.ai</B> 커넥터를 열고 <B>Connect</B>를 클릭합니다.</>,
+          <><B>Allow</B>를 클릭해 <M>verify:read</M> 권한을 허용합니다. 이 권한으로 주소 검증, 크레딧 확인, 지난 검증 조회를 할 수 있습니다.</>,
+        ],
+      },
+      chatgpt: {
+        subtitle: 'Giggal.ai를 ChatGPT의 맞춤 플러그인으로 추가하고 OAuth로 연결합니다. 붙여 넣을 API 키는 필요 없습니다.',
+        steps: [
+          <>ChatGPT의 사이드바에서 <B>Plugins</B>를 열고, 오른쪽 위의 <B>+</B>를 클릭합니다.</>,
+          <>이름을 <M>Giggal.ai</M>로 정하고, <B>Server URL</B>에 아래의 MCP URL을 입력합니다. <B>Authentication → OAuth</B>를 고르고, 확인란을 선택한 뒤 <B>Create</B>를 클릭합니다.</>,
+          <><B>Giggal.ai</B> 플러그인을 열고 <B>Connect</B>를 클릭한 다음 <B>Sign in with Giggal.ai</B>를 클릭합니다.</>,
+          <><B>Allow</B>를 클릭해 <M>verify:read</M> 권한을 허용합니다. 이 권한으로 주소 검증, 크레딧 확인, 지난 검증 조회를 할 수 있습니다.</>,
+        ],
+      },
+      'claude-code': { note: <><M>YOUR_API_KEY</M>를 Giggal.ai 대시보드의 키로 바꾸십시오. 이미 <M>giggal</M> 서버가 있다면 먼저 <M>claude mcp remove giggal --scope user</M> 명령을 실행한 뒤 다시 추가하십시오.</> },
+      codex: { note: <>Codex는 환경 변수에서 토큰을 읽습니다. 환경 변수를 설정하고 셸을 다시 불러온 뒤, Codex를 닫았다가 다시 열고 <M>/mcp</M> 명령을 실행해 확인하십시오.<EnvBlock /></> },
+      cursor: { note: <><M>YOUR_API_KEY</M>를 Giggal.ai 대시보드의 키로 바꾸십시오.</> },
+      windsurf: { note: <><M>YOUR_API_KEY</M>를 Giggal.ai 대시보드의 키로 바꾸십시오.</> },
+      vscode: { note: <><M>YOUR_API_KEY</M>를 Giggal.ai 대시보드의 키로 바꾸십시오. VS Code는 <M>&quot;mcpServers&quot;</M> 대신 <M>&quot;servers&quot;</M>를 씁니다.</> },
+      cline: { note: <><M>YOUR_API_KEY</M>를 Giggal.ai 대시보드의 키로 바꾸십시오. 여기 나온 경로는 macOS 경로이므로, 사용하는 시스템에 맞게 바꾸십시오.</> },
+      zed: { note: <><M>YOUR_API_KEY</M>를 Giggal.ai 대시보드의 키로 바꾸십시오.</> },
     },
   },
 }

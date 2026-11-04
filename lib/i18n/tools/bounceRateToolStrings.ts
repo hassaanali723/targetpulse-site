@@ -499,6 +499,51 @@ const ja: BounceRateToolStrings = {
   },
 }
 
+const ko: BounceRateToolStrings = {
+  tabAria: '계산할 항목',
+  tabEmail: '이메일 반송률',
+  tabWebsite: '웹사이트 이탈률(GA4)',
+  fieldSent: { label: '발송 수', hint: '사용하는 도구가 해당 발송에 대해 보고한 전체 수입니다.', placeholder: '10,000' },
+  fieldHard: { label: '하드 바운스 수', hint: '영구적인 실패입니다. 주소가 존재하지 않습니다.', placeholder: '150' },
+  fieldSoft: { label: '소프트 바운스 수', hint: '일시적인 실패입니다. 도구에 반송 수가 하나만 나오면 비워 두십시오.', placeholder: '100' },
+  fieldSessions: { label: '세션수', hint: 'Google 애널리틱스 4 보고서의 값입니다.', placeholder: '2,000' },
+  fieldEngaged: { label: '참여 세션수', hint: '같은 보고서, 같은 기간의 값입니다.', placeholder: '1,250' },
+  tryExamplePrompt: '숫자를 입력하거나 ',
+  tryExampleLink: '예시로 계산해 보십시오',
+  errorWhole: '소수점이나 문자 없이 정수만 입력하십시오.',
+  errorCheck: '숫자를 확인하십시오.',
+  emailResults: {
+    heading: '이메일 반송률',
+    bouncedOfSent: (bounced, sent) => `이메일 ${sent}건 중 ${bounced}건이 반송되었습니다. Mailchimp, Klaviyo, Mailgun은 이 방식으로 계산합니다.`,
+    statHard: { label: '하드 바운스율', note: '대부분의 서비스 한도는 하드 바운스만 계산합니다.' },
+    statSoft: { label: '소프트 바운스율', note: '메일함이 가득 찬 경우처럼 일시적인 실패입니다.' },
+    statDelivered: { label: '전달률', note: (delivered) => `이메일 ${delivered}건이 수신 서버에 수락되었습니다.` },
+    deliveredComparison: (pct) => `도구가 발송 수가 아니라 전달된 이메일 수로 나누면, 같은 숫자로 ${pct}가 됩니다. 비교하기 전에 도구의 계산 방식을 확인하십시오.`,
+    allUnderLimits: (hardRate) => `하드 바운스율은 ${hardRate}이며, 아래의 모든 서비스 한도보다 낮습니다.`,
+    overLimits: (hardRate, providers) => `하드 바운스율은 ${hardRate}이며, ${providers}의 한도와 같거나 그보다 높습니다. 다음 발송 전에 리스트를 정리하십시오.`,
+    limitsHeader: '서비스별 한도와 비교',
+    countsHard: '하드 바운스만',
+    countsAll: '모든 반송',
+    atLimit: '한도 도달',
+    overLimit: '한도 초과',
+    underLimit: '한도 미만',
+    tooMany: (n) => `${n}건 초과`,
+    leftRoom: (n, counts) => `${counts === 'hard' ? '하드 바운스' : '반송'} ${n}건 더 허용`,
+    providerNote: 'Gmail, Yahoo, Microsoft는 반송률 한도를 공개하지 않습니다. 이들의 0.3% 규칙은 스팸 신고에 관한 것이며, 반송과는 관계가 없습니다. Mailchimp도 수치를 공개하지 않습니다.',
+    ctaBox: {
+      title: '하드 바운스는 대부분 존재하지 않는 주소에서 발생합니다',
+      desc: '발송 전에 리스트를 확인하면 이런 주소를 제거할 수 있습니다. 그러면 반송으로 집계되지 않습니다.',
+      button: '이메일 리스트 검증하기',
+    },
+  },
+  websiteResults: {
+    heading: '웹사이트 이탈률(GA4)',
+    sessionsNotEngaged: (unengaged, sessions) => `세션 ${sessions}개 중 ${unengaged}개가 참여 세션이 아니었습니다.`,
+    statEngagement: { label: '참여율', note: '참여 세션수 ÷ 세션수입니다. 이탈률은 100%에서 이 값을 뺀 값입니다.' },
+    statEngaged: { label: '참여 세션수', note: '10초 넘게 지속되었거나, 주요 이벤트가 있었거나, 페이지 조회가 2회 이상인 세션입니다.' },
+  },
+}
+
 export const BOUNCE_RATE_TOOL_STRINGS: Record<Locale, BounceRateToolStrings> = {
   en,
   fr,
@@ -510,6 +555,7 @@ export const BOUNCE_RATE_TOOL_STRINGS: Record<Locale, BounceRateToolStrings> = {
   pl,
   id,
   ja,
+  ko,
 }
 
 export function bounceRateToolStrings(locale: Locale): BounceRateToolStrings {

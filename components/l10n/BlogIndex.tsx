@@ -39,7 +39,7 @@ export default function BlogIndexL10n({ locale, page = 1 }: { locale: L10nLocale
   const totalPages = totalBlogPages(posts.length)
   return (
     <main className="relative min-h-screen bg-slate-50 grid-lines overflow-x-hidden text-slate-800 antialiased">
-      <JsonLd data={breadcrumbL10n(locale, [{ name: locale === 'ja' ? 'ブログ' : 'Blog', path }])} />
+      <JsonLd data={breadcrumbL10n(locale, [{ name: BLOG_LABEL[locale] ?? 'Blog', path }])} />
       <JsonLd
         data={itemListLd({
           id: `https://giggal.ai${path}#posts`,
@@ -78,6 +78,9 @@ export default function BlogIndexL10n({ locale, page = 1 }: { locale: L10nLocale
   )
 }
 
+// The word "Blog" where a language does not write it in Latin letters.
+export const BLOG_LABEL: Partial<Record<L10nLocale, string>> = { ja: 'ブログ', ko: '블로그' }
+
 const PAGE_WORD: Record<L10nLocale, string> = {
   it: 'pagina',
   de: 'Seite',
@@ -88,6 +91,7 @@ const PAGE_WORD: Record<L10nLocale, string> = {
   pl: 'strona',
   id: 'halaman',
   ja: 'ページ',
+  ko: '페이지',
 }
 
 // Metadata for pages 2..n of a localized hub. Page 1 keeps the hub URL and its
@@ -98,10 +102,17 @@ export function blogIndexPagedMetadata(locale: L10nLocale, page: number): Metada
   const path = CLUSTERS.blog[locale]
   const pageWord = PAGE_WORD[locale]
   // Japanese puts the page number before the counter word (2ページ目) and uses 。
-  const title = locale === 'ja' ? `ブログ（${page}ページ目） | Giggal.ai` : `Blog, ${pageWord} ${page} | Giggal.ai`
+  const title =
+    locale === 'ja'
+      ? `ブログ（${page}ページ目） | Giggal.ai`
+      : locale === 'ko'
+        ? `블로그 ${page}페이지 | Giggal.ai`
+        : `Blog, ${pageWord} ${page} | Giggal.ai`
   const description =
     locale === 'ja'
       ? `${b.hubDesc}${page}ページ目です。`
+      : locale === 'ko'
+        ? `${b.hubDesc} ${page}페이지입니다.`
       : `${b.hubDesc} ${pageWord.charAt(0).toUpperCase() + pageWord.slice(1)} ${page}.`
   const url = `https://giggal.ai${path}/page/${page}`
   return {

@@ -1584,6 +1584,158 @@ const ja: BounceRatePageStrings = {
   ctaHeadline: '送信する前にバウンス率を下げましょう',
 }
 
+const ko: BounceRatePageStrings = {
+  metaTitle: '반송률 계산기: 이메일 반송률과 웹사이트 이탈률(GA4) | Giggal.ai',
+  ogTitle: '반송률 계산기: 이메일 반송률과 웹사이트 이탈률(GA4)',
+  description:
+    '이메일 반송률과 웹사이트 이탈률을 무료로 계산합니다. 반송률 계산식, 하드 바운스율과 소프트 바운스율, 발송 서비스의 한도, GA4 계산 방법도 설명합니다.',
+  ogLocale: 'ko_KR',
+  ogImage: '/tools/bounce-rate-calculator-og-v2.webp',
+  ogAlt: '무료 반송률 계산기',
+  crumb: '반송률 계산기',
+  appName: '무료 반송률 계산기',
+  featureList: [
+    '발송 수와 반송 수로 이메일 반송률 계산',
+    '하드 바운스율, 소프트 바운스율, 전달률을 따로 표시',
+    '내 숫자를 발송 서비스의 한도와 비교',
+    'Google 애널리틱스 4 세션수로 웹사이트 이탈률 계산',
+    '내 숫자를 넣은 반송률 계산식 표시',
+  ],
+  h1: '반송률 계산기',
+  heroIntro:
+    '이메일 캠페인의 반송률이나 웹사이트의 이탈률을 계산합니다. 이메일 발송 도구나 Google 애널리틱스 4의 숫자를 입력하면 비율과 그 의미를 확인할 수 있습니다.',
+  howTitle: '반송률 계산기 사용 방법',
+  howSteps: [
+    '이메일 캠페인이라면 “이메일 반송률” 탭을 그대로 사용합니다. 캠페인 보고서에 있는 발송 수, 하드 바운스 수, 소프트 바운스 수를 입력합니다.',
+    '도구에 반송 수가 하나만 나온다면, 그 숫자를 “하드 바운스 수”에 입력하고 “소프트 바운스 수”는 비워 둡니다.',
+    '결과를 확인합니다. 전체 반송률, 하드 바운스율, 소프트 바운스율, 전달률이 표시됩니다.',
+    '결과 아래에 있는 발송 서비스 목록을 확인합니다. Amazon SES, HubSpot, Postmark 등의 한도에 얼마나 가까운지 알 수 있습니다.',
+    '웹사이트라면 “웹사이트 이탈률(GA4)” 탭으로 바꾸고, Google 애널리틱스 4의 세션수와 참여 세션수를 입력합니다.',
+  ],
+  howFooter:
+    '결과는 입력하는 즉시 바뀝니다. 각 결과 아래에 내 숫자를 넣은 계산식이 표시되므로, 계산을 확인하거나 보고서에 복사할 수 있습니다.',
+  imageAlt:
+    '이메일 반송률 계산을 보여 주는 그림. 반송된 이메일 수를 발송 수로 나누고, 발송 서비스의 한도와 비교합니다.',
+  formulaTitle: '반송률 계산식',
+  formulaIntro:
+    '영어의 “bounce rate”에는 두 가지 뜻이 있습니다. 이메일에서는 전달되지 못한 메시지의 비율을 뜻합니다. 웹사이트에서는 방문자가 참여하지 않은 방문의 비율을 뜻하며, 한국어로는 보통 “이탈률”이라고 합니다. 따라서 “반송률은 어떻게 계산하는가”에 대한 답은 어느 쪽을 말하는지에 따라 달라집니다.',
+  emailFormulaTitle: '이메일 반송률 계산식',
+  emailFormulaCode: '반송률 = 반송된 이메일 수 ÷ 발송 수 × 100',
+  emailFormulaText:
+    '이메일 10,000건을 보내고 250건이 반송되면, 반송률은 250 ÷ 10,000 × 100 = 2.5%입니다. 반송된 이메일에는 하드 바운스(주소가 존재하지 않음)와 소프트 바운스(메일함이 가득 찬 경우 같은 일시적인 문제)가 모두 포함됩니다.',
+  websiteFormulaTitle: 'GA4의 웹사이트 이탈률 계산식',
+  websiteFormulaCode: '이탈률 = (세션수 − 참여 세션수) ÷ 세션수 × 100',
+  websiteFormulaText:
+    '이것은 [Google 애널리틱스 4](https://support.google.com/analytics/answer/12195621)의 정의로, 참여가 없었던 세션의 비율입니다. 이탈률은 항상 100%에서 참여율을 뺀 값과 같습니다. 세션수가 2,000이고 참여 세션수가 1,250이면 이탈률은 37.5%입니다.',
+  websiteOldText:
+    '예전 안내 자료에는 다른 계산식이 나옵니다. 페이지 1개만 본 세션수 ÷ 전체 세션수입니다. 이것은 [유니버설 애널리틱스의 정의](https://support.google.com/analytics/answer/1009409)입니다. 표준 유니버설 애널리틱스는 2023년 7월 1일에 데이터 처리를 중단했습니다. 현재 보고서에는 GA4 계산식을 사용하십시오.',
+  calcEmailTitle: '이메일 반송률 계산 방법',
+  calcEmailSteps: [
+    '이메일 발송 도구에서 캠페인 1개 또는 기간 1개의 보고서를 엽니다.',
+    '발송 수를 확인하고, 이어서 하드 바운스 수와 소프트 바운스 수를 확인합니다.',
+    '두 반송 수를 더합니다.',
+    '발송 수로 나누고 100을 곱합니다.',
+  ],
+  calcEmailIntro:
+    '대부분의 도구는 발송 수로 나누지만, 설명하는 방식은 도구마다 다릅니다. 내 숫자를 다른 숫자와 비교하기 전에, 각 도구가 무엇을 세는지 확인하십시오.',
+  definitionsHead: ['도구', '반송률 계산 방식'],
+  definitionsRows: [
+    { a: 'Mailchimp', b: '하드 바운스 수와 소프트 바운스 수의 합 ÷ 전체 발송 수', href: 'https://mailchimp.com/help/custom-report-metrics/' },
+    { a: 'Klaviyo', b: '반송된 이메일 수 ÷ 전체 발송 수', href: 'https://help.klaviyo.com/hc/en-us/articles/360057036052' },
+    { a: 'Mailgun', b: '전달되지 않은 수 ÷ 전체 발송 수. 보고서에는 하드 바운스율도 따로 표시됩니다', href: 'https://documentation.mailgun.com/docs/mailgun/user-manual/reporting/rate-definitions' },
+    { a: 'Campaign Monitor', b: '반송된 이메일 수 ÷ “캠페인이 전달된 수신자의 총수”', href: 'https://help.campaignmonitor.com/s/article/bounced-emails-report' },
+    { a: 'Brevo', b: '반송 수 ÷ 수신자 수. 트랜잭션 이메일 보고서에는 하드와 소프트 비율이 따로 표시됩니다', href: 'https://help.brevo.com/hc/en-us/articles/4863866741266-Brevo-Glossary' },
+    { a: 'Amazon SES', b: '하드 바운스만, 대표성 있는 양의 메일을 기준으로 측정합니다', href: 'https://docs.aws.amazon.com/ses/latest/dg/faqs-enforcement.html' },
+  ],
+  calcEmailDiff:
+    '이 차이는 비율이 높을 때 커집니다. 이메일 10,000건 중 500건이 반송되면, 발송 수 기준으로는 5%이지만 전달된 9,500건 기준으로는 5.26%입니다. 이 계산기는 두 값을 모두 보여 줍니다.',
+  calcEmailHardNote:
+    '하드 바운스율도 따로 계산하십시오. 소프트 바운스는 다음 재시도에서 해결되는 경우가 많아서, 대부분의 발송 서비스 한도는 하드 바운스만 계산합니다.',
+  limitsTitle: '발송 서비스별 이메일 반송률 한도',
+  limitsIntro:
+    '이메일 발송 서비스는 반송률 한도를 공개하고, 한도를 넘은 계정을 검토하거나 정지합니다. 공개된 수치는 다음과 같습니다.',
+  limitsHead: ['발송 서비스', '한도', '공개된 내용'],
+  limitsRows: [
+    { name: 'Amazon SES', limit: 5, what: '하드 바운스율이 5%가 되면 계정이 검토 대상이 되고, 10%가 되면 발송이 정지됩니다. 목표는 2% 미만입니다.', source: 'https://docs.aws.amazon.com/ses/latest/dg/faqs-enforcement.html' },
+    { name: 'Postmark', limit: 10, what: '대표성 있는 양의 메일에서 하드 바운스율이 10%가 되면 계정이 정지됩니다.', source: 'https://postmarkapp.com/support/article/1118-why-is-my-account-pending-approval' },
+    { name: 'Brevo', limit: 2, what: '하드 바운스율이 2%를 넘거나 소프트 바운스율이 5%를 넘으면 캠페인 발송이 정지됩니다.', source: 'https://help.brevo.com/hc/en-us/articles/209435165' },
+    { name: 'HubSpot', limit: 5, what: '계정의 최근 발송에서 반송률이 5%가 되면 마케팅 이메일 발송이 정지됩니다.', source: 'https://knowledge.hubspot.com/marketing-email/why-is-my-email-suspended' },
+    { name: 'SendGrid', limit: 5, what: '반송률이 5%를 넘는 계정은 경고를 받고, 정지될 수 있습니다.', source: 'https://sendgrid.com/en-us/blog/email-bounce-management' },
+  ],
+  limitsMailchimpNote:
+    '[Mailchimp](https://mailchimp.com/help/about-bounce-warnings/)는 수치를 공개하지 않습니다. 한도는 경우에 따라 다르며, 계정을 정지하기 전에 경고를 보낸다고 설명합니다.',
+  limitsMailboxNote:
+    '메일 서비스 제공업체는 반송 한도를 전혀 두지 않습니다. [Gmail의 발신자 가이드라인](https://support.google.com/a/answer/81126)과 [Yahoo의 가이드라인](https://senders.yahooinc.com/best-practices/)에는 0.3% 한도가 있지만, 이것은 스팸 신고에 적용됩니다. 반송에 대해서는 Gmail은 메일이 반복해서 반송되는 사람의 구독을 해지하도록, Yahoo는 무효한 수신자를 즉시 삭제하도록 발신자에게 요구합니다.',
+  benchmarksTitle: '이메일 반송률 벤치마크',
+  benchmarksParas: [
+    '공개된 평균값은 크게 다릅니다. 주된 이유는 보고서마다 반송을 세는 방식이 다르기 때문입니다. 2022년 데이터를 바탕으로 한 [Twilio SendGrid의 2023년 보고서](https://www.twilio.com/en-us/resource-center/2023-email-marketing-benchmark-report)에서는 평균 반송률이 1.06%, 중앙값이 0.21%였습니다. 이 보고서는 일시적인 차단을 따로 셉니다. [GetResponse의 2024년 보고서](https://www.getresponse.com/resources/reports/email-marketing-benchmarks)에서는 전체 비율이 2.33%였고, 업종에 따라 1.19%~4.86%였습니다. 이 보고서는 하드 바운스와 소프트 바운스를 나누지 않습니다.',
+    '벤치마크보다는 내 숫자의 추이와 발송 서비스의 한도가 더 유용합니다. 콜드메일에서 어느 정도가 좋은 수치인지는 [콜드메일의 적정 반송률](/blog/good-bounce-rate-for-cold-email)을 참고하십시오. 평균값을 더 자세히 보려면 [이메일 반송률 벤치마크와 낮추는 방법](/blog/how-to-reduce-email-bounce-rate)을 참고하십시오.',
+  ],
+  hardSoftTitle: '하드 바운스와 소프트 바운스',
+  hardSoftParas: [
+    '하드 바운스는 영구적인 실패입니다. 수신 서버는 5로 시작하는 코드로 응답합니다. 예를 들어 존재하지 않는 주소에는 5.1.1이 돌아옵니다. [RFC 5321](https://www.rfc-editor.org/rfc/rfc5321)은 발신자가 같은 요청을 그대로 반복하지 않아야 한다고 정합니다. 소프트 바운스는 일시적이며 4로 시작합니다. 발신자는 나중에 다시 시도할 수 있습니다.',
+    '이 경계는 도구마다 다를 수 있습니다. [RFC 3463](https://datatracker.ietf.org/doc/html/rfc3463)은 메일함이 가득 찬 경우를 일시적인 실패로 보지만, 이를 하드 바운스로 분류하는 도구도 있습니다. 또한 대부분의 도구는 반복된 소프트 바운스를 하드 바운스로 바꿉니다.',
+  ],
+  softRulesHead: ['도구', '소프트 바운스가 하드 바운스로 바뀌는 조건'],
+  softRulesRows: [
+    { a: 'Mailchimp', b: '활동 기록이 없는 주소는 소프트 바운스 7회 후, 과거 활동 기록이 있는 주소는 15회 후', href: 'https://mailchimp.com/help/soft-vs-hard-bounces/' },
+    { a: 'Klaviyo', b: '최근 2년 동안 소프트 바운스가 7회를 넘겨 연속으로 발생한 후', href: 'https://help.klaviyo.com/hc/en-us/articles/115005250408' },
+    { a: 'Brevo', b: '36시간 동안 재시도하고, 캠페인에서 소프트 바운스가 5회 연속 발생하면 주소를 차단', href: 'https://help.brevo.com/hc/en-us/articles/209435165' },
+    { a: 'HubSpot', b: '보류 중인 반송을 72시간 동안 재시도한 후 소프트 바운스로 계산', href: 'https://knowledge.hubspot.com/marketing-email/what-is-the-difference-between-a-hard-bounce-and-a-soft-bounce' },
+  ],
+  hardSoftLink:
+    '각 유형의 오류 코드는 [하드 바운스와 소프트 바운스의 차이](/blog/hard-bounce-vs-soft-bounce)를 참고하십시오.',
+  ga4Title: 'Google 애널리틱스 4에서 이탈률을 계산하는 방법',
+  ga4Paras: [
+    'GA4는 10초 넘게 지속되었거나 주요 이벤트가 있었던 세션을 참여 세션이라고 합니다. 페이지 또는 화면 조회가 2회 이상인 세션도 포함됩니다. 그 밖의 모든 세션은 이탈률에 포함됩니다. 10초 타이머는 사이트 관리자가 데이터 스트림의 태그 설정에서 바꿀 수 있습니다.',
+    '대부분의 GA4 보고서에는 이탈률이 기본으로 표시되지 않습니다. 추가하려면 세부정보 보고서를 열고 “보고서 맞춤설정”을 선택한 다음, “측정항목”에서 “이탈률”을 추가합니다. 편집자 또는 관리자 역할이 필요합니다. 보고서를 수정하고 싶지 않다면, 보고서에서 세션수와 참여 세션수를 확인하고 위의 “웹사이트 이탈률(GA4)” 탭을 사용하십시오.',
+    '유니버설 애널리틱스에서 바뀌면서 많은 숫자가 달라졌습니다. 페이지 1개를 30초 동안 읽고 떠난 방문자는 예전에는 이탈로 계산되었습니다. GA4에서는 방문이 10초 넘게 지속되었으므로 이탈이 아닙니다.',
+    '인터넷에서 볼 수 있는 “26%~40%면 매우 좋음” 같은 웹사이트 이탈률 기준에 주의하십시오. 이런 기준은 유니버설 애널리틱스 시절의 것이며, 출처를 밝히는 경우가 거의 없습니다. GA4에는 자체 [벤치마킹](https://support.google.com/analytics/answer/16388466) 기능이 있으며, 설정을 켜면 내 속성을 비슷한 그룹과 비교합니다.',
+  ],
+  lowerTitle: '이메일 반송률을 낮추는 방법',
+  lowerParas: [
+    '하드 바운스는 존재하지 않는 주소에서 발생합니다. 따라서 해결책은 발송 전에 그런 주소를 제거하는 것입니다. 새 가입자는 들어오는 즉시 확인하십시오. 오래된 리스트는 캠페인 전에 확인하십시오. 사람들은 이직하고 계정을 닫기 때문입니다.',
+    '하드 바운스가 발생한 주소는 모두 삭제하십시오. Yahoo는 무효한 수신자를 즉시 삭제하도록, Gmail은 메일이 반복해서 반송되는 사람의 구독을 해지하도록 발신자에게 요구합니다. [Microsoft](https://techcommunity.microsoft.com/blog/microsoftdefenderforoffice365blog/strengthening-email-ecosystem-outlook%e2%80%99s-new-requirements-for-high%e2%80%90volume-senders/4399730)는 무효한 주소를 매월 또는 분기마다 삭제하도록 권장합니다.',
+    '주소 1개는 [이메일 유효성 검사](/email-checker)로, 리스트 전체는 [대량 이메일 검증](/bulk-email-verifier)으로 확인하십시오. 둘 다 캐치올 도메인을 포함해 어떤 주소가 반송될지 알려 줍니다.',
+  ],
+  faqTitle: '자주 묻는 질문',
+  faqs: [
+    {
+      q: '반송률 계산식은 무엇입니까?',
+      a: '이메일의 경우 반송률 = 반송된 이메일 수 ÷ 발송 수 × 100입니다. Google 애널리틱스 4의 웹사이트 이탈률 = (세션수 − 참여 세션수) ÷ 세션수 × 100입니다. 이것은 100%에서 참여율을 뺀 값과 같습니다.',
+    },
+    {
+      q: '이메일 반송률은 어떻게 계산합니까?',
+      a: '캠페인 보고서의 하드 바운스 수와 소프트 바운스 수를 더하고, 발송 수로 나눈 다음 100을 곱합니다. 이메일 10,000건을 보내 250건이 반송되면 반송률은 2.5%입니다.',
+    },
+    {
+      q: '이메일 반송률은 발송 수와 전달 수 중 무엇을 기준으로 합니까?',
+      a: '대부분의 도구는 발송 수로 나눕니다. Mailchimp, Klaviyo, Mailgun 모두 이 방식으로 설명합니다. 수신자 대비 비율로 설명하는 도구도 일부 있으므로, 두 숫자를 비교하기 전에 도구의 도움말 페이지를 확인하십시오.',
+    },
+    {
+      q: '좋은 이메일 반송률은 어느 정도입니까?',
+      a: '2% 미만이 안전한 목표입니다. Amazon SES는 발신자에게 2% 미만을 유지하도록 요구하고, Brevo는 하드 바운스율이 2%를 넘는 계정을 정지할 수 있습니다. Twilio SendGrid의 2023년 보고서에서 반송률의 중앙값은 0.21%였습니다.',
+    },
+    {
+      q: '이메일 반송률 5%는 나쁜 수치입니까?',
+      a: '그렇습니다. 하드 바운스율이 5%가 되면 Amazon SES는 계정을 검토 대상으로 정하고, HubSpot은 계정을 정지할 수 있습니다. 다시 발송하기 전에 리스트를 정리하십시오.',
+    },
+    {
+      q: 'Gmail에는 반송률 한도가 있습니까?',
+      a: '없습니다. Gmail의 발신자 가이드라인이 정한 것은 0.3%의 스팸 비율 한도이며, 반송 한도가 아닙니다. 다만 주소가 반복해서 반송되는 사람의 구독을 해지하도록 발신자에게 요구합니다. Yahoo와 Microsoft도 반송 수치를 공개하지 않습니다.',
+    },
+    {
+      q: 'GA4에서 이탈률은 어떻게 계산합니까?',
+      a: '세션수에서 참여 세션수를 빼고, 세션수로 나눕니다. GA4는 10초 넘게 지속되었거나 주요 이벤트가 있었던 세션을 참여 세션으로 계산합니다. 페이지 또는 화면 조회가 2회 이상인 세션도 포함됩니다. 나머지는 모두 이탈입니다.',
+    },
+    {
+      q: 'GA4 이탈률이 예전 유니버설 애널리틱스의 수치와 다른 이유는 무엇입니까?',
+      a: '유니버설 애널리틱스는 페이지 1개만 본 세션을 모두 이탈로 계산했습니다. GA4는 참여가 없었던 세션을 계산합니다. 페이지 1개를 30초 동안 본 방문은 유니버설 애널리틱스에서는 이탈이었지만, GA4에서는 이탈이 아닙니다.',
+    },
+  ],
+  ctaHeadline: '발송하기 전에 반송률을 낮추십시오',
+}
+
 export const BOUNCE_RATE_PAGE_STRINGS: Record<Locale, BounceRatePageStrings> = {
   en,
   fr,
@@ -1595,6 +1747,7 @@ export const BOUNCE_RATE_PAGE_STRINGS: Record<Locale, BounceRatePageStrings> = {
   pl,
   id,
   ja,
+  ko,
 }
 
 export function bounceRatePageStrings(locale: Locale): BounceRatePageStrings {

@@ -2671,6 +2671,247 @@ const jaTool: SpfToolStrings = {
   },
 }
 
+// Korean: 합니다체. Template values (domains, terms) can end in any letter, so the
+// Korean text puts a noun such as 도메인 or 항목 before a particle instead of a bare value.
+const koLookups = (p: SpfSummaryParts) => `허용된 DNS 조회 ${p.limit}회 중 ${p.lookups}회를 사용합니다.`
+const koAll = (q: SpfQualifier | null) => {
+  if (q === '-') return '목록에 없는 서버에서 보낸 메일은 SPF에 실패(fail)합니다.'
+  if (q === '~') return '목록에 없는 서버에서 보낸 메일은 소프트 실패(softfail)가 됩니다.'
+  return ''
+}
+
+const koTool: SpfToolStrings = {
+  tabsLabel: 'SPF 도구 모드',
+  tabCheck: '검사',
+  tabCheckMore: ' (SPF 레코드)',
+  tabCreate: '생성',
+  tabCreateMore: ' (SPF 레코드)',
+
+  label: '도메인 또는 이메일 주소',
+  placeholder: 'example.com',
+  button: 'SPF 레코드 검사',
+  tryLabel: '예시:',
+  inputEmpty: 'example.com 같은 도메인을 입력하십시오.',
+  inputInvalid: '도메인 형식이 아닌 것 같습니다. example.com 같은 형식으로 입력하십시오.',
+  lookupError: 'DNS 서비스에 연결하지 못했습니다. 연결을 확인하고 다시 시도하십시오.',
+  noAnswer: ({ domain }) =>
+    `${domain ? `${domain}의 DNS 서버가 응답하지 않았습니다.` : 'DNS 서버가 응답하지 않았습니다.'} 지금은 수신 서버도 같은 일시적 오류(temperror)를 받습니다. 몇 분 뒤 다시 시도하십시오.`,
+
+  summary: {
+    valid: (p) => ({ title: `${p.domain}의 SPF 레코드는 유효합니다`, text: `${koLookups(p)} ${koAll(p.allQualifier)}`.trim() }),
+    warnings: (p) => ({
+      title: `${p.domain}의 SPF 레코드는 작동하지만 경고가 있습니다`,
+      text: `수신 서버는 이 레코드를 사용할 수 있지만, 아래 경고는 레코드를 약하게 만들거나 나중에 오류를 일으킬 수 있습니다. ${koLookups(p)}`,
+    }),
+    broken: (p) => ({
+      title: `${p.domain}의 SPF 레코드에 오류가 있습니다`,
+      text: '수신 서버는 이런 레코드를 오류(permerror)로 처리하므로, 이 도메인에서 보내는 모든 메일이 SPF에 실패합니다. 해결 방법은 아래에 있습니다.',
+    }),
+    unprotected: (p) => ({
+      title: `${p.domain}의 SPF 레코드가 도메인을 보호하지 못합니다`,
+      text: `인터넷의 모든 서버가 SPF를 통과하므로, 누구나 ${p.domain}에서 보낸 것처럼 SPF를 통과하는 메일을 보낼 수 있습니다.`,
+    }),
+    none: (p) => ({
+      title: `${p.domain}에는 SPF 레코드가 없습니다`,
+      text: '수신 서버는 어떤 서버가 이 도메인의 이메일을 보낼 수 있는지 판단할 수 없습니다. Gmail은 2024년 2월부터 모든 발신자에게 SPF 또는 DKIM을 요구하고 있습니다.',
+    }),
+    nxdomain: (p) => ({ title: `${p.domain} 도메인은 존재하지 않습니다`, text: 'DNS에 이 도메인에 관한 기록이 없습니다. 철자를 확인하십시오.' }),
+  },
+  recordFor: (domain) => `${domain}의 SPF 레코드`,
+  copy: '복사',
+  copied: '복사됨',
+  lookupsMeter: 'DNS 조회',
+  lookupsMeterNote: 'include, a, mx, ptr, exists, redirect는 각각 1회로 셉니다. include 안의 조회도 포함합니다.',
+  voidMeter: '빈 조회',
+  voidMeterNote: '아무것도 찾지 못한 조회입니다. 2회를 넘으면 수신 서버가 SPF를 실패로 처리할 수 있습니다.',
+  meterOf: (limit) => `/ ${limit}`,
+  unlisted: '목록에 없는 서버',
+  allLabel: { '-': '실패(fail)', '~': '소프트 실패', '?': '중립(neutral)', '+': '통과(안전하지 않음)' },
+  allNotSet: '설정 안 됨',
+  allSetBy: (q) => `레코드 끝의 ${q}all로 설정되어 있습니다.`,
+  allMissing: '레코드 끝에 all이 없으므로 다른 서버는 중립(neutral) 결과를 받습니다.',
+  fixTitle: '수정할 사항',
+  notesTitle: '참고',
+  inDomain: (domain) => `${domain}의 레코드에서`,
+  thPart: '부분',
+  thMeaning: '의미',
+  thCost: '조회',
+  partsTitle: '각 부분의 의미',
+  lookups: (n) => `${n}회`,
+  vSpf1: '이 TXT 레코드가 SPF 레코드임을 나타냅니다. 모든 SPF 레코드는 이것으로 시작합니다.',
+  showContents: (domain) => `${domain}의 내용 보기`,
+  hideContents: (domain) => `${domain}의 내용 숨기기`,
+  describe: {
+    redirect: (domain) => `위의 어느 항목과도 일치하지 않으면 대신 ${domain}의 SPF 레코드를 사용합니다.`,
+    exp: 'SPF가 실패했을 때 수신 서버가 보여 줄 수 있는 메시지가 담긴 TXT 레코드를 지정합니다.',
+    unknownModifier: 'SPF에 정의되지 않은 설정입니다. 수신 서버는 이 설정을 무시합니다.',
+    all: {
+      '-': '그 밖의 모든 서버에서 보낸 메일은 SPF에 실패합니다.',
+      '~': '그 밖의 모든 서버에서 보낸 메일은 소프트 실패가 됩니다. 수신 서버는 보통 메일을 받지만 더 의심스럽게 취급합니다.',
+      '?': '다른 서버에 대해서는 아무것도 정하지 않습니다. 그 메일은 중립(neutral) 결과를 받으며, 이는 SPF 레코드가 없는 것과 같습니다.',
+      '+': '인터넷의 모든 서버가 SPF를 통과합니다. 레코드의 나머지 부분이 의미가 없어집니다.',
+    },
+    server: (address) => `${address} 서버`,
+    ip4Range: (address, cidr, count) => `${address}/${cidr} 범위의 서버(주소 ${count.toLocaleString('en-US')}개)`,
+    ip6Range: (address, cidr) => `IPv6 범위 ${address}/${cidr}의 서버`,
+    a: (domain, cidr) => `${domain}의 IP 주소에 있는 서버${cidr ? `(${cidr} 범위로 확장)` : ''}`,
+    mx: (domain) => `${domain}의 메일을 받는 메일 서버`,
+    include: (domain, service) => `${domain}의 SPF 레코드가 허용하는 서버${service ? `(${service})` : ''}`,
+    ptr: (domain) => `IP 주소의 역방향 조회 결과가 ${domain} 아래의 이름을 가리키는 서버`,
+    existsMacro: '발신 서버의 정보로 만든 DNS 조회에서 주소를 찾으면 일치합니다. 대규모 발신자가 많은 서버 목록을 지정할 때 사용합니다.',
+    exists: (domain) => `${domain}에 IP 주소가 있으면 일치합니다.`,
+    // Every subject above ends in 서버, so the particles are fixed.
+    sentence: (subject, q) => {
+      if (q === '+') return `${subject}는 메일을 보낼 수 있습니다.`
+      if (q === '-') return `${subject}에서 보낸 메일은 SPF에 실패합니다.`
+      if (q === '~') return `${subject}에서 보낸 메일은 소프트 실패가 됩니다.`
+      return `${subject}에서 보낸 메일은 중립(neutral) 결과를 받습니다.`
+    },
+  },
+  nearMissTitle: '잘못 작성된 SPF 레코드로 보이는 TXT 레코드를 찾았습니다.',
+  nearMissSpf2: 'v=spf2.0으로 시작하는 레코드는 Sender ID라는 옛 방식의 레코드입니다. 수신 서버는 Sender ID를 더 이상 확인하지 않습니다. SPF 레코드는 정확히 v=spf1으로 시작해야 합니다.',
+  nearMissOther: '수신 서버는 이 레코드를 무시합니다. SPF 레코드는 정확히 v=spf1과 공백 하나로 시작해야 하기 때문입니다.',
+  noMx: '{domain}에는 MX 레코드도 없으므로, 이메일에 전혀 사용되지 않는 도메인일 수 있습니다. 이메일을 보내지 않는 도메인은 {record} 레코드를 게시할 수 있습니다. 이 레코드는 어떤 서버도 이 도메인으로 메일을 보낼 수 없다고 수신 서버에 알려 주므로, 도메인을 사칭하기가 더 어려워집니다.',
+  createFor: (domain) => `${domain}의 SPF 레코드 만들기`,
+  fixInCreator: '이 레코드를 SPF 생성기로 불러와 수정하기',
+  answeredBy: '응답 출처:',
+  publicDns: '공개 DNS',
+  ctaTitle: 'SPF로는 반송을 막을 수 없습니다',
+  ctaText: 'SPF는 메일이 자사 서버에서 보낸 것임을 보여 줍니다. 그래도 존재하지 않는 주소로 보낸 메일은 반송되며, 반송률이 높으면 이메일 도달률이 떨어집니다.',
+  ctaButton: '이메일 리스트 검증하기',
+  ctaHref: '/ko/bulk-email-verifier',
+
+  domainStep: '도메인',
+  loadButton: '현재 레코드 불러오기',
+  loadHelp: '도메인에 이미 SPF 레코드가 있으면 불러온 뒤 새 발신자를 추가하십시오. 이 단계는 건너뛰어도 됩니다.',
+  load: {
+    nxdomain: (domain) => `${domain} 도메인은 DNS에 존재하지 않습니다. 철자를 확인하십시오.`,
+    none: (domain) => `${domain}에는 아직 SPF 레코드가 없습니다. 아래에서 발신자를 선택해 새로 만드십시오.`,
+    redirect: (domain, record) => `${domain}의 SPF 레코드는 redirect를 사용합니다(${record}). 이 양식으로는 안전하게 편집할 수 없으므로 직접 수정하십시오.`,
+    loaded: ({ domain, multiple, changedAll }) =>
+      `${domain}의 현재 레코드를 불러왔습니다. 발신자를 추가하거나 삭제한 뒤, 기존 레코드를 새 레코드로 바꾸십시오.${
+        multiple ? ' SPF 레코드가 여러 개 있어 첫 번째 레코드를 불러왔습니다. 이 레코드를 게시한 뒤 나머지 레코드를 삭제하십시오.' : ''
+      }${changedAll ? ' 끝부분이 ~all이나 -all이 아니어서 ~all로 바꿨습니다.' : ''}`,
+  },
+  sendersStep: '도메인으로 이메일을 보내는 서비스는 무엇입니까?',
+  sendersHelp: '주소에 도메인을 사용해 메일을 보내는 서비스를 모두 선택하십시오. 숫자는 허용된 DNS 조회 10회 중 각 서비스가 사용하는 횟수입니다.',
+  groupMailbox: '이메일 서비스',
+  groupService: '발송, 마케팅, 고객 지원 도구',
+  unneededInline: (subdomainOnly) => `{include}({name}) 항목은 보통${subdomainOnly ? ' 메인 도메인에' : ''} 필요하지 않습니다. {reason}`,
+  unneeded: ({ include, name, subdomainOnly, reason, cost }) =>
+    `include:${include}(${name}) 항목은 보통${subdomainOnly ? ' 메인 도메인에' : ''} 필요하지 않습니다. ${reason} 삭제하면 조회 ${cost}회를 줄일 수 있습니다.`,
+  unneededSummary: 'Mailchimp, SendGrid, Brevo 등을 사용하십니까? include가 필요 없을 수 있습니다.',
+  otherLabel: '여기에 없는 다른 서비스',
+  otherPlaceholder: 'spf.example-service.com',
+  addButton: '추가',
+  otherHelp: '서비스의 설정 가이드에서 include 값을 복사하십시오.',
+  ownServer: '자체 서버에서도 메일을 보내십니까?',
+  ipsLabel: '메일을 보내는 서버의 IP 주소',
+  ipsPlaceholder: '192.0.2.10\n198.51.100.0/24\n2001:db8::/32',
+  ipsHelp: '한 줄에 하나씩 입력합니다. IPv4와 IPv6 모두 사용할 수 있으며, /24 같은 범위도 입력할 수 있습니다.',
+  aLabel: '도메인이 가리키는 서버에서 메일을 보냄',
+  aHelp: '도메인 자체의 IP 주소를 추가합니다. 조회 1회를 사용합니다.',
+  mxLabel: '수신 메일 서버에서도 메일을 보냄',
+  mxHelp: 'MX 레코드에 있는 서버를 추가합니다. 조회 1회를 사용합니다. Google Workspace와 Microsoft 365는 include가 이미 발송을 포함하므로 필요하지 않습니다.',
+  keptTitle: '현재 레코드에서 유지한 항목',
+  remove: (term) => `${term} 삭제`,
+  allStep: '목록에 없는 서버에서 보낸 메일은 어떻게 처리합니까?',
+  softFail: {
+    title: '소프트 실패',
+    text: '수신 서버는 메일을 받지만 더 의심스럽게 취급합니다. Google과 M3AAWG가 권장하는 끝부분입니다.',
+  },
+  fail: {
+    title: '실패(fail)',
+    text: '메일이 허용되지 않았다고 수신 서버에 알립니다. Microsoft는 DKIM과 DMARC를 설정한 뒤 이 방식을 권장합니다. 일부 수신 서버는 DMARC 확인 전에 메일을 거부하므로, 그 메일은 DMARC 보고서에 나타나지 않습니다.',
+  },
+  recordTitle: '생성된 SPF 레코드',
+  recordHelp: '도메인의 DNS에 TXT 레코드로 추가하십시오.',
+  typeLabel: '유형',
+  nameLabel: '이름 / 호스트',
+  nameHelp: '일부 DNS 호스팅 업체는 @ 대신 도메인 이름 자체를 입력하거나 이름 칸을 비워 두도록 요구합니다.',
+  valueLabel: '값',
+  draftLookups: (n, limit) => `DNS 조회 ${n} / ${limit}회`,
+  counting: '실제 DNS에서 세는 중',
+  noSenders:
+    '아직 선택한 발신자가 없습니다. 발신자가 없는 레코드는 어떤 서버도 이 도메인의 메일을 보낼 수 없다는 뜻입니다. 이것은 이메일을 전혀 보내지 않는 도메인에만 맞으며, 그 경우 레코드 끝은 {ending}이어야 합니다.',
+  neverSends: '이 도메인은 이메일을 전혀 보내지 않음',
+  draftError: '조회 횟수를 세기 위한 DNS 서비스에 연결하지 못했습니다. 연결을 확인하십시오.',
+  howTitle: '추가하는 방법',
+  howSteps: [
+    '도메인의 DNS를 관리하는 곳에 로그인합니다. 보통 도메인을 구입한 회사입니다.',
+    'v=spf1으로 시작하는 TXT 레코드를 찾습니다. 레코드가 있으면 그 값을 위의 레코드로 바꿉니다. SPF 레코드가 2개이면 모든 메일의 SPF가 작동하지 않으므로, 두 번째 SPF 레코드는 추가하지 마십시오.',
+    '레코드가 없으면 위의 이름과 값으로 새 TXT 레코드를 추가하고 저장합니다.',
+  ],
+  howLast: '몇 분 기다린 뒤 {check}. {dkim}와 {dmarc}로 DKIM과 DMARC도 설정하십시오.',
+  checkPublished: '게시된 레코드를 검사하십시오',
+  dkimLabel: 'DKIM 생성기',
+  dkimHref: '/ko/dkim-generator',
+  dmarcLabel: 'DMARC 생성기',
+  dmarcHref: '/ko/dmarc-generator',
+  issues: {
+    'bad-syntax': (p) => `“${p.raw}” 항목의 형식이 올바르지 않으므로, 수신 서버는 레코드를 오류(permerror)로 처리합니다.`,
+    'bad-syntax-percent': (p) => `“${p.raw}” 항목에 올바른 SPF 매크로가 아닌 % 기호가 있으므로, 수신 서버는 레코드를 오류(permerror)로 처리합니다.`,
+    'duplicate-modifier': (p) => `레코드에 ${p.name}= 항목이 2개 이상 있습니다. 하나만 허용되므로, 수신 서버는 레코드를 오류(permerror)로 처리합니다.`,
+    'empty-modifier': (p) => `“${p.raw}” 항목의 = 기호 뒤에 도메인이 없습니다.`,
+    'equals-not-colon': (p) => `“${p.raw}” 항목은 SPF가 콜론을 요구하는 곳에 = 기호를 사용합니다. 수신 서버는 이 항목을 알 수 없는 설정으로 읽고 건너뜁니다. 대신 ${p.name}:${p.value} 형식으로 적으십시오.`,
+    'unknown-term': (p) => `“${p.raw}” 항목은 올바른 SPF 메커니즘이 아닙니다. 수신 서버는 레코드 전체를 오류(permerror)로 처리합니다.`,
+    'bad-ip': (p) => `“${p.raw}” 항목에 올바른 ${p.family} 주소가 없습니다.`,
+    'bad-cidr': (p) => `“${p.raw}” 항목의 접두사 길이가 /${p.max}보다 깁니다.`,
+    'after-all': () => '“all” 뒤에 메커니즘이 있습니다. 수신 서버는 “all”에서 멈추므로 그 뒤의 내용은 사용되지 않습니다.',
+    'include-plus-all': () => '이 include가 가리키는 레코드는 “+all”로 끝나므로, 이 include는 인터넷의 모든 서버와 일치합니다.',
+    'long-record': (p) => `레코드 길이가 ${p.length}자입니다. RFC 7208은 DNS 응답이 UDP 패킷 하나에 들어가도록 작게(약 450바이트 미만) 유지해야 한다고 합니다. 일부 수신 서버는 더 큰 응답을 읽지 못할 수 있습니다.`,
+    macro: (p) => `“${p.target}” 항목은 발신 서버에 따라 달라지는 SPF 매크로를 사용합니다. 검사기는 이 항목을 따라갈 수 없습니다.`,
+    'macro-exists': (p) => `“${p.raw}” 항목은 발신 서버마다 값이 채워지는 SPF 매크로를 사용합니다. 조회 1회로 세지만, 검사기는 이 항목이 허용하는 서버를 나열할 수 없습니다.`,
+    loop: (p) => `${p.target} 도메인이 ${p.chain.join(' > ')} 경로를 거쳐 자기 자신을 include합니다. 수신 서버는 이를 오류로 처리합니다.`,
+    'too-deep': (p) => `include 연결이 ${p.limit}단계보다 깊어서 검사기가 확인을 멈췄습니다.`,
+    temperror: (p) => `${p.target}의 DNS 서버가 응답하지 않았습니다. 수신 서버는 일시적 오류(temperror)를 받고 나중에 다시 시도할 수 있습니다. 몇 분 뒤 다시 검사하십시오.`,
+    'temperror-term': (p) => `${p.target}의 DNS 서버가 응답하지 않아 “${p.raw}” 항목을 검사할 수 없었습니다. 수신 서버는 일시적 오류(temperror)를 받습니다.`,
+    'include-no-spf': (p) =>
+      `include:${p.target} 항목은 ${p.missing ? '존재하지 않는 도메인' : 'SPF 레코드가 없는 도메인'}을 가리킵니다. 수신 서버는 레코드 전체를 오류(permerror)로 처리합니다.`,
+    'redirect-no-spf': (p) =>
+      `redirect=${p.target} 항목은 ${p.missing ? '존재하지 않는 도메인' : 'SPF 레코드가 없는 도메인'}을 가리킵니다. 수신 서버는 레코드 전체를 오류(permerror)로 처리합니다.`,
+    multiple: (p) => `${p.target} 도메인은 SPF 레코드를 ${p.count}개 게시하고 있습니다. RFC 7208은 정확히 하나만 허용하므로, 수신 서버는 SPF를 오류(permerror)로 처리합니다. 레코드 하나로 합치십시오.`,
+    'multiple-included': (p) => `${p.target} 도메인은 SPF 레코드를 ${p.count}개 게시하고 있습니다. 레코드는 정확히 하나여야 합니다.`,
+    'void-a': (p) => `“${p.raw}” 항목은 ${p.target}의 IP 주소를 찾지 못합니다. 따라서 아무것과도 일치하지 않으며 빈 조회로 셉니다.`,
+    'void-mx': (p) => `“${p.raw}” 항목은 ${p.target}의 메일 서버를 찾지 못합니다. 따라서 아무것과도 일치하지 않으며 빈 조회로 셉니다.`,
+    'mx-over-10': (p) => `${p.target}에는 MX 레코드가 ${p.count}개 있습니다. RFC 7208은 mx 메커니즘에 최대 10개까지만 허용합니다.`,
+    ptr: (p) => `“${p.raw}” 항목은 ptr을 사용합니다. RFC 7208은 ptr을 사용하지 말라고 합니다. 느리고, 조회를 1회 사용하며, ip4나 ip6보다 신뢰도가 낮습니다.`,
+    exists: (p) => `“${p.raw}” 항목은 ${p.target} 도메인이 존재하는지 확인합니다. 보통 매크로와 함께 사용합니다.`,
+    'redirect-ignored': () => '레코드에 “all”과 redirect가 모두 있습니다. “all”이 있으면 수신 서버는 redirect를 무시합니다.',
+    'plus-all': () => '“+all”은 인터넷의 모든 서버가 이 도메인 이름으로 메일을 보내도록 허용합니다. “~all” 또는 “-all”로 바꾸십시오.',
+    'neutral-all': () => '“?all”은 중립(neutral)입니다. 목록에 없는 서버에 대해 수신 서버에 아무것도 알려 주지 않으므로 보호 효과가 없습니다.',
+    'no-all': () => '레코드가 “all”로 끝나지 않으므로, 수신 서버는 목록에 없는 서버를 중립(neutral)으로 처리합니다. 끝에 “~all” 또는 “-all”을 추가하십시오.',
+    'too-many-lookups': (p) => `이 레코드에는 DNS 조회가 ${p.lookups}회 필요합니다. 한도는 ${p.limit}회이므로, 수신 서버는 처리를 멈추고 SPF를 오류(permerror)로 처리합니다.`,
+    'near-limit': (p) => `허용된 DNS 조회 ${p.limit}회를 모두 사용합니다. include를 하나 더 추가하면 모든 메일의 SPF가 작동하지 않습니다.`,
+    'near-limit-one-left': (p) => `허용된 DNS 조회 ${p.limit}회 중 ${p.lookups}회를 사용합니다. 조회 1회의 여유가 있지만, 대부분의 include는 조회를 2회 이상 사용합니다.`,
+    'too-many-voids': (p) => `조회 ${p.voids}회에서 아무것도 찾지 못했습니다. RFC 7208에 따르면 이런 “빈” 조회가 ${p.limit}회를 넘으면 수신 서버는 SPF를 실패로 처리할 수 있습니다.`,
+  },
+  failures: {
+    'no-answer': 'DNS가 응답하지 않음',
+    nxdomain: '존재하지 않는 도메인',
+    'no-spf': 'SPF 레코드 없음',
+    multiple: 'SPF 레코드가 여러 개 있음',
+  },
+  senderNames: {
+    'zoho.com': 'Zoho Mail(이전 include)',
+    'zohomail.eu': 'Zoho Mail(EU)',
+    'zoho.eu': 'Zoho Mail(EU, 이전 include)',
+    'eu.mailgun.org': 'Mailgun(EU)',
+  },
+  senderNotes: {
+    'Zoho Mail': '다른 지역의 계정은 zohomail.eu처럼 지역별 끝부분을 사용합니다.',
+    Mailgun: 'mg.yourdomain.com 같은 하위 도메인에서 보낸다면, 대신 그 하위 도메인의 레코드에 추가하십시오.',
+  },
+  notNeededReasons: {
+    Mailchimp: '현재 Mailchimp의 도메인 설정은 SPF가 아니라 DKIM과 DMARC 레코드만 요구합니다.',
+    Postmark: 'Postmark는 SPF가 더 이상 필요하지 않다고 안내합니다. Postmark 자체 반송 주소나, Postmark를 가리키도록 설정한 Return-Path 레코드로 메일을 보냅니다.',
+    Brevo: 'Brevo는 전용 IP 주소에서 보내는 경우가 아니면 SPF가 필요하지 않다고 안내합니다.',
+    Klaviyo: 'Klaviyo는 보통 SPF 레코드를 추가할 필요가 없다고 안내합니다.',
+    SendGrid: 'SendGrid의 도메인 인증은 em1234.yourdomain.com처럼 SendGrid가 만들어 주는 하위 도메인에 SPF를 설정합니다.',
+    'Amazon SES': 'SES에서는 bounce.yourdomain.com 같은 사용자 지정 MAIL FROM 하위 도메인에만 SPF가 필요합니다. 기본적으로는 SES 자체 반송 주소를 사용합니다.',
+  },
+}
+
 export const SPF_TOOL_STRINGS: Partial<Record<Locale, SpfToolStrings>> & { en: SpfToolStrings } = {
   en,
   de: deTool,
@@ -2682,6 +2923,7 @@ export const SPF_TOOL_STRINGS: Partial<Record<Locale, SpfToolStrings>> & { en: S
   pl: plTool,
   id: idTool,
   ja: jaTool,
+  ko: koTool,
 }
 
 export function spfToolStrings(locale: Locale): SpfToolStrings {

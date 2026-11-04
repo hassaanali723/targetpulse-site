@@ -26,7 +26,7 @@ export function numL(locale: L10nLocale, n: number): string {
 /** "97.8%" -> "97,8%" (it, es, pt-br) or "97,8 %" (de, fr). */
 export function pctL(locale: L10nLocale, s: string): string {
   if (!/^[\d.]+%$/.test(s)) return s
-  if (locale === 'ja') return s // ja keeps the decimal point: 97.8%
+  if (locale === 'ja' || locale === 'ko') return s // ja and ko keep the decimal point: 97.8%
   const v = s.slice(0, -1).replace('.', ',')
   return locale === 'de' || locale === 'fr' ? `${v}${NB}%` : `${v}%`
 }
@@ -80,6 +80,7 @@ const LM_DATE: Record<L10nLocale, string> = {
   pl: '25 lutego 2026',
   id: '25 Februari 2026',
   ja: '2026年2月25日',
+  ko: '2026년 2월 25일',
 }
 
 export const ALT_UI: Record<L10nLocale, AltUi> = {
@@ -564,6 +565,62 @@ export const ALT_UI: Record<L10nLocale, AltUi> = {
     // Rendered as: toolLead + <link>related[0].anchor</link> + "."
     toolLead: '1件のアドレスを確認するには：',
   },
+  ko: {
+    enSuffix: '(영어)',
+    bottomLine: '핵심 요약',
+    volume: '수량',
+    perMonth: '/월',
+    est: '추정',
+    estimateNote: (n) => `제3자 출처를 바탕으로 한 추정치이며, ${n} 요금 페이지에서는 확인되지 않았습니다.`,
+    checked: (n, d) => [`${n} 가격은 ${d}에 확인했습니다. 가격은 바뀌었을 수 있으므로 `, `${n} 요금 페이지`, '를 확인하십시오.'],
+    yes: '있음',
+    no: '없음',
+    partial: '일부',
+    rows: {
+      price10k: '크레딧 10,000개 가격',
+      catchAll: '캐치올 검증',
+      catchAllPricing: '캐치올 검증 가격',
+      seg: 'SEG 뒤의 주소 검증',
+      expiry: '크레딧 유효기간',
+      free: '무료 제공량',
+      chargesUnknown: '“알 수 없음” 결과 과금',
+      accuracy: '정확도 수치',
+    },
+    gateways: (n) => `게이트웨이 ${n}종`,
+    verdictHead: ['결과', '의미'],
+    verdicts: [
+      ['전송 가능', '메일함이 존재하며 메일을 받습니다'],
+      ['전송 불가', '메일함이 존재하지 않습니다'],
+      ['위험', '주소는 존재하지만 전송에 위험이 있습니다'],
+      ['알 수 없음', '주소를 검증할 수 없었으며, 크레딧은 환불됩니다'],
+    ],
+    bench: {
+      resolved: '결과를 낸 캐치올 도메인 주소 비율',
+      accuracy: '측정된 전체 정확도',
+      // LEADMAGIC_BENCHMARK.publisher is "LeadMagic" (ends in a consonant
+      // sound), so the subject particle is 이.
+      source: (n) => `${n}의 수치는 ${LEADMAGIC_BENCHMARK.publisher}이 ${LM_DATE.ko}에 공개한 독립 테스트에서 나온 것입니다. 실제 B2B 이메일 10,000개를 사용했으며, 그중 28%는 캐치올 도메인 주소였습니다.`,
+      caveat: '이 테스트를 공개한 LeadMagic은 경쟁 이메일 검증 도구를 판매하며, 자체 결과에서 1위를 차지했습니다. 중립적인 연구가 아니라 판매 업체가 진행한 테스트로 보아야 합니다. Giggal.ai는 테스트 대상에 포함되지 않았습니다.',
+    },
+    heroCta: '무료 크레딧 1,000개로 시작하기',
+    compareAll: '모든 검증 도구 비교(영어)',
+    tryHeading: '보유한 리스트로 직접 시험해 보기',
+    faqHeading: '자주 묻는 질문',
+    keepReading: '함께 읽을 글',
+    related: [
+      { href: '/email-checker', anchor: '무료 이메일 유효성 검사 도구' },
+      { href: '/alternatives', anchor: '모든 검증 도구 비교' },
+      { href: '/catch-all-verification', anchor: '캐치올 도메인 주소와 위험 주소 검증' },
+      { href: '/seg-email-verification', anchor: '보안 이메일 게이트웨이(SEG) 뒤의 주소' },
+      { href: '/pricing', anchor: '요금과 크레딧' },
+    ],
+    h2hHeading: (n) => `${n} 및 다른 검증 도구 직접 비교`,
+    h2hProse: (n) => [`자주 비교되는 검증 도구들과 ${n} 서비스를 비교한 페이지입니다. 모든 페이지에 세 번째 선택지로 Giggal.ai를 함께 실었습니다. 전체 표는 `, '비교 페이지', '(영어)에 있습니다.'],
+    breadcrumbAlternatives: '대안',
+    featureHeading: (n) => `${n} vs Giggal.ai`,
+    // Rendered as: toolLead + <link>related[0].anchor</link> + "."
+    toolLead: '주소 1개만 확인하려면 다음을 쓰십시오: ',
+  },
 }
 
 // ── Translated competitor facts ──────────────────────────────────────────────
@@ -581,6 +638,7 @@ const GIGGAL_FACTS: Record<L10nLocale, { freeTier: string; creditsExpire: string
   pl: { freeTier: '1000 kredytów, bez karty, także do masowego importu', creditsExpire: 'Kredyty nigdy nie wygasają, bez żadnych warunków.', catchAllCreditCost: '1 kredyt, tak jak każde inne sprawdzenie', claimedAccuracy: 'Deklaruje 98,5%', category: 'Weryfikator catch-all i SEG' },
   id: { freeTier: '1.000 kredit, tanpa kartu kredit, juga untuk pemeriksaan massal', creditsExpire: 'Kredit tidak pernah kedaluwarsa, tanpa syarat.', catchAllCreditCost: '1 kredit, sama seperti pemeriksaan lain', claimedAccuracy: 'Mengklaim 98,5%', category: 'Alat verifikasi untuk catch-all dan SEG' },
   ja: { freeTier: '1,000クレジット（クレジットカード不要、一括チェックにも利用可）', creditsExpire: 'クレジットに有効期限はありません。条件もありません。', catchAllCreditCost: '1クレジット（ほかのチェックと同じ）', claimedAccuracy: '98.5%と主張', category: 'キャッチオールドメインとSEGに対応した検証ツール' },
+  ko: { freeTier: '크레딧 1,000개(신용카드 불필요, 대량 검사에도 사용 가능)', creditsExpire: '크레딧에 유효기간이 없습니다. 조건도 없습니다.', catchAllCreditCost: '크레딧 1개(다른 검사와 같음)', claimedAccuracy: '98.5% 주장', category: '캐치올 도메인과 SEG를 지원하는 검증 도구' },
 }
 export function giggalFacts(locale: L10nLocale) {
   return { ...GIGGAL, ...GIGGAL_FACTS[locale] }
@@ -597,6 +655,7 @@ const FACTS: Record<string, Partial<Record<L10nLocale, Facts>>> = {
     pl: { freeTier: '100 kredytów miesięcznie', creditsExpire: 'Kredyty nie wygasają', catchAllCreditCost: 'Ocena AI od 1 do 10, bez wyniku prawidłowy lub nieprawidłowy', claimedAccuracy: 'Deklaruje 99,6%' },
     id: { freeTier: '100 kredit per bulan', creditsExpire: 'Kredit tidak kedaluwarsa', catchAllCreditCost: 'Skor AI 1 sampai 10, bukan valid atau tidak valid', claimedAccuracy: 'Mengklaim 99,6%' },
     ja: { freeTier: '毎月100クレジット', creditsExpire: 'クレジットに有効期限はありません', catchAllCreditCost: 'AIによる1〜10のスコア。有効・無効の結果は出ません', claimedAccuracy: '99.6%と主張' },
+    ko: { freeTier: '매월 크레딧 100개', creditsExpire: '크레딧에 유효기간이 없습니다', catchAllCreditCost: 'AI 점수 1~10, 유효 또는 무효 결과 없음', claimedAccuracy: '99.6% 주장' },
   },
   neverbounce: {
     it: { freeTier: '10 crediti alla registrazione', creditsExpire: "I crediti scadono 12 mesi dopo l'acquisto", catchAllCreditCost: 'Segnati Accept-All, ne risolve pochi' },
@@ -608,6 +667,7 @@ const FACTS: Record<string, Partial<Record<L10nLocale, Facts>>> = {
     pl: { freeTier: '10 kredytów przy rejestracji', creditsExpire: 'Kredyty wygasają 12 miesięcy po zakupie', catchAllCreditCost: 'Oznaczane jako Accept-All, rozstrzyga niewiele' },
     id: { freeTier: '10 kredit saat mendaftar', creditsExpire: 'Kredit kedaluwarsa 12 bulan setelah pembelian', catchAllCreditCost: 'Ditandai Accept-All, hanya sedikit yang diselesaikan' },
     ja: { freeTier: '登録時に10クレジット', creditsExpire: 'クレジットは購入から12か月で失効します', catchAllCreditCost: 'Accept-Allと表示され、結果が出るのはわずか' },
+    ko: { freeTier: '가입 시 크레딧 10개', creditsExpire: '크레딧은 구매 후 12개월이 지나면 만료됩니다', catchAllCreditCost: 'Accept-All로 표시, 결과를 내는 주소는 일부' },
   },
   hunter: {
     de: {
@@ -676,6 +736,11 @@ const FACTS: Record<string, Partial<Record<L10nLocale, Facts>>> = {
       freeTier: '無料トライアルで50クレジット', creditsExpire: 'サブスクリプションが有効な間は、プランのクレジットが繰り越されます', catchAllCreditCost: 'ラベルのみで、結果は出ません',
       pricingBasisNote: 'Snov.ioは、共通クレジットを使う月額サブスクリプションとして販売されています（1回のチェックに1クレジット）。数値は、その件数のチェックに対応する最小の月額プランです（月払いの場合。年払いでは約25%安くなります）。月100万件は個別プランです。Giggal.aiの数値は、従量課金の1回払いの料金です。',
       notes: { Custom: '個別プラン' },
+    },
+    ko: {
+      freeTier: '무료 체험 시 크레딧 50개', creditsExpire: '구독이 유지되는 동안 요금제 크레딧이 이월됩니다', catchAllCreditCost: '표시만 하고 결과 없음',
+      pricingBasisNote: 'Snov.io는 크레딧을 함께 쓰는 월 구독으로 판매됩니다(검증 1회에 크레딧 1개). 수치는 해당 검증 횟수를 감당하는 가장 작은 월 요금제입니다(월간 결제 기준, 연간 결제 시 약 25% 저렴). 매월 100만 회는 맞춤 요금제입니다. Giggal.ai의 수치는 종량제 1회 결제 가격입니다.',
+      notes: { Custom: '맞춤 요금제' },
     },
   },
   apollo: {

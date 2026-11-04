@@ -25,6 +25,7 @@ const LOCALE_META: Record<Locale, { native: string; short: string }> = {
   pl: { native: 'Polski', short: 'PL' },
   id: { native: 'Bahasa Indonesia', short: 'ID' },
   ja: { native: '日本語', short: 'JA' },
+  ko: { native: '한국어', short: 'KO' },
 }
 
 function alternateOf(pathname: string, from: Locale, target: Locale): string {
@@ -123,6 +124,17 @@ const FLAG_PATHS: Record<Locale, React.ReactNode> = {
       <circle cx="10" cy="7" r="4.2" fill="#bc002d" />
     </>
   ),
+  // Simplified Taegukgi: white field, red-over-blue circle, four black trigram marks.
+  ko: (
+    <>
+      <rect width="20" height="14" fill="#fff" />
+      <path d="M6.6 7a3.4 3.4 0 0 1 6.8 0z" fill="#cd2e3a" />
+      <path d="M6.6 7a3.4 3.4 0 0 0 6.8 0z" fill="#0047a0" />
+      <g stroke="#000" strokeWidth="0.9">
+        <path d="M2.4 2.6l1.6 1.6M2.4 11.4l1.6-1.6M17.6 2.6L16 4.2M17.6 11.4L16 9.8" />
+      </g>
+    </>
+  ),
 }
 
 function Flag({ locale, className = '' }: { locale: Locale; className?: string }) {
@@ -163,7 +175,7 @@ function CheckIcon() {
   )
 }
 
-const LABEL: Record<Locale, string> = { en: 'Language', it: 'Lingua', de: 'Sprache', es: 'Idioma', 'pt-br': 'Idioma', fr: 'Langue', nl: 'Taal', pl: 'Język', id: 'Bahasa', ja: '言語' }
+const LABEL: Record<Locale, string> = { en: 'Language', it: 'Lingua', de: 'Sprache', es: 'Idioma', 'pt-br': 'Idioma', fr: 'Langue', nl: 'Taal', pl: 'Język', id: 'Bahasa', ja: '言語', ko: '언어' }
 
 /** Desktop: globe + current code, opens a dropdown listing all languages. */
 export default function LanguageSwitcher({

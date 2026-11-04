@@ -585,6 +585,55 @@ const jaTool: FreeProvidersToolStrings = {
   companyNames: { 'Globo / Vivo': '複数の会社' },
 }
 
+const koTool: FreeProvidersToolStrings = {
+  banner: (p) =>
+    `${p.providers.toLocaleString('ko-KR')}개 서비스의 도메인 ${p.domains.toLocaleString('ko-KR')}개입니다. ${p.date}에 확인했을 때 모든 도메인의 MX 레코드가 정상적으로 작동했습니다.`,
+  dateLocale: 'ko-KR',
+  checkLabel: '무료 이메일 도메인인지 확인',
+  checkPlaceholder: '도메인 또는 이메일 주소 입력',
+  checkButton: '도메인 확인',
+  inputEmpty: '도메인 또는 이메일 주소를 입력하십시오.',
+  inputInvalid: '도메인 형식이 아닌 것 같습니다. gmail.com과 같은 형식으로 입력하십시오.',
+  isFree: (domain) => `${domain} 도메인은 무료 이메일 도메인입니다.`,
+  belongsTo: (name, company) => `${name} 서비스에 속한 도메인입니다${company ? `. 운영사는 ${company}입니다` : ''}.`,
+  kindNotes: {
+    webmail: '누구나 가입할 수 있는 무료 웹메일 서비스입니다.',
+    privacy: '개인정보 보호를 중시하는 암호화 이메일 서비스입니다.',
+    isp: '가정용 인터넷 요금제에 포함된 이메일이므로, 이 주소도 개인 주소입니다.',
+  },
+  notListed: (domain) => `${domain} 도메인은 이 목록에 없습니다.`,
+  notListedText:
+    '회사, 학교 또는 개인 도메인일 가능성이 높습니다. 이 목록에서 다루지 않는 소규모 무료 이메일 서비스이거나 일회용 이메일 서비스일 수도 있습니다. {mx}로 메일 서버를 확인하거나, {disposable}로 일회용 주소인지 확인할 수 있습니다.',
+  mxLink: 'MX 레코드 조회',
+  mxHref: '/ko/mx-lookup',
+  disposableLink: '일회용 이메일 판별',
+  disposableHref: '/ko/disposable-email-checker',
+  browseLabel: '목록 보기',
+  browsePlaceholder: '도메인 또는 서비스 이름으로 필터링(예: hotmail, gmx)',
+  filters: {
+    all: '전체',
+    webmail: '무료 웹메일',
+    privacy: '개인정보 보호·암호화',
+    isp: '인터넷 서비스 제공업체',
+  },
+  kindLabels: {
+    webmail: '무료 웹메일',
+    privacy: '개인정보 보호·암호화',
+    isp: '인터넷 서비스 제공업체',
+  },
+  showing: (domains, providers) =>
+    `${providers.toLocaleString('ko-KR')}개 서비스의 도메인 ${domains.toLocaleString('ko-KR')}개 표시 중`,
+  copy: '도메인 복사',
+  copied: '복사됨',
+  thProvider: '서비스',
+  thDomains: '도메인',
+  empty: '이 필터와 일치하는 도메인이 없습니다.',
+  fileTxt: 'free-email-domains.txt',
+  fileCsv: 'free-email-domains.csv',
+  fileJson: 'free-email-domains.json',
+  csvHeader: '도메인,서비스,운영사,국가,유형',
+  companyNames: { 'Globo / Vivo': '여러 회사' },
+}
 
 export const FREE_PROVIDERS_TOOL_STRINGS: Record<Locale, FreeProvidersToolStrings> = {
   en,
@@ -597,6 +646,7 @@ export const FREE_PROVIDERS_TOOL_STRINGS: Record<Locale, FreeProvidersToolString
   pl: plTool,
   id: idTool,
   ja: jaTool,
+  ko: koTool,
 }
 
 export function freeProvidersToolStrings(locale: Locale): FreeProvidersToolStrings {

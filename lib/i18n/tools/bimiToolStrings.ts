@@ -1403,7 +1403,143 @@ const jaTool: BimiToolStrings = {
   },
 }
 
-export const BIMI_TOOL_STRINGS: Record<Locale, BimiToolStrings> = { en, de: deTool, fr: frTool, es: esTool, it: itTool, 'pt-br': ptBrTool, nl: nlTool, pl: plTool, id: idTool, ja: jaTool }
+const koKb = (byteSize: number) => (byteSize / 1024).toFixed(1)
+
+const koTool: BimiToolStrings = {
+  tabRecord: '레코드 생성',
+  tabChecker: 'SVG 로고 검사',
+  tabReadiness: '준비 체크리스트',
+
+  domainLabel: '도메인',
+  domainPlaceholder: 'example.com',
+  selectorLabel: '셀렉터',
+  selectorHint: '(기본값: default)',
+  selectorWarning: 'default가 아닌 셀렉터를 쓰면 메일에 BIMI-Selector 헤더가 필요합니다.',
+  logoLabel: '로고 URL',
+  logoHint: '(https://로 시작하고 .svg로 끝나야 합니다)',
+  logoPlaceholder: 'https://example.com/bimi/logo.svg',
+  certLabel: '인증서 URL',
+  certHint: '(선택 사항. https://로 시작하고 .pem으로 끝나야 합니다)',
+  certPlaceholder: 'https://example.com/bimi/cert.pem',
+  leaveLogoEmpty: 'l= 값을 비워 두기 (로고가 인증서 안에 포함됨)',
+  leaveLogoEmptyHelp: 'Google의 예시에는 두 형식이 모두 나옵니다. 일부 인증서는 PEM 데이터 안에 로고를 포함합니다.',
+  outputTitle: '게시할 DNS TXT 레코드',
+  hostLabel: '호스트 / 이름',
+  copy: '복사',
+  copied: '복사됨',
+  hostShort: '도메인을 자동으로 붙이는 관리 화면용 짧은 형식: {host}',
+  typeLabel: '레코드 유형',
+  ttlNote: 'TTL: 3600 (1시간 권장)',
+  valueLabel: 'TXT 레코드 값',
+  zoneLabel: '존 파일 형식',
+
+  checkerTitle: 'SVG 로고 파일 업로드 또는 SVG 코드 붙여넣기',
+  uploadButton: 'SVG 파일 업로드',
+  pasteLabel: '또는 SVG 마크업 붙여넣기:',
+  previewAlt: 'SVG 미리 보기',
+  passBadge: 'Tiny PS 규칙 모두 충족',
+  failBadge: 'Tiny PS 규칙 미충족',
+  fileSize: (byteSize) => `파일 크기: ${koKb(byteSize)} KB`,
+  passText: '이 SVG 로고는 메일 서비스 제공업체와 인증 기관의 사양을 충족합니다.',
+  failText: '게시하기 전에 아래에서 통과하지 못한 항목을 확인하고 로고를 수정하십시오.',
+
+  readinessTitle: 'BIMI 적용 준비 상태',
+  readinessIntro: '갖춘 사전 조건에 체크하면 브랜드 로고가 표시될 수 있는 곳을 알 수 있습니다.',
+  dmarcItem: 'DMARC 정책이 quarantine 또는 reject',
+  dmarcItemText: 'BIMI를 쓰려면 DMARC 정책이 적용 단계여야 합니다. 레코드가 필요하면 {link}를 사용하십시오.',
+  dmarcLabel: 'DMARC 레코드 생성기',
+  dmarcHref: '/ko/dmarc-generator',
+  alignItem: 'SPF와 DKIM 통과 및 정렬',
+  alignItemText: '메일 헤더가 From 주소의 도메인으로 문제없이 인증되어야 합니다.',
+  logoItem: '로고가 검사를 통과함',
+  logoItemText: 'SVG Tiny PS 준수, 정사각형 viewBox, script 및 래스터 요소 없음.',
+  certTitle: '인증서 수준',
+  certOptions: {
+    none: '없음 (직접 호스팅하는 SVG만)',
+    CMC: 'CMC (Common Mark Certificate)',
+    VMC: 'VMC (Verified Mark Certificate)',
+  },
+  whereTitle: '로고가 표시될 수 있는 곳:',
+  where: {
+    VMC: 'VMC가 있는 경우: Gmail(체크 표시 포함), Apple Mail, BIMI를 지원하는 메일 서비스 제공업체',
+    CMC: 'CMC가 있는 경우: Gmail(체크 표시 없음). Apple Mail에는 표시되지 않습니다',
+    none: '인증서가 없는 경우: Yahoo, Fastmail처럼 인증서 없는 레코드를 받아들이는 메일 서비스 제공업체만',
+  },
+  prerequisitesNote:
+    '참고: 사전 조건을 먼저 갖춰야 합니다. DMARC 정책이 quarantine 또는 reject가 아니면 어떤 메일 서비스 제공업체도 로고를 표시하지 않습니다.',
+
+  urlErrors: {
+    required: 'URL을 입력하십시오',
+    'not-https': 'URL은 https://로 시작해야 합니다',
+    extension: (extension) => `URL은 .${extension}${extension === 'pem' ? '으로' : '로'} 끝나야 합니다`,
+    invalid: 'URL 형식이 올바르지 않습니다',
+  },
+  checks: {
+    baseProfile: {
+      title: 'baseProfile이 tiny-ps인 루트 svg 요소',
+      pass: () => '루트 요소는 baseProfile="tiny-ps"인 <svg>입니다.',
+      fail: () => '루트 <svg> 요소에 baseProfile="tiny-ps"를 선언해야 합니다.',
+    },
+    version: {
+      title: '버전 1.2',
+      pass: () => 'SVG의 version 속성이 1.2로 설정되어 있습니다.',
+      fail: () => '루트 <svg> 요소에 version="1.2"를 선언해야 합니다.',
+    },
+    viewBox: {
+      title: 'viewBox가 정사각형',
+      pass: () => 'viewBox의 너비와 높이가 같습니다.',
+      fail: () => 'SVG viewBox의 너비와 높이가 같아야 합니다(가로세로 비율 1:1).',
+    },
+    'no-root-xy': {
+      title: '루트 svg에 x, y 속성 없음',
+      pass: () => '루트 <svg> 요소에 x 속성과 y 속성이 없습니다.',
+      fail: () => '루트 <svg> 태그에는 x 좌표나 y 좌표 속성을 넣을 수 없습니다.',
+    },
+    title: {
+      title: 'title 요소 있음',
+      pass: () => '브랜드 이름이 들어 있고 비어 있지 않은 <title> 요소가 있습니다.',
+      fail: () => '회사 이름이나 브랜드 이름을 적은 <title> 요소가 필요합니다.',
+    },
+    filesize: {
+      title: '파일 크기 32 KB 이하',
+      pass: ({ byteSize }) => `파일 크기는 ${koKb(byteSize)} KB입니다(한도 32 KB 이내).`,
+      fail: ({ byteSize }) => `파일 크기가 ${koKb(byteSize)} KB로, 한도인 32 KB를 넘습니다.`,
+    },
+    'no-script': {
+      title: 'script 요소 없음',
+      pass: () => '실행 가능한 <script> 요소가 없습니다.',
+      fail: () => '메일함 보안을 위해 Tiny PS에서는 스크립트를 쓸 수 없습니다.',
+    },
+    'no-image': {
+      title: '삽입된 래스터 이미지(image 요소) 없음',
+      pass: () => '삽입된 래스터 <image> 요소가 없습니다.',
+      fail: () => 'Tiny PS에는 순수한 벡터 그래픽만 쓸 수 있습니다. 래스터 <image> 태그는 허용되지 않습니다.',
+    },
+    'no-foreignObject': {
+      title: 'foreignObject 없음',
+      pass: () => '<foreignObject> 요소가 없습니다.',
+      fail: () => 'Tiny PS에서는 <foreignObject> 요소를 쓸 수 없습니다.',
+    },
+    'no-animation': {
+      title: '애니메이션 요소 없음',
+      pass: () => 'SVG 애니메이션 요소가 없습니다.',
+      fail: () => '애니메이션 SVG 요소(<animate>, <set> 등)는 쓸 수 없습니다.',
+    },
+    'no-external-ref': {
+      title: '외부 파일 참조 없음',
+      pass: () => '외부 URL이나 외부 파일 참조가 없습니다.',
+      fail: () => '외부 파일 참조나 원격 링크는 허용되지 않습니다.',
+    },
+    'text-elements': {
+      title: '텍스트 요소',
+      pass: () => '<text> 요소가 없습니다.',
+      fail: () =>
+        '로고 안의 텍스트는 환경마다 다르게 보일 수 있습니다. 디자인 도구에서 텍스트를 윤곽선으로 변환하십시오.',
+    },
+  },
+}
+
+export const BIMI_TOOL_STRINGS: Record<Locale, BimiToolStrings> = { en, de: deTool, fr: frTool, es: esTool, it: itTool, 'pt-br': ptBrTool, nl: nlTool, pl: plTool, id: idTool, ja: jaTool, ko: koTool }
 
 export function bimiToolStrings(locale: Locale): BimiToolStrings {
   return BIMI_TOOL_STRINGS[locale] ?? en

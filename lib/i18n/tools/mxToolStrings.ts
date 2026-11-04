@@ -684,6 +684,68 @@ const jaTool: MxToolStrings = {
   },
 }
 
+const koServers = (n: number) => `메일 서버를 ${n}개 찾았습니다`
+const koProvider = (name: string) => `. 이 도메인의 메일은 ${name}에서 받습니다`
+const koHead = (p: MxSummaryParts) => `${koServers(p.servers)}${p.provider ? koProvider(p.provider) : ''}`
+
+const koTool: MxToolStrings = {
+  label: '도메인 또는 이메일 주소',
+  placeholder: 'example.com',
+  button: 'MX 레코드 조회',
+  tryLabel: '예시:',
+  thPriority: '우선순위',
+  thServer: '메일 서버',
+  thIps: 'IP 주소',
+  thTtl: 'TTL',
+  none: '없음',
+  nullMx: '. (Null MX)',
+  legend: '발신 서버는 숫자가 가장 작은 서버부터 시도합니다. 숫자가 같은 서버는 부하를 나눠서 처리합니다.',
+  copy: '레코드 복사',
+  copied: '복사됨',
+  answeredBy: '응답 서버:',
+  dnssec: ' · DNSSEC 검증됨',
+  ctaTitle: 'MX 레코드로는 도메인만 확인할 수 있고, 메일함은 확인할 수 없습니다',
+  ctaText: '도메인이 메일을 받을 수 있어도, 보내려는 이메일 주소가 실제로 있다는 뜻은 아닙니다. 보내기 전에 이메일 주소 자체를 확인하십시오.',
+  ctaButton: '이메일 주소 유효성 검사하기',
+  ctaHref: '/ko/email-checker',
+  lookupError: 'DNS 서비스에 연결하지 못했습니다. 인터넷 연결을 확인한 뒤 다시 시도하십시오.',
+  inputEmpty: 'example.com과 같은 도메인을 입력하십시오.',
+  inputInvalid: '도메인 형식이 아닌 것 같습니다. example.com과 같은 형식으로 입력하십시오.',
+  issues: {
+    'ip-literal': '이 레코드는 IP 주소를 가리킵니다. MX 레코드에는 호스트 이름을 지정해야 하며, 일부 메일 서버(기본 설정의 Exim 등)는 이 주소로 메일을 전달하지 않습니다.',
+    'lookup-failed': '이 서버의 주소를 조회하지 못했습니다. 잠시 후 다시 시도하십시오.',
+    cname: '이 서버 이름은 별칭(CNAME)입니다. MX 규칙에 따르면 실제 호스트 이름이어야 합니다. 많은 발신 서버가 별칭을 그대로 따라가지만, 표준에서 이를 요구하지는 않습니다.',
+    'no-address': '이 서버 이름에는 IP 주소가 없습니다. 따라서 이 서버로 보낸 메일은 전달할 수 없습니다.',
+    'no-address-missing': '이 서버 이름은 DNS에 없습니다. 따라서 이 서버로 보낸 메일은 전달할 수 없습니다.',
+    'null-mx-mixed': '이 도메인은 일반 MX 레코드와 함께 Null MX(“0 .”)를 게시하고 있습니다. Null MX는 유일한 MX 레코드여야 하므로 둘 중 하나를 삭제하십시오.',
+  },
+  summary: {
+    servers: koServers,
+    provider: koProvider,
+    ok: (p) => ({ title: `${p.domain} 도메인은 이메일을 받을 수 있습니다`, text: `${koHead(p)}.` }),
+    okWithIssues: (p) => ({
+      title: `${p.domain} 도메인에 MX 레코드가 있지만, 수정할 문제가 있습니다`,
+      text: `${koHead(p)}. 문제는 아래에 표시됩니다.`,
+    }),
+    implicit: (p) => ({
+      title: `${p.domain} 도메인에 MX 레코드가 없습니다`,
+      text: `발신 서버는 도메인 자체의 주소(${p.fallback})로 대신 전달을 시도합니다. 이 방식은 그 주소에서 메일 서버가 실행 중일 때만 작동합니다. 이 도메인으로 이메일을 받아야 한다면 MX 레코드를 추가하십시오.`,
+    }),
+    none: (p) => ({
+      title: `${p.domain} 도메인은 이메일을 받을 수 없습니다`,
+      text: 'MX 레코드가 없고, 발신 서버가 대신 사용할 주소도 없습니다. 이 도메인으로 보낸 메일은 반송됩니다.',
+    }),
+    nullMx: (p) => ({
+      title: `${p.domain} 도메인은 이메일을 전혀 받지 않습니다`,
+      text: '이 도메인은 Null MX 레코드(0 .)를 게시하고 있습니다. 이 레코드는 발신 서버에 전달을 시도하지 말라고 알립니다. 이메일에 쓰지 않는 도메인이라면 정상적인 설정입니다. 메일을 보내는 도메인에는 이 레코드가 있으면 안 됩니다. 답장과 반송 메일이 돌아올 수 없기 때문입니다.',
+    }),
+    nxdomain: (p) => ({
+      title: `${p.domain} 도메인은 존재하지 않습니다`,
+      text: 'DNS에 이 도메인의 기록이 없습니다. 철자를 확인하십시오.',
+    }),
+  },
+}
+
 export const MX_TOOL_STRINGS: Partial<Record<Locale, MxToolStrings>> & { en: MxToolStrings } = {
   en,
   de: deTool,
@@ -695,6 +757,7 @@ export const MX_TOOL_STRINGS: Partial<Record<Locale, MxToolStrings>> & { en: MxT
   pl: plTool,
   id: idTool,
   ja: jaTool,
+  ko: koTool,
 }
 
 export function mxToolStrings(locale: Locale): MxToolStrings {

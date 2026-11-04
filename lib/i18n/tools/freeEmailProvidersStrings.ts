@@ -1847,6 +1847,179 @@ const ja: FreeProvidersPageStrings = {
   ctaHeadline: 'サービス名だけでなく、各メールアドレスが存在するかを確認しましょう',
 }
 
+const ko: FreeProvidersPageStrings = {
+  metaTitle: '무료 이메일 도메인 목록: 무료 이메일 서비스와 도메인 | Giggal.ai',
+  ogTitle: '무료 이메일 도메인 목록: 무료 이메일 서비스와 도메인',
+  description: (domains) =>
+    `Gmail과 Outlook부터 Proton, GMX까지 무료 이메일 서비스를 정리한 목록입니다. 무료 이메일 도메인 ${domains.toLocaleString('ko-KR')}개를 확인하거나 CSV로 다운로드할 수 있습니다.`,
+  ogLocale: 'ko_KR',
+  ogImage: '/og-card.png',
+  ogAlt: '무료 이메일 서비스와 도메인 목록',
+  crumb: '무료 이메일 도메인 목록',
+  listName: '무료 이메일 서비스 비교',
+  listDescription: '주요 무료 이메일 서비스와 각 무료 요금제에 포함된 내용입니다.',
+  appName: '무료 이메일 도메인 확인 도구와 목록',
+  featureList: (domains, providers) => [
+    `${providers.toLocaleString('ko-KR')}개 서비스의 무료 이메일 도메인 ${domains.toLocaleString('ko-KR')}개`,
+    '모든 도메인의 MX 레코드 작동 여부 확인 완료',
+    '도메인이나 이메일 주소가 무료 이메일 서비스인지 확인',
+    'TXT, CSV, JSON 형식으로 다운로드',
+  ],
+  h1: '무료 이메일 도메인 목록',
+  heroIntro: (domains) =>
+    `사람들이 실제로 쓰는 무료 이메일 서비스와, 그 주소에 쓰이는 도메인 ${domains.toLocaleString('ko-KR')}개의 목록입니다. 도메인을 확인하거나 목록 전체를 다운로드하십시오.`,
+  howTitle: '이 목록을 사용하는 방법',
+  howSteps: [
+    '주소 하나를 확인하려면 위쪽 입력란에 붙여 넣으십시오. 도구가 그 도메인이 무료 이메일 서비스의 도메인인지, 어느 서비스의 도메인인지 알려 줍니다.',
+    '특정 서비스의 도메인을 찾으려면 필터에 서비스 이름을 입력하십시오. 예를 들어 hotmail이나 gmx를 입력합니다. Outlook.com 하나만 해도 국가별 도메인이 수십 개 있습니다.',
+    '스프레드시트, CRM 또는 자체 코드에서 목록을 쓰려면 다운로드하십시오. CSV에는 도메인, 서비스, 운영사, 국가, 유형이 들어 있습니다.',
+  ],
+  howNote: '다운로드 내용은 설정한 필터를 따릅니다. 예를 들어 “인터넷 서비스 제공업체”를 선택하면 해당 도메인만 받을 수 있습니다.',
+  imageAlt: '여러 무료 이메일 서비스의 이메일 주소를 도메인 목록으로 분류하는 모습을 나타낸 그림.',
+  coverTitle: '이 목록에 포함된 것과 포함되지 않은 것',
+  coverParas: [
+    '이 무료 이메일 서비스 목록은 세 종류의 서비스를 다룹니다. 첫째, Gmail, Outlook.com, Yahoo Mail, GMX, mail.com 같은 무료 웹메일 서비스입니다. 둘째, Proton Mail과 Tuta 같은 개인정보 보호 중심의 암호화 서비스입니다. 셋째, Comcast, AT&T, BT, Orange 같은 대형 인터넷 서비스 제공업체의 개인용 메일함입니다. 이 메일함은 무료가 아니라 가정용 인터넷 요금제에 포함되어 있지만, 개인 주소라는 점은 같습니다.',
+    '모든 도메인은 목록에 추가하기 전에 [MX 레코드](/mx-lookup)를 확인했습니다. 자체 메일 서버를 운영하는 서비스라면 레코드가 그 서버를 가리켜야 했습니다. 더 이상 메일을 받지 않는 오래된 도메인과 지금은 다른 곳이 소유한 도메인은 제외했습니다. 그래서 yahoo.ch, aol.ca 같은 일부 오래된 국가별 도메인은 이 목록에 없습니다.',
+    '일회용 이메일 서비스는 이 목록에 없습니다. 이런 서비스는 몇 분이나 몇 시간 뒤에 만료되는 일회용 받은편지함을 제공하며, 별도의 [일회용 이메일 서비스 목록](/disposable-email-providers)이 있습니다.',
+  ],
+  compareTitle: '무료 이메일 서비스 비교',
+  compareIntro:
+    '주요 이메일 서비스가 무료 요금제에서 제공하는 내용입니다. 모든 수치는 각 서비스의 공식 페이지에서 2026년 10월 12일에 확인했습니다. 무료 요금제는 자주 바뀌므로, 결정하기 전에 해당 서비스의 사이트를 확인하십시오.',
+  thProvider: '서비스',
+  thStorage: '무료 저장 용량',
+  thNotes: '참고',
+  compare: {
+    Gmail: {
+      storage: '15 GB(Google Drive, Google Photos와 공유)',
+      notes:
+        '광고가 표시되지만, Google은 광고를 고를 때 이메일 내용을 사용하지 않는다고 밝히고 있습니다. 2026년 3월부터 일부 신규 계정은 5 GB로 시작하며, 전화번호를 인증하면 나머지 10 GB가 추가됩니다.',
+    },
+    'Outlook.com': {
+      storage: '이메일용 15 GB',
+      notes: '첨부 파일은 별도의 5 GB 클라우드 저장 공간에서 차감됩니다. Microsoft 365를 유료로 구독하지 않으면 광고가 표시됩니다.',
+    },
+    'Yahoo Mail': {
+      storage: '미국 기준 20 GB',
+      notes: '일부 국가는 용량이 더 적습니다. 영국 사용자에게는 2026년에 15 GB로 줄어든다는 안내가 있었습니다. Yahoo Mail Plus를 쓰면 광고가 사라집니다.',
+    },
+    'iCloud Mail': {
+      storage: '5 GB(iCloud의 다른 기능과 공유)',
+      notes: '모든 Apple 계정에 포함됩니다. 자신의 도메인을 쓰려면 유료 iCloud+ 요금제가 필요합니다.',
+    },
+    'Proton Mail': {
+      storage: '500 MB(초기 설정 단계를 마치면 1 GB로 증가)',
+      notes: '종단 간 암호화를 제공합니다. 무료 요금제에서는 주소 1개, 하루 150통까지 사용할 수 있습니다.',
+    },
+    Tuta: {
+      storage: '1 GB',
+      notes: '종단 간 암호화를 제공합니다. 무료 요금제에서는 추가 주소와 사용자 지정 도메인을 쓸 수 없습니다.',
+    },
+    'Zoho Mail': {
+      storage: '사용자당 5 GB(최대 5명)',
+      notes:
+        '무료 요금제로는 드물게 자신의 도메인으로 사용할 수 있습니다. 웹과 앱에서만 쓸 수 있고 IMAP과 POP을 지원하지 않으며, 모든 지역에서 제공되지는 않습니다. 광고는 없습니다.',
+    },
+    GMX: {
+      storage: 'gmx.com 및 gmx.co.uk에서 65 GB',
+      notes: '추가 주소를 최대 10개까지 만들 수 있습니다. gmx.de 및 gmx.net의 독일 서비스는 무료 요금제가 더 작아 1 GB입니다.',
+    },
+    'mail.com': {
+      storage: '65 GB, 별도로 클라우드 저장 공간 2 GB',
+      notes: 'email.com, usa.com, consultant.com 등 100개가 넘는 도메인 중에서 주소를 고를 수 있습니다. Premium을 쓰면 광고가 사라집니다.',
+    },
+  },
+  bestTitle: '어떤 이메일 서비스가 가장 잘 맞습니까?',
+  bestIntro: '모든 사람에게 가장 좋은 이메일 서비스는 하나로 정해져 있지 않습니다. 어떤 이메일 계정이 맞는지는 어디에 쓸지에 따라 달라집니다.',
+  bestList: [
+    '무료 저장 용량이 가장 큰 서비스는 GMX와 mail.com으로, 각각 65 GB를 제공합니다.',
+    '개인정보 보호가 중요하다면, Proton Mail과 Tuta는 무료 요금제에서도 메일을 종단 간 암호화합니다.',
+    '자신의 도메인을 무료로 쓰려면, Zoho Mail의 Forever Free 요금제가 최대 5명까지 지원합니다.',
+    '이미 Apple, Google, Microsoft 앱을 쓴다면, iCloud Mail, Gmail, Outlook.com이 각 앱과 함께 작동합니다.',
+  ],
+  bestNote:
+    '업무용으로도 처음에는 무료 주소로 충분합니다. 다만 일부 기업용 양식은 무료 주소를 받지 않습니다. 그 이유는 아래 B2B 양식 항목에서 설명합니다.',
+  signupTitle: '지금 새 무료 이메일 계정을 만들 수 있는 도메인',
+  signupIntro:
+    '대형 서비스는 오랜 기간에 걸쳐 도메인을 늘려 왔지만, 신규 계정에 제공하는 도메인은 일부뿐입니다. 나머지 도메인도 이미 가지고 있는 사람은 계속 사용할 수 있습니다.',
+  thNewAccounts: '신규 계정',
+  thOtherDomains: '사용 중인 다른 도메인',
+  newAccountsLabel: '신규 계정: ',
+  alsoInUseLabel: '사용 중인 다른 도메인: ',
+  signupOther: {
+    Gmail: 'googlemail.com(같은 메일함으로 도착)',
+    'Outlook.com': 'live.com, msn.com, hotmail.co.uk 같은 국가별 도메인',
+    'Yahoo Mail': 'ymail.com, rocketmail.com, yahoo.co.uk 같은 국가별 도메인',
+    'iCloud Mail': 'me.com, mac.com',
+    'Proton Mail': 'protonmail.ch. pm.me는 유료 요금제에서 사용할 수 있습니다.',
+    Tuta: 'tuta.com은 유료 요금제에서 사용할 수 있습니다.',
+    GMX: '기타 국가별 도메인',
+    'mail.com': '약 140개가 더 있으며, 모두 신규 계정에서 선택할 수 있습니다.',
+  },
+  signupNote:
+    'B2B 필터에서는 이 차이가 중요하지 않습니다. me.com이나 ymail.com 주소도 gmail.com 주소와 똑같이 개인 주소입니다. 그래서 이 목록에는 두 종류를 모두 넣었습니다.',
+  closeTitle: '사용하지 않는 무료 계정은 해지됩니다',
+  closeIntro: '무료 이메일 서비스는 사용하지 않는 계정을 삭제합니다. 무료 주소가 많은 오래된 리스트에서 시간이 지날수록 반송이 늘어나는 이유 중 하나입니다.',
+  closeList: [
+    'Gmail: 2년 동안 사용하지 않은 계정은 Google이 삭제할 수 있습니다.',
+    'Outlook.com: 받은편지함을 유지하려면 적어도 1년에 한 번 로그인해야 합니다. 2년 동안 로그인하지 않으면 계정이 해지됩니다.',
+    'Yahoo Mail: 12개월 동안 사용하지 않으면 메일함이 삭제되고, 18개월이 지나면 계정이 삭제됩니다.',
+    'Proton Mail: 무료 계정은 12개월 동안 활동이 없으면 삭제됩니다.',
+    'Tuta: 무료 계정은 6개월 동안 로그인하지 않으면 삭제됩니다.',
+  ],
+  closeNote:
+    '오래된 리스트로 이메일을 보내기 전에 리스트를 확인하십시오. [대량 이메일 검증](/bulk-email-verifier)은 더 이상 존재하지 않는 주소를 찾아내고, [이메일 유효성 검사](/email-checker)는 주소 하나를 같은 방식으로 확인합니다.',
+  b2bTitle: 'B2B 양식과 무료 이메일 도메인',
+  b2bParas: [
+    '많은 B2B 기업은 업무용 주소로만 가입을 받으려 합니다. 예를 들어 HubSpot에는 “Block free email providers”라는 양식 설정이 있어 무료 이메일 도메인을 차단할 수 있습니다. 위의 CSV를 사용하면 자체 양식 코드에서도 같은 기능을 만들 수 있습니다.',
+    '하지만 차단에는 단점도 있습니다. 일부 개인 사업자와 소규모 기업은 모든 업무를 Gmail이나 Outlook.com 주소로 처리하며, 일괄 차단하면 이들의 가입을 막게 됩니다. 더 유연한 방법은 주소를 받은 뒤 CRM에서 개인 주소로 표시하고, 영업팀이 판단하게 하는 것입니다.',
+    '무료 주소가 가짜 주소인 것은 아닙니다. Gmail과 Outlook.com 메일함은 계속 유지되며 메일을 받습니다. 몇 분이나 몇 시간 뒤에 작동하지 않게 되는 것은 일회용 주소이며, [일회용 이메일 판별](/disposable-email-checker) 도구로 찾아낼 수 있습니다.',
+  ],
+  dupesTitle: '중복된 무료 이메일 주소 찾기',
+  dupesIntro: '일부 서비스는 표기가 다른 여러 주소를 같은 받은편지함으로 전달합니다. 리스트에서 중복을 제거할 때 이 점이 중요합니다.',
+  dupesList: [
+    'Gmail은 이름 부분의 점을 무시합니다. 따라서 john.smith@gmail.com과 johnsmith@gmail.com은 같은 받은편지함입니다. 이는 개인용 Gmail에 해당하며, Google Workspace 계정에는 해당하지 않습니다.',
+    'gmail.com 주소와 googlemail.com 주소로 보낸 메일은 같은 메일함에 도착합니다.',
+    'john+news@gmail.com 같은 플러스 주소로 보낸 메일도 기본 받은편지함에 도착합니다.',
+    'Yandex는 이름 부분의 점과 하이픈을 같은 주소로 취급합니다.',
+  ],
+  faqTitle: '자주 묻는 질문',
+  faqs: [
+    {
+      q: '이메일 서비스 제공업체란 무엇입니까?',
+      a: '메일함을 운영하는 회사입니다. 주소를 발급하고, 메일을 저장하고, 메일을 보내고 받을 수 있게 해 줍니다. Gmail, Outlook.com, Proton Mail이 이메일 서비스 제공업체입니다. 같은 용어는 Mailchimp 같은 대량 이메일 발송 서비스에도 쓰입니다. 이런 서비스는 받은편지함을 제공하는 대신 뉴스레터를 보냅니다.',
+    },
+    {
+      q: '저장 용량이 가장 큰 무료 이메일 서비스는 무엇입니까?',
+      a: '이 페이지에서 비교한 서비스 중에서는 GMX(gmx.com 및 gmx.co.uk)와 mail.com이 각각 65 GB로 가장 큽니다. Yahoo는 미국에서 20 GB, Gmail과 Outlook.com은 15 GB를 제공합니다.',
+    },
+    {
+      q: '개인정보 보호가 가장 뛰어난 무료 이메일 서비스는 무엇입니까?',
+      a: 'Proton Mail과 Tuta는 무료 요금제에서도 메일을 종단 간 암호화합니다. Gmail, Outlook.com, iCloud Mail은 무료 계정에 종단 간 암호화를 제공하지 않습니다.',
+    },
+    {
+      q: '자신의 도메인으로 무료 이메일 주소를 만들 수 있습니까?',
+      a: 'Zoho Mail의 Forever Free 요금제는 자신의 도메인 1개로 최대 5명까지, 웹과 Zoho 앱에서 사용할 수 있습니다. Gmail과 Proton Mail은 유료 요금제가 필요하고, iCloud Mail은 iCloud+가 필요합니다.',
+    },
+    {
+      q: '무료 이메일 주소와 일회용 이메일 주소는 같습니까?',
+      a: '아니요. name@gmail.com 같은 무료 주소는 계속 유지되는 메일함입니다. 일회용 주소는 몇 분이나 몇 시간 뒤에 작동하지 않게 되며, 사람들은 가입 양식을 통과하려고 이를 사용합니다. 이 목록은 계속 유지되는 메일함을 제공하는 서비스만 다룹니다.',
+    },
+    {
+      q: '양식에서 무료 이메일 도메인을 차단하려면 어떻게 합니까?',
+      a: 'HubSpot에서는 양식 설정에서 “Block free email providers”를 켜십시오. 자체 코드에서는 위의 CSV 또는 JSON을 다운로드한 뒤, 도메인이 목록에 있는 주소를 거부하거나 표시하십시오.',
+    },
+    {
+      q: '무료 이메일 계정은 만료됩니까?',
+      a: '네, 아무도 사용하지 않으면 만료됩니다. Google은 2년 동안 사용하지 않은 Gmail 계정을 삭제할 수 있습니다. Yahoo는 12개월이 지나면 메일함을 삭제하고, Outlook.com은 1년에 한 번도 로그인하지 않으면 받은편지함을 비활성화합니다.',
+    },
+    {
+      q: '알고 있는 도메인이 목록에 없는 이유는 무엇입니까?',
+      a: '그 도메인이 더 이상 메일을 받지 않거나, 지금은 다른 회사의 소유이거나, 아직 추가하지 않은 소규모 서비스일 수 있습니다. 목록을 확인할 때 MX 레코드가 작동하지 않는 도메인은 모두 제외했습니다.',
+    },
+  ],
+  ctaHeadline: '서비스만이 아니라 각 주소가 실제로 있는지 확인하십시오',
+}
+
 export const FREE_PROVIDERS_PAGE_STRINGS: Record<Locale, FreeProvidersPageStrings> = {
   en,
   es,
@@ -1858,4 +2031,5 @@ export const FREE_PROVIDERS_PAGE_STRINGS: Record<Locale, FreeProvidersPageString
   pl,
   id,
   ja,
+  ko,
 }

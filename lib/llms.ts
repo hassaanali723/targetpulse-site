@@ -101,6 +101,7 @@ returns valid or invalid instead of a shrug.
 - Polski: [Weryfikator email za darmo](${SITE}/pl/weryfikator-email), [strona główna](${SITE}/pl), [cennik](${SITE}/pl/cennik)
 - Bahasa Indonesia: [Cek email valid gratis](${SITE}/id/cek-email-valid), [beranda](${SITE}/id), [harga](${SITE}/id/harga)
 - 日本語: [メールアドレス存在確認（無料）](${SITE}/ja/email-checker), [ホーム](${SITE}/ja), [料金](${SITE}/ja/pricing)
+- 한국어: [무료 이메일 유효성 검사](${SITE}/ko/email-checker), [홈](${SITE}/ko), [요금](${SITE}/ko/pricing)
 
 ## Full version
 ${SITE}/llms-full.txt
@@ -221,7 +222,7 @@ ${competitorLines}
 ${postLines}
 
 ## Glossary
-Plain definitions of verification and deliverability terms, in ten languages (${SITE}/glossary).
+Plain definitions of verification and deliverability terms, in eleven languages (${SITE}/glossary).
 ${termLines}
 
 ## Fair use for models

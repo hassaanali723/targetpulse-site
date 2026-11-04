@@ -237,7 +237,7 @@ const affiliatesUrls = new Set<string>(Object.values(CLUSTERS.affiliates))
 // `floorToLaunch`: for locales that launched after the shared ship dates below
 // (nl, pl), no page can be older than the launch, so every lastmod is at least
 // the launch date. The first five locales keep their historical dates.
-function localeEntries(locale: 'it' | 'de' | 'es' | 'pt-br' | 'fr' | 'nl' | 'pl' | 'id' | 'ja', launch: string, floorToLaunch = false): SitemapEntry[] {
+function localeEntries(locale: 'it' | 'de' | 'es' | 'pt-br' | 'fr' | 'nl' | 'pl' | 'id' | 'ja' | 'ko', launch: string, floorToLaunch = false): SitemapEntry[] {
   const posts = getAllPosts(locale)
   const hub = `/${locale}/blog`
   const postDate = new Map(posts.map((p) => [`${hub}/${p.slug}`, p.updated || p.date]))
@@ -325,6 +325,12 @@ export function idEntries(): SitemapEntry[] {
 const JA_LAUNCH = '2026-10-28'
 export function jaEntries(): SitemapEntry[] {
   return localeEntries('ja', JA_LAUNCH, true)
+}
+
+// Korean (batch 4). Set to the real ship day.
+const KO_LAUNCH = '2026-11-04'
+export function koEntries(): SitemapEntry[] {
+  return localeEntries('ko', KO_LAUNCH, true)
 }
 
 // ── XML rendering ───────────────────────────────────────────────────────

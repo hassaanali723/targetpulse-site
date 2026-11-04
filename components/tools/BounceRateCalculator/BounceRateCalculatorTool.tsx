@@ -42,6 +42,7 @@ const andJoiner = (names: string[], loc: Locale): string => {
     pl: ' i ',
     id: ' dan ',
     ja: '、',
+    ko: ' 및 ',
   }[loc] ?? ' and '
   return names.slice(0, -1).join(', ') + conjunction + names[names.length - 1]
 }

@@ -2517,6 +2517,250 @@ const ja: SpfPageStrings = {
   ctaHeadline: '送信前にメールアドレスを確認しましょう',
 }
 
+// Korean: 합니다체, URL /ko/spf-checker. Keyword "SPF 레코드" in the title, H1 and description.
+const ko: SpfPageStrings = {
+  metaTitle: 'SPF 레코드 검사기: 무료 SPF 레코드 조회 및 생성 | Giggal.ai',
+  ogTitle: 'SPF 레코드 검사기: 무료 SPF 레코드 조회 및 생성',
+  description:
+    '원하는 도메인의 SPF 레코드를 무료로 검사합니다. 각 부분의 의미를 설명하고, DNS 조회 횟수를 한도 10회와 비교하고, 오류를 찾습니다. 새 SPF 레코드도 만들 수 있습니다.',
+  ogLocale: 'ko_KR',
+  ogImage: '/og-card.png',
+  ogAlt: '무료 SPF 레코드 검사기 및 생성기',
+  crumb: 'SPF 레코드 검사기',
+  appName: '무료 SPF 레코드 검사기 및 생성기',
+  featureList: [
+    '원하는 도메인의 SPF 레코드 검사',
+    '레코드의 각 부분을 알기 쉬운 한국어로 설명',
+    '중첩된 include를 포함해 DNS 조회 횟수를 한도 10회와 비교해 계산',
+    '여러 개의 레코드, 빈 조회(void lookup), +all, ptr, 구문 오류 감지',
+    '자주 쓰는 이메일 서비스 목록으로 새 SPF 레코드 생성',
+  ],
+  h1: 'SPF 레코드 검사기 및 생성기',
+  heroIntro:
+    '원하는 도메인의 SPF 레코드를 검사하거나 새 레코드를 만들 수 있습니다. 이 SPF 검사기는 레코드의 모든 부분을 설명하고, DNS 조회 횟수를 한도 10회와 비교해 계산합니다.',
+  howTitle: 'SPF 레코드를 검사하는 방법',
+  howSteps: [
+    '위 입력란에 도메인을 입력합니다. 전체 이메일 주소를 입력해도 됩니다. 도구는 도메인 부분만 사용합니다.',
+    '“SPF 레코드 검사”를 클릭합니다. 검사기는 공개 DNS에서 현재 레코드를 읽습니다. 수신 서버가 읽는 것과 같은 레코드입니다.',
+    '먼저 요약을 확인합니다. 레코드가 유효한지, 경고가 있는지, 오류가 있는지 알려 줍니다.',
+    '문제가 있으면 문제 목록을 확인합니다. 각 항목에 무엇을 바꿔야 하는지 나와 있습니다.',
+    '그 아래에는 레코드의 각 부분에 대한 설명과 각 부분이 사용하는 DNS 조회 횟수가 나옵니다. include를 열면 그 뒤에 있는 서비스가 허용하는 내용을 볼 수 있습니다.',
+  ],
+  howNote:
+    '주소창의 링크를 열면 같은 SPF 검사가 다시 실행됩니다. 이 링크를 동료나 DNS 호스팅 업체에 보낼 수 있습니다. 한계가 하나 있습니다. 수신 서버는 메일을 보낸 서버의 IP 주소를 기준으로 SPF를 확인합니다. 이 SPF 분석 도구에는 확인할 메일이 없으므로 레코드 자체를 검사합니다. 발신 서버마다 값이 바뀌는 SPF 매크로로 만든 부분은 평가할 수 없습니다.',
+  imageAlt: '여러 부분으로 나눈 SPF 레코드와, DNS 조회를 10회 중 몇 회 사용했는지 보여 주는 카운터 일러스트.',
+  whatTitle: 'SPF 레코드란?',
+  whatIntro:
+    'SPF 레코드는 도메인의 DNS에 있는 TXT 레코드입니다. 그 도메인의 이메일을 보낼 수 있는 서버를 나열합니다. SPF는 Sender Policy Framework의 약자이며, 규칙은 [RFC 7208](https://www.rfc-editor.org/rfc/rfc7208)에 정의되어 있습니다. Google Workspace를 사용하는 도메인에는 다음과 같은 레코드가 있는 경우가 많습니다.',
+  whatAfter: [
+    '`v=spf1`은 이 레코드가 SPF 레코드임을 나타냅니다. `include:_spf.google.com`은 Google 자체 목록에 있는 모든 서버를 허용합니다. `~all`은 그 밖의 서버에서 온 메일을 의심스러운 메일로 처리하라고 수신 서버에 알립니다.',
+    '메일이 도착하면 수신 서버는 Return-Path라고 부르는 반송 주소에서 도메인을 가져옵니다. 그 도메인의 SPF 레코드를 읽고, 발신 서버의 IP 주소가 목록에 있는지 확인합니다. SPF는 받은편지함에 보이는 보낸 사람(From) 주소를 확인하지 않습니다. 그래서 SPF는 DKIM, DMARC와 함께 작동합니다. 세 가지의 관계는 [SPF, DKIM, DMARC 설명](/blog/spf-dkim-dmarc-explained)을 참고하십시오.',
+    '2024년 2월부터 [Gmail은 모든 발신자에게 SPF 또는 DKIM을 요구합니다](https://support.google.com/a/answer/81126). 대량 발신자에게는 둘 다 요구합니다. Yahoo도 같은 규칙을 적용합니다.',
+  ],
+  partsTitle: 'SPF 레코드 각 부분의 의미',
+  partsIntro:
+    'SPF 레코드는 공백으로 구분한 항목의 목록입니다. 수신 서버는 왼쪽부터 오른쪽으로 읽고, 발신 서버와 처음 일치하는 항목에서 멈춥니다.',
+  thPart: '부분',
+  thDoes: '역할',
+  thLookup: 'DNS 조회',
+  lookupLabel: 'DNS 조회: ',
+  parts: [
+    { part: 'v=spf1', does: 'TXT 레코드가 SPF임을 나타냅니다. 맨 앞에 정확히 이대로 적어야 합니다.', lookup: '없음' },
+    { part: 'ip4:192.0.2.10', does: 'IPv4 주소 하나 또는 192.0.2.0/24 같은 범위를 허용합니다.', lookup: '없음' },
+    { part: 'ip6:2001:db8::/32', does: 'IPv6 주소 하나 또는 범위를 허용합니다.', lookup: '없음' },
+    { part: 'a', does: '도메인 자체의 IP 주소, 또는 콜론 뒤에 적은 도메인의 IP 주소를 허용합니다.', lookup: '있음' },
+    { part: 'mx', does: '도메인의 MX 레코드에 있는 서버, 즉 그 도메인의 메일을 받는 서버를 허용합니다.', lookup: '있음' },
+    { part: 'include:_spf.google.com', does: '다른 도메인의 SPF 레코드가 허용하는 모든 서버를 허용합니다. 서비스를 추가할 때 이 방법을 사용합니다.', lookup: '있음(대상 레코드의 조회도 추가)' },
+    { part: 'exists:%{i}.example.com', does: 'DNS 조회로 주소를 찾으면 일치합니다. 대규모 발신자가 매크로와 함께 사용합니다.', lookup: '있음' },
+    { part: 'ptr', does: '역방향 DNS로 일치 여부를 판단합니다. 느리고 신뢰도가 낮아서 RFC 7208은 사용하지 말라고 합니다.', lookup: '있음' },
+    { part: '~all 또는 -all', does: '목록에 없는 모든 서버를 어떻게 처리할지 정합니다. 맨 끝에 적습니다.', lookup: '없음' },
+    { part: 'redirect=example.net', does: '이 레코드 대신 다른 도메인의 SPF 레코드를 사용합니다. 레코드에 all이 있으면 무시됩니다.', lookup: '있음' },
+  ],
+  partsAfter: [
+    '어느 부분이든 앞에 한정자를 붙여 일치할 때의 결과를 정할 수 있습니다. `+`는 통과(pass)를 뜻하며 기본값이라 보통 적지 않습니다. 나머지는 `-` 실패(fail), `~` 소프트 실패(softfail), `?` 중립(neutral)입니다. 그래서 같은 all이라도 레코드 끝은 `-all`, `~all`, `?all`처럼 달라집니다.',
+    '이름은 대소문자를 구분하지 않으므로 `Include:`도 `include:`와 똑같이 작동합니다. RFC 7208은 모든 레코드를 all 또는 redirect로 끝내라고 권장합니다. 둘 다 없으면 목록에 없는 서버는 중립(neutral) 결과를 받습니다.',
+  ],
+  limitTitle: 'DNS 조회 10회 한도',
+  limitParas: [
+    'include, a, mx, ptr, exists, redirect는 각각 수신 서버가 DNS 조회를 한 번 하게 만듭니다. RFC 7208이 허용하는 횟수는 모두 합쳐 10회입니다. include 안의 조회도 세기 때문에 include 하나가 조회를 여러 번 사용할 수 있습니다. ip4, ip6, all은 조회를 사용하지 않습니다. 레코드에 10회를 넘는 조회가 필요하면 수신 서버는 처리를 멈추고 permerror를 반환하며, SPF는 실패합니다.',
+    '이 한도에는 쉽게 도달합니다. 자주 쓰는 include가 사용하는 조회 횟수를 실제 DNS에서 측정한 결과, Google Workspace 1회, Microsoft 365 1회, Salesforce 2회, Mailgun 5회, Freshdesk 7회였습니다. Google Workspace를 쓰는 회사가 Mailgun과 Freshdesk를 추가하면 그것만으로 조회가 13회 필요합니다. .com, .net, .org, .se 도메인의 [SPF 레코드를 조사한 2024년 연구](https://www.usenix.org/conference/usenixsecurity24/presentation/ashiq)에서는 6.5%가 10회를 넘는 조회를 필요로 했습니다. 이 사례의 83.7%는 호스팅 업체 단 두 곳의 레코드를 include한 것이 원인이었습니다.',
+    '조회 횟수는 바뀌기도 합니다. Google의 include는 2025년 12월까지 조회 4회를 사용했습니다. 그달 [Google은 중첩된 include를 하나의 목록으로 바꿨습니다](https://www.uriports.com/blog/google-simplifies-its-spf-record/). 일부 SPF 가이드와 생성기는 아직도 4회라고 적고 있습니다. 위 검사기는 실행할 때마다 실제 횟수를 셉니다.',
+    '한도를 넘는다고 모든 메일이 실패하는 것은 아닙니다. [Microsoft가 지적하듯이](https://learn.microsoft.com/en-us/defender-office-365/email-authentication-spf-configure) 수신 서버는 처음 일치하는 항목에서 멈춥니다. 앞쪽에 적힌 서버에서 보낸 메일은 통과할 수 있지만, 뒤쪽에 적힌 서버에서 보낸 메일은 실패합니다. 그래서 문제가 무작위로 생기는 것처럼 보입니다. 레코드 전체의 조회 횟수를 세어 보십시오.',
+    '한도가 하나 더 있습니다. 아무것도 찾지 못한 조회를 빈 조회(void lookup)라고 합니다. 예를 들어 더 이상 존재하지 않는 도메인을 include한 경우입니다. RFC 7208은 빈 조회가 2회를 넘으면 수신 서버가 처리를 멈춰야 한다고 합니다.',
+  ],
+  underTitle: 'DNS 조회를 10회 이내로 줄이는 방법',
+  underSteps: [
+    '더 이상 사용하지 않는 서비스의 include를 삭제합니다.',
+    '서비스가 더 이상 요구하지 않는 include를 삭제합니다. Mailchimp, Postmark, Brevo, Klaviyo는 메인 도메인에 include가 필요하지 않고, SendGrid와 Amazon SES는 include를 하위 도메인에 둡니다. 목록은 아래에 있습니다.',
+    '자체 서버는 a나 mx 대신 ip4와 ip6로 적습니다. RFC 7208은 이 방식을 권장하며, IP 주소는 조회를 사용하지 않습니다.',
+    '일부 메일은 news.example.com 같은 하위 도메인에서 보냅니다. 하위 도메인마다 별도의 레코드가 있고, 각각 조회 10회를 따로 사용할 수 있습니다.',
+  ],
+  underNote:
+    '일부 서비스는 include를 그 뒤에 있는 IP 주소로 바꾸는 SPF 평탄화(flattening)를 제공합니다. 조회 횟수는 줄지만, 서비스 업체가 주소를 바꿔도 평탄화한 레코드는 따라 바뀌지 않습니다. Microsoft는 IP 범위가 안정적이고 문서로 공개된 서비스만 평탄화하고, Microsoft 365 자체는 평탄화하지 말며, 적어도 분기에 한 번 결과를 확인하라고 권고합니다.',
+  servicesTitle: 'Google Workspace, Microsoft 365 등 서비스별 SPF include',
+  servicesIntro:
+    '각 서비스의 설정 가이드에 나온 include 값과 각 값이 사용하는 DNS 조회 횟수입니다. 횟수는 2026년 10월 12일에 실제 DNS에서 측정했습니다. 서비스를 설정할 때는 해당 서비스의 가이드에서 값을 복사하십시오. 일부 값은 지역이나 계정에 따라 다릅니다.',
+  thService: '서비스',
+  thInclude: 'include',
+  thLookups: '조회',
+  lookupCount: (n) => `조회 ${n}회`,
+  servicesNote:
+    'HubSpot은 계정마다 hubspotemail.net으로 끝나는 고유한 include를 제공합니다. HubSpot 이메일 설정에서 복사하십시오. 조회 1회를 사용합니다.',
+  notNeededTitle: '보통 include가 필요 없는 서비스',
+  notNeededIntro:
+    'SPF는 보낸 사람(From) 주소가 아니라 반송 주소를 기준으로 확인합니다. 요즘 많은 발신 서비스는 자체 반송 주소나, 사용 중인 도메인의 하위 도메인을 사용합니다. 이런 서비스의 include를 메인 도메인에 넣으면 아무 효과 없이 조회 횟수만 소모합니다.',
+  notNeededAfter: '검사기는 레코드에서 이런 include를 찾으면 알려 줍니다.',
+  createTitle: 'SPF 레코드를 만드는 방법',
+  createIntro:
+    '위의 “생성” 탭에서 SPF 레코드를 만들 수 있습니다. 메일을 보내는 서비스를 선택하면 SPF 레코드 생성기가 레코드를 작성하고 조회 횟수를 셉니다. 도메인에 이미 레코드가 있으면 먼저 불러오십시오. 그러면 기존 레코드를 대체하지 않고 내용을 추가할 수 있습니다. 그 과정은 다음과 같습니다.',
+  createSteps: [
+    '도메인 이름으로 이메일을 보내는 서비스를 모두 적습니다. 메일함 서비스만이 아니라 뉴스레터, CRM, 헬프데스크, 청구, 웹사이트 양식까지 생각하십시오. DMARC 보고서를 보면 잊고 있던 발신자를 찾을 수 있습니다.',
+    '각 서비스의 include를 설정 가이드에서 찾거나 도구에서 선택합니다. 자체 메일 서버는 IP 주소를 사용합니다.',
+    '끝부분을 ~all과 -all 중에서 고릅니다. 차이는 다음 섹션에서 설명합니다.',
+    '도메인 자체에 TXT 레코드 하나로 게시합니다. 대부분의 DNS 호스팅 업체에서는 이 이름을 @로 표시합니다. v=spf1으로 시작하는 레코드가 이미 있으면 두 번째 레코드를 추가하지 말고 기존 레코드를 수정합니다.',
+    '몇 분 기다린 뒤 SPF 검사기로 도메인을 다시 검사합니다.',
+  ],
+  createParas: [
+    '하위 도메인은 상위 도메인의 레코드를 사용하지 않으므로, 메일을 보내는 이름마다 별도의 레코드가 필요합니다. 메일을 전혀 보내지 않는 도메인이나 하위 도메인에도 `v=spf1 -all` 레코드를 두십시오. RFC 7208은 이를 널리 확립된 모범 사례라고 합니다. 이렇게 하면 다른 사람이 그 이름으로 SPF를 통과하는 메일을 보낼 수 없습니다. [영국 NCSC](https://www.ncsc.gov.uk/blog-post/protecting-parked-domains)는 이런 도메인에 p=reject DMARC 레코드와 null MX 레코드도 추가하라고 권합니다.',
+    '255자를 넘는 레코드는 같은 TXT 레코드 안에서 여러 문자열로 나눠야 합니다. 수신 서버는 문자열을 공백 없이 이어 붙이므로, 공백은 문자열 사이가 아니라 문자열 안에 넣으십시오. DNS 호스팅 업체가 긴 값을 어떻게 처리하는지 확인하십시오.',
+  ],
+  endingTitle: '~all과 -all: 어떤 끝부분을 써야 할까',
+  endingIntro: '대형 서비스 업체들의 의견은 서로 다르며, 각자 이유가 있습니다.',
+  endingList: [
+    '[Google](https://knowledge.workspace.google.com/admin/security/set-up-spf)은 ~all을 권장합니다.',
+    '대형 메일 서비스 제공업체와 발신자가 회원으로 있는 업계 단체 [M3AAWG](https://www.m3aawg.org/sites/default/files/m3aawg-email-authentication-recommended-best-practices-09-2020.pdf)는 레코드를 ~all로 끝내야 한다고 합니다. 또한 DMARC 확인이 끝나기 전에는 SPF fail을 이유로 메일을 거부하지 말라고 수신 서버에 요청합니다.',
+    '[Microsoft](https://learn.microsoft.com/en-us/defender-office-365/email-authentication-spf-configure)는 DKIM과 DMARC도 설정되어 있다면 -all을 권장합니다.',
+  ],
+  endingParas: [
+    '-all의 위험은 일부 수신 서버가 DMARC를 확인하기 전, 전송 도중에 메일을 거부한다는 점입니다. 2026년 DMARC 표준인 [RFC 9989](https://www.rfc-editor.org/rfc/rfc9989)는 이런 메일이 DMARC 보고서에 나타나지 않는다고 설명합니다. 그래서 문제를 찾기가 더 어려워집니다.',
+    '실제로는 메일을 보내는 도메인에는 ~all이 더 안전한 선택입니다. 아직 모든 발신자를 찾고 있는 단계라면 특히 그렇습니다. DMARC 정책이 quarantine이나 reject라면, 실패한 메일의 처리는 어차피 DMARC가 결정합니다. 메일을 전혀 보내지 않는 도메인에는 -all을 사용하십시오. 모든 서버를 통과시키는 +all은 절대 사용하지 말고, 레코드가 없는 것과 같은 ?all도 피하십시오.',
+  ],
+  resultsTitle: 'SPF 검사 결과의 의미',
+  thResult: '결과',
+  thMeaning: '의미',
+  thAction: '조치',
+  results: [
+    {
+      result: '유효한 SPF 레코드',
+      meaning: '레코드가 하나이고, 읽을 수 있으며, 조회가 10회 이내이고, ~all 또는 -all로 끝납니다.',
+      action: '조치가 필요 없습니다. 메일을 보내는 새 서비스를 추가한 뒤에는 다시 검사하십시오.',
+    },
+    {
+      result: '작동하지만 경고가 있는 SPF 레코드',
+      meaning: '수신 서버는 사용할 수 있지만, 조회 9회 또는 10회, 끝에 all 없음, ptr 사용처럼 레코드를 약하게 만드는 요소가 있습니다.',
+      action: '레코드 아래에 표시된 경고를 수정합니다. 서비스를 하나 더 추가하면 경고가 오류로 바뀌는 경우가 많습니다.',
+    },
+    {
+      result: '오류가 있는 SPF 레코드',
+      meaning: '수신 서버가 permerror를 반환하므로, 이 도메인에서 보내는 모든 메일이 SPF에 실패합니다.',
+      action: '표시된 오류를 수정합니다. 가장 흔한 오류는 레코드가 2개인 경우와 조회가 10회를 넘는 경우입니다.',
+    },
+    {
+      result: '도메인을 보호하지 못하는 SPF 레코드',
+      meaning: '레코드가 +all로 끝나거나 +all로 끝나는 레코드를 include하므로, 인터넷의 모든 서버가 통과합니다.',
+      action: '+all을 ~all 또는 -all로 바꿉니다.',
+    },
+    {
+      result: 'SPF 레코드 없음',
+      meaning: '도메인에 v=spf1으로 시작하는 TXT 레코드가 없습니다.',
+      action: '“생성” 탭에서 만듭니다. 메일을 전혀 보내지 않는 도메인에는 v=spf1 -all을 설정합니다.',
+    },
+    {
+      result: '존재하지 않는 도메인',
+      meaning: 'DNS에 이 도메인에 관한 기록이 전혀 없습니다.',
+      action: '철자를 확인하고, 도메인이 등록되어 있는지 확인합니다.',
+    },
+  ],
+  receiverIntro:
+    '수신 서버는 SPF 검사 결과를 자체 용어로 표시합니다. 이 용어는 spf=pass, spf=softfail처럼 메일 헤더에 나타나며, DMARC 보고서에도 나타납니다.',
+  spfResults: [
+    { result: 'pass', meaning: '발신 서버가 허용되어 있습니다.' },
+    { result: 'fail', meaning: '서버가 허용되어 있지 않습니다(-all). 수신 서버가 메일을 거부할 수 있습니다.' },
+    { result: 'softfail', meaning: '서버가 허용되지 않았을 가능성이 높습니다(~all). RFC 7208은 이 결과만으로 메일을 거부하면 안 된다고 합니다.' },
+    { result: 'neutral', meaning: '레코드가 이 서버에 대해 아무것도 정하지 않습니다(?all). 레코드가 없는 것과 같게 취급됩니다.' },
+    { result: 'none', meaning: '도메인에 SPF 레코드가 없습니다.' },
+    { result: 'temperror', meaning: 'DNS 조회가 일시적으로 실패했습니다. 발신 측이 나중에 다시 시도할 수 있습니다.' },
+    { result: 'permerror', meaning: '레코드에 오류가 있어 읽을 수 없습니다. DNS에서 수정해야만 해결됩니다.' },
+  ],
+  errorsTitle: '흔한 SPF 레코드 오류와 해결 방법',
+  errorsIntro:
+    '[2023년에 인기 도메인 1,200만 개를 조사한 결과](https://arxiv.org/abs/2502.08240), 56.5%에 SPF가 있었고, SPF 레코드의 2.9%에 오류가 있었습니다. 가장 흔한 오류는 SPF 레코드가 없는 이름을 가리키는 include나 redirect였습니다. 두 번째로 흔한 오류는 조회 횟수 초과였습니다.',
+  errors: [
+    {
+      title: '한 도메인에 SPF 레코드가 2개 있음',
+      text: '새 서비스의 설정 가이드에 “이 TXT 레코드를 추가하십시오”라고 적혀 있어, 기존 레코드 옆에 새 레코드를 추가하면 자주 생깁니다. 레코드가 2개이면 permerror가 발생합니다. 하나로 합치십시오. v=spf1을 하나만 맨 앞에 두고, 모든 include와 IP 주소를 나열한 뒤, 끝에 all을 하나만 적습니다.',
+    },
+    {
+      title: '아무것도 가리키지 않는 include',
+      text: 'include가 SPF 레코드가 없는 도메인을 가리키면 레코드 전체가 permerror로 실패합니다. 오타일 수도 있고, 서비스가 종료되었거나 include를 바꾼 경우일 수도 있습니다. 삭제하거나 서비스의 현재 값으로 바꾸십시오.',
+    },
+    {
+      title: '끝이 +all, ?all이거나 all이 없음',
+      text: '`+all`은 인터넷의 모든 서버를 허용하므로 레코드가 아무것도 보호하지 않습니다. `?all`을 쓰거나 all이 아예 없으면 중립(neutral) 결과가 나오고, 수신 서버는 이를 레코드가 없는 것처럼 취급합니다. 레코드 끝을 ~all 또는 -all로 바꾸십시오.',
+    },
+    {
+      title: '레코드 안의 ptr',
+      text: 'RFC 7208은 ptr을 사용하지 말라고 합니다. 느리고, 조회를 1회 사용하며, DNS에 문제가 있을 때 다른 메커니즘보다 신뢰도가 떨어집니다. ptr이 대상으로 삼던 서버를 ip4와 ip6 항목으로 바꾸십시오.',
+    },
+    {
+      title: '입력 실수',
+      text: '콜론 뒤의 공백, 일부가 빠진 IPv4 주소, SPF에 없는 단어는 모두 permerror를 일으킵니다. 눈에 잘 띄지 않는 실수도 있습니다. 등호를 쓴 `include=example.com`은 알 수 없는 설정으로 읽혀 무시되므로, 그 서비스는 허용되지 않습니다. 검사기는 이런 실수를 모두 알려 줍니다.',
+    },
+  ],
+  mythsTitle: 'SPF 가이드가 자주 틀리는 세 가지',
+  myths: [
+    '“SPF 레코드에는 대문자를 쓸 수 없다.” RFC 7208에 따르면 이름은 대소문자를 구분하지 않습니다.',
+    '“SPF 레코드는 최대 255자다.” 255자 한도는 문자열 하나마다 적용됩니다. 더 긴 레코드는 여러 문자열로 나눕니다. RFC 7208이 요구하는 것은 DNS 응답 전체를 약 450바이트 미만으로 작게 유지하는 것뿐입니다.',
+    '“include는 10개까지 쓸 수 있다.” 이 한도는 DNS 조회 횟수에 적용되며, include 안의 조회도 셉니다.',
+  ],
+  authTitle: 'SPF는 발신 도메인 인증의 한 부분',
+  authParas: [
+    'SPF 통과에는 한계가 있습니다. 같은 2023년 조사에서 도메인의 34.7%가 100,000개가 넘는 IP 주소에서 오는 메일을 허용했습니다. 또한 누군가 메일을 전달하면 전달 서버가 레코드에 없으므로 SPF가 실패합니다.',
+    'DKIM은 메일 자체에 서명하므로 보통 전달된 뒤에도 유효합니다. DMARC는 SPF 또는 DKIM이 보낸 사람(From) 주소와 같은 도메인으로 통과했는지 확인하고, 둘 다 통과하지 못했을 때 어떻게 처리할지 수신 서버에 알려 줍니다. 많은 발신 서비스는 자체 반송 도메인으로 SPF를 통과하는데, 이 도메인은 보낸 사람 주소와 일치하지 않습니다. 서비스에서 사용자 지정 Return-Path를 설정하면 해결됩니다. 나머지 두 레코드는 [DKIM 생성기](/dkim-generator)와 [DMARC 생성기](/dmarc-generator)로 설정하고, [MX 레코드 조회](/mx-lookup)로 도메인이 메일을 받는 곳을 확인하십시오.',
+    '인증은 존재하지 않는 주소에도 도움이 되지 않습니다. 그런 주소로 보낸 메일은 반송되며, 반송률이 높으면 이메일 도달률이 떨어집니다. 주소 하나는 [이메일 유효성 검사](/email-checker)로, 리스트 전체는 [대량 이메일 검증](/bulk-email-verifier)으로 확인하십시오. 팀과 공유할 짧은 정의는 [용어집의 SPF 레코드 항목](/glossary/spf)을 참고하십시오.',
+  ],
+  faqTitle: '자주 묻는 질문',
+  faqs: [
+    {
+      q: 'SPF 레코드란 무엇입니까?',
+      a: '도메인의 이메일을 보낼 수 있는 서버를 나열한, 도메인 DNS의 TXT 레코드입니다. 수신 서버는 이 레코드를 읽고 메일이 정말 그 도메인의 서버에서 왔는지 판단합니다. SPF는 Sender Policy Framework의 약자이며 RFC 7208에 정의되어 있습니다.',
+    },
+    {
+      q: 'SPF 레코드는 어떻게 검사합니까?',
+      a: '이 페이지 위쪽의 SPF 검사기에 도메인을 입력하십시오. 터미널에서는 Windows의 경우 nslookup -type=txt example.com, macOS와 Linux의 경우 dig txt example.com으로 확인할 수 있습니다. v=spf1으로 시작하는 TXT 레코드를 찾으십시오.',
+    },
+    {
+      q: '한 도메인에 SPF 레코드를 2개 둘 수 있습니까?',
+      a: '아니요. RFC 7208은 도메인 이름 하나에 SPF 레코드 하나만 허용합니다. 2개가 있으면 수신 서버가 영구 오류를 반환하고, 모든 메일이 SPF에 실패합니다. 두 레코드를 하나로 합치십시오. 사이트 인증 코드 같은 다른 TXT 레코드는 그대로 두어도 됩니다.',
+    },
+    {
+      q: 'SPF permerror는 무슨 뜻입니까?',
+      a: '수신 서버가 SPF 레코드를 읽지 못해 검사가 실패했다는 뜻입니다. 주요 원인은 SPF 레코드가 2개 있는 경우, DNS 조회가 10회를 넘는 경우, SPF 레코드가 없는 도메인을 include한 경우입니다. 입력 실수로도 생길 수 있습니다. 위 검사기가 원인을 알려 줍니다.',
+    },
+    {
+      q: '~all과 -all은 어떻게 다릅니까?',
+      a: '~all을 쓰면 목록에 없는 서버에서 온 메일은 소프트 실패(softfail)가 되고, 수신 서버는 보통 메일을 받되 더 의심스럽게 취급합니다. -all을 쓰면 실패(fail)가 되고, 일부 수신 서버는 메일을 거부합니다. Google은 ~all을 권장합니다. Microsoft는 DKIM과 DMARC를 설정한 뒤에는 -all을 권장합니다.',
+    },
+    {
+      q: '하위 도메인에도 별도의 SPF 레코드가 필요합니까?',
+      a: '이메일을 보낸다면 필요합니다. 하위 도메인은 상위 도메인의 SPF 레코드를 사용하지 않습니다. news.example.com에서 메일을 보낸다면 별도의 레코드가 필요합니다. 메일을 전혀 보내지 않는다면 v=spf1 -all을 설정하십시오.',
+    },
+    {
+      q: 'SPF 레코드 변경이 반영되기까지 얼마나 걸립니까?',
+      a: '최대 기존 레코드의 TTL만큼 걸립니다. 기존 응답을 캐시한 리졸버는 TTL이 끝날 때까지 이전 응답을 사용합니다. 따라서 TTL이 3600이면 최대 1시간이 걸립니다. Google은 변경에 최대 48시간이 걸릴 수 있다고 하지만, 대부분은 훨씬 빨리 반영됩니다.',
+    },
+    {
+      q: 'DKIM이 있으면 SPF는 필요 없습니까?',
+      a: '둘 다 있는 편이 더 안전합니다. Gmail과 Yahoo는 소량 발신자에게는 SPF 또는 DKIM을 요구하지만, 대량 발신자에게는 둘 다 요구합니다. DMARC는 둘 중 하나가 통과하고 보낸 사람(From) 도메인과 일치하면 통과하므로, 둘 다 있으면 하나가 실패해도 다른 하나가 예비 수단이 됩니다.',
+    },
+    {
+      q: 'SPF로 이메일 스푸핑을 막을 수 있습니까?',
+      a: 'SPF만으로는 막을 수 없습니다. SPF는 사람들이 보는 보낸 사람(From) 주소가 아니라 반송 주소(Return-Path)를 확인합니다. 스팸 발신자는 자기 도메인으로 SPF를 통과하면서도 보낸 사람 칸에 귀사의 이름을 표시할 수 있습니다. DMARC는 두 도메인이 일치하도록 요구해 이 허점을 막습니다.',
+    },
+  ],
+  ctaHeadline: '보내기 전에 이메일 주소를 검사하십시오',
+}
+
 export const SPF_PAGE_STRINGS: Partial<Record<Locale, SpfPageStrings>> & { en: SpfPageStrings } = {
   en,
   de,
@@ -2528,4 +2772,5 @@ export const SPF_PAGE_STRINGS: Partial<Record<Locale, SpfPageStrings>> & { en: S
   pl,
   id,
   ja,
+  ko,
 }

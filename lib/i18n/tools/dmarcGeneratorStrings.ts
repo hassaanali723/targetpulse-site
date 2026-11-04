@@ -820,4 +820,81 @@ const ja: DmarcPageStrings = {
   ctaHeadline: 'DMARCの設定が終わったら、次はメールリストを確認しましょう。',
 }
 
-export const DMARC_PAGE_STRINGS: Record<Locale, DmarcPageStrings> = { en, de, fr, es, it, 'pt-br': ptBr, nl, pl, id, ja }
+const ko: DmarcPageStrings = {
+  metaTitle: '무료 DMARC 생성기: DMARC 레코드 만들기(2026) | Giggal.ai',
+  ogTitle: '무료 DMARC 생성기: DMARC 레코드 만들기(2026)',
+  description:
+    '2026년 표준(RFC 9989)에 맞는 DMARC 레코드를 만들어 DMARC 설정을 마칩니다. 정책, 하위 도메인, 보고서, 테스트 모드를 정합니다. 기존 레코드의 폐지된 태그도 제거합니다. 무료입니다.',
+  ogLocale: 'ko_KR',
+  ogImage: '/og-card.png',
+  ogAlt: 'Giggal.ai 무료 DMARC 레코드 생성기',
+  crumb: 'DMARC 레코드 생성기',
+  appName: '무료 DMARC 레코드 생성기',
+  featureList: [
+    'RFC 9989(2026년 표준)에 맞는 유효한 DMARC 레코드 생성',
+    '폐지된 태그(pct, rf, ri)를 제거해 기존 레코드 정리',
+    '정책, 하위 도메인, 보고서, 테스트 모드(t=y) 설정',
+    '외부 보고서 수신 도메인에 필요한 승인 레코드 생성',
+    '100% 브라우저에서 실행되며 추적 데이터를 보내지 않음',
+  ],
+  h1: 'DMARC 레코드 생성기',
+  heroIntro:
+    'DMARC 레코드는 도메인을 사칭한 이메일을 어떻게 처리할지 메일 서비스 제공업체에 알려 줍니다. 질문 3개에 답하면 DMARC 레코드가 만들어집니다.',
+  howTitle: 'DMARC 레코드를 게시하는 방법',
+  howSteps: [
+    '위의 세 단계를 입력합니다. 이미 레코드가 있다면 “이미 DMARC 레코드가 있습니까?” 아래에 붙여 넣어 정리할 수 있습니다.',
+    'DNS 서비스에서 호스트 이름을 _dmarc로 하여 TXT 레코드를 만듭니다. 일부 DNS 서비스는 _dmarc.yourdomain.com 같은 전체 이름을 요구합니다.',
+    '값을 붙여 넣고 저장합니다. 도메인에 DMARC 레코드가 하나만 있는지 확인하십시오. 수신 측은 DMARC 레코드를 2개 발견하면 둘 다 무시합니다.',
+    'DNS가 업데이트되기를 기다린 뒤, 보고서를 받는 메일함(rua 주소)을 확인합니다. 집계 보고서를 보내는 메일 서비스 제공업체는 최소 24시간에 한 번은 보고서를 보내야 합니다.',
+  ],
+  imageAlt: '세 단계의 적용 정책과 보호 방패가 있는 DMARC 정책 레코드 일러스트.',
+  changedTitle: '2026년 DMARC 레코드의 변경 사항',
+  changedText:
+    '2026년 5월, RFC 9989가 RFC 7489를 대체하면서 DMARC는 표준 트랙(Standards Track)에 올랐습니다. 레코드는 여전히 v=DMARC1 값으로 시작하므로 기존 레코드는 계속 작동합니다. pct, rf, ri 태그 3개는 폐지되었습니다. 새 태그는 2개로, 테스트 모드인 t와 존재하지 않는 하위 도메인용 정책인 np입니다. 이 DMARC 레코드 생성기는 폐지된 태그를 쓰지 않으며, 기존 레코드 확인 기능은 이 태그를 제거합니다. 전체 태그 목록은 [DMARC 레코드란](/blog/what-is-a-dmarc-record)에 있습니다.',
+  policyTitle: 'DMARC 정책 선택 방법',
+  policyParas: [
+    '먼저 p=none과 rua 주소로 시작하십시오. 메일 처리는 바뀌지 않고, 보고서에서 어떤 서비스가 이 도메인 이름으로 메일을 보내는지 알 수 있습니다. 표준에 따르면 정상 발신 경로를 모두 인증하는 데 여러 달이 걸릴 수 있습니다. 사용자가 메일링 리스트에 글을 올리는 도메인이라면, 최소 한 달 동안 p=none을 쓰고 이어서 같은 기간 동안 quarantine을 쓰면서 결과를 비교한 뒤 reject로 옮기라고 권합니다.',
+    't=y 옵션은 마지막 단계에서 도움이 됩니다. p=reject를 t=y와 함께 게시하면 수신 측은 대신 quarantine을 적용합니다. 그래서 메일을 잃지 않고, 거부되었을 메일을 확인할 수 있습니다. 준비가 되면 t=y를 삭제하십시오.',
+    'reject를 게시하기 전에 모든 메일에 DKIM 서명이 있는지 확인하십시오. 전달(포워딩)하면 SPF가 깨지므로, 표준은 p=reject 도메인이 SPF에만 의존해서는 안 된다고 정합니다. 메일 서버를 직접 운영한다면 [DKIM 생성기](/dkim-generator)로 키를 만들 수 있습니다.',
+  ],
+  reportsTitle: '보고서를 받는 주소',
+  reportsParas: [
+    'rua는 집계 보고서를 받는 주소입니다. 집계 보고서는 XML 파일로, 보통 하루 단위로 이 도메인 이름으로 메일을 보낸 IP 주소와 인증 통과 여부를 보여 줍니다. ruf는 메일 한 통마다 보내는 실패 보고서를 받는 주소입니다. 많은 수신 측이 개인정보 보호를 이유로 실패 보고서의 내용을 크게 가리거나 아예 보내지 않으므로, 실패 보고서에 의존하지 마십시오.',
+    '보고서 주소가 보호하려는 도메인과 다른 도메인에 있으면(예: 보고서 분석 서비스), 그 도메인이 승인 레코드를 게시해야 수신 측이 보고서를 보냅니다. 위의 보조 기능이 이 레코드를 만들어 줍니다. 보고서 도메인을 관리하는 담당자에게 전달하십시오. 이 규칙은 RFC 9990의 4절에 있습니다.',
+  ],
+  mistakesTitle: '이 DMARC 생성기가 막아 주는 실수',
+  mistakesParas: [
+    '수신 측은 v=DMARC1 이외의 값으로 시작하는 레코드를 무시하므로, 이 생성기는 항상 v=DMARC1을 맨 앞에 둡니다. rua와 ruf 주소에 필요한 mailto: 접두사를 붙이고, 잘못된 것으로 보이는 주소를 알려 줍니다. pct는 쓰지 않으며, pct가 100 미만인 기존 레코드를 확인하면 대신 t=y를 제안합니다. reject는 모든 메일에 DKIM 서명이 있을 때만 안전하므로 reject를 선택하면 경고합니다. 엄격한 정렬 때문에 하위 도메인에서 보낸 메일이 실패할 때도 경고합니다.',
+    '이 도구가 확인할 수 없는 것은 DNS뿐입니다. 결과를 도메인의 유일한 DMARC 레코드로 게시하십시오. DMARC가 SPF, DKIM과 함께 작동하는 방식은 [SPF, DKIM, DMARC 설명](/blog/spf-dkim-dmarc-explained)을 참고하십시오.',
+  ],
+  faqTitle: '자주 묻는 질문',
+  faqs: [
+    {
+      q: '처음 만드는 DMARC 레코드는 어떻게 해야 합니까?',
+      a: 'v=DMARC1; p=none; rua=mailto:dmarc-reports@yourdomain.com 레코드입니다. 메일 처리 방식은 바뀌지 않고, 보고서 수신이 시작됩니다. 도구에서 “모니터링만”을 선택하면 이 레코드를 만들 수 있습니다.',
+    },
+    {
+      q: 'pct는 아직 지원됩니까?',
+      a: '현재 표준에서는 지원되지 않습니다. RFC 9989는 pct를 rf, ri와 함께 폐지했습니다. 남아 있는 pct=100은 문제를 일으키지 않지만, 단계적으로 적용하고 싶다면 비율 대신 t=y를 사용하십시오.',
+    },
+    {
+      q: 't=y는 어떤 역할을 합니까?',
+      a: '게시한 정책보다 한 단계 아래 정책을 적용하도록 수신 측에 요청합니다. reject는 quarantine으로, quarantine은 none으로 처리됩니다. 보고서는 바뀌지 않으며, p=none에서는 아무 효과가 없습니다.',
+    },
+    {
+      q: 'rua와 ruf가 모두 필요합니까?',
+      a: '상황을 파악하려면 rua가 필요합니다. rua가 없으면 집계 보고서를 받을 수 없습니다. ruf는 선택 사항이며, 많은 수신 측은 실패 보고서를 아예 보내지 않습니다.',
+    },
+    {
+      q: 'np는 무엇입니까?',
+      a: 'DNS에 존재하지 않는 하위 도메인(가짜로 만든 invoices-2026.yourdomain.com 등)에 적용하는 정책입니다. np를 생략하면 sp가 적용되고, sp도 없으면 p가 적용됩니다.',
+    },
+    {
+      q: '레코드는 어디에 게시합니까?',
+      a: '_dmarc.yourdomain.com에 TXT 레코드로 게시합니다. 대부분의 DNS 관리 화면에서는 호스트 칸에 _dmarc만 입력하면 도메인을 자동으로 붙입니다.',
+    },
+  ],
+  ctaHeadline: 'DMARC 설정을 마쳤다면 이메일 리스트도 확인하십시오.',
+}
+
+export const DMARC_PAGE_STRINGS: Record<Locale, DmarcPageStrings> = { en, de, fr, es, it, 'pt-br': ptBr, nl, pl, id, ja, ko }

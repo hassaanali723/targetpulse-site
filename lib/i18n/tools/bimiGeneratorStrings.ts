@@ -814,4 +814,80 @@ const ja: BimiPageStrings = {
   ctaHeadline: 'ロゴの準備ができたら、メールリストも確認しましょう。',
 }
 
-export const BIMI_PAGE_STRINGS: Record<Locale, BimiPageStrings> = { en, de, fr, es, it, 'pt-br': ptBr, nl, pl, id, ja }
+const ko: BimiPageStrings = {
+  metaTitle: '무료 BIMI 레코드 생성기 및 SVG 로고 검사 | Giggal.ai',
+  ogTitle: '무료 BIMI 레코드 생성기 및 SVG 로고 검사',
+  description:
+    '브라우저에서 BIMI 레코드를 만들고 SVG 로고가 Tiny PS 규칙에 맞는지 검사합니다. Gmail, Apple Mail 등에서 로고를 표시하는 데 필요한 조건도 확인할 수 있습니다. 무료입니다.',
+  ogLocale: 'ko_KR',
+  ogImage: '/og-card.png',
+  ogAlt: '무료 BIMI 레코드 생성기',
+  crumb: 'BIMI 레코드 생성기',
+  appName: '무료 BIMI 레코드 생성기 및 SVG 로고 검사',
+  featureList: [
+    '셀렉터, 로고 URL, 인증서 URL을 지정해 BIMI TXT 레코드 생성',
+    'SVG 로고를 SVG Tiny PS의 엄격한 사양 11개 항목으로 검증',
+    'Gmail과 Apple Mail 지원을 위한 대화형 BIMI 준비 체크리스트',
+    '존 파일 형식의 줄 생성과 복사 기능',
+    '100% 브라우저에서 실행되며 업로드나 원격 측정(telemetry) 없음',
+  ],
+  h1: 'BIMI 레코드 생성기',
+  heroIntro:
+    '인증서를 구입하거나 DNS에 무언가를 게시하기 전에, 도메인의 BIMI 레코드를 만들고 로고 파일이 규칙을 충족하는지 확인할 수 있습니다.',
+  howTitle: 'BIMI 설정 방법',
+  howSteps: [
+    'DMARC 정책을 적용 단계(enforcement)로 올립니다. BIMI는 p=none에서 작동하지 않으므로 정책이 quarantine 또는 reject여야 합니다. 이 레코드는 [DMARC 레코드 생성기](/dmarc-generator)로 만들 수 있습니다.',
+    '로고를 SVG Tiny PS 파일로 준비한 뒤, 위의 “SVG 로고 검사”로 테스트합니다.',
+    '인증서를 정합니다. Gmail은 VMC 또는 CMC가 있을 때만 BIMI 로고를 표시하고, Apple Mail은 VMC가 있을 때만 표시합니다.',
+    'SVG 파일과, 인증서가 있다면 인증서의 PEM 파일을 HTTPS 주소로 호스팅합니다.',
+    '이 생성기로 만든 레코드를 default._bimi.yourdomain에 TXT 레코드로 게시합니다.',
+  ],
+  imageAlt: '인증된 이메일 아바타와 정사각형 SVG 브랜드 로고 그리드가 함께 있는 일러스트.',
+  recordTitle: 'BIMI 레코드의 구성',
+  thTag: '태그',
+  thDoes: '역할',
+  thExample: '예시',
+  tagMeanings: [
+    '버전. 항상 BIMI1입니다',
+    'SVG 로고의 HTTPS 주소',
+    'VMC 또는 CMC 인증서(PEM 파일)의 HTTPS 주소',
+  ],
+  recordNote:
+    'Google의 예시에는 두 가지 형식이 나옵니다. 하나는 l=만 있는 레코드입니다. 다른 하나는 로고가 PEM 파일 안에 들어 있으므로 l= 값을 비워 두고 a= 값으로 인증서를 가리키는 레코드입니다. 인증서가 있다면 인증서 제공업체가 권장하는 형식을 따르십시오. 이 생성기는 두 형식을 모두 만들 수 있습니다. 새로 추가된 선택 사항인 avp= 태그는 로고가 브랜드 로고인지 개인 아바타인지를 메일 서비스 제공업체에 알려 줍니다. 대부분의 발신자는 이 태그를 넣지 않습니다.',
+  logoTitle: '로고 검사 도구가 확인하는 규칙',
+  logoPara:
+    'BIMI 로고는 SVG Tiny PS를 사용합니다. SVG Tiny PS는 받은편지함에서 안전하게 표시하도록 기능을 줄인 SVG입니다. 루트 요소에는 baseProfile을 tiny-ps로, version을 1.2로 설정해야 합니다. 이미지는 정사각형이어야 하고, 브랜드 이름이 들어간 title 요소가 있어야 합니다. 스크립트, 삽입된 래스터 이미지, 애니메이션, 외부 파일 링크는 허용되지 않으며, 파일 크기는 32 KB 미만이어야 합니다. 디자인 도구에서 내보낸 일반 SVG는 보통 이 규칙 중 하나 이상을 어깁니다. 그래서 인증서를 신청하기 전에 검사해 볼 필요가 있습니다.',
+  certTitle: 'VMC와 CMC: 필요한 인증서 고르기',
+  certPara:
+    'Gmail은 레코드가 인증서를 가리킬 때만 BIMI 로고를 표시합니다. VMC(Verified Mark Certificate)는 등록 상표가 필요하며, Gmail의 파란색 체크 표시가 함께 붙습니다. CMC(Common Mark Certificate)는 상표 등록이 되지 않은 로고를 위한 인증서입니다. Gmail에 로고는 표시되지만 체크 표시는 붙지 않습니다. Apple Mail은 VMC만 받습니다. Yahoo, Fastmail 등 일부 다른 메일 서비스 제공업체는 인증서가 전혀 없는 레코드로도 로고를 표시할 수 있습니다. 인증서는 소수의 인증 기관에서만 발급되며, Google은 인정하는 인증 기관 목록을 공개합니다.',
+  faqTitle: '자주 묻는 질문',
+  faqs: [
+    {
+      q: 'DMARC가 p=none이어도 BIMI가 작동합니까?',
+      a: '아니요. Google은 BIMI가 DMARC 정책 none을 지원하지 않는다고 밝히고 있습니다. 정책은 quarantine 또는 reject여야 합니다.',
+    },
+    {
+      q: 'Gmail에는 VMC가 필요합니까?',
+      a: 'VMC와 CMC 중 하나가 필요합니다. VMC는 등록 상표가 필요하며 파란색 체크 표시가 붙습니다. CMC는 상표가 필요 없으며, 체크 표시 없이 로고를 표시합니다.',
+    },
+    {
+      q: 'BIMI 로고가 표시되지 않는 이유는 무엇입니까?',
+      a: '흔한 원인은 DMARC가 아직 p=none인 경우, 메일이 DMARC를 통과하지 못하는 경우, SVG가 올바른 Tiny PS가 아닌 경우, 인증서가 없거나 만료된 경우, 받는 메일함이 BIMI를 지원하지 않는 경우입니다. 메일 서비스 제공업체가 새 레코드를 반영하기까지 시간이 걸릴 수도 있습니다.',
+    },
+    {
+      q: 'BIMI를 쓰면 이메일 도달률이 높아집니까?',
+      a: '직접적으로는 높아지지 않습니다. BIMI는 DMARC 정책이 적용 단계(quarantine 또는 reject)이고 DMARC를 이미 통과한 메일에 로고를 표시할 뿐입니다. 메일 도달에 도움이 되는 것은 그 단계에 이르기 위한 작업, 즉 SPF, DKIM, DMARC를 올바르게 설정하는 일입니다. [SPF, DKIM, DMARC 설명](/ko/blog/spf-dkim-dmarc-explained)을 참고하십시오.',
+    },
+    {
+      q: 'default._bimi는 무엇입니까?',
+      a: '메일 서비스 제공업체가 BIMI 레코드를 찾는 DNS 이름입니다. default는 셀렉터입니다. 메일 종류마다 다른 로고를 쓰려는 경우에만 다른 셀렉터와 메일의 BIMI-Selector 헤더가 필요합니다.',
+    },
+    {
+      q: '로고가 어딘가에 업로드됩니까?',
+      a: '아니요. 로고 검사 도구는 브라우저 안에서 파일을 읽습니다.',
+    },
+  ],
+  ctaHeadline: '로고가 준비되었다면 이메일 리스트도 확인하십시오.',
+}
+
+export const BIMI_PAGE_STRINGS: Record<Locale, BimiPageStrings> = { en, de, fr, es, it, 'pt-br': ptBr, nl, pl, id, ja, ko }

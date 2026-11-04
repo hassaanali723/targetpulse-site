@@ -1186,3 +1186,15 @@ html[lang='ja'] body {
 html[lang='ja'] :is(h1, h2, h3, h4, button, a) {
   word-break: auto-phrase;
 }
+
+/* Korean (/ko): the site font has no Hangul, so name the system Korean fonts
+   (Apple SD Gothic Neo on Mac/iOS, Malgun Gothic on Windows). Korean puts
+   spaces between words, so keep-all stops a word breaking across lines. */
+html[lang='ko'] .font-sans {
+  font-family: var(--font-jakarta, system-ui), 'Plus Jakarta Sans', 'Apple SD Gothic Neo', 'Malgun Gothic',
+    '맑은 고딕', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif;
+}
+html[lang='ko'] body {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}

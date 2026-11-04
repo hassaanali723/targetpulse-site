@@ -14,6 +14,7 @@ import { CLUSTERS, HREFLANG_CODE, hreflangAlternates, type Cluster, type Cluster
 import { getImageDimensions, getPostBySlug, getPostSlugs } from '@/lib/blog'
 import { getStrings, type L10nLocale } from '@/lib/i18n/strings'
 import { BLOG_STRINGS } from '@/lib/i18n/blog'
+import { BLOG_LABEL } from '@/components/l10n/BlogIndex'
 
 // Localized blog article, shared by every language route.
 
@@ -83,7 +84,7 @@ export default function BlogArticleL10n({ locale, slug }: { locale: L10nLocale; 
 
   return (
     <main className="relative min-h-screen bg-slate-50 grid-lines overflow-x-clip text-slate-800 antialiased">
-      <JsonLd data={breadcrumbL10n(locale, [{ name: locale === 'ja' ? 'ブログ' : 'Blog', path: hub }, { name: post.title, path }])} />
+      <JsonLd data={breadcrumbL10n(locale, [{ name: BLOG_LABEL[locale] ?? 'Blog', path: hub }, { name: post.title, path }])} />
       <JsonLd
         data={{
           '@context': 'https://schema.org',
@@ -115,7 +116,7 @@ export default function BlogArticleL10n({ locale, slug }: { locale: L10nLocale; 
             {b.home}
           </Link>
           <ChevronRight aria-hidden="true" className="sep" />
-          <Link href={hub}>{locale === 'ja' ? 'ブログ' : 'Blog'}</Link>
+          <Link href={hub}>{BLOG_LABEL[locale] ?? 'Blog'}</Link>
           <ChevronRight aria-hidden="true" className="sep" />
           <span className="current" aria-current="page">{post.title}</span>
         </nav>

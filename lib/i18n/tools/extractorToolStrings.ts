@@ -605,7 +605,60 @@ const jaTool: ExtractorToolStrings = {
   csvHeader: 'Email,Domain,Top-Level Domain',
 }
 
-export const EXTRACTOR_TOOL_STRINGS: Record<Locale, ExtractorToolStrings> = { en, de: deTool, fr: frTool, es: esTool, it: itTool, 'pt-br': ptBrTool, nl: nlTool, pl: plTool, id: idTool, ja: jaTool }
+const koTool: ExtractorToolStrings = {
+  inputLabel: '텍스트 붙여넣기 또는 파일 끌어다 놓기',
+  clearAll: '모두 지우기',
+  dropBefore: '여기에 파일을 끌어다 놓거나 ',
+  dropLink: '파일을 선택',
+  dropAfter: '하십시오',
+  supports: 'TXT, CSV, TSV, XLSX, XLS, HTML, JSON, EML, VCF, 로그 파일 지원',
+  placeholder: '일반 텍스트, HTML 소스 코드, 문서 내용 또는 anna@example.com 같은 주소가 들어 있는 연락처 목록을 붙여 넣으십시오...',
+  processing: '백그라운드에서 처리하는 중...',
+  readingFiles: '파일을 읽는 중...',
+  readingFile: (name, index, total) => `${name} 파일을 읽는 중 (${index}/${total})...`,
+  fileError: '업로드한 파일 중 하나를 읽지 못했습니다. 파일 형식을 확인하십시오.',
+  optDeduplicate: '중복 제거',
+  optLowercase: '주소 전체를 소문자로 변환',
+  optWrittenOut: '풀어 쓴 주소 변환 ([at], [dot])',
+  optHideRole: '역할 기반 주소 숨기기 (info@, support@)',
+  sortLabel: '정렬:',
+  sortNone: '나타난 순서',
+  sortAlpha: '알파벳순 (A-Z)',
+  sortDomain: '도메인순',
+  domainFilters: '도메인 필터',
+  includeLabel: '다음 도메인만 포함 (쉼표로 구분):',
+  includePlaceholder: '예: example.com, company.com',
+  excludeLabel: '다음 도메인 제외 (쉼표로 구분):',
+  excludePlaceholder: '예: mailinator.com, tempmail.com',
+  uniqueAddresses: '고유 주소',
+  addressesListed: '표시된 주소',
+  totalDetected: '감지된 전체 수',
+  copied: '복사됨',
+  copyList: '목록 복사',
+  copyComma: '쉼표로 구분해 복사',
+  downloadTxt: 'TXT 다운로드',
+  downloadCsv: 'CSV 다운로드',
+  topDomains: '많이 감지된 도메인:',
+  moreDomains: (n) => `그 밖의 도메인 ${n.toLocaleString('ko-KR')}개`,
+  thIndex: '#',
+  thEmail: '이메일 주소',
+  thDomain: '도메인',
+  thTld: 'TLD',
+  showing: (from, to, total) =>
+    `전체 ${total.toLocaleString('ko-KR')}개 중 ${from.toLocaleString('ko-KR')}~${to.toLocaleString('ko-KR')}번째 표시`,
+  nextTitle: '다음 단계: 보내기 전에 이 주소 검증하기',
+  nextText:
+    '주소를 찾았다고 해서 메일함이 존재하는지 알 수 있는 것은 아닙니다. 무료 크레딧 1,000개로 주소가 유효한지 확인하거나 리스트 전체를 정리할 수 있습니다.',
+  verifyButton: '이 주소 검증하기',
+  checkOneButton: '주소 1개 확인하기',
+  checkOneHref: '/ko/email-checker',
+  noResults: '현재 필터 설정으로는 유효한 이메일 주소를 찾지 못했습니다.',
+  fileTxt: 'extracted-emails.txt',
+  fileCsv: 'extracted-emails.csv',
+  csvHeader: 'Email,Domain,Top-Level Domain',
+}
+
+export const EXTRACTOR_TOOL_STRINGS: Record<Locale, ExtractorToolStrings> = { en, de: deTool, fr: frTool, es: esTool, it: itTool, 'pt-br': ptBrTool, nl: nlTool, pl: plTool, id: idTool, ja: jaTool, ko: koTool }
 
 export function extractorToolStrings(locale: Locale): ExtractorToolStrings {
   return EXTRACTOR_TOOL_STRINGS[locale] ?? en

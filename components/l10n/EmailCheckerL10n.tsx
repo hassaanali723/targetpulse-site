@@ -191,7 +191,7 @@ export default async function EmailCheckerL10n({
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={r.logo} alt="" aria-hidden="true" width={20} height={20} loading="lazy" decoding="async" className="w-5 h-5 object-contain" />
               <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" aria-hidden="true" />
-              <span className="text-[13px] font-extrabold text-slate-900 tabular-nums">{locale === 'ja' ? r.rating.toFixed(1) : r.rating.toFixed(1).replace('.', ',')}</span>
+              <span className="text-[13px] font-extrabold text-slate-900 tabular-nums">{locale === 'ja' || locale === 'ko' ? r.rating.toFixed(1) : r.rating.toFixed(1).replace('.', ',')}</span>
               <span className="text-[12.5px] font-medium text-slate-500 group-hover:text-slate-700">{r.note}</span>
             </a>
           ))}
