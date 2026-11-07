@@ -1708,6 +1708,155 @@ const ko: MxPageStrings = {
   ctaHeadline: '도메인만이 아니라 메일함까지 확인하십시오',
 }
 
+// Turkish: formal "siz", "MX kaydı sorgulama" as the head term, apostrophe suffixes after names and codes.
+const tr: MxPageStrings = {
+  metaTitle: 'MX kaydı sorgulama: ücretsiz MX kaydı kontrolü | Giggal.ai',
+  ogTitle: 'MX kaydı sorgulama: ücretsiz MX kaydı kontrolü',
+  description:
+    'Her alan adı için ücretsiz MX kaydı sorgulama. E-postaları alan sunucuları gönderenlerin denediği sırayla görün, eksik veya hatalı MX kayıtlarını bulun.',
+  ogLocale: 'tr_TR',
+  ogImage: '/tools/mx-lookup-og-v2.webp',
+  ogAlt: 'Ücretsiz MX kaydı sorgulama aracı',
+  crumb: 'MX kaydı sorgulama',
+  appName: 'Ücretsiz MX kaydı sorgulama aracı',
+  featureList: [
+    'Her alan adının MX kayıtlarını sorgular',
+    'E-posta sunucularını önceliğe göre sıralar',
+    'Her e-posta sunucusunun IPv4 ve IPv6 adreslerini gösterir',
+    'Eksik, null ve hatalı MX kayıtlarını işaretler',
+    'Yaygın e-posta sağlayıcılarını tanır',
+  ],
+  h1: 'MX kaydı sorgulama',
+  heroIntro: 'Herhangi bir alan adı için MX sorgusu yapın. Alan adının e-postalarını alan sunucuları, gönderenlerin denediği sırayla görün.',
+  howTitle: 'Bir alan adının MX kayıtları nasıl kontrol edilir',
+  howSteps: [
+    'Bir alan adının MX kayıtlarını bulmak için alan adını yukarıdaki kutuya yazın. Tam bir e-posta adresi veya bir web sitesi bağlantısı da kullanabilirsiniz. Araç yalnızca alan adını alır.',
+    'MX kayıtlarını sorgulayın düğmesine tıklayın. MX sorgusu kayıtları herkese açık DNS\'ten okur. Böylece bir gönderenin şu anda gördüğünü görürsünüz.',
+    'Önce özeti okuyun. Özet, alan adının e-posta alıp alamayacağını söyler.',
+    'Ardından tabloyu okuyun. Her satır bir e-posta sunucusudur. Satırda sunucunun öncelik numarası, IP adresleri ve TTL değeri yer alır.',
+  ],
+  howNote:
+    'Kayıtlarınızı yakın zamanda değiştirdiyseniz ve hâlâ eskilerini görüyorsanız, tablodaki TTL süresinin dolmasını bekleyin. TTL, DNS çözümleyicilerinin önceki cevabı saklayabileceği saniye sayısıdır. Adres çubuğunuzdaki bağlantı aynı MX kaydı kontrolünü tekrar çalıştırır. Bu bağlantıyı bir iş arkadaşınıza veya DNS sağlayıcınıza gönderebilirsiniz.',
+  imageAlt: 'Bir e-postanın, alan adının MX kayıtlarını izleyerek öncelik sırasına göre e-posta sunucularına gitmesini gösteren çizim.',
+  whatTitle: 'MX kaydı nedir',
+  whatBefore: [
+    'MX kaydı (mail exchanger kaydı), diğer e-posta sunucularına bir alan adının e-postalarını nereye teslim edeceklerini söyleyen DNS kaydıdır. Biri anna@example.com adresine yazdığında, onun e-posta sunucusu example.com alan adının MX kayıtlarını sorgular ve orada adı geçen sunucuya bağlanır. MX sorgusu veya e-posta sunucusu sorgusu, bu kayıtları okur. Adım adım bir örnekle sade bir açıklama için sözlüğümüzdeki [MX kaydı](/glossary/mx-record) maddesine bakın.',
+    'Her kaydın iki bölümü vardır: bir öncelik numarası ve bir e-posta sunucusunun adı. Google Workspace\'in kurulum rehberi, aşağıdaki gibi tek bir kayıt ister:',
+  ],
+  whatAfter: [
+    'Eski Workspace alan adlarında genellikle bunun yerine hâlâ beş kayıt bulunur. Bu kayıtların ilki ASPMX.L.GOOGLE.COM\'dur. Google bu kayıtları hâlâ desteklediği için değiştirmeniz gerekmez.',
+    'MX kayıtları yalnızca gelen e-postaları yönetir. Giden e-postalar başka kayıtlarla, özellikle SPF, DKIM ve DMARC ile ilgilidir. Bu üç kaydın nasıl çalıştığını görmek için [SPF, DKIM ve DMARC nedir](/blog/spf-dkim-dmarc-explained) yazısına bakın.',
+  ],
+  priorityTitle: 'Öncelik numarası ne anlama gelir',
+  priorityParas: [
+    'Gönderenler önce en düşük numaralı sunucuyu dener. Bu sunucu cevap vermezse, bir sonraki en düşük numaraya geçerler. İki sunucunun numarası aynıysa, gönderenler bunlardan birini rastgele seçer. Bu da yükü dağıtır (RFC 5321, bölüm 5.1).',
+    'Önemli olan numaraların büyüklüğü değil, sırasıdır. 10 ve 20 öncelikleri, 1 ve 2 ile aynı şekilde çalışır. Örneğin Gmail\'in kendi alan adı 5, 10, 20, 30 ve 40 numaralı beş sunucu listeler.',
+  ],
+  resultsTitle: 'MX sorgusu sonucunuz ne anlama gelir',
+  thResult: 'Sonuç',
+  thMeaning: 'Anlamı',
+  thAction: 'Ne yapmalısınız',
+  results: [
+    {
+      result: 'E-posta alabilir',
+      meaning: 'Alan adının MX kayıtları var ve her e-posta sunucusunun bir IP adresi var.',
+      action: 'Bir şey yapmanız gerekmez. E-postalar yine de gelmiyorsa e-posta sunucusunun kendisine veya spam filtrelemesine bakın.',
+    },
+    {
+      result: 'MX kayıtları var, ancak düzeltilmesi gereken bir sorun var',
+      meaning: 'En az bir kayıtta sorun var. Araç bu sorunu sunucunun altında listeler.',
+      action: 'Kaydı DNS sağlayıcınızda düzeltin. Yaygın sorunlar bu tablonun altında açıklanmıştır.',
+    },
+    {
+      result: 'MX kaydı yok',
+      meaning: 'Gönderenler bunun yerine alan adının kendi adresini (A veya AAAA kaydını) kullanır.',
+      action: 'Alan adı e-posta alacaksa MX kayıtları ekleyin. Değerleri e-posta sağlayıcınız verir.',
+    },
+    {
+      result: 'E-posta alamaz',
+      meaning: 'MX kaydı yok ve bunun yerine kullanılabilecek bir adres de yok.',
+      action: 'MX kayıtları ekleyin. Alan adı e-posta için kullanılmıyorsa olduğu gibi bırakın.',
+    },
+    {
+      result: 'Hiç e-posta kabul etmiyor',
+      meaning: 'Alan adı bir null MX kaydı (0 .) yayımlıyor. Bu kayıt gönderenlere teslim denememelerini söyler (RFC 7505).',
+      action: 'Alan adı e-posta için kullanılmıyorsa bir şey yapmanız gerekmez. E-posta gönderdiğiniz bir alan adında bu kaydı tutmayın, çünkü yanıtlar ve geri dönen e-postalar size ulaşamaz.',
+    },
+    {
+      result: 'Mevcut değil',
+      meaning: 'DNS\'te bu alan adına ait hiçbir kayıt yok.',
+      action: 'Yazımı kontrol edin ve alan adının kayıtlı olduğundan emin olun.',
+    },
+  ],
+  resultsNote:
+    'Araç, tek tek kayıtlardaki dört sorunu da işaretler. Bir kayıt, ana bilgisayar adı (host name) yerine bir IP adresini gösterebilir. Sunucu adı bir takma ad (CNAME) olabilir. RFC 2181 buna izin vermez. Sunucu adının IP adresi olmayabilir. Bu durumda o sunucuya gönderilen e-postalar teslim edilemez. Ya da alan adı normal MX kayıtlarının yanında bir null MX yayımlayabilir. Bu, kayıtların birbiriyle çelişmesi demektir.',
+  providersTitle: 'Google Workspace, Microsoft 365 ve diğer sağlayıcılar için MX kayıtları',
+  providersIntro:
+    'MX kayıtları sorgusu bu sunucu adlarından birini gösteriyorsa, alan adının e-postalarını kimin yönettiğini bilirsiniz. Her adın önündeki sayı onun önceliğidir. Bir sağlayıcıyı kurarken değerleri sağlayıcının kendi kurulum sayfasından kopyalayın. Bazı değerler alan adınıza veya bölgenize göre değişir.',
+  thProvider: 'Sağlayıcı',
+  thRecords: 'MX kayıtları',
+  providerNotes: {
+    'Google Workspace': 'Eski kurulumlar ASPMX.L.GOOGLE.COM ile birlikte dört ALT sunucusu kullanır. Google bunları hâlâ destekler.',
+    'Microsoft 365':
+      'İlk bölüm alan adınıza özeldir. DNSSEC kullanan alan adları mx.microsoft ile biten bir ad alır. Tam değeri yönetim merkezinden kopyalayın.',
+    'Zoho Mail': 'Son bölüm veri merkezinize göre değişir. Örneğin AB için mx.zoho.eu kullanılır.',
+    'iCloud Mail': 'iCloud+ üzerindeki özel alan adları içindir.',
+    'Cloudflare Email Routing': 'E-postaları başka bir gelen kutusuna yönlendirir. Öncelikleri Cloudflare sizin için ayarlar.',
+    'Amazon SES': 'E-posta almak içindir. Ortadaki bölüm AWS bölgenizdir.',
+    IONOS: 'Bazı ülkeler mx00.ionos.de gibi kendi uzantılarını kullanır.',
+  },
+  providersAfter:
+    'Bazen MX kayıtları bunun yerine Proofpoint, Mimecast veya Barracuda sunucularını gösterir. Bunlar güvenlik ağ geçitleridir. E-postalar önce bu ağ geçitlerinden geçer, filtrelenir ve ardından gerçek e-posta sağlayıcısına gider. Sorgu bu sağlayıcıyı göremez. Ağ geçitleri her adres için cevap verdiğinden e-posta doğrulamayı da zorlaştırır. [Güvenli e-posta ağ geçidi arkasındaki adresleri doğrulama](/blog/how-to-verify-emails-behind-secure-email-gateways) yazısında nasıl yapılacağını okuyabilirsiniz.',
+  changeTitle: 'MX kayıtlarınızı değiştirme',
+  changeParas: [
+    'E-postanızı yeni bir sağlayıcıya taşımak için yeni sağlayıcının MX kayıtlarını DNS sağlayıcınızda ekleyin ve eskilerini kaldırın. Gönderenler DNS\'in döndürdüğü cevabı izler. Bu yüzden önbellekteki cevapların süresi doldukça e-postalar yeni sunucuya gelmeye başlar.',
+    'Bunun ne kadar süreceği eski kayıtların TTL değerine bağlıdır. Bir taşıma planlıyorsanız, TTL değerini önceden birkaç dakikaya düşürün. Bunu en az bir tam TTL süresi önce yapın. Böylece geçiş günü geldiğinde eski ve daha uzun TTL süresi dolmuş olur. Her şey çalıştığında TTL değerini tekrar yükseltin. Bazı e-postalar hâlâ oraya gelebileceği için eski posta kutusunu yine de birkaç gün açık tutun.',
+    'Sağlayıcılar değişikliklerin görünmesi için genellikle 48 veya 72 saate kadar bir süre belirtir. Bu, olağan bekleme süresi değil, güvenli bir üst sınırdır. Daha önce hiç MX kaydı olmayan bir alan adına MX kaydı eklemek biraz daha uzun sürebilir, çünkü DNS çözümleyicileri boş cevabı da önbelleğe almış olabilir. Bu cevabın ne kadar saklanacağını alan adının SOA kaydı belirler.',
+    'Geçişten sonra yeni sağlayıcının sizin adınıza e-posta gönderebilmesi için [SPF kaydınızı güncelleyin](/spf-checker) ve sağlayıcının DKIM imzalamasını açın. Kendi sunucunuzdan gönderiyorsanız, [DKIM oluşturucu](/dkim-generator) bir anahtar oluşturur. [DMARC oluşturucu](/dmarc-generator) ise ikisini birbirine bağlayan DMARC kaydını hazırlar.',
+  ],
+  mailboxTitle: 'MX sorgusu posta kutusunu kontrol etmez',
+  mailboxParas: [
+    'MX kayıtları, alan adının e-posta kabul ettiğini gösterir. Belirli bir adresin mevcut olduğunu göstermez. example.com alan adının MX kayıtlarında hiçbir sorun olmasa bile jane@example.com adresine gönderilen e-posta geri dönebilir. Bunun nedeni Jane\'in şirketten ayrılmış olması veya adresin hiç var olmamış olması olabilir.',
+    'Posta kutusunu kontrol etmek, e-posta sunucusuna sormak demektir. Bir e-posta doğrulama aracı bunu yapar. Tek bir adres için [mail adresi doğrulama aracını](/email-checker), bir kampanyadan önce listenin tamamı için [toplu mail doğrulama aracını](/bulk-email-verifier) kullanın.',
+  ],
+  faqTitle: 'Sıkça sorulan sorular',
+  faqs: [
+    {
+      q: 'MX kaydı nedir?',
+      a: 'Bir alan adının e-posta sunucularını belirten DNS kaydıdır. Biri o alan adındaki bir adrese e-posta gönderdiğinde, gönderenin e-posta sunucusu MX kayıtlarını sorgular. Bu kayıtlar sunucuya mesajı nereye teslim edeceğini söyler.',
+    },
+    {
+      q: 'MX kayıtlarımı nasıl kontrol ederim?',
+      a: 'Alan adınızı bu sayfanın üst kısmındaki MX sorgusu kutusuna yazın. Terminalden kontrol etmek için Windows\'ta nslookup -type=mx example.com, macOS ve Linux\'ta dig mx example.com komutunu kullanabilirsiniz.',
+    },
+    {
+      q: 'Bir alan adının birden fazla MX kaydı olabilir mi?',
+      a: 'Evet, çoğu alan adının birden fazla MX kaydı vardır. Gönderenler önce en düşük öncelik numaralı kaydı dener ve diğerlerini yedek olarak tutar. Aynı numaraya sahip kayıtlar yükü paylaşır.',
+    },
+    {
+      q: 'Bir alan adının MX kaydı yoksa ne olur?',
+      a: 'Gönderenler bunun yerine alan adının kendi A veya AAAA kaydını kullanır ve oraya teslim etmeyi dener. Bu yalnızca o adreste bir e-posta sunucusu çalışıyorsa işe yarar. Bu yüzden e-posta alması gereken bir alan adının MX kayıtlarına ihtiyacı vardır.',
+    },
+    {
+      q: 'Bir MX kaydı bir IP adresini veya bir CNAME kaydını gösterebilir mi?',
+      a: 'Hayır. Kendi A veya AAAA kaydı olan bir ana bilgisayar adını belirtmelidir. Kayıtta bir IP adresi kullanmak standarda aykırıdır. RFC 2181 standardı da bu adın bir takma ad olmaması gerektiğini söyler. Bazı gönderenler takma adla da çalışır, ancak buna güvenemezsiniz.',
+    },
+    {
+      q: 'MX kayıtlarımı kim yönetir?',
+      a: 'Alan adınızın DNS hizmetini kim yürütüyorsa o yönetir. Bu genellikle alan adını satın aldığınız kayıt firmasıdır. Ad sunucularınızı Cloudflare gibi bir hizmete taşıdıysanız, o hizmettir. Kayıtların kendisi herkese açıktır, çünkü her gönderenin bunları okuması gerekir.',
+    },
+    {
+      q: 'MX kaydı değişiklikleri ne kadar sürer?',
+      a: 'En fazla eski kaydın TTL süresi kadar sürer. Eski kaydı önbelleğe alan DNS çözümleyicileri, TTL süresi dolana kadar eski cevabı kullanır. Yani TTL değeri 3600 ise bu süre en fazla bir saattir. DNS sağlayıcınızın değişikliği yayımlaması da birkaç dakika sürebilir.',
+    },
+    {
+      q: 'E-posta göndermek için MX kaydına ihtiyacım var mı?',
+      a: 'Hayır. MX kayıtları e-posta almak içindir. Gönderim SPF, DKIM ve DMARC kayıtlarına bağlıdır. Ancak bazı alıcı sunucular, hiç MX veya A kaydı olmayan bir alan adından gelen e-postaları reddeder. Böyle bir alan adı yanıtları alamaz.',
+    },
+  ],
+  ctaHeadline: 'Yalnızca alan adını değil, posta kutusunu da kontrol edin',
+}
+
 export const MX_PAGE_STRINGS: Partial<Record<Locale, MxPageStrings>> & { en: MxPageStrings } = {
   en,
   de,
@@ -1720,4 +1869,5 @@ export const MX_PAGE_STRINGS: Partial<Record<Locale, MxPageStrings>> & { en: MxP
   id,
   ja,
   ko,
+  tr,
 }

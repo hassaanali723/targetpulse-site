@@ -135,8 +135,8 @@ function PricingLadder({ c, locale }: { c: Competitor; locale: L10nLocale }) {
           <thead>
             <tr className="bg-slate-50 border-b-2 border-slate-200">
               <th className={`${th} text-slate-400`}>{ui.volume}</th>
-              <th className={`${th} text-indigo-600`}>Giggal.ai</th>
-              <th className={`${th} text-slate-400`}>{c.name}</th>
+              <th className={`${th} text-indigo-600`} lang="en">Giggal.ai</th>
+              <th className={`${th} text-slate-400`} lang="en">{c.name}</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100">
@@ -195,8 +195,8 @@ function ComparisonTable({ c, locale }: { c: Competitor; locale: L10nLocale }) {
         <thead>
           <tr className="bg-slate-50 border-b-2 border-slate-200">
             <th className={`${th} text-slate-400 w-[38%]`}>&nbsp;</th>
-            <th className={`${th} text-indigo-600`}>Giggal.ai</th>
-            <th className={`${th} text-slate-400`}>{c.name}</th>
+            <th className={`${th} text-indigo-600`} lang="en">Giggal.ai</th>
+            <th className={`${th} text-slate-400`} lang="en">{c.name}</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-slate-100">

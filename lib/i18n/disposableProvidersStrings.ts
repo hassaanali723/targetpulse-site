@@ -1381,4 +1381,134 @@ const ko: ProvidersStrings = {
   enSuffix: '(영어)',
 }
 
-export const PROVIDERS_STRINGS: Record<Locale, ProvidersStrings> = { en, it, de, es, 'pt-br': ptBr, fr, nl, pl, id, ja, ko }
+// Turkish. Keyword plan (SEO-Plan/i18n-batch5-tr-keyword-plan.md, provisional):
+// people searching "geçici e-posta", "geçici mail" and "tek kullanımlık
+// e-posta" want a throwaway inbox, so the page is a list of throwaway-address
+// services, like the Korean, Japanese and Indonesian pages. Title "Geçici
+// e-posta (geçici mail) servisleri listesi", H1 "Geçici e-posta servisleri
+// listesi". Only the services in lib/data/disposableProviders.ts. Formal "siz".
+const tr: ProvidersStrings = {
+  metaTitle: 'Tek kullanımlık mail ve geçici mail siteleri listesi | Giggal.ai',
+  ogTitle: 'Tek kullanımlık mail ve geçici mail siteleri ve kullandıkları alan adları',
+  description: "Tek kullanımlık mail ve geçici mail siteleri listesi, 10 dakikalık mail servisleri dahil. Bir adresi 100.000'den fazla geçici alan adıyla ücretsiz kontrol edin.",
+  ogLocale: 'tr_TR',
+  ogAlt: 'Giggal.ai tek kullanımlık mail siteleri listesi',
+  crumb: 'Tek kullanımlık mail siteleri',
+  // The page renders h1 + " " + <accent>h1Accent</accent>, so the heading
+  // reads exactly "Tek kullanımlık mail siteleri listesi".
+  h1: 'Tek kullanımlık mail siteleri',
+  h1Accent: 'listesi',
+  heroIntro: "Geçici mail ve tek kullanımlık mail adresi veren servislerin listesi. Tek kullanımlık mail, kısa bir süre veya tek bir kez kullanılan bir e-posta adresidir. Servisler çalışma şekline göre gruplanmıştır. Geçici e-posta alan adlarının toplam sayısı 100.000'i aşar ve her gün değişir.",
+  ctaCheck: 'Bir adresi kontrol edin',
+  ctaBlock: 'Kayıt sırasında engelleyin',
+  kindsTitle: 'Dört tür geçici mail servisi',
+  kindsIntro: 'Her geçici adres aynı şekilde çalışmaz. Türünü bilmek, o adrese gönderdiğiniz bir mesaja ne olacağını gösterir.',
+  categories: {
+    timed: { label: 'Süreli gelen kutusu', badge: 'Süreli', desc: 'Gelen kutusu veya mesajları belirli bir süre sonra silinir.' },
+    public: { label: 'Herkese açık gelen kutusu', badge: 'Herkese açık', desc: 'Adresi bilen herkes okuyabilir. Şifre yoktur.' },
+    alias: { label: 'Takma ad veya yönlendirme', badge: 'Takma ad / yönlendirme', desc: 'Gerçek bir gelen kutusuna yönlendiren bir takma ad oluşturur. Takma ad sonradan kapatılabilir.' },
+    api: { label: 'API veya geliştirici', badge: 'API / geliştirici', desc: 'Betikler ve testler için geliştirilmiştir. Mesajları okumak için bir API sunar.' },
+  },
+  listTitle: 'Geçici mail servisleri ve alan adları',
+  listIntro: 'En bilinen servisler ve her birinin e-posta gönderdiği alan adları. Birçoğu burada gösterilenlerden daha fazla alan adını dönüşümlü olarak kullanır.',
+  blurbs: {
+    'Temp-Mail': 'Kayıt gerektirmeden rastgele bir geçici gelen kutusu verir.',
+    'Mailinator': 'Şifresiz, herkese açık gelen kutuları. Herkes her adresi okuyabilir.',
+    '10MinuteMail': 'Oluşturulduktan on dakika sonra süresi dolan bir adres verir.',
+    'Guerrilla Mail': 'Her mesajı geldikten bir saat sonra siler. Birkaç alan adı kullanır.',
+    'YOPmail': 'Şifresiz, herkese açık gelen kutuları. Mesajlar birkaç gün saklanır.',
+    'Maildrop': 'Tek seferlik kayıtlar için herkese açık gelen kutusu. Hesap gerekmez.',
+    'Mohmal': 'Kayıt gerektirmeyen geçici gelen kutusu servisi.',
+    'EmailOnDeck': 'Hesap gerektirmeyen geçici gelen kutusu servisi.',
+    'Dropmail': 'API sunan geçici e-posta. Çok sayıda alan adını dönüşümlü olarak kullanır.',
+    'ThrowawayMail': 'Tek seferlik kullanım için geçici gelen kutusu.',
+    'TrashMail': 'Belirli bir süre veya mesaj sayısından sonra çalışmayı bırakan yönlendirme adresi.',
+    'Temp Mail Plus': 'Birkaç alan adı arasından seçim yapabileceğiniz geçici e-posta.',
+    'Tempmailo': 'Tek seferlik kullanım için geçici gelen kutusu.',
+    'Tempail': 'Kayıt gerektirmeyen tek kullanımlık gelen kutusu.',
+    'Mint Email': 'Kısa süreli kullanım için tek kullanımlık gelen kutusu.',
+    'Mailnesia': 'Şifresiz, herkese açık tek kullanımlık gelen kutusu.',
+    'MailCatch': 'Herkese açık geçici gelen kutusu, kayıt gerekmez.',
+    'Spamgourmet': 'Belirli bir mesaj sayısından sonra çalışmayı bırakan yönlendirme adresleri.',
+    'Dispostable': 'Hızlı kayıtlar için herkese açık tek kullanımlık gelen kutusu.',
+    'Fake Mail Generator': 'Birkaç alan adında tek kullanımlık adresler oluşturur.',
+    'GetAirMail': 'Kayıt gerektirmeyen geçici gelen kutusu.',
+    'Inbox Kitten': 'Açık kaynaklı, herkese açık tek kullanımlık gelen kutusu.',
+    'Burner Mail': 'Her site için gerçek gelen kutunuza yönlendiren ayrı bir takma ad oluşturur.',
+    'addy.io': 'Takma ad yönlendirme servisi. Eski adı AnonAddy.',
+    '33Mail': 'Kişisel bir alt alan adında yönlendirme takma adları.',
+    'Moakt': 'Kayıt gerektirmeyen geçici gelen kutusu.',
+    'Minute Inbox': 'Kısa süreli kullanım için geçici gelen kutusu.',
+    'Harakirimail': 'Herkese açık tek kullanımlık gelen kutusu.',
+    'Mailsac': 'Testlerde kullanılan, API sunan tek kullanımlık gelen kutuları.',
+    'Email Fake': 'Çok sayıda alan adında geçici bir adres oluşturur.',
+    'Tmailor': 'Kayıt gerektirmeyen geçici gelen kutusu.',
+    'Mail.tm': 'Ücretsiz ve herkese açık bir API sunan geçici e-posta.',
+    'DiscardMail': 'Herkese açık tek kullanımlık gelen kutusu, kayıt gerekmez.',
+    'Spambog': 'Birkaç alan adı olan, herkese açık geçici gelen kutusu.',
+    'Fakeinbox': 'Tek seferlik kullanım için geçici gelen kutusu.',
+  },
+  moreTitle: 'Diğer geçici mail alan adları',
+  moreIntro: (n) =>
+    `Yukarıdaki servis kartlarında yer alanların dışında ${n} geçici ve tek kullanımlık alan adı daha. Bunların çoğu aynı servislere aittir. Bu servisler engelleme listelerini aşmak için ek alan adları kaydeder. Bu liste, geçici e-posta alan adlarının tam listesinin küçük bir parçasıdır. Doğrulama hizmeti adresleri 100.000'den fazla alan adıyla karşılaştırır ve altı saatte bir yeni alan adları ekler.`,
+  staleNote: 'Sabit bir liste hızla eskir. Bunun yerine adresi güncel listeyle kontrol edin.',
+  gmailTitle: 'Gmail, Outlook veya Hotmail geçici bir mail alan adı mı?',
+  gmailParas: [
+    'Hayır. Gmail, Outlook, Hotmail, Yahoo ve iCloud kalıcı posta kutusu sağlayıcılarıdır. İnsanlar bu hesapları yıllarca kullanır. Bu yüzden hiçbir geçici e-posta listesinde yer almazlar ve bunları engellememelisiniz.',
+    'Bir Gmail veya Outlook adresi yine de hatalı olabilir. Posta kutusu var olmayabilir ya da adreste bir yazım hatası olabilir. Bu ayrı bir kontroldür: alan adının geçici olup olmadığı değil, posta kutusunun gerçek olup olmadığı kontrol edilir. Bu soruyu [mail adresi doğrulama aracı](/email-checker) yanıtlar.',
+  ],
+  blockTitle: 'Geçici mail adresleri nasıl engellenir',
+  blockIntro: 'Her geçici alan adının listesini elle tutamazsınız. Sayıları çok fazladır ve her gün değişir. Güvenilir yol, her adresi girildiği anda kontrol etmek ve sonuca göre işlem yapmaktır.',
+  blockItems: [
+    "**Kayıt sırasında:** adresi [e-posta doğrulama API'si](/email-validation-api) (İngilizce) ile kontrol edin ve adres geçiciyse başka bir adres isteyin.",
+    '**Elinizdeki bir listede:** geçici, geçersiz ve rol tabanlı adresleri tek seferde çıkarmak için [e-posta listesi temizleme](/email-list-cleaning) (İngilizce) hizmetini kullanın.',
+    '**Her seferinde bir adres:** ücretsiz [geçici mail kontrolü](/disposable-email-checker) aracını kullanın.',
+  ],
+  faqTitle: 'Tek kullanımlık mail siteleri: sık sorulan sorular',
+  faqs: [
+    {
+      q: 'Tek kullanımlık mail nedir?',
+      a: 'Tek kullanımlık mail, şifre ve kayıt olmadan birkaç saniyede oluşturulan geçici bir gelen kutusudur. Bu adreslere sahte mail de denir. İnsanlar bu servisleri gerçek adreslerini vermeden bir formu geçmek veya e-posta adresi istenen bir dosyayı indirmek için kullanır. Temp-Mail, Mailinator ve 10MinuteMail bilinen örneklerdir.',
+    },
+    {
+      q: 'Geçici mail veya 10 dakikalık mail nasıl alınır?',
+      a: 'Bu sayfadaki listeden bir servis seçin. Temp-Mail, kayıt gerektirmeden hemen geçici bir gelen kutusu verir. 10MinuteMail ile alınan adresin süresi, oluşturulduktan on dakika sonra dolar. Mailinator gibi herkese açık gelen kutularında adresi bilen herkes mesajları okuyabilir.',
+    },
+    {
+      q: 'Hangi geçici mail servisini seçmeliyim?',
+      a: 'Kullanım amacınıza bağlıdır. Kayıt olmadan hemen kullanmak için Temp-Mail gibi süreli bir gelen kutusu, 10 dakikalık mail için 10MinuteMail vardır. Gerçek gelen kutunuza yönlendirip sonradan kapatmak istiyorsanız addy.io veya 33Mail gibi takma ad servisleri vardır. Herkese açık gelen kutularını herkes okuyabilir, bu yüzden kişisel e-postalar için uygun değildir.',
+    },
+    {
+      q: 'Kaç tane geçici mail alan adı var?',
+      a: "Bu sayfadaki listeden çok daha fazla. Tek bir servis yüzlerce alan adını dönüşümlü olarak kullanabilir ve her gün yeni alan adları ortaya çıkar. Giggal doğrulama hizmeti adresleri, altı saatte bir yeniden oluşturulan 100.000'den fazla geçici alan adından oluşan bir listeyle karşılaştırır.",
+    },
+    {
+      q: 'Gmail, Outlook veya Hotmail geçici bir mail alan adı mı?',
+      a: 'Hayır. Gmail, Outlook, Hotmail, Yahoo ve iCloud geçici servis değil, kalıcı posta kutusu sağlayıcılarıdır. Hiçbir geçici e-posta listesinde yer almazlar. Bu alan adlarındaki bir adres, posta kutusu yoksa yine de geçersiz olabilir. Bu ayrı bir kontroldür.',
+    },
+    {
+      q: 'Geçici e-posta alan adlarını nasıl engellerim?',
+      a: "Her adresi kayıt sırasında kontrol edin. Alan adı geçiciyse, hesap oluşturulmadan önce kişiden farklı bir adres isteyin. Bunu formlarınızda, gerçek zamanlı yanıt veren e-posta doğrulama API'si ile otomatik hâle getirebilirsiniz.",
+    },
+    {
+      q: 'Geçici alan adlarının tam listesini indirebilir miyim?',
+      a: 'Bu sayfa bilinen alan adlarını gösterir. Tam liste doğrulama hizmetinde tutulur ve sürekli güncellenir. Bu yüzden güvenilir yol, hızla eskiyen sabit bir dosyayı kopyalamak değil, adresleri API üzerinden kontrol etmektir.',
+    },
+    {
+      q: 'Geçici e-posta servisi ile takma ad servisi arasındaki fark nedir?',
+      a: 'Geçici e-posta servisi, bırakılmak üzere tasarlanmış tek kullanımlık bir gelen kutusu verir. addy.io veya 33Mail gibi bir takma ad servisi ise e-postaları gerçek gelen kutunuza yönlendirir ve takma adı sonradan kapatmanıza izin verir. Bazı takma ad alan adları geçici e-posta listelerinde yer alır, çünkü kişi e-postalarınızı istediği zaman kesebilir. Bazıları yer almaz, çünkü birinin okuduğu gerçek bir gelen kutusuna yönlendirirler.',
+    },
+  ],
+  ctaBand: 'Geçici mail adreslerini listenize girmeden engelleyin',
+  related: [
+    { href: '/disposable-email-checker', label: 'Geçici mail kontrolü', desc: 'Bir adresin geçici olup olmadığını kontrol edin.' },
+    { href: '/email-validation-api', label: "E-posta doğrulama API'si", desc: 'Geçici adreslerle yapılan kayıtları gerçek zamanlı engelleyin.' },
+    { href: '/email-checker', label: 'Mail adresi doğrulama', desc: 'Bir posta kutusunun var olup olmadığını kontrol edin.' },
+    { href: '/email-list-cleaning', label: 'E-posta listesi temizleme', desc: 'Listenin tamamını tek seferde temizleyin.' },
+  ],
+  itemListName: 'Tek kullanımlık mail siteleri',
+  itemListDesc: 'Başlıca geçici ve tek kullanımlık e-posta servisleri ve kullandıkları alan adları.',
+  enSuffix: ' (İngilizce)',
+}
+
+export const PROVIDERS_STRINGS: Record<Locale, ProvidersStrings> = { en, it, de, es, 'pt-br': ptBr, fr, nl, pl, id, ja, ko, tr }

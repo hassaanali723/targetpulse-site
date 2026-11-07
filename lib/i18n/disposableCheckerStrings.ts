@@ -1501,4 +1501,140 @@ const ko: CheckerStrings = {
   enSuffix: '(영어)',
 }
 
-export const CHECKER_STRINGS: Record<Locale, CheckerStrings> = { en, it, de, es, 'pt-br': ptBr, fr, nl, pl, id, ja, ko }
+// Turkish. Keyword plan (SEO-Plan/i18n-batch5-tr-keyword-plan.md, provisional):
+// head term "geçici e-posta kontrolü", with "tek kullanımlık e-posta" and
+// "geçici mail" in copy. "geçici e-posta" is the standard term from the
+// terminology sheet. Formal "siz". The title is 61 characters, so it carries no
+// " | Giggal.ai" suffix (64-character limit).
+const tr: CheckerStrings = {
+  metaTitle: 'Geçici mail kontrolü: tek kullanımlık mail tespiti | Giggal.ai',
+  ogTitle: 'Ücretsiz geçici mail kontrolü: sahte ve tek kullanımlık mail adreslerini tespit edin',
+  description: "Ücretsiz geçici mail kontrolü: sahte ve tek kullanımlık mail adreslerini tespit edin. 100.000'den fazla alan adı, altı saatte bir güncellenir. Kayıt gerekmez.",
+  ogLocale: 'tr_TR',
+  ogAlt: 'Giggal.ai geçici mail kontrolü',
+  crumb: 'Geçici mail kontrolü',
+  h1: 'Ücretsiz geçici mail kontrolü:',
+  h1Accent: 'sahte ve tek kullanımlık adresleri tespit edin',
+  heroIntro: "Bir mail adresinin geçici veya tek kullanımlık bir mail servisine ait olup olmadığını görmek için adresi girin. Alan adı, altı saatte bir güncellenen 100.000'den fazla geçici e-posta alan adıyla karşılaştırılır.",
+  toolNote: 'Saatte beş ücretsiz kontrol, kayıt gerekmez. Bu araç alan adının geçici olup olmadığını söyler. Posta kutusunun var olup olmadığını öğrenmek için [mail adresi doğrulama aracını](/email-checker) kullanın.',
+  howTitle: 'Geçici mail kontrolü nasıl çalışır',
+  howIntro: 'Geçici e-posta servisleri sürekli yeni alan adları kaydeder. Güncellenmeyen bir liste bu alan adlarını kaçırır. Bu yüzden kontrol, bu web sitesindeki bir dosyada değil, Giggal doğrulama hizmetinde çalışır.',
+  how: [
+    {
+      title: 'Adres biçimi kontrolü',
+      text: 'Araç, adresin geçerli bir biçimde olup olmadığını kontrol eder: bir yerel kısım, tek bir @ işareti ve bir alan adı. Bu kontrol, sunucuya bir şey gönderilmeden önce yapılır.',
+    },
+    {
+      title: "Alan adının 100.000'den fazla geçici alan adıyla karşılaştırılması",
+      text: 'Alan adı, Giggal doğrulama hizmetindeki geçici alan adları listesiyle karşılaştırılır. Listedeki bir alan adının alt alan adları da geçici sayılır. Liste altı saatte bir yeniden oluşturulur ve ekibimiz elle düzeltmeler ekler.',
+    },
+    {
+      title: 'Sonuç',
+      text: 'Araç "geçici" veya "geçici değil" sonucunu bildirir. Geçici değil sonucu, alan adının bilinen bir geçici e-posta servisi olmadığı anlamına gelir. Posta kutusunun var olduğu anlamına gelmez.',
+    },
+    {
+      title: 'Teslim edilebilirlik ayrı bir kontroldür',
+      text: 'Posta kutusunun var olup olmadığını ve e-posta kabul edip etmediğini öğrenmek için ücretsiz mail adresi doğrulama aracını kullanın. Bu araç posta kutusunun var olup olmadığını kontrol eder. Bu sayfa yalnızca adresin geçici olup olmadığı sorusunu yanıtlar.',
+    },
+  ],
+  servicesTitle: 'Yaygın geçici mail servisleri',
+  servicesIntro: 'Listedeki servislerden bazıları şunlardır. Liste, bu servislerin kaydettiği ve dönüşümlü olarak kullandığı çok sayıda küçük alan adını da kapsar.',
+  services: [
+    { name: 'Temp-Mail', desc: 'Kayıt gerektirmeden rastgele bir geçici gelen kutusu verir.' },
+    { name: 'Mailinator', desc: 'Herkese açık gelen kutuları. E-postaları herkes şifre olmadan okuyabilir.' },
+    { name: '10MinuteMail', desc: 'Oluşturulduktan on dakika sonra süresi dolan gelen kutusu.' },
+    { name: 'Guerrilla Mail', desc: 'Her mesajı geldikten bir saat sonra siler.' },
+    { name: 'ThrowawayMail', desc: 'Tek seferlik kayıtlar için geçici gelen kutusu.' },
+    { name: 'Yopmail', desc: 'Şifresiz, herkese açık gelen kutuları. Mesajlar birkaç gün saklanır.' },
+    { name: 'SharkLasers', desc: 'Guerrilla Mail tarafından kullanılan alan adlarından biri.' },
+    { name: 'TrashMail', desc: 'Belirli bir süre sonra çalışmayı bırakan geçici yönlendirme adresleri.' },
+  ],
+  viewAll: 'Tüm tek kullanımlık mail sitelerini görün',
+  whyTitle: 'Geçici mail adreslerini neden engellemelisiniz',
+  whyIntro: 'Geçici bir adres bir kişi kaydı değildir. Kişi, ilk birkaç dakikadan sonra gönderdiğiniz hiçbir şeyi görmez. Bundan üç sorun doğar:',
+  why: [
+    {
+      title: 'Kimsenin okumadığı e-postalar',
+      text: "Hoş geldiniz e-postaları, makbuzlar ve başlangıç e-posta dizileri, artık var olmayan ya da hiç açılmayan bir gelen kutusuna gider. Bazı servisler gelen kutusunun süresi dolduktan sonra e-postayı reddeder. Bu, raporlarınızda bounce olarak görünür.",
+    },
+    {
+      title: 'Ücretsiz deneme süresinin kötüye kullanılması',
+      text: "Bir kişi, her seferinde yeni bir geçici adresle çok sayıda deneme hesabı açabilir. Bu adresleri kayıt sırasında engellemek bunun çoğunu durdurur. Bunu kayıt formlarında [e-posta doğrulama API'miz](/email-validation-api) (İngilizce) ile otomatik hâle getirebilirsiniz.",
+    },
+    {
+      title: 'CRM sisteminizde yanlış rakamlar',
+      text: 'Geçici adreslerle yapılan kayıtlar müşteri adayı olarak sayılır, ancak hiçbir zaman yanıt vermez, e-posta açmaz veya satın alma yapmaz. Kayıt sayılarınızı olduğundan iyi, dönüşüm oranınızı olduğundan kötü gösterir.',
+    },
+  ],
+  bulkTitle: 'Tek adres kontrolü veya toplu kontrol',
+  bulkParas: [
+    'Yukarıdaki araç her seferinde bir adresi kontrol eder. Şüpheli bir kayıt veya tek bir müşteri adayı için kullanışlıdır. Bir listenin tamamı için tek tek kontrol çok yavaştır.',
+    'Giggal panelinde bir CSV veya TXT dosyasını [e-posta listesi temizleme hizmetimize](/email-list-cleaning) (İngilizce) yükleyebilir ve listenin tamamını tek seferde kontrol edebilirsiniz. Her adres geçici alan adları, info@ veya sales@ gibi rol tabanlı adresler ve posta kutusunun var olup olmadığı açısından kontrol edilir. Standart bir kontrolün posta kutusunu doğrulayamadığı [catch-all alan adlarında](/catch-all-verification) Giggal daha ayrıntılı bir kontrol çalıştırır. Ücretsiz bir hesapla 1.000 kredi alırsınız.',
+  ],
+  faqTitle: 'Geçici mail kontrolü hakkında sorular',
+  faqs: [
+    {
+      q: 'Geçici mail adresi nedir?',
+      a: 'Geçici mail adresi, yani tek kullanımlık e-posta adresi, Mailinator, Temp-Mail veya 10MinuteMail gibi bir servisten alınan geçici bir gelen kutusudur. Herkes şifre olmadan birkaç saniyede bir tane oluşturabilir. İnsanlar bu adresleri gerçek adreslerini vermeden bir kayıt formunu geçmek veya bir dosyayı indirmek için kullanır. Gelen kutusu belirli bir süre sonra silinir ya da kişi onu bir daha hiç açmaz.',
+    },
+    {
+      q: 'Bu geçici mail kontrol aracı nasıl çalışır?',
+      a: "Araç adresi Giggal doğrulama hizmetine gönderir. Hizmette 100.000'den fazla geçici ve tek kullanımlık e-posta alan adından oluşan bir liste vardır. Liste altı saatte bir herkese açık kaynaklardan yeniden oluşturulur ve ekibimiz elle düzeltmeler ekler. Alan adı veya üst alan adı listedeyse araç adresi geçici olarak bildirir. Değilse geçici değil olarak bildirir.",
+    },
+    {
+      q: '"Geçici değil" sonucu adresin geçerli olduğu anlamına mı gelir?',
+      a: 'Hayır. Alan adının bilinen bir geçici e-posta servisi olmadığı anlamına gelir. Posta kutusu yine de var olmayabilir. Bunu kontrol etmek için adresi ücretsiz mail adresi doğrulama aracında kontrol edin. Bu araç posta kutusunu canlı olarak kontrol eder ve adresin e-posta alıp alamayacağını söyler.',
+    },
+    {
+      q: 'Geçici bir e-posta adresine gönderim geri döner mi?',
+      a: 'Bazen. Bazı servisler her mesajı kabul eder ve belirli bir süre sonra siler. Diğerleri gelen kutusunu birkaç dakika sonra kapatır ve sonrasında gelen e-postaları reddeder. İki durumda da kişi e-postanızı daha sonra okumaz. Adresi her iki durumda da kullanılamaz sayın.',
+    },
+    {
+      q: 'Bu geçici mail kontrol aracı ücretsiz mi?',
+      a: 'Evet. Kayıt olmadan saatte 5 ücretsiz kontrol yapabilirsiniz. Bir listenin tamamını kontrol etmek için ücretsiz bir hesap açın. Hesapla birlikte 1.000 doğrulama kredisi alırsınız.',
+    },
+    {
+      q: 'Kayıt formlarında geçici mail adreslerini nasıl engellerim?',
+      a: "Giggal'ı formunuza veya uygulamanıza API ya da Zapier entegrasyonu üzerinden bağlayın. Her adres gönderildiği anda kontrol edilir. Adres geçiciyse, hesap oluşturulmadan önce kişiden farklı bir adres isteyebilirsiniz.",
+    },
+    {
+      q: 'Geçici e-posta ile ücretsiz e-posta sağlayıcısı arasındaki fark nedir?',
+      a: 'Gmail, Yahoo veya Outlook gibi ücretsiz bir sağlayıcı, insanlara şifreli ve kalıcı bir posta kutusu verir. Geçici bir servis ise atılmak üzere tasarlanmış geçici bir posta kutusu verir. Giggal geçici adresleri işaretler ve normal ücretsiz posta kutularına dokunmaz.',
+    },
+    {
+      q: 'Geçici e-posta adreslerini toplu olarak kontrol edebilir miyim?',
+      a: 'Evet. Giggal panelinde bir CSV veya TXT dosyası yükleyin. Her adres geçici alan adları, rol tabanlı adresler, catch-all alan adları ve posta kutusunun var olup olmadığı açısından kontrol edilir.',
+    },
+  ],
+  ctaBand: 'Geçici mail adreslerini engelleyin ve listenizi temizleyin',
+  related: [
+    { href: '/email-validation-api', label: "e-posta doğrulama API'si: geçici adreslerle yapılan kayıtları gerçek zamanlı engelleyin" },
+    { href: '/email-checker', label: 'mail adresi doğrulama: bu posta kutusu var mı?' },
+    { href: '/catch-all-verification', label: 'catch-all ve riskli e-posta adreslerini doğrulayın' },
+    { href: '/seg-email-verification', label: 'güvenli e-posta ağ geçitlerinin arkasındaki adresleri doğrulayın' },
+    { href: '/pricing', label: 'fiyatlar, krediler ve paketler' },
+  ],
+  console: {
+    checks: { basic: 'Temel geçerlilik kontrolleri', disposable: 'Geçici alan adı kontrolü' },
+    // Rendered as "{domain} " + this text, so the line reads as a sentence:
+    // "example.com geçici bir e-posta alan adıdır".
+    isDisposable: 'geçici bir e-posta alan adıdır',
+    notDisposable: 'geçici bir e-posta alan adı değildir',
+    disposableText: 'Bu alan adı geçici veya tek kullanımlık bir e-posta servisidir. Bu adresi listenize eklemeyin.',
+    notDisposableText: 'Bu alan adı geçici ve tek kullanımlık e-posta servisleri listesinde yok. Bu sonuç posta kutusunun var olup olmadığını göstermez.',
+    deliverPrompt: 'Bu posta kutusunun var olup olmadığını ve e-posta kabul edip etmediğini öğrenmek için adresi mail adresi doğrulama aracında kontrol edin.',
+    deliverButton: 'Bu adrese e-posta teslim edilebilir mi, kontrol edin',
+    verifierPath: '/tr/mail-adresi-dogrulama',
+    logs: {
+      basicStart: '[BASIC] {email} adresinin biçimi kontrol ediliyor...',
+      basicOk: '[SUCCESS] Adresin biçimi geçerli.',
+      basicFail: '[FAILED] Bu adres geçerli bir e-posta biçiminde değil.',
+      registry: '[DISPOSABLE] {domain} alan adı geçici alan adları listesinde aranıyor...',
+      isDisposable: '[RESULT] {domain} alan adı geçici veya tek kullanımlık bir e-posta servisidir.',
+      notDisposable: '[RESULT] {domain} alan adı bilinen bir geçici e-posta servisi değildir.',
+    },
+  },
+  enSuffix: ' (İngilizce)',
+}
+
+export const CHECKER_STRINGS: Record<Locale, CheckerStrings> = { en, it, de, es, 'pt-br': ptBr, fr, nl, pl, id, ja, ko, tr }

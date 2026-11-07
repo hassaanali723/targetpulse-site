@@ -1539,7 +1539,144 @@ const koTool: BimiToolStrings = {
   },
 }
 
-export const BIMI_TOOL_STRINGS: Record<Locale, BimiToolStrings> = { en, de: deTool, fr: frTool, es: esTool, it: itTool, 'pt-br': ptBrTool, nl: nlTool, pl: plTool, id: idTool, ja: jaTool, ko: koTool }
+const trKb = (byteSize: number) =>
+  (byteSize / 1024).toLocaleString('tr-TR', { minimumFractionDigits: 1, maximumFractionDigits: 1 })
+
+const trTool: BimiToolStrings = {
+  tabRecord: 'Kayıt oluşturucu',
+  tabChecker: 'SVG logo kontrolü',
+  tabReadiness: 'Hazırlık kontrol listesi',
+
+  domainLabel: 'Alan adı',
+  domainPlaceholder: 'example.com',
+  selectorLabel: 'Seçici (selector)',
+  selectorHint: '(varsayılan: default)',
+  selectorWarning: 'default dışında bir seçici kullanırsanız e-postalarda bir BIMI-Selector başlığı gerekir.',
+  logoLabel: 'Logo URL\'si',
+  logoHint: '(https:// ile başlamalı ve .svg ile bitmelidir)',
+  logoPlaceholder: 'https://example.com/bimi/logo.svg',
+  certLabel: 'Sertifika URL\'si',
+  certHint: '(isteğe bağlı, https:// ile başlamalı ve .pem ile bitmelidir)',
+  certPlaceholder: 'https://example.com/bimi/cert.pem',
+  leaveLogoEmpty: 'l= değerini boş bırak (logo sertifikanın içinde)',
+  leaveLogoEmptyHelp: 'Google\'ın örneklerinde iki biçim de yer alır. Bazı sertifikalar logoyu PEM verisinin içinde taşır.',
+  outputTitle: 'Bu DNS TXT kaydını yayımlayın',
+  hostLabel: 'Host / ad',
+  copy: 'Kopyala',
+  copied: 'Kopyalandı',
+  hostShort: 'Alan adını kendisi ekleyen paneller için kısa biçim: {host}',
+  typeLabel: 'Kayıt türü',
+  ttlNote: 'TTL: 3600 (1 saat önerilir)',
+  valueLabel: 'TXT kaydı değeri',
+  zoneLabel: 'Bölge dosyası biçimi',
+
+  checkerTitle: 'SVG logo dosyası yükleyin veya SVG kodunu yapıştırın',
+  uploadButton: 'SVG dosyası yükleyin',
+  pasteLabel: 'Veya SVG işaretlemesini yapıştırın:',
+  previewAlt: 'SVG önizlemesi',
+  passBadge: 'Tüm Tiny PS kurallarını karşılıyor',
+  failBadge: 'Tiny PS kurallarını karşılamıyor',
+  fileSize: (byteSize) => `Dosya boyutu: ${trKb(byteSize)} KB`,
+  passText: 'SVG logonuz e-posta sağlayıcılarının ve sertifika yetkililerinin şartlarını karşılıyor.',
+  failText: 'Yayımlamadan önce logonuzu uygun hâle getirmek için aşağıdaki başarısız maddeleri inceleyin.',
+
+  readinessTitle: 'BIMI kurulumuna hazırlık',
+  readinessIntro: 'Marka logonuzun nerede görüneceğini öğrenmek için karşıladığınız ön koşulları işaretleyin.',
+  dmarcItem: 'DMARC politikası quarantine veya reject',
+  dmarcItemText: 'BIMI, uygulanan bir DMARC politikası gerektirir. Bir kayda mı ihtiyacınız var? {link} aracımızı kullanın.',
+  dmarcLabel: 'DMARC oluşturucu',
+  dmarcHref: '/tr/dmarc-olusturucu',
+  alignItem: 'SPF ve DKIM geçiyor ve hizalı',
+  alignItemText: 'E-posta başlıkları, From adresindeki alan adıyla sorunsuz şekilde doğrulanmalıdır.',
+  logoItem: 'Logo kontrolden geçiyor',
+  logoItemText: 'SVG Tiny PS uyumlu, kare viewBox, script veya raster öğe yok.',
+  certTitle: 'Sertifika düzeyi',
+  certOptions: {
+    none: 'Yok (yalnızca kendi barındırdığınız SVG)',
+    CMC: 'CMC (Common Mark Certificate)',
+    VMC: 'VMC (Verified Mark Certificate)',
+  },
+  whereTitle: 'Logonuzun görünebileceği yerler:',
+  where: {
+    VMC: 'VMC ile: onay işaretiyle Gmail, Apple Mail ve BIMI\'yi destekleyen sağlayıcılar',
+    CMC: 'CMC ile: onay işareti olmadan Gmail. Apple Mail\'de görünmez',
+    none: 'Sertifika olmadan: yalnızca sertifikasız kayıtları kabul eden Yahoo ve Fastmail gibi sağlayıcılar',
+  },
+  prerequisitesNote:
+    'Not: Önce ön koşullar karşılanmalıdır. DMARC politikası quarantine veya reject değilse hiçbir sağlayıcı logonuzu göstermez.',
+
+  urlErrors: {
+    required: 'URL gereklidir',
+    'not-https': 'URL https:// ile başlamalıdır',
+    extension: (extension) => `URL .${extension} ile bitmelidir`,
+    invalid: 'Geçersiz URL biçimi',
+  },
+  checks: {
+    baseProfile: {
+      title: 'Kök öğe, baseProfile değeri tiny-ps olan svg',
+      pass: () => 'Kök öğe baseProfile="tiny-ps" içeren bir <svg> öğesidir.',
+      fail: () => 'Kök <svg> öğesi baseProfile="tiny-ps" tanımlamalıdır.',
+    },
+    version: {
+      title: 'Sürüm 1.2',
+      pass: () => 'SVG version özniteliği 1.2 olarak ayarlanmış.',
+      fail: () => 'Kök <svg> öğesi version="1.2" tanımlamalıdır.',
+    },
+    viewBox: {
+      title: 'viewBox kare',
+      pass: () => 'viewBox genişliği ve yüksekliği aynı.',
+      fail: () => 'SVG viewBox genişliği ve yüksekliği eşit olmalıdır (1:1 en boy oranı).',
+    },
+    'no-root-xy': {
+      title: 'Kök svg öğesinde x veya y özniteliği yok',
+      pass: () => 'Kök <svg> öğesinde x veya y özniteliği yok.',
+      fail: () => 'Kök <svg> etiketi x veya y koordinat öznitelikleri içermemelidir.',
+    },
+    title: {
+      title: 'title öğesi var',
+      pass: () => 'Marka adınızı içeren, boş olmayan bir <title> öğesi var.',
+      fail: () => 'Şirketinizin veya markanızın adını belirten bir <title> öğesi gereklidir.',
+    },
+    filesize: {
+      title: 'Dosya boyutu 32 KB veya daha az',
+      pass: ({ byteSize }) => `Dosya boyutu ${trKb(byteSize)} KB (32 KB sınırının altında).`,
+      fail: ({ byteSize }) => `Dosya boyutu ${trKb(byteSize)} KB. Bu boyut 32 KB sınırını aşıyor.`,
+    },
+    'no-script': {
+      title: 'script öğesi yok',
+      pass: () => 'Çalıştırılabilir bir <script> öğesi bulunamadı.',
+      fail: () => 'Posta kutusu güvenliği nedeniyle Tiny PS içinde komut dosyaları yasaktır.',
+    },
+    'no-image': {
+      title: 'Gömülü raster görsel (image öğesi) yok',
+      pass: () => 'Gömülü raster <image> öğesi bulunamadı.',
+      fail: () => 'Tiny PS yalnızca vektör çizim kabul eder. Raster <image> etiketlerine izin verilmez.',
+    },
+    'no-foreignObject': {
+      title: 'foreignObject yok',
+      pass: () => '<foreignObject> öğesi bulunamadı.',
+      fail: () => 'Tiny PS içinde <foreignObject> öğelerine izin verilmez.',
+    },
+    'no-animation': {
+      title: 'Animasyon öğesi yok',
+      pass: () => 'SVG animasyon öğesi bulunamadı.',
+      fail: () => 'Animasyonlu SVG öğeleri (<animate>, <set> gibi) yasaktır.',
+    },
+    'no-external-ref': {
+      title: 'Harici dosyalara başvuru yok',
+      pass: () => 'Dış URL veya harici dosya başvurusu yok.',
+      fail: () => 'Harici dosya başvurularına veya uzak bağlantılara izin verilmez.',
+    },
+    'text-elements': {
+      title: 'Metin öğeleri',
+      pass: () => 'Ham <text> öğesi bulunamadı.',
+      fail: () =>
+        'Logodaki metin her yerde aynı şekilde görünmeyebilir. Tasarım aracınızda metni dış hatlara (outline) dönüştürün.',
+    },
+  },
+}
+
+export const BIMI_TOOL_STRINGS: Record<Locale, BimiToolStrings> = { en, de: deTool, fr: frTool, es: esTool, it: itTool, 'pt-br': ptBrTool, nl: nlTool, pl: plTool, id: idTool, ja: jaTool, ko: koTool, tr: trTool }
 
 export function bimiToolStrings(locale: Locale): BimiToolStrings {
   return BIMI_TOOL_STRINGS[locale] ?? en

@@ -988,4 +988,89 @@ const ko: DkimPageStrings = {
   ctaHeadline: 'DKIM 설정을 마쳤다면 이메일 리스트도 확인하십시오.',
 }
 
-export const DKIM_PAGE_STRINGS: Record<Locale, DkimPageStrings> = { en, it, de, fr, es, 'pt-br': ptBr, nl, pl, id, ja, ko }
+const tr: DkimPageStrings = {
+  metaTitle: 'DKIM oluşturucu: ücretsiz DKIM anahtarı ve kaydı | Giggal.ai',
+  ogTitle: 'DKIM oluşturucu: ücretsiz DKIM anahtarı ve kaydı',
+  description:
+    'Tarayıcınızda 2048 bitlik bir DKIM anahtar çifti ve yayımlanacak DKIM kaydını oluşturun. Özel anahtarınız hiçbir yere gönderilmez. Ücretsiz, kayıt gerekmez.',
+  ogLocale: 'tr_TR',
+  ogImage: '/og-card.png',
+  ogAlt: 'Ücretsiz DKIM oluşturucu',
+  crumb: 'DKIM oluşturucu',
+  appName: 'Ücretsiz DKIM oluşturucu',
+  featureList: [
+    'Tarayıcıda 2048 bitlik DKIM anahtar çifti oluşturur',
+    'Yayımlamaya hazır, biçimlendirilmiş DNS TXT kaydı',
+    'PKCS#1 ve PKCS#8 özel anahtarlar',
+    'DNS uyumluluğu için 255 karakterlik bölümlere ayırma',
+    'Özel anahtarlar hiçbir sunucuya gönderilmez',
+  ],
+  h1: 'DKIM oluşturucu',
+  heroIntro: 'Bir DKIM anahtar çifti ve yayımlayacağınız DKIM kaydının (DNS TXT kaydı) tam değerini oluşturun.',
+  howTitle: 'Oluşturulan bir anahtarla DKIM nasıl kurulur',
+  howSteps: [
+    'Alan adınızı ve bir seçici (selector) girin, bir anahtar uzunluğu seçin ve DKIM anahtarları oluşturun düğmesine tıklayın.',
+    'DNS sağlayıcınızda bir TXT kaydı oluşturun. Yukarıda gösterilen kayıt adını kullanın (selector._domainkey veya sağlayıcınız isterse tam ad) ve TXT değerini yapıştırın.',
+    'Özel anahtarı, aynı seçici ve alan adıyla, e-posta sunucunuzun DKIM imzalama ayarlarına kurun.',
+    'Kişisel bir Gmail hesabına bir test mesajı gönderin ve Orijinali göster seçeneğini açın. DKIM satırının yanında PASS yazmalıdır.',
+  ],
+  howNote:
+    'Sonuç PASS değilse, DNS kaydının yayımlanmasının tamamlandığını ve sunucudaki seçicinin DNS\'teki seçiciyle tam olarak aynı olduğunu kontrol edin. DKIM\'in SPF ve DMARC ile nasıl birlikte çalıştığını görmek için [SPF, DKIM ve DMARC nedir](/blog/spf-dkim-dmarc-explained) yazısına bakın.',
+  imageAlt: 'Bir e-posta mesajını kriptografik imzayla koruyan genel ve özel anahtarların çizimi.',
+  selectorTitle: 'Seçici ve anahtar uzunluğu seçimi',
+  selectorParas: [
+    'Seçici yalnızca bir etikettir. Bu yüzden daha sonra tanıyacağınız bir ad seçin. s2026a gibi tarihe dayalı bir ad, anahtarları değiştirdiğinizde hangi anahtarın güncel olduğunu açıkça gösterir. Seçici harf, rakam ve kısa çizgi içerebilir.',
+    'Anahtar uzunluğu için 2048 bit güvenli varsayılan değerdir. Gmail en az 1024 bitlik DKIM anahtarları ister ve 2048 bit önerir. RFC 8301 standardı da imzalayanların en az 1024 bit kullanmaları gerektiğini ve 2048 bit kullanmalarının önerildiğini söyler. Aynı RFC, alıcıların 4096 bite kadar anahtarları işleyebilmesini zorunlu tutar. Ancak 4096 bitlik bir kayıt o kadar uzundur ki bazı DNS panelleri bu kayıtta sorun çıkarır. Bu yüzden bu uzunluğu yalnızca bir nedeniniz varsa seçin.',
+  ],
+  recordTitle: 'Bir DKIM kaydında neler bulunur',
+  thTag: 'Etiket',
+  thMeaning: 'Anlamı',
+  thExample: 'Örnek',
+  tags: [
+    { tag: 'v', meaning: 'Sürüm. İsteğe bağlıdır, ancak varsa ilk sırada olmalıdır', example: 'v=DKIM1' },
+    { tag: 'k', meaning: 'Anahtar türü. Varsayılan değer rsa\'dır', example: 'k=rsa' },
+    { tag: 'p', meaning: 'Base64 ile kodlanmış genel anahtar. Boş bir p= değeri, anahtarın iptal edildiği anlamına gelir', example: 'p=MIIBIjAN...' },
+    { tag: 't', meaning: 'İşaretler. y test anlamına gelir. s ise anahtarın alt alan adları için kullanılamayacağı anlamına gelir', example: 't=y' },
+  ],
+  recordNote: 'Üç etiket daha vardır (karma algoritmaları için h, notlar için n ve hizmet türü için s), ancak bunlara nadiren ihtiyaç duyarsınız.',
+  splitTitle: 'Uzun DKIM kayıtları neden bölünür',
+  splitText:
+    '2048 bitlik bir genel anahtar, base64 ile kodlandığında yaklaşık 390 karakter uzunluğundadır. DNS, TXT verilerini her biri en fazla 255 karakterlik dizeler olarak saklar (RFC 1035). Bu yüzden bu uzunlukta bir anahtar iki veya daha fazla dize olarak yayımlanmalıdır. Alıcılar imzayı kontrol etmeden önce bu dizeleri yeniden birleştirir. Çoğu DNS paneli, tek dizelik sürümü yapıştırdığınızda değeri sizin için böler. Yukarıdaki bölge dosyası sürümü, bir BIND bölge dosyasını doğrudan düzenleyen kişiler içindir. Bu sürümde dizeler parantez içinde yer alır, böylece kayıt birkaç satıra yayılabilir.',
+  rotateTitle: 'DKIM anahtarlarını değiştirme',
+  rotateText:
+    'Hiçbir şeyi bozmadan anahtarları değiştirmek için yeni bir seçici altında yeni bir anahtar çifti oluşturun ve kaydını eski kaydın yanında yayımlayın. Sunucunuzu yeni seçiciyle imzalayacak şekilde değiştirin. Eski anahtarla imzalanan e-postalar teslim edildikten sonra eski kaydı kaldırın.',
+  faqTitle: 'Sıkça sorulan sorular',
+  faqs: [
+    {
+      q: 'Bu DKIM oluşturucuyu kullanmak güvenli mi?',
+      a: 'Anahtar çifti, tarayıcınızın yerleşik Web Crypto API\'si ile oluşturulur. Özel anahtar sunucularımıza veya başka bir yere asla gönderilmez. Bu, anahtarı bizim de kurtaramayacağımız anlamına gelir. Bu yüzden sayfadan ayrılmadan önce anahtarı indirin.',
+    },
+    {
+      q: 'Özel anahtar nereye konur?',
+      a: 'E-posta sunucunuzun DKIM imzalama ayarlarına konur, başka hiçbir yere konmaz. Anahtarı asla DNS\'e koymayın veya e-postayla göndermeyin. Yalnızca TXT değerinin içindeki genel anahtar yayımlanır.',
+    },
+    {
+      q: '1024 bit mi, 2048 bit mi kullanmalıyım?',
+      a: 'DNS sağlayıcınız daha uzun kaydı saklayamıyorsa 1024 bit kullanın, aksi hâlde 2048 bit kullanın. Gmail en az 1024 biti kabul eder, ancak 2048 bit önerir. RFC 8301 standardı da imzalayanların en az 2048 bit kullanmasını önerir.',
+    },
+    {
+      q: 'DKIM kaydım neden birkaç dizeye bölünmüş?',
+      a: 'Bir TXT kaydındaki her dize en fazla 255 karakter içerebilir ve 2048 bitlik bir anahtar bundan daha uzundur. Alıcılar dizeleri yeniden tek bir değerde birleştirir. Bu yüzden bölme işlemi kaydı değiştirmez.',
+    },
+    {
+      q: 'Hangi özel anahtar biçimini kullanmalıyım?',
+      a: 'Birçok imzalama aracı standart PKCS#8 dosyasını (BEGIN PRIVATE KEY) kabul eder. Aracınız BEGIN RSA PRIVATE KEY istiyorsa bunun yerine PKCS#1 sürümünü indirin. Bu, aynı anahtarın daha eski bir biçimidir.',
+    },
+    {
+      q: 'DKIM\'in çalıştığını nasıl kontrol ederim?',
+      a: 'Sunucunuzdan kişisel bir Gmail hesabına bir mesaj gönderin, mesajı açın ve Orijinali göster seçeneğini seçin. Gmail, DKIM sonucunu üst kısımda listeler. Alan adınız için PASS görmeniz gerekir.',
+    },
+    {
+      q: 'Bu anahtarı Google Workspace veya Microsoft 365 ile kullanabilir miyim?',
+      a: 'Hayır. İkisi de kendi DKIM anahtarlarını oluşturur. Bu yüzden yönetim konsollarındaki kurulumu kullanın. Bu araç, imzalama anahtarını sizin kontrol ettiğiniz sunucular içindir.',
+    },
+  ],
+  ctaHeadline: 'DKIM hazır mı? Sırada listeniz var.',
+}
+
+export const DKIM_PAGE_STRINGS: Record<Locale, DkimPageStrings> = { en, it, de, fr, es, 'pt-br': ptBr, nl, pl, id, ja, ko, tr }

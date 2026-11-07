@@ -1331,6 +1331,115 @@ const ko: EmailSignaturePageStrings = {
   ctaHeadline: '서명을 만들었다면, 받는 사람의 이메일 주소도 확인하십시오.',
 }
 
+const tr: EmailSignaturePageStrings = {
+  metaTitle: 'Ücretsiz mail imzası oluşturma: Gmail ve Outlook | Giggal.ai',
+  ogTitle: 'Ücretsiz mail imzası oluşturma: Gmail ve Outlook',
+  description:
+    'Gmail, Outlook ve Apple Mail için ücretsiz mail imzası oluşturma. Şablon seçin, bilgilerinizi ekleyin, tek tıkla kopyalayın. Kayıt ve filigran yok.',
+  ogLocale: 'tr_TR',
+  ogImage: '/tools/email-signature-generator-og-v2.webp',
+  ogAlt: 'Ücretsiz mail imzası oluşturma aracı',
+  crumb: 'Mail imzası oluşturma',
+  appName: 'Ücretsiz mail imzası oluşturma aracı',
+  featureList: [
+    'Gmail, Outlook ve Apple Mail için tablo tabanlı HTML imzalar oluşturun',
+    'Özel vurgu renkleri ve yazı tipleriyle 4 duyarlı şablon arasından seçim yapın',
+    'Biçimli HTML olarak kopyalayın veya mobil uygulamalar için düz metin olarak alın',
+    'Gmail\'in 10.000 karakter sınırında kalmak için anlık karakter sayacı',
+    'Tamamen tarayıcıda çalışır, izleme yapmaz ve veri saklamaz',
+  ],
+  h1: 'Ücretsiz mail imzası oluşturma',
+  heroIntro: 'Bilgilerinizi girin, bir düzen seçin ve Gmail, Outlook ve Apple Mail\'de çalışan bir mail imzasını kopyalayın.',
+  howTitle: 'Mail imzası nasıl yapılır',
+  howSteps: [
+    'Göstermek istediğiniz bilgileri doldurun. İsteğe bağlı bir alanı boş bırakırsanız o alan düzenden kalkar.',
+    'Bir şablon ve bir vurgu rengi seçin, ardından önizlemeyi kontrol edin.',
+    'Logonuzu veya fotoğrafınızı, görselin bağlantısını yapıştırarak ekleyin. Görsel, şirketinizin web sitesi gibi herkese açık bir HTTPS adresinde barındırılmalıdır.',
+    'İmzayı kopyalayın düğmesine tıklayın ve imzayı e-posta uygulamanızın imza ayarlarına yapıştırın. Her uygulama için adımlar aşağıdadır.',
+  ],
+  imageAlt: 'Profil fotoğrafı, iletişim bilgileri ve sosyal medya simgeleri içeren profesyonel bir e-posta imzası düzeninin çizimi.',
+  addTitle: 'Mail imzası nasıl eklenir: Gmail, Outlook ve Apple Mail',
+  addParas: [
+    'Web\'de Gmail: Ayarlar menüsünü açın, ardından Tüm ayarları görün seçeneğini seçin. Genel sekmesinde İmza bölümünü bulun, Yeni oluştur düğmesine tıklayın, imzaya bir ad verin ve yapıştırın. Sayfanın en altına inin ve Değişiklikleri Kaydet düğmesine tıklayın.',
+    'Outlook: Web\'de Outlook veya yeni Outlook uygulamasında Ayarlar, Hesaplar ve İmzalar bölümlerini sırayla açın. İmzayı yapıştırın, bir ad verin ve kaydedin. Windows için klasik Outlook uygulamasında Dosya, Seçenekler, Posta, İmzalar yolunu izleyin.',
+    'Apple Mail: Mail menüsünden Ayarlar bölümünü (eski sürümlerde Tercihler), ardından İmzalar sekmesini açın. Hesabı seçin, artı düğmesine tıklayın ve yapıştırın. Biçimlendirme değişirse “Always match my default message font” (her zaman varsayılan ileti yazı tipimle eşleştir) seçeneğinin işaretini kaldırın.',
+  ],
+  worksTitle: 'Her mail uygulamasında düzgün görünen bir imzanın özellikleri',
+  worksParas: [
+    'Önemli bilgileri metin olarak tutun. Outlook, okuyucu izin verene kadar görselleri çoğu zaman engeller. Bu yüzden tek bir büyük görselden oluşan bir imza boş görünebilir. Metin olarak yazılan adınız, telefon numaranız ve web siteniz her zaman görünür.',
+    'İmzayı kısa tutun. Gmail bir imzayı 10.000 karakterle sınırlar ve görseller de bu sınıra dahildir. Yukarıdaki sayaç, sınıra ne kadar yakın olduğunuzu gösterir.',
+    'Görselleri küçük tutun ve bir sunucuda barındırın. Google, imza görselleri için yaklaşık 300 ila 400 piksel genişlik ve 70 ila 100 piksel yükseklik önerir. Görseller herkese açık bir bağlantıdan yüklenmelidir. Şirket içi bir sunucudaki veya giriş gerektiren bir yerdeki dosyalar, şirketiniz dışındaki kişilere görünmez.',
+    'Telefonlarda düz metin bekleyin. Gmail mobil uygulaması yalnızca düz metin imzaları destekler. Bu yüzden orada düz metin kopyasını kullanın.',
+    'İmza, kapanış ifadenizin altında yer alır. Hangi kapanış ifadesini ve üstündeki son cümleyi kullanacağınızı görmek için [mail nasıl bitirilir](/blog/how-to-end-an-email) yazısına bakın.',
+  ],
+  examplesTitle: 'Profesyonel mail imzası örnekleri',
+  whenLabel: 'Ne zaman kullanılır:',
+  examples: {
+    simple: {
+      title: '1. Sade',
+      name: 'Ayşe Yılmaz',
+      role: 'Müşteri İlişkileri Yöneticisi, Örnek Teknoloji A.Ş.',
+      contact: '+90 212 000 00 00 · example.com',
+      when: 'azın daha iyi olduğu günlük e-postalar.',
+    },
+    cta: {
+      title: '2. Eylem çağrısıyla',
+      name: 'Ayşe Yılmaz',
+      role: 'Müşteri İlişkileri Yöneticisi, Örnek Teknoloji A.Ş.',
+      phone: '+90 212 000 00 00',
+      button: '15 dakikalık bir görüşme planlayın',
+      when: 'yanıtların toplantıya dönüşmesini istediğiniz satış ve müşteri yönetimi işleri.',
+    },
+    logo: {
+      title: '3. Logolu',
+      logo: 'LOGO',
+      name: 'Can Demir',
+      role: 'İş Ortaklıkları Direktörü / Example Inc.',
+      contact: '+90 312 000 44 77 · example.com',
+      when: 'markanızın insanların sizi tanımasına yardımcı olduğu durumlar.',
+    },
+    shared: {
+      title: '4. Ortak gelen kutusu',
+      name: 'Örnek Destek Ekibi',
+      link: 'help.example.com',
+      hours: 'Pazartesi ila Cuma, 09.00 ila 17.00 (TSİ)',
+      when: 'support@ gibi, imzayı tek bir kişinin atmadığı ekip adresleri.',
+    },
+  },
+  faqTitle: 'Sıkça sorulan sorular',
+  faqs: [
+    {
+      q: 'Bu mail imzası oluşturma aracı ücretsiz mi?',
+      a: 'Evet. Kayıt gerekmez, filigran yoktur ve oluşturabileceğiniz imza sayısında bir sınır yoktur.',
+    },
+    {
+      q: 'İmzada Giggal\'a bir bağlantı yer alıyor mu?',
+      a: 'Yalnızca bu seçeneği işaretlerseniz yer alır. Seçenek varsayılan olarak kapalıdır.',
+    },
+    {
+      q: 'Logom neden görünmüyor?',
+      a: 'Görsel bağlantısı herkese açık olmalı ve https ile başlamalıdır. Şirket içi sunuculardaki, özel bulut klasörlerindeki veya giriş gerektiren yerlerdeki dosyaların bağlantıları alıcılarda yüklenmez. Bazı uygulamalar, özellikle Outlook, okuyucu izin verene kadar görselleri de gizler.',
+    },
+    {
+      q: 'Logomu buraya yükleyebilir miyim?',
+      a: 'Henüz değil. Zaten internette olan bir görselin bağlantısını yapıştırın. Gmail\'de imza düzenleyicisinin içinden Google Drive\'dan veya bilgisayarınızdan da görsel ekleyebilirsiniz.',
+    },
+    {
+      q: 'Kurumsal bir mail imzasında neler olmalı?',
+      a: 'Çoğu kişi için adınız, unvanınız, şirketiniz ve size ulaşmanın bir veya iki yolu yeterlidir. Okuyucuya faydalı olacaksa bir logo, bir fotoğraf veya tek bir bağlantı ekleyin. Alıntıları, uzun yasal uyarıları ve kullandığınız her sosyal ağı eklemeyin.',
+    },
+    {
+      q: 'İmzam telefonumda neden farklı görünüyor?',
+      a: 'Birçok telefon e-posta uygulaması imzaları düz metin olarak gösterir. Gmail uygulaması ise yalnızca düz metni destekler. Mobil için düz metin kopyasını kullanın.',
+    },
+    {
+      q: 'Bilgilerim herhangi bir yerde saklanıyor mu?',
+      a: 'Hayır. Oluşturucu tarayıcınızda çalışır ve bilgileriniz sunucularımıza kaydedilmez.',
+    },
+  ],
+  ctaHeadline: 'İmzanız hazır mı? Şimdi kime yazdığınızı kontrol edin.',
+}
+
 export const EMAIL_SIGNATURE_PAGE_STRINGS: Partial<Record<Locale, EmailSignaturePageStrings>> & {
   en: EmailSignaturePageStrings
-} = { en, 'pt-br': ptBr, de, fr, es, it, nl, pl, id, ja, ko }
+} = { en, 'pt-br': ptBr, de, fr, es, it, nl, pl, id, ja, ko, tr }

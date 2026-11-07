@@ -114,7 +114,9 @@ export function websiteBounce(sessions: number, engaged: number): WebsiteBounceR
 }
 
 /** 2 decimals below 10%, 1 decimal above, with trailing zeros removed. */
-export function formatPct(n: number): string {
-  const s = n.toFixed(n < 10 ? 2 : 1)
-  return `${s.replace(/\.?0+$/, '')}%`
+// Turkish writes the percent sign first with a decimal comma (%2,5); every
+// other locale keeps the existing "2.5%" output.
+export function formatPct(n: number, locale?: string): string {
+  const s = n.toFixed(n < 10 ? 2 : 1).replace(/\.?0+$/, '')
+  return locale === 'tr' ? `%${s.replace('.', ',')}` : `${s}%`
 }

@@ -658,7 +658,60 @@ const koTool: ExtractorToolStrings = {
   csvHeader: 'Email,Domain,Top-Level Domain',
 }
 
-export const EXTRACTOR_TOOL_STRINGS: Record<Locale, ExtractorToolStrings> = { en, de: deTool, fr: frTool, es: esTool, it: itTool, 'pt-br': ptBrTool, nl: nlTool, pl: plTool, id: idTool, ja: jaTool, ko: koTool }
+const trTool: ExtractorToolStrings = {
+  inputLabel: 'Metni yapıştırın veya dosyaları bırakın',
+  clearAll: 'Tümünü temizle',
+  dropBefore: 'Dosyaları buraya bırakın veya ',
+  dropLink: 'dosya seçin',
+  dropAfter: '',
+  supports: 'TXT, CSV, TSV, XLSX, XLS, HTML, JSON, EML, VCF ve log dosyalarını destekler',
+  placeholder: 'Ham metin, HTML kaynak kodu, belge içeriği veya anna@example.com gibi adresler içeren kişi listelerini yapıştırın...',
+  processing: 'Arka planda işleniyor...',
+  readingFiles: 'Dosyalar okunuyor...',
+  readingFile: (name, index, total) => `${name} okunuyor (${index}/${total})...`,
+  fileError: 'Yüklenen dosyalardan biri okunamadı. Dosya biçimini kontrol edin.',
+  optDeduplicate: 'Yinelenenleri kaldır',
+  optLowercase: 'Adresin tamamını küçük harfe çevir',
+  optWrittenOut: 'Yazıyla yazılmış adresleri dönüştür ([at], [dot])',
+  optHideRole: 'Rol tabanlı adresleri gizle (info@, support@)',
+  sortLabel: 'Sırala:',
+  sortNone: 'Bulunma sırası',
+  sortAlpha: 'Alfabetik (A-Z)',
+  sortDomain: 'Alan adına göre',
+  domainFilters: 'Alan adı filtreleri',
+  includeLabel: 'Yalnızca bu alan adlarını dahil et (virgülle ayırın):',
+  includePlaceholder: 'ör. example.com, company.com',
+  excludeLabel: 'Bu alan adlarını hariç tut (virgülle ayırın):',
+  excludePlaceholder: 'ör. mailinator.com, tempmail.com',
+  uniqueAddresses: 'Benzersiz adres',
+  addressesListed: 'Listelenen adres',
+  totalDetected: 'Toplam bulunan',
+  copied: 'Kopyalandı',
+  copyList: 'Listeyi kopyala',
+  copyComma: 'Virgülle ayırarak kopyala',
+  downloadTxt: 'TXT indir',
+  downloadCsv: 'CSV indir',
+  topDomains: 'En çok bulunan alan adları:',
+  moreDomains: (n) => `+${n.toLocaleString('tr-TR')} alan adı daha`,
+  thIndex: '#',
+  thEmail: 'E-posta adresi',
+  thDomain: 'Alan adı',
+  thTld: 'TLD',
+  showing: (from, to, total) =>
+    `${from.toLocaleString('tr-TR')} ila ${to.toLocaleString('tr-TR')} gösteriliyor (toplam ${total.toLocaleString('tr-TR')})`,
+  nextTitle: 'Sonraki adım: göndermeden önce bu adresleri doğrulayın',
+  nextText:
+    'Bir adresi bulmak, posta kutusunun var olup olmadığını göstermez. 1.000 ücretsiz krediyle adreslerin geçerli olup olmadığını kontrol edin veya listenin tamamını temizleyin.',
+  verifyButton: 'Bu adresleri doğrulayın',
+  checkOneButton: 'Tek bir adresi kontrol edin',
+  checkOneHref: '/tr/mail-adresi-dogrulama',
+  noResults: 'Mevcut filtre ayarlarıyla hiç geçerli e-posta adresi bulunamadı.',
+  fileTxt: 'ayiklanan-e-postalar.txt',
+  fileCsv: 'ayiklanan-e-postalar.csv',
+  csvHeader: 'E-posta,Alan adı,TLD',
+}
+
+export const EXTRACTOR_TOOL_STRINGS: Record<Locale, ExtractorToolStrings> = { en, de: deTool, fr: frTool, es: esTool, it: itTool, 'pt-br': ptBrTool, nl: nlTool, pl: plTool, id: idTool, ja: jaTool, ko: koTool, tr: trTool }
 
 export function extractorToolStrings(locale: Locale): ExtractorToolStrings {
   return EXTRACTOR_TOOL_STRINGS[locale] ?? en

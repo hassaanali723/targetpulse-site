@@ -2761,6 +2761,249 @@ const ko: SpfPageStrings = {
   ctaHeadline: '보내기 전에 이메일 주소를 검사하십시오',
 }
 
+const tr: SpfPageStrings = {
+  metaTitle: 'SPF kaydı kontrol ve oluşturma: ücretsiz SPF aracı | Giggal.ai',
+  ogTitle: 'SPF kaydı kontrol ve oluşturma: ücretsiz SPF aracı',
+  description:
+    'Alan adınızın SPF kaydını ücretsiz kontrol edin. Bölümlerin anlamını görün, DNS sorgularını 10 sınırına göre sayın, hataları bulun veya yeni kayıt oluşturun.',
+  ogLocale: 'tr_TR',
+  ogImage: '/og-card.png',
+  ogAlt: 'Ücretsiz SPF kaydı kontrol ve oluşturma aracı',
+  crumb: 'SPF kaydı kontrolü',
+  appName: 'Ücretsiz SPF kaydı kontrol ve oluşturma aracı',
+  featureList: [
+    'Her alan adının SPF kaydını kontrol eder',
+    'Kaydın her bölümünü sade Türkçeyle açıklar',
+    'İç içe include kayıtları dahil DNS sorgularını 10 sınırına göre sayar',
+    'Birden fazla kayıt, boş sorgular, +all, ptr ve yazım hatalarını işaretler',
+    'Yaygın e-posta hizmetlerinden oluşan bir listeden yeni bir SPF kaydı oluşturur',
+  ],
+  h1: 'SPF kaydı kontrol ve oluşturma aracı',
+  heroIntro:
+    'Herhangi bir alan adının SPF kaydını kontrol edin veya yeni bir kayıt oluşturun. SPF kontrol aracı kaydın her bölümünü açıklar ve DNS sorgularını 10 sınırına göre sayar.',
+  howTitle: 'SPF kaydı nasıl kontrol edilir',
+  howSteps: [
+    'Yukarıdaki kutuya bir alan adı yazın. Tam bir e-posta adresi de kullanabilirsiniz. Araç yalnızca alan adını alır.',
+    'SPF kaydını kontrol edin düğmesine tıklayın. SPF kontrolü canlı kaydı herkese açık DNS\'ten okur. Bu, alıcı bir sunucunun okuduğu kayıtla aynıdır.',
+    'Önce özeti okuyun. Özet, kaydın geçerli olup olmadığını, uyarı içerip içermediğini veya hatalı olup olmadığını söyler.',
+    'Ardından varsa sorunların listesini okuyun. Her sorun neyin değiştirilmesi gerektiğini söyler.',
+    'Bunun altında kaydın her bölümü, kullandığı DNS sorgularıyla birlikte açıklanır. Arkasındaki hizmetin neye izin verdiğini görmek için bir include kaydını açın.',
+  ],
+  howNote:
+    'Adres çubuğunuzdaki bağlantı aynı SPF kontrolünü tekrar çalıştırır. Bu yüzden bağlantıyı bir iş arkadaşınıza veya DNS sağlayıcınıza gönderebilirsiniz. Bir sınır var: alıcı sunucu SPF\'yi, mesajı gönderen sunucunun IP adresine göre kontrol eder. Bu SPF analiz aracının bakabileceği bir mesaj yoktur. Bu yüzden kaydın kendisini kontrol eder. Her gönderen sunucu için değişen SPF makrolarıyla oluşturulmuş bölümleri değerlendiremez.',
+  imageAlt: 'Bölümlerine ayrılmış bir SPF kaydının ve 10 üzerinden kullanılan DNS sorgularını gösteren bir sayacın çizimi.',
+  whatTitle: 'SPF kaydı nedir?',
+  whatIntro:
+    'SPF kaydı, bir alan adının DNS ayarlarındaki bir TXT kaydıdır. Bu alan adı adına e-posta gönderebilecek sunucuları listeler. SPF, Sender Policy Framework ifadesinin kısaltmasıdır. Kurallar [RFC 7208](https://www.rfc-editor.org/rfc/rfc7208) standardında yer alır. Google Workspace kullanan bir alan adında genellikle buna benzer bir kayıt bulunur:',
+  whatAfter: [
+    '`v=spf1`, kaydı bir SPF kaydı olarak işaretler. `include:_spf.google.com`, Google\'ın kendi listesindeki her sunucuya izin verir. `~all`, alıcı sunuculara diğer sunuculardan gelen e-postalara şüpheyle yaklaşmalarını söyler.',
+    'Bir mesaj geldiğinde alıcı sunucu, alan adını Return-Path adı verilen bounce adresinden alır. Bu alan adının SPF kaydını okur ve gönderen sunucunun IP adresinin listede olup olmadığını kontrol eder. SPF, gelen kutunuzda gördüğünüz From adresine bakmaz. Bu yüzden DKIM ve DMARC ile birlikte çalışır. Üçünün nasıl bir arada çalıştığını görmek için [SPF, DKIM ve DMARC nedir](/blog/spf-dkim-dmarc-explained) yazısına bakın.',
+    'Şubat 2024\'ten beri [Gmail her gönderenden SPF veya DKIM istiyor](https://support.google.com/a/answer/81126). Toplu gönderim yapanlardan ise ikisini birden istiyor. Yahoo da aynı kuralları uyguluyor.',
+  ],
+  partsTitle: 'Bir SPF kaydının her bölümü ne anlama gelir',
+  partsIntro:
+    'Bir SPF kaydı, boşluklarla ayrılmış ifadelerden oluşan bir listedir. Alıcı sunucular bu ifadeleri soldan sağa okur ve gönderen sunucuyla eşleşen ilk ifadede durur.',
+  thPart: 'Bölüm',
+  thDoes: 'Ne işe yarar',
+  thLookup: 'DNS sorgusu',
+  lookupLabel: 'DNS sorgusu: ',
+  parts: [
+    { part: 'v=spf1', does: 'TXT kaydını SPF olarak işaretler. İlk sırada ve tam olarak bu şekilde yazılmalıdır.', lookup: 'Hayır' },
+    { part: 'ip4:192.0.2.10', does: 'Tek bir IPv4 adresine veya 192.0.2.0/24 gibi bir aralığa izin verir.', lookup: 'Hayır' },
+    { part: 'ip6:2001:db8::/32', does: 'Tek bir IPv6 adresine veya aralığına izin verir.', lookup: 'Hayır' },
+    { part: 'a', does: 'Alan adının kendi IP adreslerine veya iki nokta üst üsteden sonra belirttiğiniz bir alan adının IP adreslerine izin verir.', lookup: 'Evet' },
+    { part: 'mx', does: 'Alan adının MX kayıtlarındaki sunuculara, yani alan adının e-postalarını alan sunuculara izin verir.', lookup: 'Evet' },
+    { part: 'include:_spf.google.com', does: 'Başka bir alan adının SPF kaydının izin verdiği her sunucuya izin verir. Bir hizmeti bu şekilde eklersiniz.', lookup: 'Evet, ayrıca kendi sorguları' },
+    { part: 'exists:%{i}.example.com', does: 'Bir DNS sorgusu bir adres bulduğunda eşleşir. Büyük gönderenler bunu makrolarla birlikte kullanır.', lookup: 'Evet' },
+    { part: 'ptr', does: 'Ters DNS ile eşleştirir. RFC 7208, yavaş ve güvenilmez olduğu için kullanılmamasını söyler.', lookup: 'Evet' },
+    { part: '~all veya -all', does: 'Listelemediğiniz her sunucuya ne olacağını belirler. Kaydın sonuna yazılır.', lookup: 'Hayır' },
+    { part: 'redirect=example.net', does: 'Bu kaydın yerine başka bir alan adının SPF kaydını kullanır. Kayıtta all varsa yok sayılır.', lookup: 'Evet' },
+  ],
+  partsAfter: [
+    'Her bölüm, eşleştiğinde sonucu belirleyen bir niteleyiciyle başlayabilir. `+` geçer (pass) anlamına gelir ve varsayılandır. Bu yüzden kimse yazmaz. `-` başarısız (fail), `~` soft fail, `?` ise nötr (neutral) anlamına gelir. Bu yüzden aynı all kelimesi bir kaydı `-all`, `~all` veya `?all` olarak bitirebilir.',
+    'Adlar büyük ve küçük harfe duyarlı değildir. Bu yüzden `Include:` da `include:` gibi çalışır. RFC 7208, her kaydın all veya bir redirect ile bitmesini önerir. İkisi de yoksa listelemediğiniz sunucular nötr sonuç alır.',
+  ],
+  limitTitle: '10 DNS sorgusu sınırı',
+  limitParas: [
+    'Her include, a, mx, ptr, exists ve redirect, alıcı sunucunun bir DNS sorgusu yapmasına yol açar. RFC 7208 toplamda 10 sorguya izin verir. Bir include içindeki sorgular da sayılır. Bu yüzden tek bir include birkaç sorgu kullanabilir. ip4, ip6 ve all sorgu kullanmaz. Bir kayıt 10\'dan fazla sorgu gerektirdiğinde alıcı sunucular durur ve permerror döndürür. Bu durumda SPF kontrolü başarısız olur.',
+    'Bu sınıra ulaşmak kolaydır. Yaygın include kayıtlarının maliyetini canlı DNS üzerinden ölçtük: Google Workspace 1, Microsoft 365 1, Salesforce 2, Mailgun 5 ve Freshdesk 7. Google Workspace kullanan ve Mailgun ile Freshdesk ekleyen bir şirket şimdiden 13 sorguya ihtiyaç duyar. .com, .net, .org ve .se alan adlarındaki [SPF kayıtları üzerine 2024\'te yapılan bir çalışma](https://www.usenix.org/conference/usenixsecurity24/presentation/ashiq), kayıtların %6,5\'inin 10\'dan fazla sorgu gerektirdiğini buldu. Bu durumların %83,7\'sine yalnızca iki barındırma sağlayıcısının kayıtlarına yapılan include ifadeleri yol açıyordu.',
+    'Maliyetler de değişir. Google\'ın include kaydı Aralık 2025\'e kadar 4 sorgu kullanıyordu. O tarihte [Google iç içe include kayıtlarını düz bir listeyle değiştirdi](https://www.uriports.com/blog/google-simplifies-its-spf-record/). Bazı SPF rehberleri ve oluşturucuları hâlâ 4 diyor. Yukarıdaki kontrol aracı, her çalıştırdığınızda gerçek sayıyı sayar.',
+    'Sınırı aşmak her mesajı her zaman bozmaz. [Microsoft\'un belirttiği gibi](https://learn.microsoft.com/en-us/defender-office-365/email-authentication-spf-configure) alıcı sunucular ilk eşleşmede durur. Kayıtta başta listelenen bir sunucudan gelen e-postalar yine de geçebilir. Sonda listelenen bir sunucudan gelen e-postalar ise başarısız olur. Bu da sorunun rastgele görünmesine yol açar. Bu yüzden kaydın tamamını sayın.',
+    'İkinci bir sınır daha vardır. Hiçbir şey bulamayan bir sorgu boş sorgudur (void lookup). Örneğin artık var olmayan bir alan adına yapılan bir include buna girer. RFC 7208, alıcı sunucuların bu sorgulardan 2 tanesinden sonra durması gerektiğini söyler.',
+  ],
+  underTitle: '10 sorgunun altına nasıl inilir',
+  underSteps: [
+    'Artık kullanmadığınız hizmetlerin include kayıtlarını kaldırın.',
+    'Bir hizmetin artık istemediği include kayıtlarını kaldırın. Mailchimp, Postmark, Brevo ve Klaviyo ana alan adınızda include kaydına ihtiyaç duymaz. SendGrid ve Amazon SES ise kendi kayıtlarını bir alt alan adına koyar. Liste aşağıdadır.',
+    'Kendi sunucularınızı a veya mx yerine ip4 ve ip6 ile listeleyin. RFC 7208 bu sırayı önerir ve IP adresleri sorgu kullanmaz.',
+    'E-postaların bir kısmını news.example.com gibi bir alt alan adından gönderin. Her alt alan adının kendi kaydı ve kendi 10 sorgusu vardır.',
+  ],
+  underNote:
+    'Bazı hizmetler SPF düzleştirme (flattening) sunar. Bu yöntem include kayıtlarını, arkalarındaki IP adresleriyle değiştirir. Sorgu tasarrufu sağlar, ancak sağlayıcılar adreslerini değiştirir ve düzleştirilmiş bir kayıt bu değişiklikleri izlemez. Microsoft, yalnızca sabit ve belgelenmiş IP aralıkları olan hizmetlerin düzleştirilmesini önerir. Microsoft 365\'in kendisinin asla düzleştirilmemesini ve sonucun en az üç ayda bir kontrol edilmesini tavsiye eder.',
+  servicesTitle: 'Google Workspace, Microsoft 365 ve diğer hizmetler için SPF include değerleri',
+  servicesIntro:
+    'Bunlar, her hizmetin kurulum rehberindeki include değerleri ve her birinin kullandığı DNS sorgularıdır. Maliyetleri 12 Ekim 2026 tarihinde canlı DNS üzerinden ölçtük. Bir hizmeti kurarken değeri hizmetin kendi rehberinden kopyalayın, çünkü bazı değerler bölgenize veya hesabınıza göre değişir.',
+  thService: 'Hizmet',
+  thInclude: 'Include',
+  thLookups: 'Sorgu',
+  lookupCount: (n) => `${n} sorgu`,
+  servicesNote:
+    'HubSpot her hesaba hubspotemail.net ile biten kendi include değerini verir. Bu değeri HubSpot e-posta ayarlarınızdan kopyalayın. 1 sorgu kullanır.',
+  notNeededTitle: 'Genellikle include gerektirmeyen hizmetler',
+  notNeededIntro:
+    'SPF, From adresine göre değil, bounce adresine göre kontrol edilir. Birçok gönderim hizmeti artık kendi bounce adresini veya sizin alan adınızın bir alt alan adını kullanıyor. Bu hizmetler için ana alan adınıza eklenen bir include, sorgu harcamaktan başka bir işe yaramaz.',
+  notNeededAfter: 'Kontrol aracı bu include kayıtlarını kaydınızda bulduğunda işaretler.',
+  createTitle: 'SPF kaydı nasıl oluşturulur',
+  createIntro:
+    'Bir SPF kaydı oluşturmak için yukarıdaki Oluştur sekmesini kullanın. E-postalarınızı gönderen hizmetleri işaretleyin. SPF kaydı oluşturucu kaydı yazar ve sorgularını sayar. Alan adınızın zaten bir kaydı varsa, önce bu kaydı yükleyin. Böylece kaydı değiştirmek yerine kayda ekleme yaparsınız. Arkasındaki adımlar şunlardır:',
+  createSteps: [
+    'Alan adınız adına e-posta gönderen her hizmeti listeleyin. E-posta sağlayıcınızın ötesini düşünün: bültenler, CRM sisteminiz, destek masası, faturalama, web sitesi formları. DMARC raporları unuttuğunuz gönderenleri gösterir.',
+    'Her hizmetin include değerini kurulum rehberinde bulun veya araçta işaretleyin. Kendi e-posta sunucularınız için IP adreslerini kullanın.',
+    'Kaydın sonunu seçin: ~all veya -all. Bir sonraki bölüm farkı açıklar.',
+    'Kaydı, alan adının kendisinde tek bir TXT kaydı olarak yayımlayın. Çoğu DNS sağlayıcısı bu ada @ der. v=spf1 ile başlayan bir kayıt zaten varsa, ikinci bir kayıt eklemek yerine mevcut kaydı düzenleyin.',
+    'Birkaç dakika bekleyin ve alan adını SPF kontrol aracıyla tekrar kontrol edin.',
+  ],
+  createParas: [
+    'E-posta gönderen her adın kendi kaydına ihtiyacı vardır, çünkü alt alan adları üst alan adının kaydını kullanmaz. Hiç e-posta göndermeyen bir alan adı veya alt alan adı da bir kayıt almalıdır: `v=spf1 -all`. RFC 7208 bunu yerleşik bir en iyi uygulama olarak tanımlar. Bu kayıt, başkalarının bu ad adına geçerli görünen e-posta göndermesini engeller. [Birleşik Krallık NCSC](https://www.ncsc.gov.uk/blog-post/protecting-parked-domains), bu tür alan adlarına p=reject içeren bir DMARC kaydı ve bir null MX kaydı eklenmesini de önerir.',
+    '255 karakterden uzun bir kayıt, aynı TXT kaydının içinde birkaç dizeye bölünmelidir. Alıcı sunucular dizeleri boşluk olmadan birleştirir. Bu yüzden boşluğu dizelerin arasına değil, bir dizenin içine koyun. DNS sağlayıcınızın uzun değerleri nasıl işlediğini kontrol edin.',
+  ],
+  endingTitle: '~all mı, -all mı: kayıt hangisiyle bitmeli',
+  endingIntro: 'Büyük sağlayıcılar bu konuda aynı fikirde değildir ve her birinin bir gerekçesi vardır.',
+  endingList: [
+    '[Google](https://knowledge.workspace.google.com/admin/security/set-up-spf) ~all önerir.',
+    '[M3AAWG](https://www.m3aawg.org/sites/default/files/m3aawg-email-authentication-recommended-best-practices-09-2020.pdf), üyeleri arasında büyük e-posta sağlayıcıları ve gönderenlerin bulunduğu bir sektör grubudur. Kayıtların ~all ile bitmesi gerektiğini söyler. Ayrıca alıcı sunuculardan, DMARC kontrolü yapılana kadar SPF fail sonucu nedeniyle e-postaları reddetmemelerini ister.',
+    '[Microsoft](https://learn.microsoft.com/en-us/defender-office-365/email-authentication-spf-configure), DKIM ve DMARC da kurulu olduğu sürece -all önerir.',
+  ],
+  endingParas: [
+    '-all ile ilgili risk, bazı alıcı sunucuların mesajı teslim sırasında, DMARC kontrol edilmeden önce reddetmesidir. 2026 DMARC standardı olan [RFC 9989](https://www.rfc-editor.org/rfc/rfc9989), bu tür e-postaların DMARC raporlarınızda hiç görünmediğini belirtir. Bu da sorunları bulmayı zorlaştırır.',
+    'Uygulamada, e-posta gönderen bir alan adı için ~all daha güvenli seçimdir. Bu durum özellikle tüm gönderenlerinizi hâlâ belirlemeye çalışırken geçerlidir. DMARC politikanız quarantine veya reject ise, başarısız e-postalara ne olacağına zaten DMARC karar verir. Hiç e-posta göndermeyen alan adlarında -all kullanın. Her sunucunun geçmesine izin veren +all ifadesini asla kullanmayın. Hiç kayıt olmamasıyla aynı sayılan ?all ifadesinden de kaçının.',
+  ],
+  resultsTitle: 'SPF kontrol sonucunuz ne anlama gelir',
+  thResult: 'Sonuç',
+  thMeaning: 'Anlamı',
+  thAction: 'Ne yapmalısınız',
+  results: [
+    {
+      result: 'Geçerli SPF kaydı',
+      meaning: 'Tek bir kayıt var, kayıt okunabiliyor, 10 sorgu sınırının içinde ve ~all veya -all ile bitiyor.',
+      action: 'Bir şey yapmanız gerekmez. Sizin adınıza e-posta gönderen yeni bir hizmet ekledikten sonra tekrar kontrol edin.',
+    },
+    {
+      result: 'Çalışan ancak uyarı içeren SPF kaydı',
+      meaning: 'Alıcı sunucular kaydı kullanabilir, ancak bir şey kaydı zayıflatıyor. Örneğin 9 veya 10 sorgu, sonda all olmaması veya ptr.',
+      action: 'Kaydın altında listelenen uyarıları düzeltin. Bu uyarılar, bir hizmet daha eklediğinizde çoğu zaman hataya dönüşür.',
+    },
+    {
+      result: 'SPF kaydı hatalı',
+      meaning: 'Alıcı sunucular permerror alır. Bu yüzden alan adından gelen tüm e-postalar SPF kontrolünden geçemez.',
+      action: 'Listelenen hataları düzeltin. En yaygın hatalar iki kayıt olması ve 10\'dan fazla sorgu olmasıdır.',
+    },
+    {
+      result: 'SPF kaydı alan adını korumuyor',
+      meaning: 'Kayıt +all ile bitiyor veya böyle biten bir kaydı dahil ediyor. Bu yüzden internetteki her sunucu kontrolden geçer.',
+      action: '+all ifadesini ~all veya -all olarak değiştirin.',
+    },
+    {
+      result: 'SPF kaydı yok',
+      meaning: 'Alan adı, v=spf1 ile başlayan hiçbir TXT kaydı yayımlamıyor.',
+      action: 'Oluştur sekmesiyle bir kayıt oluşturun. Hiç e-posta göndermeyen bir alan adı v=spf1 -all kaydını almalıdır.',
+    },
+    {
+      result: 'Alan adı mevcut değil',
+      meaning: 'DNS\'te bu alan adına ait hiçbir kayıt yok.',
+      action: 'Yazımı kontrol edin ve alan adının kayıtlı olduğundan emin olun.',
+    },
+  ],
+  receiverIntro:
+    'Alıcı sunucular, bir SPF kontrolünün sonucu için kendi terimlerini kullanır. Bu terimleri mesaj başlıklarında, örneğin spf=pass veya spf=softfail olarak, ve DMARC raporlarında görürsünüz:',
+  spfResults: [
+    { result: 'pass', meaning: 'Gönderen sunucuya izin verilmiştir.' },
+    { result: 'fail', meaning: 'Sunucuya izin verilmemiştir (-all). Alıcı sunucular mesajı reddedebilir.' },
+    { result: 'softfail', meaning: 'Sunucuya büyük olasılıkla izin verilmemiştir (~all). RFC 7208, alıcı sunucuların yalnızca bu nedenle mesajı reddetmemesi gerektiğini söyler.' },
+    { result: 'neutral', meaning: 'Kayıt bu sunucu hakkında hiçbir şey söylemez (?all). Hiç kayıt olmamasıyla aynı sayılır.' },
+    { result: 'none', meaning: 'Alan adının SPF kaydı yok.' },
+    { result: 'temperror', meaning: 'Bir DNS sorgusu kısa süreliğine başarısız oldu. Gönderen daha sonra tekrar deneyebilir.' },
+    { result: 'permerror', meaning: 'Kayıt hatalı ve okunamıyor. Yalnızca DNS\'te yapılacak bir düzeltme işe yarar.' },
+  ],
+  errorsTitle: 'Yaygın SPF kaydı hataları ve nasıl düzeltilecekleri',
+  errorsIntro:
+    '[12 milyon popüler alan adı üzerinde 2023\'te yapılan bir tarama](https://arxiv.org/abs/2502.08240), bu alan adlarının %56,5\'inde SPF bulunduğunu ve SPF kayıtlarının %2,9\'unda hata olduğunu buldu. En yaygın hata, SPF kaydı olmayan bir adı gösteren bir include veya redirect ifadesiydi. Çok fazla sorgu ikinci sıradaydı.',
+  errors: [
+    {
+      title: 'Bir alan adında iki SPF kaydı',
+      text: 'Bu durum çoğu zaman yeni bir hizmetin kurulum rehberi “bu TXT kaydını ekleyin” dediğinde ve biri bu kaydı eski kaydın yanına eklediğinde ortaya çıkar. İki kayıt permerror hatasına yol açar. Kayıtları tek bir kayıtta birleştirin. Tek bir v=spf1 ile başlayın, her include ve IP adresini listeleyin ve tek bir all ile bitirin.',
+    },
+    {
+      title: 'Hiçbir yeri göstermeyen bir include',
+      text: 'Bir include, SPF kaydı olmayan bir alan adını gösteriyorsa, kaydın tamamı permerror ile başarısız olur. Bu bir yazım hatası olabilir. Kapanan veya include değerini değiştiren bir hizmet de olabilir. Bu ifadeyi kaldırın veya hizmetin güncel değeriyle değiştirin.',
+    },
+    {
+      title: 'Sonda +all, ?all veya hiç all olmaması',
+      text: '`+all` internetteki her sunucuya izin verir. Bu yüzden kayıt hiçbir şeyi korumaz. `?all` veya hiç all olmaması nötr sonuç verir. Alıcı sunucular bunu kayıt yokmuş gibi değerlendirir. Kaydı ~all veya -all ile bitirin.',
+    },
+    {
+      title: 'Kayıtta ptr bulunması',
+      text: 'RFC 7208, ptr kullanılmaması gerektiğini söyler. ptr yavaştır, bir sorgu kullanır ve DNS sorun yaşadığında diğer mekanizmalardan daha az güvenilirdir. Bunu, kapsaması gereken sunucular için ip4 ve ip6 girişleriyle değiştirin.',
+    },
+    {
+      title: 'Yazım hataları',
+      text: 'İki nokta üst üsteden sonra bir boşluk, bir bölümü eksik bir IPv4 adresi veya SPF\'nin tanımadığı bir kelime permerror hatasına yol açar. Bir hata daha sessizdir: eşittir işaretiyle yazılmış `include=example.com` bilinmeyen bir ayar olarak okunur ve atlanır. Bu yüzden o hizmete hiç izin verilmez. Kontrol aracı bunların hepsini işaretler.',
+    },
+  ],
+  mythsTitle: 'SPF rehberlerinin sık yanlış anlattığı üç ayrıntı',
+  myths: [
+    '“Bir SPF kaydı büyük harf içeremez.” RFC 7208, adların büyük ve küçük harfe duyarlı olmadığını söyler.',
+    '“Bir SPF kaydı en fazla 255 karakter olabilir.” 255 sınırı her dize için geçerlidir. Daha uzun bir kayıt dizelere bölünür. RFC 7208 yalnızca DNS cevabının tamamının küçük, yaklaşık 450 bayttan az kalmasını ister.',
+    '“En fazla 10 include ekleyebilirsiniz.” Sınır DNS sorgularını sayar ve include içindeki sorgular da sayılır.',
+  ],
+  authTitle: 'SPF, e-posta kimlik doğrulamasının bir parçasıdır',
+  authParas: [
+    'SPF kontrolünden geçmenin sınırları vardır. Aynı 2023 taramasında alan adlarının %34,7\'si 100.000\'den fazla IP adresinden gelen e-postalara izin veriyordu. Ayrıca biri mesajınızı yönlendirdiğinde SPF bozulur, çünkü yönlendiren sunucu kaydınızda yer almaz.',
+    'DKIM mesajın kendisini imzalar. Bu yüzden genellikle yönlendirmeden etkilenmez. DMARC, From adresindeki alan adı için SPF veya DKIM kontrolünün geçip geçmediğini kontrol eder ve ikisi de geçmediğinde alıcı sunuculara ne yapacaklarını söyler. Birçok gönderim hizmeti, From adresinizle eşleşmeyen kendi bounce alan adıyla SPF kontrolünden geçer. Hizmette özel bir Return-Path ayarlamak bunu düzeltir. Diğer iki kaydı [DKIM oluşturucu](/dkim-generator) ve [DMARC oluşturucu](/dmarc-generator) ile kurun. Alan adınızın e-postaları nerede aldığını kontrol etmek için [MX kaydı sorgulama](/mx-lookup) aracını kullanın.',
+    'Kimlik doğrulama, var olmayan adresler konusunda da işe yaramaz. Bu adreslere gönderilen e-postalar geri döner ve yüksek bir bounce oranı teslimata zarar verir. Tek tek adresleri [mail adresi doğrulama aracıyla](/email-checker), bir listenin tamamını [toplu mail doğrulama aracıyla](/bulk-email-verifier) kontrol edin. Ekibinizle paylaşabileceğiniz kısa bir tanım için [SPF kaydı sözlük maddesine](/glossary/spf) bakın.',
+  ],
+  faqTitle: 'Sıkça sorulan sorular',
+  faqs: [
+    {
+      q: 'SPF kaydı nedir?',
+      a: 'Alan adınızın DNS ayarlarında, alan adı adına e-posta göndermesine izin verilen sunucuları listeleyen bir TXT kaydıdır. Alıcı sunucular bir mesajın gerçekten sizin sunucularınızdan birinden gelip gelmediğine karar vermek için bu kaydı okur. SPF, Sender Policy Framework ifadesinin kısaltmasıdır ve RFC 7208 standardında tanımlanır.',
+    },
+    {
+      q: 'SPF kaydımı nasıl kontrol ederim?',
+      a: 'Alan adınızı bu sayfanın üst kısmındaki SPF kontrol aracına yazın. Terminalden kontrol etmek için Windows\'ta nslookup -type=txt example.com, macOS ve Linux\'ta dig txt example.com komutunu kullanabilirsiniz. v=spf1 ile başlayan TXT kaydını arayın.',
+    },
+    {
+      q: 'Bir alan adının iki SPF kaydı olabilir mi?',
+      a: 'Hayır. RFC 7208, alan adı başına bir SPF kaydına izin verir. İki kayıt olduğunda alıcı sunucular kalıcı bir hata döndürür ve tüm e-postalarınız SPF kontrolünden geçemez. İki kaydı tek bir kayıtta birleştirin. Site doğrulama kodları gibi diğer TXT kayıtları kalabilir.',
+    },
+    {
+      q: 'SPF permerror ne anlama gelir?',
+      a: 'Alıcı sunucunun SPF kaydınızı okuyamadığı ve bu yüzden kontrolün başarısız olduğu anlamına gelir. Yaygın nedenler iki SPF kaydı, 10\'dan fazla DNS sorgusu veya SPF kaydı olmayan bir alan adına yapılan bir include ifadesidir. Bir yazım hatası da buna yol açabilir. Yukarıdaki kontrol aracı nedeni gösterir.',
+    },
+    {
+      q: '~all ile -all arasındaki fark nedir?',
+      a: '~all ile listelemediğiniz sunuculardan gelen e-postalar soft fail sonucu alır. Alıcı sunucular bu e-postaları genellikle kabul eder, ancak bunlara daha şüpheyle yaklaşır. -all ile bu e-postalar fail sonucu alır ve bazı alıcı sunucular bunları reddeder. Google ~all önerir. Microsoft ise DKIM ve DMARC kurulduktan sonra -all önerir.',
+    },
+    {
+      q: 'Alt alan adlarının kendi SPF kaydına ihtiyacı var mı?',
+      a: 'E-posta gönderiyorlarsa evet. Bir alt alan adı, üst alan adının SPF kaydını kullanmaz. news.example.com e-posta gönderiyorsa kendi kaydına ihtiyaç duyar. Hiç e-posta göndermiyorsa ona v=spf1 -all kaydını verin.',
+    },
+    {
+      q: 'Bir SPF kaydı değişikliği ne kadar sürer?',
+      a: 'En fazla eski kaydın TTL süresi kadar sürer. Eski kaydı önbelleğe alan DNS çözümleyicileri, TTL süresi dolana kadar eski cevabı kullanır. Yani TTL değeri 3600 ise bu süre en fazla bir saattir. Google, değişikliklerin 48 saate kadar sürebileceğini söyler, ancak çoğu çok daha erken görünür.',
+    },
+    {
+      q: 'Zaten DKIM kullanıyorsam SPF\'ye ihtiyacım var mı?',
+      a: 'İkisinin birden olması daha güvenlidir. Gmail ve Yahoo, küçük gönderenlerden SPF veya DKIM kabul eder, ancak toplu gönderim yapanlardan ikisini birden ister. DMARC, ikisinden biri geçtiğinde ve From alan adınızla eşleştiğinde geçer. Bu yüzden ikisinin birden olması size bir yedek sağlar.',
+    },
+    {
+      q: 'SPF, e-posta sahteciliğini önler mi?',
+      a: 'Tek başına önlemez. SPF, insanların gördüğü From adresini değil, bounce adresini (Return-Path) kontrol eder. Bir spam gönderici kendi alan adıyla SPF kontrolünden geçebilir ve From alanında yine sizin adınızı gösterebilir. DMARC, iki alan adının eşleşmesini zorunlu tutarak bu açığı kapatır.',
+    },
+  ],
+  ctaHeadline: 'Göndermeden önce adresleri kontrol edin',
+}
+
 export const SPF_PAGE_STRINGS: Partial<Record<Locale, SpfPageStrings>> & { en: SpfPageStrings } = {
   en,
   de,
@@ -2773,4 +3016,5 @@ export const SPF_PAGE_STRINGS: Partial<Record<Locale, SpfPageStrings>> & { en: S
   id,
   ja,
   ko,
+  tr,
 }

@@ -153,8 +153,12 @@ function renderFigure(lines: string[], locale: BlogLocale): string {
 
 // Stable, URL-safe anchor id from heading text (e.g. "1. What a catch-all" ->
 // "1-what-a-catch-all"). Collisions are suffixed -2, -3, ... within a post.
-function slugify(text: string): string {
-  return text
+// Turkish letters become their ASCII base so heading anchors keep the word
+// (Örnek -> ornek). Other locales keep the original behaviour.
+const TR_ASCII: Record<string, string> = { ç: 'c', ğ: 'g', ı: 'i', i̇: 'i', ö: 'o', ş: 's', ü: 'u' }
+function slugify(text: string, locale?: BlogLocale): string {
+  const base = locale === 'tr' ? text.toLocaleLowerCase('tr').replace(/i̇|[çğıöşü]/g, (ch) => TR_ASCII[ch] ?? ch) : text
+  return base
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/(^-|-$)/g, '')
@@ -240,7 +244,7 @@ export function renderMarkdown(body: string, locale: BlogLocale): { html: string
   const toc: TocItem[] = []
   const used = new Set<string>()
   const uniqueId = (raw: string): string => {
-    const base = slugify(raw) || 'section'
+    const base = slugify(raw, locale) || 'section'
     let id = base
     let n = 2
     while (used.has(id)) id = `${base}-${n++}`

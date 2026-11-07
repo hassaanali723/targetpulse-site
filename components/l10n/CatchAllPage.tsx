@@ -11,6 +11,7 @@ import JsonLd from '@/components/JsonLd'
 import { faqPageLd } from '@/lib/schema'
 import { breadcrumbL10n } from '@/lib/i18n/schema'
 import { SIGNUP_URL, type L10nLocale } from '@/lib/i18n/strings'
+import BrandText from '@/components/i18n/BrandText'
 
 // Localized product explainer for catch-all verification, the same sections
 // as app/(it)/it/verifica-catch-all/page.tsx with the copy passed in.
@@ -181,7 +182,7 @@ export default function CatchAllPageL10n({ locale, content: c }: { locale: L10nL
             <p className="text-[12px] text-slate-500 leading-relaxed font-medium">{c.compare.typicalNote}</p>
           </div>
           <div className="bg-white border-2 border-indigo-100 rounded-3xl p-6 sm:p-8 card-vivid-shadow ring-2 ring-indigo-600/5 space-y-5">
-            <span className="inline-block text-[10px] font-black uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-lg">{c.compare.giggalLabel}</span>
+            <span className="inline-block text-[10px] font-black uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-lg"><BrandText text={c.compare.giggalLabel} /></span>
             <div className="text-[15px] font-bold text-slate-700">{c.compare.count}</div>
             <div className="space-y-2">
               <Row Icon={CheckCircle2} label={L.valid} value={c.compare.giggal[0]} tone="text-emerald-700" />

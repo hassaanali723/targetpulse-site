@@ -5,6 +5,7 @@ import { ArrowUpRight, MailCheck, ListChecks, FileDown, Coins, Workflow, BookOpe
 import { ZAPIER_WORKFLOWS, ZAPIER_APP_URL, SIGNUP_URL, type ZapierWorkflow } from '@/lib/integrations'
 import type { ZapierContent } from '@/lib/i18n/integrationPages/types'
 import { Rich } from '@/components/integrations/pages/parts'
+import BrandText from '@/components/i18n/BrandText'
 
 // Small partner-app logo for a workflow row: local file, CDN fallback,
 // lettermark last.
@@ -89,7 +90,7 @@ export default function ZapierTabs({ t, viewOnZapier }: { t: ZapierContent['tabs
 
         <div className="border-t border-slate-100 mt-6 pt-6 text-left">
           <p className="text-[10px] font-black uppercase tracking-[0.16em] text-slate-500 mb-3">
-            {t.actionsTitle}
+            <BrandText text={t.actionsTitle} />
           </p>
           <div className="space-y-3.5">
             {t.actions.map((a, i) => {

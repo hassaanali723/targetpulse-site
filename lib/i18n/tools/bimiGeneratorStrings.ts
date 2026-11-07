@@ -890,4 +890,80 @@ const ko: BimiPageStrings = {
   ctaHeadline: '로고가 준비되었다면 이메일 리스트도 확인하십시오.',
 }
 
-export const BIMI_PAGE_STRINGS: Record<Locale, BimiPageStrings> = { en, de, fr, es, it, 'pt-br': ptBr, nl, pl, id, ja, ko }
+const tr: BimiPageStrings = {
+  metaTitle: 'Ücretsiz BIMI kaydı oluşturucu ve SVG logo kontrolü | Giggal.ai',
+  ogTitle: 'Ücretsiz BIMI kaydı oluşturucu ve SVG logo kontrolü',
+  description:
+    'BIMI kaydınızı oluşturun ve SVG logonuzu tarayıcıda Tiny PS kurallarına göre kontrol edin. Logonun Gmail ve Apple Mail\'de görünmesi için gerekenleri görün.',
+  ogLocale: 'tr_TR',
+  ogImage: '/og-card.png',
+  ogAlt: 'Ücretsiz BIMI kaydı oluşturucu',
+  crumb: 'BIMI kaydı oluşturucu',
+  appName: 'Ücretsiz BIMI kaydı oluşturucu ve SVG logo kontrolü',
+  featureList: [
+    'Özel seçici, logo ve sertifika URL\'leriyle BIMI TXT kayıtları oluşturur',
+    'SVG logoları 11 katı SVG Tiny PS kuralına göre kontrol eder',
+    'Gmail ve Apple Mail desteği için etkileşimli BIMI hazırlık kontrol listesi',
+    'Bölge dosyası satırı oluşturma ve kopyalama yardımcıları',
+    'Tamamen tarayıcıda çalışır, hiçbir dosya yüklenmez ve kullanım verisi gönderilmez',
+  ],
+  h1: 'BIMI kaydı oluşturucu',
+  heroIntro:
+    'Bir sertifika satın almadan veya bir şey yayımlamadan önce alan adınızın BIMI kaydını oluşturun ve logo dosyanızın kurallara uyduğunu kontrol edin.',
+  howTitle: 'BIMI nasıl kurulur',
+  howSteps: [
+    'DMARC politikanızı uygulama düzeyine getirin. BIMI p=none ile çalışmaz. Politikanız quarantine veya reject olmalıdır. [DMARC oluşturucu](/dmarc-generator) bu kaydı oluşturabilir.',
+    'Logonuzu SVG Tiny PS dosyası olarak hazırlayın ve yukarıdaki logo kontrolüyle test edin.',
+    'Bir sertifikaya karar verin. Gmail BIMI logolarını yalnızca VMC veya CMC ile gösterir. Apple Mail ise yalnızca VMC ile gösterir.',
+    'SVG dosyasını ve varsa sertifikanın PEM dosyasını HTTPS adreslerinde barındırın.',
+    'Bu oluşturucudaki kaydı default._bimi.alanadiniz adresinde bir TXT kaydı olarak yayımlayın.',
+  ],
+  imageAlt: 'Doğrulanmış bir e-posta avatarının yanında kare biçimli SVG marka logolarından oluşan bir ızgaranın çizimi.',
+  recordTitle: 'Bir BIMI kaydında neler bulunur',
+  thTag: 'Etiket',
+  thDoes: 'Ne işe yarar',
+  thExample: 'Örnek',
+  tagMeanings: [
+    'Sürüm, her zaman BIMI1',
+    'SVG logonuzun HTTPS adresi',
+    'VMC veya CMC sertifikanızın HTTPS adresi (bir PEM dosyası)',
+  ],
+  recordNote:
+    'Google\'ın kendi örneklerinde iki biçim yer alır: yalnızca l= içeren bir kayıt ve l= değeri boş bırakılıp a= değeri sertifikayı gösteren bir kayıt. İkinci biçimde logo PEM dosyasının içine gömülüdür. Bir sertifikanız varsa sertifika sağlayıcınızın önerisini izleyin. Oluşturucu iki biçimi de üretebilir. Daha yeni ve isteğe bağlı bir avp= etiketi, sağlayıcılara logonun bir marka mı yoksa kişisel bir avatar mı olduğunu söyler. Gönderenlerin çoğu bu etiketi kullanmaz.',
+  logoTitle: 'Kontrol aracının test ettiği logo kuralları',
+  logoPara:
+    'BIMI logoları SVG Tiny PS kullanır. Bu, gelen kutularında güvenli görüntüleme için hazırlanmış, sadeleştirilmiş bir SVG sürümüdür. Kök öğede baseProfile değeri tiny-ps, version değeri 1.2 olmalıdır. Görsel kare olmalı ve marka adınızı içeren bir title öğesi bulunmalıdır. Komut dosyalarına, gömülü raster görsellere, animasyona ve harici dosyalara bağlantılara izin verilmez. Dosya 32 KB sınırının altında kalmalıdır. Bir tasarım aracından dışa aktarılan normal bir SVG genellikle bu kurallardan en az birini ihlal eder. Bu yüzden sertifikaya başvurmadan önce logoyu kontrol etmek faydalıdır.',
+  certTitle: 'VMC mi, CMC mi: hangi sertifikaya ihtiyacınız var',
+  certPara:
+    'Gmail, BIMI logolarını yalnızca kayıt bir sertifikayı gösterdiğinde görüntüler. VMC (Verified Mark Certificate) için tescilli bir marka gerekir ve Gmail\'in mavi onay işaretini ekler. CMC (Common Mark Certificate) tescilli olmayan logolar içindir. Gmail logoyu gösterir, ancak onay işareti olmadan gösterir. Apple Mail yalnızca VMC kabul eder. Yahoo ve Fastmail gibi bazı diğer sağlayıcılar, hiç sertifika içermeyen bir kayıttan da logo gösterebilir. Sertifikalar kısa bir sertifika yetkilileri listesinden alınır. Google kabul ettiği yetkilileri yayımlar.',
+  faqTitle: 'Sıkça sorulan sorular',
+  faqs: [
+    {
+      q: 'BIMI, p=none politikasındaki DMARC ile çalışır mı?',
+      a: 'Hayır. Google, BIMI\'nin none DMARC politikasını desteklemediğini belirtir. Politikanız quarantine veya reject olmalıdır.',
+    },
+    {
+      q: 'Gmail için VMC gerekir mi?',
+      a: 'VMC veya CMC sertifikalarından biri gerekir. VMC için tescilli bir marka gerekir ve mavi onay işareti alır. CMC için marka tescili gerekmez ve logo onay işareti olmadan gösterilir.',
+    },
+    {
+      q: 'BIMI logom neden görünmüyor?',
+      a: 'Yaygın nedenler şunlardır: DMARC hâlâ p=none politikasındadır, e-postalar DMARC kontrolünden geçmiyordur, SVG dosyası geçerli bir Tiny PS dosyası değildir, sertifika eksiktir veya süresi dolmuştur ya da gelen kutusu BIMI\'yi desteklemiyordur. Sağlayıcıların yeni bir kaydı fark etmesi de biraz zaman alabilir.',
+    },
+    {
+      q: 'BIMI teslim edilebilirliği artırır mı?',
+      a: 'Doğrudan artırmaz. BIMI yalnızca uygulama düzeyindeki DMARC kontrolünden zaten geçen e-postalarda bir logo gösterir. E-postalarınızın ulaşmasına yardımcı olan şey, bu aşamaya gelmek için yapılan çalışmadır, yani SPF, DKIM ve DMARC ayarlarını doğru yapmaktır. [SPF, DKIM ve DMARC nedir](/tr/blog/spf-dkim-dmarc-nedir) yazısına bakın.',
+    },
+    {
+      q: 'default._bimi nedir?',
+      a: 'Sağlayıcıların BIMI kaydınızı aradığı DNS adıdır. default, seçicidir. Farklı bir seçiciye ve e-postalarınızda bir BIMI-Selector başlığına yalnızca farklı e-posta türleri için farklı logolar istiyorsanız ihtiyacınız olur.',
+    },
+    {
+      q: 'Logom herhangi bir yere yükleniyor mu?',
+      a: 'Hayır. Kontrol aracı dosyayı tarayıcınızda okur.',
+    },
+  ],
+  ctaHeadline: 'Logo hazır mı? Listenizi de kontrol edin.',
+}
+
+export const BIMI_PAGE_STRINGS: Record<Locale, BimiPageStrings> = { en, de, fr, es, it, 'pt-br': ptBr, nl, pl, id, ja, ko, tr }

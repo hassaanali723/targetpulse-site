@@ -337,7 +337,7 @@ export default async function EmailCheckerL10n({
           <ul className="grid gap-4 sm:grid-cols-2">
             <li className="sm:col-span-2 rounded-2xl bg-slate-900 p-6 text-white shadow-[0_24px_50px_-28px_rgba(15,23,42,0.7)]">
               <div className="flex items-center gap-4">
-                <span className="text-5xl font-black tracking-tight bg-gradient-to-r from-indigo-300 to-emerald-300 bg-clip-text text-transparent">&lt;3%</span>
+                <span className="text-5xl font-black tracking-tight bg-gradient-to-r from-indigo-300 to-emerald-300 bg-clip-text text-transparent">{locale === 'tr' ? '<%3' : '<3%'}</span>
                 <div>
                   <p className="flex items-center gap-2 font-extrabold">
                     <TrendingDown className="h-[18px] w-[18px] text-emerald-300" /> {t.whySend.bounceTitle}

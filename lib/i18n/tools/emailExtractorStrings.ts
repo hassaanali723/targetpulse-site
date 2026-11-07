@@ -862,4 +862,77 @@ const ko: ExtractorPageStrings = {
   ctaHeadline: '메일을 보내기 전에 추출한 이메일 주소를 검증하십시오.',
 }
 
-export const EXTRACTOR_PAGE_STRINGS: Record<Locale, ExtractorPageStrings> = { en, de, fr, es, it, 'pt-br': ptBr, nl, pl, id, ja, ko }
+const tr: ExtractorPageStrings = {
+  metaTitle: 'Ücretsiz e-posta ayıklayıcı: metinden adres çıkarın | Giggal.ai',
+  ogTitle: 'Ücretsiz e-posta ayıklayıcı: metinden ve dosyalardan e-posta çıkarın',
+  description:
+    'Metin, CSV, Excel veya HTML içindeki e-posta adreslerini tarayıcınızda ayıklayın. Yinelenenleri kaldırın, alan adına göre gruplayın. Ücretsiz, kayıt gerekmez.',
+  ogLocale: 'tr_TR',
+  ogImage: '/og-card.png',
+  ogAlt: 'Ücretsiz e-posta ayıklayıcı',
+  crumb: 'Ücretsiz e-posta ayıklayıcı',
+  appName: 'Ücretsiz e-posta ayıklayıcı',
+  featureList: [
+    'Metin, CSV, Excel veya HTML içinden e-posta adresi ayıklama',
+    'Yinelenenleri kaldırma ve alan adına göre filtreleme',
+    'Yazıyla yazılmış, gizlenmiş adresleri dönüştürme',
+    'Alan adı sütunuyla TXT veya CSV olarak dışa aktarma',
+    'Web Worker ile tamamen tarayıcıda çalışır',
+  ],
+  h1: 'Ücretsiz e-posta ayıklayıcı',
+  heroIntro: 'Metni yapıştırın veya dosyaları bırakın. Yinelenenlerden arındırılmış, temiz bir e-posta adresi listesi alın.',
+  howTitle: 'Metinden e-posta adresleri nasıl ayıklanır',
+  howSteps: [
+    'Metni kutuya yapıştırın veya bir ya da daha fazla dosyayı bırakın.',
+    'Seçeneklerinizi belirleyin: yinelenenleri kaldırın, sıralayın, alan adına göre filtreleyin veya info@ gibi rol tabanlı adresleri gizleyin.',
+    'Kutunun altındaki sonuçları okuyun: liste, sayılar ve en çok bulunan alan adları. Sonuçlar siz yazarken güncellenir.',
+    'Listeyi kopyalayın veya TXT olarak ya da alan adı sütunlu bir CSV olarak indirin.',
+  ],
+  howNote: 'Yapıştırdığınız veya yüklediğiniz hiçbir şey tarayıcınızdan çıkmaz. Bu yüzden aracı müşteri dışa aktarımlarında ve şirket içi belgelerde kullanabilirsiniz.',
+  imageAlt: 'Belgelerden ayıklanan ve yinelenenleri kaldırılarak düzenli bir listeye dönüştürülen e-posta adreslerinin çizimi.',
+  findsTitle: 'Bu e-posta ayıklayıcı neleri bulur, neleri atlar',
+  findsParas: [
+    'Ayıklayıcı, ad@alanadi.tld biçimindeki her şeyi arar ve ardından her eşleşmeyi temizler. mailto:anna@example.com gibi bir bağlantı anna@example.com olarak çıkar. Bir adresin sonuna yapışmış virgül veya parantez atılır. logo@2x.png gibi Retina görsel adları basit bir kalıba e-posta gibi görünür. Bu yüzden araç bunları, icon@3x.svg gibi diğer dosya adlarıyla birlikte atar.',
+    'Adresleri botlardan gizleyen sayfalar, adresleri bazen anna [at] example [dot] com şeklinde yazıyla yazar. Yazıyla yazılmış adres seçeneğini açtığınızda araç, parantezli biçimleri ([at], (at), {at} ve bunlara karşılık gelen dot biçimleri) normal adreslere geri çevirir. Bu seçenek varsayılan olarak kapalıdır, çünkü daha gevşek eşleştirme hatalı sonuçlar getirir.',
+    'Anna@Example.com ve anna@example.com gibi yalnızca büyük harflerle ayrılan adresler tek adres sayılır, çünkü büyük e-posta sağlayıcıları bunları aynı posta kutusu olarak kabul eder. Bunun nedenini [e-posta adresleri büyük ve küçük harfe duyarlı mı](/blog/are-email-addresses-case-sensitive) yazısında açıklıyoruz.',
+    'Araç yalnızca metninizde geçen adresleri bulur. İnternette arama yapmaz, eksik adresleri tahmin etmez ve bir URL\'den sayfa çekmez.',
+  ],
+  filesTitle: 'Kullanabileceğiniz dosyalar',
+  filesPara:
+    'Düz metin biçimleri olduğu gibi çalışır: .txt, .csv, .tsv, .log, .md, .json, .xml, .html, .eml ve .vcf. Excel dosyaları (.xlsx ve .xls) hücre hücre okunur. Birkaç dosyayı aynı anda bırakabilirsiniz. Sonuçlar tek bir listede birleştirilir. PDF ve Word dosyaları henüz desteklenmiyor. Bu dosyaları açın, metni kopyalayın ve kutuya yapıştırın.',
+  beforeTitle: 'Listedeki kişilere e-posta göndermeden önce',
+  beforeParas: [
+    'Bir adresi bulmak, yalnızca o adresin bir yere yazılmış olduğunu kanıtlar. Posta kutusunun hâlâ var olduğunu göstermez. Eski belgelerden çıkarılan listelerde başka işe geçmiş birçok kişi bulunur. Bu adreslere göndermek [hard bounce](/blog/hard-bounce-vs-soft-bounce) üretir ve gönderen itibarınıza zarar verir. İlk gönderimden önce listeyi [e-posta listesi temizleme](/email-list-cleaning) (İngilizce) sayfasındaki araçla kontrol edin veya tek bir adresi [ücretsiz mail adresi doğrulama aracıyla](/email-checker) test edin.',
+    'Ardından kime yazdığınızı düşünün. Sizden haber almayı kabul etmiş kişilere veya onlarla iletişim kurmak için başka bir yasal gerekçeniz olan kişilere e-posta gönderin. GDPR ve CAN-SPAM gibi gizlilik ve spam karşıtı kurallar, listeyi hangi araçla oluşturduğunuzdan bağımsız olarak listeyi nasıl kullandığınız için geçerlidir.',
+  ],
+  faqTitle: 'Sıkça sorulan sorular',
+  faqs: [
+    {
+      q: 'Bu e-posta ayıklayıcı ücretsiz mi?',
+      a: 'Evet. Kayıt gerekmez ve aracı kaç kez çalıştırabileceğinize dair bir sınır yoktur. Listeyi daha sonra doğrulamak ayrı bir adımdır. Yeni Giggal hesapları 1.000 ücretsiz doğrulama kredisi alır.',
+    },
+    {
+      q: 'Metnim herhangi bir yere yükleniyor mu?',
+      a: 'Hayır. Ayıklama işlemi tarayıcı sekmenizde çalışır. Yapıştırdığınız veya yüklediğiniz hiçbir şey sunucularımıza gönderilmez. Bir Excel dosyası eklerseniz sayfa, elektronik tabloları okumak için gereken kodu yükler, ancak dosyanız cihazınızda kalır.',
+    },
+    {
+      q: 'Bir web sitesi URL\'sinden e-posta ayıklayabilir mi?',
+      a: 'Henüz değil. Sayfayı açın, her şeyi seçin, kopyalayın ve kutuya yapıştırın. Yalnızca sayfa kodunda geçen adresler için bunun yerine sayfanın kaynak kodunu yapıştırın.',
+    },
+    {
+      q: 'E-postaların geçerli olup olmadığını kontrol ediyor mu?',
+      a: 'Hayır. Yalnızca metninizde geçen adresleri bulur. Her posta kutusunun var olup olmadığını öğrenmek için listeyi [e-posta listesi temizleme](/email-list-cleaning) (İngilizce) aracıyla doğrulayın veya tek bir adresi [mail adresi doğrulama aracıyla](/tr/mail-adresi-dogrulama) test edin.',
+    },
+    {
+      q: 'Ne kadar metin yapıştırabilirim?',
+      a: '20 MB veya daha büyük dışa aktarımlar dahil büyük girdiler sorun olmaz, çünkü işlem cihazınızda bir arka plan iş parçacığında çalışır. Çok büyük dosyalar birkaç saniye sürer. Bu dosyalar işlenirken sayfayı kullanmaya devam edebilirsiniz.',
+    },
+    {
+      q: 'Excel veya CSV dosyalarından e-posta ayıklayabilir miyim?',
+      a: 'Evet. .xlsx, .xls veya .csv dosyalarını kutuya bırakın. Her hücre taranır. Bu yüzden adreslerin hangi sütunda olduğu önemli değildir.',
+    },
+  ],
+  ctaHeadline: 'Ayıkladığınız kişileri doğrulamaya hazır mısınız?',
+}
+
+export const EXTRACTOR_PAGE_STRINGS: Record<Locale, ExtractorPageStrings> = { en, de, fr, es, it, 'pt-br': ptBr, nl, pl, id, ja, ko, tr }

@@ -966,6 +966,86 @@ const koTool: SignatureToolStrings = {
   },
 }
 
+const trTool: SignatureToolStrings = {
+  defaults: {
+    fullName: 'Ayşe Yılmaz',
+    jobTitle: 'Müşteri İlişkileri Yöneticisi',
+    company: 'Örnek Teknoloji A.Ş.',
+    phone: '+90 212 000 00 00',
+    email: 'ayse@example.com',
+    website: 'example.com',
+  },
+  fields: {
+    fullName: { label: 'Ad soyad *', placeholder: 'Ayşe Yılmaz' },
+    jobTitle: { label: 'Unvan', placeholder: 'Müşteri İlişkileri Yöneticisi' },
+    company: { label: 'Şirket', placeholder: 'Örnek Teknoloji A.Ş.' },
+    department: { label: 'Departman (isteğe bağlı)', placeholder: 'Müşteri Başarısı' },
+    pronouns: { label: 'Zamirler (isteğe bağlı)', placeholder: 'she/her' },
+    phone: { label: 'Telefon', placeholder: '+90 212 000 00 00' },
+    mobile: { label: 'Cep telefonu (isteğe bağlı)', placeholder: '+90 500 000 00 77' },
+    email: { label: 'E-posta', placeholder: 'ayse@example.com' },
+    website: { label: 'Web sitesi', placeholder: 'example.com' },
+    address: { label: 'Ofis adresi (isteğe bağlı)', placeholder: 'Örnek Cad. No: 100, İstanbul' },
+    logoUrl: { label: 'Şirket logosu URL\'si', placeholder: 'https://example.com/logo.png' },
+    photoUrl: { label: 'Profil fotoğrafı URL\'si', placeholder: 'https://example.com/photo.jpg' },
+    linkedin: { label: 'LinkedIn profili URL\'si', placeholder: 'https://linkedin.com/in/...' },
+    x: { label: 'X / Twitter URL\'si', placeholder: 'https://x.com/...' },
+    facebook: { label: 'Facebook URL\'si', placeholder: 'https://facebook.com/...' },
+    instagram: { label: 'Instagram URL\'si', placeholder: 'https://instagram.com/...' },
+    youtube: { label: 'YouTube kanalı URL\'si', placeholder: 'https://youtube.com/@...' },
+    ctaText: { label: 'Düğme metni (isteğe bağlı)', placeholder: '15 dakikalık bir görüşme planlayın' },
+    ctaUrl: { label: 'Düğme URL\'si', placeholder: 'https://cal.com/...' },
+    disclaimer: { label: 'Yasal uyarı (isteğe bağlı)', placeholder: 'Bu e-postanın içeriği gizlidir...' },
+  },
+
+  templateStep: '1. Düzen şablonunu seçin',
+  templates: {
+    'simple-text': 'Sade metin',
+    'logo-left': 'Solda logo',
+    'photo-divider': 'Fotoğraf ve ayırıcı çizgi',
+    compact: 'Kompakt',
+  },
+  fontLabel: 'Yazı tipi',
+  colorLabel: 'Vurgu rengi',
+  colorAria: (hex) => `Renk ${hex}`,
+  personalStep: '2. Kişisel ve şirket bilgileri',
+  contactStep: '3. İletişim bilgileri',
+  imagesStep: '4. Logo ve fotoğraf bağlantıları',
+  imagesHelp: 'Bir görsel bağlantısı yapıştırın. Bağlantı herkese açık bir HTTPS URL\'si olmalıdır (doğrudan dosya yükleme desteklenmez).',
+  socialStep: '5. Sosyal medya bağlantıları (isteğe bağlı)',
+  socialIcons: 'Metin yerine küçük simgeler kullan',
+  ctaStep: '6. Eylem çağrısı ve yasal uyarı',
+  madeWith: '“Giggal.ai ile oluşturuldu” bağlantısını göster (varsayılan olarak kapalı)',
+
+  tabPreview: 'Önizleme',
+  tabHtml: 'HTML kodu',
+  tabPlain: 'Düz metin',
+  chars: (n) => `${n.toLocaleString('tr-TR')}/10.000 karakter`,
+  overLimit: 'Gmail\'in 10.000 karakterlik imza sınırını aşıyor. Metni veya URL\'leri kısaltın.',
+  plainHelp: 'iOS ve Android için Gmail gibi mobil e-posta uygulamalarında önerilir.',
+  copySignature: 'İmzayı kopyalayın',
+  copiedSignature: 'İmza kopyalandı. E-posta programınıza yapıştırın',
+  copyHtml: 'HTML kodunu kopyalayın',
+  download: '.html olarak indirin',
+  downloadName: 'eposta-imzasi.html',
+  copyPlain: 'Düz metin sürümünü kopyalayın',
+
+  signature: {
+    phone: 'Tel:',
+    mobile: 'Cep:',
+    email: 'E-posta:',
+    web: 'Web:',
+    address: 'Adres:',
+    logoAlt: 'Logo',
+    madeWith: 'Giggal.ai ile oluşturuldu',
+  },
+
+  imageWarnings: {
+    'not-https': 'Görsel URL\'si https:// ile başlamalıdır',
+    invalid: 'Geçersiz görsel URL\'si',
+  },
+}
+
 export const SIGNATURE_TOOL_STRINGS: Partial<Record<Locale, SignatureToolStrings>> & { en: SignatureToolStrings } = {
   en,
   'pt-br': ptBrTool,
@@ -978,6 +1058,7 @@ export const SIGNATURE_TOOL_STRINGS: Partial<Record<Locale, SignatureToolStrings
   id: idTool,
   ja: jaTool,
   ko: koTool,
+  tr: trTool,
 }
 
 export function signatureToolStrings(locale: Locale): SignatureToolStrings {

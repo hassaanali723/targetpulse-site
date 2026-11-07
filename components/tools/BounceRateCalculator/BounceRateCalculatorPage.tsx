@@ -1,3 +1,4 @@
+import { formatPct } from '@/lib/tools/bounceRateCore'
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Navbar from '@/components/Navbar'
@@ -204,9 +205,9 @@ export default function BounceRateCalculatorPage({ locale }: { locale: Locale })
                       <a href={p.source} className="text-slate-900 hover:text-indigo-600 hover:underline" {...ext}>
                         {p.name}
                       </a>
-                      <span className="sm:hidden font-semibold text-indigo-600"> · {p.limit}%</span>
+                      <span className="sm:hidden font-semibold text-indigo-600"> · {formatPct(p.limit, locale)}</span>
                     </td>
-                    <td className="hidden sm:table-cell py-3 px-4 font-bold text-indigo-600">{p.limit}%</td>
+                    <td className="hidden sm:table-cell py-3 px-4 font-bold text-indigo-600">{formatPct(p.limit, locale)}</td>
                     <td className="block sm:table-cell pt-0.5 pb-3 sm:pt-3 px-4 text-slate-600">{p.what}</td>
                   </tr>
                 ))}

@@ -182,6 +182,22 @@ export const REVIEW_BADGES: Record<L10nLocale, ReviewBadgeStrings> = {
       { title: '알 수 없음 결과는 무료', text: '분명한 결과에만 비용을 냅니다.' },
     ],
   },
+  tr: {
+    heading: 'Gerçek ekipler tarafından değerlendirildi',
+    readOn: (p) => `${p} üzerindeki Giggal.ai değerlendirmelerini okuyun`,
+    rating: decimalComma,
+    reviews: (n) => `${n} değerlendirme`,
+    verified: 'Doğrulanmış kullanıcı değerlendirmeleri',
+    read: 'Değerlendirmeleri okuyun',
+    used: "Giggal.ai'ı kullandınız mı?",
+    leave: "Trustpilot'ta değerlendirme yazın",
+    points: [
+      { title: '1.000 ücretsiz kredi', text: 'Başlamak için kredi kartı gerekmez.' },
+      { title: 'Kredilerin süresi hiç dolmaz', text: 'Bir kez satın alın, ihtiyacınız olduğunda kullanın.' },
+      { title: 'Catch-all adreslerde gerçek sonuç', text: 'Riskli değil, geçerli ya da geçersiz.' },
+      { title: 'Bilinmiyor sonuçları ücretsiz', text: 'Yalnızca net bir sonuç için ödeme yaparsınız.' },
+    ],
+  },
 }
 
 // The reviews themselves stay in English as written (plans/08 D4), so the
@@ -246,6 +262,12 @@ export const REVIEW_WALL: Record<L10nLocale, ReviewWallStrings> = {
     sub: 'G2, Product Hunt, SourceForge에 영어로 작성된 리뷰 원문입니다.',
     showAll: '나머지 리뷰 {n}개 보기',
     showFewer: '리뷰 접기',
+  },
+  tr: {
+    title: 'Müşteriler Giggal.ai hakkında ne diyor',
+    sub: "G2, Product Hunt ve SourceForge'daki İngilizce orijinal değerlendirmeler.",
+    showAll: 'Diğer {n} değerlendirmeyi gösterin',
+    showFewer: 'Daha az değerlendirme gösterin',
   },
 }
 
@@ -688,6 +710,50 @@ export const MCP: Record<L10nLocale, McpStrings> = {
       vscode: { note: <><M>YOUR_API_KEY</M>를 Giggal.ai 대시보드의 키로 바꾸십시오. VS Code는 <M>&quot;mcpServers&quot;</M> 대신 <M>&quot;servers&quot;</M>를 씁니다.</> },
       cline: { note: <><M>YOUR_API_KEY</M>를 Giggal.ai 대시보드의 키로 바꾸십시오. 여기 나온 경로는 macOS 경로이므로, 사용하는 시스템에 맞게 바꾸십시오.</> },
       zed: { note: <><M>YOUR_API_KEY</M>를 Giggal.ai 대시보드의 키로 바꾸십시오.</> },
+    },
+  },
+  tr: {
+    title: "Giggal.ai'ı sık kullandığınız yapay zekâ aracına bağlayın.",
+    subtitle: "Giggal.ai'ı MCP üzerinden yapay zekâ ajanınıza ekleyin ve e-posta adreslerini Claude, Cursor, VS Code ve diğer araçların içinde doğrulayın. Catch-all adresler dahildir.",
+    toolsAria: 'Yapay zekâ araçları',
+    groups: ['Sohbet uygulamaları', 'Kod editörleri'],
+    pasteInto: 'Yapıştırılacak dosya:',
+    or: ' veya ',
+    serverUrl: "MCP sunucusu URL'si",
+    copy: 'Kopyalayın',
+    copied: 'Kopyalandı',
+    copyAria: 'Panoya kopyalayın',
+    restart: 'Sunucuyu ekledikten sonra istemciyi yeniden başlatın ve şunu sorun:',
+    askBefore: '“',
+    askAfter: ' adresine e-posta teslim edilebilir mi?”',
+    guide: 'Kurulum kılavuzunun tamamını görün',
+    tools: {
+      claude: {
+        subtitle: "Giggal.ai'ı Claude'da custom connector olarak ekleyin. Yapılandırma dosyası yok, yapıştırılacak API anahtarı yok.",
+        steps: [
+          <>Claude&apos;da (web veya masaüstü) <B>Settings → Connectors</B> bölümünü açın.</>,
+          <><B>Add</B> → <B>Add custom connector</B> seçeneğine tıklayın.</>,
+          <>Ad olarak <M>Giggal.ai</M> yazın, aşağıdaki MCP URL&apos;sini yapıştırın ve <B>Add</B> düğmesine tıklayın.</>,
+          <><B>Giggal.ai</B> connector&apos;ını açın ve <B>Connect</B> düğmesine tıklayın.</>,
+          <><M>verify:read</M> iznini vermek için <B>Allow</B> düğmesine tıklayın. Bu izin adres doğrulamayı, kredileri kontrol etmeyi ve önceki doğrulamaları aramayı kapsar.</>,
+        ],
+      },
+      chatgpt: {
+        subtitle: "Giggal.ai'ı ChatGPT'de özel bir plugin olarak ekleyin. OAuth ile bağlanır, yapıştırılacak API anahtarı yoktur.",
+        steps: [
+          <>ChatGPT&apos;de kenar çubuğundan <B>Plugins</B> bölümünü açın ve sağ üstteki <B>+</B> düğmesine tıklayın.</>,
+          <>Ad olarak <M>Giggal.ai</M> yazın, <B>Server URL</B> alanına aşağıdaki MCP URL&apos;sini girin, <B>Authentication → OAuth</B> seçeneğini seçin, onay kutusunu işaretleyin ve <B>Create</B> düğmesine tıklayın.</>,
+          <><B>Giggal.ai</B> plugin&apos;ini açın, <B>Connect</B> düğmesine, ardından <B>Sign in with Giggal.ai</B> düğmesine tıklayın.</>,
+          <><M>verify:read</M> iznini vermek için <B>Allow</B> düğmesine tıklayın. Bu izin adres doğrulamayı, kredileri kontrol etmeyi ve önceki doğrulamaları aramayı kapsar.</>,
+        ],
+      },
+      'claude-code': { note: <><M>YOUR_API_KEY</M> yerine Giggal.ai panelinizdeki anahtarı yazın. Zaten bir <M>giggal</M> sunucunuz var mı? Önce <M>claude mcp remove giggal --scope user</M> komutunu çalıştırın, sonra sunucuyu yeniden ekleyin.</> },
+      codex: { note: <>Codex, token&apos;ı bir ortam değişkeninden okur. Değişkeni ayarlayın, kabuğunuzu yeniden yükleyin, Codex&apos;i tamamen kapatıp yeniden açın ve doğrulamak için <M>/mcp</M> komutunu çalıştırın:<EnvBlock /></> },
+      cursor: { note: <><M>YOUR_API_KEY</M> yerine Giggal.ai panelinizdeki anahtarı yazın.</> },
+      windsurf: { note: <><M>YOUR_API_KEY</M> yerine Giggal.ai panelinizdeki anahtarı yazın.</> },
+      vscode: { note: <><M>YOUR_API_KEY</M> yerine Giggal.ai panelinizdeki anahtarı yazın. VS Code, <M>&quot;mcpServers&quot;</M> yerine <M>&quot;servers&quot;</M> kullanır.</> },
+      cline: { note: <><M>YOUR_API_KEY</M> yerine Giggal.ai panelinizdeki anahtarı yazın. Gösterilen yol macOS yoludur. Kendi işletim sisteminize göre değiştirin.</> },
+      zed: { note: <><M>YOUR_API_KEY</M> yerine Giggal.ai panelinizdeki anahtarı yazın.</> },
     },
   },
 }

@@ -8,6 +8,7 @@ import { ZAPIER_APPS, zapierAppLogo } from '@/lib/zapierApps'
 import { localizeHref, type Locale } from '@/lib/i18n/clusters'
 import type { GridStrings } from '@/lib/i18n/integrationPages/types'
 import { Rich } from '@/components/integrations/pages/parts'
+import BrandText from '@/components/i18n/BrandText'
 
 // Merge the curated registry with every programmatic Zapier app page.
 // Curated entries win on slug collisions (they have hand-written copy).
@@ -78,7 +79,7 @@ function IntegrationCard({ integration, s, categoryLabel }: { integration: Integ
         <span
           className={`text-[10px] font-black uppercase tracking-wider px-2 py-1 rounded-full border ${CONNECTION_BADGE[integration.connection]}`}
         >
-          {s.connection[integration.connection]}
+          <BrandText text={s.connection[integration.connection]} />
         </span>
       </div>
       <h3 className="text-[15px] font-black text-slate-900 mb-1.5 flex items-center gap-1.5">

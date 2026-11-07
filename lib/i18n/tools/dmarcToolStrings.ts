@@ -1557,7 +1557,141 @@ const koTool: DmarcToolStrings = {
   },
 }
 
-export const DMARC_TOOL_STRINGS: Record<Locale, DmarcToolStrings> = { en, de: deTool, fr: frTool, es: esTool, it: itTool, 'pt-br': ptBrTool, nl: nlTool, pl: plTool, id: idTool, ja: jaTool, ko: koTool }
+const trTool: DmarcToolStrings = {
+  copy: 'Kopyala',
+  copied: 'Kopyalandı',
+
+  // Step 1
+  domainLabel: 'Alan adınız',
+  domainPlaceholder: 'example.com',
+  domainHelp: 'E-posta adresinizde @ işaretinden sonraki bölüm. anna@example.com için example.com girin.',
+  domainInvalid: 'Bu bir alan adına benzemiyor. example.com gibi bir değer girin.',
+
+  // Step 2
+  ruaLabel: 'Raporlar nereye gönderilsin?',
+  recommended: 'Önerilen',
+  ruaPlaceholder: 'dmarc@example.com',
+  ruaHelp: 'E-posta sağlayıcıları, toplu raporlar (rua) adı verilen özetleri bu adrese gönderir. Bu raporlar, alan adınız adına kimlerin e-posta gönderdiğini gösterir.',
+  ruaInvalid: 'Bu bir e-posta adresine benzemiyor. Siz düzeltene kadar bu adres kayda eklenmez.',
+
+  // Step 3
+  policyLegend: 'Politika ne kadar katı olsun?',
+  policyIntro:
+    'E-posta sağlayıcıları, alan adınızı kullanan e-postaların gerçekten sizden gelip gelmediğini kontrol eder. DMARC politikanız, bu kontrolden geçemeyen e-postalara, örneğin adınıza gönderilen sahte e-postalara ne olacağını belirler.',
+  policies: {
+    none: {
+      title: 'Yalnızca izle',
+      text: 'E-postalarınız için henüz hiçbir şey değişmez. Alan adınız adına kimlerin e-posta gönderdiğini gösteren raporlar alırsınız.',
+    },
+    quarantine: {
+      title: 'Spam klasörüne gönder',
+      text: 'Kontrolden geçemeyen e-postalar spam klasörüne alınır. Raporlar gerçek e-postalarınızın geçtiğini gösterdikten sonra bunu seçin.',
+    },
+    reject: {
+      title: 'Engelle',
+      text: 'Kontrolden geçemeyen e-postalar reddedilir ve hiç ulaşmaz. Tüm e-postalarınızın geçtiğinden emin olduğunuzda bunu en son seçin.',
+    },
+  },
+  startHere: 'Buradan başlayın',
+
+  // Advanced settings
+  advancedTitle: 'Gelişmiş ayarlar',
+  advancedHint: 'Alt alan adları, hizalama (alignment), hata raporları (forensic) ve test modu. Çoğu kişi bunları atlayabilir.',
+  testMode: 'Test modu',
+  testModeHelp:
+    'Siz test ederken e-posta sağlayıcılarından bir kademe daha yumuşak davranmalarını ister. Engelle seçeneği Spam klasörüne gönder gibi, Spam klasörüne gönder seçeneği ise Yalnızca izle gibi çalışır.',
+  testModeDisabled: 'Önce Spam klasörüne gönder veya Engelle seçeneğini seçin. Yalnızca izle seçiliyken test modunun hiçbir etkisi yoktur.',
+  spLabel: 'Alt alan adları için politika',
+  spInherit: 'Ana seçiminizle aynı',
+  spHelp: 'news.example.com gibi adresler için.',
+  npLabel: 'Var olmayan alt alan adları için politika',
+  npInherit: 'Alt alan adı politikasıyla aynı',
+  npHelp: 'Dolandırıcıların kullandığı invoices.example.com gibi uydurma adlar için.',
+  adkimLabel: 'DKIM hizalaması',
+  aspfLabel: 'SPF hizalaması',
+  alignRelaxed: 'Esnek (varsayılan, önerilen)',
+  alignStrict: 'Katı (alan adı tam olarak eşleşmeli)',
+  rufLabel: 'Hata raporu e-postası',
+  rufPlaceholder: 'İsteğe bağlı',
+  rufHelp: 'Tek tek başarısız e-postalarla ilgili raporlar. Birçok sağlayıcı bu raporları göndermez.',
+  foLabel: 'Hata raporları ne zaman gönderilsin',
+  foOptions: {
+    '0': 'SPF ve DKIM ikisi de başarısız olduğunda (varsayılan)',
+    '1': 'SPF veya DKIM başarısız olduğunda',
+    d: 'DKIM başarısız olduğunda',
+    s: 'SPF başarısız olduğunda',
+  },
+  foNeedsRuf: 'Önce bir hata raporu e-postası ekleyin.',
+
+  // The record
+  recordTitle: 'DMARC kaydınız',
+  recordIntro: 'Bunu alan adınızın DNS ayarlarına yeni bir TXT kaydı olarak ekleyin.',
+  typeLabel: 'Tür',
+  hostLabel: 'Ad / Host',
+  fullName: 'Bazı sağlayıcılar tam adı ister:',
+  yourDomain: 'alanadiniz.com',
+  valueLabel: 'Değer',
+
+  // External report domain
+  consentTitle: 'Rapor alan adında bir kayıt daha gerekiyor',
+  consentText:
+    'Rapor adresiniz farklı bir alan adında. E-posta sağlayıcıları raporları oraya yalnızca o alan adı aşağıdaki kaydı yayımlıyorsa gönderir. Bu kaydı o alan adını yöneten kişiye gönderin.',
+  consentAddTo: '{domain} alan adının DNS ayarlarına TXT türünde ekleyin:',
+  consentName: 'Ad: ',
+  consentValue: 'Değer: ',
+
+  // What to do next
+  nextTitle: 'Sonraki adımlar',
+  nextCheck:
+    'Alan adınız için SPF ve DKIM kurulumunun yapıldığını kontrol edin. DMARC bu ikisine dayanır. Bunlar olmadan gerçek e-postalarınız bile kontrolden geçemez. Google Workspace veya Microsoft 365 gibi e-posta hizmetiniz bunları nasıl açacağınızı açıklar. {spf} aracı, SPF kaydınızın çalışıp çalışmadığını gösterir. Ayrıntılar için: {guide}.',
+  spfLabel: 'SPF kaydı kontrol',
+  spfHref: '/tr/spf-kaydi-kontrol',
+  guideLabel: 'SPF, DKIM ve DMARC birlikte nasıl çalışır',
+  guideHref: '/tr/blog/spf-dkim-dmarc-nedir',
+  nextSignIn: 'Alan adınızın DNS ayarlarını yönettiğiniz yerde oturum açın. Bu genellikle alan adını satın aldığınız şirkettir.',
+  nextAdd:
+    'Yukarıdaki ad ve değerle yeni bir TXT kaydı ekleyin ve kaydedin. Alan adında yalnızca bir DMARC kaydı tutun, çünkü e-posta sunucuları iki kayıt bulursa ikisini de yok sayar.',
+  nextLevel: {
+    noReports: '2. adımda bir rapor adresi ekleyin. Raporlar olmadan gerçek e-postalarınızın geçip geçmediğini bilemezsiniz.',
+    none: 'Raporları birkaç hafta boyunca okuyun. Gerçek e-postalarınız geçtiğinde bu sayfaya dönün ve Spam klasörüne gönder seçeneğini seçin.',
+    quarantine: 'Raporları okumaya devam edin. Gerçek e-postalarınızın hiçbiri spam klasörüne gitmediğinde bu sayfaya dönün ve Engelle seçeneğini seçin.',
+    reject: 'Raporları okumaya devam edin. Raporlar, alan adınız adına e-posta göndermeye başlayan her yeni hizmeti gösterir.',
+  },
+
+  cleanerToggle: 'Zaten bir DMARC kaydınız var mı? Kaydınızı RFC 9989 ile kaldırılan ayarlar için kontrol edin.',
+  importLabel: 'Mevcut DMARC kaydınızı yapıştırın',
+  cleanButton: 'Kaydı kontrol edin ve temizleyin',
+  cleanedTitle: 'Temizlenmiş kayıt',
+  alreadyClean: 'Kaydınız zaten temiz. Hiçbir şeyin değişmesi gerekmedi.',
+  whatChanged: (n) => `Neler değişti (${n})`,
+  changeLabel: { removed: 'Kaldırıldı', normalized: 'Değiştirildi', modernized: 'Öneri' },
+
+  warnings: {
+    'bad-address': (address) =>
+      `“${address}” geçerli bir e-posta adresi değil. Bu yüzden kayda eklenmedi.`,
+    'reject-no-reports':
+      'Bu kayıt kontrolden geçemeyen e-postaları engelliyor (p=reject), ancak rapor adresi yok. Gerçek e-postalarınız reddedilirse bunu bilemezsiniz.',
+    'reject-dkim':
+      'p=reject değerini yalnızca tüm e-postalarınız DKIM ile imzalanıyorsa kullanın. Yönlendirilen e-postalar çoğu zaman SPF kontrolünden geçemez. Bu yüzden yalnızca SPF yeterli değildir.',
+    'strict-alignment':
+      'Katı hizalama, alan adının tam olarak eşleşmesini gerektirir. Bir hizmet e-postanızı mail.example.com gibi bir alt alan adından imzalıyor veya gönderiyorsa, bu e-posta kontrolden geçemez.',
+    'ruf-unreliable': 'Birçok e-posta sağlayıcısı gizlilik nedeniyle hata raporu göndermez. Bu raporlara güvenmeyin.',
+  },
+  changes: {
+    'missing-version': () =>
+      'Bir DMARC kaydı v=DMARC1 ile başlamalıdır. Aksi hâlde e-posta sunucuları kaydı yok sayar. Temizlenmiş kayıt v=DMARC1 ile başlar.',
+    'bad-policy': ({ value }) =>
+      `Kayıtta geçerli bir politika yoktu${value ? ` (“p=${value}”)` : ''}. Politika, yalnızca izleme yapan p=none olarak ayarlandı.`,
+    retired: ({ tag, value }) =>
+      `${tag}=${value} artık DMARC standardının (RFC 9989) bir parçası değil. Bu yüzden kaldırıldı.`,
+    'pct-partial': () =>
+      'Kaydınız politikayı e-postalarınızın yalnızca bir kısmına uyguluyordu. Test ederken politikayı yumuşatmak için bunun yerine Gelişmiş ayarlar bölümünde test modunu (t=y) açın.',
+    'sp-matches': ({ value }) => `sp=${value} ana politikanızla aynıydı. Bu yüzden gerekli değildi.`,
+    default: ({ tag, value }) => `${tag}=${value} zaten varsayılan değer. Bu yüzden gerekli değildi.`,
+  },
+}
+
+export const DMARC_TOOL_STRINGS: Record<Locale, DmarcToolStrings> = { en, de: deTool, fr: frTool, es: esTool, it: itTool, 'pt-br': ptBrTool, nl: nlTool, pl: plTool, id: idTool, ja: jaTool, ko: koTool, tr: trTool }
 
 export function dmarcToolStrings(locale: Locale): DmarcToolStrings {
   return DMARC_TOOL_STRINGS[locale] ?? en

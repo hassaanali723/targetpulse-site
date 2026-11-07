@@ -23,6 +23,7 @@ export function GET() {
       'sitemap-id.xml',
       'sitemap-ja.xml',
       'sitemap-ko.xml',
+      'sitemap-tr.xml',
     ]),
     { headers: XML_HEADERS }
   )

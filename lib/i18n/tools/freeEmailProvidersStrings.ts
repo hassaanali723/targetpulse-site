@@ -2020,6 +2020,179 @@ const ko: FreeProvidersPageStrings = {
   ctaHeadline: '서비스만이 아니라 각 주소가 실제로 있는지 확인하십시오',
 }
 
+const tr: FreeProvidersPageStrings = {
+  metaTitle: 'Ücretsiz mail adresi veren sağlayıcılar listesi | Giggal.ai',
+  ogTitle: 'Ücretsiz mail adresi veren sağlayıcılar listesi',
+  description: (domains) =>
+    `Gmail ve Outlook'tan Proton ve GMX'e kadar ücretsiz mail adresi veren sağlayıcılar. ${domains.toLocaleString('tr-TR')} ücretsiz e-posta alan adını kontrol edin veya CSV olarak indirin.`,
+  ogLocale: 'tr_TR',
+  ogImage: '/og-card.png',
+  ogAlt: 'Ücretsiz mail sağlayıcıları listesi',
+  crumb: 'Ücretsiz mail sağlayıcıları',
+  listName: 'Ücretsiz mail sağlayıcılarının karşılaştırması',
+  listDescription: 'Başlıca ücretsiz e-posta hizmetleri ve ücretsiz planlarının neleri içerdiği.',
+  appName: 'Ücretsiz e-posta alan adı kontrol aracı ve listesi',
+  featureList: (domains, providers) => [
+    `${providers.toLocaleString('tr-TR')} sağlayıcıdan ${domains.toLocaleString('tr-TR')} ücretsiz e-posta alan adı`,
+    'Her alan adının MX kayıtlarının çalıştığı kontrol edildi',
+    'Bir alan adının veya e-posta adresinin ücretsiz bir sağlayıcıya ait olup olmadığını kontrol edin',
+    'TXT, CSV veya JSON olarak indirin',
+  ],
+  h1: 'Ücretsiz mail sağlayıcıları listesi',
+  heroIntro: (domains) =>
+    `İnsanların gerçekten kullandığı, ücretsiz mail adresi veren hizmetler ve bu adreslerin sonunda yer alan ${domains.toLocaleString('tr-TR')} alan adı. Bir alan adını kontrol edin veya listenin tamamını indirin.`,
+  howTitle: 'Bu liste nasıl kullanılır',
+  howSteps: [
+    'Tek bir adresi kontrol etmek için adresi üstteki kutuya yapıştırın. Araç, alan adının ücretsiz bir sağlayıcıya ait olup olmadığını ve hangi sağlayıcıya ait olduğunu söyler.',
+    'Bir sağlayıcının alan adlarını bulmak için sağlayıcının adını filtreye yazın, örneğin hotmail veya gmx. Yalnızca Outlook.com\'un onlarca ülke sürümü vardır.',
+    'Listeyi bir elektronik tabloda, bir CRM\'de veya kendi kodunuzda kullanmak için indirin. CSV dosyasında alan adı, sağlayıcı, sağlayıcının arkasındaki şirket, ülke ve tür bilgisi bulunur.',
+  ],
+  howNote: 'İndirilen dosyalar belirlediğiniz filtreye göre oluşur. Örneğin İnternet sağlayıcıları filtresini seçerseniz yalnızca bu alan adlarını alırsınız.',
+  imageAlt: 'Farklı ücretsiz sağlayıcılardan gelen e-posta adreslerinin bir alan adı listesine ayrılmasını gösteren çizim.',
+  coverTitle: 'Listede neler var, neler yok',
+  coverParas: [
+    'Bu ücretsiz e-posta sağlayıcıları listesi üç tür hizmeti kapsar. Birincisi Gmail, Outlook.com, Yahoo Mail, GMX ve mail.com gibi ücretsiz webmail hizmetleridir. İkincisi Proton Mail ve Tuta gibi gizlilik odaklı, şifreli hizmetlerdir. Üçüncüsü ise Comcast, AT&T, BT ve Orange gibi büyük internet sağlayıcılarının bireysel posta kutularıdır. Bunlar ücretsiz değil, bir ev internet paketiyle birlikte gelir, ancak yine de kişisel adreslerdir.',
+    'Her alan adını listeye eklemeden önce [MX kayıtlarını](/mx-lookup) kontrol ettik. Kendi e-posta sunucularını çalıştıran sağlayıcılarda kayıtların bu sunucuları göstermesi gerekiyordu. Artık e-posta kabul etmeyen eski alan adları ve şimdi başka birine ait olan alan adları listeye alınmadı. yahoo.ch ve aol.ca gibi birkaç eski ülke sürümünün burada olmamasının nedeni budur.',
+    'Geçici e-posta servisleri bu listede yok. Bu servisler dakikalar veya saatler sonra kullanılamaz hâle gelen tek kullanımlık gelen kutuları verir. Bu servislerin kendi [tek kullanımlık mail siteleri listesi](/disposable-email-providers) vardır.',
+  ],
+  compareTitle: 'Ücretsiz mail sağlayıcılarının karşılaştırması',
+  compareIntro:
+    'Aşağıda, başlıca e-posta hizmeti sağlayıcılarının ücretsiz planlarında neler sunduğunu görebilirsiniz. Her rakam, sağlayıcının kendi sayfalarından alındı ve 12 Ekim 2026 tarihinde kontrol edildi. Ücretsiz planlar sık değişir. Bu yüzden karar vermeden önce sağlayıcının sitesini kontrol edin.',
+  thProvider: 'Sağlayıcı',
+  thStorage: 'Ücretsiz depolama',
+  thNotes: 'Notlar',
+  compare: {
+    Gmail: {
+      storage: '15 GB, Google Drive ve Google Fotoğraflar ile paylaşılır',
+      notes:
+        'Reklam gösterir, ancak Google reklamları seçmek için e-postalarınızı kullanmadığını söylüyor. Mart 2026\'dan itibaren bazı yeni hesaplar 5 GB ile başlar. Kalan 10 GB, bir telefon numarasını doğruladıktan sonra eklenir.',
+    },
+    'Outlook.com': {
+      storage: 'E-posta için 15 GB',
+      notes: 'Ekler, ayrı bir 5 GB bulut depolama alanından düşülür. Microsoft 365 için ödeme yapmazsanız reklam gösterir.',
+    },
+    'Yahoo Mail': {
+      storage: 'ABD\'de 20 GB',
+      notes: 'Bazı ülkelerde daha az alan verilir. Birleşik Krallık\'taki kullanıcılara 2026\'da alanın 15 GB\'a düşürüleceği bildirildi. Yahoo Mail Plus reklamları kaldırır.',
+    },
+    'iCloud Mail': {
+      storage: '5 GB, iCloud\'un geri kalanıyla paylaşılır',
+      notes: 'Her Apple Hesabı ile birlikte gelir. Kendi alan adınızı kullanmak için ücretli bir iCloud+ planı gerekir.',
+    },
+    'Proton Mail': {
+      storage: '500 MB, kurulum adımlarından sonra 1 GB olur',
+      notes: 'Uçtan uca şifrelidir. Ücretsiz plan tek bir adrese ve günde 150 mesaja izin verir.',
+    },
+    Tuta: {
+      storage: '1 GB',
+      notes: 'Uçtan uca şifrelidir. Ücretsiz planda ek adres veya özel alan adı yoktur.',
+    },
+    'Zoho Mail': {
+      storage: 'Kullanıcı başına 5 GB, en fazla 5 kullanıcı',
+      notes:
+        'Ücretsiz bir plan için alışılmadık şekilde kendi alan adınızla çalışır. Yalnızca web ve uygulama üzerinden kullanılır, IMAP veya POP yoktur ve her bölgede sunulmaz. Reklam yoktur.',
+    },
+    GMX: {
+      storage: 'gmx.com ve gmx.co.uk üzerinde 65 GB',
+      notes: 'En fazla 10 ek adres. gmx.de ve gmx.net üzerindeki Alman hizmetinin ücretsiz planı daha küçüktür ve 1 GB alan verir.',
+    },
+    'mail.com': {
+      storage: '65 GB ve ek olarak 2 GB bulut depolama',
+      notes: 'Adresinizi email.com, usa.com ve consultant.com gibi 100\'den fazla alan adı arasından seçersiniz. Premium sürüm reklamları kaldırır.',
+    },
+  },
+  bestTitle: 'Sizin için en iyi e-posta hizmeti hangisi?',
+  bestIntro: 'Tek bir en iyi e-posta hizmeti yoktur. Sizin için en iyi e-posta hesabı, hesabı ne için kullanacağınıza bağlıdır.',
+  bestList: [
+    'En fazla ücretsiz depolama alanı için GMX ve mail.com her biri 65 GB verir.',
+    'Gizlilik için Proton Mail ve Tuta, ücretsiz planda bile e-postalarınızı uçtan uca şifreler.',
+    'Ücretsiz olarak kendi alan adınızı kullanmak için Zoho Mail\'in Forever Free planı en fazla beş kişiyi kapsar.',
+    'Apple, Google veya Microsoft uygulamalarını zaten kullanıyorsanız, iCloud Mail, Gmail veya Outlook.com bu uygulamalarla birlikte çalışır.',
+  ],
+  bestNote:
+    'İş için başlangıçta ücretsiz bir adres yeterlidir. Ancak bazı iş formları ücretsiz adresleri engeller. Bunun nedenini aşağıdaki B2B formları bölümünde açıklıyoruz.',
+  signupTitle: 'Hangi alan adlarıyla hâlâ kaydolabilirsiniz',
+  signupIntro:
+    'Büyük sağlayıcılar yıllar içinde ek alan adları topladı. Bunların yalnızca bazıları yeni hesaplara sunulur. Diğerleri, bu adreslere zaten sahip olan kişiler için çalışmaya devam eder.',
+  thNewAccounts: 'Yeni hesaplar',
+  thOtherDomains: 'Kullanımdaki diğer alan adları',
+  newAccountsLabel: 'Yeni hesaplar: ',
+  alsoInUseLabel: 'Ayrıca kullanımda: ',
+  signupOther: {
+    Gmail: 'googlemail.com, aynı posta kutusuna ulaşır',
+    'Outlook.com': 'live.com, msn.com ve hotmail.co.uk gibi ülke sürümleri',
+    'Yahoo Mail': 'ymail.com, rocketmail.com ve yahoo.co.uk gibi ülke sürümleri',
+    'iCloud Mail': 'me.com, mac.com',
+    'Proton Mail': 'protonmail.ch. pm.me ücretli planlarla birlikte gelir.',
+    Tuta: 'tuta.com ücretli planlarla birlikte gelir.',
+    GMX: 'Diğer ülke sürümleri',
+    'mail.com': 'Yaklaşık 140 alan adı daha. Hepsi yeni hesaplara açıktır.',
+  },
+  signupNote:
+    'Bir B2B filtresi için bu fark önemli değildir. me.com veya ymail.com üzerindeki bir adres, gmail.com üzerindeki bir adres kadar kişiseldir. Bu yüzden liste iki türü de içerir.',
+  closeTitle: 'Ücretsiz hesaplar kullanılmadığında kapanır',
+  closeIntro: 'Ücretsiz sağlayıcılar kullanılmayan hesapları siler. Ücretsiz adreslerle dolu eski bir listenin zamanla daha fazla bounce üretmesinin bir nedeni budur.',
+  closeList: [
+    'Gmail: Google, iki yıldır kullanılmayan bir hesabı silebilir.',
+    'Outlook.com: gelen kutunuzu korumak için yılda en az bir kez oturum açmanız gerekir. Hesap, iki yıl boyunca oturum açılmazsa kapanır.',
+    'Yahoo Mail: posta kutusu 12 ay kullanılmadığında, hesap ise 18 ay sonra silinir.',
+    'Proton Mail: ücretsiz hesaplar 12 ay hareketsiz kaldıktan sonra silinir.',
+    'Tuta: ücretsiz hesaplar 6 ay boyunca giriş yapılmazsa silinir.',
+  ],
+  closeNote:
+    'Eski bir listeye e-posta göndermeden önce listeyi kontrol edin. [Toplu mail doğrulama aracı](/bulk-email-verifier) artık var olmayan adresleri bulur. [Mail adresi doğrulama aracı](/email-checker) aynı işi tek bir adres için yapar.',
+  b2bTitle: 'B2B formlarında ücretsiz e-posta alan adları',
+  b2bParas: [
+    'Birçok B2B şirketi yalnızca iş adresleriyle yapılan kayıtları ister. Örneğin HubSpot\'ta “Block free email providers” adlı bir form ayarı vardır. Bu ayar ücretsiz alan adlarını reddeder. Aynı işi yukarıdaki CSV dosyasıyla kendi form kodunuzda da yapabilirsiniz.',
+    'Ancak engellemenin bir bedeli vardır. Bazı serbest çalışanlar ve küçük işletmeler her şeyi bir Gmail veya Outlook.com adresinden yürütür. Kesin bir engelleme bu kişileri geri çevirir. Daha yumuşak bir seçenek, adresi kabul etmek, CRM sisteminizde kişisel olarak işaretlemek ve kararı satış ekibinize bırakmaktır.',
+    'Ücretsiz bir adres sahte bir adres değildir. Gmail ve Outlook.com posta kutuları kalıcıdır ve e-posta alır. Birkaç dakika veya birkaç saat sonra çalışmayı bırakan adresler geçici adreslerdir. [Geçici mail kontrolü aracı](/disposable-email-checker) bu adresleri yakalar.',
+  ],
+  dupesTitle: 'Yinelenen ücretsiz adresleri bulma',
+  dupesIntro: 'Bazı sağlayıcılar bir adresin birkaç farklı yazımını aynı gelen kutusuna teslim eder. Bu, bir listeden yinelenenleri kaldırırken önemlidir.',
+  dupesList: [
+    'Gmail, kullanıcı adındaki noktaları dikkate almaz. Bu yüzden john.smith@gmail.com ve johnsmith@gmail.com aynı gelen kutusudur. Bu kural kişisel Gmail için geçerlidir, Google Workspace hesapları için geçerli değildir.',
+    'gmail.com ve googlemail.com aynı posta kutusuna ulaşır.',
+    'john+news@gmail.com gibi artı işaretli adresler de ana gelen kutusuna düşer.',
+    'Yandex, kullanıcı adındaki noktaları ve kısa çizgileri aynı adres olarak kabul eder.',
+  ],
+  faqTitle: 'Sıkça sorulan sorular',
+  faqs: [
+    {
+      q: 'E-posta hizmeti sağlayıcısı nedir?',
+      a: 'Posta kutunuzu çalıştıran şirkettir. Size bir adres verir, e-postalarınızı saklar ve e-posta gönderip almanızı sağlar. Gmail, Outlook.com ve Proton Mail birer e-posta hizmeti sağlayıcısıdır. Aynı terim Mailchimp gibi toplu e-posta hizmetleri için de kullanılır. Bu hizmetler gelen kutusu barındırmaz, bülten gönderir.',
+    },
+    {
+      q: 'Hangi ücretsiz e-posta hizmeti en fazla depolama alanı verir?',
+      a: 'Bu sayfada karşılaştırılan hizmetler arasında en fazla alanı her biri 65 GB ile GMX (gmx.com ve gmx.co.uk üzerinde) ve mail.com verir. Yahoo ABD\'de 20 GB, Gmail ve Outlook.com ise 15 GB verir.',
+    },
+    {
+      q: 'Hangi ücretsiz e-posta sağlayıcısı en fazla gizlilik sunar?',
+      a: 'Proton Mail ve Tuta, ücretsiz planlarında bile e-postalarınızı uçtan uca şifreler. Gmail, Outlook.com ve iCloud Mail ücretsiz hesaplarda uçtan uca şifreleme sunmaz.',
+    },
+    {
+      q: 'Kendi alan adımla ücretsiz bir mail adresi alabilir miyim?',
+      a: 'Zoho Mail\'in Forever Free planı, kendinize ait bir alan adıyla, en fazla beş kullanıcı için, web üzerinde ve Zoho\'nun uygulamalarında çalışır. Gmail ve Proton Mail bunun için ücretli bir plan ister. iCloud Mail ise iCloud+ gerektirir.',
+    },
+    {
+      q: 'Ücretsiz bir mail adresi geçici bir adresle aynı şey midir?',
+      a: 'Hayır. ad@gmail.com gibi ücretsiz bir adres kalıcı bir posta kutusudur. Geçici bir adres dakikalar veya saatler sonra çalışmayı bırakır. İnsanlar bu adresleri kayıt formlarını geçmek için kullanır. Bu liste yalnızca kalıcı sağlayıcıları kapsar.',
+    },
+    {
+      q: 'Bir formda ücretsiz e-posta alan adlarını nasıl engellerim?',
+      a: 'HubSpot\'ta formun ayarlarından “Block free email providers” seçeneğini açın. Kendi kodunuzda ise yukarıdaki CSV veya JSON dosyasını indirin. Ardından alan adı bu listede olan her adresi reddedin veya işaretleyin.',
+    },
+    {
+      q: 'Ücretsiz e-posta hesaplarının süresi dolar mı?',
+      a: 'Evet, kimse kullanmazsa dolar. Google, iki yıl kullanılmayan bir Gmail hesabını silebilir. Yahoo posta kutusunu 12 ay sonra siler. Outlook.com ise yılda bir kez oturum açmazsanız gelen kutusunu kapatır.',
+    },
+    {
+      q: 'Bildiğim bir alan adı neden listede yok?',
+      a: 'Bu alan adı artık e-posta almıyor olabilir, şimdi başka bir şirkete ait olabilir veya henüz eklemediğimiz daha küçük bir sağlayıcıya ait olabilir. Listeyi kontrol ettiğimizde MX kayıtları çalışmayan hiçbir alan adı listeye alınmadı.',
+    },
+  ],
+  ctaHeadline: 'Yalnızca sağlayıcıyı değil, her adresin var olduğunu da kontrol edin',
+}
+
 export const FREE_PROVIDERS_PAGE_STRINGS: Record<Locale, FreeProvidersPageStrings> = {
   en,
   es,
@@ -2032,4 +2205,5 @@ export const FREE_PROVIDERS_PAGE_STRINGS: Record<Locale, FreeProvidersPageString
   id,
   ja,
   ko,
+  tr,
 }

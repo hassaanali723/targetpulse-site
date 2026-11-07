@@ -1736,6 +1736,158 @@ const ko: BounceRatePageStrings = {
   ctaHeadline: '발송하기 전에 반송률을 낮추십시오',
 }
 
+const tr: BounceRatePageStrings = {
+  metaTitle: 'Bounce oranı hesaplama: e-posta ve web sitesi | Giggal.ai',
+  ogTitle: 'Bounce oranı hesaplama: e-posta ve web sitesi',
+  description:
+    'E-posta ve web siteleri için ücretsiz bounce oranı hesaplama aracı. Bounce oranı formülü, hard ve soft bounce oranları, sağlayıcı limitleri ve GA4 hesaplaması.',
+  ogLocale: 'tr_TR',
+  ogImage: '/tools/bounce-rate-calculator-og-v2.webp',
+  ogAlt: 'Ücretsiz bounce oranı hesaplama aracı',
+  crumb: 'Bounce oranı hesaplama',
+  appName: 'Ücretsiz bounce oranı hesaplama aracı',
+  featureList: [
+    'Gönderilen e-posta ve bounce sayısından e-posta bounce oranı',
+    'Hard bounce, soft bounce ve teslim oranları ayrı ayrı',
+    'Sayılarınızı gönderim sağlayıcılarının limitleriyle karşılaştırır',
+    'Google Analytics 4 oturumlarından web sitesi bounce oranı',
+    'Bounce oranı formülünü sizin sayılarınızla gösterir',
+  ],
+  h1: 'Bounce oranı hesaplama',
+  heroIntro:
+    'Bir e-posta kampanyasının veya bir web sitesinin bounce oranını hesaplayın. E-posta aracınızdaki veya Google Analytics 4\'teki sayıları girin. Oranı ve bu oranın ne anlama geldiğini görün.',
+  howTitle: 'Bounce oranı hesaplama aracı nasıl kullanılır',
+  howSteps: [
+    'Bir e-posta kampanyası için E-posta sekmesinde kalın. Kampanya raporunuzdaki gönderilen e-posta sayısını, hard bounce ve soft bounce sayılarını girin.',
+    'Aracınız tek bir bounce sayısı gösteriyorsa, bu sayıyı Hard bounce sayısı alanına yazın ve Soft bounce sayısı alanını boş bırakın.',
+    'Sonucu okuyun. Genel bounce oranını, hard ve soft bounce oranlarını ve teslim oranını görürsünüz.',
+    'Sonucun altındaki sağlayıcı listesini kontrol edin. Liste, Amazon SES, HubSpot, Postmark ve diğer sağlayıcıların limitlerine ne kadar yakın olduğunuzu gösterir.',
+    'Bir web sitesi için Web sitesi sekmesine geçin. Google Analytics 4\'teki oturum ve etkileşimli oturum sayılarını girin.',
+  ],
+  howFooter:
+    'Sonuçlar siz yazarken güncellenir. Her sonucun altında formül sizin sayılarınızla gösterilir. Böylece hesabı kontrol edebilir veya bir rapora kopyalayabilirsiniz.',
+  imageAlt:
+    'E-posta bounce oranı hesaplamasının çizimi: geri dönen e-postalar gönderilen e-postalara bölünür ve sağlayıcı limitleriyle karşılaştırılır.',
+  formulaTitle: 'Bounce oranı formülü',
+  formulaIntro:
+    '“Bounce oranı” iki farklı anlama gelir. E-postada, teslim edilemeyen mesajların payıdır. Bir web sitesinde ise ziyaretçinin etkileşim kurmadığı ziyaretlerin payıdır. Bu yüzden “bounce oranı nasıl hesaplanır?” sorusunun cevabı, hangisini kastettiğinize bağlıdır.',
+  emailFormulaTitle: 'E-posta bounce oranı formülü',
+  emailFormulaCode: 'Bounce oranı = geri dönen e-postalar ÷ gönderilen e-postalar × 100',
+  emailFormulaText:
+    '10.000 e-posta gönderdiniz ve 250 tanesi geri döndü. Bu durumda bounce oranı 250 ÷ 10.000 × 100 = %2,5 olur. Geri dönen e-postalar hem hard bounce (adres mevcut değil) hem de soft bounce (dolu posta kutusu gibi geçici bir sorun) içerir.',
+  websiteFormulaTitle: 'GA4\'te web sitesi bounce oranı formülü',
+  websiteFormulaCode: 'Bounce oranı = (oturumlar − etkileşimli oturumlar) ÷ oturumlar × 100',
+  websiteFormulaText:
+    'Bu, [Google Analytics 4](https://support.google.com/analytics/answer/12195621) tanımıdır: etkileşimli olmayan oturumların yüzdesi. GA4\'ün Türkçe arayüzünde bu metriğin adı “Hemen çıkma oranı”dır. Sonuç her zaman %100 eksi etkileşim oranına eşittir. 2.000 oturum ve 1.250 etkileşimli oturum varsa bounce oranı %37,5 olur.',
+  websiteOldText:
+    'Eski rehberler farklı bir bounce oranı hesaplaması verir: tek sayfalık oturumlar ÷ tüm oturumlar. Bu, [Universal Analytics tanımıydı](https://support.google.com/analytics/answer/1009409). Standart Universal Analytics 1 Temmuz 2023\'te veri işlemeyi durdurdu. Bu yüzden güncel raporlar için GA4 formülünü kullanın.',
+  calcEmailTitle: 'E-posta bounce oranı nasıl hesaplanır',
+  calcEmailSteps: [
+    'E-posta aracınızda bir kampanyanın veya bir dönemin raporunu açın.',
+    'Gönderilen e-posta sayısını, ardından hard bounce ve soft bounce sayılarını not edin.',
+    'İki bounce sayısını toplayın.',
+    'Toplamı gönderilen e-posta sayısına bölün ve 100 ile çarpın.',
+  ],
+  calcEmailIntro:
+    'Araçların çoğu gönderilen e-postalara böler, ancak hepsi bunu aynı şekilde ifade etmez. Sayınızı başka birinin sayısıyla karşılaştırmadan önce, her aracın neyi saydığını kontrol edin:',
+  definitionsHead: ['Araç', 'Bounce oranını nasıl hesaplar'],
+  definitionsRows: [
+    { a: 'Mailchimp', b: 'Hard ve soft bounce toplamı ÷ gönderilen toplam e-posta', href: 'https://mailchimp.com/help/custom-report-metrics/' },
+    { a: 'Klaviyo', b: 'Geri dönen e-postalar ÷ gönderilen toplam e-posta', href: 'https://help.klaviyo.com/hc/en-us/articles/360057036052' },
+    { a: 'Mailgun', b: 'Teslim edilmeyenler ÷ gönderilen toplam. Raporlarında ayrı bir hard bounce oranı da gösterilir', href: 'https://documentation.mailgun.com/docs/mailgun/user-manual/reporting/rate-definitions' },
+    { a: 'Campaign Monitor', b: 'Geri dönen e-postalar ÷ “kampanyanın teslim edildiği toplam alıcı sayısı”', href: 'https://help.campaignmonitor.com/s/article/bounced-emails-report' },
+    { a: 'Brevo', b: 'Bounce sayısı ÷ alıcı sayısı. İşlemsel e-posta raporlarında hard ve soft oranlar ayrı gösterilir', href: 'https://help.brevo.com/hc/en-us/articles/4863866741266-Brevo-Glossary' },
+    { a: 'Amazon SES', b: 'Yalnızca hard bounce, gönderilerinizin temsili bir hacmi üzerinden ölçülür', href: 'https://docs.aws.amazon.com/ses/latest/dg/faqs-enforcement.html' },
+  ],
+  calcEmailDiff:
+    'Bu fark, oranlar yükseldikçe önem kazanır. 10.000 e-postada 500 bounce, gönderilen e-postaların %5\'idir, ancak teslim edilen 9.500 e-postanın %5,26\'sıdır. Hesaplama aracı ikisini de gösterir.',
+  calcEmailHardNote:
+    'Hard bounce oranını da ayrıca hesaplayın. Sağlayıcı limitlerinin çoğu yalnızca hard bounce sayar, çünkü soft bounce çoğu zaman bir sonraki denemede düzelir.',
+  limitsTitle: 'Gönderim sağlayıcılarında e-posta bounce oranı limitleri',
+  limitsIntro:
+    'Gönderim sağlayıcıları bounce oranı limitleri yayımlar. Bu limitleri aşan hesapları incelemeye alır veya askıya alırlar. Yayımladıkları sayılar şunlardır:',
+  limitsHead: ['Sağlayıcı', 'Limit', 'Ne diyor'],
+  limitsRows: [
+    { name: 'Amazon SES', limit: 5, what: 'Hard bounce oranı %5 olduğunda hesap incelemeye alınır, %10 olduğunda gönderim askıya alınır. Hedef %2\'nin altıdır.', source: 'https://docs.aws.amazon.com/ses/latest/dg/faqs-enforcement.html' },
+    { name: 'Postmark', limit: 10, what: 'Temsili bir gönderim hacminde hard bounce oranı %10 olduğunda hesap askıya alınır.', source: 'https://postmarkapp.com/support/article/1118-why-is-my-account-pending-approval' },
+    { name: 'Brevo', limit: 2, what: 'Hard bounce oranı %2\'yi veya soft bounce oranı %5\'i aşarsa kampanya gönderimi askıya alınır.', source: 'https://help.brevo.com/hc/en-us/articles/209435165' },
+    { name: 'HubSpot', limit: 5, what: 'Hesabın son gönderimlerinde bounce oranı %5 olduğunda pazarlama e-postası gönderimi askıya alınır.', source: 'https://knowledge.hubspot.com/marketing-email/why-is-my-email-suspended' },
+    { name: 'SendGrid', limit: 5, what: 'Bounce oranı %5\'in üzerinde olan hesaplar uyarı alır ve askıya alınabilir.', source: 'https://sendgrid.com/en-us/blog/email-bounce-management' },
+  ],
+  limitsMailchimpNote:
+    '[Mailchimp](https://mailchimp.com/help/about-bounce-warnings/) bir sayı yayımlamaz. Limitlerin değişebildiğini ve bir hesabı askıya almadan önce uyarı gönderdiğini belirtir.',
+  limitsMailboxNote:
+    'E-posta sağlayıcıları hiçbir bounce limiti belirlemez. [Gmail\'in gönderen kuralları](https://support.google.com/a/answer/81126) ve [Yahoo\'nun kuralları](https://senders.yahooinc.com/best-practices/) %0,3\'lük bir limit içerir, ancak bu limit spam şikâyetleri için geçerlidir. Bounce konusunda Gmail, e-postaları tekrar tekrar geri dönen kişilerin aboneliğini sonlandırmanızı ister. Yahoo ise geçersiz alıcıları hemen listeden çıkarmanızı ister.',
+  benchmarksTitle: 'E-posta bounce oranı karşılaştırma değerleri',
+  benchmarksParas: [
+    'Yayımlanan ortalamalar çok farklıdır. Bunun ana nedeni, her raporun bounce sayısını farklı şekilde saymasıdır. 2022 verilerine dayanan [Twilio SendGrid\'in 2023 raporu](https://www.twilio.com/en-us/resource-center/2023-email-marketing-benchmark-report), ortalama bounce oranını %1,06, medyanı ise %0,21 olarak verdi. Bu rapor geçici engellemeleri ayrı sayar. [GetResponse\'un 2024 raporu](https://www.getresponse.com/resources/reports/email-marketing-benchmarks) genel oranı %2,33 olarak verdi. Sektöre göre oran %1,19 ila %4,86 arasındaydı. Bu rapor hard ve soft bounce ayrımı yapmaz.',
+    'Bir karşılaştırma değeri, kendi eğiliminizden ve sağlayıcınızın limitinden daha az işe yarar. Soğuk e-postada neyin iyi sayıldığını görmek için [soğuk e-posta için iyi bir bounce oranı](/blog/good-bounce-rate-for-cold-email) yazısına bakın. Ortalamalara daha ayrıntılı bakmak için [e-posta bounce oranı karşılaştırma değerleri ve oranı düşürme yolları](/blog/how-to-reduce-email-bounce-rate) yazısını okuyun.',
+  ],
+  hardSoftTitle: 'Hard bounce ve soft bounce',
+  hardSoftParas: [
+    'Hard bounce kalıcı bir hatadır. Alıcı sunucu 5 ile başlayan bir kodla cevap verir. Örneğin var olmayan bir adres için 5.1.1 kodu döner. [RFC 5321](https://www.rfc-editor.org/rfc/rfc5321) standardına göre gönderen aynı isteği tekrarlamamalıdır. Soft bounce ise geçicidir ve 4 ile başlar. Gönderen daha sonra tekrar deneyebilir.',
+    'Araçlar bu sınırda her zaman aynı fikirde değildir. [RFC 3463](https://datatracker.ietf.org/doc/html/rfc3463) standardı dolu bir posta kutusunu geçici sayar, ancak bazı araçlar bunu hard bounce olarak kaydeder. Araçların çoğu, tekrarlanan soft bounce durumlarını da hard bounce\'a çevirir:',
+  ],
+  softRulesHead: ['Araç', 'Soft bounce ne zaman hard bounce olur'],
+  softRulesRows: [
+    { a: 'Mailchimp', b: 'Hiç etkinliği olmayan bir adres için 7 soft bounce sonrasında, adresin geçmişte etkinliği varsa 15 soft bounce sonrasında', href: 'https://mailchimp.com/help/soft-vs-hard-bounces/' },
+    { a: 'Klaviyo', b: 'Son 2 yılda üst üste 7\'den fazla soft bounce olduğunda', href: 'https://help.klaviyo.com/hc/en-us/articles/115005250408' },
+    { a: 'Brevo', b: '36 saat boyunca tekrar dener, ardından kampanyalarda üst üste 5 soft bounce sonrasında adresi engeller', href: 'https://help.brevo.com/hc/en-us/articles/209435165' },
+    { a: 'HubSpot', b: 'Bekleyen bir bounce\'u, soft bounce olarak saymadan önce 72 saat boyunca tekrar dener', href: 'https://knowledge.hubspot.com/marketing-email/what-is-the-difference-between-a-hard-bounce-and-a-soft-bounce' },
+  ],
+  hardSoftLink:
+    'Her türün arkasındaki kodlar için [hard bounce ve soft bounce farkı](/blog/hard-bounce-vs-soft-bounce) yazısına bakın.',
+  ga4Title: 'Google Analytics 4\'te bounce oranı nasıl hesaplanır',
+  ga4Paras: [
+    'GA4, 10 saniyeden uzun süren veya önemli bir etkinlik içeren oturumu etkileşimli sayar. 2 veya daha fazla sayfa ya da ekran görüntülemesi olan oturumlar da etkileşimli sayılır. Diğer tüm oturumlar bounce oranına eklenir. Site sahibi 10 saniyelik süreyi veri akışının etiket ayarlarından değiştirebilir.',
+    'GA4 raporlarının çoğu bounce oranını varsayılan olarak göstermez. Eklemek için bir ayrıntı raporu açın, Raporu özelleştir seçeneğini seçin, Metrikler bölümüne gidin ve Hemen çıkma oranı metriğini ekleyin. Bunun için Düzenleyici veya Yönetici rolüne sahip olmanız gerekir. Raporu düzenlemek istemiyorsanız, rapordaki oturum ve etkileşimli oturum sayılarını alın ve yukarıdaki Web sitesi sekmesini kullanın.',
+    'Universal Analytics\'ten geçiş birçok sayıyı değiştirdi. Bir sayfayı 30 saniye okuyup çıkan bir ziyaretçi eskiden bounce sayılıyordu. GA4\'te sayılmaz, çünkü ziyaret 10 saniyeden uzun sürmüştür.',
+    'İnternette bulduğunuz web sitesi bounce oranı aralıklarına, örneğin “%26 ila %40 mükemmeldir” gibi ifadelere dikkat edin. Bu aralıklar Universal Analytics döneminden gelir ve nadiren bir kaynak belirtir. GA4\'ün kendi [karşılaştırma özelliği](https://support.google.com/analytics/answer/16388466) vardır. Bu ayar açıkken mülkünüzü benzer bir grupla karşılaştırır.',
+  ],
+  lowerTitle: 'E-posta bounce oranınızı nasıl düşürürsünüz',
+  lowerParas: [
+    'Hard bounce, var olmayan adreslerden gelir. Bu yüzden çözüm, bu adresleri göndermeden önce listeden çıkarmaktır. Yeni kayıtları geldikleri anda kontrol edin. Eski listeleri de bir kampanyadan önce kontrol edin, çünkü insanlar iş değiştirir ve hesaplarını kapatır.',
+    'Hard bounce veren her adresi listeden çıkarın. Yahoo, geçersiz alıcıları hemen çıkarmanızı ister. Gmail, e-postaları tekrar tekrar geri dönen kişilerin aboneliğini sonlandırmanızı ister. [Microsoft](https://techcommunity.microsoft.com/blog/microsoftdefenderforoffice365blog/strengthening-email-ecosystem-outlook%e2%80%99s-new-requirements-for-high%e2%80%90volume-senders/4399730) ise geçersiz adresleri ayda bir veya üç ayda bir temizlemenizi önerir.',
+    'Tek bir adres için [mail adresi doğrulama aracını](/email-checker), bir listenin tamamı için [toplu mail doğrulama aracını](/bulk-email-verifier) kullanın. İkisi de catch-all alan adları dahil hangi adreslerin geri döneceğini gösterir.',
+  ],
+  faqTitle: 'Sıkça sorulan sorular',
+  faqs: [
+    {
+      q: 'Bounce oranının formülü nedir?',
+      a: 'E-posta için bounce oranı = geri dönen e-postalar ÷ gönderilen e-postalar × 100. Google Analytics 4\'te bir web sitesi için bounce oranı = (oturumlar − etkileşimli oturumlar) ÷ oturumlar × 100. Bu, %100 eksi etkileşim oranıyla aynıdır.',
+    },
+    {
+      q: 'E-posta bounce oranı nasıl hesaplanır?',
+      a: 'Kampanya raporunuzdaki hard ve soft bounce sayılarını toplayın, gönderilen e-posta sayısına bölün ve 100 ile çarpın. Gönderilen 10.000 e-postada 250 bounce, %2,5 bounce oranı demektir.',
+    },
+    {
+      q: 'E-posta bounce oranı gönderilen e-postalara göre mi, teslim edilen e-postalara göre mi hesaplanır?',
+      a: 'Araçların çoğu gönderilen e-postalara böler. Mailchimp, Klaviyo ve Mailgun bunu bu şekilde belgeler. Birkaç araç ise oranı alıcıların payı olarak ifade eder. Bu yüzden iki sayıyı karşılaştırmadan önce aracınızın yardım sayfasını kontrol edin.',
+    },
+    {
+      q: 'İyi bir e-posta bounce oranı nedir?',
+      a: '%2\'nin altı güvenli bir hedeftir. Amazon SES, gönderenlerden %2\'nin altında kalmalarını ister. Brevo da hard bounce oranı %2\'nin üzerindeki hesapları askıya alabilir. Twilio SendGrid\'in 2023 raporunda medyan bounce oranı %0,21 idi.',
+    },
+    {
+      q: '%5 e-posta bounce oranı kötü mü?',
+      a: 'Evet. Hard bounce oranı %5 olduğunda Amazon SES hesabı incelemeye alır, HubSpot da hesabı askıya alabilir. Tekrar göndermeden önce listeyi temizleyin.',
+    },
+    {
+      q: 'Gmail\'in bir bounce oranı limiti var mı?',
+      a: 'Hayır. Gmail\'in gönderen kuralları bir bounce limiti değil, %0,3\'lük bir spam oranı limiti belirler. Ancak adresleri tekrar tekrar geri dönen kişilerin aboneliğini sonlandırmanızı ister. Yahoo ve Microsoft da bir bounce sayısı yayımlamaz.',
+    },
+    {
+      q: 'GA4\'te bounce oranı nasıl hesaplanır?',
+      a: 'Oturum sayısından etkileşimli oturum sayısını çıkarın, ardından sonucu oturum sayısına bölün. GA4, 10 saniyeden uzun süren veya önemli bir etkinlik içeren oturumu etkileşimli sayar. 2 veya daha fazla sayfa ya da ekran görüntülemesi olan oturumlar da etkileşimli sayılır. Geri kalan her şey bounce sayılır.',
+    },
+    {
+      q: 'GA4 bounce oranım neden eski Universal Analytics oranından farklı?',
+      a: 'Universal Analytics, tek sayfalık her oturumu bounce olarak sayıyordu. GA4 ise etkileşimli olmayan oturumları sayar. Tek bir sayfaya yapılan 30 saniyelik bir ziyaret Universal Analytics\'te bounce sayılıyordu, ancak GA4\'te bounce sayılmaz.',
+    },
+  ],
+  ctaHeadline: 'Göndermeden önce bounce oranını düşürün',
+}
+
 export const BOUNCE_RATE_PAGE_STRINGS: Record<Locale, BounceRatePageStrings> = {
   en,
   fr,
@@ -1748,6 +1900,7 @@ export const BOUNCE_RATE_PAGE_STRINGS: Record<Locale, BounceRatePageStrings> = {
   id,
   ja,
   ko,
+  tr,
 }
 
 export function bounceRatePageStrings(locale: Locale): BounceRatePageStrings {

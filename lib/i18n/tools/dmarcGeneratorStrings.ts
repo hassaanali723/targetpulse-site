@@ -897,4 +897,81 @@ const ko: DmarcPageStrings = {
   ctaHeadline: 'DMARC 설정을 마쳤다면 이메일 리스트도 확인하십시오.',
 }
 
-export const DMARC_PAGE_STRINGS: Record<Locale, DmarcPageStrings> = { en, de, fr, es, it, 'pt-br': ptBr, nl, pl, id, ja, ko }
+const tr: DmarcPageStrings = {
+  metaTitle: 'DMARC oluşturucu: ücretsiz DMARC kaydı (2026) | Giggal.ai',
+  ogTitle: 'DMARC oluşturucu: ücretsiz DMARC kaydı (2026)',
+  description:
+    '2026 standardına (RFC 9989) uygun DMARC kaydı oluşturun: politika, alt alan adları, raporlar ve test modu. Eski kayıttaki kaldırılan etiketleri silin. Ücretsiz.',
+  ogLocale: 'tr_TR',
+  ogImage: '/og-card.png',
+  ogAlt: 'Ücretsiz DMARC kaydı oluşturucu',
+  crumb: 'DMARC kaydı oluşturucu',
+  appName: 'Ücretsiz DMARC kaydı oluşturucu',
+  featureList: [
+    'RFC 9989\'a (2026 standardı) uygun DMARC kayıtları oluşturur',
+    'Kaldırılan etiketleri (pct, rf, ri) silerek eski kayıtları temizler',
+    'Politika, alt alan adları, raporlama ve test modu (t=y) ayarları',
+    'Harici rapor adresleri için onay kayıtları oluşturur',
+    'Tamamen tarayıcıda çalışır, hiçbir kullanım verisi göndermez',
+  ],
+  h1: 'DMARC kaydı oluşturucu',
+  heroIntro:
+    'Bir DMARC kaydı, e-posta sağlayıcılarına alan adınızı taklit eden e-postalarla ne yapacaklarını söyler. Kendi kaydınızı oluşturmak için üç soruyu cevaplayın.',
+  howTitle: 'DMARC kaydınızı nasıl yayımlarsınız',
+  howSteps: [
+    'Yukarıdaki üç adımı doldurun. Zaten bir kaydınız varsa, temizlemek için kaydı “Zaten bir DMARC kaydınız var mı?” bölümüne yapıştırın.',
+    'DNS sağlayıcınızda, host adı _dmarc olan bir TXT kaydı oluşturun. Bazı sağlayıcılar tam adı ister: _dmarc.alanadiniz.com.',
+    'Değeri yapıştırın ve kaydedin. Bu kaydın alan adındaki tek DMARC kaydı olduğundan emin olun. İki kayıt bulan alıcı sunucular ikisini de yok sayar.',
+    'DNS\'in güncellenmesini bekleyin, ardından rapor gelen kutunuzu (rua adresi) izleyin. Toplu rapor gönderen sağlayıcılar bu raporları en az 24 saatte bir göndermelidir.',
+  ],
+  imageAlt: 'Üç uygulama adımı ve koruyucu bir kalkan içeren bir DMARC politika kaydının çizimi.',
+  changedTitle: '2026\'da DMARC kayıtları için neler değişti',
+  changedText:
+    'Mayıs 2026\'da RFC 9989, RFC 7489\'un yerini aldı ve DMARC\'ı Standards Track statüsüne taşıdı. Kayıtlar hâlâ v=DMARC1 ile başlar. Bu yüzden mevcut kayıtlar çalışmaya devam eder. Üç etiket kaldırıldı: pct, rf ve ri. İki etiket yeni: bir test modu olan t ve var olmayan alt alan adları için bir politika olan np. Bu DMARC kaydı oluşturucu kaldırılan etiketleri asla yazmaz. Mevcut kayıtlar için yapılan kontrol de bu etiketleri siler. Etiketlerin tam listesi [DMARC kaydı nedir](/blog/what-is-a-dmarc-record) yazısında yer alır.',
+  policyTitle: 'Hangi DMARC politikasını seçmelisiniz',
+  policyParas: [
+    'p=none ve bir rua adresiyle başlayın. E-postalarınız için hiçbir şey değişmez. Raporlar size hangi hizmetlerin alan adınız adına e-posta gönderdiğini gösterir. Standarda göre her meşru kaynağın kimlik doğrulamasını sağlamak birçok ay sürebilir. Kullanıcıları e-posta listelerine mesaj gönderen alan adları için standart, en az bir ay p=none, ardından aynı uzunlukta bir süre quarantine politikasını önerir. reject politikasına geçmeden önce sonuçları karşılaştırmanızı ister.',
+    't=y seçeneği son adımda yardımcı olur. p=reject politikasını t=y ile yayımlarsanız alıcı sunucular bunun yerine quarantine uygular. Böylece e-posta kaybetmeden nelerin reddedileceğini görebilirsiniz. Hazır olduğunuzda t=y değerini kaldırın.',
+    'Reject politikasını yayımlamadan önce tüm e-postalarınızın DKIM ile imzalandığından emin olun. Standarda göre p=reject kullanan bir alan adı yalnızca SPF\'ye güvenmemelidir, çünkü yönlendirme SPF\'yi bozar. Kendi e-posta sunucunuzu çalıştırıyorsanız [DKIM oluşturucu](/dkim-generator) bir anahtar oluşturabilir.',
+  ],
+  reportsTitle: 'Rapor adresleri',
+  reportsParas: [
+    'rua, toplu raporların gönderildiği adrestir. Bu raporlar genellikle birer günü kapsayan XML dosyalarıdır. Alan adınız adına hangi IP adreslerinin e-posta gönderdiğini ve bu e-postaların kontrolden geçip geçmediğini listeler. ruf ise mesaj bazında hata raporları içindir. Birçok alıcı sunucu bu raporlardaki bilgileri gizlilik nedeniyle büyük ölçüde siler veya raporları hiç göndermez. Bu yüzden bu raporlara güvenmeyin.',
+    'Bir rapor adresi, koruduğunuz alan adından farklı bir alan adındaysa, örneğin bir raporlama hizmetindeyse, alıcı sunucuların oraya bir şey göndermesi için o alan adının bir onay kaydı yayımlaması gerekir. Yukarıdaki yardımcı bu kaydı sizin için yazar. Kaydı, raporlama alan adını yöneten kişiye gönderin. Bu kural RFC 9990 standardının 4. bölümünde yer alır.',
+  ],
+  mistakesTitle: 'Bu DMARC oluşturucunun önlediği hatalar',
+  mistakesParas: [
+    'Oluşturucu v=DMARC1 değerini her zaman ilk sıraya koyar, çünkü alıcı sunucular başka bir şeyle başlayan bir kaydı yok sayar. rua ve ruf adreslerinin ihtiyaç duyduğu mailto: önekini ekler ve hatalı görünen adresleri işaretler. pct etiketini asla yazmaz. pct değeri 100\'ün altında olan eski bir kaydı kontrol ettiğinizde bunun yerine t=y önerir. Reject seçtiğinizde sizi uyarır, çünkü bu seçenek ancak tüm e-postalarınız DKIM ile imzalandığında güvenlidir. Katı hizalama alt alan adlarınızdan gelen e-postaların kontrolden geçememesine yol açacaksa da sizi uyarır.',
+    'Kontrol edemediği tek şey DNS kaydınızdır. Sonucu alan adındaki tek DMARC kaydı olarak yayımlayın. DMARC\'ın SPF ve DKIM ile nasıl çalıştığını görmek için [SPF, DKIM ve DMARC nedir](/blog/spf-dkim-dmarc-explained) yazısına bakın.',
+  ],
+  faqTitle: 'Sıkça sorulan sorular',
+  faqs: [
+    {
+      q: 'İlk DMARC kaydım ne olmalı?',
+      a: 'v=DMARC1; p=none; rua=mailto:dmarc-reports@alanadiniz.com. Bu kayıt e-postalarınızın nasıl işlendiğini değiştirmez ve raporları başlatır. Bu kaydı oluşturmak için araçta Yalnızca izle seçeneğini seçin.',
+    },
+    {
+      q: 'pct hâlâ destekleniyor mu?',
+      a: 'Güncel standartta desteklenmiyor. RFC 9989, pct etiketini rf ve ri ile birlikte kaldırdı. Kalmış bir pct=100 zarar vermez. Ancak daha yumuşak bir geçiş istiyorsanız yüzde yerine t=y kullanın.',
+    },
+    {
+      q: 't=y ne işe yarar?',
+      a: 'Alıcı sunuculardan yayımladığınız politikanın bir kademe altını uygulamalarını ister. Böylece reject, quarantine gibi, quarantine ise none gibi işlenir. Raporları değiştirmez ve p=none ile hiçbir etkisi yoktur.',
+    },
+    {
+      q: 'rua ve ruf gerekli mi?',
+      a: 'Neler olduğunu görmek istiyorsanız rua gereklidir. rua olmadan hiç toplu rapor almazsınız. ruf isteğe bağlıdır ve birçok alıcı sunucu hata raporlarını hiç göndermez.',
+    },
+    {
+      q: 'np nedir?',
+      a: 'DNS\'te var olmayan alt alan adları için politikadır, örneğin uydurma bir invoices-2026.alanadiniz.com için. Bu etiketi eklemezseniz sp geçerli olur. sp de yoksa p geçerli olur.',
+    },
+    {
+      q: 'Kaydı nerede yayımlamalıyım?',
+      a: '_dmarc.alanadiniz.com adresinde bir TXT kaydı olarak yayımlayın. Çoğu DNS paneli host alanına yalnızca _dmarc yazmanızı ister ve alan adını kendisi ekler.',
+    },
+  ],
+  ctaHeadline: 'DMARC tamam mı? Sırada listeniz var.',
+}
+
+export const DMARC_PAGE_STRINGS: Record<Locale, DmarcPageStrings> = { en, de, fr, es, it, 'pt-br': ptBr, nl, pl, id, ja, ko, tr }

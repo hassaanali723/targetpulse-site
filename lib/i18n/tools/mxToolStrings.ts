@@ -746,6 +746,68 @@ const koTool: MxToolStrings = {
   },
 }
 
+const trServers = (n: number) => `${n} e-posta sunucusu bulundu`
+const trProvider = (name: string) => `. Bu alan adının e-postalarını ${name} alıyor`
+const trHead = (p: MxSummaryParts) => `${trServers(p.servers)}${p.provider ? trProvider(p.provider) : ''}`
+
+const trTool: MxToolStrings = {
+  label: 'Alan adı veya e-posta adresi',
+  placeholder: 'example.com',
+  button: 'MX kayıtlarını sorgulayın',
+  tryLabel: 'Deneyin:',
+  thPriority: 'Öncelik',
+  thServer: 'E-posta sunucusu',
+  thIps: 'IP adresleri',
+  thTtl: 'TTL',
+  none: 'yok',
+  nullMx: '. (null MX)',
+  legend: 'Gönderen sunucular önce en düşük sayıyı dener. Aynı sayıya sahip sunucular yükü paylaşır.',
+  copy: 'Kayıtları kopyalayın',
+  copied: 'Kopyalandı',
+  answeredBy: 'Yanıtlayan:',
+  dnssec: ' · DNSSEC ile doğrulandı',
+  ctaTitle: 'MX kayıtları posta kutusunu değil, alan adını kapsar',
+  ctaText: 'Bir alan adı e-posta alabilir, ancak yazmak istediğiniz adres yine de mevcut olmayabilir. Göndermeden önce adresin kendisini kontrol edin.',
+  ctaButton: 'Bir e-posta adresini doğrulayın',
+  ctaHref: '/tr/mail-adresi-dogrulama',
+  lookupError: 'DNS hizmetlerine ulaşamadık. Bağlantınızı kontrol edip tekrar deneyin.',
+  inputEmpty: 'example.com gibi bir alan adı girin.',
+  inputInvalid: 'Bu bir alan adına benzemiyor. example.com gibi bir değer girin.',
+  issues: {
+    'ip-literal': 'Bu kayıt bir IP adresini gösteriyor. Bir MX kaydı bir ana bilgisayar adı (host name) belirtmelidir. Bazı e-posta sunucuları (varsayılan ayarlarla Exim gibi) bu adrese e-posta teslim etmez.',
+    'lookup-failed': 'Bu sunucunun adresini sorgulayamadık. Biraz sonra tekrar deneyin.',
+    cname: 'Bu sunucu adı bir takma addır (CNAME). MX kurallarına göre gerçek ana bilgisayar adı olmalıdır. Birçok gönderen sunucu takma adı yine de takip eder, ancak standart bunu zorunlu tutmaz.',
+    'no-address': 'Bu sunucu adının IP adresi yok. Bu yüzden bu sunucuya gönderilen e-postalar teslim edilemez.',
+    'no-address-missing': 'Bu sunucu adı DNS\'te mevcut değil. Bu yüzden bu sunucuya gönderilen e-postalar teslim edilemez.',
+    'null-mx-mixed': 'Bu alan adı, normal MX kayıtlarının yanında bir null MX (“0 .”) yayımlıyor. Null MX tek MX kaydı olmalıdır. Bu yüzden ikisinden birini kaldırın.',
+  },
+  summary: {
+    servers: trServers,
+    provider: trProvider,
+    ok: (p) => ({ title: `${p.domain} e-posta alabilir`, text: `${trHead(p)}.` }),
+    okWithIssues: (p) => ({
+      title: `${p.domain} alan adının MX kayıtları var, ancak düzeltilmesi gereken bir sorun var`,
+      text: `${trHead(p)}. Sorunlar aşağıda listelenmiştir.`,
+    }),
+    implicit: (p) => ({
+      title: `${p.domain} alan adının MX kaydı yok`,
+      text: `Gönderen sunucular bunun yerine alan adının kendi adresini (${p.fallback}) kullanır. Bu yalnızca o adreste bir e-posta sunucusu çalışıyorsa işe yarar. Bu alan adı e-posta alacaksa MX kayıtları ekleyin.`,
+    }),
+    none: (p) => ({
+      title: `${p.domain} e-posta alamaz`,
+      text: 'MX kaydı yok ve gönderen sunucuların bunun yerine kullanabileceği bir adres de yok. Bu alan adına gönderilen e-postalar geri döner.',
+    }),
+    nullMx: (p) => ({
+      title: `${p.domain} hiç e-posta kabul etmiyor`,
+      text: 'Bu alan adı bir null MX kaydı (0 .) yayımlıyor. Bu kayıt, gönderen sunuculara teslim denememelerini söyler. E-posta için kullanılmayan bir alan adında bu normaldir. E-posta gönderdiğiniz bir alan adında bu kayıt olmamalıdır, çünkü yanıtlar ve geri dönen e-postalar size ulaşamaz.',
+    }),
+    nxdomain: (p) => ({
+      title: `${p.domain} mevcut değil`,
+      text: 'DNS\'te bu alan adına ait bir kayıt yok. Yazımı kontrol edin.',
+    }),
+  },
+}
+
 export const MX_TOOL_STRINGS: Partial<Record<Locale, MxToolStrings>> & { en: MxToolStrings } = {
   en,
   de: deTool,
@@ -758,6 +820,7 @@ export const MX_TOOL_STRINGS: Partial<Record<Locale, MxToolStrings>> & { en: MxT
   id: idTool,
   ja: jaTool,
   ko: koTool,
+  tr: trTool,
 }
 
 export function mxToolStrings(locale: Locale): MxToolStrings {

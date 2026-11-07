@@ -26,6 +26,7 @@ const LOCALE_META: Record<Locale, { native: string; short: string }> = {
   id: { native: 'Bahasa Indonesia', short: 'ID' },
   ja: { native: '日本語', short: 'JA' },
   ko: { native: '한국어', short: 'KO' },
+  tr: { native: 'Türkçe', short: 'TR' },
 }
 
 function alternateOf(pathname: string, from: Locale, target: Locale): string {
@@ -135,6 +136,15 @@ const FLAG_PATHS: Record<Locale, React.ReactNode> = {
       </g>
     </>
   ),
+  // Red field, white crescent and star.
+  tr: (
+    <>
+      <rect width="20" height="14" fill="#e30a17" />
+      <circle cx="7.6" cy="7" r="3.5" fill="#fff" />
+      <circle cx="8.5" cy="7" r="2.8" fill="#e30a17" />
+      <path d="M11.9 7l1.9-.62-1.18 1.62V6l1.18 1.62z" fill="#fff" />
+    </>
+  ),
 }
 
 function Flag({ locale, className = '' }: { locale: Locale; className?: string }) {
@@ -175,7 +185,7 @@ function CheckIcon() {
   )
 }
 
-const LABEL: Record<Locale, string> = { en: 'Language', it: 'Lingua', de: 'Sprache', es: 'Idioma', 'pt-br': 'Idioma', fr: 'Langue', nl: 'Taal', pl: 'Język', id: 'Bahasa', ja: '言語', ko: '언어' }
+const LABEL: Record<Locale, string> = { en: 'Language', it: 'Lingua', de: 'Sprache', es: 'Idioma', 'pt-br': 'Idioma', fr: 'Langue', nl: 'Taal', pl: 'Język', id: 'Bahasa', ja: '言語', ko: '언어', tr: 'Dil' }
 
 /** Desktop: globe + current code, opens a dropdown listing all languages. */
 export default function LanguageSwitcher({

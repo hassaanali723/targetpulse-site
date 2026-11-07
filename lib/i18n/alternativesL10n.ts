@@ -23,11 +23,12 @@ export function usdL(locale: L10nLocale, n: number): string {
 export function numL(locale: L10nLocale, n: number): string {
   return getStrings(locale).number(n)
 }
-/** "97.8%" -> "97,8%" (it, es, pt-br) or "97,8 %" (de, fr). */
+/** "97.8%" -> "97,8%" (it, es, pt-br), "97,8 %" (de, fr) or "%97,8" (tr). */
 export function pctL(locale: L10nLocale, s: string): string {
   if (!/^[\d.]+%$/.test(s)) return s
   if (locale === 'ja' || locale === 'ko') return s // ja and ko keep the decimal point: 97.8%
   const v = s.slice(0, -1).replace('.', ',')
+  if (locale === 'tr') return `%${v}` // Turkish puts the sign first: %97,8
   return locale === 'de' || locale === 'fr' ? `${v}${NB}%` : `${v}%`
 }
 
@@ -81,6 +82,7 @@ const LM_DATE: Record<L10nLocale, string> = {
   id: '25 Februari 2026',
   ja: '2026年2月25日',
   ko: '2026년 2월 25일',
+  tr: '25 Şubat 2026',
 }
 
 export const ALT_UI: Record<L10nLocale, AltUi> = {
@@ -621,6 +623,60 @@ export const ALT_UI: Record<L10nLocale, AltUi> = {
     // Rendered as: toolLead + <link>related[0].anchor</link> + "."
     toolLead: '주소 1개만 확인하려면 다음을 쓰십시오: ',
   },
+  tr: {
+    enSuffix: ' (İngilizce)',
+    bottomLine: 'Kısaca',
+    volume: 'Miktar',
+    perMonth: '/ay',
+    est: 'tahmin',
+    estimateNote: (n) => `Üçüncü taraf kaynaklardan alınan tahmin. ${n} fiyat sayfasında doğrulanmadı.`,
+    checked: (n, d) => [`${n} fiyatları ${d} tarihinde kontrol edildi. Fiyatlar değişmiş olabilir. Güncel fiyatlar için `, `${n} fiyat sayfasına`, ' bakın.'],
+    yes: 'Evet',
+    no: 'Hayır',
+    partial: 'Kısmen',
+    rows: {
+      price10k: '10.000 kredinin fiyatı',
+      catchAll: 'Catch-all doğrulama',
+      catchAllPricing: 'Catch-all doğrulama ücreti',
+      seg: 'SEG arkasındaki adresleri doğrulama',
+      expiry: 'Kredilerin geçerlilik süresi',
+      free: 'Ücretsiz paket',
+      chargesUnknown: 'Bilinmiyor sonuçlarını ücretlendirir',
+      accuracy: 'Doğruluk rakamı',
+    },
+    gateways: (n) => `${n} ağ geçidi`,
+    verdictHead: ['Sonuç', 'Anlamı'],
+    verdicts: [
+      ['Teslim edilebilir', 'Posta kutusu var ve e-posta kabul eder'],
+      ['Teslim edilemez', 'Posta kutusu yok'],
+      ['Riskli', 'Adres var, ancak teslim edilebilirlik açısından risk taşır'],
+      ['Bilinmiyor', 'Adresi doğrulayamadık ve kredi iade edilir'],
+    ],
+    bench: {
+      resolved: 'sonuç verilen catch-all adres oranı',
+      accuracy: 'ölçülen genel doğruluk',
+      source: (n) => `${n} rakamları, ${LEADMAGIC_BENCHMARK.publisher} tarafından ${LM_DATE.tr} tarihinde yayınlanan bağımsız bir testten alınmıştır. Testte 10.000 gerçek B2B e-posta adresi kullanıldı ve bunların %28'i catch-all alan adlarındaydı.`,
+      caveat: 'Bu testi, rakip bir e-posta doğrulama aracı satan LeadMagic yayınladı. LeadMagic kendi sonuçlarında kendini birinci sıraya koydu. Bu testi tarafsız bir çalışma olarak değil, bir satıcının yaptığı test olarak okuyun. Giggal.ai bu testte ölçülen araçlar arasında değildi.',
+    },
+    heroCta: '1.000 krediyle ücretsiz başlayın',
+    compareAll: 'Tüm doğrulama araçlarını karşılaştırın (İngilizce)',
+    tryHeading: 'Kendi listenizde deneyin',
+    faqHeading: 'Sık sorulan sorular',
+    keepReading: 'Okumaya devam edin',
+    related: [
+      { href: '/email-checker', anchor: 'ücretsiz mail adresi doğrulama aracı' },
+      { href: '/alternatives', anchor: 'tüm doğrulama araçlarını karşılaştırın' },
+      { href: '/catch-all-verification', anchor: 'catch-all ve riskli e-posta adreslerini doğrulayın' },
+      { href: '/seg-email-verification', anchor: 'SEG ağ geçitleri arkasındaki e-posta adresleri' },
+      { href: '/pricing', anchor: 'fiyatlar ve krediler' },
+    ],
+    h2hHeading: (n) => `${n} için birebir karşılaştırmalar`,
+    h2hProse: (n) => [`${n} aracını en sık takip ettiğimiz doğrulama araçlarıyla karşılaştırın. Her sayfada üçüncü seçenek olarak Giggal.ai da yer alır. Tablonun tamamını `, 'karşılaştırma sayfasında', ' görebilirsiniz (İngilizce).'],
+    breadcrumbAlternatives: 'Alternatifler',
+    featureHeading: (n) => `${n} ve Giggal.ai karşılaştırması`,
+    // Rendered as: toolLead + <link>related[0].anchor</link> + "."
+    toolLead: 'Tek bir adres için şu aracı kullanabilirsiniz: ',
+  },
 }
 
 // ── Translated competitor facts ──────────────────────────────────────────────
@@ -639,6 +695,7 @@ const GIGGAL_FACTS: Record<L10nLocale, { freeTier: string; creditsExpire: string
   id: { freeTier: '1.000 kredit, tanpa kartu kredit, juga untuk pemeriksaan massal', creditsExpire: 'Kredit tidak pernah kedaluwarsa, tanpa syarat.', catchAllCreditCost: '1 kredit, sama seperti pemeriksaan lain', claimedAccuracy: 'Mengklaim 98,5%', category: 'Alat verifikasi untuk catch-all dan SEG' },
   ja: { freeTier: '1,000クレジット（クレジットカード不要、一括チェックにも利用可）', creditsExpire: 'クレジットに有効期限はありません。条件もありません。', catchAllCreditCost: '1クレジット（ほかのチェックと同じ）', claimedAccuracy: '98.5%と主張', category: 'キャッチオールドメインとSEGに対応した検証ツール' },
   ko: { freeTier: '크레딧 1,000개(신용카드 불필요, 대량 검사에도 사용 가능)', creditsExpire: '크레딧에 유효기간이 없습니다. 조건도 없습니다.', catchAllCreditCost: '크레딧 1개(다른 검사와 같음)', claimedAccuracy: '98.5% 주장', category: '캐치올 도메인과 SEG를 지원하는 검증 도구' },
+  tr: { freeTier: '1.000 kredi, kredi kartı gerekmez, toplu kontrolde de kullanılabilir', creditsExpire: 'Kredilerin süresi hiç dolmaz, hiçbir koşul yoktur.', catchAllCreditCost: '1 kredi, diğer tüm doğrulamalarla aynı', claimedAccuracy: '%98,5 iddia eder', category: 'Catch-all ve SEG doğrulama aracı' },
 }
 export function giggalFacts(locale: L10nLocale) {
   return { ...GIGGAL, ...GIGGAL_FACTS[locale] }
@@ -656,6 +713,7 @@ const FACTS: Record<string, Partial<Record<L10nLocale, Facts>>> = {
     id: { freeTier: '100 kredit per bulan', creditsExpire: 'Kredit tidak kedaluwarsa', catchAllCreditCost: 'Skor AI 1 sampai 10, bukan valid atau tidak valid', claimedAccuracy: 'Mengklaim 99,6%' },
     ja: { freeTier: '毎月100クレジット', creditsExpire: 'クレジットに有効期限はありません', catchAllCreditCost: 'AIによる1〜10のスコア。有効・無効の結果は出ません', claimedAccuracy: '99.6%と主張' },
     ko: { freeTier: '매월 크레딧 100개', creditsExpire: '크레딧에 유효기간이 없습니다', catchAllCreditCost: 'AI 점수 1~10, 유효 또는 무효 결과 없음', claimedAccuracy: '99.6% 주장' },
+    tr: { freeTier: 'Ayda 100 kredi', creditsExpire: 'Kredilerin süresi dolmaz', catchAllCreditCost: '1 ila 10 arası yapay zekâ puanı, geçerli ya da geçersiz sonucu yok', claimedAccuracy: '%99,6 iddia eder' },
   },
   neverbounce: {
     it: { freeTier: '10 crediti alla registrazione', creditsExpire: "I crediti scadono 12 mesi dopo l'acquisto", catchAllCreditCost: 'Segnati Accept-All, ne risolve pochi' },
@@ -668,6 +726,7 @@ const FACTS: Record<string, Partial<Record<L10nLocale, Facts>>> = {
     id: { freeTier: '10 kredit saat mendaftar', creditsExpire: 'Kredit kedaluwarsa 12 bulan setelah pembelian', catchAllCreditCost: 'Ditandai Accept-All, hanya sedikit yang diselesaikan' },
     ja: { freeTier: '登録時に10クレジット', creditsExpire: 'クレジットは購入から12か月で失効します', catchAllCreditCost: 'Accept-Allと表示され、結果が出るのはわずか' },
     ko: { freeTier: '가입 시 크레딧 10개', creditsExpire: '크레딧은 구매 후 12개월이 지나면 만료됩니다', catchAllCreditCost: 'Accept-All로 표시, 결과를 내는 주소는 일부' },
+    tr: { freeTier: 'Kayıt sırasında 10 kredi', creditsExpire: 'Kredilerin süresi satın almadan 12 ay sonra dolar', catchAllCreditCost: 'Accept-All olarak işaretlenir, az sayıda adres için sonuç verir' },
   },
   hunter: {
     de: {
@@ -741,6 +800,11 @@ const FACTS: Record<string, Partial<Record<L10nLocale, Facts>>> = {
       freeTier: '무료 체험 시 크레딧 50개', creditsExpire: '구독이 유지되는 동안 요금제 크레딧이 이월됩니다', catchAllCreditCost: '표시만 하고 결과 없음',
       pricingBasisNote: 'Snov.io는 크레딧을 함께 쓰는 월 구독으로 판매됩니다(검증 1회에 크레딧 1개). 수치는 해당 검증 횟수를 감당하는 가장 작은 월 요금제입니다(월간 결제 기준, 연간 결제 시 약 25% 저렴). 매월 100만 회는 맞춤 요금제입니다. Giggal.ai의 수치는 종량제 1회 결제 가격입니다.',
       notes: { Custom: '맞춤 요금제' },
+    },
+    tr: {
+      freeTier: 'Ücretsiz denemede 50 kredi', creditsExpire: 'Abonelik devam ettiği sürece paket kredileri sonraki aya aktarılır', catchAllCreditCost: 'İşaretlenir, sonuç verilmez',
+      pricingBasisNote: "Snov.io ortak kredili aylık bir abonelik olarak satılır (her doğrulama için 1 kredi). Rakamlar, o sayıda doğrulamayı karşılayan en küçük aylık paketin fiyatıdır (aylık faturalama; yıllık faturalamada yaklaşık %25 daha ucuz). Ayda bir milyon doğrulama özel bir pakettir. Giggal.ai rakamları tek seferlik, kullandıkça öde fiyatlarıdır.",
+      notes: { Custom: 'Özel paket' },
     },
   },
   apollo: {

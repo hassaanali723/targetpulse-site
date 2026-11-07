@@ -21,6 +21,7 @@ export const COMPARE_SEGMENT: Record<L10nLocale, string> = {
   id: 'perbandingan',
   ja: 'compare',
   ko: 'compare',
+  tr: 'karsilastirma',
 }
 
 const PAIRS: { versus: string; cluster: ClusterId }[] = [
@@ -50,6 +51,7 @@ const TITLES: Record<string, Partial<Record<L10nLocale, string>>> = {
     id: 'ZeroBounce vs NeverBounce: harga dan akurasi | Giggal.ai',
     ja: 'ZeroBounce vs NeverBounce：料金と正確性の比較 | Giggal.ai',
     ko: 'ZeroBounce vs NeverBounce: 가격과 정확도 비교 | Giggal.ai',
+    tr: 'ZeroBounce vs NeverBounce: fiyat ve doğruluk | Giggal.ai',
   },
   'zerobounce-vs-hunter': {
     de: 'ZeroBounce vs Hunter: Preise und Genauigkeit | Giggal.ai',
@@ -84,6 +86,7 @@ const PROFILES: Record<string, Partial<Record<L10nLocale, Profile>>> = {
     id: { category: 'Alat verifikasi murni', oneLiner: 'alat verifikasi yang sudah lama ada dan menjadi bagian dari paket deliverability yang luas.', catchAllApproach: 'memberi alamat catch-all skor 1 sampai 10 dengan AI, bukan memastikan kotak masuknya.', bestFor: 'tim yang ingin verifikasi sekaligus inbox placement serta pemantauan DMARC dan blacklist.' },
     ja: { category: 'メールアドレス検証専用のツール', oneLiner: '幅広い到達率ツール群の一部として、長く提供されている検証ツールです。', catchAllApproach: 'キャッチオールドメインのアドレスに、メールボックスを確認する代わりに、AIで1〜10のスコアを付けます。', bestFor: '検証に加えて、受信トレイへの到達テスト（インボックスプレースメント）、DMARCとブラックリストの監視も使いたいチーム' },
     ko: { category: '검증 전용 도구', oneLiner: '폭넓은 이메일 도달률 도구 모음에 포함된, 오랫동안 운영되어 온 검증 도구입니다.', catchAllApproach: '캐치올 도메인 주소의 메일함을 확인하는 대신 AI로 1~10점의 점수를 매깁니다.', bestFor: '검증과 함께 받은편지함 도달 테스트, DMARC 및 블랙리스트 모니터링을 쓰려는 팀' },
+    tr: { category: 'Yalnızca doğrulama aracı', oneLiner: 'geniş bir teslim edilebilirlik paketinin parçası olan, uzun süredir piyasada bulunan bir doğrulama aracıdır.', catchAllApproach: 'catch-all adreslerde posta kutusunu doğrulamak yerine yapay zekâ ile 1 ila 10 arası bir puan verir.', bestFor: 'doğrulamayı gelen kutusuna ulaşma testleri, DMARC izleme ve kara liste izleme ile birlikte isteyen ekipler' },
   },
   neverbounce: {
     it: { category: 'Verificatore puro', oneLiner: 'un verificatore noto per le integrazioni CRM profonde e la pulizia delle liste dentro i tuoi strumenti.', catchAllApproach: 'segna gli indirizzi accept-all e ne risolve solo una piccola parte.', bestFor: 'ai team che puliscono le liste direttamente dentro Salesforce, HubSpot o Marketo.' },
@@ -96,6 +99,7 @@ const PROFILES: Record<string, Partial<Record<L10nLocale, Profile>>> = {
     id: { category: 'Alat verifikasi murni', oneLiner: 'alat verifikasi yang dikenal karena integrasi CRM-nya dan pembersihan daftar langsung di alat Anda.', catchAllApproach: 'menandai alamat accept-all dan hanya menyelesaikan sebagian kecil darinya.', bestFor: 'tim yang membersihkan daftar langsung di Salesforce, HubSpot, atau Marketo.' },
     ja: { category: 'メールアドレス検証専用のツール', oneLiner: 'CRMとの連携と、お使いのツールの中でのリストのクリーニングで知られる検証ツールです。', catchAllApproach: 'アクセプトオール（accept-all）のアドレスにラベルを付け、結果を出せるのはその一部だけです。', bestFor: 'Salesforce、HubSpot、Marketoの中で直接リストをクリーニングするチーム' },
     ko: { category: '검증 전용 도구', oneLiner: '깊이 있는 CRM 연동과, 지금 쓰는 도구 안에서 리스트를 정리하는 기능으로 알려진 검증 도구입니다.', catchAllApproach: 'accept-all 주소를 표시하며, 그중 적은 비율에만 결과를 냅니다.', bestFor: 'Salesforce, HubSpot, Marketo 안에서 직접 리스트를 정리하는 팀' },
+    tr: { category: 'Yalnızca doğrulama aracı', oneLiner: 'kapsamlı CRM entegrasyonları ve listeleri kullandığınız araçların içinde temizlemesiyle bilinen bir doğrulama aracıdır.', catchAllApproach: 'accept-all adresleri işaretler ve bunların yalnızca küçük bir kısmı için sonuç verir.', bestFor: 'listelerini doğrudan Salesforce, HubSpot veya Marketo içinde temizleyen ekipler' },
   },
   hunter: {
     de: { category: 'Such- und Outreach-Plattform', oneLiner: 'eine Plattform, die zuerst E-Mails findet und die Prüfung in Monatspläne packt.', catchAllApproach: 'versucht bei einigen großen Anbietern, Accept-all zu bestätigen, und markiert es sonst nur.', bestFor: 'Teams, die Interessenten in einem Abo finden und prüfen wollen.' },
@@ -626,6 +630,59 @@ const LANG: Record<L10nLocale, Lang> = {
       altLabel: (n) => `${n} 대안`,
       compareEvery: '모든 검증 도구 비교(영어)',
       allComparisons: '모든 비교(영어)',
+    },
+  },
+  // Turkish: the only tr pair is zerobounce-vs-neverbounce, and both names
+  // end in "Bounce" (pronounced "bauns"), so the suffixes after ${A}, ${B}
+  // and c.name follow that sound: mu, 'un, 'a. Most templates avoid a suffix
+  // after the brand. oneLiner ends in a full verb (…aracıdır.), catchAllApproach
+  // completes "<A> …", bestFor is a noun phrase closed with "için uygundur".
+  tr: {
+    rows: ['Kategori', 'Catch-all için sonuç verir', 'Catch-all doğrulama ücreti', 'Güvenli e-posta ağ geçitleri', '10.000 kredinin fiyatı', '100.000 kredinin fiyatı', '1.000.000 kredinin fiyatı', 'Kredilerin geçerlilik süresi', 'Ücretsiz paket', 'Bilinmiyor sonuçlarını ücretlendirir', 'Doğruluk rakamı'],
+    priceSentence: (c, p) => c.pricingModel === 'subscription'
+      ? `${c.name} aylık paketlerle satılır. Ayda 10.000 doğrulama için başlangıç fiyatı ${p(10000)}`
+      : `${c.name} fiyatları: 10.000 kredi için ${p(10000)}, 100.000 kredi için ${p(100000)} ve bir milyon kredi için ${p(1000000)}`,
+    expiry: (c) => `${c.name}: ${lc(c.creditsExpire)}`,
+    free: (c) => `ücretsiz paket olarak ${lc(c.freeTier)} sunar`,
+    intro: (A, B, pa, pb) => `${A} ile ${B} arasındaki seçim, çoğu zaman her aracın listenizde gerçekten sorun çıkaran adresleri nasıl ele aldığına bağlıdır. ${A}, ${pa.oneLiner} ${B}, ${pb.oneLiner} Aşağıda iki aracın fiyatlarını, catch-all adreslerle ne yaptıklarını ve hangi doğruluğu iddia ettiklerini görebilirsiniz. Aynı listede Giggal.ai'ın nerede durduğunu da gösteriyoruz. Böylece karşılaştırma için üçüncü bir rakamınız olur.`,
+    sections: (A, B, a, b, pa, pb, ps) => [
+      { heading: `${A} ve ${B} catch-all adresleri nasıl ele alır`, prose: `${A} ${pa.catchAllApproach} ${B} ${pb.catchAllApproach} Catch-all alan adları her isme gelen e-postayı kabul eder. Bu yüzden normal bir kontrol, gerçek bir posta kutusunu var olmayan bir posta kutusundan ayıramaz. Listeler geçerli kişileri çoğu zaman bu noktada fark edilmeden kaybeder.`, label: "Giggal.ai'ın catch-all yaklaşımı:" },
+      { heading: `${A} ve ${B} fiyat karşılaştırması`, prose: `${ps[0]}. ${ps[1]}. İki rakam da her satıcının kendi yayınladığı fiyatlardan alınmıştır. Bunları her ay gönderdiğiniz e-posta sayısıyla karşılaştırın.`, label: "Giggal.ai'ın fiyatı:" },
+      { heading: 'Güvenli e-posta ağ geçidi (SEG) desteği', prose: `Kurumsal alan adlarında Mimecast, Proofpoint veya Barracuda gibi bir ağ geçidi çoğu zaman posta kutusunun önünde durur ve normal kontrolü engeller. ${A} ${a.advertisesSegSupport ? 'bu ağ geçitlerinin arkasında doğrulama yaptığını belirtir' : 'bu ağ geçitlerini kapsamaz'}. ${B} ${segB(a, b, ['da aynısını belirtir', 'ise bu ağ geçitlerinin arkasında doğrulama yaptığını belirtir', 'ise bunları kapsamaz', 'da bunları kapsamaz'])}.`, label: "Giggal.ai'ın ağ geçidi yaklaşımı:" },
+      { heading: 'Krediler, ücretsiz paketler ve geçerlilik süresi', prose: `${LANG.tr.expiry(a)}. ${A} ${LANG.tr.free(a)}. ${LANG.tr.expiry(b)}. ${B} ${LANG.tr.free(b)}.`, label: "Giggal.ai'ın kredi politikası:" },
+    ],
+    edges: [
+      'Giggal.ai catch-all adreslere gerçek bir teslim edilebilir ya da teslim edilemez sonucu verir. Her e-posta adresi için sabit olarak 1 kredi kullanılır.',
+      'Giggal.ai sabit, kullandıkça öde fiyatlarını yayınlar: 10.000 kredi için $9,90, 100.000 kredi için $76 ve bir milyon kredi için $680. Kredilerin süresi hiç dolmaz.',
+      'Giggal.ai, Mimecast, Proofpoint ve Barracuda dahil adı bilinen 15 güvenli e-posta ağ geçidini tespit eder ve bunların arkasındaki adresler için gerçek bir sonuç verir.',
+      'Giggal.ai kredilerinin süresi hiç dolmaz ve bilinmiyor sonuçları ücretlendirilmez. Her liste, kredi kartı gerekmeden 1.000 ücretsiz krediyle başlar.',
+    ],
+    faqs: (A, B, a, b, pa, pb, ps) => [
+      { q: `${A} mu, ${B} mu? Hangisini seçmeliyim?`, a: `Listenize bağlıdır. ${A}, ${pa.bestFor} için uygundur. ${B}, ${pb.bestFor} için uygundur. Sizin için en önemli konu catch-all adreslerde sonuç almak ve güvenli e-posta ağ geçitlerini kapsamaksa Giggal.ai ikisini de 10.000 kredi için $9,90 fiyatla yapar.` },
+      { q: `${A} ve ${B} fiyat açısından nasıl karşılaştırılır?`, a: `${ps[0]}. ${ps[1]}. Giggal.ai fiyatları: 10.000 kredi için $9,90, 100.000 kredi için $76 ve bir milyon kredi için $680. Kredilerin süresi hiç dolmaz.` },
+      { q: `${A} veya ${B} catch-all adresler için sonuç verir mi?`, a: `${LANG.tr.caResolve(a)}. ${LANG.tr.caResolve(b)}. Giggal.ai catch-all adreslere gerçek bir teslim edilebilir ya da teslim edilemez sonucu verir ve her e-posta adresi için sabit olarak 1 kredi kullanır. 15 güvenli e-posta ağ geçidinin arkasındaki adresleri de doğrular.` },
+      { q: `${A} veya ${B} yerine daha iyi bir seçenek var mı?`, a: "Giggal.ai, iki aracın genellikle atladığı zor adresler için geliştirilmiştir. Catch-all adreslere e-posta adresi başına sabit 1 krediyle gerçek bir sonuç verir ve 15 güvenli e-posta ağ geçidinin arkasındaki adresleri doğrular. 10.000 kredi için $9,90'lık sabit bir fiyat yayınlar ve kredilerin süresi hiç dolmaz. Bir listeyi kredi kartı olmadan 1.000 ücretsiz krediyle kontrol edebilirsiniz." },
+      { q: "Karar vermeden önce Giggal.ai'ı deneyebilir miyim?", a: `Evet. Giggal.ai, kredi kartı gerekmeden 1.000 ücretsiz kredi verir ve bu krediler toplu yüklemede de kullanılabilir. ${A} veya ${B} ile test edeceğiniz listenin aynısını kontrol edin ve catch-all satırlarını karşılaştırın.` },
+    ],
+    caResolve: (c) =>
+      c.resolvesCatchAll === 'partial'
+        ? `${c.name} bazı catch-all adresler için sonuç verir`
+        : c.resolvesCatchAll
+        ? `${c.name} catch-all adresler için sonuç verir`
+        : `${c.name} catch-all adresleri posta kutusunu doğrulamadan işaretler`,
+    desc: (A, B) => `${A} ve ${B} karşılaştırması: iki e-posta doğrulama aracının fiyatı, catch-all adreslerdeki yaklaşımı, doğruluğu ve Giggal.ai'ın yeri.`,
+    og: (A, B) => `${A} vs ${B} ve Giggal.ai karşılaştırması`,
+    ui: {
+      tableHeading: (A, B) => `${A}, ${B} ve Giggal.ai karşılaştırması`,
+      tableNote: 'Buradaki her fiyat ve koşul, satıcının kendi yayınladığı fiyatlardan alınmıştır. Bir araç hacme göre satılmıyorsa hücrede satıcının ifadesi ya da aylık paket fiyatı gösterilir.',
+      promoHeading: "Ekipler neden ikisinin yerine Giggal.ai'ı seçiyor",
+      promo: (A, B) => `${A} ve ${B}, çok sayıda catch-all adresi ve ağ geçidi korumalı adresi doğrulanmamış bırakır. Giggal.ai bu adresler için sabit 1 krediyle gerçek bir sonuç verir, 15 güvenli e-posta ağ geçidinin arkasındaki adresleri doğrular ve 10.000 kredi için $9,90'lık sabit bir fiyat yayınlar. Kredilerin süresi hiç dolmaz.`,
+      promoCta: '1.000 e-posta adresini ücretsiz doğrulayın',
+      related: 'İlgili karşılaştırmalar',
+      altSentence: ['Giggal.ai ile doğrudan karşılaştırma mı istiyorsunuz? ', '', ' ve ', '', ' sayfalarına bakın ya da '],
+      altLabel: (n) => `${n} alternatifi`,
+      compareEvery: 'tüm doğrulama araçlarını karşılaştırın (İngilizce)',
+      allComparisons: 'Tüm karşılaştırmalar (İngilizce)',
     },
   },
 }

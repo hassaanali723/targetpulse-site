@@ -92,6 +92,7 @@ const PAGE_WORD: Record<L10nLocale, string> = {
   id: 'halaman',
   ja: 'ページ',
   ko: '페이지',
+  tr: 'sayfa',
 }
 
 // Metadata for pages 2..n of a localized hub. Page 1 keeps the hub URL and its

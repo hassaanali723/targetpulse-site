@@ -43,6 +43,7 @@ const andJoiner = (names: string[], loc: Locale): string => {
     id: ' dan ',
     ja: '、',
     ko: ' 및 ',
+    tr: ' ve ',
   }[loc] ?? ' and '
   return names.slice(0, -1).join(', ') + conjunction + names[names.length - 1]
 }
@@ -118,9 +119,9 @@ function EmailResults({ r, t, locale }: { r: EmailBounceResult; t: BounceRateToo
     <div className="space-y-5">
       <div className="rounded-xl bg-slate-900 text-white p-5 md:p-6">
         <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400">{er.heading}</div>
-        <div className="mt-1 text-4xl md:text-5xl font-black">{formatPct(r.rate)}</div>
+        <div className="mt-1 text-4xl md:text-5xl font-black">{formatPct(r.rate, locale)}</div>
         <p className="mt-2 font-mono text-xs sm:text-sm text-emerald-300 break-words">
-          ({fmt(r.hard)} + {fmt(r.soft)}) ÷ {fmt(r.sent)} × 100 = {formatPct(r.rate)}
+          ({fmt(r.hard)} + {fmt(r.soft)}) ÷ {fmt(r.sent)} × 100 = {formatPct(r.rate, locale)}
         </p>
         <p className="mt-2 text-xs sm:text-sm text-slate-400">
           {er.bouncedOfSent(fmt(r.bounced), fmt(r.sent))}
@@ -128,17 +129,17 @@ function EmailResults({ r, t, locale }: { r: EmailBounceResult; t: BounceRateToo
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
-        <Stat label={er.statHard.label} value={formatPct(r.hardRate)} note={er.statHard.note} />
-        <Stat label={er.statSoft.label} value={formatPct(r.softRate)} note={er.statSoft.note} />
+        <Stat label={er.statHard.label} value={formatPct(r.hardRate, locale)} note={er.statHard.note} />
+        <Stat label={er.statSoft.label} value={formatPct(r.softRate, locale)} note={er.statSoft.note} />
         <div className="col-span-2 sm:col-span-1">
-          <Stat label={er.statDelivered.label} value={formatPct(r.deliveredRate)} note={er.statDelivered.note(fmt(r.delivered))} />
+          <Stat label={er.statDelivered.label} value={formatPct(r.deliveredRate, locale)} note={er.statDelivered.note(fmt(r.delivered))} />
         </div>
       </div>
 
       {r.rateOfDelivered !== null && r.bounced > 0 && (
         <p className="text-sm text-slate-600 leading-relaxed flex items-start gap-2">
           <Info className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
-          <span>{er.deliveredComparison(formatPct(r.rateOfDelivered))}</span>
+          <span>{er.deliveredComparison(formatPct(r.rateOfDelivered, locale))}</span>
         </p>
       )}
 
@@ -146,8 +147,8 @@ function EmailResults({ r, t, locale }: { r: EmailBounceResult; t: BounceRateToo
         <Icon className={`w-5 h-5 shrink-0 mt-0.5 ${iconColor}`} />
         <p className="text-sm font-medium leading-relaxed">
           {over.length === 0
-            ? er.allUnderLimits(formatPct(r.hardRate))
-            : er.overLimits(formatPct(r.hardRate), andJoiner(overNames, locale))}
+            ? er.allUnderLimits(formatPct(r.hardRate, locale))
+            : er.overLimits(formatPct(r.hardRate, locale), andJoiner(overNames, locale))}
         </p>
       </div>
 
@@ -169,7 +170,7 @@ function EmailResults({ r, t, locale }: { r: EmailBounceResult; t: BounceRateToo
                     l.over ? 'bg-rose-50 text-rose-700' : 'bg-emerald-50 text-emerald-700'
                   }`}
                 >
-                  {l.atLimit ? er.atLimit : l.over ? er.overLimit : er.underLimit} {l.limit}%
+                  {l.atLimit ? er.atLimit : l.over ? er.overLimit : er.underLimit} {formatPct(l.limit, locale)}
                 </span>
                 <p className="text-[11px] text-slate-500 sm:mt-1 sm:whitespace-nowrap">
                   {l.over ? er.tooMany(fmt(-l.room)) : er.leftRoom(fmt(l.room), l.counts)}
@@ -208,16 +209,16 @@ function WebsiteResults({ r, t, locale }: { r: WebsiteBounceResult; t: BounceRat
     <div className="space-y-5">
       <div className="rounded-xl bg-slate-900 text-white p-5 md:p-6">
         <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400">{wr.heading}</div>
-        <div className="mt-1 text-4xl md:text-5xl font-black">{formatPct(r.bounceRate)}</div>
+        <div className="mt-1 text-4xl md:text-5xl font-black">{formatPct(r.bounceRate, locale)}</div>
         <p className="mt-2 font-mono text-xs sm:text-sm text-emerald-300 break-words">
-          ({fmt(r.sessions)} − {fmt(r.engaged)}) ÷ {fmt(r.sessions)} × 100 = {formatPct(r.bounceRate)}
+          ({fmt(r.sessions)} − {fmt(r.engaged)}) ÷ {fmt(r.sessions)} × 100 = {formatPct(r.bounceRate, locale)}
         </p>
         <p className="mt-2 text-xs sm:text-sm text-slate-400">
           {wr.sessionsNotEngaged(fmt(r.sessions - r.engaged), fmt(r.sessions))}
         </p>
       </div>
       <div className="grid grid-cols-2 gap-2 sm:gap-3">
-        <Stat label={wr.statEngagement.label} value={formatPct(r.engagementRate)} note={wr.statEngagement.note} />
+        <Stat label={wr.statEngagement.label} value={formatPct(r.engagementRate, locale)} note={wr.statEngagement.note} />
         <Stat label={wr.statEngaged.label} value={fmt(r.engaged)} note={wr.statEngaged.note} />
       </div>
     </div>

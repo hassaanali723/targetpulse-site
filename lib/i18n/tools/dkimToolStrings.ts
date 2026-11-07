@@ -1216,7 +1216,112 @@ ${keys.privateKeyPkcs8Pem}
   },
 }
 
-export const DKIM_TOOL_STRINGS: Record<Locale, DkimToolStrings> = { en, it: itTool, de: deTool, fr: frTool, es: esTool, 'pt-br': ptBrTool, nl: nlTool, pl: plTool, id: idTool, ja: jaTool, ko: koTool }
+const trTool: DkimToolStrings = {
+  domainLabel: 'Alan adı',
+  domainPlaceholder: 'example.com',
+  domainHelp: 'Giden e-postalarınız için kullandığınız gönderen alan adı',
+  selectorLabel: 'DKIM seçicisi (selector)',
+  selectorPlaceholder: 's2026a',
+  selectorHelp: 'Bu anahtar çiftini DNS\'te tanımlar (ör. s2026a)',
+  keySizeLabel: 'Anahtar uzunluğu',
+  keySizeOptions: {
+    2048: '2048 bit (önerilen)',
+    1024: '1024 bit (Gmail\'in kabul ettiği en düşük uzunluk)',
+    4096: '4096 bit (uzun kayıt, DNS sağlayıcınızı kontrol edin)',
+  },
+  keySizeHelp: {
+    2048: 'Gmail ve RFC 8301 tarafından önerilir',
+    1024: 'Eski uzunluk, modern kriptanalize karşı zayıf',
+    4096: 'Standart 512 baytlık UDP DNS paketi sınırını aşar',
+  },
+  invalidSelector: 'Geçersiz seçici',
+  invalidDomain: 'Geçersiz alan adı',
+  generationFailed: 'Anahtar oluşturulamadı',
+  generating: 'RSA anahtar çifti tarayıcıda oluşturuluyor...',
+  generate: 'DKIM anahtarları oluşturun',
+
+  dnsTitle: 'DNS TXT kaydı',
+  keyInfo: (bits, chars) => `${bits} bit (${chars} karakter)`,
+  formatLabel: 'Biçim:',
+  formatSingle: 'Tek dize',
+  formatChunked: '255 karakterlik bölümler',
+  formatBind: 'BIND bölgesi',
+  hostLabel: 'Kayıt adı / ana bilgisayar (host):',
+  copied: 'Kopyalandı',
+  copyHost: 'Host değerini kopyalayın',
+  orFqdn: (fqdn) => `(veya ${fqdn})`,
+  valueLabel: 'Kayıt değeri (TXT):',
+  copyValue: 'Değeri kopyalayın',
+  chunkedNote:
+    'DNS sağlayıcınız (ör. GoDaddy, Namecheap) tek bir TXT dizesini 255 karakterle sınırlıyorsa bu bölümlenmiş biçimi kullanın.',
+
+  privateKeyTitle: 'Özel anahtar',
+  pkcs1Label: 'PKCS#1 (RSA)',
+  pkcs8Label: 'PKCS#8',
+  hide: 'Gizle',
+  show: 'Göster',
+  reveal: 'Özel anahtarı görmek için tıklayın',
+  copiedKey: 'Anahtar kopyalandı',
+  copyPrivateKey: 'Özel anahtarı kopyalayın',
+  downloadKey: 'Anahtar dosyasını indirin',
+  downloadBundle: 'Kurulum dosyasını indirin (.txt)',
+  rulesTitle: 'Önemli kurulum kuralları:',
+  rules: [
+    'Bu özel anahtarı gizli tutun. Anahtarı yalnızca e-posta aktarım aracınızın (MTA) veya e-posta gönderim platformunuzun içinde yapılandırın.',
+    'Önce DNS TXT kaydını yayımlayın. DNS kaydı yayılmadan önce imzalı e-posta göndermek kimlik doğrulama hatalarına ve geri dönen e-postalara yol açar.',
+    'Çoğu e-posta yazılımı (Postfix, OpenDKIM, cPanel, Exim) geleneksel PKCS#1 RSA biçimini bekler.',
+  ],
+
+  bundleFileName: (domain, selector) => `${domain}-${selector}-dkim-kurulum.txt`,
+  bundleText: (keys) => `${keys.domain.toUpperCase()} İÇİN DKIM KURULUM TALİMATLARI
+Giggal.ai DKIM oluşturucu ile tarayıcıda oluşturuldu
+
+==================================================
+1. DNS TXT KAYDI
+==================================================
+Host / ad:
+${keys.dnsRecordName}
+(veya tam nitelikli alan adı (FQDN): ${keys.dnsRecordFqdn})
+
+TXT kaydı değeri (tek dize):
+${keys.dnsRecordValue}
+
+TXT kaydı değeri (255 karakterlik bölümler, tırnak içinde):
+${keys.dnsRecordChunked}
+
+BIND bölgesi biçimi:
+${keys.bindRecord}
+
+==================================================
+2. ÖZEL ANAHTAR (e-posta sunucusuna veya MTA'ya kurun)
+==================================================
+Biçim: PKCS#1 (geleneksel RSA)
+${keys.privateKeyPkcs1Pem}
+
+Biçim: PKCS#8 (standart)
+${keys.privateKeyPkcs8Pem}
+
+==================================================
+ÖNEMLİ KURULUM NOTLARI:
+- E-posta sunucunuzda DKIM imzalamayı açmadan ÖNCE DNS TXT kaydını ekleyin ve kaydın yayıldığını doğrulayın.
+- Özel anahtarı gizli tutun. Anahtarı asla paylaşmayın veya DNS'te yayımlamayın.
+`,
+
+  errors: {
+    'selector-empty': 'Seçici boş olamaz',
+    'selector-too-long': 'Seçici en fazla 63 karakter olmalıdır',
+    'selector-chars':
+      'Seçici yalnızca harf, rakam ve kısa çizgi içerebilir. Kısa çizgiyle başlayamaz veya bitemez',
+    'domain-empty': 'Alan adı boş olamaz',
+    'domain-too-long': 'Alan adı çok uzun',
+    'domain-no-tld': 'Alan adı bir üst düzey alan adı içermelidir (ör. example.com)',
+    'domain-label-length': 'Alan adındaki bir bölümün uzunluğu geçersiz',
+    'domain-label': (label) => `Alan adında geçersiz bölüm: “${label}”`,
+    'no-web-crypto': 'Web Crypto API (crypto.subtle) bu tarayıcıda kullanılamıyor',
+  },
+}
+
+export const DKIM_TOOL_STRINGS: Record<Locale, DkimToolStrings> = { en, it: itTool, de: deTool, fr: frTool, es: esTool, 'pt-br': ptBrTool, nl: nlTool, pl: plTool, id: idTool, ja: jaTool, ko: koTool, tr: trTool }
 
 export function dkimToolStrings(locale: Locale): DkimToolStrings {
   return DKIM_TOOL_STRINGS[locale] ?? en

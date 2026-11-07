@@ -635,6 +635,56 @@ const koTool: FreeProvidersToolStrings = {
   companyNames: { 'Globo / Vivo': '여러 회사' },
 }
 
+const trTool: FreeProvidersToolStrings = {
+  banner: (p) =>
+    `${p.providers.toLocaleString('tr-TR')} sağlayıcıdan ${p.domains.toLocaleString('tr-TR')} alan adı. ${p.date} tarihinde kontrol ettiğimizde hepsinin MX kayıtları çalışıyordu.`,
+  dateLocale: 'tr-TR',
+  checkLabel: 'Bu, ücretsiz bir e-posta alan adı mı?',
+  checkPlaceholder: 'Bir alan adı veya e-posta adresi girin',
+  checkButton: 'Alan adını kontrol edin',
+  inputEmpty: 'Bir alan adı veya e-posta adresi girin.',
+  inputInvalid: 'Bu bir alan adına benzemiyor. gmail.com gibi bir değer deneyin.',
+  isFree: (domain) => `${domain} ücretsiz bir e-posta alan adıdır.`,
+  belongsTo: (name, company) => `Bu alan adı ${name} sağlayıcısına aittir${company ? `. Sağlayıcıyı ${company} işletir` : ''}.`,
+  kindNotes: {
+    webmail: 'Herkesin kaydolabileceği ücretsiz bir webmail hizmetidir.',
+    privacy: 'Gizlilik odaklı, şifreli bir e-posta hizmetidir.',
+    isp: 'Bir ev internet paketiyle birlikte gelir. Bu yüzden bu da kişisel bir adrestir.',
+  },
+  notListed: (domain) => `${domain} bu listede yok.`,
+  notListedText:
+    'Büyük olasılıkla bir şirket, okul veya kişisel alan adıdır. Listemizde yer almayan küçük bir ücretsiz sağlayıcı veya bir geçici e-posta servisi de olabilir. {mx} aracıyla e-posta sunucularına bakabilir veya {disposable} aracıyla geçici bir adres olup olmadığını kontrol edebilirsiniz.',
+  mxLink: 'MX kaydı sorgulama',
+  mxHref: '/tr/mx-kaydi-sorgulama',
+  disposableLink: 'geçici mail kontrolü',
+  disposableHref: '/tr/gecici-mail-kontrolu',
+  browseLabel: 'Listeye göz atın',
+  browsePlaceholder: 'Alan adına veya sağlayıcıya göre filtreleyin, ör. hotmail veya gmx',
+  filters: {
+    all: 'Tümü',
+    webmail: 'Ücretsiz webmail',
+    privacy: 'Gizlilik odaklı ve şifreli',
+    isp: 'İnternet sağlayıcıları',
+  },
+  kindLabels: {
+    webmail: 'Ücretsiz webmail',
+    privacy: 'Gizlilik odaklı ve şifreli',
+    isp: 'İnternet sağlayıcısı',
+  },
+  showing: (domains, providers) =>
+    `${providers.toLocaleString('tr-TR')} sağlayıcıdan ${domains.toLocaleString('tr-TR')} alan adı gösteriliyor`,
+  copy: 'Alan adlarını kopyalayın',
+  copied: 'Kopyalandı',
+  thProvider: 'Sağlayıcı',
+  thDomains: 'Alan adları',
+  empty: 'Bu filtreyle eşleşen alan adı yok.',
+  fileTxt: 'ucretsiz-e-posta-alan-adlari.txt',
+  fileCsv: 'ucretsiz-e-posta-alan-adlari.csv',
+  fileJson: 'ucretsiz-e-posta-alan-adlari.json',
+  csvHeader: 'alan adı,sağlayıcı,şirket,ülke,tür',
+  companyNames: { 'Globo / Vivo': 'Çeşitli şirketler' },
+}
+
 export const FREE_PROVIDERS_TOOL_STRINGS: Record<Locale, FreeProvidersToolStrings> = {
   en,
   es: esTool,
@@ -647,6 +697,7 @@ export const FREE_PROVIDERS_TOOL_STRINGS: Record<Locale, FreeProvidersToolString
   id: idTool,
   ja: jaTool,
   ko: koTool,
+  tr: trTool,
 }
 
 export function freeProvidersToolStrings(locale: Locale): FreeProvidersToolStrings {

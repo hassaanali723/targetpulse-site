@@ -544,6 +544,51 @@ const ko: BounceRateToolStrings = {
   },
 }
 
+const tr: BounceRateToolStrings = {
+  tabAria: 'Hesaplanacak oran',
+  tabEmail: 'E-posta bounce oranı',
+  tabWebsite: 'Web sitesi bounce oranı',
+  fieldSent: { label: 'Gönderilen e-posta', hint: 'Aracınızın bu gönderim için bildirdiği toplam sayı.', placeholder: '10.000' },
+  fieldHard: { label: 'Hard bounce sayısı', hint: 'Kalıcı hata: adres mevcut değil.', placeholder: '150' },
+  fieldSoft: { label: 'Soft bounce sayısı', hint: 'Geçici hata. Aracınız tek bir sayı gösteriyorsa boş bırakın.', placeholder: '100' },
+  fieldSessions: { label: 'Oturumlar', hint: 'Google Analytics 4 raporunuzdaki sayı.', placeholder: '2.000' },
+  fieldEngaged: { label: 'Etkileşimli oturumlar', hint: 'Aynı rapor ve aynı tarih aralığı.', placeholder: '1.250' },
+  tryExamplePrompt: 'Sayılarınızı girin veya ',
+  tryExampleLink: 'bir örnek deneyin',
+  errorWhole: 'Yalnızca tam sayı girin. Ondalık veya harf kullanmayın.',
+  errorCheck: 'Sayıları kontrol edin.',
+  emailResults: {
+    heading: 'E-posta bounce oranı',
+    bouncedOfSent: (bounced, sent) => `${sent} e-postanın ${bounced} tanesi geri döndü. Mailchimp, Klaviyo ve Mailgun oranı bu şekilde hesaplar.`,
+    statHard: { label: 'Hard bounce oranı', note: 'Sağlayıcı limitlerinin çoğu yalnızca bunları sayar.' },
+    statSoft: { label: 'Soft bounce oranı', note: 'Dolu posta kutusu gibi geçici hatalar.' },
+    statDelivered: { label: 'Teslim oranı', note: (delivered) => `${delivered} e-posta kabul edildi.` },
+    deliveredComparison: (pct) => `Aracınız gönderilen e-postalar yerine teslim edilen e-postalara bölüyorsa, aynı sayılar ${pct} sonucunu verir. Karşılaştırma yapmadan önce aracınızın bu oranı nasıl tanımladığını kontrol edin.`,
+    allUnderLimits: (hardRate) => `Hard bounce oranınız ${hardRate}. Bu oran aşağıdaki tüm sağlayıcı limitlerinin altında.`,
+    overLimits: (hardRate, providers) => `Hard bounce oranınız ${hardRate}. Bu oran, ${providers} tarafından belirlenen limite eşit veya bu limitin üzerinde. Bir sonraki gönderimden önce listeyi temizleyin.`,
+    limitsHeader: 'Sayılarınız ve sağlayıcı limitleri',
+    countsHard: 'yalnızca hard bounce',
+    countsAll: 'tüm bounce türleri',
+    atLimit: 'Limitte',
+    overLimit: 'Limitin üstünde',
+    underLimit: 'Limitin altında',
+    tooMany: (n) => `${n} adet fazla`,
+    leftRoom: (n, counts) => `Limite ${n} ${counts === 'hard' ? 'hard bounce' : 'bounce'} kaldı`,
+    providerNote: 'Gmail, Yahoo ve Microsoft bir bounce oranı limiti yayımlamaz. Bu sağlayıcıların %0,3 kuralı bounce ile değil, spam şikâyetleriyle ilgilidir. Mailchimp de bir sayı yayımlamaz.',
+    ctaBox: {
+      title: 'Hard bounce hatalarının çoğu var olmayan adreslerden gelir',
+      desc: 'Göndermeden önce listeyi kontrol ederseniz bu adresler listeden çıkar. Böylece bounce oranınıza hiç eklenmezler.',
+      button: 'E-posta listesi doğrulayın',
+    },
+  },
+  websiteResults: {
+    heading: 'Web sitesi bounce oranı (GA4)',
+    sessionsNotEngaged: (unengaged, sessions) => `${sessions} oturumun ${unengaged} tanesi etkileşimli değildi.`,
+    statEngagement: { label: 'Etkileşim oranı', note: 'Etkileşimli oturumlar ÷ oturumlar. Bounce oranı, %100 eksi bu orandır.' },
+    statEngaged: { label: 'Etkileşimli oturumlar', note: '10 saniyeden uzun süren, önemli bir etkinlik içeren veya 2 ya da daha fazla sayfa görüntülemesi olan oturumlar.' },
+  },
+}
+
 export const BOUNCE_RATE_TOOL_STRINGS: Record<Locale, BounceRateToolStrings> = {
   en,
   fr,
@@ -556,6 +601,7 @@ export const BOUNCE_RATE_TOOL_STRINGS: Record<Locale, BounceRateToolStrings> = {
   id,
   ja,
   ko,
+  tr,
 }
 
 export function bounceRateToolStrings(locale: Locale): BounceRateToolStrings {
