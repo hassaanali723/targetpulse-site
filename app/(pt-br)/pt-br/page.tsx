@@ -87,7 +87,7 @@ const content: HomeContent = {
     items: [
       { title: 'Limpeza de listas em massa', body: 'Envie um arquivo CSV ou Excel e receba os resultados em minutos.', points: ['Até 50.000 endereços por arquivo', 'Baixe a lista limpa em CSV'], link: 'Limpe uma lista grátis' },
       { title: 'Verificação catch-all', body: 'Uma resposta de verdade em domínios catch-all, em vez de "arriscado".', points: ['Custa o mesmo crédito que qualquer outra verificação', 'Funciona com domínios protegidos por gateways como Mimecast e Proofpoint'], link: 'Como funciona a verificação catch-all' },
-      { title: 'API para desenvolvedores', body: 'Verifique endereços nos seus formulários de cadastro e nos seus apps.', points: ['Um endereço ou uma lista inteira por chamada', 'Chaves de API no seu painel'], link: 'Documentação da API (em inglês)' },
+      { title: 'API para desenvolvedores', body: 'Verifique endereços nos seus formulários de cadastro e nos seus apps.', points: ['Um endereço ou uma lista inteira por chamada', 'Chaves de API no seu painel'], link: 'Documentação da API' },
       { title: 'Integrações com CRM e apps', body: 'Envie os contatos limpos para HubSpot, Mailchimp e outros.', points: ['Funciona com as ferramentas que você já usa', 'Zapier e n8n para todo o resto'], link: 'Ver todas as integrações' },
       { title: 'Preços por uso', body: 'Todos os preços são públicos. Os créditos não expiram.', points: ['Sem mensalidade obrigatória', 'Compre mais só quando precisar'], link: 'Ver todos os preços' },
       { title: 'Suporte prioritário', body: 'Travou em algo? Fale direto com nossos engenheiros.', points: ['Pessoas de verdade, não um bot', 'Fale por e-mail ou pelo formulário de contato'], link: 'Falar com o suporte' },

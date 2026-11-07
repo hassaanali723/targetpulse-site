@@ -171,7 +171,7 @@ export const copy: EmailCheckerCopy = {
     api: (
       <>
         Adresleri kendi uygulamanızda veya kayıt formunuzda kontrol etmek için{' '}
-        <InlineLink href="/email-verification-api">e-posta doğrulama API</InlineLink> sayfasına bakın (İngilizce).
+        <InlineLink href="/tr/email-dogrulama-api">e-posta doğrulama API</InlineLink> sayfasına bakın.
         API aynı kontrolleri çalıştırır ve sonucu JSON olarak döndürür.
       </>
     ),

@@ -14,7 +14,7 @@ export const API_DOCS_IT: ApiDocsStrings = {
   contactPath: '/it/contatti',
 
   overviewBanner:
-    "Cerchi una panoramica? Leggi la pagina sull'[API di verifica email](/email-verification-api) o sull'[API di validazione email per i moduli di iscrizione](/email-validation-api).",
+    "Cerchi una panoramica? Leggi la pagina sull'[API di verifica email](/it/api-verifica-email) o sull'[API di validazione email per i moduli di iscrizione](/it/api-validazione-email).",
   hero: {
     h1: 'Documentazione API di verifica email',
     lead: 'Verifica email singole, avvia batch in blocco e controlla a fondo gli indirizzi catch-all e protetti da SEG. Tutti gli endpoint usano JSON, si autenticano con una chiave API e ti addebitano solo le verifiche riuscite.',

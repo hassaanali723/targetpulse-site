@@ -71,9 +71,9 @@ export const footer = {
     links: [
       { name: '이메일 검증', href: '/ko' },
       { name: '대량 이메일 검증', href: '/ko/bulk-email-verifier' },
-      { name: '이메일 리스트 정리(영어)', href: '/email-list-cleaning' },
+      { name: '이메일 리스트 정리', href: '/ko/email-list-cleaning' },
       { name: '연동', href: '/ko/integrations' },
-      { name: '이메일 검증 API(영어)', href: '/email-verification-api' },
+      { name: '이메일 검증 API', href: '/ko/email-verification-api' },
       { name: '요금', href: '/ko/pricing' },
     ],
   },

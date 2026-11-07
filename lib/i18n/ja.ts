@@ -72,9 +72,9 @@ export const footer = {
     links: [
       { name: 'メールアドレス検証', href: '/ja' },
       { name: 'メールアドレスの一括検証', href: '/ja/bulk-email-verifier' },
-      { name: 'メールリストのクリーニング（英語）', href: '/email-list-cleaning' },
+      { name: 'メールリストのクリーニング', href: '/ja/email-list-cleaning' },
       { name: '連携', href: '/ja/integrations' },
-      { name: 'メールアドレス検証API（英語）', href: '/email-verification-api' },
+      { name: 'メールアドレス検証API', href: '/ja/email-verification-api' },
       { name: '料金', href: '/ja/pricing' },
     ],
   },

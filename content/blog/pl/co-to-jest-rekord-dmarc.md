@@ -391,4 +391,4 @@ Nie. Domena może mieć tylko jeden rekord DMARC. RFC 9989 mówi, że jeśli ser
 **Czy DMARC chroni przed podobnymi domenami?**
 Nie. DMARC chroni tylko dokładnie tę domenę, która jest w twoim DNS. Nie powstrzyma nikogo przed zarejestrowaniem podobnie wyglądającej domeny, na przykład z dwiema zamienionymi literami albo z inną końcówką, taką jak .net. Nie powstrzyma też fałszywej nazwy wyświetlanej nadawcy. Przed podobnymi domenami chronią inne metody, na przykład śledzenie nowych rejestracji domen, które kopiują twoją nazwę.
 
-Rekord DMARC dowodzi, że twoja poczta naprawdę pochodzi od ciebie. Nie pomoże jednak, gdy wysyłasz na adresy, które już nie istnieją. Przed kolejną wysyłką przepuść listę przez [Giggal.ai](/email-list-cleaning) (po angielsku), aby usunąć nieprawidłowe adresy i utrzymać niski współczynnik odbić.
+Rekord DMARC dowodzi, że twoja poczta naprawdę pochodzi od ciebie. Nie pomoże jednak, gdy wysyłasz na adresy, które już nie istnieją. Przed kolejną wysyłką przepuść listę przez [Giggal.ai](/email-list-cleaning), aby usunąć nieprawidłowe adresy i utrzymać niski współczynnik odbić.

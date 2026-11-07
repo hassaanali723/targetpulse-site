@@ -87,4 +87,4 @@ Non. Mailchimp recommande d'archiver les contacts nettoyés plutôt que de les s
 **Pourquoi Mailchimp a-t-il nettoyé une adresse que je sais valide ?**
 Des adresses email valides peuvent faire un hard bounce si un filtre anti-spam ou un pare-feu d'entreprise bloque les serveurs de Mailchimp avec des réponses SMTP comme Denied ou Blocked. Si le destinataire demande à son administrateur réseau d'autoriser les adresses IP d'envoi de Mailchimp, il peut revenir dans votre audience par votre formulaire d'inscription.
 
-Un badge Cleaned, c'est Mailchimp qui protège votre réputation d'expéditeur après coup. Vérifier d'abord empêche le rebond d'arriver. Passez votre liste d'abonnés dans [Giggal.ai](/email-list-cleaning) (en anglais) avant votre prochain envoi pour trouver les adresses invalides avant que Mailchimp ne les nettoie.
+Un badge Cleaned, c'est Mailchimp qui protège votre réputation d'expéditeur après coup. Vérifier d'abord empêche le rebond d'arriver. Passez votre liste d'abonnés dans [Giggal.ai](/email-list-cleaning) avant votre prochain envoi pour trouver les adresses invalides avant que Mailchimp ne les nettoie.

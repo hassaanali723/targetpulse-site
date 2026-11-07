@@ -71,9 +71,9 @@ export const footer = {
     links: [
       { name: 'E-mailverificatie', href: '/nl' },
       { name: 'Bulk e-mailverificatie', href: '/nl/bulk-e-mailverificatie' },
-      { name: 'E-maillijst opschonen (in het Engels)', href: '/email-list-cleaning' },
+      { name: 'E-maillijst opschonen', href: '/nl/e-maillijst-opschonen' },
       { name: 'Integraties', href: '/nl/integraties' },
-      { name: 'API voor e-mailverificatie (in het Engels)', href: '/email-verification-api' },
+      { name: 'API voor e-mailverificatie', href: '/nl/e-mailverificatie-api' },
       { name: 'Prijzen', href: '/nl/prijzen' },
     ],
   },

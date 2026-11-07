@@ -35,7 +35,7 @@ A resposta da Microsoft é parecida. Em uma resposta no fórum de suporte da Mic
 
 O problema costuma aparecer no login. Imagine que você se cadastra como `Sarah@example.com` no celular, porque o teclado colocou a primeira letra em maiúscula. Depois você faz login digitando `sarah@example.com`, e um sistema mal feito diz que a conta não existe. O usuário não mudou o endereço. O formulário de login é que comparou o texto diferenciando maiúsculas e minúsculas.
 
-Listas e CRMs têm a sua própria versão do problema. Quando alguém se cadastra como `Bob@company.com` e depois baixa um material como `bob@company.com`, muitas plataformas contam dois leads separados. Isso infla as suas métricas e faz as pessoas receberem campanhas duplicadas. Remova os registros duplicados ignorando maiúsculas e minúsculas antes de [verificar ou enviar](/email-list-cleaning) (em inglês) para uma lista de marketing.
+Listas e CRMs têm a sua própria versão do problema. Quando alguém se cadastra como `Bob@company.com` e depois baixa um material como `bob@company.com`, muitas plataformas contam dois leads separados. Isso infla as suas métricas e faz as pessoas receberem campanhas duplicadas. Remova os registros duplicados ignorando maiúsculas e minúsculas antes de [verificar ou enviar](/email-list-cleaning) para uma lista de marketing.
 
 E existe o servidor raro de empresa que diferencia maiúsculas e minúsculas, a exceção que a resposta da Microsoft cita. Se um contato escreve o endereço como `M.MacDonald@specialtycorp.com` no cartão de visita, mantenha essas maiúsculas quando escrever para ele. Isso não atrapalha os sistemas comuns e evita problemas de entrega nos sistemas que diferenciam.
 
@@ -62,7 +62,7 @@ String cleanEmail = email.toLowerCase(Locale.ROOT);
 
 O `toLowerCase()` do JavaScript não tem esse problema, porque usa os mapeamentos padrão do Unicode e não as configurações de locale do servidor. Só o `toLocaleLowerCase()` depende do locale.
 
-Para pegar formatos quebrados e entradas ruins antes que cheguem ao seu banco de dados, valide os endereços no cadastro com uma [API de validação de e-mail](/email-validation-api) (em inglês). Ela pega erros de digitação e domínios desativados enquanto a pessoa ainda está na página.
+Para pegar formatos quebrados e entradas ruins antes que cheguem ao seu banco de dados, valide os endereços no cadastro com uma [API de validação de e-mail](/email-validation-api). Ela pega erros de digitação e domínios desativados enquanto a pessoa ainda está na página.
 
 ## Perguntas frequentes
 
@@ -81,4 +81,4 @@ Você deve comparar e indexar os endereços de e-mail em minúsculas para evitar
 **Letras maiúsculas podem fazer um e-mail dar bounce?**
 Muito raramente. Isso só acontece em um servidor incomum configurado para tratar Admin@ e admin@ como caixas separadas. Se um endereço com maiúsculas der bounce, procure outra causa primeiro, como um erro de digitação ou uma caixa que não existe mais. O código na mensagem de bounce diz qual é, como explicamos em [hard bounce e soft bounce](/blog/hard-bounce-vs-soft-bounce).
 
-Maiúsculas não impedem um e-mail de chegar, mas [um erro de digitação](/email-checker) impede. Se você vai limpar uma lista de contatos antes do próximo envio, passe a lista pelo [Giggal.ai](/email-list-cleaning) (em inglês) para encontrar antes as caixas desativadas e os domínios quebrados.
+Maiúsculas não impedem um e-mail de chegar, mas [um erro de digitação](/email-checker) impede. Se você vai limpar uma lista de contatos antes do próximo envio, passe a lista pelo [Giggal.ai](/email-list-cleaning) para encontrar antes as caixas desativadas e os domínios quebrados.

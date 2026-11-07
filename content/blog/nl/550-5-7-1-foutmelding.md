@@ -60,7 +60,7 @@ Gmail en Outlook.com weigeren nu allebei veel mail zonder authenticatie direct. 
 
 Slaagt de authenticatie en zegt Gmail nog steeds "likely unsolicited mail" (waarschijnlijk ongevraagde mail)? Dan is het probleem meestal reputatie, dus hoe ontvangers op je eerdere mail hebben gereageerd. [Google Postmaster Tools](/glossary/postmaster-tools) toont je spampercentage. Google vraagt afzenders om dat onder 0,1% te houden en het nooit 0,3% te laten bereiken. Stijgt het? Pauzeer de campagne dan, in plaats van er meer volume doorheen te sturen. Mail die in spam belandde, gaat vaak direct bouncen als je reputatie blijft dalen.
 
-De kwaliteit van je lijst speelt daar direct in mee. Oude lijsten zitten vol verlaten mailboxen, en sommige providers maken van lang geleden opgeheven adressen [spamvallen](/glossary/spam-trap). Raak je die, of bounce je op veel adressen die niet meer bestaan, dan zien filters dat je je lijst niet schoon houdt. Is de lijst meer dan een paar maanden oud, of komt hij uit scraping of een aankoop? [Controleer de lijst dan voor je verstuurt](/email-list-cleaning) (in het Engels).
+De kwaliteit van je lijst speelt daar direct in mee. Oude lijsten zitten vol verlaten mailboxen, en sommige providers maken van lang geleden opgeheven adressen [spamvallen](/glossary/spam-trap). Raak je die, of bounce je op veel adressen die niet meer bestaan, dan zien filters dat je je lijst niet schoon houdt. Is de lijst meer dan een paar maanden oud, of komt hij uit scraping of een aankoop? [Controleer de lijst dan voor je verstuurt](/email-list-cleaning).
 
 Relayfouten zijn een apart probleem. Unable to relay of Invalid credentials for relay [IP] betekent dat de server waarlangs je verstuurt je app niet herkent als toegestaan.
 
@@ -119,4 +119,4 @@ Deze fout betekent dat een verzendende applicatie mail probeerde te versturen vi
 
 Wat de oorzaak ook is, bewaar de volledige bounce. Daar vraagt de IT-afdeling van een ontvanger of je e-mailprovider als eerste om.
 
-Zijn de meeste van je bounces 550 5.1.1 in plaats van 5.7.1, dan is de lijst het probleem. Dan loont het om [hem te verifiëren met Giggal.ai](/email-list-cleaning) (in het Engels) voor de volgende verzending.
+Zijn de meeste van je bounces 550 5.1.1 in plaats van 5.7.1, dan is de lijst het probleem. Dan loont het om [hem te verifiëren met Giggal.ai](/email-list-cleaning) voor de volgende verzending.

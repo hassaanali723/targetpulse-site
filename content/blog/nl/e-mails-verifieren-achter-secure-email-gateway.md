@@ -65,4 +65,4 @@ Haal je lijst door de tool die je nu gebruikt en bewaar de export. Haal elke rij
 
 Die vergelijking is waar het om gaat. Elke leverancier hier, wij ook, doet claims over nauwkeurigheid die op een prijspagina op elkaar lijken. Het enige getal dat iets betekent, is hoeveel van je eigen dode contacten weer tot leven kwamen. En of de adressen met het label geldig echt mail accepteerden toen je ernaar verstuurde.
 
-Wil je dat proberen? Giggal.ai geeft 1.000 gratis credits zonder creditcard. Ze werken met een bulkupload in plaats van één adres per keer, en alleen zo vertelt deze test je iets. Je kunt ook meer lezen over [hoe we catch-all- en accept-all-domeinen verifiëren](/catch-all-verification), of over onze [aanpak voor SEG-verificatie](/seg-email-verification) (in het Engels).
+Wil je dat proberen? Giggal.ai geeft 1.000 gratis credits zonder creditcard. Ze werken met een bulkupload in plaats van één adres per keer, en alleen zo vertelt deze test je iets. Je kunt ook meer lezen over [hoe we catch-all- en accept-all-domeinen verifiëren](/catch-all-verification), of over onze [aanpak voor SEG-verificatie](/seg-email-verification).

@@ -35,7 +35,7 @@ Die Antwort von Microsoft ist ähnlich. In einer Antwort im Support-Forum von Mi
 
 Am häufigsten passiert es beim Login. Sie melden sich auf dem Handy als `Sarah@example.com` an, weil die Tastatur den ersten Buchstaben groß geschrieben hat. Später melden Sie sich mit `sarah@example.com` an. Ein einfaches System meldet dann, dass kein Konto gefunden wurde. Die Person hat ihre Adresse nicht geändert. Aber das Login-Formular hat den Text mit strenger Unterscheidung der Schreibweise verglichen.
 
-Listen und CRMs haben ihre eigene Form des Problems. Meldet sich jemand als `Bob@company.com` an und lädt später einen Leitfaden als `bob@company.com` herunter, zählen viele Plattformen zwei getrennte Leads. Das bläht Ihre Kennzahlen auf, und die Person bekommt Kampagnen doppelt. Entfernen Sie Dubletten ohne Rücksicht auf die Schreibweise, bevor Sie eine Marketing-Liste [prüfen oder an sie senden](/email-list-cleaning) (auf Englisch).
+Listen und CRMs haben ihre eigene Form des Problems. Meldet sich jemand als `Bob@company.com` an und lädt später einen Leitfaden als `bob@company.com` herunter, zählen viele Plattformen zwei getrennte Leads. Das bläht Ihre Kennzahlen auf, und die Person bekommt Kampagnen doppelt. Entfernen Sie Dubletten ohne Rücksicht auf die Schreibweise, bevor Sie eine Marketing-Liste [prüfen oder an sie senden](/email-list-cleaning).
 
 Dann gibt es den seltenen Firmenserver, der die Schreibweise streng unterscheidet. Das ist die Ausnahme, die die Antwort bei Microsoft erwähnt. Schreibt ein Kontakt seine Adresse auf der Visitenkarte als `M.MacDonald@specialtycorp.com`, behalten Sie diese Schreibweise bei, wenn Sie ihm schreiben. Normalen Systemen schadet das nicht, und bei Systemen, die unterscheiden, vermeiden Sie Zustellprobleme.
 
@@ -62,7 +62,7 @@ String cleanEmail = email.toLowerCase(Locale.ROOT);
 
 `toLowerCase()` in JavaScript ist vor dieser Falle sicher. Es nutzt die Standardzuordnung von Unicode statt der Locale des Hosts. Nur `toLocaleLowerCase()` hängt von der Locale ab.
 
-Um falsche Formate und schlechte Einträge abzufangen, bevor sie in Ihre Datenbank gelangen, prüfen Sie Adressen bei der Anmeldung mit einer [API zur E-Mail-Validierung](/email-validation-api) (auf Englisch). Sie fängt Tippfehler und tote Domains ab, solange die Person noch auf der Seite ist.
+Um falsche Formate und schlechte Einträge abzufangen, bevor sie in Ihre Datenbank gelangen, prüfen Sie Adressen bei der Anmeldung mit einer [API zur E-Mail-Validierung](/email-validation-api). Sie fängt Tippfehler und tote Domains ab, solange die Person noch auf der Seite ist.
 
 ## Häufige Fragen
 
@@ -81,4 +81,4 @@ Vergleichen und indexieren Sie E-Mail-Adressen in Kleinbuchstaben, um doppelte K
 **Können Großbuchstaben einen Bounce auslösen?**
 Sehr selten. Das passiert nur bei einem ungewöhnlichen Server, der Admin@ und admin@ als getrennte Postfächer behandelt. Bounct eine Adresse mit Großbuchstaben, suchen Sie zuerst nach einer anderen Ursache, etwa einem Tippfehler oder einem Postfach, das nicht mehr existiert. Der Code in der Bounce-Meldung zeigt Ihnen, welche Ursache es ist. Das erklärt der Beitrag zu [Hard Bounce vs. Soft Bounce](/blog/hard-bounce-vs-soft-bounce).
 
-Großbuchstaben verhindern nicht, dass eine E-Mail ankommt, [ein Tippfehler](/email-checker) aber schon. Wenn Sie eine Kontaktliste vor dem nächsten Versand bereinigen, lassen Sie sie durch [Giggal.ai](/email-list-cleaning) (auf Englisch) laufen. So finden Sie zuerst tote Postfächer und fehlerhafte Domains.
+Großbuchstaben verhindern nicht, dass eine E-Mail ankommt, [ein Tippfehler](/email-checker) aber schon. Wenn Sie eine Kontaktliste vor dem nächsten Versand bereinigen, lassen Sie sie durch [Giggal.ai](/email-list-cleaning) laufen. So finden Sie zuerst tote Postfächer und fehlerhafte Domains.

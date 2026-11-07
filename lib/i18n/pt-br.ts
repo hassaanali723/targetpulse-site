@@ -72,9 +72,9 @@ export const footer = {
     links: [
       { name: 'Serviço de verificação de e-mail', href: '/pt-br' },
       { name: 'Validador de e-mail em massa', href: '/pt-br/validador-de-email-em-massa' },
-      { name: 'Limpeza de listas de e-mail (em inglês)', href: '/email-list-cleaning' },
+      { name: 'Limpeza de listas de e-mail', href: '/pt-br/limpeza-de-lista-de-email' },
       { name: 'Integrações', href: '/pt-br/integracoes' },
-      { name: 'API de verificação de e-mail (em inglês)', href: '/email-verification-api' },
+      { name: 'API de verificação de e-mail', href: '/pt-br/api-de-verificacao-de-email' },
       { name: 'Preços', href: '/pt-br/precos' },
     ],
   },

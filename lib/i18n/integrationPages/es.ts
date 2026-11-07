@@ -149,7 +149,7 @@ export const ES: IntegrationPagesContent = {
     appListIntro: '{count} apps se conectan a Giggal.ai a través de Zapier. Cada una tiene su propia guía de configuración.',
     apiTitle: '¿Tu herramienta no está en la lista?',
     apiText:
-      'Cualquier herramienta que pueda enviar una solicitud HTTP puede verificar correos con Giggal.ai. Usa la [API de verificación de correo](/email-verification-api) para comprobaciones individuales o en bloque, o conéctate a través de Zapier.',
+      'Cualquier herramienta que pueda enviar una solicitud HTTP puede verificar correos con Giggal.ai. Usa la [API de verificación de correo](/es/api-de-verificacion-de-correo) para comprobaciones individuales o en bloque, o conéctate a través de Zapier.',
     apiCta: 'Referencia de la API',
     apiHref: '/es/documentacion-api',
   },
@@ -405,7 +405,7 @@ export const ES: IntegrationPagesContent = {
     ],
     calloutTitle: 'Las direcciones catch-all y las protegidas por gateways reciben válido o no válido',
     calloutText:
-      'Muchos verificadores devuelven desconocido para las direcciones protegidas por gateways de seguridad de correo, y arriesgado para los dominios catch-all. Giggal.ai [verifica direcciones protegidas por gateways](/seg-email-verification) como Proofpoint y Mimecast, y hace comprobaciones adicionales en los dominios catch-all. [Mira cómo funciona la verificación catch-all](/es/verificacion-catch-all).',
+      'Muchos verificadores devuelven desconocido para las direcciones protegidas por gateways de seguridad de correo, y arriesgado para los dominios catch-all. Giggal.ai [verifica direcciones protegidas por gateways](/es/verificacion-seg) como Proofpoint y Mimecast, y hace comprobaciones adicionales en los dominios catch-all. [Mira cómo funciona la verificación catch-all](/es/verificacion-catch-all).',
     faqTitle: 'Preguntas frecuentes sobre la verificación de correo en n8n',
     faq: [
       {
@@ -507,7 +507,7 @@ export const ES: IntegrationPagesContent = {
     ],
     calloutTitle: 'Por qué usar un verificador de correo catch-all con HubSpot',
     calloutText:
-      'Cerca del 30 % de una lista B2B está en dominios catch-all. Muchos verificadores devuelven esos contactos como arriesgados, así que no puedes hacer nada con ellos. Giggal.ai es un [verificador de correo](/es/validar-correo) que hace comprobaciones adicionales en los dominios catch-all y [verifica direcciones protegidas por gateways de seguridad de correo](/seg-email-verification) como Proofpoint y Mimecast. La mayoría de esos contactos vuelve como entregable o no entregable. [Mira cómo funciona la verificación catch-all](/es/verificacion-catch-all).',
+      'Cerca del 30 % de una lista B2B está en dominios catch-all. Muchos verificadores devuelven esos contactos como arriesgados, así que no puedes hacer nada con ellos. Giggal.ai es un [verificador de correo](/es/validar-correo) que hace comprobaciones adicionales en los dominios catch-all y [verifica direcciones protegidas por gateways de seguridad de correo](/es/verificacion-seg) como Proofpoint y Mimecast. La mayoría de esos contactos vuelve como entregable o no entregable. [Mira cómo funciona la verificación catch-all](/es/verificacion-catch-all).',
     propsTitle: 'Propiedades de HubSpot que Giggal.ai escribe en cada contacto',
     propsIntro:
       'Las cinco propiedades se crean la primera vez que haces una verificación. Están en un grupo de propiedades llamado Giggal Email Verifier. Tus propiedades de HubSpot actuales no cambian.',
@@ -620,7 +620,7 @@ export const ES: IntegrationPagesContent = {
     why: [
       'Cerca del 30 % de una lista B2B está en dominios catch-all. Estos dominios aceptan correo para cualquier dirección, exista o no el buzón. Muchos verificadores marcan esas direcciones como arriesgadas, lo que significa que no pudieron saberlo.',
       'En un chat, esa etiqueta no sirve de nada. El asistente repite lo que recibe, así que un tercio de tu lista vuelve como dudosa. Giggal.ai sigue comprobando esas direcciones y devuelve válido o no válido. Hace lo mismo con los buzones protegidos por 15 gateways de seguridad de correo concretos, entre ellos Proofpoint, Mimecast y Barracuda.',
-      'Para ver ejemplos de instrucciones, lee [cómo verificar correos dentro de Claude y ChatGPT](/es/blog/verificar-correos-en-claude-y-chatgpt). El servidor MCP usa el mismo motor que la [API de verificación de correo](/email-verification-api).',
+      'Para ver ejemplos de instrucciones, lee [cómo verificar correos dentro de Claude y ChatGPT](/es/blog/verificar-correos-en-claude-y-chatgpt). El servidor MCP usa el mismo motor que la [API de verificación de correo](/es/api-de-verificacion-de-correo).',
     ],
     faqTitle: 'Preguntas frecuentes sobre el servidor MCP de verificación de correo',
     faq: [

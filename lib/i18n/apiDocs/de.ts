@@ -14,7 +14,7 @@ export const API_DOCS_DE: ApiDocsStrings = {
   contactPath: '/de/kontakt',
 
   overviewBanner:
-    'Sie suchen einen Überblick? Lesen Sie die Seite zur [API für E-Mail-Verifizierung](/email-verification-api) oder zur [API für E-Mail-Validierung in Anmeldeformularen](/email-validation-api).',
+    'Sie suchen einen Überblick? Lesen Sie die Seite zur [API für E-Mail-Verifizierung](/de/e-mail-verifizierung-api) oder zur [API für E-Mail-Validierung in Anmeldeformularen](/de/e-mail-validierung-api).',
   hero: {
     h1: 'Dokumentation der API für E-Mail-Verifizierung',
     lead: 'Prüfen Sie einzelne E-Mails, starten Sie Massenprüfungen in Batches und prüfen Sie Catch-all-Adressen und Adressen hinter Sicherheits-Gateways (SEG) im Detail. Alle Endpunkte nutzen JSON und werden per API-Schlüssel authentifiziert. Abgerechnet wird nur jede erfolgreiche Prüfung.',

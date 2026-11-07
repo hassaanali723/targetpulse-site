@@ -391,4 +391,4 @@ Nee. Een domein mag maar één DMARC-record publiceren. RFC 9989 zegt dat een on
 **Houdt DMARC domeinen tegen die op het mijne lijken?**
 Nee. DMARC beschermt alleen het exacte domein in je DNS. Het kan niet voorkomen dat iemand een domein registreert dat er vergelijkbaar uitziet, bijvoorbeeld met twee letters omgewisseld of met een andere extensie zoals .net. Het kan ook geen valse weergavenaam tegenhouden. Voor domeinen die op het jouwe lijken, heb je andere maatregelen nodig, zoals letten op nieuwe domeinregistraties die je naam kopiëren.
 
-Een DMARC-record bewijst dat je e-mail echt van jou komt. Het helpt niet als je verstuurt naar adressen die niet meer bestaan. Haal je lijst voor je volgende verzending door [Giggal.ai](/email-list-cleaning) (in het Engels) om ongeldige adressen te verwijderen en je bouncepercentage laag te houden.
+Een DMARC-record bewijst dat je e-mail echt van jou komt. Het helpt niet als je verstuurt naar adressen die niet meer bestaan. Haal je lijst voor je volgende verzending door [Giggal.ai](/email-list-cleaning) om ongeldige adressen te verwijderen en je bouncepercentage laag te houden.

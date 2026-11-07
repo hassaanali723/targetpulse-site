@@ -257,7 +257,7 @@ export default function SecureEmailGatewayPage() {
         {MIMECAST_PAGE_LIVE && (
           <p className="text-sm font-medium">
             <LocalLink href="/mimecast-email-verification" locale="de" className={`inline-flex items-center gap-1 ${inlineLink}`}>
-              So funktioniert die Mimecast-Verifizierung (Englisch)
+              So funktioniert die Mimecast-Verifizierung
               <ArrowRight className="w-4 h-4" />
             </LocalLink>
           </p>

@@ -34,7 +34,7 @@ Microsoft'un yanıtı da benzerdir. Microsoft destek forumundaki bir yanıtta, @
 
 Sorun genellikle oturum açarken çıkar. Telefon klavyesi ilk harfi otomatik olarak büyüttüğü için `Sarah@example.com` ile kaydolduğunuzu düşünün. Daha sonra `sarah@example.com` yazarak oturum açtığınızda, basit bir sistem hesap bulunamadığını bildirir. Kullanıcı adresini değiştirmemiştir. Ancak oturum açma formu metni katı bir büyük küçük harf duyarlılığıyla karşılaştırmıştır.
 
-Listelerde ve CRM sistemlerinde de sorunun kendine özgü bir biçimi vardır. Biri `Bob@company.com` ile kaydolup daha sonra bir rehberi `bob@company.com` ile indirdiğinde, birçok platform bunu iki ayrı potansiyel müşteri olarak sayar. Bu durum metriklerinizi şişirir ve kişilere aynı kampanyaları iki kez gönderir. Bir pazarlama listesini [doğrulamadan veya ona göndermeden](/email-list-cleaning) (İngilizce) önce, büyük küçük harfi dikkate almadan yinelenen kayıtları temizleyin.
+Listelerde ve CRM sistemlerinde de sorunun kendine özgü bir biçimi vardır. Biri `Bob@company.com` ile kaydolup daha sonra bir rehberi `bob@company.com` ile indirdiğinde, birçok platform bunu iki ayrı potansiyel müşteri olarak sayar. Bu durum metriklerinizi şişirir ve kişilere aynı kampanyaları iki kez gönderir. Bir pazarlama listesini [doğrulamadan veya ona göndermeden](/email-list-cleaning) önce, büyük küçük harfi dikkate almadan yinelenen kayıtları temizleyin.
 
 Bir de harf büyüklüğünü gerçekten katı biçimde ele alan nadir şirket sunucuları vardır. Bunlar, Microsoft forumundaki yanıtın bahsettiği istisnadır. Bir kişi kartvizitinde adresini `M.MacDonald@specialtycorp.com` şeklinde yazıyorsa, ona yazarken bu büyük harfleri koruyun. Bu, standart sistemlere zarar vermez. Harf büyüklüğünü önemseyen sistemlerde ise teslimat sorunlarını önler.
 
@@ -61,7 +61,7 @@ String cleanEmail = email.toLowerCase(Locale.ROOT);
 
 JavaScript'teki `toLowerCase()` bu tuzaktan etkilenmez, çünkü sunucunun yerel ayarlarını değil, Unicode'un varsayılan eşlemelerini kullanır. Yalnızca `toLocaleLowerCase()` yerel ayara bağlıdır.
 
-Hatalı biçimleri ve kötü girişleri veritabanınıza ulaşmadan yakalamak için kayıt sırasında adresleri bir [e-posta doğrulama API'siyle](/email-validation-api) (İngilizce) kontrol edin. Bu, kişi henüz sayfadayken yazım hatalarını ve çalışmayan alan adlarını yakalar.
+Hatalı biçimleri ve kötü girişleri veritabanınıza ulaşmadan yakalamak için kayıt sırasında adresleri bir [e-posta doğrulama API'siyle](/email-validation-api) kontrol edin. Bu, kişi henüz sayfadayken yazım hatalarını ve çalışmayan alan adlarını yakalar.
 
 ## Sık sorulan sorular
 
@@ -80,4 +80,4 @@ Yinelenen hesapları ve oturum açma hatalarını önlemek için e-posta adresle
 **Büyük harfler bir e-postanın bounce olmasına neden olabilir mi?**
 Çok nadiren. Bu yalnızca Admin@ ve admin@ adreslerini ayrı posta kutuları olarak ele alacak şekilde ayarlanmış alışılmadık bir sunucuda olur. Büyük harf içeren bir adres bounce olursa, önce başka bir nedene bakın. Örneğin bir yazım hatası veya artık var olmayan bir posta kutusu olabilir. Bounce mesajındaki kod hangisi olduğunu söyler. Bunu [hard bounce ve soft bounce](/blog/hard-bounce-vs-soft-bounce) yazımızda açıklıyoruz.
 
-Büyük harfler bir e-postanın ulaşmasını engellemez, ancak [bir yazım hatası](/email-checker) engeller. Bir sonraki gönderimden önce kişi listenizi temizliyorsanız, çalışmayan posta kutularını ve bozuk alan adlarını önceden yakalamak için listeyi [Giggal.ai](/email-list-cleaning) (İngilizce) ile kontrol edin.
+Büyük harfler bir e-postanın ulaşmasını engellemez, ancak [bir yazım hatası](/email-checker) engeller. Bir sonraki gönderimden önce kişi listenizi temizliyorsanız, çalışmayan posta kutularını ve bozuk alan adlarını önceden yakalamak için listeyi [Giggal.ai](/email-list-cleaning) ile kontrol edin.

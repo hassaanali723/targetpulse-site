@@ -61,7 +61,7 @@ Potem spójrz na proporcje. Jeśli duża część nowej listy odbiła się przy 
 
 ## Źródło listy zwykle wyjaśnia najwięcej
 
-To, skąd pochodzi lista, pozwala przewidzieć liczbę odbić. Lista wyeksportowana z twojego CRM, złożona z osób, które już ci odpisywały, ma bardzo mało odbić. Lista zescrapowana z internetu lub kupiona od brokera ma ich znacznie więcej. Adresy zebrano tam raz i nigdy więcej ich nie sprawdzano, a część z nich w tym czasie przestała działać. Jeśli wiesz, że lista jest kupiona lub zescrapowana, załóż, że część jest nieaktualna. Przepuść ją przez [narzędzie do czyszczenia listy mailingowej](/email-list-cleaning) (po angielsku) przed pierwszą wysyłką, zamiast dowiadywać się tego z raportu odbić.
+To, skąd pochodzi lista, pozwala przewidzieć liczbę odbić. Lista wyeksportowana z twojego CRM, złożona z osób, które już ci odpisywały, ma bardzo mało odbić. Lista zescrapowana z internetu lub kupiona od brokera ma ich znacznie więcej. Adresy zebrano tam raz i nigdy więcej ich nie sprawdzano, a część z nich w tym czasie przestała działać. Jeśli wiesz, że lista jest kupiona lub zescrapowana, załóż, że część jest nieaktualna. Przepuść ją przez [narzędzie do czyszczenia listy mailingowej](/email-list-cleaning) przed pierwszą wysyłką, zamiast dowiadywać się tego z raportu odbić.
 
 ## Kiedy weryfikacja pomaga, a kiedy nie
 

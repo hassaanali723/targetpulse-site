@@ -113,7 +113,7 @@ Bounces in die fase raken een domein met maar twee weken geschiedenis. Er is nie
 
 Controleer de lijst dus voor de eerste campagne, niet nadat de bounces binnenkomen:
 
-1. Haal de lijst door een [email checker](/email-checker) of laat de hele [e-maillijst opschonen](/email-list-cleaning) (in het Engels).
+1. Haal de lijst door een [email checker](/email-checker) of laat de hele [e-maillijst opschonen](/email-list-cleaning).
 2. Verwijder ongeldige adressen, wegwerpadressen en rol-adressen.
 3. Zet catch-all-adressen in een aparte, langzamere groep. Een catch-all-domein accepteert elk adres. Een gewone controle kan je dus niet vertellen of de persoon bestaat. [Catch-all-verificatie](/catch-all-verification) kan dat wel.
 4. Stuur de eerste campagne naar het schoonste deel van de lijst, en breid daarna uit.

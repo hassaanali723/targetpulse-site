@@ -99,7 +99,7 @@ Dwie kategorie warto usunąć nawet wtedy, gdy przechodzą weryfikację jako pra
 
 Adresy funkcyjne to wspólne aliasy: info@, sales@, support@, admin@. Zwykle istnieją, więc przechodzą weryfikację, ale trafiają do wspólnej skrzynki, której nikt osobiście nie prowadzi. Zaangażowanie jest słabe, a odsetek zgłoszeń spamu wyższy niż średnio. W cold outreachu są prawie bezwartościowe.
 
-Jednorazowe adresy pochodzą z usług tymczasowej poczty i istnieją przez kilka minut. Przechodzą weryfikację, dopóki działają, a potem znikają. Gdy [czyścisz listę mailingową](/email-list-cleaning) (po angielsku), każdy przyzwoity weryfikator oznacza obie kategorie osobno od adresów prawidłowych. To więc krok filtrowania, a nie dodatkowa praca.
+Jednorazowe adresy pochodzą z usług tymczasowej poczty i istnieją przez kilka minut. Przechodzą weryfikację, dopóki działają, a potem znikają. Gdy [czyścisz listę mailingową](/email-list-cleaning), każdy przyzwoity weryfikator oznacza obie kategorie osobno od adresów prawidłowych. To więc krok filtrowania, a nie dodatkowa praca.
 
 ## Napraw źródło adresów, a nie tylko listę
 

@@ -16,7 +16,7 @@ export const API_DOCS_ES: ApiDocsStrings = {
   contactPath: '/es/contacto',
 
   overviewBanner:
-    '¿Buscas una visión general? Consulta la [API de verificación de correo](/email-verification-api) o la [API de validación de correo para formularios de registro](/email-validation-api) (en inglés).',
+    '¿Buscas una visión general? Consulta la [API de verificación de correo](/es/api-de-verificacion-de-correo) o la [API de validación de correo para formularios de registro](/es/api-de-validacion-de-correo).',
   hero: {
     h1: 'Referencia de la API para validar correos',
     lead: 'Verifica correos uno a uno, procesa lotes en bloque y haz una verificación profunda de direcciones catch-all y protegidas por SEG. Todos los endpoints usan JSON, se autentican con una clave de API y se cobran por cada verificación correcta.',

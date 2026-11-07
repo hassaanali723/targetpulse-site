@@ -113,7 +113,7 @@ In quella fase i bounce colpiscono un dominio che ha solo due settimane di stori
 
 Per questo controlla la lista prima della prima campagna, non dopo l'arrivo dei bounce:
 
-1. Passa la lista da una [verifica email](/email-checker) o da una [pulizia completa della lista email](/email-list-cleaning) (in inglese).
+1. Passa la lista da una [verifica email](/email-checker) o da una [pulizia completa della lista email](/email-list-cleaning).
 2. Togli gli indirizzi non validi, temporanei e di ruolo.
 3. Tieni gli indirizzi catch-all in un gruppo separato e più lento. Un dominio catch-all accetta ogni indirizzo, quindi un controllo di base non può dirti se la persona esiste. La [verifica catch-all](/catch-all-verification) può farlo.
 4. Invia la prima campagna alla parte più pulita della lista, poi allarga.

@@ -391,4 +391,4 @@ No. Un dominio può pubblicare un solo record DMARC. La RFC 9989 dice che se un 
 **DMARC blocca i domini simili al mio?**
 No. DMARC protegge solo il dominio esatto presente nel tuo DNS. Non può impedire a qualcuno di registrare un dominio dall'aspetto simile, per esempio con due lettere scambiate o con una terminazione diversa come .net. Non può nemmeno bloccare un nome visualizzato falso. Per i domini simili servono altre misure, come tenere d'occhio le nuove registrazioni di domini che copiano il tuo nome.
 
-Un record DMARC dimostra che la tua posta viene davvero da te. Non può aiutarti quando invii a indirizzi che non esistono più. Passa la tua lista da [Giggal.ai](/email-list-cleaning) (in inglese) prima del prossimo invio per togliere gli indirizzi non validi e tenere basso il tasso di rimbalzo.
+Un record DMARC dimostra che la tua posta viene davvero da te. Non può aiutarti quando invii a indirizzi che non esistono più. Passa la tua lista da [Giggal.ai](/email-list-cleaning) prima del prossimo invio per togliere gli indirizzi non validi e tenere basso il tasso di rimbalzo.

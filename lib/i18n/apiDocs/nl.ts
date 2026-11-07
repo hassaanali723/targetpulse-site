@@ -14,7 +14,7 @@ export const API_DOCS_NL: ApiDocsStrings = {
   contactPath: '/nl/contact',
 
   overviewBanner:
-    'Zoek je een algemeen overzicht? Lees de pagina over de [API voor e-mailverificatie](/email-verification-api) of over de [API voor e-mailvalidatie in aanmeldformulieren](/email-validation-api) (in het Engels).',
+    'Zoek je een algemeen overzicht? Lees de pagina over de [API voor e-mailverificatie](/nl/e-mailverificatie-api) of over de [API voor e-mailvalidatie in aanmeldformulieren](/nl/e-mailvalidatie-api).',
   hero: {
     h1: 'API-documentatie voor e-mailverificatie',
     lead: 'Controleer een e-mailadres, start bulkcontroles en controleer catch-all-adressen en adressen achter een SEG grondig. Alle endpoints gebruiken JSON en authenticatie met een API-sleutel. Je betaalt alleen voor geslaagde controles.',

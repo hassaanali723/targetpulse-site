@@ -74,9 +74,9 @@ export const footer = {
     links: [
       { name: 'E-Mail-Verifizierungsdienst', href: '/de' },
       { name: 'E-Mail-Massenprüfung', href: '/de/e-mail-massenpruefung' },
-      { name: 'E-Mail-Listen bereinigen (Englisch)', href: '/email-list-cleaning' },
+      { name: 'E-Mail-Listen bereinigen', href: '/de/e-mail-liste-bereinigen' },
       { name: 'Integrationen', href: '/de/integrationen' },
-      { name: 'E-Mail-Verifizierungs-API (Englisch)', href: '/email-verification-api' },
+      { name: 'E-Mail-Verifizierungs-API', href: '/de/e-mail-verifizierung-api' },
       { name: 'Preise', href: '/de/preise' },
     ],
   },

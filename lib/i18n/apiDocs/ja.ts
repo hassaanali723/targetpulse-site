@@ -14,7 +14,7 @@ export const API_DOCS_JA: ApiDocsStrings = {
   contactPath: '/ja/contact',
 
   overviewBanner:
-    '概要をお探しですか？　[メールアドレス検証API](/email-verification-api)と[登録フォーム向けのメールアドレスのバリデーションAPI](/email-validation-api)のページ（英語）をご覧ください。',
+    '概要をお探しですか？　[メールアドレス検証API](/ja/email-verification-api)と[登録フォーム向けのメールアドレスのバリデーションAPI](/ja/email-validation-api)のページをご覧ください。',
   hero: {
     h1: 'メールアドレス検証APIのドキュメント',
     lead: 'メールアドレスの検証、一括チェック、キャッチオールドメインやSEGの背後にあるアドレスの詳細チェックを行えます。すべてのエンドポイントはJSONを使い、APIキーで認証します。料金がかかるのは成功したチェックだけです。',

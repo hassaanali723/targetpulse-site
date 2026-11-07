@@ -171,7 +171,7 @@ export const copy: EmailCheckerCopy = {
     api: (
       <>
         Untuk mengecek alamat di aplikasi atau formulir pendaftaran Anda sendiri, pakai{' '}
-        <InlineLink href="/email-verification-api">API verifikasi email</InlineLink> (dalam bahasa Inggris). API ini
+        <InlineLink href="/id/api-verifikasi-email">API verifikasi email</InlineLink>. API ini
         menjalankan pemeriksaan yang sama dan memberi hasil dalam JSON.
       </>
     ),

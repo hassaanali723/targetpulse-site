@@ -86,7 +86,7 @@ const content: HomeContent = {
     items: [
       { title: 'Listenbereinigung im großen Stil', body: 'CSV- oder Excel-Datei hochladen, Ergebnisse in Minuten.', points: ['Bis zu 50.000 Adressen pro Datei', 'Bereinigte Liste als CSV herunterladen'], link: 'Liste kostenlos bereinigen' },
       { title: 'Catch-all-Verifizierung', body: 'Ein klares Ergebnis für Catch-all-Domains statt „riskant“.', points: ['Ein Credit, wie jede andere Prüfung', 'Funktioniert hinter Gateways wie Mimecast und Proofpoint'], link: 'So funktioniert die Catch-all-Verifizierung' },
-      { title: 'API für Entwickler', body: 'Prüfen Sie Adressen in Anmeldeformularen und in Ihren Apps.', points: ['Eine Adresse oder eine ganze Liste pro Aufruf', 'API-Schlüssel aus Ihrem Dashboard'], link: 'API-Dokumentation (auf Englisch)' },
+      { title: 'API für Entwickler', body: 'Prüfen Sie Adressen in Anmeldeformularen und in Ihren Apps.', points: ['Eine Adresse oder eine ganze Liste pro Aufruf', 'API-Schlüssel aus Ihrem Dashboard'], link: 'API-Dokumentation' },
       { title: 'CRM- und App-Integrationen', body: 'Senden Sie bereinigte Kontakte an HubSpot, Mailchimp und weitere Tools.', points: ['Funktioniert mit den Tools, die Sie schon nutzen', 'Zapier und n8n für alles andere'], link: 'Alle Integrationen ansehen' },
       { title: 'Bezahlung nach Verbrauch', body: 'Alle Preise sind öffentlich einsehbar. Credits verfallen nicht.', points: ['Kein Abo nötig', 'Nachkaufen nach Bedarf'], link: 'Alle Preise ansehen' },
       { title: 'Priorisierter Support', body: 'Hängen Sie fest? Unsere Techniker helfen Ihnen direkt.', points: ['Echte Menschen, kein Bot', 'Per E-Mail oder über das Kontaktformular'], link: 'Support kontaktieren' },

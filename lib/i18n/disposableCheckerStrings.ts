@@ -1294,7 +1294,7 @@ const ja: CheckerStrings = {
     },
     {
       title: '無料トライアルの不正利用',
-      text: '1人が、毎回新しい使い捨てメールアドレスを使って、トライアルのアカウントを何個も作れます。登録時にこうしたアドレスをブロックすれば、不正利用の大部分を止められます。登録フォームでは、[メールアドレスのバリデーションAPI](/email-validation-api)（英語）で自動化できます。',
+      text: '1人が、毎回新しい使い捨てメールアドレスを使って、トライアルのアカウントを何個も作れます。登録時にこうしたアドレスをブロックすれば、不正利用の大部分を止められます。登録フォームでは、[メールアドレスのバリデーションAPI](/email-validation-api)で自動化できます。',
     },
     {
       title: 'CRMの数字のずれ',
@@ -1304,7 +1304,7 @@ const ja: CheckerStrings = {
   bulkTitle: '1件ずつのチェックと一括チェック',
   bulkParas: [
     '上のツールは、1回に1件のアドレスをチェックします。怪しい登録や1件のリードを調べるときに役立ちます。リスト全体を1件ずつ調べるのは時間がかかりすぎます。',
-    'Giggalのダッシュボードでは、CSVまたはTXTのファイルを[メールリストのクリーニングサービス](/email-list-cleaning)（英語）にアップロードし、リスト全体をまとめてチェックできます。各アドレスについて、使い捨てドメイン、info@やsales@などの役割アドレス、メールボックスが存在するかをチェックします。通常のチェックではメールボックスを確認できない[キャッチオールドメイン](/catch-all-verification)では、Giggalがより詳しいチェックを行います。無料アカウントには1,000クレジットが付きます。',
+    'Giggalのダッシュボードでは、CSVまたはTXTのファイルを[メールリストのクリーニングサービス](/email-list-cleaning)にアップロードし、リスト全体をまとめてチェックできます。各アドレスについて、使い捨てドメイン、info@やsales@などの役割アドレス、メールボックスが存在するかをチェックします。通常のチェックではメールボックスを確認できない[キャッチオールドメイン](/catch-all-verification)では、Giggalがより詳しいチェックを行います。無料アカウントには1,000クレジットが付きます。',
   ],
   faqTitle: '捨てメアド判定：よくある質問',
   faqs: [
@@ -1423,7 +1423,7 @@ const ko: CheckerStrings = {
     },
     {
       title: '무료 체험 악용',
-      text: '한 사람이 매번 새 일회용 이메일 주소로 체험 계정을 여러 개 만들 수 있습니다. 가입 단계에서 이런 주소를 차단하면 대부분의 악용을 막을 수 있습니다. 가입 양식에서는 [이메일 유효성 검사 API](/email-validation-api)(영어)로 자동화할 수 있습니다.',
+      text: '한 사람이 매번 새 일회용 이메일 주소로 체험 계정을 여러 개 만들 수 있습니다. 가입 단계에서 이런 주소를 차단하면 대부분의 악용을 막을 수 있습니다. 가입 양식에서는 [이메일 유효성 검사 API](/email-validation-api)로 자동화할 수 있습니다.',
     },
     {
       title: 'CRM의 잘못된 수치',
@@ -1433,7 +1433,7 @@ const ko: CheckerStrings = {
   bulkTitle: '단일 검사와 대량 검사',
   bulkParas: [
     '위의 도구는 한 번에 주소 1개를 검사합니다. 의심스러운 가입이나 리드 1건을 확인할 때 유용합니다. 리스트 전체를 하나씩 검사하기에는 너무 느립니다.',
-    'Giggal 대시보드에서는 CSV 또는 TXT 파일을 [이메일 리스트 정리 서비스](/email-list-cleaning)(영어)에 업로드해 리스트 전체를 한 번에 검사할 수 있습니다. 모든 주소에 대해 일회용 도메인, info@, sales@ 같은 역할 기반 주소, 메일함이 있는지를 검사합니다. 일반 검사로는 메일함을 확인할 수 없는 [캐치올(catch-all) 도메인](/catch-all-verification)에서는 Giggal이 더 깊은 검사를 실행합니다. 무료 계정에는 크레딧 1,000개가 제공됩니다.',
+    'Giggal 대시보드에서는 CSV 또는 TXT 파일을 [이메일 리스트 정리 서비스](/email-list-cleaning)에 업로드해 리스트 전체를 한 번에 검사할 수 있습니다. 모든 주소에 대해 일회용 도메인, info@, sales@ 같은 역할 기반 주소, 메일함이 있는지를 검사합니다. 일반 검사로는 메일함을 확인할 수 없는 [캐치올(catch-all) 도메인](/catch-all-verification)에서는 Giggal이 더 깊은 검사를 실행합니다. 무료 계정에는 크레딧 1,000개가 제공됩니다.',
   ],
   faqTitle: '일회용 이메일 판별: 자주 묻는 질문',
   faqs: [
@@ -1559,7 +1559,7 @@ const tr: CheckerStrings = {
     },
     {
       title: 'Ücretsiz deneme süresinin kötüye kullanılması',
-      text: "Bir kişi, her seferinde yeni bir geçici adresle çok sayıda deneme hesabı açabilir. Bu adresleri kayıt sırasında engellemek bunun çoğunu durdurur. Bunu kayıt formlarında [e-posta doğrulama API'miz](/email-validation-api) (İngilizce) ile otomatik hâle getirebilirsiniz.",
+      text: "Bir kişi, her seferinde yeni bir geçici adresle çok sayıda deneme hesabı açabilir. Bu adresleri kayıt sırasında engellemek bunun çoğunu durdurur. Bunu kayıt formlarında [e-posta doğrulama API'miz](/email-validation-api) ile otomatik hâle getirebilirsiniz.",
     },
     {
       title: 'CRM sisteminizde yanlış rakamlar',
@@ -1569,7 +1569,7 @@ const tr: CheckerStrings = {
   bulkTitle: 'Tek adres kontrolü veya toplu kontrol',
   bulkParas: [
     'Yukarıdaki araç her seferinde bir adresi kontrol eder. Şüpheli bir kayıt veya tek bir müşteri adayı için kullanışlıdır. Bir listenin tamamı için tek tek kontrol çok yavaştır.',
-    'Giggal panelinde bir CSV veya TXT dosyasını [e-posta listesi temizleme hizmetimize](/email-list-cleaning) (İngilizce) yükleyebilir ve listenin tamamını tek seferde kontrol edebilirsiniz. Her adres geçici alan adları, info@ veya sales@ gibi rol tabanlı adresler ve posta kutusunun var olup olmadığı açısından kontrol edilir. Standart bir kontrolün posta kutusunu doğrulayamadığı [catch-all alan adlarında](/catch-all-verification) Giggal daha ayrıntılı bir kontrol çalıştırır. Ücretsiz bir hesapla 1.000 kredi alırsınız.',
+    'Giggal panelinde bir CSV veya TXT dosyasını [e-posta listesi temizleme hizmetimize](/email-list-cleaning) yükleyebilir ve listenin tamamını tek seferde kontrol edebilirsiniz. Her adres geçici alan adları, info@ veya sales@ gibi rol tabanlı adresler ve posta kutusunun var olup olmadığı açısından kontrol edilir. Standart bir kontrolün posta kutusunu doğrulayamadığı [catch-all alan adlarında](/catch-all-verification) Giggal daha ayrıntılı bir kontrol çalıştırır. Ücretsiz bir hesapla 1.000 kredi alırsınız.',
   ],
   faqTitle: 'Geçici mail kontrolü hakkında sorular',
   faqs: [

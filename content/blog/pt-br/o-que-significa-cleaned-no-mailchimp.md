@@ -87,4 +87,4 @@ Não. O Mailchimp recomenda arquivar os contatos Cleaned em vez de excluí-los. 
 **Por que o Mailchimp marcou como Cleaned um endereço que eu sei que é válido?**
 Endereços de e-mail válidos podem dar hard bounce se um filtro de spam ou um firewall corporativo bloquear os servidores do Mailchimp com respostas SMTP como Denied ou Blocked. Se o destinatário pedir ao administrador da rede para colocar os IPs de envio do Mailchimp na lista de permitidos, ele pode voltar ao seu público pelo seu formulário de cadastro.
 
-A etiqueta Cleaned é o Mailchimp protegendo a sua reputação de envio depois do problema. Verificar antes impede que o bounce aconteça. Passe a sua lista de assinantes pelo [Giggal.ai](/email-list-cleaning) (em inglês) antes do próximo envio para encontrar os endereços inválidos antes que o Mailchimp os marque como Cleaned.
+A etiqueta Cleaned é o Mailchimp protegendo a sua reputação de envio depois do problema. Verificar antes impede que o bounce aconteça. Passe a sua lista de assinantes pelo [Giggal.ai](/email-list-cleaning) antes do próximo envio para encontrar os endereços inválidos antes que o Mailchimp os marque como Cleaned.

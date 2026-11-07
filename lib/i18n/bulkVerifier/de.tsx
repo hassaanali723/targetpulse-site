@@ -90,8 +90,8 @@ export const copy: BulkVerifierCopy = {
       <>
         Giggal.ai prüft jede Catch-all-Adresse und liefert gültig oder ungültig. Das kostet 1 Credit, wie bei jeder
         anderen Adresse. Es funktioniert auch bei Domains hinter{' '}
-        <InlineLink locale="de" href="/seg-email-verification">Sicherheits-Gateways wie Proofpoint und Mimecast</InlineLink>{' '}
-        (Englisch), bei denen andere Tools oft unbekannt liefern.
+        <InlineLink locale="de" href="/seg-email-verification">Sicherheits-Gateways wie Proofpoint und Mimecast</InlineLink>
+        , bei denen andere Tools oft unbekannt liefern.
       </>,
     ],
   },
@@ -128,7 +128,7 @@ export const copy: BulkVerifierCopy = {
       'Eine Datei hochzuladen ist ein Weg. Sie können die Massenprüfung von E-Mail-Adressen auch aus Ihrer eigenen App oder Ihrem Workflow starten.',
     items: [
       {
-        title: 'E-Mail-Verifizierungs-API (Englisch)',
+        title: 'E-Mail-Verifizierungs-API',
         text: 'Senden Sie Adressen aus Ihrer App oder Ihrem Anmeldeformular und erhalten Sie das Ergebnis als JSON zurück.',
       },
       {
@@ -148,7 +148,7 @@ export const copy: BulkVerifierCopy = {
         Beim Prüfen einer E-Mail-Liste erhält jede Adresse ein Ergebnis. Beim Bereinigen arbeiten Sie mit diesen
         Ergebnissen: Sie entfernen die ungültigen Adressen, die Wegwerfadressen und die Duplikate und behalten eine
         saubere Datei. Beides beginnt mit demselben Upload. Mehr dazu lesen Sie auf der Seite{' '}
-        <InlineLink locale="de" href="/email-list-cleaning">E-Mail-Listen bereinigen</InlineLink> (Englisch).
+        <InlineLink locale="de" href="/email-list-cleaning">E-Mail-Listen bereinigen</InlineLink>.
       </>
     ),
     oneTitle: 'Sie möchten nur eine einzelne Adresse prüfen?',

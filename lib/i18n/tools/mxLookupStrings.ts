@@ -761,7 +761,7 @@ const es: MxPageStrings = {
     OVHcloud: 'OVH utiliza servidores desde mx0 hasta mx4 con prioridades escalonadas.',
   },
   providersAfter:
-    'A veces los registros MX apuntan a Proofpoint, Mimecast o Barracuda. Son pasarelas de seguridad (SEG) que analizan el correo antes de pasarlo al buzón final. Si necesitas validar direcciones en estos entornos, consulta [cómo verificar correos tras un gateway de seguridad](/blog/verificar-correos-tras-un-gateway-de-seguridad).',
+    'A veces los registros MX apuntan a Proofpoint, Mimecast o Barracuda. Son pasarelas de seguridad (SEG) que analizan el correo antes de pasarlo al buzón final. Si necesitas validar direcciones en estos entornos, consulta [cómo verificar correos tras un gateway de seguridad](/blog/how-to-verify-emails-behind-secure-email-gateways).',
   changeTitle: 'Cómo cambiar tus registros MX sin perder mensajes',
   changeParas: [
     'Para migrar a otro proveedor, crea los nuevos registros MX en tu proveedor de DNS y elimina los antiguos. Los remitentes comenzarán a enviar al nuevo servidor a medida que caduquen las respuestas en caché.',
@@ -911,7 +911,7 @@ const ptBr: MxPageStrings = {
     OVHcloud: 'Utiliza múltiplos servidores de mx0 a mx4.',
   },
   providersAfter:
-    'Em alguns casos, os registros MX apontam para Proofpoint, Mimecast ou Barracuda. São gateways de segurança (SEG) que inspecionam o tráfego antes da entrega. Entenda mais no guia sobre [como verificar e-mails atrás de gateways de segurança](/blog/verificar-emails-atras-de-gateways-de-seguranca).',
+    'Em alguns casos, os registros MX apontam para Proofpoint, Mimecast ou Barracuda. São gateways de segurança (SEG) que inspecionam o tráfego antes da entrega. Entenda mais no guia sobre [como verificar e-mails atrás de gateways de segurança](/blog/how-to-verify-emails-behind-secure-email-gateways).',
   changeTitle: 'Como alterar registros MX com segurança',
   changeParas: [
     'Para trocar de serviço de e-mail, cadastre as novas entradas MX no painel DNS e exclua as antigas. Os servidores externos migrarão o tráfego gradualmente.',
@@ -1061,7 +1061,7 @@ const nl: MxPageStrings = {
     OVHcloud: 'Gedistribueerd over meerdere servers van mx0 tot mx4.',
   },
   providersAfter:
-    'Soms verwijzen MX-records naar Proofpoint, Mimecast of Barracuda. Dit zijn Secure Email Gateways die berichten inspecteren voor aflevering. Lees hoe u [e-mails verifieert achter een secure email gateway](/blog/e-mails-verifieren-achter-secure-email-gateway).',
+    'Soms verwijzen MX-records naar Proofpoint, Mimecast of Barracuda. Dit zijn Secure Email Gateways die berichten inspecteren voor aflevering. Lees hoe u [e-mails verifieert achter een secure email gateway](/blog/how-to-verify-emails-behind-secure-email-gateways).',
   changeTitle: 'MX-records wijzigen zonder downtime',
   changeParas: [
     'Bij overstappen naar een andere e-mailprovider voegt u de nieuwe records toe in DNS en verwijdert u de oude. Externe servers schakelen geleidelijk over.',
@@ -1211,7 +1211,7 @@ const pl: MxPageStrings = {
     OVHcloud: 'Rozdzielone pomiędzy serwery mx0 do mx4.',
   },
   providersAfter:
-    'Czasami rekordy MX wskazują na Proofpoint, Mimecast lub Barracuda. Są to bramki bezpieczeństwa (SEG) filtrujące pocztę przed jej ostatecznym doręczeniem. Zobacz, [jak weryfikować adresy e-mail chronione bramkami bezpieczeństwa](/blog/weryfikacja-email-za-bramka-bezpieczenstwa).',
+    'Czasami rekordy MX wskazują na Proofpoint, Mimecast lub Barracuda. Są to bramki bezpieczeństwa (SEG) filtrujące pocztę przed jej ostatecznym doręczeniem. Zobacz, [jak weryfikować adresy e-mail chronione bramkami bezpieczeństwa](/blog/how-to-verify-emails-behind-secure-email-gateways).',
   changeTitle: 'Jak zmienić rekordy MX bez przestojów w poczcie',
   changeParas: [
     'Zmieniając operatora poczty, najpierw utwórz nowe rekordy MX w DNS, a następnie usuń dotychczasowe. Serwery nadawców zaczną stopniowo kierować ruch do nowego operatora.',
@@ -1361,7 +1361,7 @@ const id: MxPageStrings = {
     OVHcloud: 'Menggunakan server mx0 hingga mx4 dengan prioritas bertingkat.',
   },
   providersAfter:
-    'Terkadang MX record mengarah ke Proofpoint, Mimecast, atau Barracuda. Ini adalah Secure Email Gateway yang menyaring ancaman sebelum email diteruskan. Pelajari [cara memverifikasi email di balik gateway keamanan](/blog/verifikasi-email-di-balik-secure-email-gateway).',
+    'Terkadang MX record mengarah ke Proofpoint, Mimecast, atau Barracuda. Ini adalah Secure Email Gateway yang menyaring ancaman sebelum email diteruskan. Pelajari [cara memverifikasi email di balik gateway keamanan](/blog/how-to-verify-emails-behind-secure-email-gateways).',
   changeTitle: 'Cara mengganti MX record tanpa email terputus',
   changeParas: [
     'Saat beralih ke penyedia baru, tambahkan MX record baru di DNS terlebih dahulu, baru hapus yang lama. Server di internet akan berpindah secara bertahap.',

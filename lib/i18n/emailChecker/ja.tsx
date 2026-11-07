@@ -167,8 +167,8 @@ export const copy: EmailCheckerCopy = {
     api: (
       <>
         自社のアプリや登録フォームでアドレスをチェックするには、
-        <InlineLink href="/email-verification-api">メールアドレス検証API</InlineLink>
-        （英語）を使ってください。同じチェックを実行し、結果をJSONで返します。
+        <InlineLink href="/ja/email-verification-api">メールアドレス検証API</InlineLink>
+        を使ってください。同じチェックを実行し、結果をJSONで返します。
       </>
     ),
   },

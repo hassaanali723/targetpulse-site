@@ -92,7 +92,7 @@ export const copy: BulkVerifierCopy = {
       <>
         Giggal.ai는 캐치올 도메인 주소를 하나씩 검사하고 유효 또는 무효 결과를 돌려줍니다. 가격은 다른 주소와 같은 크레딧 1개입니다.{' '}
         <InlineLink locale="ko" href="/seg-email-verification">Proofpoint, Mimecast 같은 보안 이메일 게이트웨이</InlineLink>
-        (SEG, 영어) 뒤에 있는 도메인도 검증합니다. 다른 도구는 이런 도메인에서 알 수 없음 결과를 내는 경우가 많습니다.
+        (SEG) 뒤에 있는 도메인도 검증합니다. 다른 도구는 이런 도메인에서 알 수 없음 결과를 내는 경우가 많습니다.
       </>,
     ],
   },
@@ -130,7 +130,7 @@ export const copy: BulkVerifierCopy = {
       '파일 업로드는 한 가지 방법입니다. 자체 앱이나 워크플로에서 대량 이메일 검증을 실행할 수도 있습니다.',
     items: [
       {
-        title: '이메일 검증 API(영어)',
+        title: '이메일 검증 API',
         text: '앱이나 가입 양식에서 주소를 보내고, 결과를 JSON으로 받습니다.',
       },
       {
@@ -149,7 +149,7 @@ export const copy: BulkVerifierCopy = {
       <>
         이메일 리스트 검증은 모든 주소에 결과를 붙입니다. 정리는 그 결과로 하는 작업입니다. 무효 주소, 일회용 이메일 주소, 중복 주소를 지우고 깨끗한 파일을 남깁니다. 두 작업 모두 같은 업로드로 시작합니다. 자세한 내용은{' '}
         <InlineLink locale="ko" href="/email-list-cleaning">이메일 리스트 정리</InlineLink>
-        (영어)를 참고하십시오.
+        를 참고하십시오.
       </>
     ),
     oneTitle: '주소 1개만 검사하고 싶으십니까?',

@@ -35,7 +35,7 @@ Het antwoord van Microsoft lijkt erop. In een reactie op het supportforum van Mi
 
 Bij inloggen gaat het meestal mis. Stel dat je je op een telefoon aanmeldt als `Sarah@example.com`, omdat het toetsenbord de eerste letter een hoofdletter gaf. Later log je in met `sarah@example.com`. Een simpel systeem meldt dan dat er geen account is gevonden. De gebruiker heeft zijn adres niet veranderd, maar het inlogformulier vergeleek de tekst strikt hoofdlettergevoelig.
 
-Lijsten en CRM's hebben hun eigen versie van het probleem. Meldt iemand zich aan als `Bob@company.com` en downloadt hij later een gids als `bob@company.com`? Dan tellen veel platforms twee aparte leads. Dat blaast je cijfers op en stuurt mensen dubbele campagnes. Ontdubbel je records zonder op hoofdletters te letten voordat je een marketinglijst [verifieert of ernaar verstuurt](/email-list-cleaning) (in het Engels).
+Lijsten en CRM's hebben hun eigen versie van het probleem. Meldt iemand zich aan als `Bob@company.com` en downloadt hij later een gids als `bob@company.com`? Dan tellen veel platforms twee aparte leads. Dat blaast je cijfers op en stuurt mensen dubbele campagnes. Ontdubbel je records zonder op hoofdletters te letten voordat je een marketinglijst [verifieert of ernaar verstuurt](/email-list-cleaning).
 
 Dan is er nog de zeldzame bedrijfsserver die hoofdletters wel strikt behandelt, de uitzondering die Microsoft in de reactie noemt. Schrijft een contact zijn adres op een visitekaartje als `M.MacDonald@specialtycorp.com`, houd die hoofdletters dan aan als je hem mailt. Het kan bij standaardsystemen geen kwaad, en je voorkomt problemen met aflevering bij systemen waar het wel uitmaakt.
 
@@ -62,7 +62,7 @@ String cleanEmail = email.toLowerCase(Locale.ROOT);
 
 `toLowerCase()` in JavaScript heeft deze valkuil niet, omdat het de standaardmappings van Unicode gebruikt en niet de locale van de host. Alleen `toLocaleLowerCase()` hangt af van de locale.
 
-Wil je kapotte opmaak en foute invoer opvangen voordat ze in je database komen? Valideer adressen dan bij de aanmelding met een [API voor e-mailvalidatie](/email-validation-api) (in het Engels). Die vangt typfouten en dode domeinen op terwijl de persoon nog op de pagina is.
+Wil je kapotte opmaak en foute invoer opvangen voordat ze in je database komen? Valideer adressen dan bij de aanmelding met een [API voor e-mailvalidatie](/email-validation-api). Die vangt typfouten en dode domeinen op terwijl de persoon nog op de pagina is.
 
 ## Veelgestelde vragen
 
@@ -81,4 +81,4 @@ Vergelijk en indexeer e-mailadressen in kleine letters, zodat je dubbele account
 **Kunnen hoofdletters een e-mail laten bouncen?**
 Heel zelden. Het gebeurt alleen op een ongebruikelijke server die is ingesteld om Admin@ en admin@ als aparte mailboxen te behandelen. Bouncet een adres met hoofdletters, zoek dan eerst naar iets anders, zoals een typfout of een mailbox die niet meer bestaat. De code in de bouncemelding vertelt je welke van de twee het is, zoals uitgelegd in [hard bounce vs soft bounce](/blog/hard-bounce-vs-soft-bounce).
 
-Hoofdletters houden een e-mail niet tegen, maar [een typfout](/email-checker) wel. Schoon je een contactlijst op voor de volgende verzending, haal hem dan door [Giggal.ai](/email-list-cleaning) (in het Engels) om eerst dode mailboxen en kapotte domeinen te vinden.
+Hoofdletters houden een e-mail niet tegen, maar [een typfout](/email-checker) wel. Schoon je een contactlijst op voor de volgende verzending, haal hem dan door [Giggal.ai](/email-list-cleaning) om eerst dode mailboxen en kapotte domeinen te vinden.

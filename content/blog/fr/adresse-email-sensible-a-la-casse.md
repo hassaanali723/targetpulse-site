@@ -35,7 +35,7 @@ La réponse de Microsoft est proche. Dans une réponse sur le forum d'assistance
 
 C'est en général à la connexion que le problème apparaît. Vous vous inscrivez avec `Sarah@example.com` sur un téléphone parce que le clavier a mis la première lettre en majuscule. Plus tard, vous vous connectez en tapant `sarah@example.com`, et un système mal conçu répond qu'aucun compte n'existe. L'utilisateur n'a pas changé d'adresse, mais le formulaire de connexion a comparé le texte en tenant compte de la casse.
 
-Les listes et les CRM ont leur propre version du problème. Quand quelqu'un s'inscrit avec `Bob@company.com` puis télécharge un guide avec `bob@company.com`, beaucoup de plateformes comptent deux contacts distincts. Cela gonfle vos statistiques et envoie des campagnes en double aux mêmes personnes. Dédoublonnez les fiches sans tenir compte de la casse avant de [vérifier ou d'envoyer](/email-list-cleaning) (en anglais) à une liste marketing.
+Les listes et les CRM ont leur propre version du problème. Quand quelqu'un s'inscrit avec `Bob@company.com` puis télécharge un guide avec `bob@company.com`, beaucoup de plateformes comptent deux contacts distincts. Cela gonfle vos statistiques et envoie des campagnes en double aux mêmes personnes. Dédoublonnez les fiches sans tenir compte de la casse avant de [vérifier ou d'envoyer](/email-list-cleaning) à une liste marketing.
 
 Il reste enfin le rare serveur d'entreprise qui applique strictement la casse, l'exception citée dans la réponse de Microsoft. Si un contact écrit son adresse `M.MacDonald@specialtycorp.com` sur une carte de visite, gardez ces majuscules quand vous lui écrivez. Cela ne gêne pas les systèmes standards et évite des problèmes de livraison sur les systèmes qui tiennent compte de la casse.
 
@@ -62,7 +62,7 @@ String cleanEmail = email.toLowerCase(Locale.ROOT);
 
 La méthode `toLowerCase()` de JavaScript ne tombe pas dans ce piège, parce qu'elle utilise les correspondances Unicode par défaut et non les réglages de locale de l'hôte. Seule `toLocaleLowerCase()` dépend de la locale.
 
-Pour attraper les formats cassés et les mauvaises saisies avant qu'ils n'arrivent dans votre base, validez les adresses avec une [API de validation d'email](/email-validation-api) (en anglais) à l'inscription. Elle attrape les fautes de frappe et les domaines morts pendant que la personne est encore sur la page.
+Pour attraper les formats cassés et les mauvaises saisies avant qu'ils n'arrivent dans votre base, validez les adresses avec une [API de validation d'email](/email-validation-api) à l'inscription. Elle attrape les fautes de frappe et les domaines morts pendant que la personne est encore sur la page.
 
 ## Questions fréquentes
 
@@ -81,4 +81,4 @@ Comparez et indexez les adresses email en minuscules pour éviter les comptes en
 **Les majuscules peuvent-elles faire rebondir un email ?**
 Très rarement. Cela n'arrive que sur un serveur inhabituel configuré pour traiter Admin@ et admin@ comme deux boîtes distinctes. Si une adresse avec des majuscules rebondit, cherchez d'abord une autre cause, comme une faute de frappe ou une boîte qui n'existe plus. Le code du message de rebond vous dit laquelle, comme l'explique l'article [hard bounce et soft bounce](/blog/hard-bounce-vs-soft-bounce).
 
-Les majuscules n'empêchent pas un email d'arriver, mais [une faute de frappe](/email-checker) l'en empêche. Si vous nettoyez une liste de contacts avant le prochain envoi, passez-la d'abord dans [Giggal.ai](/email-list-cleaning) (en anglais) pour attraper les boîtes mortes et les domaines cassés.
+Les majuscules n'empêchent pas un email d'arriver, mais [une faute de frappe](/email-checker) l'en empêche. Si vous nettoyez une liste de contacts avant le prochain envoi, passez-la d'abord dans [Giggal.ai](/email-list-cleaning) pour attraper les boîtes mortes et les domaines cassés.

@@ -165,7 +165,7 @@ export default function BulkVerifierL10n({
   const flagIcons = [ShieldCheck, Timer, Users, Copy]
   const useIcons = [Send, UserPlus, Archive, Database]
   const software = [
-    { Icon: Code2, href: '/email-verification-api' },
+    { Icon: Code2, href: CLUSTERS.verificationApi[locale] },
     { Icon: Workflow, href: CLUSTERS.integrations[locale] },
     { Icon: Bot, href: CLUSTERS.mcp[locale] },
   ]

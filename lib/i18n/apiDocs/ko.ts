@@ -16,7 +16,7 @@ export const API_DOCS_KO: ApiDocsStrings = {
   contactPath: '/ko/contact',
 
   overviewBanner:
-    '개요가 필요하십니까? [이메일 검증 API](/email-verification-api)(영어) 또는 [가입 양식용 이메일 유효성 검사 API](/email-validation-api)(영어) 페이지를 참고하십시오.',
+    '개요가 필요하십니까? [이메일 검증 API](/ko/email-verification-api) 또는 [가입 양식용 이메일 유효성 검사 API](/ko/email-validation-api) 페이지를 참고하십시오.',
   hero: {
     h1: '이메일 검증 API 문서',
     lead: '이메일 주소 1개 검증, 대량 검증, 캐치올 도메인 주소와 SEG로 보호되는 주소의 정밀 검사를 할 수 있습니다. 모든 엔드포인트는 JSON을 쓰고 API 키로 인증하며, 성공한 검증에만 요금이 부과됩니다.',

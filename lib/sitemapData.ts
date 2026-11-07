@@ -233,8 +233,9 @@ const freeToolL10nUrls = new Set<string>([
 // The last three free tools (Gmail plus addressing, email permutator, spam
 // word checker) were localized on this date.
 const LAST_TOOLS_SHIPPED = '2026-11-07'
+// The product pages, the SEG page and the blacklist post shipped in more languages the same day.
 const lastToolUrls = new Set<string>(
-  ['plusAddressing', 'emailPermutator', 'spamWordChecker'].flatMap((id) => Object.values((CLUSTERS as Record<string, Cluster>)[id] ?? {})),
+  ['plusAddressing', 'emailPermutator', 'spamWordChecker', 'listCleaning', 'verificationApi', 'validationApi', 'mimecast', 'seg', 'postEmailBlacklistCheck'].flatMap((id) => Object.values((CLUSTERS as Record<string, Cluster>)[id] ?? {})),
 )
 
 // The translated affiliate pages shipped on this date.

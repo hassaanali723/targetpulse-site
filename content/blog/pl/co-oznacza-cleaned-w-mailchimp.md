@@ -87,4 +87,4 @@ Nie. Mailchimp zaleca archiwizowanie kontaktów Cleaned zamiast ich usuwania. Ar
 **Dlaczego Mailchimp wyczyścił adres, który na pewno jest prawidłowy?**
 Prawidłowe adresy e-mail mogą dać twarde odbicie, jeśli firmowy filtr antyspamowy lub zapora blokuje serwery Mailchimpa z odpowiedziami SMTP typu Denied lub Blocked. Jeśli odbiorca poprosi administratora sieci o dodanie adresów IP Mailchimpa do listy dozwolonych, może ponownie dołączyć do twoich odbiorców przez formularz zapisu.
 
-Oznaczenie Cleaned to sposób, w jaki Mailchimp chroni twoją reputację nadawcy już po fakcie. Weryfikacja przed wysyłką sprawia, że do odbicia w ogóle nie dochodzi. Przed kolejną wysyłką przepuść listę subskrybentów przez [Giggal.ai](/email-list-cleaning) (po angielsku), aby znaleźć nieprawidłowe adresy, zanim Mailchimp je wyczyści.
+Oznaczenie Cleaned to sposób, w jaki Mailchimp chroni twoją reputację nadawcy już po fakcie. Weryfikacja przed wysyłką sprawia, że do odbicia w ogóle nie dochodzi. Przed kolejną wysyłką przepuść listę subskrybentów przez [Giggal.ai](/email-list-cleaning), aby znaleźć nieprawidłowe adresy, zanim Mailchimp je wyczyści.

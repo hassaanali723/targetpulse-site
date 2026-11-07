@@ -71,9 +71,9 @@ export const footer = {
     links: [
       { name: 'Verifikasi email', href: '/id' },
       { name: 'Verifikasi email massal', href: '/id/verifikasi-email-massal' },
-      { name: 'Membersihkan daftar email (dalam bahasa Inggris)', href: '/email-list-cleaning' },
+      { name: 'Membersihkan daftar email', href: '/id/membersihkan-daftar-email' },
       { name: 'Integrasi', href: '/id/integrasi' },
-      { name: 'API verifikasi email (dalam bahasa Inggris)', href: '/email-verification-api' },
+      { name: 'API verifikasi email', href: '/id/api-verifikasi-email' },
       { name: 'Harga', href: '/id/harga' },
     ],
   },

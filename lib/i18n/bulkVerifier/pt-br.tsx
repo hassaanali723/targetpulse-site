@@ -88,8 +88,8 @@ export const copy: BulkVerifierCopy = {
       <>
         A Giggal.ai verifica cada endereço catch-all e devolve válido ou inválido, pelo mesmo 1 crédito de qualquer outro
         endereço. Ela também funciona em domínios protegidos por{' '}
-        <InlineLink locale="pt-br" href="/seg-email-verification">gateways de segurança como Proofpoint e Mimecast</InlineLink>{' '}
-        (em inglês), onde outras ferramentas costumam devolver desconhecido.
+        <InlineLink locale="pt-br" href="/seg-email-verification">gateways de segurança como Proofpoint e Mimecast</InlineLink>
+        , onde outras ferramentas costumam devolver desconhecido.
       </>,
     ],
   },
@@ -126,7 +126,7 @@ export const copy: BulkVerifierCopy = {
       'Enviar um arquivo é uma das formas. Você também pode verificar e-mails em massa a partir do seu próprio app ou fluxo de trabalho.',
     items: [
       {
-        title: 'API de verificação de e-mail (em inglês)',
+        title: 'API de verificação de e-mail',
         text: 'Envie endereços do seu app ou formulário de cadastro e receba o resultado em JSON.',
       },
       {
@@ -146,7 +146,7 @@ export const copy: BulkVerifierCopy = {
         Verificar uma lista de e-mails dá um resultado a cada endereço. A limpeza é o que você faz com esses resultados:
         você remove os endereços inválidos, descartáveis e duplicados e fica com um arquivo limpo. As duas começam com o
         mesmo envio de arquivo. Leia mais sobre{' '}
-        <InlineLink locale="pt-br" href="/email-list-cleaning">limpeza de lista de e-mails</InlineLink> (em inglês).
+        <InlineLink locale="pt-br" href="/email-list-cleaning">limpeza de lista de e-mails</InlineLink>.
       </>
     ),
     oneTitle: 'Precisa verificar só um endereço?',

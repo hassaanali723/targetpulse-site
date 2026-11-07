@@ -164,8 +164,8 @@ export const copy: EmailCheckerCopy = {
     api: (
       <>
         자체 앱이나 가입 양식 안에서 주소를 검사하려면{' '}
-        <InlineLink href="/email-verification-api">이메일 검증 API</InlineLink>
-        (영어)를 쓰십시오. 같은 검사를 실행하고 결과를 JSON으로 돌려줍니다.
+        <InlineLink href="/ko/email-verification-api">이메일 검증 API</InlineLink>
+        를 쓰십시오. 같은 검사를 실행하고 결과를 JSON으로 돌려줍니다.
       </>
     ),
   },

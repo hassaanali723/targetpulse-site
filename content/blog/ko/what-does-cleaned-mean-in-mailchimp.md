@@ -87,4 +87,4 @@ Mailchimp는 또한 발송 도메인을 인증하고, [DMARC를 설정](/blog/wh
 **유효한 주소인데 왜 Mailchimp가 Cleaned로 바꿨습니까?**
 기업의 스팸 필터나 방화벽이 Denied, Blocked 같은 SMTP 응답으로 Mailchimp 서버를 차단하면, 유효한 이메일 주소도 하드 바운스될 수 있습니다. 수신자가 네트워크 관리자에게 Mailchimp의 발송 IP 주소를 허용 목록에 넣어 달라고 요청하면, 가입 양식으로 오디언스에 다시 가입할 수 있습니다.
 
-Cleaned 배지는 문제가 생긴 뒤에 Mailchimp가 발신자 평판을 보호하는 장치입니다. 먼저 검증하면 반송 자체가 일어나지 않습니다. 다음 발송 전에 구독자 리스트를 [Giggal.ai](/email-list-cleaning)(영어)로 검사해, Mailchimp가 Cleaned로 바꾸기 전에 무효 주소를 찾으십시오.
+Cleaned 배지는 문제가 생긴 뒤에 Mailchimp가 발신자 평판을 보호하는 장치입니다. 먼저 검증하면 반송 자체가 일어나지 않습니다. 다음 발송 전에 구독자 리스트를 [Giggal.ai](/email-list-cleaning)로 검사해, Mailchimp가 Cleaned로 바꾸기 전에 무효 주소를 찾으십시오.

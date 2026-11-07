@@ -147,7 +147,7 @@ export const DE: IntegrationPagesContent = {
       '{count} Apps lassen sich über Zapier mit Giggal.ai verbinden. Für jede App gibt es eine eigene Anleitung auf Englisch.',
     apiTitle: 'Ihr Tool ist nicht dabei?',
     apiText:
-      'Jedes Tool, das HTTP-Anfragen senden kann, kann E-Mails mit Giggal.ai prüfen. Nutzen Sie die [API für E-Mail-Verifizierung](/email-verification-api) für Einzel- und Massenprüfungen, oder verbinden Sie Ihr Tool über Zapier.',
+      'Jedes Tool, das HTTP-Anfragen senden kann, kann E-Mails mit Giggal.ai prüfen. Nutzen Sie die [API für E-Mail-Verifizierung](/de/e-mail-verifizierung-api) für Einzel- und Massenprüfungen, oder verbinden Sie Ihr Tool über Zapier.',
     apiCta: 'API-Dokumentation',
     apiHref: '/de/api-dokumentation',
   },
@@ -388,7 +388,7 @@ export const DE: IntegrationPagesContent = {
     ],
     calloutTitle: 'Catch-all- und Gateway-Adressen erhalten gültig oder ungültig',
     calloutText:
-      'Viele Prüftools liefern unbekannt für Adressen hinter Sicherheits-Gateways und riskant für Catch-all-Domains. Giggal.ai [prüft Adressen hinter Gateways](/seg-email-verification) wie Proofpoint und Mimecast und führt auf Catch-all-Domains zusätzliche Prüfungen durch. [So funktioniert die Catch-all-Verifizierung](/de/catch-all-verifizierung).',
+      'Viele Prüftools liefern unbekannt für Adressen hinter Sicherheits-Gateways und riskant für Catch-all-Domains. Giggal.ai [prüft Adressen hinter Gateways](/de/secure-email-gateway) wie Proofpoint und Mimecast und führt auf Catch-all-Domains zusätzliche Prüfungen durch. [So funktioniert die Catch-all-Verifizierung](/de/catch-all-verifizierung).',
     faqTitle: 'Häufige Fragen zur E-Mail-Verifizierung in n8n',
     faq: [
       {
@@ -490,7 +490,7 @@ export const DE: IntegrationPagesContent = {
     ],
     calloutTitle: 'Warum ein E-Mail-Checker für Catch-all-Adressen in HubSpot sinnvoll ist',
     calloutText:
-      'Rund 30 % einer B2B-Liste liegen auf Catch-all-Domains. Viele Prüftools liefern diese Kontakte als riskant, und Sie können nichts damit anfangen. Mit Giggal.ai können Sie jede [E-Mail-Adresse prüfen](/de/email-adresse-pruefen). Giggal.ai führt auf Catch-all-Domains zusätzliche Prüfungen durch und [prüft Adressen hinter Sicherheits-Gateways](/seg-email-verification) wie Proofpoint und Mimecast. Die meisten dieser Kontakte erhalten zustellbar oder unzustellbar. [So funktioniert die Catch-all-Verifizierung](/de/catch-all-verifizierung).',
+      'Rund 30 % einer B2B-Liste liegen auf Catch-all-Domains. Viele Prüftools liefern diese Kontakte als riskant, und Sie können nichts damit anfangen. Mit Giggal.ai können Sie jede [E-Mail-Adresse prüfen](/de/email-adresse-pruefen). Giggal.ai führt auf Catch-all-Domains zusätzliche Prüfungen durch und [prüft Adressen hinter Sicherheits-Gateways](/de/secure-email-gateway) wie Proofpoint und Mimecast. Die meisten dieser Kontakte erhalten zustellbar oder unzustellbar. [So funktioniert die Catch-all-Verifizierung](/de/catch-all-verifizierung).',
     propsTitle: 'HubSpot-Eigenschaften, die Giggal.ai an jeden Kontakt schreibt',
     propsIntro:
       'Die fünf Eigenschaften werden bei Ihrer ersten Prüfung angelegt. Sie liegen in einer Eigenschaftsgruppe namens Giggal Email Verifier. Ihre bestehenden HubSpot-Eigenschaften werden nicht geändert.',
@@ -603,7 +603,7 @@ export const DE: IntegrationPagesContent = {
     why: [
       'Rund 30 % einer B2B-Liste liegen auf Catch-all-Domains. Diese Domains nehmen E-Mails für jede Adresse an, ob das Postfach existiert oder nicht. Viele Prüftools markieren diese Adressen als riskant. Das heißt: Sie konnten es nicht feststellen.',
       'Im Chat hilft diese Markierung nicht. Der Assistent gibt wieder, was er erhalten hat. Ein Drittel Ihrer Liste kommt dann als unsicher zurück. Giggal.ai prüft diese Adressen weiter und liefert gültig oder ungültig. Dasselbe gilt für Postfächer hinter 15 namentlich bekannten Sicherheits-Gateways, darunter Proofpoint, Mimecast und Barracuda.',
-      'Beispiel-Prompts finden Sie im Artikel [E-Mails in Claude und ChatGPT prüfen](/de/blog/e-mails-in-claude-und-chatgpt-pruefen). Der MCP-Server nutzt dieselbe Prüftechnik wie die [API für E-Mail-Verifizierung](/email-verification-api).',
+      'Beispiel-Prompts finden Sie im Artikel [E-Mails in Claude und ChatGPT prüfen](/de/blog/e-mails-in-claude-und-chatgpt-pruefen). Der MCP-Server nutzt dieselbe Prüftechnik wie die [API für E-Mail-Verifizierung](/de/e-mail-verifizierung-api).',
     ],
     faqTitle: 'Häufige Fragen zum MCP-Server für E-Mail-Verifizierung',
     faq: [

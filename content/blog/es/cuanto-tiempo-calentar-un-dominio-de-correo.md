@@ -113,7 +113,7 @@ En esa etapa, los rebotes afectan a un dominio que solo tiene dos semanas de his
 
 Así que revisa la lista antes de la primera campaña, no después de que lleguen los rebotes:
 
-1. Pasa la lista por un [validador de correo](/email-checker) o haz una [limpieza completa de la lista de correo](/email-list-cleaning) (en inglés).
+1. Pasa la lista por un [validador de correo](/email-checker) o haz una [limpieza completa de la lista de correo](/email-list-cleaning).
 2. Elimina las direcciones no válidas, las desechables y las de rol.
 3. Pon las direcciones catch-all en un grupo aparte y más lento. Un dominio catch-all acepta todas las direcciones, así que una comprobación básica no puede decirte si la persona existe. La [verificación catch-all](/catch-all-verification) sí puede.
 4. Envía la primera campaña a la parte más limpia de la lista y luego amplía.

@@ -113,7 +113,7 @@ Bu aşamadaki bounce'lar, yalnızca iki haftalık geçmişi olan bir alan adın�
 
 Bu nedenle listeyi bounce'lar geldikten sonra değil, ilk kampanyadan önce kontrol edin:
 
-1. Listeyi bir [mail adresi doğrulama aracında](/email-checker) kontrol edin veya tam bir [e-posta listesi temizleme](/email-list-cleaning) (İngilizce) işleminden geçirin.
+1. Listeyi bir [mail adresi doğrulama aracında](/email-checker) kontrol edin veya tam bir [e-posta listesi temizleme](/email-list-cleaning) işleminden geçirin.
 2. Geçersiz, geçici ve rol tabanlı adresleri çıkarın.
 3. Catch-all adresleri ayrı ve daha yavaş bir grupta tutun. Catch-all bir alan adı her adresi kabul eder. Bu yüzden basit bir kontrol, kişinin var olup olmadığını söyleyemez. [Catch-all doğrulama](/catch-all-verification) bunu söyleyebilir.
 4. İlk kampanyayı listenin en temiz kısmına gönderin, ardından genişletin.

@@ -176,7 +176,7 @@ export const copy: EmailCheckerCopy = {
     api: (
       <>
         Um Adressen in Ihrer eigenen App oder Ihrem Anmeldeformular zu prüfen, nutzen Sie die{' '}
-        <InlineLink href="/email-verification-api">E-Mail-Verifizierungs-API</InlineLink>. Sie führt dieselben Prüfungen
+        <InlineLink href="/de/e-mail-verifizierung-api">E-Mail-Verifizierungs-API</InlineLink>. Sie führt dieselben Prüfungen
         aus und liefert das Ergebnis als JSON.
       </>
     ),

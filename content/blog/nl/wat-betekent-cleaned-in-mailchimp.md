@@ -87,4 +87,4 @@ Nee. Mailchimp raadt aan contacten op Cleaned te archiveren in plaats van te ver
 **Waarom zette Mailchimp een adres op Cleaned waarvan ik weet dat het geldig is?**
 Geldige e-mailadressen kunnen hard bouncen als een spamfilter of firewall van een bedrijf de servers van Mailchimp blokkeert met SMTP-antwoorden als Denied of Blocked. Vraagt de ontvanger de netwerkbeheerder om de verzendende IP-adressen van Mailchimp op de allowlist te zetten, dan kan die persoon zich via je aanmeldformulier opnieuw bij je audience aanmelden.
 
-Met het label Cleaned beschermt Mailchimp je afzenderreputatie achteraf. Eerst verifiëren voorkomt dat de bounce überhaupt gebeurt. Haal je lijst met abonnees voor je volgende verzending door [Giggal.ai](/email-list-cleaning) (in het Engels) om ongeldige adressen te vinden voordat Mailchimp ze op Cleaned zet.
+Met het label Cleaned beschermt Mailchimp je afzenderreputatie achteraf. Eerst verifiëren voorkomt dat de bounce überhaupt gebeurt. Haal je lijst met abonnees voor je volgende verzending door [Giggal.ai](/email-list-cleaning) om ongeldige adressen te vinden voordat Mailchimp ze op Cleaned zet.

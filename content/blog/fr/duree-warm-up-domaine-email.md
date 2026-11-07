@@ -113,7 +113,7 @@ Un seul mauvais envoi peut annuler des semaines de warm-up. La cause habituelle 
 
 Vérifiez donc la liste avant la première campagne, et non après l'arrivée des rebonds :
 
-1. Passez la liste dans un [vérificateur d'adresse mail](/email-checker) ou faites un [nettoyage complet de la liste](/email-list-cleaning) (en anglais).
+1. Passez la liste dans un [vérificateur d'adresse mail](/email-checker) ou faites un [nettoyage complet de la liste](/email-list-cleaning).
 2. Retirez les adresses invalides, jetables et les adresses de rôle.
 3. Mettez les adresses catch-all dans un groupe à part, envoyé plus lentement. Un domaine catch-all accepte toutes les adresses, donc un contrôle de base ne peut pas vous dire si la personne existe. La [vérification catch-all](/catch-all-verification) le peut.
 4. Envoyez la première campagne à la partie la plus propre de la liste, puis élargissez.

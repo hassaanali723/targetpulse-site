@@ -14,7 +14,7 @@ export const API_DOCS_ID: ApiDocsStrings = {
   contactPath: '/id/kontak',
 
   overviewBanner:
-    'Mencari gambaran umum? Baca halaman tentang [API verifikasi email](/email-verification-api) atau [API validasi email untuk formulir pendaftaran](/email-validation-api) (dalam bahasa Inggris).',
+    'Mencari gambaran umum? Baca halaman tentang [API verifikasi email](/id/api-verifikasi-email) atau [API validasi email untuk formulir pendaftaran](/id/api-validasi-email).',
   hero: {
     h1: 'Dokumentasi API verifikasi email',
     lead: 'Cek alamat email, jalankan pemeriksaan massal, dan cek secara mendalam alamat catch-all serta alamat di balik SEG. Semua endpoint memakai JSON dan autentikasi dengan API key. Anda hanya membayar pemeriksaan yang berhasil.',

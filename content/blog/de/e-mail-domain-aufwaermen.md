@@ -113,7 +113,7 @@ Bounces in dieser Phase treffen eine Domain, die erst zwei Wochen Historie hat. 
 
 Prüfen Sie die Liste deshalb vor der ersten Kampagne, nicht erst, wenn die Bounces kommen:
 
-1. Lassen Sie die Liste durch einen [E-Mail-Checker](/email-checker) oder eine vollständige [Bereinigung der E-Mail-Liste](/email-list-cleaning) (auf Englisch) laufen.
+1. Lassen Sie die Liste durch einen [E-Mail-Checker](/email-checker) oder eine vollständige [Bereinigung der E-Mail-Liste](/email-list-cleaning) laufen.
 2. Entfernen Sie ungültige Adressen, Wegwerfadressen und Rollenadressen.
 3. Halten Sie Catch-all-Adressen in einer eigenen, langsameren Gruppe. Eine Catch-all-Domain nimmt jede Adresse an. Eine einfache Prüfung kann Ihnen also nicht sagen, ob die Person existiert. Die [Catch-all-Verifizierung](/catch-all-verification) kann es.
 4. Senden Sie die erste Kampagne an den saubersten Teil der Liste und erweitern Sie dann.

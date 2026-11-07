@@ -132,7 +132,7 @@ export const copy: BulkVerifierCopy = {
       'Caricare un file è un modo. Puoi anche eseguire la verifica email massiva dalla tua app o dal tuo flusso di lavoro.',
     items: [
       {
-        title: 'API di verifica email (in inglese)',
+        title: 'API di verifica email',
         text: 'Invia gli indirizzi dalla tua app o dal tuo modulo di iscrizione e ricevi il risultato in JSON.',
       },
       {
@@ -152,7 +152,7 @@ export const copy: BulkVerifierCopy = {
         La verifica di una lista email dà un risultato a ogni indirizzo. La pulizia è quello che fai con quei
         risultati: rimuovi gli indirizzi non validi, usa e getta e duplicati, e tieni un file pulito. Entrambe partono
         dallo stesso caricamento. Leggi di più sulla{' '}
-        <InlineLink locale="it" href="/email-list-cleaning">pulizia della lista email</InlineLink> (in inglese).
+        <InlineLink locale="it" href="/email-list-cleaning">pulizia della lista email</InlineLink>.
       </>
     ),
     oneTitle: 'Devi controllare un solo indirizzo?',

@@ -15,7 +15,7 @@ export const API_DOCS_TR: ApiDocsStrings = {
   contactPath: '/tr/iletisim',
 
   overviewBanner:
-    'Genel bir tanıtım mı arıyorsunuz? [E-posta doğrulama API](/email-verification-api) sayfasına veya [kayıt formları için e-posta doğrulama API](/email-validation-api) sayfasına bakın (İngilizce).',
+    'Genel bir tanıtım mı arıyorsunuz? [E-posta doğrulama API](/tr/email-dogrulama-api) sayfasına veya [kayıt formları için e-posta doğrulama API](/tr/email-validasyon-api) sayfasına bakın.',
   hero: {
     h1: 'E-posta doğrulama API dokümantasyonu',
     lead: 'Tek tek e-posta adreslerini doğrulayın, toplu doğrulama işleri çalıştırın ve catch-all ile SEG korumalı adresleri derinlemesine kontrol edin. Tüm endpointler JSON kullanır ve API anahtarıyla kimlik doğrulama yapar. Yalnızca başarılı doğrulamalar için ödeme yaparsınız.',

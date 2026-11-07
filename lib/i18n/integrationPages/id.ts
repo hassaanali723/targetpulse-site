@@ -151,7 +151,7 @@ export const ID: IntegrationPagesContent = {
     appListIntro: '{count} aplikasi terhubung dengan Giggal.ai lewat Zapier. Setiap aplikasi punya panduan sendiri (dalam bahasa Inggris).',
     apiTitle: 'Alat Anda tidak ada di daftar?',
     apiText:
-      'Setiap alat yang bisa mengirim permintaan HTTP bisa mengecek alamat email dengan Giggal.ai. Pakai [API verifikasi email](/email-verification-api) (dalam bahasa Inggris) untuk pemeriksaan satuan dan massal, atau hubungkan lewat Zapier.',
+      'Setiap alat yang bisa mengirim permintaan HTTP bisa mengecek alamat email dengan Giggal.ai. Pakai [API verifikasi email](/id/api-verifikasi-email) untuk pemeriksaan satuan dan massal, atau hubungkan lewat Zapier.',
     apiCta: 'Dokumentasi API',
     apiHref: '/id/dokumentasi-api',
   },
@@ -391,7 +391,7 @@ export const ID: IntegrationPagesContent = {
     ],
     calloutTitle: 'Alamat catch-all dan alamat di balik gateway mendapat hasil valid atau tidak valid',
     calloutText:
-      'Banyak alat memberi hasil "tidak diketahui" untuk alamat di balik secure email gateway, dan "berisiko" untuk domain catch-all. Giggal.ai [mengecek alamat di balik gateway ini](/seg-email-verification) (dalam bahasa Inggris), seperti Proofpoint dan Mimecast. Giggal.ai juga menjalankan pemeriksaan tambahan pada domain catch-all. [Lihat cara kerja verifikasi catch-all](/id/verifikasi-catch-all).',
+      'Banyak alat memberi hasil "tidak diketahui" untuk alamat di balik secure email gateway, dan "berisiko" untuk domain catch-all. Giggal.ai [mengecek alamat di balik gateway ini](/id/verifikasi-seg), seperti Proofpoint dan Mimecast. Giggal.ai juga menjalankan pemeriksaan tambahan pada domain catch-all. [Lihat cara kerja verifikasi catch-all](/id/verifikasi-catch-all).',
     faqTitle: 'Pertanyaan umum tentang verifikasi email di n8n',
     faq: [
       {
@@ -493,7 +493,7 @@ export const ID: IntegrationPagesContent = {
     ],
     calloutTitle: 'Kenapa memakai pemeriksa catch-all dengan HubSpot',
     calloutText:
-      'Sekitar 30% dari daftar B2B berada di domain catch-all. Banyak alat memberi hasil "berisiko" untuk kontak ini, dan hasil itu tidak bisa Anda pakai. Dengan Giggal.ai, Anda bisa [cek email valid](/id/cek-email-valid), juga di domain catch-all, berkat pemeriksaan tambahan. Giggal.ai [juga mengecek alamat di balik secure email gateway](/seg-email-verification) (dalam bahasa Inggris), seperti Proofpoint dan Mimecast. Sebagian besar kontak ini kembali dengan hasil dapat dikirim atau tidak dapat dikirim. [Lihat cara kerja verifikasi catch-all](/id/verifikasi-catch-all).',
+      'Sekitar 30% dari daftar B2B berada di domain catch-all. Banyak alat memberi hasil "berisiko" untuk kontak ini, dan hasil itu tidak bisa Anda pakai. Dengan Giggal.ai, Anda bisa [cek email valid](/id/cek-email-valid), juga di domain catch-all, berkat pemeriksaan tambahan. Giggal.ai [juga mengecek alamat di balik secure email gateway](/id/verifikasi-seg), seperti Proofpoint dan Mimecast. Sebagian besar kontak ini kembali dengan hasil dapat dikirim atau tidak dapat dikirim. [Lihat cara kerja verifikasi catch-all](/id/verifikasi-catch-all).',
     propsTitle: 'Properti HubSpot yang diisi Giggal.ai pada setiap kontak',
     propsIntro:
       'Kelima properti dibuat saat pemeriksaan pertama Anda. Properti itu ada di grup properti bernama Giggal Email Verifier. Properti HubSpot Anda yang sudah ada tidak diubah.',
@@ -606,7 +606,7 @@ export const ID: IntegrationPagesContent = {
     why: [
       'Sekitar 30% dari daftar B2B berada di domain catch-all. Domain ini menerima email untuk alamat apa pun, entah kotak masuknya ada atau tidak. Banyak alat menandai alamat ini sebagai "berisiko". Artinya alat itu tidak bisa memastikannya.',
       'Di chat, label itu tidak membantu. Asisten mengulang apa yang ia terima, jadi sepertiga daftar Anda kembali dengan hasil yang tidak pasti. Giggal.ai mengecek alamat ini lebih mendalam dan memberi hasil valid atau tidak valid. Giggal.ai melakukan hal yang sama untuk kotak masuk di balik 15 secure email gateway (gateway keamanan email) yang kami kenali, termasuk Proofpoint, Mimecast, dan Barracuda.',
-      'Untuk contoh pertanyaan, baca [verifikasi email di Claude dan ChatGPT](/id/blog/verifikasi-email-di-claude-dan-chatgpt). Server MCP memakai mesin yang sama dengan [API verifikasi email](/email-verification-api) (dalam bahasa Inggris).',
+      'Untuk contoh pertanyaan, baca [verifikasi email di Claude dan ChatGPT](/id/blog/verifikasi-email-di-claude-dan-chatgpt). Server MCP memakai mesin yang sama dengan [API verifikasi email](/id/api-verifikasi-email).',
     ],
     faqTitle: 'Pertanyaan umum tentang server MCP untuk verifikasi email',
     faq: [

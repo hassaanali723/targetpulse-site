@@ -35,7 +35,7 @@ Jawaban Microsoft mirip. Dalam sebuah balasan di forum dukungan Microsoft, seora
 
 Masalah paling sering muncul saat login. Misalnya Anda mendaftar sebagai `Sarah@example.com` di ponsel karena keyboard otomatis membuat huruf pertama menjadi kapital. Lalu Anda login dengan mengetik `sarah@example.com`. Sistem yang dibuat secara sederhana akan menjawab bahwa akun tidak ditemukan. Pengguna tidak mengubah alamatnya, tetapi formulir login membandingkan teks dengan membedakan huruf besar secara ketat.
 
-Daftar email dan CRM punya versi masalah sendiri. Jika seseorang mendaftar sebagai `Bob@company.com` dan kemudian mengunduh panduan sebagai `bob@company.com`, banyak platform menghitungnya sebagai dua lead terpisah. Angka Anda jadi terlalu besar, dan orang menerima kampanye ganda. Hapus data ganda tanpa membedakan huruf besar sebelum Anda [memverifikasi atau mengirim](/email-list-cleaning) (dalam bahasa Inggris) ke daftar pemasaran.
+Daftar email dan CRM punya versi masalah sendiri. Jika seseorang mendaftar sebagai `Bob@company.com` dan kemudian mengunduh panduan sebagai `bob@company.com`, banyak platform menghitungnya sebagai dua lead terpisah. Angka Anda jadi terlalu besar, dan orang menerima kampanye ganda. Hapus data ganda tanpa membedakan huruf besar sebelum Anda [memverifikasi atau mengirim](/email-list-cleaning) ke daftar pemasaran.
 
 Lalu ada server perusahaan yang jarang ditemui, yang memang membedakan huruf besar secara ketat. Ini pengecualian yang disebut dalam balasan Microsoft tadi. Jika seorang kontak menulis alamatnya sebagai `M.MacDonald@specialtycorp.com` di kartu nama, pertahankan huruf besar itu saat Anda mengirim email kepadanya. Cara ini tidak merugikan sistem standar, dan menghindari masalah pengiriman pada sistem yang membedakan huruf besar.
 
@@ -62,7 +62,7 @@ String cleanEmail = email.toLowerCase(Locale.ROOT);
 
 `toLowerCase()` di JavaScript aman dari jebakan ini karena memakai pemetaan default Unicode, bukan pengaturan locale host. Hanya `toLocaleLowerCase()` yang bergantung pada locale.
 
-Untuk menangkap format yang rusak dan input yang salah sebelum masuk ke database, validasi alamat dengan [API validasi email](/email-validation-api) (dalam bahasa Inggris) saat pendaftaran. API ini menangkap salah ketik dan domain mati selagi orang itu masih ada di halaman.
+Untuk menangkap format yang rusak dan input yang salah sebelum masuk ke database, validasi alamat dengan [API validasi email](/email-validation-api) saat pendaftaran. API ini menangkap salah ketik dan domain mati selagi orang itu masih ada di halaman.
 
 ## Pertanyaan yang sering diajukan
 
@@ -81,4 +81,4 @@ Bandingkan dan buat index alamat email dengan huruf kecil untuk mencegah akun ga
 **Apakah huruf besar bisa membuat email bounce?**
 Sangat jarang. Hal ini hanya terjadi pada server yang tidak biasa, yang diatur untuk menganggap Admin@ dan admin@ sebagai mailbox terpisah. Jika alamat dengan huruf besar mengalami bounce, cari penyebab lain lebih dulu, seperti salah ketik atau mailbox yang sudah tidak ada. Kode di pesan bounce memberi tahu Anda penyebabnya, seperti dijelaskan di [hard bounce vs soft bounce](/blog/hard-bounce-vs-soft-bounce).
 
-Huruf besar tidak akan menghalangi email sampai, tetapi [salah ketik](/email-checker) bisa. Jika Anda membersihkan daftar kontak sebelum pengiriman berikutnya, periksa daftar itu dengan [Giggal.ai](/email-list-cleaning) (dalam bahasa Inggris) untuk menemukan mailbox mati dan domain rusak lebih dulu.
+Huruf besar tidak akan menghalangi email sampai, tetapi [salah ketik](/email-checker) bisa. Jika Anda membersihkan daftar kontak sebelum pengiriman berikutnya, periksa daftar itu dengan [Giggal.ai](/email-list-cleaning) untuk menemukan mailbox mati dan domain rusak lebih dulu.

@@ -391,4 +391,4 @@ Non. Un domaine ne peut publier qu'un seul enregistrement DMARC. La RFC 9989 ind
 **DMARC bloque-t-il les domaines qui imitent le vôtre ?**
 Non. DMARC ne protège que le domaine exact publié dans votre DNS. Il ne peut pas empêcher quelqu'un d'enregistrer un domaine qui ressemble au vôtre, par exemple avec deux lettres inversées ou une autre terminaison comme .net. Il ne peut pas non plus empêcher un faux nom d'affichage. Les domaines d'imitation demandent d'autres mesures, comme surveiller les nouveaux enregistrements de domaines qui copient votre nom.
 
-Un enregistrement DMARC prouve que vos emails viennent vraiment de vous. Il ne peut rien quand vous envoyez à des adresses qui n'existent plus. Passez votre liste dans [Giggal.ai](/email-list-cleaning) (en anglais) avant votre prochain envoi, pour retirer les adresses invalides et garder un taux de rebond bas.
+Un enregistrement DMARC prouve que vos emails viennent vraiment de vous. Il ne peut rien quand vous envoyez à des adresses qui n'existent plus. Passez votre liste dans [Giggal.ai](/email-list-cleaning) avant votre prochain envoi, pour retirer les adresses invalides et garder un taux de rebond bas.

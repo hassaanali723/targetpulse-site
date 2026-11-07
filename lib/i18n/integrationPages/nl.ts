@@ -151,7 +151,7 @@ export const NL: IntegrationPagesContent = {
     appListIntro: '{count} apps koppelen via Zapier met Giggal.ai. Elke app heeft een eigen handleiding (in het Engels).',
     apiTitle: 'Staat je tool er niet bij?',
     apiText:
-      'Elke tool die een HTTP-verzoek kan sturen, kan e-mailadressen controleren met Giggal.ai. Gebruik de [API voor e-mailverificatie](/email-verification-api) (in het Engels) voor losse controles en bulkcontroles, of koppel via Zapier.',
+      'Elke tool die een HTTP-verzoek kan sturen, kan e-mailadressen controleren met Giggal.ai. Gebruik de [API voor e-mailverificatie](/nl/e-mailverificatie-api) voor losse controles en bulkcontroles, of koppel via Zapier.',
     apiCta: 'API-documentatie',
     apiHref: '/nl/api-documentatie',
   },
@@ -391,7 +391,7 @@ export const NL: IntegrationPagesContent = {
     ],
     calloutTitle: 'Catch-all-adressen en adressen achter een gateway krijgen geldig of ongeldig',
     calloutText:
-      'Veel tools geven "onbekend" terug voor adressen achter een secure email gateway, en "riskant" voor catch-all-domeinen. Giggal.ai [controleert adressen achter deze gateways](/seg-email-verification) (in het Engels), zoals Proofpoint en Mimecast. Het doet ook extra controles op catch-all-domeinen. [Bekijk hoe catch-all-verificatie werkt](/nl/catch-all-verificatie).',
+      'Veel tools geven "onbekend" terug voor adressen achter een secure email gateway, en "riskant" voor catch-all-domeinen. Giggal.ai [controleert adressen achter deze gateways](/nl/seg-verificatie), zoals Proofpoint en Mimecast. Het doet ook extra controles op catch-all-domeinen. [Bekijk hoe catch-all-verificatie werkt](/nl/catch-all-verificatie).',
     faqTitle: 'Veelgestelde vragen over e-mailverificatie in n8n',
     faq: [
       {
@@ -493,7 +493,7 @@ export const NL: IntegrationPagesContent = {
     ],
     calloutTitle: 'Waarom je een catch-all-checker gebruikt met HubSpot',
     calloutText:
-      'Ongeveer 30% van een B2B-lijst staat op catch-all-domeinen. Veel tools geven deze contacten terug als "riskant", en daar kun je niets mee. Met Giggal.ai kun je een [mailadres controleren](/nl/mailadres-controleren), ook op een catch-all-domein, dankzij extra controles. Giggal.ai [controleert ook adressen achter een secure email gateway](/seg-email-verification) (in het Engels), zoals Proofpoint en Mimecast. De meeste van deze contacten komen terug als bezorgbaar of niet bezorgbaar. [Bekijk hoe catch-all-verificatie werkt](/nl/catch-all-verificatie).',
+      'Ongeveer 30% van een B2B-lijst staat op catch-all-domeinen. Veel tools geven deze contacten terug als "riskant", en daar kun je niets mee. Met Giggal.ai kun je een [mailadres controleren](/nl/mailadres-controleren), ook op een catch-all-domein, dankzij extra controles. Giggal.ai [controleert ook adressen achter een secure email gateway](/nl/seg-verificatie), zoals Proofpoint en Mimecast. De meeste van deze contacten komen terug als bezorgbaar of niet bezorgbaar. [Bekijk hoe catch-all-verificatie werkt](/nl/catch-all-verificatie).',
     propsTitle: 'De HubSpot-eigenschappen die Giggal.ai bij elk contact invult',
     propsIntro:
       'De vijf eigenschappen worden aangemaakt bij je eerste controle. Ze staan in een groep eigenschappen met de naam Giggal Email Verifier. Je bestaande HubSpot-eigenschappen worden niet gewijzigd.',
@@ -606,7 +606,7 @@ export const NL: IntegrationPagesContent = {
     why: [
       'Ongeveer 30% van een B2B-lijst staat op catch-all-domeinen. Deze domeinen accepteren mail voor elk adres, of de mailbox nu bestaat of niet. Veel tools markeren deze adressen als "riskant". Dat betekent dat ze het niet konden vaststellen.',
       'In een chat helpt dat label niet. De assistent herhaalt wat hij krijgt, dus een derde van je lijst komt terug met een onzeker resultaat. Giggal.ai controleert deze adressen grondiger en geeft geldig of ongeldig terug. Het doet hetzelfde voor mailboxen achter een lijst van 15 secure email gateways, waaronder Proofpoint, Mimecast en Barracuda.',
-      'Lees voor voorbeelden van vragen [e-mails verifiëren in Claude en ChatGPT](/nl/blog/e-mails-verifieren-in-claude-en-chatgpt). De MCP-server gebruikt dezelfde engine als de [API voor e-mailverificatie](/email-verification-api) (in het Engels).',
+      'Lees voor voorbeelden van vragen [e-mails verifiëren in Claude en ChatGPT](/nl/blog/e-mails-verifieren-in-claude-en-chatgpt). De MCP-server gebruikt dezelfde engine als de [API voor e-mailverificatie](/nl/e-mailverificatie-api).',
     ],
     faqTitle: 'Veelgestelde vragen over de MCP-server voor e-mailverificatie',
     faq: [

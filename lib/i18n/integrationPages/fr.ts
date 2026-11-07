@@ -151,7 +151,7 @@ export const FR: IntegrationPagesContent = {
     appListIntro: '{count} applications se connectent à Giggal.ai via Zapier. Chacune a son propre guide de configuration (en anglais).',
     apiTitle: 'Votre outil n’est pas dans la liste ?',
     apiText:
-      'Tout outil capable d’envoyer une requête HTTP peut vérifier des emails avec Giggal.ai. Utilisez l’[API de vérification d’email](/email-verification-api) (en anglais) pour les vérifications unitaires et en masse, ou connectez-vous via Zapier.',
+      'Tout outil capable d’envoyer une requête HTTP peut vérifier des emails avec Giggal.ai. Utilisez l’[API de vérification d’email](/fr/api-verification-email) pour les vérifications unitaires et en masse, ou connectez-vous via Zapier.',
     apiCta: 'Documentation de l’API',
     apiHref: '/fr/documentation-api',
   },
@@ -391,7 +391,7 @@ export const FR: IntegrationPagesContent = {
     ],
     calloutTitle: 'Les adresses catch-all et derrière une passerelle reçoivent un résultat valide ou invalide',
     calloutText:
-      'Beaucoup de vérificateurs renvoient « inconnue » pour les adresses derrière une passerelle de messagerie sécurisée, et « risquée » pour les domaines catch-all. Giggal.ai [vérifie les adresses derrière ces passerelles](/seg-email-verification) (en anglais), comme Proofpoint et Mimecast. Il fait aussi des contrôles supplémentaires sur les domaines catch-all. [Voir comment fonctionne la vérification catch-all](/fr/verification-catch-all).',
+      'Beaucoup de vérificateurs renvoient « inconnue » pour les adresses derrière une passerelle de messagerie sécurisée, et « risquée » pour les domaines catch-all. Giggal.ai [vérifie les adresses derrière ces passerelles](/fr/verification-seg), comme Proofpoint et Mimecast. Il fait aussi des contrôles supplémentaires sur les domaines catch-all. [Voir comment fonctionne la vérification catch-all](/fr/verification-catch-all).',
     faqTitle: 'FAQ sur la vérification d’adresse mail dans n8n',
     faq: [
       {
@@ -493,7 +493,7 @@ export const FR: IntegrationPagesContent = {
     ],
     calloutTitle: 'Pourquoi utiliser un vérificateur catch-all avec HubSpot',
     calloutText:
-      'Environ 30 % d’une liste B2B se trouve sur des domaines catch-all. Beaucoup de vérificateurs renvoient ces contacts comme « risqués », et vous ne pouvez rien en faire. Avec Giggal.ai, vous pouvez [vérifier une adresse mail](/fr/verifier-adresse-mail) même sur un domaine catch-all, grâce à des contrôles supplémentaires. Giggal.ai [vérifie aussi les adresses derrière une passerelle de messagerie sécurisée](/seg-email-verification) (en anglais), comme Proofpoint et Mimecast. La plupart de ces contacts reviennent délivrables ou non délivrables. [Voir comment fonctionne la vérification catch-all](/fr/verification-catch-all).',
+      'Environ 30 % d’une liste B2B se trouve sur des domaines catch-all. Beaucoup de vérificateurs renvoient ces contacts comme « risqués », et vous ne pouvez rien en faire. Avec Giggal.ai, vous pouvez [vérifier une adresse mail](/fr/verifier-adresse-mail) même sur un domaine catch-all, grâce à des contrôles supplémentaires. Giggal.ai [vérifie aussi les adresses derrière une passerelle de messagerie sécurisée](/fr/verification-seg), comme Proofpoint et Mimecast. La plupart de ces contacts reviennent délivrables ou non délivrables. [Voir comment fonctionne la vérification catch-all](/fr/verification-catch-all).',
     propsTitle: 'Les propriétés HubSpot que Giggal.ai écrit sur chaque contact',
     propsIntro:
       'Les cinq propriétés sont créées lors de votre première vérification. Elles se trouvent dans un groupe de propriétés nommé Giggal Email Verifier. Vos propriétés HubSpot existantes ne sont pas modifiées.',
@@ -606,7 +606,7 @@ export const FR: IntegrationPagesContent = {
     why: [
       'Environ 30 % d’une liste B2B se trouve sur des domaines catch-all. Ces domaines acceptent les emails pour n’importe quelle adresse, que la boîte mail existe ou non. Beaucoup de vérificateurs classent ces adresses comme « risquées », ce qui veut dire qu’ils n’ont pas pu conclure.',
       'Dans un chat, cette étiquette n’aide pas. L’assistant répète ce qu’on lui donne, donc un tiers de votre liste revient avec un résultat incertain. Giggal.ai contrôle ces adresses plus en détail et renvoie valide ou invalide. Il fait de même pour les boîtes mail derrière une liste de 15 passerelles de messagerie sécurisées, dont Proofpoint, Mimecast et Barracuda.',
-      'Pour des exemples de demandes, lisez [vérifier des emails dans Claude et ChatGPT](/fr/blog/verifier-emails-dans-claude-et-chatgpt). Le serveur MCP utilise le même moteur que l’[API de vérification d’email](/email-verification-api) (en anglais).',
+      'Pour des exemples de demandes, lisez [vérifier des emails dans Claude et ChatGPT](/fr/blog/verifier-emails-dans-claude-et-chatgpt). Le serveur MCP utilise le même moteur que l’[API de vérification d’email](/fr/api-verification-email).',
     ],
     faqTitle: 'FAQ sur le serveur MCP de vérification d’email',
     faq: [

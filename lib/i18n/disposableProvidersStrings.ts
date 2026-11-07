@@ -1199,8 +1199,8 @@ const ja: ProvidersStrings = {
   blockTitle: '使い捨てメールアドレスをブロックする方法',
   blockIntro: '使い捨てメールアドレスのドメインをすべて手作業でリストにすることはできません。数が多すぎ、毎日変わるからです。確実な方法は、入力されたアドレスを1件ずつチェックし、その結果に応じて対応することです。',
   blockItems: [
-    '**登録時：**[メールアドレスのバリデーションAPI](/email-validation-api)（英語）でアドレスをチェックし、使い捨てなら別のアドレスの入力を求めます。',
-    '**すでに持っているリスト：**[メールリストのクリーニング](/email-list-cleaning)（英語）にかけ、使い捨て、無効、役割アドレスを一度に取り除きます。',
+    '**登録時：**[メールアドレスのバリデーションAPI](/email-validation-api)でアドレスをチェックし、使い捨てなら別のアドレスの入力を求めます。',
+    '**すでに持っているリスト：**[メールリストのクリーニング](/email-list-cleaning)にかけ、使い捨て、無効、役割アドレスを一度に取り除きます。',
     '**1件ずつ：**無料の[捨てメアド判定ツール](/disposable-email-checker)を使います。',
   ],
   faqTitle: '捨てアド・捨てメアド：よくある質問',
@@ -1330,8 +1330,8 @@ const ko: ProvidersStrings = {
   blockTitle: '일회용 이메일 주소를 차단하는 방법',
   blockIntro: '모든 일회용 이메일 도메인을 직접 목록으로 관리할 수는 없습니다. 너무 많고 매일 바뀌기 때문입니다. 확실한 방법은 주소가 입력될 때마다 검사하고 그 결과에 따라 조치하는 것입니다.',
   blockItems: [
-    '**가입 단계:** [이메일 유효성 검사 API](/email-validation-api)(영어)로 주소를 검사하고, 일회용 주소라면 다른 주소를 요청합니다.',
-    '**이미 가진 리스트:** [이메일 리스트 정리](/email-list-cleaning)(영어)를 실행해 일회용 주소, 무효 주소, 역할 기반 주소를 한 번에 지웁니다.',
+    '**가입 단계:** [이메일 유효성 검사 API](/email-validation-api)로 주소를 검사하고, 일회용 주소라면 다른 주소를 요청합니다.',
+    '**이미 가진 리스트:** [이메일 리스트 정리](/email-list-cleaning)를 실행해 일회용 주소, 무효 주소, 역할 기반 주소를 한 번에 지웁니다.',
     '**주소 1개씩:** 무료 [일회용 이메일 판별 도구](/disposable-email-checker)를 씁니다.',
   ],
   faqTitle: '일회용 이메일·임시 이메일: 자주 묻는 질문',
@@ -1460,8 +1460,8 @@ const tr: ProvidersStrings = {
   blockTitle: 'Geçici mail adresleri nasıl engellenir',
   blockIntro: 'Her geçici alan adının listesini elle tutamazsınız. Sayıları çok fazladır ve her gün değişir. Güvenilir yol, her adresi girildiği anda kontrol etmek ve sonuca göre işlem yapmaktır.',
   blockItems: [
-    "**Kayıt sırasında:** adresi [e-posta doğrulama API'si](/email-validation-api) (İngilizce) ile kontrol edin ve adres geçiciyse başka bir adres isteyin.",
-    '**Elinizdeki bir listede:** geçici, geçersiz ve rol tabanlı adresleri tek seferde çıkarmak için [e-posta listesi temizleme](/email-list-cleaning) (İngilizce) hizmetini kullanın.',
+    "**Kayıt sırasında:** adresi [e-posta doğrulama API'si](/email-validation-api) ile kontrol edin ve adres geçiciyse başka bir adres isteyin.",
+    '**Elinizdeki bir listede:** geçici, geçersiz ve rol tabanlı adresleri tek seferde çıkarmak için [e-posta listesi temizleme](/email-list-cleaning) hizmetini kullanın.',
     '**Her seferinde bir adres:** ücretsiz [geçici mail kontrolü](/disposable-email-checker) aracını kullanın.',
   ],
   faqTitle: 'Tek kullanımlık mail siteleri: sık sorulan sorular',

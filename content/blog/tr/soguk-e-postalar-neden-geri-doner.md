@@ -62,7 +62,7 @@ Ardından orana bakın. Yeni bir listenin büyük bir kısmı ilk gönderimde ge
 
 ## Asıl belirleyici genellikle listenin kaynağıdır
 
-Bir listenin nereden geldiği, ne kadar geri döneceğini gösterir. Kendi CRM'inizden dışa aktardığınız ve size daha önce yanıt vermiş kişilerden oluşan bir liste çok az geri döner. Web'den toplanmış veya bir aracıdan satın alınmış bir liste çok daha fazla geri döner. Çünkü adresler bir kez toplanmış ve bir daha hiç kontrol edilmemiştir. O zamandan beri bir kısmı da kullanılmaz hâle gelmiştir. Bir listenin satın alınmış veya web'den toplanmış olduğunu biliyorsanız bir kısmının eskidiğini varsayın. Bunu bounce raporundan öğrenmek yerine ilk gönderimden önce listeyi bir [e-posta listesi temizleme aracından](/email-list-cleaning) (İngilizce) geçirin.
+Bir listenin nereden geldiği, ne kadar geri döneceğini gösterir. Kendi CRM'inizden dışa aktardığınız ve size daha önce yanıt vermiş kişilerden oluşan bir liste çok az geri döner. Web'den toplanmış veya bir aracıdan satın alınmış bir liste çok daha fazla geri döner. Çünkü adresler bir kez toplanmış ve bir daha hiç kontrol edilmemiştir. O zamandan beri bir kısmı da kullanılmaz hâle gelmiştir. Bir listenin satın alınmış veya web'den toplanmış olduğunu biliyorsanız bir kısmının eskidiğini varsayın. Bunu bounce raporundan öğrenmek yerine ilk gönderimden önce listeyi bir [e-posta listesi temizleme aracından](/email-list-cleaning) geçirin.
 
 ## Doğrulama nerede işe yarar, nerede yaramaz?
 

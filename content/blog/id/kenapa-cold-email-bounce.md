@@ -61,7 +61,7 @@ Lalu lihat perbandingannya. Jika banyak alamat di daftar baru terkena bounce pad
 
 ## Sumber daftar biasanya adalah penyebab sebenarnya
 
-Asal sebuah daftar menentukan seberapa banyak daftar itu akan bounce. Daftar yang Anda ekspor dari CRM sendiri, berisi orang yang pernah membalas Anda, sangat jarang bounce. Daftar hasil scraping dari web atau yang dibeli dari broker jauh lebih sering bounce. Alamatnya dikumpulkan sekali dan tidak pernah diperiksa lagi, dan sebagian sudah mati sejak saat itu. Jika Anda tahu sebuah daftar dibeli atau hasil scraping, anggap sebagian isinya sudah usang. Periksa daftar itu dengan [alat untuk membersihkan daftar email](/email-list-cleaning) (dalam bahasa Inggris) sebelum pengiriman pertama, daripada mengetahuinya dari laporan bounce.
+Asal sebuah daftar menentukan seberapa banyak daftar itu akan bounce. Daftar yang Anda ekspor dari CRM sendiri, berisi orang yang pernah membalas Anda, sangat jarang bounce. Daftar hasil scraping dari web atau yang dibeli dari broker jauh lebih sering bounce. Alamatnya dikumpulkan sekali dan tidak pernah diperiksa lagi, dan sebagian sudah mati sejak saat itu. Jika Anda tahu sebuah daftar dibeli atau hasil scraping, anggap sebagian isinya sudah usang. Periksa daftar itu dengan [alat untuk membersihkan daftar email](/email-list-cleaning) sebelum pengiriman pertama, daripada mengetahuinya dari laporan bounce.
 
 ## Kapan verifikasi membantu, dan kapan tidak
 

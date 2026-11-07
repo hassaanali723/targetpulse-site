@@ -98,8 +98,8 @@ export const copy: BulkVerifierCopy = {
       <>
         Giggal.ai sprawdza każdy adres catch-all i zwraca wynik prawidłowy albo nieprawidłowy za 1 kredyt, tak samo
         jak dla każdego innego adresu. Działa też na domenach chronionych przez{' '}
-        <InlineLink locale="pl" href="/seg-email-verification">bramki bezpieczeństwa, takie jak Proofpoint i Mimecast</InlineLink>{' '}
-        (po angielsku), gdzie inne narzędzia często zwracają wynik nieznany.
+        <InlineLink locale="pl" href="/seg-email-verification">bramki bezpieczeństwa, takie jak Proofpoint i Mimecast</InlineLink>
+        , gdzie inne narzędzia często zwracają wynik nieznany.
       </>,
     ],
   },
@@ -136,7 +136,7 @@ export const copy: BulkVerifierCopy = {
       'Wgranie pliku to pierwsza możliwość. Adresy e-mail możesz też weryfikować masowo z własnej aplikacji lub automatyzacji.',
     items: [
       {
-        title: 'API do weryfikacji e-mail (po angielsku)',
+        title: 'API do weryfikacji e-mail',
         text: 'Wysyłaj adresy z aplikacji lub formularza rejestracji i odbieraj wynik w formacie JSON.',
       },
       {
@@ -156,7 +156,7 @@ export const copy: BulkVerifierCopy = {
         Weryfikacja listy daje wynik dla każdego adresu. Czyszczenie listy mailingowej to to, co robisz z tymi
         wynikami. Usuwasz adresy nieprawidłowe, jednorazowe i zduplikowane, a zostaje lista prawidłowych adresów
         e-mail. Obie czynności zaczynają się od tego samego importu. Więcej o tym, jak działa{' '}
-        <InlineLink locale="pl" href="/email-list-cleaning">czyszczenie listy mailingowej</InlineLink> (po angielsku).
+        <InlineLink locale="pl" href="/email-list-cleaning">czyszczenie listy mailingowej</InlineLink>.
       </>
     ),
     oneTitle: 'Chcesz sprawdzić tylko jeden adres?',

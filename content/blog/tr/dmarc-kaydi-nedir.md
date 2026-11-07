@@ -391,4 +391,4 @@ Hayır. Bir alan adı yalnızca bir DMARC kaydı yayımlayabilir. RFC 9989'a gö
 **DMARC benzer görünen alan adlarını durdurur mu?**
 Hayır. DMARC yalnızca DNS'inizdeki alan adının tam olarak kendisini korur. Birinin benzer görünen bir alan adı kaydetmesini engelleyemez. Bu, örneğin iki harfi yer değiştirmiş veya .net gibi farklı bir uzantısı olan bir alan adı olabilir. DMARC sahte bir görünen adı da durduramaz. Benzer görünen alan adları için başka önlemler gerekir. Örneğin adınızı kopyalayan yeni alan adı kayıtlarını izleyebilirsiniz.
 
-DMARC kaydı, e-postanızın gerçekten sizden geldiğini kanıtlar. Ancak artık var olmayan adreslere gönderim yaptığınızda yardımcı olamaz. Geçersiz adresleri çıkarmak ve bounce oranınızı düşük tutmak için bir sonraki gönderiminizden önce listenizi [Giggal.ai](/email-list-cleaning) (İngilizce) ile kontrol edin.
+DMARC kaydı, e-postanızın gerçekten sizden geldiğini kanıtlar. Ancak artık var olmayan adreslere gönderim yaptığınızda yardımcı olamaz. Geçersiz adresleri çıkarmak ve bounce oranınızı düşük tutmak için bir sonraki gönderiminizden önce listenizi [Giggal.ai](/email-list-cleaning) ile kontrol edin.

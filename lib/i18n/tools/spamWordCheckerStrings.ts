@@ -167,7 +167,7 @@ const ja: SpamPageStrings = {
   ],
   cleanTitle: '問題なしの結果でもわからないこと',
   cleanPara:
-    '問題なしの結果は、文面そのものに警告の要素がないことを意味します。送信ドメインやリストについては何もわかりませんが、こちらのほうが重要です。SPF、DKIM、DMARCのないドメインからのメールや、存在しないアドレスが多いリストに送ったメールは、どれだけ丁寧に書いても迷惑メールフォルダに入ることがあります。1つ目は[SPF・DKIM・DMARCの解説](/blog/spf-dkim-dmarc-explained)で、2つ目は[メールリストのクリーニング](/email-list-cleaning)（英語）で説明しています。',
+    '問題なしの結果は、文面そのものに警告の要素がないことを意味します。送信ドメインやリストについては何もわかりませんが、こちらのほうが重要です。SPF、DKIM、DMARCのないドメインからのメールや、存在しないアドレスが多いリストに送ったメールは、どれだけ丁寧に書いても迷惑メールフォルダに入ることがあります。1つ目は[SPF・DKIM・DMARCの解説](/blog/spf-dkim-dmarc-explained)で、2つ目は[メールリストのクリーニング](/email-list-cleaning)で説明しています。',
   faqTitle: 'よくある質問',
   faqs: [
     {
@@ -241,7 +241,7 @@ const ko: SpamPageStrings = {
   ],
   cleanTitle: '깨끗한 결과가 알려 주지 않는 것',
   cleanPara:
-    '깨끗한 결과는 문구 자체에 경고 신호가 없다는 뜻입니다. 발송 도메인이나 리스트에 대해서는 아무것도 알려 주지 않는데, 이 둘이 더 중요합니다. SPF, DKIM, DMARC가 없는 도메인에서 보낸 메일이나, 존재하지 않는 주소가 많은 리스트로 보낸 메일은 아무리 신경 써서 써도 스팸함에 들어갈 수 있습니다. 첫 번째는 [SPF, DKIM, DMARC 설명](/blog/spf-dkim-dmarc-explained)에서, 두 번째는 [이메일 리스트 정리](/email-list-cleaning)(영어)에서 다룹니다.',
+    '깨끗한 결과는 문구 자체에 경고 신호가 없다는 뜻입니다. 발송 도메인이나 리스트에 대해서는 아무것도 알려 주지 않는데, 이 둘이 더 중요합니다. SPF, DKIM, DMARC가 없는 도메인에서 보낸 메일이나, 존재하지 않는 주소가 많은 리스트로 보낸 메일은 아무리 신경 써서 써도 스팸함에 들어갈 수 있습니다. 첫 번째는 [SPF, DKIM, DMARC 설명](/blog/spf-dkim-dmarc-explained)에서, 두 번째는 [이메일 리스트 정리](/email-list-cleaning)에서 다룹니다.',
   faqTitle: '자주 묻는 질문',
   faqs: [
     {
@@ -316,7 +316,7 @@ const tr: SpamPageStrings = {
   ],
   cleanTitle: 'Temiz bir sonucun size söylemedikleri',
   cleanPara:
-    'Temiz bir kontrol, metnin kendisinin uyarı işareti taşımadığı anlamına gelir. Gönderen alan adınız veya listeniz hakkında hiçbir şey söylemez, oysa bunlar daha önemlidir. SPF, DKIM ve DMARC olmayan bir alan adından gelen veya artık var olmayan adreslerle dolu bir listeye gönderilen e-posta, ne kadar özenle yazılmış olursa olsun spam klasörüne düşebilir. İlki için [SPF, DKIM ve DMARC nedir](/blog/spf-dkim-dmarc-explained) yazısına, ikincisi için [e-posta listesi temizleme](/email-list-cleaning) (İngilizce) sayfasına bakın.',
+    'Temiz bir kontrol, metnin kendisinin uyarı işareti taşımadığı anlamına gelir. Gönderen alan adınız veya listeniz hakkında hiçbir şey söylemez, oysa bunlar daha önemlidir. SPF, DKIM ve DMARC olmayan bir alan adından gelen veya artık var olmayan adreslerle dolu bir listeye gönderilen e-posta, ne kadar özenle yazılmış olursa olsun spam klasörüne düşebilir. İlki için [SPF, DKIM ve DMARC nedir](/blog/spf-dkim-dmarc-explained) yazısına, ikincisi için [e-posta listesi temizleme](/email-list-cleaning) sayfasına bakın.',
   faqTitle: 'Sıkça sorulan sorular',
   faqs: [
     {
@@ -393,7 +393,7 @@ const it: SpamPageStrings = {
   ],
   cleanTitle: 'Cosa non ti dice un risultato pulito',
   cleanPara:
-    'Un controllo pulito significa che il testo in sé non fa scattare segnali di allarme. Non dice nulla sul tuo dominio di invio o sulla tua lista, che contano di più. La posta da un dominio senza SPF, DKIM e DMARC, o inviata a una lista piena di indirizzi non più validi, può finire nello spam anche se è scritta con cura. [SPF, DKIM e DMARC: cosa sono](/blog/spf-dkim-dmarc-explained) spiega il primo punto, e la [pulizia delle liste email](/email-list-cleaning) (in inglese) spiega il secondo.',
+    'Un controllo pulito significa che il testo in sé non fa scattare segnali di allarme. Non dice nulla sul tuo dominio di invio o sulla tua lista, che contano di più. La posta da un dominio senza SPF, DKIM e DMARC, o inviata a una lista piena di indirizzi non più validi, può finire nello spam anche se è scritta con cura. [SPF, DKIM e DMARC: cosa sono](/blog/spf-dkim-dmarc-explained) spiega il primo punto, e la [pulizia delle liste email](/email-list-cleaning) spiega il secondo.',
   faqTitle: 'Domande frequenti',
   faqs: [
     {
@@ -470,7 +470,7 @@ const de: SpamPageStrings = {
   ],
   cleanTitle: 'Was ein sauberes Ergebnis nicht aussagt',
   cleanPara:
-    'Ein sauberes Ergebnis bedeutet, dass der Text selbst keine Warnsignale auslöst. Über Ihre Versanddomain oder Ihre Liste sagt es nichts, und beide sind wichtiger. Mails von einer Domain ohne SPF, DKIM und DMARC oder an eine Liste voller ungültiger Adressen können im Spam landen, egal wie sorgfältig sie geschrieben sind. [SPF, DKIM und DMARC einfach erklärt](/blog/spf-dkim-dmarc-explained) behandelt den ersten Punkt, [E-Mail-Listen bereinigen](/email-list-cleaning) (Englisch) den zweiten.',
+    'Ein sauberes Ergebnis bedeutet, dass der Text selbst keine Warnsignale auslöst. Über Ihre Versanddomain oder Ihre Liste sagt es nichts, und beide sind wichtiger. Mails von einer Domain ohne SPF, DKIM und DMARC oder an eine Liste voller ungültiger Adressen können im Spam landen, egal wie sorgfältig sie geschrieben sind. [SPF, DKIM und DMARC einfach erklärt](/blog/spf-dkim-dmarc-explained) behandelt den ersten Punkt, [E-Mail-Listen bereinigen](/email-list-cleaning) den zweiten.',
   faqTitle: 'Häufige Fragen zu Spam-Wörtern',
   faqs: [
     {
@@ -547,7 +547,7 @@ const es: SpamPageStrings = {
   ],
   cleanTitle: 'Lo que un resultado limpio no te dice',
   cleanPara:
-    'Una revisión limpia significa que el texto en sí no levanta sospechas. No dice nada de tu dominio de envío ni de tu lista, que importan más. El correo de un dominio sin SPF, DKIM y DMARC, o enviado a una lista llena de direcciones que ya no existen, puede acabar en spam por muy cuidado que esté. [SPF, DKIM y DMARC explicados](/blog/spf-dkim-dmarc-explained) trata lo primero, y la [limpieza de listas de correo](/email-list-cleaning) (en inglés) trata lo segundo.',
+    'Una revisión limpia significa que el texto en sí no levanta sospechas. No dice nada de tu dominio de envío ni de tu lista, que importan más. El correo de un dominio sin SPF, DKIM y DMARC, o enviado a una lista llena de direcciones que ya no existen, puede acabar en spam por muy cuidado que esté. [SPF, DKIM y DMARC explicados](/blog/spf-dkim-dmarc-explained) trata lo primero, y la [limpieza de listas de correo](/email-list-cleaning) trata lo segundo.',
   faqTitle: 'Preguntas frecuentes',
   faqs: [
     {
@@ -625,7 +625,7 @@ const ptBr: SpamPageStrings = {
   ],
   cleanTitle: 'O que um resultado limpo não diz',
   cleanPara:
-    'Uma verificação limpa significa que o texto em si não levanta alertas. Ela não diz nada sobre o seu domínio de envio ou a sua lista, que importam mais. E-mails de um domínio sem SPF, DKIM e DMARC, ou enviados para uma lista cheia de endereços que não existem mais, podem cair no spam por mais cuidadoso que seja o texto. [SPF, DKIM e DMARC](/blog/spf-dkim-dmarc-explained) trata do primeiro ponto, e a [limpeza de listas de e-mail](/email-list-cleaning) (em inglês) trata do segundo.',
+    'Uma verificação limpa significa que o texto em si não levanta alertas. Ela não diz nada sobre o seu domínio de envio ou a sua lista, que importam mais. E-mails de um domínio sem SPF, DKIM e DMARC, ou enviados para uma lista cheia de endereços que não existem mais, podem cair no spam por mais cuidadoso que seja o texto. [SPF, DKIM e DMARC](/blog/spf-dkim-dmarc-explained) trata do primeiro ponto, e a [limpeza de listas de e-mail](/email-list-cleaning) trata do segundo.',
   faqTitle: 'Perguntas frequentes',
   faqs: [
     {
@@ -700,7 +700,7 @@ const fr: SpamPageStrings = {
   ],
   cleanTitle: 'Ce qu’un résultat propre ne vous dit pas',
   cleanPara:
-    'Une vérification propre signifie que le texte lui-même ne déclenche pas d’alerte. Elle ne dit rien de votre domaine d’envoi ni de votre liste, qui comptent davantage. Un email envoyé depuis un domaine sans SPF, DKIM et DMARC, ou à une liste pleine d’adresses mortes, peut arriver dans les spams même s’il est bien écrit. [SPF, DKIM et DMARC expliqués](/blog/spf-dkim-dmarc-explained) traite le premier point, et [le nettoyage de liste email](/email-list-cleaning) (en anglais) traite le second.',
+    'Une vérification propre signifie que le texte lui-même ne déclenche pas d’alerte. Elle ne dit rien de votre domaine d’envoi ni de votre liste, qui comptent davantage. Un email envoyé depuis un domaine sans SPF, DKIM et DMARC, ou à une liste pleine d’adresses mortes, peut arriver dans les spams même s’il est bien écrit. [SPF, DKIM et DMARC expliqués](/blog/spf-dkim-dmarc-explained) traite le premier point, et [le nettoyage de liste email](/email-list-cleaning) traite le second.',
   faqTitle: 'Questions fréquentes',
   faqs: [
     {
@@ -774,7 +774,7 @@ const nl: SpamPageStrings = {
   ],
   cleanTitle: 'Wat een schoon resultaat je niet vertelt',
   cleanPara:
-    'Een schone controle betekent dat de tekst zelf geen waarschuwingen oplevert. Het zegt niets over je verzenddomein of je lijst, en die wegen zwaarder. Mail vanaf een domein zonder SPF, DKIM en DMARC, of naar een lijst vol dode adressen, kan in de spam belanden, hoe zorgvuldig de tekst ook is. [SPF, DKIM en DMARC uitgelegd](/blog/spf-dkim-dmarc-explained) behandelt het eerste, en [e-maillijst opschonen](/email-list-cleaning) (in het Engels) het tweede.',
+    'Een schone controle betekent dat de tekst zelf geen waarschuwingen oplevert. Het zegt niets over je verzenddomein of je lijst, en die wegen zwaarder. Mail vanaf een domein zonder SPF, DKIM en DMARC, of naar een lijst vol dode adressen, kan in de spam belanden, hoe zorgvuldig de tekst ook is. [SPF, DKIM en DMARC uitgelegd](/blog/spf-dkim-dmarc-explained) behandelt het eerste, en [e-maillijst opschonen](/email-list-cleaning) het tweede.',
   faqTitle: 'Veelgestelde vragen',
   faqs: [
     {
@@ -848,7 +848,7 @@ const pl: SpamPageStrings = {
   ],
   cleanTitle: 'Czego nie mówi ci czysty wynik',
   cleanPara:
-    'Czysty wynik oznacza, że sama treść nie budzi zastrzeżeń. Nie mówi nic o twojej domenie wysyłkowej ani o liście, a one mają większe znaczenie. Wiadomość z domeny bez SPF, DKIM i DMARC albo wysłana na listę pełną nieaktywnych adresów może trafić do spamu, nawet jeśli jest starannie napisana. Artykuł [SPF, DKIM i DMARC: wyjaśnienie](/blog/spf-dkim-dmarc-explained) omawia pierwszą kwestię, a [czyszczenie listy mailingowej](/email-list-cleaning) (po angielsku) drugą.',
+    'Czysty wynik oznacza, że sama treść nie budzi zastrzeżeń. Nie mówi nic o twojej domenie wysyłkowej ani o liście, a one mają większe znaczenie. Wiadomość z domeny bez SPF, DKIM i DMARC albo wysłana na listę pełną nieaktywnych adresów może trafić do spamu, nawet jeśli jest starannie napisana. Artykuł [SPF, DKIM i DMARC: wyjaśnienie](/blog/spf-dkim-dmarc-explained) omawia pierwszą kwestię, a [czyszczenie listy mailingowej](/email-list-cleaning) drugą.',
   faqTitle: 'Najczęściej zadawane pytania',
   faqs: [
     {
@@ -922,7 +922,7 @@ const id: SpamPageStrings = {
   ],
   cleanTitle: 'Yang tidak ditunjukkan oleh hasil yang bersih',
   cleanPara:
-    'Hasil yang bersih berarti isi email itu sendiri tidak memicu peringatan. Hasil ini tidak menunjukkan apa pun tentang domain pengirim atau daftar email Anda, padahal keduanya lebih berpengaruh. Email dari domain tanpa SPF, DKIM, dan DMARC, atau yang dikirim ke daftar penuh alamat mati, bisa masuk spam meskipun ditulis dengan hati-hati. [Apa itu SPF, DKIM, dan DMARC](/blog/spf-dkim-dmarc-explained) membahas hal pertama, dan [membersihkan daftar email](/email-list-cleaning) (dalam bahasa Inggris) membahas hal kedua.',
+    'Hasil yang bersih berarti isi email itu sendiri tidak memicu peringatan. Hasil ini tidak menunjukkan apa pun tentang domain pengirim atau daftar email Anda, padahal keduanya lebih berpengaruh. Email dari domain tanpa SPF, DKIM, dan DMARC, atau yang dikirim ke daftar penuh alamat mati, bisa masuk spam meskipun ditulis dengan hati-hati. [Apa itu SPF, DKIM, dan DMARC](/blog/spf-dkim-dmarc-explained) membahas hal pertama, dan [membersihkan daftar email](/email-list-cleaning) membahas hal kedua.',
   faqTitle: 'Pertanyaan umum',
   faqs: [
     {

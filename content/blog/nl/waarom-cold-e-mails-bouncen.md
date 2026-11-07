@@ -61,7 +61,7 @@ Kijk daarna naar de verhouding. Bouncete een groot deel van een nieuwe lijst bij
 
 ## De bron van de lijst is meestal de echte oorzaak
 
-Waar een lijst vandaan komt, voorspelt hoe hij gaat bouncen. Een lijst die je uit je eigen CRM hebt geëxporteerd, met mensen die je eerder hebben geantwoord, bouncet heel weinig. Een lijst die van het web is gescrapet of bij een broker is gekocht, bouncet veel meer. De adressen zijn één keer verzameld en daarna nooit meer gecontroleerd, en een deel is in de tussentijd verdwenen. Weet je dat een lijst gekocht of gescrapet is, ga er dan van uit dat een deel verouderd is. Haal hem door een [tool om je e-maillijst op te schonen](/email-list-cleaning) (in het Engels) voor de eerste verzending, in plaats van het uit het bouncerapport te leren.
+Waar een lijst vandaan komt, voorspelt hoe hij gaat bouncen. Een lijst die je uit je eigen CRM hebt geëxporteerd, met mensen die je eerder hebben geantwoord, bouncet heel weinig. Een lijst die van het web is gescrapet of bij een broker is gekocht, bouncet veel meer. De adressen zijn één keer verzameld en daarna nooit meer gecontroleerd, en een deel is in de tussentijd verdwenen. Weet je dat een lijst gekocht of gescrapet is, ga er dan van uit dat een deel verouderd is. Haal hem door een [tool om je e-maillijst op te schonen](/email-list-cleaning) voor de eerste verzending, in plaats van het uit het bouncerapport te leren.
 
 ## Waar verificatie helpt, en waar niet
 

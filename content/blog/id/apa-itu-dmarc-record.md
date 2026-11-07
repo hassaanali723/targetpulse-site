@@ -391,4 +391,4 @@ Tidak. Satu domain hanya boleh memublikasikan satu DMARC record. RFC 9989 menyat
 **Apakah DMARC menghentikan domain tiruan?**
 Tidak. DMARC hanya melindungi domain yang sama persis di DNS Anda. DMARC tidak bisa mencegah orang mendaftarkan domain yang mirip, misalnya domain dengan dua huruf yang ditukar atau akhiran berbeda seperti .net. DMARC juga tidak bisa mencegah nama tampilan palsu. Domain tiruan membutuhkan langkah lain, seperti memantau pendaftaran domain baru yang meniru nama Anda.
 
-DMARC record membuktikan bahwa email Anda benar-benar berasal dari Anda. Record ini tidak membantu saat Anda mengirim ke alamat yang sudah tidak ada. Periksa daftar Anda dengan [Giggal.ai](/email-list-cleaning) (dalam bahasa Inggris) sebelum pengiriman berikutnya untuk menghapus alamat tidak valid dan menjaga bounce rate tetap rendah.
+DMARC record membuktikan bahwa email Anda benar-benar berasal dari Anda. Record ini tidak membantu saat Anda mengirim ke alamat yang sudah tidak ada. Periksa daftar Anda dengan [Giggal.ai](/email-list-cleaning) sebelum pengiriman berikutnya untuk menghapus alamat tidak valid dan menjaga bounce rate tetap rendah.

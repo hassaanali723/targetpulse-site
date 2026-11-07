@@ -152,7 +152,7 @@ export const JA: IntegrationPagesContent = {
     appListIntro: '{count}個のアプリが、Zapier経由でGiggal.aiとつながります。各アプリに専用のガイドがあります（英語）。',
     apiTitle: 'お使いのツールが一覧にない場合',
     apiText:
-      'HTTPリクエストを送れるツールなら、どれでもGiggal.aiでメールアドレスをチェックできます。1件ずつのチェックや一括チェックには[メールアドレス検証API](/email-verification-api)（英語）を使うか、Zapier経由でつないでください。',
+      'HTTPリクエストを送れるツールなら、どれでもGiggal.aiでメールアドレスをチェックできます。1件ずつのチェックや一括チェックには[メールアドレス検証API](/ja/email-verification-api)を使うか、Zapier経由でつないでください。',
     apiCta: 'APIドキュメント',
     apiHref: '/ja/api-docs',
   },
@@ -392,7 +392,7 @@ export const JA: IntegrationPagesContent = {
     ],
     calloutTitle: 'キャッチオールドメインとゲートウェイの背後のアドレスにも有効か無効かの結果',
     calloutText:
-      '多くのツールは、セキュアメールゲートウェイ（SEG）の背後のアドレスには「不明」、キャッチオールドメインには「リスクあり」の結果を返します。Giggal.aiは、ProofpointやMimecastなどの[ゲートウェイの背後のアドレスもチェックします](/seg-email-verification)（英語）。キャッチオールドメインにも追加のチェックを行います。[キャッチオールドメインの検証のしくみを見る](/ja/catch-all-verification)。',
+      '多くのツールは、セキュアメールゲートウェイ（SEG）の背後のアドレスには「不明」、キャッチオールドメインには「リスクあり」の結果を返します。Giggal.aiは、ProofpointやMimecastなどの[ゲートウェイの背後のアドレスもチェックします](/ja/seg-email-verification)。キャッチオールドメインにも追加のチェックを行います。[キャッチオールドメインの検証のしくみを見る](/ja/catch-all-verification)。',
     faqTitle: 'n8nでのメールアドレス検証：よくある質問',
     faq: [
       {
@@ -494,7 +494,7 @@ export const JA: IntegrationPagesContent = {
     ],
     calloutTitle: 'HubSpotでキャッチオールドメインのチェックを使う理由',
     calloutText:
-      'B2Bのリストの約30%は、キャッチオールドメインのアドレスです。多くのツールは、こうした連絡先に「リスクあり」の結果を返し、その結果は使えません。Giggal.aiなら、追加のチェックによって、キャッチオールドメインでも[メールアドレスの存在確認](/ja/email-checker)を行えます。ProofpointやMimecastなどの[セキュアメールゲートウェイの背後のアドレスもチェックします](/seg-email-verification)（英語）。こうした連絡先のほとんどに、配信可能か配信不可かの結果が付きます。[キャッチオールドメインの検証のしくみを見る](/ja/catch-all-verification)。',
+      'B2Bのリストの約30%は、キャッチオールドメインのアドレスです。多くのツールは、こうした連絡先に「リスクあり」の結果を返し、その結果は使えません。Giggal.aiなら、追加のチェックによって、キャッチオールドメインでも[メールアドレスの存在確認](/ja/email-checker)を行えます。ProofpointやMimecastなどの[セキュアメールゲートウェイの背後のアドレスもチェックします](/ja/seg-email-verification)。こうした連絡先のほとんどに、配信可能か配信不可かの結果が付きます。[キャッチオールドメインの検証のしくみを見る](/ja/catch-all-verification)。',
     propsTitle: 'Giggal.aiが各連絡先に書き込むHubSpotのプロパティ',
     propsIntro:
       '5つのプロパティは、最初のチェックのときに作成されます。Giggal Email Verifierというプロパティグループに入ります。既存のHubSpotのプロパティは変更しません。',
@@ -607,7 +607,7 @@ export const JA: IntegrationPagesContent = {
     why: [
       'B2Bのリストの約30%は、キャッチオールドメインのアドレスです。こうしたドメインは、メールボックスが存在するかどうかに関係なく、どのアドレス宛てのメールも受け付けます。多くのツールは、こうしたアドレスを「リスクあり」とします。これは、そのツールが確認できなかったという意味です。',
       'チャットでは、このラベルは役に立ちません。アシスタントは受け取った結果をそのまま伝えるので、リストの3分の1が不確かな結果で返ってきます。Giggal.aiはこうしたアドレスをより詳しくチェックし、有効か無効かの結果を返します。Giggal.aiが識別する15のセキュアメールゲートウェイ（Proofpoint、Mimecast、Barracudaなど）の背後のメールボックスにも、同じことを行います。',
-      '質問の例は、[ClaudeとChatGPTでのメールアドレス検証](/ja/blog/verify-emails-inside-claude-and-chatgpt)をご覧ください。MCPサーバーは、[メールアドレス検証API](/email-verification-api)（英語）と同じエンジンを使っています。',
+      '質問の例は、[ClaudeとChatGPTでのメールアドレス検証](/ja/blog/verify-emails-inside-claude-and-chatgpt)をご覧ください。MCPサーバーは、[メールアドレス検証API](/ja/email-verification-api)と同じエンジンを使っています。',
     ],
     faqTitle: 'メールアドレス検証のMCPサーバー：よくある質問',
     faq: [

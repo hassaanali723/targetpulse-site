@@ -99,7 +99,7 @@ Twee categorieën kun je beter weghalen, ook als ze als geldig uit de verificati
 
 Rol-adressen zijn gedeelde adressen: info@, sales@, support@, admin@. Ze bestaan meestal, dus ze komen door de verificatie. Maar ze komen uit in een gedeelde inbox waar niemand persoonlijk eigenaar van is. De betrokkenheid is laag en het aantal klachten hoger dan gemiddeld. Voor cold outreach zijn ze bijna waardeloos.
 
-Wegwerp e-mailadressen komen van diensten voor tijdelijke mail en bestaan een paar minuten. Ze komen door de verificatie zolang ze bestaan en verdwijnen daarna. Als je [je e-maillijst opschoont](/email-list-cleaning) (in het Engels), markeert elke fatsoenlijke verificatietool beide categorieën los van geldig. Het is dus een filterstap, geen extra werk.
+Wegwerp e-mailadressen komen van diensten voor tijdelijke mail en bestaan een paar minuten. Ze komen door de verificatie zolang ze bestaan en verdwijnen daarna. Als je [je e-maillijst opschoont](/email-list-cleaning), markeert elke fatsoenlijke verificatietool beide categorieën los van geldig. Het is dus een filterstap, geen extra werk.
 
 ## Los de instroom op, niet alleen de lijst
 

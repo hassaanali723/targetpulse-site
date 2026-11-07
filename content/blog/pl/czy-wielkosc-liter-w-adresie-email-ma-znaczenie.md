@@ -35,7 +35,7 @@ Odpowiedź Microsoftu jest podobna. W odpowiedzi na forum pomocy Microsoftu jedn
 
 Najczęściej problem pojawia się przy logowaniu. Załóżmy, że rejestrujesz się na telefonie jako `Sarah@example.com`, bo klawiatura zamieniła pierwszą literę na wielką. Później logujesz się, wpisując `sarah@example.com`, a prosty system odpowiada, że nie ma takiego konta. Użytkownik nie zmienił adresu, ale formularz logowania porównał tekst z rozróżnieniem wielkości liter.
 
-Listy i systemy CRM mają własną wersję tego problemu. Gdy ktoś zapisuje się jako `Bob@company.com`, a później pobiera poradnik jako `bob@company.com`, wiele platform liczy dwa osobne leady. To zawyża statystyki i powoduje, że ludzie dostają podwójne kampanie. Usuń duplikaty bez względu na wielkość liter, zanim [zweryfikujesz listę lub wyślesz kampanię](/email-list-cleaning) (po angielsku).
+Listy i systemy CRM mają własną wersję tego problemu. Gdy ktoś zapisuje się jako `Bob@company.com`, a później pobiera poradnik jako `bob@company.com`, wiele platform liczy dwa osobne leady. To zawyża statystyki i powoduje, że ludzie dostają podwójne kampanie. Usuń duplikaty bez względu na wielkość liter, zanim [zweryfikujesz listę lub wyślesz kampanię](/email-list-cleaning).
 
 Zostaje rzadki serwer firmowy, który ściśle rozróżnia wielkość liter, czyli wyjątek wspomniany w odpowiedzi Microsoftu. Jeśli kontakt zapisał na wizytówce adres `M.MacDonald@specialtycorp.com`, zachowaj tę pisownię, gdy do niego piszesz. Standardowym systemom to nie zaszkodzi, a na systemach, które rozróżniają litery, pozwoli uniknąć problemów z dostarczeniem.
 
@@ -62,7 +62,7 @@ String cleanEmail = email.toLowerCase(Locale.ROOT);
 
 W JavaScripcie `toLowerCase()` nie ma tego problemu, bo korzysta z domyślnych mapowań Unicode, a nie z ustawień regionalnych systemu. Od ustawień regionalnych zależy tylko `toLocaleLowerCase()`.
 
-Aby wyłapać błędny format i złe wpisy, zanim trafią do bazy, sprawdzaj adresy przy rejestracji przez [API do walidacji e-mail](/email-validation-api) (po angielsku). Wykrywa ono literówki i nieistniejące domeny, gdy użytkownik jest jeszcze na stronie.
+Aby wyłapać błędny format i złe wpisy, zanim trafią do bazy, sprawdzaj adresy przy rejestracji przez [API do walidacji e-mail](/email-validation-api). Wykrywa ono literówki i nieistniejące domeny, gdy użytkownik jest jeszcze na stronie.
 
 ## Najczęściej zadawane pytania
 
@@ -81,4 +81,4 @@ Porównuj i indeksuj adresy e-mail małymi literami, aby uniknąć podwójnych k
 **Czy wielkie litery mogą spowodować odbicie e-maila?**
 Bardzo rzadko. Dzieje się tak tylko na nietypowym serwerze, który traktuje Admin@ i admin@ jako osobne skrzynki. Jeśli adres z wielkimi literami daje odbicie, najpierw szukaj innej przyczyny, na przykład literówki albo skrzynki, która już nie istnieje. Kod w komunikacie o odbiciu powie ci, o co chodzi, co wyjaśniamy w poradniku o [twardych i miękkich odbiciach](/blog/hard-bounce-vs-soft-bounce).
 
-Wielkie litery nie zatrzymają wiadomości, ale [literówka](/email-checker) już tak. Jeśli czyścisz listę kontaktów przed kolejną wysyłką, przepuść ją przez [Giggal.ai](/email-list-cleaning) (po angielsku), aby najpierw wyłapać nieistniejące skrzynki i niedziałające domeny.
+Wielkie litery nie zatrzymają wiadomości, ale [literówka](/email-checker) już tak. Jeśli czyścisz listę kontaktów przed kolejną wysyłką, przepuść ją przez [Giggal.ai](/email-list-cleaning), aby najpierw wyłapać nieistniejące skrzynki i niedziałające domeny.

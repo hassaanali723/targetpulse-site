@@ -76,9 +76,9 @@ export const footer = {
     links: [
       { name: 'Mail doğrulama', href: '/tr' },
       { name: 'Toplu mail doğrulama', href: '/tr/toplu-mail-dogrulama' },
-      { name: 'E-posta listesi temizleme (İngilizce)', href: '/email-list-cleaning' },
+      { name: 'E-posta listesi temizleme', href: '/tr/mail-listesi-temizleme' },
       { name: 'Entegrasyonlar', href: '/tr/entegrasyonlar' },
-      { name: "E-posta doğrulama API'si (İngilizce)", href: '/email-verification-api' },
+      { name: "E-posta doğrulama API'si", href: '/tr/email-dogrulama-api' },
       { name: 'Fiyatlar', href: '/tr/fiyatlar' },
     ],
   },

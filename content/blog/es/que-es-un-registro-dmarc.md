@@ -391,4 +391,4 @@ No. Un dominio solo puede publicar un registro DMARC. La RFC 9989 dice que, si u
 **¿DMARC detiene los dominios parecidos?**
 No. DMARC solo protege el dominio exacto que está en tu DNS. No puede impedir que alguien registre un dominio que se parece al tuyo, por ejemplo uno con dos letras cambiadas de sitio o con otra terminación como .net. Tampoco puede impedir un nombre visible falso. Los dominios parecidos necesitan otras medidas, como vigilar los registros de dominios nuevos que copian tu nombre.
 
-Un registro DMARC demuestra que tu correo viene de ti de verdad. No sirve cuando envías a direcciones que ya no existen. Pasa tu lista por [Giggal.ai](/email-list-cleaning) (en inglés) antes de tu próximo envío para eliminar las direcciones no válidas y mantener baja tu tasa de rebote.
+Un registro DMARC demuestra que tu correo viene de ti de verdad. No sirve cuando envías a direcciones que ya no existen. Pasa tu lista por [Giggal.ai](/email-list-cleaning) antes de tu próximo envío para eliminar las direcciones no válidas y mantener baja tu tasa de rebote.

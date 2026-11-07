@@ -154,7 +154,7 @@ export const KO: IntegrationPagesContent = {
     appListIntro: '앱 {count}개가 Zapier를 통해 Giggal.ai와 연결됩니다. 앱마다 별도의 설정 가이드가 있습니다(영어).',
     apiTitle: '쓰는 도구가 목록에 없습니까?',
     apiText:
-      'HTTP 요청을 보낼 수 있는 도구라면 어떤 도구든 Giggal.ai로 이메일을 검증할 수 있습니다. 단일 검사와 대량 검사에는 [이메일 검증 API](/email-verification-api)(영어)를 쓰거나, Zapier를 통해 연결하십시오.',
+      'HTTP 요청을 보낼 수 있는 도구라면 어떤 도구든 Giggal.ai로 이메일을 검증할 수 있습니다. 단일 검사와 대량 검사에는 [이메일 검증 API](/ko/email-verification-api)를 쓰거나, Zapier를 통해 연결하십시오.',
     apiCta: 'API 문서',
     apiHref: '/ko/api-docs',
   },
@@ -394,7 +394,7 @@ export const KO: IntegrationPagesContent = {
     ],
     calloutTitle: '캐치올 도메인 주소와 게이트웨이 뒤의 주소에도 유효 또는 무효 결과',
     calloutText:
-      '많은 검증 도구는 보안 이메일 게이트웨이(SEG) 뒤의 주소에 “알 수 없음”을, 캐치올 도메인에 “위험”을 돌려줍니다. Giggal.ai는 Proofpoint, Mimecast 같은 [게이트웨이 뒤의 주소도 검증](/seg-email-verification)(영어)하며, 캐치올 도메인에도 추가 검사를 실행합니다. [캐치올 검증 방식 보기](/ko/catch-all-verification).',
+      '많은 검증 도구는 보안 이메일 게이트웨이(SEG) 뒤의 주소에 “알 수 없음”을, 캐치올 도메인에 “위험”을 돌려줍니다. Giggal.ai는 Proofpoint, Mimecast 같은 [게이트웨이 뒤의 주소도 검증](/ko/seg-email-verification)하며, 캐치올 도메인에도 추가 검사를 실행합니다. [캐치올 검증 방식 보기](/ko/catch-all-verification).',
     faqTitle: 'n8n 이메일 검증: 자주 묻는 질문',
     faq: [
       {
@@ -496,7 +496,7 @@ export const KO: IntegrationPagesContent = {
     ],
     calloutTitle: 'HubSpot과 함께 캐치올 이메일 검증 도구를 써야 하는 이유',
     calloutText:
-      'B2B 리스트의 약 30%는 캐치올 도메인에 있습니다. 많은 검증 도구는 이런 연락처를 위험으로 돌려주므로, 그 결과로는 아무 조치도 할 수 없습니다. Giggal.ai는 캐치올 도메인에 추가 검사를 실행해 [이메일 유효성 검사](/ko/email-checker)를 하고, Proofpoint, Mimecast 같은 [보안 이메일 게이트웨이 뒤의 주소도 검증](/seg-email-verification)(영어)합니다. 이런 연락처 대부분은 전송 가능 또는 전송 불가 결과를 받습니다. [캐치올 검증 방식 보기](/ko/catch-all-verification).',
+      'B2B 리스트의 약 30%는 캐치올 도메인에 있습니다. 많은 검증 도구는 이런 연락처를 위험으로 돌려주므로, 그 결과로는 아무 조치도 할 수 없습니다. Giggal.ai는 캐치올 도메인에 추가 검사를 실행해 [이메일 유효성 검사](/ko/email-checker)를 하고, Proofpoint, Mimecast 같은 [보안 이메일 게이트웨이 뒤의 주소도 검증](/ko/seg-email-verification)합니다. 이런 연락처 대부분은 전송 가능 또는 전송 불가 결과를 받습니다. [캐치올 검증 방식 보기](/ko/catch-all-verification).',
     propsTitle: 'Giggal.ai가 각 연락처에 기록하는 HubSpot 속성',
     propsIntro:
       '속성 5개는 처음 검증을 실행할 때 만들어집니다. Giggal Email Verifier라는 속성 그룹에 들어갑니다. 기존 HubSpot 속성은 바뀌지 않습니다.',
@@ -609,7 +609,7 @@ export const KO: IntegrationPagesContent = {
     why: [
       'B2B 리스트의 약 30%는 캐치올 도메인에 있습니다. 이런 도메인은 메일함이 있든 없든 모든 주소로 오는 메일을 받습니다. 많은 검증 도구는 이런 주소를 위험으로 표시하는데, 이는 확인하지 못했다는 뜻입니다.',
       '채팅에서는 이 표시가 도움이 되지 않습니다. 어시스턴트는 받은 결과를 그대로 전하므로, 리스트의 3분의 1이 불확실한 결과로 돌아옵니다. Giggal.ai는 이런 주소를 더 검사하고 유효 또는 무효 결과를 돌려줍니다. Proofpoint, Mimecast, Barracuda를 포함해 이름이 확인된 15개 보안 이메일 게이트웨이 뒤의 메일함에도 똑같이 합니다.',
-      '요청 예시는 [Claude와 ChatGPT 안에서 이메일 검증하기](/ko/blog/verify-emails-inside-claude-and-chatgpt)를 참고하십시오. MCP 서버는 [이메일 검증 API](/email-verification-api)(영어)와 같은 엔진을 씁니다.',
+      '요청 예시는 [Claude와 ChatGPT 안에서 이메일 검증하기](/ko/blog/verify-emails-inside-claude-and-chatgpt)를 참고하십시오. MCP 서버는 [이메일 검증 API](/ko/email-verification-api)와 같은 엔진을 씁니다.',
     ],
     faqTitle: '이메일 검증 MCP: 자주 묻는 질문',
     faq: [

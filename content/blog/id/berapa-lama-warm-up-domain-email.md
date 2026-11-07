@@ -113,7 +113,7 @@ Bounce pada tahap itu mengenai domain yang baru punya riwayat dua minggu. Riwaya
 
 Jadi cek daftar Anda sebelum kampanye pertama, bukan setelah bounce datang:
 
-1. Jalankan daftar Anda di [email checker](/email-checker) atau lakukan [pembersihan daftar email](/email-list-cleaning) (dalam bahasa Inggris) secara lengkap.
+1. Jalankan daftar Anda di [email checker](/email-checker) atau lakukan [pembersihan daftar email](/email-list-cleaning) secara lengkap.
 2. Hapus alamat yang tidak valid, email sekali pakai, dan alamat email berbasis peran.
 3. Simpan alamat catch-all di kelompok terpisah yang dikirimi lebih lambat. Domain catch-all menerima setiap alamat, jadi pemeriksaan dasar tidak bisa memberi tahu apakah orangnya ada. [Verifikasi catch-all](/catch-all-verification) bisa.
 4. Kirim kampanye pertama ke bagian daftar yang paling bersih, lalu perluas.

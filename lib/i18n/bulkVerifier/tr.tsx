@@ -96,7 +96,7 @@ export const copy: BulkVerifierCopy = {
         Giggal.ai her catch-all adresi kontrol eder ve diğer adreslerle aynı şekilde 1 kredi karşılığında geçerli ya da
         geçersiz sonucu verir. Diğer araçların çoğu zaman bilinmiyor sonucu verdiği{' '}
         <InlineLink locale="tr" href="/seg-email-verification">Proofpoint ve Mimecast gibi güvenli e-posta ağ geçitlerinin arkasındaki alan adlarında</InlineLink>{' '}
-        (İngilizce) da çalışır.
+        da çalışır.
       </>,
     ],
   },
@@ -133,7 +133,7 @@ export const copy: BulkVerifierCopy = {
       'Dosya yüklemek yollardan biridir. Toplu e-posta doğrulamayı kendi uygulamanızdan veya iş akışınızdan da çalıştırabilirsiniz.',
     items: [
       {
-        title: "E-posta doğrulama API'si (İngilizce)",
+        title: "E-posta doğrulama API'si",
         text: 'Adresleri uygulamanızdan veya kayıt formunuzdan gönderin ve sonucu JSON olarak alın.',
       },
       {
@@ -153,7 +153,7 @@ export const copy: BulkVerifierCopy = {
         E-posta listesi doğrulama her adrese bir sonuç verir. Temizleme ise bu sonuçlarla yaptığınız iştir: geçersiz,
         geçici ve yinelenen adresleri silersiniz ve temiz bir dosya elde edersiniz. İkisi de aynı yüklemeyle başlar.{' '}
         <InlineLink locale="tr" href="/email-list-cleaning">E-posta listesi temizleme</InlineLink> hakkında daha
-        fazlasını okuyun (İngilizce).
+        fazlasını okuyun.
       </>
     ),
     oneTitle: 'Yalnızca tek bir adresi mi kontrol etmek istiyorsunuz?',

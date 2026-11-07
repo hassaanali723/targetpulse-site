@@ -183,7 +183,7 @@ export const copy: EmailCheckerCopy = {
     api: (
       <>
         Per controllare gli indirizzi nella tua app o nel tuo modulo di iscrizione, usa l&apos;
-        <InlineLink href="/email-verification-api">API di verifica email</InlineLink>. Esegue gli stessi controlli e
+        <InlineLink href="/it/api-verifica-email">API di verifica email</InlineLink>. Esegue gli stessi controlli e
         restituisce il risultato in JSON.
       </>
     ),

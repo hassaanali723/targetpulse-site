@@ -95,8 +95,8 @@ export const copy: BulkVerifierCopy = {
       <>
         Giggal.ai mengecek setiap alamat catch-all dan memberi hasil valid atau tidak valid, seharga 1 kredit, sama
         seperti alamat lain. Ini juga berfungsi pada domain di balik{' '}
-        <InlineLink locale="id" href="/seg-email-verification">gateway keamanan seperti Proofpoint dan Mimecast</InlineLink>{' '}
-        (dalam bahasa Inggris), tempat alat lain sering memberi hasil tidak diketahui.
+        <InlineLink locale="id" href="/seg-email-verification">gateway keamanan seperti Proofpoint dan Mimecast</InlineLink>
+        , tempat alat lain sering memberi hasil tidak diketahui.
       </>,
     ],
   },
@@ -133,7 +133,7 @@ export const copy: BulkVerifierCopy = {
       'Mengunggah file adalah salah satu pilihan. Anda juga bisa mengecek alamat email secara massal dari aplikasi atau alur kerja Anda sendiri.',
     items: [
       {
-        title: 'API verifikasi email (dalam bahasa Inggris)',
+        title: 'API verifikasi email',
         text: 'Kirim alamat dari aplikasi atau formulir pendaftaran Anda dan terima hasilnya dalam JSON.',
       },
       {
@@ -153,7 +153,7 @@ export const copy: BulkVerifierCopy = {
         Saat Anda mengecek daftar email, setiap alamat mendapat hasil. Membersihkan adalah apa yang Anda lakukan dengan
         hasil itu: Anda menghapus alamat tidak valid, email sekali pakai, dan alamat ganda, lalu tersisa daftar alamat
         email yang valid. Keduanya dimulai dengan unggahan yang sama. Baca lebih lanjut tentang{' '}
-        <InlineLink locale="id" href="/email-list-cleaning">membersihkan daftar email</InlineLink> (dalam bahasa Inggris).
+        <InlineLink locale="id" href="/email-list-cleaning">membersihkan daftar email</InlineLink>.
       </>
     ),
     oneTitle: 'Hanya ingin mengecek satu alamat?',

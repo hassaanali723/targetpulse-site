@@ -74,9 +74,9 @@ export const footer = {
     links: [
       { name: 'Usługa weryfikacji e-mail', href: '/pl' },
       { name: 'Masowa weryfikacja e-mail', href: '/pl/masowa-weryfikacja-email' },
-      { name: 'Czyszczenie listy mailingowej (po angielsku)', href: '/email-list-cleaning' },
+      { name: 'Czyszczenie listy mailingowej', href: '/pl/czyszczenie-listy-email' },
       { name: 'Integracje', href: '/pl/integracje' },
-      { name: 'API do weryfikacji e-mail (po angielsku)', href: '/email-verification-api' },
+      { name: 'API do weryfikacji e-mail', href: '/pl/api-weryfikacji-email' },
       { name: 'Cennik', href: '/pl/cennik' },
     ],
   },

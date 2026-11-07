@@ -113,7 +113,7 @@ Odbicia na tym etapie uderzają w domenę, która ma tylko dwa tygodnie historii
 
 Sprawdź więc listę przed pierwszą kampanią, a nie dopiero po odbiciach:
 
-1. Przepuść listę przez [weryfikator e-mail](/email-checker) albo pełne [czyszczenie listy mailingowej](/email-list-cleaning) (po angielsku).
+1. Przepuść listę przez [weryfikator e-mail](/email-checker) albo pełne [czyszczenie listy mailingowej](/email-list-cleaning).
 2. Usuń adresy nieprawidłowe, jednorazowe i funkcyjne.
 3. Adresy catch-all trzymaj w osobnej, wolniejszej grupie. Domena catch-all przyjmuje każdy adres, więc podstawowa kontrola nie powie ci, czy dana osoba istnieje. [Weryfikacja catch-all](/catch-all-verification) to sprawdza.
 4. Wyślij pierwszą kampanię do najczystszej części listy, a potem rozszerzaj grupę odbiorców.

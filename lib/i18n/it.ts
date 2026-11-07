@@ -71,9 +71,9 @@ export const footer = {
     links: [
       { name: 'Servizio di verifica email', href: '/it' },
       { name: 'Verifica email in blocco', href: '/it/verifica-email-in-blocco' },
-      { name: 'Pulizia liste email (in inglese)', href: '/email-list-cleaning' },
+      { name: 'Pulizia liste email', href: '/it/pulizia-lista-email' },
       { name: 'Integrazioni', href: '/it/integrazioni' },
-      { name: 'API di verifica email (in inglese)', href: '/email-verification-api' },
+      { name: 'API di verifica email', href: '/it/api-verifica-email' },
       { name: 'Prezzi', href: '/it/prezzi' },
     ],
   },

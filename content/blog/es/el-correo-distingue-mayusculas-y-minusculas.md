@@ -35,7 +35,7 @@ La respuesta de Microsoft es parecida. En una respuesta en el foro de soporte de
 
 El problema suele aparecer en el inicio de sesión. Imagina que te registras como `Sarah@example.com` en un móvil porque el teclado puso la primera letra en mayúscula. Más tarde inicias sesión escribiendo `sarah@example.com`. Un sistema mal diseñado dice que no encuentra la cuenta. El usuario no cambió su dirección. El formulario de inicio de sesión comparó el texto distinguiendo mayúsculas de forma estricta.
 
-Las listas y los CRM tienen su propia versión del problema. Cuando alguien se registra como `Bob@company.com` y más tarde descarga una guía como `bob@company.com`, muchas plataformas cuentan dos leads distintos. Eso infla tus métricas y envía campañas duplicadas a la misma persona. Elimina los duplicados ignorando las mayúsculas antes de [verificar o enviar](/email-list-cleaning) (en inglés) a una lista de marketing.
+Las listas y los CRM tienen su propia versión del problema. Cuando alguien se registra como `Bob@company.com` y más tarde descarga una guía como `bob@company.com`, muchas plataformas cuentan dos leads distintos. Eso infla tus métricas y envía campañas duplicadas a la misma persona. Elimina los duplicados ignorando las mayúsculas antes de [verificar o enviar](/email-list-cleaning) a una lista de marketing.
 
 Luego está el caso raro del servidor de empresa que sí trata las mayúsculas de forma estricta, la excepción que menciona la respuesta de Microsoft. Si un contacto escribe su dirección como `M.MacDonald@specialtycorp.com` en una tarjeta de visita, mantén esas mayúsculas cuando le escribas. No afecta a los sistemas estándar y evita problemas de entrega en los sistemas que sí las distinguen.
 
@@ -62,7 +62,7 @@ String cleanEmail = email.toLowerCase(Locale.ROOT);
 
 El `toLowerCase()` de JavaScript no tiene este problema, porque usa las correspondencias por defecto de Unicode y no la configuración regional del equipo. Solo `toLocaleLowerCase()` depende de la configuración regional.
 
-Para detectar formatos rotos y entradas incorrectas antes de que lleguen a tu base de datos, valida las direcciones con una [API de validación de correo](/email-validation-api) (en inglés) en el registro. Detecta erratas y dominios muertos mientras la persona sigue en la página.
+Para detectar formatos rotos y entradas incorrectas antes de que lleguen a tu base de datos, valida las direcciones con una [API de validación de correo](/email-validation-api) en el registro. Detecta erratas y dominios muertos mientras la persona sigue en la página.
 
 ## Preguntas frecuentes
 
@@ -81,4 +81,4 @@ Debes comparar e indexar las direcciones en minúsculas para evitar cuentas dupl
 **¿Las mayúsculas pueden hacer que un correo rebote?**
 Muy rara vez. Solo pasa en un servidor poco habitual configurado para tratar Admin@ y admin@ como buzones distintos. Si una dirección con mayúsculas rebota, busca primero otra causa, como una errata o un buzón que ya no existe. El código del mensaje de rebote te dice cuál es, como se explica en [rebote duro vs rebote suave](/blog/hard-bounce-vs-soft-bounce).
 
-Las mayúsculas no impiden que un correo llegue, pero [una errata](/email-checker) sí. Si vas a limpiar una lista de contactos antes del próximo envío, pásala por [Giggal.ai](/email-list-cleaning) (en inglés) para detectar antes los buzones muertos y los dominios rotos.
+Las mayúsculas no impiden que un correo llegue, pero [una errata](/email-checker) sí. Si vas a limpiar una lista de contactos antes del próximo envío, pásala por [Giggal.ai](/email-list-cleaning) para detectar antes los buzones muertos y los dominios rotos.

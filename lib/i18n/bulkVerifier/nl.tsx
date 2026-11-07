@@ -94,8 +94,8 @@ export const copy: BulkVerifierCopy = {
       <>
         Giggal.ai controleert elk catch-all-adres en geeft geldig of ongeldig terug, voor 1 credit, net als elk ander
         adres. Het werkt ook op domeinen achter{' '}
-        <InlineLink locale="nl" href="/seg-email-verification">beveiligingsgateways zoals Proofpoint en Mimecast</InlineLink>{' '}
-        (in het Engels), waar andere tools vaak onbekend teruggeven.
+        <InlineLink locale="nl" href="/seg-email-verification">beveiligingsgateways zoals Proofpoint en Mimecast</InlineLink>
+        , waar andere tools vaak onbekend teruggeven.
       </>,
     ],
   },
@@ -132,7 +132,7 @@ export const copy: BulkVerifierCopy = {
       'Een bestand uploaden is één optie. Je kunt e-mailadressen ook in bulk controleren vanuit je eigen app of workflow.',
     items: [
       {
-        title: 'API voor e-mailverificatie (in het Engels)',
+        title: 'API voor e-mailverificatie',
         text: 'Stuur adressen vanuit je app of je aanmeldformulier en ontvang het resultaat als JSON.',
       },
       {
@@ -152,7 +152,7 @@ export const copy: BulkVerifierCopy = {
         Bij het controleren van een e-maillijst krijgt elk adres een resultaat. Opschonen is wat je met die
         resultaten doet: je verwijdert ongeldige adressen, wegwerpadressen en dubbele adressen, en je houdt een lijst
         met geldige e-mailadressen over. Beide beginnen met dezelfde upload. Lees meer over{' '}
-        <InlineLink locale="nl" href="/email-list-cleaning">een e-maillijst opschonen</InlineLink> (in het Engels).
+        <InlineLink locale="nl" href="/email-list-cleaning">een e-maillijst opschonen</InlineLink>.
       </>
     ),
     oneTitle: 'Wil je maar één adres controleren?',

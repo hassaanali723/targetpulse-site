@@ -99,7 +99,7 @@ Silmek iki seçenekten daha güvenli olanıdır ve çoğu kişi bunu yapar. Bu y
 
 Rol tabanlı adresler ortak kullanılan takma adlardır: info@, sales@, support@, admin@. Genellikle var oldukları için doğrulamadan geçerler. Ancak kimsenin kişisel olarak sahiplenmediği ortak bir gelen kutusuna düşerler. Etkileşim düşüktür ve şikâyet oranları ortalamanın üstündedir. Soğuk e-posta gönderimi için neredeyse hiçbir değerleri yoktur.
 
-Geçici e-posta (tek kullanımlık e-posta) adresleri, geçici e-posta servislerinden gelir ve yalnızca birkaç dakika var olur. Var oldukları sürece doğrulamadan geçerler, sonra kaybolurlar. [E-posta listenizi temizlediğinizde](/email-list-cleaning) (İngilizce), iyi bir doğrulama aracı bu iki kategoriyi geçerli adreslerden ayrı olarak işaretler. Yani bu ek bir iş değil, bir filtreleme adımıdır.
+Geçici e-posta (tek kullanımlık e-posta) adresleri, geçici e-posta servislerinden gelir ve yalnızca birkaç dakika var olur. Var oldukları sürece doğrulamadan geçerler, sonra kaybolurlar. [E-posta listenizi temizlediğinizde](/email-list-cleaning), iyi bir doğrulama aracı bu iki kategoriyi geçerli adreslerden ayrı olarak işaretler. Yani bu ek bir iş değil, bir filtreleme adımıdır.
 
 ## Yalnızca listeyi değil, adreslerin girişini de düzeltin
 

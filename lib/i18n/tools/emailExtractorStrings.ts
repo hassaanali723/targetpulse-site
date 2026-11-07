@@ -181,7 +181,7 @@ const de: ExtractorPageStrings = {
     },
     {
       q: 'Prüft das Tool, ob die E-Mail-Adressen gültig sind?',
-      a: 'Nein. Es findet nur Adressen, die in Ihrem Text stehen. Ob jedes Postfach existiert, erfahren Sie mit der [E-Mail-Listenbereinigung](/email-list-cleaning). Eine einzelne Adresse testen Sie mit dem [E-Mail-Prüfer](/email-checker).',
+      a: 'Nein. Es findet nur Adressen, die in Ihrem Text stehen. Ob jedes Postfach existiert, erfahren Sie mit der [E-Mail-Listenbereinigung](/de/e-mail-liste-bereinigen). Eine einzelne Adresse testen Sie mit dem [E-Mail-Prüfer](/de/email-adresse-pruefen).',
     },
     {
       q: 'Wie viel Text kann ich einfügen?',
@@ -257,7 +257,7 @@ const ptBr: ExtractorPageStrings = {
     },
     {
       q: 'A ferramenta verifica se os e-mails são válidos?',
-      a: 'Não. Ela só encontra os endereços que aparecem no seu texto. Para saber se cada caixa existe, verifique a lista com a [limpeza de lista de e-mails](/email-list-cleaning). Para um só endereço, use o [verificador de e-mail](/email-checker).',
+      a: 'Não. Ela só encontra os endereços que aparecem no seu texto. Para saber se cada caixa existe, verifique a lista com a [limpeza de lista de e-mails](/pt-br/limpeza-de-lista-de-email). Para um só endereço, use o [verificador de e-mail](/pt-br/verificacao-de-email).',
     },
     {
       q: 'Quanto texto posso colar?',
@@ -332,7 +332,7 @@ const fr: ExtractorPageStrings = {
     },
     {
       q: 'L’extracteur vérifie-t-il la validité des adresses e-mail ?',
-      a: 'Non. Il extrait uniquement les adresses présentes. Pour vérifier l’existence réelle des boîtes, utilisez notre [vérificateur d’e-mail](/email-checker) ou notre [service de nettoyage de liste](/email-list-cleaning).',
+      a: 'Non. Il extrait uniquement les adresses présentes. Pour vérifier l’existence réelle des boîtes, utilisez notre [vérificateur d’e-mail](/fr/verifier-adresse-mail) ou notre [service de nettoyage de liste](/fr/nettoyage-liste-email).',
     },
     {
       q: 'Quelle quantité de texte puis-je traiter ?',
@@ -406,7 +406,7 @@ const es: ExtractorPageStrings = {
     },
     {
       q: '¿Verifica la herramienta si los correos existen?',
-      a: 'No, únicamente extrae los correos presentes en el texto. Para comprobar si una bandeja existe, use la [limpieza de listas](/email-list-cleaning) o el [validador de correo](/email-checker).',
+      a: 'No, únicamente extrae los correos presentes en el texto. Para comprobar si una bandeja existe, use la [limpieza de listas](/es/limpieza-de-listas-de-correo) o el [validador de correo](/es/validar-correo).',
     },
     {
       q: '¿Existe algún límite de tamaño de texto?',
@@ -480,7 +480,7 @@ const it: ExtractorPageStrings = {
     },
     {
       q: 'L’estrattore verifica l’esistenza delle caselle email?',
-      a: 'No, estrae solo gli indirizzi presenti. Per verificare l’effettiva esistenza, usa la [pulizia liste email](/email-list-cleaning) o il [verificatore email](/email-checker).',
+      a: 'No, estrae solo gli indirizzi presenti. Per verificare l’effettiva esistenza, usa la [pulizia liste email](/it/pulizia-lista-email) o il [verificatore email](/it/verifica-email).',
     },
     {
       q: 'Qual è il limite di testo che posso incollare?',
@@ -554,7 +554,7 @@ const nl: ExtractorPageStrings = {
     },
     {
       q: 'Controleert de tool of de e-mailadressen echt bestaan?',
-      a: 'Nee, de tool haalt alleen de adressen uit de tekst. Gebruik onze [e-maillijst opschoning](/email-list-cleaning) of [e-mail checker](/email-checker) om te verifiëren.',
+      a: 'Nee, de tool haalt alleen de adressen uit de tekst. Gebruik onze [e-maillijst opschoning](/nl/e-maillijst-opschonen) of [e-mail checker](/nl/mailadres-controleren) om te verifiëren.',
     },
     {
       q: 'Hoeveel tekst kan ik tegelijk verwerken?',
@@ -628,7 +628,7 @@ const pl: ExtractorPageStrings = {
     },
     {
       q: 'Czy narzędzie sprawdza poprawność i istnienie adresów?',
-      a: 'Nie, jedynie wyodrębnia adresy z tekstu. Do sprawdzenia istnienia skrzynek służy [czyszczenie listy email](/email-list-cleaning) oraz [weryfikator email](/email-checker).',
+      a: 'Nie, jedynie wyodrębnia adresy z tekstu. Do sprawdzenia istnienia skrzynek służy [czyszczenie listy email](/pl/czyszczenie-listy-email) oraz [weryfikator email](/pl/weryfikator-email).',
     },
     {
       q: 'Ile tekstu mogę wkleić jednocześnie?',
@@ -702,7 +702,7 @@ const id: ExtractorPageStrings = {
     },
     {
       q: 'Apakah alat ini memeriksa apakah email tersebut aktif?',
-      a: 'Tidak, alat hanya mengekstrak teks. Untuk memverifikasi keaktifan akun, gunakan layanan [pembersih email massal](/email-list-cleaning) atau [pemeriksa email](/email-checker).',
+      a: 'Tidak, alat hanya mengekstrak teks. Untuk memverifikasi keaktifan akun, gunakan layanan [pembersih email massal](/id/membersihkan-daftar-email) atau [pemeriksa email](/id/cek-email-valid).',
     },
     {
       q: 'Berapa banyak teks yang bisa diproses sekaligus?',
@@ -756,7 +756,7 @@ const ja: ExtractorPageStrings = {
     'テキスト形式のファイルはそのまま使えます。対応形式は .txt、.csv、.tsv、.log、.md、.json、.xml、.html、.eml、.vcf です。Excelファイル（.xlsx と .xls）はセルごとに読み取ります。複数のファイルを一度にドロップすると、結果は1つのリストにまとまります。PDFとWordのファイルにはまだ対応していません。ファイルを開いてテキストをコピーし、ボックスに貼り付けてください。',
   beforeTitle: 'リストの相手にメールを送る前に',
   beforeParas: [
-    'アドレスが見つかっても、それはどこかに書かれていたことを示すだけです。メールボックスが今も存在するかどうかはわかりません。古い文書から取り出したリストには、すでに退職や異動をした人のアドレスが多く含まれます。こうしたアドレスに送ると[ハードバウンス](/blog/hard-bounce-vs-soft-bounce)が発生し、送信者レピュテーションが下がります。最初に送信する前に[メールリストのクリーニング](/email-list-cleaning)（英語）を行うか、[無料のメールアドレスチェッカー](/email-checker)で1件ずつ確認してください。',
+    'アドレスが見つかっても、それはどこかに書かれていたことを示すだけです。メールボックスが今も存在するかどうかはわかりません。古い文書から取り出したリストには、すでに退職や異動をした人のアドレスが多く含まれます。こうしたアドレスに送ると[ハードバウンス](/blog/hard-bounce-vs-soft-bounce)が発生し、送信者レピュテーションが下がります。最初に送信する前に[メールリストのクリーニング](/email-list-cleaning)を行うか、[無料のメールアドレスチェッカー](/email-checker)で1件ずつ確認してください。',
     '次に、送信する相手について考えます。メールの受信に同意した人、または連絡する別の正当な理由がある人にだけ送ってください。GDPRやCAN-SPAMなどのプライバシーや迷惑メールに関する規制は、どのツールでリストを作ったかに関係なく、リストの使い方に適用されます。',
   ],
   faqTitle: 'よくある質問',
@@ -775,7 +775,7 @@ const ja: ExtractorPageStrings = {
     },
     {
       q: '抽出したメールアドレスが有効かどうかも確認できますか？',
-      a: 'いいえ。このツールは、テキストに含まれるアドレスを見つけるだけです。各メールボックスが存在するかを調べるには、[メールリストのクリーニング](/email-list-cleaning)（英語）でリストを検証するか、[メールアドレスチェッカー](/ja/email-checker)で1件ずつ確認してください。',
+      a: 'いいえ。このツールは、テキストに含まれるアドレスを見つけるだけです。各メールボックスが存在するかを調べるには、[メールリストのクリーニング](/ja/email-list-cleaning)でリストを検証するか、[メールアドレスチェッカー](/ja/email-checker)で1件ずつ確認してください。',
     },
     {
       q: 'どのくらいの量のテキストを貼り付けられますか？',
@@ -829,7 +829,7 @@ const ko: ExtractorPageStrings = {
     '일반 텍스트 형식은 그대로 쓸 수 있습니다. 지원 형식은 .txt, .csv, .tsv, .log, .md, .json, .xml, .html, .eml, .vcf입니다. Excel 파일(.xlsx, .xls)은 셀 단위로 읽습니다. 여러 파일을 한 번에 끌어다 놓으면 결과가 하나의 목록으로 합쳐집니다. PDF와 Word 파일은 아직 지원하지 않습니다. 파일을 열어 텍스트를 복사한 다음 입력란에 붙여 넣으십시오.',
   beforeTitle: '목록의 주소로 메일을 보내기 전에',
   beforeParas: [
-    '주소를 찾았다는 것은 그 주소가 어딘가에 적혀 있었다는 사실만 보여 줍니다. 메일함이 지금도 존재하는지는 알 수 없습니다. 오래된 문서에서 뽑은 목록에는 이미 회사를 떠나거나 자리를 옮긴 사람의 주소가 많습니다. 이런 주소로 메일을 보내면 [하드 바운스](/blog/hard-bounce-vs-soft-bounce)가 생기고, 발신자 평판이 떨어집니다. 처음 보내기 전에 [이메일 리스트 정리](/email-list-cleaning)(영어)로 목록을 검사하거나, [무료 이메일 유효성 검사 도구](/email-checker)로 주소 하나를 확인하십시오.',
+    '주소를 찾았다는 것은 그 주소가 어딘가에 적혀 있었다는 사실만 보여 줍니다. 메일함이 지금도 존재하는지는 알 수 없습니다. 오래된 문서에서 뽑은 목록에는 이미 회사를 떠나거나 자리를 옮긴 사람의 주소가 많습니다. 이런 주소로 메일을 보내면 [하드 바운스](/blog/hard-bounce-vs-soft-bounce)가 생기고, 발신자 평판이 떨어집니다. 처음 보내기 전에 [이메일 리스트 정리](/email-list-cleaning)로 목록을 검사하거나, [무료 이메일 유효성 검사 도구](/email-checker)로 주소 하나를 확인하십시오.',
     '그다음에는 받는 사람을 생각해야 합니다. 수신에 동의한 사람이나, 연락할 다른 적법한 근거가 있는 사람에게만 메일을 보내십시오. GDPR, CAN-SPAM 같은 개인정보 보호 및 스팸 방지 규정은 목록을 어떤 도구로 만들었는지와 관계없이 목록을 사용하는 방식에 적용됩니다.',
   ],
   faqTitle: '자주 묻는 질문',
@@ -848,7 +848,7 @@ const ko: ExtractorPageStrings = {
     },
     {
       q: '추출한 이메일 주소가 유효한지도 검사합니까?',
-      a: '아니요. 텍스트에 있는 주소를 찾기만 합니다. 각 메일함이 존재하는지 알아보려면 [이메일 리스트 정리](/email-list-cleaning)(영어)로 목록을 검증하거나 [이메일 유효성 검사 도구](/ko/email-checker)로 주소 하나를 확인하십시오.',
+      a: '아니요. 텍스트에 있는 주소를 찾기만 합니다. 각 메일함이 존재하는지 알아보려면 [이메일 리스트 정리](/ko/email-list-cleaning)로 목록을 검증하거나 [이메일 유효성 검사 도구](/ko/email-checker)로 주소 하나를 확인하십시오.',
     },
     {
       q: '텍스트는 얼마나 붙여 넣을 수 있습니까?',
@@ -902,7 +902,7 @@ const tr: ExtractorPageStrings = {
     'Düz metin biçimleri olduğu gibi çalışır: .txt, .csv, .tsv, .log, .md, .json, .xml, .html, .eml ve .vcf. Excel dosyaları (.xlsx ve .xls) hücre hücre okunur. Birkaç dosyayı aynı anda bırakabilirsiniz. Sonuçlar tek bir listede birleştirilir. PDF ve Word dosyaları henüz desteklenmiyor. Bu dosyaları açın, metni kopyalayın ve kutuya yapıştırın.',
   beforeTitle: 'Listedeki kişilere e-posta göndermeden önce',
   beforeParas: [
-    'Bir adresi bulmak, yalnızca o adresin bir yere yazılmış olduğunu kanıtlar. Posta kutusunun hâlâ var olduğunu göstermez. Eski belgelerden çıkarılan listelerde başka işe geçmiş birçok kişi bulunur. Bu adreslere göndermek [hard bounce](/blog/hard-bounce-vs-soft-bounce) üretir ve gönderen itibarınıza zarar verir. İlk gönderimden önce listeyi [e-posta listesi temizleme](/email-list-cleaning) (İngilizce) sayfasındaki araçla kontrol edin veya tek bir adresi [ücretsiz mail adresi doğrulama aracıyla](/email-checker) test edin.',
+    'Bir adresi bulmak, yalnızca o adresin bir yere yazılmış olduğunu kanıtlar. Posta kutusunun hâlâ var olduğunu göstermez. Eski belgelerden çıkarılan listelerde başka işe geçmiş birçok kişi bulunur. Bu adreslere göndermek [hard bounce](/blog/hard-bounce-vs-soft-bounce) üretir ve gönderen itibarınıza zarar verir. İlk gönderimden önce listeyi [e-posta listesi temizleme](/email-list-cleaning) sayfasındaki araçla kontrol edin veya tek bir adresi [ücretsiz mail adresi doğrulama aracıyla](/email-checker) test edin.',
     'Ardından kime yazdığınızı düşünün. Sizden haber almayı kabul etmiş kişilere veya onlarla iletişim kurmak için başka bir yasal gerekçeniz olan kişilere e-posta gönderin. GDPR ve CAN-SPAM gibi gizlilik ve spam karşıtı kurallar, listeyi hangi araçla oluşturduğunuzdan bağımsız olarak listeyi nasıl kullandığınız için geçerlidir.',
   ],
   faqTitle: 'Sıkça sorulan sorular',
@@ -921,7 +921,7 @@ const tr: ExtractorPageStrings = {
     },
     {
       q: 'E-postaların geçerli olup olmadığını kontrol ediyor mu?',
-      a: 'Hayır. Yalnızca metninizde geçen adresleri bulur. Her posta kutusunun var olup olmadığını öğrenmek için listeyi [e-posta listesi temizleme](/email-list-cleaning) (İngilizce) aracıyla doğrulayın veya tek bir adresi [mail adresi doğrulama aracıyla](/tr/mail-adresi-dogrulama) test edin.',
+      a: 'Hayır. Yalnızca metninizde geçen adresleri bulur. Her posta kutusunun var olup olmadığını öğrenmek için listeyi [e-posta listesi temizleme](/tr/mail-listesi-temizleme) aracıyla doğrulayın veya tek bir adresi [mail adresi doğrulama aracıyla](/tr/mail-adresi-dogrulama) test edin.',
     },
     {
       q: 'Ne kadar metin yapıştırabilirim?',

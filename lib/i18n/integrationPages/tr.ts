@@ -153,7 +153,7 @@ export const TR: IntegrationPagesContent = {
     appListIntro: '{count} uygulama Zapier üzerinden Giggal.ai ile bağlanır. Her birinin kendi kurulum kılavuzu vardır (İngilizce).',
     apiTitle: 'Aracınız listede yok mu?',
     apiText:
-      'HTTP isteği gönderebilen her araç Giggal.ai ile e-posta adresi doğrulayabilir. Tek adres ve toplu kontroller için [e-posta doğrulama API](/email-verification-api) sayfasına bakın (İngilizce) ya da Zapier üzerinden bağlanın.',
+      'HTTP isteği gönderebilen her araç Giggal.ai ile e-posta adresi doğrulayabilir. Tek adres ve toplu kontroller için [e-posta doğrulama API](/tr/email-dogrulama-api) sayfasına bakın ya da Zapier üzerinden bağlanın.',
     apiCta: 'API dokümantasyonu',
     apiHref: '/tr/api-dokumantasyonu',
   },
@@ -393,7 +393,7 @@ export const TR: IntegrationPagesContent = {
     ],
     calloutTitle: 'Catch-all ve ağ geçidi arkasındaki adresler geçerli ya da geçersiz sonucu alır',
     calloutText:
-      'Birçok doğrulama aracı, güvenli e-posta ağ geçitlerinin arkasındaki adresler için bilinmiyor, catch-all alan adları için riskli sonucu verir. Giggal.ai, Proofpoint ve Mimecast gibi [ağ geçitlerinin arkasındaki adresleri doğrular](/seg-email-verification) (İngilizce) ve catch-all alan adlarında ek kontroller çalıştırır. [Catch-all doğrulamanın nasıl çalıştığını görün](/tr/catch-all-dogrulama).',
+      'Birçok doğrulama aracı, güvenli e-posta ağ geçitlerinin arkasındaki adresler için bilinmiyor, catch-all alan adları için riskli sonucu verir. Giggal.ai, Proofpoint ve Mimecast gibi [ağ geçitlerinin arkasındaki adresleri doğrular](/tr/seg-dogrulama) ve catch-all alan adlarında ek kontroller çalıştırır. [Catch-all doğrulamanın nasıl çalıştığını görün](/tr/catch-all-dogrulama).',
     faqTitle: 'n8n ile e-posta doğrulama: sık sorulan sorular',
     faq: [
       {
@@ -495,7 +495,7 @@ export const TR: IntegrationPagesContent = {
     ],
     calloutTitle: 'HubSpot ile neden catch-all e-posta doğrulama kullanmalısınız',
     calloutText:
-      "Bir B2B listesinin yaklaşık %30'u catch-all alan adlarındadır. Birçok doğrulama aracı bu kişiler için riskli sonucu verir ve bu sonuçla bir işlem yapamazsınız. Giggal.ai bir [mail adresi doğrulama](/tr/mail-adresi-dogrulama) aracıdır. Catch-all alan adlarında ek kontroller çalıştırır ve Proofpoint ile Mimecast gibi [güvenli e-posta ağ geçitlerinin arkasındaki adresleri doğrular](/seg-email-verification) (İngilizce). Bu kişilerin çoğu teslim edilebilir ya da teslim edilemez sonucuyla döner. [Catch-all doğrulamanın nasıl çalıştığını görün](/tr/catch-all-dogrulama).",
+      "Bir B2B listesinin yaklaşık %30'u catch-all alan adlarındadır. Birçok doğrulama aracı bu kişiler için riskli sonucu verir ve bu sonuçla bir işlem yapamazsınız. Giggal.ai bir [mail adresi doğrulama](/tr/mail-adresi-dogrulama) aracıdır. Catch-all alan adlarında ek kontroller çalıştırır ve Proofpoint ile Mimecast gibi [güvenli e-posta ağ geçitlerinin arkasındaki adresleri doğrular](/tr/seg-dogrulama). Bu kişilerin çoğu teslim edilebilir ya da teslim edilemez sonucuyla döner. [Catch-all doğrulamanın nasıl çalıştığını görün](/tr/catch-all-dogrulama).",
     propsTitle: 'Giggal.ai her kişiye hangi HubSpot özelliklerini yazar',
     propsIntro:
       'Beş özellik, ilk doğrulamayı çalıştırdığınızda oluşturulur. Bu özellikler Giggal Email Verifier adlı bir özellik grubunda yer alır. Mevcut HubSpot özellikleriniz değiştirilmez.',
@@ -608,7 +608,7 @@ export const TR: IntegrationPagesContent = {
     why: [
       "Bir B2B listesinin yaklaşık %30'u catch-all alan adlarındadır. Bu alan adları, posta kutusu var olsun ya da olmasın her adrese gelen e-postayı kabul eder. Birçok doğrulama aracı bu adresleri riskli olarak etiketler. Bu, aracın adresi doğrulayamadığı anlamına gelir.",
       "Sohbette bu etiket işe yaramaz. Asistan kendisine verileni tekrarlar, bu yüzden listenizin üçte biri belirsiz sonuçla döner. Giggal.ai bu adresleri daha ayrıntılı kontrol eder ve geçerli ya da geçersiz sonucunu verir. Proofpoint, Mimecast ve Barracuda dahil adı bilinen 15 güvenli e-posta ağ geçidinin (SEG) arkasındaki posta kutuları için de aynısını yapar.",
-      "Örnek istemler için [Claude ve ChatGPT içinde e-posta doğrulama](/tr/blog/claude-ve-chatgpt-icinde-e-posta-dogrulama) yazısını okuyun. MCP sunucusu, [e-posta doğrulama API'si](/email-verification-api) (İngilizce) ile aynı altyapıyı kullanır.",
+      "Örnek istemler için [Claude ve ChatGPT içinde e-posta doğrulama](/tr/blog/claude-ve-chatgpt-icinde-e-posta-dogrulama) yazısını okuyun. MCP sunucusu, [e-posta doğrulama API'si](/tr/email-dogrulama-api) ile aynı altyapıyı kullanır.",
     ],
     faqTitle: 'E-posta doğrulama MCP sunucusu: sık sorulan sorular',
     faq: [

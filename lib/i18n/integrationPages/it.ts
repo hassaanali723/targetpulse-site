@@ -134,7 +134,7 @@ export const IT: IntegrationPagesContent = {
       '{count} app si collegano a Giggal.ai tramite Zapier. Ognuna ha la sua guida di configurazione.',
     apiTitle: 'Il tuo strumento non è nella lista?',
     apiText:
-      "Qualsiasi strumento che invia una richiesta HTTP può verificare email con Giggal.ai. Usa l'[API di verifica email](/email-verification-api) per controlli singoli e in blocco, oppure collegati tramite Zapier.",
+      "Qualsiasi strumento che invia una richiesta HTTP può verificare email con Giggal.ai. Usa l'[API di verifica email](/it/api-verifica-email) per controlli singoli e in blocco, oppure collegati tramite Zapier.",
     apiCta: 'Documentazione API',
     apiHref: '/it/documentazione-api',
   },
@@ -605,7 +605,7 @@ export const IT: IntegrationPagesContent = {
     why: [
       "Circa il 30% di una lista B2B è su domini catch-all. Questi domini accettano posta per qualsiasi indirizzo, che la casella esista o no. Molti strumenti di verifica segnano quegli indirizzi come a rischio, cioè non sono riusciti a capirlo.",
       "In una chat quell'etichetta non aiuta. L'assistente ripete quello che riceve, quindi un terzo della tua lista torna come incerto. Giggal.ai controlla ancora quegli indirizzi e restituisce valida o non valida. Fa lo stesso per le caselle dietro 15 secure email gateway noti, tra cui Proofpoint, Mimecast e Barracuda.",
-      "Per esempi di richieste, leggi [come verificare le email in Claude e ChatGPT](/it/blog/verificare-email-in-claude-e-chatgpt). Il server MCP usa lo stesso motore dell'[API di verifica email](/email-verification-api).",
+      "Per esempi di richieste, leggi [come verificare le email in Claude e ChatGPT](/it/blog/verificare-email-in-claude-e-chatgpt). Il server MCP usa lo stesso motore dell'[API di verifica email](/it/api-verifica-email).",
     ],
     faqTitle: 'Domande frequenti sul server MCP per la verifica email',
     faq: [

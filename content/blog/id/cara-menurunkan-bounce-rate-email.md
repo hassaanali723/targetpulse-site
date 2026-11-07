@@ -99,7 +99,7 @@ Ada dua kategori yang sebaiknya dihapus, meskipun hasil verifikasinya valid.
 
 Alamat email berbasis peran adalah alamat bersama, seperti info@, sales@, support@ dan admin@. Alamat ini biasanya ada, jadi lolos verifikasi. Namun email masuk ke kotak masuk bersama yang tidak dimiliki satu orang. Interaksinya rendah dan tingkat keluhannya di atas rata-rata. Untuk cold outreach, alamat ini hampir tidak berguna.
 
-Email sekali pakai berasal dari layanan email sementara dan hanya ada selama beberapa menit. Alamat ini lolos verifikasi selama masih ada, lalu hilang. Saat Anda [membersihkan daftar email](/email-list-cleaning) (dalam bahasa Inggris), alat verifikasi yang baik menandai kedua kategori ini terpisah dari valid. Jadi ini hanya langkah penyaringan, bukan pekerjaan tambahan.
+Email sekali pakai berasal dari layanan email sementara dan hanya ada selama beberapa menit. Alamat ini lolos verifikasi selama masih ada, lalu hilang. Saat Anda [membersihkan daftar email](/email-list-cleaning), alat verifikasi yang baik menandai kedua kategori ini terpisah dari valid. Jadi ini hanya langkah penyaringan, bukan pekerjaan tambahan.
 
 ## Perbaiki sumber masuknya, bukan hanya daftarnya
 

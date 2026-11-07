@@ -35,7 +35,7 @@ La risposta di Microsoft è simile. In una risposta sul forum di assistenza Micr
 
 Di solito il problema compare negli accessi. Ti iscrivi come `Sarah@example.com` da telefono, perché la tastiera ha messo in maiuscolo la prima lettera. Poi accedi scrivendo `sarah@example.com`, e un sistema poco attento risponde che l'account non esiste. L'utente non ha cambiato indirizzo. È il modulo di accesso che ha confrontato il testo distinguendo le maiuscole.
 
-Liste e CRM hanno una loro versione del problema. Una persona si iscrive come `Bob@company.com` e più tardi scarica una guida come `bob@company.com`. Molte piattaforme contano due contatti separati. Questo gonfia le tue metriche e manda alla stessa persona campagne doppie. Elimina i duplicati ignorando le maiuscole prima di [verificare o inviare](/email-list-cleaning) (in inglese) a una lista marketing.
+Liste e CRM hanno una loro versione del problema. Una persona si iscrive come `Bob@company.com` e più tardi scarica una guida come `bob@company.com`. Molte piattaforme contano due contatti separati. Questo gonfia le tue metriche e manda alla stessa persona campagne doppie. Elimina i duplicati ignorando le maiuscole prima di [verificare o inviare](/email-list-cleaning) a una lista marketing.
 
 Poi c'è il raro server aziendale che distingue davvero le maiuscole, l'eccezione citata nella risposta di Microsoft. Se un contatto scrive il suo indirizzo come `M.MacDonald@specialtycorp.com` su un biglietto da visita, mantieni quelle maiuscole quando gli scrivi. Non crea problemi ai sistemi standard ed evita problemi di consegna sui sistemi che le distinguono.
 
@@ -62,7 +62,7 @@ String cleanEmail = email.toLowerCase(Locale.ROOT);
 
 `toLowerCase()` di JavaScript non ha questo problema, perché usa le corrispondenze Unicode predefinite e non le impostazioni locali del sistema. Solo `toLocaleLowerCase()` dipende dalle impostazioni locali.
 
-Per bloccare formati sbagliati e indirizzi non validi prima che entrino nel database, controlla gli indirizzi con una [API di validazione email](/email-validation-api) (in inglese) al momento dell'iscrizione. Intercetta errori di battitura e domini morti mentre la persona è ancora sulla pagina.
+Per bloccare formati sbagliati e indirizzi non validi prima che entrino nel database, controlla gli indirizzi con una [API di validazione email](/email-validation-api) al momento dell'iscrizione. Intercetta errori di battitura e domini morti mentre la persona è ancora sulla pagina.
 
 ## Domande frequenti
 
@@ -81,4 +81,4 @@ Dovresti confrontare e indicizzare gli indirizzi email in minuscolo, per evitare
 **Le maiuscole possono far rimbalzare un'email?**
 Molto raramente. Succede solo su un server insolito configurato per trattare Admin@ e admin@ come caselle separate. Se un indirizzo con maiuscole rimbalza, cerca prima un'altra causa, come un errore di battitura o una casella che non esiste più. Il codice nel messaggio di rimbalzo ti dice quale, come spiegato in [hard bounce e soft bounce](/blog/hard-bounce-vs-soft-bounce).
 
-Le maiuscole non impediscono a un'email di arrivare, ma [un errore di battitura](/email-checker) sì. Se stai pulendo una lista di contatti prima del prossimo invio, passala da [Giggal.ai](/email-list-cleaning) (in inglese) per trovare prima le caselle morte e i domini non funzionanti.
+Le maiuscole non impediscono a un'email di arrivare, ma [un errore di battitura](/email-checker) sì. Se stai pulendo una lista di contatti prima del prossimo invio, passala da [Giggal.ai](/email-list-cleaning) per trovare prima le caselle morte e i domini non funzionanti.

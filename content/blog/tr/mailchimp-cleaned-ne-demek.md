@@ -87,4 +87,4 @@ Hayır. Mailchimp, Cleaned kişileri silmek yerine arşivlemeyi önerir. Arşivl
 **Mailchimp geçerli olduğunu bildiğim bir adresi neden temizledi?**
 Kurumsal bir spam filtresi veya güvenlik duvarı, Mailchimp'in sunucularını Denied veya Blocked gibi SMTP yanıtlarıyla engellerse geçerli e-posta adresleri de hard bounce verebilir. Alıcı, ağ yöneticisinden Mailchimp'in gönderim IP adreslerini izin listesine eklemesini isterse kayıt formunuz üzerinden kitlenize yeniden katılabilir.
 
-Cleaned etiketi, Mailchimp'in sorun oluştuktan sonra gönderen itibarınızı koruma yöntemidir. Önce doğrulama yapmak ise bounce'un hiç oluşmamasını sağlar. Bir sonraki gönderiminizden önce abone listenizi [Giggal.ai](/email-list-cleaning) (İngilizce) ile kontrol edin. Böylece geçersiz adresleri Mailchimp temizlemeden önce bulursunuz.
+Cleaned etiketi, Mailchimp'in sorun oluştuktan sonra gönderen itibarınızı koruma yöntemidir. Önce doğrulama yapmak ise bounce'un hiç oluşmamasını sağlar. Bir sonraki gönderiminizden önce abone listenizi [Giggal.ai](/email-list-cleaning) ile kontrol edin. Böylece geçersiz adresleri Mailchimp temizlemeden önce bulursunuz.

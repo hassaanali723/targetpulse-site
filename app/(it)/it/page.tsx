@@ -88,7 +88,7 @@ const content: HomeContent = {
     items: [
       { title: 'Pulizia di liste in blocco', body: 'Carica un file CSV o Excel e ricevi i risultati in pochi minuti.', points: ['Fino a 50.000 indirizzi per file', 'Scarica la lista pulita in CSV'], link: 'Pulisci una lista gratis' },
       { title: 'Verifica catch-all', body: 'Una risposta certa sui domini catch-all, non "a rischio".', points: ['Costa quanto ogni altra verifica', 'Funziona dietro gateway come Mimecast e Proofpoint'], link: 'Come funziona la verifica catch-all' },
-      { title: 'API per sviluppatori', body: 'Verifica gli indirizzi nei moduli di registrazione e nelle tue app.', points: ['Un indirizzo o una lista intera per chiamata', 'Chiavi API dalla tua dashboard'], link: 'Documentazione API (in inglese)' },
+      { title: 'API per sviluppatori', body: 'Verifica gli indirizzi nei moduli di registrazione e nelle tue app.', points: ['Un indirizzo o una lista intera per chiamata', 'Chiavi API dalla tua dashboard'], link: 'Documentazione API' },
       { title: 'Integrazioni con CRM e app', body: 'Invia i contatti puliti a HubSpot, Mailchimp e altri.', points: ['Funziona con gli strumenti che usi già', 'Zapier e n8n per tutto il resto'], link: 'Vedi tutte le integrazioni' },
       { title: 'Prezzi a consumo', body: 'Tutti i prezzi sono pubblici. I crediti non scadono.', points: ['Nessun abbonamento obbligatorio', 'Ricarichi solo quando ti serve'], link: 'Vedi tutti i prezzi' },
       { title: 'Supporto prioritario', body: 'Bloccato su qualcosa? I nostri tecnici ti aiutano direttamente.', points: ['Persone vere, non un bot', 'Scrivici per email o dal modulo di contatto'], link: 'Contatta il supporto' },
