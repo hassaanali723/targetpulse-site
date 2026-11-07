@@ -96,8 +96,11 @@ function expandUmlautsAndAccents(word: string): string[] {
 
   const hasUmlaut = /[äöü]/.test(cleaned)
 
-  // Variant 1: standard accent removal (ä -> a, ö -> o, ü -> u, é -> e, etc.)
+  // Variant 1: standard accent removal (ä -> a, ö -> o, ü -> u, é -> e, etc.).
+  // Turkish dotless ı and Polish ł have no combining accent, so map them first.
   const stripped = cleaned
+    .replace(/ı/g, 'i')
+    .replace(/ł/g, 'l')
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
 
@@ -110,6 +113,8 @@ function expandUmlautsAndAccents(word: string): string[] {
     .replace(/ä/g, 'ae')
     .replace(/ö/g, 'oe')
     .replace(/ü/g, 'ue')
+    .replace(/ı/g, 'i')
+    .replace(/ł/g, 'l')
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
 
@@ -343,17 +348,31 @@ export function detectCsvColumns(firstRow: string[]): {
   let lastNameIndex = -1
   let domainIndex = -1
 
-  const lower = firstRow.map((c) => c.toLowerCase().replace(/[^a-z0-9]/g, ''))
+  // Accents are folded and non-Latin letters kept, so the headers of the
+  // localized tool pages (Prénom, Imię, 名, 이름, Soyad) are recognized too.
+  const lower = firstRow.map((c) =>
+    c
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .normalize('NFC')
+      .replace(/ı/g, 'i')
+      .replace(/[\s.,;:'"’`_\-()/\\|]+/g, ''),
+  )
   let score = 0
 
+  const FIRST = ['firstname', 'first', 'fname', 'givenname', 'nome', 'vorname', 'nombre', 'prenom', 'voornaam', 'imie', 'namadepan', 'ad', 'isim', '名', '이름']
+  const LAST = ['lastname', 'last', 'lname', 'surname', 'familyname', 'cognome', 'nachname', 'apellido', 'apellidos', 'sobrenome', 'nom', 'nomdefamille', 'achternaam', 'nazwisko', 'namabelakang', 'soyad', 'soyadi', '姓', '성']
+  const DOMAIN = ['domain', 'companydomain', 'website', 'companyurl', 'emaildomain', 'dominio', 'domaine', 'domein', 'domena', 'alanadi', 'ドメイン', '도메인']
+
   lower.forEach((col, idx) => {
-    if (['firstname', 'first', 'fname', 'givenname'].includes(col)) {
+    if (FIRST.includes(col)) {
       firstNameIndex = idx
       score++
-    } else if (['lastname', 'last', 'lname', 'surname', 'familyname'].includes(col)) {
+    } else if (LAST.includes(col)) {
       lastNameIndex = idx
       score++
-    } else if (['domain', 'companydomain', 'website', 'companyurl', 'emaildomain'].includes(col)) {
+    } else if (DOMAIN.includes(col)) {
       domainIndex = idx
       score++
     }

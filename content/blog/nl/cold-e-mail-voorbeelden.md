@@ -354,7 +354,7 @@ Een goede template die naar een slechte lijst gaat, mislukt nog steeds. Elk adre
 
 Spamhaus wijst op iets wat goed is om te weten: sommige oude adressen die nu bouncen, worden later spamvallen ([Spamhaus](https://www.spamhaus.org/resource-hub/deliverability/spamtraps-fix-the-problem-not-the-symptom/)). Verificatie verwijdert de dode adressen, maar het maakt een gekochte lijst niet veilig om te mailen.
 
-Haal de lijst voor een campagne door een [bulk email checker](/bulk-email-verifier), of controleer één adres met de [email checker](/email-checker). Zijn bounces al een probleem, lees dan [waarom cold e-mails bouncen](/blog/why-cold-emails-bounce) en [welk bouncepercentage normaal is](/blog/good-bounce-rate-for-cold-email). Je kunt je tekst ook door de [spamwoordenchecker](/spam-word-checker) (in het Engels) halen voordat hij de deur uit gaat.
+Haal de lijst voor een campagne door een [bulk email checker](/bulk-email-verifier), of controleer één adres met de [email checker](/email-checker). Zijn bounces al een probleem, lees dan [waarom cold e-mails bouncen](/blog/why-cold-emails-bounce) en [welk bouncepercentage normaal is](/blog/good-bounce-rate-for-cold-email). Je kunt je tekst ook door de [spamwoordenchecker](/spam-word-checker) halen voordat hij de deur uit gaat.
 
 ## Veelgestelde vragen
 

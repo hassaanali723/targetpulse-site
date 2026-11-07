@@ -1,6 +1,10 @@
 /**
  * Spam Word Checker Core Logic
  * Browser-safe, pure TypeScript with zero external dependencies.
+ *
+ * The trigger phrases and their alternatives are English data and stay here in
+ * every language. Findings carry ids and values only; the text shown for them
+ * lives in lib/i18n/tools/spamWordCheckerToolStrings.ts.
  */
 
 export type SpamCategory = 'urgency' | 'money' | 'overpromising' | 'shady wording' | 'clickbait'
@@ -20,15 +24,38 @@ export interface SpamMatch {
   length: number
 }
 
+/** Severity ids. The labels shown for them are in lib/i18n/tools/spamWordCheckerToolStrings.ts. */
 export type FindingSeverity = 'worth fixing' | 'worth a look'
 
+/** One id per structural check. The title, reason and suggestion for each are in the tool strings. */
+export type StructuralFindingId =
+  | 'subject-caps'
+  | 'exclamation-marks' // count, consecutive
+  | 'repeated-currency'
+  | 'subject-emojis'
+  | 'link-shorteners' // items
+  | 'many-links' // count
+  | 'unfilled-merge-tags' // items
+  | 'fake-reply'
+  | 'subject-length'
+  | 'image-heavy'
+  | 'body-word-count' // count
+
+/** Values a structural finding's message needs. Only the fields a check sets are present. */
+export interface StructuralFindingParams {
+  /** exclamation-marks: marks in total. many-links: links in the body. body-word-count: words in the body. */
+  count?: number
+  /** exclamation-marks: true when two or more stand in a row. */
+  consecutive?: boolean
+  /** link-shorteners: every short link found. unfilled-merge-tags: the first three tags. */
+  items?: string[]
+}
+
 export interface StructuralFinding {
-  id: string
+  id: StructuralFindingId
   type: 'structural'
   severity: FindingSeverity
-  title: string
-  reason: string
-  suggestion: string
+  params?: StructuralFindingParams
   categoryLabel?: 'readability' | 'spam'
 }
 
@@ -39,17 +66,17 @@ export interface WordFinding {
   phrase: string
   category: SpamCategory
   field: 'subject' | 'preview' | 'body'
-  reason: string
-  suggestion: string
+  /** The plainer phrase from SPAM_PHRASES, in English like the phrase itself. */
+  alternative?: string
 }
 
 export type Finding = StructuralFinding | WordFinding
 
-export type SummaryVerdict = 'Looks clean' | 'A few things to fix' | 'Needs work'
+/** Summary ids. The tool strings hold the label and the sentence for each. */
+export type SummaryVerdict = 'clean' | 'few-fixes' | 'needs-work'
 
 export interface SpamCheckResult {
   verdict: SummaryVerdict
-  summaryText: string
   wordMatches: SpamMatch[]
   findings: Finding[]
   worthFixing: Finding[]
@@ -423,8 +450,7 @@ export function checkSpamIssues(input: {
         phrase: wm.phrase,
         category: wm.category,
         field: wm.field,
-        reason: `Flagged in the ${wm.category} list. Mailbox filters score pushy words, especially in the subject line.`,
-        suggestion: wm.alternative ? `Consider replacing with "${wm.alternative}".` : 'Consider using plainer phrasing.',
+        alternative: wm.alternative,
       })
     }
   }
@@ -435,45 +461,28 @@ export function checkSpamIssues(input: {
     const uppercaseLetters = subjectLetters.replace(/[^A-Z]/g, '').length
     const uppercaseRatio = uppercaseLetters / subjectLetters.length
     if (uppercaseRatio >= 0.65) {
-      findings.push({
-        id: 'subject-caps',
-        type: 'structural',
-        severity: 'worth fixing',
-        title: 'Subject mostly in capitals',
-        reason: 'Subject lines with excessive capital letters trigger spam filters and feel like shouting to recipients.',
-        suggestion: 'Use normal sentence case or standard title case instead.',
-      })
+      findings.push({ id: 'subject-caps', type: 'structural', severity: 'worth fixing' })
     }
   }
 
   // 3. Structural Check: 2 or more exclamation marks in a row, or more than 3 in total
   const combinedText = `${subject} ${preview} ${cleanedBodyText}`
-  const exclamationMatches = combinedText.match(/!/g) || []
-  const hasConsecutiveExclamation = /!!+/.test(combinedText)
+  // Full-width ！ (Japanese, Chinese) counts the same as !.
+  const exclamationMatches = combinedText.match(/[!！]/g) || []
+  const hasConsecutiveExclamation = /[!！]{2,}/.test(combinedText)
   if (hasConsecutiveExclamation || exclamationMatches.length > 3) {
     findings.push({
       id: 'exclamation-marks',
       type: 'structural',
       severity: 'worth fixing',
-      title: 'Excessive exclamation marks',
-      reason: hasConsecutiveExclamation
-        ? 'Multiple exclamation marks in a row (!!) are strongly penalized by content filters.'
-        : `Found ${exclamationMatches.length} exclamation marks in total. Overuse looks aggressive and spammy.`,
-      suggestion: 'Use periods for calm, professional copy, keeping at most one exclamation mark.',
+      params: { count: exclamationMatches.length, consecutive: hasConsecutiveExclamation },
     })
   }
 
   // 4. Structural Check: Repeated currency symbols ($$$)
   const currencyMatches = combinedText.match(/(\${2,}|€{2,}|£{2,})/g)
   if (currencyMatches && currencyMatches.length > 0) {
-    findings.push({
-      id: 'repeated-currency',
-      type: 'structural',
-      severity: 'worth fixing',
-      title: 'Repeated currency symbols ($$$)',
-      reason: 'Stacking dollar signs or currency symbols is a legacy spam marker.',
-      suggestion: 'State the price clearly with a single symbol (e.g. "$100" instead of "$$$").',
-    })
+    findings.push({ id: 'repeated-currency', type: 'structural', severity: 'worth fixing' })
   }
 
   // 5. Structural Check: More than 2 emojis in the subject
@@ -481,14 +490,7 @@ export function checkSpamIssues(input: {
   const emojiRegex = /(?:[\uD83C-\uD83F][\uDC00-\uDFFF]|[\u2600-\u27BF])/g
   const subjectEmojis = subject.match(emojiRegex) || []
   if (subjectEmojis.length > 2) {
-    findings.push({
-      id: 'subject-emojis',
-      type: 'structural',
-      severity: 'worth a look',
-      title: 'More than 2 emojis in the subject',
-      reason: 'Multiple emojis reduce subject line readability and increase the risk of rendering issues on some email clients.',
-      suggestion: 'Stick to at most one relevant emoji or remove them.',
-    })
+    findings.push({ id: 'subject-emojis', type: 'structural', severity: 'worth a look' })
   }
 
   // 6. Structural Check: Link shorteners
@@ -498,9 +500,7 @@ export function checkSpamIssues(input: {
       id: 'link-shorteners',
       type: 'structural',
       severity: 'worth fixing',
-      title: 'Link shorteners detected',
-      reason: `Found shortened URLs (${shortenersFound.join(', ')}). Shorteners obscure destinations and are heavily filtered.`,
-      suggestion: 'Replace with direct links on your own branded domain.',
+      params: { items: shortenersFound },
     })
   }
 
@@ -516,14 +516,7 @@ export function checkSpamIssues(input: {
     linkCount = urls.length
   }
   if (linkCount > 3) {
-    findings.push({
-      id: 'many-links',
-      type: 'structural',
-      severity: 'worth a look',
-      title: 'More than 3 links in email body',
-      reason: `Found ${linkCount} links. Cold emails with multiple links look promotional and divide recipient attention.`,
-      suggestion: 'Focus on a single clear call-to-action link.',
-    })
+    findings.push({ id: 'many-links', type: 'structural', severity: 'worth a look', params: { count: linkCount } })
   }
 
   // 8. Structural Check: Unfilled merge tags
@@ -533,35 +526,18 @@ export function checkSpamIssues(input: {
       id: 'unfilled-merge-tags',
       type: 'structural',
       severity: 'worth fixing',
-      title: 'Unfilled merge tags',
-      reason: `Detected unpopulated placeholder tags (${mergeTags.slice(0, 3).join(', ')}). This signals an accidental template broadcast.`,
-      suggestion: 'Ensure fallback values are configured in your sending tool before launching.',
+      params: { items: mergeTags.slice(0, 3) },
     })
   }
 
   // 9. Structural Check: Re: or Fwd: at start of subject
   if (/^(?:re|fwd):\s*/i.test(subject.trim())) {
-    findings.push({
-      id: 'fake-reply',
-      type: 'structural',
-      severity: 'worth fixing',
-      title: 'Re: or Fwd: at the start of the subject',
-      reason: 'Faking an existing thread or reply trick readers into opening, which quickly draws spam complaints.',
-      suggestion: 'Only use Re: or Fwd: if this is an authentic reply to an incoming message.',
-    })
+    findings.push({ id: 'fake-reply', type: 'structural', severity: 'worth fixing' })
   }
 
   // 10. Structural Check: Subject longer than 60 characters (readability, not spam)
   if (subject.length > 60) {
-    findings.push({
-      id: 'subject-length',
-      type: 'structural',
-      severity: 'worth a look',
-      categoryLabel: 'readability',
-      title: 'Subject longer than 60 characters (readability)',
-      reason: 'Most mobile email clients truncate subject lines after 50 to 60 characters.',
-      suggestion: 'Front-load your key message so it is visible before mobile screens cut it off.',
-    })
+    findings.push({ id: 'subject-length', type: 'structural', severity: 'worth a look', categoryLabel: 'readability' })
   }
 
   // 11. Structural Check: HTML mostly images with little text
@@ -571,14 +547,7 @@ export function checkSpamIssues(input: {
   const bodyWordCount = words.length
 
   if (isHtml && imageCount >= 1 && bodyWordCount < 30) {
-    findings.push({
-      id: 'image-heavy',
-      type: 'structural',
-      severity: 'worth fixing',
-      title: 'HTML is mostly images with little text',
-      reason: 'Emails consisting primarily of images with little body copy resemble image-based spam designed to evade text filters.',
-      suggestion: 'Add substantive paragraphs of text to maintain a healthy text-to-image ratio.',
-    })
+    findings.push({ id: 'image-heavy', type: 'structural', severity: 'worth fixing' })
   }
 
   // 12. Structural Check: Body longer than 500 words (readability note, not a spam finding)
@@ -588,9 +557,7 @@ export function checkSpamIssues(input: {
       type: 'structural',
       severity: 'worth a look',
       categoryLabel: 'readability',
-      title: 'Body longer than 500 words (readability note)',
-      reason: `Found ${bodyWordCount} words. Longer cold emails have lower reply rates. Mobile readers often skim or drop off after 150 to 200 words.`,
-      suggestion: 'Trim secondary details and aim for 50 to 200 words for cold outreach.',
+      params: { count: bodyWordCount },
     })
   }
 
@@ -599,26 +566,21 @@ export function checkSpamIssues(input: {
   const worthALook = findings.filter((f) => f.severity === 'worth a look')
 
   // Summary Verdict calculation:
-  // - "Looks clean": 0 worth fixing, <= 1 minor worth a look
-  // - "Needs work": >= 2 worth fixing OR total findings >= 5
-  // - "A few things to fix": anything in between
+  // - "clean": 0 worth fixing, <= 1 minor worth a look
+  // - "needs-work": >= 2 worth fixing OR total findings >= 5
+  // - "few-fixes": anything in between
   let verdict: SummaryVerdict
-  let summaryText = ''
 
   if (worthFixing.length === 0 && worthALook.length <= 1) {
-    verdict = 'Looks clean'
-    summaryText = 'No critical spam triggers or structural flags detected in this draft.'
+    verdict = 'clean'
   } else if (worthFixing.length >= 2 || findings.length >= 5) {
-    verdict = 'Needs work'
-    summaryText = `Multiple high-priority items (${worthFixing.length} to fix) require attention before sending.`
+    verdict = 'needs-work'
   } else {
-    verdict = 'A few things to fix'
-    summaryText = `Found ${findings.length} item${findings.length > 1 ? 's' : ''} that could increase filter scrutiny.`
+    verdict = 'few-fixes'
   }
 
   return {
     verdict,
-    summaryText,
     wordMatches: allWordMatches,
     findings,
     worthFixing,

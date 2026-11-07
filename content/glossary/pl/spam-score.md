@@ -54,7 +54,7 @@ W narzędziach SEO możesz też zobaczyć „Spam Score”. SEO to działania, d
 1. Wejdź na mail-tester.com. Strona pokaże ci testowy adres e-mail.
 2. Wyślij na ten adres swój prawdziwy e-mail z narzędzia, którego zwykle używasz.
 3. Otwórz stronę z wynikami. Pokazuje ona wynik w skali do 10 i wymienia każdy znaleziony problem.
-4. Wklej temat i tekst wiadomości do naszego narzędzia [spam word checker](/spam-word-checker) (po angielsku). W przeglądarce zaznacza ono ryzykowne słowa, wielkie litery i skracacze linków.
+4. Wklej temat i tekst wiadomości do naszego narzędzia [spam word checker](/spam-word-checker). W przeglądarce zaznacza ono ryzykowne słowa, wielkie litery i skracacze linków.
 
 Na mail-tester.com wyższy wynik jest lepszy. W SpamAssassin lepszy jest niższy wynik. Czytaj listę problemów, a nie tylko liczbę.
 

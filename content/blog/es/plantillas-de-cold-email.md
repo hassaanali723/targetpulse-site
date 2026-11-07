@@ -354,7 +354,7 @@ Una buena plantilla enviada a una mala lista falla igual. Cada dirección que no
 
 Spamhaus señala algo que conviene saber: algunas direcciones antiguas que hoy rebotan se convierten más tarde en spam traps ([Spamhaus](https://www.spamhaus.org/resource-hub/deliverability/spamtraps-fix-the-problem-not-the-symptom/)). La verificación elimina las direcciones muertas, pero no hace que una lista comprada sea segura para enviar.
 
-Antes de una campaña, pasa la lista por un [verificador de correos masivo](/bulk-email-verifier), o comprueba una sola dirección con el [validador de correo](/email-checker). Si los rebotes ya son un problema, aquí tienes [por qué rebotan los cold emails](/blog/why-cold-emails-bounce) y [qué tasa de rebote es normal](/blog/good-bounce-rate-for-cold-email). También puedes pasar tu texto por el [comprobador de palabras de spam](/spam-word-checker) (en inglés) antes de enviarlo.
+Antes de una campaña, pasa la lista por un [verificador de correos masivo](/bulk-email-verifier), o comprueba una sola dirección con el [validador de correo](/email-checker). Si los rebotes ya son un problema, aquí tienes [por qué rebotan los cold emails](/blog/why-cold-emails-bounce) y [qué tasa de rebote es normal](/blog/good-bounce-rate-for-cold-email). También puedes pasar tu texto por el [comprobador de palabras de spam](/spam-word-checker) antes de enviarlo.
 
 ## Preguntas frecuentes
 

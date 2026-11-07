@@ -24,8 +24,15 @@ import {
   detectCsvColumns,
   type GeneratedEmail,
 } from '@/lib/tools/emailPermutatorCore'
+import { permutatorToolStrings } from '@/lib/i18n/tools/emailPermutatorToolStrings'
+import type { Locale } from '@/lib/i18n/clusters'
 
-export default function EmailPermutatorTool() {
+// The sign-up page; the same for every language.
+const SIGNUP_URL = '/sign-up'
+
+export default function EmailPermutatorTool({ locale = 'en' }: { locale?: Locale }) {
+  // The wording lives in lib/i18n/tools/emailPermutatorToolStrings.ts.
+  const t = permutatorToolStrings(locale)
   const [mode, setMode] = useState<'single' | 'bulk'>('single')
 
   // Single mode state
@@ -184,13 +191,13 @@ export default function EmailPermutatorTool() {
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = `permutations-${cleanDomain(domainsInput || 'emails')}.txt`
+    a.download = `${t.fileSingle(cleanDomain(domainsInput || t.fileFallback))}.txt`
     a.click()
     URL.revokeObjectURL(url)
   }
 
   const downloadSingleCsv = () => {
-    const rows = ['pattern,email,domain']
+    const rows = [t.csvHeaderSingle]
     for (const r of results) {
       rows.push(`"${r.pattern}","${r.email}","${r.domain}"`)
     }
@@ -198,13 +205,13 @@ export default function EmailPermutatorTool() {
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = `permutations-${cleanDomain(domainsInput || 'emails')}.csv`
+    a.download = `${t.fileSingle(cleanDomain(domainsInput || t.fileFallback))}.csv`
     a.click()
     URL.revokeObjectURL(url)
   }
 
   const downloadBulkCsv = () => {
-    const rows = ['first_name,last_name,domain,email,pattern']
+    const rows = [t.csvHeaderBulk]
     for (const r of bulkResults) {
       rows.push(`"${r.firstName}","${r.lastName}","${r.domain}","${r.email}","${r.pattern}"`)
     }
@@ -212,7 +219,7 @@ export default function EmailPermutatorTool() {
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = 'email-permutator-bulk.csv'
+    a.download = t.fileBulk
     a.click()
     URL.revokeObjectURL(url)
   }
@@ -231,7 +238,7 @@ export default function EmailPermutatorTool() {
           }`}
         >
           <User className="w-4 h-4" />
-          <span>Single Person</span>
+          <span>{t.modeSingle}</span>
         </button>
         <button
           type="button"
@@ -243,7 +250,7 @@ export default function EmailPermutatorTool() {
           }`}
         >
           <Users className="w-4 h-4" />
-          <span>Bulk CSV</span>
+          <span>{t.modeBulk}</span>
         </button>
       </div>
 
@@ -254,14 +261,14 @@ export default function EmailPermutatorTool() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label htmlFor="ep-firstName" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-                  First Name <span className="text-red-500">*</span>
+                  {t.firstName} <span className="text-red-500">*</span>
                 </label>
                 <input
                   id="ep-firstName"
                   type="text"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
-                  placeholder="Jane"
+                  placeholder={t.firstPlaceholder}
                   required
                   className="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition"
                 />
@@ -269,14 +276,14 @@ export default function EmailPermutatorTool() {
 
               <div>
                 <label htmlFor="ep-lastName" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-                  Last Name <span className="text-slate-400 font-normal lowercase">(optional)</span>
+                  {t.lastName} <span className="text-slate-400 font-normal lowercase">{t.optional}</span>
                 </label>
                 <input
                   id="ep-lastName"
                   type="text"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
-                  placeholder="Doe"
+                  placeholder={t.lastPlaceholder}
                   className="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition"
                 />
               </div>
@@ -285,28 +292,28 @@ export default function EmailPermutatorTool() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label htmlFor="ep-middleName" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-                  Middle Name <span className="text-slate-400 font-normal lowercase">(optional)</span>
+                  {t.middleName} <span className="text-slate-400 font-normal lowercase">{t.optional}</span>
                 </label>
                 <input
                   id="ep-middleName"
                   type="text"
                   value={middleName}
                   onChange={(e) => setMiddleName(e.target.value)}
-                  placeholder="Marie"
+                  placeholder={t.middlePlaceholder}
                   className="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition"
                 />
               </div>
 
               <div>
                 <label htmlFor="ep-nickname" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-                  Nickname <span className="text-slate-400 font-normal lowercase">(optional)</span>
+                  {t.nickname} <span className="text-slate-400 font-normal lowercase">{t.optional}</span>
                 </label>
                 <input
                   id="ep-nickname"
                   type="text"
                   value={nickname}
                   onChange={(e) => setNickname(e.target.value)}
-                  placeholder="Janey"
+                  placeholder={t.nicknamePlaceholder}
                   className="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition"
                 />
               </div>
@@ -314,24 +321,22 @@ export default function EmailPermutatorTool() {
 
             <div>
               <label htmlFor="ep-domains" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-                Company Domain(s) <span className="text-red-500">*</span>
+                {t.domains} <span className="text-red-500">*</span>
               </label>
               <input
                 id="ep-domains"
                 type="text"
                 value={domainsInput}
                 onChange={(e) => setDomainsInput(e.target.value)}
-                placeholder="example.com, acme.org"
+                placeholder={t.domainsPlaceholder}
                 required
                 className="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition"
               />
-              <p className="text-xs text-slate-500 mt-1.5">
-                Separate multiple domains with commas. We strip http://, www., paths, and leading @ automatically.
-              </p>
+              <p className="text-xs text-slate-500 mt-1.5">{t.domainsHelp}</p>
               {domainValidation.invalid.length > 0 && (
                 <p className="text-xs text-amber-600 mt-1 flex items-center gap-1">
                   <AlertCircle className="w-3.5 h-3.5" />
-                  Invalid hostnames will be ignored: {domainValidation.invalid.join(', ')}
+                  {t.invalidDomains(domainValidation.invalid.join(', '))}
                 </p>
               )}
             </div>
@@ -342,7 +347,7 @@ export default function EmailPermutatorTool() {
               className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white font-bold text-sm shadow-md transition"
             >
               <RefreshCw className="w-4 h-4" />
-              <span>Generate Formats</span>
+              <span>{t.generate}</span>
             </button>
           </form>
 
@@ -351,10 +356,8 @@ export default function EmailPermutatorTool() {
             <div className="pt-6 border-t border-slate-200 space-y-4">
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                 <div>
-                  <h3 className="text-base font-bold text-slate-900">
-                    Generated Formats ({results.length})
-                  </h3>
-                  <p className="text-xs text-slate-500">Ordered with most common company standards first.</p>
+                  <h3 className="text-base font-bold text-slate-900">{t.resultsTitle(results.length)}</h3>
+                  <p className="text-xs text-slate-500">{t.resultsNote}</p>
                 </div>
 
                 <div className="flex flex-wrap items-center gap-2">
@@ -364,7 +367,7 @@ export default function EmailPermutatorTool() {
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 bg-white text-xs font-semibold text-slate-700 hover:bg-slate-50 transition"
                   >
                     {copiedType === 'all' ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-slate-400" />}
-                    <span>{copiedType === 'all' ? 'Copied All' : 'Copy All'}</span>
+                    <span>{copiedType === 'all' ? t.copiedAll : t.copyAll}</span>
                   </button>
                   <button
                     type="button"
@@ -372,7 +375,7 @@ export default function EmailPermutatorTool() {
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 bg-white text-xs font-semibold text-slate-700 hover:bg-slate-50 transition"
                   >
                     <Download className="w-3.5 h-3.5 text-slate-400" />
-                    <span>Download TXT</span>
+                    <span>{t.downloadTxt}</span>
                   </button>
                   <button
                     type="button"
@@ -380,7 +383,7 @@ export default function EmailPermutatorTool() {
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 bg-white text-xs font-semibold text-slate-700 hover:bg-slate-50 transition"
                   >
                     <Download className="w-3.5 h-3.5 text-slate-400" />
-                    <span>Download CSV</span>
+                    <span>{t.downloadCsv}</span>
                   </button>
                 </div>
               </div>
@@ -392,7 +395,7 @@ export default function EmailPermutatorTool() {
                   type="text"
                   value={searchFilter}
                   onChange={(e) => setSearchFilter(e.target.value)}
-                  placeholder="Filter generated formats..."
+                  placeholder={t.filterPlaceholder}
                   className="w-full pl-9 pr-4 py-2 rounded-xl border border-slate-200 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-indigo-500"
                 />
               </div>
@@ -414,7 +417,7 @@ export default function EmailPermutatorTool() {
                     <button
                       type="button"
                       onClick={() => handleCopy(item.email, item.email)}
-                      aria-label={`Copy ${item.email}`}
+                      aria-label={t.copyOne(item.email)}
                       className="p-1.5 text-slate-400 hover:text-indigo-600 transition"
                     >
                       {copiedType === item.email ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
@@ -426,21 +429,21 @@ export default function EmailPermutatorTool() {
               {/* Exact Next Step Panel */}
               <div className="rounded-xl border border-indigo-100 bg-indigo-50/60 p-5 space-y-3">
                 <p className="text-sm text-slate-700 leading-relaxed font-medium">
-                  These are guesses. Verify them to find the one that exists. On catch-all domains, most checkers report every format as valid.
+                  {t.nextText}
                 </p>
                 <div className="flex flex-wrap items-center gap-3">
                   <a
-                    href="/sign-up"
+                    href={SIGNUP_URL}
                     className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs shadow-sm transition"
                   >
-                    <span>Verify these addresses</span>
+                    <span>{t.verifyButton}</span>
                     <ExternalLink className="w-3.5 h-3.5 opacity-80" />
                   </a>
                   <Link
-                    href="/email-checker"
+                    href={t.checkOneHref}
                     className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-800 font-bold text-xs transition"
                   >
-                    <span>Check one address</span>
+                    <span>{t.checkOneButton}</span>
                   </Link>
                 </div>
               </div>
@@ -455,7 +458,7 @@ export default function EmailPermutatorTool() {
           <div className="space-y-4">
             <div>
               <p className="text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-                Upload CSV or Paste Rows (Up to 5,000)
+                {t.bulkTitle}
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <input
@@ -471,14 +474,14 @@ export default function EmailPermutatorTool() {
                   className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-800 text-xs font-bold transition shadow-sm"
                 >
                   <Upload className="w-4 h-4 text-slate-500" />
-                  <span>Upload CSV File</span>
+                  <span>{t.uploadButton}</span>
                 </button>
               </div>
             </div>
 
             <div>
               <label htmlFor="ep-bulk-text" className="block text-xs font-semibold text-slate-600 mb-1">
-                Or paste CSV rows:
+                {t.pasteLabel}
               </label>
               <textarea
                 id="ep-bulk-text"
@@ -488,7 +491,7 @@ export default function EmailPermutatorTool() {
                   setCsvText(e.target.value)
                   processCsvInput(e.target.value)
                 }}
-                placeholder="First Name,Last Name,Domain&#10;Jane,Doe,example.com&#10;Alex,Smith,acme.org"
+                placeholder={t.bulkPlaceholder}
                 className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs font-mono text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600"
               />
             </div>
@@ -496,9 +499,7 @@ export default function EmailPermutatorTool() {
             {bulkRows.length > 0 && (
               <div className="p-4 rounded-xl border border-slate-200 bg-slate-50/70 space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-slate-800">
-                    Loaded {bulkRows.length} rows
-                  </span>
+                  <span className="text-xs font-bold text-slate-800">{t.loadedRows(bulkRows.length)}</span>
                   <label className="flex items-center gap-2 text-xs text-slate-600 cursor-pointer">
                     <input
                       type="checkbox"
@@ -506,7 +507,7 @@ export default function EmailPermutatorTool() {
                       onChange={(e) => setHasHeader(e.target.checked)}
                       className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
                     />
-                    <span>First row is header</span>
+                    <span>{t.headerRow}</span>
                   </label>
                 </div>
 
@@ -514,7 +515,7 @@ export default function EmailPermutatorTool() {
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   <div>
                     <label className="block text-[11px] font-bold uppercase text-slate-600 mb-1">
-                      First Name Column
+                      {t.colFirst}
                     </label>
                     <select
                       value={colFirst}
@@ -523,7 +524,7 @@ export default function EmailPermutatorTool() {
                     >
                       {bulkRows[0].map((val, idx) => (
                         <option key={`col-fn-${idx}`} value={idx}>
-                          Col {idx + 1}: {val || `(empty)`}
+                          {t.colOption(idx + 1, val || t.colEmpty)}
                         </option>
                       ))}
                     </select>
@@ -531,17 +532,17 @@ export default function EmailPermutatorTool() {
 
                   <div>
                     <label className="block text-[11px] font-bold uppercase text-slate-600 mb-1">
-                      Last Name Column
+                      {t.colLast}
                     </label>
                     <select
                       value={colLast}
                       onChange={(e) => setColLast(Number(e.target.value))}
                       className="w-full px-3 py-2 rounded-lg border border-slate-300 bg-white text-xs font-medium text-slate-800"
                     >
-                      <option value={-1}>(None / Optional)</option>
+                      <option value={-1}>{t.colNone}</option>
                       {bulkRows[0].map((val, idx) => (
                         <option key={`col-ln-${idx}`} value={idx}>
-                          Col {idx + 1}: {val || `(empty)`}
+                          {t.colOption(idx + 1, val || t.colEmpty)}
                         </option>
                       ))}
                     </select>
@@ -549,7 +550,7 @@ export default function EmailPermutatorTool() {
 
                   <div>
                     <label className="block text-[11px] font-bold uppercase text-slate-600 mb-1">
-                      Domain Column
+                      {t.colDomain}
                     </label>
                     <select
                       value={colDomain}
@@ -558,7 +559,7 @@ export default function EmailPermutatorTool() {
                     >
                       {bulkRows[0].map((val, idx) => (
                         <option key={`col-dom-${idx}`} value={idx}>
-                          Col {idx + 1}: {val || `(empty)`}
+                          {t.colOption(idx + 1, val || t.colEmpty)}
                         </option>
                       ))}
                     </select>
@@ -572,7 +573,7 @@ export default function EmailPermutatorTool() {
                   className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs shadow-md transition disabled:opacity-50"
                 >
                   <FileSpreadsheet className="w-4 h-4" />
-                  <span>Generate All Permutations</span>
+                  <span>{t.generateBulk}</span>
                 </button>
               </div>
             )}
@@ -582,12 +583,8 @@ export default function EmailPermutatorTool() {
               <div className="pt-4 border-t border-slate-200 space-y-4">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                   <div>
-                    <h3 className="text-sm font-bold text-slate-900">
-                      Generated {bulkResults.length} permutations
-                    </h3>
-                    <p className="text-xs text-slate-500">
-                      Download the CSV with first_name, last_name, domain, email, and pattern columns.
-                    </p>
+                    <h3 className="text-sm font-bold text-slate-900">{t.bulkResultsTitle(bulkResults.length)}</h3>
+                    <p className="text-xs text-slate-500">{t.bulkResultsNote}</p>
                   </div>
 
                   <button
@@ -596,28 +593,28 @@ export default function EmailPermutatorTool() {
                     className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-sm transition"
                   >
                     <Download className="w-4 h-4" />
-                    <span>Download Bulk CSV</span>
+                    <span>{t.downloadBulk}</span>
                   </button>
                 </div>
 
                 {/* Exact Next Step Panel */}
                 <div className="rounded-xl border border-indigo-100 bg-indigo-50/60 p-5 space-y-3">
                   <p className="text-sm text-slate-700 leading-relaxed font-medium">
-                    These are guesses. Verify them to find the one that exists. On catch-all domains, most checkers report every format as valid.
+                    {t.nextText}
                   </p>
                   <div className="flex flex-wrap items-center gap-3">
                     <a
-                      href="/sign-up"
+                      href={SIGNUP_URL}
                       className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs shadow-sm transition"
                     >
-                      <span>Verify these addresses</span>
+                      <span>{t.verifyButton}</span>
                       <ExternalLink className="w-3.5 h-3.5 opacity-80" />
                     </a>
                     <Link
-                      href="/email-checker"
+                      href={t.checkOneHref}
                       className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-800 font-bold text-xs transition"
                     >
-                      <span>Check one address</span>
+                      <span>{t.checkOneButton}</span>
                     </Link>
                   </div>
                 </div>

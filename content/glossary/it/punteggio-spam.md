@@ -48,7 +48,7 @@ Nel mondo SEO esiste un altro "Spam Score". È una metrica di Moz che riguarda i
 ## Come controllare il punteggio spam
 
 1. **mail-tester.com.** Il sito ti dà un indirizzo email temporaneo. Invii la tua email a quell'indirizzo. Il sito mostra un voto e l'elenco dei problemi trovati, compresi i controlli di SpamAssassin, SPF, DKIM e delle blacklist.
-2. **Il nostro [controllo delle parole spam](/spam-word-checker) (in inglese).** Incolli l'oggetto e il testo dell'email. Lo strumento evidenzia le parole a rischio, il testo in maiuscolo e i link accorciati. Non dà un numero, perché nessuno strumento sa come una casella precisa tratterà la tua email.
+2. **Il nostro [controllo delle parole spam](/spam-word-checker).** Incolli l'oggetto e il testo dell'email. Lo strumento evidenzia le parole a rischio, il testo in maiuscolo e i link accorciati. Non dà un numero, perché nessuno strumento sa come una casella precisa tratterà la tua email.
 3. **Le intestazioni dell'email.** Le intestazioni sono le righe tecniche in cima a un'email. Un server che usa SpamAssassin di solito aggiunge un'intestazione X-Spam-Status con il punteggio.
 
 ## Come abbassare il punteggio spam

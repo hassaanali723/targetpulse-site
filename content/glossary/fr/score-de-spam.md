@@ -50,7 +50,7 @@ Si vous cherchez "spam score" sur Internet, vous trouverez aussi le Spam Score d
 
 **mail-tester.com.** Le site vous donne une adresse e-mail de test. Vous envoyez votre e-mail à cette adresse depuis votre outil d’envoi habituel. Le site affiche ensuite une note sur 10 et la liste des problèmes trouvés. Attention, ici la logique est inversée : 10 sur 10 est le meilleur résultat.
 
-**Notre vérificateur de mots spam.** Le [spam word checker](/spam-word-checker) (en anglais) lit le texte de votre e-mail dans votre navigateur. Il signale les mots et les tournures qui posent souvent problème. Il ne donne pas de note, car aucun outil ne sait comment une boîte précise traitera votre e-mail.
+**Notre vérificateur de mots spam.** Le [spam word checker](/spam-word-checker) lit le texte de votre e-mail dans votre navigateur. Il signale les mots et les tournures qui posent souvent problème. Il ne donne pas de note, car aucun outil ne sait comment une boîte précise traitera votre e-mail.
 
 ## Comment faire baisser votre score de spam
 

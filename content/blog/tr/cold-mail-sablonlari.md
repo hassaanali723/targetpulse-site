@@ -369,7 +369,7 @@ Gmail ve Yahoo'nun toplu gönderenler için de kuralları vardır. Alan adınız
 
 Spamhaus bilinmesi gereken bir noktaya dikkat çekiyor: bugün bounce olan bazı eski adresler daha sonra spam tuzaklarına dönüştürülür ([Spamhaus](https://www.spamhaus.org/resource-hub/deliverability/spamtraps-fix-the-problem-not-the-symptom/)). Doğrulama çalışmayan adresleri temizler, ancak satın alınmış bir listeyi e-posta göndermek için güvenli hâle getirmez.
 
-Bir kampanyadan önce listenizi bir [toplu mail doğrulama aracında](/bulk-email-verifier) kontrol edin veya tek bir adresi [mail adresi doğrulama aracıyla](/email-checker) kontrol edin. Bounce zaten bir sorunsa, [soğuk e-postaların neden geri döndüğünü](/blog/why-cold-emails-bounce) ve [hangi bounce oranının normal olduğunu](/blog/good-bounce-rate-for-cold-email) okuyun. Metninizi göndermeden önce [spam kelime kontrol aracında](/spam-word-checker) (İngilizce) de inceleyebilirsiniz.
+Bir kampanyadan önce listenizi bir [toplu mail doğrulama aracında](/bulk-email-verifier) kontrol edin veya tek bir adresi [mail adresi doğrulama aracıyla](/email-checker) kontrol edin. Bounce zaten bir sorunsa, [soğuk e-postaların neden geri döndüğünü](/blog/why-cold-emails-bounce) ve [hangi bounce oranının normal olduğunu](/blog/good-bounce-rate-for-cold-email) okuyun. Metninizi göndermeden önce [spam kelime kontrol aracında](/spam-word-checker) de inceleyebilirsiniz.
 
 ## Sık sorulan sorular
 

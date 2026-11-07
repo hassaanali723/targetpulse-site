@@ -57,7 +57,7 @@ Si buscas "spam score" en internet, también verás el Spam Score de Moz. Es una
 
 **mail-tester.com.** La web te da una dirección de correo de prueba. Envías tu correo a esa dirección. Después la web te muestra una nota sobre 10 y la lista de problemas que encontró, como reglas de SpamAssassin y fallos de autenticación.
 
-**Nuestro comprobador de palabras de spam.** El [spam word checker](/spam-word-checker) (en inglés) revisa el asunto y el texto de tu correo en tu navegador. Marca palabras de riesgo, mayúsculas y enlaces acortados. También marca campos personalizados que no se rellenaron, como `{{first_name}}`. No da un número, porque ninguna herramienta sabe cómo tratará tu correo cada buzón.
+**Nuestro comprobador de palabras de spam.** El [spam word checker](/spam-word-checker) revisa el asunto y el texto de tu correo en tu navegador. Marca palabras de riesgo, mayúsculas y enlaces acortados. También marca campos personalizados que no se rellenaron, como `{{first_name}}`. No da un número, porque ninguna herramienta sabe cómo tratará tu correo cada buzón.
 
 ## Cómo bajar tu spam score, paso a paso
 

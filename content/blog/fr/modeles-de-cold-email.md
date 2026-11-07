@@ -354,7 +354,7 @@ Un bon modèle envoyé à une mauvaise liste échoue quand même. Chaque adresse
 
 Spamhaus fait une remarque utile : certaines vieilles adresses qui rebondissent aujourd'hui sont ensuite transformées en spam traps ([Spamhaus](https://www.spamhaus.org/resource-hub/deliverability/spamtraps-fix-the-problem-not-the-symptom/)). La vérification retire les adresses mortes, mais elle ne rend pas une liste achetée sûre pour l'envoi.
 
-Avant une campagne, passez la liste dans un [vérificateur d'emails en masse](/bulk-email-verifier), ou contrôlez une seule adresse avec le [vérificateur d'adresse mail](/email-checker). Si les rebonds posent déjà problème, voici [pourquoi les cold emails rebondissent](/blog/why-cold-emails-bounce) et [quel taux de rebond est normal](/blog/good-bounce-rate-for-cold-email). Vous pouvez aussi passer votre texte dans le [vérificateur de mots spam](/spam-word-checker) (en anglais) avant l'envoi.
+Avant une campagne, passez la liste dans un [vérificateur d'emails en masse](/bulk-email-verifier), ou contrôlez une seule adresse avec le [vérificateur d'adresse mail](/email-checker). Si les rebonds posent déjà problème, voici [pourquoi les cold emails rebondissent](/blog/why-cold-emails-bounce) et [quel taux de rebond est normal](/blog/good-bounce-rate-for-cold-email). Vous pouvez aussi passer votre texte dans le [vérificateur de mots spam](/spam-word-checker) avant l'envoi.
 
 ## Questions fréquentes
 

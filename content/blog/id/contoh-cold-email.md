@@ -354,7 +354,7 @@ Template yang bagus tetap gagal jika dikirim ke daftar yang buruk. Setiap alamat
 
 Spamhaus menyampaikan satu hal yang perlu Anda ketahui: sebagian alamat lama yang bounce hari ini kemudian diubah menjadi spam trap ([Spamhaus](https://www.spamhaus.org/resource-hub/deliverability/spamtraps-fix-the-problem-not-the-symptom/)). Verifikasi menghapus alamat yang mati, tetapi tidak membuat daftar yang dibeli menjadi aman untuk dikirimi email.
 
-Sebelum kampanye, jalankan daftar Anda di [bulk email checker](/bulk-email-verifier), atau cek satu alamat dengan [email checker](/email-checker). Jika bounce sudah menjadi masalah, baca [kenapa cold email bounce](/blog/why-cold-emails-bounce) dan [berapa bounce rate yang normal](/blog/good-bounce-rate-for-cold-email). Anda juga bisa memeriksa teks email Anda di [spam word checker](/spam-word-checker) (dalam bahasa Inggris) sebelum dikirim.
+Sebelum kampanye, jalankan daftar Anda di [bulk email checker](/bulk-email-verifier), atau cek satu alamat dengan [email checker](/email-checker). Jika bounce sudah menjadi masalah, baca [kenapa cold email bounce](/blog/why-cold-emails-bounce) dan [berapa bounce rate yang normal](/blog/good-bounce-rate-for-cold-email). Anda juga bisa memeriksa teks email Anda di [spam word checker](/spam-word-checker) sebelum dikirim.
 
 ## Pertanyaan yang sering diajukan
 

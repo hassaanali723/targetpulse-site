@@ -113,6 +113,10 @@ export const CLUSTERS = {
   disposableChecker: { en: '/disposable-email-checker', it: '/it/verifica-email-temporanea', de: '/de/wegwerf-e-mail-pruefen', es: '/es/verificar-correo-desechable', 'pt-br': '/pt-br/verificador-de-e-mail-descartavel', fr: '/fr/verifier-adresse-mail-jetable', nl: '/nl/wegwerp-e-mailadres-controleren', pl: '/pl/sprawdz-jednorazowy-email', id: '/id/cek-email-sementara', ja: '/ja/disposable-email-checker', ko: '/ko/disposable-email-checker', tr: '/tr/gecici-mail-kontrolu' },
   // Free tools localized under plan 30 (components/tools/<Tool>/<Tool>Page.tsx).
   // A language is added here only when its page is live.
+  // The last three free tools, localized 2026-11-07 (they were English only).
+  plusAddressing: { en: '/gmail-plus-addressing', it: '/it/indirizzi-gmail-con-piu', de: '/de/gmail-plus-adressen', es: '/es/direcciones-gmail-con-plus', 'pt-br': '/pt-br/enderecos-gmail-com-mais', fr: '/fr/adresses-gmail-avec-plus', nl: '/nl/gmail-adressen-met-plus', pl: '/pl/adresy-gmail-z-plusem', id: '/id/alamat-gmail-plus', ja: '/ja/gmail-plus-addressing', ko: '/ko/gmail-plus-addressing', tr: '/tr/gmail-arti-adresleme' },
+  emailPermutator: { en: '/email-permutator', it: '/it/permutatore-email', de: '/de/e-mail-permutator', es: '/es/permutador-de-correos', 'pt-br': '/pt-br/permutador-de-emails', fr: '/fr/permutateur-email', nl: '/nl/e-mailadressen-combineren', pl: '/pl/generator-wariantow-adresu-email', id: '/id/kombinasi-alamat-email', ja: '/ja/email-permutator', ko: '/ko/email-permutator', tr: '/tr/mail-adresi-kombinasyonlari' },
+  spamWordChecker: { en: '/spam-word-checker', it: '/it/controllo-parole-spam', de: '/de/spam-woerter-pruefen', es: '/es/comprobador-de-palabras-spam', 'pt-br': '/pt-br/verificador-de-palavras-de-spam', fr: '/fr/verificateur-mots-spam', nl: '/nl/spamwoorden-controleren', pl: '/pl/wykrywanie-slow-spamowych', id: '/id/cek-kata-spam', ja: '/ja/spam-word-checker', ko: '/ko/spam-word-checker', tr: '/tr/spam-kelime-kontrolu' },
   mxLookup: {
     en: '/mx-lookup',
     fr: '/fr/mx-lookup',

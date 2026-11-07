@@ -230,6 +230,13 @@ const freeToolL10nUrls = new Set<string>([
   '/de/secure-email-gateway',
 ])
 
+// The last three free tools (Gmail plus addressing, email permutator, spam
+// word checker) were localized on this date.
+const LAST_TOOLS_SHIPPED = '2026-11-07'
+const lastToolUrls = new Set<string>(
+  ['plusAddressing', 'emailPermutator', 'spamWordChecker'].flatMap((id) => Object.values((CLUSTERS as Record<string, Cluster>)[id] ?? {})),
+)
+
 // The translated affiliate pages shipped on this date.
 const AFFILIATES_SHIPPED = '2026-10-29'
 const affiliatesUrls = new Set<string>(Object.values(CLUSTERS.affiliates))
@@ -272,7 +279,9 @@ function localeEntries(locale: 'it' | 'de' | 'es' | 'pt-br' | 'fr' | 'nl' | 'pl'
                     ? FREE_TOOLS_L10N_SHIPPED
                     : affiliatesUrls.has(path)
                       ? AFFILIATES_SHIPPED
-                      : launch),
+                      : lastToolUrls.has(path)
+                        ? LAST_TOOLS_SHIPPED
+                        : launch),
     }))
   if (!floorToLaunch) return entries
   return entries.map((e) => ({ ...e, lastModified: e.lastModified && e.lastModified > launch ? e.lastModified : launch }))

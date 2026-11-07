@@ -73,7 +73,7 @@ No trabalho, a maioria das empresas escolhe um formato e usa para todo mundo. Es
 
 Qual é o mais comum depende de como você conta. A Sendburg analisou 336.782 endereços corporativos. Ela encontrou nome.sobrenome em 47,7% deles, inicial mais sobrenome (como jsmith) em 26,8% e só o nome em 8,1% ([Sendburg](https://send-burg.com/research/b2b-email-formats)). A Hunter conta empresas em vez de endereços e diz que 49,9% das empresas nos seus dados usam endereços só com o nome ([Hunter](https://hunter.io/blog/how-to-find-someones-email-address/)). As duas coisas podem ser verdade. A maioria das empresas é pequena e usa o nome. Já a maioria dos endereços pertence a empresas grandes, que preferem nome.sobrenome. Os próprios dados da Sendburg mostram nome.sobrenome subindo de 38% nas empresas com até 10 pessoas para 74% nas empresas com mais de 10.000. As duas são fornecedoras que vendem ferramentas para encontrar e-mails, então use os números como referência.
 
-Se você precisa adivinhar o endereço de um colega, o [email permutator](/email-permutator) (em inglês) lista todos os formatos prováveis para um nome e um domínio.
+Se você precisa adivinhar o endereço de um colega, o [email permutator](/email-permutator) lista todos os formatos prováveis para um nome e um domínio.
 
 ### Endereços de função
 
@@ -112,7 +112,7 @@ Na prática, um endereço pode ter no máximo 254 caracteres. A parte antes do @
 Algumas regras surpreendem as pessoas:
 
 - **Pontos no Gmail não fazem diferença.** j.smith@gmail.com e jsmith@gmail.com chegam na mesma caixa de entrada. Isso só vale para o Gmail pessoal. No Google Workspace, usado por empresas, os pontos mudam o endereço ([Google](https://support.google.com/mail/answer/7436150)).
-- **Endereços com sinal de mais.** Um e-mail para jane+news@gmail.com chega em jane@gmail.com. Assim você pode organizar as mensagens ou ver quem compartilhou o seu endereço ([Google](https://support.google.com/mail/answer/12096)). O e-mail corporativo da Microsoft também aceita isso, mas só para receber ([Microsoft](https://learn.microsoft.com/en-us/exchange/recipients-in-exchange-online/plus-addressing-in-exchange-online)). A [ferramenta de plus addressing do Gmail](/gmail-plus-addressing) (em inglês) monta esses endereços para você.
+- **Endereços com sinal de mais.** Um e-mail para jane+news@gmail.com chega em jane@gmail.com. Assim você pode organizar as mensagens ou ver quem compartilhou o seu endereço ([Google](https://support.google.com/mail/answer/12096)). O e-mail corporativo da Microsoft também aceita isso, mas só para receber ([Microsoft](https://learn.microsoft.com/en-us/exchange/recipients-in-exchange-online/plus-addressing-in-exchange-online)). A [ferramenta de plus addressing do Gmail](/gmail-plus-addressing) monta esses endereços para você.
 - **Letras maiúsculas.** O padrão diz que a parte antes do @ pode diferenciar maiúsculas e minúsculas, mas também desaconselha depender disso. Na prática, os provedores tratam Jane@ e jane@ como a mesma caixa, e a Proton diz isso nas páginas de ajuda dela ([Proton](https://proton.me/support/change-username)). Há mais sobre Gmail e Outlook em [o e-mail diferencia maiúsculas e minúsculas?](/blog/are-email-addresses-case-sensitive)
 - **Outros alfabetos.** Os endereços podem usar caracteres não latinos, como hindi ou chinês, pela RFC 6531. O Gmail envia e recebe esses endereços desde 2014 ([Google](https://workspaceupdates.googleblog.com/2014/08/support-for-third-party.html)), mas muitos sistemas mais antigos ainda não conseguem lidar com eles.
 

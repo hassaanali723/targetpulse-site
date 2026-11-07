@@ -54,7 +54,7 @@ Anda mungkin juga melihat "Spam Score" di alat SEO. SEO berarti membuat situs we
 1. Buka mail-tester.com. Situs ini menampilkan alamat email uji.
 2. Kirim email Anda yang sebenarnya ke alamat itu, dari alat yang biasa Anda pakai.
 3. Buka halaman hasil. Halaman ini menampilkan skor dari 10 dan mencantumkan setiap masalah yang ditemukan.
-4. Tempelkan baris subjek dan teks Anda ke [spam word checker](/spam-word-checker) (dalam bahasa Inggris) kami. Alat ini menandai kata berisiko, huruf kapital, dan pemendek tautan di browser Anda.
+4. Tempelkan baris subjek dan teks Anda ke [spam word checker](/spam-word-checker) kami. Alat ini menandai kata berisiko, huruf kapital, dan pemendek tautan di browser Anda.
 
 Di mail-tester.com, skor yang lebih tinggi lebih baik. Di SpamAssassin, skor yang lebih rendah lebih baik. Baca daftar masalahnya, bukan hanya angkanya.
 

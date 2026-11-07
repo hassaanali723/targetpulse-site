@@ -54,7 +54,7 @@ Je ziet "Spam Score" misschien ook in SEO-tools. SEO betekent zorgen dat een web
 1. Ga naar mail-tester.com. Je krijgt een testadres te zien.
 2. Stuur je echte e-mail naar dat adres, vanuit de tool die je normaal gebruikt.
 3. Open de resultatenpagina. Die toont een score op 10 en noemt elk probleem dat is gevonden.
-4. Plak je onderwerpregel en je tekst in onze [spam word checker](/spam-word-checker) (in het Engels). Die markeert in je browser riskante woorden, hoofdletters en linkverkorters.
+4. Plak je onderwerpregel en je tekst in onze [spam word checker](/spam-word-checker). Die markeert in je browser riskante woorden, hoofdletters en linkverkorters.
 
 Op mail-tester.com is een hogere score beter. Bij SpamAssassin is een lagere score beter. Lees de lijst met problemen, niet alleen het getal.
 

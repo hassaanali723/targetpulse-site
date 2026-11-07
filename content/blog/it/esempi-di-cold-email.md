@@ -354,7 +354,7 @@ Un buon modello inviato a una lista cattiva fallisce comunque. Ogni indirizzo ch
 
 Spamhaus fa un'osservazione utile: alcuni vecchi indirizzi che oggi rimbalzano vengono poi trasformati in spam trap ([Spamhaus](https://www.spamhaus.org/resource-hub/deliverability/spamtraps-fix-the-problem-not-the-symptom/)). La verifica toglie gli indirizzi morti, ma non rende sicura da contattare una lista comprata.
 
-Prima di una campagna, passa la lista da una [verifica email in blocco](/bulk-email-verifier), oppure controlla un singolo indirizzo con la [verifica email](/email-checker). Se i bounce sono già un problema, ecco [perché le cold email rimbalzano](/blog/why-cold-emails-bounce) e [quale tasso di rimbalzo è normale](/blog/good-bounce-rate-for-cold-email). Puoi anche passare il testo dal [controllo parole spam](/spam-word-checker) (in inglese) prima dell'invio.
+Prima di una campagna, passa la lista da una [verifica email in blocco](/bulk-email-verifier), oppure controlla un singolo indirizzo con la [verifica email](/email-checker). Se i bounce sono già un problema, ecco [perché le cold email rimbalzano](/blog/why-cold-emails-bounce) e [quale tasso di rimbalzo è normale](/blog/good-bounce-rate-for-cold-email). Puoi anche passare il testo dal [controllo parole spam](/spam-word-checker) prima dell'invio.
 
 ## Domande frequenti
 

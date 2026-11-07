@@ -73,7 +73,7 @@ Op het werk kiezen de meeste bedrijven één vorm en gebruiken die voor iedereen
 
 Welke vorm het meest voorkomt, hangt af van hoe je telt. Sendburg bekeek 336.782 zakelijke adressen. Het vond voornaam.achternaam in 47,7% ervan, flast (zoals jsmith) in 26,8% en alleen de voornaam in 8,1% ([Sendburg](https://send-burg.com/research/b2b-email-formats)). Hunter telt bedrijven in plaats van adressen, en zegt dat 49,9% van de bedrijven in zijn data adressen met alleen de voornaam gebruikt ([Hunter](https://hunter.io/blog/how-to-find-someones-email-address/)). Beide kunnen kloppen. De meeste bedrijven zijn klein en gebruiken voornamen. De meeste adressen horen bij grote bedrijven, en die kiezen vaker voor voornaam.achternaam. De eigen data van Sendburg laat zien dat voornaam.achternaam stijgt van 38% bij bedrijven tot 10 mensen naar 74% bij bedrijven met meer dan 10.000 mensen. Beide partijen verkopen tools om e-mailadressen te vinden. Zie de cijfers dus als een richtlijn.
 
-Moet je het adres van een collega raden? De [e-mailpermutator](/email-permutator) (in het Engels) toont elke waarschijnlijke vorm voor een naam en een domein.
+Moet je het adres van een collega raden? De [e-mailpermutator](/email-permutator) toont elke waarschijnlijke vorm voor een naam en een domein.
 
 ### Rol-adressen
 
@@ -112,7 +112,7 @@ In de praktijk kan een adres maximaal 254 tekens lang zijn. Het deel voor de @ m
 Een paar regels verrassen mensen:
 
 - **Punten maken in Gmail niet uit.** j.smith@gmail.com en jsmith@gmail.com komen in dezelfde inbox. Dat geldt alleen voor persoonlijke Gmail-accounts. In Google Workspace, dat bedrijven gebruiken, veranderen punten het adres wel ([Google](https://support.google.com/mail/answer/7436150)).
-- **Plus-adressering.** Mail aan jane+news@gmail.com komt aan bij jane@gmail.com. Zo kun je mail sorteren of zien wie je adres heeft gedeeld ([Google](https://support.google.com/mail/answer/12096)). De zakelijke e-mail van Microsoft ondersteunt dit ook, maar alleen voor ontvangen ([Microsoft](https://learn.microsoft.com/en-us/exchange/recipients-in-exchange-online/plus-addressing-in-exchange-online)). De [tool voor plus-adressering in Gmail](/gmail-plus-addressing) (in het Engels) maakt deze adressen voor je.
+- **Plus-adressering.** Mail aan jane+news@gmail.com komt aan bij jane@gmail.com. Zo kun je mail sorteren of zien wie je adres heeft gedeeld ([Google](https://support.google.com/mail/answer/12096)). De zakelijke e-mail van Microsoft ondersteunt dit ook, maar alleen voor ontvangen ([Microsoft](https://learn.microsoft.com/en-us/exchange/recipients-in-exchange-online/plus-addressing-in-exchange-online)). De [tool voor plus-adressering in Gmail](/gmail-plus-addressing) maakt deze adressen voor je.
 - **Hoofdletters.** De standaard zegt dat het deel voor de @ hoofdlettergevoelig kan zijn, maar raadt ook af daarop te vertrouwen. In de praktijk behandelen providers Jane@ en jane@ als dezelfde mailbox, en Proton zegt dat ook in zijn helppagina's ([Proton](https://proton.me/support/change-username)). Meer over Gmail en Outlook lees je in [is een e-mailadres hoofdlettergevoelig?](/blog/are-email-addresses-case-sensitive)
 - **Andere alfabetten.** Adressen kunnen onder RFC 6531 niet-Latijnse tekens gebruiken, zoals Hindi of Chinees. Gmail verstuurt en ontvangt die sinds 2014 ([Google](https://workspaceupdates.googleblog.com/2014/08/support-for-third-party.html)), maar veel oudere systemen kunnen er nog steeds niet mee overweg.
 

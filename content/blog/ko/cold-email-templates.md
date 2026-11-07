@@ -364,7 +364,7 @@ Gmail과 Yahoo에도 대량 발신자에 대한 규칙이 있습니다. SPF, DKI
 
 Spamhaus는 알아 둘 만한 점을 지적합니다. 지금 반송되는 오래된 주소 중 일부는 나중에 스팸 트랩으로 바뀝니다([Spamhaus](https://www.spamhaus.org/resource-hub/deliverability/spamtraps-fix-the-problem-not-the-symptom/)). 검증으로 없어진 주소는 제거할 수 있지만, 구매한 리스트를 안전하게 보낼 수 있는 리스트로 만들 수는 없습니다.
 
-캠페인 전에 [대량 이메일 검증](/bulk-email-verifier)으로 리스트를 확인하거나, [이메일 유효성 검사](/email-checker) 도구로 주소 하나를 확인하십시오. 이미 반송이 문제라면 [콜드메일이 반송되는 이유](/blog/why-cold-emails-bounce)와 [정상적인 반송률](/blog/good-bounce-rate-for-cold-email)을 참고하십시오. 보내기 전에 [스팸 단어 검사기](/spam-word-checker)(영어)로 문구를 확인할 수도 있습니다.
+캠페인 전에 [대량 이메일 검증](/bulk-email-verifier)으로 리스트를 확인하거나, [이메일 유효성 검사](/email-checker) 도구로 주소 하나를 확인하십시오. 이미 반송이 문제라면 [콜드메일이 반송되는 이유](/blog/why-cold-emails-bounce)와 [정상적인 반송률](/blog/good-bounce-rate-for-cold-email)을 참고하십시오. 보내기 전에 [스팸 단어 검사기](/spam-word-checker)로 문구를 확인할 수도 있습니다.
 
 ## 자주 묻는 질문
 

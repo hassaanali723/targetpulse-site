@@ -4,6 +4,10 @@
  * documentation, checked on 2026-10-13 (sources in
  * targetpulse-seo/plans/25-gmail-plus-addressing-plan.md).
  * No path-alias imports, so the file also runs under plain Node for quick tests.
+ *
+ * The core holds no user-facing text. Provider notes, input errors and skip
+ * reasons are keys; the wording for each language is in
+ * lib/i18n/tools/plusAddressingToolStrings.ts.
  */
 
 export type PlusSupport = 'yes' | 'tested' | 'other-separator' | 'unknown'
@@ -14,7 +18,6 @@ export interface ProviderRule {
   support: PlusSupport
   /** Gmail ignores dots in the username, so a.b@gmail.com and ab@gmail.com are one inbox. */
   dotsIgnored: boolean
-  note: string
 }
 
 export const PROVIDER_RULES: ProviderRule[] = [
@@ -23,49 +26,42 @@ export const PROVIDER_RULES: ProviderRule[] = [
     domains: ['gmail.com', 'googlemail.com'],
     support: 'yes',
     dotsIgnored: true,
-    note: 'Gmail delivers every +tag to your inbox and ignores dots in the username. gmail.com and googlemail.com are the same inbox.',
   },
   {
     name: 'Outlook.com',
     domains: ['outlook.com', 'hotmail.com', 'live.com', 'msn.com', 'hotmail.co.uk', 'outlook.co.uk', 'live.co.uk', 'hotmail.fr', 'outlook.fr', 'live.fr', 'hotmail.de', 'outlook.de', 'hotmail.it', 'outlook.it', 'hotmail.es', 'outlook.es'],
     support: 'yes',
     dotsIgnored: false,
-    note: 'Outlook.com accepts +tags. Dots are part of the address, so leave them as they are.',
   },
   {
     name: 'iCloud Mail',
     domains: ['icloud.com', 'me.com', 'mac.com'],
     support: 'tested',
     dotsIgnored: false,
-    note: 'Independent tests show iCloud delivers +tags, but Apple doesn’t document it. Send yourself a test first.',
   },
   {
     name: 'Proton Mail',
     domains: ['proton.me', 'protonmail.com', 'protonmail.ch', 'pm.me'],
     support: 'yes',
     dotsIgnored: false,
-    note: 'Proton supports +tags on every plan. When you reply, Proton uses the tagged address as the sender.',
   },
   {
     name: 'Fastmail',
     domains: ['fastmail.com', 'fastmail.fm'],
     support: 'yes',
     dotsIgnored: false,
-    note: 'Fastmail supports +tags. If the tag matches a folder name, the mail goes into that folder.',
   },
   {
     name: 'Yandex Mail',
     domains: ['yandex.com', 'yandex.ru', 'ya.ru'],
     support: 'yes',
     dotsIgnored: false,
-    note: 'Yandex supports +tags, such as login+word@yandex.ru.',
   },
   {
     name: 'Yahoo Mail',
     domains: ['yahoo.com', 'ymail.com', 'rocketmail.com', 'yahoo.co.uk', 'yahoo.fr', 'yahoo.de', 'yahoo.ca', 'yahoo.com.au', 'yahoo.in'],
     support: 'other-separator',
     dotsIgnored: false,
-    note: 'Yahoo documents disposable addresses with a dash instead (nickname-keyword@yahoo.com), and the nickname is not your account name. Its support for + is not confirmed.',
   },
 ]
 
@@ -76,7 +72,19 @@ export const providerFor = (domain: string): ProviderRule | null => DOMAIN_RULE.
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-export class PlusInputError extends Error {}
+export type PlusInputCode = 'empty' | 'invalid'
+
+/** Thrown for an unusable address. `code` picks the message in the tool strings. */
+export class PlusInputError extends Error {
+  code: PlusInputCode
+  constructor(code: PlusInputCode) {
+    super(code)
+    this.code = code
+  }
+}
+
+/** Why a tag was skipped: characters outside a-z 0-9 . _ - , or a local part over 64 characters. */
+export type PlusSkipReason = 'chars' | 'too-long'
 
 export interface PlusResult {
   base: string
@@ -85,14 +93,14 @@ export interface PlusResult {
   provider: ProviderRule | null
   addresses: { tag: string; address: string }[]
   /** Tags that were skipped, with the reason. */
-  skipped: { tag: string; reason: string }[]
+  skipped: { tag: string; reason: PlusSkipReason }[]
 }
 
 /** Builds name+tag@domain for each tag. */
 export function makePlusAddresses(rawAddress: string, rawTags: string): PlusResult {
   const address = rawAddress.trim()
-  if (!address) throw new PlusInputError('Enter your email address first.')
-  if (!EMAIL_RE.test(address)) throw new PlusInputError('That doesn’t look like an email address. Enter something like jane@gmail.com.')
+  if (!address) throw new PlusInputError('empty')
+  if (!EMAIL_RE.test(address)) throw new PlusInputError('invalid')
   const at = address.lastIndexOf('@')
   const domain = address.slice(at + 1).toLowerCase()
   // Start from the base address if the user typed one that already has a tag.
@@ -110,13 +118,13 @@ export function makePlusAddresses(rawAddress: string, rawTags: string): PlusResu
     if (seen.has(tag)) continue
     seen.add(tag)
     if (!/^[a-z0-9._-]+$/.test(tag)) {
-      skipped.push({ tag: raw, reason: 'Use letters, numbers, dots, dashes or underscores only.' })
+      skipped.push({ tag: raw, reason: 'chars' })
       continue
     }
     const full = `${local}+${tag}@${domain}`
     // RFC 5321: 64 octets before the @. RFC 3696 erratum 1690: 254 in total.
     if (local.length + 1 + tag.length > 64 || full.length > 254) {
-      skipped.push({ tag: raw, reason: 'This tag makes the address too long (64 characters before the @ at most).' })
+      skipped.push({ tag: raw, reason: 'too-long' })
       continue
     }
     addresses.push({ tag, address: full })

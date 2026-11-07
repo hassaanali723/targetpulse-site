@@ -73,7 +73,7 @@ cta: 이메일 주소가 실제로 있는지 확인하기
 
 어떤 형식이 가장 흔한지는 세는 방법에 따라 다릅니다. Sendburg는 업무용 주소 336,782개를 조사했습니다. 그 결과 이름.성 형식이 47.7%, 이름 머리글자와 성을 붙인 형식(jsmith 등)이 26.8%, 이름만 쓰는 형식이 8.1%였습니다([Sendburg](https://send-burg.com/research/b2b-email-formats)). Hunter는 주소가 아니라 회사를 기준으로 세며, 자사 데이터에 있는 회사의 49.9%가 이름만 쓰는 주소를 사용한다고 밝힙니다([Hunter](https://hunter.io/blog/how-to-find-someones-email-address/)). 두 결과는 모두 사실일 수 있습니다. 대부분의 회사는 작고 이름만 쓰는 반면, 대부분의 주소는 이름.성 형식을 선호하는 대기업에 속하기 때문입니다. Sendburg의 데이터에서도 이름.성 형식은 직원 10명 이하 회사의 38%에서 직원 10,000명 초과 회사의 74%로 늘어납니다. 두 곳 모두 이메일 찾기 도구를 판매하는 업체이므로, 이 수치는 참고용으로 보십시오.
 
-동료의 주소를 추측해야 한다면 [이메일 주소 조합 생성기](/email-permutator)(영어)가 이름과 도메인으로 가능성 있는 주소 형식을 모두 보여 줍니다.
+동료의 주소를 추측해야 한다면 [이메일 주소 조합 생성기](/email-permutator)가 이름과 도메인으로 가능성 있는 주소 형식을 모두 보여 줍니다.
 
 ### 역할 기반 주소
 
@@ -112,7 +112,7 @@ cta: 이메일 주소가 실제로 있는지 확인하기
 많은 사람이 의외라고 느끼는 규칙이 몇 가지 있습니다.
 
 - **Gmail에서는 점이 상관없습니다.** j.smith@gmail.com과 jsmith@gmail.com은 같은 받은편지함에 도착합니다. 이 규칙은 개인용 Gmail에만 해당합니다. 회사가 쓰는 Google Workspace에서는 점이 있으면 다른 주소가 됩니다([Google](https://support.google.com/mail/answer/7436150)).
-- **플러스 주소(plus addressing).** jane+news@gmail.com으로 보낸 메일은 jane@gmail.com에 도착합니다. 그래서 메일을 분류하거나 누가 주소를 공유했는지 알 수 있습니다([Google](https://support.google.com/mail/answer/12096)). Microsoft의 업무용 이메일도 이 기능을 지원하지만, 받는 메일에만 해당합니다([Microsoft](https://learn.microsoft.com/en-us/exchange/recipients-in-exchange-online/plus-addressing-in-exchange-online)). [Gmail 플러스 주소 도구](/gmail-plus-addressing)(영어)로 이런 주소를 만들 수 있습니다.
+- **플러스 주소(plus addressing).** jane+news@gmail.com으로 보낸 메일은 jane@gmail.com에 도착합니다. 그래서 메일을 분류하거나 누가 주소를 공유했는지 알 수 있습니다([Google](https://support.google.com/mail/answer/12096)). Microsoft의 업무용 이메일도 이 기능을 지원하지만, 받는 메일에만 해당합니다([Microsoft](https://learn.microsoft.com/en-us/exchange/recipients-in-exchange-online/plus-addressing-in-exchange-online)). [Gmail 플러스 주소 도구](/gmail-plus-addressing)로 이런 주소를 만들 수 있습니다.
 - **대문자.** 표준에 따르면 @ 앞부분은 대소문자를 구분할 수 있지만, 표준은 이에 의존하지 말라고도 권합니다. 실제로는 제공업체들이 Jane@ 주소와 jane@ 주소를 같은 메일함으로 처리하며, Proton도 도움말 페이지에서 그렇게 밝힙니다([Proton](https://proton.me/support/change-username)). Gmail과 Outlook에 대한 자세한 내용은 [이메일 주소는 대소문자를 구분합니까?](/blog/are-email-addresses-case-sensitive)에서 볼 수 있습니다.
 - **다른 문자 체계.** RFC 6531에 따라 주소에 힌디어나 중국어 같은 비라틴 문자를 쓸 수 있습니다. Gmail은 2014년부터 이런 주소로 메일을 보내고 받았습니다([Google](https://workspaceupdates.googleblog.com/2014/08/support-for-third-party.html)). 하지만 오래된 시스템 중에는 아직 이런 주소를 처리하지 못하는 곳이 많습니다.
 

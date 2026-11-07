@@ -73,7 +73,7 @@ cta: メールアドレスが実際に存在するか確認しましょう
 
 どの形式が最も多いかは、数え方によって変わります。Sendburgは336,782件のビジネス用アドレスを調べました。その結果、first.lastが47.7%、flast（jsmithなど）が26.8%、名のみが8.1%でした（[Sendburg](https://send-burg.com/research/b2b-email-formats)）。Hunterはアドレスではなく会社の数で数えており、データ内の会社の49.9%が名のみのアドレスを使っているとしています（[Hunter](https://hunter.io/blog/how-to-find-someones-email-address/)）。どちらも正しい可能性があります。会社の多くは小規模で名のみを使い、アドレスの多くはfirst.lastを好む大企業のものだからです。Sendburg自身のデータでも、first.lastの割合は、10人以下の会社の38%から、10,000人を超える会社の74%まで上がっています。どちらもメールアドレスを探すツールを販売する会社なので、数字は目安として扱ってください。
 
-同僚のアドレスを推測する必要がある場合は、[メールパーミュテーター](/email-permutator)（英語）で、名前とドメインから考えられる形式をすべて一覧にできます。
+同僚のアドレスを推測する必要がある場合は、[メールパーミュテーター](/email-permutator)で、名前とドメインから考えられる形式をすべて一覧にできます。
 
 ### 役割アドレス
 
@@ -112,7 +112,7 @@ cta: メールアドレスが実際に存在するか確認しましょう
 意外に思われやすいルールがいくつかあります。
 
 - **Gmailではドットは関係ありません。**j.smith@gmail.comとjsmith@gmail.comは同じ受信トレイに届きます。これが当てはまるのは個人用のGmailだけです。企業が使うGoogle Workspaceでは、ドットがあるとアドレスが変わります（[Google](https://support.google.com/mail/answer/7436150)）。
-- **プラスアドレス。**jane+news@gmail.com宛てのメールはjane@gmail.comに届きます。そのため、メールを振り分けたり、誰がアドレスを共有したかを確認したりできます（[Google](https://support.google.com/mail/answer/12096)）。Microsoftのビジネス用メールもこの機能に対応していますが、受信のみです（[Microsoft](https://learn.microsoft.com/en-us/exchange/recipients-in-exchange-online/plus-addressing-in-exchange-online)）。[Gmailのプラスアドレス作成ツール](/gmail-plus-addressing)（英語）を使うと、こうしたアドレスを作れます。
+- **プラスアドレス。**jane+news@gmail.com宛てのメールはjane@gmail.comに届きます。そのため、メールを振り分けたり、誰がアドレスを共有したかを確認したりできます（[Google](https://support.google.com/mail/answer/12096)）。Microsoftのビジネス用メールもこの機能に対応していますが、受信のみです（[Microsoft](https://learn.microsoft.com/en-us/exchange/recipients-in-exchange-online/plus-addressing-in-exchange-online)）。[Gmailのプラスアドレス作成ツール](/gmail-plus-addressing)を使うと、こうしたアドレスを作れます。
 - **大文字。**規格では、@より前の部分は大文字と小文字を区別してもよいとされていますが、それに頼ることは推奨されていません。実際には、メールサービスはJane@とjane@を同じメールボックスとして扱います。Protonもヘルプページでそう説明しています（[Proton](https://proton.me/support/change-username)）。GmailとOutlookについては、[メールアドレスの大文字と小文字は区別される？](/blog/are-email-addresses-case-sensitive)で詳しく説明しています。
 - **ラテン文字以外の文字。**RFC 6531により、ヒンディー語や中国語などラテン文字以外の文字もアドレスに使えます。Gmailは2014年からこうしたアドレスの送受信に対応しています（[Google](https://workspaceupdates.googleblog.com/2014/08/support-for-third-party.html)）。ただし、古いシステムの多くはまだ対応していません。
 

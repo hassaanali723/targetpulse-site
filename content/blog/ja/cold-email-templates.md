@@ -380,7 +380,7 @@ GmailとYahooにも、大量に送信する送信者向けのルールがあり�
 
 Spamhausは、知っておくべき点を指摘しています。今日バウンスする古いアドレスの一部は、後でスパムトラップに転用されます（[Spamhaus](https://www.spamhaus.org/resource-hub/deliverability/spamtraps-fix-the-problem-not-the-symptom/)）。検証で存在しないアドレスは取り除けますが、購入したリストを安全に送れるリストにすることはできません。
 
-キャンペーンの前に、[メールアドレスの一括検証](/bulk-email-verifier)でリストを確認してください。1件だけ確認する場合は、[メールアドレスチェッカー](/email-checker)を使います。すでにバウンスが問題になっている場合は、[コールドメールがバウンスする理由](/blog/why-cold-emails-bounce)と[正常なバウンス率の目安](/blog/good-bounce-rate-for-cold-email)をご覧ください。送信前に、[スパムワードチェッカー](/spam-word-checker)（英語）で文面を確認することもできます。
+キャンペーンの前に、[メールアドレスの一括検証](/bulk-email-verifier)でリストを確認してください。1件だけ確認する場合は、[メールアドレスチェッカー](/email-checker)を使います。すでにバウンスが問題になっている場合は、[コールドメールがバウンスする理由](/blog/why-cold-emails-bounce)と[正常なバウンス率の目安](/blog/good-bounce-rate-for-cold-email)をご覧ください。送信前に、[スパムワードチェッカー](/spam-word-checker)で文面を確認することもできます。
 
 ## よくある質問
 

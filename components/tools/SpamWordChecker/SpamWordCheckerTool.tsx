@@ -15,10 +15,20 @@ import {
 import {
   checkSpamIssues,
   type SpamCheckResult,
-  type Finding,
 } from '@/lib/tools/spamWordCheckerCore'
+import {
+  spamToolStrings,
+  spamCount,
+  spamSummary,
+  spamMarkTitle,
+  spamFindingView,
+} from '@/lib/i18n/tools/spamWordCheckerToolStrings'
+import type { Locale } from '@/lib/i18n/clusters'
 
-export default function SpamWordCheckerTool() {
+// Every visible string comes from lib/i18n/tools/spamWordCheckerToolStrings.ts.
+// The trigger phrases and their alternatives stay English in every language.
+export default function SpamWordCheckerTool({ locale = 'en' }: { locale?: Locale }) {
+  const t = spamToolStrings(locale)
   const [subject, setSubject] = useState('')
   const [preview, setPreview] = useState('')
   const [body, setBody] = useState('')
@@ -33,6 +43,8 @@ export default function SpamWordCheckerTool() {
       body,
     })
   }, [subject, preview, body, hasChecked])
+
+  const summary = analysis ? spamSummary(t, analysis) : null
 
   const handleRunCheck = (e?: React.FormEvent) => {
     if (e) e.preventDefault()
@@ -71,7 +83,7 @@ export default function SpamWordCheckerTool() {
       chunks.push(
         <mark
           key={`match-${idx}-${m.index}`}
-          title={`${m.category}: ${m.alternative ? `Try "${m.alternative}"` : 'Consider plainer phrasing'}`}
+          title={spamMarkTitle(t, m)}
           className="bg-amber-200/80 text-amber-950 px-1 py-0.5 rounded font-medium cursor-help"
         >
           {matchText}
@@ -85,7 +97,7 @@ export default function SpamWordCheckerTool() {
     }
 
     return chunks
-  }, [analysis, body])
+  }, [analysis, body, t])
 
   return (
     <div className="w-full max-w-4xl mx-auto space-y-6">
@@ -94,10 +106,10 @@ export default function SpamWordCheckerTool() {
           <div>
             <div className="flex items-center justify-between mb-1.5">
               <label htmlFor="swc-subject" className="block text-xs font-bold uppercase tracking-wider text-slate-700">
-                Subject Line <span className="text-red-500">*</span>
+                {t.subjectLabel} <span className="text-red-500">*</span>
               </label>
               <span className={`text-[11px] font-medium ${subject.length > 60 ? 'text-amber-600 font-semibold' : 'text-slate-400'}`}>
-                {subject.length}/60 chars {subject.length > 60 ? '(readability caution)' : ''}
+                {spamCount(t, t.subjectCounter, subject.length)} {subject.length > 60 ? t.subjectCaution : ''}
               </span>
             </div>
             <input
@@ -108,7 +120,7 @@ export default function SpamWordCheckerTool() {
                 setSubject(e.target.value)
                 setHasChecked(true)
               }}
-              placeholder="e.g. Quick question about our proposal"
+              placeholder={t.subjectPlaceholder}
               required
               className="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition"
             />
@@ -116,7 +128,7 @@ export default function SpamWordCheckerTool() {
 
           <div>
             <label htmlFor="swc-preview" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-              Preview Text <span className="text-slate-400 font-normal lowercase">(optional)</span>
+              {t.previewLabel} <span className="text-slate-400 font-normal lowercase">{t.optional}</span>
             </label>
             <input
               id="swc-preview"
@@ -126,7 +138,7 @@ export default function SpamWordCheckerTool() {
                 setPreview(e.target.value)
                 setHasChecked(true)
               }}
-              placeholder="e.g. A brief follow-up on our conversation last week"
+              placeholder={t.previewPlaceholder}
               className="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition"
             />
           </div>
@@ -134,7 +146,7 @@ export default function SpamWordCheckerTool() {
           <div>
             <div className="flex items-center justify-between mb-1.5">
               <label htmlFor="swc-body" className="block text-xs font-bold uppercase tracking-wider text-slate-700">
-                Email Body <span className="text-slate-400 font-normal lowercase">(plain text or copied HTML)</span>
+                {t.bodyLabel} <span className="text-slate-400 font-normal lowercase">{t.bodyHint}</span>
               </label>
               {body.length > 0 && (
                 <button
@@ -143,7 +155,7 @@ export default function SpamWordCheckerTool() {
                   className="text-xs text-slate-400 hover:text-red-600 transition flex items-center gap-1"
                 >
                   <Trash2 className="w-3 h-3" />
-                  <span>Clear</span>
+                  <span>{t.clear}</span>
                 </button>
               )}
             </div>
@@ -155,7 +167,7 @@ export default function SpamWordCheckerTool() {
                 setBody(e.target.value)
                 setHasChecked(true)
               }}
-              placeholder="Paste your email draft or newsletter HTML here..."
+              placeholder={t.bodyPlaceholder}
               className="w-full px-4 py-3 rounded-xl border border-slate-300 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 font-sans leading-relaxed"
             />
           </div>
@@ -167,58 +179,58 @@ export default function SpamWordCheckerTool() {
               className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white font-bold text-xs shadow-md transition"
             >
               <Search className="w-4 h-4" />
-              <span>Check Email Copy</span>
+              <span>{t.button}</span>
             </button>
           </div>
         </form>
 
         {/* ANALYSIS OUTPUT */}
-        {analysis && (
+        {analysis && summary && (
           <div className="pt-6 border-t border-slate-200 space-y-6">
             {/* Plain Summary Badge (No numeric score) */}
             <div
               className={`p-5 rounded-xl border flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${
-                analysis.verdict === 'Looks clean'
+                analysis.verdict === 'clean'
                   ? 'border-emerald-200 bg-emerald-50/60'
-                  : analysis.verdict === 'Needs work'
+                  : analysis.verdict === 'needs-work'
                   ? 'border-red-200 bg-red-50/60'
                   : 'border-amber-200 bg-amber-50/60'
               }`}
             >
               <div className="flex items-center gap-3">
-                {analysis.verdict === 'Looks clean' && (
+                {analysis.verdict === 'clean' && (
                   <CheckCircle2 className="w-6 h-6 text-emerald-600 shrink-0" />
                 )}
-                {analysis.verdict === 'A few things to fix' && (
+                {analysis.verdict === 'few-fixes' && (
                   <AlertCircle className="w-6 h-6 text-amber-600 shrink-0" />
                 )}
-                {analysis.verdict === 'Needs work' && (
+                {analysis.verdict === 'needs-work' && (
                   <AlertTriangle className="w-6 h-6 text-red-600 shrink-0" />
                 )}
 
                 <div>
                   <h3
                     className={`text-base font-bold ${
-                      analysis.verdict === 'Looks clean'
+                      analysis.verdict === 'clean'
                         ? 'text-emerald-950'
-                        : analysis.verdict === 'Needs work'
+                        : analysis.verdict === 'needs-work'
                         ? 'text-red-950'
                         : 'text-amber-950'
                     }`}
                   >
-                    Summary: {analysis.verdict}
+                    {summary.heading}
                   </h3>
-                  <p className="text-xs text-slate-600 mt-0.5">{analysis.summaryText}</p>
+                  <p className="text-xs text-slate-600 mt-0.5">{summary.text}</p>
                 </div>
               </div>
 
               {/* Stats pill */}
               <div className="flex items-center gap-3 text-xs text-slate-500 font-medium">
-                <span>{analysis.stats.bodyWords} words</span>
+                <span>{spamCount(t, t.statWords, analysis.stats.bodyWords)}</span>
                 <span>·</span>
-                <span>{analysis.stats.linkCount} links</span>
+                <span>{spamCount(t, t.statLinks, analysis.stats.linkCount)}</span>
                 <span>·</span>
-                <span>{analysis.findings.length} findings</span>
+                <span>{spamCount(t, t.statFindings, analysis.findings.length)}</span>
               </div>
             </div>
 
@@ -226,13 +238,13 @@ export default function SpamWordCheckerTool() {
             {body.trim() && (
               <div className="space-y-2">
                 <span className="text-xs font-bold uppercase tracking-wider text-slate-700">
-                  Highlighted Copy Preview
+                  {t.previewHeading}
                 </span>
                 <div className="p-4 rounded-xl border border-slate-200 bg-slate-50 max-h-64 overflow-y-auto font-sans text-xs text-slate-800 leading-relaxed whitespace-pre-wrap select-text">
                   {highlightedBody}
                 </div>
                 <p className="text-[11px] text-slate-400">
-                  Hover over highlighted words to see the category and suggested plainer alternative.
+                  {t.previewHint}
                 </p>
               </div>
             )}
@@ -244,28 +256,27 @@ export default function SpamWordCheckerTool() {
                 <div className="space-y-3">
                   <div className="flex items-center gap-2">
                     <span className="px-2.5 py-0.5 rounded-full bg-red-100 text-red-800 text-[11px] font-bold">
-                      Worth fixing ({analysis.worthFixing.length})
+                      {spamCount(t, t.severities['worth fixing'].label, analysis.worthFixing.length)}
                     </span>
-                    <span className="text-xs text-slate-500">Items that frequently trigger filter scrutiny</span>
+                    <span className="text-xs text-slate-500">{t.severities['worth fixing'].note}</span>
                   </div>
 
                   <div className="border border-red-200/80 rounded-xl divide-y divide-red-100 bg-white overflow-hidden shadow-sm">
-                    {analysis.worthFixing.map((f) => (
-                      <div key={f.id} className="p-4 space-y-1.5 text-xs">
-                        <div className="flex items-center justify-between">
-                          <p className="font-bold text-red-900">
-                            {f.type === 'structural' ? f.title : `Spam word: "${f.phrase}" (${f.field})`}
-                          </p>
-                          <span className="text-[10px] font-bold uppercase tracking-wider text-red-700 bg-red-50 border border-red-200 px-2 py-0.5 rounded">
-                            {f.type === 'structural' ? 'Formatting' : f.category}
-                          </span>
+                    {analysis.worthFixing.map((f) => {
+                      const v = spamFindingView(t, f)
+                      return (
+                        <div key={f.id} className="p-4 space-y-1.5 text-xs">
+                          <div className="flex items-center justify-between">
+                            <p className="font-bold text-red-900">{v.title}</p>
+                            <span className="text-[10px] font-bold uppercase tracking-wider text-red-700 bg-red-50 border border-red-200 px-2 py-0.5 rounded">
+                              {v.badge}
+                            </span>
+                          </div>
+                          <p className="text-slate-600 leading-relaxed">{v.reason}</p>
+                          <p className="text-indigo-700 font-semibold leading-relaxed">{v.suggestion}</p>
                         </div>
-                        <p className="text-slate-600 leading-relaxed">{f.reason}</p>
-                        <p className="text-indigo-700 font-semibold leading-relaxed">
-                          Suggestion: {f.suggestion}
-                        </p>
-                      </div>
-                    ))}
+                      )
+                    })}
                   </div>
                 </div>
               )}
@@ -275,40 +286,27 @@ export default function SpamWordCheckerTool() {
                 <div className="space-y-3">
                   <div className="flex items-center gap-2">
                     <span className="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[11px] font-bold">
-                      Worth a look ({analysis.worthALook.length})
+                      {spamCount(t, t.severities['worth a look'].label, analysis.worthALook.length)}
                     </span>
-                    <span className="text-xs text-slate-500">
-                      Context-dependent words and readability recommendations
-                    </span>
+                    <span className="text-xs text-slate-500">{t.severities['worth a look'].note}</span>
                   </div>
 
                   <div className="border border-amber-200/80 rounded-xl divide-y divide-amber-100 bg-white overflow-hidden shadow-sm">
-                    {analysis.worthALook.map((f) => (
-                      <div key={f.id} className="p-4 space-y-1.5 text-xs">
-                        <div className="flex items-center justify-between">
-                          <p className="font-bold text-amber-950">
-                            {f.type === 'structural'
-                              ? f.categoryLabel === 'readability'
-                                ? f.title.toLowerCase().startsWith('readability')
-                                  ? f.title
-                                  : `Readability: ${f.title}`
-                                : f.title
-                              : `Phrase in body: "${f.phrase}"`}
-                          </p>
-                          <span className="text-[10px] font-bold uppercase tracking-wider text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded">
-                            {f.type === 'structural'
-                              ? f.categoryLabel === 'readability'
-                                ? 'Readability note'
-                                : 'Formatting'
-                              : f.category}
-                          </span>
+                    {analysis.worthALook.map((f) => {
+                      const v = spamFindingView(t, f)
+                      return (
+                        <div key={f.id} className="p-4 space-y-1.5 text-xs">
+                          <div className="flex items-center justify-between">
+                            <p className="font-bold text-amber-950">{v.title}</p>
+                            <span className="text-[10px] font-bold uppercase tracking-wider text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded">
+                              {v.badge}
+                            </span>
+                          </div>
+                          <p className="text-slate-600 leading-relaxed">{v.reason}</p>
+                          <p className="text-indigo-700 font-semibold leading-relaxed">{v.suggestion}</p>
                         </div>
-                        <p className="text-slate-600 leading-relaxed">{f.reason}</p>
-                        <p className="text-indigo-700 font-semibold leading-relaxed">
-                          Suggestion: {f.suggestion}
-                        </p>
-                      </div>
-                    ))}
+                      )
+                    })}
                   </div>
                 </div>
               )}
@@ -317,9 +315,7 @@ export default function SpamWordCheckerTool() {
               {analysis.findings.length === 0 && (
                 <div className="p-5 rounded-xl border border-emerald-200 bg-emerald-50 text-emerald-900 text-xs flex items-center gap-3">
                   <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
-                  <p>
-                    No spam trigger phrases or structural warnings detected. Your subject line and copy follow clean standards.
-                  </p>
+                  <p>{t.noFindings}</p>
                 </div>
               )}
             </div>

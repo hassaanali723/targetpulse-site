@@ -4,10 +4,29 @@ import React, { useMemo, useState } from 'react'
 import Link from 'next/link'
 import { Copy, Check, AlertTriangle, Info, Download, ArrowRight, CheckCircle2 } from 'lucide-react'
 import { makePlusAddresses, findDuplicates, PlusInputError, type PlusResult } from '@/lib/tools/plusAddressingCore'
+import { plusToolStrings, type PlusToolStrings } from '@/lib/i18n/tools/plusAddressingToolStrings'
+import { localizeHref, type Locale } from '@/lib/i18n/clusters'
+
+// Every visible string comes from lib/i18n/tools/plusAddressingToolStrings.ts.
 
 type Mode = 'create' | 'clean'
 
-const TAG_IDEAS = ['newsletters', 'shopping', 'banking', 'jobs', 'travel']
+const fmtLocale = (n: number, locale: Locale) => {
+  const code = locale === 'pt-br' ? 'pt-BR' : locale === 'en' ? 'en-US' : locale
+  try {
+    return n.toLocaleString(code)
+  } catch {
+    return n.toLocaleString('en-US')
+  }
+}
+
+/** Fills the {slot} markers of a strings-file template with text or elements. */
+function fill(template: string, slots: Record<string, React.ReactNode>): React.ReactNode[] {
+  return template.split(/(\{\w+\})/).map((part, i) => {
+    const m = /^\{(\w+)\}$/.exec(part)
+    return m && m[1] in slots ? <React.Fragment key={i}>{slots[m[1]]}</React.Fragment> : part
+  })
+}
 
 async function copyText(text: string) {
   try {
@@ -22,7 +41,7 @@ async function copyText(text: string) {
   }
 }
 
-function CopyButton({ text, label = 'Copy' }: { text: string; label?: string }) {
+function CopyButton({ text, t, label = t.copy }: { text: string; t: PlusToolStrings; label?: string }) {
   const [copied, setCopied] = useState(false)
   return (
     <button
@@ -35,21 +54,18 @@ function CopyButton({ text, label = 'Copy' }: { text: string; label?: string }) 
       className="shrink-0 inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-600 hover:text-indigo-700"
     >
       {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
-      {copied ? 'Copied' : label}
+      {copied ? t.copied : label}
     </button>
   )
 }
 
-function ProviderNote({ r }: { r: PlusResult }) {
+function ProviderNote({ r, t }: { r: PlusResult; t: PlusToolStrings }) {
   const p = r.provider
   if (!p) {
     return (
       <p className="text-sm text-slate-600 leading-relaxed flex items-start gap-2">
         <Info className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
-        <span>
-          {r.domain} isn’t a provider we have rules for. If it runs on Google Workspace or Microsoft 365, plus addresses work there too.
-          Otherwise send yourself a test email before you use one.
-        </span>
+        <span>{fill(t.unknownProvider, { domain: r.domain })}</span>
       </p>
     )
   }
@@ -62,7 +78,7 @@ function ProviderNote({ r }: { r: PlusResult }) {
     >
       {warn ? <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" /> : <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />}
       <span>
-        <span className="font-bold">{p.name}:</span> {p.note}
+        <span className="font-bold">{p.name}:</span> {t.providerNotes[p.name]}
       </span>
     </p>
   )
@@ -71,7 +87,8 @@ function ProviderNote({ r }: { r: PlusResult }) {
 const textInput =
   'w-full text-base px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 font-mono'
 
-export default function PlusAddressingTool() {
+export default function PlusAddressingTool({ locale = 'en' }: { locale?: Locale }) {
+  const t = plusToolStrings(locale)
   const [mode, setMode] = useState<Mode>('create')
   const [address, setAddress] = useState('')
   const [tags, setTags] = useState('')
@@ -83,9 +100,9 @@ export default function PlusAddressingTool() {
     try {
       return { result: makePlusAddresses(address, tags), error: '' }
     } catch (e) {
-      return { result: null, error: e instanceof PlusInputError ? e.message : 'Check the address.' }
+      return { result: null, error: e instanceof PlusInputError ? t.inputErrors[e.code] : t.inputFallback }
     }
-  }, [address, tags])
+  }, [address, tags, t])
 
   const cleaned = useMemo(() => (listText.trim() ? findDuplicates(listText, stripAll) : null), [listText, stripAll])
 
@@ -97,7 +114,7 @@ export default function PlusAddressingTool() {
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = 'emails-without-duplicates.txt'
+    a.download = t.downloadFile
     a.click()
     URL.revokeObjectURL(url)
   }
@@ -110,12 +127,14 @@ export default function PlusAddressingTool() {
   return (
     <div className="w-full bg-white rounded-2xl border border-slate-200/90 shadow-xl shadow-slate-200/50 overflow-hidden">
       <div className="p-5 md:p-8 space-y-6">
-        <div role="tablist" aria-label="Plus addressing tool mode" className="inline-flex w-full sm:w-auto p-1 rounded-xl bg-slate-100 gap-1">
+        <div role="tablist" aria-label={t.tabsAria} className="inline-flex w-full sm:w-auto p-1 rounded-xl bg-slate-100 gap-1">
           <button type="button" role="tab" aria-selected={mode === 'create'} onClick={() => setMode('create')} className={tabClass('create')}>
-            Create<span className="hidden sm:inline"> plus addresses</span>
+            {t.tabCreate}
+            <span className="hidden sm:inline">{t.tabCreateMore}</span>
           </button>
           <button type="button" role="tab" aria-selected={mode === 'clean'} onClick={() => setMode('clean')} className={tabClass('clean')}>
-            Clean<span className="hidden sm:inline"> a list</span>
+            {t.tabClean}
+            <span className="hidden sm:inline">{t.tabCleanMore}</span>
           </button>
         </div>
 
@@ -124,7 +143,7 @@ export default function PlusAddressingTool() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-1.5 min-w-0">
                 <label htmlFor="pa-address" className="block text-sm font-bold text-slate-900">
-                  Your email address
+                  {t.addressLabel}
                 </label>
                 <input
                   id="pa-address"
@@ -135,13 +154,13 @@ export default function PlusAddressingTool() {
                   spellCheck={false}
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
-                  placeholder="jane@gmail.com"
+                  placeholder={t.addressPlaceholder}
                   className={textInput}
                 />
               </div>
               <div className="space-y-1.5 min-w-0">
                 <label htmlFor="pa-tags" className="block text-sm font-bold text-slate-900">
-                  Tags, separated by commas
+                  {t.tagsLabel}
                 </label>
                 <input
                   id="pa-tags"
@@ -151,19 +170,19 @@ export default function PlusAddressingTool() {
                   spellCheck={false}
                   value={tags}
                   onChange={(e) => setTags(e.target.value)}
-                  placeholder="newsletters, shopping"
+                  placeholder={t.tagsPlaceholder}
                   className={textInput}
                 />
                 <div className="flex flex-wrap items-center gap-1.5 text-xs text-slate-500">
-                  <span>Ideas:</span>
-                  {TAG_IDEAS.map((t) => (
+                  <span>{t.ideasLabel}</span>
+                  {t.tagIdeas.map((idea) => (
                     <button
-                      key={t}
+                      key={idea}
                       type="button"
-                      onClick={() => addTag(t)}
+                      onClick={() => addTag(idea)}
                       className="px-2 py-0.5 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-mono font-semibold"
                     >
-                      {t}
+                      {idea}
                     </button>
                   ))}
                 </div>
@@ -174,14 +193,14 @@ export default function PlusAddressingTool() {
               {created.error && <p className="text-sm text-rose-600 font-semibold">{created.error}</p>}
               {created.result && (
                 <>
-                  <ProviderNote r={created.result} />
+                  <ProviderNote r={created.result} t={t} />
                   {created.result.addresses.length > 0 ? (
                     <div className="border border-slate-200 rounded-xl overflow-hidden">
                       <div className="bg-slate-100 border-b border-slate-200 px-4 py-2.5 flex items-center justify-between gap-3">
                         <span className="text-[11px] font-bold uppercase tracking-wider text-slate-700">
-                          Your plus addresses ({created.result.addresses.length})
+                          {t.addressesHeading(created.result.addresses.length)}
                         </span>
-                        <CopyButton text={created.result.addresses.map((a) => a.address).join('\n')} label="Copy all" />
+                        <CopyButton text={created.result.addresses.map((a) => a.address).join('\n')} t={t} label={t.copyAll} />
                       </div>
                       <ul className="divide-y divide-slate-100 bg-white">
                         {created.result.addresses.map((a) => (
@@ -190,23 +209,29 @@ export default function PlusAddressingTool() {
                               {created.result!.local}
                               <span className="text-indigo-600 font-bold">+{a.tag}</span>@{created.result!.domain}
                             </span>
-                            <CopyButton text={a.address} />
+                            <CopyButton text={a.address} t={t} />
                           </li>
                         ))}
                       </ul>
                     </div>
                   ) : (
-                    <p className="text-sm text-slate-500">Add one or more tags to build your addresses.</p>
+                    <p className="text-sm text-slate-500">{t.noTags}</p>
                   )}
                   {created.result.skipped.map((s) => (
                     <p key={s.tag} className="text-xs text-rose-700 font-medium">
-                      Skipped “{s.tag}”: {s.reason}
+                      {fill(t.skipped, { tag: s.tag, reason: t.skipReasons[s.reason] })}
                     </p>
                   ))}
                   {created.result.provider?.name === 'Gmail' && (
                     <p className="text-sm text-slate-600 leading-relaxed">
-                      To sort them in Gmail, create a filter with the plus address in the <span className="font-semibold">To</span> field, or search
-                      for <span className="font-mono text-xs bg-slate-100 px-1 py-0.5 rounded">deliveredto:{created.result.addresses[0]?.address ?? created.result.base}</span>.
+                      {fill(t.gmailFilter, {
+                        to: <span className="font-semibold">{t.toField}</span>,
+                        query: (
+                          <span className="font-mono text-xs bg-slate-100 px-1 py-0.5 rounded">
+                            deliveredto:{created.result.addresses[0]?.address ?? created.result.base}
+                          </span>
+                        ),
+                      })}
                     </p>
                   )}
                 </>
@@ -219,18 +244,18 @@ export default function PlusAddressingTool() {
           <div role="tabpanel" className="space-y-5">
             <div className="space-y-1.5">
               <label htmlFor="pa-list" className="block text-sm font-bold text-slate-900">
-                Paste your list
+                {t.listLabel}
               </label>
               <textarea
                 id="pa-list"
                 rows={7}
                 value={listText}
                 onChange={(e) => setListText(e.target.value)}
-                placeholder={'jane.doe@gmail.com\njanedoe+news@googlemail.com\nsam+promo@outlook.com\nsam@outlook.com'}
+                placeholder={t.listPlaceholder}
                 spellCheck={false}
                 className="w-full text-base sm:text-sm px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 font-mono"
               />
-              <p className="text-xs text-slate-500">One address per line, or a column copied from a spreadsheet. Names and other text are ignored.</p>
+              <p className="text-xs text-slate-500">{t.listHelp}</p>
             </div>
             <label className="flex items-start gap-2.5 text-sm cursor-pointer">
               <input
@@ -240,11 +265,8 @@ export default function PlusAddressingTool() {
                 className="w-4 h-4 mt-0.5 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500"
               />
               <span>
-                <span className="font-bold text-slate-800">Also treat + as a tag on company domains</span>
-                <span className="block text-xs text-slate-500 mt-0.5 leading-relaxed">
-                  Fine for lists of Google Workspace and Microsoft 365 users. Leave it off otherwise, because on some mail servers the + is part of
-                  a real address.
-                </span>
+                <span className="font-bold text-slate-800">{t.stripAllLabel}</span>
+                <span className="block text-xs text-slate-500 mt-0.5 leading-relaxed">{t.stripAllHelp}</span>
               </span>
             </label>
 
@@ -253,14 +275,14 @@ export default function PlusAddressingTool() {
                 <div className="space-y-4">
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
                     {[
-                      ['Addresses found', cleaned.found],
-                      ['After merging', cleaned.unique.length],
-                      ['Duplicate groups', cleaned.groups.length],
-                      ['Lines skipped', cleaned.invalid],
+                      [t.statFound, cleaned.found],
+                      [t.statUnique, cleaned.unique.length],
+                      [t.statGroups, cleaned.groups.length],
+                      [t.statSkipped, cleaned.invalid],
                     ].map(([label, n]) => (
                       <div key={label as string} className="p-3 rounded-xl border border-slate-200 bg-white">
                         <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500">{label}</div>
-                        <div className="mt-1 text-xl font-black text-slate-900">{(n as number).toLocaleString('en-US')}</div>
+                        <div className="mt-1 text-xl font-black text-slate-900">{fmtLocale(n as number, locale)}</div>
                       </div>
                     ))}
                   </div>
@@ -268,7 +290,7 @@ export default function PlusAddressingTool() {
                   {cleaned.groups.length > 0 ? (
                     <div className="border border-slate-200 rounded-xl overflow-hidden">
                       <div className="bg-slate-100 border-b border-slate-200 px-4 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700">
-                        These addresses reach the same inbox
+                        {t.groupsHeading}
                       </div>
                       <ul className="divide-y divide-slate-100 bg-white max-h-80 overflow-y-auto">
                         {cleaned.groups.map((g) => (
@@ -280,7 +302,7 @@ export default function PlusAddressingTool() {
                             <ul className="mt-1 space-y-0.5">
                               {g.members.map((m, i) => (
                                 <li key={`${m}-${i}`} className="font-mono text-xs text-slate-600 break-all">
-                                  {i === 0 ? 'kept: ' : 'merged: '}
+                                  {i === 0 ? t.kept : t.merged}
                                   {m}
                                 </li>
                               ))}
@@ -292,39 +314,39 @@ export default function PlusAddressingTool() {
                   ) : (
                     cleaned.found > 0 && (
                       <p className="text-sm text-emerald-800 bg-emerald-50 border border-emerald-200 rounded-xl p-3 font-medium">
-                        No two addresses in this list reach the same inbox.
+                        {t.noDuplicates}
                       </p>
                     )
                   )}
 
                   {cleaned.unique.length > 0 && (
                     <div className="flex flex-wrap items-center gap-3">
-                      <CopyButton text={cleaned.unique.join('\n')} label={`Copy ${cleaned.unique.length.toLocaleString('en-US')} addresses`} />
+                      <CopyButton text={cleaned.unique.join('\n')} t={t} label={t.copyUnique(fmtLocale(cleaned.unique.length, locale))} />
                       <button
                         type="button"
                         onClick={download}
                         className="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-600 hover:text-indigo-700"
                       >
                         <Download className="w-3.5 h-3.5" />
-                        Download as .txt
+                        {t.download}
                       </button>
                     </div>
                   )}
                   <p className="text-xs text-slate-500 leading-relaxed">
-                    The first address of each group is kept exactly as written, so the person’s filters keep working.
+                    {t.keptNote}
                   </p>
 
                   {cleaned.unique.length > 0 && (
                     <div className="rounded-xl bg-gradient-to-br from-indigo-900 via-slate-900 to-indigo-950 text-white p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                       <div className="space-y-1">
-                        <h3 className="text-base font-bold">No duplicates doesn’t mean no bounces</h3>
-                        <p className="text-sm text-slate-300">Check that each address still exists before you send to the cleaned list.</p>
+                        <h3 className="text-base font-bold">{t.ctaTitle}</h3>
+                        <p className="text-sm text-slate-300">{t.ctaText}</p>
                       </div>
                       <Link
-                        href="/bulk-email-verifier"
+                        href={localizeHref('/bulk-email-verifier', locale).href}
                         className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-sm whitespace-nowrap"
                       >
-                        Verify the list
+                        {t.ctaButton}
                         <ArrowRight className="w-4 h-4" />
                       </Link>
                     </div>

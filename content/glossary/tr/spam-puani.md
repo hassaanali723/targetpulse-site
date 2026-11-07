@@ -55,7 +55,7 @@ SEO araçlarında da "Spam Score" ifadesini görebilirsiniz. SEO, bir web sitesi
 1. mail-tester.com adresine gidin. Site size bir test e-posta adresi gösterir.
 2. Gerçek e-postanızı, normalde kullandığınız araçtan bu adrese gönderin.
 3. Sonuç sayfasını açın. Sayfa 10 üzerinden bir puan gösterir ve bulduğu her sorunu listeler.
-4. Konu satırınızı ve metninizi [spam kelime kontrol aracımıza](/spam-word-checker) (İngilizce) yapıştırın. Araç riskli kelimeleri, büyük harfleri ve bağlantı kısaltıcıları tarayıcınızda işaretler.
+4. Konu satırınızı ve metninizi [spam kelime kontrol aracımıza](/spam-word-checker) yapıştırın. Araç riskli kelimeleri, büyük harfleri ve bağlantı kısaltıcıları tarayıcınızda işaretler.
 
 mail-tester.com'da yüksek puan daha iyidir. SpamAssassin'de ise düşük puan daha iyidir. Yalnızca sayıyı değil, sorunların listesini de okuyun.
 

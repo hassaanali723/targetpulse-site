@@ -73,7 +73,7 @@ W pracy większość firm wybiera jeden format i stosuje go dla wszystkich. Oto 
 
 To, który format jest najczęstszy, zależy od sposobu liczenia. Sendburg przeanalizował 336 782 adresy firmowe. Format imie.nazwisko wystąpił w 47,7% z nich, format inicjał plus nazwisko (jak jsmith) w 26,8%, a samo imię w 8,1% ([Sendburg](https://send-burg.com/research/b2b-email-formats)). Hunter liczy zamiast tego firmy i podaje, że 49,9% firm w jego danych używa adresów z samym imieniem ([Hunter](https://hunter.io/blog/how-to-find-someones-email-address/)). Obie liczby mogą być prawdziwe. Większość firm to małe firmy, które używają imion, a większość adresów należy do dużych firm, które wolą format imie.nazwisko. Dane Sendburga pokazują, że udział formatu imie.nazwisko rośnie z 38% w firmach do 10 osób do 74% w firmach zatrudniających ponad 10 000 osób. Obie firmy sprzedają narzędzia do wyszukiwania adresów e-mail, więc traktuj te liczby orientacyjnie.
 
-Jeśli musisz odgadnąć adres współpracownika, [generator wariantów adresu](/email-permutator) (po angielsku) wypisze wszystkie prawdopodobne formaty dla danego imienia, nazwiska i domeny.
+Jeśli musisz odgadnąć adres współpracownika, [generator wariantów adresu](/email-permutator) wypisze wszystkie prawdopodobne formaty dla danego imienia, nazwiska i domeny.
 
 ### Adresy funkcyjne
 
@@ -112,7 +112,7 @@ W praktyce adres może mieć najwyżej 254 znaki. Część przed @ może mieć d
 Kilka zasad zaskakuje ludzi:
 
 - **Kropki w Gmailu nie mają znaczenia.** j.smith@gmail.com i jsmith@gmail.com trafiają do tej samej skrzynki. Dotyczy to tylko prywatnego Gmaila. W Google Workspace, z którego korzystają firmy, kropki zmieniają adres ([Google](https://support.google.com/mail/answer/7436150)).
-- **Adresy z plusem.** Poczta wysłana na jane+news@gmail.com trafia na jane@gmail.com, więc możesz sortować wiadomości albo sprawdzić, kto udostępnił twój adres ([Google](https://support.google.com/mail/answer/12096)). Firmowa poczta Microsoftu też to obsługuje, choć tylko przy odbieraniu ([Microsoft](https://learn.microsoft.com/en-us/exchange/recipients-in-exchange-online/plus-addressing-in-exchange-online)). [Narzędzie do adresów z plusem w Gmailu](/gmail-plus-addressing) (po angielsku) utworzy takie adresy za ciebie.
+- **Adresy z plusem.** Poczta wysłana na jane+news@gmail.com trafia na jane@gmail.com, więc możesz sortować wiadomości albo sprawdzić, kto udostępnił twój adres ([Google](https://support.google.com/mail/answer/12096)). Firmowa poczta Microsoftu też to obsługuje, choć tylko przy odbieraniu ([Microsoft](https://learn.microsoft.com/en-us/exchange/recipients-in-exchange-online/plus-addressing-in-exchange-online)). [Narzędzie do adresów z plusem w Gmailu](/gmail-plus-addressing) utworzy takie adresy za ciebie.
 - **Wielkie litery.** Standard mówi, że część przed @ może rozróżniać wielkość liter, ale odradza poleganie na tym. W praktyce dostawcy traktują Jane@ i jane@ jako tę samą skrzynkę, co Proton potwierdza na swoich stronach pomocy ([Proton](https://proton.me/support/change-username)). Więcej o Gmailu i Outlooku piszemy w artykule [czy wielkość liter w adresie e-mail ma znaczenie?](/blog/are-email-addresses-case-sensitive)
 - **Inne alfabety.** Zgodnie z RFC 6531 adresy mogą zawierać znaki spoza alfabetu łacińskiego, na przykład hindi lub chińskie. Gmail wysyła i odbiera takie adresy od 2014 roku ([Google](https://workspaceupdates.googleblog.com/2014/08/support-for-third-party.html)), ale wiele starszych systemów nadal ich nie obsługuje.
 

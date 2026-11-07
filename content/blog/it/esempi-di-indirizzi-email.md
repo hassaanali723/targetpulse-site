@@ -73,7 +73,7 @@ Al lavoro, la maggior parte delle aziende sceglie un formato e lo usa per tutti.
 
 Quale sia il più comune dipende da come si conta. Sendburg ha analizzato 336.782 indirizzi aziendali. Ha trovato nome.cognome nel 47,7% dei casi, iniziale e cognome (come jsmith) nel 26,8% e solo il nome nell'8,1% ([Sendburg](https://send-burg.com/research/b2b-email-formats)). Hunter invece conta le aziende, e dice che il 49,9% delle aziende nei suoi dati usa indirizzi con il solo nome ([Hunter](https://hunter.io/blog/how-to-find-someones-email-address/)). Possono essere vere entrambe le cose. La maggior parte delle aziende è piccola e usa il nome, mentre la maggior parte degli indirizzi appartiene a grandi aziende, che preferiscono nome.cognome. I dati di Sendburg mostrano che nome.cognome sale dal 38% nelle aziende fino a 10 persone al 74% in quelle con più di 10.000. Entrambi sono fornitori che vendono strumenti per trovare indirizzi email, quindi considera i numeri come un'indicazione.
 
-Se devi indovinare l'indirizzo di un collega, il [permutatore email](/email-permutator) (in inglese) elenca tutti i formati probabili per un nome e un dominio.
+Se devi indovinare l'indirizzo di un collega, il [permutatore email](/email-permutator) elenca tutti i formati probabili per un nome e un dominio.
 
 ### Indirizzi di ruolo
 
@@ -112,7 +112,7 @@ In pratica un indirizzo può arrivare al massimo a 254 caratteri. La parte prima
 Alcune regole sorprendono:
 
 - **In Gmail i punti non contano.** j.smith@gmail.com e jsmith@gmail.com arrivano nella stessa casella. Vale solo per Gmail personale. In Google Workspace, usato dalle aziende, i punti cambiano l'indirizzo ([Google](https://support.google.com/mail/answer/7436150)).
-- **Indirizzi con il segno più.** La posta per jane+news@gmail.com arriva a jane@gmail.com, così puoi ordinare la posta o scoprire chi ha condiviso il tuo indirizzo ([Google](https://support.google.com/mail/answer/12096)). Anche la posta aziendale di Microsoft lo supporta, ma solo in ricezione ([Microsoft](https://learn.microsoft.com/en-us/exchange/recipients-in-exchange-online/plus-addressing-in-exchange-online)). Lo strumento per gli [indirizzi Gmail con +](/gmail-plus-addressing) (in inglese) crea questi indirizzi per te.
+- **Indirizzi con il segno più.** La posta per jane+news@gmail.com arriva a jane@gmail.com, così puoi ordinare la posta o scoprire chi ha condiviso il tuo indirizzo ([Google](https://support.google.com/mail/answer/12096)). Anche la posta aziendale di Microsoft lo supporta, ma solo in ricezione ([Microsoft](https://learn.microsoft.com/en-us/exchange/recipients-in-exchange-online/plus-addressing-in-exchange-online)). Lo strumento per gli [indirizzi Gmail con +](/gmail-plus-addressing) crea questi indirizzi per te.
 - **Lettere maiuscole.** Lo standard dice che la parte prima della @ potrebbe distinguere le maiuscole, ma sconsiglia anche di contarci. In pratica i provider trattano Jane@ e jane@ come la stessa casella, e Proton lo dice nelle sue pagine di assistenza ([Proton](https://proton.me/support/change-username)). Trovi altri dettagli su Gmail e Outlook in [gli indirizzi email distinguono maiuscole e minuscole?](/blog/are-email-addresses-case-sensitive)
 - **Altri alfabeti.** Gli indirizzi possono usare caratteri non latini, come l'hindi o il cinese, secondo la RFC 6531. Gmail li invia e li riceve dal 2014 ([Google](https://workspaceupdates.googleblog.com/2014/08/support-for-third-party.html)), ma molti sistemi più vecchi non riescono ancora a gestirli.
 

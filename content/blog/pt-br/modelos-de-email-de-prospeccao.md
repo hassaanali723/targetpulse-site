@@ -354,7 +354,7 @@ Um bom modelo enviado para uma lista ruim continua falhando. Todo endereço que 
 
 A Spamhaus faz uma observação que vale conhecer: alguns endereços antigos que dão bounce hoje viram spam traps mais tarde ([Spamhaus](https://www.spamhaus.org/resource-hub/deliverability/spamtraps-fix-the-problem-not-the-symptom/)). A verificação remove os endereços desativados, mas não torna segura uma lista comprada.
 
-Antes de uma campanha, passe a lista por um [verificador de e-mail em massa](/bulk-email-verifier) ou confira um único endereço na [verificação de e-mail](/email-checker). Se os bounces já são um problema, veja [por que cold e-mails dão bounce](/blog/why-cold-emails-bounce) e [qual taxa de bounce é normal](/blog/good-bounce-rate-for-cold-email). Você também pode passar o seu texto pelo [verificador de palavras de spam](/spam-word-checker) (em inglês) antes do envio.
+Antes de uma campanha, passe a lista por um [verificador de e-mail em massa](/bulk-email-verifier) ou confira um único endereço na [verificação de e-mail](/email-checker). Se os bounces já são um problema, veja [por que cold e-mails dão bounce](/blog/why-cold-emails-bounce) e [qual taxa de bounce é normal](/blog/good-bounce-rate-for-cold-email). Você também pode passar o seu texto pelo [verificador de palavras de spam](/spam-word-checker) antes do envio.
 
 ## Perguntas frequentes
 

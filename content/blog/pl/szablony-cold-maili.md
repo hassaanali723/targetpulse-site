@@ -356,7 +356,7 @@ Dobry szablon wysłany na złą listę i tak nie zadziała. Każdy nieistniejąc
 
 Spamhaus zwraca uwagę na jedną rzecz, którą warto znać: część starych adresów, które dziś dają odbicie, później staje się pułapkami spamowymi ([Spamhaus](https://www.spamhaus.org/resource-hub/deliverability/spamtraps-fix-the-problem-not-the-symptom/)). Weryfikacja usuwa nieistniejące adresy, ale nie sprawi, że kupiona lista będzie bezpieczna do wysyłki.
 
-Przed kampanią przepuść listę przez [narzędzie do masowej weryfikacji e-mail](/bulk-email-verifier) albo sprawdź pojedynczy adres w [weryfikatorze e-mail](/email-checker). Jeśli odbicia już są problemem, przeczytaj, [dlaczego maile wracają](/blog/why-cold-emails-bounce) i [jaki współczynnik odbić jest normalny](/blog/good-bounce-rate-for-cold-email). Przed wysyłką możesz też sprawdzić treść w [narzędziu do wykrywania słów spamowych](/spam-word-checker) (po angielsku).
+Przed kampanią przepuść listę przez [narzędzie do masowej weryfikacji e-mail](/bulk-email-verifier) albo sprawdź pojedynczy adres w [weryfikatorze e-mail](/email-checker). Jeśli odbicia już są problemem, przeczytaj, [dlaczego maile wracają](/blog/why-cold-emails-bounce) i [jaki współczynnik odbić jest normalny](/blog/good-bounce-rate-for-cold-email). Przed wysyłką możesz też sprawdzić treść w [narzędziu do wykrywania słów spamowych](/spam-word-checker).
 
 ## Najczęściej zadawane pytania
 

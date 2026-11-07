@@ -50,7 +50,7 @@ Você pode encontrar o termo "Spam Score" em ferramentas de SEO. O Moz tem uma m
 ## Como conferir o spam score do seu e-mail
 
 - **mail-tester.com:** você envia o seu e-mail para um endereço que o site mostra. Ele devolve uma nota de 0 a 10 e a lista dos problemas encontrados, incluindo SPF, DKIM e blacklists.
-- **Verificador de palavras de spam:** o nosso [spam word checker](/spam-word-checker) (em inglês) destaca palavras arriscadas, maiúsculas, links encurtados e tags de personalização que não foram preenchidas. Ele roda no seu navegador e não dá uma nota, porque nenhuma ferramenta sabe como uma caixa de entrada específica vai tratar o seu e-mail.
+- **Verificador de palavras de spam:** o nosso [spam word checker](/spam-word-checker) destaca palavras arriscadas, maiúsculas, links encurtados e tags de personalização que não foram preenchidas. Ele roda no seu navegador e não dá uma nota, porque nenhuma ferramenta sabe como uma caixa de entrada específica vai tratar o seu e-mail.
 
 ## Como reduzir a sua pontuação de spam
 

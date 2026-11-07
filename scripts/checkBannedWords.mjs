@@ -72,6 +72,12 @@ const englishBlocks = [
   'lib/i18n/tools/bimiToolStrings.ts',
   'lib/i18n/tools/emailSignatureStrings.ts',
   'lib/i18n/tools/signatureToolStrings.ts',
+  'lib/i18n/tools/emailPermutatorStrings.ts',
+  'lib/i18n/tools/emailPermutatorToolStrings.ts',
+  'lib/i18n/tools/spamWordCheckerStrings.ts',
+  'lib/i18n/tools/spamWordCheckerToolStrings.ts',
+  'lib/i18n/tools/plusAddressingStrings.ts',
+  'lib/i18n/tools/plusAddressingToolStrings.ts',
 ]
 
 /** The text of `const en ... = {` up to the next top-level const or export. */
