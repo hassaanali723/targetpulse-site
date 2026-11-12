@@ -19,6 +19,7 @@ import {
 } from '@/lib/i18n/tools/freeEmailProvidersStrings'
 import { Rich } from '@/components/disposable/LocalText'
 import FreeEmailProvidersTool from '@/components/tools/FreeEmailProviders/FreeEmailProvidersTool'
+import PureMailCards from '@/components/tools/FreeEmailProviders/PureMailCards'
 import { FREE_DOMAIN_COUNT, FREE_EMAIL_PROVIDERS } from '@/lib/tools/freeEmailProviders'
 
 // The free email providers page, one component for every language it ships in.
@@ -121,9 +122,12 @@ export default function FreeEmailProvidersPage({ locale }: { locale: Locale }) {
       </section>
 
       {/* THE TOOL */}
-      <section className="cv-section max-w-5xl mx-auto px-6 pb-16">
+      <section className={`cv-section max-w-5xl mx-auto px-6 ${isEn ? 'pb-10' : 'pb-16'}`}>
         <FreeEmailProvidersTool locale={locale} />
       </section>
+
+      {/* PureMail: business versions of Gmail and Outlook, right under the tool. English only for now. */}
+      {isEn && <PureMailCards />}
 
       {/* COPY BELOW THE TOOL */}
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-16 border-t border-slate-200 space-y-12">
