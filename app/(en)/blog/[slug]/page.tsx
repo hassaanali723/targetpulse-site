@@ -50,6 +50,8 @@ const CTA_HEADLINE: Record<string, string> = {
   'email-address-examples': 'Check that an email address really exists',
   'how-to-end-an-email': 'Make sure your email reaches a real inbox',
   'how-long-to-warm-up-email-domain': 'Verify your first campaign list before you send',
+  'how-to-check-if-email-domain-is-blacklisted': 'Check and protect your sender reputation',
+  'how-to-improve-email-deliverability': 'Protect your sender reputation before your next send',
 }
 
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
