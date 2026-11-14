@@ -91,7 +91,13 @@ export const CLUSTERS = {
   postEmailRegex: { en: '/blog/email-regex', it: '/it/blog/regex-email', de: '/de/blog/e-mail-regex', es: '/es/blog/regex-correo-electronico', 'pt-br': '/pt-br/blog/regex-de-email', fr: '/fr/blog/regex-email-validation', nl: '/nl/blog/e-mail-regex', pl: '/pl/blog/regex-email', id: '/id/blog/regex-email', ja: '/ja/blog/email-regex', ko: '/ko/blog/email-regex', tr: '/tr/blog/email-regex' },
   postEmailBlacklistCheck: { en: '/blog/how-to-check-if-email-domain-is-blacklisted', it: '/it/blog/email-blacklist-check', de: '/de/blog/blacklist-pruefen-email-domain', 'pt-br': '/pt-br/blog/como-saber-se-email-esta-na-blacklist', es: '/es/blog/como-saber-si-un-dominio-esta-en-lista-negra', fr: '/fr/blog/verifier-si-un-domaine-est-sur-liste-noire', nl: '/nl/blog/controleren-of-domein-op-blacklist-staat', pl: '/pl/blog/jak-sprawdzic-czy-domena-jest-na-czarnej-liscie', id: '/id/blog/cara-cek-domain-email-masuk-blacklist', ja: '/ja/blog/how-to-check-if-email-domain-is-blacklisted', ko: '/ko/blog/how-to-check-if-email-domain-is-blacklisted', tr: '/tr/blog/alan-adi-kara-listede-mi' },
   postPhp2shell: { en: '/blog/php2shell-vulnerability', it: '/it/blog/php2shell-vulnerabilita', de: '/de/blog/php2shell-sicherheitsluecke', es: '/es/blog/php2shell-vulnerabilidad', 'pt-br': '/pt-br/blog/php2shell-vulnerabilidade', fr: '/fr/blog/php2shell-vulnerabilite', nl: '/nl/blog/php2shell-kwetsbaarheid', pl: '/pl/blog/php2shell-podatnosc', id: '/id/blog/php2shell-kerentanan', ja: '/ja/blog/php2shell-vulnerability', ko: '/ko/blog/php2shell-vulnerability', tr: '/tr/blog/php2shell-guvenlik-acigi' },
-  postEmailDeliverability: { en: '/blog/how-to-improve-email-deliverability' },
+  postEmailDeliverability: {
+    en: '/blog/how-to-improve-email-deliverability',
+    fr: '/fr/blog/ameliorer-delivrabilite-email',
+    de: '/de/blog/e-mail-zustellbarkeit-verbessern',
+    es: '/es/blog/como-mejorar-la-entregabilidad-del-correo',
+    it: '/it/blog/come-migliorare-deliverability-email',
+  },
   // Alternative and comparison pages with local brand demand (plans/15). A
   // language is listed only where every brand on the page is searched in that
   // market, so some clusters are partial.
