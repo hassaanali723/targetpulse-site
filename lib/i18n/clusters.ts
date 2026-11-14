@@ -98,6 +98,9 @@ export const CLUSTERS = {
     es: '/es/blog/como-mejorar-la-entregabilidad-del-correo',
     it: '/it/blog/come-migliorare-deliverability-email',
   },
+  postWhatIsDkim: {
+    en: '/blog/what-is-dkim',
+  },
   // Alternative and comparison pages with local brand demand (plans/15). A
   // language is listed only where every brand on the page is searched in that
   // market, so some clusters are partial.
