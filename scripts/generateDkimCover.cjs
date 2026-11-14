@@ -5,107 +5,115 @@ const sharp = require('sharp');
 const logoBase64 = fs.readFileSync(path.resolve('public/giggal-logo-wordmark.png')).toString('base64');
 const logoSrc = `data:image/png;base64,${logoBase64}`;
 
-const item = {
+const c = {
   out: 'public/blog/covers/what-is-dkim.webp',
-  label: 'EMAIL AUTHENTICATION &amp; SECURITY',
+  label: 'EMAIL AUTHENTICATION & SECURITY',
   line1: 'What is DKIM?',
-  line2: 'DomainKeys Identified Mail &amp; DNS Cryptography',
+  line2: 'DomainKeys Identified Mail Explained',
   stats: [
-    { val: 'RFC 6376 Standards', caption: 'RSA-2048 and Ed25519 asymmetric cryptographic signatures' },
-    { val: 'Selectors and DNS TXT', caption: 'Multi-stream selector routing without key collision' },
-    { val: 'Anti-Tampering Hash', caption: 'Cryptographic body and header integrity validation' },
+    { val: 'RFC 6376 Standards', caption: 'Cryptographic email signing & RSA/Ed25519' },
+    { val: 'Selectors & DNS TXT', caption: 'Public key lookup without collision' },
+    { val: 'Anti-Spoofing Hash', caption: 'Header & body integrity verification' },
   ],
 };
 
-function renderSvg(c) {
-  const statCards = c.stats.map((s, idx) => {
-    const x = 96 + idx * 464;
-    return `
-      <g transform="translate(${x}, 580)">
-        <rect width="432" height="150" rx="16" fill="#0f172a" fill-opacity="0.85" stroke="#1e293b" stroke-width="2"/>
-        <text x="24" y="52" fill="#38bdf8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="28">${s.val}</text>
-        <text x="24" y="96" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="400" font-size="18">${s.caption}</text>
-      </g>
-    `;
-  }).join('');
-
-  return `
-    <svg width="1600" height="840" viewBox="0 0 1600 840" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="bgGradient" x1="0" y1="0" x2="1600" y2="840" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stop-color="#030712"/>
-          <stop offset="50%" stop-color="#0b1329"/>
-          <stop offset="100%" stop-color="#030712"/>
-        </linearGradient>
-        <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1300 200) rotate(90) scale(400)">
-          <stop stop-color="#38bdf8" stop-opacity="0.25"/>
-          <stop offset="1" stop-color="#38bdf8" stop-opacity="0"/>
-        </radialGradient>
-        <radialGradient id="glow2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(300 700) rotate(90) scale(400)">
-          <stop stop-color="#6366f1" stop-opacity="0.2"/>
-          <stop offset="1" stop-color="#6366f1" stop-opacity="0"/>
-        </radialGradient>
-      </defs>
-
-      <!-- Background -->
-      <rect width="1600" height="840" fill="url(#bgGradient)"/>
-      <rect width="1600" height="840" fill="url(#glow)"/>
-      <rect width="1600" height="840" fill="url(#glow2)"/>
-
-      <!-- Grid lines -->
-      <g stroke="#1e293b" stroke-opacity="0.4" stroke-width="1">
-        <line x1="0" y1="120" x2="1600" y2="120"/>
-        <line x1="0" y1="240" x2="1600" y2="240"/>
-        <line x1="0" y1="360" x2="1600" y2="360"/>
-        <line x1="0" y1="480" x2="1600" y2="480"/>
-        <line x1="0" y1="600" x2="1600" y2="600"/>
-        <line x1="0" y1="720" x2="1600" y2="720"/>
-        <line x1="200" y1="0" x2="200" y2="840"/>
-        <line x1="400" y1="0" x2="400" y2="840"/>
-        <line x1="600" y1="0" x2="600" y2="840"/>
-        <line x1="800" y1="0" x2="800" y2="840"/>
-        <line x1="1000" y1="0" x2="1000" y2="840"/>
-        <line x1="1200" y1="0" x2="1200" y2="840"/>
-        <line x1="1400" y1="0" x2="1400" y2="840"/>
-      </g>
-
-      <!-- Logo top right -->
-      <image href="${logoSrc}" x="1240" y="70" width="260" height="65"/>
-
-      <!-- Category pill -->
-      <g transform="translate(96, 80)">
-        <rect width="360" height="42" rx="21" fill="#0284c7" fill-opacity="0.15" stroke="#38bdf8" stroke-width="1.5"/>
-        <circle cx="24" cy="21" r="5" fill="#38bdf8"/>
-        <text x="40" y="27" fill="#38bdf8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="14" letter-spacing="1.5">${c.label}</text>
-      </g>
-
-      <!-- Main Headline -->
-      <text x="96" y="240" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="64" letter-spacing="-1.5">${c.line1}</text>
-      <text x="96" y="325" fill="#e2e8f0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="44" letter-spacing="-0.5">${c.line2}</text>
-
-      <!-- Explanatory subline -->
-      <text x="96" y="420" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="400" font-size="24">
-        A deep-dive technical guide into asymmetric keys, selector DNS TXT syntax, canonicalization, and anti-spoofing protection
-      </text>
-
-      <!-- Stat Cards -->
-      ${statCards}
-    </svg>
-  `;
+function escapeXml(unsafe) {
+  return String(unsafe).replace(/[<>&'"]/g, function (char) {
+    switch (char) {
+      case '<': return '&lt;';
+      case '>': return '&gt;';
+      case '&': return '&amp;';
+      case "'": return '&apos;';
+      case '"': return '&quot;';
+      default: return char;
+    }
+  });
 }
 
-async function generate() {
-  const outPath = path.resolve(item.out);
+const svg = `
+<svg width="1600" height="840" viewBox="0 0 1600 840" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1F1B4C"/>
+      <stop offset="40%" stop-color="#2A2368"/>
+      <stop offset="75%" stop-color="#3730A2"/>
+      <stop offset="100%" stop-color="#4543B1"/>
+    </linearGradient>
+
+    <radialGradient id="glow-tr" cx="95%" cy="10%" r="50%">
+      <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0.30"/>
+      <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="glow-bl" cx="10%" cy="90%" r="50%">
+      <stop offset="0%" stop-color="#2C4475" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#2C4475" stop-opacity="0"/>
+    </radialGradient>
+
+    <pattern id="grid" width="75" height="75" patternUnits="userSpaceOnUse">
+      <path d="M 75 0 L 0 0 0 75" fill="none" stroke="rgba(255, 255, 255, 0.04)" stroke-width="1.5"/>
+    </pattern>
+
+    <filter id="card-shadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#000000" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="840" fill="url(#bg-grad)"/>
+  <rect width="1600" height="840" fill="url(#glow-tr)"/>
+  <rect width="1600" height="840" fill="url(#glow-bl)"/>
+  <rect width="1600" height="840" fill="url(#grid)"/>
+
+  <text x="90" y="135" font-family="Plus Jakarta Sans, -apple-system, Segoe UI, Roboto, sans-serif" font-size="26" font-weight="700" fill="#A5B4FC" letter-spacing="4">${escapeXml(c.label)}</text>
+
+  <rect x="1296" y="80" width="212" height="68" rx="16" fill="#FFFFFF" filter="url(#card-shadow)"/>
+  <image href="${logoSrc}" x="1320" y="98" width="164" height="32" preserveAspectRatio="xMidYMid meet"/>
+
+  <rect x="90" y="170" width="100" height="6" rx="3" fill="#34D399"/>
+
+  <text x="90" y="270" font-family="Plus Jakarta Sans, -apple-system, Segoe UI, Roboto, sans-serif" font-size="64" font-weight="800" fill="#FFFFFF" letter-spacing="-1">${escapeXml(c.line1)}</text>
+  <text x="90" y="355" font-family="Plus Jakarta Sans, -apple-system, Segoe UI, Roboto, sans-serif" font-size="56" font-weight="700" fill="#E0E7FF" letter-spacing="-0.5">${escapeXml(c.line2)}</text>
+
+  <g transform="translate(90, 480)">
+    <g transform="translate(0, 0)">
+      <rect width="440" height="230" rx="20" fill="rgba(255, 255, 255, 0.04)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.5" filter="url(#card-shadow)"/>
+      <rect x="0" y="0" width="440" height="8" rx="4" fill="#34D399"/>
+      <text x="36" y="80" font-family="Plus Jakarta Sans, -apple-system, Segoe UI, Roboto, sans-serif" font-size="34" font-weight="800" fill="#FFFFFF">${escapeXml(c.stats[0].val)}</text>
+      <text x="36" y="125" font-family="Plus Jakarta Sans, -apple-system, Segoe UI, Roboto, sans-serif" font-size="20" font-weight="500" fill="#C7D2FE">${escapeXml(c.stats[0].caption)}</text>
+    </g>
+
+    <g transform="translate(485, 0)">
+      <rect width="440" height="230" rx="20" fill="rgba(255, 255, 255, 0.04)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.5" filter="url(#card-shadow)"/>
+      <rect x="0" y="0" width="440" height="8" rx="4" fill="#60A5FA"/>
+      <text x="36" y="80" font-family="Plus Jakarta Sans, -apple-system, Segoe UI, Roboto, sans-serif" font-size="34" font-weight="800" fill="#FFFFFF">${escapeXml(c.stats[1].val)}</text>
+      <text x="36" y="125" font-family="Plus Jakarta Sans, -apple-system, Segoe UI, Roboto, sans-serif" font-size="20" font-weight="500" fill="#C7D2FE">${escapeXml(c.stats[1].caption)}</text>
+    </g>
+
+    <g transform="translate(970, 0)">
+      <rect width="440" height="230" rx="20" fill="rgba(255, 255, 255, 0.04)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.5" filter="url(#card-shadow)"/>
+      <rect x="0" y="0" width="440" height="8" rx="4" fill="#A78BFA"/>
+      <text x="36" y="80" font-family="Plus Jakarta Sans, -apple-system, Segoe UI, Roboto, sans-serif" font-size="34" font-weight="800" fill="#FFFFFF">${escapeXml(c.stats[2].val)}</text>
+      <text x="36" y="125" font-family="Plus Jakarta Sans, -apple-system, Segoe UI, Roboto, sans-serif" font-size="20" font-weight="500" fill="#C7D2FE">${escapeXml(c.stats[2].caption)}</text>
+    </g>
+  </g>
+</svg>
+`;
+
+async function run() {
+  const outPath = path.resolve(c.out);
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
-  const svg = renderSvg(item);
-  await sharp(Buffer.from(svg))
-    .webp({ quality: 90 })
+
+  const svgBuffer = Buffer.from(svg.trim());
+  await sharp(svgBuffer)
+    .resize(1600, 840)
+    .webp({ quality: 92 })
     .toFile(outPath);
+
   const stat = fs.statSync(outPath);
-  console.log(`Generated: ${item.out} (${stat.size} bytes)`);
+  console.log(`Successfully generated official DKIM cover: ${c.out} (${(stat.size / 1024).toFixed(1)} KB)`);
 }
 
-generate().catch(err => {
+run().catch((err) => {
   console.error(err);
   process.exit(1);
 });
