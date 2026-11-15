@@ -101,6 +101,9 @@ export const CLUSTERS = {
   postWhatIsDkim: {
     en: '/blog/what-is-dkim',
   },
+  useCaseOutreachDeliverability: {
+    en: '/use-cases/outreach-email-deliverability',
+  },
   // Alternative and comparison pages with local brand demand (plans/15). A
   // language is listed only where every brand on the page is searched in that
   // market, so some clusters are partial.

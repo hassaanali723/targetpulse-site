@@ -21,6 +21,10 @@ const solutionsLinks = [
   { name: 'MCP Server', href: '/mcp' },
 ]
 
+const useCasesLinks = [
+  { name: 'Outreach Deliverability', href: '/use-cases/outreach-email-deliverability' },
+]
+
 const freeToolsLinks = [
   { name: 'Email checker', href: '/email-checker' },
   { name: 'Disposable email checker', href: '/disposable-email-checker' },
@@ -169,12 +173,24 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Solutions & Resources column */}
+          {/* Solutions, Use Cases & Resources column */}
           <div className="shrink-0 space-y-6">
             <div>
               <p className={headingClass}>Solutions</p>
               <ul className="space-y-2.5">
                 {solutionsLinks.map((link) => (
+                  <li key={link.name}>
+                    <Link href={link.href} className={linkClass}>
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <p className={headingClass}>Use cases</p>
+              <ul className="space-y-2.5">
+                {useCasesLinks.map((link) => (
                   <li key={link.name}>
                     <Link href={link.href} className={linkClass}>
                       {link.name}
