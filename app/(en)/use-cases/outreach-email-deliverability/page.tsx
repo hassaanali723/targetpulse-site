@@ -191,7 +191,7 @@ export default function OutreachDeliverabilityPage() {
         </h1>
 
         <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-3xl mx-auto font-medium">
-          Stricter spam filters, catch-all bounce traps, and 0.3% complaint ceilings can silently derail Outreach.io and Salesloft cadences. Giggal.ai provides pre-sequence lead hygiene, catch-all validation, and domain reputation protection so your outbound messages land in real inboxes.
+          When cold emails hit dead addresses or unverified catch-alls, your bounce rate goes up and mailbox providers send your sequences to spam. Giggal verifies your prospect lists before you launch your Outreach campaigns, keeping your sender reputation safe and your emails in the primary inbox.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">

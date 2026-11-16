@@ -3,7 +3,7 @@ import { hreflangAlternates } from '@/lib/i18n/clusters'
 
 const TITLE = 'Outreach Deliverability: Cold Email Outreach & Inbox Placement'
 const DESC =
-  'Optimize Outreach.io and sales engagement deliverability. Eliminate catch-all bounces, protect domain reputation, and keep cold sequences in the primary inbox.'
+  'Protect your Outreach.io campaigns from spam. Verify prospect lists, resolve catch-all emails, reduce bounce rates, and keep cold sequences in the primary inbox.'
 
 export const metadata: Metadata = {
   title: { absolute: `${TITLE} | Giggal.ai` },
