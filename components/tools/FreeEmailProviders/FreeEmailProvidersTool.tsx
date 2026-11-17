@@ -151,6 +151,17 @@ export default function FreeEmailProvidersTool({ locale = 'en' }: { locale?: Loc
                     {locale === 'ja' ? null : ' '}
                     {t.kindNotes[match.kind]}
                   </p>
+                  {t.verifyText && t.verifyLink && t.verifyHref && (
+                    <p className="mt-2">
+                      {fill(t.verifyText, {
+                        verifier: (
+                          <Link href={t.verifyHref} className="text-indigo-600 font-semibold hover:underline">
+                            {t.verifyLink}
+                          </Link>
+                        ),
+                      })}
+                    </p>
+                  )}
                 </div>
               </div>
             )}

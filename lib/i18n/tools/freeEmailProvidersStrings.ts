@@ -126,7 +126,8 @@ const en: FreeProvidersPageStrings = {
     "To find a provider's domains, type its name in the filter, for example hotmail or gmx. Outlook.com alone has dozens of country versions.",
     'To use the list in a spreadsheet, a CRM or your own code, download it. The CSV has the domain, the provider, the company behind it, its country and its type.',
   ],
-  howNote: 'Downloads follow the filter you set. Choose Internet providers, for example, and you get only those domains.',
+  howNote:
+    'Downloads follow the filter you set. Choose Internet providers, for example, and you get only those domains. The list tells you the provider, not whether an address exists. To check if a Gmail, Yahoo or Outlook address is real, use the free [email verifier](/email-checker).',
   imageAlt: 'Illustration of email addresses from different free providers sorted into a domain list.',
   coverTitle: "What's on the list, and what isn't",
   coverParas: [

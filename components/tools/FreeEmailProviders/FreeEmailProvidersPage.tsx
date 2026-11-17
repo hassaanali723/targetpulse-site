@@ -138,7 +138,9 @@ export default function FreeEmailProvidersPage({ locale }: { locale: Locale }) {
               <li key={i}>{step}</li>
             ))}
           </ol>
-          <p className={proseP}>{s.howNote}</p>
+          <p className={proseP}>
+            <Rich text={s.howNote} locale={locale} />
+          </p>
         </div>
 
         {/* Visual illustration in first content section */}
