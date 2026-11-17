@@ -24,6 +24,8 @@ const solutionsLinks = [
 const useCasesLinks = [
   { name: 'Outreach Deliverability', href: '/use-cases/outreach-email-deliverability' },
   { name: 'Safeguarding Domain Health', href: '/use-cases/safeguarding-domain-health' },
+  { name: 'CRM Data Cleaning', href: '/use-cases/crm-data-cleaning' },
+  { name: 'Email Warmup Deliverability', href: '/use-cases/email-warmup-deliverability' },
 ]
 
 const freeToolsLinks = [

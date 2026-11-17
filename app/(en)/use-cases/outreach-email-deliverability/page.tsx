@@ -152,7 +152,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'How does Giggal verify catch-all addresses that other tools mark as unknown?',
-    a: 'Catch-all domains accept all inbound SMTP connections at the boundary server, making standard ping checks inconclusive. Giggal analyzes deep mailbox signals, domain trust headers, and gateway signatures to determine whether an active user inbox exists behind the address, delivering 98.5% accuracy.',
+    a: 'Catch-all domains accept all inbound mail connections at the boundary server, making standard ping checks inconclusive. Giggal analyzes deep mailbox signals, domain trust headers, and gateway signatures to determine whether an active user inbox exists behind the address, delivering 98.5% accuracy.',
   },
   {
     q: 'Can we clean lead lists before importing them into Outreach?',
@@ -178,11 +178,6 @@ export default function OutreachDeliverabilityPage() {
 
       {/* ── HERO SECTION ────────────────────────────────────────── */}
       <section className="max-w-6xl mx-auto px-6 pt-28 md:pt-36 pb-12 text-center space-y-6">
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-bold tracking-wide uppercase">
-          <ShieldCheck className="w-4 h-4 text-indigo-600" />
-          USE CASES / SALES ENGAGEMENT DELIVERABILITY
-        </div>
-
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.08] text-slate-900 max-w-4xl mx-auto">
           Outreach Deliverability:{' '}
           <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">

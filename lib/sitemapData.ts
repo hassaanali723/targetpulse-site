@@ -43,6 +43,8 @@ export function coreEntries(): SitemapEntry[] {
     { path: '/catch-all-verification', lastModified: '2026-09-13', priority: '0.85' },
     { path: '/use-cases/outreach-email-deliverability', lastModified: '2026-11-15', priority: '0.85' },
     { path: '/use-cases/safeguarding-domain-health', lastModified: '2026-11-17', priority: '0.85' },
+    { path: '/use-cases/crm-data-cleaning', lastModified: '2026-11-17', priority: '0.85' },
+    { path: '/use-cases/email-warmup-deliverability', lastModified: '2026-11-18', priority: '0.85' },
     { path: '/seg-email-verification', lastModified: '2026-08-02' },
     ...(MIMECAST_PAGE_LIVE
       ? [{ path: '/mimecast-email-verification', lastModified: '2026-08-02' }]

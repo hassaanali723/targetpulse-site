@@ -225,11 +225,6 @@ export default function SafeguardingDomainHealthPage() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
               <div className="lg:col-span-7">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-semibold uppercase tracking-wider mb-5">
-                  <ShieldCheck className="w-3.5 h-3.5" />
-                  Domain Infrastructure & Deliverability
-                </div>
-
                 <h1 className="text-4xl sm:text-5xl lg:text-5xl font-extrabold tracking-tight text-slate-950 leading-[1.12]">
                   Safeguarding Domain Health & Sender Reputation
                 </h1>
