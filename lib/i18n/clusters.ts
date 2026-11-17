@@ -104,6 +104,9 @@ export const CLUSTERS = {
   useCaseOutreachDeliverability: {
     en: '/use-cases/outreach-email-deliverability',
   },
+  useCaseSafeguardingDomainHealth: {
+    en: '/use-cases/safeguarding-domain-health',
+  },
   // Alternative and comparison pages with local brand demand (plans/15). A
   // language is listed only where every brand on the page is searched in that
   // market, so some clusters are partial.

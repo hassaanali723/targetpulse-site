@@ -42,6 +42,7 @@ export function coreEntries(): SitemapEntry[] {
     { path: '', lastModified: HOMES_REDESIGNED, priority: '1' },
     { path: '/catch-all-verification', lastModified: '2026-09-13', priority: '0.85' },
     { path: '/use-cases/outreach-email-deliverability', lastModified: '2026-11-15', priority: '0.85' },
+    { path: '/use-cases/safeguarding-domain-health', lastModified: '2026-11-17', priority: '0.85' },
     { path: '/seg-email-verification', lastModified: '2026-08-02' },
     ...(MIMECAST_PAGE_LIVE
       ? [{ path: '/mimecast-email-verification', lastModified: '2026-08-02' }]
