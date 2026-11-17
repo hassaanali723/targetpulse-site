@@ -168,7 +168,7 @@ const en: MxPageStrings = {
   mailboxTitle: "An MX lookup doesn't check the mailbox",
   mailboxParas: [
     "MX records tell you the domain accepts mail. They don't tell you that a particular address exists. jane@example.com can still bounce when example.com has perfect MX records, because Jane left the company or the address never existed.",
-    'Checking the mailbox means asking the mail server, which is what an email verifier does. Use the [email checker](/email-checker) for one address, or the [bulk email verifier](/bulk-email-verifier) for a whole list before a campaign.',
+    'Checking the mailbox means asking the mail server, which is what an email verifier does. Use the free [email verifier](/email-checker) for one address, or the [bulk email verifier](/bulk-email-verifier) for a whole list before a campaign.',
   ],
   faqTitle: 'Frequently asked questions',
   faqs: [

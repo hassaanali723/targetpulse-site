@@ -52,6 +52,11 @@ export interface FreeProvidersToolStrings {
   disposableLink: string
   /** The disposable email checker page in this language. */
   disposableHref: string
+  /** Line under a free-domain result, with {verifier} as the link. Optional:
+   *  only English has it so far (added 2026-11-17). */
+  verifyText?: string
+  verifyLink?: string
+  verifyHref?: string
   browseLabel: string
   browsePlaceholder: string
   /** The filter buttons. */
@@ -98,9 +103,12 @@ const en: FreeProvidersToolStrings = {
   notListedText:
     'It’s most likely a company, school or personal domain. It could also be a small free provider we don’t cover, or a disposable address service. You can {mx} or {disposable}.',
   mxLink: 'look up its mail servers',
-  mxHref: '/es/mx-lookup',
+  mxHref: '/mx-lookup',
   disposableLink: 'check if it’s disposable',
   disposableHref: '/disposable-email-checker',
+  verifyText: 'This tells you the provider, not whether the address exists. To check the address itself, use the {verifier}.',
+  verifyLink: 'free email verifier',
+  verifyHref: '/email-checker',
   browseLabel: 'Browse the list',
   browsePlaceholder: 'Filter by domain or provider, e.g. hotmail or gmx',
   filters: {

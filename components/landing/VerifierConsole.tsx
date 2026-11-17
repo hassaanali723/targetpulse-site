@@ -60,6 +60,15 @@ interface VerifierConsoleProps {
   strings?: ConsoleStrings
   // Labels of the 'disposable' variant. Defaults to English.
   disposableStrings?: DisposableConsoleStrings
+  // The decorative "SYS_OK / DELAY / STABLE CONNECTION" bar under the log.
+  // On by default so every other page renders as before. /email-checker
+  // turns it off: it is the first text Google reads under the H1 there, and
+  // the numbers in it are not measured.
+  showStatusBar?: boolean
+  // A few labels to change on top of `strings`, for a server page that
+  // cannot read EN_CONSOLE_STRINGS (this is a client module). /email-checker
+  // uses it for plain header labels.
+  stringOverrides?: Partial<ConsoleStrings>
 }
 
 export interface ConsoleStrings {
@@ -288,8 +297,10 @@ export default function VerifierConsole({
   strings = EN_CONSOLE_STRINGS,
   emailFromQuery = false,
   disposableStrings = EN_DISPOSABLE_STRINGS,
+  showStatusBar = true,
+  stringOverrides,
 }: VerifierConsoleProps = {}) {
-  const t = strings
+  const t = stringOverrides ? { ...strings, ...stringOverrides } : strings
   const ds = disposableStrings
   const order: readonly string[] = variant === 'disposable' ? DISPOSABLE_ORDER : CHECK_ORDER
   const labelFor = (key: string) =>
@@ -523,13 +534,15 @@ export default function VerifierConsole({
           </div>
 
           {/* Bottom console info bar */}
-          <div className="border-t border-slate-800/60 pt-4 flex items-center justify-between text-[10px] font-mono text-slate-500 shrink-0 mt-4">
-            <div className="flex items-center space-x-3">
-              <span>SYS_OK: 200</span>
-              <span>DELAY: 35ms</span>
+          {showStatusBar && (
+            <div className="border-t border-slate-800/60 pt-4 flex items-center justify-between text-[10px] font-mono text-slate-500 shrink-0 mt-4">
+              <div className="flex items-center space-x-3">
+                <span>SYS_OK: 200</span>
+                <span>DELAY: 35ms</span>
+              </div>
+              <span>STABLE CONNECTION</span>
             </div>
-            <span>STABLE CONNECTION</span>
-          </div>
+          )}
         </div>
       </div>
     </div>

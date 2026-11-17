@@ -37,6 +37,8 @@ import {
   HelpCircle,
   FileSpreadsheet,
   Code2,
+  Plug,
+  Bot,
 } from 'lucide-react'
 import AwardRow from '@/components/landing/AwardRow'
 import BulkScanDemo from '@/components/landing/BulkScanDemo'
@@ -44,9 +46,9 @@ import MotionRuntime from '@/components/landing/MotionRuntime'
 import { getSourceForgeStats, PRODUCT_HUNT_RATING, CAPTERRA_RATING, G2_RATING } from '@/lib/reviewStats'
 import { hreflangAlternates } from '@/lib/i18n/clusters'
 
-const TITLE = 'Free Email Checker: Check if an Email Address Is Valid'
+const TITLE = 'Free Email Checker & Email Verifier: Check if an Email Is Valid'
 const DESC =
-  'Email checker that tells you if an email address is valid. Check the mail server and the mailbox in seconds, including catch-all domains. No signup needed.'
+  'Free email checker and email verifier. Find out if an email address is valid by checking the mail server and the mailbox, including catch-all domains. No signup.'
 
 export const metadata: Metadata = {
   // The English tool page, built for "email checker" (23,000/mo US, KD 69) and
@@ -57,6 +59,11 @@ export const metadata: Metadata = {
   // "free" searches are served here, not on a second page. Keyword data and the
   // reasoning: SEO-Plan/26-tool-pages-keyword-plan.md. Was
   // /tools/catch-all-email-checker until 2026-09-18 (301 in next.config.js).
+  // 2026-11-17 (approved by Hassaan): "Email Verifier" added to the title.
+  // The US top 10 for "email verifier" (12.1K, KD 73) shares 4 URLs with the
+  // top 10 for "email checker", so one page targets both. Hunter and
+  // Emailable rank top 4 for both with both phrases in the title. SERP data:
+  // SEO-Plan/SEMRUSH DATA/serp-email-verifier-us-2026-11-17.csv.
   title: { absolute: `${TITLE} | Giggal.ai` },
   description: DESC,
   alternates: { canonical: '/email-checker', languages: hreflangAlternates('tool') },
@@ -76,21 +83,41 @@ export const metadata: Metadata = {
   },
 }
 
-// The checker as a web application, the same markup the five localized checker
-// pages carry (lib/i18n/schema.ts). No AggregateRating (site rule C10).
-const webAppLd = {
-  '@context': 'https://schema.org',
-  '@type': ['SoftwareApplication', 'WebApplication'],
-  '@id': 'https://giggal.ai/email-checker#app',
-  name: 'Giggal.ai Email Checker',
-  url: 'https://giggal.ai/email-checker',
-  inLanguage: 'en',
-  applicationCategory: 'UtilitiesApplication',
-  operatingSystem: 'Web',
-  isAccessibleForFree: true,
-  description: DESC,
-  publisher: { '@id': ORG_ID },
-  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+// The checker as a web application, the same markup the localized checker
+// pages carry (lib/i18n/schema.ts).
+//
+// Rating: 2026-11-17, Hassaan lifted site rule C10 for this page only, as a
+// test. 7 of the 8 top pages for "email verifier" (Hunter, Emailable,
+// Kickbox, Clearout, ZeroBounce, Snov, verifyemailaddress.org) mark up an
+// AggregateRating. Ours uses the SourceForge rating only: it is read live
+// (lib/reviewStats.ts) and shown in the rating pills under the tool, so the
+// markup matches what the page displays. Scores from different platforms are
+// never added together. Worst case under Google's review snippet rules is a
+// structured data manual action, which removes the stars but does not change
+// rankings. Check the Rich Results Test and Search Console's Review snippets
+// report before adding this to other pages.
+function webAppLd(rating: { rating: number; count: number }) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': ['SoftwareApplication', 'WebApplication'],
+    '@id': 'https://giggal.ai/email-checker#app',
+    name: 'Giggal.ai Email Checker',
+    url: 'https://giggal.ai/email-checker',
+    inLanguage: 'en',
+    applicationCategory: 'UtilitiesApplication',
+    operatingSystem: 'Web',
+    isAccessibleForFree: true,
+    description: DESC,
+    publisher: { '@id': ORG_ID },
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: rating.rating,
+      ratingCount: rating.count,
+      bestRating: 5,
+      worstRating: 1,
+    },
+  }
 }
 
 // Single source of truth for the FAQ: rendered visibly AND emitted as JSON-LD.
@@ -99,15 +126,25 @@ const webAppLd = {
 const faqs: FaqItem[] = [
   {
     q: 'What is an email checker?',
-    a: 'An email checker tells you whether an email address is valid by checking its format, its mail server and the mailbox itself. It is also called an email verifier or email validator. It works without sending an email to the address.',
+    a: 'An email checker tells you whether an email address is valid by checking its syntax, its mail server and the mailbox itself. It also flags disposable and role-based addresses. It is also called an email verifier or email validator. It works without sending an email to the address.',
   },
   {
     q: 'Is an email checker the same as an email verifier?',
     a: 'Yes. Email checker, email verifier and email validator are three names for the same kind of tool. All of them verify an email address by checking its format, its mail server and the mailbox. They differ on catch-all domains. Many stop there with "risky". This one returns valid or invalid.',
   },
   {
+    // Added 2026-11-17 (approved): asked on Hunter, Emailable, Skrapp,
+    // Clearout and Snov, the top pages for "email verifier".
+    q: 'Is the email verifier free?',
+    a: 'Yes. You can check a few addresses each hour on this page with no signup and no card. To verify more, create a free account and get 1,000 free credits, with no card needed.',
+  },
+  {
+    q: 'What is the difference between email verification and email validation?',
+    a: 'Email validation checks that an address is written correctly and that its domain can receive mail. Email verification goes further and asks the mail server whether the mailbox exists. Many tools use the two words for the same thing. This email checker does both.',
+  },
+  {
     q: 'How does an email checker work?',
-    a: 'It runs four checks in order. First the format of the address. Then the domain\'s mail server records. Then it asks the mail server whether the mailbox exists. On catch-all domains, where the server says yes to every address, Giggal.ai runs extra signals to tell a real mailbox from a fake one.',
+    a: 'It runs four checks in order. First the syntax of the address. Then the domain\'s MX records. Then it connects to the mail server over SMTP and asks whether the mailbox exists. Last, it tests whether the server accepts every address. If it does, Giggal.ai runs extra signals to tell a real mailbox from a fake one. Disposable and role-based addresses are flagged along the way.',
   },
   {
     q: 'How do I check if an email address is valid?',
@@ -123,11 +160,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'Is an email checker accurate?',
-    a: 'It depends on the checker. Most are accurate on normal domains and give up on catch-all domains, where they return "risky" or "unknown". Giggal.ai keeps going on catch-all domains and returns valid or invalid, and measures 98.5% accuracy on business lists.',
-  },
-  {
-    q: 'What does "valid" mean on a catch-all domain?',
-    a: 'That the mailbox was confirmed, not just that the domain accepted the recipient. A plain catch-all label only tells you the server says yes to everything. Valid here means the address passed the extra checks that separate a real mailbox from one that will bounce.',
+    a: 'It depends on the checker. Most are accurate on normal domains and give up on catch-all domains, where they return "risky" or "unknown". Giggal.ai keeps going there and returns valid or invalid, and measures 98.5% accuracy on business lists.',
   },
   {
     q: 'What does "unknown" mean in an email check?',
@@ -149,9 +182,28 @@ const faqs: FaqItem[] = [
     q: 'Can I check a whole list here?',
     a: 'Not on this page. Create an account, upload the list as a CSV or Excel file, and every address gets the same checks. You start with 1,000 free credits and no card.',
   },
+  {
+    q: 'How often should I re-verify my email list?',
+    a: 'Verify a list before each campaign if it has not been checked recently. Addresses stop working over time, for example when people change jobs or close accounts. A list that was valid a few months ago can bounce today.',
+  },
+  {
+    q: 'Can I verify emails through an API or my CRM?',
+    a: 'Yes. The email verification API runs the same checks from your own app or signup form and returns the result as JSON. You can also verify contacts in HubSpot, or connect other apps through Zapier and n8n.',
+  },
 ]
 
-const sectionTitle = 'text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight'
+// The console's header labels, in plain words for this page. Its first text
+// sits right under the H1, so it says what the tool is. Every other label
+// stays the shared English default.
+const consoleLabels = {
+  header: 'Email checker',
+  live: 'Free',
+  actionLabel: 'One address',
+  actionTitle: 'Check an email address',
+  diagnostics: 'Checks',
+}
+
+const sectionTitle ='text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight'
 const proseP = 'text-slate-600 leading-relaxed text-sm md:text-base font-medium'
 
 export default async function EmailCheckerPage() {
@@ -159,7 +211,7 @@ export default async function EmailCheckerPage() {
   return (
     <main className="relative min-h-screen bg-slate-50 grid-lines overflow-x-hidden text-slate-800 antialiased">
       <JsonLd data={breadcrumbLd('Email Checker', '/email-checker')} />
-      <JsonLd data={webAppLd} />
+      <JsonLd data={webAppLd(sourceforge)} />
       <JsonLd data={faqPageLd(faqs)} />
       {/* Soft light behind the hero: a gradient, not a blur filter (blur is slow in iOS Safari). */}
       <div className="absolute top-0 left-1/4 w-[840px] h-[840px] -translate-x-[120px] -translate-y-[120px] rounded-full bg-[radial-gradient(circle,rgba(99,102,241,0.10),transparent_60%)] -z-10 pointer-events-none" />
@@ -170,14 +222,16 @@ export default async function EmailCheckerPage() {
       {/* ── HERO ─────────────────────────────────────────────── */}
       <section className="max-w-3xl mx-auto px-6 pt-28 md:pt-32 pb-10 text-center space-y-6">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900">
-          Email checker:{' '}
+          {/* 2026-11-17 (approved): matches the title. Was "Email checker:
+              find out if an email address is valid". */}
+          Free email checker &amp; email verifier:{' '}
           <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">
-            find out if an email address is valid
+            check if an email is valid
           </span>
         </h1>
         <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium">
-          Check or verify any email address online for free. Paste it in to test the format, the mail server and the
-          mailbox itself. On catch-all domains, this email checker keeps going and returns valid
+          Use this free email checker and email verifier to verify email addresses online. Paste an address in
+          to test the format, the mail server and the mailbox itself. On catch-all domains, this email checker keeps going and returns valid
           or invalid.
         </p>
       </section>
@@ -189,6 +243,8 @@ export default async function EmailCheckerPage() {
           endpoint="/api/tools/catch-all-check"
           defaultEmail=""
           emailFromQuery
+          stringOverrides={consoleLabels}
+          showStatusBar={false}
         />
         <p className="text-center text-[13px] text-slate-500 font-medium mt-4">
           No signup, no card. One address per check.
@@ -204,7 +260,8 @@ export default async function EmailCheckerPage() {
         </p>
         {/* Ratings: SourceForge read live, Product Hunt and Capterra from
             lib/reviewStats.ts, G2 typed in there too. Logos are the ones the home review section uses.
-            Visual only, no rating markup (site rule C10). */}
+            The SourceForge pill is also the rating in the webAppLd markup
+            above, so keep it visible. The other three are visual only. */}
         <div className="mt-6 flex flex-wrap items-center justify-center gap-2.5">
           {[
             {
@@ -259,6 +316,50 @@ export default async function EmailCheckerPage() {
       {/* Award badges from SourceForge, Slashdot and Top Business Software. */}
       <AwardRow />
 
+      {/* ── WHAT IS AN EMAIL CHECKER ─────────────────────────── */}
+      {/* Added 2026-11-17 (approved by Hassaan). The three pages Google's AI
+          Overview cites for "email checker" (verifalia, mailmeteor,
+          email-checker.net) each open with one short passage that defines the
+          tool and lists its checks. This is ours, kept near the top. */}
+      <section className="cv-section max-w-3xl mx-auto px-6 pt-16 pb-16 border-t border-slate-200">
+        <h2 className={`${sectionTitle} text-center`}>What is an email checker or email verifier?</h2>
+        <p className={`${proseP} mt-5`}>
+          An email checker is a tool that tells you if an email address is valid and can receive mail. It is
+          also called an email verifier or email validator. It checks the address without sending an email to
+          it. To verify an email address, it runs these checks:
+        </p>
+        <ul className="mt-5 space-y-2.5">
+          {[
+            { lead: 'Syntax:', rest: ' the address follows the email format, with one @ and a valid domain.' },
+            { lead: 'Domain and MX records:', rest: ' the domain exists and publishes the mail servers that receive its mail.' },
+            { lead: 'Mailbox (SMTP):', rest: ' the checker asks the mail server over SMTP whether the mailbox exists.' },
+            { lead: 'Disposable:', rest: ' the address belongs to a temporary inbox service.' },
+            { lead: 'Role-based:', rest: ' the address goes to a shared inbox such as info@ or support@.' },
+            { lead: 'Catch-all:', rest: ' the server accepts mail for every address, so the mailbox check alone does not prove the mailbox exists.' },
+          ].map((c) => (
+            <li key={c.lead} className="flex gap-3">
+              <CheckCircle2 className="mt-0.5 h-[18px] w-[18px] shrink-0 text-emerald-500" aria-hidden="true" />
+              <p className="text-sm md:text-base text-slate-600 font-medium leading-relaxed">
+                <span className="font-bold text-slate-900">{c.lead}</span>
+                {c.rest}
+              </p>
+            </li>
+          ))}
+        </ul>
+        <p className={`${proseP} mt-5`}>
+          The result is valid, invalid or unknown. Use it to remove addresses that will bounce before you send.
+        </p>
+        <div className="mt-6 flex gap-3 rounded-2xl border border-indigo-100 bg-indigo-50/60 p-5">
+          <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-indigo-600" aria-hidden="true" />
+          <p className="text-sm md:text-base text-slate-700 font-medium leading-relaxed">
+            <span className="font-bold text-slate-900">These are the basic checks.</span> Sometimes none of them
+            can tell if an address is real. In those cases, Giggal.ai runs extra in-depth checks and reads more signals from the
+            mail server. They confirm whether the address is valid and safe to send to, so you do not send to an
+            address that bounces and hurts your campaign.
+          </p>
+        </div>
+      </section>
+
       {/* ── HOW TO CHECK ─────────────────────────────────────── */}
       {/* Four stage cards on a connecting line; the catch-all stage is the
           one Giggal.ai adds, so it carries the brand gradient border. */}
@@ -266,19 +367,18 @@ export default async function EmailCheckerPage() {
         <div className="text-center max-w-2xl mx-auto">
           <h2 className={sectionTitle}>How to check if an email address is valid</h2>
           <p className={`${proseP} mt-4`}>
-            A full email check, also called email verification, has four stages. Checkers that only
-            do the first one are the reason
-            so many &quot;checked&quot; lists still bounce.
+            A full email check, also called email verification, has four stages. Each stage answers
+            a different question about the address.
           </p>
         </div>
         <div className="relative mt-12">
           <div aria-hidden="true" className="hidden lg:block absolute left-[12%] right-[12%] top-7 h-px bg-gradient-to-r from-indigo-200 via-indigo-300 to-emerald-300" />
           <ol className="relative grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { Icon: AtSign, title: 'Format', text: 'Is the address well formed: one @, a valid name before it, a domain with an ending such as .com. This catches typos and nothing else.' },
-              { Icon: Server, title: 'Mail server', text: 'Does the domain publish mail server (MX) records. No MX records means no mailbox can exist there, so the address is dead before any message is sent.' },
-              { Icon: Inbox, title: 'Mailbox', text: 'The checker asks the mail server whether this mailbox exists, without sending an email. A yes means the mailbox exists. A no means it is not there.' },
-              { Icon: ShieldCheck, title: 'Catch-all', text: 'If the server also says yes to a made-up address, step three proved nothing. This is where most email checkers print "catch-all" and stop. Giggal.ai runs extra signals that separate a real mailbox from an accept-all reply and returns valid or invalid.', highlight: true },
+              { Icon: AtSign, title: 'Syntax', text: 'Is the address well formed: one @, a valid name before it, a domain with an ending such as .com. This catches typos and nothing else.' },
+              { Icon: Server, title: 'Mail server', text: 'Does the domain publish mail server (MX) records in its DNS. No MX records means no mailbox can exist there, so the address is dead before any message is sent.' },
+              { Icon: Inbox, title: 'Mailbox', text: 'The checker connects to the mail server over SMTP and asks whether this mailbox exists, without sending an email. A yes means the mailbox exists. A no means it is not there.' },
+              { Icon: ShieldCheck, title: 'Catch-all', text: 'If the server also says yes to a made-up address, step three proved nothing. This is where most email checkers stop. Giggal.ai runs extra signals that separate a real mailbox from an accept-all reply and returns valid or invalid.', highlight: true },
             ].map((st, i) => (
               <li
                 key={st.title}
@@ -308,8 +408,9 @@ export default async function EmailCheckerPage() {
           </ol>
         </div>
         <p className="mt-8 text-center text-sm text-slate-500 font-medium max-w-2xl mx-auto">
-          The result panel above shows each stage as it runs. To check email address validity,
-          paste the address in and press the button. One address takes a few seconds.
+          The checker also flags disposable and role-based addresses. The result panel above shows
+          each stage as it runs. To check email address validity, paste the address in and press the
+          button. One address takes a few seconds.
         </p>
       </section>
 
@@ -472,7 +573,7 @@ export default async function EmailCheckerPage() {
             { Icon: MailX, text: 'When a signup bounces and you want to know if the address ever existed.' },
             { Icon: Globe, text: 'Before you send to an address you found on a website or in a CRM.' },
             { Icon: ShoppingCart, text: 'To test one address from a purchased list before you pay to clean the whole file.' },
-            { Icon: HelpCircle, text: 'To confirm a contact on a catch-all domain that another tool marked "risky".' },
+            { Icon: HelpCircle, text: 'To confirm a contact that another tool marked "risky".' },
           ].map((u) => (
             <li key={u.text} className="w-full sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.75rem)] flex gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-[0_1px_2px_rgba(15,23,42,0.04)] hover:border-indigo-200 transition-colors">
               <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-50 to-emerald-50 text-indigo-600 ring-1 ring-indigo-100">
@@ -500,56 +601,79 @@ export default async function EmailCheckerPage() {
             says yes to that too. So the normal mailbox check proves nothing there.
           </p>
           <p className={proseP}>
-            Spotting a catch-all domain is easy: test one made-up address and see if it is accepted.
-            That is why almost every email checker can tell you a domain is catch-all. Finding out
-            which mailboxes behind it are real takes far more work, so most email verifiers stop at
-            the label and leave the decision to you. On B2B lists, catch-all addresses are often a large
-            share of the contacts, and many of them are real people.
+            Spotting such a domain is easy, but finding out which mailboxes behind it are real takes
+            far more work. So most email verifiers stop at the label and leave the decision to you.
+            On B2B lists, these addresses are often a large share of the contacts, and many of them
+            are real people.
           </p>
           <p className={proseP}>
-            Giggal.ai runs the extra signals on every catch-all address and returns valid or invalid,
-            which is also why this page allows only a few checks per visitor. Read{' '}
-            <Link href="/blog/what-is-a-catch-all-email-address" className="text-indigo-600 font-bold hover:underline">
-              what a catch-all email address is
-            </Link>{' '}
-            for the full background.
+            Giggal.ai runs extra signals on each of these addresses and returns valid or invalid,
+            which is also why this page allows only a few checks per visitor.
           </p>
         </div>
         <BulkScanDemo />
         </div>
       </section>
 
-      {/* ── WHOLE LIST ───────────────────────────────────────── */}
+      {/* ── OTHER WAYS TO VERIFY ──────────────────────────────── */}
+      {/* 2026-11-17 (approved): replaces the two-card "Check a whole list"
+          section. All 8 top pages for "email verifier" list the bulk tool,
+          the API and integrations next to the single check. */}
       <section className="cv-section max-w-6xl mx-auto px-6 pt-16 pb-16 border-t border-slate-200">
         <div className="text-center max-w-2xl mx-auto">
-          <h2 className={sectionTitle}>Check a whole list instead of one address</h2>
+          <h2 className={sectionTitle}>Other ways to verify emails</h2>
+          <p className={`${proseP} mt-4`}>
+            The email checker on this page handles one address at a time. To verify more emails, use one of
+            these. Each runs the same checks, and you start with 1,000 free credits and no card.
+          </p>
         </div>
-        <div className="mt-10 grid gap-5 md:grid-cols-2">
-          <div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
-            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 ring-1 ring-emerald-100">
-              <FileSpreadsheet className="h-5 w-5" />
-            </span>
-            <p className={`${proseP} mt-4`}>
-              The email checker on this page handles one address at a time. For bulk email
-              verification of a list, create an account, upload a CSV or Excel file of up to 50,000 addresses, and{' '}
-              <Link href="/email-list-cleaning" className="text-indigo-600 font-bold hover:underline">
-                clean your email list
-              </Link>{' '}
-              with the same checks on every row. You start with 1,000 free credits and no card.
-            </p>
-          </div>
-          <div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
-            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600 ring-1 ring-indigo-100">
-              <Code2 className="h-5 w-5" />
-            </span>
-            <p className={`${proseP} mt-4`}>
-              To check addresses inside your own app or signup form, use the{' '}
-              <Link href="/email-verification-api" className="text-indigo-600 font-bold hover:underline">
-                email verification API
-              </Link>
-              . It runs the same checks and returns the result as JSON.
-            </p>
-          </div>
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            {
+              Icon: FileSpreadsheet,
+              tone: 'bg-emerald-50 text-emerald-600 ring-emerald-100',
+              title: 'Bulk email verifier',
+              href: '/bulk-email-verifier',
+              text: 'Upload a CSV or Excel file of up to 50,000 addresses and clean your email list with the same checks on every row.',
+            },
+            {
+              Icon: Code2,
+              tone: 'bg-indigo-50 text-indigo-600 ring-indigo-100',
+              title: 'Email verification API',
+              href: '/email-verification-api',
+              text: 'Check addresses from your own app or signup form. The API returns the result as JSON.',
+            },
+            {
+              Icon: Plug,
+              tone: 'bg-sky-50 text-sky-600 ring-sky-100',
+              title: 'Integrations',
+              href: '/integrations',
+              text: 'Verify contacts in HubSpot, or connect other apps through Zapier and n8n.',
+            },
+            {
+              Icon: Bot,
+              tone: 'bg-violet-50 text-violet-600 ring-violet-100',
+              title: 'MCP server',
+              href: '/mcp',
+              text: 'Verify email addresses from Claude or ChatGPT through the Giggal.ai MCP server.',
+            },
+          ].map((w) => (
+            <Link
+              key={w.href}
+              href={w.href}
+              className="group flex flex-col rounded-3xl border border-slate-200 bg-white p-6 shadow-[0_1px_2px_rgba(15,23,42,0.04)] hover:border-indigo-200 transition-colors"
+            >
+              <span className={`flex h-11 w-11 items-center justify-center rounded-xl ring-1 ${w.tone}`}>
+                <w.Icon className="h-5 w-5" />
+              </span>
+              <h3 className="mt-4 text-lg font-extrabold text-slate-900 group-hover:text-indigo-700">{w.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-slate-600 font-medium">{w.text}</p>
+              <span className="mt-auto pt-4 inline-flex items-center gap-1.5 text-sm font-bold text-indigo-600">
+                Learn more
+                <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />
+              </span>
+            </Link>
+          ))}
         </div>
       </section>
 
@@ -568,8 +692,7 @@ export default async function EmailCheckerPage() {
         <div className="border-t border-slate-200 pt-8 space-y-3">
           {[
             { href: '/disposable-email-checker', label: 'detect disposable & temporary emails' },
-            { href: '/catch-all-verification', label: 'verify catch-all & risky emails' },
-            { href: '/blog/what-is-a-catch-all-email-address', label: 'what a catch-all email address is' },
+            { href: '/email-list-cleaning', label: 'clean your email list' },
             { href: '/seg-email-verification', label: 'emails protected by SEG gateways' },
             { href: '/pricing', label: 'pricing and credits' },
           ].map((l) => (
