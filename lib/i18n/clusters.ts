@@ -113,6 +113,12 @@ export const CLUSTERS = {
   useCaseEmailWarmupDeliverability: {
     en: '/use-cases/email-warmup-deliverability',
   },
+  useCaseSpamSuspensionResolution: {
+    en: '/use-cases/spam-suspension-resolution',
+  },
+  useCaseEmailListScrubbing: {
+    en: '/use-cases/email-list-scrubbing',
+  },
   // Alternative and comparison pages with local brand demand (plans/15). A
   // language is listed only where every brand on the page is searched in that
   // market, so some clusters are partial.

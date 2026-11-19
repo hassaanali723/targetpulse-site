@@ -26,6 +26,8 @@ const useCasesLinks = [
   { name: 'Safeguarding Domain Health', href: '/use-cases/safeguarding-domain-health' },
   { name: 'CRM Data Cleaning', href: '/use-cases/crm-data-cleaning' },
   { name: 'Email Warmup Deliverability', href: '/use-cases/email-warmup-deliverability' },
+  { name: 'Spam Suspension Resolution', href: '/use-cases/spam-suspension-resolution' },
+  { name: 'Email List Scrubbing', href: '/use-cases/email-list-scrubbing' },
 ]
 
 const freeToolsLinks = [
