@@ -22,12 +22,14 @@ const solutionsLinks = [
 ]
 
 const useCasesLinks = [
+  { name: 'B2B Lead Enrichment', href: '/use-cases/b2b-lead-enrichment' },
   { name: 'Outreach Deliverability', href: '/use-cases/outreach-email-deliverability' },
   { name: 'Safeguarding Domain Health', href: '/use-cases/safeguarding-domain-health' },
   { name: 'CRM Data Cleaning', href: '/use-cases/crm-data-cleaning' },
   { name: 'Email Warmup Deliverability', href: '/use-cases/email-warmup-deliverability' },
   { name: 'Spam Suspension Resolution', href: '/use-cases/spam-suspension-resolution' },
   { name: 'Email List Scrubbing', href: '/use-cases/email-list-scrubbing' },
+  { name: 'Prevent Fake Signups', href: '/use-cases/prevent-fake-signups' },
 ]
 
 const freeToolsLinks = [

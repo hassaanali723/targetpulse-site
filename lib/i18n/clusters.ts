@@ -101,6 +101,9 @@ export const CLUSTERS = {
   postWhatIsDkim: {
     en: '/blog/what-is-dkim',
   },
+  useCaseB2bLeadEnrichment: {
+    en: '/use-cases/b2b-lead-enrichment',
+  },
   useCaseOutreachDeliverability: {
     en: '/use-cases/outreach-email-deliverability',
   },
@@ -118,6 +121,9 @@ export const CLUSTERS = {
   },
   useCaseEmailListScrubbing: {
     en: '/use-cases/email-list-scrubbing',
+  },
+  useCasePreventFakeSignups: {
+    en: '/use-cases/prevent-fake-signups',
   },
   // Alternative and comparison pages with local brand demand (plans/15). A
   // language is listed only where every brand on the page is searched in that

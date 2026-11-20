@@ -41,12 +41,14 @@ export function coreEntries(): SitemapEntry[] {
     // 2026-09-14: hero retarget off SEG onto bulk (plans/09).
     { path: '', lastModified: HOMES_REDESIGNED, priority: '1' },
     { path: '/catch-all-verification', lastModified: '2026-09-13', priority: '0.85' },
+    { path: '/use-cases/b2b-lead-enrichment', lastModified: '2026-11-19', priority: '0.85' },
     { path: '/use-cases/outreach-email-deliverability', lastModified: '2026-11-15', priority: '0.85' },
     { path: '/use-cases/safeguarding-domain-health', lastModified: '2026-11-17', priority: '0.85' },
     { path: '/use-cases/crm-data-cleaning', lastModified: '2026-11-17', priority: '0.85' },
     { path: '/use-cases/email-warmup-deliverability', lastModified: '2026-11-18', priority: '0.85' },
     { path: '/use-cases/spam-suspension-resolution', lastModified: '2026-11-18', priority: '0.85' },
     { path: '/use-cases/email-list-scrubbing', lastModified: '2026-11-19', priority: '0.85' },
+    { path: '/use-cases/prevent-fake-signups', lastModified: '2026-11-19', priority: '0.85' },
     { path: '/seg-email-verification', lastModified: '2026-08-02' },
     ...(MIMECAST_PAGE_LIVE
       ? [{ path: '/mimecast-email-verification', lastModified: '2026-08-02' }]

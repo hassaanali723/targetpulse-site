@@ -49,7 +49,7 @@ const riskPoints = [
     Icon: Globe,
     color: 'text-amber-600 bg-amber-50 border-amber-200',
     title: 'Shared Tracking Pixel Blacklists',
-    body: 'Generic open-tracking pixels route through shared multi-tenant hosts. If another sender gets flagged, receiving spam filters quarantine your sequences by association—even when your message copy is personal.',
+    body: 'Generic open-tracking pixels route through shared multi-tenant hosts. If another sender gets flagged, receiving spam filters quarantine your sequences by association, even when your message copy is personal.',
   },
   {
     Icon: Activity,
@@ -160,7 +160,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'Does catch-all verification cost extra credits?',
-    a: 'No. Giggal uses flat, transparent pricing. Every verification—including deep catch-all checks and gateway-protected mailboxes—costs exactly 1 credit per email. Unknown results are refunded automatically.',
+    a: 'No. Giggal uses flat, transparent pricing. Every verification, including deep catch-all checks and gateway-protected mailboxes, costs exactly 1 credit per email. Unknown results are refunded automatically.',
   },
 ]
 
@@ -216,11 +216,6 @@ export default function OutreachDeliverabilityPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
             {/* Left Content Column */}
             <div className="lg:col-span-7 space-y-5">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold tracking-wide uppercase">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                STANDALONE VERIFICATION TOOL
-              </div>
-
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
                 Want to Test an Outreach Lead Before Sequencing?
               </h2>

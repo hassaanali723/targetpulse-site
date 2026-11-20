@@ -8,7 +8,7 @@ import { faqPageLd, breadcrumbLd, ORG_ID } from '@/lib/schema'
 import {
   ArrowRight, ArrowUpRight, Check,
   Play, ExternalLink,
-  Star, DollarSign,
+  DollarSign,
   TrendingDown, TrendingUp, Layers,
 } from 'lucide-react'
 
@@ -36,30 +36,6 @@ const softwareLd = {
     '1,000 free scrubbing credits with zero credit card required',
   ],
 }
-
-const marketerReviews = [
-  {
-    quote:
-      'We scrubbed 18,000 stale profiles from Klaviyo before Black Friday. Our monthly bill dropped from $450 to $310, and campaign open rates jumped from 22% to 39%.',
-    author: 'Elena R.',
-    role: 'Head of Growth, DTC Apparel Brand',
-    metric: 'Saved $1,680/yr',
-  },
-  {
-    quote:
-      'Mailchimp warned us about hard bounce rates after importing a legacy giveaway list. Giggal flagged 1,400 dead addresses and 8 spam traps in minutes.',
-    author: 'Marcus T.',
-    role: 'Lifecycle Marketing Lead, SaaS Co',
-    metric: '99.6% Delivery Rate',
-  },
-  {
-    quote:
-      'Catch-all checking is unmatched. Other tools marked 30% of our B2B newsletter leads as risky unknown. Giggal gave clear valid/invalid status for almost all of them.',
-    author: 'Priya S.',
-    role: 'Demand Generation Director',
-    metric: '98.5% Catch-All Accuracy',
-  },
-]
 
 const espPlatforms = [
   {
@@ -358,62 +334,6 @@ export default function EmailListScrubbingPage() {
           </div>
         </section>
 
-        {/* REVIEWS & SOCIAL PROOF BAR (REQUESTED BY USER) */}
-        <section className="py-12 bg-slate-50/80 border-b border-slate-100">
-          <div className="mx-auto max-w-6xl px-6">
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pb-8 border-b border-slate-200/70">
-              <div className="flex items-center gap-3">
-                <div className="flex text-amber-400">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-current" />
-                  ))}
-                </div>
-                <div>
-                  <span className="text-base font-extrabold text-slate-900">4.9 / 5 Rating</span>
-                  <span className="text-xs text-slate-500 block">Trusted by 420+ marketing and ecommerce teams</span>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-5 text-xs text-slate-500 font-medium">
-                <span className="flex items-center gap-1.5">
-                  <Check className="w-4 h-4 text-emerald-600" />
-                  Verified Klaviyo Savings
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Check className="w-4 h-4 text-emerald-600" />
-                  Zero Hard Bounces
-                </span>
-              </div>
-            </div>
-
-            <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-              {marketerReviews.map((rev, idx) => (
-                <div key={idx} className="p-5 rounded-2xl border border-slate-200 bg-white shadow-sm flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="flex text-amber-400">
-                        {[...Array(5)].map((_, i) => (
-                          <Star key={i} className="w-3.5 h-3.5 fill-current" />
-                        ))}
-                      </div>
-                      <span className="text-[11px] font-bold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded">
-                        {rev.metric}
-                      </span>
-                    </div>
-                    <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal">
-                      &ldquo;{rev.quote}&rdquo;
-                    </p>
-                  </div>
-
-                  <div className="mt-4 pt-3 border-t border-slate-100">
-                    <span className="text-xs font-bold text-slate-900 block">{rev.author}</span>
-                    <span className="text-[11px] text-slate-500 block">{rev.role}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
 
         {/* ESP TIER SAVINGS MATRIX */}
         <section id="tier-savings" className="py-14 lg:py-18 bg-white border-b border-slate-100">
