@@ -8,6 +8,7 @@ export function GET() {
   return new Response(
     renderSitemapIndex([
       'sitemap-core.xml',
+      'sitemap-verify-for.xml',
       'sitemap-alternatives.xml',
       'sitemap-compare.xml',
       'sitemap-integrations.xml',

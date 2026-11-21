@@ -21,6 +21,19 @@ const solutionsLinks = [
   { name: 'MCP Server', href: '/mcp' },
 ]
 
+const outboundLinks = [
+  { name: 'Woodpecker verifier', href: '/verify-for/woodpecker' },
+  { name: 'Smartlead verifier', href: '/verify-for/smartlead' },
+  { name: 'Mailmeteor verifier', href: '/verify-for/mailmeteor' },
+  { name: 'Lemlist verifier', href: '/verify-for/lemlist' },
+  { name: 'GMass verifier', href: '/verify-for/gmass' },
+  { name: 'Mailshake verifier', href: '/verify-for/mailshake' },
+  { name: 'Saleshandy verifier', href: '/verify-for/saleshandy' },
+  { name: 'QuickMail verifier', href: '/verify-for/quickmail' },
+  { name: 'Close CRM verifier', href: '/verify-for/close' },
+  { name: 'Overloop verifier', href: '/verify-for/overloop' },
+]
+
 const useCasesLinks = [
   { name: 'B2B Lead Enrichment', href: '/use-cases/b2b-lead-enrichment' },
   { name: 'Outreach Deliverability', href: '/use-cases/outreach-email-deliverability' },
@@ -186,6 +199,18 @@ export default function Footer() {
               <p className={headingClass}>Solutions</p>
               <ul className="space-y-2.5">
                 {solutionsLinks.map((link) => (
+                  <li key={link.name}>
+                    <Link href={link.href} className={linkClass}>
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <p className={headingClass}>Cold Outbound</p>
+              <ul className="space-y-2.5">
+                {outboundLinks.map((link) => (
                   <li key={link.name}>
                     <Link href={link.href} className={linkClass}>
                       {link.name}

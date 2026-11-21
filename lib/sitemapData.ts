@@ -190,6 +190,28 @@ export function glossaryEntries(): SitemapEntry[] {
   ]
 }
 
+// ── verify-for (cold email sequencers) ──────────────────────────────────
+export const VERIFY_FOR_SLUGS = [
+  'woodpecker',
+  'smartlead',
+  'mailmeteor',
+  'lemlist',
+  'gmass',
+  'mailshake',
+  'saleshandy',
+  'quickmail',
+  'close',
+  'overloop',
+] as const
+
+export function verifyForEntries(): SitemapEntry[] {
+  return VERIFY_FOR_SLUGS.map((slug) => ({
+    path: `/verify-for/${slug}`,
+    lastModified: '2026-11-21',
+    priority: '0.85',
+  }))
+}
+
 // ── italian ─────────────────────────────────────────────────────────────
 // Every Italian URL, from the cluster map plus the Italian-only pages. The
 // lastmod is the launch date for the static pages and the post's own date
