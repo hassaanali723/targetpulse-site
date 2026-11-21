@@ -119,7 +119,8 @@ const fakeSignupFaqs: FaqItem[] = [
 ]
 
 export const metadata = {
-  title: 'Prevent Fake SaaS Signups & Disposable Email Abuse | Giggal.ai',
+  // absolute: the root layout's '%s | Giggal.ai' template would add the brand a second time.
+  title: { absolute: 'Prevent Fake SaaS Signups & Disposable Email Abuse | Giggal.ai' },
   description:
     'Block temporary 10-minute mailboxes, disposable domains, and automated bot registrations. Protect free trial credits and customer databases with low-latency API verification.',
   alternates: {

@@ -57,6 +57,18 @@ export interface FreeProvidersToolStrings {
   verifyText?: string
   verifyLink?: string
   verifyHref?: string
+  /** Second line under a free-domain result, for people building a signup
+   *  form, with {api} as the link. Optional, English only (2026-11-22). */
+  workText?: string
+  workLink?: string
+  workHref?: string
+  /** Strip under the download buttons for people who download the list to
+   *  block free addresses on a form. Optional, English only (2026-11-22). */
+  formTitle?: string
+  formText?: string
+  formButton?: string
+  formNote?: string
+  formHref?: string
   browseLabel: string
   browsePlaceholder: string
   /** The filter buttons. */
@@ -109,6 +121,15 @@ const en: FreeProvidersToolStrings = {
   verifyText: 'This tells you the provider, not whether the address exists. To check the address itself, use the {verifier}.',
   verifyLink: 'free email verifier',
   verifyHref: '/email-checker',
+  workText: 'Want only work emails on your signup form? The {api} flags free addresses like this one on every signup.',
+  workLink: 'email verification API',
+  workHref: '/email-verification-api',
+  formTitle: 'Blocking free email addresses on a signup form?',
+  formText:
+    'A list goes out of date and misses fake and temporary addresses. The Giggal.ai email verification API checks each signup as it happens and flags free, disposable, role-based and invalid addresses.',
+  formButton: 'Get 1,000 free credits',
+  formNote: 'No card needed',
+  formHref: 'https://emailverifier.giggal.ai/sign-up',
   browseLabel: 'Browse the list',
   browsePlaceholder: 'Filter by domain or provider, e.g. hotmail or gmx',
   filters: {

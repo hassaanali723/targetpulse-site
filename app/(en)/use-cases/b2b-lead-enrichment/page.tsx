@@ -171,7 +171,8 @@ const b2bFaqs: FaqItem[] = [
 ]
 
 export const metadata = {
-  title: 'B2B Lead Enrichment & Prospecting Email Verification | Giggal.ai',
+  // absolute: the root layout's '%s | Giggal.ai' template would add the brand a second time.
+  title: { absolute: 'B2B Lead Enrichment & Prospecting Email Verification | Giggal.ai' },
   description:
     'Validate scraped B2B lead lists from Apollo, ZoomInfo, Clay, and Sales Navigator. Filter outdated mailboxes, dead domains, and catch-all traps with waterfall verification.',
   alternates: {

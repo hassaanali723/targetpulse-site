@@ -2,7 +2,7 @@
 
 import React, { useMemo, useState } from 'react'
 import Link from 'next/link'
-import { Search, Copy, Check, Download, CheckCircle2, HelpCircle, ListChecks } from 'lucide-react'
+import { Search, Copy, Check, Download, CheckCircle2, HelpCircle, ListChecks, ShieldCheck, ArrowRight } from 'lucide-react'
 import {
   FREE_EMAIL_PROVIDERS,
   FREE_DOMAIN_INDEX,
@@ -162,6 +162,17 @@ export default function FreeEmailProvidersTool({ locale = 'en' }: { locale?: Loc
                       })}
                     </p>
                   )}
+                  {t.workText && t.workLink && t.workHref && (
+                    <p className="mt-1">
+                      {fill(t.workText, {
+                        api: (
+                          <Link href={t.workHref} className="text-indigo-600 font-semibold hover:underline">
+                            {t.workLink}
+                          </Link>
+                        ),
+                      })}
+                    </p>
+                  )}
                 </div>
               </div>
             )}
@@ -279,6 +290,28 @@ export default function FreeEmailProvidersTool({ locale = 'en' }: { locale?: Loc
               </button>
             </div>
           </div>
+
+          {/* For people who download the list to block free addresses on a
+              form: the API does it live. English only, added 2026-11-22. */}
+          {t.formTitle && t.formText && t.formButton && t.formHref && (
+            <div className="flex flex-col md:flex-row md:items-center gap-4 rounded-xl border border-emerald-200 bg-emerald-50/70 p-4">
+              <ShieldCheck className="hidden md:block w-6 h-6 text-emerald-600 shrink-0" aria-hidden="true" />
+              <div className="flex-1 text-sm text-slate-700">
+                <p className="font-bold text-slate-900">{t.formTitle}</p>
+                <p className="mt-0.5 leading-relaxed">{t.formText}</p>
+              </div>
+              <div className="shrink-0 md:text-right">
+                <a
+                  href={t.formHref}
+                  className="group inline-flex items-center gap-1.5 px-4 py-2.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-bold transition-colors"
+                >
+                  {t.formButton}
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />
+                </a>
+                {t.formNote && <p className="mt-1 text-xs text-slate-500 font-medium">{t.formNote}</p>}
+              </div>
+            </div>
+          )}
 
           <div className="border border-slate-200 rounded-xl overflow-hidden">
             <div className="max-h-[32rem] overflow-y-auto">
