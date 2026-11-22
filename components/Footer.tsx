@@ -190,18 +190,32 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Product column */}
-          <div className="shrink-0">
-            <p className={headingClass}>Product</p>
-            <ul className="space-y-2.5">
-              {productLinks.map((link) => (
-                <li key={link.name}>
-                  <Link href={link.href} className={linkClass}>
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          {/* Product & Scraped Leads column */}
+          <div className="shrink-0 space-y-6">
+            <div>
+              <p className={headingClass}>Product</p>
+              <ul className="space-y-2.5">
+                {productLinks.map((link) => (
+                  <li key={link.name}>
+                    <Link href={link.href} className={linkClass}>
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <p className={headingClass}>Scraped Leads</p>
+              <ul className="space-y-2.5">
+                {scrapedLeadsLinks.map((link) => (
+                  <li key={link.name}>
+                    <Link href={link.href} className={linkClass}>
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           {/* Solutions, Use Cases & Resources column */}
@@ -222,18 +236,6 @@ export default function Footer() {
               <p className={headingClass}>Cold Outbound</p>
               <ul className="space-y-2.5">
                 {outboundLinks.map((link) => (
-                  <li key={link.name}>
-                    <Link href={link.href} className={linkClass}>
-                      {link.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <p className={headingClass}>Scraped Leads</p>
-              <ul className="space-y-2.5">
-                {scrapedLeadsLinks.map((link) => (
                   <li key={link.name}>
                     <Link href={link.href} className={linkClass}>
                       {link.name}
