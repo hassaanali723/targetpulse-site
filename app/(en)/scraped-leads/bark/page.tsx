@@ -109,11 +109,6 @@ export default function BarkScrapedLeadsPage() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(16,185,129,0.15),rgba(255,255,255,0))]" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <div className="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-800/60 text-emerald-300 text-xs font-semibold uppercase tracking-wider mb-6">
-            <ShieldCheck className="w-4 h-4 text-emerald-400" />
-            <span>Service Marketplace Lead Cleansing</span>
-          </div>
-          
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight max-w-4xl mx-auto leading-tight">
             Bark Email Verification for Clean, Deliverable Service Provider Leads
           </h1>
@@ -308,10 +303,6 @@ export default function BarkScrapedLeadsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-7">
-              <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-950 border border-emerald-800/50 text-emerald-400 text-xs font-semibold mb-4">
-                <Award className="w-3.5 h-3.5" />
-                <span>Advanced Catch-All Resolution</span>
-              </div>
               <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight leading-tight">
                 Why Standard Verifiers Discard Your Best Bark Agency Prospects
               </h2>

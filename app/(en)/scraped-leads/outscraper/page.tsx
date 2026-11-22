@@ -124,11 +124,6 @@ export default function OutscraperLeadVerificationPage() {
       <main className="pt-24 sm:pt-28 pb-20 overflow-hidden">
         {/* HERO SECTION */}
         <section className="relative px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto pt-6 sm:pt-10 pb-16 text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 border border-indigo-200/80 text-indigo-700 text-xs font-semibold mb-6">
-            <Database className="w-3.5 h-3.5" />
-            <span>Pre-Outreach Verification for Outscraper Data Exports</span>
-          </div>
-
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-slate-900 leading-[1.18]">
             Outscraper Email Verification to Protect Outbound Sender Reputation
           </h1>
