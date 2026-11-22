@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
@@ -16,10 +17,34 @@ import {
   Server,
   Layers,
   ExternalLink,
+  Zap,
+  BarChart3,
+  Users,
+  MailCheck,
+  RefreshCw,
+  HelpCircle,
 } from 'lucide-react'
 
 const CANONICAL = '/verify-for/woodpecker'
 const APP_URL = 'https://emailverifier.giggal.ai/sign-up'
+
+export const metadata: Metadata = {
+  title: {
+    absolute: 'Woodpecker Email Verification | Prevent Campaign Pauses | Giggal.ai',
+  },
+  description:
+    'Verify prospect email lists before uploading to Woodpecker. Prevent Bounce Shield campaign freezes, resolve catch-all mailboxes with 98.5% accuracy, and protect sender reputation.',
+  alternates: {
+    canonical: `https://giggal.ai${CANONICAL}`,
+  },
+  openGraph: {
+    title: 'Woodpecker Email Verification | Prevent Campaign Pauses | Giggal.ai',
+    description:
+      'Verify prospect email lists before uploading to Woodpecker. Prevent Bounce Shield campaign freezes, resolve catch-all mailboxes with 98.5% accuracy, and protect sender reputation.',
+    url: `https://giggal.ai${CANONICAL}`,
+    type: 'website',
+  },
+}
 
 const softwareLd = {
   '@context': 'https://schema.org',
@@ -53,43 +78,37 @@ const woodpeckerVideo = {
 const woodpeckerFaqs: FaqItem[] = [
   {
     q: 'Why did Woodpecker automatically pause my cold email campaign?',
-    a: 'Woodpecker features an automated safety system called Bounce Shield. When the hard bounce rate on an active sequence crosses safe thresholds (typically 3%), Woodpecker pauses the campaign to prevent recipient mail servers from blacklisting your sending domain or suspending your email account.',
+    a: 'Woodpecker features an automated safety system called Woodpecker Bounce Shield. When the hard bounce rate on an active sequence crosses safe thresholds (typically 3% to 5%), Woodpecker pauses the campaign automatically. This built-in protection prevents recipient mail servers from blacklisting your sending domain or suspending your Google Workspace or Microsoft 365 accounts.',
   },
   {
-    q: 'Does Woodpecker replace the need for pre-import email verification?',
-    a: 'No. While Woodpecker monitors delivery health and pauses campaigns upon detecting failures, it does not clean your list before sending. Verification must occur prior to upload so invalid addresses are removed before they burn sending quota or trigger provider warnings.',
-  },
-  {
-    q: 'How does Giggal handle Woodpecker custom CSV snippet columns?',
-    a: 'Giggal preserves all original CSV columns during the cleaning pass. Your custom Woodpecker tags such as FIRST_NAME, COMPANY, and SNIPPET1 remain completely intact, allowing 1-click re-import without column realignment.',
-  },
-  {
-    q: 'How should agency teams handle list verification across Woodpecker client accounts?',
-    a: 'Agencies managing multiple client sub-accounts in Woodpecker should verify each prospect list independently. Storing clean deliverables per client prevents cross-account contamination and ensures client domains stay above 98% deliverability.',
+    q: 'How does Woodpecker email verification protect cold email deliverability?',
+    a: 'Running Woodpecker email verification before importing your lead CSV filters out dead accounts, invalid mail exchange records, and spam traps. By cleaning your list beforehand, your hard bounce rate stays under 1.5%, which preserves high sender reputation scores and ensures your emails reach the primary inbox rather than the spam folder.',
   },
   {
     q: 'How does Giggal handle catch-all domains for Woodpecker sequences?',
-    a: 'Unlike traditional email validators that label catch-all domains as "risky" and tell you to discard them, Giggal directly verifies mailbox existence behind the catch-all server with 98.5% accuracy. Validated catch-all addresses can be uploaded directly into your primary Woodpecker campaign without risking Bounce Shield triggers.',
+    a: 'Unlike legacy email verifiers that mark accept-all servers as risky and advise you to delete them, Giggal performs direct mailbox verification behind catch-all domains with 98.5% accuracy. Validated catch-all addresses can be imported straight into your main Woodpecker sequence, recovering 30% to 50% of B2B prospect data that competitors force you to abandon.',
+  },
+  {
+    q: 'Does Woodpecker have a built-in email verification feature?',
+    a: 'Woodpecker provides deliverability monitoring and Bounce Shield protection, but it does not perform deep pre-import list scrubbing. Verification must happen before uploading your CSV so invalid mailboxes are removed before Woodpecker attempts delivery and consumes your daily sending limit.',
+  },
+  {
+    q: 'How does Giggal preserve custom Woodpecker snippets and merge tags?',
+    a: 'Giggal preserves all original columns during verification. Custom Woodpecker fields such as FIRST_NAME, COMPANY, WEBSITE, SNIPPET1, and SNIPPET2 remain completely untouched. Once verification finishes, you can re-import the file into Woodpecker with 1-click without any manual column realignment.',
+  },
+  {
+    q: 'What is the difference between a hard bounce and a soft bounce in Woodpecker?',
+    a: 'A hard bounce (550 User Unknown) means the email address does not exist or the domain is dead; this directly damages sender score and triggers Woodpecker Bounce Shield. A soft bounce (such as 421 or 450) is temporary, indicating a full mailbox or temporary server timeout. Pre-send verification eliminates hard bounces before they happen.',
+  },
+  {
+    q: 'How often should sales teams clean email lists for Woodpecker?',
+    a: 'B2B contact data decays at an average rate of 2.5% to 3% each month due to job transitions and company reorganizations. Sales teams should clean email lists for Woodpecker immediately before every new campaign import, even if the data was purchased or scraped recently.',
+  },
+  {
+    q: 'How should outbound agencies handle list verification across Woodpecker client workspaces?',
+    a: 'Agencies managing multiple client sub-accounts in Woodpecker must clean each client prospect list independently. Verifying contacts before campaign upload prevents one client with bad data from hurting the reputation of shared agency domains and keeps deliverability above 98% across all client workspaces.',
   },
 ]
-
-export const metadata = {
-  title: {
-    absolute: 'Woodpecker Email Verification | Prevent Campaign Pauses | Giggal.ai',
-  },
-  description:
-    'Verify prospect email lists before uploading to Woodpecker. Prevent Bounce Shield campaign freezes, eliminate dead mailboxes, and protect sender reputation.',
-  alternates: {
-    canonical: `https://giggal.ai${CANONICAL}`,
-  },
-  openGraph: {
-    title: 'Woodpecker Email Verification | Prevent Campaign Pauses | Giggal.ai',
-    description:
-      'Verify prospect email lists before uploading to Woodpecker. Prevent Bounce Shield campaign freezes, eliminate dead mailboxes, and protect sender reputation.',
-    url: `https://giggal.ai${CANONICAL}`,
-    type: 'website',
-  },
-}
 
 export default function WoodpeckerVerificationPage() {
   const breadcrumbData = breadcrumbLd('Woodpecker Verification', CANONICAL)
@@ -110,8 +129,8 @@ export default function WoodpeckerVerificationPage() {
             Verify Email Lists Before Uploading to Woodpecker
           </h1>
 
-          <p className="mt-5 text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto">
-            Avoid automatic campaign freezes and domain blocks. Filter invalid mailboxes, dormant domains, and resolve catch-all leads before Woodpecker queues your sequence.
+          <p className="mt-5 text-base sm:text-lg text-slate-600 leading-relaxed max-w-3xl mx-auto">
+            Protect cold email deliverability and stop campaign freezes before they happen. Complete Woodpecker email verification to filter invalid addresses, eliminate dead mailboxes, and resolve catch-all domains with 98.5% accuracy before Woodpecker queues your outbound sequence.
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3.5">
@@ -139,7 +158,7 @@ export default function WoodpeckerVerificationPage() {
               <div className="text-2xl font-black text-indigo-600">&lt; 1.5%</div>
               <div className="text-xs text-slate-700 font-semibold mt-1">Target Bounce Rate</div>
               <p className="text-xs text-slate-500 mt-1 leading-normal">
-                Keeps Woodpecker Bounce Shield active and green without triggering sequence pauses.
+                Keeps Woodpecker Bounce Shield active and green without triggering sudden sequence pauses.
               </p>
             </div>
             <div className="p-5 rounded-xl border border-slate-200 bg-slate-50/70">
@@ -163,10 +182,10 @@ export default function WoodpeckerVerificationPage() {
         <section className="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto py-12 border-t border-slate-100">
           <div className="max-w-3xl">
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
-              Why Woodpecker Automatically Freezes Outbound Campaigns
+              Why Woodpecker Bounce Shield Automatically Freezes Outbound Campaigns
             </h2>
             <p className="mt-3 text-slate-600 text-sm sm:text-base leading-relaxed">
-              Woodpecker monitors delivery response codes in real time. When an unverified list triggers sudden delivery failures, its automated Bounce Shield safety system acts immediately to stop further damage.
+              Woodpecker monitors delivery response codes in real time. When an unverified list triggers sudden delivery failures, its automated safety mechanism, Woodpecker Bounce Shield, acts immediately to halt sending before your domain reputation collapses.
             </p>
           </div>
 
@@ -178,11 +197,11 @@ export default function WoodpeckerVerificationPage() {
                 </div>
                 <div>
                   <h3 className="text-sm font-bold text-slate-900">User Unknown (Hard Bounce)</h3>
-                  <div className="text-xs text-slate-500">Recipient mail server rejects recipient</div>
+                  <div className="text-xs text-slate-500">Recipient mail server rejects mailbox</div>
                 </div>
               </div>
               <p className="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed">
-                When sending to outdated B2B lists, former employees generate hard 550 bounces. Hitting just three bounces in a 100-email batch pushes your rate to 3%, signaling spam behavior to Google and Outlook.
+                When sending to unverified B2B lists, departed employees generate hard 550 bounces. Hitting just three bounces in a 100-email batch pushes your rate to 3%, triggering Woodpecker Bounce Shield to freeze your campaign and alerting Google Workspace or Microsoft 365 administrators.
               </p>
             </div>
 
@@ -197,9 +216,19 @@ export default function WoodpeckerVerificationPage() {
                 </div>
               </div>
               <p className="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed">
-                In Woodpecker agency dashboards, multiple clients share sending infrastructure. A single dirty campaign damages domain health across all connected client sub-accounts.
+                In Woodpecker agency dashboards, multiple campaigns draw upon connected sending domains. When an unverified CSV produces a high bounce rate, recipient servers downgrade your sender score across every mailbox sharing that domain, pushing future outreach into spam.
               </p>
             </div>
+          </div>
+
+          {/* DEEP TECHNICAL EXPLANATION OF BOUNCE CALCULATION */}
+          <div className="mt-6 p-6 rounded-2xl bg-slate-50 border border-slate-200">
+            <h3 className="text-base font-bold text-slate-900">
+              The Math Behind Woodpecker Bounce Thresholds
+            </h3>
+            <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+              Woodpecker evaluates your campaign bounce rate using the formula: <span className="font-mono bg-white px-2 py-0.5 rounded border border-slate-200 text-slate-800 text-xs">Bounce Rate = (Hard Bounces / Total Sent Emails) * 100</span>. Major email service providers require senders to keep hard bounces below 2%. When your list contains unverified contacts from outdated scrapers, bounce rates frequently spike past 8%, triggering immediate campaign pauses that stall your sales pipeline. Clean email list for Woodpecker workflows keeps this ratio well below the danger line.
+            </p>
           </div>
         </section>
 
@@ -259,14 +288,111 @@ export default function WoodpeckerVerificationPage() {
           </div>
         </section>
 
-        {/* SECTION 4: EXACT WOODPECKER CSV SCHEMA MAPPING */}
+        {/* SECTION 4: DEEP DIVE - CATCH-ALL RESOLUTION FOR WOODPECKER */}
+        <section className="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto py-12 border-t border-slate-100">
+          <div className="max-w-3xl mb-8">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
+              Why Catch-All Domain Resolution Protects Woodpecker Deliverability
+            </h2>
+            <p className="mt-3 text-slate-600 text-sm sm:text-base leading-relaxed">
+              Between 30% and 50% of business domains use accept-all configurations. When using legacy verification tools, these enterprise domains are flagged as catch-all or risky, forcing marketers to make a costly trade-off: discard valuable leads or risk triggering Woodpecker Bounce Shield.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="p-6 rounded-2xl border border-rose-200 bg-rose-50/30">
+              <div className="flex items-center gap-2 text-rose-700 font-bold text-sm">
+                <AlertTriangle className="w-4 h-4 text-rose-600" />
+                <span>The Legacy Verifier Problem</span>
+              </div>
+              <h3 className="mt-2 text-base font-bold text-slate-900">
+                Discarding 35% of B2B Prospects
+              </h3>
+              <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Conventional verification services cannot determine whether individual mailboxes exist behind catch-all mail servers. They dump every accept-all contact into an ambiguous bucket and instruct you to discard them. This wastes your prospecting spend and cuts your target market in half.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-2xl border border-emerald-200 bg-emerald-50/30">
+              <div className="flex items-center gap-2 text-emerald-700 font-bold text-sm">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                <span>Giggal Direct Mailbox Resolution</span>
+              </div>
+              <h3 className="mt-2 text-base font-bold text-slate-900">
+                98.5% Accuracy on Accept-All Servers
+              </h3>
+              <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Giggal handshakes the specific recipient mailbox directly, determining actual inbox presence behind catch-all domains. We classify them cleanly as deliverable or undeliverable, unlocking hundreds of high-value enterprise leads for your Woodpecker campaigns without raising bounce risks.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* SECTION 5: TECHNICAL COMPARISON - GIGGAL VS LEGACY TOOLS */}
+        <section className="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto py-12 border-t border-slate-100">
+          <div className="max-w-3xl mb-8">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
+              Comparing Verifiers for Woodpecker Email Verification
+            </h2>
+            <p className="mt-2 text-slate-600 text-sm leading-relaxed">
+              How modern mailbox verification compares to legacy tools when preparing cold outreach lists for Woodpecker.
+            </p>
+          </div>
+
+          <div className="overflow-x-auto rounded-xl border border-slate-200">
+            <table className="w-full text-left text-xs sm:text-sm">
+              <thead className="bg-slate-50 border-b border-slate-200 text-slate-700 font-semibold">
+                <tr>
+                  <th className="px-4 py-3">Feature & Capability</th>
+                  <th className="px-4 py-3">Giggal.ai</th>
+                  <th className="px-4 py-3 text-slate-500">Legacy Verifiers</th>
+                  <th className="px-4 py-3 text-slate-500">Basic Scraping Verifiers</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100">
+                <tr className="hover:bg-slate-50/50">
+                  <td className="px-4 py-3 font-semibold text-slate-900">Catch-All Domain Handling</td>
+                  <td className="px-4 py-3 text-emerald-700 font-bold">98.5% Direct Inbox Resolution</td>
+                  <td className="px-4 py-3 text-slate-500">Labeled "Risky" / Discarded</td>
+                  <td className="px-4 py-3 text-slate-500">Skipped or Marked Unknown</td>
+                </tr>
+                <tr className="hover:bg-slate-50/50">
+                  <td className="px-4 py-3 font-semibold text-slate-900">Woodpecker Snippet Preservation</td>
+                  <td className="px-4 py-3 text-emerald-700 font-bold">100% Native Column Retention</td>
+                  <td className="px-4 py-3 text-slate-500">Often Reorders or Drops Headers</td>
+                  <td className="px-4 py-3 text-slate-500">Exports Email Only</td>
+                </tr>
+                <tr className="hover:bg-slate-50/50">
+                  <td className="px-4 py-3 font-semibold text-slate-900">Target Hard Bounce Rate</td>
+                  <td className="px-4 py-3 text-emerald-700 font-bold">&lt; 1.5% Guaranteed Safe</td>
+                  <td className="px-4 py-3 text-slate-500">3% to 6% (Bounce Shield Risk)</td>
+                  <td className="px-4 py-3 text-slate-500">&gt; 8% (Frequent Sequence Freezes)</td>
+                </tr>
+                <tr className="hover:bg-slate-50/50">
+                  <td className="px-4 py-3 font-semibold text-slate-900">Verification Protocol</td>
+                  <td className="px-4 py-3 text-emerald-700 font-bold">Live Mailbox Handshake (No Email Sent)</td>
+                  <td className="px-4 py-3 text-slate-500">Cached MX & Syntax Check</td>
+                  <td className="px-4 py-3 text-slate-500">Regex Syntax Validation</td>
+                </tr>
+                <tr className="hover:bg-slate-50/50">
+                  <td className="px-4 py-3 font-semibold text-slate-900">Free Starter Tier</td>
+                  <td className="px-4 py-3 text-emerald-700 font-bold">1,000 Free Credits</td>
+                  <td className="px-4 py-3 text-slate-500">50 to 100 Credits</td>
+                  <td className="px-4 py-3 text-slate-500">Requires Paid Subscription</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        {/* SECTION 6: EXACT WOODPECKER CSV SCHEMA MAPPING */}
         <section className="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto py-12 border-t border-slate-100">
           <div className="max-w-3xl mb-6">
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
               Native Woodpecker CSV Column Compatibility
             </h2>
             <p className="mt-2 text-slate-600 text-sm leading-relaxed">
-              Giggal sanitizes mailboxes without altering your spreadsheet structure. Upload your export directly and import the clean results back into Woodpecker with zero column mapping errors.
+              Giggal performs Woodpecker email verification without altering your spreadsheet structure. Upload your raw prospect export and re-import verified contacts directly into Woodpecker with complete column alignment.
             </p>
           </div>
 
@@ -325,14 +451,14 @@ export default function WoodpeckerVerificationPage() {
           </div>
         </section>
 
-        {/* SECTION 5: 4-STAGE PRE-IMPORT WORKFLOW */}
+        {/* SECTION 7: 4-STAGE PRE-IMPORT WORKFLOW */}
         <section className="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto py-12 border-t border-slate-100">
           <div className="max-w-3xl mb-8">
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
-              The 4-Step Pre-Import Pipeline for Woodpecker
+              The 4-Step Pre-Import Pipeline for Woodpecker Campaigns
             </h2>
             <p className="mt-2 text-slate-600 text-sm leading-relaxed">
-              How outbound agencies prepare high-volume CSV files for zero-bounce sequence execution.
+              How outbound agencies clean email lists for Woodpecker to ensure cold email deliverability and avoid campaign interruptions.
             </p>
           </div>
 
@@ -341,41 +467,135 @@ export default function WoodpeckerVerificationPage() {
               <div className="text-xs font-bold text-indigo-600 tracking-wider uppercase font-mono">Step 01</div>
               <h3 className="text-sm font-bold text-slate-900 mt-2">Export Prospect CSV</h3>
               <p className="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                Export lead lists from Apollo, Clay, or LinkedIn Sales Navigator with standard contact fields.
+                Export prospect data from Apollo, Clay, or LinkedIn Sales Navigator with standard contact fields and custom snippets intact.
               </p>
             </div>
             <div className="p-5 rounded-xl border border-slate-200 bg-white">
               <div className="text-xs font-bold text-indigo-600 tracking-wider uppercase font-mono">Step 02</div>
               <h3 className="text-sm font-bold text-slate-900 mt-2">Server Handshake Check</h3>
               <p className="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                Giggal initiates network handshakes with target mail servers to verify inbox presence without sending email.
+                Giggal initiates network handshakes with target mail servers to verify inbox presence without sending an actual email message.
               </p>
             </div>
             <div className="p-5 rounded-xl border border-slate-200 bg-white">
               <div className="text-xs font-bold text-indigo-600 tracking-wider uppercase font-mono">Step 03</div>
               <h3 className="text-sm font-bold text-slate-900 mt-2">Resolve Catch-All Leads</h3>
               <p className="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                Giggal resolves accept-all domains directly into deliverable or undeliverable, saving leads other tools discard.
+                Giggal resolves accept-all domains directly into deliverable or undeliverable with 98.5% accuracy, recovering high-value enterprise leads.
               </p>
             </div>
             <div className="p-5 rounded-xl border border-slate-200 bg-white">
               <div className="text-xs font-bold text-indigo-600 tracking-wider uppercase font-mono">Step 04</div>
               <h3 className="text-sm font-bold text-slate-900 mt-2">Upload to Woodpecker</h3>
               <p className="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                Import clean deliverables into Woodpecker. Launch campaigns with confidence that bounce rates remain sub-1.5%.
+                Import clean deliverables into Woodpecker. Launch your campaign knowing your bounce rate stays safely below 1.5%.
               </p>
             </div>
           </div>
         </section>
 
-        {/* SECTION 6: FAQS */}
+        {/* SECTION 8: TROUBLESHOOTING FROZEN WOODPECKER SEQUENCES */}
         <section className="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto py-12 border-t border-slate-100">
           <div className="max-w-3xl mb-8">
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
-              Woodpecker List Verification Questions
+              How to Recover When Woodpecker Bounce Shield Freezes a Campaign
             </h2>
             <p className="mt-2 text-slate-600 text-sm leading-relaxed">
-              Common questions from sales teams and agency operators preparing lists for Woodpecker campaigns.
+              If your sequence was suddenly stopped by Woodpecker Bounce Shield, follow this recovery protocol to restore sending safely.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            <div className="p-5 rounded-xl border border-slate-200 bg-slate-50/50 flex flex-col sm:flex-row gap-4 items-start">
+              <div className="w-8 h-8 rounded-full bg-indigo-600 text-white font-bold text-sm flex items-center justify-center shrink-0">
+                1
+              </div>
+              <div>
+                <h3 className="text-sm font-bold text-slate-900">Pause All Connected Sending Slots</h3>
+                <p className="mt-1 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  Do not attempt to click "Resume" immediately in Woodpecker without cleaning your data. Resuming with the same unverified batch will trigger repeat 550 bounces, resulting in permanent mailbox suspension from Google or Microsoft.
+                </p>
+              </div>
+            </div>
+
+            <div className="p-5 rounded-xl border border-slate-200 bg-slate-50/50 flex flex-col sm:flex-row gap-4 items-start">
+              <div className="w-8 h-8 rounded-full bg-indigo-600 text-white font-bold text-sm flex items-center justify-center shrink-0">
+                2
+              </div>
+              <div>
+                <h3 className="text-sm font-bold text-slate-900">Export Unsent Leads and Run Verification</h3>
+                <p className="mt-1 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  Export the queued contacts from your paused Woodpecker campaign. Run the file through Giggal to isolate confirmed deliverables and remove invalid addresses, defunct domains, and spam traps.
+                </p>
+              </div>
+            </div>
+
+            <div className="p-5 rounded-xl border border-slate-200 bg-slate-50/50 flex flex-col sm:flex-row gap-4 items-start">
+              <div className="w-8 h-8 rounded-full bg-indigo-600 text-white font-bold text-sm flex items-center justify-center shrink-0">
+                3
+              </div>
+              <div>
+                <h3 className="text-sm font-bold text-slate-900">Re-import Clean Contacts and Resume Sequence</h3>
+                <p className="mt-1 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  Import only the verified deliverables back into Woodpecker. Because Giggal resolved catch-all addresses with 98.5% confidence, your bounce rate will immediately fall under 1%, allowing Woodpecker Bounce Shield to return to green status.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* SECTION 9: WOODPECKER AGENCY & MULTI-INBOX DELIVERABILITY PRACTICES */}
+        <section className="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto py-12 border-t border-slate-100">
+          <div className="max-w-3xl mb-8">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
+              Agency Best Practices: Protecting Cold Email Deliverability in Woodpecker
+            </h2>
+            <p className="mt-2 text-slate-600 text-sm leading-relaxed">
+              Experienced outbound teams use structured safeguards to maintain high inbox placement across multiple sending domains.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="p-6 rounded-2xl border border-slate-200 bg-white">
+              <div className="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 mb-4">
+                <Users className="w-5 h-5" />
+              </div>
+              <h3 className="text-base font-bold text-slate-900">Isolate Client Workspaces</h3>
+              <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Never mix prospect lists across client accounts. Perform pre-import list verification for each client separately to prevent dirty data in one campaign from harming shared agency domain reputation.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-2xl border border-slate-200 bg-white">
+              <div className="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 mb-4">
+                <BarChart3 className="w-5 h-5" />
+              </div>
+              <h3 className="text-base font-bold text-slate-900">Monitor Sending Slots</h3>
+              <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Keep daily sending limits between 30 and 50 emails per inbox in Woodpecker. High volume with unverified emails triggers rate limiting from Google and Microsoft servers.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-2xl border border-slate-200 bg-white">
+              <div className="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 mb-4">
+                <RefreshCw className="w-5 h-5" />
+              </div>
+              <h3 className="text-base font-bold text-slate-900">Re-verify Stale Leads</h3>
+              <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Any lead list older than 30 days should be sanitized again before launching a follow-up cadence. Natural B2B data decay creates unexpected bounces on previously clean lists.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* SECTION 10: FAQS */}
+        <section className="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto py-12 border-t border-slate-100">
+          <div className="max-w-3xl mb-8">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
+              Woodpecker Email Verification FAQ
+            </h2>
+            <p className="mt-2 text-slate-600 text-sm leading-relaxed">
+              Technical answers regarding Woodpecker Bounce Shield, catch-all domain resolution, and list cleaning best practices.
             </p>
           </div>
 
@@ -387,10 +607,10 @@ export default function WoodpeckerVerificationPage() {
           <div className="p-8 sm:p-10 rounded-2xl bg-slate-900 text-white text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-6">
             <div>
               <h2 className="text-xl sm:text-2xl font-bold tracking-tight">
-                Protect Your Woodpecker Senders Today
+                Protect Your Woodpecker Senders with Giggal
               </h2>
               <p className="text-sm text-slate-300 mt-2 max-w-xl">
-                Get 1,000 free verification credits. Upload your CSV and clean your outbound list in under three minutes.
+                Start with 1,000 free verification credits. Clean email list for Woodpecker sequences in under three minutes with zero credit card required.
               </p>
             </div>
             <a

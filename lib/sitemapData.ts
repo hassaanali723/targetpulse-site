@@ -207,7 +207,7 @@ export const VERIFY_FOR_SLUGS = [
 export function verifyForEntries(): SitemapEntry[] {
   return VERIFY_FOR_SLUGS.map((slug) => ({
     path: `/verify-for/${slug}`,
-    lastModified: '2026-11-21',
+    lastModified: '2026-11-22',
     priority: '0.85',
   }))
 }

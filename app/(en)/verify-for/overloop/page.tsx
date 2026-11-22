@@ -16,6 +16,10 @@ import {
   Server,
   Layers,
   ExternalLink,
+  Share2,
+  Linkedin,
+  MailCheck,
+  Zap,
 } from 'lucide-react'
 
 const CANONICAL = '/verify-for/overloop'
@@ -25,19 +29,19 @@ const softwareLd = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
   '@id': `https://giggal.ai${CANONICAL}#software`,
-  name: 'Giggal.ai Email Verification for Overloop Campaigns',
+  name: 'Giggal.ai Email Verification for Overloop Multichannel Campaigns',
   url: `https://giggal.ai${CANONICAL}`,
   applicationCategory: 'BusinessApplication',
   applicationSubCategory: 'Multichannel Outbound Deliverability and Cadence Protection',
   operatingSystem: 'Web',
   description:
-    'Verify prospect lists before importing into Overloop. Prevent multichannel cadence stalls, protect LinkedIn and email automation credits, and maintain sub-1.5% bounce rates.',
+    'Verify prospect lists before importing into Overloop. Prevent multichannel cadences from stalling, protect LinkedIn and email automation limits, and maintain cold email deliverability with verified sub-1.5% bounce rates.',
   publisher: { '@id': ORG_ID },
   featureList: [
-    'Direct CSV compatibility with Overloop multichannel lead schemas',
-    'Deep mailbox handshake without sending test messages',
-    'Catch-all domain resolution with 98.5% accuracy',
-    'Detection of inactive mailboxes and invalid MX records',
+    'Direct CSV compatibility with Overloop multichannel lead schemas and LinkedIn URLs',
+    'Deep mailbox handshake without sending test dispatch messages',
+    'Catch-all domain resolution with verified 98.5% accuracy',
+    'Protection for connected Google Workspace and Microsoft 365 sending domains',
     '1,000 free verification credits without credit card registration',
   ],
 }
@@ -52,24 +56,36 @@ const overloopVideo = {
 
 const overloopFaqs: FaqItem[] = [
   {
-    q: 'Why do invalid emails disrupt multichannel campaigns in Overloop?',
-    a: 'Overloop blends email steps with LinkedIn actions like profile views and connection requests. When an email bounces, the automated workflow stalls at that branch, leaving subsequent LinkedIn steps disconnected and wasting automation credits on contacts who have moved on.',
+    q: 'Why do invalid email addresses disrupt multichannel cadences in Overloop?',
+    a: 'Overloop blends email steps with automated LinkedIn actions such as profile views, connection requests, and inMail touches. When an unverified lead generates a hard bounce on step one, the cadence branch stalls. This leaves subsequent LinkedIn touches orphaned and wastes restricted monthly LinkedIn quotas on defunct accounts.',
   },
   {
-    q: 'How does Giggal protect Overloop sending accounts?',
-    a: 'Giggal connects directly to recipient mail servers to verify whether the inbox exists, without sending actual test emails. By eliminating invalid addresses before import, your bounce rate remains under 1.5%, protecting your domain from provider blacklists.',
+    q: 'How does email bouncing waste monthly LinkedIn automation limits?',
+    a: 'LinkedIn strictly limits accounts to approximately 100 connection requests per week. When dirty lists enter Overloop, your LinkedIn account wastes these scarce touches trying to connect with prospects who have departed their companies. Running Overloop email verification ensures every LinkedIn connection attempt targets active, verified professionals.',
   },
   {
-    q: 'Does Giggal preserve Overloop LinkedIn profile URLs and custom tags?',
-    a: 'Yes. Giggal checks the email column while maintaining all other prospect columns intact, including LinkedIn profile URLs, First Name, Company, and custom tags. You can re-upload your cleaned CSV into Overloop with zero column realignment.',
+    q: 'Does Giggal preserve LinkedIn profile URLs and Overloop custom tags?',
+    a: 'Yes. Giggal checks the email column while maintaining all other prospect columns intact, including LinkedIn profile URLs, First Name, Last Name, Company, and custom attributes. You can re-upload your clean email list directly into Overloop with zero column realignment.',
   },
   {
-    q: 'What bounce threshold should Overloop users target?',
-    a: 'You should maintain a bounce rate strictly below 2%, with under 1.5% being the safe operational target. Rates above 3% degrade domain reputation and lower inbox placement across connected mail accounts.',
+    q: 'What bounce threshold should outbound teams maintain in Overloop?',
+    a: 'Outbound sales teams should maintain an overall bounce rate strictly below 2%, with under 1.5% being the target threshold. Maintaining sub-1.5% bounces preserves domain reputation across connected Google Workspace and Microsoft accounts, ensuring maximum cold email deliverability.',
   },
   {
-    q: 'How does Giggal resolve catch-all domains for Overloop cadences?',
-    a: 'Instead of discarding viable leads marked as "risky" catch-alls, Giggal verifies mailbox existence behind the catch-all server with 98.5% accuracy. Confirmed deliverable prospects can be safely routed into your Overloop multichannel workflow without risking email failure or orphaned LinkedIn steps.',
+    q: 'How does Giggal resolve catch-all domains for Overloop multichannel campaigns?',
+    a: 'Conventional verifiers mark catch-all domains as unverifiable or risky, forcing teams to discard up to 40% of their B2B leads. Giggal performs deep mail server protocol checks to confirm whether the individual inbox exists, delivering 98.5% accuracy so you can safely route verified catch-all prospects into Overloop multichannel cadences.',
+  },
+  {
+    q: 'Can Overloop automatically recover an orphaned LinkedIn step if an email bounces?',
+    a: 'No. When an email bounces, Overloop marks the prospect as bounced and stops automated execution for that contact. Any follow-up LinkedIn step in that sequence is skipped or aborted, leaving the cadence broken. Pre-import verification prevents this failure before your campaign launches.',
+  },
+  {
+    q: 'Can I integrate Giggal email verification directly with Overloop via API?',
+    a: 'Yes. Giggal provides a high-throughput REST API that allows you to clean contact lists automatically before syncing records into Overloop via Zapier, Make, or custom webhooks.',
+  },
+  {
+    q: 'How many free verification credits does Giggal provide for Overloop users?',
+    a: 'Giggal provides 1,000 free verification credits immediately upon sign-up, requiring no credit card. You can test your actual Overloop prospect export, verify catch-all leads with 98.5% accuracy, and launch your multichannel sequences safely.',
   },
 ]
 
@@ -78,14 +94,14 @@ export const metadata = {
     absolute: 'Overloop Email Verification | Protect Multichannel Cadences | Giggal.ai',
   },
   description:
-    'Verify prospect email lists before uploading to Overloop. Prevent multichannel cadence disruptions, protect LinkedIn and email automation workflows, and eliminate hard bounces.',
+    'Verify prospect email lists before uploading to Overloop. Prevent multichannel cadences from stalling, protect LinkedIn automation limits, and maintain cold email deliverability.',
   alternates: {
     canonical: `https://giggal.ai${CANONICAL}`,
   },
   openGraph: {
     title: 'Overloop Email Verification | Protect Multichannel Cadences | Giggal.ai',
     description:
-      'Verify prospect email lists before uploading to Overloop. Prevent multichannel cadence disruptions, protect LinkedIn and email automation workflows, and eliminate hard bounces.',
+      'Verify prospect email lists before uploading to Overloop. Prevent multichannel cadences from stalling, protect LinkedIn automation limits, and maintain cold email deliverability.',
     url: `https://giggal.ai${CANONICAL}`,
     type: 'website',
   },
@@ -106,12 +122,17 @@ export default function OverloopVerificationPage() {
       <main className="pt-24 sm:pt-28 pb-20 overflow-hidden">
         {/* HERO SECTION */}
         <section className="relative px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto pt-6 sm:pt-10 pb-16 text-center">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 border border-indigo-200/80 text-indigo-700 text-xs font-semibold mb-6">
+            <Share2 className="w-3.5 h-3.5" />
+            <span>Pre-Import Verification for Overloop Multichannel Cadences</span>
+          </div>
+
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-slate-900 leading-[1.18]">
-            Verify Email Lists Before Uploading to Overloop
+            Overloop Email Verification to Safeguard Multichannel Cadences
           </h1>
 
           <p className="mt-5 text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto">
-            Safeguard your multichannel cadences and stop wasting LinkedIn automation credits. Eliminate dead inboxes, invalid domains, and spam traps before Overloop dispatches your sequence.
+            Safeguard your multichannel cadences and stop wasting restricted LinkedIn automation quotas. Clean invalid inboxes, spam traps, and dead mailboxes before Overloop launches your outreach.
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3.5">
@@ -139,7 +160,7 @@ export default function OverloopVerificationPage() {
               <div className="text-2xl font-black text-indigo-600">Multichannel Flow</div>
               <div className="text-xs text-slate-700 font-semibold mt-1">Cadence Protection</div>
               <p className="text-xs text-slate-500 mt-1 leading-normal">
-                Prevents email delivery failures from halting linked LinkedIn tasks and follow-ups.
+                Guarantees a clean email list that prevents delivery failures from halting linked LinkedIn tasks.
               </p>
             </div>
             <div className="p-5 rounded-xl border border-slate-200 bg-slate-50/70">
@@ -150,23 +171,23 @@ export default function OverloopVerificationPage() {
               </p>
             </div>
             <div className="p-5 rounded-xl border border-slate-200 bg-slate-50/70">
-              <div className="text-2xl font-black text-slate-900">Direct Re-Upload</div>
-              <div className="text-xs text-slate-700 font-semibold mt-1">Overloop CSV Alignment</div>
+              <div className="text-2xl font-black text-slate-900">98.5% Accuracy</div>
+              <div className="text-xs text-slate-700 font-semibold mt-1">Catch-All Resolution</div>
               <p className="text-xs text-slate-500 mt-1 leading-normal">
-                Preserves all LinkedIn profile URLs, company tags, and custom variables without drift.
+                Unlocks enterprise catch-all leads without triggering 550 User Unknown mailbox rejections.
               </p>
             </div>
           </div>
         </section>
 
-        {/* SECTION 2: THE MULTICHANNEL CADENCE MECHANISM */}
+        {/* SECTION 2: THE MULTICHANNEL CADENCE MECHANISM & MATH */}
         <section className="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto py-12 border-t border-slate-100">
           <div className="max-w-3xl">
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
-              Why Unverified Leads Stall Overloop Multichannel Workflows
+              Why Unverified Leads Stall Overloop Multichannel Cadences
             </h2>
             <p className="mt-3 text-slate-600 text-sm sm:text-base leading-relaxed">
-              Overloop links email outreach with automated LinkedIn tasks. When an email fails, the entire workflow suffers cascading disruptions.
+              Overloop links cold email outreach with automated LinkedIn touches. When an email bounces, conditional branching breaks down. This wastes monthly LinkedIn automation limits and damages cold email deliverability across your connected mailboxes.
             </p>
           </div>
 
@@ -182,7 +203,7 @@ export default function OverloopVerificationPage() {
                 </div>
               </div>
               <p className="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed">
-                When a lead email bounces, Overloop conditional logic halts subsequent steps. Linked LinkedIn touches become orphaned, wasting valuable monthly automation quotas on invalid contacts.
+                When a prospect email bounces, Overloop conditional logic halts subsequent steps. Linked LinkedIn touches become orphaned, burning through restricted weekly connection quotas on defunct contacts.
               </p>
             </div>
 
@@ -193,13 +214,35 @@ export default function OverloopVerificationPage() {
                 </div>
                 <div>
                   <h3 className="text-sm font-bold text-slate-900">Sender Domain Deterioration</h3>
-                  <div className="text-xs text-slate-500">Provider spam filters engage</div>
+                  <div className="text-xs text-slate-500">Mailbox provider spam filters engage</div>
                 </div>
               </div>
               <p className="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed">
                 Overloop sends emails through connected Google or Microsoft accounts. A spike in 550 bounces damages domain reputation, landing even clean outreach directly in recipient spam tabs.
               </p>
             </div>
+          </div>
+
+          {/* MATHEMATICAL FORMULA BOX */}
+          <div className="mt-8 p-6 sm:p-8 rounded-2xl border border-slate-200 bg-slate-50/90 shadow-sm">
+            <div className="flex items-center gap-2 text-indigo-600 font-bold text-xs uppercase tracking-wider mb-2">
+              <Zap className="w-4 h-4" />
+              <span>Multichannel Automation Quota Waste Formula</span>
+            </div>
+            <h3 className="text-lg font-bold text-slate-900">
+              The LinkedIn Automation Credit Waste Index
+            </h3>
+            <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+              When unverified contact lists contain defunct email addresses, the correlated LinkedIn steps waste finite automation capacity:
+            </p>
+
+            <div className="my-4 p-4 rounded-xl bg-white border border-slate-200 font-mono text-xs sm:text-sm text-slate-800 text-center shadow-inner overflow-x-auto">
+              Wasted_LinkedIn_Quota = Invalid_Emails * (Profile_Views + Connection_Requests)
+            </div>
+
+            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              LinkedIn imposes a weekly cap of roughly 100 connection requests per user profile. If an outbound rep imports an unverified list of 500 leads with a 10% bounce rate (50 invalid contacts), Overloop automated cadences will waste up to 50 valuable connection credits on contacts who have departed their companies. That represents 50% of the sales rep entire weekly LinkedIn capacity burned on dead records. Pre-import Overloop email verification preserves your automation quotas for active buyers.
+            </p>
           </div>
         </section>
 
@@ -259,7 +302,106 @@ export default function OverloopVerificationPage() {
           </div>
         </section>
 
-        {/* SECTION 4: EXACT CSV HEADER COMPATIBILITY */}
+        {/* SECTION 4: CATCH-ALL RESOLUTION DEEP-DIVE */}
+        <section className="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto py-12 border-t border-slate-100">
+          <div className="max-w-3xl">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
+              Unlocking Catch-All Leads for Overloop with 98.5% Accuracy
+            </h2>
+            <p className="mt-3 text-slate-600 text-sm sm:text-base leading-relaxed">
+              Between 30% and 50% of B2B corporate domains configure catch-all email routing. Legacy verification software labels these domains as unverified or risky. In Overloop, discarding these leads means abandoning qualified accounts where LinkedIn profiles are verified and waiting for outreach.
+            </p>
+          </div>
+
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div className="p-6 rounded-2xl border border-rose-200 bg-rose-50/30">
+              <div className="flex items-center gap-2 text-rose-700 font-bold text-xs uppercase tracking-wider mb-2">
+                <XCircle className="w-4 h-4" />
+                <span>The Legacy Verifier Dilemma</span>
+              </div>
+              <h3 className="text-base font-bold text-slate-900">
+                Discarding Viable LinkedIn Prospects
+              </h3>
+              <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Conventional tools cannot confirm individual mailbox validity behind catch-all servers. They designate the entire domain as risky, forcing sales teams to throw out 40% of their prospective TAM or accept dangerous bounce rates that damage sender health.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-2xl border border-emerald-200 bg-emerald-50/30">
+              <div className="flex items-center gap-2 text-emerald-700 font-bold text-xs uppercase tracking-wider mb-2">
+                <CheckCircle2 className="w-4 h-4" />
+                <span>The Giggal Protocol</span>
+              </div>
+              <h3 className="text-base font-bold text-slate-900">
+                98.5% Accuracy on Valid Mailboxes
+              </h3>
+              <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Giggal conducts deep protocol checks to verify specific user accounts without sending test emails. We resolve catch-all domains with 98.5% verified precision, delivering a clean email list that fuels your Overloop multichannel cadences without unexpected delivery failures.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* SECTION 5: 3-WAY COMPARISON MATRIX TABLE */}
+        <section className="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto py-12 border-t border-slate-100">
+          <div className="max-w-3xl mb-8">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
+              Comparing List Verification Methods for Overloop
+            </h2>
+            <p className="mt-3 text-slate-600 text-sm sm:text-base leading-relaxed">
+              Evaluating raw scraper exports, legacy verification services, and Giggal pre-import validation for Overloop multichannel campaigns.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-slate-200 overflow-hidden bg-white shadow-sm">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse text-xs sm:text-sm">
+                <thead>
+                  <tr className="border-b border-slate-200 bg-slate-50 text-slate-700 font-semibold">
+                    <th className="p-4">Capability / Feature</th>
+                    <th className="p-4 text-rose-600">Raw Scraper Data</th>
+                    <th className="p-4 text-amber-600">Legacy Verifiers</th>
+                    <th className="p-4 text-indigo-600 font-bold bg-indigo-50/50">Giggal Engine</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100 text-slate-600 text-xs">
+                  <tr className="hover:bg-slate-50/50">
+                    <td className="p-4 font-medium text-slate-900">Catch-All Domain Resolution</td>
+                    <td className="p-4 text-rose-600">None (high bounce risk)</td>
+                    <td className="p-4 text-amber-600">Tagged "Risky" / discarded</td>
+                    <td className="p-4 text-emerald-600 font-semibold bg-indigo-50/30">98.5% Verified Accuracy</td>
+                  </tr>
+                  <tr className="hover:bg-slate-50/50">
+                    <td className="p-4 font-medium text-slate-900">Multichannel Cadence Continuity</td>
+                    <td className="p-4 text-rose-600">Sequences stall on bounces</td>
+                    <td className="p-4 text-amber-600">Partial preservation</td>
+                    <td className="p-4 text-emerald-600 font-semibold bg-indigo-50/30">Unbroken Multichannel Flow</td>
+                  </tr>
+                  <tr className="hover:bg-slate-50/50">
+                    <td className="p-4 font-medium text-slate-900">LinkedIn Automation Quota Protection</td>
+                    <td className="p-4 text-rose-600">Heavy quota waste</td>
+                    <td className="p-4 text-amber-600">Moderate quota protection</td>
+                    <td className="p-4 text-emerald-600 font-semibold bg-indigo-50/30">100% Validated Quota Usage</td>
+                  </tr>
+                  <tr className="hover:bg-slate-50/50">
+                    <td className="p-4 font-medium text-slate-900">Overloop CSV & LinkedIn URL Preservation</td>
+                    <td className="p-4 text-slate-600">Raw formats only</td>
+                    <td className="p-4 text-amber-600">Column loss common</td>
+                    <td className="p-4 text-emerald-600 font-semibold bg-indigo-50/30">100% Intact Schema Mapping</td>
+                  </tr>
+                  <tr className="hover:bg-slate-50/50">
+                    <td className="p-4 font-medium text-slate-900">Test Message Dispatch</td>
+                    <td className="p-4 text-slate-600">None</td>
+                    <td className="p-4 text-rose-600">Some send ping emails</td>
+                    <td className="p-4 text-emerald-600 font-semibold bg-indigo-50/30">Zero Message Transmission</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        {/* SECTION 6: EXACT CSV HEADER COMPATIBILITY */}
         <section className="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto py-12 border-t border-slate-100">
           <div className="max-w-3xl">
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
@@ -316,63 +458,127 @@ export default function OverloopVerificationPage() {
                     <td className="p-3">Premier Assets</td>
                     <td className="p-3">linkedin.com/in/sfrost-capital</td>
                     <td className="p-3">inbound_partner</td>
-                    <td className="p-3 text-emerald-600 font-semibold">deliverable (resolved)</td>
+                    <td className="p-3 text-emerald-600 font-semibold">deliverable catch-all (98.5% accurate)</td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <div className="p-4 bg-slate-50/70 border-t border-slate-200 text-xs text-slate-600 flex items-center justify-between">
+            <div className="p-4 bg-slate-50/70 border-t border-slate-200 text-xs text-slate-600 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
               <span>Filter deliverables and upload back to Overloop with zero column realignment.</span>
               <span className="font-semibold text-indigo-600">LinkedIn URLs 100% Intact</span>
             </div>
           </div>
         </section>
 
-        {/* SECTION 5: STEP-BY-STEP WORKFLOW */}
+        {/* SECTION 7: 4-STAGE PRE-IMPORT PIPELINE */}
         <section className="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto py-12 border-t border-slate-100">
           <div className="max-w-3xl mb-8">
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
-              How to Verify Lists Before Sending with Overloop
+              The 4-Stage Pre-Import Pipeline for Overloop Senders
             </h2>
             <p className="mt-3 text-slate-600 text-sm sm:text-base leading-relaxed">
-              Ensure smooth execution across both email and LinkedIn automation touchpoints with this three-step workflow.
+              Every prospect record uploaded to Giggal passes through four verification filters before entering your Overloop multichannel campaigns.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-6 rounded-2xl border border-slate-200 bg-white">
-              <div className="w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 font-black text-sm flex items-center justify-center mb-4">
-                1
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="p-5 rounded-2xl border border-slate-200 bg-white shadow-sm">
+              <div className="w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 font-bold text-xs flex items-center justify-center mb-3">
+                01
               </div>
-              <h3 className="text-base font-bold text-slate-900">Export Multichannel Leads</h3>
-              <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Export your prospect list with recipient email addresses, LinkedIn profile URLs, and custom tags.
+              <h3 className="text-sm font-bold text-slate-900">Syntax & MX Check</h3>
+              <p className="mt-2 text-xs text-slate-600 leading-relaxed">
+                Filters RFC syntax errors, malformed typos, and confirms valid active MX DNS records for the receiving domain.
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl border border-slate-200 bg-white">
-              <div className="w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 font-black text-sm flex items-center justify-center mb-4">
-                2
+            <div className="p-5 rounded-2xl border border-slate-200 bg-white shadow-sm">
+              <div className="w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 font-bold text-xs flex items-center justify-center mb-3">
+                02
               </div>
-              <h3 className="text-base font-bold text-slate-900">Clean with Giggal</h3>
-              <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Upload your CSV to Giggal. Our engine verifies each mailbox directly, catching invalid servers and resolving catch-all domains into safe deliverables.
+              <h3 className="text-sm font-bold text-slate-900">Deep Mailbox Handshake</h3>
+              <p className="mt-2 text-xs text-slate-600 leading-relaxed">
+                Connects directly with the target mail server without transmitting messages, detecting deleted and inactive mailboxes.
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl border border-slate-200 bg-white">
-              <div className="w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 font-black text-sm flex items-center justify-center mb-4">
-                3
+            <div className="p-5 rounded-2xl border border-slate-200 bg-white shadow-sm">
+              <div className="w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 font-bold text-xs flex items-center justify-center mb-3">
+                03
               </div>
-              <h3 className="text-base font-bold text-slate-900">Upload to Overloop</h3>
-              <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Import clean deliverable leads into Overloop. Launch your campaign knowing your multichannel flow remains protected.
+              <h3 className="text-sm font-bold text-slate-900">Catch-All Resolution</h3>
+              <p className="mt-2 text-xs text-slate-600 leading-relaxed">
+                Analyzes server response timing and protocol signals to confirm catch-all inbox existence with 98.5% precision.
+              </p>
+            </div>
+
+            <div className="p-5 rounded-2xl border border-slate-200 bg-white shadow-sm">
+              <div className="w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 font-bold text-xs flex items-center justify-center mb-3">
+                04
+              </div>
+              <h3 className="text-sm font-bold text-slate-900">Clean CSV Export</h3>
+              <p className="mt-2 text-xs text-slate-600 leading-relaxed">
+                Downloads a clean email list with preserved LinkedIn profile URLs ready for immediate upload to Overloop.
               </p>
             </div>
           </div>
         </section>
 
-        {/* SECTION 6: FAQS */}
+        {/* SECTION 8: AGENCY & MULTICHANNEL BEST PRACTICES */}
+        <section className="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto py-12 border-t border-slate-100">
+          <div className="max-w-3xl mb-8">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
+              Agency Best Practices for Overloop Multichannel Cadences
+            </h2>
+            <p className="mt-3 text-slate-600 text-sm sm:text-base leading-relaxed">
+              Leading outbound teams follow these standards to maximize cold email deliverability and conserve LinkedIn automation quotas.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div className="p-6 rounded-2xl border border-slate-200 bg-white shadow-sm">
+              <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-indigo-600" />
+                Keep Email Bounces Under 1.5%
+              </h3>
+              <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Email service providers begin throttling sender domains when bounce rates exceed 2%. Keeping hard bounces strictly under 1.5% ensures that Overloop initial email touchpoints reach the primary inbox rather than spam folders.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-2xl border border-slate-200 bg-white shadow-sm">
+              <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-indigo-600" />
+                Preserve LinkedIn Quotas for Active Accounts
+              </h3>
+              <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                LinkedIn monitors account connection rates closely. Verifying prospect emails before import guarantees that every LinkedIn profile visit and connection request is directed toward verified, currently employed professionals.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-2xl border border-slate-200 bg-white shadow-sm">
+              <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-indigo-600" />
+                Unlock Verified Catch-All Leads
+              </h3>
+              <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Rather than discarding catch-all domains, verify them with Giggal 98.5% precision. This expands your reachable multichannel TAM and unlocks valuable enterprise leads without increasing bounce exposure.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-2xl border border-slate-200 bg-white shadow-sm">
+              <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-indigo-600" />
+                Re-Clean Aged Prospect Lists Every 60 Days
+              </h3>
+              <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                B2B contact databases experience continuous natural churn. Re-verifying prospect lists through Giggal before re-enrolling contacts in Overloop sequences eliminates sudden delivery failures and protects your multichannel cadences.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* SECTION 9: FAQS */}
         <section className="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto py-12 border-t border-slate-100">
           <div className="max-w-3xl mb-8">
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
@@ -386,7 +592,7 @@ export default function OverloopVerificationPage() {
           <FaqAccordion items={overloopFaqs} />
         </section>
 
-        {/* SECTION 7: FINAL CTA */}
+        {/* SECTION 10: FINAL CTA */}
         <section className="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto pt-6">
           <div className="p-8 sm:p-12 rounded-3xl bg-slate-900 text-white text-center relative overflow-hidden">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight">
