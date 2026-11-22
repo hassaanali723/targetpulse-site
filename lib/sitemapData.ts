@@ -212,6 +212,29 @@ export function verifyForEntries(): SitemapEntry[] {
   }))
 }
 
+// ── scraped-leads (directory & lead scrapers) ──────────────────────────
+export const SCRAPED_LEADS_SLUGS = [
+  'google-maps',
+  'outscraper',
+  'scrap-io',
+  'apify',
+  'd7-lead-finder',
+  'yelp',
+  'yellow-pages',
+  'bark',
+] as const
+
+export function scrapedLeadsEntries(): SitemapEntry[] {
+  return [
+    { path: '/scraped-leads', lastModified: '2026-11-22', priority: '0.85' },
+    ...SCRAPED_LEADS_SLUGS.map((slug) => ({
+      path: `/scraped-leads/${slug}`,
+      lastModified: '2026-11-22',
+      priority: '0.85',
+    })),
+  ]
+}
+
 // ── italian ─────────────────────────────────────────────────────────────
 // Every Italian URL, from the cluster map plus the Italian-only pages. The
 // lastmod is the launch date for the static pages and the post's own date

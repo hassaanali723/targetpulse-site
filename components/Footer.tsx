@@ -34,6 +34,17 @@ const outboundLinks = [
   { name: 'Overloop verifier', href: '/verify-for/overloop' },
 ]
 
+const scrapedLeadsLinks = [
+  { name: 'Google Maps leads', href: '/scraped-leads/google-maps' },
+  { name: 'Outscraper cleaning', href: '/scraped-leads/outscraper' },
+  { name: 'Scrap.io verifier', href: '/scraped-leads/scrap-io' },
+  { name: 'Apify lead cleaning', href: '/scraped-leads/apify' },
+  { name: 'D7 Lead Finder verifier', href: '/scraped-leads/d7-lead-finder' },
+  { name: 'Yelp directory leads', href: '/scraped-leads/yelp' },
+  { name: 'Yellow Pages cleaning', href: '/scraped-leads/yellow-pages' },
+  { name: 'Bark leads verification', href: '/scraped-leads/bark' },
+]
+
 const useCasesLinks = [
   { name: 'B2B Lead Enrichment', href: '/use-cases/b2b-lead-enrichment' },
   { name: 'Outreach Deliverability', href: '/use-cases/outreach-email-deliverability' },
@@ -211,6 +222,18 @@ export default function Footer() {
               <p className={headingClass}>Cold Outbound</p>
               <ul className="space-y-2.5">
                 {outboundLinks.map((link) => (
+                  <li key={link.name}>
+                    <Link href={link.href} className={linkClass}>
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <p className={headingClass}>Scraped Leads</p>
+              <ul className="space-y-2.5">
+                {scrapedLeadsLinks.map((link) => (
                   <li key={link.name}>
                     <Link href={link.href} className={linkClass}>
                       {link.name}
