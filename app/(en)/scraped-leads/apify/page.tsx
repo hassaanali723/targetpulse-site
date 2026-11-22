@@ -479,7 +479,7 @@ export default function ApifyLeadVerificationPage() {
                 Never Import Raw Apify Datasets
               </h3>
               <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Raw Apify files carry typical bounce rates between 24% and 38%. Pre-import Apify email verification keeps bounces strictly below 1.5%, protecting your sending domains from automated safety flags.
+                Raw Apify leads carry typical bounce rates between 24% and 38%. Pre-import Apify email verification keeps bounces strictly below 1.5%, protecting your sending domains from automated safety flags.
               </p>
             </div>
 
@@ -489,7 +489,7 @@ export default function ApifyLeadVerificationPage() {
                 Filter Out CMS Vendor Footers
               </h3>
               <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Scraped website footers frequently contain CMS platform support addresses. Verifying the domain host matches the target website ensures your sales pitch reaches actual local business leads.
+                Scraped website footers frequently contain CMS platform support addresses. Verifying the domain host matches the target website ensures your sales pitch reaches actual local business leads from Apify leads exports.
               </p>
             </div>
 

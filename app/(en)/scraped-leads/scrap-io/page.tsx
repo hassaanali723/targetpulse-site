@@ -478,7 +478,7 @@ export default function ScrapIoLeadVerificationPage() {
                 Never Import Raw Scrap.io CSVs
               </h3>
               <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Raw Scrap.io files carry typical bounce rates between 25% and 40%. Running every export through Scrap.io email verification filters invalid domains and keeps hard bounces strictly below 1.5%.
+                Raw Scrap.io leads carry typical bounce rates between 25% and 40%. Running every export through Scrap.io email verification filters invalid domains and keeps hard bounces strictly below 1.5%.
               </p>
             </div>
 
@@ -505,10 +505,20 @@ export default function ScrapIoLeadVerificationPage() {
             <div className="p-6 rounded-2xl border border-slate-200 bg-white shadow-sm">
               <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-indigo-600" />
-                Re-Clean Aged Prospect Exports Every 60 Days
+                Filter Inactive Social Profiles from Scrap.io Leads
               </h3>
               <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
-                International local business databases degrade at roughly 2.5% per month due to store closures and rebranding. Re-running your Scrap.io files through Giggal ensures continuous cold email deliverability.
+                Scrap.io surfaces Facebook, Instagram, and LinkedIn links alongside emails. Inactive or abandoned social profiles often correspond to shut-down businesses with expired mailboxes. Giggal validates each mailbox directly with authoritative mail servers.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-2xl border border-slate-200 bg-white shadow-sm md:col-span-2">
+              <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-indigo-600" />
+                Re-Clean Aged Scrap.io Leads Every 60 Days
+              </h3>
+              <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                International local business databases degrade at roughly 2.5% per month due to store closures and rebranding. Re-running your unverified Scrap.io leads through Giggal ensures continuous cold email deliverability and protects your outbound sending infrastructure across all campaigns.
               </p>
             </div>
           </div>

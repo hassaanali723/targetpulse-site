@@ -478,7 +478,7 @@ export default function YelpLeadVerificationPage() {
                 Never Import Raw Yelp Scrapes
               </h3>
               <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Raw Yelp exports carry typical bounce rates between 25% and 42%. Pre-import Yelp email verification keeps bounces strictly below 1.5%, protecting your sending domains from automated safety flags.
+                Raw Yelp leads carry typical bounce rates between 25% and 42%. Pre-import Yelp email verification keeps bounces strictly below 1.5%, protecting your sending domains from automated safety flags.
               </p>
             </div>
 
@@ -488,7 +488,7 @@ export default function YelpLeadVerificationPage() {
                 Detect Honeypot Traps Early
               </h3>
               <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Local websites linked to Yelp profiles frequently feature parked domains converted into spam traps. Deep mailbox handshakes filter these trap addresses before they flag your IP on Spamhaus or Barracuda.
+                Local websites linked to Yelp profiles frequently feature parked domains converted into spam traps. Deep mailbox handshakes filter these trap addresses from your Yelp leads before they flag your IP on Spamhaus or Barracuda.
               </p>
             </div>
 
@@ -508,7 +508,7 @@ export default function YelpLeadVerificationPage() {
                 Re-Clean Aged Prospect Exports Every 60 Days
               </h3>
               <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Local business databases degrade at roughly 2.5% per month due to closures and ownership shifts. Re-running your clean Yelp scraped leads through Giggal ensures continuous cold email deliverability.
+                Local business databases degrade at roughly 2.5% per month due to closures and ownership shifts. Re-running your Yelp leads through Giggal ensures continuous cold email deliverability.
               </p>
             </div>
           </div>
