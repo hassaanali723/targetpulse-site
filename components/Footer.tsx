@@ -45,6 +45,13 @@ const scrapedLeadsLinks = [
   { name: 'Bark leads verification', href: '/scraped-leads/bark' },
 ]
 
+const agencyLeadsLinks = [
+  { name: 'Clutch agency leads', href: '/agency-leads/clutch' },
+  { name: 'G2 software leads', href: '/agency-leads/g2' },
+  { name: 'Capterra directory leads', href: '/agency-leads/capterra' },
+  { name: 'GoodFirms IT leads', href: '/agency-leads/goodfirms' },
+]
+
 const useCasesLinks = [
   { name: 'B2B Lead Enrichment', href: '/use-cases/b2b-lead-enrichment' },
   { name: 'Outreach Deliverability', href: '/use-cases/outreach-email-deliverability' },
@@ -208,6 +215,18 @@ export default function Footer() {
               <p className={headingClass}>Scraped Leads</p>
               <ul className="space-y-2.5">
                 {scrapedLeadsLinks.map((link) => (
+                  <li key={link.name}>
+                    <Link href={link.href} className={linkClass}>
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <p className={headingClass}>Agency Leads</p>
+              <ul className="space-y-2.5">
+                {agencyLeadsLinks.map((link) => (
                   <li key={link.name}>
                     <Link href={link.href} className={linkClass}>
                       {link.name}

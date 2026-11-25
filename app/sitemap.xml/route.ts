@@ -10,6 +10,7 @@ export function GET() {
       'sitemap-core.xml',
       'sitemap-verify-for.xml',
       'sitemap-scraped-leads.xml',
+      'sitemap-agency-leads.xml',
       'sitemap-alternatives.xml',
       'sitemap-compare.xml',
       'sitemap-integrations.xml',

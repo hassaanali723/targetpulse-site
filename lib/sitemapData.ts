@@ -235,6 +235,25 @@ export function scrapedLeadsEntries(): SitemapEntry[] {
   ]
 }
 
+// ── agency-leads (B2B agency & review directories) ─────────────────────
+export const AGENCY_LEADS_SLUGS = [
+  'clutch',
+  'g2',
+  'capterra',
+  'goodfirms',
+] as const
+
+export function agencyLeadsEntries(): SitemapEntry[] {
+  return [
+    { path: '/agency-leads', lastModified: '2026-11-23', priority: '0.85' },
+    ...AGENCY_LEADS_SLUGS.map((slug) => ({
+      path: `/agency-leads/${slug}`,
+      lastModified: '2026-11-23',
+      priority: '0.85',
+    })),
+  ]
+}
+
 // ── italian ─────────────────────────────────────────────────────────────
 // Every Italian URL, from the cluster map plus the Italian-only pages. The
 // lastmod is the launch date for the static pages and the post's own date
