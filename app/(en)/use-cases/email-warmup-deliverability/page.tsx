@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Navbar from '@/components/Navbar'
+import SendingInboxesNote from '@/components/verify-for/SendingInboxesNote'
 import Footer from '@/components/Footer'
 import FaqAccordion, { type FaqItem } from '@/components/landing/FaqAccordion'
 import RatingChips from '@/components/landing/RatingChips'
@@ -377,6 +378,10 @@ export default function EmailWarmupDeliverabilityPage() {
             </div>
           </div>
         </section>
+
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SendingInboxesNote lead="Setting up new mailboxes to warm up?" medium="use-cases" slug="email-warmup-deliverability" className="my-10" />
+        </div>
 
         {/* ASYMMETRIC STICKY EDITORIAL LIST: WHY NEW MAILBOXES STALL */}
         <section className="py-20 lg:py-28">

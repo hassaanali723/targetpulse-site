@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import SendingInboxesNote from '@/components/verify-for/SendingInboxesNote'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import FaqAccordion, { type FaqItem } from '@/components/landing/FaqAccordion'
@@ -178,6 +179,7 @@ export default function OverloopVerificationPage() {
               </p>
             </div>
           </div>
+          <SendingInboxesNote tool="Overloop" slug="overloop" />
         </section>
 
         {/* SECTION 2: THE MULTICHANNEL CADENCE MECHANISM & MATH */}

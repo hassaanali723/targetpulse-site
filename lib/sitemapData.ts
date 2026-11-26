@@ -64,6 +64,7 @@ export function coreEntries(): SitemapEntry[] {
     { path: '/spf-checker', lastModified: '2026-10-12' },
     { path: '/gmail-plus-addressing', lastModified: '2026-10-13' },
     { path: '/bounce-rate-calculator', lastModified: '2026-10-13' },
+    { path: '/cold-email-campaign-calculator', lastModified: '2026-11-26' },
     { path: '/email-permutator', lastModified: '2026-10-08' },
     { path: '/bimi-generator', lastModified: '2026-10-08' },
     { path: '/spam-word-checker', lastModified: '2026-10-08' },

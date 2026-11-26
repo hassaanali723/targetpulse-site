@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import SendingInboxesNote from '@/components/verify-for/SendingInboxesNote'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import FaqAccordion, { type FaqItem } from '@/components/landing/FaqAccordion'
@@ -178,6 +179,7 @@ export default function CloseVerificationPage() {
               </p>
             </div>
           </div>
+          <SendingInboxesNote tool="Close" slug="close" />
         </section>
 
         {/* SECTION 2: THE CRM CONTAMINATION MECHANISM & MATH */}

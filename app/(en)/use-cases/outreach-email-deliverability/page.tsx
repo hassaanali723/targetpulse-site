@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Navbar from '@/components/Navbar'
+import SendingInboxesNote from '@/components/verify-for/SendingInboxesNote'
 import Footer from '@/components/Footer'
 import FaqAccordion, { type FaqItem } from '@/components/landing/FaqAccordion'
 import ProductPreview from '@/components/landing/ProductPreview'
@@ -315,7 +316,11 @@ export default function OutreachDeliverabilityPage() {
         </div>
       </section>
 
-      {/* ── WORKFLOW COMPARISON ─────────────────────────────────── */}
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SendingInboxesNote lead="Sending from secondary domains?" medium="use-cases" slug="outreach-email-deliverability" className="my-10" />
+        </div>
+
+        {/* ── WORKFLOW COMPARISON ─────────────────────────────────── */}
       <section className="max-w-6xl mx-auto px-6 py-16 border-t border-slate-200">
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
           <p className="text-[11px] font-black uppercase tracking-[0.2em] text-indigo-600">CADENCE ARCHITECTURE</p>

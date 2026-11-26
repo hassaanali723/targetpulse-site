@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import SendingInboxesNote from '@/components/verify-for/SendingInboxesNote'
 import Link from 'next/link'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
@@ -176,6 +177,7 @@ export default function MailshakeVerificationPage() {
               </p>
             </div>
           </div>
+          <SendingInboxesNote tool="Mailshake" slug="mailshake" />
         </section>
 
         {/* SECTION 2: THE SHAKE SCORE & OAUTH DYNAMICS */}

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import SendingInboxesNote from '@/components/verify-for/SendingInboxesNote'
 import Link from 'next/link'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
@@ -176,6 +177,7 @@ export default function SaleshandyVerificationPage() {
               </p>
             </div>
           </div>
+          <SendingInboxesNote tool="Saleshandy" slug="saleshandy" />
         </section>
 
         {/* SECTION 2: SEQUENCE FREEZES & ROTATION RISKS */}

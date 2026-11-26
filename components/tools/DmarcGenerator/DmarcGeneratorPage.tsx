@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
+import SendingInboxesNote from '@/components/verify-for/SendingInboxesNote'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import NavbarL10n from '@/components/l10n/Navbar'
@@ -87,6 +88,7 @@ export default function DmarcGeneratorPage({ locale }: { locale: Locale }) {
       {/* THE TOOL */}
       <section className="cv-section max-w-5xl mx-auto px-6 pb-16">
         <DmarcGeneratorTool locale={locale} />
+        {isEn && <SendingInboxesNote lead="Setting up DMARC on cold email domains?" medium="dns-tools" slug="dmarc-generator" />}
       </section>
 
       {/* COPY BELOW THE TOOL */}

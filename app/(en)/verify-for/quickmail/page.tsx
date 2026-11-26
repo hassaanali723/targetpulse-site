@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import SendingInboxesNote from '@/components/verify-for/SendingInboxesNote'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import FaqAccordion, { type FaqItem } from '@/components/landing/FaqAccordion'
@@ -178,6 +179,7 @@ export default function QuickMailVerificationPage() {
               </p>
             </div>
           </div>
+          <SendingInboxesNote tool="QuickMail" slug="quickmail" />
         </section>
 
         {/* SECTION 2: THE ROTATION DISTORTION MECHANISM & MATH */}

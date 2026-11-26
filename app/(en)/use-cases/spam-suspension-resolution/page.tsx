@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Navbar from '@/components/Navbar'
+import SendingInboxesNote from '@/components/verify-for/SendingInboxesNote'
 import Footer from '@/components/Footer'
 import FaqAccordion, { type FaqItem } from '@/components/landing/FaqAccordion'
 import AltCtaBand from '@/components/alternatives/AltCtaBand'
@@ -539,6 +540,10 @@ export default function SpamSuspensionResolutionPage() {
             </div>
           </div>
         </section>
+
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SendingInboxesNote lead="Rebuilding your sending setup after a suspension?" medium="use-cases" slug="spam-suspension-resolution" className="my-10" />
+        </div>
 
         {/* RELATED GUIDES & TOOLS */}
         <section className="py-16 lg:py-20 border-t border-slate-100 bg-slate-50/50">

@@ -1,5 +1,6 @@
 import { Fragment, type ReactNode } from 'react'
 import type { Metadata } from 'next'
+import SendingInboxesNote from '@/components/verify-for/SendingInboxesNote'
 import Image from 'next/image'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
@@ -133,6 +134,7 @@ export default function SpfCheckerPage({ locale }: { locale: Locale }) {
       {/* THE TOOL */}
       <section className="cv-section max-w-5xl mx-auto px-6 pb-16">
         <SpfCheckerTool locale={locale} />
+        {isEn && <SendingInboxesNote lead="Setting up a domain for cold email?" medium="dns-tools" slug="spf-checker" />}
       </section>
 
       {/* COPY BELOW THE TOOL */}

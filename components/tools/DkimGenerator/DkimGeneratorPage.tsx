@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
+import SendingInboxesNote from '@/components/verify-for/SendingInboxesNote'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import NavbarL10n from '@/components/l10n/Navbar'
@@ -87,6 +88,7 @@ export default function DkimGeneratorPage({ locale }: { locale: Locale }) {
       {/* THE TOOL */}
       <section className="cv-section max-w-5xl mx-auto px-6 pb-16">
         <DkimGeneratorTool locale={locale} />
+        {isEn && <SendingInboxesNote lead="Setting up DKIM on cold email domains?" medium="dns-tools" slug="dkim-generator" />}
       </section>
 
       {/* COPY BELOW THE TOOL */}
