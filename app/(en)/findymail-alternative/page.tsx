@@ -1,49 +1,92 @@
 import AltPageScaffold, { altMetadata, type AltPageConfig } from '@/components/alternatives/AltPageScaffold'
 
+// Rewritten 2026-11-27 and taken out of noindex. Ahrefs US: "findymail
+// pricing" 150, "findymail alternatives" 70, "findymail review(s)" 60,
+// "findymail alternative" 40, "findymail competitors" 40. Facts checked on
+// findymail.com the same day.
 const cfg: AltPageConfig = {
   slug: 'findymail',
-  metaTitle: 'Findymail Alternative | Catch-All Email Verifier | Giggal.ai',
-  ogTitle: 'A Findymail Alternative Built Only for Verification',
-  desc: 'Findymail verifies catch-all on a $99 monthly plan. Giggal.ai is a dedicated catch-all email verification tool at $9.90 per 10,000, bought once.',
+  metaTitle: 'Findymail Alternatives and Findymail Pricing | Giggal.ai',
+  ogTitle: 'Findymail alternatives and pricing compared',
+  desc: 'Findymail pricing starts at $99 a month. Compare Findymail alternatives and competitors, including Giggal.ai, an email verifier at $9.90 per 10,000 credits.',
   h1Article: 'A',
-  h1Tail: 'that only verifies',
+  h1Tail: 'for verifying emails you already have',
   heroP:
-    'Findymail is a finder with verification attached, sold as a subscription. Both tools resolve catch-all addresses rather than labelling them, so the real question is what you are buying. If you already have the list and need it clean, Giggal.ai is a catch-all email verifier at $9.90 per 10,000, bought once.',
+    'Findymail finds B2B emails and verifies them. Its plans start at $99 a month. If you already have a list and only need to verify it, Giggal.ai does that for $9.90 per 10,000 emails. You buy credits once, and they never expire.',
   bluf: [
-    { k: 'Both resolve catch-all', v: 'Findymail verifies accept-all addresses too. This is not the usual argument about labels.' },
-    { k: 'Shape', v: 'Findymail is a finder-plus-verifier subscription; we verify, and nothing else.' },
-    { k: 'Billing', v: 'Findymail publishes one plan at $99 a month with 5,000 verifier credits. We are $9.90 per 10,000, one-time, credits never expire.' },
-    { k: 'Gateways', v: 'We verify behind 15 named secure email gateways. Findymail does not advertise SEG support.' },
+    { k: 'Main job', v: 'Findymail finds emails, then verifies them. Giggal.ai only verifies.' },
+    { k: 'Price', v: 'Findymail starts at $99 a month. Giggal.ai is $9.90 for 10,000 credits, bought once.' },
+    { k: 'Free credits', v: 'Findymail gives 10 free credits. Giggal.ai gives 1,000, with no card.' },
+    { k: 'Guarantee', v: 'Findymail promises a bounce rate under 5%, and refunds credits above it.' },
   ],
-  catchAllHeading: 'How Giggal.ai verifies catch-all addresses',
-  catchAllProse:
-    'Findymail is one of the few tools that will commit on a catch-all address instead of handing it back marked risky, and it says so plainly. Giggal.ai does the same thing, and then goes one step further: it also verifies mailboxes behind Proofpoint, Mimecast, Barracuda and twelve other secure email gateways, which accept everything at the perimeter and defeat the ordinary check for a different reason. If your list is mostly enterprise domains, that second category is usually larger than people expect.',
-  pricingHeading: 'Findymail pricing vs Giggal.ai',
+  about: {
+    heading: 'What is Findymail?',
+    paragraphs: [
+      'Findymail is a B2B email finder. It finds work emails from a name and company, a LinkedIn URL or a Sales Navigator search. Every email it finds is verified before you get it.',
+      'It has a Chrome extension, a Google Sheets add-on, bulk upload, an API and a phone finder. It connects to Clay, HubSpot, Salesforce, Pipedrive, Instantly, Smartlead and Lemlist, among others.',
+      'Findymail also sells verifier credits for lists from other sources. It says it verifies catch-all emails that other tools mark as risky.',
+    ],
+  },
+  pricingFirst: true,
+  pricingHeading: 'Findymail pricing in 2026',
   pricingProse:
-    'Findymail publishes a single standard plan, Starter at $99 a month, carrying 5,000 finder credits and 5,000 verifier credits, with unused credits rolling over up to twice the monthly allowance. Above that, pricing is quoted as Enterprise, so there is no published figure for 10,000, 100,000 or a million verifications a month. Giggal.ai is pay-as-you-go: $9.90 for 10,000, $76 for 100,000, $680 for a million, bought once, with credits that never expire and no monthly commitment.',
-  featureNote: 'Findymail publishes only its $99 Starter plan; higher volumes are quoted individually, so the pricing rows above are blank rather than estimated.',
-  testStep3: 'Compare the catch-all rows against what Findymail returned for the same addresses.',
-  ctaHeadline: 'Verification without the subscription',
+    'Findymail has two kinds of plans. The usage-based plans are Individual at $99 a month, Pro at $249, Team at $399 and Scale at $999. They list seats and file sizes, not a credit count.',
+  pricingExtra: [
+    'The credit-based Starter plan is $99 a month. It includes 5,000 finder credits and 5,000 verifier credits. Larger volumes are Enterprise, priced on request. Unused credits roll over, up to twice the monthly allowance.',
+    'Giggal.ai has no monthly plan. 10,000 credits cost $9.90, 100,000 cost $76 and a million cost $680.',
+  ],
+  reasons: {
+    heading: 'Why teams look for a Findymail alternative',
+    items: [
+      { k: 'Verify only', v: 'Many teams already have a list. They do not need a finder, only a verifier.' },
+      { k: 'Volume', v: 'Starter includes 5,000 verifier credits a month. Larger volumes need an Enterprise quote.' },
+      { k: 'Monthly bill', v: 'Findymail bills every month. Giggal.ai credits are bought once and never expire.' },
+      { k: 'Small trial', v: 'Findymail gives 10 free credits. That is too few to test a real list.' },
+    ],
+  },
+  catchAllHeading: 'Findymail vs Giggal.ai on catch-all emails',
+  catchAllProse:
+    'Findymail verifies catch-all emails that other tools mark as risky. Giggal.ai also returns a result on catch-all addresses, at 1 credit each. It also checks addresses behind 15 named secure email gateways, such as Proofpoint, Mimecast and Barracuda. Findymail does not publish gateway support.',
+  strengths: {
+    heading: 'Findymail review: what it does well',
+    intro: 'Findymail is the better choice if you need these:',
+  },
+  others: {
+    heading: 'Other Findymail alternatives and competitors',
+    intro: 'These tools also find or verify B2B emails. Prices are from each vendor’s site on 27 November 2026.',
+    items: [
+      { name: 'Anymail Finder', text: 'An email finder with plans from $29 a month for 400 credits. It promises that at least 97% of the emails it finds will not hard bounce.' },
+      { name: 'LeadMagic', text: 'A B2B data platform with email finding, mobile numbers and company data. Plans start at $99 a month for 5,000 shared credits.' },
+      { name: 'Allegrow', text: 'A verifier for sales teams that also tracks inbox placement and domain health. Starter is $99 a month for 5,000 contacts.' },
+    ],
+  },
+  testHeading: 'Verify a Findymail export with Giggal.ai',
+  testStep3: 'Compare the catch-all rows with what Findymail returned for the same contacts.',
+  ctaHeadline: 'Verify your list without a subscription',
   faqs: [
     {
-      q: 'Is Giggal.ai a good Findymail alternative?',
-      a: 'For verification, yes. Both tools resolve catch-all addresses rather than labelling them risky, but Giggal.ai is a dedicated verifier at $9.90 per 10,000 bought once, and it also verifies behind 15 named secure email gateways. Findymail also finds email addresses, which Giggal.ai does not do at all.',
+      q: 'How much does Findymail cost?',
+      a: 'Findymail plans start at $99 a month. The credit-based Starter plan includes 5,000 finder credits and 5,000 verifier credits. Usage-based plans run from $99 to $999 a month. Larger volumes are priced on request.',
     },
     {
-      q: 'Does Giggal.ai find email addresses like Findymail?',
-      a: 'No. Giggal.ai verifies addresses you already have. If discovery is the job, Findymail is the better tool and the two are not really competing.',
+      q: 'Does Findymail have a free plan?',
+      a: 'Findymail gives 10 free credits to test, with no card. There is no ongoing free plan. Giggal.ai gives 1,000 free credits with no card.',
     },
     {
-      q: 'How do the two handle catch-all domains?',
-      a: 'Both commit to a result instead of returning risky. Findymail says catch-all verification recovers around 23% more valid emails. Giggal.ai resolves catch-all at a flat 1 credit per email, and adds secure email gateway verification that Findymail does not advertise.',
+      q: 'What are the best Findymail alternatives?',
+      a: 'For finding emails, Anymail Finder and LeadMagic are common options. For verifying a list you already have, Giggal.ai costs $9.90 per 10,000 credits, with no subscription.',
     },
     {
-      q: 'What does the pricing look like side by side?',
-      a: 'Findymail publishes Starter at $99 a month with 5,000 verifier credits, rolling over up to twice the allowance, with anything larger quoted as Enterprise. Giggal.ai is $9.90 for 10,000 one-time, $76 for 100,000 and $680 for a million, with no subscription and credits that never expire.',
+      q: 'Is Findymail good for email verification?',
+      a: 'Yes. Findymail verifies every email it finds and promises a bounce rate under 5%. Starter carries 5,000 verifier credits a month, so large lists need an Enterprise plan or another verifier.',
     },
     {
-      q: 'Can I try Giggal.ai before switching?',
-      a: 'Yes. 1,000 free credits, no card, usable on a bulk upload. Run a list Findymail has already verified and compare the catch-all rows directly.',
+      q: 'Can Giggal.ai find emails like Findymail?',
+      a: 'No. Giggal.ai only verifies. Find the emails first, then run the list through Giggal.ai before you send.',
+    },
+    {
+      q: 'Do Findymail credits expire?',
+      a: 'Unused credits roll over month to month, up to twice your monthly allowance. Giggal.ai credits never expire.',
     },
   ],
 }

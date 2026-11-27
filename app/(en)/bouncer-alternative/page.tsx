@@ -64,7 +64,7 @@ const faqs: FaqItem[] = [
 ]
 
 const sectionTitle = 'text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight'
-const proseP = 'text-slate-600 leading-relaxed text-sm md:text-base font-medium'
+const proseP = 'text-slate-600 leading-relaxed text-sm md:text-base font-medium max-w-4xl'
 
 export default function BouncerAlternativePage() {
   return (
@@ -81,8 +81,8 @@ export default function BouncerAlternativePage() {
       <Navbar />
 
       {/* ── HERO ─────────────────────────────────────────────── */}
-      <section className="max-w-3xl mx-auto px-6 pt-28 md:pt-32 pb-12 text-center space-y-6">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900">
+      <section className="max-w-6xl mx-auto px-6 pt-28 md:pt-32 pb-12 text-center space-y-6">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900 max-w-5xl mx-auto">
           A{' '}
           <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">
             Bouncer alternative
@@ -114,7 +114,7 @@ export default function BouncerAlternativePage() {
       </section>
 
       {/* ── BOTTOM LINE ──────────────────────────────────────── */}
-      <section className="max-w-3xl mx-auto px-6 pb-16">
+      <section className="max-w-6xl mx-auto px-6 pb-16">
         <Bluf
           points={[
             { k: 'Price', v: '$60 at 10k against our $9.90, and $2,000 vs $680 at a million.' },
@@ -126,7 +126,7 @@ export default function BouncerAlternativePage() {
       </section>
 
       {/* ── CATCH-ALL + SEG ──────────────────────────────────── */}
-      <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Where Giggal.ai and Bouncer differ on catch-all</h2>
         <p className={proseP}>
           Bouncer resolves catch-all with its Deep Catch-All Verification on Google and Microsoft
@@ -139,7 +139,7 @@ export default function BouncerAlternativePage() {
       </section>
 
       {/* ── PRICING ──────────────────────────────────────────── */}
-      <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Bouncer pricing vs Giggal.ai</h2>
         <p className={proseP}>
           Bouncer charges $60 at 10,000, $400 at 100,000 and $2,000 at a million. Giggal.ai is $9.90,
@@ -150,13 +150,13 @@ export default function BouncerAlternativePage() {
       </section>
 
       {/* ── FEATURE TABLE ────────────────────────────────────── */}
-      <section className="cv-section max-w-4xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Bouncer vs Giggal.ai</h2>
         <ComparisonTable competitor={competitor} />
       </section>
 
       {/* ── TEST IT ──────────────────────────────────────────── */}
-      <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Try it on your own list</h2>
         <ol className="space-y-3">
           {[
@@ -175,7 +175,7 @@ export default function BouncerAlternativePage() {
       </section>
 
       {/* ── HEAD-TO-HEAD ─────────────────────────────────────── */}
-      <HeadToHeadComparisons slug="bouncer" />
+      <HeadToHeadComparisons slug="bouncer" wide />
 
       {/* ── FAQ ──────────────────────────────────────────────── */}
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-10">
@@ -187,7 +187,7 @@ export default function BouncerAlternativePage() {
 
       <AltCtaBand headline="Same catch-all result, a sixth of the price" />
 
-      <RelatedLinks />
+      <RelatedLinks wide />
 
       <Footer />
     </main>

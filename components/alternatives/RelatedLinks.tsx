@@ -11,13 +11,13 @@ const LINKS = [
   { href: '/pricing', anchor: 'pricing and credits' },
 ]
 
-export default function RelatedLinks() {
+export default function RelatedLinks({ wide = false }: { wide?: boolean }) {
   return (
-    <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
+    <section className={`cv-section ${wide ? 'max-w-6xl' : 'max-w-3xl'} mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6`}>
       <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
         Keep reading
       </h2>
-      <ul className="grid sm:grid-cols-2 gap-3">
+      <ul className={`grid sm:grid-cols-2 ${wide ? 'lg:grid-cols-4' : ''} gap-3`}>
         {LINKS.map((l) => (
           <li key={l.href}>
             <Link

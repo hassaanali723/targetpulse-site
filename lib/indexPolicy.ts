@@ -76,13 +76,12 @@ export function isZapierIndexed(slug: string): boolean {
   return ZAPIER_INDEXED.has(slug)
 }
 
-// C7 tier C: 11 alternative pages with zero brand demand. Live, linked from
-// /alternatives, noindex. (The Search Console pull protected none of them:
-// the highest was 21 impressions.)
-export const ALT_NOINDEX: ReadonlySet<string> = new Set([
-  'myemailverifier', 'scrubby', 'quickemailverification', 'mailfloss', 'bounceless',
-  'findymail', 'leadmagic', 'allegrow', 'listmint', 'anymailfinder', 'no2bounce',
-])
+// C7 tier C used to noindex 11 alternative pages (2026-09-17). On 2026-11-27
+// the owner reversed it: Ahrefs shows real brand demand (leadmagic 800,
+// anymailfinder 350, listmint 150, allegrow 150, findymail pricing 150), and
+// all 11 pages were rewritten with their own content. The set stays so a page
+// can be noindexed again with a one-line change.
+export const ALT_NOINDEX: ReadonlySet<string> = new Set<string>([])
 
 export function isAltIndexed(slug: string): boolean {
   return !ALT_NOINDEX.has(slug)

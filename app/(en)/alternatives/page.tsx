@@ -146,13 +146,13 @@ const BLURBS: Record<string, string> = {
   briteverify:
     'An enterprise verifier from Validity that flags accept-all as risky, with published bundles around $80 per 10,000. We publish $9.90 at 10k and resolve catch-all.',
   scrubby:
-    'Validates catch-all and SEG too, but at $80 per 10k and 3 credits per catch-all. We are $9.90 and 1 credit flat, with 1,000 free bulk credits.',
+    'Checks catch-all and SEG domains too, at $80 per 10,000. Its Deep Verification costs 3 credits and takes up to 72 hours. We are $9.90 per 10,000, 1 credit flat.',
   quickemailverification:
     '$60 per 10k, and returns catch-all as a status without confirming it. We resolve it, at $9.90.',
   mailfloss:
     'A subscription tool that auto-cleans your ESP list daily but flags catch-all rather than resolving it. We resolve it, pay-as-you-go at $9.90.',
   bounceless:
-    'Now resolves catch-all too, but bills 5 credits each against our 1 credit flat, at $29 per 10k. We add SEG and 1,000 free bulk credits.',
+    'Includes catch-all evidence in its 1-credit check, at $29 per 10,000. We return a result behind 15 named secure email gateways, at $9.90 per 10,000.',
   hunter:
     'A finder-first platform where verification is bundled into monthly plans. We are a dedicated verifier that resolves catch-all, at a published $9.90 per 10,000.',
   snovio:
@@ -160,23 +160,23 @@ const BLURBS: Record<string, string> = {
   apollo:
     'A sales platform where verification is one feature; it claims 91% on catch-all. We are a dedicated verifier that resolves catch-all and SEG, pay-as-you-go.',
   findymail:
-    'Verifies catch-all and guarantees a bounce rate under 5%, but it is a finder first and sells one $99 monthly plan with 5,000 verifier credits. Nothing above that is priced publicly.',
+    'Verifies catch-all and guarantees a bounce rate under 5%, but it is a finder first. Its only plan with a credit count is $99 a month for 5,000 verifier credits.',
   leadmagic:
-    'Resolves catch-all and publishes its own benchmark on it, which is more than most vendors do. It is an enrichment subscription though: 10,000 a month means the $249 Growth plan, against $9.90 one-time here.',
+    'Resolves catch-all and publishes its own benchmark on it. It is an enrichment subscription: 10,000 validations a month needs the $99 Essential plan, against $9.90 one-time here.',
   allegrow:
     'The closest positioning to ours: catch-all resolved to valid or invalid, gateways named, and a 99% claim against our 98.5%. It is priced as a $99 monthly subscription with $8 per 1,000 add-ons, and it does sender reputation work we do not.',
   listmint:
-    'Returns catch_all_valid and catch_all_invalid as explicit result codes, which is genuinely useful. It meters catch-all from a separate, smaller credit pool, and its prices render in the browser so we could not verify them.',
+    'Checks catch-all addresses by hand, from a separate and smaller credit pool. Starter is $99 a month for 20,000 standard and 5,000 catch-all credits.',
   anymailfinder:
-    'Verifies catch-all rather than skipping it, and claims 98.9% accuracy at 86.4% coverage. Monthly subscription at $199 for 10,000 against our $9.90 one-time, and it finds addresses, which we do not.',
+    'An email finder that also verifies catch-all, at 0.2 credits per check. 10,000 checks a month needs the $89 plan, against our $9.90 one-time. It finds addresses, which we do not.',
   no2bounce:
-    'Catch-all, named gateways and credits that never expire, the same shape as us, at $17 per 10,000 against our $9.90. Giggal.ai is cheaper across the board.',
+    'Catch-all checks and credits that never expire, the same shape as us, at $20 per 10,000 against our $9.90.',
   instantly:
     'A sending platform where verification is one feature billed at 0.25 credit per lead, so 10,000 a month needs the $197 plan. It sends the campaign too, which we do not.',
 }
 
 const sectionTitle = 'text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight'
-const proseP = 'text-slate-600 leading-relaxed text-sm md:text-base font-medium'
+const proseP = 'text-slate-600 leading-relaxed text-sm md:text-base font-medium max-w-4xl'
 
 // Each vendor's smallest published package (count + price). Subscription and
 // per-seat platforms have no one-time package, shown as "Per plan".
@@ -314,8 +314,8 @@ export default function AlternativesHubPage() {
       <Navbar />
 
       {/* ── HERO ─────────────────────────────────────────────── */}
-      <section className="max-w-3xl mx-auto px-6 pt-28 md:pt-32 pb-14 text-center space-y-6">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900">
+      <section className="max-w-6xl mx-auto px-6 pt-28 md:pt-32 pb-14 text-center space-y-6">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900 max-w-5xl mx-auto">
           Compare {TOOL_COUNT}{' '}
           <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">
             email verification tools
@@ -344,7 +344,7 @@ export default function AlternativesHubPage() {
       </section>
 
       {/* ── METHOD ───────────────────────────────────────────── */}
-      <section className="cv-section max-w-3xl mx-auto px-6 pb-14">
+      <section className="cv-section max-w-6xl mx-auto px-6 pb-14">
         <div className="rounded-2xl border-2 border-slate-200 bg-white p-6 md:p-7 space-y-4 card-vivid-shadow">
           <h2 className="text-lg font-black text-slate-900">How this list is ordered</h2>
           <ol className={`list-decimal pl-5 space-y-2 ${proseP}`}>
@@ -476,7 +476,7 @@ export default function AlternativesHubPage() {
       </section>
 
       {/* ── THE RANKED LIST ──────────────────────────────────── */}
-      <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-8">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-8">
         <h2 className={sectionTitle}>The {TOOL_COUNT} tools, in order</h2>
 
         <ol className="space-y-8">
@@ -544,7 +544,7 @@ export default function AlternativesHubPage() {
       </section>
 
       {/* ── WHAT SEPARATES VERIFIERS ─────────────────────────── */}
-      <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Why most email verifiers stop at catch-all</h2>
         <div className={`space-y-5 ${proseP}`}>
           <p>

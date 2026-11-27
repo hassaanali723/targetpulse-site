@@ -65,7 +65,7 @@ const faqs: FaqItem[] = [
 ]
 
 const sectionTitle = 'text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight'
-const proseP = 'text-slate-600 leading-relaxed text-sm md:text-base font-medium'
+const proseP = 'text-slate-600 leading-relaxed text-sm md:text-base font-medium max-w-4xl'
 
 export default function MillionVerifierAlternativePage() {
   return (
@@ -82,8 +82,8 @@ export default function MillionVerifierAlternativePage() {
       <Navbar />
 
       {/* ── HERO ─────────────────────────────────────────────── */}
-      <section className="max-w-3xl mx-auto px-6 pt-28 md:pt-32 pb-12 text-center space-y-6">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900">
+      <section className="max-w-6xl mx-auto px-6 pt-28 md:pt-32 pb-12 text-center space-y-6">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900 max-w-5xl mx-auto">
           A{' '}
           <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">
             MillionVerifier alternative
@@ -114,7 +114,7 @@ export default function MillionVerifierAlternativePage() {
       </section>
 
       {/* ── BOTTOM LINE ──────────────────────────────────────── */}
-      <section className="max-w-3xl mx-auto px-6 pb-16">
+      <section className="max-w-6xl mx-auto px-6 pb-16">
         <Bluf
           points={[
             { k: 'Catch-all', v: 'We confirm it, valid or invalid. MillionVerifier marks most Risky (5% resolved, the lowest in the LeadMagic test).' },
@@ -126,7 +126,7 @@ export default function MillionVerifierAlternativePage() {
       </section>
 
       {/* ── CATCH-ALL ────────────────────────────────────────── */}
-      <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>How Giggal.ai verifies catch-all addresses</h2>
         <p className={proseP}>
           MillionVerifier is fast on ordinary domains. On a catch-all domain it marks the address
@@ -138,7 +138,7 @@ export default function MillionVerifierAlternativePage() {
       </section>
 
       {/* ── COST PER USABLE CONTACT ──────────────────────────── */}
-      <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Per credit vs per usable contact</h2>
         <p className={proseP}>
           Say a list is 30% catch-all. Run it through a tool that marks catch-all Risky and a third of
@@ -154,13 +154,13 @@ export default function MillionVerifierAlternativePage() {
       </section>
 
       {/* ── FEATURE TABLE ────────────────────────────────────── */}
-      <section className="cv-section max-w-4xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>MillionVerifier vs Giggal.ai</h2>
         <ComparisonTable competitor={competitor} />
       </section>
 
       {/* ── TEST IT ──────────────────────────────────────────── */}
-      <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Try it on your own list</h2>
         <ol className="space-y-3">
           {[
@@ -179,7 +179,7 @@ export default function MillionVerifierAlternativePage() {
       </section>
 
       {/* ── HEAD-TO-HEAD ─────────────────────────────────────── */}
-      <HeadToHeadComparisons slug="millionverifier" />
+      <HeadToHeadComparisons slug="millionverifier" wide />
 
       {/* ── FAQ ──────────────────────────────────────────────── */}
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-10">
@@ -191,7 +191,7 @@ export default function MillionVerifierAlternativePage() {
 
       <AltCtaBand headline="Measure usable contacts, not just credits" />
 
-      <RelatedLinks />
+      <RelatedLinks wide />
 
       <Footer />
     </main>

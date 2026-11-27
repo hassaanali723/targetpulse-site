@@ -1,48 +1,81 @@
 import AltPageScaffold, { altMetadata, type AltPageConfig } from '@/components/alternatives/AltPageScaffold'
 
+// Rewritten 2026-11-27 and taken out of noindex. No keyword data yet (not in
+// the Ahrefs export). Prepaid prices read in Chrome from mailfloss.com/pricing
+// the same day.
 const cfg: AltPageConfig = {
   slug: 'mailfloss',
-  metaTitle: 'Mailfloss Alternative | Giggal.ai',
-  ogTitle: 'A Mailfloss Alternative That Resolves Catch-All',
-  desc: 'Mailfloss auto-cleans your ESP list but flags catch-all rather than resolving it, and its prepaid is $40 per 10,000. Giggal.ai resolves catch-all at $9.90. 1,000 free credits, no card.',
+  metaTitle: 'Mailfloss Alternative: Pricing and Catch-All | Giggal.ai',
+  ogTitle: 'Mailfloss alternative that checks catch-all emails',
+  desc: 'Mailfloss cleans your email platform list every day but flags catch-all emails. Giggal.ai returns a result on them at $9.90 per 10,000 credits.',
   h1Article: 'A',
-  h1Tail: 'that resolves catch-all',
+  h1Tail: 'for one-time list cleaning',
   heroP:
-    'Mailfloss quietly cleans your email platform on a subscription, which is convenient, but on catch-all domains it flags rather than resolving. Giggal.ai returns a real result, pay-as-you-go, at $9.90 per 10,000 against its $40 prepaid.',
+    'Mailfloss connects to your email marketing platform and cleans the list every day. It flags catch-all addresses but does not confirm them. Giggal.ai verifies lists you upload and returns a result on catch-all addresses, at $9.90 per 10,000 emails.',
   bluf: [
-    { k: 'Catch-all', v: 'We resolve it, valid or invalid. Mailfloss flags it and stops.' },
-    { k: 'Price', v: 'Mailfloss prepaid is $40 at 10k against our $9.90; both publish tiers.' },
-    { k: 'Free tier', v: 'Mailfloss has a 7-day trial; we give 1,000 bulk credits, no card.' },
-    { k: 'Try it', v: '1,000 free credits on a bulk list, no card.' },
+    { k: 'How it works', v: 'Mailfloss cleans your list inside your email platform. Giggal.ai checks lists you upload or send by API.' },
+    { k: 'Catch-all', v: 'Mailfloss flags catch-all addresses. Giggal.ai returns a result on them.' },
+    { k: 'Price', v: 'Mailfloss prepaid credits cost $40 per 10,000. Giggal.ai costs $9.90.' },
+    { k: 'Free use', v: 'Mailfloss gives 500 free checks a month. Giggal.ai gives 1,000 once, with no card.' },
   ],
-  catchAllHeading: 'How Giggal.ai verifies catch-all addresses',
+  about: {
+    heading: 'What is Mailfloss?',
+    paragraphs: [
+      'Mailfloss is an email list cleaning service. It connects to 41 email platforms, such as Mailchimp, Klaviyo, HubSpot and ActiveCampaign. Then it removes invalid addresses from your list every day.',
+      'It also fixes common typos in email addresses. It has a real-time API, webhooks and a form widget.',
+      'Mailfloss sells monthly subscriptions and prepaid credits. Prepaid credits never expire.',
+    ],
+  },
+  reasons: {
+    heading: 'Why people look for a Mailfloss alternative',
+    items: [
+      { k: 'Catch-all', v: 'Mailfloss flags catch-all addresses. It does not confirm whether the mailbox exists.' },
+      { k: 'Card for trial', v: 'The 7-day trial on subscriptions needs a credit card.' },
+      { k: 'Platform limits', v: 'Lite connects to 1 email platform, and Business connects to 10.' },
+      { k: 'Price', v: 'Prepaid credits cost $40 per 10,000 and $300 per 100,000.' },
+    ],
+  },
+  catchAllHeading: 'How Mailfloss and Giggal.ai treat catch-all emails',
   catchAllProse:
-    'Mailfloss is built to run in the background and clean your list automatically, and for that it does a standard verification that flags catch-all without confirming the mailbox. We route those addresses down a separate path and return one of four results, so the real mailboxes come back deliverable rather than flagged.',
+    'Mailfloss flags catch-all addresses and leaves them for you to decide. Giggal.ai checks them further and returns one of four results, at 1 credit each. It also checks addresses behind 15 named secure email gateways.',
   pricingHeading: 'Mailfloss pricing vs Giggal.ai',
   pricingProse:
-    'Mailfloss sells one-time prepaid credits at $40 for 10,000, $300 for 100,000 and $1,200 for a million, alongside a monthly auto-clean subscription from $29. Giggal.ai is $9.90, $76 and $680 at those volumes, and it resolves catch-all where Mailfloss flags it. Prepaid credits never expire on either tool.',
-  testStep3: 'Look at the rows Mailfloss flagged catch-all. Count how many come back real.',
-  ctaHeadline: 'Resolve catch-all instead of only flagging it',
+    'Mailfloss subscriptions are Lite at $29 a month for 10,000 credits, Business at $59 for 25,000 and Pro at $209 for 125,000. Prepaid credits cost $8 for 1,000, $40 for 10,000, $300 for 100,000 and $1,200 for a million.',
+  pricingExtra: [
+    'Every Mailfloss account also gets 500 free verifications a month. Giggal.ai sells 10,000 credits for $9.90 and a million for $680, with no subscription.',
+  ],
+  strengths: {
+    heading: 'Where Mailfloss is a good fit',
+    intro: 'Mailfloss does some things Giggal.ai does not:',
+  },
+  others: {
+    heading: 'Other Mailfloss alternatives',
+    intro: 'These verifiers also clean marketing lists. Prices are from each vendor’s site on 27 November 2026.',
+    items: [
+      { name: 'QuickEmailVerification', text: 'Integrates with more than 50 marketing tools. 10,000 persistent credits cost $60.' },
+      { name: 'Bounceless', text: '10,000 credits cost $29, with 1,000 free credits a month on a work email.' },
+      { name: 'no2bounce', text: 'Integrates with HubSpot, Klaviyo and Zoho. 10,000 credits cost $20 and never expire.' },
+    ],
+  },
+  testHeading: 'Test Giggal.ai on an export from your email platform',
+  testStep3: 'Compare the catch-all rows with what Mailfloss flagged.',
+  ctaHeadline: 'Get a result on catch-all addresses, not a flag',
   faqs: [
     {
-      q: 'Does Giggal.ai resolve catch-all where Mailfloss flags it?',
-      a: 'Yes. Mailfloss runs a standard verification and flags catch-all without confirming the mailbox. Giggal.ai returns a real deliverable or undeliverable result on those addresses, at a flat 1 credit per email.',
+      q: 'How much does Mailfloss cost?',
+      a: 'Subscriptions start at $29 a month for 10,000 credits. Prepaid credits cost $40 for 10,000 and $1,200 for a million, and they never expire.',
     },
     {
-      q: 'How does the pricing compare?',
-      a: 'Mailfloss prepaid credits are $40 at 10,000, $300 at 100,000 and $1,200 at a million; its subscription starts at $29 a month. Giggal.ai is $9.90, $76 and $680 pay-as-you-go, and prepaid credits never expire on either.',
+      q: 'Does Mailfloss have a free plan?',
+      a: 'Yes. Every account gets 500 free verifications a month. Subscriptions also have a 7-day trial, which needs a card.',
     },
     {
-      q: 'What is Mailfloss better at?',
-      a: 'Mailfloss connects directly to about 40 email platforms and cleans your list automatically every day. If hands-off, always-on cleaning inside your ESP matters more than resolving catch-all, it is a good fit.',
+      q: 'Does Mailfloss verify catch-all emails?',
+      a: 'It flags them. It does not confirm whether the mailbox exists. Giggal.ai returns a result on catch-all addresses at 1 credit each.',
     },
     {
-      q: 'Do Giggal.ai credits expire?',
-      a: 'No. Giggal.ai credits never expire, and Mailfloss prepaid credits never expire either. Its subscription credits reset each month.',
-    },
-    {
-      q: 'Can I try Giggal.ai before switching?',
-      a: 'Yes. 1,000 free credits, no card, on a bulk upload. Run a list Mailfloss flagged catch-all and see how many resolve to a real result.',
+      q: 'Does Giggal.ai clean my email platform list like Mailfloss?',
+      a: 'No. Giggal.ai works with uploads, an API, Zapier, n8n and HubSpot. It does not run a daily cleaning job inside your email platform.',
     },
   ],
 }

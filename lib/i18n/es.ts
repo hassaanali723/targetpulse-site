@@ -108,7 +108,7 @@ export const cta = {
   headline: 'Valida una lista entera y compara los resultados',
   offer: '1.000 créditos gratis, sin tarjeta.',
   button: 'Empieza a validar gratis',
-  trust: ['Prueba gratuita', 'Los créditos no caducan', 'Reembolso de los Desconocidos'],
+  trust: ['Prueba gratuita', 'Los créditos no caducan', 'Reembolso de los resultados desconocidos'],
 }
 
 export const consoleStrings = {

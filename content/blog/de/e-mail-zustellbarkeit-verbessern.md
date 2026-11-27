@@ -53,7 +53,7 @@ v=spf1 include:_spf.google.com include:sendgrid.net ip4:198.51.100.24 ~all
 ```
 
 Zwei typische Fehler führen zu Problemen:
-- **Das 10-Lookup-Limit**: Die Spezifikation RFC 7208 begrenzt die DNS-Mechanismen auf maximal 10 Abfragen. Wer Google Workspace, HubSpot, Zendesk und SendGrid in einem Eintrag bündelt, überschreitet das Limit und erzeugt einen `PermError`. Prüfen Sie Ihre Konfiguration mit unserem [SPF-Checker](/de/spf-record-pruefen).
+- **Das 10-Lookup-Limit**: Die Spezifikation RFC 7208 begrenzt die DNS-Mechanismen auf maximal 10 Abfragen. Wer Google Workspace, HubSpot, Zendesk und SendGrid in einem Eintrag bündelt, überschreitet das Limit und erzeugt einen `PermError`. Prüfen Sie Ihre Konfiguration mit unserem [SPF-Checker](/de/spf-generator).
 - **Mehrfache SPF-Einträge**: Veröffentlichen Sie niemals zwei separate TXT-Einträge, die mit `v=spf1` beginnen. Mehrere Einträge machen die Validierung ungültig. Fassen Sie alle Quellen in einem einzigen Record zusammen.
 
 ### 2. DomainKeys Identified Mail (DKIM)
@@ -86,7 +86,7 @@ Empfohlene Vorgehensweise:
 Die Absender-Reputation bemisst sich an der Datenqualität Ihrer Empfängerliste. Wer regelmäßig an tote Postfächer sendet, wird von Filtern als Spammer eingestuft.
 
 ### Bounce-Rate unter 2 % halten
-Eine Hard-Bounce-Rate von über 2 % signalisiert unbereinigte oder eingekaufte Adressbestände. Ab 5 % drohen temporäre Sperren (Greylisting) und IP-Drosselungen. Berechnen Sie Ihre Werte mit unserem [Bounce-Rate-Rechner](/de/bounce-rate-rechner).
+Eine Hard-Bounce-Rate von über 2 % signalisiert unbereinigte oder eingekaufte Adressbestände. Ab 5 % drohen temporäre Sperren (Greylisting) und IP-Drosselungen. Berechnen Sie Ihre Werte mit unserem [Bounce-Rate-Rechner](/de/bounce-rate-berechnen).
 
 ### Wegwerf- und temporäre Adressen filtern
 Viele Nutzer verwenden Einweg-E-Mail-Dienste, um Downloads oder Testzugänge zu nutzen. Diese Postfächer werden nach wenigen Stunden gelöscht und erzeugen bei Folge-Mails permanente Bounces. Schließen Sie solche Domains mit unserem [Wegwerf-E-Mail-Prüfer](/de/wegwerf-e-mail-pruefen) aus.
@@ -113,7 +113,7 @@ Neue Domains besitzen keinen Reputationsverlauf. E-Mail-Filter bewerten ein plö
 - **Woche 3**: 50 bis 75 E-Mails pro Tag.
 - **Woche 4**: Bis zu 100 E-Mails pro Tag bei gleichbleibendem Rhythmus.
 
-Detaillierte Empfehlungen finden Sie in unserem Leitfaden zur [Aufwärmdauer einer E-Mail-Domain](/de/blog/e-mail-domain-aufwaermen-dauer).
+Detaillierte Empfehlungen finden Sie in unserem Leitfaden zur [Aufwärmdauer einer E-Mail-Domain](/de/blog/e-mail-domain-aufwaermen).
 
 ---
 

@@ -101,21 +101,21 @@ const ALT_DATES: Record<string, string> = {
   clearout: '2026-08-12',
   kickbox: '2026-08-12',
   emaillistverify: '2026-08-12',
-  myemailverifier: '2026-08-12',
+  myemailverifier: '2026-11-27',
   briteverify: '2026-08-12',
-  scrubby: '2026-09-13',
-  quickemailverification: '2026-08-12',
-  mailfloss: '2026-08-12',
-  bounceless: '2026-08-12',
+  scrubby: '2026-11-27',
+  quickemailverification: '2026-11-27',
+  mailfloss: '2026-11-27',
+  bounceless: '2026-11-27',
   hunter: '2026-08-12',
   snovio: '2026-08-12',
   apollo: '2026-08-12',
-  findymail: '2026-08-21',
-  leadmagic: '2026-08-21',
-  allegrow: '2026-08-21',
-  listmint: '2026-08-21',
-  anymailfinder: '2026-08-21',
-  no2bounce: '2026-08-21',
+  findymail: '2026-11-27',
+  leadmagic: '2026-11-27',
+  allegrow: '2026-11-27',
+  listmint: '2026-11-27',
+  anymailfinder: '2026-11-27',
+  no2bounce: '2026-11-27',
   instantly: '2026-08-21',
 }
 
@@ -271,6 +271,16 @@ const competitorPageUrls = new Set(
     .flatMap(([, c]) => Object.values(c as Cluster)),
 )
 
+// The localized brand pages (lib/i18n/altBrands) ship one language at a
+// time; each URL carries its own ship date.
+const ALT_BRAND_L10N_SHIPPED: Record<string, string> = Object.fromEntries(
+  ['leadmagic', 'anymailfinder', 'findymail', 'listmint', 'allegrow', 'no2bounce', 'quickemailverification', 'myemailverifier', 'scrubby', 'mailfloss', 'bounceless'].flatMap((slug) =>
+    Object.entries((CLUSTERS as Record<string, Cluster>)[`alt${slug[0].toUpperCase()}${slug.slice(1)}`])
+      .filter(([loc]) => loc !== 'en')
+      .map(([, path]) => [path, '2026-11-27']),
+  ),
+)
+
 // The disposable email checker and providers directory shipped in all
 // languages on this date.
 const DISPOSABLE_PROVIDERS_SHIPPED = '2026-10-02'
@@ -343,6 +353,8 @@ function localeEntries(locale: 'it' | 'de' | 'es' | 'pt-br' | 'fr' | 'nl' | 'pl'
             ? newestTerm
             : path === CLUSTERS.home[locale]
             ? HOMES_REDESIGNED
+            : ALT_BRAND_L10N_SHIPPED[path]
+            ? ALT_BRAND_L10N_SHIPPED[path]
             : competitorPageUrls.has(path)
               ? COMPETITOR_PAGES_SHIPPED
               : disposableProvidersUrls.has(path)

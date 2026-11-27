@@ -3,7 +3,7 @@ import React from 'react'
 // Brand names keep English casing inside CSS `uppercase` labels. With
 // <html lang="tr">, the browser uppercases i to İ (Zapier becomes ZAPİER);
 // marking the brand lang="en" keeps it ZAPIER. Other languages render the same.
-const BRANDS = /(Giggal\.ai|Zapier|Snov\.io|HubSpot|Mailchimp|Gmail|Outlook|Claude|ChatGPT|ZeroBounce|NeverBounce)/
+const BRANDS = /(Giggal\.ai|Zapier|Snov\.io|HubSpot|Mailchimp|Gmail|Outlook|Claude|ChatGPT|ZeroBounce|NeverBounce|LeadMagic|Anymail Finder|Anymailfinder|Findymail|Listmint|Allegrow|no2bounce|QuickEmailVerification|MyEmailVerifier|Scrubby|Mailfloss|Bounceless|Proofpoint|Mimecast)/
 
 export default function BrandText({ text }: { text: string }) {
   const parts = text.split(BRANDS)

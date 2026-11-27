@@ -15,7 +15,7 @@ import { isAltIndexed, isCompareIndexed } from '@/lib/indexPolicy'
 // drives /compare and the sitemap, so a new competitor shows up here with no
 // edit to this file.
 
-export default function HeadToHeadComparisons({ slug }: { slug: string }) {
+export default function HeadToHeadComparisons({ slug, wide = false }: { slug: string; wide?: boolean }) {
   const self = getCompetitor(slug)
 
   // An indexed brand page links only the indexed pairs (C7, Sprint 0 item 4):
@@ -35,7 +35,7 @@ export default function HeadToHeadComparisons({ slug }: { slug: string }) {
   if (!links.length) return null
 
   return (
-    <section className="cv-section max-w-4xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
+    <section className={`cv-section ${wide ? 'max-w-6xl' : 'max-w-4xl'} mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6`}>
       <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
         {self.name} head-to-head comparisons
       </h2>

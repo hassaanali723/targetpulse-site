@@ -11,6 +11,17 @@ import {
   type PricingTier,
 } from '@/lib/competitorPricing'
 import { getStrings, type L10nLocale } from '@/lib/i18n/strings'
+import type { AltFacts, AltWideUi } from '@/lib/i18n/altBrands/types'
+import * as brands_it from '@/lib/i18n/altBrands/it/facts'
+import * as brands_es from '@/lib/i18n/altBrands/es/facts'
+import * as brands_ptbr from '@/lib/i18n/altBrands/pt-br/facts'
+import * as brands_fr from '@/lib/i18n/altBrands/fr/facts'
+import * as brands_nl from '@/lib/i18n/altBrands/nl/facts'
+import * as brands_pl from '@/lib/i18n/altBrands/pl/facts'
+import * as brands_id from '@/lib/i18n/altBrands/id/facts'
+import * as brands_ja from '@/lib/i18n/altBrands/ja/facts'
+import * as brands_ko from '@/lib/i18n/altBrands/ko/facts'
+import * as brands_tr from '@/lib/i18n/altBrands/tr/facts'
 
 const NB = ' '
 
@@ -71,6 +82,9 @@ export interface AltUi {
   toolLead: string // sentence start before the tool-page link (related[0])
 }
 
+/** French "de" with elision before a vowel or h: "d'Allegrow", "de LeadMagic". */
+const deFr = (n: string) => (/^[aeiouyàâéèêh]/i.test(n) ? `d'${n}` : `de ${n}`)
+
 const LM_DATE: Record<L10nLocale, string> = {
   it: '25 febbraio 2026',
   de: '25. Februar 2026',
@@ -118,7 +132,7 @@ export const ALT_UI: Record<L10nLocale, AltUi> = {
     bench: {
       resolved: 'degli indirizzi catch-all risolti',
       accuracy: 'precisione complessiva misurata',
-      source: (n) => `I dati di ${n} vengono da un test indipendente condotto da ${LEADMAGIC_BENCHMARK.publisher}, pubblicato il ${LM_DATE.it}, su 10.000 email B2B reali, il 28% delle quali su domini catch-all.`,
+      source: (n) => `I dati di ${n} vengono da un test condotto da ${LEADMAGIC_BENCHMARK.publisher}, pubblicato il ${LM_DATE.it}, su 10.000 email B2B reali, il 28% delle quali su domini catch-all.`,
       caveat: 'Questo test è stato pubblicato da LeadMagic, che vende un verificatore email concorrente e si è classificato primo nei propri risultati. Leggilo come un test di un fornitore, non come uno studio neutrale. Giggal.ai non era tra gli strumenti misurati.',
     },
     heroCta: 'Inizia gratis con 1.000 crediti',
@@ -146,7 +160,7 @@ export const ALT_UI: Record<L10nLocale, AltUi> = {
     perMonth: '/Monat',
     est: 'geschätzt',
     estimateNote: (n) => `Schätzung aus Drittquellen, nicht auf der Preisseite von ${n} bestätigt.`,
-    checked: (n, d) => [`Preise von ${n} geprüft am ${d}. Preise können sich geändert haben, siehe die `, `Preisseite von ${n}`, '.'],
+    checked: (n, d) => [`Preise von ${n} am ${d} geprüft. Preise können sich geändert haben, siehe die `, `Preisseite von ${n}`, '.'],
     yes: 'Ja',
     no: 'Nein',
     partial: 'Teilweise',
@@ -166,28 +180,28 @@ export const ALT_UI: Record<L10nLocale, AltUi> = {
       ['Zustellbar', 'Das Postfach existiert und nimmt Post an'],
       ['Unzustellbar', 'Das Postfach existiert nicht'],
       ['Riskant', 'Die Adresse existiert, birgt aber ein Zustellrisiko'],
-      ['Unbekannt', 'Wir konnten die Adresse nicht prüfen, und der Credit wird erstattet'],
+      ['Unbekannt', 'Die Adresse ließ sich nicht prüfen. Der Credit wird erstattet'],
     ],
     bench: {
       resolved: 'der Catch-all-Adressen aufgelöst',
       accuracy: 'gemessene Gesamtgenauigkeit',
-      source: (n) => `Die Zahlen für ${n} stammen aus einem unabhängigen Test von ${LEADMAGIC_BENCHMARK.publisher}, veröffentlicht am ${LM_DATE.de}, mit 10.000 echten B2B-E-Mails, davon 28${NB}% auf Catch-all-Domains.`,
+      source: (n) => `Die Zahlen für ${n} stammen aus einem Test von ${LEADMAGIC_BENCHMARK.publisher}, veröffentlicht am ${LM_DATE.de}, mit 10.000 echten B2B-E-Mails, davon 28${NB}% auf Catch-all-Domains.`,
       caveat: 'Dieser Test wurde von LeadMagic veröffentlicht, das selbst einen konkurrierenden E-Mail-Verifizierer verkauft und sich in den eigenen Ergebnissen auf Platz eins gesetzt hat. Lesen Sie ihn als Anbietertest, nicht als neutrale Studie. Giggal.ai gehörte nicht zu den getesteten Tools.',
     },
     heroCta: 'Kostenlos starten mit 1.000 Credits',
     compareAll: 'Alle Verifizierer vergleichen (Englisch)',
-    tryHeading: 'Testen Sie es an Ihrer eigenen Liste',
+    tryHeading: 'Testen Sie es mit Ihrer eigenen Liste',
     faqHeading: 'Häufige Fragen',
     keepReading: 'Weiterlesen',
     related: [
       { href: '/email-checker', anchor: 'E-Mail-Adresse prüfen' },
-      { href: '/alternatives', anchor: 'alle Verifizierer vergleichen' },
+      { href: '/alternatives', anchor: 'Alle Verifizierer vergleichen' },
       { href: '/catch-all-verification', anchor: 'Catch-all- und riskante E-Mails prüfen' },
-      { href: '/seg-email-verification', anchor: 'E-Mails hinter SEG-Gateways' },
+      { href: '/seg-email-verification', anchor: 'E-Mails hinter Secure Email Gateways' },
       { href: '/pricing', anchor: 'Preise und Credits' },
     ],
     h2hHeading: (n) => `${n} im direkten Vergleich`,
-    h2hProse: (n) => [`So schneidet ${n} gegen die Verifizierer ab, die wir am genauesten verfolgen, mit Giggal.ai auf jeder Seite als dritter Option. Das vollständige Raster steht auf der `, 'Vergleichsübersicht', ' (Englisch).'],
+    h2hProse: (n) => [`So schneidet ${n} im Vergleich mit den Verifizierern ab, die wir am genauesten verfolgen. Giggal.ai ist auf jeder Seite die dritte Option. Die vollständige Tabelle finden Sie in der `, 'Vergleichsübersicht', ' (Englisch).'],
     breadcrumbAlternatives: 'Alternativen',
     featureHeading: (n) => `${n} vs Giggal.ai`,
     toolLead: 'Eine einzelne Adresse testen Sie hier: ',
@@ -224,7 +238,7 @@ export const ALT_UI: Record<L10nLocale, AltUi> = {
     bench: {
       resolved: 'de las direcciones catch-all resueltas',
       accuracy: 'precisión global medida',
-      source: (n) => `Los datos de ${n} vienen de una prueba independiente realizada por ${LEADMAGIC_BENCHMARK.publisher}, publicada el ${LM_DATE.es}, con 10.000 correos B2B reales, el 28% de ellos en dominios catch-all.`,
+      source: (n) => `Los datos de ${n} vienen de una prueba realizada por ${LEADMAGIC_BENCHMARK.publisher}, publicada el ${LM_DATE.es}, con 10.000 correos B2B reales, el 28% de ellos en dominios catch-all.`,
       caveat: 'Esta prueba la publicó LeadMagic, que vende un verificador de correo competidor y se situó en primer lugar en sus propios resultados. Léela como una prueba de un proveedor, no como un estudio neutral. Giggal.ai no estaba entre las herramientas medidas.',
     },
     heroCta: 'Empieza gratis con 1.000 créditos',
@@ -277,7 +291,7 @@ export const ALT_UI: Record<L10nLocale, AltUi> = {
     bench: {
       resolved: 'dos endereços catch-all resolvidos',
       accuracy: 'precisão geral medida',
-      source: (n) => `Os dados do ${n} vêm de um teste independente feito pela ${LEADMAGIC_BENCHMARK.publisher}, publicado em ${LM_DATE['pt-br']}, com 10.000 e-mails B2B reais, 28% deles em domínios catch-all.`,
+      source: (n) => `Os dados do ${n} vêm de um teste feito pela ${LEADMAGIC_BENCHMARK.publisher}, publicado em ${LM_DATE['pt-br']}, com 10.000 e-mails B2B reais, 28% deles em domínios catch-all.`,
       caveat: 'Este teste foi publicado pela LeadMagic, que vende um verificador de e-mail concorrente e se colocou em primeiro lugar nos próprios resultados. Leia como um teste de fornecedor, não como um estudo neutro. A Giggal.ai não estava entre as ferramentas medidas.',
     },
     heroCta: 'Comece grátis com 1.000 créditos',
@@ -304,8 +318,8 @@ export const ALT_UI: Record<L10nLocale, AltUi> = {
     volume: 'Volume',
     perMonth: '/mois',
     est: 'est.',
-    estimateNote: (n) => `Estimation issue de sources tierces, non confirmée sur la page de tarifs de ${n}.`,
-    checked: (n, d) => [`Tarifs de ${n} vérifiés le ${d}. Les prix ont pu changer, voir la `, `page de tarifs de ${n}`, '.'],
+    estimateNote: (n) => `Estimation issue de sources tierces, non confirmée sur la page de tarifs ${deFr(n)}.`,
+    checked: (n, d) => [`Tarifs ${deFr(n)} vérifiés le ${d}. Les prix ont pu changer, voir la `, `page de tarifs ${deFr(n)}`, '.'],
     yes: 'Oui',
     no: 'Non',
     partial: 'Partiel',
@@ -330,7 +344,7 @@ export const ALT_UI: Record<L10nLocale, AltUi> = {
     bench: {
       resolved: 'des adresses catch-all résolues',
       accuracy: 'précision globale mesurée',
-      source: (n) => `Les chiffres de ${n} viennent d'un test indépendant réalisé par ${LEADMAGIC_BENCHMARK.publisher}, publié le ${LM_DATE.fr}, sur 10 000 vrais emails B2B, dont 28${NB}% sur des domaines catch-all.`,
+      source: (n) => `Les chiffres de ${n} viennent d'un test réalisé par ${LEADMAGIC_BENCHMARK.publisher}, publié le ${LM_DATE.fr}, sur 10 000 vrais emails B2B, dont 28${NB}% sur des domaines catch-all.`,
       caveat: "Ce test a été publié par LeadMagic, qui vend un vérificateur d'email concurrent et s'est classé premier dans ses propres résultats. Lisez-le comme un test d'éditeur, pas comme une étude neutre. Giggal.ai ne faisait pas partie des outils mesurés.",
     },
     heroCta: 'Commencer gratuitement avec 1 000 crédits',
@@ -383,7 +397,7 @@ export const ALT_UI: Record<L10nLocale, AltUi> = {
     bench: {
       resolved: 'van de catch-all-adressen opgelost',
       accuracy: 'gemeten totale nauwkeurigheid',
-      source: (n) => `De cijfers van ${n} komen uit een onafhankelijke test van ${LEADMAGIC_BENCHMARK.publisher}, gepubliceerd op ${LM_DATE.nl}, met 10.000 echte B2B-e-mailadressen, waarvan 28% op catch-all-domeinen.`,
+      source: (n) => `De cijfers van ${n} komen uit een test van ${LEADMAGIC_BENCHMARK.publisher}, gepubliceerd op ${LM_DATE.nl}, met 10.000 echte B2B-e-mailadressen, waarvan 28% op catch-all-domeinen.`,
       caveat: 'Deze test is gepubliceerd door LeadMagic, dat zelf een concurrerende tool voor e-mailverificatie verkoopt en in de eigen resultaten als eerste eindigde. Lees het als een test van een leverancier, niet als een neutraal onderzoek. Giggal.ai zat niet bij de gemeten tools.',
     },
     heroCta: 'Gratis beginnen met 1.000 credits',
@@ -419,7 +433,7 @@ export const ALT_UI: Record<L10nLocale, AltUi> = {
       price10k: 'Cena za 10 000 kredytów',
       catchAll: 'Weryfikacja catch-all',
       catchAllPricing: 'Koszt catch-all',
-      seg: 'Weryfikacja za SEG',
+      seg: 'Weryfikacja adresów za SEG',
       expiry: 'Ważność kredytów',
       free: 'Darmowy pakiet',
       chargesUnknown: 'Opłata za wyniki nieznane',
@@ -437,7 +451,7 @@ export const ALT_UI: Record<L10nLocale, AltUi> = {
     bench: {
       resolved: 'rozstrzygniętych adresów catch-all',
       accuracy: 'zmierzona dokładność ogólna',
-      source: (n) => `Dane ${n} pochodzą z niezależnego testu przeprowadzonego przez ${LEADMAGIC_BENCHMARK.publisher}, opublikowanego ${LM_DATE.pl}, na próbie 10 000 prawdziwych adresów e-mail B2B, z których 28% było w domenach catch-all.`,
+      source: (n) => `Dane ${n} pochodzą z testu przeprowadzonego przez ${LEADMAGIC_BENCHMARK.publisher}, opublikowanego ${LM_DATE.pl}, na próbie 10 000 prawdziwych adresów e-mail B2B, z których 28% było w domenach catch-all.`,
       caveat: 'Ten test opublikował LeadMagic, który sprzedaje konkurencyjny weryfikator e-mail i zajął pierwsze miejsce we własnych wynikach. Traktuj go jako test dostawcy, a nie neutralne badanie. Giggal.ai nie był wśród testowanych narzędzi.',
     },
     heroCta: 'Zacznij za darmo z 1000 kredytów',
@@ -491,7 +505,7 @@ export const ALT_UI: Record<L10nLocale, AltUi> = {
     bench: {
       resolved: 'alamat catch-all terselesaikan',
       accuracy: 'akurasi keseluruhan yang diukur',
-      source: (n) => `Angka ${n} berasal dari uji independen oleh ${LEADMAGIC_BENCHMARK.publisher}, yang dipublikasikan pada ${LM_DATE.id}, dengan 10.000 alamat email B2B asli, 28% di antaranya berada di domain catch-all.`,
+      source: (n) => `Angka ${n} berasal dari uji oleh ${LEADMAGIC_BENCHMARK.publisher}, yang dipublikasikan pada ${LM_DATE.id}, dengan 10.000 alamat email B2B asli, 28% di antaranya berada di domain catch-all.`,
       caveat: 'Uji ini dipublikasikan oleh LeadMagic, yang juga menjual alat verifikasi email pesaing dan menempati posisi pertama dalam hasilnya sendiri. Baca uji ini sebagai uji dari vendor, bukan sebagai studi yang netral. Giggal.ai tidak termasuk alat yang diuji.',
     },
     heroCta: 'Mulai gratis dengan 1.000 kredit',
@@ -545,7 +559,7 @@ export const ALT_UI: Record<L10nLocale, AltUi> = {
     bench: {
       resolved: 'キャッチオールドメインのアドレスで結果を出せた割合',
       accuracy: '測定された全体の正確性',
-      source: (n) => `${n}の数値は、${LEADMAGIC_BENCHMARK.publisher}が${LM_DATE.ja}に公開した独立テストによるものです。実在するB2Bのメールアドレス10,000件を使い、そのうち28%がキャッチオールドメインのアドレスでした。`,
+      source: (n) => `${n}の数値は、${LEADMAGIC_BENCHMARK.publisher}が${LM_DATE.ja}に公開したテストによるものです。実在するB2Bのメールアドレス10,000件を使い、そのうち28%がキャッチオールドメインのアドレスでした。`,
       caveat: 'このテストを公開したLeadMagicは、競合するメールアドレス検証ツールを販売しており、自社の結果で1位になっています。中立的な調査ではなく、ベンダーによるテストとしてお読みください。Giggal.aiはテストの対象に含まれていません。',
     },
     heroCta: '無料クレジット1,000件で始める',
@@ -601,7 +615,7 @@ export const ALT_UI: Record<L10nLocale, AltUi> = {
       accuracy: '측정된 전체 정확도',
       // LEADMAGIC_BENCHMARK.publisher is "LeadMagic" (ends in a consonant
       // sound), so the subject particle is 이.
-      source: (n) => `${n}의 수치는 ${LEADMAGIC_BENCHMARK.publisher}이 ${LM_DATE.ko}에 공개한 독립 테스트에서 나온 것입니다. 실제 B2B 이메일 10,000개를 사용했으며, 그중 28%는 캐치올 도메인 주소였습니다.`,
+      source: (n) => `${n}의 수치는 ${LEADMAGIC_BENCHMARK.publisher}이 ${LM_DATE.ko}에 공개한 테스트에서 나온 것입니다. 실제 B2B 이메일 10,000개를 사용했으며, 그중 28%는 캐치올 도메인 주소였습니다.`,
       caveat: '이 테스트를 공개한 LeadMagic은 경쟁 이메일 검증 도구를 판매하며, 자체 결과에서 1위를 차지했습니다. 중립적인 연구가 아니라 판매 업체가 진행한 테스트로 보아야 합니다. Giggal.ai는 테스트 대상에 포함되지 않았습니다.',
     },
     heroCta: '무료 크레딧 1,000개로 시작하기',
@@ -655,7 +669,7 @@ export const ALT_UI: Record<L10nLocale, AltUi> = {
     bench: {
       resolved: 'sonuç verilen catch-all adres oranı',
       accuracy: 'ölçülen genel doğruluk',
-      source: (n) => `${n} rakamları, ${LEADMAGIC_BENCHMARK.publisher} tarafından ${LM_DATE.tr} tarihinde yayınlanan bağımsız bir testten alınmıştır. Testte 10.000 gerçek B2B e-posta adresi kullanıldı ve bunların %28'i catch-all alan adlarındaydı.`,
+      source: (n) => `${n} rakamları, ${LEADMAGIC_BENCHMARK.publisher} tarafından ${LM_DATE.tr} tarihinde yayınlanan bir testten alınmıştır. Testte 10.000 gerçek B2B e-posta adresi kullanıldı ve bunların %28'i catch-all alan adlarındaydı.`,
       caveat: 'Bu testi, rakip bir e-posta doğrulama aracı satan LeadMagic yayınladı. LeadMagic kendi sonuçlarında kendini birinci sıraya koydu. Bu testi tarafsız bir çalışma olarak değil, bir satıcının yaptığı test olarak okuyun. Giggal.ai bu testte ölçülen araçlar arasında değildi.',
     },
     heroCta: '1.000 krediyle ücretsiz başlayın',
@@ -680,25 +694,35 @@ export const ALT_UI: Record<L10nLocale, AltUi> = {
 }
 
 // ── Translated competitor facts ──────────────────────────────────────────────
-type Facts = Partial<Pick<Competitor, 'freeTier' | 'creditsExpire' | 'catchAllCreditCost' | 'claimedAccuracy' | 'pricingBasisNote'>> & {
-  notes?: Record<string, string> // English tier note -> localized
-}
+type Facts = AltFacts
 
 const GIGGAL_FACTS: Record<L10nLocale, { freeTier: string; creditsExpire: string; catchAllCreditCost: string; claimedAccuracy: string; category: string }> = {
-  it: { freeTier: '1.000 crediti, senza carta, validi sul caricamento in blocco', creditsExpire: 'I crediti non scadono mai, senza condizioni.', catchAllCreditCost: '1 credito, come qualsiasi altra verifica', claimedAccuracy: 'Dichiara 98,5%', category: 'Verificatore catch-all e SEG' },
-  de: { freeTier: '1.000 Credits, ohne Karte, auch für Massenprüfungen', creditsExpire: 'Credits verfallen nie, ohne Bedingungen.', catchAllCreditCost: '1 Credit, wie jede andere Prüfung', claimedAccuracy: `Gibt 98,5${NB}% an`, category: 'Catch-all- und SEG-Verifizierer' },
-  es: { freeTier: '1.000 créditos, sin tarjeta, válidos en carga masiva', creditsExpire: 'Los créditos no caducan nunca, sin condiciones.', catchAllCreditCost: '1 crédito, igual que cualquier otra verificación', claimedAccuracy: 'Declara 98,5%', category: 'Verificador catch-all y SEG' },
-  'pt-br': { freeTier: '1.000 créditos, sem cartão, válidos em envio em massa', creditsExpire: 'Os créditos nunca expiram, sem condições.', catchAllCreditCost: '1 crédito, como qualquer outra verificação', claimedAccuracy: 'Declara 98,5%', category: 'Verificador catch-all e SEG' },
+  it: { freeTier: '1.000 crediti, senza carta, validi sul caricamento in blocco', creditsExpire: 'I crediti non scadono mai, senza condizioni', catchAllCreditCost: '1 credito, come qualsiasi altra verifica', claimedAccuracy: 'Dichiara 98,5%', category: 'Verificatore catch-all e SEG' },
+  de: { freeTier: '1.000 Credits, ohne Karte, auch für einen Massen-Upload', creditsExpire: 'Credits verfallen nie, ohne Bedingungen', catchAllCreditCost: '1 Credit, wie jede andere Prüfung', claimedAccuracy: `Gibt 98,5${NB}% an`, category: 'Catch-all- und SEG-Verifizierer' },
+  es: { freeTier: '1.000 créditos, sin tarjeta, válidos en carga masiva', creditsExpire: 'Los créditos no caducan nunca, sin condiciones', catchAllCreditCost: '1 crédito, igual que cualquier otra verificación', claimedAccuracy: 'Declara 98,5%', category: 'Verificador catch-all y SEG' },
+  'pt-br': { freeTier: '1.000 créditos, sem cartão, válidos em envio em massa', creditsExpire: 'Os créditos nunca expiram, sem condições', catchAllCreditCost: '1 crédito, como qualquer outra verificação', claimedAccuracy: 'Declara 98,5%', category: 'Verificador catch-all e SEG' },
   fr: { freeTier: '1 000 crédits, sans carte, utilisables en masse', creditsExpire: "Les crédits n'expirent jamais, sans condition.", catchAllCreditCost: '1 crédit, comme toute autre vérification', claimedAccuracy: `Annonce 98,5${NB}%`, category: 'Vérificateur catch-all et SEG' },
-  nl: { freeTier: '1.000 credits, zonder creditcard, ook voor bulkcontroles', creditsExpire: 'Credits verlopen nooit, zonder voorwaarden.', catchAllCreditCost: '1 credit, net als elke andere controle', claimedAccuracy: 'Claimt 98,5%', category: 'Verificatietool voor catch-all en SEG' },
-  pl: { freeTier: '1000 kredytów, bez karty, także do masowego importu', creditsExpire: 'Kredyty nigdy nie wygasają, bez żadnych warunków.', catchAllCreditCost: '1 kredyt, tak jak każde inne sprawdzenie', claimedAccuracy: 'Deklaruje 98,5%', category: 'Weryfikator catch-all i SEG' },
-  id: { freeTier: '1.000 kredit, tanpa kartu kredit, juga untuk pemeriksaan massal', creditsExpire: 'Kredit tidak pernah kedaluwarsa, tanpa syarat.', catchAllCreditCost: '1 kredit, sama seperti pemeriksaan lain', claimedAccuracy: 'Mengklaim 98,5%', category: 'Alat verifikasi untuk catch-all dan SEG' },
-  ja: { freeTier: '1,000クレジット（クレジットカード不要、一括チェックにも利用可）', creditsExpire: 'クレジットに有効期限はありません。条件もありません。', catchAllCreditCost: '1クレジット（ほかのチェックと同じ）', claimedAccuracy: '98.5%と主張', category: 'キャッチオールドメインとSEGに対応した検証ツール' },
-  ko: { freeTier: '크레딧 1,000개(신용카드 불필요, 대량 검사에도 사용 가능)', creditsExpire: '크레딧에 유효기간이 없습니다. 조건도 없습니다.', catchAllCreditCost: '크레딧 1개(다른 검사와 같음)', claimedAccuracy: '98.5% 주장', category: '캐치올 도메인과 SEG를 지원하는 검증 도구' },
-  tr: { freeTier: '1.000 kredi, kredi kartı gerekmez, toplu kontrolde de kullanılabilir', creditsExpire: 'Kredilerin süresi hiç dolmaz, hiçbir koşul yoktur.', catchAllCreditCost: '1 kredi, diğer tüm doğrulamalarla aynı', claimedAccuracy: '%98,5 iddia eder', category: 'Catch-all ve SEG doğrulama aracı' },
+  nl: { freeTier: '1.000 credits, zonder creditcard, ook voor bulkcontroles', creditsExpire: 'Credits verlopen nooit, zonder voorwaarden', catchAllCreditCost: '1 credit, net als elke andere controle', claimedAccuracy: 'Claimt 98,5%', category: 'Verificatietool voor catch-all en SEG' },
+  pl: { freeTier: '1000 kredytów, bez karty, także do masowego importu', creditsExpire: 'Kredyty nigdy nie wygasają, bez żadnych warunków', catchAllCreditCost: '1 kredyt, tak jak każde inne sprawdzenie', claimedAccuracy: 'Deklaruje 98,5%', category: 'Weryfikator catch-all i SEG' },
+  id: { freeTier: '1.000 kredit, tanpa kartu kredit, juga untuk pemeriksaan massal', creditsExpire: 'Kredit tidak pernah kedaluwarsa, tanpa syarat', catchAllCreditCost: '1 kredit, sama seperti pemeriksaan lain', claimedAccuracy: 'Mengklaim 98,5%', category: 'Alat verifikasi untuk catch-all dan SEG' },
+  ja: { freeTier: '1,000クレジット（クレジットカード不要、一括チェックにも利用可）', creditsExpire: 'クレジットに有効期限はなく、利用条件もありません', catchAllCreditCost: '1クレジット（ほかのチェックと同じ）', claimedAccuracy: '98.5%と主張', category: 'キャッチオールドメインとSEGに対応した検証ツール' },
+  ko: { freeTier: '크레딧 1,000개(신용카드 불필요, 대량 검사에도 사용 가능)', creditsExpire: '크레딧에 유효기간이 없고 조건도 없습니다', catchAllCreditCost: '크레딧 1개(다른 검사와 같음)', claimedAccuracy: '98.5% 주장', category: '캐치올 도메인과 SEG를 지원하는 검증 도구' },
+  tr: { freeTier: '1.000 kredi, kredi kartı gerekmez, toplu kontrolde de kullanılabilir', creditsExpire: 'Kredilerin süresi hiç dolmaz, hiçbir koşul yoktur', catchAllCreditCost: '1 kredi, diğer tüm doğrulamalarla aynı', claimedAccuracy: '%98,5 iddia eder', category: 'Catch-all ve SEG doğrulama aracı' },
 }
 export function giggalFacts(locale: L10nLocale) {
   return { ...GIGGAL, ...GIGGAL_FACTS[locale] }
+}
+
+// Labels for the wide brand-page layout (components/l10n/AltPageWide.tsx).
+// Partial: a language gets an entry when its brand pages ship.
+export type { AltWideUi }
+export const ALT_WIDE_UI: Partial<Record<L10nLocale, AltWideUi>> = {
+  de: {
+    keyFacts: (n) => `${n}: die wichtigsten Fakten`,
+    factRows: { price10k: '10.000 Prüfungen', free: 'Gratis-Credits', expiry: 'Verfall der Credits', catchAll: 'Catch-all' },
+    perMonth: ' im Monat',
+    notPublished: 'Nicht veröffentlicht',
+  },
 }
 
 const FACTS: Record<string, Partial<Record<L10nLocale, Facts>>> = {
@@ -821,6 +845,176 @@ const FACTS: Record<string, Partial<Record<L10nLocale, Facts>>> = {
       notes: { Quote: 'Auf Anfrage', Enterprise: 'Enterprise' },
     },
   },
+  // Brand pages rewritten in English on 2026-11-27, localized one language at a time.
+  leadmagic: {
+    de: {
+      freeTier: 'Keine Gratis-Credits',
+      creditsExpire: 'Ungenutzte Monats-Credits werden übertragen, bis zum Zweifachen des Monatskontingents',
+      catchAllCreditCost: '0,25 Credit pro eindeutigem Ergebnis; ein unbekanntes Ergebnis ist kostenlos',
+      claimedAccuracy: `Gibt 99,5${NB}% für die Validierung an`,
+      pricingBasisNote: 'LeadMagic wird als Monatsabo mit einem gemeinsamen Credit-Pool verkauft: Essential 99 $ (5.000 Credits), Growth 249 $ (20.000), Professional 499 $ (50.000), Ultimate 849 $ (100.000). Eine eindeutige Validierung kostet 0,25 Credit, ein unbekanntes Ergebnis ist kostenlos. Die Werte oben zeigen den kleinsten Monatsplan, der so viele Validierungen abdeckt. Bei jährlicher Zahlung sind zwei Monate gratis. Die Werte von Giggal.ai sind einmalige Pay-as-you-go-Preise.',
+      betterFitFor: [
+        'Viele Anreicherungsdaten über die Verifizierung hinaus: Mobilnummern, Firmendaten, Jobwechsel und Werbedaten',
+        'Veröffentlichte eigene Testdaten zu Catch-all-Adressen, die es bei den meisten Anbietern nicht gibt',
+        'Suche, Anreicherung und Verifizierung in einem Abo',
+        'Eine API für Entwickler mit Credit-Preisen pro Endpunkt',
+      ],
+      notes: { Enterprise: 'Enterprise' },
+    },
+  },
+  anymailfinder: {
+    de: {
+      freeTier: '7-tägige Testphase mit 100 Credits; die Karte wird geprüft, aber nicht belastet',
+      creditsExpire: 'Credits werden ohne Obergrenze übertragen, solange das Abo läuft, und verfallen bei Kündigung am Ende des Abrechnungszeitraums',
+      catchAllCreditCost: '0,2 Credit pro Prüfung, wie jede andere Verifizierung',
+      claimedAccuracy: `Gibt 98,9${NB}% Genauigkeit bei 86,4${NB}% Abdeckung an`,
+      pricingBasisNote: `Anymail Finder wird als Monatsabo verkauft, mit Credit-Stufen von 400 Credits für 29 $ im Monat bis 100.000 Credits für 799 $. Die Prüfung einer E-Mail, die Sie woanders gefunden haben, kostet 0,2 Credit. Die Werte oben sind die kleinsten Monatspläne, die so viele Prüfungen abdecken. Bei jährlicher Zahlung sparen Sie 33${NB}%. Eine Million Prüfungen im Monat liegt über der höchsten Monatsstufe. Die Werte von Giggal.ai sind einmalige Pay-as-you-go-Preise.`,
+      betterFitFor: [
+        'E-Mail-Adressen aus Name und Domain finden, was Giggal.ai nicht macht',
+        `Eine angegebene Zustellgarantie von 97${NB}% oder mehr`,
+        'Credits, die ohne Obergrenze übertragen werden, solange das Abo läuft',
+        'Eine lange bestehende Marke mit vielen veröffentlichten Inhalten',
+      ],
+      notes: { Enterprise: 'Enterprise' },
+    },
+  },
+  findymail: {
+    de: {
+      freeTier: '10 Credits bei der Anmeldung, ohne Karte',
+      creditsExpire: 'Ungenutzte Credits werden übertragen, bis zum Zweifachen des Monatskontingents',
+      catchAllCreditCost: '1 Credit, wie jede andere Verifizierung',
+      claimedAccuracy: `Garantiert eine Bounce-Rate unter 5${NB}%, darüber werden Credits erstattet`,
+      pricingBasisNote: 'Findymail verkauft nutzungsbasierte Pläne von 99 $ bis 999 $ im Monat, die keine Credit-Zahl nennen. Dazu kommt ein Plan mit Credits: Starter für 99 $ im Monat mit 5.000 Finder-Credits und 5.000 Verifier-Credits. Alles darüber läuft über Enterprise, mit Preis auf Anfrage. Deshalb gibt es keinen veröffentlichten Preis für 10.000, 100.000 oder eine Million Verifizierungen im Monat. Die Werte von Giggal.ai sind einmalige Pay-as-you-go-Preise.',
+      betterFitFor: [
+        'Die Suche nach E-Mail-Adressen, die Giggal.ai gar nicht anbietet',
+        'Eine Garantie auf die Bounce-Rate mit Erstattung der Credits',
+        'Eine Chrome-Erweiterung, die E-Mails auf LinkedIn und im Sales Navigator findet und prüft',
+        'SOC 2 Typ 2 und Hosting in der EU',
+      ],
+      notes: { Enterprise: 'Enterprise' },
+    },
+  },
+  listmint: {
+    de: {
+      freeTier: 'Kostenloser Start, Menge nicht veröffentlicht',
+      creditsExpire: 'Nicht veröffentlicht',
+      catchAllCreditCost: 'Getrennte Catch-all-Credits: 5.000 im Monat im Plan für 99 $',
+      pricingBasisNote: 'Listmint wird als Monatsabo verkauft, mit zwei Credit-Pools. Starter kostet 99 $ im Monat für 20.000 Standard-Credits und 5.000 Catch-all-Credits. Agency kostet 187 $ im Monat für 50.000 Standard-Credits und 10.000 Catch-all-Credits. Größere Volumen gibt es als Enterprise mit Preis auf Anfrage. Die Werte von Giggal.ai sind einmalige Pay-as-you-go-Preise.',
+      betterFitFor: [
+        'Eine Catch-all-Prüfung, die Listmint nach eigener Aussage von Hand durchführt',
+        'Catch-all-Verifizierung in Echtzeit',
+        'Ein großes Monatskontingent an Standard-Credits im Einstiegsplan',
+      ],
+      notes: { Enterprise: 'Enterprise' },
+    },
+  },
+  allegrow: {
+    de: {
+      freeTier: '14-tägige Testphase für bis zu 1.000 Adressen',
+      creditsExpire: 'Das Kontingent gilt pro Monat. Die Testphase endet nach 14 Tagen',
+      catchAllCreditCost: '1 Kontakt aus dem Kontingent des Plans',
+      claimedAccuracy: `Gibt 99${NB}% an`,
+      pricingBasisNote: 'Allegrow wird als Monatsabo verkauft. Starter kostet 99 $ im Monat für 5.000 Kontakte, zusätzliche Credits kosten 8 $ pro 1.000. 10.000 im Monat kommen damit auf 139 $. Das haben wir aus den veröffentlichten Preisen berechnet. Allegrow bietet diesen Plan nicht an. Die Zeilen für 100.000 und 1.000.000 sind Scale Plus Unlimited für 1.340 $ im Monat bei jährlicher Zahlung, also unbegrenzte Verifizierung. Die Werte von Giggal.ai sind einmalige Pay-as-you-go-Preise.',
+      betterFitFor: [
+        'Ein Plan mit unbegrenzter Verifizierung, den Giggal.ai nicht hat',
+        'Bewertung der Absender-Reputation und Überwachung der Posteingangsplatzierung neben der Verifizierung',
+        'Native Integrationen für HubSpot, Outreach und Salesloft mit SSO und SOC-2-Berichten',
+        'Eine veröffentlichte Studie zu falsch positiven Ergebnissen bei erfundenen Adressen',
+      ],
+      estimateNote: 'Von uns aus den veröffentlichten Preisen von Allegrow berechnet, kein Plan, den Allegrow anbietet.',
+      notes: { unlimited: 'unbegrenzt' },
+    },
+  },
+  no2bounce: {
+    de: {
+      freeTier: '100 Credits ohne Karte, die nie verfallen',
+      creditsExpire: 'Credits verfallen nie, ohne monatliches Nutzungslimit',
+      catchAllCreditCost: '1 Credit pro E-Mail, wie bei der Standardprüfung',
+      claimedAccuracy: `Gibt 99,6${NB}% an`,
+      betterFitFor: [
+        'Viele Preisstufen, von 10.000 Credits bis 50 Millionen',
+        'Credits, die nie verfallen, wie bei Giggal.ai',
+        `Monats- und Jahresabos mit 15${NB}% und 20${NB}% Rabatt gegenüber Pay-as-you-go`,
+        'Ein E-Mail-Finder und eine Domain-Suche mit denselben Credits',
+      ],
+    },
+  },
+  quickemailverification: {
+    de: {
+      freeTier: '100 Credits pro Tag, kostenlos',
+      creditsExpire: 'Dauerhafte Pay-as-you-go-Credits verfallen nie',
+      catchAllCreditCost: 'Mit dem Status Catch-all gemeldet, nicht bestätigt',
+      claimedAccuracy: `Gibt 99${NB}% an`,
+      betterFitFor: [
+        '100 Gratis-Credits jeden Tag, dazu ein monatliches Gratis-Kontingent',
+        'Dauerhafte Pay-as-you-go-Credits, die nie verfallen',
+        'Ein niedriger Einstiegspreis ab 4 $ für 500 Credits',
+        'Eine etablierte Echtzeit-API',
+      ],
+    },
+  },
+  myemailverifier: {
+    de: {
+      freeTier: '100 Credits pro Tag, kostenlos',
+      creditsExpire: 'Credits verfallen nie',
+      catchAllCreditCost: 'Mit dem Status Catch-all gemeldet, nicht bestätigt',
+      betterFitFor: [
+        'Ein sehr niedriger Grundpreis von 0,0025 $ pro Verifizierung',
+        '100 Gratis-Credits pro Tag, die sich erneuern, statt nach einer Testphase zu enden',
+        'Credits, die nie verfallen, mit Aktionen für Bonus-Credits bei großem Volumen',
+        'Viele öffentliche Bewertungen auf G2, Capterra und Trustpilot',
+      ],
+    },
+  },
+  scrubby: {
+    de: {
+      freeTier: '200 Credits',
+      creditsExpire: 'Pay-as-you-go-Credits verfallen nie; Plan-Credits werden übertragen',
+      catchAllCreditCost: '1 Credit bei Quick Verification; Deep Verification kostet 3 Credits und dauert bis zu 72 Stunden',
+      claimedAccuracy: 'Auf der Preisseite nicht veröffentlicht',
+      betterFitFor: [
+        'Eine Deep Verification, die echte E-Mails an schwer prüfbare Adressen sendet',
+        'Ein Gratis-Kontingent von 200 Credits ohne Karte',
+        'Pay-as-you-go und Monatspläne, mit Plan-Credits, die übertragen werden',
+        'Eine einzige, klar umrissene Aufgabe statt einer großen Suite',
+      ],
+      notes: { 'Quote only': 'Nur auf Anfrage' },
+    },
+  },
+  mailfloss: {
+    de: {
+      freeTier: '500 Verifizierungen im Monat, dazu eine 7-tägige Testphase bei Abos',
+      creditsExpire: 'Vorausbezahlte Credits verfallen nie; Abo-Credits werden monatlich zurückgesetzt',
+      catchAllCreditCost: 'Markiert, nicht bestätigt',
+      betterFitFor: [
+        'Automatische tägliche Bereinigung direkt in Ihrer E-Mail-Plattform',
+        '41 native Integrationen, darunter Mailchimp, Klaviyo und HubSpot',
+        'Ein Abo, das nach der Einrichtung von selbst läuft, statt manueller Uploads',
+        'Abo und vorausbezahlte Credits zur Auswahl',
+      ],
+    },
+  },
+  bounceless: {
+    de: {
+      freeTier: '1.000 Credits im Monat mit einer geschäftlichen E-Mail-Adresse, ohne Karte',
+      creditsExpire: 'Credits aus Paketen oder Abos verfallen nie',
+      catchAllCreditCost: 'Hinweise zu Catch-all sind in der Prüfung für 1 Credit enthalten',
+      betterFitFor: [
+        'Ein Gratis-Kontingent von 1.000 Credits jeden Monat mit einer geschäftlichen E-Mail-Adresse',
+        'Einmalige Pakete und Monatsabos, mit Credits, die nie verfallen',
+        'Zusätzliche Tools in einem Konto: Absender-Zustand, Posteingangsplatzierung und Prüfung von Anmeldeformularen',
+        'Ein niedriger Preis bei sehr großen Volumen, 579 $ für eine Million',
+      ],
+    },
+  },
+}
+
+// The other languages keep their brand-page words in one file each
+// (lib/i18n/altBrands/<locale>/facts.ts), merged in here.
+const BRAND_MODULES: Partial<Record<L10nLocale, { FACTS: Record<string, AltFacts>; WIDE_UI: AltWideUi | null }>> = { 'it': brands_it, 'es': brands_es, 'pt-br': brands_ptbr, 'fr': brands_fr, 'nl': brands_nl, 'pl': brands_pl, 'id': brands_id, 'ja': brands_ja, 'ko': brands_ko, 'tr': brands_tr }
+for (const [loc, mod] of Object.entries(BRAND_MODULES) as [L10nLocale, { FACTS: Record<string, AltFacts>; WIDE_UI: AltWideUi | null }][]) {
+  for (const [slug, f] of Object.entries(mod.FACTS)) FACTS[slug] = { ...FACTS[slug], [loc]: f }
+  if (mod.WIDE_UI) ALT_WIDE_UI[loc] = mod.WIDE_UI
 }
 
 /** The competitor with its words translated; numbers untouched. */

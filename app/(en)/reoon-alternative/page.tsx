@@ -47,7 +47,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'What does Giggal.ai do with catch-all addresses that Reoon does not?',
-    a: 'It returns a real deliverable or undeliverable result at a flat 1 credit per email. Reoon reports catch-all as a status and leaves it there. Reoon was not in the LeadMagic test, so there is no independent catch-all figure for it.',
+    a: 'It returns a real deliverable or undeliverable result at a flat 1 credit per email. Reoon reports catch-all as a status and leaves it there. Reoon was not in the LeadMagic test, so there is no published catch-all figure for it.',
   },
   {
     q: 'Does Reoon verify behind secure email gateways?',
@@ -64,7 +64,7 @@ const faqs: FaqItem[] = [
 ]
 
 const sectionTitle = 'text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight'
-const proseP = 'text-slate-600 leading-relaxed text-sm md:text-base font-medium'
+const proseP = 'text-slate-600 leading-relaxed text-sm md:text-base font-medium max-w-4xl'
 
 export default function ReoonAlternativePage() {
   return (
@@ -81,8 +81,8 @@ export default function ReoonAlternativePage() {
       <Navbar />
 
       {/* ── HERO ─────────────────────────────────────────────── */}
-      <section className="max-w-3xl mx-auto px-6 pt-28 md:pt-32 pb-12 text-center space-y-6">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900">
+      <section className="max-w-6xl mx-auto px-6 pt-28 md:pt-32 pb-12 text-center space-y-6">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900 max-w-5xl mx-auto">
           A{' '}
           <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">
             Reoon alternative
@@ -113,7 +113,7 @@ export default function ReoonAlternativePage() {
       </section>
 
       {/* ── BOTTOM LINE ──────────────────────────────────────── */}
-      <section className="max-w-3xl mx-auto px-6 pb-16">
+      <section className="max-w-6xl mx-auto px-6 pb-16">
         <Bluf
           points={[
             { k: 'Price', v: 'About even. $9.90 vs $11.90 at 10k. Not the deciding factor.' },
@@ -125,7 +125,7 @@ export default function ReoonAlternativePage() {
       </section>
 
       {/* ── CATCH-ALL ────────────────────────────────────────── */}
-      <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>How Giggal.ai verifies catch-all addresses</h2>
         <p className={proseP}>
           On a catch-all domain the server accepts every address. Reoon reports the status and stops,
@@ -136,7 +136,7 @@ export default function ReoonAlternativePage() {
       </section>
 
       {/* ── SEG ──────────────────────────────────────────────── */}
-      <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Secure email gateways</h2>
         <p className={proseP}>
           A gateway sits in front of the mail server and answers on its behalf, which breaks a
@@ -154,7 +154,7 @@ export default function ReoonAlternativePage() {
       </section>
 
       {/* ── PRICING ──────────────────────────────────────────── */}
-      <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Reoon pricing vs Giggal.ai</h2>
         <PricingLadder competitor={competitor} />
         <p className={proseP}>
@@ -165,13 +165,13 @@ export default function ReoonAlternativePage() {
       </section>
 
       {/* ── FEATURE TABLE ────────────────────────────────────── */}
-      <section className="cv-section max-w-4xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Reoon vs Giggal.ai</h2>
         <ComparisonTable competitor={competitor} />
       </section>
 
       {/* ── TEST IT ──────────────────────────────────────────── */}
-      <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Try it on your own list</h2>
         <ol className="space-y-3">
           {[
@@ -190,7 +190,7 @@ export default function ReoonAlternativePage() {
       </section>
 
       {/* ── HEAD-TO-HEAD ─────────────────────────────────────── */}
-      <HeadToHeadComparisons slug="reoon" />
+      <HeadToHeadComparisons slug="reoon" wide />
 
       {/* ── FAQ ──────────────────────────────────────────────── */}
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-10">
@@ -202,7 +202,7 @@ export default function ReoonAlternativePage() {
 
       <AltCtaBand headline="Price is a tie. Let the results decide." />
 
-      <RelatedLinks />
+      <RelatedLinks wide />
 
       <Footer />
     </main>

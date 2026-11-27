@@ -1,197 +1,86 @@
-import type { Metadata } from 'next'
-import { NOINDEX_ROBOTS } from '@/lib/indexPolicy'
-import Link from 'next/link'
-import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
-import FaqAccordion, { type FaqItem } from '@/components/landing/FaqAccordion'
-import JsonLd from '@/components/JsonLd'
-import { faqPageLd, breadcrumbTrailLd } from '@/lib/schema'
-import PricingLadder from '@/components/alternatives/PricingLadder'
-import ComparisonTable from '@/components/alternatives/ComparisonTable'
-import VerdictExplainer from '@/components/alternatives/VerdictExplainer'
-import Bluf from '@/components/alternatives/Bluf'
-import AltCtaBand from '@/components/alternatives/AltCtaBand'
-import RelatedLinks from '@/components/alternatives/RelatedLinks'
-import HeadToHeadComparisons from '@/components/alternatives/HeadToHeadComparisons'
-import { getCompetitor } from '@/lib/competitorPricing'
-import { ArrowRight } from 'lucide-react'
+import AltPageScaffold, { altMetadata, type AltPageConfig } from '@/components/alternatives/AltPageScaffold'
 
-const APP_URL = 'https://emailverifier.giggal.ai/sign-up'
-const competitor = getCompetitor('myemailverifier')
-
-const DESC =
-  'MyEmailVerifier gives 100 free credits a day but flags catch-all as a status without confirming it. Giggal.ai resolves catch-all at $9.90 per 10,000. 1,000 free credits, no card.'
-
-export const metadata: Metadata = {
-  robots: NOINDEX_ROBOTS, // C7 tier C: zero brand demand
-  title: { absolute: 'MyEmailVerifier Alternative | Giggal.ai' },
-  description: DESC,
-  alternates: { canonical: '/myemailverifier-alternative' },
-  openGraph: {
-    siteName: 'Giggal.ai',
-    images: [{ url: '/og-card.png', width: 1200, height: 630, alt: 'Giggal.ai email verification' }],
-    title: 'A MyEmailVerifier Alternative That Resolves Catch-All',
-    description: DESC,
-    url: 'https://giggal.ai/myemailverifier-alternative',
-    type: 'website',
+// Rewritten 2026-11-27 on the shared scaffold and taken out of noindex. Semrush
+// US: "my email verifier" 210. myemailverifier.com blocked our check on
+// 2026-11-27 (Cloudflare), so its prices are from the 2026-08-12 check and the
+// page says so.
+const cfg: AltPageConfig = {
+  slug: 'myemailverifier',
+  metaTitle: 'MyEmailVerifier Alternative: Pricing and Catch-All | Giggal.ai',
+  ogTitle: 'MyEmailVerifier alternative for B2B lists',
+  desc: 'MyEmailVerifier gives 100 free credits a day but marks catch-all as a status. Giggal.ai returns a result on catch-all emails at $9.90 per 10,000.',
+  h1Article: 'A',
+  h1Tail: 'for B2B lists with catch-all domains',
+  heroP:
+    'MyEmailVerifier is a low-cost email verifier with 100 free credits a day. It marks catch-all addresses with their own status and does not confirm them. Giggal.ai returns a result on those addresses, at $9.90 per 10,000 emails.',
+  bluf: [
+    { k: 'Catch-all', v: 'MyEmailVerifier marks catch-all as a status. Giggal.ai returns a result.' },
+    { k: 'Price', v: '10,000 credits cost $15 on MyEmailVerifier and $9.90 on Giggal.ai.' },
+    { k: 'At volume', v: 'A million credits cost $349 on MyEmailVerifier and $680 on Giggal.ai.' },
+    { k: 'Free credits', v: 'MyEmailVerifier gives 100 a day. Giggal.ai gives 1,000 once, with no card.' },
+  ],
+  about: {
+    heading: 'What is MyEmailVerifier?',
+    paragraphs: [
+      'MyEmailVerifier is an email verification service from myemailverifier.com. It verifies bulk lists and single emails, and it has an API.',
+      'It gives 100 free credits every day. Paid credits start at $4 for 1,000 and never expire.',
+      'It returns catch-all addresses with a separate catch-all status. It does not confirm whether those mailboxes exist.',
+    ],
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'A MyEmailVerifier Alternative That Resolves Catch-All',
-    description: DESC,
+  reasons: {
+    heading: 'Why people look for a MyEmailVerifier alternative',
+    items: [
+      { k: 'Catch-all', v: 'Catch-all addresses come back with no clear answer. On B2B lists, that can be a large share of the list.' },
+      { k: 'Gateways', v: 'MyEmailVerifier does not list Proofpoint, Mimecast or other gateways it can check behind.' },
+    ],
   },
+  catchAllHeading: 'Catch-all emails: MyEmailVerifier vs Giggal.ai',
+  catchAllProse:
+    'Many company domains accept every address, so a basic check cannot tell a real address from a fake one. MyEmailVerifier marks these addresses catch-all and leaves the decision to you. Giggal.ai checks them further and returns one of the four results below, at 1 credit each.',
+  pricingHeading: 'MyEmailVerifier pricing vs Giggal.ai',
+  pricingProse:
+    'MyEmailVerifier sells credits that never expire. At our August 2026 check, 1,000 credits cost $4, 10,000 cost $15, 100,000 cost $99 and a million cost $349.',
+  pricingExtra: [
+    'Giggal.ai sells 10,000 credits for $9.90, 100,000 for $76 and a million for $680. At a million, MyEmailVerifier costs less. Giggal.ai adds a result on catch-all and gateway addresses.',
+  ],
+  strengths: {
+    heading: 'Where MyEmailVerifier is a good fit',
+    intro: 'MyEmailVerifier is a good choice for some lists:',
+  },
+  others: {
+    heading: 'Other MyEmailVerifier alternatives',
+    intro: 'These verifiers also have low prices or free daily credits. Prices are from each vendor’s site on 27 November 2026.',
+    items: [
+      { name: 'QuickEmailVerification', text: 'Also gives 100 free credits a day. 10,000 persistent credits cost $60.' },
+      { name: 'Bounceless', text: 'Gives 1,000 free credits a month with a work email. 10,000 credits cost $29, with catch-all evidence included.' },
+      { name: 'no2bounce', text: '10,000 credits cost $20 and never expire. It sends test messages to confirm catch-all mailboxes.' },
+    ],
+  },
+  testHeading: 'Check your catch-all rows with Giggal.ai',
+  testStep3: 'Compare the rows MyEmailVerifier marked catch-all.',
+  ctaHeadline: 'Get a result on catch-all addresses',
+  faqs: [
+    {
+      q: 'How much does MyEmailVerifier cost?',
+      a: 'At our August 2026 check, 1,000 credits cost $4, 10,000 cost $15, 100,000 cost $99 and a million cost $349. The credits never expire.',
+    },
+    {
+      q: 'Is MyEmailVerifier free?',
+      a: 'It gives 100 free credits every day. The daily credits reset instead of ending after a trial. Giggal.ai gives 1,000 free credits once, with no card.',
+    },
+    {
+      q: 'Does MyEmailVerifier verify catch-all emails?',
+      a: 'It detects catch-all domains and returns a catch-all status. It does not confirm the mailbox. Giggal.ai returns a result on catch-all addresses at 1 credit each.',
+    },
+    {
+      q: 'Do Giggal.ai credits expire?',
+      a: 'No. Giggal.ai credits never expire. MyEmailVerifier credits never expire either.',
+    },
+  ],
 }
 
-const faqs: FaqItem[] = [
-  {
-    q: 'Does Giggal.ai resolve catch-all where MyEmailVerifier flags it?',
-    a: 'Yes. MyEmailVerifier returns catch-all addresses as a separate status and does not confirm the mailbox. Giggal.ai returns a real deliverable or undeliverable result on those addresses, at a flat 1 credit per email.',
-  },
-  {
-    q: 'How much does MyEmailVerifier cost compared with Giggal.ai?',
-    a: 'MyEmailVerifier publishes a volume-tiered table: $15 at 10,000, $99 at 100,000 and $349 at a million. Giggal.ai is $9.90, $76 and $680 at those volumes. Both keep credits from expiring, so the difference that matters is that we resolve catch-all and it flags it.',
-  },
-  {
-    q: 'What is MyEmailVerifier better at?',
-    a: 'It gives 100 free credits every day that reset rather than expiring after a trial, keeps a very low headline rate, never expires credits, and runs bonus-credit promotions at high volume. On price and free allowance, it is strong.',
-  },
-  {
-    q: 'Do Giggal.ai credits expire?',
-    a: 'No. Giggal.ai credits never expire, and MyEmailVerifier credits never expire either, so both are safe to stockpile.',
-  },
-  {
-    q: 'Can I try Giggal.ai before switching?',
-    a: 'Yes. 1,000 free credits, no card, on a bulk upload. Re-run a list MyEmailVerifier returned as catch-all and see how many resolve to a real result.',
-  },
-]
-
-const sectionTitle = 'text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight'
-const proseP = 'text-slate-600 leading-relaxed text-sm md:text-base font-medium'
+export const metadata = altMetadata(cfg)
 
 export default function MyEmailVerifierAlternativePage() {
-  return (
-    <main className="relative min-h-screen bg-slate-50 grid-lines overflow-x-hidden text-slate-800 antialiased">
-      <JsonLd
-        data={breadcrumbTrailLd([
-          { name: 'Alternatives', path: '/alternatives' },
-          { name: 'MyEmailVerifier alternative', path: '/myemailverifier-alternative' },
-        ])}
-      />
-      <JsonLd data={faqPageLd(faqs)} />
-      <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-indigo-500/10 blur-[120px] -z-10 pointer-events-none" />
-
-      <Navbar />
-
-      {/* ── HERO ─────────────────────────────────────────────── */}
-      <section className="max-w-3xl mx-auto px-6 pt-28 md:pt-32 pb-12 text-center space-y-6">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900">
-          A{' '}
-          <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">
-            MyEmailVerifier alternative
-          </span>{' '}
-          that resolves catch-all
-        </h1>
-        <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium">
-          MyEmailVerifier is a low-cost verifier with 100 free credits a day, but on catch-all
-          domains it returns a status and leaves the mailbox unconfirmed. Giggal.ai returns a real
-          result, at $9.90 per 10,000.
-        </p>
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3">
-          <a
-            href={APP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-indigo-600 hover:bg-indigo-700 font-extrabold rounded-xl text-white shadow-md shadow-indigo-600/10 hover:-translate-y-0.5 transition-all text-sm"
-          >
-            Start free with 1,000 credits
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-          </a>
-          <Link
-            href="/alternatives"
-            className="px-8 py-3.5 bg-white border border-slate-300 hover:border-slate-800 hover:bg-slate-50 font-bold rounded-xl text-slate-700 hover:text-slate-950 transition-all text-center text-sm flex items-center justify-center gap-2 shadow-sm"
-          >
-            Compare all verifiers
-          </Link>
-        </div>
-      </section>
-
-      {/* ── BOTTOM LINE ──────────────────────────────────────── */}
-      <section className="max-w-3xl mx-auto px-6 pb-16">
-        <Bluf
-          points={[
-            { k: 'Catch-all', v: 'We resolve it, valid or invalid. MyEmailVerifier flags it as a status and stops.' },
-            { k: 'Price', v: 'MyEmailVerifier is $15 at 10k and $349 at a million; we are $9.90 and $680.' },
-            { k: 'Free tier', v: 'It gives 100 credits a day; we give 1,000 bulk credits, no card.' },
-            { k: 'Try it', v: '1,000 free credits on a bulk list, no card.' },
-          ]}
-        />
-      </section>
-
-      {/* ── CATCH-ALL ────────────────────────────────────────── */}
-      <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
-        <h2 className={sectionTitle}>How Giggal.ai verifies catch-all addresses</h2>
-        <p className={proseP}>
-          MyEmailVerifier separates its results into valid, invalid, catch-all and unknown, and hands
-          catch-all addresses back as their own status rather than confirming the mailbox. That keeps
-          it honest, but it leaves you a pile to sort out by hand. We route those addresses down a
-          separate path and return one of four results, so the real mailboxes come back deliverable.
-        </p>
-        <VerdictExplainer />
-      </section>
-
-      {/* ── PRICING ──────────────────────────────────────────── */}
-      <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
-        <h2 className={sectionTitle}>MyEmailVerifier pricing vs Giggal.ai</h2>
-        <p className={proseP}>
-          MyEmailVerifier publishes a volume-tiered table: $15 at 10,000, $99 at 100,000 and $349 at
-          a million, with credits that never expire. Giggal.ai is $9.90, $76 and $680 at those
-          volumes. The split that matters is catch-all: we resolve it where MyEmailVerifier only
-          flags it.
-        </p>
-        <PricingLadder competitor={competitor} />
-      </section>
-
-      {/* ── FEATURE TABLE ────────────────────────────────────── */}
-      <section className="cv-section max-w-4xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
-        <h2 className={sectionTitle}>MyEmailVerifier vs Giggal.ai</h2>
-        <ComparisonTable competitor={competitor} />
-      </section>
-
-      {/* ── TEST IT ──────────────────────────────────────────── */}
-      <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
-        <h2 className={sectionTitle}>Try it on your own list</h2>
-        <ol className="space-y-3">
-          {[
-            'Export a list you already checked in MyEmailVerifier.',
-            'Run it here on the 1,000 free credits. No card.',
-            'Look at the rows returned as catch-all. Count how many come back real.',
-          ].map((step, i) => (
-            <li key={i} className="flex items-start gap-3 text-slate-700 text-sm md:text-base font-medium">
-              <span className="shrink-0 w-6 h-6 rounded-lg bg-indigo-100 text-indigo-700 font-black text-[13px] flex items-center justify-center">
-                {i + 1}
-              </span>
-              <span className="pt-0.5">{step}</span>
-            </li>
-          ))}
-        </ol>
-      </section>
-
-      {/* ── HEAD-TO-HEAD ─────────────────────────────────────── */}
-      <HeadToHeadComparisons slug="myemailverifier" />
-
-      {/* ── FAQ ──────────────────────────────────────────────── */}
-      <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-10">
-        <div className="text-center space-y-3">
-          <h2 className={sectionTitle}>Frequently asked questions</h2>
-        </div>
-        <FaqAccordion items={faqs} />
-      </section>
-
-      <AltCtaBand headline="Resolve the addresses MyEmailVerifier marks catch-all" />
-
-      <RelatedLinks />
-
-      <Footer />
-    </main>
-  )
+  return <AltPageScaffold config={cfg} />
 }

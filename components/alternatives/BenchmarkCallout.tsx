@@ -25,7 +25,7 @@ export default function BenchmarkCallout({ competitor }: { competitor: Competito
         </div>
       </div>
       <p className="text-[13px] text-slate-600 leading-relaxed font-medium border-t border-slate-100 pt-4">
-        Figures for {competitor.name} come from an independent test run by {LEADMAGIC_BENCHMARK.publisher}, published{' '}
+        Figures for {competitor.name} come from a test run by {LEADMAGIC_BENCHMARK.publisher}, published{' '}
         {LEADMAGIC_BENCHMARK.publishedOn}, on {LEADMAGIC_BENCHMARK.sample}.
       </p>
       <p className="flex items-start gap-2 text-[12px] text-slate-400 leading-relaxed font-medium">

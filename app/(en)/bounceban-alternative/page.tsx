@@ -63,7 +63,7 @@ const faqs: FaqItem[] = [
 ]
 
 const sectionTitle = 'text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight'
-const proseP = 'text-slate-600 leading-relaxed text-sm md:text-base font-medium'
+const proseP = 'text-slate-600 leading-relaxed text-sm md:text-base font-medium max-w-4xl'
 
 export default function BounceBanAlternativePage() {
   return (
@@ -80,8 +80,8 @@ export default function BounceBanAlternativePage() {
       <Navbar />
 
       {/* ── HERO ─────────────────────────────────────────────── */}
-      <section className="max-w-3xl mx-auto px-6 pt-28 md:pt-32 pb-12 text-center space-y-6">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900">
+      <section className="max-w-6xl mx-auto px-6 pt-28 md:pt-32 pb-12 text-center space-y-6">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900 max-w-5xl mx-auto">
           A{' '}
           <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">
             BounceBan alternative
@@ -113,7 +113,7 @@ export default function BounceBanAlternativePage() {
       </section>
 
       {/* ── BOTTOM LINE ──────────────────────────────────────── */}
-      <section className="max-w-3xl mx-auto px-6 pb-16">
+      <section className="max-w-6xl mx-auto px-6 pb-16">
         <Bluf
           points={[
             { k: 'Same job', v: 'Both resolve catch-all and SEG without sending. This is the closest matchup here.' },
@@ -125,7 +125,7 @@ export default function BounceBanAlternativePage() {
       </section>
 
       {/* ── SAME JOB, DIFFERENT TERMS ────────────────────────── */}
-      <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Both resolve catch-all and SEG</h2>
         <p className={proseP}>
           BounceBan resolves catch-all and gateway addresses too, without sending mail, and claims
@@ -135,7 +135,7 @@ export default function BounceBanAlternativePage() {
       </section>
 
       {/* ── FREE TIER ────────────────────────────────────────── */}
-      <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>The free tier difference</h2>
         <p className={proseP}>
           BounceBan gives unlimited single checks for free, which is handy for one address at a time.
@@ -146,7 +146,7 @@ export default function BounceBanAlternativePage() {
       </section>
 
       {/* ── PRICE ────────────────────────────────────────────── */}
-      <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Price per catch-all address</h2>
         <p className={proseP}>
           Both BounceBan and Giggal.ai charge a flat 1 credit per verification.
@@ -157,7 +157,7 @@ export default function BounceBanAlternativePage() {
       </section>
 
       {/* ── FEATURE TABLE ────────────────────────────────────── */}
-      <section className="cv-section max-w-4xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>BounceBan vs Giggal.ai</h2>
         <ComparisonTable competitor={competitor} />
         <p className="text-[13px] text-slate-500 font-medium">
@@ -167,7 +167,7 @@ export default function BounceBanAlternativePage() {
       </section>
 
       {/* ── TEST IT ──────────────────────────────────────────── */}
-      <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Try it on your own list</h2>
         <ol className="space-y-3">
           {[
@@ -186,7 +186,7 @@ export default function BounceBanAlternativePage() {
       </section>
 
       {/* ── HEAD-TO-HEAD ─────────────────────────────────────── */}
-      <HeadToHeadComparisons slug="bounceban" />
+      <HeadToHeadComparisons slug="bounceban" wide />
 
       {/* ── FAQ ──────────────────────────────────────────────── */}
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-10">
@@ -198,7 +198,7 @@ export default function BounceBanAlternativePage() {
 
       <AltCtaBand headline="Run a catch-all list on the free credits" />
 
-      <RelatedLinks />
+      <RelatedLinks wide />
 
       <Footer />
     </main>

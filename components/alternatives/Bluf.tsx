@@ -3,11 +3,11 @@
 // answer is scannable in five seconds, not read as a paragraph.
 import { type ReactNode } from 'react'
 
-export default function Bluf({ points }: { points: { k: string; v: ReactNode }[] }) {
+export default function Bluf({ points, label = 'Bottom line' }: { points: { k: string; v: ReactNode }[]; label?: string }) {
   return (
     <div className="rounded-3xl border-2 border-slate-200 bg-white p-6 md:p-8 card-vivid-shadow">
       <p className="text-[11px] font-black uppercase tracking-[0.16em] text-indigo-600 mb-5">
-        Bottom line
+        {label}
       </p>
       <dl className="divide-y divide-slate-100">
         {points.map((p) => (

@@ -50,13 +50,14 @@ export interface Competitor {
   betterFitFor: string[] // honest, specific strengths
   pricingModel?: 'onetime' | 'subscription' | 'seat' // default onetime; subscription/seat platforms do not sell per-volume verification
   pricingBasisNote?: string // footnote under the pricing ladder when the numbers are not one-time per-volume prices
+  estimateNote?: string // replaces the generic "third-party estimate" footnote when the estimate is our own arithmetic
 }
 
 // The date all competitor facts here were checked. Human-formatted by
 // LastVerifiedNote. If you refresh a vendor, bump its lastVerified, not this.
 export const CHECKED_ON = '2026-08-06'
 
-// ── Independent benchmark ────────────────────────────────────────────────────
+// ── LeadMagic benchmark (a vendor test) ────────────────────────────────────────────────────
 // LeadMagic, published 25 Feb 2026: 10,000 real B2B emails, 28% on catch-all
 // domains, run within 48 hours. The caveat is mandatory wherever this is cited
 // and is baked into BenchmarkCallout so it cannot be dropped by accident.
@@ -124,7 +125,7 @@ export const COMPETITORS: Record<string, Competitor> = {
     benchmarkAccuracy: '97.8%',
     benchmarkCatchAllResolved: '12%',
     betterFitFor: [
-      'A bundled deliverability suite Giggal has no equivalent for: inbox placement testing, DMARC monitoring, blacklist monitoring and email warmup',
+      'A bundled deliverability suite Giggal.ai has no equivalent for: inbox placement testing, DMARC monitoring, blacklist monitoring and email warmup',
       'A larger public review corpus',
       'No charge for duplicate or unknown results',
     ],
@@ -155,7 +156,7 @@ export const COMPETITORS: Record<string, Competitor> = {
     benchmarkCatchAllResolved: '8%',
     betterFitFor: [
       'A much larger integration surface, roughly 80 or more native integrations including Salesforce, HubSpot and Marketo',
-      'List cleaning that runs natively inside a CRM, which Giggal does not do',
+      'List cleaning that runs natively inside a CRM, which Giggal.ai does not do',
       'A natural fit if your contact data already lives in ZoomInfo',
     ],
   },
@@ -184,7 +185,7 @@ export const COMPETITORS: Record<string, Competitor> = {
     benchmarkAccuracy: null,
     benchmarkCatchAllResolved: null,
     betterFitFor: [
-      'Unlimited free single verifications, which Giggal has no equivalent for',
+      'Unlimited free single verifications, which Giggal.ai has no equivalent for',
       'A CRM Sync feature that verifies new contacts automatically each day',
       'A wider automation surface: a ChatGPT GPT, a Claude Code plugin, published AI skills, an n8n node and a Google Sheets add-on',
       '306 G2 reviews against Giggal’s smaller review corpus',
@@ -312,7 +313,7 @@ export const COMPETITORS: Record<string, Competitor> = {
     benchmarkAccuracy: null,
     benchmarkCatchAllResolved: null,
     betterFitFor: [
-      'An Email Toxicity Check that flags spam traps and complainers, which Giggal does not offer',
+      'An Email Toxicity Check that flags spam traps and complainers, which Giggal.ai does not offer',
       'The highest review scores among dedicated verifiers, 4.8 on G2 and 4.9 on Capterra',
       'A mature real-time verification API and a deliverability toolkit',
       'SOC 2 Type II and GDPR compliance',
@@ -555,7 +556,7 @@ export const COMPETITORS: Record<string, Competitor> = {
     benchmarkAccuracy: null,
     benchmarkCatchAllResolved: null,
     betterFitFor: [
-      'A leading email finder and domain search, which Giggal does not do',
+      'A leading email finder and domain search, which Giggal.ai does not do',
       'Built-in cold outreach campaigns from the same tool',
       'A very large integration surface and public API',
       'A strong fit if prospecting and verifying in one platform matters more than price',
@@ -629,7 +630,7 @@ export const COMPETITORS: Record<string, Competitor> = {
     benchmarkAccuracy: null,
     benchmarkCatchAllResolved: null,
     betterFitFor: [
-      'A very large B2B contact and company database, which Giggal does not offer',
+      'A very large B2B contact and company database, which Giggal.ai does not offer',
       'Sales engagement, sequences and a dialer in one platform',
       'A free-forever starter plan',
       'A fit when you need data and outreach, not just verification',
@@ -638,15 +639,18 @@ export const COMPETITORS: Record<string, Competitor> = {
 
   // ── Mid-tier verifiers ──────────────────────────────────────────────────────
 
-  // Catch-all specialist. Validates catch-all (and SEG-protected) addresses where
-  // others return Unknown, 98.7% accuracy, 200 free credits. Pay-as-you-go is a
-  // flat $0.008 per credit (10k $80, 100k $800); "Deep" catch-all verification
-  // costs 3 credits per email. 1M is enterprise/demo-quote, so left unknown.
+  // Catch-all specialist. Rechecked live 2026-11-27: pay-as-you-go is still a
+  // flat $0.008 per credit (10k $80, 100k $800), credits never expire. Monthly
+  // plans: Starter $47 (6,000), Growth $97 (15,000), Pro $497 (100,000), plan
+  // credits roll over; above 100k a month is Contact Sales. Quick Verification is
+  // 1 credit and covers standard, catch-all and SEG-protected domains. Deep
+  // Verification is 3 credits and sends real emails, final results in 72 hours.
+  // "All purchases are final." The 98.7% figure is no longer on its pages.
   scrubby: {
     slug: 'scrubby',
     name: 'Scrubby',
     pricingUrl: 'https://scrubby.io/pricing',
-    lastVerified: '2026-08-12',
+    lastVerified: '2026-11-27',
     startingPrice: null,
     tiers: [
       { credits: 10000, totalUsd: 80, perEmailUsd: 0.008, status: 'verified' },
@@ -657,28 +661,29 @@ export const COMPETITORS: Record<string, Competitor> = {
     freeTier: '200 credits',
     creditsExpire: 'Pay-as-you-go credits never expire; plan credits roll over',
     chargesForUnknown: null,
-    resolvesCatchAll: true, // validates catch-all where others return Unknown
-    catchAllCreditCost: 'Deep (catch-all) verification is 3 credits per email',
+    resolvesCatchAll: true, // Quick Verification covers catch-all domains
+    catchAllCreditCost: '1 credit on Quick Verification; Deep Verification is 3 credits and takes up to 72 hours',
     advertisesSegSupport: true, // page: "standard, catch-all, and SEG-protected domains"
-    claimedAccuracy: 'Claims 98.7%',
+    claimedAccuracy: 'Not published on its pricing page',
     benchmarkAccuracy: null,
     benchmarkCatchAllResolved: null,
     betterFitFor: [
-      'A tool built specifically to recover catch-all and risky addresses',
-      'A 200-credit free tier to test on your own list',
-      'Both pay-as-you-go and subscription billing',
+      'A Deep Verification option that sends real emails to hard-to-verify addresses',
+      'A 200-credit free tier with no card',
+      'Both pay-as-you-go and monthly plans, with plan credits that roll over',
       'A single, focused job rather than a broad suite',
     ],
   },
 
-  // Persistent (pay-as-you-go) credit table read from the /plans page: 10k $60,
-  // 100k $320, 1M $1,350; entry $4 for 500 credits; 100 free credits a day;
-  // credits never expire. 99% accuracy claim. Flags catch-all.
+  // Persistent (pay-as-you-go) credit table read from the /plans slider,
+  // rechecked live 2026-11-27: 10k $60, 100k $320, 1M $1,350; entry $4 for 500
+  // credits; 100 free credits a day; credits never expire. 99% accuracy claim,
+  // "50+" marketing tool integrations, ISO 27001 and GDPR badges. Flags catch-all.
   quickemailverification: {
     slug: 'quickemailverification',
     name: 'QuickEmailVerification',
     pricingUrl: 'https://quickemailverification.com/plans',
-    lastVerified: '2026-08-12',
+    lastVerified: '2026-11-27',
     startingPrice: { credits: 500, totalUsd: 4 },
     tiers: [
       { credits: 10000, totalUsd: 60, perEmailUsd: 0.006, status: 'verified' },
@@ -703,15 +708,17 @@ export const COMPETITORS: Record<string, Competitor> = {
     ],
   },
 
-  // Subscription auto-cleaning tool (Lite $29/mo for 10k, Business $59/mo, Pro
-  // $209/mo), but it also sells one-time PREPAID credits read from its own page
-  // JS: 10k $40, 100k $300, 1M $1,200. Prepaid credits never expire. 7-day trial.
-  // Connects to ~40 email platforms and cleans lists daily. Flags catch-all.
+  // Subscription auto-cleaning tool (Lite $29/mo for 10,000, Business $59/mo for
+  // 25,000, Pro $209/mo for 125,000; card required, 7-day trial). It also sells
+  // one-time PREPAID credits, rechecked live 2026-11-27: 1k $8, 10k $40, 100k
+  // $300, 1M $1,200. Prepaid credits never expire. Every account gets 500 free
+  // verifications a month. 41 native email platform integrations; cleans lists
+  // daily and fixes typos. Flags catch-all.
   mailfloss: {
     slug: 'mailfloss',
     name: 'Mailfloss',
     pricingUrl: 'https://mailfloss.com/pricing/',
-    lastVerified: '2026-08-12',
+    lastVerified: '2026-11-27',
     startingPrice: { credits: 1000, totalUsd: 8 },
     tiers: [
       { credits: 10000, totalUsd: 40, perEmailUsd: 0.004, status: 'verified' },
@@ -719,7 +726,7 @@ export const COMPETITORS: Record<string, Competitor> = {
       { credits: 1000000, totalUsd: 1200, perEmailUsd: 0.0012, status: 'verified' },
     ],
     minimumPurchase: null,
-    freeTier: '7-day free trial',
+    freeTier: '500 verifications a month, plus a 7-day trial on subscriptions',
     creditsExpire: 'Prepaid credits never expire; subscription credits reset monthly',
     chargesForUnknown: null,
     resolvesCatchAll: false,
@@ -730,21 +737,24 @@ export const COMPETITORS: Record<string, Competitor> = {
     benchmarkCatchAllResolved: null,
     betterFitFor: [
       'Automatic daily cleaning wired directly into your email platform',
-      'Around 40 native integrations, including Mailchimp, Klaviyo and HubSpot',
+      '41 native integrations, including Mailchimp, Klaviyo and HubSpot',
       'A set-and-forget subscription rather than manual uploads',
       'Both subscription and prepaid-credit options',
     ],
   },
 
-  // Site redesigned since last check. Real pay-as-you-go tiers read from its
-  // page: 10k $29, 100k $159, 1M $579. 1,000 free credits, no card; PAYG credits
-  // never expire. Now RESOLVES catch-all via a "Deep catch-all" add-on that costs
-  // 5 credits fresh (3 if cached) per catch-all, with unresolved ones refunded.
+  // Rechecked live 2026-11-27. Pay-as-you-go packs unchanged: 5k $19, 10k $29,
+  // 100k $159, 1M $579. It now also sells monthly subscriptions (Starter 6,500
+  // for $19 up to Scale 1,000,000 for $499). 1,000 free credits a month with a
+  // work email, no card. Credits never expire, from packs or subscriptions.
+  // "Catch-all evidence" is now included in the 1-credit standard price (the old
+  // 5-credit add-on is gone); unconfirmed results are not billed. No native app
+  // integrations yet (CSV and API guides only).
   bounceless: {
     slug: 'bounceless',
     name: 'Bounceless',
     pricingUrl: 'https://bounceless.io/pricing',
-    lastVerified: '2026-08-12',
+    lastVerified: '2026-11-27',
     startingPrice: { credits: 5000, totalUsd: 19 },
     tiers: [
       { credits: 10000, totalUsd: 29, perEmailUsd: 0.0029, status: 'verified' },
@@ -752,20 +762,20 @@ export const COMPETITORS: Record<string, Competitor> = {
       { credits: 1000000, totalUsd: 579, perEmailUsd: 0.000579, status: 'verified' },
     ],
     minimumPurchase: null,
-    freeTier: '1,000 credits',
-    creditsExpire: 'Pay-as-you-go credits never expire',
-    chargesForUnknown: null,
+    freeTier: '1,000 credits a month with a work email, no card',
+    creditsExpire: 'Credits never expire, from packs or subscriptions',
+    chargesForUnknown: false, // "Unconfirmed verification results are not billed."
     resolvesCatchAll: true,
-    catchAllCreditCost: 'Deep catch-all resolution, 5 credits fresh or 3 cached',
+    catchAllCreditCost: 'Catch-all evidence included in the 1-credit check',
     advertisesSegSupport: false,
     claimedAccuracy: '-',
     benchmarkAccuracy: null,
     benchmarkCatchAllResolved: null,
     betterFitFor: [
-      'A sliding volume rate, as low as $0.28 per 1,000 at high volume',
-      'A simple, low-cost pay-as-you-go model',
-      'Bulk list cleaning and a real-time API',
-      'A straightforward single-purpose verifier',
+      'A free allowance of 1,000 credits every month on a work email',
+      'Both one-time packs and monthly subscriptions, with credits that never expire',
+      'Extra tools in one account: sender health, inbox placement and signup form checks',
+      'A low price at very high volume, $579 for a million',
     ],
   },
 
@@ -776,14 +786,16 @@ export const COMPETITORS: Record<string, Competitor> = {
   // finding, so their tier figures are the smallest monthly plan that covers
   // that volume, not a one-time price.
 
-  // Read live from findymail.com/pricing. Only one standard plan is published
-  // (Starter, $99/mo, 5,000 finder + 5,000 verifier credits); everything above
-  // that is "Enterprise, custom", so no tier here can be given a number.
+  // Rechecked live 2026-11-27. findymail.com/pricing now leads with usage-based
+  // plans (Individual $99, Pro $249, Team $399, Scale $999 a month) that list no
+  // credit count. The credit-based Starter plan is unchanged at $99 a month for
+  // 5,000 finder + 5,000 verifier credits; above that is Enterprise, custom. So
+  // no verification volume here can be given a number. SOC 2 Type 2, EU hosted.
   findymail: {
     slug: 'findymail',
     name: 'Findymail',
     pricingUrl: 'https://www.findymail.com/pricing',
-    lastVerified: '2026-08-21',
+    lastVerified: '2026-11-27',
     startingPrice: null,
     pricingModel: 'subscription',
     tiers: [
@@ -792,7 +804,7 @@ export const COMPETITORS: Record<string, Competitor> = {
       { credits: 1000000, totalUsd: null, perEmailUsd: null, status: 'unknown', note: 'Enterprise' },
     ],
     pricingBasisNote:
-      'Findymail publishes one standard plan, Starter at $99 a month, which carries 5,000 finder credits and 5,000 verifier credits. Anything above that is quoted as Enterprise, so there is no published figure at 10,000, 100,000 or a million verifications a month. Giggal.ai figures are one-time pay-as-you-go.',
+      'Findymail sells usage-based plans from $99 to $999 a month that list no credit count, and one credit-based plan, Starter at $99 a month with 5,000 finder credits and 5,000 verifier credits. Anything above that is quoted as Enterprise, so there is no published figure at 10,000, 100,000 or a million verifications a month. Giggal.ai figures are one-time pay-as-you-go.',
     minimumPurchase: null,
     freeTier: '10 credits on signup, no card',
     creditsExpire: 'Unused credits roll over up to twice the monthly allowance',
@@ -804,39 +816,44 @@ export const COMPETITORS: Record<string, Competitor> = {
     benchmarkAccuracy: null,
     benchmarkCatchAllResolved: null,
     betterFitFor: [
-      'Finding email addresses in the first place, which Giggal does not do at all',
+      'Finding email addresses in the first place, which Giggal.ai does not do at all',
       'A bounce-rate guarantee backed by refunded credits',
-      'Native scraping from Sales Navigator and Apollo exports',
-      'A single subscription covering both finding and verifying',
+      'A Chrome extension that finds and verifies emails on LinkedIn and Sales Navigator',
+      'SOC 2 Type 2 and hosting in the EU',
     ],
   },
 
-  // Read live from leadmagic.io/pricing (monthly billing shown). 10k/mo lands on
-  // Growth, 100k/mo on Ultimate; a million a month is above the published plans.
-  // LeadMagic is also the publisher of the catch-all benchmark cited elsewhere in
-  // this file, in which it ranked itself first.
+  // Rechecked live 2026-11-27 (leadmagic.io/pricing, monthly billing). Plans:
+  // Essential $99 (5,000 credits), Growth $249 (20,000), Professional $499
+  // (50,000), Ultimate $849 (100,000); the old $49.99 Basic plan is gone. One
+  // shared credit pool. Email Validation costs 0.25 credits per conclusive
+  // result and unknown results are free, so 10,000 validations is 2,500 credits
+  // (Essential) and 100,000 is 25,000 credits (Professional). A million is
+  // 250,000 credits, above Ultimate. No free credits. Rollover up to 2x the
+  // monthly allowance. LeadMagic also publishes the catch-all benchmark cited
+  // elsewhere in this file, in which it ranked itself first.
   leadmagic: {
     slug: 'leadmagic',
     name: 'LeadMagic',
     pricingUrl: 'https://leadmagic.io/pricing',
-    lastVerified: '2026-08-21',
+    lastVerified: '2026-11-27',
     startingPrice: null,
     pricingModel: 'subscription',
     tiers: [
-      { credits: 10000, totalUsd: 249, perEmailUsd: null, status: 'verified', perMonth: true },
-      { credits: 100000, totalUsd: 849, perEmailUsd: null, status: 'verified', perMonth: true },
+      { credits: 10000, totalUsd: 99, perEmailUsd: null, status: 'verified', perMonth: true },
+      { credits: 100000, totalUsd: 499, perEmailUsd: null, status: 'verified', perMonth: true },
       { credits: 1000000, totalUsd: null, perEmailUsd: null, status: 'unknown', note: 'Enterprise' },
     ],
     pricingBasisNote:
-      'LeadMagic is a monthly subscription with a shared credit pool: Basic $49.99 (2,000 credits), Essential $99 (5,000), Growth $249 (20,000), Professional $499 (50,000), Ultimate $849 (100,000). The figures above are the smallest monthly plan that covers that volume, billed monthly; annual billing is roughly 17% less. Giggal.ai figures are one-time pay-as-you-go.',
+      'LeadMagic is a monthly subscription with one credit pool: Essential $99 (5,000 credits), Growth $249 (20,000), Professional $499 (50,000), Ultimate $849 (100,000). A conclusive validation costs 0.25 credits and an unknown result is free. The figures above are the smallest monthly plan that covers that many validations. Annual billing gives two months free. Giggal.ai figures are one-time pay-as-you-go.',
     minimumPurchase: null,
-    freeTier: 'Not published',
-    creditsExpire: 'Credits roll over up to two months on Essential and above; Basic has no rollover',
-    chargesForUnknown: null,
-    resolvesCatchAll: true, // publishes its own catch-all resolution benchmark
-    catchAllCreditCost: 'Not published',
+    freeTier: 'No free credits',
+    creditsExpire: 'Unused monthly credits roll over, up to 2 times the monthly allowance',
+    chargesForUnknown: false, // "Unknown results are free"
+    resolvesCatchAll: true, // separate Catch-All Validation product
+    catchAllCreditCost: '0.25 credits per conclusive result; unknown is free',
     advertisesSegSupport: false,
-    claimedAccuracy: '-',
+    claimedAccuracy: 'Claims 99.5% for validation',
     benchmarkAccuracy: null,
     benchmarkCatchAllResolved: null,
     betterFitFor: [
@@ -847,6 +864,9 @@ export const COMPETITORS: Record<string, Competitor> = {
     ],
   },
 
+  // Rechecked live 2026-11-27, unchanged apart from a new custom-priced API plan
+  // and a longer integration list (Outreach, Salesloft, HubSpot, Apollo,
+  // ZoomInfo, Clay). It says it never sends emails to verify a catch-all.
   // Read live from allegrow.co/plans. Starter is $99/mo for 5,000 contacts with
   // add-on credits at $8 per 1,000, so 10,000 a month is $99 + $40 = $139 and is
   // marked an estimate because Allegrow does not publish that combination as a
@@ -856,7 +876,7 @@ export const COMPETITORS: Record<string, Competitor> = {
     slug: 'allegrow',
     name: 'Allegrow',
     pricingUrl: 'https://www.allegrow.co/plans',
-    lastVerified: '2026-08-21',
+    lastVerified: '2026-11-27',
     startingPrice: null,
     pricingModel: 'subscription',
     tiers: [
@@ -866,6 +886,7 @@ export const COMPETITORS: Record<string, Competitor> = {
     ],
     pricingBasisNote:
       'Allegrow is a monthly subscription. Starter is $99 a month for 5,000 contacts, with add-on credits at $8 per 1,000, so 10,000 a month works out at $139; that is our arithmetic on their published rates, not a plan they list. The 100,000 and 1,000,000 rows are Scale Plus Unlimited at $1,340 a month billed annually, which is unlimited verification. Giggal.ai figures are one-time pay-as-you-go.',
+    estimateNote: 'Our calculation from Allegrow’s published rates, not a plan Allegrow lists.',
     minimumPurchase: null,
     freeTier: '14-day trial covering up to 1,000 addresses',
     creditsExpire: 'Plan allowance is monthly; the trial expires after 14 days',
@@ -877,110 +898,120 @@ export const COMPETITORS: Record<string, Competitor> = {
     benchmarkAccuracy: null,
     benchmarkCatchAllResolved: null,
     betterFitFor: [
-      'An unlimited verification tier, which Giggal has no equivalent for',
+      'An unlimited verification tier, which Giggal.ai has no equivalent for',
       'Sender reputation scoring and inbox placement monitoring alongside verification',
       'Native HubSpot, Outreach and Salesloft integrations with SSO and SOC 2 reporting',
       'A published false-positive study on fictional addresses',
     ],
   },
 
-  // listmint.io/pricing renders its plan figures client-side and could not be
-  // read directly, so every tier stays 'unknown' rather than being copied from a
-  // third-party summary. The product behaviour below is from Listmint's own
-  // published pages.
+  // Rechecked live 2026-11-27. The plan figures are now readable on the
+  // listmint.io home page: Starter $99/mo (20,000 standard + 5,000 catch-all
+  // credits), Agency $187/mo (50,000 standard + 10,000 catch-all), Enterprise on
+  // request. 10k fits Starter; 100k and 1M are above Agency, so Enterprise.
+  // Catch-all credits are a separate, smaller and more expensive pool, and
+  // Listmint says it "manually verifies catch-alls".
   listmint: {
     slug: 'listmint',
     name: 'Listmint',
     pricingUrl: 'https://listmint.io/pricing',
-    lastVerified: '2026-08-21',
+    lastVerified: '2026-11-27',
     startingPrice: null,
     pricingModel: 'subscription',
     tiers: [
-      { credits: 10000, totalUsd: null, perEmailUsd: null, status: 'unknown', note: 'Not published' },
-      { credits: 100000, totalUsd: null, perEmailUsd: null, status: 'unknown', note: 'Not published' },
-      { credits: 1000000, totalUsd: null, perEmailUsd: null, status: 'unknown', note: 'Not published' },
+      { credits: 10000, totalUsd: 99, perEmailUsd: null, status: 'verified', perMonth: true },
+      { credits: 100000, totalUsd: null, perEmailUsd: null, status: 'unknown', note: 'Enterprise' },
+      { credits: 1000000, totalUsd: null, perEmailUsd: null, status: 'unknown', note: 'Enterprise' },
     ],
     pricingBasisNote:
-      'Listmint splits its allowance into standard credits and a separate, smaller pool of catch-all credits, and its pricing page builds those figures in the browser, so we could not read them directly. We would rather show nothing than publish a number we did not verify. Giggal.ai figures are one-time pay-as-you-go.',
+      'Listmint is a monthly subscription with two credit pools. Starter is $99 a month for 20,000 standard credits and 5,000 catch-all credits. Agency is $187 a month for 50,000 standard and 10,000 catch-all credits. Larger volumes are Enterprise, priced on request. Giggal.ai figures are one-time pay-as-you-go.',
     minimumPurchase: null,
-    freeTier: 'Not published',
+    freeTier: 'Free start, amount not published',
     creditsExpire: 'Not published',
     chargesForUnknown: null,
-    resolvesCatchAll: true, // returns catch_all_valid / catch_all_invalid
-    catchAllCreditCost: 'Billed from a separate catch-all credit pool',
+    resolvesCatchAll: true, // "manually verifies catch-alls"
+    catchAllCreditCost: 'Separate catch-all credits: 5,000 a month on the $99 plan',
     advertisesSegSupport: false,
     claimedAccuracy: '-',
     benchmarkAccuracy: null,
     benchmarkCatchAllResolved: null,
     betterFitFor: [
-      'Explicit catch_all_valid and catch_all_invalid result codes, which are easy to filter on',
-      'Real-time verification aimed at signup forms',
-      'A published comparison library against other verifiers',
+      'A catch-all check that Listmint says it runs by hand',
+      'Real-time catch-all verification',
+      'A large monthly allowance of standard credits on the entry plan',
     ],
   },
 
-  // Read live from anymailfinder.com/pricing, monthly billing. The published
-  // monthly ladder tops out at 100,000 credits a month, so a million is not
-  // covered by a standard plan.
+  // Rechecked live 2026-11-27 (anymailfinder.com/pricing, monthly billing). The
+  // ladder is unchanged: 400 credits $29 up to 100,000 credits $799. Verifying an
+  // email from another source costs 0.2 credits, "charged for every check", so
+  // 10,000 verifications is 2,000 credits ($89 plan) and 100,000 is 20,000
+  // credits ($299 plan, 25,000 credits). A million is 200,000 credits a month,
+  // above the monthly ladder. Trial: 7 days, 100 credits, card checked.
   anymailfinder: {
     slug: 'anymailfinder',
     name: 'Anymail Finder',
     pricingUrl: 'https://www.anymailfinder.com/pricing',
-    lastVerified: '2026-08-21',
+    lastVerified: '2026-11-27',
     startingPrice: null,
     pricingModel: 'subscription',
     tiers: [
-      { credits: 10000, totalUsd: 199, perEmailUsd: null, status: 'verified', perMonth: true },
-      { credits: 100000, totalUsd: 799, perEmailUsd: null, status: 'verified', perMonth: true },
+      { credits: 10000, totalUsd: 89, perEmailUsd: null, status: 'verified', perMonth: true },
+      { credits: 100000, totalUsd: 299, perEmailUsd: null, status: 'verified', perMonth: true },
       { credits: 1000000, totalUsd: null, perEmailUsd: null, status: 'unknown', note: 'Enterprise' },
     ],
     pricingBasisNote:
-      'Anymail Finder is a monthly subscription with a published credit ladder from 400 credits at $29 a month up to 100,000 at $799. The figures above are the plans at those volumes, billed monthly; annual billing is around a third less. The monthly ladder stops at 100,000, so a million a month is not a published plan. Giggal.ai figures are one-time pay-as-you-go.',
+      'Anymail Finder is a monthly subscription with a credit ladder from 400 credits at $29 a month up to 100,000 at $799. Verifying an email you found elsewhere costs 0.2 credits per check. The figures above are the smallest monthly plans that cover that many checks. Annual billing saves 33%. A million checks a month is above the monthly ladder. Giggal.ai figures are one-time pay-as-you-go.',
     minimumPurchase: null,
-    freeTier: '100 credits on signup, card verification required',
-    creditsExpire: 'Credits roll over with no cap while the subscription is active, and expire if you cancel',
-    chargesForUnknown: false,
-    resolvesCatchAll: true, // "We verify these anyway, so you don't lose valid contacts"
-    catchAllCreditCost: '1 credit, the same as any other verification',
+    freeTier: '7-day trial with 100 credits; card checked, not charged',
+    creditsExpire: 'Credits roll over with no cap while the subscription is active, and expire at the end of the billing period if you cancel',
+    chargesForUnknown: true, // verifier: 0.2 credits, "charged for every check"
+    resolvesCatchAll: true, // "only the few we genuinely can't reach stay risky"
+    catchAllCreditCost: '0.2 credits per check, the same as any other verification',
     advertisesSegSupport: false,
     claimedAccuracy: 'Claims 98.9% accuracy at 86.4% coverage',
     benchmarkAccuracy: null,
     benchmarkCatchAllResolved: null,
     betterFitFor: [
-      'Finding email addresses from a name and domain, which Giggal does not do',
+      'Finding email addresses from a name and domain, which Giggal.ai does not do',
       'A stated delivery guarantee of 97% or better',
       'Credits that roll over with no cap while you stay subscribed',
       'A long-running brand with a large published content library',
     ],
   },
 
-  // Read live from no2bounce.com/pricing. One-time credit packages, and the
-  // closest competitor here on terms: catch-all, named gateways and
-  // never-expiring credits, at a higher price than ours.
+  // Rechecked live 2026-11-27 in the "All packages" table on
+  // no2bounce.com/pricing (pay as you go): 10k $20, 25k $49, 50k $85, 100k $149,
+  // 250k $299, 500k $399, 1M $679, up to 50M. Monthly auto-refill plans are 15%
+  // less and yearly 20% less. 100 free credits, no card. Credits never expire.
+  // To confirm a catch-all mailbox it sends controlled test messages. The pages
+  // now claim 99.6% accuracy. Gateways were named on the August check.
   no2bounce: {
     slug: 'no2bounce',
     name: 'no2bounce',
     pricingUrl: 'https://www.no2bounce.com/pricing',
-    lastVerified: '2026-08-21',
-    startingPrice: { credits: 10000, totalUsd: 17 },
+    lastVerified: '2026-11-27',
+    startingPrice: { credits: 10000, totalUsd: 20 },
     tiers: [
-      { credits: 10000, totalUsd: 17, perEmailUsd: 0.0017, status: 'verified' },
-      { credits: 100000, totalUsd: 126, perEmailUsd: 0.00126, status: 'verified' },
-      { credits: 1000000, totalUsd: 721, perEmailUsd: 0.000721, status: 'verified' },
+      { credits: 10000, totalUsd: 20, perEmailUsd: 0.002, status: 'verified' },
+      { credits: 100000, totalUsd: 149, perEmailUsd: 0.00149, status: 'verified' },
+      { credits: 1000000, totalUsd: 679, perEmailUsd: 0.000679, status: 'verified' },
     ],
     minimumPurchase: null,
     freeTier: '100 credits, no card, credits never expire',
     creditsExpire: 'Credits never expire, with no monthly usage limit',
     chargesForUnknown: null,
-    resolvesCatchAll: true,
+    resolvesCatchAll: true, // sends test messages to confirm catch-all mailboxes
     catchAllCreditCost: '1 credit per email, the same as standard',
-    advertisesSegSupport: true, // names Proofpoint, Mimecast and Cisco
-    claimedAccuracy: 'Claims over 97% on catch-all addresses',
+    advertisesSegSupport: true, // named Proofpoint, Mimecast and Cisco (Aug check)
+    claimedAccuracy: 'Claims 99.6%',
     benchmarkAccuracy: null,
     benchmarkCatchAllResolved: null,
     betterFitFor: [
-      'A published price ladder with seven volume steps',
+      'A long price ladder, from 10,000 credits up to 50 million',
       'Credits that never expire, the same as ours',
+      'Monthly and yearly plans at 15% and 20% less than pay-as-you-go',
+      'An email finder and domain search on the same credits',
     ],
   },
 
@@ -1014,7 +1045,7 @@ export const COMPETITORS: Record<string, Competitor> = {
     benchmarkAccuracy: null,
     benchmarkCatchAllResolved: null,
     betterFitFor: [
-      'Actually sending the campaign, which Giggal does not do: inbox rotation, warmup and sequencing in one platform',
+      'Actually sending the campaign, which Giggal.ai does not do: inbox rotation, warmup and sequencing in one platform',
       'A 450 million contact B2B database built into the same subscription',
       'Verification that happens automatically as leads enter a campaign',
       'A much larger user base and review history',

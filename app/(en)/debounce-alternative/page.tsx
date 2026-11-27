@@ -65,7 +65,7 @@ const faqs: FaqItem[] = [
 ]
 
 const sectionTitle = 'text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight'
-const proseP = 'text-slate-600 leading-relaxed text-sm md:text-base font-medium'
+const proseP = 'text-slate-600 leading-relaxed text-sm md:text-base font-medium max-w-4xl'
 
 export default function DeBounceAlternativePage() {
   return (
@@ -82,8 +82,8 @@ export default function DeBounceAlternativePage() {
       <Navbar />
 
       {/* ── HERO ─────────────────────────────────────────────── */}
-      <section className="max-w-3xl mx-auto px-6 pt-28 md:pt-32 pb-12 text-center space-y-6">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900">
+      <section className="max-w-6xl mx-auto px-6 pt-28 md:pt-32 pb-12 text-center space-y-6">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900 max-w-5xl mx-auto">
           A{' '}
           <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-600 bg-clip-text text-transparent">
             DeBounce alternative
@@ -114,7 +114,7 @@ export default function DeBounceAlternativePage() {
       </section>
 
       {/* ── BOTTOM LINE ──────────────────────────────────────── */}
-      <section className="max-w-3xl mx-auto px-6 pb-16">
+      <section className="max-w-6xl mx-auto px-6 pb-16">
         <Bluf
           points={[
             { k: 'Catch-all', v: '10 credits at DeBounce, a separate product. 1.5 here, in the same run.' },
@@ -126,7 +126,7 @@ export default function DeBounceAlternativePage() {
       </section>
 
       {/* ── THE ARITHMETIC ───────────────────────────────────── */}
-      <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>The catch-all math</h2>
         <p className={proseP}>
           A 10,000-address list, 30% on catch-all domains. That is 7,000 ordinary addresses and 3,000
@@ -156,7 +156,7 @@ export default function DeBounceAlternativePage() {
       </section>
 
       {/* ── WHAT YOU GET ─────────────────────────────────────── */}
-      <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>What the catch-all credits resolve</h2>
         <p className={proseP}>
           DeBounce does return results through its catch-all product, so this is not paying for
@@ -168,7 +168,7 @@ export default function DeBounceAlternativePage() {
       </section>
 
       {/* ── STANDARD PRICING ─────────────────────────────────── */}
-      <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>DeBounce standard pricing</h2>
         <p className={proseP}>
           Outside catch-all, DeBounce is $25 at 10,000, $135 at 100,000 and $750 at a million, read
@@ -178,13 +178,13 @@ export default function DeBounceAlternativePage() {
       </section>
 
       {/* ── FEATURE TABLE ────────────────────────────────────── */}
-      <section className="cv-section max-w-4xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>DeBounce vs Giggal.ai</h2>
         <ComparisonTable competitor={competitor} />
       </section>
 
       {/* ── TEST IT ──────────────────────────────────────────── */}
-      <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Try it on your own list</h2>
         <ol className="space-y-3">
           {[
@@ -203,7 +203,7 @@ export default function DeBounceAlternativePage() {
       </section>
 
       {/* ── HEAD-TO-HEAD ─────────────────────────────────────── */}
-      <HeadToHeadComparisons slug="debounce" />
+      <HeadToHeadComparisons slug="debounce" wide />
 
       {/* ── FAQ ──────────────────────────────────────────────── */}
       <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-10">
@@ -215,7 +215,7 @@ export default function DeBounceAlternativePage() {
 
       <AltCtaBand headline="Run the catch-all math on your own list" />
 
-      <RelatedLinks />
+      <RelatedLinks wide />
 
       <Footer />
     </main>

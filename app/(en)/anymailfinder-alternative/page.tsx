@@ -1,49 +1,87 @@
 import AltPageScaffold, { altMetadata, type AltPageConfig } from '@/components/alternatives/AltPageScaffold'
 
+// Rewritten 2026-11-27 and taken out of noindex. Ahrefs US: "anymailfinder"
+// 350, "anymailfinder alternative" 150, "any mail finder" 100, "anymailfinder
+// pricing" 60, "anymailfinder alternatives" 40. Searchers write it as one word,
+// so the H1 and title do too. Facts checked on anymailfinder.com the same day.
 const cfg: AltPageConfig = {
   slug: 'anymailfinder',
-  metaTitle: 'Anymail Finder Alternative | Catch-All Verifier | Giggal.ai',
-  ogTitle: 'An Anymail Finder Alternative Built Only for Verification',
-  desc: 'Anymail Finder verifies catch-all at $199 a month for 10,000 credits. Giggal.ai is a dedicated catch-all email verifier at $9.90 per 10,000, bought once.',
+  metaTitle: 'Anymailfinder Alternative for Email Verification | Giggal.ai',
+  ogTitle: 'Anymailfinder alternative for verifying email lists',
+  desc: 'Looking for an Anymailfinder alternative? Compare Anymail Finder pricing with Giggal.ai, a pay-as-you-go email verifier at $9.90 per 10,000 credits.',
   h1Article: 'An',
-  h1Tail: 'for verification alone',
+  h1Highlight: 'Anymailfinder alternative',
+  h1Tail: 'for lists you already have',
   heroP:
-    'Anymail Finder verifies catch-all addresses instead of skipping them, and says so clearly. It is also a finder sold on a monthly subscription, where 10,000 credits a month costs $199. If you already have the addresses, Giggal.ai does the verification half at $9.90 per 10,000, bought once.',
+    'Anymail Finder is built to find email addresses. Its verifier is a side tool, paid from a monthly plan. If your list already exists and you only need to verify it, Giggal.ai does that for $9.90 per 10,000 emails, with no subscription.',
   bluf: [
-    { k: 'Both resolve catch-all', v: 'Anymail Finder verifies accept-all addresses rather than flagging them risky.' },
-    { k: 'Shape', v: 'Anymail Finder finds and verifies. We verify only.' },
-    { k: 'Billing', v: '$199 a month for 10,000 credits there, against $9.90 per 10,000 bought once here.' },
-    { k: 'Gateways', v: 'We verify behind 15 named secure email gateways. Anymail Finder does not advertise SEG support.' },
+    { k: 'Main job', v: 'Anymail Finder finds emails. Giggal.ai verifies emails you already have.' },
+    { k: 'Price', v: 'A verifier check costs 0.2 credits, on plans from $29 a month. Giggal.ai is $9.90 for 10,000, bought once.' },
+    { k: 'Credits', v: 'Anymail Finder credits expire if you cancel. Giggal.ai credits never expire.' },
+    { k: 'Unknown', v: 'Anymail Finder charges for every check. Giggal.ai refunds the credit on unknown results.' },
   ],
-  catchAllHeading: 'How Giggal.ai verifies catch-all addresses',
+  about: {
+    heading: 'What is Anymail Finder?',
+    paragraphs: [
+      'Anymail Finder, also written Anymailfinder, is an email finder for B2B sales. You give it a name and a company, and it returns a verified work email. It can also search by domain, job title or LinkedIn URL.',
+      'It has a Chrome extension, bulk upload for up to 100,000 rows and an API. Finding a person’s email costs 1 credit, and only when a verified email is found.',
+      'Anymail Finder also has an email verifier for lists from other sources. Each check costs 0.2 credits and is charged every time. It returns valid, risky or invalid.',
+    ],
+  },
+  reasons: {
+    heading: 'Why people look for an Anymailfinder alternative',
+    items: [
+      { k: 'Monthly plan', v: 'Your credits stay only while you stay subscribed. If you cancel, they expire at the end of the billing period.' },
+      { k: 'Per check', v: 'The verifier charges 0.2 credits for every check, including addresses it cannot confirm.' },
+      { k: 'Card for trial', v: 'The 7-day trial asks for a card. Giggal.ai gives 1,000 free credits with no card.' },
+      { k: 'Gateways', v: 'Anymail Finder does not publish support for secure email gateways such as Proofpoint or Mimecast.' },
+    ],
+  },
+  catchAllHeading: 'How Anymail Finder and Giggal.ai handle catch-all emails',
   catchAllProse:
-    'Anymail Finder puts the problem well on its own site: most tools cannot confirm an address on an accept-all server, so they flag it risky and skip it, and you lose valid contacts. Both tools refuse to do that. Giggal.ai adds the gateway case on top. Proofpoint, Mimecast and Barracuda accept everything at the perimeter and filter internally, so from outside they behave like a catch-all, and Giggal.ai resolves mailboxes behind 15 named gateways. Anymail Finder claims 98.9% accuracy at 86.4% coverage; Giggal.ai claims 98.5% on standard business lists. Their headline number is the higher one, which is why the coverage figure next to it matters more than either.',
-  pricingHeading: 'Anymail Finder pricing vs Giggal.ai',
+    'Anymail Finder says it verifies most catch-all addresses as valid or invalid. The few it cannot reach stay risky. Giggal.ai also returns a result on catch-all addresses, at 1 credit each, and adds checks behind 15 named secure email gateways. When Giggal.ai cannot get an answer, the result is unknown and the credit goes back to you.',
+  pricingHeading: 'Anymail Finder pricing for email verification',
   pricingProse:
-    'Anymail Finder is a monthly subscription with a published ladder: 400 credits at $29, 1,000 at $49, 5,000 at $149, 10,000 at $199, 25,000 at $299, 50,000 at $499 and 100,000 at $799 a month. Annual billing is around a third cheaper. Credits roll over with no cap while you stay subscribed, and expire if you cancel. Giggal.ai is one-time: $9.90 for 10,000, $76 for 100,000, $680 for a million, with credits that never expire whether or not you buy again.',
-  featureNote: 'Anymail Finder is billed monthly and its credits cover finding as well as verifying, so its figures are monthly plan prices, not one-time. Its published monthly ladder stops at 100,000.',
-  testStep3: 'Compare the catch-all rows against what Anymail Finder returned for the same addresses.',
-  ctaHeadline: 'Verify the list you already have',
+    'Anymail Finder sells monthly plans from $29 for 400 credits up to $799 for 100,000 credits. Annual billing saves 33%. A verifier check costs 0.2 credits, so 10,000 checks use 2,000 credits.',
+  pricingExtra: [
+    'That puts 10,000 checks a month on the $89 plan, and 100,000 checks on the $299 plan. Unused credits roll over while you stay subscribed. Giggal.ai sells 10,000 credits for $9.90 and 100,000 for $76, once, with no expiry.',
+  ],
+  strengths: {
+    heading: 'When Anymail Finder is the better choice',
+    intro: 'Anymail Finder does things Giggal.ai does not. Pick it for these needs:',
+  },
+  others: {
+    heading: 'Other Anymailfinder alternatives',
+    intro: 'These tools find emails, verify them, or both. Prices are from each vendor’s site on 27 November 2026.',
+    items: [
+      { name: 'Findymail', text: 'Finds and verifies emails, with a Chrome extension for LinkedIn and Sales Navigator. Starter is $99 a month for 5,000 finder and 5,000 verifier credits.' },
+      { name: 'LeadMagic', text: 'A B2B data platform with email finding, mobile numbers and validation. Validation costs 0.25 credits per conclusive result, on plans from $99 a month.' },
+      { name: 'Scrubby', text: 'A verifier for catch-all and gateway-protected addresses. Pay-as-you-go credits cost $0.008 each and never expire.' },
+    ],
+  },
+  testHeading: 'Check an Anymail Finder export with Giggal.ai',
+  testStep3: 'Compare the rows Anymail Finder marked risky with the results Giggal.ai returns.',
+  ctaHeadline: 'Verify the emails you already found',
   faqs: [
     {
-      q: 'Is Giggal.ai a good Anymail Finder alternative?',
-      a: 'For verification, yes. Both resolve catch-all addresses rather than skipping them, but Giggal.ai is a dedicated verifier at $9.90 per 10,000 bought once, and it verifies behind 15 named secure email gateways. Anymail Finder also finds addresses from a name and domain, which Giggal.ai does not.',
+      q: 'What is the best Anymailfinder alternative?',
+      a: 'It depends on the job. To find emails, look at Findymail or LeadMagic. To verify a list you already have, Giggal.ai costs $9.90 per 10,000 credits, with no subscription and credits that never expire.',
     },
     {
-      q: 'Does Giggal.ai find email addresses?',
-      a: 'No. Giggal.ai verifies addresses you already have. If you need discovery, Anymail Finder is the right tool for that half of the job.',
+      q: 'How much does Anymail Finder cost?',
+      a: 'Monthly plans run from $29 for 400 credits to $799 for 100,000 credits. Annual billing saves 33%. Verifying an email from another source costs 0.2 credits.',
     },
     {
-      q: 'How do the accuracy claims compare?',
-      a: 'Anymail Finder claims 98.9% accuracy at 86.4% verified coverage, with a 97% delivery guarantee. Giggal.ai claims 98.5% accuracy on standard business lists and typical bounce rates under 3% on cleaned lists. Both are vendor claims, so test them on your own data.',
+      q: 'Does Anymail Finder have a free trial?',
+      a: 'Yes. It has a 7-day trial with 100 credits. You add a card, which is checked but not charged. Giggal.ai gives 1,000 free credits with no card.',
     },
     {
-      q: 'What happens to credits if I stop paying?',
-      a: 'On Anymail Finder credits roll over with no cap while the subscription is active, then expire at the end of the billing period once you cancel. Giggal.ai credits are bought outright and never expire.',
+      q: 'Can Giggal.ai find email addresses like Anymail Finder?',
+      a: 'No. Giggal.ai only verifies addresses you already have. Use a finder first, then verify the list with Giggal.ai before you send.',
     },
     {
-      q: 'Can I try Giggal.ai before switching?',
-      a: 'Yes. 1,000 free credits, no card, on a bulk upload, against Anymail Finder’s 100 free credits which require card verification.',
+      q: 'Do Anymail Finder credits expire?',
+      a: 'They roll over with no cap while your plan is active. If you cancel, they expire at the end of the billing period. Giggal.ai credits never expire.',
     },
   ],
 }

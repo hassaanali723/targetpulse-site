@@ -104,7 +104,7 @@ export const PLATFORMS_B: Record<string, PairContent> = {
         heading: 'NeverBounce vs Findymail pricing',
         paragraphs: [
           'NeverBounce sells credit packs. It costs $50 for 10,000 emails, $400 for 100,000 and $2,500 for a million. Its smallest pack is 1,000 emails for $8.',
-          'Findymail publishes one standard plan, Starter, at $99 a month. It carries 5,000 finder credits and 5,000 verifier credits. Anything above that is quoted as Enterprise. So there is no published Findymail price for 10,000, 100,000 or a million verifications a month.',
+          'Findymail’s only plan with a credit count is Starter, at $99 a month. It carries 5,000 finder credits and 5,000 verifier credits. Its usage-based plans list no credit count, and higher volumes are quoted as Enterprise. So there is no published Findymail price for 10,000, 100,000 or a million verifications a month.',
           'Credit rules differ too. NeverBounce credits expire 12 months after purchase. Findymail rolls unused credits over, up to twice the monthly allowance.',
         ],
         giggalEdgeLabel: 'How Giggal.ai prices it.',
@@ -185,7 +185,7 @@ export const PLATFORMS_B: Record<string, PairContent> = {
         heading: 'ZeroBounce vs Findymail pricing',
         paragraphs: [
           'ZeroBounce publishes prices by credit volume. It costs $129 for 10,000 emails, $649 for 100,000 and $3,199 for a million. The minimum purchase is 2,000 credits for $39.',
-          'Findymail’s only published plan is Starter at $99 a month. That plan includes 5,000 verifier credits and 5,000 finder credits. Higher volumes are quoted as Enterprise, with no public price.',
+          'Findymail’s only plan with a credit count is Starter at $99 a month. That plan includes 5,000 verifier credits and 5,000 finder credits. Its usage-based plans list no credit count, and higher volumes are quoted as Enterprise.',
           'ZeroBounce credits never expire. Findymail carries unused credits forward, up to twice its monthly allowance.',
         ],
         giggalEdgeLabel: 'How Giggal.ai prices it.',
@@ -266,8 +266,8 @@ export const PLATFORMS_B: Record<string, PairContent> = {
         heading: 'ZeroBounce vs LeadMagic pricing',
         paragraphs: [
           'ZeroBounce publishes prices by credit volume. It costs $129 for 10,000 emails, $649 for 100,000 and $3,199 for a million. The minimum purchase is 2,000 credits for $39, and credits never expire.',
-          'LeadMagic is a monthly subscription with a shared credit pool. Plans run from $49.99 a month for 2,000 credits to $849 for 100,000. The smallest plan covering 10,000 verifications a month is Growth at $249. For 100,000 a month, it is Ultimate at $849. A million a month is an Enterprise quote.',
-          'Annual billing on LeadMagic is roughly 17% less. Credits roll over up to two months on the $99 plan and above. The $49.99 Basic plan has no rollover.',
+          'LeadMagic is a monthly subscription with a shared credit pool. Plans run from $99 a month for 5,000 credits to $849 for 100,000. A conclusive validation costs 0.25 credits, and an unknown result is free. The smallest plan covering 10,000 verifications a month is Essential at $99. For 100,000 a month, it is Professional at $499. A million a month is an Enterprise quote.',
+          'Annual billing on LeadMagic gives two months free. Unused monthly credits roll over, up to twice the monthly allowance. LeadMagic gives no free credits.',
         ],
         giggalEdgeLabel: 'How Giggal.ai prices it.',
         giggalEdge:
@@ -286,7 +286,7 @@ export const PLATFORMS_B: Record<string, PairContent> = {
         heading: 'ZeroBounce vs LeadMagic on catch-all addresses',
         paragraphs: [
           'On a catch-all domain, the server accepts every address. A normal [email checker](/email-checker) cannot tell whether the named mailbox is real.',
-          'ZeroBounce scores catch-all addresses from 1 to 10 with AI. It does not return a valid or invalid result for them. LeadMagic resolves catch-all addresses instead of flagging them. It does not publish what a catch-all check costs in credits.',
+          'ZeroBounce scores catch-all addresses from 1 to 10 with AI. It does not return a valid or invalid result for them. LeadMagic resolves catch-all addresses instead of flagging them. A conclusive result costs 0.25 credits, and an unknown result is free.',
           'Secure email gateways cause a similar problem on company domains. ZeroBounce advertises support for them. LeadMagic does not publish a named gateway list.',
         ],
         giggalEdgeLabel: 'How Giggal.ai handles catch-all.',
@@ -309,7 +309,7 @@ export const PLATFORMS_B: Record<string, PairContent> = {
       },
       {
         q: 'How much do ZeroBounce and LeadMagic cost for 10,000 emails?',
-        a: 'ZeroBounce costs $129 for 10,000 emails. LeadMagic needs its Growth plan at $249 a month for that volume. Giggal.ai costs $9.90 for 10,000, bought once.',
+        a: 'ZeroBounce costs $129 for 10,000 emails. LeadMagic needs its Essential plan at $99 a month for that volume. Giggal.ai costs $9.90 for 10,000, bought once.',
       },
       {
         q: 'LeadMagic vs ZeroBounce: which is better for B2B lists?',
@@ -317,7 +317,7 @@ export const PLATFORMS_B: Record<string, PairContent> = {
       },
       {
         q: 'Do ZeroBounce or LeadMagic credits expire?',
-        a: 'ZeroBounce credits never expire. LeadMagic credits roll over up to two months on plans from $99 a month, and the Basic plan has no rollover. Giggal.ai credits never expire.',
+        a: 'ZeroBounce credits never expire. LeadMagic rolls unused monthly credits over, up to twice the monthly allowance. Giggal.ai credits never expire.',
       },
       {
         q: 'Can I try Giggal.ai before deciding?',

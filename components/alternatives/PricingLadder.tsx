@@ -70,8 +70,8 @@ export default function PricingLadder({ competitor }: { competitor: Competitor }
 
       {hasEstimate && (
         <p className="text-[11px] text-slate-400 font-medium">
-          <sup>est</sup> Estimate from third-party sources, not confirmed on {competitor.name}’s
-          pricing page.
+          <sup>est</sup>{' '}
+          {competitor.estimateNote ?? `Estimate from third-party sources, not confirmed on ${competitor.name}’s pricing page.`}
         </p>
       )}
 

@@ -43,6 +43,17 @@ export interface AltL10nConfig {
   faqs: FaqItem[]
   ctaHeadline: string
   breadcrumb: string
+  // Per-brand sections, used by the wide layout (components/l10n/AltPageWide.tsx)
+  // for the brand pages rewritten on 2026-11-27. Same meaning as the English
+  // AltPageConfig fields; the strength cards come from the localized
+  // competitor.betterFitFor.
+  about?: { heading: string; paragraphs: string[] }
+  pricingExtra?: string[]
+  reasons?: { heading: string; items: { k: string; v: string }[] }
+  strengths?: { heading: string; intro: string }
+  others?: { heading: string; intro: string; items: { name: string; text: string }[] }
+  tableHeading?: string
+  testHeading?: string
 }
 
 export function altL10nMetadata(cfg: AltL10nConfig): Metadata {
@@ -126,7 +137,7 @@ function LastVerified({ c, locale }: { c: Competitor; locale: L10nLocale }) {
   )
 }
 
-function PricingLadder({ c, locale }: { c: Competitor; locale: L10nLocale }) {
+export function PricingLadder({ c, locale }: { c: Competitor; locale: L10nLocale }) {
   const ui = ALT_UI[locale]
   return (
     <div className="space-y-4">
@@ -134,17 +145,17 @@ function PricingLadder({ c, locale }: { c: Competitor; locale: L10nLocale }) {
         <table className="w-full text-left border-collapse">
           <thead>
             <tr className="bg-slate-50 border-b-2 border-slate-200">
-              <th className={`${th} text-slate-400`}>{ui.volume}</th>
-              <th className={`${th} text-indigo-600`} lang="en">Giggal.ai</th>
-              <th className={`${th} text-slate-400`} lang="en">{c.name}</th>
+              <th className={`${th} !px-3 sm:!px-5 text-slate-400`}>{ui.volume}</th>
+              <th className={`${th} !px-3 sm:!px-5 text-indigo-600 [overflow-wrap:anywhere]`} lang="en">Giggal.ai</th>
+              <th className={`${th} !px-3 sm:!px-5 text-slate-400 [overflow-wrap:anywhere]`} lang="en">{c.name}</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100">
             {[10000, 100000, 1000000].map((credits) => (
               <tr key={credits}>
-                <td className="px-5 py-4 text-sm font-bold text-slate-700">{numL(locale, credits)}</td>
-                <td className="px-5 py-4 text-sm font-black text-indigo-700">{usdL(locale, giggalTierAt(credits).totalUsd as number)}</td>
-                <td className="px-5 py-4 text-sm font-bold text-slate-900">
+                <td className="px-3 sm:px-5 py-4 text-sm font-bold text-slate-700">{numL(locale, credits)}</td>
+                <td className="px-3 sm:px-5 py-4 text-sm font-black text-indigo-700">{usdL(locale, giggalTierAt(credits).totalUsd as number)}</td>
+                <td className="px-3 sm:px-5 py-4 text-sm font-bold text-slate-900">
                   <PriceCell c={c} credits={credits} locale={locale} />
                 </td>
               </tr>
@@ -154,7 +165,7 @@ function PricingLadder({ c, locale }: { c: Competitor; locale: L10nLocale }) {
       </div>
       {c.tiers.some((t) => t.status === 'estimate') && (
         <p className="text-[11px] text-slate-400 font-medium">
-          <sup>{ui.est}</sup> {ui.estimateNote(c.name)}
+          <sup>{ui.est}</sup> {c.estimateNote ?? ui.estimateNote(c.name)}
         </p>
       )}
       {c.pricingBasisNote && <p className="text-[11px] text-slate-400 font-medium leading-relaxed">{c.pricingBasisNote}</p>}
@@ -163,7 +174,7 @@ function PricingLadder({ c, locale }: { c: Competitor; locale: L10nLocale }) {
   )
 }
 
-function ComparisonTable({ c, locale }: { c: Competitor; locale: L10nLocale }) {
+export function ComparisonTable({ c, locale }: { c: Competitor; locale: L10nLocale }) {
   const ui = ALT_UI[locale]
   const g = giggalFacts(locale)
   const cell = (s: string) => <span className="font-semibold text-slate-700">{s}</span>
@@ -220,7 +231,7 @@ const VERDICT_ICONS = [
   { Icon: HelpCircle, tint: 'text-slate-500' },
 ]
 
-function VerdictExplainer({ locale }: { locale: L10nLocale }) {
+export function VerdictExplainer({ locale }: { locale: L10nLocale }) {
   const ui = ALT_UI[locale]
   return (
     <div className="overflow-hidden rounded-2xl border-2 border-slate-200 card-vivid-shadow bg-white">
@@ -252,7 +263,7 @@ function VerdictExplainer({ locale }: { locale: L10nLocale }) {
   )
 }
 
-function BenchmarkCallout({ c, locale }: { c: Competitor; locale: L10nLocale }) {
+export function BenchmarkCallout({ c, locale }: { c: Competitor; locale: L10nLocale }) {
   if (!c.benchmarkAccuracy || !c.benchmarkCatchAllResolved) return null
   const ui = ALT_UI[locale].bench
   return (
@@ -293,7 +304,7 @@ function Bluf({ points, locale }: { points: { k: string; v: string }[]; locale: 
 }
 
 /** The comparison pages for `slug` that the English page links, each routed to `locale` when it exists there. */
-function HeadToHead({ slug, locale }: { slug: string; locale: L10nLocale }) {
+export function HeadToHead({ slug, locale, wide = false }: { slug: string; locale: L10nLocale; wide?: boolean }) {
   const ui = ALT_UI[locale]
   const self = getCompetitor(slug)
   const links = ALL_COMPETITOR_SLUGS.filter((o) => o !== slug && isCompareIndexed(versusSlug(slug, o)))
@@ -302,7 +313,7 @@ function HeadToHead({ slug, locale }: { slug: string; locale: L10nLocale }) {
   if (!links.length) return null
   const [before, link, after] = ui.h2hProse(self.name)
   return (
-    <section className="cv-section max-w-4xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
+    <section className={`cv-section ${wide ? 'max-w-6xl' : 'max-w-4xl'} mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6`}>
       <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">{ui.h2hHeading(self.name)}</h2>
       <p className="text-base text-slate-600 leading-relaxed font-medium max-w-2xl">
         {before}
@@ -325,12 +336,12 @@ function HeadToHead({ slug, locale }: { slug: string; locale: L10nLocale }) {
   )
 }
 
-export function RelatedLinksL10n({ locale }: { locale: L10nLocale }) {
+export function RelatedLinksL10n({ locale, wide = false }: { locale: L10nLocale; wide?: boolean }) {
   const ui = ALT_UI[locale]
   return (
-    <section className="cv-section max-w-3xl mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6">
+    <section className={`cv-section ${wide ? 'max-w-6xl' : 'max-w-3xl'} mx-auto px-6 pt-12 pb-20 border-t border-slate-200 space-y-6`}>
       <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">{ui.keepReading}</h2>
-      <ul className="grid sm:grid-cols-2 gap-3">
+      <ul className={`grid sm:grid-cols-2 gap-3 ${wide ? 'lg:grid-cols-3' : ''}`}>
         {ui.related.map((l) => {
           const loc = localizeHref(l.href, locale).localized
           return (

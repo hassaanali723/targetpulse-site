@@ -1,49 +1,81 @@
 import AltPageScaffold, { altMetadata, type AltPageConfig } from '@/components/alternatives/AltPageScaffold'
 
+// Rewritten 2026-11-27 and taken out of noindex. Ahrefs US: "listmint" 150,
+// "list mint" 10, "listmint pricing" 10. Plan figures read from the listmint.io
+// home page the same day.
 const cfg: AltPageConfig = {
   slug: 'listmint',
-  metaTitle: 'Listmint Alternative | Catch-All Email Verifier | Giggal.ai',
-  ogTitle: 'A Listmint Alternative With One Credit Pool and a Published Price',
-  desc: 'Listmint meters catch-all from a separate, smaller credit pool. Giggal.ai resolves catch-all from one balance at $9.90 per 10,000.',
+  metaTitle: 'Listmint Alternative: Catch-All Email Verification | Giggal.ai',
+  ogTitle: 'Listmint alternative for catch-all email verification',
+  desc: 'Listmint is $99 a month with 5,000 catch-all credits. Giggal.ai checks catch-all emails at 1 credit each, $9.90 per 10,000, with credits that never expire.',
   h1Article: 'A',
   h1Tail: 'with one pool of credits',
   heroP:
-    'Listmint returns catch_all_valid and catch_all_invalid as explicit result codes, which is a genuinely good design. The friction is the metering: catch-all verifications come out of a separate, smaller allowance, so the part of your list that needs the most work is the part you run out of first. Giggal.ai bills catch-all from the same credits as everything else.',
+    'Listmint is an email verifier that focuses on catch-all addresses. It splits each plan into standard credits and a smaller pool of catch-all credits. Giggal.ai uses one pool. A catch-all check costs 1 credit, the same as any other email.',
   bluf: [
-    { k: 'Both resolve catch-all', v: 'Listmint returns catch_all_valid or catch_all_invalid. We return valid or invalid.' },
-    { k: 'Metering', v: 'Listmint splits standard and catch-all credits into two pools. We use one pool, with flat 1 credit per verification.' },
-    { k: 'Price transparency', v: 'Listmint builds its prices in the browser, so we could not verify them. Ours are published: $9.90 per 10,000.' },
-    { k: 'Gateways', v: 'We verify behind 15 named secure email gateways. Listmint does not publish SEG support.' },
+    { k: 'Credits', v: 'Listmint has two credit pools. Giggal.ai has one, at 1 credit per email.' },
+    { k: 'Price', v: 'Listmint Starter is $99 a month. Giggal.ai is $9.90 for 10,000 credits, bought once.' },
+    { k: 'Catch-all', v: 'Listmint Starter gives 5,000 catch-all credits a month. Giggal.ai has no separate limit.' },
+    { k: 'Gateways', v: 'Giggal.ai checks addresses behind 15 named email gateways. Listmint does not name any.' },
   ],
-  catchAllHeading: 'How Giggal.ai verifies catch-all addresses',
+  about: {
+    heading: 'What is Listmint?',
+    paragraphs: [
+      'Listmint is an email verification service from listmint.io. It runs standard SMTP checks and a separate catch-all check. Listmint says it verifies catch-all addresses by hand.',
+      'Its catch-all credits cost more than its standard credits. So each plan includes a large pool of standard credits and a smaller pool of catch-all credits.',
+      'Listmint also says it can verify catch-all addresses in real time.',
+    ],
+  },
+  reasons: {
+    heading: 'Why people look for a Listmint alternative',
+    items: [
+      { k: 'Catch-all cap', v: 'Starter includes 5,000 catch-all credits a month. One large B2B list can use all of them.' },
+      { k: 'Monthly plan', v: 'Listmint is billed monthly. Giggal.ai credits are bought once and never expire.' },
+      { k: 'Volume', v: 'The largest listed plan is Agency, with 50,000 standard credits. More needs an Enterprise quote.' },
+      { k: 'Gateways', v: 'Listmint does not name secure email gateways it can check behind.' },
+    ],
+  },
+  catchAllHeading: 'Listmint vs Giggal.ai on catch-all addresses',
   catchAllProse:
-    'Listmint and Giggal.ai agree on the important thing: an accept-all domain deserves a real answer, not a label. Listmint expresses it as catch_all_valid and catch_all_invalid, which is easy to filter on and worth copying. The practical difference is what happens when a list is mostly catch-all. On Listmint that drains a separate allowance sized smaller than the standard one. On Giggal.ai every verification costs a flat 1 credit from the same balance, and there is no second pool to run dry. Giggal.ai also resolves mailboxes behind 15 named secure email gateways, which Listmint does not advertise.',
+    'Listmint bills catch-all checks from a separate pool of credits. On the $99 Starter plan, that pool is 5,000 a month. Giggal.ai has no separate pool. Every address costs 1 credit, catch-all or not. When Giggal.ai cannot get an answer, the result is unknown and the credit is refunded.',
   pricingHeading: 'Listmint pricing vs Giggal.ai',
   pricingProse:
-    'Listmint splits its allowance into standard credits and a separate, smaller pool of catch-all credits. Its pricing page assembles those figures in the browser, so we could not read them from the source and we would rather leave the rows blank than publish a number we did not verify. Giggal.ai publishes a flat list: $9.90 for 10,000, $76 for 100,000, $680 for a million, bought once, credits never expire, and catch-all comes out of the same balance at a flat 1 credit.',
-  featureNote: 'Listmint’s pricing renders client-side and could not be read directly, so its rows are blank rather than estimated. Check listmint.io/pricing for current figures.',
-  testStep3: 'Look at how far 1,000 credits goes on a catch-all heavy list, against Listmint’s separate catch-all allowance.',
-  ctaHeadline: 'One balance, one price, catch-all included',
+    'Listmint Starter is $99 a month for 20,000 standard credits and 5,000 catch-all credits. Agency is $187 a month for 50,000 standard credits and 10,000 catch-all credits. Enterprise is priced on request.',
+  pricingExtra: [
+    'Giggal.ai has no plan tiers. 10,000 credits cost $9.90 and 100,000 cost $76. You can spend any of them on catch-all addresses.',
+  ],
+  strengths: {
+    heading: 'Where Listmint is a good fit',
+    intro: 'Listmint makes sense if you want these:',
+  },
+  others: {
+    heading: 'Other Listmint alternatives',
+    intro: 'These verifiers also return a result on catch-all addresses. Prices are from each vendor’s site on 27 November 2026.',
+    items: [
+      { name: 'Scrubby', text: 'Checks catch-all and gateway-protected domains at 1 credit. Its Deep Verification costs 3 credits and sends real emails. Pay-as-you-go is $0.008 per credit.' },
+      { name: 'no2bounce', text: 'Sends test messages to confirm catch-all mailboxes. 10,000 pay-as-you-go credits cost $20 and never expire.' },
+      { name: 'Allegrow', text: 'Returns valid or invalid on catch-all contacts for sales teams. Starter is $99 a month for 5,000 contacts.' },
+    ],
+  },
+  testHeading: 'Run a Listmint list through Giggal.ai',
+  testStep3: 'Compare the catch-all rows with what Listmint returned.',
+  ctaHeadline: 'Check catch-all emails with no separate credit cap',
   faqs: [
     {
+      q: 'How much does Listmint cost?',
+      a: 'Listmint Starter is $99 a month with 20,000 standard credits and 5,000 catch-all credits. Agency is $187 a month with 50,000 standard and 10,000 catch-all credits. Enterprise is priced on request.',
+    },
+    {
+      q: 'Why does Listmint have separate catch-all credits?',
+      a: 'Listmint says its catch-all credits cost more than its normal SMTP credits, because a catch-all check takes more work. Giggal.ai charges 1 credit for every address, including catch-all.',
+    },
+    {
       q: 'Is Giggal.ai a good Listmint alternative?',
-      a: 'Yes, and they are close on the core idea. Both resolve catch-all addresses to a real result rather than labelling them. Giggal.ai bills catch-all from a single credit balance at a flat 1 credit, publishes a flat price list starting at $9.90 per 10,000, and also verifies behind 15 named secure email gateways.',
+      a: 'Yes, if you verify lists with many catch-all addresses. Giggal.ai has no separate catch-all limit and no monthly plan. It costs $9.90 per 10,000 credits.',
     },
     {
-      q: 'What is the difference between catch_all_valid and a Giggal.ai result?',
-      a: 'Functionally very little. Listmint splits the catch-all case into its own result codes, Giggal.ai folds it into the same valid or invalid result as any other address. Both tell you whether the mailbox is real.',
-    },
-    {
-      q: 'Why does the credit pool matter?',
-      a: 'Because roughly 30% of a B2B list sits on catch-all domains. When catch-all is metered separately and sized smaller than the standard pool, that segment is where you run out first. A single balance means the mix of your list does not change what you can finish.',
-    },
-    {
-      q: 'What does Giggal.ai cost?',
-      a: '$9.90 for 10,000, $76 for 100,000 and $680 for a million, bought once with no subscription. Credits never expire, and all verifications cost a flat 1 credit.',
-    },
-    {
-      q: 'Can I try Giggal.ai before switching?',
-      a: 'Yes. 1,000 free credits, no card, on a bulk upload. Run a catch-all heavy segment and compare the results row by row.',
+      q: 'Does Listmint have a free trial?',
+      a: 'Listmint offers a free start, but does not publish how many credits it includes. Giggal.ai gives 1,000 free credits with no card.',
     },
   ],
 }
