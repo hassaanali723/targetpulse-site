@@ -68,6 +68,12 @@ returns valid or invalid instead of a shrug.
 - [SEG verification](${SITE}/seg-email-verification): Proofpoint, Mimecast and Barracuda
 - [Bulk email verifier](${SITE}/bulk-email-verifier): verify a CSV or Excel list of up to 50,000 addresses, a result on every row, catch-all resolved
 - [Email checker](${SITE}/email-checker): one address at a time, catch-all resolved, no account
+- [Email header analyzer](${SITE}/email-header-analyzer): inspect SPF, DKIM, DMARC, ARC results, trace relay hops, and verify authserv-id boundaries
+- [SPF flattener](${SITE}/spf-flattener): resolve nested includes, deduplicate IPs, and prevent SPF 10-lookup PermError failures
+- [Role-based email checker](${SITE}/role-account-checker): detect and filter RFC 2142 role accounts, spam traps, and generic inboxes
+- [Mail IP reputation checker](${SITE}/ip-reputation-checker): scan mail server IPs across DNSBLs and verify FCrDNS compliance
+- [DMARC checker](${SITE}/dmarc-checker): inspect DMARC records, test p=reject policies, and verify DMARCbis RFC 9989 compliance
+- [DKIM checker](${SITE}/dkim-checker): inspect DKIM selectors, verify 2048-bit RSA and Ed25519 keys, and chase CNAME delegation
 - [Disposable email checker](${SITE}/disposable-email-checker): detect temporary, burner and throwaway inboxes, no account
 - [Free email providers](${SITE}/free-email-providers): list of free email providers and 417 free email domains with working MX records, a checker and CSV download
 - [Email extractor](${SITE}/email-extractor): extract and deduplicate emails from text, files and spreadsheets in the browser

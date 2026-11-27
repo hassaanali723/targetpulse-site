@@ -2,6 +2,12 @@ import fs from 'node:fs'
 import path from 'node:path'
 
 const pages = [
+  { slug: 'email-header-analyzer', h1Snippet: 'Email Header Analyzer' },
+  { slug: 'spf-flattener', h1Snippet: 'Free SPF Flattener Tool' },
+  { slug: 'role-account-checker', h1Snippet: 'Role-Based Email Checker' },
+  { slug: 'ip-reputation-checker', h1Snippet: 'Mail IP Reputation' },
+  { slug: 'dmarc-checker', h1Snippet: 'DMARC Record Checker' },
+  { slug: 'dkim-checker', h1Snippet: 'DKIM Record Checker' },
   { slug: 'email-extractor', h1Snippet: 'Free Email Extractor' },
   { slug: 'dkim-generator', h1Snippet: 'DKIM Generator' },
   { slug: 'dmarc-generator', h1Snippet: 'DMARC Record Generator' },

@@ -65,6 +65,12 @@ const useCasesLinks = [
 
 const freeToolsLinks = [
   { name: 'Email checker', href: '/email-checker' },
+  { name: 'Email header analyzer', href: '/email-header-analyzer' },
+  { name: 'SPF flattener', href: '/spf-flattener' },
+  { name: 'Role account checker', href: '/role-account-checker' },
+  { name: 'IP reputation checker', href: '/ip-reputation-checker' },
+  { name: 'DMARC checker', href: '/dmarc-checker' },
+  { name: 'DKIM checker', href: '/dkim-checker' },
   { name: 'Disposable email checker', href: '/disposable-email-checker' },
   { name: 'Disposable email providers', href: '/disposable-email-providers' },
   { name: 'Free email providers', href: '/free-email-providers' },

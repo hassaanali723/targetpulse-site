@@ -54,6 +54,12 @@ export function coreEntries(): SitemapEntry[] {
       ? [{ path: '/mimecast-email-verification', lastModified: '2026-08-02' }]
       : []),
     { path: '/email-checker', lastModified: '2026-09-18' },
+    { path: '/email-header-analyzer', lastModified: '2026-11-28' },
+    { path: '/spf-flattener', lastModified: '2026-11-28' },
+    { path: '/role-account-checker', lastModified: '2026-11-28' },
+    { path: '/ip-reputation-checker', lastModified: '2026-11-28' },
+    { path: '/dmarc-checker', lastModified: '2026-11-28' },
+    { path: '/dkim-checker', lastModified: '2026-11-28' },
     { path: '/disposable-email-checker', lastModified: '2026-10-02' },
     { path: '/disposable-email-providers', lastModified: '2026-10-02' },
     { path: '/free-email-providers', lastModified: '2026-10-12' },
