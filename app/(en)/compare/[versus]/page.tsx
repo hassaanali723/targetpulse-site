@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { isCompareIndexed, NOINDEX_ROBOTS } from '@/lib/indexPolicy'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Check } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import FaqAccordion from '@/components/landing/FaqAccordion'
@@ -15,7 +15,7 @@ import {
   buildComparison,
   versusSlug,
 } from '@/lib/compare'
-import { ALL_COMPETITOR_SLUGS, getCompetitor } from '@/lib/competitorPricing'
+import { ALL_COMPETITOR_SLUGS, getCompetitor, GIGGAL } from '@/lib/competitorPricing'
 import { clusterOfEnglish, hreflangAlternates } from '@/lib/i18n/clusters'
 
 const APP_URL = 'https://emailverifier.giggal.ai/sign-up'
@@ -102,8 +102,8 @@ export default function ComparePage({ params }: { params: { versus: string } }) 
       <Navbar />
 
       {/* ── HERO ─────────────────────────────────────────────── */}
-      <section className="max-w-3xl mx-auto px-6 pt-28 md:pt-32 pb-10 text-center space-y-6">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900">
+      <section className="max-w-6xl mx-auto px-6 pt-28 md:pt-32 pb-10 text-center space-y-6">
+        <h1 className="max-w-3xl mx-auto text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900">
           {A} <span className="text-indigo-500">vs</span> {B}
         </h1>
         <p className={`${proseP} max-w-2xl mx-auto`}>{c.intro}</p>
@@ -126,10 +126,50 @@ export default function ComparePage({ params }: { params: { versus: string } }) 
         </div>
       </section>
 
+      {/* ── GIGGAL.AI FIRST ──────────────────────────────────── */}
+      <section className="max-w-6xl mx-auto px-6 pb-6">
+        <div className="rounded-2xl border-2 border-indigo-200 bg-white p-6 md:p-8 card-vivid-shadow grid md:grid-cols-[1.4fr_1fr] gap-6 md:gap-10 items-center">
+          <div className="space-y-3 text-left">
+            <p className="text-[11px] font-black uppercase tracking-wider text-indigo-600">
+              A third option to compare
+            </p>
+            <h2 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight">
+              Giggal.ai: an email verifier for catch-all and gateway addresses
+            </h2>
+            <p className={proseP}>
+              {c.giggalTop ??
+                `If you already have your list and need to check it, Giggal.ai verifies it for $9.90 per 10,000 emails, with no subscription.`}
+            </p>
+            <a
+              href={APP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center justify-center gap-2 px-6 py-3 bg-indigo-600 hover:bg-indigo-700 font-extrabold rounded-xl text-white shadow-md shadow-indigo-600/10 hover:-translate-y-0.5 transition-all text-sm"
+            >
+              Verify 1,000 emails free
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+            </a>
+          </div>
+          <ul className="space-y-3 text-left">
+            {[
+              'A deliverable or undeliverable result on catch-all addresses, for 1 credit each',
+              `Checks addresses behind ${GIGGAL.segGatewayCount} secure email gateways, such as Proofpoint and Mimecast`,
+              '$9.90 per 10,000 emails, pay as you go. Credits never expire',
+              '1,000 free credits with no card, usable on a bulk upload',
+            ].map((f) => (
+              <li key={f} className="flex items-start gap-2.5 text-[13px] md:text-sm font-semibold text-slate-700">
+                <Check className="w-4 h-4 mt-0.5 shrink-0 text-emerald-600" />
+                {f}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
       {/* ── TABLE ────────────────────────────────────────────── */}
-      <section className="cv-section max-w-4xl mx-auto px-6 pt-8 pb-16 space-y-6">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-8 pb-16 space-y-6">
         <h2 className={sectionTitle}>
-          How {A}, {B} and Giggal.ai compare
+          How Giggal.ai, {A} and {B} compare
         </h2>
         <CompareTable aName={A} bName={B} rows={c.rows} />
         <p className="text-[12px] text-slate-400 font-medium">
@@ -167,15 +207,15 @@ export default function ComparePage({ params }: { params: { versus: string } }) 
       ))}
 
       {/* ── GIGGAL PROMO BAND ────────────────────────────────── */}
-      <section className="max-w-4xl mx-auto px-6 py-14">
+      <section className="max-w-6xl mx-auto px-6 py-14">
         <div className="rounded-3xl border-2 border-indigo-100 bg-gradient-to-br from-indigo-50 to-white p-8 md:p-10 text-center card-vivid-shadow space-y-5">
           <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">
-            Why teams pick Giggal.ai over both
+            Verify your list with Giggal.ai
           </h2>
           <p className={`${proseP} max-w-2xl mx-auto`}>
-            {A} and {B} each leave many catch-all and gateway-protected addresses unconfirmed.
-            Giggal.ai returns a real result on those at a flat 1 credit, verifies behind 15 secure email
-            gateways, and publishes a flat $9.90 per 10,000 with credits that never expire.
+            Giggal.ai returns a deliverable or undeliverable result on catch-all addresses for 1 credit
+            each. It verifies behind {GIGGAL.segGatewayCount} secure email gateways. It costs $9.90 per
+            10,000 emails, and credits never expire.
           </p>
           <a
             href={APP_URL}
@@ -196,9 +236,9 @@ export default function ComparePage({ params }: { params: { versus: string } }) 
       </section>
 
       {/* ── RELATED + ALTERNATIVE LINKS ──────────────────────── */}
-      <section className="cv-section max-w-4xl mx-auto px-6 pt-10 pb-24 border-t border-slate-200 space-y-6">
+      <section className="cv-section max-w-6xl mx-auto px-6 pt-10 pb-24 border-t border-slate-200 space-y-6">
         <h2 className={sectionTitle}>Related comparisons</h2>
-        <div className="grid sm:grid-cols-2 gap-3">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
           {related.map((r) => (
             <Link
               key={r.slug}

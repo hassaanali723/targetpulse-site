@@ -11,6 +11,7 @@
 import { MIMECAST_PAGE_LIVE } from '@/lib/flags'
 import { allPairs } from '@/lib/compare'
 import { ZAPIER_APPS } from '@/lib/zapierApps'
+import { BATCH3_SLUGS } from '@/lib/comparePairs'
 import { isAltIndexed, isCompareIndexed, isZapierIndexed, pastSitemapGrace } from '@/lib/indexPolicy'
 import { getAllPosts } from '@/lib/blog'
 import { getAllTerms } from '@/lib/glossary'
@@ -143,12 +144,12 @@ export function compareEntries(): SitemapEntry[] {
   // then leave (lib/indexPolicy.ts).
   const drop = pastSitemapGrace()
   return [
-    { path: '/compare', lastModified: '2026-08-16' },
+    { path: '/compare', lastModified: '2026-11-27' },
     ...allPairs()
       .filter(({ a, b }) => !drop || isCompareIndexed(`${a}-vs-${b}`))
       .map(({ a, b }) => ({
         path: `/compare/${a}-vs-${b}`,
-        lastModified: '2026-08-16',
+        lastModified: BATCH3_SLUGS.has(`${a}-vs-${b}`) ? '2026-11-27' : '2026-08-16',
       })),
   ]
 }
