@@ -56,7 +56,7 @@ const COMPARE_PROTECTED: [string, string][] = [
   ['bounceban', 'hunter'],        // 63, 6.0
 ]
 
-// 2026-10-22: 20 big-brand pairs taken out of noindex, each with hand-written
+// 2026-10-22 and 2026-11-27: 40 brand pairs taken out of noindex, each with hand-written
 // content in lib/comparePairs (owner decision: brand demand, not impressions).
 export const COMPARE_INDEXED: ReadonlySet<string> = new Set([
   ...[...COMPARE_PAIRS, ...COMPARE_PROTECTED].map(([a, b]) => versusSlug(a, b)),

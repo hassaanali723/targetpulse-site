@@ -1,5 +1,5 @@
-// Three-way comparison table for /compare pages: C1 | C2 | Giggal.ai (the
-// Giggal column is tinted and emphasised). Driven entirely by the serialisable
+// Three-way comparison table for /compare pages: Giggal.ai | C1 | C2 (the
+// Giggal column comes first, tinted and emphasised). Driven entirely by the serialisable
 // rows the compare engine returns. No client JS.
 import { Check, X } from 'lucide-react'
 import type { CmpValue, CmpRow } from '@/lib/compare'
@@ -48,11 +48,11 @@ export default function CompareTable({
             <th className="px-5 py-3 text-[11px] font-black uppercase tracking-wider text-slate-400 w-[28%]">
               &nbsp;
             </th>
-            <th className="px-5 py-3 text-[13px] font-bold text-slate-600 text-left">{aName}</th>
-            <th className="px-5 py-3 text-[13px] font-bold text-slate-600 text-left">{bName}</th>
-            <th className="px-5 py-3 text-[11px] font-black uppercase tracking-wider text-indigo-600 bg-indigo-50/60 border-l border-indigo-100">
+            <th className="px-5 py-3 text-[11px] font-black uppercase tracking-wider text-indigo-600 bg-indigo-50/60 border-x border-indigo-100">
               Giggal.ai
             </th>
+            <th className="px-5 py-3 text-[13px] font-bold text-slate-600 text-left">{aName}</th>
+            <th className="px-5 py-3 text-[13px] font-bold text-slate-600 text-left">{bName}</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-slate-100">
@@ -61,14 +61,14 @@ export default function CompareTable({
               <th scope="row" className="px-5 py-4 text-[13px] font-bold text-slate-600 text-left">
                 {r.label}
               </th>
+              <td className="px-5 py-4 text-[13px] text-slate-900 bg-indigo-50/40 border-x border-indigo-100">
+                <Cell v={r.giggal} strong />
+              </td>
               <td className="px-5 py-4 text-[13px] text-slate-900">
                 <Cell v={r.a} />
               </td>
               <td className="px-5 py-4 text-[13px] text-slate-900">
                 <Cell v={r.b} />
-              </td>
-              <td className="px-5 py-4 text-[13px] text-slate-900 bg-indigo-50/40 border-l border-indigo-100">
-                <Cell v={r.giggal} strong />
               </td>
             </tr>
           ))}

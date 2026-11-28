@@ -110,6 +110,7 @@ export interface Comparison {
   pb: CompareProfile
   rows: CmpRow[]
   intro: string
+  giggalTop?: string // hand-written pairs: the Giggal.ai card under the hero
   sections: CompareSection[]
   faqs: FaqItem[]
   metaTitle: string
@@ -232,6 +233,7 @@ export function buildComparison(aSlug: string, bSlug: string): Comparison {
       pb,
       rows,
       intro: custom.intro,
+      giggalTop: custom.giggalTop,
       sections: custom.sections.map((s) => ({
         heading: s.heading,
         prose: '',

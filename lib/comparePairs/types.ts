@@ -21,6 +21,9 @@ export interface PairContent {
   metaDescription: string // 120 to 160 characters
   ogTitle: string
   intro: string // hero paragraph under the H1 "A vs B"
+  // Giggal.ai card under the hero: one or two sentences on where Giggal.ai
+  // fits for this pair. Omit to show the generic line.
+  giggalTop?: string
   sections: PairSection[]
   faqs: FaqItem[]
 }

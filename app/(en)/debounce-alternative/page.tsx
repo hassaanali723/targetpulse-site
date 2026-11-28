@@ -20,7 +20,7 @@ const APP_URL = 'https://emailverifier.giggal.ai/sign-up'
 const competitor = getCompetitor('debounce')
 
 const DESC =
-  'DeBounce charges 10 credits per catch-all check as a separate product. Giggal.ai charges 1.5 and resolves them in the same run. 1,000 free credits, no card.'
+  'DeBounce charges 10 credits per catch-all check, sold separately. Giggal.ai charges 1 credit and resolves them in the same run. 1,000 free credits, no card.'
 
 export const metadata: Metadata = {
   title: { absolute: 'DeBounce Alternative: Catch-All Resolved in One Run | Giggal.ai' },
@@ -91,8 +91,9 @@ export default function DeBounceAlternativePage() {
           with catch-all in the same run
         </h1>
         <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium">
-          DeBounce charges 10 credits per catch-all address, as a separate product. We charge 1.5 in
-          the same run. On a list with real catch-all volume, that gap compounds fast.
+          DeBounce charges 10 credits per catch-all address, as a separate product. We charge 1 credit
+          in the same run, the same as any other address. The more catch-all addresses your list has,
+          the bigger the difference.
         </p>
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3">
           <a
@@ -117,8 +118,8 @@ export default function DeBounceAlternativePage() {
       <section className="max-w-6xl mx-auto px-6 pb-16">
         <Bluf
           points={[
-            { k: 'Catch-all', v: '10 credits at DeBounce, a separate product. 1.5 here, in the same run.' },
-            { k: '30% list', v: 'A 10k list, 30% catch-all: ~37,000 credits vs ~11,500.' },
+            { k: 'Catch-all', v: '10 credits at DeBounce, a separate product. 1 credit here, in the same run.' },
+            { k: '30% list', v: 'A 10k list, 30% catch-all: ~37,000 credits vs 10,000.' },
             { k: 'Resolution', v: 'That 10-credit check resolved 6% of catch-alls in the LeadMagic test.' },
             { k: 'Even ground', v: 'Standard checks are 1 credit on both. Credits never expire on either.' },
           ]}
@@ -188,7 +189,7 @@ export default function DeBounceAlternativePage() {
         <h2 className={sectionTitle}>Try it on your own list</h2>
         <ol className="space-y-3">
           {[
-            'Count the catch-all share of your list and run it through the 10 vs 1.5 sum above.',
+            'Count the catch-all share of your list and run it through the 10 vs 1 sum above.',
             'Run a real segment here on the 1,000 free credits. No card.',
             'Compare the resolved rows against a DeBounce run, and the credit spend against the sum.',
           ].map((step, i) => (
